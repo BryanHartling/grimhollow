@@ -85,6 +85,7 @@ import com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTilemap;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonWallsTilemap;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.FogOfWar;
+import com.shatteredpixel.shatteredpixeldungeon.tiles.LightingOverlay;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.GridTileMap;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.RaisedTerrainTilemap;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.TerrainFeaturesTilemap;
@@ -178,6 +179,18 @@ public class GameScene extends PixelScene {
 	private static CellSelector cellSelector;
 	
 	private Group terrain;
+	private Group bloodDecals;
+
+	public static void bloodDecal(int cell) {
+		if (scene == null || scene.bloodDecals == null || java.util.concurrent.ThreadLocalRandom.current().nextInt(5)!=0) return;
+		Image decal=new Image("effects/blood_decals.png");
+		int variant=java.util.concurrent.ThreadLocalRandom.current().nextInt(3);
+		int frame=com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TILE_SIZE;
+		decal.frame(decal.texture.uvRect(variant*frame,0,(variant+1)*frame,frame));
+		decal.width=decal.height=DungeonTilemap.SIZE;
+		decal.point(DungeonTilemap.tileToWorld(cell));
+		scene.bloodDecals.add(decal);
+	}
 	private Group customTiles;
 	private Group levelVisuals;
 	private Group levelWallVisuals;
@@ -285,6 +298,9 @@ public class GameScene extends PixelScene {
 
 		terrainFeatures = new TerrainFeaturesTilemap(Dungeon.level.plants, Dungeon.level.traps);
 		terrain.add(terrainFeatures);
+		bloodDecals=new Group();
+		terrain.add(bloodDecals);
+		add(new LightingOverlay());
 		
 		levelVisuals = Dungeon.level.addVisuals();
 		add(levelVisuals);
@@ -350,6 +366,7 @@ public class GameScene extends PixelScene {
 
 		fog = new FogOfWar( Dungeon.level.width(), Dungeon.level.height() );
 		add( fog );
+		add(new com.shatteredpixel.shatteredpixeldungeon.effects.HealthVignette());
 
 		spells = new Group();
 		add( spells );

@@ -23,6 +23,7 @@ package com.shatteredpixel.shatteredpixeldungeon.tiles;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.GameGeometry;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.Image;
@@ -76,7 +77,7 @@ public class FogOfWar extends Image {
 	private volatile ArrayList<Rect> updating;
 
 	//should be divisible by 2
-	private static final int PIX_PER_TILE = 2;
+	private static final int PIX_PER_TILE = GameGeometry.FOG_SAMPLES_PER_TILE;
 
 	/*
 	TODO currently the center of each fox pixel is aligned with the inside of a cell

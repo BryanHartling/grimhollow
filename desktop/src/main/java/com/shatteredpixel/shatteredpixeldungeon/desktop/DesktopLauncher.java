@@ -48,6 +48,8 @@ import java.util.Locale;
 public class DesktopLauncher {
 
 	public static void main (String[] args) {
+		final boolean smoke = java.util.Arrays.asList(args).contains("--smoke-title")
+				|| java.util.Arrays.asList(args).contains("--smoke-sewers");
 
 		if (!DesktopLaunchValidator.verifyValidJVMState(args)){
 			return;
@@ -73,6 +75,7 @@ public class DesktopLauncher {
 		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
 			@Override
 			public void uncaughtException(Thread thread, Throwable throwable) {
+				if (smoke) { throwable.printStackTrace(); System.exit(1); }
 				Game.reportException(throwable);
 				StringWriter sw = new StringWriter();
 				PrintWriter pw = new PrintWriter(sw);
@@ -169,6 +172,7 @@ public class DesktopLauncher {
 		}
 
 		config.setPreferencesConfig( basePath, baseFileType );
+		if (smoke) System.out.println("PREFERENCES_PATH=" + new Lwjgl3FileHandle(basePath, baseFileType).file().getAbsolutePath());
 		SPDSettings.set( new Lwjgl3Preferences( new Lwjgl3FileHandle(basePath + SPDSettings.DEFAULT_PREFS_FILE, baseFileType) ));
 		FileUtils.setDefaultFileProperties( baseFileType, basePath );
 		
@@ -189,6 +193,9 @@ public class DesktopLauncher {
 		config.setWindowIcon("icons/icon_16.png", "icons/icon_32.png", "icons/icon_48.png",
 				"icons/icon_64.png", "icons/icon_128.png", "icons/icon_256.png");
 
-		new Lwjgl3Application(new ShatteredPixelDungeon(new DesktopPlatformSupport()), config);
+		if (smoke) config.setInitialVisible(false);
+		new Lwjgl3Application(smoke
+				? new DesktopSmokeProbe(java.util.Arrays.asList(args).contains("--smoke-sewers"))
+				: new ShatteredPixelDungeon(new DesktopPlatformSupport()), config);
 	}
 }

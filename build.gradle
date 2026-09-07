@@ -4,18 +4,20 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:9.1.0'
+        if (!providers.gradleProperty('desktopOnly').map { it.toBoolean() }.getOrElse(false)) {
+            classpath 'com.android.tools.build:gradle:9.1.0'
+        }
     }
 }
 
 allprojects {
 
     ext {
-        appName = 'Shattered Pixel Dungeon'
-        appPackageName = 'com.shatteredpixel.shatteredpixeldungeon'
+        appName = 'Grimhollow'
+        appPackageName = 'com.grimhollow.dungeon'
 
         appVersionCode = 896
-        appVersionName = '3.3.8'
+        appVersionName = '0.1.0'
 
         appJavaCompatibility = JavaVersion.VERSION_11
 

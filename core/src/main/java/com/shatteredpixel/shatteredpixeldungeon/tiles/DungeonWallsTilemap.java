@@ -31,7 +31,8 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 	public static HashSet<Integer> skipCells = new HashSet<>();
 
 	public DungeonWallsTilemap(){
-		super(Dungeon.level.tilesTex());
+		super(Dungeon.level.tilesTex().equals("environment/tiles_sewers.png")
+				? "environment/walls_sewers.png" : Dungeon.level.tilesTex());
 		skipCells.clear();
 		map( Dungeon.level.map, Dungeon.level.width() );
 	}

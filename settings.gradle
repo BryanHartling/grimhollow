@@ -3,8 +3,10 @@ include ':SPD-classes'
 include ':core'
 
 //platform modules
-include ':android'
-include ':ios'
+if (!providers.gradleProperty('desktopOnly').map { it.toBoolean() }.getOrElse(false)) {
+    include ':android'
+}
+// iOS is outside this fork's Windows/Android delivery targets.
 include ':desktop'
 
 //service modules

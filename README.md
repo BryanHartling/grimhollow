@@ -1,27 +1,70 @@
-# Shattered Pixel Dungeon
+# Grimhollow
 
-[Shattered Pixel Dungeon](https://shatteredpixel.com/shatteredpd/) is an open-source traditional roguelike dungeon crawler with randomized levels and enemies, and hundreds of items to collect and use. It's based on the [source code of Pixel Dungeon](https://github.com/00-Evan/pixel-dungeon-gradle), by [Watabou](https://watabou.itch.io/).
+GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), based on **v3.3.8**, commit `7b8b845a76fe76c6b7c031ae9e570852411f56db`. Upstream history and Java packages are preserved.
 
-Shattered Pixel Dungeon currently compiles for Android, iOS, and Desktop platforms. You can find official releases of the game on:
+**Partial build foundation, not the completed specification.** Six upstream heroes remain playable. The three new heroes and §9 content are not implemented. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md), [CHANGES.md](CHANGES.md), and the supplied [specification](GDD-one-shot-build-spec.md).
 
-[![Get it on Google Play](https://shatteredpixel.com/assets/images/badges/gplay.png)](https://play.google.com/store/apps/details?id=com.shatteredpixel.shatteredpixeldungeon)
-[![Download on the App Store](https://shatteredpixel.com/assets/images/badges/appstore.png)](https://apps.apple.com/app/shattered-pixel-dungeon/id1563121109)
-[![Steam](https://shatteredpixel.com/assets/images/badges/steam.png)](https://store.steampowered.com/app/1769170/Shattered_Pixel_Dungeon/)<br>
-[![GOG.com](https://shatteredpixel.com/assets/images/badges/gog.png)](https://www.gog.com/game/shattered_pixel_dungeon)
-[![Itch.io](https://shatteredpixel.com/assets/images/badges/itch.png)](https://shattered-pixel.itch.io/shattered-pixel-dungeon)
-[![Github Releases](https://shatteredpixel.com/assets/images/badges/github.png)](https://github.com/00-Evan/shattered-pixel-dungeon/releases)
+## Build on Windows
 
-If you like this game, please consider [supporting me on Patreon](https://www.patreon.com/ShatteredPixel)!
+Requires Temurin **JDK 17**. Install JDK and Android tools locally, then configure the session:
 
-There is an official blog for this project at [ShatteredPixel.com](https://www.shatteredpixel.com/blog/).
+```powershell
+.\tools\bootstrap-windows.ps1
+. .\tools\env.ps1
+.\gradlew.bat desktop:run -PdesktopOnly=true
+```
 
-The game also has a translation project hosted on [Transifex](https://explore.transifex.com/shattered-pixel/shattered-pixel-dungeon/).
+Desktop-only excludes the Android module and Android plugin and works with no SDK or `ANDROID_HOME`. For a runnable jar:
 
-Note that **this repository does not accept pull requests!** The code here is provided in hopes that others may find it useful for their own projects, not to allow community contribution. Issue reports of all kinds (bug reports, feature requests, etc.) are welcome.
+```powershell
+.\gradlew.bat desktop:dist -PdesktopOnly=true
+java -jar desktop\build\libs\desktop-0.1.0.jar
+```
 
-If you'd like to work with the code, you can find the following guides in `/docs`:
-- [Compiling for Android.](docs/getting-started-android.md)
-    - **[If you plan to distribute on Google Play please read the end of this guide.](docs/getting-started-android.md#distributing-your-app)**
-- [Compiling for desktop platforms.](docs/getting-started-desktop.md)
-- [Compiling for iOS.](docs/getting-started-ios.md)
-- [Recommended changes for making your own version.](docs/recommended-changes.md)
+`desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.
+
+Full build needs SDK platform 36 and build-tools 36.0.0:
+
+```powershell
+. .\tools\env.ps1
+.\gradlew.bat desktop:dist core:test android:assembleDebug
+```
+
+Paths on this host:
+
+- `JAVA_HOME=C:\Users\Hartl\Documents\grimhollow\.toolchain\jdk-17` (Temurin 17.0.20.1+1).
+- `ANDROID_HOME=C:\Users\Hartl\Documents\grimhollow\.toolchain\android-sdk`.
+- `GRADLE_USER_HOME=C:\Users\Hartl\Documents\grimhollow\.gradle-user-home`.
+- Python 3.12.14: `C:\Users\Hartl\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe`.
+
+Google's current tools delegate sdkmanager to Android CLI. The bootstrap uses slash-separated package names to avoid the Windows wrapper splitting semicolons. Downloads are checked against publisher checksums. The CLI reported a nonzero result even after installing the packages; actual Gradle packaging subsequently succeeded. No system environment changes are needed.
+
+## Install Android
+
+Download `grimhollow-android-debug.zip` from GitHub Actions and extract the APK. Enable Developer Options and allow **Install unknown apps** for the app opening the APK, then open and install it. With USB debugging:
+
+```powershell
+adb install -r android\build\outputs\apk\debug\android-debug.apk
+```
+
+The exact debug application ID is `com.grimhollow.dungeon` (no `.indev` suffix); label **Grimhollow**. It installs alongside SPD. Desktop saves/settings use `%APPDATA%\.grimhollow\Grimhollow\`, distinct from upstream. Linux uses `$XDG_DATA_HOME/.grimhollow/grimhollow` (or `~/.local/share/.grimhollow/grimhollow`); macOS uses `~/Library/Application Support/Grimhollow`.
+
+## Verify
+
+```powershell
+.\gradlew.bat core:test -PdesktopOnly=true
+.\gradlew.bat desktop:run -PdesktopOnly=true --args=--smoke-title
+.\gradlew.bat desktop:run -PdesktopOnly=true --args=--smoke-sewers
+.\gradlew.bat core:smokeRun -PdesktopOnly=true
+python tools/artgen/validate.py
+```
+
+The optional desktop probe renders actual OpenGL frames into `.local/acceptance/` and exits. The Sewer probe uses test save slot 99. The default headless gate targets the three new heroes and fails while they are absent. `-PsmokeUpstream=true` instead diagnoses the six retained classes: generate floors 1–6, save/load, ten seeds each. This diagnostic does not count as new-class acceptance or simulated combat.
+
+CI runs Linux/Windows desktop builds, JUnit, full art validation, Android packaging, and the headless gate. Failed gates remain active; jars upload even when a later acceptance gate fails. Artifact retention: 14 days.
+
+Art: [ART_PIPELINE.md](ART_PIPELINE.md). Dynamic lighting is in Settings → Display, upstream's graphics tab. Ambient, hero, decorative-wall and persistent blob sources are implemented; transient effects remain incomplete.
+
+## Attribution
+
+Original Pixel Dungeon by Oleg Dolya; Shattered Pixel Dungeon by Evan Debenham and contributors. All new code/art is GPL-3.0-or-later. See [LICENSE.txt](LICENSE.txt) and preserved copyright headers. No Blizzard assets, names or text were imported.

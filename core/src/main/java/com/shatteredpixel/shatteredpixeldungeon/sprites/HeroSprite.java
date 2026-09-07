@@ -23,6 +23,7 @@ package com.shatteredpixel.shatteredpixeldungeon.sprites;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.GameGeometry;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.HeroDisguise;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass;
@@ -39,8 +40,8 @@ import com.watabou.utils.RectF;
 
 public class HeroSprite extends CharSprite {
 	
-	private static final int FRAME_WIDTH	= 12;
-	private static final int FRAME_HEIGHT	= 15;
+	private static final int FRAME_WIDTH = GameGeometry.LEGACY_HERO_FRAME_W;
+	private static final int FRAME_HEIGHT = GameGeometry.LEGACY_HERO_FRAME_H;
 	
 	private static final int RUN_FRAMERATE	= 20;
 	

@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         manifestPlaceholders = [appName:appName]
-        applicationId appPackageName
+        applicationId 'com.grimhollow.dungeon'
 
         versionCode appVersionCode
         versionName appVersionName
@@ -25,7 +25,6 @@ android {
 
     buildTypes {
         debug {
-            applicationIdSuffix ".indev"
             versionNameSuffix '-INDEV'
             dependencies {
                 debugImplementation project(':services:updates:debugUpdates')

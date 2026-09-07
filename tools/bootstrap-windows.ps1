@@ -21,18 +21,24 @@ $env:Path = "$env:JAVA_HOME/bin;$env:Path"
 & "$env:JAVA_HOME/bin/java.exe" -version
 if (!(Test-Path "$env:ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat")) {
     $index = [xml](Invoke-WebRequest 'https://dl.google.com/android/repository/repository2-1.xml').Content
-    $sdkPackage = $index.sdkrepository.remotePackage | Where-Object { $_.path -eq 'cmdline-tools;latest' }
+    $sdkPackage = $index.SelectNodes("//*[local-name()='remotePackage']") | Where-Object { $_.path -eq 'cmdline-tools;latest' }
     $sdkArchive = $sdkPackage.archives.archive | Where-Object { $_.'host-os' -eq 'windows' }
+    if (!$sdkArchive.complete.url) { throw 'Windows command-line tools archive absent from Google repository index' }
     $sdkZip = Join-Path $toolRoot 'android-commandline.zip'
     Invoke-WebRequest ("https://dl.google.com/android/repository/" + $sdkArchive.complete.url) -OutFile $sdkZip
-    if ((Get-FileHash $sdkZip -Algorithm SHA1).Hash.ToLowerInvariant() -ne $sdkArchive.complete.checksum.'#text') { throw 'Android tools SHA1 mismatch' }
+    $expectedChecksum = $sdkArchive.complete.SelectSingleNode('checksum').InnerText.Trim()
+    if ((Get-FileHash $sdkZip -Algorithm SHA1).Hash.ToLowerInvariant() -ne $expectedChecksum) { throw 'Android tools SHA1 mismatch' }
     Expand-Archive -LiteralPath $sdkZip -DestinationPath "$toolRoot/android-extract" -Force
     New-Item -ItemType Directory -Force "$env:ANDROID_HOME/cmdline-tools" | Out-Null
     Copy-Item -LiteralPath "$toolRoot/android-extract/cmdline-tools" -Destination "$env:ANDROID_HOME/cmdline-tools/latest" -Recurse
 }
 1..100 | ForEach-Object { 'y' } | & "$env:ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" --licenses
 if ($LASTEXITCODE -ne 0) { throw 'SDK license acceptance failed' }
-& "$env:ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" 'platforms;android-36' 'build-tools;36.0.0' 'platform-tools'
+if (Test-Path "$env:ANDROID_HOME/cmdline-tools/latest/bin/android.exe") {
+    & "$env:ANDROID_HOME/cmdline-tools/latest/bin/android.exe" "--sdk=$env:ANDROID_HOME" sdk install 'platforms/android-36' 'build-tools/36.0.0' 'platform-tools'
+} else {
+    & "$env:ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" 'platforms;android-36' 'build-tools;36.0.0' 'platform-tools'
+}
 if ($LASTEXITCODE -ne 0) { throw 'SDK installation failed' }
 Write-Output "JAVA_HOME=$env:JAVA_HOME"
 Write-Output "ANDROID_HOME=$env:ANDROID_HOME"

@@ -71,6 +71,12 @@ public class Tilemap extends Visual {
 		updated = new Rect();
 	}
 
+	/** Allows high-resolution texture frames without changing logical world coordinates. */
+	protected void cellSize(float width, float height) {
+		cellW = width;
+		cellH = height;
+	}
+
 	public void map( int[] data, int cols ) {
 
 		this.data = data;

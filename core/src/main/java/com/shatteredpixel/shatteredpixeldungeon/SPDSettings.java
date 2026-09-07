@@ -34,6 +34,9 @@ import com.watabou.utils.Point;
 import java.util.Locale;
 
 public class SPDSettings extends GameSettings {
+
+	public static boolean dynamicLighting() { return getBoolean("dynamic_lighting", true); }
+	public static void dynamicLighting(boolean enabled) { put("dynamic_lighting", enabled); }
 	
 	//Version info
 	

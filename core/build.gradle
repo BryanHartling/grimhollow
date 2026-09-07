@@ -6,4 +6,20 @@ java.sourceCompatibility = java.targetCompatibility = appJavaCompatibility
 dependencies {
     api project(':SPD-classes')
     implementation project(':services')
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+    testRuntimeOnly "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine:5.12.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.2'
+}
+
+test { useJUnitPlatform() }
+
+tasks.register('smokeRun', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun'
+    workingDir = file('src/main/assets')
+    systemProperty 'grimhollow.smokeOutput', layout.buildDirectory.dir('reports/smoke').get().asFile.absolutePath
+    if (providers.gradleProperty('smokeUpstream').getOrElse('false').toBoolean()) args '--upstream'
 }

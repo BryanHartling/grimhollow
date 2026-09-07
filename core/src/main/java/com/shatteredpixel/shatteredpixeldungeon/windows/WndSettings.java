@@ -220,6 +220,7 @@ public class WndSettings extends WndTabbed {
 		RenderedTextBlock title;
 		ColorBlock sep1;
 		CheckBox chkFullscreen;
+		CheckBox chkDynamicLighting;
 		CheckBox chkLandscape;
 		ColorBlock sep2;
 		OptionSlider optBrightness;
@@ -312,6 +313,15 @@ public class WndSettings extends WndTabbed {
 			optScreenShake.setSelectedValue(SPDSettings.screenShake());
 			add(optScreenShake);
 
+			chkDynamicLighting = new CheckBox(Messages.get(this, "dynamic_lighting")) {
+				@Override protected void onClick() {
+					super.onClick();
+					SPDSettings.dynamicLighting(checked());
+				}
+			};
+			chkDynamicLighting.checked(SPDSettings.dynamicLighting());
+			add(chkDynamicLighting);
+
 		}
 
 		@Override
@@ -351,7 +361,8 @@ public class WndSettings extends WndTabbed {
 				optScreenShake.setRect(0, optFollowIntensity.bottom() + GAP, width, SLIDER_HEIGHT);
 			}
 
-			height = optScreenShake.bottom();
+			chkDynamicLighting.setRect(0, optScreenShake.bottom() + GAP, width, BTN_HEIGHT);
+			height = chkDynamicLighting.bottom();
 		}
 
 	}

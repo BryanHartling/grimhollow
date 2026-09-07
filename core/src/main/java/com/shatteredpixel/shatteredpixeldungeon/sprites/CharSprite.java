@@ -343,6 +343,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 	}
 	
 	public void bloodBurstA( PointF from, int damage ) {
+		if (visible && ch != null && damage > 0) GameScene.bloodDecal(ch.pos);
 		if (visible) {
 			PointF c = center();
 			int n = (int)Math.min( 9 * Math.sqrt( (double)damage / ch.HT ), 9 );

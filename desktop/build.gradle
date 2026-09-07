@@ -14,6 +14,23 @@ processResources {
 
 def osName = System.getProperty('os.name').toLowerCase(Locale.ROOT)
 
+// The application plugin's run task needs the same metadata as the packaged jar.
+tasks.named('run', JavaExec) {
+    systemProperty 'grimhollow.smokeDir', rootProject.file('.local/acceptance').absolutePath
+    systemProperty 'Specification-Title', appName
+    systemProperty 'Implementation-Title', appPackageName
+    systemProperty 'Specification-Version', appVersionName
+    systemProperty 'Implementation-Version', appVersionCode
+    if (osName.contains('mac')) jvmArgs '-XstartOnFirstThread'
+}
+
+// Upstream calls its runnable fat-jar task release; retain it and expose the spec's alias.
+tasks.register('dist') {
+    group = 'distribution'
+    description = 'Build the runnable Grimhollow desktop jar.'
+    dependsOn 'release'
+}
+
 tasks.register('debug', JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     ignoreExitValue = true

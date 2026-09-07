@@ -100,6 +100,8 @@ public class Corrosion extends Buff implements Hero.Doom {
 
 	@Override
 	public boolean act() {
+		if (target.sprite != null && target.sprite.visible) target.sprite.emitter().burst(
+				com.shatteredpixel.shatteredpixeldungeon.effects.particles.NecroticParticle.FACTORY, 3);
 		if (target.isAlive()) {
 			target.damage((int)damage, this);
 			if (damage < (Dungeon.scalingDepth()/2)+2) {

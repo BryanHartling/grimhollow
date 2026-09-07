@@ -1,0 +1,151 @@
+FAIL NECROMANCER seed=0: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL NECROMANCER seed=1: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL NECROMANCER seed=2: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL NECROMANCER seed=3: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL NECROMANCER seed=4: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL NECROMANCER seed=5: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL NECROMANCER seed=6: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL NECROMANCER seed=7: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL NECROMANCER seed=8: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL NECROMANCER seed=9: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.NECROMANCER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL ENCHANTER seed=0: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL ENCHANTER seed=1: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL ENCHANTER seed=2: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL ENCHANTER seed=3: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL ENCHANTER seed=4: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL ENCHANTER seed=5: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL ENCHANTER seed=6: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL ENCHANTER seed=7: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL ENCHANTER seed=8: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL ENCHANTER seed=9: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL PSYCHIC seed=0: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL PSYCHIC seed=1: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL PSYCHIC seed=2: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL PSYCHIC seed=3: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL PSYCHIC seed=4: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL PSYCHIC seed=5: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL PSYCHIC seed=6: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL PSYCHIC seed=7: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL PSYCHIC seed=8: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+FAIL PSYCHIC seed=9: java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+java.lang.IllegalArgumentException: No enum constant com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC
+	at java.base/java.lang.Enum.valueOf(Enum.java:273)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.valueOf(HeroClass.java:85)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:36)
+Runs=30 failures=30

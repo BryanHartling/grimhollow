@@ -1,0 +1,196 @@
+{
+  "kind": "icon",
+  "dimensions": [
+    192,
+    192
+  ],
+  "palette_roles": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+  ],
+  "silhouette": [
+    {
+      "type": "rect",
+      "points": [
+        0,
+        0,
+        255,
+        255
+      ],
+      "role": 0
+    },
+    {
+      "type": "ellipse",
+      "points": [
+        30,
+        20,
+        226,
+        230
+      ],
+      "role": 7
+    },
+    {
+      "type": "ellipse",
+      "points": [
+        45,
+        30,
+        211,
+        213
+      ],
+      "role": 1
+    },
+    {
+      "type": "ellipse",
+      "points": [
+        65,
+        45,
+        191,
+        161
+      ],
+      "role": 9
+    },
+    {
+      "type": "polygon",
+      "points": [
+        [
+          77,
+          110
+        ],
+        [
+          179,
+          110
+        ],
+        [
+          169,
+          191
+        ],
+        [
+          145,
+          205
+        ],
+        [
+          111,
+          205
+        ],
+        [
+          87,
+          191
+        ]
+      ],
+      "role": 9
+    },
+    {
+      "type": "ellipse",
+      "points": [
+        83,
+        91,
+        117,
+        126
+      ],
+      "role": 0
+    },
+    {
+      "type": "ellipse",
+      "points": [
+        139,
+        91,
+        173,
+        126
+      ],
+      "role": 0
+    },
+    {
+      "type": "ellipse",
+      "points": [
+        94,
+        105,
+        111,
+        117
+      ],
+      "role": 13
+    },
+    {
+      "type": "ellipse",
+      "points": [
+        145,
+        105,
+        162,
+        117
+      ],
+      "role": 13
+    },
+    {
+      "type": "polygon",
+      "points": [
+        [
+          127,
+          120
+        ],
+        [
+          116,
+          143
+        ],
+        [
+          138,
+          143
+        ]
+      ],
+      "role": 0
+    },
+    {
+      "type": "rect",
+      "points": [
+        101,
+        165,
+        107,
+        192
+      ],
+      "role": 1
+    },
+    {
+      "type": "rect",
+      "points": [
+        123,
+        165,
+        129,
+        195
+      ],
+      "role": 1
+    },
+    {
+      "type": "rect",
+      "points": [
+        145,
+        165,
+        151,
+        192
+      ],
+      "role": 1
+    }
+  ],
+  "animation_keyframes": [],
+  "seed": 417,
+  "output": "android/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+  "provenance": "Original Grimhollow primitives, GPL-3.0-or-later"
+}

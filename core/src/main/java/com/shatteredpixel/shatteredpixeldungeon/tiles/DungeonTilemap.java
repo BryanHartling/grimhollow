@@ -22,6 +22,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.tiles;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.GameGeometry;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.TextureFilm;
@@ -33,12 +34,13 @@ import com.watabou.utils.PointF;
 
 public abstract class DungeonTilemap extends Tilemap {
 
-	public static final int SIZE = 16;
+	public static final int SIZE = GameGeometry.WORLD_TILE_SIZE;
 
 	protected int[] map;
 
 	public DungeonTilemap(String tex) {
-		super(tex, new TextureFilm( tex, SIZE, SIZE ) );
+		super(tex, new TextureFilm( tex, GameGeometry.tileFrame(tex), GameGeometry.tileFrame(tex) ) );
+		cellSize(SIZE, SIZE);
 	}
 
 	@Override
@@ -138,6 +140,7 @@ public abstract class DungeonTilemap extends Tilemap {
 		
 		final Image tile = new Image( texture );
 		tile.frame( tileset.get( getTileVisual( pos, oldValue, false)));
+		tile.width = tile.height = SIZE;
 		tile.point( tileToWorld( pos ) );
 
 		parent.add( tile );

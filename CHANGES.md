@@ -1,9 +1,122 @@
 # Changes from Shattered Pixel Dungeon v3.3.8
 
-Upstream history is retained. Work branch: `grimhollow`.
+Upstream history retained; branch `grimhollow`. Each changed path is listed below.
 
-- `.gitignore`: exclude local toolchains, build caches, temporary credentials and output.
-- `tools/bootstrap-windows.ps1`: install checksum-verified Temurin 17 and Android tools into the repository's ignored local toolchain directory.
-- `tools/env.ps1`: configure the local build session without changing system settings.
-- `KNOWN_ISSUES.md`: record specification conflicts, environment failures, and acceptance status.
-- `CHANGES.md`: maintain this per-file change ledger.
+- `.gitattributes`: Portable wrapper line endings and binary-asset treatment.
+- `.github/workflows/build.yml`: Linux/Windows desktop, Android and headless CI with artifacts and active acceptance failures.
+- `.gitignore`: Exclude machine-local toolchains, caches and temporary credentials.
+- `ART_PIPELINE.md`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+- `CHANGES.md`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+- `GDD-one-shot-build-spec.md`: Preserve the exact supplied specification without credentials.
+- `KNOWN_ISSUES.md`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+- `README.md`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+- `SPD-classes/src/main/java/com/watabou/noosa/Tilemap.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `android/build.gradle`: Grimhollow build identity, platform isolation, distribution task or test configuration.
+- `android/src/main/res/mipmap-hdpi/ic_launcher.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-hdpi/ic_launcher_background.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-hdpi/ic_launcher_foreground.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-hdpi/ic_launcher_monochrome.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-ldpi/ic_launcher.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-ldpi/ic_launcher_background.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-ldpi/ic_launcher_foreground.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-ldpi/ic_launcher_monochrome.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-mdpi/ic_launcher.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-mdpi/ic_launcher_background.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-mdpi/ic_launcher_foreground.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-mdpi/ic_launcher_monochrome.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-xhdpi/ic_launcher.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-xhdpi/ic_launcher_background.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-xhdpi/ic_launcher_monochrome.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-xxhdpi/ic_launcher.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-xxhdpi/ic_launcher_background.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-xxhdpi/ic_launcher_monochrome.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-xxxhdpi/ic_launcher.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-xxxhdpi/ic_launcher_background.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `android/src/main/res/mipmap-xxxhdpi/ic_launcher_monochrome.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `build.gradle`: Grimhollow build identity, platform isolation, distribution task or test configuration.
+- `core/build.gradle`: Grimhollow build identity, platform isolation, distribution task or test configuration.
+- `core/src/main/assets/effects/blood_decals.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/effects/health_vignette.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/environment/tiles_sewers.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/environment/walls_sewers.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/messages/windows/windows.properties`: Persist and localize the dynamic-lighting display setting.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/GameGeometry.java`: Separate 64px texture dimensions from retained logical world/UI coordinates.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/SPDSettings.java`: Persist and localize the dynamic-lighting display setting.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Corrosion.java`: Shared green emissive corrosion particles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/HealthVignette.java`: Scale crimson screen edges to the specified low-health thresholds.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/particles/NecroticParticle.java`: Shared green emissive corrosion particles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/GameScene.java`: Integrate terrain lighting, transient level blood decals and low-health feedback.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/CharSprite.java`: Integrate terrain lighting, transient level blood decals and low-health feedback.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/HeroSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/DungeonTerrainTilemap.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/DungeonTilemap.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/DungeonWallsTilemap.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/FogOfWar.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/LightMap.java`: Cached low-resolution quadratic terrain light accumulation and one multiply draw.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/LightingOverlay.java`: Cached low-resolution quadratic terrain light accumulation and one multiply draw.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndSettings.java`: Persist and localize the dynamic-lighting display setting.
+- `core/src/test/java/com/shatteredpixel/shatteredpixeldungeon/acceptance/SmokeRun.java`: Real generator/save-load smoke harness; the required missing classes fail explicitly.
+- `core/src/test/java/com/shatteredpixel/shatteredpixeldungeon/tiles/LightMapTest.java`: JUnit coverage of light falloff, clipping, saturation and health thresholds.
+- `desktop/build.gradle`: Grimhollow build identity, platform isolation, distribution task or test configuration.
+- `desktop/src/main/assets/icons/icon_128.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `desktop/src/main/assets/icons/icon_16.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `desktop/src/main/assets/icons/icon_256.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `desktop/src/main/assets/icons/icon_32.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `desktop/src/main/assets/icons/icon_48.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `desktop/src/main/assets/icons/icon_64.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `desktop/src/main/assets/icons/mac.icns`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `desktop/src/main/assets/icons/windows.ico`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `desktop/src/main/java/com/shatteredpixel/shatteredpixeldungeon/desktop/DesktopLauncher.java`: Use fork metadata for title/save isolation and expose opt-in OpenGL verification.
+- `desktop/src/main/java/com/shatteredpixel/shatteredpixeldungeon/desktop/DesktopSmokeProbe.java`: Render title and Sewer screenshots in real OpenGL, then exit.
+- `gradle.properties`: Grimhollow build identity, platform isolation, distribution task or test configuration.
+- `settings.gradle`: Grimhollow build identity, platform isolation, distribution task or test configuration.
+- `tools/artgen/build.py`: Deterministic procedural painter, source import, dependencies or full/subset validator.
+- `tools/artgen/import_upstream_layout.py`: Deterministic procedural painter, source import, dependencies or full/subset validator.
+- `tools/artgen/requirements.txt`: Deterministic procedural painter, source import, dependencies or full/subset validator.
+- `tools/artgen/specs/android_src_main_res_mipmap-hdpi_ic_launcher_background_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-hdpi_ic_launcher_foreground_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-hdpi_ic_launcher_monochrome_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-hdpi_ic_launcher_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-ldpi_ic_launcher_background_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-ldpi_ic_launcher_foreground_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-ldpi_ic_launcher_monochrome_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-ldpi_ic_launcher_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-mdpi_ic_launcher_background_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-mdpi_ic_launcher_foreground_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-mdpi_ic_launcher_monochrome_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-mdpi_ic_launcher_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-xhdpi_ic_launcher_background_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-xhdpi_ic_launcher_foreground_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-xhdpi_ic_launcher_monochrome_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-xhdpi_ic_launcher_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-xxhdpi_ic_launcher_background_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-xxhdpi_ic_launcher_foreground_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-xxhdpi_ic_launcher_monochrome_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-xxhdpi_ic_launcher_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-xxxhdpi_ic_launcher_background_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-xxxhdpi_ic_launcher_foreground_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-xxxhdpi_ic_launcher_monochrome_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/android_src_main_res_mipmap-xxxhdpi_ic_launcher_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/blood_decals.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/desktop_src_main_assets_icons_icon_128_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/desktop_src_main_assets_icons_icon_16_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/desktop_src_main_assets_icons_icon_256_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/desktop_src_main_assets_icons_icon_32_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/desktop_src_main_assets_icons_icon_48_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/desktop_src_main_assets_icons_icon_64_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/desktop_src_main_assets_icons_mac_icns.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/desktop_src_main_assets_icons_windows_ico.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/health_vignette.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/tiles_sewers.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/walls_sewers.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/validate.py`: Deterministic procedural painter, source import, dependencies or full/subset validator.
+- `tools/bootstrap-windows.ps1`: Reproducible local toolchain installation or session environment setup.
+- `tools/env.ps1`: Reproducible local toolchain installation or session environment setup.
+- `tools/github.ps1`: Push and inspect CI using transient authorization; never persist a credential in Git configuration.
+- `tools/update-change-ledger.py`: Build-support utility for this documented checkpoint.
+- `verification/art-validation.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+- `verification/generated-art-validation.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+- `verification/new-class-smoke.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.

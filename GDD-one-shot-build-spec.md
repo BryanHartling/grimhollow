@@ -1,4 +1,4 @@
-# Game Design Document & Build Specification
+# Game Design Document & Build Specification (v0.2 — continuation revision)
 ## Working title: **Grimhollow** (a Shattered Pixel Dungeon derivative)
 
 **Document purpose.** This is a complete, self-contained specification intended to be handed to an autonomous coding agent to produce a playable build in a single run. It defines the deliverable, the technical base, every new class and content item with concrete numbers, the art specification and pipeline, and the acceptance tests the build must pass. Where the spec is silent, follow existing Shattered Pixel Dungeon (SPD) conventions exactly.
@@ -22,10 +22,11 @@ A Git repository forked from `00-Evan/shattered-pixel-dungeon` at the latest tag
 
 ## 2. Base, constraints, and license
 
-- **Base:** Shattered Pixel Dungeon, Java, libGDX, Gradle. Modules: `core`, `desktop`, `android`, `services`, `SPD-classes`. Fork; do not rewrite.
+- **Base:** Shattered Pixel Dungeon **v3.3.8** (commit `7b8b845a`), Java, libGDX, Gradle. Modules: `core`, `desktop`, `android`, `services`, `SPD-classes`. Fork; do not rewrite.
 - **License:** GPL-3.0. All new code and art are GPL-3.0. Do not import third-party assets under incompatible licenses. Do not reproduce any Blizzard/Diablo asset, name, or text; only the *style* described in §5 is the reference.
 - **Scope rules (hard):**
-  - Keep: top-down grid, all existing mechanics and systems, talent grid, subclasses, armor abilities, alchemy, identification, hunger, challenges, Amulet of Yendor, all five existing classes.
+  - Keep: top-down grid, all existing mechanics and systems, talent grid, subclasses, armor abilities, alchemy, identification, hunger, challenges, Amulet of Yendor, and all **six** existing classes (Warrior, Mage, Rogue, Huntress, Duelist, Cleric). Nine classes total after additions.
+  - Enum key collisions: upstream already uses `HeroSubClass.WARDEN` (Huntress). New enum keys must not collide with any existing `HeroClass`, `HeroSubClass`, `Talent`, or `ArmorAbility` identifier; check before adding.
   - Add: only what is specified here. Every new ability is implemented on existing base classes (`Buff`, `Wand`, `Spell`, `Weapon.Enchantment`, `Armor.Glyph`, `Mob`, `Talent`, `ArmorAbility`, `Item`, `KindOfWeapon`, `Trap`).
   - Do not add: affixes/rares/uniques, skill trees, mana, isometric rendering, new resource systems beyond the three class items defined below, new game modes.
 - **Compatibility:** save files from upstream do not need to load. Upstream's `Badges`, `Rankings`, and `Statistics` must continue to work and include the new classes.
@@ -60,17 +61,17 @@ All paths under `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/`.
 
 ## 4. Resolution and rendering
 
-### 4.1 Constants
-Abstract every hardcoded 16/12/15/8 that relates to sprite and tile geometry into a single `com.shatteredpixel.shatteredpixeldungeon.GameGeometry` class:
+### 4.1 Geometry (validated approach)
+**Logical world units stay at upstream's 16 per tile.** Camera, physics, pathing, UI, and all `Level` coordinates are untouched. Only *texture* resolution changes. `com.shatteredpixel.shatteredpixeldungeon.GameGeometry` holds the texture-side constants and the conversion between texture frames and logical placement:
 
 ```
-TILE_SIZE = 64
-HERO_FRAME_W = 48, HERO_FRAME_H = 60
-MOB_FRAME_W/H = per-mob, default 48x60; large mobs 96x96 (bosses, DM-300, Yog)
-ITEM_ICON = 32
-UI_SCALE = independent of TILE_SIZE (existing SPD scaling settings unchanged)
+LOGICAL_TILE = 16            (unchanged; do not modify)
+TEX_TILE = 64
+TEX_HERO_W = 48, TEX_HERO_H = 60      (rendered into a 12x15 logical footprint)
+TEX_MOB default 48x60; large mobs 96x96 (bosses, DM-300, Yog)
+TEX_ITEM = 32                          (rendered into an 8x8 logical footprint)
 ```
-`DungeonTilemap`, `DungeonTerrainTilemap`, `DungeonWallsTilemap`, `CharSprite`, `ItemSprite`, `MissileSprite`, `FogOfWar`, and all `TextureFilm` constructors read from `GameGeometry`. Camera zoom defaults must be recomputed so the visible tile count at default zoom matches upstream (upstream shows ~15×10 tiles on a phone; preserve that).
+`Tilemap` (SPD-classes), `DungeonTilemap`, `DungeonTerrainTilemap`, `DungeonWallsTilemap`, and `FogOfWar` are already converted for terrain. Remaining: `CharSprite`, `HeroSprite`, `MobSprite`, `ItemSprite`, `MissileSprite`, and every `TextureFilm` constructor for character and item sheets must read `GameGeometry` and scale frames into the logical footprint. Visible tile count at default zoom is preserved automatically because logical units did not change.
 
 ### 4.2 Performance budget
 - Android target: 60 fps on a 2020 mid-range device at default zoom.
@@ -81,7 +82,7 @@ UI_SCALE = independent of TILE_SIZE (existing SPD scaling settings unchanged)
 Add `tiles/LightingOverlay.java`, drawn after terrain and before characters, additively blended:
 - **Ambient:** each region has an ambient multiplier applied to visible terrain (see §5.2 table). Fog of war is unchanged.
 - **Light sources:** a light source is any of: hero (radius = current view distance, warm amber), wall torches in the tile set (radius 3, amber), fire/burning tiles (radius 2, orange), electric effects (radius 2, cyan, 1-frame), necrotic/corrosion/curse effects (radius 1–2, sickly green), frost (radius 1, pale cyan).
-- **Falloff:** quadratic; light color multiplied onto terrain color, clamped.
+- **Falloff:** quadratic; light color multiplied onto terrain color, clamped. Light must fall off radially from each source; the hero's own light is brightest at the hero and reaches ambient level at its radius edge. **Do not clamp or boost light at the visible-region boundary**: fog of war handles unexplored cells, and a room's edge must not render brighter than its interior.
 - **Implementation:** one full-screen quad per light is unacceptable on mobile. Render lights into a low-resolution light map (1/4 tile resolution), then multiply once. Cache when nothing changed.
 - **Setting:** add a toggle in Settings → Graphics: "Dynamic lighting" (default on). When off, render as upstream.
 
@@ -130,14 +131,15 @@ Region ambient multipliers (RGB): Sewers `0.55,0.60,0.50`; Prison `0.50,0.50,0.5
 - Walls: `assets/environment/walls_<region>.png` following upstream's wall stitching layout.
 - Items: `assets/sprites/items.png` at 32×32, indices matching upstream `ItemSpriteSheet` (extend; do not renumber).
 - Effects: `assets/effects/*.png` at 64×64 frames.
-- UI: `assets/interfaces/*` may remain upstream (UI scale is independent) except talent icons (`talent_icons.png`), which need entries for every new talent.
+- UI: `assets/interfaces/*` may remain upstream (UI scale is independent) except: talent icons (`talent_icons.png`), which need entries for every new talent; and the **title screen**. Replace `banners.png` (the "Shattered Pixel Dungeon" wordmark and any Pixel Dungeon branding) with a pipeline-generated Grimhollow wordmark in the §5.2 palette (bone-white lettering, crimson accent, dark outline), and replace the title background with a pipeline-generated dark stone/bone composition. No upstream title text or logo may remain visible anywhere in the running game.
 
 ### 5.5 Asset inventory (must be complete)
 - **Tiles:** 5 regions × full `DungeonTileSheet` index set, plus new decor per region: Sewers (bone piles, rusted grate, mildew), Prison (chains, gibbet, bloodstain), Caves (crystal cluster, fungus, ash), City (broken statue, tapestry remnant, candle), Halls (obsidian, ritual circle, bone throne).
-- **Characters:** all upstream heroes (5), all upstream mobs and bosses, plus new: Necromancer, Enchanter, Psychic heroes; Skeleton (ally recolor), Ghoul (ally), cursed mob variants (recolor pass + green emissive), Hexcaster elite, Warden of Chains prison boss variant.
+- **Characters:** all upstream heroes (6), all upstream mobs and bosses, plus new: Necromancer, Enchanter, Psychic heroes; Skeleton (ally recolor), Ghoul (ally), cursed mob variants (recolor pass + green emissive), Hexcaster elite, Chainwarden prison boss variant.
 - **Items:** all upstream item indices plus new: Bone Rod, Phylactery, Sigil Brush, Runed Baton, Focus Ring, Focus Crystal, Scythe family (3 tiers), Bone armor, Leather variants, Hourglass of Ashes, Wand of Necrosis, Wand of Gravity, Wand of Bone, Spell of Soulfire.
 - **Effects:** bone wall, force wall, necrotic particle, curse aura ring, sigil glyphs (weapon/armor inscription), psychic storm ring, corpse explosion burst.
 - **Talent icons:** all §6–8 talents.
+- **Title screen:** Grimhollow wordmark and title background (see §5.4). Also update the window title, About screen text, and any in-game reference to the upstream name so the build identifies as Grimhollow while preserving the required GPL attribution to Pixel Dungeon and Shattered Pixel Dungeon in the About/credits screen.
 
 ### 5.6 Art pipeline (required deliverable)
 Create `tools/artgen/` containing a scripted, deterministic pipeline that regenerates every asset from source files:
@@ -206,7 +208,7 @@ Armor abilities use upstream's charge system (`HeroClass` armor ability charge, 
 
 ## 7. Class: Enchanter
 
-Enum `ENCHANTER`; subclasses `ARTIFICER`, `WARDEN`. Sprite `hero_enchanter.png`. Dominant color iron/blue-grey, accent holy gold.
+Enum `ENCHANTER`; subclasses `ARTIFICER`, `SCRIVENER` (display name "Scrivener"; not `WARDEN`, which upstream uses for the Huntress). Sprite `hero_enchanter.png`. Dominant color iron/blue-grey, accent holy gold.
 
 ### 7.1 Stats and kit
 - Base stats identical to Rogue (HP 20, +5/level; str 10).
@@ -238,11 +240,11 @@ Enum `ENCHANTER`; subclasses `ARTIFICER`, `WARDEN`. Sprite `hero_enchanter.png`.
 **T3**
 - Common: *Efficient Sigils* (10/20/30% chance Inscribe costs no charge), *Deep Knowledge* (start floors with 0/1/2 random enchantments temporarily "known" for Inscribe).
 - Artificer: *Master Craft* (Reinforce also +1/+2/+3 flat dmg or armor), *Lasting Work* (on descent, 25/50/75% chance the current inscription or Reinforce becomes permanent; once per floor; permanent enchant replaces existing).
-- Warden: *Wide Field* (aura radius +0/+1/+2), *Counterweight* (each debuff applied grants 1/2/3 turns Barkskin at lvl/2).
+- Scrivener: *Wide Field* (aura radius +0/+1/+2), *Counterweight* (each debuff applied grants 1/2/3 turns Barkskin at lvl/2).
 
 ### 7.3 Subclasses
 - **Artificer:** **Transmute Sigil** (2 charges): reroll the permanent enchantment/glyph on equipped weapon/armor to a random different one of the same rarity tier. **Reinforce** (1 charge): +1 temporary upgrade level on weapon or armor for 50 turns (uses upstream's temporary level system as in the Mage's Staff/Magical Infusion).
-- **Warden:** **Sanctify** (1 charge): 3×3 around hero: allies/hero gain Bless 8 + Haste 8. **Nullify** (2 charges): 5×5 around target: remove all buffs from enemies (`Buff.detach` on all non-permanent), and apply **Silenced** 5 turns (enemy `Mob` subclasses that cast — Warlock, Shaman, DM-100, Necromancer, Hexcaster — skip ranged/cast actions). **Fracture** (1 charge): target's `drRoll` returns 0 for 6 turns.
+- **Scrivener:** **Sanctify** (1 charge): 3×3 around hero: allies/hero gain Bless 8 + Haste 8. **Nullify** (2 charges): 5×5 around target: remove all buffs from enemies (`Buff.detach` on all non-permanent), and apply **Silenced** 5 turns (enemy `Mob` subclasses that cast — Warlock, Shaman, DM-100, Necromancer, Hexcaster — skip ranged/cast actions). **Fracture** (1 charge): target's `drRoll` returns 0 for 6 turns.
 
 ### 7.4 Armor abilities
 | Ability | Cost | Effect | Talents |
@@ -338,7 +340,7 @@ Charges 0–10 (regen 1 per 30 turns, faster with upgrades). Activate: enemies i
 ### 9.6 New mobs
 - **Cursed variants:** 10% of eligible spawns (rat, gnoll, crab, skeleton, thief, bat, brute, shaman, monk, warlock, golem, succubus, eye, scorpio) spawn with a random Hexweaver curse *on themselves* (they apply it to the hero on hit, 5 turns). +30% HP, drop an extra item from the floor loot table. Green emissive tint.
 - **Hexcaster** (elite, floors 11–20): HP 60, ranged caster; alternates Amplify Suffering and Decrepify on the hero at range; flees at melee range. Drops a random wand 25%.
-- **Warden of Chains** (Tengu-level variant boss, 30% chance replaces Tengu on floor 10): Tengu stats; instead of traps, summons Chain Traps (Prison chain visuals) that root the hero 2 turns; every 4 turns pulls the hero 2 cells toward himself (Gravity effect).
+- **Chainwarden** (Tengu-level variant boss, 30% chance replaces Tengu on floor 10): Tengu stats; instead of traps, summons Chain Traps (Prison chain visuals) that root the hero 2 turns; every 4 turns pulls the hero 2 cells toward himself (Gravity effect).
 
 ### 9.7 Existing content adjustments
 - Add all new enchantments/curses to `Weapon.Enchantment`/`Armor.Glyph` pools with upstream's rarity weights (curses weight 3 each, Dark Blessing weight 1).
@@ -358,7 +360,7 @@ Implement as JUnit tests in `core/src/test/` where feasible; otherwise as a head
 4. `python tools/artgen/validate.py` exits 0.
 
 ### 10.2 Gameplay (headless where possible)
-5. Each of 8 classes starts a run with its kit; inventory contents match §6–8.
+5. Each of 9 classes starts a run with its kit; inventory contents match §6–8.
 6. Each new talent can be selected at its tier and does not throw when its hook fires (drive via scripted hero level-ups and simulated combat).
 7. Each subclass is selectable at level 13 via the Tengu reward flow.
 8. Each armor ability is selectable at level 21 and executes without exception in a scripted scenario (target present, minions present, corpse cell present, etc.).
@@ -389,15 +391,18 @@ Implement as JUnit tests in `core/src/test/` where feasible; otherwise as a head
 
 ---
 
-## 12. Priority order if time-constrained
+## 12. Priority order and current checkpoint
 
-If the run must be cut short, deliver in this order and stop cleanly at any boundary:
-1. Build + §13 (package ID, desktop-only flag, CI) + geometry abstraction + one region (Sewers) at 64px with lighting.
-2. Necromancer complete.
-3. Art pipeline + all five regions and all upstream mobs/items.
-4. Enchanter complete.
-5. Psychic complete.
-6. §9 content, in listed order.
+**Checkpoint (commit `a4015d1`, branch `grimhollow`):** build, packaging, CI, desktop-only flag, geometry for terrain, Sewers tiles/walls at 64px, lighting overlay (ambient, hero, wall torches, persistent blobs), vignette, blood decals, art pipeline for the assets listed in ART_PIPELINE.md, headless smoke harness. Verified by the logs under `verification/`. Tests 1, 2, 3, 20, 22, 23 pass.
+
+**Remaining work, in priority order.** Finish each stage to a clean, building, committed, pushed state before starting the next:
+
+1. **Stage 1 remainder:** (a) lighting falloff fix per §4.3 (radial, no boundary halo); (b) character and item geometry (`CharSprite`, `HeroSprite`, `MobSprite`, `ItemSprite`, `MissileSprite`) reading `GameGeometry`; (c) pipeline generation of the six upstream hero sheets and `items.png` at texture resolution, using upstream silhouettes as vector sources exactly as the Sewers tiles do. (d) Grimhollow title screen wordmark and background per §5.4, and the About/credits text update. Transient light sources and remaining regions are deferred to stage 3.
+2. **Necromancer complete** (§6). Green headless gate for this class alone (`Runs=10 failures=0`).
+3. **Art pipeline coverage:** remaining four regions, all upstream mobs, new-hero sheets, transient light sources. Test 17 passes.
+4. **Enchanter complete** (§7).
+5. **Psychic complete** (§8).
+6. **§9 content**, in listed order.
 
 ---
 
@@ -451,3 +456,18 @@ Constraints:
 22. The debug APK's `applicationId` is `com.grimhollow.dungeon` and its label is "Grimhollow" (check via `aapt dump badging`).
 23. Desktop build writes saves and settings to a directory distinct from upstream's.
 
+---
+
+## 14. Process guidance for continuation runs
+
+These rules exist because the first run spent most of its time on verification scaffolding and produced no gameplay content.
+
+- **The verification harness is sufficient.** `verification/`, `SmokeRun`, `DesktopSmokeProbe`, `validate.py`, `update-change-ledger.py`, and the CI workflow exist and work. Do not build new probes, ledgers, evidence formats, or acceptance documents. Extend `SmokeRun` only where a new class requires it. Append to existing logs; do not restructure them.
+- **Verify at stage boundaries, not continuously.** Within a stage, compile and run the directly relevant test. Run the full acceptance set (§10, §13.5) once per stage, at the end, then commit and push.
+- **Content over evidence.** A stage that ships a working feature with a two-line KNOWN_ISSUES entry is worth more than a stage that ships a perfect report and no feature. Spend at least 80% of effort on the numbered stage deliverable.
+- **Do not re-verify what the checkpoint already proved.** Tests 1, 2, 3, 20, 22, 23 are passing; re-run them only in the final CI run.
+- **Environment friction.** If a command fails for sandbox or permission reasons, retry once with the documented escalation route from KNOWN_ISSUES.md, then record it and move on. Do not spend more than a few minutes on any single environment issue.
+- **Deviations.** When the spec is wrong or a better engineering approach exists (as with the 16-unit logical geometry), take the better approach, note it in one line in CHANGES.md, and continue. Do not stop to ask.
+- **Report format is unchanged** (see the prompt's Finishing section), but keep the KNOWN_ISSUES entries to one line each.
+
+---

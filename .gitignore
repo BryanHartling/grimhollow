@@ -18,3 +18,9 @@ local.properties
 #intellij project files
 *.iml
 *.idea
+
+# Machine-local toolchains, credentials, and acceptance output
+.toolchain/
+.gradle-user-home/
+.local/
+__pycache__/

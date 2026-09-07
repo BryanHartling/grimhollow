@@ -1,9 +1,11 @@
 # Known issues
 
-- Stage 1 remainder is complete; stages 2-6 are not yet implemented. The complete game is not delivered at this checkpoint.
-- Full art acceptance remains red: `Validated 45 generated specifications; 5 failures`; 103 legacy sheets lack sources, three new hero sheets are absent, and complete style/frame coverage remains deferred to stage 3.
-- Lighting now falls off radially without a visibility-boundary boost; transient effects and lighting of walls rendered after characters remain deferred to stage 3.
-- Tests 5-16 are not passing for the full deliverable because the new classes/content are absent; tests 18-19 and Android device gameplay have not run.
-- CI retains the full art and three-class gates; the workflow remains red for missing later-stage content. No passing-state tag exists.
+- Stages 1 and 2 are complete; stage 3 was not started. Enchanter, Psychic, full art coverage and section 9 content remain undelivered.
+- Tests 4 and 17 fail: `Validated 47 generated specifications; 4 failures`; 103 existing sheets lack pipeline sources, Enchanter/Psychic hero sheets are absent, and complete style/frame coverage remains unfinished.
+- The Necromancer and its minions use transitional art; full new-character art, four remaining regions and transient lighting belong to stage 3. Bone Prison currently uses barricade visuals for its opaque, nonflammable terrain.
+- Full tests 5-9 and 14 are not run for all specified content; Necromancer kit, talent hooks, subclass spell sets, armor execution and curse/minion save-load are exercised by its smoke gate. The actual Tengu/crown UI selection flows have not been driven in automation.
+- Full test 15 remains failing for the absent Enchanter and Psychic; the Necromancer-only gate reports `Runs=10 failures=0` using generator/debug descent, not a combat-playing bot.
+- Tests 11-13, 16, 18 and 19 are NOT RUN: later-class behavior, full sprite-index coverage, five-region luminance and turn-performance measurements remain pending; Android device gameplay is also untested.
+- Test 21 remains failing because the full art and three-class CI gates are retained. A separate Necromancer-only CI job provides the stage 2 gate; platform artifacts remain available from the failing overall workflow.
 - GitHub Actions dispatch/settings requests return HTTP 403 with the supplied token; push-triggered workflows work but may appear after a delay.
-- Sandbox fetch/.git writes require the documented escalation route; both continuation checks passed there. Builds must use an elevated fresh Gradle process (`--no-daemon`), because a cached sandbox daemon produced AccessDeniedException for cached dependency JARs.
+- Sandbox fetch/.git writes require the documented escalation route; both continuation checks passed there. Use an elevated fresh Gradle process (`--no-daemon`) to avoid cached sandbox-daemon AccessDeniedException errors.

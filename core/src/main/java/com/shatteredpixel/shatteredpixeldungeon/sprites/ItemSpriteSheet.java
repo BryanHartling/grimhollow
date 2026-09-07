@@ -25,11 +25,12 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.watabou.noosa.TextureFilm;
 
 public class ItemSpriteSheet {
+    public static final int BONE_ROD=512, PHYLACTERY=513, ARMOR_NECROMANCER=514;
 
 	public static final int SIZE = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM;
 
 	private static final int TX_WIDTH = 512;
-	private static final int TX_HEIGHT = 1024;
+	private static final int TX_HEIGHT = 1056;
 
 	private static final int WIDTH = TX_WIDTH / SIZE;
 

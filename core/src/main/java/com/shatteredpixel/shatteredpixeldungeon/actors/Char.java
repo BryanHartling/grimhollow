@@ -498,7 +498,9 @@ public abstract class Char extends Actor {
 				}
 
 				//vulnerable specifically applies after armor reductions
-				if (enemy.buff(Vulnerable.class) != null) {
+				if (enemy.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.AmplifySuffering.class) != null) {
+                    effectiveDamage *= 1.5f;
+                } else if (enemy.buff(Vulnerable.class) != null) {
 					effectiveDamage *= 1.33f;
 				}
 
@@ -516,7 +518,10 @@ public abstract class Char extends Actor {
 				return true;
 			}
 
-			enemy.damage( effectiveDamage, this );
+			com.shatteredpixel.shatteredpixeldungeon.actors.buffs.NecroCurse maiden=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.NecroCurse.find(enemy);
+            int reflected=maiden!=null && maiden.kind==com.shatteredpixel.shatteredpixeldungeon.actors.buffs.NecroCurse.Kind.IRON_MAIDEN && Dungeon.level.adjacent(pos,enemy.pos)?Math.round(Math.max(0,effectiveDamage)*.5f):0;
+            enemy.damage( effectiveDamage, this );
+            if(reflected>0 && isAlive())damage(reflected,maiden);
 
 			if (buff(FireImbue.class) != null)  buff(FireImbue.class).proc(enemy);
 			if (buff(FrostImbue.class) != null) buff(FrostImbue.class).proc(enemy);
@@ -810,6 +815,7 @@ public abstract class Char extends Actor {
 	}
 	
 	public void damage( int dmg, Object src ) {
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.markDamage(this,src);
 		
 		if (!isAlive() || dmg < 0) {
 			return;
@@ -907,6 +913,7 @@ public abstract class Char extends Actor {
 		}
 
 		Class<?> srcClass = src.getClass();
+        if(buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LowerResistance.class)!=null && !(src instanceof Char) && !(src instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon) && !(src instanceof com.shatteredpixel.shatteredpixeldungeon.actors.buffs.NecroCurse)) damage *= 1.25f;
 		if (isImmune( srcClass )) {
 			damage = 0;
 		} else {
@@ -1304,6 +1311,7 @@ public abstract class Char extends Actor {
 	//returns percent effectiveness after resistances
 	//TODO currently resistances reduce effectiveness by a static 50%, and do not stack.
 	public float resist( Class effect ){
+        if(buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LowerResistance.class)!=null)return 1f;
 		HashSet<Class> resists = new HashSet<>(resistances);
 		for (Property p : properties()){
 			resists.addAll(p.resistances());
@@ -1324,6 +1332,7 @@ public abstract class Char extends Actor {
 	protected final HashSet<Class> immunities = new HashSet<>();
 	
 	public boolean isImmune(Class effect ){
+        if(buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LowerResistance.class)!=null)return false;
 		HashSet<Class> immunes = new HashSet<>(immunities);
 		for (Property p : properties()){
 			immunes.addAll(p.immunities());
@@ -1346,6 +1355,7 @@ public abstract class Char extends Actor {
 	//similar to isImmune, but only factors in damage.
 	//Is used in AI decision-making
 	public boolean isInvulnerable( Class effect ){
+        if(buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.LowerResistance.class)!=null)return false;
 		return buff(Challenge.SpectatorFreeze.class) != null || buff(Invulnerability.class) != null;
 	}
 

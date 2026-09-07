@@ -35,10 +35,13 @@ public class Barkskin extends Buff {
 	}
 
 	private int level = 0;
+    private int fixedDuration=-1;
+    public void setForDuration(int value,int duration) {level=Math.max(level,value);fixedDuration=Math.max(fixedDuration,duration);}
 	private int interval = 1;
 	
 	@Override
 	public boolean act() {
+        if(fixedDuration>=0){if(--fixedDuration<=0)detach();else spend(TICK);return true;}
 		if (target.isAlive()) {
 
 			spend( interval );
@@ -104,6 +107,7 @@ public class Barkskin extends Buff {
 		super.storeInBundle( bundle );
 		bundle.put( INTERVAL, interval );
 		bundle.put( LEVEL, level );
+        bundle.put("fixed_duration",fixedDuration);
 	}
 	
 	@Override
@@ -111,6 +115,7 @@ public class Barkskin extends Buff {
 		super.restoreFromBundle( bundle );
 		interval = bundle.getInt( INTERVAL );
 		level = bundle.getInt( LEVEL );
+        fixedDuration=bundle.contains("fixed_duration")?bundle.getInt("fixed_duration"):-1;
 	}
 
 	//These two methods allow for multiple instances of barkskin to stack in terms of duration

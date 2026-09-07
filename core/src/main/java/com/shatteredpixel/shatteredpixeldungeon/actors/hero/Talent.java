@@ -197,6 +197,9 @@ public enum Talent {
 	//Power of Many T4
 	BEAMING_RAY(183, 4), LIFE_LINK(184, 4), STASIS(185, 4),
 
+	//Necromancer talents
+    GRAVE_HARVEST(224), BONE_MEAL(225), CORPSE_SENSE(226), NECROTIC_TOUCH(227), STURDY_BONES(228), DARK_PACT(229), SECOND_GRAVE(230), WARD_OF_BONE(231), NECROTIC_SIPHON(232), DEATHSPEAKERS_COMMAND(233, 3), GRAVE_WISDOM(234, 3), BONE_LEGION(235, 1), GRAVE_SPEECH(236, 3), LINGERING_HEX(237, 3), CURSED_GROUND(238, 3), WIDER_BLAST(239, 3), ROT(240, 3), SOUL_REFUND(241, 3), BLESSED_PACT(242, 3), BONE_SHELL(243, 3), RECLAIMED(244, 3), LASTING_CAGE(245, 3), JAGGED(246, 3), NECROMANCERS_KEY(247, 3),
+
 	//universal T4
 	HEROIC_ENERGY(26, 4), //See icon() and title() for special logic for this one
 	//Ratmogrify T4
@@ -495,6 +498,7 @@ public enum Talent {
 	}
 
 	public static void onTalentUpgraded( Hero hero, Talent talent ){
+        if(talent==STURDY_BONES || talent==CORPSE_SENSE)for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroSkeleton minion:com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroSkeleton.minions())minion.refreshStats();
 		//for metamorphosis
 		if (talent == IRON_WILL && hero.heroClass != HeroClass.WARRIOR){
 			Buff.affect(hero, BrokenSeal.WarriorShield.class);
@@ -582,6 +586,7 @@ public enum Talent {
 	public static class NatureBerriesDropped extends CounterBuff{{revivePersists = true;}};
 
 	public static void onFoodEaten( Hero hero, float foodVal, Item foodSource ){
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.onFood();
 		if (hero.hasTalent(HEARTY_MEAL)){
 			//4/6 HP healed, when hero is below 33% health (with a little rounding up)
 			if (hero.HP/(float)hero.HT < 0.334f) {
@@ -863,6 +868,7 @@ public enum Talent {
 	}
 
 	public static int onAttackProc( Hero hero, Char enemy, int dmg ){
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.onHit(enemy);
 
 		if (hero.hasTalent(Talent.PROVOKED_ANGER)
 			&& hero.buff(ProvokedAngerTracker.class) != null){
@@ -973,6 +979,7 @@ public enum Talent {
 
 		//tier 1
 		switch (cls){
+			case NECROMANCER: Collections.addAll(tierTalents, GRAVE_HARVEST, BONE_MEAL, CORPSE_SENSE, NECROTIC_TOUCH); break;
 			case WARRIOR: default:
 				Collections.addAll(tierTalents, HEARTY_MEAL, VETERANS_INTUITION, PROVOKED_ANGER, IRON_WILL);
 				break;
@@ -1002,6 +1009,7 @@ public enum Talent {
 
 		//tier 2
 		switch (cls){
+			case NECROMANCER: Collections.addAll(tierTalents, STURDY_BONES, DARK_PACT, SECOND_GRAVE, WARD_OF_BONE, NECROTIC_SIPHON); break;
 			case WARRIOR: default:
 				Collections.addAll(tierTalents, IRON_STOMACH, LIQUID_WILLPOWER, RUNIC_TRANSFERENCE, LETHAL_MOMENTUM, IMPROVISED_PROJECTILES);
 				break;
@@ -1031,6 +1039,7 @@ public enum Talent {
 
 		//tier 3
 		switch (cls){
+			case NECROMANCER: Collections.addAll(tierTalents, DEATHSPEAKERS_COMMAND, GRAVE_WISDOM); break;
 			case WARRIOR: default:
 				Collections.addAll(tierTalents, HOLD_FAST, STRONGMAN);
 				break;
@@ -1077,7 +1086,9 @@ public enum Talent {
 
 		//tier 3
 		switch (cls){
-			case BERSERKER: default:
+			case DEATHSPEAKER: Collections.addAll(tierTalents, BONE_LEGION, GRAVE_SPEECH); break;
+            case HEXWEAVER: Collections.addAll(tierTalents, LINGERING_HEX, CURSED_GROUND); break;
+            case BERSERKER: default:
 				Collections.addAll(tierTalents, ENDLESS_RAGE, DEATHLESS_FURY, ENRAGED_CATALYST);
 				break;
 			case GLADIATOR:

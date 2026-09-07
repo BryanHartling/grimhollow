@@ -66,6 +66,7 @@ public class Terrain {
 	public static final int REGION_DECO_ALT = 34; //alt visual for region deco, sometimes SP, sometimes other
 	public static final int MINE_CRYSTAL    = 35;
 	public static final int MINE_BOULDER    = 36;
+    public static final int BONE_WALL=39;
 
 	public static final int WATER		    = 29;
 	
@@ -86,6 +87,7 @@ public class Terrain {
 		flags[EMPTY_WELL]	= PASSABLE;
 		flags[WATER]		= PASSABLE | LIQUID;
 		flags[WALL]			= LOS_BLOCKING | SOLID;
+        flags[BONE_WALL]=LOS_BLOCKING|SOLID;
 		flags[DOOR]			= PASSABLE | LOS_BLOCKING | FLAMABLE | SOLID;
 		flags[OPEN_DOOR]	= PASSABLE | FLAMABLE;
 		flags[ENTRANCE]		= PASSABLE;

@@ -325,7 +325,7 @@ public class HeroSelectScene extends PixelScene {
 		} else {
 			background.visible = false;
 
-			int btnWidth = HeroBtn.MIN_WIDTH;
+			int btnWidth = (int)Math.min(HeroBtn.MIN_WIDTH, w/heroBtns.size());
 
 			float curX = insets.left + (w - btnWidth * heroBtns.size()) / 2f;
 			if (curX > 0) {

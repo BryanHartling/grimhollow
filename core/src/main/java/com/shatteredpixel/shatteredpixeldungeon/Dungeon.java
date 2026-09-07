@@ -295,6 +295,7 @@ public class Dungeon {
 	}
 	
 	public static Level newLevel() {
+        com.shatteredpixel.shatteredpixeldungeon.levels.features.BoneWalls.clear(level);
 		
 		Dungeon.level = null;
 		Actor.clear();
@@ -462,6 +463,7 @@ public class Dungeon {
 	}
 	
 	public static void switchLevel( final Level level, int pos ) {
+        if(Dungeon.level!=level)com.shatteredpixel.shatteredpixeldungeon.levels.features.BoneWalls.clear(Dungeon.level);
 
 		//Position of -2 specifically means trying to place the hero the exit
 		if (pos == -2){

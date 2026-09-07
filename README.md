@@ -2,7 +2,7 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), based on **v3.3.8**, commit `7b8b845a76fe76c6b7c031ae9e570852411f56db`. Upstream history and Java packages are preserved.
 
-**Stage 1 complete; later gameplay stages pending.** Six upstream heroes remain playable. The three new heroes and §9 content are not implemented. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md), [CHANGES.md](CHANGES.md), and the supplied [specification](GDD-one-shot-build-spec.md).
+**Stages 1 and 2 complete.** Seven heroes are playable, including the Necromancer with Deathspeaker and Hexweaver subclasses, talents and three armor abilities. Enchanter, Psychic, stage 3 art coverage and section 9 content remain pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.2 specification](GDD-one-shot-build-spec.md).
 
 ## Build on Windows
 
@@ -18,7 +18,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true
-java -jar desktop\build\libs\desktop-0.1.0.jar
+java -jar desktop\build\libs\desktop-0.2.0.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.
@@ -70,3 +70,9 @@ Art: [ART_PIPELINE.md](ART_PIPELINE.md). Dynamic lighting is in Settings → Dis
 Original Pixel Dungeon by Oleg Dolya; Shattered Pixel Dungeon by Evan Debenham and contributors. All new code/art is GPL-3.0-or-later. See [LICENSE.txt](LICENSE.txt) and preserved copyright headers. No Blizzard assets, names or text were imported.
 
 For continuation builds on this host, add `--no-daemon` to avoid reusing a Gradle daemon launched under a different sandbox context.
+
+## Necromancer checkpoint
+
+Choose Necromancer in hero selection. Kills charge the equipped Phylactery; click it to open the spell circle. Skeletons follow and fight automatically. Tengu's mask offers Deathspeaker (ghouls and shared buffs) or Hexweaver (four curses). Upgrade armor with the Dwarf King's crown for Corpse Explosion, Death Pact or Bone Prison.
+
+Run the class-specific gate with `gradlew.bat core:smokeRun -PsmokeClass=NECROMANCER -PdesktopOnly=true --no-daemon`. It exercises class features and generator/debug descent to floor 6 for ten seeds. The default `core:smokeRun` still requires all three new classes and fails until Enchanter and Psychic are delivered. CI preserves that gate and the full art validator; the separate `necromancer-smoke` job is the stage 2 gate. Both platform builds upload their artifacts even when later-stage gates fail.

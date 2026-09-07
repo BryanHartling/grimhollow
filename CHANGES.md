@@ -43,26 +43,56 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `core/src/main/assets/environment/tiles_sewers.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/environment/walls_sewers.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/interfaces/banners.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/interfaces/talent_icons.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/interfaces/title_grimhollow.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/messages/actors/actors.properties`: Persist and localize the dynamic-lighting display setting.
+- `core/src/main/assets/messages/items/items.properties`: Persist and localize the dynamic-lighting display setting.
 - `core/src/main/assets/messages/scenes/scenes.properties`: Persist and localize the dynamic-lighting display setting.
 - `core/src/main/assets/messages/windows/windows.properties`: Persist and localize the dynamic-lighting display setting.
 - `core/src/main/assets/sprites/hero_cleric.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/hero_duelist.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/hero_huntress.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/hero_mage.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/sprites/hero_necromancer.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/hero_rogue.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/hero_warrior.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/items.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/Assets.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/Badges.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/Dungeon.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/GameGeometry.java`: Separate 64px texture dimensions from retained logical world/UI coordinates.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/SPDSettings.java`: Persist and localize the dynamic-lighting display setting.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/Char.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/AmplifySuffering.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Barkskin.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Corrosion.java`: Shared green emissive corrosion particles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/LowerResistance.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/NecroCurse.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Necromancy.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/Hero.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/HeroClass.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/HeroSubClass.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/Talent.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/cleric/PowerOfMany.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/necromancer/BonePrison.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/necromancer/CorpseExplosion.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/necromancer/DeathPact.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/rogue/ShadowClone.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Mob.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/NecroGhoul.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/NecroSkeleton.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/HealthVignette.java`: Scale crimson screen edges to the specified low-health thresholds.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/particles/NecroticParticle.java`: Shared green emissive corrosion particles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/Phylactery.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/ClassArmor.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/NecromancerArmor.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/BoneRod.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/Level.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/Terrain.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/features/BoneWalls.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/AboutScene.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/GameScene.java`: Integrate terrain lighting, transient level blood decals and low-health feedback.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/HeroSelectScene.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/AcidicSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/AlbinoSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/BanditSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
@@ -112,7 +142,8 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/MirrorSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/MobSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/MonkSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/NecromancerSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/NecroSkeletonSprite.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/NecromancerSprite.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/NewbornElementalSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/PhantomPiranhaSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/PiranhaSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
@@ -132,7 +163,7 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SlimeSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SnakeSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SpawnerSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SpectralNecromancerSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SpectralNecromancerSprite.java`: Implement Necromancer equipment, minions, curse/talent effects, armor abilities or persistent state.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SpinnerSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/StatueSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SuccubusSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
@@ -146,6 +177,7 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/WraithSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/YogSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/DungeonTerrainTilemap.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/DungeonTileSheet.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/DungeonTilemap.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/DungeonWallsTilemap.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/FogOfWar.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
@@ -158,8 +190,9 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v0_8_X_Changes.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v0_9_X_Changes.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v1_X_Changes.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndHeroInfo.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndSettings.java`: Persist and localize the dynamic-lighting display setting.
-- `core/src/test/java/com/shatteredpixel/shatteredpixeldungeon/acceptance/SmokeRun.java`: Real generator/save-load smoke harness; the required missing classes fail explicitly.
+- `core/src/test/java/com/shatteredpixel/shatteredpixeldungeon/acceptance/SmokeRun.java`: Extend the existing harness with the required class selector and Necromancer kit, spells, armor, minion-cap and save/load scenarios.
 - `core/src/test/java/com/shatteredpixel/shatteredpixeldungeon/tiles/LightMapTest.java`: JUnit coverage of light falloff, clipping, saturation and health thresholds.
 - `desktop/build.gradle`: Grimhollow build identity, platform isolation, distribution task or test configuration.
 - `desktop/src/main/assets/icons/icon_128.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
@@ -217,9 +250,11 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `tools/artgen/specs/hero_duelist.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/hero_huntress.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/hero_mage.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/hero_necromancer.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/hero_rogue.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/hero_warrior.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/items.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/talent_icons.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/tiles_sewers.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/title_grimhollow.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/walls_sewers.json`: Editable deterministic source specification for its generated asset.
@@ -238,4 +273,6 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `verification/junit-summary.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
 - `verification/new-class-smoke.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
 - `verification/reproducibility.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
-`n- v0.2 deviation: preserve upstream animation/armor rows and 16-unit world placement; title lettering follows the explicit title exception; MobSprite/MissileSprite inherit central frame conversion from CharSprite/ItemSprite.
+
+- v0.2 decisions: keep upstream animation/armor layouts and 16-unit placement; use NECROTIC_SIPHON to avoid the Warlock talent collision; count a Bone Rod kill once through the shared kill hook; Decrepify lasts its specified six turns before Lingering Hex; fixed Barkskin durations extend the existing buff; Bone Wall uses unused terrain ID 39.
+- Stage 2 gate: the requested Necromancer-only CI job supplements the unchanged full three-class and art gates; stage 3 artwork remains deferred.

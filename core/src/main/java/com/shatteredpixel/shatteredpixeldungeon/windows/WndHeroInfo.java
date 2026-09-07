@@ -58,6 +58,7 @@ public class WndHeroInfo extends WndTabbed {
 
 		Image tabIcon;
 		switch (cl){
+            case NECROMANCER: tabIcon=new ItemSprite(ItemSpriteSheet.PHYLACTERY); break;
 			case WARRIOR: default:
 				tabIcon = new ItemSprite(ItemSpriteSheet.SEAL, null);
 				break;
@@ -173,6 +174,7 @@ public class WndHeroInfo extends WndTabbed {
 			}
 
 			switch (cls){
+                case NECROMANCER: icons=new Image[]{new ItemSprite(ItemSpriteSheet.PHYLACTERY),new ItemSprite(ItemSpriteSheet.BONE_ROD),new ItemSprite(ItemSpriteSheet.SCROLL_ISAZ)};break;
 				case WARRIOR: default:
 					icons = new Image[]{ new ItemSprite(ItemSpriteSheet.SEAL),
 							new ItemSprite(ItemSpriteSheet.WORN_SHORTSWORD),

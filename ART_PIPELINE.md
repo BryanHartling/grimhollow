@@ -21,3 +21,5 @@ Terrain frames are 64×64 with upstream indices preserved in 1024×1024 sheets. 
 `validate.py --generated-only` is a **subset diagnostic** for dimensions, CIE76 palette distance, per-tile luminance, nonempty outputs and source reconstruction. CI uses the full default command. Character outlines, occupancy, animation-index coverage and item semantics remain unfinished and reported; a subset pass does not satisfy tests 4, 16 or 17.
 
 Hero sources keep upstream animation/armor indices, fit the silhouette into a 48x60 frame and add a 2px dark outline. Items retain atlas indices at twice the upstream texture size; their logical footprint is 8x8. Title lettering is the explicit exception to the no-text asset rule in section 5.4.
+
+Stage 2 adds a transitional Necromancer sheet from the Mage vector silhouette, 24 Necromancer talent pictograms, and an appended item row for Bone Rod, Phylactery and class armor. Full new-character and minion art remains stage 3. All 47 generated specifications reconstruct from JSON; the full inventory gate remains intentionally failing.

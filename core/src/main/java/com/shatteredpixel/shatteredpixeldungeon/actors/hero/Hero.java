@@ -1637,6 +1637,7 @@ public class Hero extends Char {
 		int preHP = HP + shielding();
 		if (src instanceof Hunger) preHP -= shielding();
 		super.damage( dmg, src );
+        if(buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.class)!=null)buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.class).ward();
 		int postHP = HP + shielding();
 		if (src instanceof Hunger) postHP -= shielding();
 		int effectiveDamage = preHP - postHP;
@@ -1775,6 +1776,7 @@ public class Hero extends Char {
 		int step = -1;
 		
 		if (Dungeon.level.adjacent( pos, target )) {
+            com.shatteredpixel.shatteredpixeldungeon.levels.features.BoneWalls.unlock(target);
 
 			path = null;
 

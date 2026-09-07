@@ -40,6 +40,7 @@ public class DungeonTerrainTilemap extends DungeonTilemap {
 
 	@Override
 	protected int getTileVisual(int pos, int tile, boolean flat) {
+        if(tile==Terrain.BONE_WALL)tile=Terrain.BARRICADE;
 		int visual = DungeonTileSheet.directVisuals.get(tile, -1);
 		if (visual != -1) return DungeonTileSheet.getVisualWithAlts(visual, pos);
 

@@ -157,6 +157,8 @@ public abstract class Level implements Bundlable {
 	public int viewDistance = Dungeon.isChallenged( Challenges.DARKNESS ) ? 2 : 8;
 	
 	public boolean[] heroFOV;
+    public SparseArray<Integer> corpses=new SparseArray<>();
+    public SparseArray<Integer> boneOriginal=new SparseArray<>(),boneTurns=new SparseArray<>();
 	
 	public boolean[] passable;
 	public boolean[] losBlocking;
@@ -379,6 +381,10 @@ public abstract class Level implements Bundlable {
 		customWalls = new ArrayList<>();
 		
 		map		= bundle.getIntArray( MAP );
+        int[] boneCells=bundle.getIntArray("bone_cells"), boneValues=bundle.getIntArray("bone_values");
+        for(int i=0;i<boneCells.length;i++)map[boneCells[i]]=boneValues[i];
+        int[] corpseCells=bundle.getIntArray("corpse_cells"), corpseValues=bundle.getIntArray("corpse_values");
+        for(int i=0;i<corpseCells.length;i++)corpses.put(corpseCells[i],corpseValues[i]);
 
 		visited	= bundle.getBooleanArray( VISITED );
 		mapped	= bundle.getBooleanArray( MAPPED );
@@ -457,6 +463,8 @@ public abstract class Level implements Bundlable {
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
+        bundle.put("bone_cells",boneOriginal.keyArray());int[] original=new int[boneOriginal.keyArray().length];int bi=0;for(int cell:boneOriginal.keyArray())original[bi++]=boneOriginal.get(cell);bundle.put("bone_values",original);
+        bundle.put("corpse_cells",corpses.keyArray());int[] values=new int[corpses.keyArray().length];int ci=0;for(int cell:corpses.keyArray())values[ci++]=corpses.get(cell);bundle.put("corpse_values",values);
 		bundle.put( VERSION, Game.versionCode );
 		bundle.put( WIDTH, width );
 		bundle.put( HEIGHT, height );
@@ -1470,6 +1478,7 @@ public abstract class Level implements Bundlable {
 				if (m instanceof WandOfWarding.Ward
 						|| m instanceof WandOfRegrowth.Lotus
 						|| m instanceof SpiritHawk.HawkAlly
+                        || (m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroSkeleton && Dungeon.hero.hasTalent(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.CORPSE_SENSE))
 						|| m.buff(PowerOfMany.PowerBuff.class) != null){
 					if (m.fieldOfView == null || m.fieldOfView.length != length()){
 						m.fieldOfView = new boolean[length()];

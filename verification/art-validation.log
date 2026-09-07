@@ -10,3 +10,8 @@ FAIL: Missing hero_enchanter.png; character outline, occupancy and animation tes
 FAIL: Missing hero_psychic.png; character outline, occupancy and animation tests cannot pass.
 FAIL: Full character/item style and referenced-frame coverage gates are not implemented; tests 16 and 17 cannot be certified.
 Validated 45 generated specifications; 5 failures.
+FAIL: Incomplete art inventory: 103 existing sheets lack pipeline specs (including terrain_features.png, tiles_caves.png, tiles_caves_crystal.png, tiles_caves_gnoll.png, tiles_city.png, tiles_halls.png, tiles_prison.png, visual_grid.png).
+FAIL: Missing hero_enchanter.png; character outline, occupancy and animation tests cannot pass.
+FAIL: Missing hero_psychic.png; character outline, occupancy and animation tests cannot pass.
+FAIL: Full character/item style and referenced-frame coverage gates are not implemented; tests 16 and 17 cannot be certified.
+Validated 47 generated specifications; 4 failures.

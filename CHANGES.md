@@ -72,6 +72,7 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `desktop/src/main/java/com/shatteredpixel/shatteredpixeldungeon/desktop/DesktopLauncher.java`: Use fork metadata for title/save isolation and expose opt-in OpenGL verification.
 - `desktop/src/main/java/com/shatteredpixel/shatteredpixeldungeon/desktop/DesktopSmokeProbe.java`: Render title and Sewer screenshots in real OpenGL, then exit.
 - `gradle.properties`: Grimhollow build identity, platform isolation, distribution task or test configuration.
+- `gradlew.bat`: Build-support utility for this documented checkpoint.
 - `settings.gradle`: Grimhollow build identity, platform isolation, distribution task or test configuration.
 - `tools/artgen/build.py`: Deterministic procedural painter, source import, dependencies or full/subset validator.
 - `tools/artgen/import_upstream_layout.py`: Deterministic procedural painter, source import, dependencies or full/subset validator.

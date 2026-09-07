@@ -33,4 +33,10 @@ foreach($run in $result.workflow_runs) {
     $run | Select-Object id,head_sha,status,conclusion,html_url
     $jobs=Invoke-RestMethod -Headers $headers -Uri $run.jobs_url
     $jobs.jobs | Select-Object name,status,conclusion,html_url
+    if ($run -eq $result.workflow_runs[0]) {
+        foreach ($job in $jobs.jobs) {
+            Write-Output ("Steps for " + $job.name)
+            $job.steps | Where-Object { $_.name -notlike 'Post *' } | Select-Object name,status,conclusion
+        }
+    }
 }

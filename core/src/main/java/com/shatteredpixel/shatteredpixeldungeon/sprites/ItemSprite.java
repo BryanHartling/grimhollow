@@ -49,8 +49,15 @@ import com.watabou.utils.Random;
 import java.nio.Buffer;
 
 public class ItemSprite extends MovieClip {
+    @Override public void frame(com.watabou.utils.RectF frame) {
+        super.frame(frame);
+        width /= com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM / (float)SIZE;
+        height /= com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM / (float)SIZE;
+        updateVertices();
+    }
 
-	public static final int SIZE	= 16;
+
+	public static final int SIZE = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.LOGICAL_ITEM;
 	
 	private static final float DROP_INTERVAL = 0.4f;
 	
@@ -386,10 +393,10 @@ public class ItemSprite extends MovieClip {
 
 	public static int pick( int index, int x, int y ) {
 		SmartTexture tx = TextureCache.get( Assets.Sprites.ITEMS );
-		int rows = tx.width / SIZE;
+		int rows = tx.width / com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM;
 		int row = index / rows;
 		int col = index % rows;
-		return tx.getPixel( col * SIZE + x, row * SIZE + y );
+		return tx.getPixel( col * com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM + x*2, row * com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM + y*2 );
 	}
 	
 	public static class Glowing {

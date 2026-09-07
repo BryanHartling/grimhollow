@@ -31,7 +31,7 @@ public class RatSprite extends MobSprite {
 		
 		texture( Assets.Sprites.RAT );
 		
-		TextureFilm frames = new TextureFilm( texture, 16, 15 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 16, 15 );
 		
 		idle = new Animation( 2, true );
 		idle.frames( frames, 0, 0, 0, 1 );

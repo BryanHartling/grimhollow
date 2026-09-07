@@ -34,7 +34,7 @@ public class SeniorSprite extends MobSprite {
 		
 		texture( Assets.Sprites.MONK );
 		
-		TextureFilm frames = new TextureFilm( texture, 15, 14 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 15, 14 );
 		
 		idle = new Animation( 6, true );
 		idle.frames( frames, 18, 17, 18, 19 );

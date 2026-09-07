@@ -60,7 +60,7 @@ public class RatKingSprite extends MobSprite {
 
 		texture( Assets.Sprites.RATKING );
 
-		TextureFilm frames = new TextureFilm( texture, 16, 17 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 16, 17 );
 
 		idle = new Animation( 2, true );
 		idle.frames( frames, c+0, c+0, c+0, c+1 );

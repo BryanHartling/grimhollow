@@ -263,12 +263,12 @@ public class Assets {
 		public static final String ITEMS        = "sprites/items.png";
 		public static final String ITEM_ICONS   = "sprites/item_icons.png";
 
-		public static final String WARRIOR  = "sprites/warrior.png";
-		public static final String MAGE     = "sprites/mage.png";
-		public static final String ROGUE    = "sprites/rogue.png";
-		public static final String HUNTRESS = "sprites/huntress.png";
-		public static final String DUELIST  = "sprites/duelist.png";
-		public static final String CLERIC   = "sprites/cleric.png";
+		public static final String WARRIOR  = "sprites/hero_warrior.png";
+		public static final String MAGE     = "sprites/hero_mage.png";
+		public static final String ROGUE    = "sprites/hero_rogue.png";
+		public static final String HUNTRESS = "sprites/hero_huntress.png";
+		public static final String DUELIST  = "sprites/hero_duelist.png";
+		public static final String CLERIC   = "sprites/hero_cleric.png";
 		public static final String AVATARS  = "sprites/avatars.png";
 		public static final String PET      = "sprites/pet.png";
 		public static final String AMULET   = "sprites/amulet.png";

@@ -40,7 +40,7 @@ public class GolemSprite extends MobSprite {
 		
 		texture( Assets.Sprites.GOLEM );
 		
-		TextureFilm frames = new TextureFilm( texture, 17, 19 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 17, 19 );
 		
 		idle = new Animation( 4, true );
 		idle.frames( frames, 0, 1 );

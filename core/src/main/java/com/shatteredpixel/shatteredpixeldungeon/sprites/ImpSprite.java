@@ -32,7 +32,7 @@ public class ImpSprite extends MobSprite {
 		
 		texture( Assets.Sprites.IMP );
 		
-		TextureFilm frames = new TextureFilm( texture, 12, 14 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 14 );
 		
 		idle = new Animation( 10, true );
 		idle.frames( frames,

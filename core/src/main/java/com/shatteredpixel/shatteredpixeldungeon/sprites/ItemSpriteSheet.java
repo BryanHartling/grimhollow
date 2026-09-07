@@ -26,10 +26,10 @@ import com.watabou.noosa.TextureFilm;
 
 public class ItemSpriteSheet {
 
-	public static final int SIZE = 16;
+	public static final int SIZE = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM;
 
-	private static final int TX_WIDTH = 256;
-	private static final int TX_HEIGHT = 512;
+	private static final int TX_WIDTH = 512;
+	private static final int TX_HEIGHT = 1024;
 
 	private static final int WIDTH = TX_WIDTH / SIZE;
 
@@ -43,7 +43,7 @@ public class ItemSpriteSheet {
 	private static void assignItemRect( int item, int width, int height ){
 		int x = (item % WIDTH) * SIZE;
 		int y = (item / WIDTH) * SIZE;
-		film.add( item, x, y, x+width, y+height);
+		film.add( item, x, y, x+width*com.shatteredpixel.shatteredpixeldungeon.GameGeometry.ITEM_DENSITY, y+height*com.shatteredpixel.shatteredpixeldungeon.GameGeometry.ITEM_DENSITY);
 	}
 
 	private static final int PLACEHOLDERS   =                               xy(1, 1);   //18 slots
@@ -823,7 +823,7 @@ public class ItemSpriteSheet {
 		private static void assignIconRect( int item, int width, int height ){
 			int x = (item % WIDTH) * SIZE;
 			int y = (item / WIDTH) * SIZE;
-			film.add( item, x, y, x+width, y+height);
+			film.add( item, x, y, x+width*com.shatteredpixel.shatteredpixeldungeon.GameGeometry.ITEM_DENSITY, y+height*com.shatteredpixel.shatteredpixeldungeon.GameGeometry.ITEM_DENSITY);
 		}
 
 		private static final int RINGS          =                            xy(1, 1);  //16 slots

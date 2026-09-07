@@ -35,7 +35,7 @@ public class WarlockSprite extends MobSprite {
 		
 		texture( Assets.Sprites.WARLOCK );
 		
-		TextureFilm frames = new TextureFilm( texture, 12, 15 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 15 );
 		
 		idle = new Animation( 2, true );
 		idle.frames( frames, 0, 0, 0, 1, 0, 0, 1, 1 );

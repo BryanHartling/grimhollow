@@ -50,7 +50,7 @@ public class MimicSprite extends MobSprite {
 
 		texture( Assets.Sprites.MIMIC );
 
-		TextureFilm frames = new TextureFilm( texture, 16, 16 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 16, 16 );
 
 		advancedHiding = new Animation( 1, true );
 		advancedHiding.frames( frames, 0+c);

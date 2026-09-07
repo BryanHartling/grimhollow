@@ -42,7 +42,7 @@ public abstract class CrystalSpireSprite extends MobSprite {
 	public CrystalSpireSprite(){
 		texture( Assets.Sprites.CRYSTAL_SPIRE );
 
-		TextureFilm frames = new TextureFilm( texture, 24, 41 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 24, 41 );
 
 		int c = texOffset();
 
@@ -65,7 +65,7 @@ public abstract class CrystalSpireSprite extends MobSprite {
 			hpPercent = ch.HP/(float)ch.HT;
 		}
 
-		TextureFilm frames = new TextureFilm( texture, 24, 41 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 24, 41 );
 
 		if (hpPercent > 0.9f){
 			idle.frames( frames, 0+texOffset() );

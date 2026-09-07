@@ -31,7 +31,7 @@ public class CrabSprite extends MobSprite {
 
 		texture( Assets.Sprites.CRAB );
 
-		TextureFilm frames = new TextureFilm( texture, 16, 16 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 16, 16 );
 
 		idle = new Animation( 5, true );
 		idle.frames( frames, 0, 1, 0, 2 );

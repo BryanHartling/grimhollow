@@ -2,7 +2,7 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), based on **v3.3.8**, commit `7b8b845a76fe76c6b7c031ae9e570852411f56db`. Upstream history and Java packages are preserved.
 
-**Partial build foundation, not the completed specification.** Six upstream heroes remain playable. The three new heroes and §9 content are not implemented. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md), [CHANGES.md](CHANGES.md), and the supplied [specification](GDD-one-shot-build-spec.md).
+**Stage 1 complete; later gameplay stages pending.** Six upstream heroes remain playable. The three new heroes and §9 content are not implemented. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md), [CHANGES.md](CHANGES.md), and the supplied [specification](GDD-one-shot-build-spec.md).
 
 ## Build on Windows
 
@@ -68,3 +68,5 @@ Art: [ART_PIPELINE.md](ART_PIPELINE.md). Dynamic lighting is in Settings → Dis
 ## Attribution
 
 Original Pixel Dungeon by Oleg Dolya; Shattered Pixel Dungeon by Evan Debenham and contributors. All new code/art is GPL-3.0-or-later. See [LICENSE.txt](LICENSE.txt) and preserved copyright headers. No Blizzard assets, names or text were imported.
+
+For continuation builds on this host, add `--no-daemon` to avoid reusing a Gradle daemon launched under a different sandbox context.

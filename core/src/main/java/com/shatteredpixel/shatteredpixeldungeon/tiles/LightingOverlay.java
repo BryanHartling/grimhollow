@@ -67,7 +67,7 @@ public class LightingOverlay extends Image {
         bitmap.setBlending(Pixmap.Blending.None);
         for (int y=0; y<map.height; y++) for (int x=0; x<map.width; x++) {
             int cell = x/map.samples + (y/map.samples)*Dungeon.level.width();
-            bitmap.drawPixel(x, y, Dungeon.level.heroFOV[cell] ? map.rgba(x,y) : 0xffffffff);
+            bitmap.drawPixel(x, y, map.rgba(x,y));
         }
         texture.bitmap(bitmap);
         rebuilds++;

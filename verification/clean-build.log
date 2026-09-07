@@ -106,3 +106,51 @@ For more on this, please refer to https://docs.gradle.org/9.4.0/userguide/comman
 BUILD SUCCESSFUL in 1m 10s
 52 actionable tasks: 52 executed
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.0/userguide/configuration_cache_enabling.html
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :services:news:shatteredNews:processResources NO-SOURCE
+> Task :services:updates:githubUpdates:processResources NO-SOURCE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:news:shatteredNews:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :services:news:shatteredNews:classes UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:news:shatteredNews:jar UP-TO-DATE
+> Task :services:updates:githubUpdates:compileJava UP-TO-DATE
+> Task :services:updates:githubUpdates:classes UP-TO-DATE
+> Task :services:updates:githubUpdates:jar UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes UP-TO-DATE
+
+> Task :desktop:run
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow\.local\acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow\.local\acceptance/sewers-lighting-on.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow\.local\acceptance/sewers-lighting-off.png
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 16s
+13 actionable tasks: 1 executed, 12 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.0/userguide/configuration_cache_enabling.html

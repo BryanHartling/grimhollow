@@ -36,7 +36,7 @@ public class FungalSentrySprite extends MobSprite {
 
 		texture( Assets.Sprites.FUNGAL_SENTRY );
 
-		TextureFilm frames = new TextureFilm( texture, 18, 18 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 18, 18 );
 
 		idle = new Animation( 0, true );
 		idle.frames( frames, 0);

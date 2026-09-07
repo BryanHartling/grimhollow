@@ -39,7 +39,7 @@ public class BlacksmithSprite extends MobSprite {
 		
 		texture( Assets.Sprites.TROLL );
 		
-		TextureFilm frames = new TextureFilm( texture, 13, 16 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 13, 16 );
 		
 		idle = new Animation( 15, true );
 		idle.frames( frames, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 3 );

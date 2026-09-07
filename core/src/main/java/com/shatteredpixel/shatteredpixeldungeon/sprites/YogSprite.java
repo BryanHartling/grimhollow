@@ -35,7 +35,7 @@ public class YogSprite extends MobSprite {
 
 		texture( Assets.Sprites.YOG );
 		
-		TextureFilm frames = new TextureFilm( texture, 20, 19 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 20, 19 );
 		
 		idle = new Animation( 10, true );
 		idle.frames( frames, 0, 1, 2, 2, 1, 0, 3, 4, 4, 3, 0, 5, 6, 6, 5 );

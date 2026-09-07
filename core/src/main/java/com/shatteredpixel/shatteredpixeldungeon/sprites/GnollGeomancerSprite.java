@@ -59,7 +59,7 @@ public class GnollGeomancerSprite extends MobSprite {
 
 	private void updateAnims(){
 
-		TextureFilm frames = new TextureFilm( texture, 12, 16 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 16 );
 
 		int ofs = isStatue ? 21 : 0;
 		idle = new Animation( isStatue ? 1 : 2, true );

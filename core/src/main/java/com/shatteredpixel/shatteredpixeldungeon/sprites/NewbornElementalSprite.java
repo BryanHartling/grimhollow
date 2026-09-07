@@ -36,7 +36,7 @@ public class NewbornElementalSprite extends MobSprite{
 
 		int ofs = 21;
 
-		TextureFilm frames = new TextureFilm( texture, 12, 14 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 14 );
 
 		idle = new MovieClip.Animation( 10, true );
 		idle.frames( frames, ofs+0, ofs+1, ofs+2 );

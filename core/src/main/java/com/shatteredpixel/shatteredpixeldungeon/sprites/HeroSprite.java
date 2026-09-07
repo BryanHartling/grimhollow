@@ -40,8 +40,8 @@ import com.watabou.utils.RectF;
 
 public class HeroSprite extends CharSprite {
 	
-	private static final int FRAME_WIDTH = GameGeometry.LEGACY_HERO_FRAME_W;
-	private static final int FRAME_HEIGHT = GameGeometry.LEGACY_HERO_FRAME_H;
+	private static final int FRAME_WIDTH = GameGeometry.HERO_FRAME_W;
+	private static final int FRAME_HEIGHT = GameGeometry.HERO_FRAME_H;
 	
 	private static final int RUN_FRAMERATE	= 20;
 	
@@ -186,8 +186,8 @@ public class HeroSprite extends CharSprite {
 	public static Image avatar( HeroClass cl, int armorTier ) {
 		
 		RectF patch = tiers().get( armorTier );
-		Image avatar = new Image( cl.spritesheet() );
-		RectF frame = avatar.texture.uvRect( 1, 0, FRAME_WIDTH, FRAME_HEIGHT );
+		Image avatar = GameGeometry.heroImage( cl.spritesheet() );
+		RectF frame = avatar.texture.uvRect( GameGeometry.HERO_DENSITY, 0, FRAME_WIDTH, FRAME_HEIGHT );
 		frame.shift( patch.left, patch.top );
 		avatar.frame( frame );
 		

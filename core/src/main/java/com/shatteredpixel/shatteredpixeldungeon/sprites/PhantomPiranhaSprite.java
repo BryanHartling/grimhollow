@@ -41,7 +41,7 @@ public class PhantomPiranhaSprite extends MobSprite {
 
 		texture( Assets.Sprites.PIRANHA );
 
-		TextureFilm frames = new TextureFilm( texture, 12, 16 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 16 );
 
 		int c = 21;
 

@@ -38,7 +38,7 @@ public class DM201Sprite extends MobSprite {
 
 		texture( Assets.Sprites.DM200 );
 
-		TextureFilm frames = new TextureFilm( texture, 21, 18 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 21, 18 );
 
 		int c = 12;
 

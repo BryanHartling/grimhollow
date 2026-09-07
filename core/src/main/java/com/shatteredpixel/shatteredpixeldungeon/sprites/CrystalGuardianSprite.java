@@ -36,7 +36,7 @@ public abstract class CrystalGuardianSprite extends MobSprite {
 
 		texture( Assets.Sprites.CRYSTAL_GUARDIAN );
 
-		TextureFilm frames = new TextureFilm( texture, 12, 15 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 15 );
 
 		int c = texOffset();
 

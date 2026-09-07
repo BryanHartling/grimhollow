@@ -363,7 +363,7 @@ public class PowerOfMany extends ArmorAbility {
 		public void setup(HeroClass cls){
 			texture(cls.spritesheet());
 
-			TextureFilm film = new TextureFilm( HeroSprite.tiers(), 6, 12, 15 );
+			TextureFilm film = new TextureFilm( HeroSprite.tiers(), 6, com.shatteredpixel.shatteredpixeldungeon.GameGeometry.HERO_FRAME_W, com.shatteredpixel.shatteredpixeldungeon.GameGeometry.HERO_FRAME_H );
 
 			idle = new Animation( 1, true );
 			idle.frames( film, 0, 0, 0, 1, 0, 0, 1, 1 );

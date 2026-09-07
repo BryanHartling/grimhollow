@@ -38,7 +38,7 @@ public class DM200Sprite extends MobSprite {
 
 		texture( Assets.Sprites.DM200 );
 
-		TextureFilm frames = new TextureFilm( texture, 21, 18 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 21, 18 );
 
 		idle = new Animation( 10, true );
 		idle.frames( frames, 0, 1 );

@@ -59,3 +59,23 @@ for output,size,kind in targets:
                 animation_keyframes=[],seed=417,output=output,provenance='Original Grimhollow primitives, GPL-3.0-or-later')
     (SPEC_DIR/(output.replace('/','_').replace('.','_')+'.json')).write_text(json.dumps(spec,indent=2)+'\n')
 print('Imported fixed upstream Sewer layout and original launcher icon specifications.')
+
+# Character and item inputs retain GPL upstream silhouettes as editable horizontal vectors.
+for name in ['warrior','mage','rogue','huntress','duelist','cleric','items']:
+    source = subprocess.check_output([git,'show',BASE+':core/src/main/assets/sprites/'+name+'.png'],cwd=ROOT)
+    image=Image.open(io.BytesIO(source)).convert('RGBA'); pixels=np.array(image); runs=[]
+    for y,row in enumerate(pixels):
+        x=0
+        while x<len(row):
+            if row[x,3]<128: x+=1; continue
+            role=int(np.argmin(np.sum((COLORS.astype(np.int32)-row[x,:3].astype(np.int32))**2,axis=1)))
+            end=x+1
+            while end<len(row) and np.array_equal(row[end],row[x]): end+=1
+            runs.append([y,x,end-x,role]); x=end
+    factor=2 if name=='items' else 4
+    output=name if name=='items' else 'hero_'+name
+    spec=dict(kind='items' if name=='items' else 'hero',dimensions=[image.width*factor,image.height*factor],
+        source_dimensions=list(image.size),frame=[32,32] if name=='items' else [48,60],runs=runs,silhouette=[],
+        palette_roles=list(range(23)),animation_keyframes=[],seed=417,provenance='GPL-3.0-or-later upstream '+BASE,
+        output='core/src/main/assets/sprites/'+output+'.png')
+    (SPEC_DIR/(output+'.json')).write_text(json.dumps(spec,separators=(',',':'))+'\n')

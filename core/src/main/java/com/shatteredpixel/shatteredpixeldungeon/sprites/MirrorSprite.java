@@ -30,8 +30,8 @@ import com.watabou.utils.PointF;
 
 public class MirrorSprite extends MobSprite {
 	
-	private static final int FRAME_WIDTH	= 12;
-	private static final int FRAME_HEIGHT	= 15;
+	private static final int FRAME_WIDTH = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.HERO_FRAME_W;
+	private static final int FRAME_HEIGHT = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.HERO_FRAME_H;
 	
 	public MirrorSprite() {
 		super();

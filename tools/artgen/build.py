@@ -3,7 +3,7 @@ import hashlib
 import json
 from pathlib import Path
 import numpy as np
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[2]
 SPEC_DIR = Path(__file__).parent / 'specs'
@@ -17,6 +17,35 @@ def locked(path):
 
 def paint(spec):
     w,h = spec['dimensions']
+    if spec['kind'] in ['hero','items','vectors']:
+        sw,sh = spec.get('source_dimensions', [w,h])
+        original = Image.new('RGBA',(sw,sh)); draw = ImageDraw.Draw(original)
+        for y,x,length,role in spec.get('runs', []):
+            draw.line((x,y,x+length-1,y), fill=tuple(COLORS[role])+(255,))
+        for shape in spec.get('silhouette', []):
+            points=shape['points']; color='#'+PALETTE[shape['role']]
+            if shape['type']=='rect': draw.rectangle(points,fill=color)
+            elif shape['type']=='ellipse': draw.ellipse(points,fill=color)
+            elif shape['type']=='polygon': draw.polygon([tuple(p) for p in points],fill=color)
+            elif shape['type']=='line': draw.line([tuple(p) for p in points], fill=color, width=shape.get('width',1))
+        if spec['kind']=='hero':
+            image=Image.new('RGBA',(w,h))
+            for y in range(sh//15):
+                for x in range(sw//12):
+                    frame=original.crop((x*12,y*15,x*12+12,y*15+15))
+                    box=frame.getbbox()
+                    if not box: continue
+                    frame=frame.crop(box); ratio=min(42/frame.width,46/frame.height)
+                    frame=frame.resize((int(frame.width*ratio),int(frame.height*ratio)),Image.Resampling.NEAREST)
+                    tile=Image.new('RGBA',(48,60)); tile.alpha_composite(frame,((48-frame.width)//2,54-frame.height))
+                    outline=Image.new('RGBA',(48,60),'#0E0D0C'); outline.putalpha(tile.getchannel('A').filter(ImageFilter.MaxFilter(5)))
+                    outline.alpha_composite(tile); image.alpha_composite(outline,(x*48,y*60))
+        else:
+            image=original.resize((w,h),Image.Resampling.NEAREST)
+        pixels=np.array(image); yy,xx=np.indices((h,w),dtype=np.int64)
+        shade=85+((xx*374761393+yy*668265263+spec['seed'])%16)
+        pixels[:,:,:3]=(pixels[:,:,:3].astype(np.int32)*shade[:,:,None]//100).astype(np.uint8)
+        return Image.fromarray(pixels)
     if spec['kind']=='vignette':
         yy,xx=np.indices((h,w))
         edge=np.minimum.reduce([xx,yy,w-1-xx,h-1-yy])

@@ -42,21 +42,122 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `core/src/main/assets/effects/health_vignette.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/environment/tiles_sewers.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/environment/walls_sewers.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/interfaces/banners.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/interfaces/title_grimhollow.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/messages/scenes/scenes.properties`: Persist and localize the dynamic-lighting display setting.
 - `core/src/main/assets/messages/windows/windows.properties`: Persist and localize the dynamic-lighting display setting.
+- `core/src/main/assets/sprites/hero_cleric.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/sprites/hero_duelist.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/sprites/hero_huntress.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/sprites/hero_mage.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/sprites/hero_rogue.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/sprites/hero_warrior.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/sprites/items.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/Assets.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/GameGeometry.java`: Separate 64px texture dimensions from retained logical world/UI coordinates.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/SPDSettings.java`: Persist and localize the dynamic-lighting display setting.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Corrosion.java`: Shared green emissive corrosion particles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/cleric/PowerOfMany.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/rogue/ShadowClone.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/HealthVignette.java`: Scale crimson screen edges to the specified low-health thresholds.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/particles/NecroticParticle.java`: Shared green emissive corrosion particles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/AboutScene.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/GameScene.java`: Integrate terrain lighting, transient level blood decals and low-health feedback.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/AcidicSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/AlbinoSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/BanditSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/BatSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/BeeSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/BlacksmithSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/BruteSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/CausticSlimeSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/CharSprite.java`: Integrate terrain lighting, transient level blood decals and low-health feedback.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/CrabSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/CrystalGuardianSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/CrystalSpireSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/CrystalWispSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/DM100Sprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/DM200Sprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/DM201Sprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/DM300Sprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/EarthGuardianSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/ElementalSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/EyeSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/FetidRatSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/FistSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/FungalCoreSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/FungalSentrySprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/FungalSpinnerSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/GhostSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/GhoulSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/GnollExileSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/GnollGeomancerSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/GnollGuardSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/GnollSapperSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/GnollSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/GnollTricksterSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/GolemSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/GooSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/GreatCrabSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/GuardSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/HermitCrabSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/HeroSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/ImpSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/ItemSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/ItemSpriteSheet.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/KingSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/LarvaSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/LotusSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/MimicSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/MirrorSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/MobSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/MonkSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/NecromancerSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/NewbornElementalSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/PhantomPiranhaSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/PiranhaSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/PylonSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/RatKingSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/RatSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/RipperSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/RotHeartSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/RotLasherSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/ScorpioSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SeniorSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/ShamanSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SheepSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/ShieldedSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/ShopkeeperSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SkeletonSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SlimeSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SnakeSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SpawnerSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SpectralNecromancerSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SpinnerSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/StatueSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SuccubusSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SwarmSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/TenguSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/ThiefSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/TormentedSpiritSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/UndeadSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/WandmakerSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/WarlockSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/WraithSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/YogSprite.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/DungeonTerrainTilemap.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/DungeonTilemap.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/DungeonWallsTilemap.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/FogOfWar.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/LightMap.java`: Cached low-resolution quadratic terrain light accumulation and one multiply draw.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/LightingOverlay.java`: Cached low-resolution quadratic terrain light accumulation and one multiply draw.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/TitleBackground.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v0_3_X_Changes.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v0_6_X_Changes.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v0_7_X_Changes.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v0_8_X_Changes.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v0_9_X_Changes.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v1_X_Changes.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndSettings.java`: Persist and localize the dynamic-lighting display setting.
 - `core/src/test/java/com/shatteredpixel/shatteredpixeldungeon/acceptance/SmokeRun.java`: Real generator/save-load smoke harness; the required missing classes fail explicitly.
 - `core/src/test/java/com/shatteredpixel/shatteredpixeldungeon/tiles/LightMapTest.java`: JUnit coverage of light falloff, clipping, saturation and health thresholds.
@@ -101,6 +202,7 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `tools/artgen/specs/android_src_main_res_mipmap-xxxhdpi_ic_launcher_foreground_png.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/android_src_main_res_mipmap-xxxhdpi_ic_launcher_monochrome_png.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/android_src_main_res_mipmap-xxxhdpi_ic_launcher_png.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/banners.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/blood_decals.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/desktop_src_main_assets_icons_icon_128_png.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/desktop_src_main_assets_icons_icon_16_png.json`: Editable deterministic source specification for its generated asset.
@@ -111,7 +213,15 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `tools/artgen/specs/desktop_src_main_assets_icons_mac_icns.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/desktop_src_main_assets_icons_windows_ico.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/health_vignette.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/hero_cleric.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/hero_duelist.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/hero_huntress.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/hero_mage.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/hero_rogue.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/hero_warrior.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/items.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/tiles_sewers.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/title_grimhollow.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/walls_sewers.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/validate.py`: Deterministic procedural painter, source import, dependencies or full/subset validator.
 - `tools/bootstrap-windows.ps1`: Reproducible local toolchain installation or session environment setup.
@@ -128,3 +238,4 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `verification/junit-summary.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
 - `verification/new-class-smoke.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
 - `verification/reproducibility.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+`n- v0.2 deviation: preserve upstream animation/armor rows and 16-unit world placement; title lettering follows the explicit title exception; MobSprite/MissileSprite inherit central frame conversion from CharSprite/ItemSprite.

@@ -67,11 +67,11 @@ public class AboutScene extends PixelScene {
 		//*** Shattered Pixel Dungeon Credits ***
 
 		CreditsBlock shpx = new CreditsBlock(true, Window.SHPX_COLOR,
-				"Shattered Pixel Dungeon",
-				Icons.SHPX.get(),
-				"Developed by: _Evan Debenham_\nBased on Pixel Dungeon's open source",
-				"ShatteredPixel.com",
-				"https://ShatteredPixel.com");
+				com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(this, "grimhollow"),
+                null,
+                com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(this, "grimhollow_credits"),
+                "GitHub",
+                "https://github.com/bryanhartling/grimhollow");
 		if (landscape()){
 			shpx.setRect((w - fullWidth)/2f - 6, insets.top + 10, 120, 0);
 		} else {
@@ -150,7 +150,7 @@ public class AboutScene extends PixelScene {
 				GDX_COLOR,
 				"libGDX",
 				Icons.LIBGDX.get(),
-				"ShatteredPD is powered by _libGDX_!",
+				com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(this, "grimhollow_engine"),
 				"libgdx.com",
 				"https://libgdx.com/");
 		if (landscape()){

@@ -61,6 +61,12 @@ import java.nio.Buffer;
 import java.util.HashSet;
 
 public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip.Listener {
+    @Override public void frame(com.watabou.utils.RectF frame) {
+        super.frame(frame);
+        int density = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterDensity(texture);
+        width /= density; height /= density;
+        updateVertices();
+    }
 	
 	// Color constants for floating text
 	public static final int DEFAULT		= 0xFFFFFF;

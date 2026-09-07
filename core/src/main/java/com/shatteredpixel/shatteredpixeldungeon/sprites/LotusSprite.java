@@ -44,7 +44,7 @@ public class LotusSprite extends MobSprite {
 
 		texture( Assets.Sprites.LOTUS );
 
-		TextureFilm frames = new TextureFilm( texture, 19, 16 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 19, 16 );
 
 		idle = new MovieClip.Animation( 1, true );
 		idle.frames( frames, 0 );

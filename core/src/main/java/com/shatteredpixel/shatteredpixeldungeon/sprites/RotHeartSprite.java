@@ -39,7 +39,7 @@ public class RotHeartSprite extends MobSprite {
 
 		texture( Assets.Sprites.ROT_HEART );
 
-		TextureFilm frames = new TextureFilm( texture, 16, 16 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 16, 16 );
 
 		idle = new MovieClip.Animation( 1, true );
 		idle.frames( frames, 0);

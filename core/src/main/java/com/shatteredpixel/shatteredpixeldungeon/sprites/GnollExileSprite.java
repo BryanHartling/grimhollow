@@ -31,7 +31,7 @@ public class GnollExileSprite extends MobSprite {
 
 		texture( Assets.Sprites.GNOLL );
 
-		TextureFilm frames = new TextureFilm( texture, 12, 15 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 15 );
 
 		int c = 21;
 

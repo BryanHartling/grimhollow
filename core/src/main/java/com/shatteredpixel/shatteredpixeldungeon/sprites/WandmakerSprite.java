@@ -37,7 +37,7 @@ public class WandmakerSprite extends MobSprite {
 		
 		texture( Assets.Sprites.MAKER );
 		
-		TextureFilm frames = new TextureFilm( texture, 12, 14 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 14 );
 		
 		idle = new Animation( 10, true );
 		idle.frames( frames, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 3, 3, 3, 3, 3, 2, 1 );

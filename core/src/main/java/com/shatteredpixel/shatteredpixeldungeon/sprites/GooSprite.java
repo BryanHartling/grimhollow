@@ -53,7 +53,7 @@ public class GooSprite extends MobSprite {
 		
 		texture( Assets.Sprites.GOO );
 		
-		TextureFilm frames = new TextureFilm( texture, 20, 14 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 20, 14 );
 		
 		idle = new Animation( 10, true );
 		idle.frames( frames, 2, 1, 0, 0, 1 );

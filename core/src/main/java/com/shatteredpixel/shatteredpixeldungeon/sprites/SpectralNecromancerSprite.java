@@ -40,7 +40,7 @@ public class SpectralNecromancerSprite extends MobSprite {
 		super();
 
 		texture( Assets.Sprites.NECRO );
-		TextureFilm film = new TextureFilm( texture, 16, 16 );
+		TextureFilm film = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 16, 16 );
 
 		int c = 16;
 

@@ -31,7 +31,7 @@ public class BatSprite extends MobSprite {
 		
 		texture( Assets.Sprites.BAT );
 		
-		TextureFilm frames = new TextureFilm( texture, 15, 15 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 15, 15 );
 		
 		idle = new Animation( 8, true );
 		idle.frames( frames, 0, 1 );

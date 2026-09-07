@@ -39,7 +39,7 @@ public class SpinnerSprite extends MobSprite {
 
 		texture( Assets.Sprites.SPINNER );
 		
-		TextureFilm frames = new TextureFilm( texture, 16, 16 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 16, 16 );
 		
 		idle = new Animation( 10, true );
 		idle.frames( frames, 0, 0, 0, 0, 0, 1, 0, 1 );

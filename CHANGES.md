@@ -117,6 +117,13 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `tools/env.ps1`: Reproducible local toolchain installation or session environment setup.
 - `tools/github.ps1`: Push and inspect CI using transient authorization; never persist a credential in Git configuration.
 - `tools/update-change-ledger.py`: Build-support utility for this documented checkpoint.
+- `verification/ACCEPTANCE.md`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+- `verification/apk-identity.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
 - `verification/art-validation.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+- `verification/ci-status.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+- `verification/clean-build.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+- `verification/desktop-only.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
 - `verification/generated-art-validation.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+- `verification/junit-summary.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
 - `verification/new-class-smoke.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.
+- `verification/reproducibility.log`: Build, pipeline, provenance or actual acceptance evidence and limitations.

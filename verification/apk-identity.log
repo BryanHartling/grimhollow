@@ -1,0 +1,4 @@
+
+package: name='com.grimhollow.dungeon' versionCode='896' versionName='0.1.0-INDEV' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+application-label:'Grimhollow'
+

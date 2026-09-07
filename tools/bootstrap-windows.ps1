@@ -39,6 +39,14 @@ if (Test-Path "$env:ANDROID_HOME/cmdline-tools/latest/bin/android.exe") {
 } else {
     & "$env:ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager.bat" 'platforms;android-36' 'build-tools;36.0.0' 'platform-tools'
 }
-if ($LASTEXITCODE -ne 0) { throw 'SDK installation failed' }
+if ($LASTEXITCODE -ne 0) {
+    if ((Test-Path "$env:ANDROID_HOME/platforms/android-36/android.jar") -and
+        (Test-Path "$env:ANDROID_HOME/build-tools/36.0.0/aapt.exe") -and
+        (Test-Path "$env:ANDROID_HOME/platform-tools/adb.exe")) {
+        Write-Warning 'Android CLI reported nonzero after installing the required files; verifying aapt directly.'
+        & "$env:ANDROID_HOME/build-tools/36.0.0/aapt.exe" version
+        if ($LASTEXITCODE -ne 0) { throw 'Installed aapt failed verification' }
+    } else { throw 'SDK installation failed; required SDK files are missing' }
+}
 Write-Output "JAVA_HOME=$env:JAVA_HOME"
 Write-Output "ANDROID_HOME=$env:ANDROID_HOME"

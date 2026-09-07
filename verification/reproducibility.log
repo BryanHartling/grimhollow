@@ -1,0 +1,1 @@
+PASS: clean-clone art rebuild; git status --porcelain produced no output.

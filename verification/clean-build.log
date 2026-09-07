@@ -1,0 +1,108 @@
+> Task :core:processResources NO-SOURCE
+> Task :services:news:shatteredNews:processResources NO-SOURCE
+> Task :services:updates:githubUpdates:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :services:updates:debugUpdates:processResources NO-SOURCE
+> Task :services:news:debugNews:processResources NO-SOURCE
+> Task :android:generateDebugResources
+> Task :android:packageDebugResources
+> Task :android:processDebugNavigationResources
+> Task :android:parseDebugLocalResources
+> Task :android:generateDebugRFile
+> Task :android:javaPreCompileDebug
+> Task :android:generateDebugAssets UP-TO-DATE
+
+> Task :SPD-classes:compileJava
+Note: C:\Users\Hartl\Documents\grimhollow\.local\clean-check\SPD-classes\src\main\java\com\watabou\noosa\TextInput.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes
+> Task :SPD-classes:jar
+> Task :services:compileJava
+> Task :services:news:shatteredNews:compileJava
+> Task :desktop:processResources
+> Task :services:processResources NO-SOURCE
+> Task :services:classes
+> Task :android:mergeDebugAssets
+> Task :services:news:shatteredNews:classes
+> Task :services:jar
+> Task :services:news:shatteredNews:jar
+> Task :services:updates:debugUpdates:compileJava
+> Task :services:updates:debugUpdates:classes
+> Task :services:updates:debugUpdates:jar
+> Task :services:news:debugNews:compileJava
+> Task :services:news:debugNews:classes
+> Task :services:news:debugNews:jar
+> Task :android:compressDebugAssets
+> Task :android:checkDebugDuplicateClasses
+> Task :services:updates:githubUpdates:compileJava
+> Task :services:updates:githubUpdates:classes
+> Task :services:updates:githubUpdates:jar
+> Task :android:desugarDebugFileDependencies
+> Task :android:checkDebugAarMetadata
+> Task :android:mapDebugSourceSetPaths
+> Task :android:compileDebugNavigationResources
+> Task :android:createDebugCompatibleScreenManifests
+> Task :android:extractDeepLinksDebug
+> Task :android:mergeExtDexDebug
+> Task :android:processDebugMainManifest
+> Task :android:processDebugManifest
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders
+> Task :android:validateSigningDebug
+> Task :android:writeDebugAppMetadata
+> Task :android:writeDebugSigningConfigVersions
+> Task :android:processDebugManifestForPackage
+> Task :android:mergeDebugResources
+> Task :android:processDebugResources
+
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :desktop:compileJava
+> Task :desktop:classes
+
+> Task :android:compileDebugJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource
+> Task :android:dexBuilderDebug
+> Task :android:mergeProjectDexDebug
+> Task :android:mergeDebugNativeLibs
+
+> Task :android:stripDebugDebugSymbols
+Unable to strip the following libraries, packaging them as they are: libgdx-freetype.so, libgdx.so. Run with --info option to learn more.
+
+> Task :desktop:run
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow\.local\clean-check\.local\acceptance/title.png
+[Controllers] removed manager for application, 0 managers active
+
+> Task :android:mergeLibDexDebug
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/.local/clean-check/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 10s
+52 actionable tasks: 52 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.0/userguide/configuration_cache_enabling.html

@@ -1,6 +1,6 @@
 # Reproducible art pipeline
 
-This checkpoint generates Sewer tile/wall atlases and Android/desktop launcher icons. It is **not the complete §5 asset set**. Remaining assets are upstream or unimplemented; the default validator reports incomplete coverage as a failure.
+This checkpoint generates Sewer tile/wall atlases, Android/desktop launcher icons, a health vignette and three blood-decal variants. It is **not the complete §5 asset set**. Remaining assets are upstream or unimplemented; the default validator reports incomplete coverage as a failure.
 
 Requires Python 3.11+ (host: 3.12.14), Pillow 12.3.0, NumPy 2.3.5:
 

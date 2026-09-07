@@ -44,7 +44,7 @@ public class SmokeRun {
             config.preferencesDirectory=output.resolve("prefs").toString();
             HeadlessApplication app=new HeadlessApplication(new ApplicationAdapter(){},config);
             new ShatteredPixelDungeon(null);
-            Game.version="0.1.0"; Game.versionCode=896;
+            Game.version="0.2.0"; Game.versionCode=896;
             FileUtils.setDefaultFileProperties(Files.FileType.Absolute,output.resolve("saves").toString()+"/");
             for(String name:classes) for(int seed=0;seed<10;seed++) {
                 try {
@@ -120,6 +120,8 @@ public class SmokeRun {
         ghoul.HP=1;Talent.onFoodEaten(h,100,new Food());check(ghoul.HP>1,"Bone Meal");
         enemy=target(h.pos+2);h.HP=50;ghoul.attackProc(enemy,10);check(h.HP==53,"Ghoul lifesteal");
         Talent.onAttackProc(h,enemy,5);check(enemy.buff(Corrosion.class)!=null,"Necrotic Touch");
+        Buff.detach(enemy,Corrosion.class);h.belongings.thrownWeapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife();
+        Talent.onAttackProc(h,enemy,5);check(enemy.buff(Corrosion.class)==null,"Necrotic Touch excludes thrown weapons");h.belongings.thrownWeapon=null;
         Buff.prolong(h,Bless.class,10);Buff.prolong(h,Haste.class,10);Buff.affect(h,Barkskin.class).setForDuration(10,10);
         // Second Grave never permits more than cap+1, and the exemption ends after 5 turns.
         for(NecroSkeleton m:NecroSkeleton.minions()){m.sacrificed=true;if(m.sprite==null){m.sprite=new NecroSkeletonSprite();m.sprite.link(m);}m.die(h);}
@@ -143,6 +145,8 @@ public class SmokeRun {
         }
         Buff.prolong(enemy,Invulnerability.class,10);check(!enemy.isInvulnerable(BoneRod.class),"Lower Resistance bypasses immunity");Buff.detach(enemy,Invulnerability.class);
         h.HP=10;h.buff(Necromancy.class).ward();check(h.buff(Barkskin.class)!=null,"Ward of Bone");
+        Buff.detach(h,Barkskin.class);Dungeon.depth=2;h.buff(Necromancy.class).ward();Buff.detach(h,Barkskin.class);Dungeon.depth=1;h.buff(Necromancy.class).ward();
+        check(h.buff(Barkskin.class)==null,"Ward of Bone cannot recharge by revisiting a floor");
         h.buff(Necromancy.class).siphon(enemy);int hp=h.HP;h.buff(Necromancy.class).siphon(enemy);check(h.HP==hp,"One Soul Siphon target per turn");
         // All armor talent sets and concrete target scenarios.
         h.armorAbility=new CorpseExplosion();h.talents.get(3).clear();Talent.initArmorTalents(h);maxTalents();armor.charge=100;Dungeon.level.corpses.put(h.pos+1,100);

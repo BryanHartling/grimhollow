@@ -15,3 +15,6 @@ desktop (windows-latest): build success; Full art acceptance gate failure; JUnit
 headless-smoke: Three classes, ten seeds each, through floor 6 failure; log artifact upload success.
 First push run 34149800004 also completed / failure with the same job conclusions.
 No workflow or check was disabled or weakened.
+
+Stage 2 CI, commit 9e2d52d642000ba9a193fe31d0767cdd8753bd63, run 34165648440:
+android completed success; necromancer-smoke completed success; desktop Windows/Linux completed failure (full art gate); headless-smoke completed failure (remaining two classes absent).

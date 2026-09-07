@@ -10,14 +10,14 @@ import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.watabou.utils.*;
 /** Persistent once-per-floor and once-per-turn talent state. No regenerating resource. */
 public class Necromancy extends Buff {
-    private int wardDepth=-1, wardBranch=-1;
+    private final java.util.HashSet<Integer> wardFloors=new java.util.HashSet<>();
     private float siphonTurn=-100;
     public static int points(Talent talent) { return Dungeon.hero == null ? 0 : Dungeon.hero.pointsInTalent(talent); }
     public static void heal(int amount) { if (Dungeon.hero != null && Dungeon.hero.isAlive()) Dungeon.hero.HP=Math.min(Dungeon.hero.HT,Dungeon.hero.HP+Math.max(0,amount)); }
     public static void onFood() { for (NecroSkeleton m : NecroSkeleton.minions()) m.HP=Math.min(m.HT,m.HP+Math.round(m.HT*.25f*points(Talent.BONE_MEAL))); }
     public static void onHit(Char enemy) {
         int p=points(Talent.NECROTIC_TOUCH);
-        if (p>0 && !(Dungeon.hero.belongings.weapon() instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon)) {
+        if (p>0 && !(Dungeon.hero.belongings.attackingWeapon() instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon)) {
             Buff.affect(enemy,Corrosion.class).set(p,1); Buff.prolong(enemy,HeroDamage.class,p+1);
         }
     }
@@ -51,12 +51,12 @@ public class Necromancy extends Buff {
     }
     public void ward() {
         Hero h=(Hero)target;
-        if (h.isAlive() && h.HP < h.HT*.3f && points(Talent.WARD_OF_BONE)>0 && (wardDepth!=Dungeon.depth || wardBranch!=Dungeon.branch)) {
-            wardDepth=Dungeon.depth; wardBranch=Dungeon.branch;
+        if (h.isAlive() && h.HP < h.HT*.3f && points(Talent.WARD_OF_BONE)>0 && !wardFloors.contains(Dungeon.depth+100*Dungeon.branch)) {
+            wardFloors.add(Dungeon.depth+100*Dungeon.branch);
             Buff.affect(h,Barkskin.class).setForDuration(points(Talent.WARD_OF_BONE)==1?h.lvl/2:h.lvl,20);
         }
     }
     @Override public boolean act() { ward(); spend(TICK); return true; }
-    @Override public void storeInBundle(Bundle b) { super.storeInBundle(b);b.put("ward_depth",wardDepth);b.put("ward_branch",wardBranch);b.put("siphon_turn",siphonTurn); }
-    @Override public void restoreFromBundle(Bundle b) { super.restoreFromBundle(b);wardDepth=b.getInt("ward_depth");wardBranch=b.getInt("ward_branch");siphonTurn=b.getFloat("siphon_turn"); }
+    @Override public void storeInBundle(Bundle b) { super.storeInBundle(b);b.put("ward_floors",wardFloors.stream().mapToInt(Integer::intValue).toArray());b.put("siphon_turn",siphonTurn); }
+    @Override public void restoreFromBundle(Bundle b) { super.restoreFromBundle(b);wardFloors.clear();for(int floor:b.getIntArray("ward_floors"))wardFloors.add(floor);siphonTurn=b.getFloat("siphon_turn"); }
 }

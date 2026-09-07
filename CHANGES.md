@@ -276,3 +276,4 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 
 - v0.2 decisions: keep upstream animation/armor layouts and 16-unit placement; use NECROTIC_SIPHON to avoid the Warlock talent collision; count a Bone Rod kill once through the shared kill hook; Decrepify lasts its specified six turns before Lingering Hex; fixed Barkskin durations extend the existing buff; Bone Wall uses unused terrain ID 39.
 - Stage 2 gate: the requested Necromancer-only CI job supplements the unchanged full three-class and art gates; stage 3 artwork remains deferred.
+- Necromancy.java: preserve spent Ward of Bone floors across revisits and saves; Necrotic Touch checks the actual attack weapon so thrown attacks are excluded.

@@ -170,9 +170,10 @@ public enum HeroClass {
     private static void initEnchanter(Hero hero){
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.affect(hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.class);
         (hero.belongings.weapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RunedBaton()).identify();
+        ((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)hero.belongings.weapon).runeEtching=new com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching();
         com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush item=new com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush();
         (hero.belongings.artifact=item).identify();item.activate(hero);
-        new Food().collect();new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment().identify().collect();new PotionOfHealing().collect();
+        new Food().collect();new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment().identify();new ScrollOfIdentify().collect();new PotionOfHealing().collect();
         Dungeon.quickslot.setSlot(0,item);
     }
 	private static void initNecromancer(Hero hero) {
@@ -350,26 +351,8 @@ public enum HeroClass {
 		}
 	}
 
-	public String splashArt(){
-        if(this==PSYCHIC)return "interfaces/title_grimhollow.png";
-        if(this==ENCHANTER)return "interfaces/title_grimhollow.png";
-        if(this==NECROMANCER)return "interfaces/title_grimhollow.png";
-		switch (this) {
-			case WARRIOR: default:
-				return Assets.Splashes.WARRIOR;
-			case MAGE:
-				return Assets.Splashes.MAGE;
-			case ROGUE:
-				return Assets.Splashes.ROGUE;
-			case HUNTRESS:
-				return Assets.Splashes.HUNTRESS;
-			case DUELIST:
-				return Assets.Splashes.DUELIST;
-			case CLERIC:
-				return Assets.Splashes.CLERIC;
-		}
-	}
-	
+    public String splashArt(){return "splashes/"+name().toLowerCase(java.util.Locale.ROOT)+".png";}
+    
 	public boolean isUnlocked(){
 		//always unlock on debug builds
 		if (DeviceCompat.isDebug()) return true;

@@ -45,7 +45,9 @@ public class Phylactery extends Artifact {
     @Override public String status(){return charge+"/"+cap();}
     @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("spent_experience",spentExperience);b.put("visited_floors",visitedFloors.stream().mapToInt(Integer::intValue).toArray());}
     @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);level(b.getInt("level"));charge=b.getInt("charge");spentExperience=b.getFloat("spent_experience");visitedFloors.clear();for(int floor:b.getIntArray("visited_floors"))visitedFloors.add(floor);chargeCap=cap();}
-    @Override public ArrayList<String> actions(Hero hero){ArrayList<String> a=super.actions(hero);if(isEquipped(hero))a.add(AC_CAST);return a;}
+    @Override public void doDrop(Hero hero){}
+    @Override public boolean doUnequip(Hero hero,boolean collect,boolean single){return false;}
+    @Override public ArrayList<String> actions(Hero hero){ArrayList<String> a=super.actions(hero);a.remove(AC_DROP);a.remove(AC_THROW);a.remove(AC_UNEQUIP);if(isEquipped(hero))a.add(AC_CAST);return a;}
     public ArrayList<Spell> spells(Hero hero){
         ArrayList<Spell> spells=new ArrayList<>();spells.add(Spell.RAISE_SKELETON);spells.add(Spell.WITHER);
         if(level()>=1)spells.add(Spell.RAISE_WRAITH);

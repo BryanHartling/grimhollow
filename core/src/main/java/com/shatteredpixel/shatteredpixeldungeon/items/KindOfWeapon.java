@@ -122,7 +122,8 @@ abstract public class KindOfWeapon extends EquipableItem {
 			return false;
 		}
 
-		detachAll( hero.belongings.backpack );
+		RuneEtching.equipping=true;
+        try {detachAll( hero.belongings.backpack );} finally {RuneEtching.equipping=false;}
 		
 		if (hero.belongings.weapon == null || hero.belongings.weapon.doUnequip( hero, true )) {
 			
@@ -169,7 +170,8 @@ abstract public class KindOfWeapon extends EquipableItem {
 		}
 
 		boolean wasInInv = hero.belongings.contains(this);
-		detachAll( hero.belongings.backpack );
+		RuneEtching.equipping=true;
+        try {detachAll( hero.belongings.backpack );} finally {RuneEtching.equipping=false;}
 
 		if (hero.belongings.secondWep == null || hero.belongings.secondWep.doUnequip( hero, true )) {
 

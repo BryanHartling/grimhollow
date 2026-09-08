@@ -39,6 +39,8 @@ def validate(generated_only=False):
                     tile=pixels[y:y+64,x:x+64]; alpha=tile[:,:,3]>0
                     if alpha.any() and (tile[:,:,:3][alpha] @ np.array([.2126,.7152,.0722])/255).mean()>.45:
                         errors.append(f'{spec["output"]}: tile ({x//64},{y//64}) luminance exceeds .45')
+                    if alpha.any() and (tile[:,:,:3][alpha] @ np.array([.2126,.7152,.0722])/255).std()<.08:
+                        errors.append(f'{spec["output"]}: tile ({x//64},{y//64}) luminance std below .08')
         # Construction check also prevents untracked text/logo/watermark additions.
         # Locked human replacements need separate review; they are never automatically certified.
         if locked(path): errors.append(f'{spec["output"]}: locked human override requires style review')

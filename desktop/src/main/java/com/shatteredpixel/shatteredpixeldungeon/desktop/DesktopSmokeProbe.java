@@ -77,6 +77,14 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 Dungeon.hero.heroClass=hero;
                 com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
                 band(sprite,16,.85f,.95f,buffer,camera,zoom,failures,"24 "+hero);heroes++;sprite.destroy();
+                com.watabou.noosa.Image avatar=com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite.avatar(hero,6);
+                band(avatar,16,.85f,.95f,buffer,camera,zoom,failures,"24 avatar "+hero);avatar.destroy();
+                GamesInProgress.set(99);
+                com.shatteredpixel.shatteredpixeldungeon.scenes.StartScene.SaveSlotButton slot=new com.shatteredpixel.shatteredpixeldungeon.scenes.StartScene.SaveSlotButton();slot.setRect(0,0,160,28);slot.set(99);
+                if(slot.portrait()==null)failures.add("24 missing save portrait "+hero);else band(slot.portrait(),16,.85f,.95f,buffer,camera,zoom,failures,"24 save "+hero);slot.destroy();
+                com.watabou.noosa.Image splash=new com.watabou.noosa.Image(hero.splashArt());
+                if(splash.texture.width!=800||splash.texture.height!=450||GameGeometry.opaqueHeight(splash.texture,splash.frame())==0)failures.add("36 empty or wrong splash "+hero);
+                if(hero.shortDesc().contains("!!!"))failures.add("36 missing description "+hero);splash.destroy();
             }
             Dungeon.hero.heroClass=original;Dungeon.hero.sprite=originalSprite;
             java.io.File jar=new java.io.File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
@@ -104,6 +112,15 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(GameGeometry.opaqueHeight(sprite.texture,sprite.frame())==0){failures.add("25 empty "+field.getName());continue;}
                 band(sprite,16,.45f,.55f,buffer,camera,zoom,failures,"25 "+field.getName());
                 exactRectangle(sprite,index,32,buffer,camera,zoom,failures,field.getName());items++;sprite.destroy();
+                final int itemIndex=index;
+                com.shatteredpixel.shatteredpixeldungeon.ui.ItemSlot slot=new com.shatteredpixel.shatteredpixeldungeon.ui.ItemSlot(new com.shatteredpixel.shatteredpixeldungeon.items.Item(){@Override public int image(){return itemIndex;}});
+                slot.setRect(16,8,24,24);slot.camera=camera;
+                java.lang.reflect.Field imageField=slot.getClass().getDeclaredField("sprite");imageField.setAccessible(true);
+                com.watabou.noosa.Image buttonImage=(com.watabou.noosa.Image)imageField.get(slot);
+                Pixmap actual=renderSprite(buttonImage,buffer,camera);int l=256,r=-1,t=256,b=-1;
+                for(int yy=0;yy<256;yy++)for(int xx=0;xx<256;xx++)if((actual.getPixel(xx,yy)&255)!=0){l=Math.min(l,xx);r=Math.max(r,xx);t=Math.min(t,yy);b=Math.max(b,yy);}
+                actual.dispose();if(Math.max(r-l+1,b-t+1)<24*.7f*zoom)failures.add("25/36 ItemSlot underfilled "+field.getName());
+                buffer.begin();slot.draw();buffer.end();slot.destroy();
             }
             for(java.lang.reflect.Field field:com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.Icons.class.getFields()) {
                 if(field.getType()!=int.class||field.getName().equals("SIZE"))continue;
@@ -126,24 +143,71 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             }
             com.shatteredpixel.shatteredpixeldungeon.levels.Level.set(cell,terrain);
             System.out.println("TEST 26: three stains and floor/chasm/water/trap placement failures="+(failures.size()-before));
+            before=failures.size();
+            for(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent talent:com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.values()){
+                com.shatteredpixel.shatteredpixeldungeon.ui.TalentIcon icon=new com.shatteredpixel.shatteredpixeldungeon.ui.TalentIcon(talent);
+                if(Math.round(icon.frame().width()*icon.texture.width)!=32||GameGeometry.opaqueHeight(icon.texture,icon.frame())==0)failures.add("36 empty talent "+talent);
+                Pixmap drawn=renderSprite(icon,buffer,camera);drawn.dispose();icon.destroy();
+            }
+            System.out.println("TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures="+(failures.size()-before));
+            saveCompatibility(failures);contactScrub(jar,failures);
             buffer.dispose();for(String failure:failures)System.out.println("FAIL "+failure);
             if(!failures.isEmpty())throw new AssertionError("Rendering acceptance failures="+failures.size());
-            System.out.println("TESTS 24-26 PASS");
+            System.out.println("TESTS 24-26, 34-36 PASS");
         }catch(Exception e){throw new RuntimeException(e);}
+    }
+    private void saveCompatibility(java.util.List<String> failures)throws Exception {
+        int before=failures.size();
+        Dungeon.saveAll();
+        com.watabou.utils.Bundle original=com.watabou.utils.FileUtils.bundleFromFile(GamesInProgress.gameFile(99));
+        try {
+            for(int version:new int[]{1,Game.versionCode+1}){
+                original.put("version",version);com.watabou.utils.FileUtils.bundleToFile(GamesInProgress.gameFile(98),original);
+                GamesInProgress.setUnknown(98);
+                com.shatteredpixel.shatteredpixeldungeon.scenes.StartScene.SaveSlotButton slot=new com.shatteredpixel.shatteredpixeldungeon.scenes.StartScene.SaveSlotButton();slot.setRect(0,0,160,28);slot.set(98);
+                if(!slot.incompatible())failures.add("34 unsupported version offered Continue");slot.destroy();
+            }
+            original.put("version",Game.versionCode);com.watabou.utils.FileUtils.bundleToFile(GamesInProgress.gameFile(98),original);GamesInProgress.setUnknown(98);
+            GamesInProgress.Info info=GamesInProgress.check(98);info.armorTier=99;
+            com.shatteredpixel.shatteredpixeldungeon.scenes.StartScene.SaveSlotButton slot=new com.shatteredpixel.shatteredpixeldungeon.scenes.StartScene.SaveSlotButton();slot.setRect(0,0,160,28);slot.set(98);
+            if(!slot.incompatible())failures.add("34 invalid portrait offered Continue");slot.destroy();
+            com.shatteredpixel.shatteredpixeldungeon.scenes.StartScene.SaveSlotButton.deleteIncompatible(98);
+            if(GamesInProgress.gameExists(98))failures.add("34 Delete did not remove incompatible save");
+        }finally{com.shatteredpixel.shatteredpixeldungeon.scenes.StartScene.SaveSlotButton.deleteIncompatible(98);}
+        System.out.println("TEST 34: old/future version, portrait exception and deletion failures="+(failures.size()-before));
+    }
+    private void contactScrub(java.io.File jar,java.util.List<String> failures)throws Exception {
+        int before=failures.size();
+        String[] forbidden={String.join("", "shattered","pixel.com"),String.join("","pat","reon"),String.join("","ev","an@")};
+        try(java.util.jar.JarFile archive=new java.util.jar.JarFile(jar)){
+            for(java.util.jar.JarEntry entry:java.util.Collections.list(archive.entries()))if(entry.getName().endsWith(".class")||entry.getName().endsWith(".properties")){
+                String text=new String(archive.getInputStream(entry).readAllBytes(),java.nio.charset.StandardCharsets.UTF_8).toLowerCase(java.util.Locale.ROOT);
+                for(String token:forbidden)if(text.contains(token))failures.add("35 packaged contact "+entry.getName());
+            }
+        }
+        for(String directory:new String[]{"core/src/main","desktop/src/main","android/src/main","services"})try(java.util.stream.Stream<java.nio.file.Path> paths=java.nio.file.Files.walk(java.nio.file.Path.of(directory))){
+            paths.filter(p->p.toString().endsWith(".java")||p.toString().endsWith(".properties")).forEach(p->{try{
+                String text=java.nio.file.Files.readString(p).replaceAll("(?s)/\\*.*?\\*/", "").toLowerCase(java.util.Locale.ROOT);
+                for(String token:forbidden)if(text.contains(token))failures.add("35 source contact "+p);
+            }catch(Exception e){throw new RuntimeException(e);}});
+        }
+        System.out.println("TEST 35: packaged classes/resources and source contact scan failures="+(failures.size()-before));
     }
     private Pixmap renderSprite(com.watabou.noosa.Image image,com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,com.watabou.noosa.Camera camera)throws Exception {
         // Generated ground shadows are separate from the sprite's alpha silhouette.
         if(image instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite){java.lang.reflect.Field shadow=com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite.class.getDeclaredField("renderShadow");shadow.setAccessible(true);shadow.setBoolean(image,false);}
         image.x=16;image.y=8;image.camera=camera;
         buffer.begin();Gdx.gl.glDisable(com.badlogic.gdx.graphics.GL20.GL_SCISSOR_TEST);Gdx.gl.glDisable(com.badlogic.gdx.graphics.GL20.GL_BLEND);Gdx.gl.glClearColor(0,0,0,0);Gdx.gl.glClear(com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT);
-        com.watabou.noosa.NoosaScript.get().resetCamera();image.draw();
+        // Widget construction may upload a libGDX font texture between these draws.
+        // Match the game's per-frame binding reset before drawing the measured image.
+        com.watabou.glwrap.Texture.clear();com.watabou.noosa.NoosaScript.get().resetCamera();image.draw();
         Pixmap pixels=Pixmap.createFromFrameBuffer(0,0,256,256);buffer.end();com.watabou.glwrap.Blending.useDefault();return pixels;
     }
     private void band(com.watabou.noosa.Image sprite,float footprint,float low,float high,com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,com.watabou.noosa.Camera camera,float zoom,java.util.List<String> failures,String name)throws Exception {
         Pixmap p=renderSprite(sprite,buffer,camera);int top=256,bottom=-1;
         for(int y=0;y<256;y++)for(int x=0;x<256;x++)if((p.getPixel(x,y)&255)!=0){top=Math.min(top,y);bottom=Math.max(bottom,y);}
         float ratio=(bottom-top+1)/(footprint*zoom);p.dispose();
-        if(ratio<low||ratio>high)failures.add(name+" height/tile="+ratio);
+        if(ratio<low||ratio>high)failures.add(name+" height/tile="+ratio+" logical="+sprite.width+"x"+sprite.height+" opaque="+GameGeometry.opaqueHeight(sprite.texture,sprite.frame())+" frame="+sprite.frame()+" scale="+sprite.scale);
     }
     private void exactRectangle(com.watabou.noosa.Image sprite,int index,int cellSize,com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,com.watabou.noosa.Camera camera,float zoom,java.util.List<String> failures,String name)throws Exception {
         com.watabou.utils.RectF uv=sprite.frame();int w=Math.round(uv.width()*sprite.texture.width),h=Math.round(uv.height()*sprite.texture.height);

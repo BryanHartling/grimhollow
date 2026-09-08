@@ -80,7 +80,7 @@ public class AboutScene extends PixelScene {
 		content.add(shpx);
 
 		CreditsBlock alex = new CreditsBlock(false, Window.SHPX_COLOR,
-				"Splash Art & Design:",
+				"Upstream Visual Design:",
 				Icons.ALEKS.get(),
 				"Aleksandar Komitov",
 				"alekskomitov.com",
@@ -117,9 +117,9 @@ public class AboutScene extends PixelScene {
 		CreditsBlock wata = new CreditsBlock(true, WATA_COLOR,
 				"Pixel Dungeon",
 				Icons.WATA.get(),
-				"Developed by: _Watabou_\nInspired by Brian Walker's Brogue",
-				"watabou.itch.io",
-				"https://watabou.itch.io/");
+				"Developed by: _Oleg Dolya (Watabou)_\nInspired by Brian Walker's Brogue",
+                "Pixel Dungeon source",
+                "https://github.com/watabou/pixel-dungeon");
 		if (landscape()){
 			wata.setRect(shpx.left(), lumine.bottom() + 8, colWidth, 0);
 		} else {
@@ -143,7 +143,9 @@ public class AboutScene extends PixelScene {
 		}
 		content.add(cube);
 
-		//*** libGDX Credits ***
+		CreditsBlock upstream=new CreditsBlock(true,Window.SHPX_COLOR,"Shattered Pixel Dungeon",null,"Evan Debenham and contributors. GPL-3.0-or-later.","Upstream project","https://github.com/00-Evan/shattered-pixel-dungeon");
+        upstream.setRect(wata.left(),Math.max(wata.bottom(),cube.bottom())+8,colWidth,0);content.add(upstream);
+        //*** libGDX Credits ***
 
 		final int GDX_COLOR = 0xE44D3C;
 		CreditsBlock gdx = new CreditsBlock(true,
@@ -154,9 +156,9 @@ public class AboutScene extends PixelScene {
 				"libgdx.com",
 				"https://libgdx.com/");
 		if (landscape()){
-			gdx.setRect(wata.left(), wata.bottom() + 8, colWidth, 0);
+			gdx.setRect(wata.left(), upstream.bottom() + 8, colWidth, 0);
 		} else {
-			gdx.setRect(wata.left(), cube.bottom() + 8, colWidth, 0);
+			gdx.setRect(wata.left(), upstream.bottom() + 8, colWidth, 0);
 		}
 		content.add(gdx);
 

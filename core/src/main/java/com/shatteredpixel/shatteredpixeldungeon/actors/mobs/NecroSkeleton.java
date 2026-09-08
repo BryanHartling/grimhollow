@@ -39,7 +39,7 @@ public class NecroSkeleton extends DirectableAlly {
     @Override public int damageRoll() {return Math.round(Random.NormalIntRange(2+summonerLevel/2,5+summonerLevel)*growth())+Necromancy.points(Talent.DEATHSPEAKERS_COMMAND);}
     @Override public int drRoll() {return super.drRoll()+summonerLevel/3+Necromancy.points(Talent.STURDY_BONES);}
     private float speech() {return 1+.05f*Necromancy.points(Talent.GRAVE_SPEECH)*Math.max(0,minions().size()-1);}
-    @Override public int attackSkill(Char target) {return Math.round((10+summonerLevel)*speech());}
+    @Override public int attackSkill(Char target) {return Math.round((10+summonerLevel)*speech())+(Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.class)!=null&&Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.class).isEquipped(Dungeon.hero)&&Dungeon.level.distance(pos,Dungeon.hero.pos)<=2?1:0);}
     @Override public int defenseSkill(Char enemy) {return Math.round((5+summonerLevel)*speech());}
     public void refreshStats(){
         summonerLevel=Dungeon.hero.lvl;

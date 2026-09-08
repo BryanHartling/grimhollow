@@ -418,6 +418,7 @@ public class HeroSelectScene extends PixelScene {
 		try {
 			//loading these big jpgs fails sometimes, so we have a catch for it
 			background.texture(cl.splashArt());
+            background.frame(0,0,800,450);
 		} catch (Exception e){
 			Game.reportException(e);
 			background.texture(TextureCache.createSolid(0xFF2d2f31));
@@ -574,7 +575,7 @@ public class HeroSelectScene extends PixelScene {
 
 			this.cl = cl;
 
-			icon(new Image(cl.spritesheet(), 0, 90, 12, 15));
+			icon(com.shatteredpixel.shatteredpixeldungeon.GameGeometry.portrait(cl, 6));
 
 		}
 

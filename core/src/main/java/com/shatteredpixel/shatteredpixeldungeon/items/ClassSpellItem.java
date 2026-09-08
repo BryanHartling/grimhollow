@@ -25,7 +25,9 @@ public abstract class ClassSpellItem extends Artifact {
     @Override protected ArtifactBuff passiveBuff(){return new Charger();}
     public class Charger extends ArtifactBuff {@Override public boolean act(){advance(regeneration());spend(TICK);return true;}}
     @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);charge=b.getInt("charge");}
-    @Override public ArrayList<String> actions(Hero hero){ArrayList<String> a=super.actions(hero);if(isEquipped(hero))a.add("CAST");return a;}
+    @Override public void doDrop(Hero hero){}
+    @Override public boolean doUnequip(Hero hero,boolean collect,boolean single){return false;}
+    @Override public ArrayList<String> actions(Hero hero){ArrayList<String> a=super.actions(hero);a.remove(AC_DROP);a.remove(AC_THROW);a.remove(AC_UNEQUIP);if(isEquipped(hero))a.add("CAST");return a;}
     protected abstract String[] spells(Hero hero);
     protected abstract void select(Hero hero,String spell);
     @Override public void execute(Hero hero,String action){super.execute(hero,action);if(action.equals("CAST")&&isEquipped(hero))GameScene.show(new Window(){

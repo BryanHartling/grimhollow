@@ -124,6 +124,7 @@ public class ItemSlot extends Button {
 	protected void layout() {
 		super.layout();
 		
+		com.shatteredpixel.shatteredpixeldungeon.GameGeometry.fitBox(sprite, Math.max(1,width-margin.left-margin.right)*.85f, Math.max(1,height-margin.top-margin.bottom)*.85f);
 		sprite.x = x + margin.left + (width - sprite.width - (margin.left + margin.right)) / 2f;
 		sprite.y = y + margin.top + (height - sprite.height - (margin.top + margin.bottom)) / 2f;
 		PixelScene.align(sprite);

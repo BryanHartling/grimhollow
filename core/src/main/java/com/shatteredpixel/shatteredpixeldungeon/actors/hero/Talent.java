@@ -456,6 +456,9 @@ public enum Talent {
 			}
 			HeroClass cls = Dungeon.hero != null ? Dungeon.hero.heroClass : GamesInProgress.selectedClass;
 			switch (cls){
+                case NECROMANCER:return 296;
+                case ENCHANTER:return 297;
+                case PSYCHIC:return 298;
 				case WARRIOR: default:
 					return 26;
 				case MAGE:

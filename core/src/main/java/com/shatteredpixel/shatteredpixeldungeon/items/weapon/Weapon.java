@@ -127,9 +127,12 @@ abstract public class Weapon extends KindOfWeapon {
 	public boolean enchantHardened = false;
 	public boolean curseInfusionBonus = false;
 	public boolean masteryPotionBonus = false;
+    public com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching runeEtching;
+    @Override protected void onDetach(){super.onDetach();com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching.recover(this);}
 	
 	@Override
 	public int proc( Char attacker, Char defender, int damage ) {
+        if(runeEtching!=null&&attacker.buff(MagicImmune.class)==null&&defender.isAlive())damage=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.weaponProc(runeEtching.floorEnchant,this,attacker,defender,damage,.5f);
 
 		if(inscribed!=null&&attacker.buff(MagicImmune.class)==null)damage=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.weaponProc(inscribed,this,attacker,defender,damage,1);
         boolean becameAlly = false;
@@ -230,7 +233,7 @@ abstract public class Weapon extends KindOfWeapon {
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
-        bundle.put("inscribed",inscribed);
+        bundle.put("inscribed",inscribed);bundle.put("rune_etching",runeEtching);
 		bundle.put( USES_LEFT_TO_ID, usesLeftToID );
 		bundle.put( AVAILABLE_USES, availableUsesToID );
 		bundle.put( ENCHANTMENT, enchantment );
@@ -243,7 +246,7 @@ abstract public class Weapon extends KindOfWeapon {
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		super.restoreFromBundle( bundle );
-        inscribed=(Enchantment)bundle.get("inscribed");
+        inscribed=(Enchantment)bundle.get("inscribed");runeEtching=(com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching)bundle.get("rune_etching");
 		usesLeftToID = bundle.getFloat( USES_LEFT_TO_ID );
 		availableUsesToID = bundle.getFloat( AVAILABLE_USES );
 		enchantment = (Enchantment)bundle.get( ENCHANTMENT );
@@ -406,7 +409,8 @@ abstract public class Weapon extends KindOfWeapon {
 		
 		cursed = false;
 
-		return super.upgrade();
+		if(runeEtching!=null&&runeEtching.level()==0)runeEtching.level(1);
+        return super.upgrade();
 	}
 	
 	@Override

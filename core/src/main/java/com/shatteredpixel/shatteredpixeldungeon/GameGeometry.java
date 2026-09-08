@@ -49,6 +49,19 @@ public final class GameGeometry {
         float factor=opaque==0?1:visibleHeight/opaque;
         image.logicalSize(image.frame().width()*image.texture.width*factor,image.frame().height()*image.texture.height*factor);
     }
+    public static void fitBox(com.watabou.noosa.Image image, float w, float h) {
+        com.watabou.utils.RectF f=image.frame(); int x=Math.round(f.left*image.texture.width),y=Math.round(f.top*image.texture.height);
+        int fw=Math.round(f.width()*image.texture.width),fh=Math.round(f.height()*image.texture.height),left=fw,right=-1,top=fh,bottom=-1;
+        for(int j=0;j<fh;j++)for(int i=0;i<fw;i++)if((image.texture.bitmap.getPixel(x+i,y+j)&255)!=0){left=Math.min(left,i);right=Math.max(right,i);top=Math.min(top,j);bottom=Math.max(bottom,j);}
+        if(right<left)return;
+        float scale=Math.min(w/(right-left+1),h/(bottom-top+1));image.logicalSize(fw*scale,fh*scale);
+    }
+    public static com.watabou.noosa.Image portrait(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass hero,int tier) {
+        if(hero==null||tier<0||tier>7)throw new IllegalArgumentException("Invalid saved hero portrait");
+        com.watabou.noosa.Image image=heroImage(hero.spritesheet(),0,15*tier,12,15);
+        if(opaqueHeight(image.texture,image.frame())==0)throw new IllegalArgumentException("Missing hero portrait");
+        fit(image,image.frame(),14.5f);return image;
+    }
     public static com.watabou.noosa.TextureFilm characterFilm(Object texture, int width, int height) {
         int density = characterDensity(texture);
         return new com.watabou.noosa.TextureFilm(texture, width*density, height*density);

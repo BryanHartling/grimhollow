@@ -204,7 +204,7 @@ public class SmokeRun {
 
     private static void psychicScenario() throws Exception {
         Hero h=Dungeon.hero;FocusCrystal crystal=h.belongings.getItem(FocusCrystal.class);
-        check(h.HP==20&&h.HT==20&&h.STR==10&&crystal!=null&&crystal.charges()==2&&crystal.cap()==2,"Psychic base kit");
+        check(h.HP==20&&h.HT==20&&h.STR==10&&crystal!=null&&crystal.charges()==2&&crystal.cap()==3,"Psychic base kit");
         check(h.belongings.weapon instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.FocusRing&&h.belongings.armor instanceof ClothArmor&&h.belongings.getItem(Food.class).quantity()==2,"Psychic equipment and food");
         check(h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife.class).quantity()==3&&h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision.class).isIdentified()&&new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping().isKnown(),"Psychic consumables and identification");
         check(h.talents.get(0).size()==4&&h.talents.get(1).size()==5,"Psychic talent tiers");
@@ -218,7 +218,7 @@ public class SmokeRun {
             check(psychic-base==level/5,"12: exact Telekinetic Force at level "+level);
         }
         h.lvl=21;h.HT=h.HP=120;h.subClass=HeroSubClass.PUPPETEER;Talent.initSubclassTalents(h);maxTalents();
-        check(crystal.cap()==6,"Focused Mind capacity");
+        check(crystal.cap()==7,"Focused Mind capacity");
         int heapCell=center+2;Dungeon.level.drop(new Food(),heapCell);Rat enemy=target(heapCell);
         com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().reveal();Dungeon.level.setTrap(trap,heapCell);Level.set(heapCell,Terrain.TRAP);
         int food=h.belongings.getItem(Food.class).quantity();crystal.gainCharge(10);
@@ -284,7 +284,18 @@ public class SmokeRun {
         Hero h=Dungeon.hero;SigilBrush brush=h.belongings.getItem(SigilBrush.class);
         check(h.HT==20&&h.STR==10&&brush!=null&&brush.charges()==2,"Enchanter base kit");
         check(h.belongings.weapon instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RunedBaton&&h.belongings.getItem(Food.class).quantity()==2,"Baton and rations");
-        check(h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment.class).isIdentified()&&h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing.class)!=null,"Enchanter consumables");
+        check(h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment.class)==null&&new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment().isKnown()&&h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify.class)!=null&&h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing.class)!=null,"Enchanter consumables");
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon starter=(com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)h.belongings.weapon;
+        RuneEtching rune=starter.runeEtching;starter.upgrade();
+        check(starter.actions(h).contains(Item.AC_DROP)&&starter.value()>0,"37: ordinary sellable starter");
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword replacement=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword();
+        replacement.identify();replacement.collect();check(replacement.doEquip(h),"37: replace starting weapon");
+        int chargesBefore=brush.charges();check(RuneEtching.etch(h)&&brush.charges()==chargesBefore&&replacement.runeEtching==rune&&starter.runeEtching==null&&starter.level()==0&&replacement.level()==1,"37: transfer exactly one upgrade without charge");
+        replacement.doUnequip(h,true);replacement.detachAll(h.belongings.backpack);
+        check(h.belongings.getItem(RuneEtching.class)==rune&&replacement.runeEtching==null&&replacement.level()==0,"37: lost carrier returns rune");
+        starter.doEquip(h);check(RuneEtching.etch(h)&&starter.level()==1&&starter.runeEtching==rune,"37: reattach after carrier loss");
+        check(!rune.actions(h).contains(Item.AC_DROP),"37: rune cannot be dropped");
+        System.out.println("TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment");
         clearArena();Rat enemy=target(h.pos+1);enemy.sprite.visible=false;
         check(brush.cast(h,"hex",enemy.pos,null,null)&&brush.charges()==1&&enemy.buff(DegradedGear.class)!=null&&enemy.buff(Hex.class)!=null,"Hex Sigil");
         for(int i=0;i<37;i++)h.buff(ClassSpellItem.Charger.class).act();check(brush.charges()==1,"No early Brush charge");h.buff(ClassSpellItem.Charger.class).act();check(brush.charges()==2,"Brush level-one cadence");
@@ -297,7 +308,7 @@ public class SmokeRun {
         brush.gainCharge(10);check(brush.cast(h,"reinforce",h.pos,w,null)&&w.buffedLvl()==w.level()+1&&w.reinforceFlat==3,"Reinforce and Master Craft");
         Class<?> old=w.enchantment.getClass();brush.gainCharge(10);check(brush.cast(h,"transmute",h.pos,w,null)&&w.enchantment.getClass()!=old&&Arrays.asList(com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon.Enchantment.common).contains(w.enchantment.getClass()),"Transmute different same-rarity enchantment");
         // Proc both sigils through the real weapon path, using Kinetic to avoid GL-only visual effects in headless mode.
-        w.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic());((com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RunedBaton)w).floorEnchant=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic();
+        w.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic());w.runeEtching.floorEnchant=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic();
         w.proc(h,enemy,5);check(h.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.KineticTracker.class)!=null,"Inscription proc hook");
         EnchanterMagic magic=EnchanterMagic.state();for(int i=0;i<4;i++)magic.act();check(h.buff(Barkskin.class)!=null,"Warding Sigils");
         int turns=w.inscriptionTurns;Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);h=Dungeon.hero;h.sprite=new HeroSprite();brush=h.belongings.getItem(SigilBrush.class);w=(com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)h.belongings.weapon;

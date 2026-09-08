@@ -4,7 +4,7 @@ package com.shatteredpixel.shatteredpixeldungeon.tiles;
 /** Pure CPU light accumulation; testable without OpenGL. Values multiply terrain once. */
 public final class LightMap {
     public static final float[][] AMBIENT = {
-        {.55f, .60f, .50f}, {.50f, .50f, .58f}, {.60f, .45f, .35f},
+        {.50f, .55f, .45f}, {.50f, .50f, .58f}, {.60f, .45f, .35f},
         {.62f, .55f, .50f}, {.40f, .40f, .52f}
     };
     public final int width, height, samples;

@@ -28,7 +28,7 @@ public class EnchanterMagic extends Buff {
         Set<String> all=new TreeSet<>(known);all.addAll(floorKnown);
         for(Class<?> type:Statistics.itemTypesDiscovered)if(Weapon.Enchantment.class.isAssignableFrom(type)||Armor.Glyph.class.isAssignableFrom(type))all.add(type.getName());
         Item weapon=Dungeon.hero.belongings.weapon;
-        if(weapon instanceof RunedBaton)all.add(((RunedBaton)weapon).floorEnchant.getClass().getName());
+        RuneEtching etching=RuneEtching.find(Dungeon.hero);if(etching!=null)all.add(etching.floorEnchant.getClass().getName());
         java.util.List<Class<?>> list=new ArrayList<>();
         for(String name:all)try{Class<?> type=Class.forName(name);if((armor?Armor.Glyph.class:Weapon.Enchantment.class).isAssignableFrom(type))list.add(type);}catch(ClassNotFoundException ignored){}
         return list;
@@ -38,7 +38,7 @@ public class EnchanterMagic extends Buff {
         boolean descending=lastFloor!=-1&&floor>lastFloor;lastFloor=floor;lastPos=Dungeon.hero.pos;stationary=0;
         Hero h=Dungeon.hero;SigilBrush brush=h.belongings.getItem(SigilBrush.class);
         if(descending&&brush!=null)brush.gainCharge(points(Talent.FIELD_REPAIR));
-        if(h.belongings.weapon instanceof RunedBaton)((RunedBaton)h.belongings.weapon).roll();
+        RuneEtching etching=RuneEtching.find(h);if(etching!=null)etching.roll();
         floorKnown.clear();while(floorKnown.size()<Math.max(0,points(Talent.DEEP_KNOWLEDGE)-1))floorKnown.add(Weapon.Enchantment.random().getClass().getName());
         if(floors.add(floor)&&descending&&h.subClass==HeroSubClass.ARTIFICER&&Random.Float()<.25f*points(Talent.LASTING_WORK)){
             for(Item item:new Item[]{h.belongings.weapon,h.belongings.armor})if(item!=null){

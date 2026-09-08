@@ -185,12 +185,6 @@ public class HeroSprite extends CharSprite {
 	
 	public static Image avatar( HeroClass cl, int armorTier ) {
 		
-		RectF patch = tiers().get( armorTier );
-		Image avatar = GameGeometry.heroImage( cl.spritesheet() );
-		RectF frame = avatar.texture.uvRect( GameGeometry.HERO_DENSITY, 0, FRAME_WIDTH, FRAME_HEIGHT );
-		frame.shift( patch.left, patch.top );
-		avatar.frame( frame );
-		
-		return avatar;
+        return com.shatteredpixel.shatteredpixeldungeon.GameGeometry.portrait(cl, armorTier);
 	}
 }

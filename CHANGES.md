@@ -366,3 +366,8 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - Trap Sense propagates through the existing trap, blob and damage-buff paths; merged hazards of one type retain the strongest triggering multiplier until cleared.
 - Psychic floor-entry bonuses are persisted per floor to prevent stair farming; Precognition tests damage after resistance and mitigation, before shields.
 - Hurl uses the same movement callback with and without sprites; headless input reset is a no-op when there is no cell selector, and the carved smoke arena refreshes upstream visibility metadata.
+
+- v0.5 fix-up: UI occupancy means the longest opaque dimension within the available button box; slender weapons keep their aspect ratio.
+- v0.5 compatibility accepts supported Grimhollow saves (896 through the running version); unknown versions or invalid portraits offer deletion without loading the run.
+- v0.5 contact scanning covers packaged Java/resources and their sources, excluding specification/history documents and legitimate credits/copyright headers.
+- v0.5 Rune Etching survives carrier loss even with a full backpack; equipping is explicitly distinguished from losing an item.

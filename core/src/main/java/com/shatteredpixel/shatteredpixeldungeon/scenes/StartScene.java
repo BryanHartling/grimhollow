@@ -163,7 +163,7 @@ public class StartScene extends PixelScene {
 		ShatteredPixelDungeon.switchNoFade( TitleScene.class );
 	}
 	
-	private static class SaveSlotButton extends Button {
+	public static class SaveSlotButton extends Button {
 		
 		private NinePatch bg;
 		
@@ -178,6 +178,10 @@ public class StartScene extends PixelScene {
 		
 		private int slot;
 		private boolean newGame;
+        private boolean incompatible;
+        public Image portrait(){return hero;}
+        public boolean incompatible(){return incompatible;}
+        public static void deleteIncompatible(int slot){com.shatteredpixel.shatteredpixeldungeon.Dungeon.deleteGame(slot,true);GamesInProgress.delete(slot);}
 		
 		@Override
 		protected void createChildren() {
@@ -197,6 +201,13 @@ public class StartScene extends PixelScene {
 			this.slot = slot;
 			GamesInProgress.Info info = GamesInProgress.check(slot);
 			newGame = info == null;
+            incompatible=info!=null&&info.incompatible;
+            Image portrait=null;
+            if(!newGame&&!incompatible)try{portrait=com.shatteredpixel.shatteredpixeldungeon.GameGeometry.portrait(info.heroClass,info.armorTier);}catch(RuntimeException e){incompatible=info.incompatible=true;}
+            if(incompatible){
+                if(hero!=null){hero.visible=false;steps.visible=false;depth.visible=false;classIcon.visible=false;level.visible=false;hero=null;}
+                name.text(Messages.get(StartScene.class,"incompatible"));lastPlayed.text("");layout();return;
+            }
 			if (newGame){
 				name.text( Messages.get(StartScene.class, "new"));
 				
@@ -221,7 +232,7 @@ public class StartScene extends PixelScene {
 				}
 				
 				if (hero == null){
-					hero = new Image(info.heroClass.spritesheet(), 0, 15*info.armorTier, 12, 15);
+					hero = portrait;
 					add(hero);
 					
 					steps = new Image(Icons.get(Icons.STAIRS));
@@ -234,7 +245,7 @@ public class StartScene extends PixelScene {
 					level = new BitmapText(PixelScene.pixelFont);
 					add(level);
 				} else {
-					hero.copy(new Image(info.heroClass.spritesheet(), 0, 15*info.armorTier, 12, 15));
+					hero.copy(portrait);portrait.destroy();
 					
 					classIcon.copy(Icons.get(info.heroClass));
 				}
@@ -340,8 +351,12 @@ public class StartScene extends PixelScene {
 		
 		@Override
 		protected void onClick() {
-			if (newGame) {
-				GamesInProgress.selectedClass = null;
+			if(incompatible){
+                ShatteredPixelDungeon.scene().add(new com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions(Messages.get(StartScene.class,"incompatible"),Messages.get(StartScene.class,"incompatible_desc"),Messages.get(StartScene.class,"delete"),Messages.get(StartScene.class,"cancel")){
+                    @Override protected void onSelect(int index){if(index==0){deleteIncompatible(slot);ShatteredPixelDungeon.switchNoFade(StartScene.class);}}
+                });
+            } else if (newGame) {
+                GamesInProgress.selectedClass = null;
 				GamesInProgress.curSlot = slot;
 				ShatteredPixelDungeon.switchScene(HeroSelectScene.class);
 			} else {

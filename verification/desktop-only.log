@@ -57,3 +57,5 @@ TEST 26: three stains and floor/chasm/water/trap placement failures=0
 TESTS 24-26 PASS
 PASS: Sewer scene renders with dynamic lighting on and off.
 [Controllers] removed manager for application, 0 managers active
+
+v0.5 stage 4.5: desktop:dist BUILD SUCCESSFUL; -Dgrimhollow.geometryTests=true --smoke-sewers: TEST 24 heroes=9 mob sprites=101 failures=0; TEST 25 items=365 identification icons=60 failures=0; TESTS 24-26, 34-36 PASS.

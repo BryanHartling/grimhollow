@@ -92,10 +92,10 @@ public class AndroidLauncher extends AndroidApplication {
 
 			Gdx.app = this;
 			if (UpdateImpl.supportsUpdates()) {
-				Updates.service = UpdateImpl.getUpdateService();
+				Updates.service = null; // Fork releases are not published yet.
 			}
 			if (NewsImpl.supportsNews()) {
-				News.service = NewsImpl.getNewsService();
+				News.service = null; // No fork news service.
 			}
 
 			FileUtils.setDefaultFileProperties(Files.FileType.Local, "");

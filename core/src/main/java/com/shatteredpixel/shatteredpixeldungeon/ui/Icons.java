@@ -453,6 +453,12 @@ public enum Icons {
 	
 	public static Image get( HeroClass cl ) {
 		switch (cl) {
+			case NECROMANCER:
+				return new ItemSprite(ItemSpriteSheet.PHYLACTERY);
+			case ENCHANTER:
+				return new ItemSprite(ItemSpriteSheet.SIGIL_BRUSH);
+			case PSYCHIC:
+				return new ItemSprite(ItemSpriteSheet.FOCUS_CRYSTAL);
 			case WARRIOR:
 				return new ItemSprite(ItemSpriteSheet.SEAL);
 			case MAGE:

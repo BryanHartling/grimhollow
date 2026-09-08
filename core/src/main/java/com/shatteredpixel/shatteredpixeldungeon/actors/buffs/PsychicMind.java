@@ -13,7 +13,7 @@ public class PsychicMind extends Buff {
     private final HashSet<Integer> floors=new HashSet<>(),precognitionFloors=new HashSet<>();
     public static int points(Talent t){return Dungeon.hero==null?0:Dungeon.hero.pointsInTalent(t);}
     public static PsychicMind state(){return Dungeon.hero==null?null:Dungeon.hero.buff(PsychicMind.class);}
-    public static int force(Hero h){return h.heroClass==HeroClass.PSYCHIC?h.lvl/5:0;}
+    public static int force(Hero h){return h.heroClass==HeroClass.PSYCHIC&&h.belongings.getItem(FocusCrystal.class)!=null&&h.belongings.getItem(FocusCrystal.class).isEquipped(h)?h.lvl/5:0;}
     public static int thrownDamage(Hero h,int damage){damage+=force(h);if(h.buff(MeldedMind.class)!=null&&h.hasTalent(Talent.KINETIC_SURGE))damage=Math.round(damage*(h.pointsInTalent(Talent.KINETIC_SURGE)==3?1.5f:1.25f));return damage;}
     public static boolean calm(){if(Dungeon.level==null)return true;for(Mob mob:Dungeon.level.mobs)if(mob.alignment==Char.Alignment.ENEMY&&Dungeon.level.heroFOV[mob.pos]&&mob.invisible<=0)return false;return true;}
     public void arrive(){int floor=Dungeon.depth+100*Dungeon.branch;if(!floors.add(floor))return;FocusCrystal crystal=Dungeon.hero.belongings.getItem(FocusCrystal.class);if(crystal!=null)crystal.gainCharge(points(Talent.KINETIC_RESERVE));if(Dungeon.hero.subClass==HeroSubClass.SEER&&points(Talent.TREASURE_SENSE)>0)reveal(true,points(Talent.TREASURE_SENSE)>=3,false,false);}

@@ -105,17 +105,17 @@ public class WndVictoryCongrats extends Window {
 
 		height += Math.max(dailyImg.height(), dailyTxt.height()) + 6;
 
-		RenderedTextBlock finalTxt = PixelScene.renderTextBlock(Messages.get(this, "thank_you") + " "  + Messages.get(this, "support_prompt"), 6);
+		RenderedTextBlock finalTxt = PixelScene.renderTextBlock(Messages.get(this, "thank_you"), 6);
 		finalTxt.maxWidth(width);
 		finalTxt.setPos(0, height);
 		add(finalTxt);
 
 		height = (int) finalTxt.bottom() + 4;
 
-		RedButton btnSupport = new RedButton(Messages.get(this, "support")) {
+		RedButton btnSupport = new RedButton(Messages.get(com.shatteredpixel.shatteredpixeldungeon.scenes.TitleScene.class, "support")) {
 			@Override
 			protected void onClick() {
-				ShatteredPixelDungeon.switchScene(SupporterScene.class);
+				ShatteredPixelDungeon.platform.openURI("https://github.com/bryanhartling/grimhollow/issues");
 			}
 		};
 		btnSupport.icon(Icons.GOLD.get());

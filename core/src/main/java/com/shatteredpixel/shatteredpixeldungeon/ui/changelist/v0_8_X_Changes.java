@@ -97,7 +97,7 @@ public class v0_8_X_Changes {
 
 		changes.addButton(new ChangeButton(Icons.get(Icons.NEWS), "Ingame News Feed",
 				"_A news feed has been added to the game's main menu!_\n\n" +
-				"This feed pulls in blog posts from ShatteredPixel.com, and displays then within the game. It will also notify players when new posts are available.\n\n" +
+				"This feed pulls in blog posts from Grimhollow on GitHub, and displays then within the game. It will also notify players when new posts are available.\n\n" +
 				"I've wanted to improve my communication with the game's playerbase for quite a while, and this is a huge step in that direction."));
 
 		changes.addButton(new ChangeButton(new ItemSprite(ItemSpriteSheet.RING_TOPAZ), Messages.get(RingOfEnergy.class, "name"),

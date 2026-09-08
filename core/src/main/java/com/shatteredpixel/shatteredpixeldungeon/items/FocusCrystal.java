@@ -14,7 +14,7 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import java.util.Arrays;
 public class FocusCrystal extends ClassSpellItem {
     {image=ItemSpriteSheet.FOCUS_CRYSTAL;}
-    @Override public int cap(){return super.cap()+(PsychicMind.points(Talent.FOCUSED_MIND)>=2?1:0);}
+    @Override public int cap(){return 1+super.cap()+(PsychicMind.points(Talent.FOCUSED_MIND)>=2?1:0);}
     @Override protected float regeneration(){return PsychicMind.calm()?1+.15f*PsychicMind.points(Talent.DEEP_FOCUS):1;}
     @Override public String[] spells(Hero h){return h.subClass==HeroSubClass.PUPPETEER?new String[]{"grasp","glimpse","dominate","suggestion"}:h.subClass==HeroSubClass.SEER?new String[]{"grasp","glimpse","hurl"}:new String[]{"grasp","glimpse"};}
     @Override protected void select(Hero h,String spell){

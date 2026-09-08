@@ -108,27 +108,17 @@ public class GamesInProgress {
 			
 		} else {
 			
-			Info info;
-			try {
-				
-				Bundle bundle = FileUtils.bundleFromFile(gameFile(slot));
+            Info info=new Info();info.slot=slot;
+            try {
+                Bundle bundle=FileUtils.bundleFromFile(gameFile(slot));
+                int version=bundle.getInt("version");
+                if(version<896||version>com.watabou.noosa.Game.versionCode)throw new IOException("Incompatible save version");
+                Dungeon.preview(info,bundle);
+                if(info.heroClass==null||info.subClass==null||info.armorTier<0||info.armorTier>7
+                    ||!com.badlogic.gdx.Gdx.files.internal(info.heroClass.spritesheet()).exists()
+                    ||!com.badlogic.gdx.Gdx.files.internal(info.heroClass.splashArt()).exists())throw new IOException("Missing saved portrait");
+            } catch(Exception e){info.incompatible=true;}
 
-				if (bundle.getInt( "version" ) < ShatteredPixelDungeon.v2_5_4) {
-					info = null;
-				} else {
-
-					info = new Info();
-					info.slot = slot;
-					Dungeon.preview(info, bundle);
-				}
-
-			} catch (IOException e) {
-				info = null;
-			} catch (Exception e){
-				ShatteredPixelDungeon.reportException( e );
-				info = null;
-			}
-			
 			slotStates.put( slot, info );
 			return info;
 			
@@ -176,6 +166,7 @@ public class GamesInProgress {
 	
 	public static class Info {
 		public int slot;
+        public boolean incompatible;
 
 		public int depth;
 		public int version;

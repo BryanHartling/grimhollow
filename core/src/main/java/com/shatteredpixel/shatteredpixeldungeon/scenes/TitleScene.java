@@ -485,7 +485,7 @@ public class TitleScene extends PixelScene {
 
 		@Override
 		protected void onClick() {
-			ShatteredPixelDungeon.switchNoFade(SupporterScene.class);
+			ShatteredPixelDungeon.platform.openURI("https://github.com/bryanhartling/grimhollow/issues");
 		}
 	}
 }

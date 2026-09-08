@@ -149,7 +149,7 @@ public class NewsScene extends PixelScene {
 			@Override
 			protected void onClick() {
 				super.onClick();
-				ShatteredPixelDungeon.platform.openURI("https://ShatteredPixel.com");
+				ShatteredPixelDungeon.platform.openURI("https://Grimhollow on GitHub");
 			}
 		};
 		btnSite.icon(Icons.get(Icons.NEWS));

@@ -1090,3 +1090,7 @@ For more on this, please refer to https://docs.gradle.org/9.4.0/userguide/comman
 BUILD SUCCESSFUL in 22s
 7 actionable tasks: 1 executed, 6 up-to-date
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.0/userguide/configuration_cache_enabling.html
+
+v0.5 stage 4.5: core:smokeRun -PdesktopOnly=true --no-daemon: Runs=30 failures=0.
+Class-only -PsmokeClass=NECROMANCER / ENCHANTER / PSYCHIC: Runs=10 failures=0 each.
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment.

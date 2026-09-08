@@ -17,6 +17,39 @@ def locked(path):
 
 def paint(spec):
     w,h = spec['dimensions']
+    if spec['kind']=='talents':
+        image=Image.new('RGBA',(w,h));d=ImageDraw.Draw(image)
+        for index in range(320):
+            x=index%16*32;y=index//16*32;accent=PALETTE[13+(index//32)%10]
+            d.polygon([(x+16,y+2),(x+29,y+16),(x+16,y+29),(x+2,y+16)],fill='#0E0D0C')
+            d.polygon([(x+16,y+5),(x+26,y+16),(x+16,y+26),(x+5,y+16)],fill='#'+PALETTE[1])
+            d.line([(x+10,y+22),(x+16,y+9),(x+22,y+22)],fill='#'+accent,width=3)
+            for bit in range(9):
+                if (index+1)&(1<<bit):
+                    bx=x+9+bit%3*5;by=y+10+bit//3*5
+                    d.rectangle((bx,by,bx+2,by+2),fill='#'+PALETTE[10])
+        return image
+    if spec['kind']=='splash':
+        # Original illustrated composition, independent of upstream splash images.
+        image=Image.new('RGBA',(w,h),'#1A1816');d=ImageDraw.Draw(image)
+        for y in range(0,h,36):
+            for x in range(-40,w,80):
+                x+=(y//36%2)*40
+                d.rectangle((x+2,y+2,x+77,y+33),fill='#'+PALETTE[1+(x//80+y//36+spec['seed'])%2])
+        d.ellipse((235,-130,755,470),fill='#0E0D0C');d.rectangle((235,170,755,450),fill='#0E0D0C')
+        a='#'+PALETTE[spec['accent']]
+        d.polygon([(440,195),(405,260),(372,449),(640,449),(593,248),(545,195)],fill=a)
+        d.polygon([(487,193),(470,283),(504,426),(536,280),(522,193)],fill='#1A1816')
+        d.ellipse((454,89,547,213),fill='#0E0D0C');d.ellipse((465,100,536,202),fill='#6B645C')
+        d.polygon([(458,142),(468,101),(500,76),(538,109),(552,157),(521,127),(486,130)],fill=a)
+        d.line((479,156,490,155),fill='#EFE7D2',width=3);d.line((516,155,527,156),fill='#EFE7D2',width=3)
+        d.polygon([(430,224),(451,268),(404,334),(379,315)],fill='#2E241A')
+        d.polygon([(554,224),(579,230),(624,312),(600,334)],fill='#2E241A')
+        d.line((614,185,582,450),fill='#0E0D0C',width=20);d.line((614,185,582,450),fill='#8A7331',width=9)
+        d.ellipse((592,156,636,208),fill='#0E0D0C');d.ellipse((600,164,628,200),fill=a)
+        for x in [215,750]:
+            d.rectangle((x,310,x+8,430),fill='#565B62');d.ellipse((x-6,293,x+14,319),fill='#E0982F')
+        return image
     if spec['kind'] in ['hero','items','vectors']:
         sw,sh = spec.get('source_dimensions', [w,h])
         original = Image.new('RGBA',(sw,sh)); draw = ImageDraw.Draw(original)
@@ -66,20 +99,18 @@ def paint(spec):
             draw.line((x,y,x+length-1,y), fill=tuple(COLORS[role])+(255,))
         image = original.resize((w,h), Image.Resampling.NEAREST)
         pixels = np.array(image)
-        # Coordinate-hashed fine grain plus broad material modulation. No RNG state or timestamps.
-        yy,xx = np.indices((h,w),dtype=np.int64)
-        grain = (xx*374761393 + yy*668265263 + spec['seed']*1274126177) & 0xffffffff
-        grain = ((grain ^ (grain >> 13))*1274126177) & 0xffffffff
-        shades = 70 + (grain%21) + ((xx//11+yy//17)%5)
-        pixels[:,:,:3] = (pixels[:,:,:3].astype(np.int32)*shades[:,:,None]//100).astype(np.uint8)
-        # Per-frame exposure controls bright stone/bone while preserving palette hue.
-        for ty in range(0,h,64):
-            for tx in range(0,w,64):
-                tile=pixels[ty:ty+64,tx:tx+64]
-                active=tile[:,:,3]>0
-                if active.any():
-                    mean=(tile[:,:,:3][active] @ np.array([.2126,.7152,.0722])/255).mean()
-                    if mean>.42: tile[:,:,:3]=(tile[:,:,:3]*(.42/mean)).astype(np.uint8)
+        # Dark mortar and irregular wet highlights widen each tile's value range.
+        yy,xx=np.indices((h,w),dtype=np.int64)
+        noise=((xx*374761393+yy*668265263+spec['seed']*1274126177)&0xffffffff)
+        noise=((noise^(noise>>13))*1274126177)&0xffffffff
+        material=((xx//5+yy//7)%7)/6
+        target=.13+.26*material+.12*(noise%101)/100
+        target=np.where((xx%16<2)|(yy%13<2),.055,target)
+        rgb=pixels[:,:,:3].astype(float);lum=rgb@np.array([.2126,.7152,.0722])/255
+        ratio=np.minimum(1,target/np.maximum(lum,.001))
+        tint=np.clip((target-lum)/np.maximum(1-lum,.001),0,1)
+        rgb=np.where((target<lum)[:,:,None],rgb*ratio[:,:,None],rgb+(255-rgb)*tint[:,:,None])
+        pixels[:,:,:3]=np.rint(rgb).clip(0,255).astype(np.uint8)
         return Image.fromarray(pixels)
     canvas = Image.new('RGBA',(256,256))
     draw = ImageDraw.Draw(canvas)

@@ -291,7 +291,7 @@ public class MeleeWeapon extends Weapon {
 
 	@Override
 	public int damageRoll(Char owner) {
-		int damage = augment.damageFactor(super.damageRoll( owner ));
+		int damage = augment.damageFactor(super.damageRoll( owner ))+reinforceFlat;
 
 		if (owner instanceof Hero) {
 			int exStr = ((Hero)owner).STR() - STRReq();
@@ -365,7 +365,7 @@ public class MeleeWeapon extends Weapon {
 			info += "\n\n" + abilityInfo();
 		}
 		
-		return info;
+		return info+sigilInfo();
 	}
 	
 	public String statsInfo(){

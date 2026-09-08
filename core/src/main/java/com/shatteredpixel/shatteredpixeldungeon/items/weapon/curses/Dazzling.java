@@ -41,6 +41,7 @@ public class Dazzling extends Weapon.Enchantment {
 	public int proc(Weapon weapon, Char attacker, Char defender, int damage ) {
 
 		float procChance = 1/10f * procChanceMultiplier(attacker);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(attacker,procChance);
 		if (Random.Float() < procChance) {
 			for (Char ch : Actor.chars()){
 				if (ch.fieldOfView != null && ch.fieldOfView[defender.pos]){

@@ -41,6 +41,7 @@ public class Friendly extends Weapon.Enchantment {
 		}
 
 		float procChance = 1/10f * procChanceMultiplier(attacker);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(attacker,procChance);
 		if (Random.Float() < procChance) {
 			
 			Buff.affect( attacker, Charm.class, Charm.DURATION ).object = defender.id();

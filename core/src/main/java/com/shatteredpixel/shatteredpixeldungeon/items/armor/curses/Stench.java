@@ -37,6 +37,7 @@ public class Stench extends Armor.Glyph {
 	public int proc(Armor armor, Char attacker, Char defender, int damage) {
 
 		float procChance = 1/8f * procChanceMultiplier(defender);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(defender,procChance);
 		if ( Random.Float() < procChance ) {
 
 			GameScene.add( Blob.seed( defender.pos, 250, ToxicGas.class ) );

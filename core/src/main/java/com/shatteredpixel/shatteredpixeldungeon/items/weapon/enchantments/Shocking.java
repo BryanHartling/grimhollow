@@ -46,6 +46,7 @@ public class Shocking extends Weapon.Enchantment {
 
 		// flat 33% proc chance, effect scales with level via damage dealt
 		float procChance = (1/3f) * procChanceMultiplier(attacker);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(attacker,procChance);
 		if (Random.Float() < procChance) {
 
 			float powerMulti = Math.max(1f, procChance);

@@ -40,6 +40,7 @@ public class Overgrowth extends Armor.Glyph {
 	public int proc(Armor armor, Char attacker, Char defender, int damage) {
 
 		float procChance = 1/20f * procChanceMultiplier(defender);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(defender,procChance);
 		if ( Random.Float() < procChance ) {
 
 			Plant p = ((Plant.Seed) Generator.randomUsingDefaults(Generator.Category.SEED)).couch(defender.pos, null);

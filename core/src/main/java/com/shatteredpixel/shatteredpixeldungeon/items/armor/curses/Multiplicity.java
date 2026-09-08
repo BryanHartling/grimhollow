@@ -54,6 +54,7 @@ public class Multiplicity extends Armor.Glyph {
 	public int proc(Armor armor, Char attacker, Char defender, int damage) {
 
 		float procChance = 1/20f * procChanceMultiplier(defender);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(defender,procChance);
 		if ( Random.Float() < procChance ) {
 			ArrayList<Integer> spawnPoints = new ArrayList<>();
 

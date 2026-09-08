@@ -382,13 +382,23 @@ public class Item implements Bundlable {
 	
 	//returns the level of the item, after it may have been modified by temporary boosts/reductions
 	//note that not all item properties should care about buffs/debuffs! (e.g. str requirement)
+    public int inscriptionTurns,reinforceTurns,reinforceFlat;
+    public String sigilInfo(){
+        String text="";
+        if(inscriptionTurns>0){
+            Object sigil=this instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon?((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)this).inscribed:this instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor?((com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor)this).inscribed:null;
+            if(sigil!=null){String name=sigil instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon.Enchantment?((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon.Enchantment)sigil).name():((com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor.Glyph)sigil).name();text+="\n\n"+Messages.get(Item.class,"inscribed",name,inscriptionTurns);}
+        }
+        if(reinforceTurns>0)text+="\n\n"+Messages.get(Item.class,"reinforced",reinforceTurns,reinforceFlat);
+        return text;
+    }
 	public int buffedLvl(){
 		//only the hero can be affected by Degradation
 		if (Dungeon.hero != null && Dungeon.hero.buff( Degrade.class ) != null
 			&& (isEquipped( Dungeon.hero ) || Dungeon.hero.belongings.contains( this ))) {
-			return Degrade.reduceLevel(level());
+			return Degrade.reduceLevel(level())+(reinforceTurns>0?1:0);
 		} else {
-			return level();
+			return level()+(reinforceTurns>0?1:0);
 		}
 	}
 
@@ -586,7 +596,8 @@ public class Item implements Bundlable {
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
-		bundle.put( QUANTITY, quantity );
+		bundle.put("inscription_turns",inscriptionTurns);bundle.put("reinforce_turns",reinforceTurns);bundle.put("reinforce_flat",reinforceFlat);
+        bundle.put( QUANTITY, quantity );
 		bundle.put( LEVEL, level );
 		bundle.put( LEVEL_KNOWN, levelKnown );
 		bundle.put( CURSED, cursed );
@@ -600,7 +611,8 @@ public class Item implements Bundlable {
 	
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
-		quantity	= bundle.getInt( QUANTITY );
+		inscriptionTurns=bundle.getInt("inscription_turns");reinforceTurns=bundle.getInt("reinforce_turns");reinforceFlat=bundle.getInt("reinforce_flat");
+        quantity	= bundle.getInt( QUANTITY );
 		levelKnown	= bundle.getBoolean( LEVEL_KNOWN );
 		cursedKnown	= bundle.getBoolean( CURSED_KNOWN );
 		

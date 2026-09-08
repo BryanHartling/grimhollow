@@ -48,6 +48,7 @@ public class Blooming extends Weapon.Enchantment {
 		// lvl 1 - 50%
 		// lvl 2 - 60%
 		float procChance = (level+1f)/(level+3f) * procChanceMultiplier(attacker);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(attacker,procChance);
 		if (Random.Float() < procChance) {
 
 			float powerMulti = Math.max(1f, procChance);

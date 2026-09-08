@@ -113,6 +113,7 @@ public class Armor extends EquipableItem {
 	
 	public Augment augment = Augment.NONE;
 	
+	public Glyph inscribed;
 	public Glyph glyph;
 	public boolean glyphHardened = false;
 	public boolean curseInfusionBonus = false;
@@ -142,6 +143,7 @@ public class Armor extends EquipableItem {
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
+        bundle.put("inscribed",inscribed);
 		bundle.put( USES_LEFT_TO_ID, usesLeftToID );
 		bundle.put( AVAILABLE_USES, availableUsesToID );
 		bundle.put( GLYPH, glyph );
@@ -155,6 +157,7 @@ public class Armor extends EquipableItem {
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		super.restoreFromBundle(bundle);
+        inscribed=(Glyph)bundle.get("inscribed");
 		usesLeftToID = bundle.getInt( USES_LEFT_TO_ID );
 		availableUsesToID = bundle.getInt( AVAILABLE_USES );
 		inscribe((Glyph) bundle.get(GLYPH));
@@ -217,7 +220,8 @@ public class Armor extends EquipableItem {
 			Catalog.setSeen(glyph.getClass());
 			Statistics.itemTypesDiscovered.add(glyph.getClass());
 		}
-		return super.identify(byHero);
+		com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.learn(this);
+        return super.identify(byHero);
 	}
 
 	public void setIDReady(){
@@ -373,7 +377,7 @@ public class Armor extends EquipableItem {
 	}
 
 	public final int DRMax(){
-		return DRMax(buffedLvl());
+		return DRMax(buffedLvl())+reinforceFlat;
 	}
 
 	public int DRMax(int lvl){
@@ -390,7 +394,7 @@ public class Armor extends EquipableItem {
 	}
 
 	public final int DRMin(){
-		return DRMin(buffedLvl());
+		return DRMin(buffedLvl())+reinforceFlat;
 	}
 
 	public int DRMin(int lvl){
@@ -496,6 +500,7 @@ public class Armor extends EquipableItem {
 	}
 	
 	public int proc( Char attacker, Char defender, int damage ) {
+        if(inscribed!=null&&defender.buff(MagicImmune.class)==null)damage=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.glyphProc(inscribed,this,attacker,defender,damage,1);
 
 		if (defender.buff(MagicImmune.class) == null) {
 			Glyph trinityGlyph = null;
@@ -512,7 +517,7 @@ public class Armor extends EquipableItem {
 					&& defender.buff(HolyWard.HolyArmBuff.class) != null){
 				if (glyph != null &&
 						(((Hero) defender).subClass == HeroSubClass.PALADIN || hasCurseGlyph())){
-					damage = glyph.proc( this, attacker, defender, damage );
+					damage = com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.glyphProc(glyph,this,attacker,defender,damage,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.permanent(this));
 				}
 				if (trinityGlyph != null){
 					damage = trinityGlyph.proc( this, attacker, defender, damage );
@@ -522,7 +527,7 @@ public class Armor extends EquipableItem {
 
 			} else {
 				if (glyph != null) {
-					damage = glyph.proc(this, attacker, defender, damage);
+					damage = com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.glyphProc(glyph,this,attacker,defender,damage,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.permanent(this));
 				}
 				if (trinityGlyph != null){
 					damage = trinityGlyph.proc( this, attacker, defender, damage );
@@ -637,7 +642,7 @@ public class Armor extends EquipableItem {
 			info += "\n\n" + Messages.get(Armor.class, "seal_attached", seal.maxShield(tier, level()));
 		}
 		
-		return info;
+		return info+sigilInfo();
 	}
 
 	@Override
@@ -748,6 +753,7 @@ public class Armor extends EquipableItem {
 	}
 
 	public boolean hasGlyph(Class<?extends Glyph> type, Char owner) {
+        if(owner.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune.class)==null&&inscribed!=null&&inscribed.getClass()==type)return true;
 		if (owner.buff(MagicImmune.class) != null) {
 			return false;
 		} else if (glyph != null
@@ -819,7 +825,7 @@ public class Armor extends EquipableItem {
 		}
 
 		public static float genericProcChanceMultiplier( Char defender ){
-			float multi = RingOfArcana.enchantPowerMultiplier(defender);
+			float multi = RingOfArcana.enchantPowerMultiplier(defender)*com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procStrength(defender);
 
 			if (Dungeon.hero.alignment == defender.alignment
 					&& Dungeon.hero.buff(AuraOfProtection.AuraBuff.class) != null

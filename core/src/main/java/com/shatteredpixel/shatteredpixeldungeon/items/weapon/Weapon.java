@@ -122,6 +122,7 @@ abstract public class Weapon extends KindOfWeapon {
 	protected float usesLeftToID = usesToID();
 	protected float availableUsesToID = usesToID()/2f;
 	
+	public Enchantment inscribed;
 	public Enchantment enchantment;
 	public boolean enchantHardened = false;
 	public boolean curseInfusionBonus = false;
@@ -130,7 +131,8 @@ abstract public class Weapon extends KindOfWeapon {
 	@Override
 	public int proc( Char attacker, Char defender, int damage ) {
 
-		boolean becameAlly = false;
+		if(inscribed!=null&&attacker.buff(MagicImmune.class)==null)damage=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.weaponProc(inscribed,this,attacker,defender,damage,1);
+        boolean becameAlly = false;
 		boolean wasAlly = defender.alignment == Char.Alignment.ALLY;
 		if (attacker.buff(MagicImmune.class) == null) {
 			Enchantment trinityEnchant = null;
@@ -147,7 +149,7 @@ abstract public class Weapon extends KindOfWeapon {
 					&& attacker.buff(HolyWeapon.HolyWepBuff.class) != null){
 				if (enchantment != null &&
 						(((Hero) attacker).subClass == HeroSubClass.PALADIN || hasCurseEnchant())){
-					damage = enchantment.proc(this, attacker, defender, damage);
+					damage = com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.weaponProc(enchantment,this,attacker,defender,damage,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.permanent(this));
 					if (defender.alignment == Char.Alignment.ALLY && !wasAlly){
 						becameAlly = true;
 					}
@@ -162,7 +164,7 @@ abstract public class Weapon extends KindOfWeapon {
 
 			} else {
 				if (enchantment != null) {
-					damage = enchantment.proc(this, attacker, defender, damage);
+					damage = com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.weaponProc(enchantment,this,attacker,defender,damage,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.permanent(this));
 					if (defender.alignment == Char.Alignment.ALLY && !wasAlly) {
 						becameAlly = true;
 					}
@@ -228,6 +230,7 @@ abstract public class Weapon extends KindOfWeapon {
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
+        bundle.put("inscribed",inscribed);
 		bundle.put( USES_LEFT_TO_ID, usesLeftToID );
 		bundle.put( AVAILABLE_USES, availableUsesToID );
 		bundle.put( ENCHANTMENT, enchantment );
@@ -240,6 +243,7 @@ abstract public class Weapon extends KindOfWeapon {
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		super.restoreFromBundle( bundle );
+        inscribed=(Enchantment)bundle.get("inscribed");
 		usesLeftToID = bundle.getFloat( USES_LEFT_TO_ID );
 		availableUsesToID = bundle.getFloat( AVAILABLE_USES );
 		enchantment = (Enchantment)bundle.get( ENCHANTMENT );
@@ -276,7 +280,8 @@ abstract public class Weapon extends KindOfWeapon {
 			Catalog.setSeen(enchantment.getClass());
 			Statistics.itemTypesDiscovered.add(enchantment.getClass());
 		}
-		return super.identify(byHero);
+		com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.learn(this);
+        return super.identify(byHero);
 	}
 
 	public void setIDReady(){
@@ -469,6 +474,7 @@ abstract public class Weapon extends KindOfWeapon {
 	}
 
 	public boolean hasEnchant(Class<?extends Enchantment> type, Char owner) {
+        if(owner.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune.class)==null&&inscribed!=null&&inscribed.getClass()==type)return true;
 		if (owner.buff(MagicImmune.class) != null) {
 			return false;
 		} else if (enchantment != null
@@ -541,7 +547,7 @@ abstract public class Weapon extends KindOfWeapon {
 		}
 
 		public static float genericProcChanceMultiplier( Char attacker ){
-			float multi = RingOfArcana.enchantPowerMultiplier(attacker);
+			float multi = RingOfArcana.enchantPowerMultiplier(attacker)*com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procStrength(attacker);
 			Berserk rage = attacker.buff(Berserk.class);
 			if (rage != null) {
 				multi = rage.enchantFactor(multi);

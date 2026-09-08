@@ -76,6 +76,7 @@ public class Necromancer extends Mob {
 
 	@Override
 	protected boolean act() {
+        if(buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Silenced.class)!=null){summoning=false;spend(TICK);return true;}
 		if (summoning && state != HUNTING){
 			summoning = false;
 			if (sprite instanceof NecromancerSprite) ((NecromancerSprite) sprite).cancelSummoning();

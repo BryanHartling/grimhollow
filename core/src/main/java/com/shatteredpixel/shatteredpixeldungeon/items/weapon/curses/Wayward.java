@@ -37,6 +37,7 @@ public class Wayward extends Weapon.Enchantment {
 	@Override
 	public int proc( Weapon weapon, Char attacker, Char defender, int damage ) {
 		float procChance = 1/4f * procChanceMultiplier(attacker);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(attacker,procChance);
 
 		if (attacker.buff(WaywardBuff.class) != null){
 			Buff.detach(attacker, WaywardBuff.class);

@@ -45,6 +45,7 @@ public class Corrupting extends Weapon.Enchantment {
 		// lvl 1 ~ 23%
 		// lvl 2 ~ 26%
 		float procChance = (level+5f)/(level+25f) * procChanceMultiplier(attacker);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(attacker,procChance);
 		if (damage >= defender.HP
 				&& Random.Float() < procChance
 				&& !defender.isImmune(Corruption.class)

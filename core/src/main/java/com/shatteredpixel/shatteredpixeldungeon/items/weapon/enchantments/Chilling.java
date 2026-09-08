@@ -42,6 +42,7 @@ public class Chilling extends Weapon.Enchantment {
 		// lvl 1 - 40%
 		// lvl 2 - 50%
 		float procChance = (level+1f)/(level+4f) * procChanceMultiplier(attacker);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(attacker,procChance);
 		if (Random.Float() < procChance) {
 
 			float powerMulti = Math.max(1f, procChance);

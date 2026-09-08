@@ -39,6 +39,7 @@ public class Corrosion extends Armor.Glyph {
 	public int proc(Armor armor, Char attacker, Char defender, int damage) {
 
 		float procChance = 1/10f * procChanceMultiplier(defender);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(defender,procChance);
 		if ( Random.Float() < procChance ) {
 			int pos = defender.pos;
 			for (int i : PathFinder.NEIGHBOURS9){

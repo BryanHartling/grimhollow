@@ -198,6 +198,7 @@ public enum Talent {
 	BEAMING_RAY(183, 4), LIFE_LINK(184, 4), STASIS(185, 4),
 
 	//Necromancer talents
+    KEEN_STUDY(248), STEADY_HAND(249), SHARPENED_SIGILS(250), FIELD_REPAIR(251), DUAL_INSCRIPTION(252), RESONANCE(253), WARDING_SIGILS(254), ATTUNEMENT(255), OVERLOAD(256), EFFICIENT_SIGILS(257, 3), DEEP_KNOWLEDGE(258, 3), MASTER_CRAFT(259, 3), LASTING_WORK(260, 3), WIDE_FIELD(261, 3), COUNTERWEIGHT(262, 3), SUSTAINED(263, 3), AMPLIFIED(264, 3), FEEDBACK(265, 3), WIDE_SANCTUARY(266, 3), CONSECRATED(267, 3), MOBILE(268, 3), CASCADE(269, 3), SALVAGE(270, 3), RECLAMATION(271, 3),
     GRAVE_HARVEST(224), BONE_MEAL(225), CORPSE_SENSE(226), NECROTIC_TOUCH(227), STURDY_BONES(228), DARK_PACT(229), SECOND_GRAVE(230), WARD_OF_BONE(231), NECROTIC_SIPHON(232), DEATHSPEAKERS_COMMAND(233, 3), GRAVE_WISDOM(234, 3), BONE_LEGION(235, 1), GRAVE_SPEECH(236, 3), LINGERING_HEX(237, 3), CURSED_GROUND(238, 3), WIDER_BLAST(239, 3), ROT(240, 3), SOUL_REFUND(241, 3), BLESSED_PACT(242, 3), BONE_SHELL(243, 3), RECLAIMED(244, 3), LASTING_CAGE(245, 3), JAGGED(246, 3), NECROMANCERS_KEY(247, 3),
 
 	//universal T4
@@ -711,6 +712,7 @@ public enum Talent {
 	}
 
 	public static void onPotionUsed( Hero hero, int cell, float factor ){
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.consume(hero);
 		if (hero.hasTalent(LIQUID_WILLPOWER)){
 			// 6.5/10% of max HP
 			int shieldToGive = Math.round( factor * hero.HT * (0.030f + 0.035f*hero.pointsInTalent(LIQUID_WILLPOWER)));
@@ -762,6 +764,7 @@ public enum Talent {
 	}
 
 	public static void onScrollUsed( Hero hero, int pos, float factor, Class<?extends Item> cls ){
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.consume(hero);
 		if (hero.hasTalent(INSCRIBED_POWER)){
 			// 2/3 empowered wand zaps
 			Buff.affect(hero, ScrollEmpower.class).reset((int) (factor * (1 + hero.pointsInTalent(INSCRIBED_POWER))));
@@ -862,6 +865,7 @@ public enum Talent {
 	}
 
 	public static void onItemCollected( Hero hero, Item item ){
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.collect(item);
 		if (hero.pointsInTalent(THIEFS_INTUITION) == 2){
 			if (item instanceof Ring) ((Ring) item).setKnown();
 		}
@@ -980,6 +984,7 @@ public enum Talent {
 		//tier 1
 		switch (cls){
 			case NECROMANCER: Collections.addAll(tierTalents, GRAVE_HARVEST, BONE_MEAL, CORPSE_SENSE, NECROTIC_TOUCH); break;
+            case ENCHANTER: Collections.addAll(tierTalents, KEEN_STUDY, STEADY_HAND, SHARPENED_SIGILS, FIELD_REPAIR); break;
 			case WARRIOR: default:
 				Collections.addAll(tierTalents, HEARTY_MEAL, VETERANS_INTUITION, PROVOKED_ANGER, IRON_WILL);
 				break;
@@ -1010,6 +1015,7 @@ public enum Talent {
 		//tier 2
 		switch (cls){
 			case NECROMANCER: Collections.addAll(tierTalents, STURDY_BONES, DARK_PACT, SECOND_GRAVE, WARD_OF_BONE, NECROTIC_SIPHON); break;
+            case ENCHANTER: Collections.addAll(tierTalents, DUAL_INSCRIPTION, RESONANCE, WARDING_SIGILS, ATTUNEMENT, OVERLOAD); break;
 			case WARRIOR: default:
 				Collections.addAll(tierTalents, IRON_STOMACH, LIQUID_WILLPOWER, RUNIC_TRANSFERENCE, LETHAL_MOMENTUM, IMPROVISED_PROJECTILES);
 				break;
@@ -1040,6 +1046,7 @@ public enum Talent {
 		//tier 3
 		switch (cls){
 			case NECROMANCER: Collections.addAll(tierTalents, DEATHSPEAKERS_COMMAND, GRAVE_WISDOM); break;
+            case ENCHANTER: Collections.addAll(tierTalents, EFFICIENT_SIGILS, DEEP_KNOWLEDGE); break;
 			case WARRIOR: default:
 				Collections.addAll(tierTalents, HOLD_FAST, STRONGMAN);
 				break;
@@ -1086,7 +1093,9 @@ public enum Talent {
 
 		//tier 3
 		switch (cls){
-			case DEATHSPEAKER: Collections.addAll(tierTalents, BONE_LEGION, GRAVE_SPEECH); break;
+			case ARTIFICER: Collections.addAll(tierTalents, MASTER_CRAFT, LASTING_WORK); break;
+            case SCRIVENER: Collections.addAll(tierTalents, WIDE_FIELD, COUNTERWEIGHT); break;
+            case DEATHSPEAKER: Collections.addAll(tierTalents, BONE_LEGION, GRAVE_SPEECH); break;
             case HEXWEAVER: Collections.addAll(tierTalents, LINGERING_HEX, CURSED_GROUND); break;
             case BERSERKER: default:
 				Collections.addAll(tierTalents, ENDLESS_RAGE, DEATHLESS_FURY, ENRAGED_CATALYST);

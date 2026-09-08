@@ -43,6 +43,7 @@ public class Lucky extends Weapon.Enchantment {
 		// lvl 1 ~ 12%
 		// lvl 2 ~ 14%
 		float procChance = (level+4f)/(level+40f) * procChanceMultiplier(attacker);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(attacker,procChance);
 		if (Random.Float() < procChance){
 
 			float powerMulti = Math.max(1f, procChance);

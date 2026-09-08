@@ -875,6 +875,7 @@ public abstract class Mob extends Char {
 	@Override
 	public void die( Object cause ) {
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.onDeath(this,cause);
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.onDeath(this,cause);
 
 		if (cause == Chasm.class){
 			//50% chance to round up, 50% to round down

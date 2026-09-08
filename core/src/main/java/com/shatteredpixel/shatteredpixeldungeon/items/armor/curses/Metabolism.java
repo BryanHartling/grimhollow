@@ -41,6 +41,7 @@ public class Metabolism extends Glyph {
 	public int proc( Armor armor, Char attacker, Char defender, int damage) {
 
 		float procChance = 1/6f * procChanceMultiplier(defender);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(defender,procChance);
 		if ( Random.Float() < procChance && defender instanceof Hero) {
 
 			//assumes using up 10% of starving, and healing of 1 hp per 10 turns;

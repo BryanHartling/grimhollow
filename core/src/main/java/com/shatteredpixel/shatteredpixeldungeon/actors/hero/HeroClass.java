@@ -90,7 +90,8 @@ public enum HeroClass {
 	HUNTRESS( HeroSubClass.SNIPER, HeroSubClass.WARDEN ),
 	DUELIST( HeroSubClass.CHAMPION, HeroSubClass.MONK ),
 	CLERIC( HeroSubClass.PRIEST, HeroSubClass.PALADIN ),
-	NECROMANCER(HeroSubClass.DEATHSPEAKER, HeroSubClass.HEXWEAVER);
+	NECROMANCER(HeroSubClass.DEATHSPEAKER, HeroSubClass.HEXWEAVER),
+    ENCHANTER(HeroSubClass.ARTIFICER, HeroSubClass.SCRIVENER);
 
 	private HeroSubClass[] subClasses;
 
@@ -120,6 +121,7 @@ public enum HeroClass {
 		switch (this) {
 			case NECROMANCER:
                 initNecromancer(hero); break;
+            case ENCHANTER: initEnchanter(hero);break;
 			case WARRIOR:
 				initWarrior( hero );
 				break;
@@ -156,6 +158,14 @@ public enum HeroClass {
 
 	}
 
+    private static void initEnchanter(Hero hero){
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.affect(hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.class);
+        (hero.belongings.weapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RunedBaton()).identify();
+        com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush item=new com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush();
+        (hero.belongings.artifact=item).identify();item.activate(hero);
+        new Food().collect();new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment().identify().collect();new PotionOfHealing().collect();
+        Dungeon.quickslot.setSlot(0,item);
+    }
 	private static void initNecromancer(Hero hero) {
         (hero.belongings.weapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneRod()).identify();
         com.shatteredpixel.shatteredpixeldungeon.items.Phylactery item=new com.shatteredpixel.shatteredpixeldungeon.items.Phylactery();
@@ -180,6 +190,7 @@ public enum HeroClass {
 			case CLERIC:
 				return Badges.Badge.MASTERY_CLERIC;
             case NECROMANCER: return Badges.Badge.MASTERY_NECROMANCER;
+            case ENCHANTER: return Badges.Badge.MASTERY_ENCHANTER;
 		}
 		return null;
 	}
@@ -290,6 +301,7 @@ public enum HeroClass {
 	}
 
 	public ArmorAbility[] armorAbilities(){
+        if(this==ENCHANTER)return new ArmorAbility[]{new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Overcharge(),new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Sanctuary(),new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Unmaking()};
         if(this==NECROMANCER)return new ArmorAbility[]{new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.necromancer.CorpseExplosion(),new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.necromancer.DeathPact(),new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.necromancer.BonePrison()};
 		switch (this) {
 			case WARRIOR: default:
@@ -308,6 +320,7 @@ public enum HeroClass {
 	}
 
 	public String spritesheet() {
+        if(this==ENCHANTER)return "sprites/hero_enchanter.png";
         if(this==NECROMANCER)return "sprites/hero_necromancer.png";
 		switch (this) {
 			case WARRIOR: default:
@@ -326,6 +339,7 @@ public enum HeroClass {
 	}
 
 	public String splashArt(){
+        if(this==ENCHANTER)return "interfaces/title_grimhollow.png";
         if(this==NECROMANCER)return "interfaces/title_grimhollow.png";
 		switch (this) {
 			case WARRIOR: default:

@@ -59,6 +59,7 @@ public class SmokeRun {
                         Dungeon.switchLevel(level,-1);
                         if(!Dungeon.level.insideMap(Dungeon.hero.pos)) throw new AssertionError("Invalid hero placement");
                         if(depth==1 && Dungeon.hero.heroClass==HeroClass.NECROMANCER)necromancerScenario();
+                        if(depth==1 && Dungeon.hero.heroClass==HeroClass.ENCHANTER)enchanterScenario();
                         Dungeon.saveAll();
                         if(depth==6) {
                             Dungeon.loadGame(99);
@@ -197,5 +198,46 @@ public class SmokeRun {
         for(int cell:walls)check(Dungeon.level.map[cell]!=Terrain.BONE_WALL,"Bone Prison reverts on load");
         check(BoneWalls.prison(h.pos+3,10,1),"Exit prison");Level previous=Dungeon.level;Dungeon.newLevel();check(previous.boneOriginal.keyArray().length==0,"Bone Prison reverts on level exit");Dungeon.switchLevel(previous,h.pos);
         System.out.println("NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS");
+    }
+
+    private static void enchanterScenario() throws Exception {
+        Hero h=Dungeon.hero;SigilBrush brush=h.belongings.getItem(SigilBrush.class);
+        check(h.HT==20&&h.STR==10&&brush!=null&&brush.charges()==2,"Enchanter base kit");
+        check(h.belongings.weapon instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RunedBaton&&h.belongings.getItem(Food.class).quantity()==2,"Baton and rations");
+        check(h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment.class).isIdentified()&&h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing.class)!=null,"Enchanter consumables");
+        clearArena();Rat enemy=target(h.pos+1);enemy.sprite.visible=false;
+        check(brush.cast(h,"hex",enemy.pos,null,null)&&brush.charges()==1&&enemy.buff(DegradedGear.class)!=null&&enemy.buff(Hex.class)!=null,"Hex Sigil");
+        for(int i=0;i<37;i++)h.buff(ClassSpellItem.Charger.class).act();check(brush.charges()==1,"No early Brush charge");h.buff(ClassSpellItem.Charger.class).act();check(brush.charges()==2,"Brush level-one cadence");
+        h.lvl=21;h.HT=h.HP=120;h.subClass=HeroSubClass.ARTIFICER;Talent.initSubclassTalents(h);maxTalents();
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon w=(com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)h.belongings.weapon;
+        w.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic());w.identify();
+        EnchanterMagic.learn(w);check(EnchanterMagic.state().choices(false).contains(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.class),"Identified-run inscription knowledge");
+        brush.gainCharge(10);check(brush.cast(h,"inscribe",h.pos,w,com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.class),"Inscribe selected known enchantment");
+        check(w.inscribed!=null&&w.enchantment!=null&&w.inscriptionTurns==50,"Temporary and permanent sigils coexist; Steady Hand");
+        brush.gainCharge(10);check(brush.cast(h,"reinforce",h.pos,w,null)&&w.buffedLvl()==w.level()+1&&w.reinforceFlat==3,"Reinforce and Master Craft");
+        Class<?> old=w.enchantment.getClass();brush.gainCharge(10);check(brush.cast(h,"transmute",h.pos,w,null)&&w.enchantment.getClass()!=old&&Arrays.asList(com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon.Enchantment.common).contains(w.enchantment.getClass()),"Transmute different same-rarity enchantment");
+        // Proc both sigils through the real weapon path, using Kinetic to avoid GL-only visual effects in headless mode.
+        w.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic());((com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RunedBaton)w).floorEnchant=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic();
+        w.proc(h,enemy,5);check(h.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.KineticTracker.class)!=null,"Inscription proc hook");
+        EnchanterMagic magic=EnchanterMagic.state();for(int i=0;i<4;i++)magic.act();check(h.buff(Barkskin.class)!=null,"Warding Sigils");
+        int turns=w.inscriptionTurns;Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);h=Dungeon.hero;h.sprite=new HeroSprite();brush=h.belongings.getItem(SigilBrush.class);w=(com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)h.belongings.weapon;
+        check(w.inscribed!=null&&w.inscriptionTurns==turns&&w.reinforceTurns>0&&w.reinforceFlat==3,"Inscription and Reinforce save/load");
+        clearArena();enemy=target(h.pos+1);
+        for(int i=0;i<50;i++)EnchanterMagic.state().act();check(w.inscribed==null&&w.reinforceTurns==0&&w.buffedLvl()==w.level(),"Temporary effects expire");
+        h.subClass=HeroSubClass.SCRIVENER;h.talents.clear();Talent.initClassTalents(h);Talent.initSubclassTalents(h);maxTalents();
+        brush.gainCharge(10);check(brush.cast(h,"sanctify",h.pos,null,null)&&h.buff(Bless.class)!=null&&h.buff(Haste.class)!=null,"Sanctify");
+        Buff.prolong(enemy,Bless.class,10);brush.gainCharge(10);check(brush.cast(h,"nullify",enemy.pos,null,null)&&enemy.buff(Bless.class)==null&&enemy.buff(Silenced.class)!=null,"Nullify and Silence");
+        brush.gainCharge(10);check(brush.cast(h,"fracture",enemy.pos,null,null)&&EnchanterMagic.armorRoll(enemy)==0,"Fracture");
+        ClassArmor armor=ClassArmor.upgrade(h,new ClothArmor());
+        h.armorAbility=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Overcharge();Talent.initArmorTalents(h);maxTalents();armor.charge=100;((com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Overcharge)h.armorAbility).activate(armor,h,h.pos);
+        check(h.buff(Overcharged.class)!=null&&EnchanterMagic.procChance(h,.2f)==1.75f,"Overcharge forces procs with Amplified strength");
+        h.armorAbility=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Sanctuary();h.talents.get(3).clear();Talent.initArmorTalents(h);maxTalents();armor.charge=100;h.HP=60;
+        ((com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Sanctuary)h.armorAbility).activate(armor,h,h.pos);
+        com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SanctuaryZone zone=(com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SanctuaryZone)Dungeon.level.blobs.get(com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SanctuaryZone.class);zone.act();zone.act();check(h.HP==61&&enemy.buff(Slow.class)!=null&&enemy.buff(Corrosion.class)!=null,"Sanctuary healing and enemy effects");
+        h.armorAbility=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Unmaking();h.talents.get(3).clear();Talent.initArmorTalents(h);maxTalents();armor.charge=100;
+        ((com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Unmaking)h.armorAbility).activate(armor,h,enemy.pos);
+        check(enemy.buff(Unmade.class)!=null&&enemy.buff(Vulnerable.class)!=null&&enemy.buff(Cripple.class)!=null&&h.HP>61,"Unmaking and Reclamation");
+        enemy.damage(enemy.HP,h);check(brush.charges()>0,"Salvage hook");
+        System.out.println("ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS");
     }
 }

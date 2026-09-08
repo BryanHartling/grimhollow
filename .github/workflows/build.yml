@@ -32,7 +32,7 @@ jobs:
         run: ./gradlew core:test -PdesktopOnly=true --console=plain
       - name: Offscreen geometry acceptance 24-26
         if: ${{ !cancelled() && runner.os == 'Linux' }}
-        run: xvfb-run -a java -Dgrimhollow.geometryTests=true -jar desktop/build/libs/desktop-0.2.1.jar --smoke-sewers
+        run: xvfb-run -a java -Dgrimhollow.geometryTests=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
@@ -99,5 +99,26 @@ jobs:
         if: always()
         with:
           name: grimhollow-necromancer-logs
+          path: core/build/reports/smoke/
+          retention-days: 14
+
+  enchanter-smoke:
+    runs-on: ubuntu-latest
+    needs: desktop
+    if: ${{ !cancelled() }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Enchanter, ten seeds, class features and floor 6
+        run: ./gradlew core:smokeRun -PsmokeClass=ENCHANTER -PdesktopOnly=true --no-daemon --console=plain
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: grimhollow-enchanter-logs
           path: core/build/reports/smoke/
           retention-days: 14

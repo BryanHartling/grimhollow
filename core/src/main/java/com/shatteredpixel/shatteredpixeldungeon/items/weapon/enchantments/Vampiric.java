@@ -42,6 +42,7 @@ public class Vampiric extends Weapon.Enchantment {
 		float healChance = 0.05f + .25f*missingPercent;
 
 		healChance *= procChanceMultiplier(attacker);
+		healChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(attacker,healChance);
 		
 		if (Random.Float() < healChance
 				&& attacker.alignment != defender.alignment

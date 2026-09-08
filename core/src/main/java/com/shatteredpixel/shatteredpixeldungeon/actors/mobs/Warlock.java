@@ -78,11 +78,13 @@ public class Warlock extends Mob implements Callback {
 	
 	@Override
 	protected boolean canAttack( Char enemy ) {
+        if(buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Silenced.class)!=null)return Dungeon.level.adjacent(pos,enemy.pos);
 		return super.canAttack(enemy)
 				|| new Ballistica( pos, enemy.pos, Ballistica.MAGIC_BOLT).collisionPos == enemy.pos;
 	}
 	
 	protected boolean doAttack( Char enemy ) {
+        if(buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Silenced.class)!=null)return super.doAttack(enemy);
 
 		if (Dungeon.level.adjacent( pos, enemy.pos )
 				|| new Ballistica( pos, enemy.pos, Ballistica.MAGIC_BOLT).collisionPos != enemy.pos) {

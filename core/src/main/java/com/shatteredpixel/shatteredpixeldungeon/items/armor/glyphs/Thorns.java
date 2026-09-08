@@ -41,6 +41,7 @@ public class Thorns extends Armor.Glyph {
 		// lvl 1 - 23.1%
 		// lvl 2 - 28.5%
 		float procChance = (level+2f)/(level+12f) * procChanceMultiplier(defender);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(defender,procChance);
 		if ( attacker.alignment != defender.alignment && Random.Float() < procChance ) {
 
 			float powerMulti = Math.max(1f, procChance);

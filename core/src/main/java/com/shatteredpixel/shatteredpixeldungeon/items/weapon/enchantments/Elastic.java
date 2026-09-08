@@ -42,6 +42,7 @@ public class Elastic extends Weapon.Enchantment {
 		// lvl 1 - 33%
 		// lvl 2 - 43%
 		float procChance = (level+1f)/(level+5f) * procChanceMultiplier(attacker);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(attacker,procChance);
 		if (Random.Float() < procChance) {
 
 			float powerMulti = Math.max(1f, procChance);

@@ -2,7 +2,7 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), based on **v3.3.8**, commit `7b8b845a76fe76c6b7c031ae9e570852411f56db`. Upstream history and Java packages are preserved.
 
-**Stages 1, 2 and 2.5 complete.** Seven heroes are playable, including the Necromancer with Deathspeaker and Hexweaver subclasses, talents and three armor abilities. Enchanter, Psychic, stage 5 art coverage and section 9 content remain pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.3 specification](GDD-one-shot-build-spec.md).
+**Stages 1, 2, 2.5 and 3 complete.** Eight heroes are playable, including the Necromancer with Deathspeaker and Hexweaver subclasses, talents and three armor abilities. Psychic, stage 5 art coverage and section 9 content remain pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.3 specification](GDD-one-shot-build-spec.md).
 
 ## Build on Windows
 
@@ -18,7 +18,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true
-java -jar desktop\build\libs\desktop-0.2.1.jar
+java -jar desktop\build\libs\desktop-0.3.0-enchanter.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.
@@ -80,3 +80,5 @@ Run the class-specific gate with `gradlew.bat core:smokeRun -PsmokeClass=NECROMA
 Phylactery starts with one charge and restores a minimum of one on first arrival at each floor. Only spending spell charges levels it; kills replenish charges. Raise Dead offers Skeleton, Wraith (artifact level 1), Ghoul (3), and Deathspeaker Revenant (6).
 
 Rendering tests 24–26: run the desktop jar with Java option -Dgrimhollow.geometryTests=true and argument --smoke-sewers. The existing hidden OpenGL runner checks all sprite types and both item atlases using an offscreen framebuffer.
+
+Enchanter: use the Sigil Brush to inscribe known enchantments or glyphs, weaken enemies, and cast subclass spells. The Artificer rerolls and reinforces gear; the Scrivener blesses allies, silences casters, and fractures armor. Class gate: gradlew.bat core:smokeRun -PsmokeClass=ENCHANTER -PdesktopOnly=true --no-daemon.

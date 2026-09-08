@@ -383,7 +383,7 @@ public abstract class Char extends Actor {
 
 		} else if (hit( this, enemy, accMulti, false )) {
 			
-			int dr = Math.round(enemy.drRoll() * AscensionChallenge.statModifier(enemy));
+			int dr = Math.round(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.armorRoll(enemy) * AscensionChallenge.statModifier(enemy));
             if(this instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroWraith)dr/=2;
 			
 			if (this instanceof Hero){
@@ -629,6 +629,7 @@ public abstract class Char extends Actor {
 
 	public static boolean hit( Char attacker, Char defender, float accMulti, boolean magic ) {
 		float acuStat = attacker.attackSkill( defender );
+        if(attacker.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.DegradedGear.class)!=null)acuStat*=.8f;
 		float defStat = defender.defenseSkill( attacker );
 
 		if (defender instanceof Hero && ((Hero) defender).damageInterrupt){
@@ -656,7 +657,7 @@ public abstract class Char extends Actor {
 
 		float acuRoll = Random.Float( acuStat );
 		if (attacker.buff(Bless.class) != null) acuRoll *= 1.25f;
-		if (attacker.buff(  Hex.class) != null) acuRoll *= 0.8f;
+		if (attacker.buff(  Hex.class) != null) acuRoll *= com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SanctuaryZone.contains(attacker.pos) ? .7f : .8f;
 		if (attacker.buff( Daze.class) != null) acuRoll *= 0.5f;
 		for (ChampionEnemy buff : attacker.buffs(ChampionEnemy.class)){
 			acuRoll *= buff.evasionAndAccuracyFactor();
@@ -962,6 +963,7 @@ public abstract class Char extends Actor {
 
 			float finalChance = buff(Grim.GrimTracker.class).maxChance;
 			finalChance *= (float)Math.pow( ((HT - HP) / (float)HT), 2);
+			if(buff(Grim.GrimTracker.class).forced)finalChance=1;
 
 			if (Random.Float() < finalChance) {
 				int extraDmg = Math.round(HP*resist(Grim.class));

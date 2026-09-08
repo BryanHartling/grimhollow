@@ -39,6 +39,7 @@ public class Displacing extends Weapon.Enchantment {
 	public int proc(Weapon weapon, Char attacker, Char defender, int damage ) {
 
 		float procChance = 1/12f * procChanceMultiplier(attacker);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(attacker,procChance);
 		if (Random.Float() < procChance && !defender.properties().contains(Char.Property.IMMOVABLE)){
 
 			int oldpos = defender.pos;

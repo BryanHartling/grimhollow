@@ -43,6 +43,7 @@ public class Entanglement extends Glyph {
 
 		final int level = Math.max( 0, armor.buffedLvl() );
 		float procChance = 1/4f * procChanceMultiplier(defender);
+        procChance=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procChance(defender,procChance);
 
 		if (Random.Float() < procChance) {
 

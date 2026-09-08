@@ -49,6 +49,7 @@ public class Grim extends Weapon.Enchantment {
 		//we defer logic using an actor here so we can know the true final damage
 		//see Char.damage
 		Buff.affect(defender, GrimTracker.class).maxChance = maxChance;
+		defender.buff(GrimTracker.class).forced = attacker.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Overcharged.class)!=null;
 
 		if (defender.buff(GrimTracker.class) != null
 				&& attacker instanceof Hero
@@ -71,6 +72,7 @@ public class Grim extends Weapon.Enchantment {
 		}
 
 		public float maxChance;
+		public boolean forced;
 		public boolean qualifiesForBadge;
 
 		@Override

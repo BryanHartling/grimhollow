@@ -774,3 +774,68 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `verification/render-poc.png` — Pipeline-generated rendered POC output or requested verification image.
 
 - `tools/artgen/pngencode.py` - Serialize PNGs and embedded ICO/ICNS PNGs with fixed Sub filtering and standard-library Huffman-only compression; Linux CI exposed 55 byte differences with Pillow encoding despite the local rebuild passing.
+
+## v0.6 stage 5.5 reference board
+
+- `GDD-one-shot-build-spec.md` — Adopt v0.6 and its human-review decision before gathering references.
+- `KNOWN_ISSUES.md` — Preserve checkpoint failures and record the stage 5.5 review boundary and source-fit limitations.
+- `verification/art-validation.log` — Append the actual test 38 result without extending the verification harness.
+- `references/references.md` — Preserve original visual targets, enforce CC0/public domain, add requested rows 34-45 with neutral 1.0 relative weights where unspecified, and retain actual PNG formats for rows 14 and 33.
+- `references/SOURCES.md` — Record source/license/date, exact download and SHA-256 for every image/map, plus a nine-screenshot hash-only exclusion list.
+- `references/index.html` — Provide an offline review gallery with source links, companion maps and honest fit notes.
+- `references/ref-01-catacomb-corridor.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-02-catacomb-arch.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-03-catacomb-wide.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-04-sewer-tunnel-brick.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-05-lighting-split.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-05-sewer-tunnel-vault.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-06-brick-culvert.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-07-crypt-vault.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-08-crypt-cobweb.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-09-crypt-treasury.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-10-chains-decay.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-11-chains-weathered.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-12-chains-stone.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-13-mine-tunnel.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-14-mine-timber-shadow.png` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-15-mine-shaft.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-16-cathedral-ruin.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-17-cathedral-ruin-arches.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-18-cathedral-dark.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-19-displacement-1k.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-19-normal-gl-1k.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-19-roughness-1k.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-19-wet-stone-floor.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-20-displacement-1k.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-20-moss-texture.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-20-normal-gl-1k.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-20-roughness-1k.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-21-displacement-1k.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-21-mossy-cobble-seamless.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-21-normal-gl-1k.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-21-roughness-1k.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-22-torch-flame.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-23-torch-flame-2.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-24-torch-ancient.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-25-armor-museum.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-26-armor-worcester.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-27-armor-display.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-28-hooded-monk-statue.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-29-monk-statue-render.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-30-seated-hooded-statue.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-31-illuminated-initial.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-32-ornate-letter.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-33-letter-template.png` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-34-smoke-wisps.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-35-reeds-tall-grass.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-36-puddle-ripple.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-37-scorched-stone.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-38-dried-blood-value.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-39-human-skeleton.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-40-rat-dark-fur.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-41-crab-top-view.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-42-carrion-crow.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-43-ritual-dagger.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-44-antique-glass-vial.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- `references/ref-45-red-wax-seal.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
+- Reference equivalents are selected for visual qualities, not exact historical locations; source-side previews and unmodified archive members avoid inventing art or changing targets.

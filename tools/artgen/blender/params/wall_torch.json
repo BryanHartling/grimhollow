@@ -8,8 +8,8 @@
   "chip": 0.012,
   "bevel": 0.035,
   "moss_density": 0.25,
-  "grain_frequency": 0.8,
-  "bump_depth": 0.055,
+  "grain_frequency": 1.1,
+  "bump_depth": 0.025,
   "ao_distance": 0.08,
   "stone_roughness": 0.25,
   "water_roughness": 0.19,
@@ -44,5 +44,5 @@
   "core_emission": 3.25,
   "flame_edge": "6C2A18",
   "separate_emission_curve": true,
-  "inner_emission": 1.2
+  "inner_emission": 1.35
 }

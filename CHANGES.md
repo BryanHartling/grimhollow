@@ -882,3 +882,131 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - The existing three-tile wall-light radius is retained per the presentation-only constraint; the board's two-tile falloff target remains a recorded miss rather than changing game lighting to inflate a score.
 - Water neighbours share one displaced mesh instead of nine disconnected patches, eliminating mismatched boundary normals; only material/geometry construction changes, not camera framing.
 - Flame scoring excludes the wooden holder, and summary references select the source photograph/albedo rather than accidentally choosing a companion displacement map.
+- `.github/workflows/build.yml` — Run the requested Sewers test 39 from committed caches on both desktop runners, even when the existing full-inventory gate fails; no Blender dependency or weakened check.
+- Upright partial door atlas components fit the complete gate into their existing mask bounds; sampling only its dark centre lost jamb/strap contrast in all three sideways states.
+- The torch surface exposure excludes its emissive flame; all non-neutral accent pixels count toward the hue-budget check, and the original comparison threshold is unchanged.
+- `core/src/main/assets/environment/tiles_sewers.png` — Regenerated Sewers atlas or water texture from selected caches and existing layout masks.
+- `core/src/main/assets/environment/walls_sewers.png` — Regenerated Sewers atlas or water texture from selected caches and existing layout masks.
+- `core/src/main/assets/environment/water0.png` — Regenerated Sewers atlas or water texture from selected caches and existing layout masks.
+- `tools/artgen/blender/params/decor.json` — Selected parameters for this Sewers class; full earlier parameter sets are retained in its round records.
+- `tools/artgen/blender/params/door.json` — Selected parameters for this Sewers class; full earlier parameter sets are retained in its round records.
+- `tools/artgen/blender/params/floor.json` — Selected parameters for this Sewers class; full earlier parameter sets are retained in its round records.
+- `tools/artgen/blender/params/wall.json` — Selected parameters for this Sewers class; full earlier parameter sets are retained in its round records.
+- `tools/artgen/blender/params/wall_torch.json` — Selected parameters for this Sewers class; full earlier parameter sets are retained in its round records.
+- `tools/artgen/blender/params/water.json` — Selected parameters for this Sewers class; full earlier parameter sets are retained in its round records.
+- `tools/artgen/render_cache/tiles/decor_0.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/decor_1.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/decor_2.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/door_0.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/door_1.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/door_2.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/door_open_0.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/door_open_1.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/door_open_2.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/floor_0.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/floor_1.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/floor_2.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/wall_0.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/wall_1.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/wall_2.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/wall_torch_0.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/wall_torch_1.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/wall_torch_2.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/water_0.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/water_1.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `tools/artgen/render_cache/tiles/water_2.png` — Selected Blender environment/prop render-cache frame; reproduced within the required pHash tolerance.
+- `verification/apk-identity.log` — Append actual stage-5.6 command evidence to the existing verification log.
+- `verification/art-validation.log` — Append actual stage-5.6 command evidence to the existing verification log.
+- `verification/clean-build.log` — Append actual stage-5.6 command evidence to the existing verification log.
+- `verification/iteration/decor/procedural.png` — Reproducible procedural baseline preserved for the required comparison.
+- `verification/iteration/decor/round-00.png` — Historical POC output preserved for the required comparison; decor/torch show the former atlas frame.
+- `verification/iteration/decor/round-01.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/decor/round-01.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/decor/round-01.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/decor/round-02.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/decor/round-02.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/decor/round-02.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/decor/round-03.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/decor/round-03.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/decor/round-03.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/door/procedural.png` — Reproducible procedural baseline preserved for the required comparison.
+- `verification/iteration/door/round-00.png` — Historical POC output preserved for the required comparison; decor/torch show the former atlas frame.
+- `verification/iteration/door/round-01.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/door/round-01.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/door/round-01.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/door/round-02.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/door/round-02.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/door/round-02.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/door/round-03.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/door/round-03.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/door/round-03.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/floor/procedural.png` — Reproducible procedural baseline preserved for the required comparison.
+- `verification/iteration/floor/round-00.png` — Historical POC output preserved for the required comparison; decor/torch show the former atlas frame.
+- `verification/iteration/floor/round-01.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/floor/round-01.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/floor/round-01.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/floor/round-02.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/floor/round-02.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/floor/round-02.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/sewers-ingame.png` — Actual lit OpenGL frame at default zoom in generated seed 417; water, bridge, doors, rubble and one wall torch; no terrain edits.
+- `verification/iteration/summary.png` — Four-column 4x reference/procedural/POC/best comparison with score histories.
+- `verification/iteration/wall/procedural.png` — Reproducible procedural baseline preserved for the required comparison.
+- `verification/iteration/wall/round-00.png` — Historical POC output preserved for the required comparison; decor/torch show the former atlas frame.
+- `verification/iteration/wall/round-01.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall/round-01.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall/round-01.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall/round-02.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall/round-02.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall/round-02.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall_torch/procedural.png` — Reproducible procedural baseline preserved for the required comparison.
+- `verification/iteration/wall_torch/round-00.png` — Historical POC output preserved for the required comparison; decor/torch show the former atlas frame.
+- `verification/iteration/wall_torch/round-01.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall_torch/round-01.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall_torch/round-01.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall_torch/round-02.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall_torch/round-02.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall_torch/round-02.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall_torch/round-03.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall_torch/round-03.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall_torch/round-03.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall_torch/round-04.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall_torch/round-04.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall_torch/round-04.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall_torch/round-05.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall_torch/round-05.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall_torch/round-05.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall_torch/round-06.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall_torch/round-06.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall_torch/round-06.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall_torch/round-07.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall_torch/round-07.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall_torch/round-07.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall_torch/round-08.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall_torch/round-08.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall_torch/round-08.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall_torch/round-09.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall_torch/round-09.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall_torch/round-09.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall_torch/round-10.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall_torch/round-10.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall_torch/round-10.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall_torch/round-11.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall_torch/round-11.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall_torch/round-11.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/wall_torch/round-12.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/wall_torch/round-12.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/wall_torch/round-12.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/water/procedural.png` — Reproducible procedural baseline preserved for the required comparison.
+- `verification/iteration/water/round-00.png` — Historical POC output preserved for the required comparison; decor/torch show the former atlas frame.
+- `verification/iteration/water/round-01.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/water/round-01.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/water/round-01.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/water/round-02.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/water/round-02.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/water/round-02.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/iteration/water/round-03.json` — Measured targets, relative weights, parameters, cache hashes and validator/seam/global results for this round.
+- `verification/iteration/water/round-03.md` — At most three lines of critique after viewing the render beside its top-weighted reference.
+- `verification/iteration/water/round-03.png` — Pipeline-processed render for the corresponding recorded iteration round.
+- `verification/junit-summary.log` — Append actual stage-5.6 command evidence to the existing verification log.
+- `verification/new-class-smoke.log` — Append actual stage-5.6 command evidence to the existing verification log.
+- `verification/reproducibility.log` — Append actual stage-5.6 command evidence to the existing verification log.

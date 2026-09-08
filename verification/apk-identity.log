@@ -2,3 +2,9 @@
 package: name='com.grimhollow.dungeon' versionCode='896' versionName='0.1.0-INDEV' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
 application-label:'Grimhollow'
 
+
+package: name='com.grimhollow.dungeon' versionCode='902' versionName='0.4.2-INDEV' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+sdkVersion:'21'
+targetSdkVersion:'36'
+application-label:'Grimhollow'
+

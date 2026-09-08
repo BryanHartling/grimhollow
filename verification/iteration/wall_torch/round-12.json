@@ -1,0 +1,234 @@
+{
+  "asset_class": "wall_torch",
+  "round": 12,
+  "parameters": {
+    "seed": 5706,
+    "count": 3,
+    "relief": 0.07,
+    "displacement": 0.055,
+    "wall_height": 0.6,
+    "mortar_width": 0.025,
+    "chip": 0.012,
+    "bevel": 0.035,
+    "moss_density": 0.25,
+    "grain_frequency": 1.1,
+    "bump_depth": 0.025,
+    "ao_distance": 0.08,
+    "stone_roughness": 0.25,
+    "water_roughness": 0.19,
+    "specular": 0.12,
+    "water_depth": 0.025,
+    "decor_density": 7,
+    "light_strength": 1.15,
+    "light_angle": -5,
+    "stone_color": "75664F",
+    "moss_color": "4C5939",
+    "water_color": "3E4C35",
+    "tone_curve": [
+      0.025,
+      0.13,
+      0.27,
+      0.4
+    ],
+    "tone_breaks": [
+      0.25,
+      0.6,
+      0.89
+    ],
+    "tone_gamma": 1.2,
+    "light_steps": [
+      0,
+      0.2,
+      0.4,
+      0.8
+    ],
+    "grain_min": 0.12,
+    "grain_max": 1.8,
+    "core_emission": 3.25,
+    "flame_edge": "6C2A18",
+    "separate_emission_curve": true,
+    "inner_emission": 1.35
+  },
+  "references": [
+    {
+      "reference": 22,
+      "weight": 1,
+      "targets": [
+        {
+          "target": "flame has >= .90 luminance core",
+          "value": 1.0,
+          "minimum": 1,
+          "maximum": null,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "core fraction of flame",
+          "value": 0.019230769230769232,
+          "minimum": null,
+          "maximum": 0.02,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "flame edge hue",
+          "value": 12.857142857142856,
+          "minimum": 10,
+          "maximum": 20,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 1.0
+    },
+    {
+      "reference": 24,
+      "weight": 0.7,
+      "targets": [
+        {
+          "target": "wall light residual at two tiles",
+          "value": 0.05072316538005924,
+          "minimum": null,
+          "maximum": 0.00392156862745098,
+          "pass_": false,
+          "score": 0
+        }
+      ],
+      "score": 0.0
+    },
+    {
+      "reference": 5,
+      "weight": 0.8,
+      "targets": [
+        {
+          "target": "near warm hue",
+          "value": 37.94295489256217,
+          "minimum": 25,
+          "maximum": 40,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "far cool hue",
+          "value": 42.79432933646294,
+          "minimum": 200,
+          "maximum": 230,
+          "pass_": false,
+          "score": 0.2139716466823147
+        }
+      ],
+      "score": 0.6069858233411574
+    }
+  ],
+  "composite": 0.5942354634691703,
+  "global_targets": {
+    "region_mean_after_lighting": 0.12252578639481092,
+    "region_mean_pass": true,
+    "dominant_green_brown_fraction": 0.9994021045918368,
+    "hue_budget_pass": true,
+    "accent_families": 1,
+    "accent_bins": [
+      0.0005978954081632653,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "readability": "N/A: no characters or mobs are iterated; full-game test 30 remains NOT RUN",
+    "composition": "7x7 fixed terrain sample; actual ambient/hero/torch equation, no fog or UI",
+    "ambient": [
+      0.5,
+      0.55,
+      0.45
+    ]
+  },
+  "variants": [
+    {
+      "variant": 0,
+      "metrics": {
+        "mean": 0.1859108319914117,
+        "std": 0.21211271335338713,
+        "dark_fraction": 0.6280193236714976,
+        "hue": 27.502907205509754,
+        "saturation": 0.14285714285714285,
+        "highlights_075": 0.0322061191626409,
+        "core_090": 0.00644122383252818,
+        "mortar_contrast": 0.348118431372549,
+        "palette_max_delta": 11.491874867303105,
+        "opaque_pixels": 621
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0,
+        "wrap_y": 0.0,
+        "interior_x_limit": 0.06652267156862743,
+        "interior_y_limit": 0.026043198529411754,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 1,
+      "metrics": {
+        "mean": 0.1859108319914117,
+        "std": 0.21211271335338713,
+        "dark_fraction": 0.6280193236714976,
+        "hue": 27.502907205509754,
+        "saturation": 0.14285714285714285,
+        "highlights_075": 0.0322061191626409,
+        "core_090": 0.00644122383252818,
+        "mortar_contrast": 0.348118431372549,
+        "palette_max_delta": 11.491874867303105,
+        "opaque_pixels": 621
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0,
+        "wrap_y": 0.0,
+        "interior_x_limit": 0.06652267156862743,
+        "interior_y_limit": 0.026043198529411754,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 2,
+      "metrics": {
+        "mean": 0.1859108319914117,
+        "std": 0.21211271335338713,
+        "dark_fraction": 0.6280193236714976,
+        "hue": 27.502907205509754,
+        "saturation": 0.14285714285714285,
+        "highlights_075": 0.0322061191626409,
+        "core_090": 0.00644122383252818,
+        "mortar_contrast": 0.348118431372549,
+        "palette_max_delta": 11.491874867303105,
+        "opaque_pixels": 621
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0,
+        "wrap_y": 0.0,
+        "interior_x_limit": 0.06652267156862743,
+        "interior_y_limit": 0.026043198529411754,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    }
+  ],
+  "passing": true,
+  "converged": false,
+  "cache_sha256": {
+    "tiles/wall_torch_0.png": "27432d03fcc96f1091f3583f68abe33f937be0cb6fe484ff8c3ff047e157419b",
+    "tiles/wall_torch_1.png": "48a2868bff40efe93563f752b98fc8bc205d6a8b076b44c6c46140a72c6cf115",
+    "tiles/wall_torch_2.png": "90db0cdad752982bcde20848fd9ed90bda3902cec0ba62933433e653f0b86767"
+  },
+  "reference_board_sha256": "60b32e4d79fce004e304853bfa926b135cba355ad307554daac0337ed6e0cf57"
+}

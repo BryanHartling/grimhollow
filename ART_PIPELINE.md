@@ -77,3 +77,11 @@ It selects an actual generated WaterBridgeRoom with water, a traversable bridge,
 rubble and one decorative wall source, and changes no terrain cells. The captured frame
 uses dynamic lighting and default zoom; settings are restored. The result is
 `verification/iteration/sewers-ingame.png`. Enhanced animated effects remain stage 7.
+
+Selected review rounds: floor 02, wall 02, water 03, door 03, decor 03, wall torch 12.
+The first five exceed 0.85; the torch ends at the prescribed round limit with a valid
+0.594 composite and explicit lighting-target misses. Test 39 checks current shipped
+variants, including the open-door state, against the selected records. The final atlas
+check also validates the masked component frames. A tied score selects the latest valid
+round. The generated review room is seed 417, bounds (1,15)-(10,22), with 15 water cells,
+two doors, two rubble tiles and one wall torch; its terrain is not repainted.

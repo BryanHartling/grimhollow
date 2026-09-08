@@ -110,6 +110,15 @@ def apply_tiles(spec,base):
         elif kind=='wall_torch':
             material=tile('wall',variant).copy();material.alpha_composite(tile('wall_torch',variant))
         else:material=tile(kind,variant).copy()
+        bounds=original.getbbox()
+        if kind.startswith('door') and bounds:
+            left,top,right,bottom=bounds
+            # Upright partial door components use a compact projection of the
+            # whole gate. Cropping its dark centre discarded jamb/strap contrast.
+            # Horizontal overhangs continue to sample their original strip.
+            if bottom-top>right-left:
+                component=material.resize((right-left,bottom-top),Image.Resampling.NEAREST)
+                material=Image.new('RGBA',(64,64));material.paste(component,(left,top))
         material.putalpha(original.getchannel('A'));output.paste(material,(x,y))
     return output
 

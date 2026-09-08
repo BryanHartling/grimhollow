@@ -26,6 +26,9 @@ jobs:
         run: ./gradlew desktop:dist -PdesktopOnly=true --console=plain
       - name: Full art acceptance gate
         run: python tools/artgen/validate.py --rebuild
+      - name: Sewers iteration acceptance 39 (committed cache only)
+        if: ${{ !cancelled() }}
+        run: python tools/artgen/iteration.py --check
       - name: JUnit tests
         if: ${{ !cancelled() }}
         shell: bash

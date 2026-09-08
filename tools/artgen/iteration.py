@@ -102,7 +102,7 @@ def globals_for(images):
     # Neutral metal/black pixels do not constitute an additional coloured accent.
     accent_mask=(~dominant)&(s>=.10)&(v>.025)
     bins=np.bincount((h[accent_mask]//30).astype(int),minlength=12)/h.size
-    present=bins>.01
+    present=bins>0
     accents=int(sum(present[i] and not present[(i-1)%12] for i in range(12)))
     if present.all():accents=1
     mean=float((lit@LUMA).mean());coverage=float(dominant.mean())

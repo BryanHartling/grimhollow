@@ -156,11 +156,11 @@ public class WandOfBlastWave extends DamageWand {
 		final boolean finalCollided = collided && collideDmg;
 		final int initialpos = ch.pos;
 
-		Actor.add(new Pushing(ch, ch.pos, newPos, new Callback() {
+		Callback movement = new Callback() {
 			public void call() {
 				if (initialpos != ch.pos || Actor.findChar(newPos) != null) {
 					//something caused movement or added chars before pushing resolved, cancel to be safe.
-					ch.sprite.place(ch.pos);
+					if(ch.sprite!=null)ch.sprite.place(ch.pos);
 					return;
 				}
 				int oldPos = ch.pos;
@@ -188,7 +188,9 @@ public class WandOfBlastWave extends DamageWand {
 					Dungeon.observe();
 				}
 			}
-		}));
+		};
+        if(ch.sprite==null || ch.sprite.parent==null) movement.call();
+        else Actor.add(new Pushing(ch, ch.pos, newPos, movement));
 	}
 
 	public static class Knockback{}

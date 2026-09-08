@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuite name="com.shatteredpixel.shatteredpixeldungeon.tiles.LightMapTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-09-07T17:45:07.733Z" hostname="ACURITE_WEATHER" time="0.023">
 To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
-Daemon will be stopped at the end of the build 
+Daemon will be stopped at the end of the build
 > Task :core:processResources NO-SOURCE
 > Task :services:news:shatteredNews:processResources NO-SOURCE
 > Task :services:updates:githubUpdates:processResources NO-SOURCE

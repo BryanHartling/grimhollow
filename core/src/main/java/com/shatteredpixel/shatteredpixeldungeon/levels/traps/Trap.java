@@ -56,7 +56,13 @@ public abstract class Trap implements Bundlable {
 	public int color;
 	public int shape;
 
-	public int pos;
+	public static final ThreadLocal<Float> POWER=ThreadLocal.withInitial(()->1f);
+    public static float damagePower(Object source){
+        float value=source instanceof Trap?((Trap)source).psychicPower:source instanceof com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff?((com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff)source).trapPower:source instanceof com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob?((com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob)source).trapPower:1;
+        return Math.max(value,POWER.get());
+    }
+    public float psychicPower=1;
+    public int pos;
 	public boolean reclaimed = false; //if this trap was spawned by reclaim trap
 
 	public boolean visible;
@@ -98,7 +104,7 @@ public abstract class Trap implements Bundlable {
 			Dungeon.level.discover(pos);
 			Bestiary.setSeen(getClass());
 			Bestiary.countEncounter(getClass());
-			activate();
+float prior=POWER.get();POWER.set(psychicPower);try{activate();}finally{POWER.set(prior);}
 		}
 	}
 

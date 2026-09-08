@@ -56,6 +56,7 @@ public class Blob extends Actor {
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
+        if(trapPower>1)bundle.put("trap_power",trapPower);
 		
 		if (volume > 0) {
 		
@@ -90,6 +91,7 @@ public class Blob extends Actor {
 	public void restoreFromBundle( Bundle bundle ) {
 		
 		super.restoreFromBundle( bundle );
+        trapPower=bundle.contains("trap_power")?bundle.getFloat("trap_power"):1;
 
 		if (bundle.contains( CUR )) {
 
@@ -108,8 +110,8 @@ public class Blob extends Actor {
 
 	protected ArrayList<Integer> cellsToFlagUpdate = new ArrayList<>();
 	
-	@Override
-	public boolean act() {
+	public float trapPower=1;
+    @Override public boolean act() {
 		
 		spend( TICK );
 		
@@ -120,7 +122,9 @@ public class Blob extends Actor {
 
 			volume = 0;
 
-			evolve();
+float prior=com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap.POWER.get();
+            com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap.POWER.set(trapPower);
+            try{evolve();}finally{com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap.POWER.set(prior);}
 			int[] tmp = off;
 			off = cur;
 			cur = tmp;
@@ -266,7 +270,8 @@ public class Blob extends Actor {
 		
 		if (gas != null){
 			level.blobs.put( type, gas );
-			gas.seed( level, cell, amount );
+			if(gas.volume==0)gas.trapPower=1;gas.trapPower=Math.max(gas.trapPower,com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap.POWER.get());
+            gas.seed( level, cell, amount );
 		}
 		
 		return gas;

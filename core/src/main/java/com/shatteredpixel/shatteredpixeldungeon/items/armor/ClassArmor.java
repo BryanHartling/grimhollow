@@ -102,6 +102,7 @@ abstract public class ClassArmor extends Armor {
 		switch (owner.heroClass) {
             case NECROMANCER: classArmor=new NecromancerArmor(); break;
             case ENCHANTER: classArmor=new EnchanterArmor();break;
+            case PSYCHIC: classArmor=new PsychicArmor();break;
 			case WARRIOR:
 				classArmor = new WarriorArmor();
 				break;

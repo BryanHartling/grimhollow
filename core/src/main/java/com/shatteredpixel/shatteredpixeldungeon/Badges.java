@@ -73,6 +73,7 @@ public class Badges {
 		MASTERY_CLERIC,
         MASTERY_NECROMANCER,
         MASTERY_ENCHANTER,
+        MASTERY_PSYCHIC,
 		FOUND_RATMOGRIFY,
 
 		//bronze
@@ -134,6 +135,7 @@ public class Badges {
 		BOSS_SLAIN_1_CLERIC,
         BOSS_SLAIN_1_NECROMANCER,
         BOSS_SLAIN_1_ENCHANTER,
+        BOSS_SLAIN_1_PSYCHIC,
 		BOSS_SLAIN_1_ALL_CLASSES    ( 54, BadgeType.GLOBAL ),
 		RESEARCHER_2                ( 55, BadgeType.JOURNAL ),
 		GAMES_PLAYED_2              ( 56, BadgeType.GLOBAL ),
@@ -191,6 +193,7 @@ public class Badges {
 		VICTORY_CLERIC,
         VICTORY_NECROMANCER,
         VICTORY_ENCHANTER,
+        VICTORY_PSYCHIC,
 		VICTORY_ALL_CLASSES         ( 103, BadgeType.GLOBAL ),
 		DEATH_FROM_ALL              ( 104, BadgeType.GLOBAL ),
 		BOSS_SLAIN_3_GLADIATOR,
@@ -208,6 +211,8 @@ public class Badges {
         BOSS_SLAIN_3_DEATHSPEAKER,
         BOSS_SLAIN_3_HEXWEAVER,
         BOSS_SLAIN_3_SCRIVENER,
+        BOSS_SLAIN_3_SEER,
+        BOSS_SLAIN_3_PUPPETEER,
         BOSS_SLAIN_3_ARTIFICER,
 		BOSS_SLAIN_3_ALL_SUBCLASSES ( 105, BadgeType.GLOBAL ),
 		BOSS_CHALLENGE_3            ( 106 ),
@@ -819,6 +824,7 @@ public class Badges {
 		firstBossClassBadges.put(HeroClass.CLERIC, Badge.BOSS_SLAIN_1_CLERIC);
         firstBossClassBadges.put(HeroClass.NECROMANCER, Badge.BOSS_SLAIN_1_NECROMANCER);
         firstBossClassBadges.put(HeroClass.ENCHANTER, Badge.BOSS_SLAIN_1_ENCHANTER);
+        firstBossClassBadges.put(HeroClass.PSYCHIC, Badge.BOSS_SLAIN_1_PSYCHIC);
 	}
 
 	private static LinkedHashMap<HeroClass, Badge> victoryClassBadges = new LinkedHashMap<>();
@@ -831,6 +837,7 @@ public class Badges {
 		victoryClassBadges.put(HeroClass.CLERIC, Badge.VICTORY_CLERIC);
         victoryClassBadges.put(HeroClass.NECROMANCER, Badge.VICTORY_NECROMANCER);
         victoryClassBadges.put(HeroClass.ENCHANTER, Badge.VICTORY_ENCHANTER);
+        victoryClassBadges.put(HeroClass.PSYCHIC, Badge.VICTORY_PSYCHIC);
 	}
 
 	private static LinkedHashMap<HeroSubClass, Badge> thirdBossSubclassBadges = new LinkedHashMap<>();
@@ -851,6 +858,8 @@ public class Badges {
         thirdBossSubclassBadges.put(HeroSubClass.HEXWEAVER, Badge.BOSS_SLAIN_3_HEXWEAVER);
         thirdBossSubclassBadges.put(HeroSubClass.ARTIFICER, Badge.BOSS_SLAIN_3_ARTIFICER);
         thirdBossSubclassBadges.put(HeroSubClass.SCRIVENER, Badge.BOSS_SLAIN_3_SCRIVENER);
+        thirdBossSubclassBadges.put(HeroSubClass.PUPPETEER, Badge.BOSS_SLAIN_3_PUPPETEER);
+        thirdBossSubclassBadges.put(HeroSubClass.SEER, Badge.BOSS_SLAIN_3_SEER);
 	}
 	
 	public static void validateBossSlain() {
@@ -972,6 +981,7 @@ public class Badges {
 				break;
 			case NECROMANCER: badge=Badge.MASTERY_NECROMANCER; break;
             case ENCHANTER: badge=Badge.MASTERY_ENCHANTER;break;
+            case PSYCHIC: badge=Badge.MASTERY_PSYCHIC;break;
             case CLERIC:
 				badge = Badge.MASTERY_CLERIC;
 				break;

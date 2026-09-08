@@ -1636,7 +1636,7 @@ public class Hero extends Char {
 
 		int preHP = HP + shielding();
 		if (src instanceof Hunger) preHP -= shielding();
-		super.damage( dmg, src );
+        super.damage( dmg, src );
         if(buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.class)!=null)buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.class).ward();
 		int postHP = HP + shielding();
 		if (src instanceof Hunger) postHP -= shielding();
@@ -1781,7 +1781,7 @@ public class Hero extends Char {
 			path = null;
 
 			if (Actor.findChar( target ) == null) {
-				if (Dungeon.level.passable[target] || Dungeon.level.avoid[target]) {
+				if (Dungeon.level.passable[target] || Dungeon.level.avoid[target] || com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.heroPasses(target)) {
 					step = target;
 				}
 				if (walkingToVisibleTrapInFog
@@ -1800,7 +1800,7 @@ public class Hero extends Char {
 			else if (path.getLast() != target)
 				newPath = true;
 			else {
-				if (!Dungeon.level.passable[path.get(0)] || Actor.findChar(path.get(0)) != null) {
+				if ((!Dungeon.level.passable[path.get(0)] && !com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.heroPasses(path.get(0))) || Actor.findChar(path.get(0)) != null) {
 					newPath = true;
 				}
 			}
@@ -1813,7 +1813,7 @@ public class Hero extends Char {
 				boolean[] m = Dungeon.level.mapped;
 				boolean[] passable = new boolean[len];
 				for (int i = 0; i < len; i++) {
-					passable[i] = p[i] && (v[i] || m[i]);
+					passable[i] = (p[i] || com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.heroPasses(i)) && (v[i] || m[i]);
 				}
 
 				PathFinder.Path newpath = Dungeon.findPath(this, target, passable, fieldOfView, true);

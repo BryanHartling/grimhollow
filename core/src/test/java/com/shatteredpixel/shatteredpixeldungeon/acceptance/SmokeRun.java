@@ -44,7 +44,7 @@ public class SmokeRun {
             config.preferencesDirectory=output.resolve("prefs").toString();
             HeadlessApplication app=new HeadlessApplication(new ApplicationAdapter(){},config);
             new ShatteredPixelDungeon(null);
-            Game.version="0.2.0"; Game.versionCode=896;
+            Game.version="0.3.0"; Game.versionCode=899;
             FileUtils.setDefaultFileProperties(Files.FileType.Absolute,output.resolve("saves").toString()+"/");
             for(String name:classes) for(int seed=0;seed<10;seed++) {
                 try {
@@ -60,6 +60,7 @@ public class SmokeRun {
                         if(!Dungeon.level.insideMap(Dungeon.hero.pos)) throw new AssertionError("Invalid hero placement");
                         if(depth==1 && Dungeon.hero.heroClass==HeroClass.NECROMANCER)necromancerScenario();
                         if(depth==1 && Dungeon.hero.heroClass==HeroClass.ENCHANTER)enchanterScenario();
+                        if(depth==1 && Dungeon.hero.heroClass==HeroClass.PSYCHIC)psychicScenario();
                         Dungeon.saveAll();
                         if(depth==6) {
                             Dungeon.loadGame(99);
@@ -86,9 +87,10 @@ public class SmokeRun {
     private static void clearArena(){
         if(com.watabou.noosa.Camera.main==null)com.watabou.noosa.Camera.main=new com.watabou.noosa.Camera(0,0,320,240,1);
         for(Mob m:Dungeon.level.mobs.toArray(new Mob[0])){Actor.remove(m);for(Buff buff:m.buffs())Actor.remove(buff);}
-        Dungeon.level.mobs.clear();BoneWalls.clear(Dungeon.level);
+        Dungeon.level.mobs.clear();BoneWalls.clear(Dungeon.level);com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.clear(Dungeon.level);
         int width=Dungeon.level.width(),center=width*(Dungeon.level.height()/2)+width/2;
         for(int y=-4;y<=4;y++)for(int x=-4;x<=4;x++){int cell=center+y*width+x;Level.set(cell,Terrain.EMPTY);Dungeon.level.traps.remove(cell);Dungeon.level.heaps.remove(cell);}
+        Dungeon.level.cleanWalls();
         Dungeon.hero.pos=center;Dungeon.hero.sprite=new HeroSprite();Arrays.fill(Dungeon.level.heroFOV,true);
     }
     private static Rat target(int cell){
@@ -198,6 +200,84 @@ public class SmokeRun {
         for(int cell:walls)check(Dungeon.level.map[cell]!=Terrain.BONE_WALL,"Bone Prison reverts on load");
         check(BoneWalls.prison(h.pos+3,10,1),"Exit prison");Level previous=Dungeon.level;Dungeon.newLevel();check(previous.boneOriginal.keyArray().length==0,"Bone Prison reverts on level exit");Dungeon.switchLevel(previous,h.pos);
         System.out.println("NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS");
+    }
+
+    private static void psychicScenario() throws Exception {
+        Hero h=Dungeon.hero;FocusCrystal crystal=h.belongings.getItem(FocusCrystal.class);
+        check(h.HP==20&&h.HT==20&&h.STR==10&&crystal!=null&&crystal.charges()==2&&crystal.cap()==2,"Psychic base kit");
+        check(h.belongings.weapon instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.FocusRing&&h.belongings.armor instanceof ClothArmor&&h.belongings.getItem(Food.class).quantity()==2,"Psychic equipment and food");
+        check(h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife.class).quantity()==3&&h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision.class).isIdentified()&&new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping().isKnown(),"Psychic consumables and identification");
+        check(h.talents.get(0).size()==4&&h.talents.get(1).size()==5,"Psychic talent tiers");
+        clearArena();int center=h.pos,width=Dungeon.level.width();
+        check(crystal.cast(h,"glimpse",h.pos,null)&&h.buff(MindVision.class)!=null,"Glimpse");
+        for(int i=0;i<37;i++)h.buff(ClassSpellItem.Charger.class).act();check(crystal.charges()==1,"Crystal no early charge");h.buff(ClassSpellItem.Charger.class).act();check(crystal.charges()==2,"Crystal level-one cadence");
+        for(int level:new int[]{1,5,10,30}){
+            h.lvl=level;com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife knife=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife();
+            com.watabou.utils.Random.pushGenerator(12345);int psychic=knife.damageRoll(h);com.watabou.utils.Random.popGenerator();
+            h.heroClass=HeroClass.HUNTRESS;com.watabou.utils.Random.pushGenerator(12345);int base=knife.damageRoll(h);com.watabou.utils.Random.popGenerator();h.heroClass=HeroClass.PSYCHIC;
+            check(psychic-base==level/5,"12: exact Telekinetic Force at level "+level);
+        }
+        h.lvl=21;h.HT=h.HP=120;h.subClass=HeroSubClass.PUPPETEER;Talent.initSubclassTalents(h);maxTalents();
+        check(crystal.cap()==6,"Focused Mind capacity");
+        int heapCell=center+2;Dungeon.level.drop(new Food(),heapCell);Rat enemy=target(heapCell);
+        com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().reveal();Dungeon.level.setTrap(trap,heapCell);Level.set(heapCell,Terrain.TRAP);
+        int food=h.belongings.getItem(Food.class).quantity();crystal.gainCharge(10);
+        check(crystal.cast(h,"grasp",heapCell,null),"11: cast Grasp on visible heap");
+        check(h.belongings.getItem(Food.class).quantity()==food+1&&Dungeon.level.heaps.get(heapCell)==null,"11: Grasp collects heap");
+        check(trap.active&&enemy.buff(Vertigo.class)!=null,"11: Grasp heap priority and Wrench");
+        Buff.detach(enemy,Vertigo.class);int oldHP=enemy.HP;
+        check(crystal.cast(h,"grasp",heapCell,null)&&!trap.active&&Dungeon.level.traps.get(heapCell)==null,"11: Grasp triggers and removes trap");
+        com.shatteredpixel.shatteredpixeldungeon.actors.blobs.ToxicGas gas=(com.shatteredpixel.shatteredpixeldungeon.actors.blobs.ToxicGas)Dungeon.level.blobs.get(com.shatteredpixel.shatteredpixeldungeon.actors.blobs.ToxicGas.class);gas.act();
+        check(oldHP-enemy.HP==Math.round(1.5f*(1+Dungeon.scalingDepth()/5)),"Trap Sense scales remote hazard damage");
+        int charge=crystal.charges();check(!crystal.cast(h,"grasp",center-2,null)&&crystal.charges()==charge,"11: empty Grasp is free");
+        clearArena();enemy=target(center+1);Rat rival=target(center+2);
+        Buff.prolong(h,Bless.class,10);Buff.prolong(h,Haste.class,10);Buff.affect(h,Barkskin.class).setForDuration(8,10);
+        crystal.gainCharge(10);check(crystal.cast(h,"dominate",enemy.pos,null)&&enemy.buff(Amok.class).dominated&&enemy.buff(Bless.class)!=null&&enemy.buff(Haste.class)!=null&&Barkskin.currentLevel(enemy)==8,"Dominate and Shared Will");
+        enemy.sprite=new RatSprite(){@Override public void showAlert(){}};enemy.sprite.link(enemy);enemy.sprite.visible=false;enemy.state=enemy.HUNTING;rival.sprite.visible=false;Buff.prolong(rival,Paralysis.class,5);
+        java.lang.reflect.Method act=Mob.class.getDeclaredMethod("act");act.setAccessible(true);int rivalHP=rival.HP;act.invoke(enemy);
+        check(enemy.isTargeting(rival)&&rival.HP<rivalHP,"13: dominated enemy attacks another hostile instead of adjacent hero");
+        check(enemy.buff(Amok.class).cooldown()>=15,"Dominate fifteen-turn duration");
+        for(int turn=1;turn<15;turn++){act.invoke(enemy);check(enemy.isTargeting(rival),"13: domination continues to prefer the hostile");}
+        crystal.gainCharge(-crystal.charges());rival.HP=1;rival.damage(1,enemy);check(crystal.charges()==1,"Harvest Thought kill charge");
+        crystal.gainCharge(10);check(crystal.cast(h,"suggestion",enemy.pos,null)&&enemy.buff(Terror.class)!=null,"Suggestion");Buff.detach(enemy,Terror.class);
+        Buff.prolong(h,MindVision.class,5);float vision=h.buff(MindVision.class).cooldown();Rat killed=target(center+3);killed.HP=1;killed.damage(1,h);check(h.buff(MindVision.class).cooldown()==vision+2,"Lingering Sight");
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon knives=h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife.class);
+        Buff.prolong(enemy,Hex.class,5);check(knives.proc(h,enemy,10)==14,"Fracture Point");
+        float acc=knives.accuracyFactor(h,enemy);h.talents.get(1).put(Talent.GUIDED_THROW,0);float baseAcc=knives.accuracyFactor(h,enemy);h.talents.get(1).put(Talent.GUIDED_THROW,2);check(Math.abs(acc/baseAcc-1.2f)<.001f,"Guided Throw");
+        java.lang.reflect.Field curUser=Item.class.getDeclaredField("curUser");curUser.setAccessible(true);curUser.set(null,h);
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon thrown=(com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon)knives.detach(h.belongings.backpack);
+        float durability=knives.durabilityLeft();java.lang.reflect.Method land=com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon.class.getDeclaredMethod("rangedHit",Char.class,int.class);land.setAccessible(true);land.invoke(thrown,enemy,enemy.pos);
+        check(h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife.class).quantity()==3&&h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife.class).durabilityLeft()<durability,"Recall returns the thrown knife and consumes durability");
+        Buff.detach(h,Barkskin.class);h.HP=35;h.damage(10,enemy);check(h.HP==35,"Precognition dodges threshold hit");h.damage(10,enemy);check(h.HP==25,"Precognition only once on this floor");h.HP=120;
+        int dominatedCell=enemy.pos;Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);h=Dungeon.hero;h.sprite=new HeroSprite();crystal=h.belongings.getItem(FocusCrystal.class);
+        enemy=(Rat)Dungeon.level.findMob(dominatedCell);check(enemy!=null&&enemy.buff(Amok.class)!=null&&enemy.buff(Amok.class).dominated,"14: domination survives save/load");check(!PsychicMind.state().dodge(110,enemy),"Precognition expenditure survives save/load");
+        clearArena();Buff.detach(h,MindVision.class);Buff.detach(h,Bless.class);Buff.detach(h,Haste.class);
+        crystal.gainCharge(-crystal.charges());for(int i=0;i<16;i++)h.buff(ClassSpellItem.Charger.class).act();check(crystal.charges()==1,"Deep Focus accelerates calm regeneration");
+        h.subClass=HeroSubClass.SEER;h.talents.clear();Talent.initClassTalents(h);Talent.initSubclassTalents(h);maxTalents();
+        for(int y=-4;y<=4;y++)Level.set(center+1+y*width,Terrain.WALL);
+        enemy=target(center+2);Rat distant=target(center+4);int secret=center+2+width;Level.set(secret,Terrain.SECRET_DOOR);
+        trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().hide();Dungeon.level.setTrap(trap,center+2-width);Level.set(trap.pos,Terrain.SECRET_TRAP);
+        PsychicMind.state().act();Dungeon.observe();check(h.buff(SeerSight.class)!=null&&Dungeon.level.heroFOV[enemy.pos]&&!Dungeon.level.heroFOV[distant.pos]&&Dungeon.level.map[secret]==Terrain.DOOR&&trap.visible,"Seer radius-three sight and secrets through walls");
+        clearArena();enemy=target(center-2+width);crystal.gainCharge(10);check(crystal.cast(h,"hurl",enemy.pos,center-1+width)&&enemy.pos==center+2+width,"Hurl plus Heavy Hand distance");
+        Level.set(center+4+width,Terrain.WALL);crystal.gainCharge(10);check(crystal.cast(h,"hurl",enemy.pos,center+3+width)&&enemy.pos==center+3+width&&enemy.buff(Paralysis.class)!=null,"Hurl wall impact");
+        clearArena();enemy=target(center-2+width);trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().reveal();Dungeon.level.setTrap(trap,center+2+width);Level.set(trap.pos,Terrain.TRAP);crystal.gainCharge(10);check(crystal.cast(h,"hurl",enemy.pos,center-1+width)&&enemy.pos==trap.pos&&!trap.active,"Hurl landing triggers trap");
+        clearArena();int revealCell=center+3;Dungeon.level.drop(new Food(),revealCell);trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().hide();Dungeon.level.setTrap(trap,revealCell+width);Level.set(trap.pos,Terrain.SECRET_TRAP);
+        crystal.gainCharge(-crystal.charges());Dungeon.depth=2;PsychicMind.state().arrive();check(crystal.charges()==2&&Dungeon.level.heaps.get(revealCell).seen&&trap.visible,"Kinetic Reserve and Treasure Sense");crystal.gainCharge(-2);PsychicMind.state().arrive();check(crystal.charges()==0,"No floor-entry recharge exploit");Dungeon.depth=1;
+        clearArena();enemy=target(center+2);Rat other=target(center+2+width);ClassArmor armor=ClassArmor.upgrade(h,new ClothArmor());
+        h.armorAbility=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.PsychicStorm();Talent.initArmorTalents(h);maxTalents();armor.charge=100;((com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.PsychicStorm)h.armorAbility).activate(armor,h,h.pos);
+        check(enemy.buff(Amok.class)!=null&&enemy.buff(Vertigo.class)!=null&&enemy.buff(Terror.class)!=null&&crystal.charges()==2,"Psychic Storm, Dread and Backlash");
+        h.armorAbility=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.MindMeld();h.talents.get(3).clear();Talent.initArmorTalents(h);maxTalents();armor.charge=100;((com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.MindMeld)h.armorAbility).activate(armor,h,h.pos);
+        check(h.buff(MindVision.class).cooldown()>=50&&h.buff(MeldedMind.class)!=null&&PsychicMind.thrownDamage(h,10)==21,"Mind Meld duration and Kinetic Surge");for(boolean mapped:Dungeon.level.mapped)check(mapped,"Total Sight");
+        clearArena();h.armorAbility=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.ForceWall();h.talents.get(3).clear();Talent.initArmorTalents(h);armor.charge=100;
+        ((com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.ForceWall)h.armorAbility).activate(armor,h,center+2);
+        check(Dungeon.level.forceOriginal.keyArray().length==3,"Force Wall creates three cells");for(int cell:Dungeon.level.forceOriginal.keyArray())check(!Dungeon.level.passable[cell]&&!Dungeon.level.losBlocking[cell],"Force Wall blocks movement but not LOS");
+        knives=h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife.class);check(knives.throwPos(h,center+4)==center+1&&!com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.heroPasses(center+2),"Force Wall blocks ordinary throws and hero movement");
+        maxTalents();check(knives.throwPos(h,center+4)==center+4&&com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.heroPasses(center+2),"Permeable throws and walking");
+        enemy=target(center+3);enemy.move(center+2);check(enemy.pos==center+3&&enemy.buff(Paralysis.class)!=null,"Repulse blocks and paralyzes");
+        for(int i=0;i<8;i++)h.buff(com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.class).act();check(Dungeon.level.forceOriginal.keyArray().length==0,"Force Wall eight-turn timeout");
+        check(com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.line(center+2,17),"Held Firm wall");int[] walls=Dungeon.level.forceOriginal.keyArray();Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);h=Dungeon.hero;h.sprite=new HeroSprite();for(int cell:walls)check(Dungeon.level.map[cell]!=Terrain.FORCE_WALL,"Force Wall restores on load");
+        check(com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.line(center+2,17),"Exit wall");Level previous=Dungeon.level;Dungeon.newLevel();check(previous.forceOriginal.keyArray().length==0,"Force Wall restores on floor exit");Dungeon.switchLevel(previous,h.pos);
+        System.out.println("PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS");
     }
 
     private static void enchanterScenario() throws Exception {

@@ -40,22 +40,24 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `build.gradle`: Grimhollow build identity, platform isolation, distribution task or test configuration.
 - `core/build.gradle`: Grimhollow build identity, platform isolation, distribution task or test configuration.
 - `core/src/main/assets/effects/blood_decals.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/effects/force_wall.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/effects/health_vignette.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/environment/tiles_sewers.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/environment/walls_sewers.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/interfaces/banners.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/interfaces/talent_icons.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/interfaces/title_grimhollow.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
-- `core/src/main/assets/messages/actors/actors.properties`: Persist and localize the dynamic-lighting display setting.
-- `core/src/main/assets/messages/items/items.properties`: Persist and localize the dynamic-lighting display setting.
-- `core/src/main/assets/messages/scenes/scenes.properties`: Persist and localize the dynamic-lighting display setting.
-- `core/src/main/assets/messages/windows/windows.properties`: Persist and localize the dynamic-lighting display setting.
+- `core/src/main/assets/messages/actors/actors.properties`: Localize class kits, talents, spells, effects, armor abilities and display settings.
+- `core/src/main/assets/messages/items/items.properties`: Localize class kits, talents, spells, effects, armor abilities and display settings.
+- `core/src/main/assets/messages/scenes/scenes.properties`: Localize class kits, talents, spells, effects, armor abilities and display settings.
+- `core/src/main/assets/messages/windows/windows.properties`: Localize class kits, talents, spells, effects, armor abilities and display settings.
 - `core/src/main/assets/sprites/hero_cleric.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/hero_duelist.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/hero_enchanter.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/hero_huntress.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/hero_mage.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/hero_necromancer.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
+- `core/src/main/assets/sprites/hero_psychic.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/hero_rogue.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/hero_warrior.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
 - `core/src/main/assets/sprites/items.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
@@ -65,30 +67,39 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/GameGeometry.java`: Separate 64px texture dimensions from retained logical world/UI coordinates.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/SPDSettings.java`: Persist and localize the dynamic-lighting display setting.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/Char.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/blobs/SanctuaryZone.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/blobs/Blob.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/blobs/SanctuaryZone.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Amok.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/AmplifySuffering.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Barkskin.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Buff.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Corrosion.java`: Shared green emissive corrosion particles.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/DegradedGear.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/EnchanterMagic.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/FracturedArmor.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/DegradedGear.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/EnchanterMagic.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/FracturedArmor.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/LowerResistance.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/MeldedMind.java`: Implement Psychic equipment, talents, control spells, sight, armor abilities or temporary terrain.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/NecroCurse.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Necromancy.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Overcharged.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Silenced.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Unmade.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Overcharged.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/PsychicMind.java`: Implement Psychic equipment, talents, control spells, sight, armor abilities or temporary terrain.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/SeerSight.java`: Implement Psychic equipment, talents, control spells, sight, armor abilities or temporary terrain.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Silenced.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Unmade.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/Hero.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/HeroClass.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/HeroSubClass.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/Talent.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/cleric/PowerOfMany.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/enchanter/Overcharge.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/enchanter/Sanctuary.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/enchanter/Unmaking.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/enchanter/Overcharge.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/enchanter/Sanctuary.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/enchanter/Unmaking.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/necromancer/BonePrison.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/necromancer/CorpseExplosion.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/necromancer/DeathPact.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/psychic/ForceWall.java`: Implement Psychic equipment, talents, control spells, sight, armor abilities or temporary terrain.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/psychic/MindMeld.java`: Implement Psychic equipment, talents, control spells, sight, armor abilities or temporary terrain.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/psychic/PsychicStorm.java`: Implement Psychic equipment, talents, control spells, sight, armor abilities or temporary terrain.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/rogue/ShadowClone.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/DM100.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Mob.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
@@ -101,14 +112,16 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Warlock.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/HealthVignette.java`: Scale crimson screen edges to the specified low-health thresholds.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/particles/NecroticParticle.java`: Shared green emissive corrosion particles.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/ClassSpellItem.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/ClassSpellItem.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/FocusCrystal.java`: Implement Psychic equipment, talents, control spells, sight, armor abilities or temporary terrain.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/Item.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/Phylactery.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/SigilBrush.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/SigilBrush.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/Armor.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/ClassArmor.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/EnchanterArmor.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/EnchanterArmor.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/NecromancerArmor.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/PsychicArmor.java`: Implement Psychic equipment, talents, control spells, sight, armor abilities or temporary terrain.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/curses/AntiEntropy.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/curses/Corrosion.java`: Shared green emissive corrosion particles.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/curses/Displacement.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
@@ -121,6 +134,7 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/glyphs/Potential.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/glyphs/Repulsion.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/glyphs/Thorns.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/wands/WandOfBlastWave.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/Weapon.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/curses/Annoying.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/curses/Dazzling.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
@@ -140,11 +154,17 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/enchantments/Shocking.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/enchantments/Vampiric.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/BoneRod.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/FocusRing.java`: Implement Psychic equipment, talents, control spells, sight, armor abilities or temporary terrain.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/MeleeWeapon.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
-- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/RunedBaton.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/RunedBaton.java`: Implement Enchanter spells, charge cadence, equipment inscriptions, debuffs or armor abilities.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/missiles/MissileWeapon.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/Level.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/Terrain.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/features/BoneWalls.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/features/ForceWalls.java`: Implement Psychic equipment, talents, control spells, sight, armor abilities or temporary terrain.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/traps/PoisonDartTrap.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/traps/Trap.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/mechanics/Ballistica.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/AboutScene.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/GameScene.java`: Integrate terrain lighting, transient level blood decals and low-health feedback.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/HeroSelectScene.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
@@ -249,7 +269,7 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v1_X_Changes.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndHeroInfo.java`: Adapt terrain texture frames and central geometry constants while preserving logical placement.
 - `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndSettings.java`: Persist and localize the dynamic-lighting display setting.
-- `core/src/test/java/com/shatteredpixel/shatteredpixeldungeon/acceptance/SmokeRun.java`: Real generator/save-load smoke harness; the required missing classes fail explicitly.
+- `core/src/test/java/com/shatteredpixel/shatteredpixeldungeon/acceptance/SmokeRun.java`: Exercise all three class feature sets, retained heroes, generator descent, persistence and acceptance 27.
 - `core/src/test/java/com/shatteredpixel/shatteredpixeldungeon/tiles/LightMapTest.java`: JUnit coverage of light falloff, clipping, saturation and health thresholds.
 - `desktop/build.gradle`: Grimhollow build identity, platform isolation, distribution task or test configuration.
 - `desktop/src/main/assets/icons/icon_128.png`: Pipeline-generated palette-constrained asset; regenerate with tools/artgen/build.py.
@@ -302,6 +322,7 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `tools/artgen/specs/desktop_src_main_assets_icons_icon_64_png.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/desktop_src_main_assets_icons_mac_icns.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/desktop_src_main_assets_icons_windows_ico.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/force_wall.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/health_vignette.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/hero_cleric.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/hero_duelist.json`: Editable deterministic source specification for its generated asset.
@@ -309,6 +330,7 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `tools/artgen/specs/hero_huntress.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/hero_mage.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/hero_necromancer.json`: Editable deterministic source specification for its generated asset.
+- `tools/artgen/specs/hero_psychic.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/hero_rogue.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/hero_warrior.json`: Editable deterministic source specification for its generated asset.
 - `tools/artgen/specs/items.json`: Editable deterministic source specification for its generated asset.
@@ -339,3 +361,8 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - Fracture and Degraded Gear modify the shared physical armor roll in Char.attack so overrides in every existing mob respect the effect.
 - Nullify preserves revive-persistent buffs; Overcharge forces eligible probability checks without inflating their random thresholds into unbounded damage.
 
+
+- Guided Throw keeps SPD's adjacency/range accuracy model: upstream has no per-tile range penalty to remove; the specified 10/20% accuracy bonus applies.
+- Trap Sense propagates through the existing trap, blob and damage-buff paths; merged hazards of one type retain the strongest triggering multiplier until cleared.
+- Psychic floor-entry bonuses are persisted per floor to prevent stair farming; Precognition tests damage after resistance and mitigation, before shields.
+- Hurl uses the same movement callback with and without sprites; headless input reset is a no-op when there is no cell selector, and the carved smoke arena refreshes upstream visibility metadata.

@@ -39,7 +39,8 @@ public class Ballistica {
 	public Integer dist = 0;
 
 	//parameters to specify the colliding cell
-	public static final int STOP_TARGET = 1;    //ballistica will stop at the target cell
+	public static final int FORCE_PASS = 16;
+    public static final int STOP_TARGET = 1;    //ballistica will stop at the target cell
 	public static final int STOP_CHARS = 2;     //ballistica will stop on first char hit
 	public static final int STOP_SOLID = 4;     //ballistica will stop on solid terrain
 	public static final int IGNORE_SOFT_SOLID = 8; //ballistica will ignore soft solid terrain, such as doors and webs
@@ -119,7 +120,8 @@ public class Ballistica {
 			if (collisionPos == null
 					&& stopTerrain
 					&& cell != sourcePos
-					&& !Dungeon.level.passable[cell]
+					&& !forcePass(cell)
+                    && !Dungeon.level.passable[cell]
 					&& !Dungeon.level.avoid[cell]
 					&& Actor.findChar(cell) == null) {
 				collide(path.get(path.size() - 1));
@@ -127,7 +129,7 @@ public class Ballistica {
 
 			path.add(cell);
 
-			if (collisionPos == null && stopTerrain && cell != sourcePos && Dungeon.level.solid[cell]) {
+			if (collisionPos == null && stopTerrain && cell != sourcePos && Dungeon.level.solid[cell] && !forcePass(cell)) {
 				if (ignoreSoftSolid && (Dungeon.level.passable[cell] || Dungeon.level.avoid[cell])) {
 					//do nothing
 				} else {
@@ -152,7 +154,8 @@ public class Ballistica {
 	}
 
 	//we only want to record the first position collision occurs at.
-	private void collide(int cell){
+	private boolean forcePass(int cell){return (collisionProperties & FORCE_PASS)!=0 && Dungeon.level.map[cell]==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.FORCE_WALL;}
+    private void collide(int cell){
 		if (collisionPos == null) {
 			collisionPos = cell;
 		}

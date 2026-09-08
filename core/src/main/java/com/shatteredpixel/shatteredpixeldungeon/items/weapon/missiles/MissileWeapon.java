@@ -215,7 +215,8 @@ abstract public class MissileWeapon extends Weapon {
 
 		accFactor *= adjacentAccFactor(owner, target);
 
-		return accFactor;
+		if(owner instanceof Hero)accFactor*=1+.1f*((Hero)owner).pointsInTalent(Talent.GUIDED_THROW);
+        return accFactor;
 	}
 
 	protected float adjacentAccFactor(Char owner, Char target){
@@ -280,7 +281,7 @@ abstract public class MissileWeapon extends Weapon {
 				}
 			}
 
-			if (!spawnedForEffect) super.onThrow( cell );
+			if (!spawnedForEffect && !recall(false)) super.onThrow( cell );
 		} else {
 			if (!curUser.shoot( enemy, this )) {
 				rangedMiss( cell );
@@ -294,6 +295,10 @@ abstract public class MissileWeapon extends Weapon {
 
 	@Override
 	public int proc(Char attacker, Char defender, int damage) {
+        if(attacker instanceof Hero){
+            if(defender.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Vertigo.class)!=null||defender.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hex.class)!=null)damage+=2*((Hero)attacker).pointsInTalent(Talent.FRACTURE_POINT);
+            if(((Hero)attacker).heroClass==HeroClass.PSYCHIC)Buff.prolong(defender,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.PsychicDamage.class,20);
+        }
 		if (attacker == Dungeon.hero && Random.Int(3) < Dungeon.hero.pointsInTalent(Talent.SHARED_ENCHANTMENT)){
 			SpiritBow bow = Dungeon.hero.belongings.getItem(SpiritBow.class);
 			if (bow != null && bow.enchantment != null && Dungeon.hero.buff(MagicImmune.class) == null) {
@@ -403,6 +408,7 @@ abstract public class MissileWeapon extends Weapon {
 	
 	protected void rangedHit( Char enemy, int cell ){
 		decrementDurability();
+        if(recall(true))return;
 		if (durability > 0 && !spawnedForEffect){
 			//attempt to stick the missile weapon to the enemy, just drop it if we can't.
 			if (sticky && enemy != null && enemy.isActive() && enemy.alignment != Char.Alignment.ALLY){
@@ -417,11 +423,18 @@ abstract public class MissileWeapon extends Weapon {
 	}
 	
 	protected void rangedMiss( int cell ) {
+        if(recall(false))return;
 		parent = null;
 		if (!spawnedForEffect) super.onThrow(cell);
 	}
 
-	public float durabilityLeft(){
+	private boolean recall(boolean spent){
+        if(spawnedForEffect||curUser==null||!curUser.hasTalent(Talent.RECALL)||Random.Float()>=.5f*curUser.pointsInTalent(Talent.RECALL))return false;
+        if(!spent)decrementDurability();
+        if(durability<=0)return true;
+        parent=null;return collect(curUser.belongings.backpack);
+    }
+    public float durabilityLeft(){
 		return durability;
 	}
 
@@ -513,7 +526,8 @@ abstract public class MissileWeapon extends Weapon {
 			}
 		}
 		
-		return damage;
+		if(owner instanceof Hero)damage=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.thrownDamage((Hero)owner,damage);
+        return damage;
 	}
 	
 	@Override
@@ -685,6 +699,7 @@ abstract public class MissileWeapon extends Weapon {
 			}
 		}
 		
+if(Dungeon.hero!=null&&Dungeon.hero.heroClass==HeroClass.PSYCHIC)info+="\n\n"+Messages.get(MissileWeapon.class,"telekinetic_force",com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.force(Dungeon.hero));
 		return info;
 	}
 

@@ -295,7 +295,7 @@ public class Dungeon {
 	}
 	
 	public static Level newLevel() {
-        com.shatteredpixel.shatteredpixeldungeon.levels.features.BoneWalls.clear(level);
+        com.shatteredpixel.shatteredpixeldungeon.levels.features.BoneWalls.clear(level);com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.clear(level);
 		
 		Dungeon.level = null;
 		Actor.clear();
@@ -463,7 +463,7 @@ public class Dungeon {
 	}
 	
 	public static void switchLevel( final Level level, int pos ) {
-        if(Dungeon.level!=level)com.shatteredpixel.shatteredpixeldungeon.levels.features.BoneWalls.clear(Dungeon.level);
+        if(Dungeon.level!=level){com.shatteredpixel.shatteredpixeldungeon.levels.features.BoneWalls.clear(Dungeon.level);com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.clear(Dungeon.level);}
 
 		//Position of -2 specifically means trying to place the hero the exit
 		if (pos == -2){
@@ -483,6 +483,7 @@ public class Dungeon {
 		hero.pos = pos;
         com.shatteredpixel.shatteredpixeldungeon.items.Phylactery phylactery=hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.class);if(phylactery!=null)phylactery.arrive();
         if(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.state()!=null)com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.state().arrive();
+        if(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.state()!=null)com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.state().arrive();
 
 		if (hero.buff(AscensionChallenge.class) != null){
 			hero.buff(AscensionChallenge.class).onLevelSwitch();

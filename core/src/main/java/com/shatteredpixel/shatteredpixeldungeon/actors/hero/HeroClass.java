@@ -91,7 +91,7 @@ public enum HeroClass {
 	DUELIST( HeroSubClass.CHAMPION, HeroSubClass.MONK ),
 	CLERIC( HeroSubClass.PRIEST, HeroSubClass.PALADIN ),
 	NECROMANCER(HeroSubClass.DEATHSPEAKER, HeroSubClass.HEXWEAVER),
-    ENCHANTER(HeroSubClass.ARTIFICER, HeroSubClass.SCRIVENER);
+    ENCHANTER(HeroSubClass.ARTIFICER, HeroSubClass.SCRIVENER), PSYCHIC(HeroSubClass.PUPPETEER, HeroSubClass.SEER);
 
 	private HeroSubClass[] subClasses;
 
@@ -122,6 +122,7 @@ public enum HeroClass {
 			case NECROMANCER:
                 initNecromancer(hero); break;
             case ENCHANTER: initEnchanter(hero);break;
+            case PSYCHIC: initPsychic(hero);break;
 			case WARRIOR:
 				initWarrior( hero );
 				break;
@@ -158,6 +159,14 @@ public enum HeroClass {
 
 	}
 
+    private static void initPsychic(Hero hero){
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.affect(hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.class);
+        (hero.belongings.weapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.FocusRing()).identify();
+        com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal crystal=new com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal();
+        (hero.belongings.artifact=crystal).identify();crystal.activate(hero);
+        new Food().collect();new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife().quantity(3).collect();
+        new PotionOfMindVision().identify().collect();new ScrollOfMagicMapping().identify();Dungeon.quickslot.setSlot(0,crystal);
+    }
     private static void initEnchanter(Hero hero){
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.affect(hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.class);
         (hero.belongings.weapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RunedBaton()).identify();
@@ -191,6 +200,7 @@ public enum HeroClass {
 				return Badges.Badge.MASTERY_CLERIC;
             case NECROMANCER: return Badges.Badge.MASTERY_NECROMANCER;
             case ENCHANTER: return Badges.Badge.MASTERY_ENCHANTER;
+            case PSYCHIC: return Badges.Badge.MASTERY_PSYCHIC;
 		}
 		return null;
 	}
@@ -301,6 +311,7 @@ public enum HeroClass {
 	}
 
 	public ArmorAbility[] armorAbilities(){
+        if(this==PSYCHIC)return new ArmorAbility[]{new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.PsychicStorm(),new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.MindMeld(),new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.ForceWall()};
         if(this==ENCHANTER)return new ArmorAbility[]{new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Overcharge(),new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Sanctuary(),new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Unmaking()};
         if(this==NECROMANCER)return new ArmorAbility[]{new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.necromancer.CorpseExplosion(),new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.necromancer.DeathPact(),new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.necromancer.BonePrison()};
 		switch (this) {
@@ -320,6 +331,7 @@ public enum HeroClass {
 	}
 
 	public String spritesheet() {
+        if(this==PSYCHIC)return "sprites/hero_psychic.png";
         if(this==ENCHANTER)return "sprites/hero_enchanter.png";
         if(this==NECROMANCER)return "sprites/hero_necromancer.png";
 		switch (this) {
@@ -339,6 +351,7 @@ public enum HeroClass {
 	}
 
 	public String splashArt(){
+        if(this==PSYCHIC)return "interfaces/title_grimhollow.png";
         if(this==ENCHANTER)return "interfaces/title_grimhollow.png";
         if(this==NECROMANCER)return "interfaces/title_grimhollow.png";
 		switch (this) {

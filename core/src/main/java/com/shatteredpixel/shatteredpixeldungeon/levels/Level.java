@@ -158,6 +158,7 @@ public abstract class Level implements Bundlable {
 	
 	public boolean[] heroFOV;
     public SparseArray<Integer> corpses=new SparseArray<>();
+    public SparseArray<Integer> forceOriginal=new SparseArray<>(),forceTurns=new SparseArray<>();
     public SparseArray<Integer> boneOriginal=new SparseArray<>(),boneTurns=new SparseArray<>();
 	
 	public boolean[] passable;
@@ -381,6 +382,7 @@ public abstract class Level implements Bundlable {
 		customWalls = new ArrayList<>();
 		
 		map		= bundle.getIntArray( MAP );
+        int[] forceCells=bundle.getIntArray("force_cells"),forceValues=bundle.getIntArray("force_values");for(int i=0;i<forceCells.length&&i<forceValues.length;i++)map[forceCells[i]]=forceValues[i];
         int[] boneCells=bundle.getIntArray("bone_cells"), boneValues=bundle.getIntArray("bone_values");
         for(int i=0;i<boneCells.length;i++)map[boneCells[i]]=boneValues[i];
         int[] corpseCells=bundle.getIntArray("corpse_cells"), corpseValues=bundle.getIntArray("corpse_values");
@@ -463,6 +465,7 @@ public abstract class Level implements Bundlable {
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
+        bundle.put("force_cells",forceOriginal.keyArray());int[] forceValues=new int[forceOriginal.keyArray().length];int fi=0;for(int cell:forceOriginal.keyArray())forceValues[fi++]=forceOriginal.get(cell);bundle.put("force_values",forceValues);
         bundle.put("bone_cells",boneOriginal.keyArray());int[] original=new int[boneOriginal.keyArray().length];int bi=0;for(int cell:boneOriginal.keyArray())original[bi++]=boneOriginal.get(cell);bundle.put("bone_values",original);
         bundle.put("corpse_cells",corpses.keyArray());int[] values=new int[corpses.keyArray().length];int ci=0;for(int cell:corpses.keyArray())values[ci++]=corpses.get(cell);bundle.put("corpse_values",values);
 		bundle.put( VERSION, Game.versionCode );
@@ -1354,7 +1357,8 @@ public abstract class Level implements Bundlable {
 		int sense = 1;
 		//Currently only the hero can get mind vision
 		if (c.isAlive() && c == Dungeon.hero) {
-			for (Buff b : c.buffs( MindVision.class )) {
+			if(c.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.SeerSight.class)!=null)sense=Math.max(sense,3);
+            for (Buff b : c.buffs( MindVision.class )) {
 				sense = Math.max( ((MindVision)b).distance, sense );
 			}
 			if (c.buff(MagicalSight.class) != null){
@@ -1419,7 +1423,7 @@ public abstract class Level implements Bundlable {
 				}
 			} else {
 
-				int mindVisRange = 0;
+				int mindVisRange = c.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.SeerSight.class)!=null?3:0;
 				if (((Hero) c).hasTalent(Talent.HEIGHTENED_SENSES)){
 					mindVisRange = 1+((Hero) c).pointsInTalent(Talent.HEIGHTENED_SENSES);
 				}

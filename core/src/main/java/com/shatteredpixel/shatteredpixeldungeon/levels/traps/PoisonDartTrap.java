@@ -125,7 +125,7 @@ public class PoisonDartTrap extends Trap {
 												if (reclaimed) Badges.validateDeathFromFriendlyMagic();
 											}
 										}
-										Buff.affect( finalTarget, Poison.class ).set( poisonAmount() );
+										Buff.affect( finalTarget, Poison.class ).set( poisonAmount() );Buff.affect(finalTarget,Poison.class).trapPower=psychicPower;
 										Sample.INSTANCE.play(Assets.Sounds.HIT, 1, 1, Random.Float(0.8f, 1.25f));
 										finalTarget.sprite.bloodBurstA(finalTarget.sprite.center(), dmg);
 										finalTarget.sprite.flash();
@@ -135,7 +135,7 @@ public class PoisonDartTrap extends Trap {
 						return false;
 					} else {
 						finalTarget.damage(Random.NormalIntRange(4, 8) - finalTarget.drRoll(), PoisonDartTrap.this);
-						Buff.affect( finalTarget, Poison.class ).set( poisonAmount() );
+						Buff.affect( finalTarget, Poison.class ).set( poisonAmount() );Buff.affect(finalTarget,Poison.class).trapPower=psychicPower;
 						return true;
 					}
 				} else {

@@ -273,6 +273,13 @@ public abstract class Mob extends Char {
 	protected boolean intelligentAlly = false;
 	
 	protected Char chooseEnemy() {
+        Amok control=buff(Amok.class);
+        if(control!=null&&control.dominated){
+            Mob best=null;
+            for(Mob other:Dungeon.level.mobs)if(other!=this&&other.isAlive()&&other.alignment==Alignment.ENEMY&&other.invisible<=0&&fieldOfView!=null&&fieldOfView[other.pos])
+                if(best==null||Dungeon.level.distance(pos,other.pos)<Dungeon.level.distance(pos,best.pos)||(Dungeon.level.distance(pos,other.pos)==Dungeon.level.distance(pos,best.pos)&&other.pos<best.pos))best=other;
+            if(best!=null)return best;
+        }
 
 		Dread dread = buff( Dread.class );
 		if (dread != null) {
@@ -507,6 +514,7 @@ public abstract class Mob extends Char {
 	}
 
 	protected boolean getCloser( int target ) {
+        if(Dungeon.level.adjacent(pos,target)&&com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.repulse(this,target))return false;
 		
 		if (rooted || target == pos || !Dungeon.level.insideMap(target)) {
 			return false;
@@ -876,6 +884,7 @@ public abstract class Mob extends Char {
 	public void die( Object cause ) {
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.onDeath(this,cause);
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.onDeath(this,cause);
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.onDeath(this,cause);
 
 		if (cause == Chasm.class){
 			//50% chance to round up, 50% to round down

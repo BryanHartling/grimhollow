@@ -641,7 +641,7 @@ public class Item implements Bundlable {
 	}
 
 	public int throwPos( Hero user, int dst){
-		return new Ballistica( user.pos, dst, Ballistica.PROJECTILE ).collisionPos;
+		return new Ballistica( user.pos, dst, Ballistica.PROJECTILE | ((this instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon && user.pointsInTalent(Talent.PERMEABLE)>0)?Ballistica.FORCE_PASS:0) ).collisionPos;
 	}
 
 	public void throwSound(){

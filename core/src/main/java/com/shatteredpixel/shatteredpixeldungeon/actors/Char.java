@@ -817,6 +817,7 @@ public abstract class Char extends Actor {
 	}
 	
 	public void damage( int dmg, Object src ) {
+        dmg=Math.round(dmg*com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap.damagePower(src));
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.markDamage(this,src);
 		
 		if (!isAlive() || dmg < 0) {
@@ -939,7 +940,8 @@ public abstract class Char extends Actor {
 			if (dmg < 0) dmg = 0;
 		}
 		
-		if (buff( Paralysis.class ) != null) {
+		if(this==Dungeon.hero&&buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.class)!=null&&buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.class).dodge(dmg,src))return;
+        if (buff( Paralysis.class ) != null) {
 			buff( Paralysis.class ).processDamage(dmg);
 		}
 
@@ -1259,6 +1261,7 @@ public abstract class Char extends Actor {
 
 	//travelling may be false when a character is moving instantaneously, such as via teleportation
 	public void move( int step, boolean travelling ) {
+        if(com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.repulse(this,step))return;
 
 		if (travelling && Dungeon.level.adjacent( step, pos ) && buff( Vertigo.class ) != null) {
 			sprite.interruptMotion();

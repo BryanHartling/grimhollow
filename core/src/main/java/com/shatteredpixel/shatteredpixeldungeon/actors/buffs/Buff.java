@@ -64,7 +64,9 @@ public class Buff extends Actor {
 		return new HashSet<>(immunities);
 	}
 	
-	public boolean attachTo( Char target ) {
+	public float trapPower=1;
+    public boolean attachTo( Char target ) {
+        trapPower=Math.max(trapPower,com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap.POWER.get());
 
 		if (target.isImmune( getClass() )) {
 			return false;
@@ -147,12 +149,14 @@ public class Buff extends Actor {
 	@Override
 	public void storeInBundle(Bundle bundle) {
 		super.storeInBundle(bundle);
+        if(trapPower>1)bundle.put("trap_power",trapPower);
 		if (mnemonicExtended) bundle.put(MNEMONIC_EXTENDED, mnemonicExtended);
 	}
 
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
+        trapPower=bundle.contains("trap_power")?bundle.getFloat("trap_power"):1;
 		if (bundle.contains(MNEMONIC_EXTENDED)) {
 			mnemonicExtended = bundle.getBoolean(MNEMONIC_EXTENDED);
 		}
@@ -174,6 +178,7 @@ public class Buff extends Actor {
 	//same as append, but prevents duplication.
 	public static<T extends Buff> T affect( Char target, Class<T> buffClass ) {
 		T buff = target.buff( buffClass );
+        if(buff!=null)buff.trapPower=Math.max(buff.trapPower,com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap.POWER.get());
 		if (buff != null) {
 			return buff;
 		} else {

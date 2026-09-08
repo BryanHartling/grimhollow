@@ -1679,7 +1679,7 @@ public class GameScene extends PixelScene {
 	}
 	
 	public static void resetKeyHold(){
-		cellSelector.resetKeyHold();
+		if(cellSelector!=null)cellSelector.resetKeyHold();
 	}
 
 	public static void examineCell( Integer cell ) {

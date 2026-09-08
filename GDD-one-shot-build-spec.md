@@ -1,4 +1,4 @@
-# Game Design Document & Build Specification (v0.5 — second playtest revision)
+# Game Design Document & Build Specification (v0.6 — reference-guided render revision)
 ## Working title: **Grimhollow** (a Shattered Pixel Dungeon derivative)
 
 **Document purpose.** This is a complete, self-contained specification intended to be handed to an autonomous coding agent to produce a playable build in a single run. It defines the deliverable, the technical base, every new class and content item with concrete numbers, the art specification and pipeline, and the acceptance tests the build must pass. Where the spec is silent, follow existing Shattered Pixel Dungeon (SPD) conventions exactly.
@@ -367,7 +367,7 @@ Charges 0–10 (regen 1 per 30 turns, faster with upgrades). Activate: enemies i
 
 ---
 
-## 10. Acceptance tests (37 total; 28–37 in §15.7)
+## 10. Acceptance tests (39 total; 28–39 in §15.7)
 
 Implement as JUnit tests in `core/src/test/` where feasible; otherwise as a headless smoke script.
 
@@ -450,8 +450,10 @@ Headless render each sprite type into an offscreen framebuffer at default zoom a
    - (i) **Stale-save hardening**: a save slot whose data cannot be loaded (version mismatch, missing sprite, exception during portrait build) shows "Incompatible save" with a delete option instead of crashing. Test 34.
    - (j) **Launchers** per §13.7.
    Tag `v0.3.2-fixup2`.
-5. **Rendered-art proof of concept (§15.1–15.4):** Blender headless pipeline; Sewers tiles/walls, rat, crab, and the Necromancer rendered and post-processed; side-by-side comparison image against the procedural output committed under `verification/`. Tag `v0.4.0-render-poc`. **Stop and wait for human judgment before stage 6.**
-6. **Rendered-art coverage (§15.5):** on approval, all five regions, all mobs, all heroes, all items, and title art through the Blender pipeline; test 17 passes.
+5. ~~Rendered-art proof of concept~~ done (`v0.4.0-render-poc`, commit `07519a5`). **Human review outcome:** environment renders regressed against the procedural output (uniform fine brick grid, no relief or AO, flat water); character renders are not viable from primitive-built geometry. Decision: Blender continues for environments, props, items, and effects only; characters are removed from the Blender scope (see §15.5 revision).
+5.5. **Reference board (§15.8.1):** populate `references/` from `references/references.md`, CC0 or public domain only. Commit. **Stop for human review of the folder.** Tag `v0.4.1-references`.
+5.6. **Reference-guided environment iteration (§15.8.2–15.8.4):** on approval, run the loop for Sewers floor, wall, water, door, decor, and wall torch. Commit the score history and the final side-by-side. Tag `v0.4.2-sewers-iterated`. **Stop for human review.**
+6. **Rendered-art coverage (§15.5, revised):** on approval, the remaining four regions through the same loop, then all items and props, title art, and effects sources. Characters and mobs use the procedural pipeline with the §15.5 silhouette redesign. Test 17 passes.
 7. **Enhanced effects (§15.6):** animated gas, fire and scorch, grass, water, spell and curse effects. Tag `v0.5.0-rendered`.
 8. **§9 content**, in listed order.
 
@@ -557,8 +559,8 @@ Rationale: the procedural Pillow pipeline plateaus at "clean pixel art." The tar
 ### 15.4 Proof of concept (stage 5)
 Render and post-process: Sewers floor, wall, water, grass, and door tiles; rat; crab; Necromancer (all armor tiers); Skeleton and Ghoul minions. Produce `verification/render-poc.png`: a 2×N side-by-side of the procedural and rendered versions of each asset at 4× zoom, plus one in-game screenshot of a Sewers room with the rendered set. Commit and tag. Do not proceed to stage 6 without human approval recorded in the next continuation prompt.
 
-### 15.5 Coverage (stage 6)
-All five regions with decor; all upstream mobs and bosses; all nine heroes with armor tiers; all items; title wordmark and background; talent icons for §6–8. Test 17 passes with the render cache as source. The Pillow generators for these assets are removed once their rendered replacements pass validation; the post-process and validator stay.
+### 15.5 Coverage (stage 6, revised after the POC review)
+**Blender scope:** all five regions with decor and props; all items; title wordmark and background; effects sources (§15.6). **Not Blender:** heroes, mobs, bosses, and minions. Character sheets are produced by the procedural (Pillow) pipeline with a **silhouette redesign**: silhouettes authored natively at 48×60 as vector shapes with a hood/helm/shell cue that reads at 16 px, 3–4 tone shading bands, a soft drop shadow, and the §5.3 constraints; references `references/ref-25` to `ref-30` and the §D notes guide the shapes. The Blender character rigs from the POC are retained under `tools/artgen/blender/experimental/` but not used for shipped assets. Test 17 passes with the render cache (environments, items, effects) plus the procedural character sheets as sources.
 
 ### 15.6 Enhanced effects (stage 7)
 Presentation only. No change to any mechanic, cell logic, duration, spread rate, or damage. Gated behind a new Settings → Display toggle "Enhanced effects" (default on); when off, upstream rendering is used.
@@ -569,6 +571,33 @@ Presentation only. No change to any mechanic, cell logic, duration, spread rate,
 - **Spells and curses:** rendered strips for necrotic particles, curse ring (Hexweaver curses), inscription glyphs (Enchanter), psychic ring (Psychic), bone wall and force wall, corpse explosion burst, Sanctuary zone edge. Replace the programmatic circles and squares from stage 2–4 with these; keep the same sizes and durations.
 - **Torches:** wall torch flame uses the flame strip at 32 px with a 4-frame flicker; light radius unchanged.
 - **Performance:** all effect sheets in one atlas ≤ 2048×2048; per-frame cost of enhanced effects on a floor with 40 gas cells and 10 fire cells must stay under 2 ms on the desktop headless timing harness (extend test 19 with this scenario).
+
+### 15.8 Reference-guided iteration (environments, water, lighting, props)
+
+#### 15.8.1 Reference board
+`references/references.md` is the board specification: numbered images with intended use, region, material, qualities, measurable targets, and weights. Populate `references/` as follows:
+- For each numbered row, obtain an image matching the row's *qualities* from a CC0 or public-domain source (Poly Haven, ambientCG, Wikimedia Commons, StockCake free license, Unsplash/Pexels licenses acceptable). Record the actual source URL and license in a `references/SOURCES.md` table (file, URL, license, retrieved date).
+- Also obtain the "also gather" items listed in sections C, D, and E of the board, numbering them 34 onward and appending rows to `references.md` in the same format.
+- Reject any image that is a game screenshot, game concept art, or a recognisable copyrighted character; §G of the board is a hard rule.
+- Do not proceed to §15.8.2 until the folder has been reviewed by a human (stage 5.5 stop).
+
+#### 15.8.2 The loop
+For each asset class in scope (per region: floor tiles, wall tiles, water/sewage, doors, decor props, wall torch; global: item props, title background), iterate:
+1. **Render** the asset class from the current Blender parameters (`tools/artgen/blender/params/<class>.json`).
+2. **Post-process** through the standard pipeline and run the validator; a validator failure is a failed round regardless of score.
+3. **Score** against the class's reference images (rows tagged for that class and region), computing each *measurable target* from the board and a weighted composite in [0, 1]; also compute the global targets in board §F. Record everything to `verification/iteration/<class>/round-NN.json` with the render PNG beside it.
+4. **Critique**: view the render and the top-weighted reference side by side and write a ≤ 3-line note on the largest visible gap (scale, value range, specular, seam, silhouette). Save as `round-NN.md`.
+5. **Adjust** parameters in the direction the critique and the failing targets indicate. Never edit the reference images or the targets.
+6. Stop when composite ≥ 0.85 with all global targets met, or after 12 rounds, whichever first. Keep the best-scoring passing round as the shipped parameters.
+
+#### 15.8.3 Constraints on the loop
+- Parameter space only: material node values, displacement depth and frequency, flagstone/brick count per tile, mortar width and depth, wall extrusion height, light rig angle/strength (within ±15° and ±30% of §15.2), water surface roughness/depth gradient/specular, decor density, quantization tone curve. No changes to camera projection, frame sizes, animation counts, or palette.
+- Tile seams are checked every round (2×2 tiling, no repeated feature at the boundary).
+- The in-game screenshot for review is taken **with dynamic lighting on** at default zoom in a generated Sewers room containing water, a bridge, a door, decor, and one wall torch.
+- The loop does not run on characters or mobs (see §15.5).
+
+#### 15.8.4 Review deliverable
+`verification/iteration/summary.png`: for each class, a row showing the top reference, the procedural version, POC round 0, and the best round, at 4× zoom, with the composite score history as a small line under it. Plus the in-game screenshot. Commit and stop.
 
 ### 15.7 Acceptance tests (extend §10)
 28. `python tools/artgen/build.py` (no `--render`) reproduces `assets/` byte-for-byte from the committed render cache.
@@ -581,3 +610,5 @@ Presentation only. No change to any mechanic, cell logic, duration, spread rate,
 35. Attribution scrub per §13.6.
 36. Every `HeroClass` has a non-empty avatar frame and a splash image; every `Talent` has a non-empty icon frame; an `ItemSlot` rendered with any item fills ≥ 70% of the slot.
 37. Rune Etching: Etch moves it to the wielded weapon and carries one upgrade level; the new weapon rolls a common enchantment on the next floor entry alongside its permanent one; dropping the carrying weapon returns the Etching to inventory; the Etching itself cannot be dropped.
+38. Reference board: every row in `references.md` has a file, a `SOURCES.md` entry with URL and license, and the license is on the allowed list; no file's perceptual hash matches any entry in a small blocklist of well-known game screenshots the run compiles from the §G list.
+39. Iteration loop: for each in-scope class, ≥ 1 round recorded, best round passes the validator and all §F global targets, and the seam test passes.

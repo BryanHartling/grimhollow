@@ -235,5 +235,14 @@
     "tiles/door_1.png": "fcb88d8a5bd9948a3fec42086042cdd3fdcfe5d2bde467c5f93725ad13916bcc",
     "tiles/door_2.png": "a043da112c5aa6edbdb92ae4c429d79630381272a17b9f5a14e9325c5abb851b"
   },
-  "reference_board_sha256": "60b32e4d79fce004e304853bfa926b135cba355ad307554daac0337ed6e0cf57"
+  "reference_board_sha256": "60b32e4d79fce004e304853bfa926b135cba355ad307554daac0337ed6e0cf57",
+  "post_pack_validation": {
+    "passed": true,
+    "assets": [
+      "core/src/main/assets/environment/tiles_sewers.png",
+      "core/src/main/assets/environment/walls_sewers.png"
+    ],
+    "finding": "All generated atlas checks pass after shared upright-component fitting.",
+    "evidence": "verification/art-validation.log"
+  }
 }

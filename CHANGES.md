@@ -1010,3 +1010,4 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `verification/junit-summary.log` — Append actual stage-5.6 command evidence to the existing verification log.
 - `verification/new-class-smoke.log` — Append actual stage-5.6 command evidence to the existing verification log.
 - `verification/reproducibility.log` — Append actual stage-5.6 command evidence to the existing verification log.
+- `verification/iteration/door/round-02.json` — Record the later masked-atlas failure as a failed round while preserving its standalone measurements; round 03 records the passing correction.

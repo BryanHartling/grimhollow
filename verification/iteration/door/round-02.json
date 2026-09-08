@@ -228,12 +228,21 @@
       "validator_pass": true
     }
   ],
-  "passing": true,
-  "converged": true,
+  "passing": false,
+  "converged": false,
   "cache_sha256": {
     "tiles/door_0.png": "887c0f1642bbbdbda4047c000e63a1273f2ee0e0b3a6f69c65e12a933150b3e7",
     "tiles/door_1.png": "50808c171ee71d250168a4d577da0a0c235631a57a07e3805fe9bdc9fa155ae3",
     "tiles/door_2.png": "b12a02652398a8667bed7c21a4fe6fecf5af3cc61e714765ff57e87381b19453"
   },
-  "reference_board_sha256": "60b32e4d79fce004e304853bfa926b135cba355ad307554daac0337ed6e0cf57"
+  "reference_board_sha256": "60b32e4d79fce004e304853bfa926b135cba355ad307554daac0337ed6e0cf57",
+  "post_pack_validation": {
+    "passed": false,
+    "assets": [
+      "core/src/main/assets/environment/tiles_sewers.png",
+      "core/src/main/assets/environment/walls_sewers.png"
+    ],
+    "finding": "Final atlas validation found luminance std below .08 in frames 227, 228 and 229 of both Sewer sheets; this invalidates the earlier standalone-render pass.",
+    "evidence": "verification/art-validation.log"
+  }
 }

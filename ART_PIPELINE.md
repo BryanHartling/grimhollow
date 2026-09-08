@@ -42,7 +42,7 @@ python tools/artgen/validate.py --rebuild
 python tools/artgen/validate.py --rerender --generated-only
 ```
 
-Recorded rounds are immutable. Use the next unused round number (maximum 12); `--class`
+Recorded parameters, scores and renders are preserved. Later atlas findings are appended to the same record; a newly discovered failure changes its pass status without erasing the original measurements. Use the next unused round number (maximum 12); `--class`
 records only that class. `--asset water`, `--asset decor`, and `--asset wall_torch` render
 one class; `--asset door` includes both door states. Stop a class at composite >= 0.85 with
 all applicable global checks passing, otherwise keep its best passing round at round 12.

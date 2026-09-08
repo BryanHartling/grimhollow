@@ -1,1 +1,8 @@
 PASS: clean-clone art rebuild; git status --porcelain produced no output.
+
+POC rendering complete: 282 rendered files
+TEST 29: 282 cached frames; max pHash distance=2; failures=0
+Validated 64 generated specifications; 0 failures. Subset diagnostic only.
+
+
+Stage 5 final post-process: TEST 28: 64 rebuilt files; byte differences=0; Blender not invoked. Full art gate retains the two deferred-coverage failures (100 sheets).

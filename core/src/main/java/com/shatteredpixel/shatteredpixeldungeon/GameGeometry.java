@@ -23,7 +23,9 @@ public final class GameGeometry {
     public static final int TEX_ITEM = ITEM_ICON, LOGICAL_ITEM = 8;
     public static final int HERO_DENSITY = HERO_FRAME_W / LEGACY_HERO_FRAME_W;
     public static final int ITEM_DENSITY = TEX_ITEM / LEGACY_ITEM_ICON;
+    private static final String[] RENDERED_CHARACTERS={"sprites/rat.png","sprites/crab.png","sprites/minion_skeleton.png","sprites/minion_ghoul.png"};
     public static int characterDensity(Object texture) {
+        for(String path:RENDERED_CHARACTERS)if(path.equals(texture)||texture==com.watabou.gltextures.TextureCache.get(path))return 4;
         if (texture instanceof String) return ((String)texture).startsWith("sprites/hero_") ? HERO_DENSITY : 1;
         // Converted hero atlases retain upstream's eight armor rows and padding.
         if (texture instanceof com.watabou.gltextures.SmartTexture) {

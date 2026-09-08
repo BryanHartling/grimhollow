@@ -29,6 +29,15 @@ def validate(generated_only=False):
         if list(image.size)!=spec['dimensions']: errors.append(f'{spec["output"]}: wrong dimensions')
         pixels=np.array(image); visible=pixels[:,:,3]>0
         if not visible.any(): errors.append(f'{spec["output"]}: empty asset'); continue
+        if spec.get('rendered_character'):
+            fw,fh=spec['frame']
+            for row in range(spec.get('tiers',1)):
+                for index,pose in enumerate(spec['layout']):
+                    frame=pixels[row*fh:(row+1)*fh,index*fw:(index+1)*fw];active=frame[:,:,3]>0
+                    if not active.any():errors.append(f'{spec["output"]}: empty rendered tier {row} frame {index}')
+                    if pose.startswith('idle') and active.any():
+                        y=np.where(active)[0];occupancy=(y.max()-y.min()+1)/fh
+                        if not .60<=occupancy<=.85:errors.append(f'{spec["output"]}: idle occupancy {occupancy:.3f} outside .60-.85')
         unique=np.unique(pixels[:,:,:3][visible],axis=0)
         for chunk in np.array_split(lab(unique),max(1,len(unique)//128)):
             delta=np.sqrt(((chunk[:,None,:]-palette_lab[None,:,:])**2).sum(axis=2)).min(axis=1)
@@ -59,5 +68,21 @@ def validate(generated_only=False):
     return bool(errors)
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser(); parser.add_argument('--generated-only',action='store_true')
-    sys.exit(validate(parser.parse_args().generated_only))
+    parser=argparse.ArgumentParser(); parser.add_argument('--generated-only',action='store_true');parser.add_argument('--rerender',action='store_true');parser.add_argument('--rebuild',action='store_true')
+    args=parser.parse_args();render_fail=False
+    if args.rebuild:
+        import hashlib
+        from build import build
+        paths=[ROOT/json.loads(p.read_text())['output'] for p in SPEC_DIR.glob('*.json')]
+        before={p:hashlib.sha256(p.read_bytes()).hexdigest() for p in paths};build()
+        changes=[p for p,sha in before.items() if hashlib.sha256(p.read_bytes()).hexdigest()!=sha]
+        render_fail=bool(changes);print(f'TEST 28: {len(paths)} rebuilt files; byte differences={len(changes)}; Blender not invoked')
+    if args.rerender:
+        from rendered import CACHE,phash
+        from build import render,build
+        before={p:phash(p) for p in CACHE.rglob('*.png')};render();build()
+        changed=[(str(p.relative_to(CACHE)),int(np.count_nonzero(bits!=phash(p)))) for p,bits in before.items()]
+        bad=[(name,bits) for name,bits in changed if bits>2];render_fail=render_fail or bool(bad) or not before
+        for name,bits in bad:print('FAIL: render pHash',name,bits,'bits')
+        print(f'TEST 29: {len(changed)} cached frames; max pHash distance={max((v for _,v in changed),default=-1)}; failures={len(bad)}')
+    sys.exit(validate(args.generated_only) or render_fail)

@@ -39,17 +39,19 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if (!(Game.scene() instanceof TitleScene)) throw new AssertionError("Title scene did not launch");
             capture("title");
             if (!sewers) { Gdx.app.exit(); return; }
-            GamesInProgress.selectedClass=HeroClass.WARRIOR;
+            GamesInProgress.selectedClass=Boolean.getBoolean("grimhollow.renderPoc")?HeroClass.NECROMANCER:HeroClass.WARRIOR;
             GamesInProgress.curSlot=99;
             Dungeon.seed=417;
             Dungeon.init();
             Dungeon.switchLevel(Dungeon.newLevel(),-1);
+            if(Boolean.getBoolean("grimhollow.renderPoc"))pocRoom();
             InterlevelScene.mode=InterlevelScene.Mode.DESCEND;
             SPDSettings.dynamicLighting(true);
             switchNoFade(GameScene.class);
         } else if (sewers && frames==360) {
             if (!(Game.scene() instanceof GameScene)) throw new AssertionError("Sewer scene did not launch");
             capture("sewers-lighting-on");
+            if(Boolean.getBoolean("grimhollow.renderPoc")){Pixmap shot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());PixmapIO.writePNG(Gdx.files.absolute("verification/render-poc-ingame.png"),shot,-1,true);shot.dispose();}
             SPDSettings.dynamicLighting(false);
         } else if (sewers && frames==420) {
             capture("sewers-lighting-off");
@@ -58,6 +60,27 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             System.out.println("PASS: Sewer scene renders with dynamic lighting on and off.");
             Gdx.app.exit();
         }
+    }
+
+    private void pocRoom(){
+        com.shatteredpixel.shatteredpixeldungeon.levels.Level level=Dungeon.level;
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:level.mobs.toArray(new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob[0]))com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(mob);
+        level.mobs.clear();level.heaps.clear();level.traps.clear();int w=level.width(),c=w*(level.height()/2)+w/2;
+        for(int y=-4;y<=4;y++)for(int x=-5;x<=5;x++){
+            int cell=c+x+y*w,tile=(Math.abs(x)==5||Math.abs(y)==4)?com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WALL:com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.EMPTY;
+            if(x<-2&&Math.abs(y)<3)tile=com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WATER;
+            if(x>2&&y>0&&y<4)tile=com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.GRASS;
+            com.shatteredpixel.shatteredpixeldungeon.levels.Level.set(cell,tile);
+        }
+        com.shatteredpixel.shatteredpixeldungeon.levels.Level.set(c+4*w,com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.DOOR);
+        level.cleanWalls();Dungeon.hero.pos=c;Dungeon.hero.viewDistance=8;
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroSkeleton skeleton=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroSkeleton();skeleton.configure(1);skeleton.pos=c-1;
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroGhoul ghoul=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroGhoul();ghoul.configure(1);ghoul.pos=c+1;
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat rat=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();rat.pos=c+2-2*w;
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Crab crab=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Crab();crab.pos=c-2-2*w;
+        // Keep the comparison fixture posed; normal runs and AI acceptance use live states.
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob[]{skeleton,ghoul,rat,crab}){mob.state=mob.PASSIVE;level.mobs.add(mob);com.shatteredpixel.shatteredpixeldungeon.actors.Actor.add(mob);}
+        Dungeon.observe();
     }
 
     /** Acceptance 24-26 use actual sprite draws into an RGBA framebuffer. No scene screenshots are measured. */

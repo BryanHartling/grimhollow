@@ -1096,3 +1096,5 @@ Class-only -PsmokeClass=NECROMANCER / ENCHANTER / PSYCHIC: Runs=10 failures=0 ea
 TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment.
 
 Stage 3.5: Enchanter-only Runs=10 failures=0; combined Runs=30 failures=0. TEST 33 PASS: scroll/stone offers, cancellation/application, Artificer, Scrivener, saved history. TEST 37 additionally checks replacement floor rolls alongside permanent enchantment. Initial combined run exposed a zero-damage rat attack in test 13; zero-armor fixture correction passed with unchanged targeting/damage assertions.
+
+Stage 5: gradlew.bat desktop:dist core:test core:smokeRun -PsmokeUpstream=true -PdesktopOnly=true --no-daemon: BUILD SUCCESSFUL; Runs=90 failures=0. JUnit tests=4 failures=0 errors=0.

@@ -377,3 +377,398 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - The Rune Etching's current enchantment and carried upgrade are shown on its carrier's item description.
 
 - The existing domination fixture uses zero armor for its victim, preserving its damage assertion while removing the legal one-damage/one-armor zero-hit flake exposed by changed Runecraft RNG consumption.
+
+- POC animation renders are fitted into the existing upstream frame layouts; no world-unit or frame-index changes are made. The fixed raw camera projects a one-metre biped height to 60 pixels before atlas fitting.
+- Skeleton and Ghoul minions receive dedicated rendered textures while hostile variants keep their existing assets until stage 6; shared texture-density handling covers the converted atlases.
+- The POC replaces the requested Sewers material frames while retaining upstream transparency masks for autotiling; unrequested props and regions remain on the procedural or upstream path.
+
+- Shared rat/crab atlases retain pipeline-generated variant rows outside the rendered POC; replacing only the requested rows prevents four empty variant sprites without starting stage 6.
+- `android/src/main/java/com/shatteredpixel/shatteredpixeldungeon/android/AndroidLauncher.java` — Support the staged Grimhollow implementation and its documented verification.
+- `android/src/main/java/com/shatteredpixel/shatteredpixeldungeon/android/AndroidMissingNativesHandler.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/environment/water0.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/messages/journal/journal.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/levels/levels.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/misc/misc.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_be.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_cs.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_de.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_el.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_eo.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_es.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_fr.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_hu.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_in.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_it.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_ja.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_ko.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_nl.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_pl.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_pt.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_ru.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_sv.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_tr.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_uk.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_vi.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_zh-hant.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/scenes/scenes_zh.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/ui/ui.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_be.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_cs.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_de.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_el.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_eo.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_es.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_fr.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_hu.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_in.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_it.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_ja.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_ko.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_nl.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_pl.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_pt.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_ru.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_sv.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_tr.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_uk.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_vi.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_zh-hant.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/messages/windows/windows_zh.properties` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/assets/splashes/cleric.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/splashes/duelist.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/splashes/enchanter.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/splashes/huntress.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/splashes/mage.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/splashes/necromancer.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/splashes/psychic.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/splashes/rogue.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/splashes/warrior.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/sprites/crab.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/sprites/minion_ghoul.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/sprites/minion_skeleton.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/assets/sprites/rat.png` — Pipeline-generated rendered POC output or requested verification image.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/GamesInProgress.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/KindOfWeapon.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/RuneEtching.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/Runecraft.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/Stylus.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/scrolls/exotic/ScrollOfEnchantment.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/stones/StoneOfEnchantment.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/NewsScene.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/StartScene.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/SupporterScene.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/TitleScene.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/NecroGhoulSprite.java` — Use the dedicated rendered Ghoul minion texture.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/Icons.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/ItemSlot.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/TalentIcon.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndSupportPrompt.java` — Support the staged Grimhollow implementation and its documented verification.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndVictoryCongrats.java` — Support the staged Grimhollow implementation and its documented verification.
+- `services/news/shatteredNews/src/main/java/com/shatteredpixel/shatteredpixeldungeon/services/news/ShatteredNews.java` — Support the staged Grimhollow implementation and its documented verification.
+- `tools/artgen/blender/materials.py` — Define the shared Blender POC scene, rig, material or animation source.
+- `tools/artgen/blender/render.py` — Define the shared Blender POC scene, rig, material or animation source.
+- `tools/artgen/blender/rig_biped.py` — Define the shared Blender POC scene, rig, material or animation source.
+- `tools/artgen/blender/rig_blob.py` — Define the shared Blender POC scene, rig, material or animation source.
+- `tools/artgen/blender/rig_quad.py` — Define the shared Blender POC scene, rig, material or animation source.
+- `tools/artgen/install_blender.py` — Install the pinned portable Blender release after SHA-256 verification.
+- `tools/artgen/render_cache/crab/0/attack_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/attack_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/attack_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/attack_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/attack_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/die_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/die_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/die_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/die_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/die_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/idle_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/idle_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/run_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/run_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/run_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/run_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/run_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/run_5.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/special_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/special_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/special_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/crab/0/special_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/attack_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/attack_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/attack_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/attack_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/attack_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/die_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/die_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/die_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/die_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/die_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/idle_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/idle_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/run_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/run_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/run_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/run_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/run_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/run_5.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/special_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/special_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/special_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/ghoul/0/special_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/attack_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/attack_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/attack_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/attack_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/attack_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/die_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/die_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/die_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/die_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/die_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/idle_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/idle_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/run_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/run_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/run_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/run_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/run_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/run_5.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/special_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/special_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/special_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/0/special_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/attack_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/attack_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/attack_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/attack_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/attack_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/die_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/die_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/die_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/die_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/die_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/idle_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/idle_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/run_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/run_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/run_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/run_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/run_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/run_5.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/special_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/special_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/special_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/1/special_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/attack_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/attack_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/attack_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/attack_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/attack_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/die_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/die_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/die_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/die_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/die_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/idle_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/idle_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/run_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/run_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/run_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/run_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/run_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/run_5.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/special_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/special_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/special_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/2/special_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/attack_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/attack_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/attack_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/attack_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/attack_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/die_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/die_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/die_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/die_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/die_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/idle_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/idle_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/run_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/run_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/run_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/run_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/run_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/run_5.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/special_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/special_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/special_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/3/special_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/attack_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/attack_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/attack_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/attack_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/attack_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/die_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/die_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/die_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/die_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/die_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/idle_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/idle_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/run_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/run_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/run_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/run_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/run_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/run_5.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/special_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/special_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/special_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/4/special_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/attack_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/attack_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/attack_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/attack_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/attack_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/die_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/die_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/die_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/die_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/die_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/idle_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/idle_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/run_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/run_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/run_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/run_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/run_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/run_5.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/special_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/special_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/special_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/5/special_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/attack_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/attack_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/attack_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/attack_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/attack_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/die_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/die_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/die_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/die_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/die_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/idle_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/idle_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/run_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/run_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/run_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/run_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/run_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/run_5.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/special_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/special_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/special_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/6/special_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/attack_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/attack_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/attack_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/attack_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/attack_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/die_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/die_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/die_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/die_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/die_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/idle_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/idle_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/run_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/run_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/run_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/run_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/run_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/run_5.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/special_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/special_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/special_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/necromancer/7/special_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/attack_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/attack_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/attack_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/attack_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/attack_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/die_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/die_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/die_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/die_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/die_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/idle_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/idle_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/run_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/run_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/run_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/run_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/run_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/run_5.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/special_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/special_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/special_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/rat/0/special_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/attack_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/attack_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/attack_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/attack_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/attack_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/die_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/die_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/die_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/die_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/die_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/idle_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/idle_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/run_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/run_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/run_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/run_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/run_4.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/run_5.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/special_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/special_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/special_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/skeleton/0/special_3.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/door_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/door_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/door_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/door_open_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/door_open_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/door_open_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/floor_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/floor_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/floor_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/grass_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/grass_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/grass_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/wall_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/wall_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/wall_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/water_0.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/water_1.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/render_cache/tiles/water_2.png` — Committed Blender source frame; regenerated by the seeded render pipeline.
+- `tools/artgen/rendered.py` — Post-process committed renders and generate the side-by-side POC comparison.
+- `tools/artgen/specs/render_crab.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/render_ghoul.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/render_rat.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/render_skeleton.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/render_water.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/splash_cleric.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/splash_duelist.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/splash_enchanter.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/splash_huntress.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/splash_mage.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/splash_necromancer.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/splash_psychic.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/splash_rogue.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/artgen/specs/splash_warrior.json` — Map pipeline-owned rendered frames into the upstream atlas layout.
+- `tools/play.bat` — Support the staged Grimhollow implementation and its documented verification.
+- `tools/rebuild.bat` — Support the staged Grimhollow implementation and its documented verification.
+- `verification/render-poc-ingame.png` — Pipeline-generated rendered POC output or requested verification image.
+- `verification/render-poc.png` — Pipeline-generated rendered POC output or requested verification image.

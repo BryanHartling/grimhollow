@@ -282,6 +282,7 @@ public class GameScene extends PixelScene {
 				Blending.enable();
 			}
 		};
+		if(Dungeon.level.waterTex().equals(Assets.Environment.WATER_SEWERS))water.scale(.25f,.25f);
 		water.autoAdjust = true;
 		terrain.add( water );
 

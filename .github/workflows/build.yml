@@ -25,7 +25,7 @@ jobs:
         shell: bash
         run: ./gradlew desktop:dist -PdesktopOnly=true --console=plain
       - name: Full art acceptance gate
-        run: python tools/artgen/validate.py
+        run: python tools/artgen/validate.py --rebuild
       - name: JUnit tests
         if: ${{ !cancelled() }}
         shell: bash

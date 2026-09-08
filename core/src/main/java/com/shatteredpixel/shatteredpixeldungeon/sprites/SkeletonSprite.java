@@ -28,10 +28,11 @@ import com.watabou.noosa.TextureFilm;
 
 public class SkeletonSprite extends MobSprite {
 	
+	protected String textureFile(){return Assets.Sprites.SKELETON;}
 	public SkeletonSprite() {
 		super();
 		
-		texture( Assets.Sprites.SKELETON );
+		texture( textureFile() );
 		
 		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 15 );
 		

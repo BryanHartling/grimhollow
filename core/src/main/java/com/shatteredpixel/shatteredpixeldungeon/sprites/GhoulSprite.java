@@ -28,10 +28,11 @@ public class GhoulSprite extends MobSprite {
 
 	private Animation crumple;
 	
+	protected String textureFile(){return Assets.Sprites.GHOUL;}
 	public GhoulSprite() {
 		super();
 		
-		texture( Assets.Sprites.GHOUL );
+		texture( textureFile() );
 		
 		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 14 );
 

@@ -15,7 +15,7 @@ COLORS = np.array([tuple(bytes.fromhex(x)) for x in PALETTE], dtype=np.uint8)
 def locked(path):
     return path.with_suffix(path.suffix+'.lock').exists() or path.with_suffix('.lock').exists()
 
-def paint(spec):
+def procedural(spec):
     w,h = spec['dimensions']
     if spec['kind']=='talents':
         image=Image.new('RGBA',(w,h));d=ImageDraw.Draw(image)
@@ -63,16 +63,17 @@ def paint(spec):
             elif shape['type']=='line': draw.line([tuple(p) for p in points], fill=color, width=shape.get('width',1))
         if spec['kind']=='hero':
             image=Image.new('RGBA',(w,h))
-            for y in range(sh//15):
-                for x in range(sw//12):
-                    frame=original.crop((x*12,y*15,x*12+12,y*15+15))
+            sfw,sfh=spec.get("source_frame",[12,15]);fw,fh=spec.get("frame",[48,60])
+            for y in range(sh//sfh):
+                for x in range(sw//sfw):
+                    frame=original.crop((x*sfw,y*sfh,x*sfw+sfw,y*sfh+sfh))
                     box=frame.getbbox()
                     if not box: continue
-                    frame=frame.crop(box); ratio=min(42/frame.width,46/frame.height)
+                    frame=frame.crop(box); ratio=min((fw-6)/frame.width,(fh-14)/frame.height)
                     frame=frame.resize((int(frame.width*ratio),int(frame.height*ratio)),Image.Resampling.NEAREST)
-                    tile=Image.new('RGBA',(48,60)); tile.alpha_composite(frame,((48-frame.width)//2,54-frame.height))
-                    outline=Image.new('RGBA',(48,60),'#0E0D0C'); outline.putalpha(tile.getchannel('A').filter(ImageFilter.MaxFilter(5)))
-                    outline.alpha_composite(tile); image.alpha_composite(outline,(x*48,y*60))
+                    tile=Image.new('RGBA',(fw,fh)); tile.alpha_composite(frame,((fw-frame.width)//2,fh-6-frame.height))
+                    outline=Image.new('RGBA',(fw,fh),'#0E0D0C'); outline.putalpha(tile.getchannel('A').filter(ImageFilter.MaxFilter(5)))
+                    outline.alpha_composite(tile); image.alpha_composite(outline,(x*fw,y*fh))
         else:
             image=original.resize((w,h),Image.Resampling.NEAREST)
         pixels=np.array(image); yy,xx=np.indices((h,w),dtype=np.int64)
@@ -124,6 +125,23 @@ def paint(spec):
     # Nearest sampling keeps the finite palette exact even on tiny launcher icons.
     return canvas.resize((w,h),Image.Resampling.NEAREST)
 
+def paint(spec):
+    import rendered
+    if spec.get('rendered_character'):return rendered.character(spec,procedural(spec))
+    if spec.get('rendered_water'):return rendered.tile('water')
+    base=procedural(spec)
+    return rendered.apply_tiles(spec,base) if spec.get('rendered_tiles') else base
+
+def render(asset=None):
+    import os,subprocess
+    blender=Path(os.environ.get('BLENDER',ROOT/'.toolchain/blender/blender.exe'))
+    env=os.environ.copy();env['BLENDER_USER_CONFIG']=str(ROOT/'.toolchain/blender/config')
+    command=[str(blender),'-b','-t','4','--python-exit-code','1','-P',str(Path(__file__).parent/'blender/render.py')]
+    if asset:command+=['--','--asset',asset]
+    subprocess.run(command,check=True,env=env)
+    import rendered
+    rendered.tile.cache_clear()
+
 def build():
     for source in sorted(SPEC_DIR.glob('*.json')):
         spec = json.loads(source.read_text())
@@ -136,5 +154,12 @@ def build():
         elif path.suffix == '.icns': image.save(path,format='ICNS')
         else: image.save(path,format='PNG',compress_level=9,optimize=False)
         print(hashlib.sha256(path.read_bytes()).hexdigest(),spec['output'])
+    if (Path(__file__).parent/'render_cache/necromancer/0/idle_0.png').exists():
+        import rendered
+        rendered.comparison([json.loads(p.read_text()) for p in sorted(SPEC_DIR.glob('*.json'))],procedural)
 
-if __name__ == '__main__': build()
+if __name__ == '__main__':
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('--render',action='store_true');parser.add_argument('--asset');args=parser.parse_args()
+    if args.render:render(args.asset)
+    build()

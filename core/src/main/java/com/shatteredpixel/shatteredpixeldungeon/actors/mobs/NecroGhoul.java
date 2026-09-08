@@ -6,7 +6,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.GhoulSprite;
 import com.watabou.utils.Random;
 public class NecroGhoul extends NecroSkeleton {
-    {spriteClass=GhoulSprite.class;remaining=40;}
+    {spriteClass=com.shatteredpixel.shatteredpixeldungeon.sprites.NecroGhoulSprite.class;remaining=40;}
     private boolean risen;
     @Override protected int baseHealth(){return 30+6*summonerLevel;}
     @Override public int damageRoll(){return Math.round(Random.NormalIntRange(4+summonerLevel/2,8+summonerLevel)*growth())+Necromancy.points(Talent.DEATHSPEAKERS_COMMAND);}

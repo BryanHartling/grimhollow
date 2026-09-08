@@ -1,4 +1,4 @@
-# Game Design Document & Build Specification (v0.2 — continuation revision)
+# Game Design Document & Build Specification (v0.3 — playtest revision)
 ## Working title: **Grimhollow** (a Shattered Pixel Dungeon derivative)
 
 **Document purpose.** This is a complete, self-contained specification intended to be handed to an autonomous coding agent to produce a playable build in a single run. It defines the deliverable, the technical base, every new class and content item with concrete numbers, the art specification and pipeline, and the acceptance tests the build must pass. Where the spec is silent, follow existing Shattered Pixel Dungeon (SPD) conventions exactly.
@@ -158,11 +158,27 @@ Enum entry `NECROMANCER`; subclass entries `DEATHSPEAKER`, `HEXWEAVER`. Sprite `
 ### 6.1 Stats and kit
 - Base stats identical to Mage (HP 20, +5/level; str 10).
 - **Bone Rod** (`items/weapon/melee/BoneRod.java`): tier 1, dmg 1–6, str req 10, delay 1. Unique class weapon (like Mage's Staff): cannot be dropped, can be upgraded. On killing blow: `Phylactery.gainCharge(1)`.
-- **Phylactery** (`items/Phylactery.java`): equipped in a dedicated slot like the Cleric's Holy Tome; charges start 0, cap 3 (5 for Deathspeaker). No time regen. `gainCharge` on any kill by hero or hero-owned minion. Opens a radial spell menu.
-- **Raise Skeleton** (1 charge): spawns `NecroSkeleton` (ally, based on upstream `Skeleton` with `DirectableAlly` behavior) on an adjacent empty cell. HP = 15 + 4 × heroLevel; dmg = 2 + heroLevel/2 to 5 + heroLevel; armor = heroLevel/3. Lifetime 40 turns (dies, no explosion). Max concurrent minions 2 (3 with Bone Legion).
+- **Phylactery** (`items/Phylactery.java`): equipped in a dedicated slot like the Cleric's Holy Tome. **Charges start at 1**, cap per Phylactery level (below). **No time-based regeneration of any kind**; `gainCharge` fires only on kills by the hero or hero-owned minions. On arriving at a new floor, if charges are 0 they are set to 1. Opens a radial spell menu.
+- **Phylactery growth (usage-based only).** Levels 0–10 like an artifact. Experience comes **only from charges spent** on any Phylactery spell: 10 charges per level at level 0, +5 per level thereafter (10, 15, 20 … 55; cumulative 325 to reach 10). **Scrolls of Upgrade, Magical Infusion, and the Alchemist's Toolkit do not affect it**; it is not a valid target for them.
+  - Max charges: 3 at level 0; +1 at levels 2, 5, 8 (6 at level 8+).
+  - Minion HP and damage: +5% per Phylactery level.
+  - Unlocks: Wraith tier at level 1, Ghoul tier at level 3.
+  - Level 10: all Raise costs reduced by 1 (minimum 1).
+- **Raise Dead** (opens a picker showing affordable, unlocked tiers; each minion occupies one slot against the concurrent cap):
+
+| Cost | Minion | Base mob | Numbers (lvl = hero level; then ×Phylactery bonus) | Lifetime |
+|---|---|---|---|---|
+| 1 | Skeleton | `Skeleton` | HP 15 + 4×lvl; dmg 2+lvl/2 to 5+lvl; armor lvl/3 | 30 turns |
+| 2 | Wraith | `Wraith` | HP 10 + 3×lvl; dmg 3+lvl/2 to 7+lvl; high evasion (as upstream Wraith); speed 1.5×; ignores 50% of target armor | 30 turns |
+| 3 | Ghoul | `Ghoul` | HP 30 + 6×lvl; dmg 4+lvl/2 to 8+lvl; 30% of damage dealt heals the hero; if it dies while another hero-owned minion is alive, it rises once at half HP (upstream Ghoul behavior, ally-scoped) | 40 turns |
+
+  Spawn on an adjacent empty cell; if none, the spell is refused and no charge is spent. Minions die quietly at end of lifetime (no explosion, no corpse cell).
+- **Concurrent minion cap:** 1 at hero levels 1–6, 2 at levels 7–20, 3 at 21+; Bone Legion +1 on top. Deathspeaker +1 on top.
+- **Minion AI (all tiers): aggressive by default.** Extend `DirectableAlly` so that, absent a direction from the hero, a minion attacks any hostile it can see, prioritizing the enemy nearest to the hero, and returns to follow-the-hero when nothing hostile is in view. The hero's existing direct-to-cell and hold commands still override. Minions never attack the hero's other allies, NPCs, or shopkeepers.
 - **Wither** (1 charge, targets any cell in sight): `Weakness` 10 turns + `Vulnerable` 10 turns.
-- Starting bag: Bone Rod, Phylactery, cloth armor, 2 food rations, 1 Potion of Toxic Gas (identified), 1 Scroll of Identify.
+- Starting bag: Bone Rod, Phylactery (1 charge), cloth armor, 2 food rations, 1 Potion of Toxic Gas (identified), 1 Scroll of Identify.
 - Identifies at start: Wand of Corrosion, Potion of Toxic Gas.
+- Internal talent key for Soul Siphon is `NECROTIC_SIPHON` (upstream Mage already uses `SOUL_SIPHON`); display name unchanged.
 
 ### 6.2 Talents
 **T1** (levels 2–6, 5 points, 2 max each)
@@ -176,19 +192,19 @@ Enum entry `NECROMANCER`; subclass entries `DEATHSPEAKER`, `HEXWEAVER`. Sprite `
 **T2** (levels 7–12, 5 points, 2 max each)
 | Talent | Effect |
 |---|---|
-| Sturdy Bones | Minions +10/20% max HP, +1/+2 armor |
+| Sturdy Bones | Minions +10/20% max HP, +1/+2 armor (all tiers) |
 | Dark Pact | If a cursed (Wither/any curse) target dies, hero heals 1/2 HP × remaining curse turns, capped at 15 |
-| Second Grave | Minion death → 15/30% chance a new skeleton spawns in place (does not count against cap for 5 turns) |
+| Second Grave | Minion death (any tier, not a Ghoul's first rise) → 15/30% chance a Skeleton spawns in place (does not count against cap for 5 turns) |
 | Ward of Bone | Once per floor at <30% HP: Barkskin (lvl/2, lvl) for 20 turns |
 | Soul Siphon | Cursed enemies drain 1/2 HP/turn to hero (max 1 target contributes per turn) |
 
 **T3** (level 13+, subclass)
-- Common: *Deathspeaker's Command* (minions gain +1/+2/+3 damage), *Grave Wisdom* (charges cap +0/+1/+1; Wither also Cripples 0/2/4 turns).
+- Common: *Deathspeaker's Command* (minions gain +1/+2/+3 damage), *Grave Wisdom* (Phylactery experience per charge spent ×1.0/1.25/1.5; Wither also Cripples 0/2/4 turns).
 - Deathspeaker: *Bone Legion* (+1 concurrent minion), *Grave Speech* (minions +5/10/15% accuracy and evasion per other minion alive).
 - Hexweaver: *Lingering Hex* (curse duration +25/50/75%), *Cursed Ground* (cursed enemy death spreads its curse to adjacent enemies at 50/75/100% duration).
 
 ### 6.3 Subclasses
-- **Deathspeaker:** Phylactery cap 5. New spell **Raise Ghoul** (2 charges): HP 25 + 6×lvl, dmg 4+lvl/2 to 8+lvl, 30% lifesteal to hero, lifetime 40. Minions inherit hero's Bless, Haste, Barkskin while active.
+- **Deathspeaker:** +1 max charges and +1 concurrent minion cap on top of the Phylactery values. Minions inherit the hero's active Bless, Haste, and Barkskin. Unlocks a fourth Raise tier at Phylactery level 6: **Revenant** (4 charges; base `Ghoul` sprite with distinct tint; HP 50 + 8×lvl; dmg 6+lvl to 12+lvl; immune to Terror and Amok; 50 turns; **occupies two minion slots**). Only one Revenant at a time.
 - **Hexweaver:** four new curses, 1 charge each, one curse per target (new replaces old), duration 12 turns base:
   - **Amplify Suffering**: target takes +50% physical damage (`AmplifySuffering extends Buff`; hook in `Char.defenseProc` or damage pipeline as upstream does for `Vulnerable`; do not stack with Vulnerable, take max).
   - **Decrepify**: Slow + Weakness + Cripple, 6 turns.
@@ -349,7 +365,7 @@ Charges 0–10 (regen 1 per 30 turns, faster with upgrades). Activate: enemies i
 
 ---
 
-## 10. Acceptance tests
+## 10. Acceptance tests (27 total)
 
 Implement as JUnit tests in `core/src/test/` where feasible; otherwise as a headless smoke script.
 
@@ -380,6 +396,13 @@ Implement as JUnit tests in `core/src/test/` where feasible; otherwise as a head
 ### 10.4 Performance
 19. Desktop headless timing: 1,000 simulated turns on floor 15 with 20 mobs and lighting on completes in < 3 s.
 
+### 10.5 Rendering geometry (added after playtest)
+Headless render each sprite type into an offscreen framebuffer at default zoom and measure the non-transparent bounding box:
+24. Every hero and mob sprite's bounding-box height is 85–95% of tile height (large mobs: 85–95% of their designated multi-tile footprint). Fails for any sprite outside that band.
+25. Every `ItemSpriteSheet` index renders a frame whose pixels match exactly the corresponding rectangle of `items.png` (no cross-frame bleed); floor item sprites are 45–55% of tile height.
+26. Blood decal bounding box is 30–60% of tile size; a scripted death on a chasm cell produces no decal, on a floor cell produces one.
+27. Phylactery: after 300 simulated turns with no kills, charge count is unchanged; after 12 charges spent from level 0, Phylactery level is 1 and the Wraith tier is offered; a spawned minion attacks a visible hostile within 2 turns without a hero command.
+
 ---
 
 ## 11. Delivery format
@@ -393,18 +416,25 @@ Implement as JUnit tests in `core/src/test/` where feasible; otherwise as a head
 
 ## 12. Priority order and current checkpoint
 
-**Checkpoint (commit `a4015d1`, branch `grimhollow`):** build, packaging, CI, desktop-only flag, geometry for terrain, Sewers tiles/walls at 64px, lighting overlay (ambient, hero, wall torches, persistent blobs), vignette, blood decals, art pipeline for the assets listed in ART_PIPELINE.md, headless smoke harness. Verified by the logs under `verification/`. Tests 1, 2, 3, 20, 22, 23 pass.
+**Checkpoint (commit `7931343`, tag `v0.2.0-necromancer`):** stages 1 and 2 complete per the stage-2 report. Playtesting on Windows found the defects listed in stage 2.5 below.
 
 **Remaining work, in priority order.** Finish each stage to a clean, building, committed, pushed state before starting the next:
 
-1. **Stage 1 remainder:** (a) lighting falloff fix per §4.3 (radial, no boundary halo); (b) character and item geometry (`CharSprite`, `HeroSprite`, `MobSprite`, `ItemSprite`, `MissileSprite`) reading `GameGeometry`; (c) pipeline generation of the six upstream hero sheets and `items.png` at texture resolution, using upstream silhouettes as vector sources exactly as the Sewers tiles do. (d) Grimhollow title screen wordmark and background per §5.4, and the About/credits text update. Transient light sources and remaining regions are deferred to stage 3.
-2. **Necromancer complete** (§6). Green headless gate for this class alone (`Runs=10 failures=0`).
-3. **Art pipeline coverage:** remaining four regions, all upstream mobs, new-hero sheets, transient light sources. Test 17 passes.
-4. **Enchanter complete** (§7).
-5. **Psychic complete** (§8).
+1. ~~Stage 1~~ done.
+2. ~~Stage 2 (Necromancer)~~ done; revised below.
+2.5. **Playtest fix-up (bugs and balance found in play; do first):**
+   - (a) **Character sprites render too small** (~60% of tile height; must be ~94%, matching upstream's 15/16). Fix the scale in `CharSprite`/`HeroSprite`/`MobSprite`.
+   - (b) **Floor item sprites render too small**; same fix in `ItemSprite`/`MissileSprite`.
+   - (c) **Inventory icons corrupted for some indices** (e.g., Potion of Toxic Gas, Scroll of Identify show fragments of neighbouring frames). `items.png` layout or the `ItemSpriteSheet` index-to-rectangle mapping is inconsistent after regeneration. Fix so every index resolves to its own frame.
+   - (d) **Blood decals render ~4× too large** and are placed on chasm cells. Fix decal scale; place decals only on passable solid floor (never chasm, water, or trap cells).
+   - (e) **Phylactery regenerates over time after the first kill.** Remove all time-based regeneration (§6.1). Apply the revised charge rules: start at 1, floor-arrival minimum 1, kills only.
+   - (f) **Minion cap, tiers, growth, and AI** per revised §6.1 and §6.3: cap 1/2/3 by hero level, Skeleton/Wraith/Ghoul tiers, usage-based Phylactery levels with unlocks, aggressive default AI, skeleton lifetime 30. Deathspeaker Revenant tier.
+   - (g) **New acceptance tests 24–27** (§10.5) added and passing; Necromancer-only gate still `Runs=10 failures=0`.
+   Tag `v0.2.1-necromancer-fixup`.
+3. **Enchanter complete** (§7). Enchanter-only gate green.
+4. **Psychic complete** (§8). Psychic-only gate green; the full three-class gate green. Tag `v0.3.0-three-classes`.
+5. **Art pipeline coverage and quality:** (a) remaining four regions, all upstream mobs, new-hero sheets, transient light sources (test 17 passes); (b) quality pass on the procedural pipeline: redesign character silhouettes natively at 48×60 with 3–4 tone shading and a soft drop shadow rather than tracing upstream's 12×15 vectors; ambient-occlusion darkening at wall bases; directional highlight on stone; specular ripple on water and sewage; higher decor density per region.
 6. **§9 content**, in listed order.
-
----
 
 ## 13. Build environment, packaging, and CI
 
@@ -463,7 +493,7 @@ Constraints:
 These rules exist because the first run spent most of its time on verification scaffolding and produced no gameplay content.
 
 - **The verification harness is sufficient.** `verification/`, `SmokeRun`, `DesktopSmokeProbe`, `validate.py`, `update-change-ledger.py`, and the CI workflow exist and work. Do not build new probes, ledgers, evidence formats, or acceptance documents. Extend `SmokeRun` only where a new class requires it. Append to existing logs; do not restructure them.
-- **Verify at stage boundaries, not continuously.** Within a stage, compile and run the directly relevant test. Run the full acceptance set (§10, §13.5) once per stage, at the end, then commit and push.
+- **Verify at stage boundaries, not continuously.** Within a stage, compile and run the directly relevant test. Run the full acceptance set (§10 incl. §10.5, §13.5) once per stage, at the end, then commit and push.
 - **Content over evidence.** A stage that ships a working feature with a two-line KNOWN_ISSUES entry is worth more than a stage that ships a perfect report and no feature. Spend at least 80% of effort on the numbered stage deliverable.
 - **Do not re-verify what the checkpoint already proved.** Tests 1, 2, 3, 20, 22, 23 are passing; re-run them only in the final CI run.
 - **Environment friction.** If a command fails for sandbox or permission reasons, retry once with the documented escalation route from KNOWN_ISSUES.md, then record it and move on. Do not spend more than a few minutes on any single environment issue.

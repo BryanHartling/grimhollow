@@ -56,6 +56,7 @@ public class ScrollOfEnchantment extends ExoticScroll {
 	
 	@Override
 	public void doRead() {
+		if(com.shatteredpixel.shatteredpixeldungeon.items.Runecraft.enabled(curUser)){identifiedByUse=false;GameScene.selectItem(itemSelector);return;}
 		if (!isKnown()) {
 			identify();
 			curItem = detach(curUser.belongings.backpack);
@@ -66,7 +67,10 @@ public class ScrollOfEnchantment extends ExoticScroll {
 		GameScene.selectItem( itemSelector );
 	}
 
-	public static boolean enchantable( Item item ){
+    public com.shatteredpixel.shatteredpixeldungeon.items.Runecraft.Offer runecraftOffer(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero hero,Item item){
+        return com.shatteredpixel.shatteredpixeldungeon.items.Runecraft.offer(hero,item,false,()->{if(!anonymous&&!hero.belongings.contains(this))return false;if(!anonymous)detach(hero.belongings.backpack);identify();return true;});
+    }
+    public static boolean enchantable( Item item ){
 		return (item instanceof Weapon || item instanceof Armor)
 				&& (item.isUpgradable() || item instanceof SpiritBow);
 	}
@@ -111,7 +115,10 @@ public class ScrollOfEnchantment extends ExoticScroll {
 		}
 
 		@Override
-		public void onSelect(final Item item) {
+        public void onSelect(final Item item) {
+            if(item!=null&&com.shatteredpixel.shatteredpixeldungeon.items.Runecraft.enabled(curUser)){
+                com.shatteredpixel.shatteredpixeldungeon.items.Runecraft.show(runecraftOffer(curUser,item),()->{readAnimation();Sample.INSTANCE.play(Assets.Sounds.READ);Enchanting.show(curUser,item);});return;
+            }
 			
 			if (item instanceof Weapon){
 				if (!identifiedByUse) {

@@ -365,7 +365,7 @@ public class MeleeWeapon extends Weapon {
 			info += "\n\n" + abilityInfo();
 		}
 		
-		return info+sigilInfo();
+		return info+sigilInfo()+(runeEtching==null?"":"\n\n"+Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching.class,"attached",runeEtching.floorEnchant.name(),runeEtching.level()));
 	}
 	
 	public String statsInfo(){

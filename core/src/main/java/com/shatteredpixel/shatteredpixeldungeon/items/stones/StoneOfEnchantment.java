@@ -50,7 +50,10 @@ public class StoneOfEnchantment extends InventoryStone {
 	
 	@Override
 	protected void onItemSelected(Item item) {
-		if (!anonymous) {
+        if(com.shatteredpixel.shatteredpixeldungeon.items.Runecraft.enabled(curUser)){
+            com.shatteredpixel.shatteredpixeldungeon.items.Runecraft.show(runecraftOffer(curUser,item),()->{curUser.sprite.emitter().start(Speck.factory(Speck.LIGHT),.1f,5);Enchanting.show(curUser,item);useAnimation();});return;
+        }
+        if (!anonymous) {
 			curItem.detach(curUser.belongings.backpack);
 			Catalog.countUse(getClass());
 			Talent.onRunestoneUsed(curUser, curUser.pos, getClass());
@@ -79,8 +82,11 @@ public class StoneOfEnchantment extends InventoryStone {
 		
 	}
 	
-	@Override
-	public int value() {
+    public com.shatteredpixel.shatteredpixeldungeon.items.Runecraft.Offer runecraftOffer(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero hero,Item item){
+        return com.shatteredpixel.shatteredpixeldungeon.items.Runecraft.offer(hero,item,false,()->{if(!anonymous&&!hero.belongings.contains(this))return false;if(!anonymous){detach(hero.belongings.backpack);Catalog.countUse(getClass());Talent.onRunestoneUsed(hero,hero.pos,getClass());}return true;});
+    }
+    @Override
+    public int value() {
 		return 30 * quantity;
 	}
 

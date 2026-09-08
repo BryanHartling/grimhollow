@@ -94,7 +94,10 @@ public class Stylus extends Item {
 			return;
 		}
 		
-		detach(curUser.belongings.backpack);
+        if(Runecraft.enabled(curUser)){
+            Runecraft.show(Runecraft.offer(curUser,armor,false,()->{if(!curUser.belongings.contains(this))return false;detach(curUser.belongings.backpack);Catalog.countUse(getClass());return true;}),()->{curUser.sprite.operate(curUser.pos);Enchanting.show(curUser,armor);Sample.INSTANCE.play(Assets.Sounds.BURNING);curUser.spend(TIME_TO_INSCRIBE);curUser.busy();});return;
+        }
+        detach(curUser.belongings.backpack);
 		Catalog.countUse(getClass());
 
 		GLog.w( Messages.get(this, "inscribed"));

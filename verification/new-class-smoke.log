@@ -1094,3 +1094,5 @@ Consider enabling configuration cache to speed up this build: https://docs.gradl
 v0.5 stage 4.5: core:smokeRun -PdesktopOnly=true --no-daemon: Runs=30 failures=0.
 Class-only -PsmokeClass=NECROMANCER / ENCHANTER / PSYCHIC: Runs=10 failures=0 each.
 TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment.
+
+Stage 3.5: Enchanter-only Runs=10 failures=0; combined Runs=30 failures=0. TEST 33 PASS: scroll/stone offers, cancellation/application, Artificer, Scrivener, saved history. TEST 37 additionally checks replacement floor rolls alongside permanent enchantment. Initial combined run exposed a zero-damage rat attack in test 13; zero-armor fixture correction passed with unchanged targeting/damage assertions.

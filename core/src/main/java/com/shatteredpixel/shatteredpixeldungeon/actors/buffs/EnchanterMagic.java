@@ -13,6 +13,13 @@ import java.util.*;
 import com.watabou.utils.Random;
 /** Run knowledge, item-bound temporary effects, and Enchanter talent hooks. */
 public class EnchanterMagic extends Buff {
+    private final LinkedHashMap<String,Integer> inscriptions=new LinkedHashMap<>();
+    public void record(Class<?> type){String key=type.getName();int count=inscriptions.getOrDefault(key,0)+1;inscriptions.remove(key);inscriptions.put(key,count);}
+    public Class<?> favorite(boolean armor,Class<?> excluded){
+        Class<?> best=null;int count=0;
+        for(Map.Entry<String,Integer> entry:inscriptions.entrySet())try{Class<?> type=Class.forName(entry.getKey());if(type!=excluded&&(armor?Armor.Glyph.class:Weapon.Enchantment.class).isAssignableFrom(type)&&entry.getValue()>=count){best=type;count=entry.getValue();}}catch(ClassNotFoundException ignored){}
+        return best;
+    }
     private final Set<String> known=new TreeSet<>(),floorKnown=new TreeSet<>();
     private final Set<Integer> floors=new HashSet<>();
     private int lastPos=-1,stationary,lastFloor=-1;
@@ -89,6 +96,6 @@ public class EnchanterMagic extends Buff {
         if(mob.buff(Unmade.class)!=null)brush.gainCharge(points(Talent.SALVAGE));
     }
     public static int strip(Char enemy){int count=0;for(Buff buff:enemy.buffs())if(!buff.revivePersists){buff.detach();count++;}return count;}
-    @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("known",known.toArray(new String[0]));b.put("floor_known",floorKnown.toArray(new String[0]));b.put("floors",floors.stream().mapToInt(Integer::intValue).toArray());b.put("last_floor",lastFloor);b.put("last_pos",lastPos);b.put("stationary",stationary);}
-    @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);Collections.addAll(known,b.getStringArray("known"));Collections.addAll(floorKnown,b.getStringArray("floor_known"));for(int n:b.getIntArray("floors"))floors.add(n);lastFloor=b.getInt("last_floor");lastPos=b.getInt("last_pos");stationary=b.getInt("stationary");}
+    @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("inscription_names",inscriptions.keySet().toArray(new String[0]));b.put("inscription_counts",inscriptions.values().stream().mapToInt(Integer::intValue).toArray());b.put("known",known.toArray(new String[0]));b.put("floor_known",floorKnown.toArray(new String[0]));b.put("floors",floors.stream().mapToInt(Integer::intValue).toArray());b.put("last_floor",lastFloor);b.put("last_pos",lastPos);b.put("stationary",stationary);}
+    @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);String[] names=b.getStringArray("inscription_names");int[] counts=b.getIntArray("inscription_counts");for(int i=0;i<Math.min(names.length,counts.length);i++)inscriptions.put(names[i],counts[i]);Collections.addAll(known,b.getStringArray("known"));Collections.addAll(floorKnown,b.getStringArray("floor_known"));for(int n:b.getIntArray("floors"))floors.add(n);lastFloor=b.getInt("last_floor");lastPos=b.getInt("last_pos");stationary=b.getInt("stationary");}
 }

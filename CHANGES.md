@@ -371,3 +371,9 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - v0.5 compatibility accepts supported Grimhollow saves (896 through the running version); unknown versions or invalid portraits offer deletion without loading the run.
 - v0.5 contact scanning covers packaged Java/resources and their sources, excluding specification/history documents and legitimate credits/copyright headers.
 - v0.5 Rune Etching survives carrier loss even with a full backpack; equipping is explicitly distinguished from losing an item.
+
+- Runecraft preserves curses by refusing cursed gear; upstream Magical Infusion only preserves existing enchants and upgrades, so it retains its upgrade-only flow. Crafted scrolls/stones and the glyph Stylus use the shared picker.
+- Scrivener selects the most-used compatible enchantment/glyph, ties most recent, with current-enchantment exclusion taking priority; Artificer Transmute offers all remaining same-rarity choices when fewer than three exist.
+- The Rune Etching's current enchantment and carried upgrade are shown on its carrier's item description.
+
+- The existing domination fixture uses zero armor for its victim, preserving its damage assertion while removing the legal one-damage/one-armor zero-hit flake exposed by changed Runecraft RNG consumption.

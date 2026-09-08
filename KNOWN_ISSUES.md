@@ -1,6 +1,6 @@
 # Known issues
 
-- Stages 1, 2, 2.5, 3, 4 and 4.5 are complete; Runecraft and the rendered proof of concept are next. Full art coverage, transient lighting and section 9 content remain undelivered.
+- Stages 1, 2, 2.5, 3, 3.5, 4 and 4.5 are complete; the rendered proof of concept is next. Full art coverage, transient lighting and section 9 content remain undelivered.
 - Tests 4 and 17 fail: `Validated 59 generated specifications; 2 failures`; 103 existing sheets lack pipeline sources, and full character/item style and referenced-frame coverage remain unfinished. All 59 generated assets pass the subset validator.
 - New heroes and minions use transitional pipeline art; full character art and four remaining regions belong to stage 6. Bone Prison uses barricade visuals; Force Wall has a generated transparent effect.
 - Full tests 6, 7 and 8 are NOT RUN: scripted talent maps and representative hooks pass, and all nine new armor abilities execute, but exhaustive talent-selection and actual Tengu/crown UI flows were not driven.

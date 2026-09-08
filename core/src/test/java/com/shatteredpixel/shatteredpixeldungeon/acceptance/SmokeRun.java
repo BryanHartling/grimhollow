@@ -234,6 +234,8 @@ public class SmokeRun {
         Buff.prolong(h,Bless.class,10);Buff.prolong(h,Haste.class,10);Buff.affect(h,Barkskin.class).setForDuration(8,10);
         crystal.gainCharge(10);check(crystal.cast(h,"dominate",enemy.pos,null)&&enemy.buff(Amok.class).dominated&&enemy.buff(Bless.class)!=null&&enemy.buff(Haste.class)!=null&&Barkskin.currentLevel(enemy)==8,"Dominate and Shared Will");
         enemy.sprite=new RatSprite(){@Override public void showAlert(){}};enemy.sprite.link(enemy);enemy.sprite.visible=false;enemy.state=enemy.HUNTING;rival.sprite.visible=false;Buff.prolong(rival,Paralysis.class,5);
+        // Isolate the AI assertion from a rat's legal 1-damage minus 1-armor roll.
+        Buff.prolong(rival,FracturedArmor.class,5);
         java.lang.reflect.Method act=Mob.class.getDeclaredMethod("act");act.setAccessible(true);int rivalHP=rival.HP;act.invoke(enemy);
         check(enemy.isTargeting(rival)&&rival.HP<rivalHP,"13: dominated enemy attacks another hostile instead of adjacent hero");
         check(enemy.buff(Amok.class).cooldown()>=15,"Dominate fifteen-turn duration");
@@ -280,6 +282,30 @@ public class SmokeRun {
         System.out.println("PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS");
     }
 
+    private static void runecraftScenario(Hero h,SigilBrush brush,com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon w)throws Exception {
+        clearArena();
+        for(HeroSubClass subclass:new HeroSubClass[]{HeroSubClass.NONE,HeroSubClass.ARTIFICER}){
+            h.subClass=subclass;w.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic());
+            com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment scroll=new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment();scroll.collect();
+            Runecraft.Offer canceled=scroll.runecraftOffer(h,w);int count=subclass==HeroSubClass.ARTIFICER?3:2;
+            check(canceled.options().size()==count,"33: exact option count "+subclass);
+            java.util.Set<Class<?>> types=new java.util.HashSet<>();for(Object option:canceled.options()){check(option.getClass()!=w.enchantment.getClass(),"33: excludes current enchantment");types.add(option.getClass());}
+            check(types.size()==count,"33: distinct choices");canceled.cancel();check(h.belongings.contains(scroll)&&!canceled.apply(0),"33: cancel preserves scroll");
+            Runecraft.Offer chosen=scroll.runecraftOffer(h,w);Class<?> selected=chosen.options().get(0).getClass();check(chosen.apply(0)&&w.enchantment.getClass()==selected&&!h.belongings.contains(scroll),"33: choice applies and consumes scroll");
+        }
+        h.subClass=HeroSubClass.SCRIVENER;
+        w.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing());EnchanterMagic.learn(w);
+        w.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic());
+        for(int i=0;i<3;i++){brush.gainCharge(10);check(brush.cast(h,"inscribe",h.pos,w,com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing.class),"33: inscribe Blazing");}
+        com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment scroll=new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment();scroll.collect();
+        Runecraft.Offer favorite=scroll.runecraftOffer(h,w);check(favorite.options().size()==2&&favorite.options().stream().anyMatch(e->e instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing),"33: Scrivener favors three Blazing inscriptions");favorite.cancel();
+        com.watabou.utils.Bundle stored=new com.watabou.utils.Bundle();EnchanterMagic.state().storeInBundle(stored);EnchanterMagic restored=new EnchanterMagic();restored.restoreFromBundle(stored);check(restored.favorite(false,w.enchantment.getClass())==com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing.class,"33: inscription history persists");
+        com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment stone=new com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfEnchantment();stone.collect();
+        Runecraft.Offer glyphs=stone.runecraftOffer(h,h.belongings.armor);check(glyphs.options().size()==2&&glyphs.options().get(0) instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor.Glyph,"33: crafted stone offers armor glyphs");glyphs.cancel();check(h.belongings.contains(stone),"33: cancel preserves stone");
+        w.cursed=true;check(scroll.runecraftOffer(h,w)==null&&w.cursed&&h.belongings.contains(scroll),"33: Runecraft does not cleanse curses");w.cursed=false;
+        scroll.detachAll(h.belongings.backpack);stone.detachAll(h.belongings.backpack);w.enchant(null);w.inscribed=null;w.inscriptionTurns=0;h.subClass=HeroSubClass.NONE;brush.gainCharge(10);
+        System.out.println("TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence");
+    }
     private static void enchanterScenario() throws Exception {
         Hero h=Dungeon.hero;SigilBrush brush=h.belongings.getItem(SigilBrush.class);
         check(h.HT==20&&h.STR==10&&brush!=null&&brush.charges()==2,"Enchanter base kit");
@@ -291,11 +317,14 @@ public class SmokeRun {
         com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword replacement=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword();
         replacement.identify();replacement.collect();check(replacement.doEquip(h),"37: replace starting weapon");
         int chargesBefore=brush.charges();check(RuneEtching.etch(h)&&brush.charges()==chargesBefore&&replacement.runeEtching==rune&&starter.runeEtching==null&&starter.level()==0&&replacement.level()==1,"37: transfer exactly one upgrade without charge");
+        replacement.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing());
+        Dungeon.depth=2;EnchanterMagic.state().arrive();check(Arrays.asList(RuneEtching.FLOOR_ENCHANTS).contains(rune.floorEnchant.getClass())&&replacement.enchantment instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing,"37: replacement rolls floor rune beside permanent enchant");Dungeon.depth=1;EnchanterMagic.state().arrive();
         replacement.doUnequip(h,true);replacement.detachAll(h.belongings.backpack);
         check(h.belongings.getItem(RuneEtching.class)==rune&&replacement.runeEtching==null&&replacement.level()==0,"37: lost carrier returns rune");
         starter.doEquip(h);check(RuneEtching.etch(h)&&starter.level()==1&&starter.runeEtching==rune,"37: reattach after carrier loss");
         check(!rune.actions(h).contains(Item.AC_DROP),"37: rune cannot be dropped");
         System.out.println("TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment");
+        runecraftScenario(h,brush,starter);
         clearArena();Rat enemy=target(h.pos+1);enemy.sprite.visible=false;
         check(brush.cast(h,"hex",enemy.pos,null,null)&&brush.charges()==1&&enemy.buff(DegradedGear.class)!=null&&enemy.buff(Hex.class)!=null,"Hex Sigil");
         for(int i=0;i<37;i++)h.buff(ClassSpellItem.Charger.class).act();check(brush.charges()==1,"No early Brush charge");h.buff(ClassSpellItem.Charger.class).act();check(brush.charges()==2,"Brush level-one cadence");
@@ -306,7 +335,7 @@ public class SmokeRun {
         brush.gainCharge(10);check(brush.cast(h,"inscribe",h.pos,w,com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.class),"Inscribe selected known enchantment");
         check(w.inscribed!=null&&w.enchantment!=null&&w.inscriptionTurns==50,"Temporary and permanent sigils coexist; Steady Hand");
         brush.gainCharge(10);check(brush.cast(h,"reinforce",h.pos,w,null)&&w.buffedLvl()==w.level()+1&&w.reinforceFlat==3,"Reinforce and Master Craft");
-        Class<?> old=w.enchantment.getClass();brush.gainCharge(10);check(brush.cast(h,"transmute",h.pos,w,null)&&w.enchantment.getClass()!=old&&Arrays.asList(com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon.Enchantment.common).contains(w.enchantment.getClass()),"Transmute different same-rarity enchantment");
+        Class<?> old=w.enchantment.getClass();brush.gainCharge(10);Runecraft.Offer transmute=brush.transmuteOffer(h,w);check(transmute!=null&&transmute.apply(0)&&w.enchantment.getClass()!=old&&Arrays.asList(com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon.Enchantment.common).contains(w.enchantment.getClass()),"Transmute different same-rarity enchantment");
         // Proc both sigils through the real weapon path, using Kinetic to avoid GL-only visual effects in headless mode.
         w.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic());w.runeEtching.floorEnchant=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic();
         w.proc(h,enemy,5);check(h.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.KineticTracker.class)!=null,"Inscription proc hook");

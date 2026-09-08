@@ -24,7 +24,7 @@ public class SigilBrush extends ClassSpellItem {
         if(spell.equals("inscribe")||spell.equals("transmute")||spell.equals("reinforce")){
             GameScene.show(new WndOptions(Messages.get(this,spell),Messages.get(this,"equipment"),Messages.get(this,"weapon"),Messages.get(this,"armor")){
                 @Override protected void onSelect(int index){Item item=index==0?h.belongings.weapon:h.belongings.armor;if(item==null)return;
-                    if(!spell.equals("inscribe")){cast(h,spell,h.pos,item,null);return;}
+                    if(spell.equals("transmute")){Runecraft.show(transmuteOffer(h,item),()->{});return;}if(!spell.equals("inscribe")){cast(h,spell,h.pos,item,null);return;}
                     java.util.List<Class<?>> options=EnchanterMagic.state().choices(index==1);String[] labels=new String[options.size()];for(int i=0;i<labels.length;i++){Object o=Reflection.newInstance(options.get(i));labels[i]=o instanceof Weapon.Enchantment?((Weapon.Enchantment)o).name():((Armor.Glyph)o).name();}
                     GameScene.show(new WndOptions(Messages.get(SigilBrush.class,"inscribe"),Messages.get(SigilBrush.class,"known"),labels){@Override protected void onSelect(int i){cast(h,spell,h.pos,item,options.get(i));}});
                 }});
@@ -47,9 +47,9 @@ public class SigilBrush extends ClassSpellItem {
                 break;
             case "transmute":
                 if(item==null||!item.isEquipped(h))return false;
-                if(item instanceof Weapon){Weapon w=(Weapon)item;w.enchant((Weapon.Enchantment)reroll(w.enchantment,Weapon.Enchantment.common,Weapon.Enchantment.uncommon,Weapon.Enchantment.rare,Weapon.Enchantment.curses));}
-                else if(item instanceof Armor){Armor a=(Armor)item;a.inscribe((Armor.Glyph)reroll(a.glyph,Armor.Glyph.common,Armor.Glyph.uncommon,Armor.Glyph.rare,Armor.Glyph.curses));}else return false;
-                EnchanterMagic.learn(item);break;
+                Runecraft.Offer offer=transmuteOffer(h,item);if(offer==null||choice==null)return false;
+                for(int i=0;i<offer.options().size();i++)if(offer.options().get(i).getClass()==choice)return offer.apply(i);
+                return false;
             case "reinforce":
                 if(item==null||!item.isEquipped(h)||!(item instanceof Weapon||item instanceof Armor))return false;
                 item.reinforceTurns=50;item.reinforceFlat=h.pointsInTalent(Talent.MASTER_CRAFT);break;
@@ -70,6 +70,7 @@ public class SigilBrush extends ClassSpellItem {
         }
         finish(h,cost);return true;
     }
-    private void inscribe(Item item,Class<?> type,int turns){if(item instanceof Weapon)((Weapon)item).inscribed=(Weapon.Enchantment)Reflection.newInstance(type);else ((Armor)item).inscribed=(Armor.Glyph)Reflection.newInstance(type);item.inscriptionTurns=turns;}
+    public Runecraft.Offer transmuteOffer(Hero h,Item item){if(h.subClass!=HeroSubClass.ARTIFICER||item==null||!item.isEquipped(h)||!ready(h,2))return null;return Runecraft.offer(h,item,true,()->{if(!ready(h,2))return false;finish(h,2);return true;});}
+    private void inscribe(Item item,Class<?> type,int turns){if(item instanceof Weapon)((Weapon)item).inscribed=(Weapon.Enchantment)Reflection.newInstance(type);else ((Armor)item).inscribed=(Armor.Glyph)Reflection.newInstance(type);item.inscriptionTurns=turns;EnchanterMagic.state().record(type);}
     private Object reroll(Object old,Class<?>[]...tiers){Class<?>[] pool=tiers[0];if(old!=null)for(Class<?>[] tier:tiers)if(Arrays.asList(tier).contains(old.getClass()))pool=tier;ArrayList<Class<?>> options=new ArrayList<>(Arrays.asList(pool));if(old!=null)options.remove(old.getClass());return Reflection.newInstance(Random.element(options));}
 }

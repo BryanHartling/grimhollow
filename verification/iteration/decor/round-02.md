@@ -1,2 +1,2 @@
-This round became too dark: small rubble fragments and moss disappear against the background.
-Raise material response and moss contrast while retaining the sparse broken silhouette.
+Vision 0.80: Brighter rubble facets make the separated chunks readable at tile scale.
+Keep the outline and introduce a little more moss material separation.

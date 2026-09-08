@@ -1,0 +1,239 @@
+{
+  "asset_class": "decor",
+  "round": 2,
+  "parameters": {
+    "seed": 5706,
+    "count": 3,
+    "relief": 0.07,
+    "displacement": 0.055,
+    "wall_height": 0.6,
+    "mortar_width": 0.025,
+    "chip": 0.012,
+    "bevel": 0.035,
+    "moss_density": 0.7,
+    "grain_frequency": 2.3,
+    "bump_depth": 0.055,
+    "ao_distance": 0.35,
+    "stone_roughness": 0.25,
+    "water_roughness": 0.19,
+    "specular": 0.18,
+    "water_depth": 0.025,
+    "decor_density": 9,
+    "light_strength": 1.0,
+    "light_angle": 0,
+    "stone_color": "75664F",
+    "moss_color": "4C5939",
+    "water_color": "3E4C35",
+    "tone_curve": [
+      0.025,
+      0.105,
+      0.24,
+      0.39
+    ],
+    "tone_breaks": [
+      0.25,
+      0.6,
+      0.89
+    ],
+    "tone_gamma": 1.2,
+    "light_steps": [
+      0,
+      0.8,
+      1.8,
+      3.2
+    ],
+    "grain_min": 0.12,
+    "grain_max": 1.8,
+    "core_emission": 8
+  },
+  "references": [
+    {
+      "reference": 2,
+      "weight": 0.5,
+      "targets": [
+        {
+          "target": "room mean luminance",
+          "value": 0.12026821782186435,
+          "minimum": 0.12,
+          "maximum": 0.2,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "room fraction below .15",
+          "value": 0.5127650669642857,
+          "minimum": 0.6,
+          "maximum": null,
+          "pass_": false,
+          "score": 0.8546084449404762
+        },
+        {
+          "target": "warm lit hue",
+          "value": 37.4699805242304,
+          "minimum": 30,
+          "maximum": 40,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 0.9515361483134921
+    },
+    {
+      "reference": 20,
+      "weight": 0.8,
+      "targets": [
+        {
+          "target": "moss/wet-edge hue",
+          "value": 80.00000000000001,
+          "minimum": 75,
+          "maximum": 100,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "moss/wet-edge saturation",
+          "value": 0.42857142857142855,
+          "minimum": 0.3,
+          "maximum": 0.5,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "moss/wet-edge luminance std",
+          "value": 0.0,
+          "minimum": 0.08,
+          "maximum": null,
+          "pass_": false,
+          "score": 0
+        }
+      ],
+      "score": 0.6666666666666666
+    },
+    {
+      "reference": 21,
+      "weight": 0.7,
+      "targets": [
+        {
+          "target": "2x2 seam pass",
+          "value": 1.0,
+          "minimum": 1,
+          "maximum": null,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 1.0
+    }
+  ],
+  "composite": 0.8545507037450397,
+  "global_targets": {
+    "region_mean_after_lighting": 0.12026821782186435,
+    "region_mean_pass": true,
+    "dominant_green_brown_fraction": 1.0,
+    "hue_budget_pass": true,
+    "accent_families": 0,
+    "accent_bins": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "readability": "N/A: no characters or mobs are iterated; full-game test 30 remains NOT RUN",
+    "composition": "7x7 fixed terrain sample; actual ambient/hero/torch equation, no fog or UI",
+    "ambient": [
+      0.5,
+      0.55,
+      0.45
+    ]
+  },
+  "variants": [
+    {
+      "variant": 0,
+      "metrics": {
+        "mean": 0.07578464606181455,
+        "std": 0.061437506510497834,
+        "dark_fraction": 0.9596448748991122,
+        "hue": 32.11991842262419,
+        "saturation": 0.14285714285714285,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.08090117647058823,
+        "palette_max_delta": 9.653697827965228,
+        "opaque_pixels": 1239
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0,
+        "wrap_y": 0.0,
+        "interior_x_limit": 0.04851409313725488,
+        "interior_y_limit": 0.07636642156862743,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": false
+    },
+    {
+      "variant": 1,
+      "metrics": {
+        "mean": 0.09287570722384549,
+        "std": 0.0648119370824825,
+        "dark_fraction": 0.9315838800374883,
+        "hue": 32.561444136679505,
+        "saturation": 0.3333333333333333,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.05400078431372549,
+        "palette_max_delta": 9.653697827965228,
+        "opaque_pixels": 1067
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0,
+        "wrap_y": 0.0,
+        "interior_x_limit": 0.045807291666666645,
+        "interior_y_limit": 0.053082107843137244,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": false
+    },
+    {
+      "variant": 2,
+      "metrics": {
+        "mean": 0.059996956559228785,
+        "std": 0.06208824865884361,
+        "dark_fraction": 0.9586631486367634,
+        "hue": 31.20711327481212,
+        "saturation": 0.14285714285714285,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.07951686274509803,
+        "palette_max_delta": 9.653697827965228,
+        "opaque_pixels": 1137
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0,
+        "wrap_y": 0.0,
+        "interior_x_limit": 0.039834558823529403,
+        "interior_y_limit": 0.06517156862745095,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": false
+    }
+  ],
+  "passing": false,
+  "converged": false,
+  "cache_sha256": {
+    "tiles/decor_0.png": "be44561ba3a31f14739976fb258cd50a6a6aa07110246047f0684111fd102ed7",
+    "tiles/decor_1.png": "605092a0ecc105bfbfea801deb8ff07d686af406373d65878d716b4da24721ff",
+    "tiles/decor_2.png": "cbd2d6e9a923bdb1f390c377853a2a66050806348c7da27a8dede332ae8d13e2"
+  },
+  "reference_board_sha256": "60b32e4d79fce004e304853bfa926b135cba355ad307554daac0337ed6e0cf57"
+}

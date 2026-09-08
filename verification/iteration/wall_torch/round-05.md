@@ -1,3 +1,2 @@
-Separate exposure restores a readable metal collar and dark wooden shaft without washing out the flame.
-The core is still a little broad beside the photograph; lower its emission and try a more raking key for the holder.
-The light falloff and far-wall hue remain unchanged score limits.
+Vision 0.95: The cropped comparison still reads immediately as a torch with a flame and holder.
+Refine holder grain; preserve the approved flame silhouette.

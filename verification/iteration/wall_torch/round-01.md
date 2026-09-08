@@ -1,2 +1,2 @@
-The narrow flame and dark holder read, but the reference has a white hot core that this render lacks.
-Increase core emission and preserve its red edge; the existing three-tile light radius still misses the board two-tile falloff.
+Vision 0.95: The approved flame and shaft clearly read as a burning wall torch beside the cropped flame reference.
+Preserve the silhouette and improve the iron and wood value separation.

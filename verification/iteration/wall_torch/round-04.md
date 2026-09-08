@@ -1,3 +1,2 @@
-The corrected dark red edge passes the palette check and the white core stays small.
-The holder is still nearly black because the flame dominates its exposure; separate the surface tone curve from the emissive range.
-The fixed light falloff and far-wall colour remain the main numeric misses.
+Vision 0.95: The flame, bowl and shaft remain unmistakably a torch beside the cropped subject reference.
+Keep the white core and refine the dark holder material.

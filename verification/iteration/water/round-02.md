@@ -1,2 +1,2 @@
-Bright diagonal ochre blobs still read as a repeated stripe rather than green standing water; the wrap test fails.
-Use a connected displaced surface, lower directional specular, and periodic material value bands so the seam is physical rather than blurred away.
+Vision 0.30: The off-centre bright spot avoids an eye but the circular depression still reads as a hole rather than a reflective water surface.
+Use a continuous tone curve and a broad channel-shaped depth field to remove hard rings.

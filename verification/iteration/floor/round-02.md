@@ -1,2 +1,2 @@
-The stone faces now have darker warm bands and chipped edges, much closer to the damp coarse masonry.
-The numeric stop condition is met; retain round 02. Moss contrast and specular pooling remain weaker than the material study.
+Vision 0.82: Larger separated polygons read as laid flagstones, with clearer joints than the procedural grid.
+Stone sizes are still too similar; increase the size difference between neighbouring polygons.

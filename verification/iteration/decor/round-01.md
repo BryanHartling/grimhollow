@@ -1,2 +1,2 @@
-The rubble silhouette separates from the floor, but its moss is sparse and has too little value variation.
-Increase moss density/relief and lower the stone exposure so the damp green edges remain visible.
+Vision 0.77: Separated angular fragments read as rubble; their green-brown material relates to the cropped moss scan.
+The small dark fragments need stronger material planes at game scale.

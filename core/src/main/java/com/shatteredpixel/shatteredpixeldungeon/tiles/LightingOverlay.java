@@ -17,6 +17,7 @@ import java.util.Arrays;
 
 /** One cached low-resolution light texture, one multiplicative draw, no per-light quads. */
 public class LightingOverlay extends Image {
+    private static LightingOverlay active;
     private final LightMap map;
     private final String cacheKey;
     private int previousHash;
@@ -24,6 +25,7 @@ public class LightingOverlay extends Image {
     public int rebuilds;
 
     public LightingOverlay() {
+        active = this;
         map = new LightMap(Dungeon.level.width(), Dungeon.level.height(), GameGeometry.LIGHT_SAMPLES_PER_TILE);
         cacheKey = "Grimhollow-lightmap-" + map.width + "x" + map.height;
         texture(TextureCache.create(cacheKey, map.width, map.height));
@@ -82,7 +84,32 @@ public class LightingOverlay extends Image {
         try { super.draw(); } finally { Blending.setNormalMode(); }
     }
     @Override public void destroy() {
+        if (active == this) active = null;
         super.destroy();
         TextureCache.remove(cacheKey);
+    }
+
+    /** Walls draw after actors for occlusion, so sample the same map in their own pass. */
+    public static NoosaScript walls() {
+        if (active == null || !SPDSettings.dynamicLighting() || Dungeon.depth > 5)
+            return NoosaScriptNoLighting.get();
+        WallLightScript script = com.watabou.glscripts.Script.use(WallLightScript.class);
+        Gdx.gl.glActiveTexture(Gdx.gl.GL_TEXTURE1);
+        Gdx.gl.glBindTexture(Gdx.gl.GL_TEXTURE_2D, active.texture.id);
+        Gdx.gl.glActiveTexture(Gdx.gl.GL_TEXTURE0);
+        Gdx.gl.glUniform1i(script.uniform("uLight").location(), 1);
+        script.uniform("uLevelSize").value2f(Dungeon.level.width()*16, Dungeon.level.height()*16);
+        return script;
+    }
+
+    public static class WallLightScript extends NoosaScriptNoLighting {
+        @Override protected String shader() {
+            return "uniform mat4 uCamera; uniform mat4 uModel; uniform vec2 uLevelSize;\n"
+                + "attribute vec4 aXYZW; attribute vec2 aUV; varying vec2 vUV; varying vec2 vLight;\n"
+                + "void main(){ vec4 world=uModel*aXYZW; gl_Position=uCamera*world; vUV=aUV; vLight=world.xy/uLevelSize; }\n//\n"
+                + "#ifdef GL_ES\nprecision mediump float;\n#endif\n"
+                + "varying vec2 vUV; varying vec2 vLight; uniform sampler2D uTex; uniform sampler2D uLight;\n"
+                + "void main(){ vec4 color=texture2D(uTex,vUV); color.rgb*=texture2D(uLight,vLight).rgb; gl_FragColor=color; }\n";
+        }
     }
 }

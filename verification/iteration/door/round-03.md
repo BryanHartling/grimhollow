@@ -1,3 +1,2 @@
-The arch remains readable around a dark gate opening, consistent with the corridor reference.
-The shared upright-component projection restores jamb/strap variation in the formerly flat sideways atlas pieces.
-Retain this converged round after the atlas correction; the gate interior stays deliberately dark.
+Vision 0.93: The approved gate reads clearly against its brighter jambs.
+Keep the silhouette and refine wood midtone separation.

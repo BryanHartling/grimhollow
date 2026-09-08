@@ -10,7 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 import numpy as np
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from build import ROOT, COLORS
 from rendered import tile, CACHE
 from validate import lab
@@ -166,105 +166,295 @@ def scores(kind,metrics,p,seam,images):
     return rows,float(sum(r['weight']*r['score'] for r in rows)/sum(r['weight'] for r in rows))
 
 
-def record(number,kinds):
-    if not 1<=number<=12:raise ValueError('Rounds must be 1-12')
-    images={k:tile(k,0) for k in CLASSES}
-    global_metrics=globals_for(images)
-    for kind in kinds:
-        folder=OUT/kind;folder.mkdir(parents=True,exist_ok=True);stem=f'round-{number:02}'
-        path=folder/(stem+'.json')
-        if path.exists():raise ValueError('Recorded rounds are immutable: '+str(path))
-        p=json.loads((PARAMS/(kind+'.json')).read_text())
-        variants=[]
-        for variant in range(3):
-            im=tile(kind,variant);m=measurements(im);seam=seams(im,kind in ('decor','wall_torch'))
-            valid=bool(im.size==(64,64) and m['opaque_pixels']>0 and m['palette_max_delta']<=12 and m['std']>=.08 and m['mean']<=.45)
-            variants.append(dict(variant=variant,metrics=m,seam=seam,validator_pass=valid))
-        rows,score=scores(kind,variants[0]['metrics'],p,variants[0]['seam'],images)
-        passed=all(v['validator_pass'] and v['seam']['pass_'] for v in variants) and global_metrics['region_mean_pass'] and global_metrics['hue_budget_pass']
-        hashes={f'tiles/{kind}_{i}.png':hashlib.sha256((CACHE/f'tiles/{kind}_{i}.png').read_bytes()).hexdigest() for i in range(3)}
-        data=dict(asset_class=kind,round=number,parameters=p,references=rows,composite=score,global_targets=global_metrics,
-                  variants=variants,passing=bool(passed),converged=bool(passed and score>=.85),cache_sha256=hashes,
-                  reference_board_sha256=hashlib.sha256((ROOT/'references/references.md').read_bytes()).hexdigest())
-        path.write_text(json.dumps(data,indent=2)+'\n')
-        images[kind].save(folder/(stem+'.png'))
-        print(f'{kind} round={number:02} composite={score:.3f} validator={all(v["validator_pass"] for v in variants)} seams={all(v["seam"]["pass_"] for v in variants)} globals={passed} converged={data["converged"]}')
-    summary()
-    summary(number,kinds)
+def bits(image):
+    gray=np.array(image.convert('L').resize((32,32),Image.Resampling.LANCZOS),dtype=float)
+    n=np.arange(32);k=np.arange(8)[:,None];basis=np.cos(np.pi*(2*n+1)*k/64)
+    spectrum=basis@gray@basis.T
+    return spectrum>np.median(spectrum.flatten()[1:])
+
+
+def luminance(image):
+    return np.asarray(image.convert('RGB'),dtype=float)@LUMA/255
+
+
+def edge_features(image):
+    a=luminance(image.filter(ImageFilter.GaussianBlur(.7)))
+    gy,gx=np.gradient(a);weight=np.hypot(gx,gy)
+    # Edge direction, not gradient direction. Nine fixed 20-degree bins.
+    angle=(np.arctan2(gy,gx)+np.pi/2)%np.pi
+    histogram=np.histogram(angle,bins=np.linspace(0,np.pi,10),weights=weight)[0]
+    histogram=histogram/max(1e-9,histogram.sum())
+    horizontal=float(weight[(angle<=np.pi/8)|(angle>=7*np.pi/8)].sum()/max(1e-9,weight.sum()))
+    raw=luminance(image);lap=-4*raw+np.roll(raw,1,0)+np.roll(raw,-1,0)+np.roll(raw,1,1)+np.roll(raw,-1,1)
+    return dict(orientation_histogram=histogram.tolist(),peak=float(histogram.max()),horizontal=horizontal,laplacian_variance=float(lap.var()))
+
+
+def stone_components(image):
+    a=luminance(image);lo,hi=np.percentile(a,[5,80]);threshold=lo+.45*(hi-lo)
+    mask=a>threshold;h,w=mask.shape;visited=np.zeros_like(mask);parts=[]
+    # Nearest sampling can join separate slabs by a one-pixel neck. Separate
+    # eroded cores, then grow them back within the original stone pixels.
+    core=mask.copy()
+    for dy,dx in ((1,0),(-1,0),(0,1),(0,-1)):core&=np.roll(np.roll(mask,dy,0),dx,1)
+    for y,x in zip(*np.where(core)):
+        if visited[y,x]:continue
+        points=[];stack=[(y,x)];visited[y,x]=True
+        while stack:
+            yy,xx=stack.pop();points.append((yy,xx))
+            for dy,dx in ((1,0),(-1,0),(0,1),(0,-1)):
+                ny,nx=(yy+dy)%h,(xx+dx)%w
+                if core[ny,nx] and not visited[ny,nx]:visited[ny,nx]=True;stack.append((ny,nx))
+        if len(points)>=h*w*.01:parts.append(np.array(points))
+    from collections import deque
+    labels=np.zeros((h,w),dtype=int);queue=deque()
+    for label,part in enumerate(parts,1):
+        for y,x in part:labels[y,x]=label;queue.append((y,x))
+    while queue:
+        y,x=queue.popleft()
+        for dy,dx in ((1,0),(-1,0),(0,1),(0,-1)):
+            ny,nx=(y+dy)%h,(x+dx)%w
+            if mask[ny,nx] and not labels[ny,nx]:labels[ny,nx]=labels[y,x];queue.append((ny,nx))
+    parts=[np.argwhere(labels==label) for label in range(1,len(parts)+1)]
+    areas=[len(p)/(h*w) for p in parts]
+    def span(values,n):
+        v=np.unique(values);gaps=np.diff(np.r_[v,v[0]+n]);return float((n-gaps.max()+1)/n)
+    spans=[max(span(p[:,0],h),span(p[:,1],w)) for p in parts]
+    # Joint width measured away from junctions: median distance to nearest stone.
+    distance=np.zeros_like(a);remaining=~mask;front=mask.copy()
+    for depth in range(1,10):
+        front=front|np.roll(front,1,0)|np.roll(front,-1,0)|np.roll(front,1,1)|np.roll(front,-1,1)
+        added=remaining&front;distance[added]=depth;remaining[added]=False
+    return dict(areas=areas,median_area=float(np.median(areas)) if areas else 0,
+                area_ratio=max(areas)/min(areas) if areas else 0,largest_span=max(spans,default=0),
+                mortar_width=float(2*np.median(distance[~mask])/w) if (~mask).any() else 0,
+                mortar_contrast=float(a[mask].mean()-a[~mask].mean()) if mask.any() and (~mask).any() else 0,
+                stone_count=len(parts))
+
+
+def structural(kind,image,images,p):
+    m=measurements(image);e=edge_features(image);a=luminance(image);targets=[];details={}
+    if kind=='floor':
+        details=stone_components(image)
+        targets=[target('stones across tile edge',p['count'],2,3),target('largest stone span',details['largest_span'],.40),
+                 target('stone area size ratio',details['area_ratio'],2),target('mortar width / edge',details['mortar_width'],high=.06),
+                 target('mortar luminance separation',details['mortar_contrast'],.15,.25),target('orientation histogram peak',e['peak'],high=.30)]
+    elif kind=='wall':
+        body=float(a[13:45].mean());top=float(a[:13].mean());damp=float(a[45:].mean())
+        details=dict(top=top,body=body,damp=damp)
+        targets=[target('horizontal edge energy',e['horizontal'],.55),target('top band minus body',top-body,.15),
+                 target('body minus damp band',body-damp,.10),target('wall / floor pHash bits',int(np.count_nonzero(bits(image)!=bits(images['floor']))),12)]
+    elif kind=='water':
+        edge=np.ones(a.shape,dtype=bool);edge[8:-8,8:-8]=False
+        depth=float(a[edge].mean()-a[24:40,24:40].mean())
+        floor_energy=edge_features(images['floor'])['laplacian_variance']
+        details=dict(depth=depth,floor_laplacian_variance=floor_energy)
+        targets=[target('high frequency / floor',e['laplacian_variance']/max(1e-9,floor_energy),high=.25),target('edge minus centre depth',depth,.08),
+                 target('specular >= .70 fraction',float((a>=.70).mean()),.01,.04),target('water hue',m['hue'],80,110),
+                 target('water saturation',m['saturation'],.20,.35),target('water mean',m['mean'],high=.12),
+                 target('water / grass pHash bits',int(np.count_nonzero(bits(image)!=bits(tile('grass')))),16)]
+    else:
+        baseline=json.loads((OUT/kind/'round-00.json').read_text())['parameters']
+        keys=('seed','count','relief','displacement','wall_height','mortar_width','chip','bevel','decor_density','water_depth','light_angle','light_strength')
+        same=all(p.get(k)==baseline.get(k) for k in keys)
+        targets=[target('approved shape parameters unchanged',int(same),1)]
+    return dict(targets=targets,details=details,edges=e,passing=all(t['pass_'] for t in targets),score=float(np.mean([t['score'] for t in targets])))
+
+
+def room_gate(annotate=False):
+    metadata=json.loads((OUT/'room.json').read_text());image=Image.open(OUT/'sewers-ingame.png').convert('RGB')
+    terrain=Image.open(OUT/'sewers-terrain.png').convert('RGB');a=luminance(image);base=luminance(terrain)
+    cells=metadata['cells'];samples={};visible=np.zeros(a.shape,dtype=bool)
+    for cell in cells:
+        x0,y0,x1,y1=cell['box'];x0=max(0,x0);y0=max(0,y0);x1=min(a.shape[1],x1);y1=min(a.shape[0],y1)
+        if x0>=x1 or y0>=y1:continue
+        cell['box']=[x0,y0,x1,y1];visible[y0:y1,x0:x1]=True
+        crop=terrain.crop((x0,y0,x1,y1));value=float(luminance(crop).mean())
+        h,s,v=hsv(np.array(crop,dtype=float));chromatic=(s>.1)&(v>.02)
+        hue=float(np.degrees(np.angle(np.mean(np.exp(1j*np.radians(h[chromatic]))))))%360 if chromatic.any() else 0
+        samples[(cell['x'],cell['y'])]=dict(cell=cell,image=crop,mean=value,hue=hue)
+    walls=[s for s in samples.values() if s['cell']['kind']=='wall'];floors=[s for s in samples.values() if s['cell']['kind']=='floor']
+    if not walls or not floors:raise ValueError('Room lacks visible floor or wall samples')
+    wall_mean=float(np.mean([s['mean'] for s in walls]));floor_mean=float(np.mean([s['mean'] for s in floors]))
+    # Representative cells selected by closeness to their class median, never by best contrast.
+    wall=min(walls,key=lambda s:abs(s['mean']-np.median([x['mean'] for x in walls])))
+    floor=min(floors,key=lambda s:abs(s['mean']-np.median([x['mean'] for x in floors])))
+    phash=int(np.count_nonzero(bits(wall['image'])!=bits(floor['image'])))
+    areas=[stone_components(s['image'])['median_area'] for s in floors]
+    adjacency=[]
+    for (x,y),s in samples.items():
+        if s['cell']['kind']!='water':continue
+        for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)):
+            other=samples.get((x+dx,y+dy))
+            if other and other['cell']['kind']=='floor':
+                delta=abs(s['hue']-other['hue']);adjacency.append((abs(s['mean']-other['mean']),min(delta,360-delta)))
+    if not adjacency:raise ValueError('No adjacent visible water and floor')
+    coords=set(samples);outer={c for c in coords if any((c[0]+dx,c[1]+dy) not in coords for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)))}
+    inner={c for c in coords-outer if any((c[0]+dx,c[1]+dy) in outer for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)))}
+    outer_mean=float(np.mean([samples[c]['mean'] for c in outer]));inner_mean=float(np.mean([samples[c]['mean'] for c in inner]))
+    readability=[]
+    for subject in metadata['subjects']:
+        x0,y0,x1,y1=subject['box'];difference=np.abs(a[y0:y1,x0:x1]-base[y0:y1,x0:x1])
+        contrast=float(np.percentile(difference,95));readability.append(dict(name=subject['name'],contrast=contrast,pass_=contrast>=.20))
+    groups=[dict(name='Wall/floor distinctness',measurements=[target('mean luminance difference',abs(wall_mean-floor_mean),.10),target('representative pHash bits',phash,12)]),
+            dict(name='Feature scale at 1x',measurements=[target('median flagstone fraction',float(np.median(areas)),.12)]),
+            dict(name='Adjacent water/floor contrast',measurements=[target('median luminance difference',float(np.median([x[0] for x in adjacency])),.12),target('median hue difference',float(np.median([x[1] for x in adjacency])),30)]),
+            dict(name='No boundary halo',measurements=[target('outer minus inner mean',outer_mean-inner_mean,high=0)],outer_mean=outer_mean,inner_mean=inner_mean),
+            dict(name='Visible-cell value range',measurements=[target('visible mean',float(a[visible].mean()),.12,.20),target('visible std',float(a[visible].std()),.12)]),
+            dict(name='Hero / rat / item readability',measurements=[target(x['name']+' bbox contrast',x['contrast'],.20) for x in readability])]
+    for g in groups:g['passing']=all(m['pass_'] for m in g['measurements'])
+    hue,sat,val=hsv(np.array(terrain,dtype=float)[visible]);dominant=(hue>=15)&(hue<=125)
+    accent=(~dominant)&(sat>=.10)&(val>.025)
+    bins=np.bincount((hue[accent]//30).astype(int),minlength=12)/max(1,len(hue));present=bins>0
+    accents=int(sum(present[i] and not present[(i-1)%12] for i in range(12)))
+    if present.all():accents=1
+    mean=float(a[visible].mean());globals_=dict(region_mean_after_lighting=mean,region_mean_pass=.11<=mean<=.17,
+        dominant_green_brown_fraction=float(dominant.mean()),hue_budget_pass=float(dominant.mean())>=.70 and accents<=1,accent_families=accents,accent_bins=bins.tolist(),
+        readability='Existing mobs unchanged; sprite-pair histogram test 30 remains pending',composition='Actual OpenGL screenshot; all heroFOV visible cells',ambient=[.50,.55,.45])
+    result=dict(passing=all(g['passing'] for g in groups),groups=groups,global_targets=globals_,
+                screenshot_sha256=hashlib.sha256((OUT/'sewers-ingame.png').read_bytes()).hexdigest(),
+                terrain_sha256=hashlib.sha256((OUT/'sewers-terrain.png').read_bytes()).hexdigest(),
+                sample_count=len(samples),seed=metadata['seed'],lighting=metadata['lighting'],zoom=metadata['zoom'],
+                method='Full visible-cell mask; class-median representative pHashes; all water/floor adjacencies; 4-neighbour rings; p95 paired-background absolute bbox luminance contrast')
+    if annotate:
+        canvas=Image.new('RGB',(image.width,image.height+220),'#141311');canvas.paste(image,(0,0));draw=ImageDraw.Draw(canvas)
+        font=review_font(16)
+        for i,g in enumerate(groups):
+            line=f'{i+1}. {g["name"]}: '+', '.join(f'{m["target"]}={m["value"]:.3f}' for m in g['measurements'])+(' PASS' if g['passing'] else ' FAIL')
+            draw.text((16,image.height+12+i*32),line,font=font,fill='#C9BFA8' if g['passing'] else '#E0982F')
+        canvas.save(OUT/'sewers-gate.png');(OUT/'room-gate.json').write_text(json.dumps(result,indent=2)+'\n')
+    return result
+
+
+def review_font(size):
+    try:return ImageFont.truetype('C:/Windows/Fonts/consola.ttf',size)
+    except OSError:return ImageFont.load_default(size=size)
+
+
+def reference(kind):
+    number=max(REFERENCES[kind],key=lambda r:r[1])[0]
+    path=next(p for p in sorted((ROOT/'references').glob(f'ref-{number:02}-*.jpg')) if not any(s in p.name for s in ('normal','roughness','displacement')))
+    image=Image.open(path).convert('RGBA');box=(0,0,*image.size)
+    if kind=='wall_torch':
+        rgba=np.array(image);mask=(rgba[:,:,:3].max(axis=2)>35)&(rgba[:,:,3]>0)
+        yy,xx=np.where(mask);box=(int(xx.min()),int(yy.min()),int(xx.max()+1),int(yy.max()+1))
+        image=image.crop(box)
+    elif kind=='decor':image=image.crop(image.getbbox());box=(0,0,*image.size)
+    return image,dict(number=number,file=str(path.relative_to(ROOT)),subject_box=box,sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 
 
 def rounds(kind):
-    return [json.loads(p.read_text()) for p in sorted((OUT/kind).glob('round-*.json'))]
+    return [json.loads(p.read_text()) for p in sorted((OUT/kind).glob('round-*.json')) if p.stem!='round-00']
 
 
 def best(kind):
-    values=rounds(kind);passing=[v for v in values if v['passing']]
-    return max(passing or values,key=lambda x:(x['composite'],x['round'])) if values else None
+    values=rounds(kind);passing=[r for r in values if r['passing']]
+    return max(passing or values,key=lambda r:(r['composite'],r['round'])) if values else None
 
 
-def summary(number=None,kinds=CLASSES):
-    canvas=Image.new('RGB',(1152,64+len(kinds)*352),'#141311');d=ImageDraw.Draw(canvas)
-    try:font=ImageFont.truetype('C:/Windows/Fonts/consola.ttf',16)
-    except OSError:font=ImageFont.load_default(size=16)
-    for x,text in zip((16,304,592,880),('REFERENCE (fit)','PROCEDURAL 4x','POC ROUND 0 4x','BEST ROUND 4x')):d.text((x,16),text,font=font,fill='#C9BFA8')
+def summary(preview=False,kinds=CLASSES):
+    canvas=Image.new('RGB',(1152,64+len(kinds)*384),'#141311');draw=ImageDraw.Draw(canvas);font=review_font(16)
+    for x,label in zip((16,304,592,880),('REFERENCE SUBJECT','PROCEDURAL 4x','APPROVED PASS / R0','CURRENT' if preview else 'BEST PASSING 4x')):draw.text((x,16),label,font=font,fill='#C9BFA8')
     for row,kind in enumerate(kinds):
-        y=64+row*352;chosen=best(kind)
-        if number is not None:chosen=next((r for r in rounds(kind) if r['round']==number),chosen)
-        ref=max(REFERENCES[kind],key=lambda t:t[1])[0]
-        source=next(p for p in sorted((ROOT/'references').glob(f'ref-{ref:02}-*.jpg')) if not any(s in p.name for s in ('normal','roughness','displacement')))
-        d.text((16,y),f'{kind} / ref {ref:02}',font=font,fill='#EFE7D2')
-        paths=[source,OUT/kind/'procedural.png',OUT/kind/'round-00.png',OUT/kind/f'round-{chosen["round"]:02}.png' if chosen else None]
-        for col,path in enumerate(paths):
-            if path is None:continue
-            im=Image.open(path).convert('RGBA')
+        y=64+row*384;r=best(kind);ref,info=reference(kind)
+        images=[ref,Image.open(OUT/kind/'procedural.png').convert('RGBA'),Image.open(OUT/kind/'round-00.png').convert('RGBA'),tile(kind) if preview or not r else Image.open(OUT/kind/f'round-{r["round"]:02}.png').convert('RGBA')]
+        draw.text((16,y),f'{kind} / ref {info["number"]:02}',font=font,fill='#EFE7D2')
+        for col,im in enumerate(images):
+            im=im.copy()
             if col==0:im.thumbnail((256,256),Image.Resampling.LANCZOS)
             else:im=im.resize((256,256),Image.Resampling.NEAREST)
             canvas.paste(im,(16+col*288+(256-im.width)//2,y+28+(256-im.height)//2),im)
-        values=rounds(kind)
-        if values:
-            label=f'r{chosen["round"]:02} score {chosen["composite"]:.3f}  '+(('VALID' if chosen['composite']>=.85 else 'VALID (<0.85)') if chosen['passing'] else 'FAILED ROUND')
-            d.text((592,y+292),label,font=font,fill='#C9BFA8' if chosen['passing'] else '#E0982F')
-            points=[(24+(r['round']-1)*44,y+336-r['composite']*36) for r in values]
-            d.line((24,y+336-.85*36,508,y+336-.85*36),fill='#3B3733')
-            if len(points)>1:d.line(points,fill='#E0982F',width=2)
-            for x,yy in points:d.ellipse((x-3,yy-3,x+3,yy+3),fill='#E4C76A')
-            d.text((16,y+285),'Score history (line = 0.85)',font=font,fill='#6B645C')
-            if kind in ('decor','wall_torch'):d.text((592,y+315),'POC lacked a dedicated prop',font=font,fill='#6B645C')
-    canvas.save(OUT/'summary.png' if number is None else ROOT/'.local/iteration-review.png')
+        values=rounds(kind);first=next((v['round'] for v in values if v['vision']['score']>.7),None)
+        if r:
+            draw.text((16,y+290),f'vision first >0.7: {first if first else "not reached"}',font=font,fill='#C9BFA8')
+            draw.text((592,y+290),f'r{r["round"]:02} composite={r["composite"]:.3f} '+('PASS' if r['passing'] else 'FAIL'),font=font,fill='#C9BFA8')
+            for key,color in [('composite','#E0982F')]:
+                points=[(24+(v['round']-1)*34,y+362-v[key]*45) for v in values]
+                draw.line((24,y+362-.90*45,466,y+362-.90*45),fill='#6B645C')
+                if len(points)>1:draw.line(points,fill=color,width=2)
+                for x,yy in points:draw.ellipse((x-2,yy-2,x+2,yy+2),fill='#E4C76A')
+    canvas.save(ROOT/'.local/iteration-review.png' if preview else OUT/'summary.png')
 
 
-def check():
-    failures=[]
-    images={k:tile(k) for k in CLASSES}
-    current_global=globals_for(images)
-    if not current_global['region_mean_pass'] or not current_global['hue_budget_pass']:
-        failures.append('current shipped terrain composition fails global targets')
+def record(number,kinds,vision_path):
+    if not 1<=number<=14:raise ValueError('Calibrated rounds must be 1-14')
+    judgments=json.loads(Path(vision_path).read_text());images={k:tile(k) for k in CLASSES};room=room_gate(True)
+    import io,contextlib
+    from validate import validate
+    output=io.StringIO()
+    with contextlib.redirect_stdout(output):atlas_failed=validate(True)
+    atlas=dict(passing=not atlas_failed,output=output.getvalue().strip().splitlines())
+    room_folder=OUT/'rooms';room_folder.mkdir(exist_ok=True)
+    for suffix,source in [('.png','sewers-ingame.png'),('-terrain.png','sewers-terrain.png'),('.json','room.json')]:
+        (room_folder/f'round-{number:02}{suffix}').write_bytes((OUT/source).read_bytes())
+    for kind in kinds:
+        folder=OUT/kind;path=folder/f'round-{number:02}.json'
+        if path.exists():raise ValueError('Round already recorded: '+str(path))
+        vision=judgments[kind]
+        if not 0<=vision['score']<=1 or not vision['reason'].strip():raise ValueError('Vision score and one-line reason required')
+        if vision.get('wrong_kind') and vision['score']>.3:raise ValueError('Wrong-kind vision score must be <= .3')
+        p=json.loads((PARAMS/f'{kind}.json').read_text());variants=[]
+        for variant in range(3):
+            im=tile(kind,variant);m=measurements(im);seam=seams(im,kind in ('decor','wall_torch'));structure=structural(kind,im,images,p)
+            valid=im.size==(64,64) and m['opaque_pixels']>0 and m['palette_max_delta']<=12 and m['std']>=.08 and m['mean']<=.45
+            variants.append(dict(variant=variant,metrics=m,seam=seam,structural=structure,validator_pass=bool(valid)))
+        rows,numeric=scores(kind,variants[0]['metrics'],p,variants[0]['seam'],images)
+        structure_score=float(np.mean([v['structural']['score'] for v in variants]));score=.30*numeric+.30*structure_score+.40*vision['score']
+        g=room['global_targets'];passed=all(v['validator_pass'] and v['seam']['pass_'] and v['structural']['passing'] for v in variants) and room['passing'] and g['region_mean_pass'] and g['hue_budget_pass'] and atlas['passing']
+        _,ref=reference(kind)
+        data=dict(asset_class=kind,round=number,parameters=p,references=rows,reference_subject=ref,vision=vision,
+                  weights=dict(numeric=.30,structural=.30,vision=.40),numeric=numeric,structural_score=structure_score,composite=score,
+                  variants=variants,room=room,atlas_validator=atlas,global_targets=g,passing=bool(passed),converged=bool(passed and score>=.90 and number>=6),
+                  cache_sha256={f'tiles/{kind}_{i}.png':hashlib.sha256((CACHE/f'tiles/{kind}_{i}.png').read_bytes()).hexdigest() for i in range(3)})
+        path.write_text(json.dumps(data,indent=2)+'\n');images[kind].save(folder/f'round-{number:02}.png')
+        retained=ROOT/'.local/iteration-cache'/kind/f'round-{number:02}';retained.mkdir(parents=True,exist_ok=True)
+        for cached_kind in ([kind,'door_open'] if kind=='door' else [kind]):
+            for variant in range(3):
+                filename=f'{cached_kind}_{variant}.png';(retained/filename).write_bytes((CACHE/'tiles'/filename).read_bytes())
+        critique=f'Vision {vision["score"]:.2f}: {vision["reason"]}\n'+vision.get('gap','Material/value refinement follows the measured failures.')+'\n'
+        if len(critique.strip().splitlines())>3:raise ValueError('Critique must fit three lines')
+        (folder/f'round-{number:02}.md').write_text(critique)
+        print(f'{kind} r{number:02}: composite={score:.3f} vision={vision["score"]:.2f} passing={passed}; structural failures='+str([t['target'] for v in variants for t in v['structural']['targets'] if not t['pass_']]))
+    summary()
+
+
+def check(room_only=False):
+    failures=[];room=room_gate(True);images={k:tile(k) for k in CLASSES}
+    for g in room['groups']:
+        print(g['name']+': '+', '.join(f'{m["target"]}={m["value"]:.4f}' for m in g['measurements'])+(' PASS' if g['passing'] else ' FAIL'))
+        if not g['passing']:failures.append(g['name'])
+    print(f'TEST 40: measurements=6 failures={len(failures)}')
+    if room_only:return bool(failures)
+    class_failures=[]
     for kind in CLASSES:
-        chosen=best(kind)
-        if not chosen or not chosen['passing']:failures.append(kind+': no passing round')
+        values=rounds(kind);chosen=best(kind)
+        if len(values)<6:class_failures.append(kind+': fewer than six rounds')
+        if not chosen or not chosen['passing']:class_failures.append(kind+': no round passes all required gates')
+        p=json.loads((PARAMS/f'{kind}.json').read_text())
         if chosen:
-            p=json.loads((PARAMS/(kind+'.json')).read_text())
-            if p!=chosen['parameters']:failures.append(kind+': shipped parameters differ from best passing round')
-            if tile(kind).tobytes()!=Image.open(OUT/kind/f'round-{chosen["round"]:02}.png').convert('RGBA').tobytes():failures.append(kind+': shipped pixels differ')
-            if chosen['composite']<.85 and len(rounds(kind))<12:failures.append(kind+': stopped before convergence or round 12')
-            for rendered_kind in ([kind,'door_open'] if kind=='door' else [kind]):
-                for variant in range(3):
-                    im=tile(rendered_kind,variant);m=measurements(im)
-                    if im.size!=(64,64) or not m['opaque_pixels'] or m['palette_max_delta']>12 or m['std']<.08 or m['mean']>.45:
-                        failures.append(f'{rendered_kind}/{variant}: current render fails validator')
-                    if not seams(im,kind in ('decor','wall_torch'))['pass_']:failures.append(f'{rendered_kind}/{variant}: current seam failure')
-            for r in rounds(kind):
-                critique=OUT/kind/f'round-{r["round"]:02}.md'
-                if not critique.exists() or not 1<=len(critique.read_text().strip().splitlines())<=3:failures.append(kind+': missing or overlong critique')
-    for fail in failures:print('FAIL:',fail)
-    print(f'Sewers lit composition: mean={current_global["region_mean_after_lighting"]:.4f}; dominant green-brown={current_global["dominant_green_brown_fraction"]:.4f}')
-    print(f'TEST 39: classes={len(CLASSES)} failures={len(failures)}')
-    return bool(failures)
+            if p!=chosen['parameters']:class_failures.append(kind+': current parameters differ from selected round')
+            if tile(kind).tobytes()!=Image.open(OUT/kind/f'round-{chosen["round"]:02}.png').convert('RGBA').tobytes():class_failures.append(kind+': selected pixels differ')
+            if chosen['composite']<.90 and len(values)<14:class_failures.append(kind+': stopped below .90 before round 14')
+        for rendered_kind in ([kind,'door_open'] if kind=='door' else [kind]):
+            for v in range(3):
+                im=tile(rendered_kind,v);m=measurements(im)
+                if im.size!=(64,64) or not m['opaque_pixels'] or m['palette_max_delta']>12 or m['std']<.08 or m['mean']>.45 or not seams(im,kind in ('decor','wall_torch'))['pass_'] or not structural(kind,im,images,p)['passing']:class_failures.append(f'{rendered_kind}/{v}: current validation, structure or seams fail')
+        for r in values:
+            note=OUT/kind/f'round-{r["round"]:02}.md'
+            if not note.exists() or not 1<=len(note.read_text().strip().splitlines())<=3:class_failures.append(kind+': missing/overlong critique')
+            if r['vision'].get('wrong_kind') and r['vision']['score']>.3:class_failures.append(kind+': wrong-kind score exceeds .3')
+    if not room['global_targets']['region_mean_pass'] or not room['global_targets']['hue_budget_pass']:class_failures.append('current screenshot fails board global targets')
+    for f in class_failures:print('FAIL:',f)
+    print(f'TEST 39: classes=6 failures={len(class_failures)}')
+    return bool(failures or class_failures)
 
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--round',type=int);parser.add_argument('--class',dest='kind',choices=CLASSES);parser.add_argument('--summary',action='store_true');parser.add_argument('--check',action='store_true')
+    parser=argparse.ArgumentParser();parser.add_argument('--round',type=int);parser.add_argument('--class',dest='kinds',choices=CLASSES,nargs='+')
+    parser.add_argument('--vision');parser.add_argument('--summary',action='store_true');parser.add_argument('--preview',action='store_true');parser.add_argument('--check',action='store_true');parser.add_argument('--check-room',action='store_true')
     args=parser.parse_args()
-    if args.round:record(args.round,[args.kind] if args.kind else CLASSES)
+    if args.preview:summary(True,args.kinds or CLASSES)
+    if args.round:record(args.round,args.kinds or CLASSES,args.vision)
     if args.summary:summary()
-    if args.check:raise SystemExit(check())
+    if args.check or args.check_room:raise SystemExit(check(args.check_room))
+
+

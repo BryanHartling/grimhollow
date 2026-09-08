@@ -1,2 +1,2 @@
-The courses are legible but still look like regular gray paving rather than damp masonry.
-Increase coarse material variation and mortar depth; reduce the large uniform highlight planes.
+Vision 0.84: Horizontal courses and a lit cap read as wall masonry, distinct from the polygonal floor.
+The cap-to-body step is abrupt; soften material variation without losing the required band.

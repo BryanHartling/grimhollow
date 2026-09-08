@@ -1,2 +1,2 @@
-The arch and iron straps read clearly; the jambs are much brighter and cleaner than the corridor reference.
-Lower the stone tone curve and expose coarse material shading while keeping the dark gate aperture.
+Vision 0.91: The approved arch, iron straps and dark wooden gate remain recognizable against the corridor reference.
+Lift the wood midtones slightly to keep the gate visible beside brighter flooring.

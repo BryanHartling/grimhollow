@@ -28,6 +28,10 @@ import java.util.HashSet;
 
 public class DungeonWallsTilemap extends DungeonTilemap {
 
+    @Override protected com.watabou.noosa.NoosaScript script() {
+        return LightingOverlay.walls();
+    }
+
 	public static HashSet<Integer> skipCells = new HashSet<>();
 
 	public DungeonWallsTilemap(){

@@ -68,6 +68,36 @@ def flame(x,y,z,p,m):
     ring('pinpoint hot core',x,y+.025,z+.035,.009,.013,1,m['hot_core'])
 
 
+def flagstones(p):
+    """Periodic Voronoi cells: broad unequal polygons, not a perturbed square grid."""
+    sites=p.get('stone_sites',[[.12,.14],[.63,.10],[.21,.65],[.68,.70],[.90,.37]])
+    result=[]
+    weights=p.get('stone_weights',[0]*len(sites))
+    for index,(sx,sy) in enumerate(sites):
+        poly=[(-2.,-2.),(3.,-2.),(3.,3.),(-2.,3.)]
+        for ox in (-1,0,1):
+            for oy in (-1,0,1):
+                for other,(bx,by) in enumerate(sites):
+                    bx+=ox;by+=oy
+                    if abs(bx-sx)+abs(by-sy)<1e-8:continue
+                    nx,ny=bx-sx,by-sy;limit=(bx*bx+by*by-sx*sx-sy*sy+weights[index]-weights[other])/2
+                    clipped=[]
+                    for a,b in zip(poly,poly[1:]+poly[:1]):
+                        da=a[0]*nx+a[1]*ny-limit;db=b[0]*nx+b[1]*ny-limit
+                        if da<=0:clipped.append(a)
+                        if (da<=0)!=(db<=0):
+                            t=da/(da-db);clipped.append((a[0]+t*(b[0]-a[0]),a[1]+t*(b[1]-a[1])))
+                    poly=clipped
+        # Offset edges by half the mortar joint using a centroid contraction.
+        inset=p['mortar_width']/2
+        points=[]
+        for x,y in poly:
+            distance=math.hypot(x-sx,y-sy);ratio=max(0,1-inset/distance)
+            points.append((sx+(x-sx)*ratio-.5,sy+(y-sy)*ratio-.5))
+        result.append(points)
+    return result
+
+
 def geometry(kind, variant, p, m):
     for ty in (-1,0,1):
         for tx in (-1,0,1):
@@ -75,7 +105,21 @@ def geometry(kind, variant, p, m):
             rng=random.Random(p['seed']+variant)
             if kind not in ('decor','wall_torch'):
                 box('deep mortar bed',(tx,ty,-.15 if kind=='water' else -.035),(3,3,.06) if kind=='water' else (1,1,.06),m['mortar'],0)
-            if kind in ('floor','wall'):
+            if kind=='floor' and p.get('calibrated'):
+                for index,poly in enumerate(flagstones(p)):
+                    top=p['relief']+rng.uniform(0,p['displacement']);n=len(poly)
+                    vertices=[(tx+x,ty+y,z) for z in (0,top) for x,y in poly]
+                    faces=[tuple(reversed(range(n))),tuple(range(n,2*n))]+[(i,(i+1)%n,(i+1)%n+n,i+n) for i in range(n)]
+                    obj=mesh('broad polygonal flagstone',vertices,faces,m['stone'],p['bevel'])
+                    shade=p.get('stone_values',[.85,1.1,1.24,.92,1.06])[index]
+                    obj.color=(shade,shade,shade,1)
+            elif kind=='wall' and p.get('calibrated'):
+                for row in range(3):
+                    for col in range(2):
+                        x=tx+(col+.25+(row%2)*.45)*.5-.5
+                        y=ty+(row+.5)/3-.5
+                        slab('horizontal masonry course',x,y,.5-p['mortar_width'],1/3-p['mortar_width'],0,p['wall_height'],m['stone'],rng,p['chip'],p['bevel'])
+            elif kind in ('floor','wall'):
                 count=p['count'];pitch=1/count
                 # Offset from tile borders; periodic boundary stones are completed by neighbours.
                 for row in range(count):
@@ -142,6 +186,6 @@ def render(kind,variant,reset,camera,save,cache):
         x,y,z=light.location
         light.location=(x*math.cos(angle)-y*math.sin(angle),x*math.sin(angle)+y*math.cos(angle),z)
         light.rotation_euler=(-light.location).to_track_quat('-Z','Y').to_euler()
-    mats=materials.environment(p)
+    mats=materials.environment(dict(p,asset_class=kind))
     geometry(kind,variant,p,mats)
     save(cache/f'tiles/{kind}_{variant}.png')

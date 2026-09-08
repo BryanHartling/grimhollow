@@ -1,0 +1,54 @@
+{
+  "asset_class": "wall_torch",
+  "round": 0,
+  "parameters": {
+    "seed": 5706,
+    "count": 3,
+    "relief": 0.07,
+    "displacement": 0.055,
+    "wall_height": 0.6,
+    "mortar_width": 0.025,
+    "chip": 0.012,
+    "bevel": 0.035,
+    "moss_density": 0.25,
+    "grain_frequency": 1.1,
+    "bump_depth": 0.025,
+    "ao_distance": 0.08,
+    "stone_roughness": 0.25,
+    "water_roughness": 0.19,
+    "specular": 0.12,
+    "water_depth": 0.025,
+    "decor_density": 7,
+    "light_strength": 1.15,
+    "light_angle": -5,
+    "stone_color": "75664F",
+    "moss_color": "4C5939",
+    "water_color": "3E4C35",
+    "tone_curve": [
+      0.025,
+      0.13,
+      0.27,
+      0.4
+    ],
+    "tone_breaks": [
+      0.25,
+      0.6,
+      0.89
+    ],
+    "tone_gamma": 1.2,
+    "light_steps": [
+      0,
+      0.2,
+      0.4,
+      0.8
+    ],
+    "grain_min": 0.12,
+    "grain_max": 1.8,
+    "core_emission": 3.25,
+    "flame_edge": "6C2A18",
+    "separate_emission_curve": true,
+    "inner_emission": 1.35
+  },
+  "source_tag": "v0.4.2-sewers-iterated",
+  "approved_shape": true
+}

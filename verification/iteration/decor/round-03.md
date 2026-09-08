@@ -1,2 +1,2 @@
-The broken masonry silhouette and moss edges are readable again, with warm chipped faces and deep gaps.
-The numeric stop condition is met; retain round 03. The scan has much finer organic detail than this deliberately sparse 64 px prop.
+Vision 0.82: Rubble chunks are recognizable and distinct from the floor pattern.
+Lift a few exposed planes without changing the chunk arrangement.

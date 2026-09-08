@@ -1,0 +1,253 @@
+{
+  "asset_class": "floor",
+  "round": 1,
+  "parameters": {
+    "seed": 5706,
+    "count": 3,
+    "relief": 0.07,
+    "displacement": 0.055,
+    "wall_height": 0.6,
+    "mortar_width": 0.025,
+    "chip": 0.012,
+    "bevel": 0.025,
+    "moss_density": 0.25,
+    "grain_frequency": 3,
+    "bump_depth": 0.035,
+    "ao_distance": 0.26,
+    "stone_roughness": 0.25,
+    "water_roughness": 0.19,
+    "specular": 0.18,
+    "water_depth": 0.025,
+    "decor_density": 7,
+    "light_strength": 1.0,
+    "light_angle": 0,
+    "stone_color": "6B645C",
+    "moss_color": "4C5939",
+    "water_color": "3E4C35",
+    "tone_curve": [
+      0.045,
+      0.14,
+      0.34,
+      0.52
+    ],
+    "tone_breaks": [
+      0.2,
+      0.55,
+      0.84
+    ],
+    "tone_gamma": 1.0
+  },
+  "references": [
+    {
+      "reference": 4,
+      "weight": 1,
+      "targets": [
+        {
+          "target": "constructed stones per tile edge",
+          "value": 3.0,
+          "minimum": 2,
+          "maximum": 3,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "surface p85-p15 mortar contrast",
+          "value": 0.3808752941176471,
+          "minimum": 0.2,
+          "maximum": null,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 1.0
+    },
+    {
+      "reference": 19,
+      "weight": 1,
+      "targets": [
+        {
+          "target": "constructed flagstones per tile edge",
+          "value": 3.0,
+          "minimum": 2,
+          "maximum": 3,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "highlight fraction",
+          "value": 0.0,
+          "minimum": null,
+          "maximum": 0.05,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "surface luminance std",
+          "value": 0.18103097300788223,
+          "minimum": 0.1,
+          "maximum": null,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 1.0
+    },
+    {
+      "reference": 20,
+      "weight": 0.8,
+      "targets": [
+        {
+          "target": "moss/wet-edge hue",
+          "value": 85.71428571428572,
+          "minimum": 75,
+          "maximum": 100,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "moss/wet-edge saturation",
+          "value": 0.3684210526315789,
+          "minimum": 0.3,
+          "maximum": 0.5,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "moss/wet-edge luminance std",
+          "value": 0.0447804623156505,
+          "minimum": 0.08,
+          "maximum": null,
+          "pass_": false,
+          "score": 0.5597557789456312
+        }
+      ],
+      "score": 0.8532519263152104
+    },
+    {
+      "reference": 21,
+      "weight": 0.7,
+      "targets": [
+        {
+          "target": "2x2 seam pass",
+          "value": 1.0,
+          "minimum": 1,
+          "maximum": null,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 1.0
+    }
+  ],
+  "composite": 0.9664575831577624,
+  "global_targets": {
+    "region_mean_after_lighting": 0.24142170598361182,
+    "region_mean_pass": false,
+    "dominant_green_brown_fraction": 0.9996761399872449,
+    "hue_budget_pass": true,
+    "accent_families": 0,
+    "accent_bins": [
+      0.000323860012755102,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "readability": "N/A: no characters or mobs are iterated; full-game test 30 remains NOT RUN",
+    "composition": "7x7 fixed terrain sample; actual ambient/hero/torch equation, no fog or UI",
+    "ambient": [
+      0.5,
+      0.55,
+      0.45
+    ]
+  },
+  "variants": [
+    {
+      "variant": 0,
+      "metrics": {
+        "mean": 0.4081623341758578,
+        "std": 0.18103097300788223,
+        "dark_fraction": 0.213134765625,
+        "hue": 30.96766800523694,
+        "saturation": 0.15492957746478878,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.3808752941176471,
+        "palette_max_delta": 5.600033334087794,
+        "opaque_pixels": 4096
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.003707107843137252,
+        "wrap_y": 0.018121936274509802,
+        "interior_x_limit": 0.08227941176470589,
+        "interior_y_limit": 0.14390012254901957,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 1,
+      "metrics": {
+        "mean": 0.4053229721966911,
+        "std": 0.1820392194972222,
+        "dark_fraction": 0.228271484375,
+        "hue": 30.9143458743686,
+        "saturation": 0.15492957746478878,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.3808752941176471,
+        "palette_max_delta": 5.600033334087794,
+        "opaque_pixels": 4096
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.01150428921568627,
+        "wrap_y": 0.014920343137254901,
+        "interior_x_limit": 0.08057598039215685,
+        "interior_y_limit": 0.15452512254901957,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 2,
+      "metrics": {
+        "mean": 0.4102248357077205,
+        "std": 0.17857375754614754,
+        "dark_fraction": 0.210205078125,
+        "hue": 31.133785343272148,
+        "saturation": 0.15492957746478878,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.3808752941176471,
+        "palette_max_delta": 5.600033334087794,
+        "opaque_pixels": 4096
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.012607230392156861,
+        "wrap_y": 0.009528186274509801,
+        "interior_x_limit": 0.08797181372549018,
+        "interior_y_limit": 0.1512714460784314,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    }
+  ],
+  "passing": false,
+  "converged": false,
+  "cache_sha256": {
+    "tiles/floor_0.png": "564f928b132fbc84941362f6ea590b5cba0a160eb07281fdc2d5530f7908836c",
+    "tiles/floor_1.png": "a6ec3889fd1bee4b45ad118cf2526c99889045697b81d6901c5ababcc10bac1d",
+    "tiles/floor_2.png": "c5d692c401696a1e7ee4433674ac7ab19f80aa7178c3a82215f1cb36bbc0127d"
+  },
+  "reference_board_sha256": "60b32e4d79fce004e304853bfa926b135cba355ad307554daac0337ed6e0cf57"
+}

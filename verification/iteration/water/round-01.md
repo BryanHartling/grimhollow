@@ -1,2 +1,2 @@
-The surface is continuous but too flat and black, with a visible horizontal wrap discontinuity.
-Increase broad wave relief and value separation, reduce glossy directional falloff, and shift the material toward olive green.
+Vision 0.25: The isolated bright slash and concentric dark patch read as an eye, not the smooth reflective sewer surface.
+Move the reflection off-centre and widen its footprint; reduce high-frequency energy and centre brightness.

@@ -17,6 +17,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private int frames;
     private boolean originalLighting;
     private int originalZoom;
+    private int[] reviewBounds;
+    private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat reviewRat;
+    private com.shatteredpixel.shatteredpixeldungeon.items.Heap reviewItem;
     DesktopSmokeProbe(boolean sewers) {
         super(new DesktopPlatformSupport());
         this.sewers=sewers;
@@ -61,6 +64,14 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     throw new AssertionError("Iteration review requires lighting on and default zoom");
                 Pixmap shot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());
                 PixmapIO.writePNG(Gdx.files.absolute("verification/iteration/sewers-ingame.png"),shot,-1,true);shot.dispose();
+                roomMetadata();
+                Dungeon.hero.sprite.visible=false;reviewRat.sprite.visible=false;reviewItem.sprite.visible=false;
+                // Draw the exact same frame without subjects; ItemSprite.update would
+                // otherwise restore visibility before a later-frame background capture.
+                Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);Game.scene().draw();
+                Pixmap ground=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());
+                PixmapIO.writePNG(Gdx.files.absolute("verification/iteration/sewers-terrain.png"),ground,-1,true);ground.dispose();
+                Dungeon.hero.sprite.visible=true;reviewRat.sprite.visible=true;reviewItem.sprite.visible=true;
                 System.out.println("ITERATION SCREENSHOT: lighting=true defaultZoom="+com.watabou.noosa.Camera.main.zoom);
             }
             if(Boolean.getBoolean("grimhollow.renderPoc")){Pixmap shot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());PixmapIO.writePNG(Gdx.files.absolute("verification/render-poc-ingame.png"),shot,-1,true);shot.dispose();}
@@ -98,6 +109,20 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     }
                 }
                 if(water>0&&door>0&&decor>0&&torch==1&&bridge>=0) {
+                    for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:level.mobs)
+                        com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(mob);
+                    level.mobs.clear();level.heaps.clear();
+                    java.util.ArrayList<Integer> floor=new java.util.ArrayList<>();
+                    for(int y=room.top+1;y<room.bottom;y++)for(int x=room.left+1;x<room.right;x++) {
+                        int c=x+y*w;
+                        if(level.map[c]==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.EMPTY && !level.traps.containsKey(c))floor.add(c);
+                    }
+                    floor.sort(java.util.Comparator.comparingDouble(c->Math.abs(c%w-(room.left+room.right)/2f)+Math.abs(c/w-(room.top+room.bottom)/2f)));
+                    if(floor.size()<3)continue;
+                    reviewBounds=new int[]{room.left,room.top,room.right,room.bottom};
+                    bridge=floor.get(0);
+                    reviewRat=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();reviewRat.pos=floor.get(1);reviewRat.state=reviewRat.PASSIVE;level.mobs.add(reviewRat);
+                    reviewItem=level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing(),floor.get(2));
                     Dungeon.switchLevel(level,bridge);Dungeon.observe();
                     System.out.println("ITERATION ROOM: seed="+seed+" bounds="+room.left+","+room.top+","+room.right+","+room.bottom+" water="+water+" doors="+door+" rubble="+decor+" wallTorch="+torch+" bridgeCell="+bridge+" terrainEdits=0");
                     return;
@@ -105,6 +130,34 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             }
         }
         throw new AssertionError("No generated Sewer bridge room satisfies the review scene");
+    }
+
+    private String screenBox(float x,float y,float width,float height) {
+        com.watabou.noosa.Camera c=com.watabou.noosa.Camera.main;
+        com.watabou.utils.Point a=c.cameraToScreen(x,y),b=c.cameraToScreen(x+width,y+height);
+        float sx=(float)Gdx.graphics.getBackBufferWidth()/Gdx.graphics.getWidth(),sy=(float)Gdx.graphics.getBackBufferHeight()/Gdx.graphics.getHeight();
+        return "["+Math.round(a.x*sx)+","+Math.round(a.y*sy)+","+Math.round(b.x*sx)+","+Math.round(b.y*sy)+"]";
+    }
+
+    /** Pixel masks derive from the actual camera/terrain; no synthetic room is scored. */
+    private void roomMetadata() {
+        com.shatteredpixel.shatteredpixeldungeon.levels.Level l=Dungeon.level;int w=l.width();
+        StringBuilder json=new StringBuilder("{\"seed\":417,\"lighting\":true,\"zoom\":"+com.watabou.noosa.Camera.main.zoom+",\"bounds\":"+java.util.Arrays.toString(reviewBounds)+",\"cells\":[");
+        boolean first=true;
+        for(int c=0;c<l.length();c++)if(l.heroFOV[c]) {
+            int t=l.map[c];String kind="other";
+            if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.EMPTY)kind="floor";
+            else if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WATER)kind="water";
+            else if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WALL||t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WALL_DECO)kind="wall";
+            if(!first)json.append(',');first=false;
+            json.append("{\"cell\":").append(c).append(",\"x\":").append(c%w).append(",\"y\":").append(c/w).append(",\"kind\":\"").append(kind).append("\",\"box\":").append(screenBox(c%w*16,c/w*16,16,16)).append('}');
+        }
+        json.append("],\"subjects\":[");
+        com.watabou.noosa.Visual[] sprites={Dungeon.hero.sprite,reviewRat.sprite,reviewItem.sprite};
+        String[] names={"hero","rat","item"};int[] cells={Dungeon.hero.pos,reviewRat.pos,reviewItem.pos};
+        for(int i=0;i<3;i++) { if(i>0)json.append(',');com.watabou.noosa.Visual s=sprites[i];json.append("{\"name\":\"").append(names[i]).append("\",\"cell\":").append(cells[i]).append(",\"box\":").append(screenBox(s.x,s.y,s.width(),s.height())).append('}'); }
+        json.append("]}");
+        Gdx.files.absolute("verification/iteration/room.json").writeString(json.toString(),false,"UTF-8");
     }
 
     private void pocRoom(){

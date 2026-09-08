@@ -1,2 +1,2 @@
-Darker mortar and irregular faces give the courses more weight and depth than the POC.
-The numeric stop condition is met; retain round 02. The far wall still lacks the reference cool cast.
+Vision 0.85: Horizontal masonry and cap/body bands clearly read as a wall rather than floor.
+Add restrained wet grain and retain the brighter top plane.

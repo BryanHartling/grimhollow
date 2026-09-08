@@ -80,8 +80,9 @@ def character(kind,tier=0):
 
 import argparse
 parser=argparse.ArgumentParser();parser.add_argument('--asset');args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+assets=set(args.asset.split(',')) if args.asset else None
 for kind in ['floor','wall','water','grass','door','door_open','decor','wall_torch']:
-    if args.asset is None or args.asset==kind or (args.asset=='sewers' and kind!='grass') or (args.asset=='door' and kind=='door_open'):
+    if assets is None or kind in assets or ('sewers' in assets and kind!='grass') or ('door' in assets and kind=='door_open'):
         for variant in range(3):
             if kind=='grass':tiles(kind,variant)
             else:sewers.render(kind,variant,reset,camera,render,CACHE)

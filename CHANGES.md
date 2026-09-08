@@ -1011,3 +1011,15 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `verification/new-class-smoke.log` — Append actual stage-5.6 command evidence to the existing verification log.
 - `verification/reproducibility.log` — Append actual stage-5.6 command evidence to the existing verification log.
 - `verification/iteration/door/round-02.json` — Record the later masked-atlas failure as a failed round while preserving its standalone measurements; round 03 records the passing correction.
+
+## Stage 5.7 calibrated Sewers pass
+
+- `GDD-one-shot-build-spec.md`: Adopt the supplied v0.7 specification before implementation.
+- `references/ref-04-sewer-tunnel-brick.jpg`, `references/SOURCES.md`: Replace the monochrome reference with the CC0 colour sewer photograph from PxHere 49195; preserve all targets and other references.
+- `tools/artgen/blender/sewers.py`, `materials.py`, `params/`: Use unequal periodic polygonal flagstones, horizontal damp wall courses, and smooth neutral water reflections; preserve approved door/decor/torch geometry.
+- `tools/artgen/rendered.py`: Fit full material relief into upstream half-height wall/bank components and use the wet-bank material at waterlines; a continuous water tone curve preserves smooth reflected light within the existing palette tolerance.
+- `LightingOverlay.java`, `DungeonWallsTilemap.java`: Sewers walls draw after the floor overlay for actor occlusion; sample the same cached light map in the wall shader to remove the unlit room-edge halo without changing other regions.
+- `DesktopSmokeProbe.java`, `tools/artgen/iteration.py`: Extend the existing renderer and iteration tool for the six real screenshot measurements, structural checks, mandatory vision score/reason, minimum six rounds and fourteen-round limit.
+- `.github/workflows/build.yml`: Keep the full art gate; add committed-image tests 39–40 and rerun all six room checks, including the halo, after the standard Linux OpenGL capture.
+- Measurement choices where the spec is silent: nine 20-degree edge bins with no bin above 30%; damp band at least 0.10 below body; class-median representative pHashes; median adjacent-cell differences; p95 absolute luminance contrast against a paired background for sprite bounding boxes.
+- Prior stage-5.6 round files remain under each class's `stage-5.6/`; this pass starts at the last review set as round 0, retaining the approved prop shapes.

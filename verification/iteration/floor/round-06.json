@@ -1,0 +1,759 @@
+{
+  "asset_class": "floor",
+  "round": 6,
+  "parameters": {
+    "seed": 5706,
+    "count": 2,
+    "relief": 0.065,
+    "displacement": 0.025,
+    "wall_height": 0.6,
+    "mortar_width": 0.06,
+    "chip": 0.006,
+    "bevel": 0.022,
+    "moss_density": 0,
+    "grain_frequency": 3.0,
+    "bump_depth": 0.055,
+    "ao_distance": 0.35,
+    "stone_roughness": 0.25,
+    "water_roughness": 0.19,
+    "specular": 0.18,
+    "water_depth": 0.025,
+    "decor_density": 7,
+    "light_strength": 1.0,
+    "light_angle": 0,
+    "stone_color": "756044",
+    "moss_color": "4C5939",
+    "water_color": "3E4C35",
+    "tone_curve": [
+      0.2,
+      0.35,
+      0.46,
+      0.56
+    ],
+    "tone_breaks": [
+      0.27,
+      0.39,
+      0.49
+    ],
+    "tone_gamma": 1,
+    "light_steps": [
+      0,
+      0.8,
+      1.8,
+      3.2
+    ],
+    "grain_min": 0.12,
+    "grain_max": 1.8,
+    "core_emission": 8,
+    "calibrated": true,
+    "absolute_tones": true,
+    "grain_amplitude": 0.065,
+    "stone_value": 0.43,
+    "mortar_value": 0.22,
+    "stone_values": [
+      0.9,
+      1.1,
+      1.17,
+      0.92,
+      1.04
+    ],
+    "stone_sites": [
+      [
+        0.12,
+        0.14
+      ],
+      [
+        0.63,
+        0.1
+      ],
+      [
+        0.21,
+        0.65
+      ],
+      [
+        0.68,
+        0.7
+      ],
+      [
+        0.9,
+        0.37
+      ]
+    ],
+    "stone_weights": [
+      0.04,
+      0,
+      0,
+      0.005,
+      -0.028
+    ],
+    "bank_color": "4E6C47",
+    "bank_tone_curve": [
+      0.005,
+      0.045,
+      0.24,
+      0.42
+    ]
+  },
+  "references": [
+    {
+      "reference": 4,
+      "weight": 1,
+      "targets": [
+        {
+          "target": "constructed stones per tile edge",
+          "value": 2.0,
+          "minimum": 2,
+          "maximum": 3,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "surface p85-p15 mortar contrast",
+          "value": 0.20967921568627446,
+          "minimum": 0.2,
+          "maximum": null,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 1.0
+    },
+    {
+      "reference": 19,
+      "weight": 1,
+      "targets": [
+        {
+          "target": "constructed flagstones per tile edge",
+          "value": 2.0,
+          "minimum": 2,
+          "maximum": 3,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "highlight fraction",
+          "value": 0.0,
+          "minimum": null,
+          "maximum": 0.05,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "surface luminance std",
+          "value": 0.10779146722550362,
+          "minimum": 0.1,
+          "maximum": null,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 1.0
+    },
+    {
+      "reference": 20,
+      "weight": 0.8,
+      "targets": [
+        {
+          "target": "moss/wet-edge hue",
+          "value": 0.0,
+          "minimum": 75,
+          "maximum": 100,
+          "pass_": false,
+          "score": 0
+        },
+        {
+          "target": "moss/wet-edge saturation",
+          "value": 0.0,
+          "minimum": 0.3,
+          "maximum": 0.5,
+          "pass_": false,
+          "score": 0
+        },
+        {
+          "target": "moss/wet-edge luminance std",
+          "value": 0.0,
+          "minimum": 0.08,
+          "maximum": null,
+          "pass_": false,
+          "score": 0
+        }
+      ],
+      "score": 0.0
+    },
+    {
+      "reference": 21,
+      "weight": 0.7,
+      "targets": [
+        {
+          "target": "2x2 seam pass",
+          "value": 0.0,
+          "minimum": 1,
+          "maximum": null,
+          "pass_": false,
+          "score": 0
+        }
+      ],
+      "score": 0.0
+    }
+  ],
+  "reference_subject": {
+    "number": 4,
+    "file": "references\\ref-04-sewer-tunnel-brick.jpg",
+    "subject_box": [
+      0,
+      0,
+      1200,
+      800
+    ],
+    "sha256": "227fea099d776465b790d45a1b1eb317d1a66b0801d4a2128e3d690a95879333"
+  },
+  "vision": {
+    "score": 0.89,
+    "reason": "Broad unequal flagstones read clearly beside the sewer photograph, although stone faces remain too flat.",
+    "gap": "Try a coarser mineral value variation while retaining the narrow joints and large stones."
+  },
+  "weights": {
+    "numeric": 0.3,
+    "structural": 0.3,
+    "vision": 0.4
+  },
+  "numeric": 0.5714285714285714,
+  "structural_score": 1.0,
+  "composite": 0.8274285714285714,
+  "variants": [
+    {
+      "variant": 0,
+      "metrics": {
+        "mean": 0.40310907149969366,
+        "std": 0.10779146722550362,
+        "dark_fraction": 0.0,
+        "hue": 33.24339711951212,
+        "saturation": 0.41726618705035967,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.20967921568627446,
+        "palette_max_delta": 10.458467596049156,
+        "opaque_pixels": 4096
+      },
+      "seam": {
+        "pass_": false,
+        "wrap_x": 0.04342830882352941,
+        "wrap_y": 0.010922181372549015,
+        "interior_x_limit": 0.04319393382352943,
+        "interior_y_limit": 0.04833639705882352,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "structural": {
+        "targets": [
+          {
+            "target": "stones across tile edge",
+            "value": 2.0,
+            "minimum": 2,
+            "maximum": 3,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "largest stone span",
+            "value": 0.578125,
+            "minimum": 0.4,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "stone area size ratio",
+            "value": 4.650862068965517,
+            "minimum": 2,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "mortar width / edge",
+            "value": 0.03125,
+            "minimum": null,
+            "maximum": 0.06,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "mortar luminance separation",
+            "value": 0.23699323923054075,
+            "minimum": 0.15,
+            "maximum": 0.25,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "orientation histogram peak",
+            "value": 0.2400105107966631,
+            "minimum": null,
+            "maximum": 0.3,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "details": {
+          "areas": [
+            0.263427734375,
+            0.167236328125,
+            0.19287109375,
+            0.17919921875,
+            0.056640625
+          ],
+          "median_area": 0.17919921875,
+          "area_ratio": 4.650862068965517,
+          "largest_span": 0.578125,
+          "mortar_width": 0.03125,
+          "mortar_contrast": 0.23699323923054075,
+          "stone_count": 5
+        },
+        "edges": {
+          "orientation_histogram": [
+            0.15068170240583284,
+            0.05353147231597244,
+            0.11703506723095396,
+            0.06166923947511405,
+            0.2400105107966631,
+            0.04762534138382348,
+            0.08141952874263689,
+            0.09585325446285735,
+            0.15217388318614591
+          ],
+          "peak": 0.2400105107966631,
+          "horizontal": 0.3258924021080285,
+          "laplacian_variance": 0.013917476020125379
+        },
+        "passing": true,
+        "score": 1.0
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 1,
+      "metrics": {
+        "mean": 0.4031724123008579,
+        "std": 0.10774779544137858,
+        "dark_fraction": 0.0,
+        "hue": 33.24521935141686,
+        "saturation": 0.41726618705035967,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.20967921568627446,
+        "palette_max_delta": 10.458467596049156,
+        "opaque_pixels": 4096
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.04342830882352941,
+        "wrap_y": 0.008501838235294115,
+        "interior_x_limit": 0.04428308823529413,
+        "interior_y_limit": 0.04833639705882352,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "structural": {
+        "targets": [
+          {
+            "target": "stones across tile edge",
+            "value": 2.0,
+            "minimum": 2,
+            "maximum": 3,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "largest stone span",
+            "value": 0.578125,
+            "minimum": 0.4,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "stone area size ratio",
+            "value": 4.650862068965517,
+            "minimum": 2,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "mortar width / edge",
+            "value": 0.03125,
+            "minimum": null,
+            "maximum": 0.06,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "mortar luminance separation",
+            "value": 0.23699895085877384,
+            "minimum": 0.15,
+            "maximum": 0.25,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "orientation histogram peak",
+            "value": 0.2406040208957157,
+            "minimum": null,
+            "maximum": 0.3,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "details": {
+          "areas": [
+            0.263427734375,
+            0.167236328125,
+            0.19287109375,
+            0.179443359375,
+            0.056640625
+          ],
+          "median_area": 0.179443359375,
+          "area_ratio": 4.650862068965517,
+          "largest_span": 0.578125,
+          "mortar_width": 0.03125,
+          "mortar_contrast": 0.23699895085877384,
+          "stone_count": 5
+        },
+        "edges": {
+          "orientation_histogram": [
+            0.1525673794646726,
+            0.05525392894483346,
+            0.11526578995089005,
+            0.06326136279102908,
+            0.2406040208957157,
+            0.045871756503419826,
+            0.0813553451837281,
+            0.0973070686122199,
+            0.14851334765349128
+          ],
+          "peak": 0.2406040208957157,
+          "horizontal": 0.32676341736084397,
+          "laplacian_variance": 0.01416958134655542
+        },
+        "passing": true,
+        "score": 1.0
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 2,
+      "metrics": {
+        "mean": 0.4030295161228554,
+        "std": 0.10779059681606076,
+        "dark_fraction": 0.0,
+        "hue": 33.24336265090473,
+        "saturation": 0.41726618705035967,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.20967921568627446,
+        "palette_max_delta": 10.458467596049156,
+        "opaque_pixels": 4096
+      },
+      "seam": {
+        "pass_": false,
+        "wrap_x": 0.04342830882352941,
+        "wrap_y": 0.008501838235294115,
+        "interior_x_limit": 0.04319393382352943,
+        "interior_y_limit": 0.04833639705882352,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "structural": {
+        "targets": [
+          {
+            "target": "stones across tile edge",
+            "value": 2.0,
+            "minimum": 2,
+            "maximum": 3,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "largest stone span",
+            "value": 0.578125,
+            "minimum": 0.4,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "stone area size ratio",
+            "value": 4.650862068965517,
+            "minimum": 2,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "mortar width / edge",
+            "value": 0.03125,
+            "minimum": null,
+            "maximum": 0.06,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "mortar luminance separation",
+            "value": 0.23690066570112897,
+            "minimum": 0.15,
+            "maximum": 0.25,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "orientation histogram peak",
+            "value": 0.24010924087836769,
+            "minimum": null,
+            "maximum": 0.3,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "details": {
+          "areas": [
+            0.263427734375,
+            0.167236328125,
+            0.19287109375,
+            0.17919921875,
+            0.056640625
+          ],
+          "median_area": 0.17919921875,
+          "area_ratio": 4.650862068965517,
+          "largest_span": 0.578125,
+          "mortar_width": 0.03125,
+          "mortar_contrast": 0.23690066570112897,
+          "stone_count": 5
+        },
+        "edges": {
+          "orientation_histogram": [
+            0.15040312546916754,
+            0.055950454738040105,
+            0.1163191636069912,
+            0.060507962270319265,
+            0.24010924087836769,
+            0.04797452750153683,
+            0.08143280525526837,
+            0.0955218640458506,
+            0.15178085623445842
+          ],
+          "peak": 0.24010924087836769,
+          "horizontal": 0.3260707402443681,
+          "laplacian_variance": 0.013842584980230867
+        },
+        "passing": true,
+        "score": 1.0
+      },
+      "validator_pass": true
+    }
+  ],
+  "room": {
+    "passing": true,
+    "groups": [
+      {
+        "name": "Wall/floor distinctness",
+        "measurements": [
+          {
+            "target": "mean luminance difference",
+            "value": 0.21814042745604295,
+            "minimum": 0.1,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "representative pHash bits",
+            "value": 32.0,
+            "minimum": 12,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      },
+      {
+        "name": "Feature scale at 1x",
+        "measurements": [
+          {
+            "target": "median flagstone fraction",
+            "value": 0.18055555555555555,
+            "minimum": 0.12,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      },
+      {
+        "name": "Adjacent water/floor contrast",
+        "measurements": [
+          {
+            "target": "median luminance difference",
+            "value": 0.17951762714460787,
+            "minimum": 0.12,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "median hue difference",
+            "value": 43.378593203443515,
+            "minimum": 30,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      },
+      {
+        "name": "No boundary halo",
+        "measurements": [
+          {
+            "target": "outer minus inner mean",
+            "value": -0.14869682240249976,
+            "minimum": null,
+            "maximum": 0,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "outer_mean": 0.053695957361026,
+        "inner_mean": 0.20239277976352577,
+        "passing": true
+      },
+      {
+        "name": "Visible-cell value range",
+        "measurements": [
+          {
+            "target": "visible mean",
+            "value": 0.1407221155109613,
+            "minimum": 0.12,
+            "maximum": 0.2,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "visible std",
+            "value": 0.12976151747621442,
+            "minimum": 0.12,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      },
+      {
+        "name": "Hero / rat / item readability",
+        "measurements": [
+          {
+            "target": "hero bbox contrast",
+            "value": 0.4393659607843137,
+            "minimum": 0.2,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "rat bbox contrast",
+            "value": 0.3190070588235294,
+            "minimum": 0.2,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "item bbox contrast",
+            "value": 0.5222698039215687,
+            "minimum": 0.2,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      }
+    ],
+    "global_targets": {
+      "region_mean_after_lighting": 0.1407221155109613,
+      "region_mean_pass": true,
+      "dominant_green_brown_fraction": 0.82119140625,
+      "hue_budget_pass": true,
+      "accent_families": 1,
+      "accent_bins": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.00047743055555555554,
+        4.8828125e-05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "readability": "Existing mobs unchanged; sprite-pair histogram test 30 remains pending",
+      "composition": "Actual OpenGL screenshot; all heroFOV visible cells",
+      "ambient": [
+        0.5,
+        0.55,
+        0.45
+      ]
+    },
+    "screenshot_sha256": "56aca5316f69a10d9f333785bcb6d678393ad4b5c400429ad0612b4ad2fa58b7",
+    "terrain_sha256": "f8195ee9ea8a02f8a18759b5df1278438c1084e854c4034730af58c94defafbf",
+    "sample_count": 80,
+    "seed": 417,
+    "lighting": true,
+    "zoom": 3.0,
+    "method": "Full visible-cell mask; class-median representative pHashes; all water/floor adjacencies; 4-neighbour rings; p95 paired-background absolute bbox luminance contrast"
+  },
+  "atlas_validator": {
+    "passing": true,
+    "output": [
+      "Validated 64 generated specifications; 0 failures. Subset diagnostic only."
+    ]
+  },
+  "global_targets": {
+    "region_mean_after_lighting": 0.1407221155109613,
+    "region_mean_pass": true,
+    "dominant_green_brown_fraction": 0.82119140625,
+    "hue_budget_pass": true,
+    "accent_families": 1,
+    "accent_bins": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.00047743055555555554,
+      4.8828125e-05,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "readability": "Existing mobs unchanged; sprite-pair histogram test 30 remains pending",
+    "composition": "Actual OpenGL screenshot; all heroFOV visible cells",
+    "ambient": [
+      0.5,
+      0.55,
+      0.45
+    ]
+  },
+  "passing": false,
+  "converged": false,
+  "cache_sha256": {
+    "tiles/floor_0.png": "af45cf5cbbc7fca12a747376f660645983e4fb64f7eea367a6c42cfada02fde0",
+    "tiles/floor_1.png": "465b58999d68406eceb947232aca2e623778b60c5fac59a1a84c88df08cb7ab2",
+    "tiles/floor_2.png": "d5c2601d621df31ec37f042e397e1cbfdf22a6299fa9de9903ac0386081e632b"
+  }
+}

@@ -26,7 +26,7 @@ jobs:
         run: ./gradlew desktop:dist -PdesktopOnly=true --console=plain
       - name: Full art acceptance gate
         run: python tools/artgen/validate.py --rebuild
-      - name: Sewers iteration acceptance 39 (committed cache only)
+      - name: Sewers iteration and room acceptance 39-40 (committed cache only)
         if: ${{ !cancelled() }}
         run: python tools/artgen/iteration.py --check
       - name: JUnit tests
@@ -35,7 +35,10 @@ jobs:
         run: ./gradlew core:test -PdesktopOnly=true --console=plain
       - name: Offscreen geometry acceptance 24-26
         if: ${{ !cancelled() && runner.os == 'Linux' }}
-        run: xvfb-run -a java -Dgrimhollow.geometryTests=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
+        run: xvfb-run -a java -Dgrimhollow.iteration=true -Dgrimhollow.geometryTests=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
+      - name: Live room gate including boundary halo regression
+        if: ${{ !cancelled() && runner.os == 'Linux' }}
+        run: python tools/artgen/iteration.py --check-room
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

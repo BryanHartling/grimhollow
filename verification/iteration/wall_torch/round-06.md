@@ -1,3 +1,2 @@
-The raking key gives the iron collars a small warm edge while keeping the core compact.
-The shaft remains visually fragmented; try coarser grain and a slightly brighter middle tone to join the readable wood planes.
-The two lighting targets still cap the composite.
+Vision 0.95: The approved flame and handle remain immediately readable, with a pale hot core and dark support.
+Try subtle handle material variation; preserve the approved flame and shape.

@@ -9,33 +9,45 @@
     "wall_height": 0.6,
     "mortar_width": 0.025,
     "chip": 0.012,
-    "bevel": 0.025,
+    "bevel": 0.035,
     "moss_density": 0.25,
-    "grain_frequency": 3,
-    "bump_depth": 0.035,
-    "ao_distance": 0.26,
+    "grain_frequency": 1.1,
+    "bump_depth": 0.025,
+    "ao_distance": 0.08,
     "stone_roughness": 0.25,
     "water_roughness": 0.19,
-    "specular": 0.18,
+    "specular": 0.12,
     "water_depth": 0.025,
     "decor_density": 7,
-    "light_strength": 1.0,
-    "light_angle": 0,
-    "stone_color": "6B645C",
+    "light_strength": 1.15,
+    "light_angle": -5,
+    "stone_color": "75664F",
     "moss_color": "4C5939",
     "water_color": "3E4C35",
     "tone_curve": [
-      0.045,
-      0.14,
-      0.34,
-      0.52
+      0.025,
+      0.13,
+      0.27,
+      0.4
     ],
     "tone_breaks": [
-      0.2,
-      0.55,
-      0.84
+      0.25,
+      0.6,
+      0.89
     ],
-    "tone_gamma": 1.0
+    "tone_gamma": 1.2,
+    "light_steps": [
+      0,
+      0.2,
+      0.4,
+      0.8
+    ],
+    "grain_min": 0.12,
+    "grain_max": 1.8,
+    "core_emission": 3.25,
+    "flame_edge": "6C2A18",
+    "separate_emission_curve": true,
+    "inner_emission": 1.35
   },
   "references": [
     {
@@ -44,15 +56,15 @@
       "targets": [
         {
           "target": "flame has >= .90 luminance core",
-          "value": 0.0,
+          "value": 1.0,
           "minimum": 1,
           "maximum": null,
-          "pass_": false,
-          "score": 0
+          "pass_": true,
+          "score": 1.0
         },
         {
           "target": "core fraction of flame",
-          "value": 0.0,
+          "value": 0.019230769230769232,
           "minimum": null,
           "maximum": 0.02,
           "pass_": true,
@@ -60,14 +72,14 @@
         },
         {
           "target": "flame edge hue",
-          "value": 30.0,
+          "value": 12.857142857142856,
           "minimum": 10,
           "maximum": 20,
-          "pass_": false,
-          "score": 0.5
+          "pass_": true,
+          "score": 1.0
         }
       ],
-      "score": 0.5
+      "score": 1.0
     },
     {
       "reference": 24,
@@ -90,66 +102,61 @@
       "targets": [
         {
           "target": "near warm hue",
-          "value": 40.673637690064936,
+          "value": 41.21889146161863,
           "minimum": 25,
           "maximum": 40,
           "pass_": false,
-          "score": 0.9831590577483766
+          "score": 0.9695277134595341
         },
         {
           "target": "far cool hue",
-          "value": 48.596978762257606,
+          "value": 48.625109501869034,
           "minimum": 200,
           "maximum": 230,
           "pass_": false,
-          "score": 0.24298489381128804
+          "score": 0.24312554750934517
         }
       ],
-      "score": 0.6130719757798323
+      "score": 0.6063266304844397
     }
   ],
-  "composite": 0.3961830322495463,
-  "global_targets": {
-    "region_mean_after_lighting": 0.24142170598361182,
-    "region_mean_pass": false,
-    "dominant_green_brown_fraction": 0.9996761399872449,
-    "hue_budget_pass": true,
-    "accent_families": 0,
-    "accent_bins": [
-      0.000323860012755102,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0
+  "reference_subject": {
+    "number": 22,
+    "file": "references\\ref-22-torch-flame.jpg",
+    "subject_box": [
+      301,
+      168,
+      802,
+      528
     ],
-    "readability": "N/A: no characters or mobs are iterated; full-game test 30 remains NOT RUN",
-    "composition": "7x7 fixed terrain sample; actual ambient/hero/torch equation, no fog or UI",
-    "ambient": [
-      0.5,
-      0.55,
-      0.45
-    ]
+    "sha256": "28bc041fbb4cd61c1b46a8fefb7a30b1d9a81556abab0c2c387ab614e613b58b"
   },
+  "vision": {
+    "score": 0.95,
+    "reason": "The approved flame and shaft clearly read as a burning wall torch beside the cropped flame reference.",
+    "gap": "Preserve the silhouette and improve the iron and wood value separation."
+  },
+  "weights": {
+    "numeric": 0.3,
+    "structural": 0.3,
+    "vision": 0.4
+  },
+  "numeric": 0.5940245217550207,
+  "structural_score": 1.0,
+  "composite": 0.8582073565265063,
   "variants": [
     {
       "variant": 0,
       "metrics": {
-        "mean": 0.16552934482649745,
-        "std": 0.18289266775733598,
-        "dark_fraction": 0.789049919484702,
-        "hue": 27.375546420604913,
-        "saturation": 0.15789473684210525,
-        "highlights_075": 0.0,
-        "core_090": 0.0,
-        "mortar_contrast": 0.2882,
-        "palette_max_delta": 7.17026807343391,
+        "mean": 0.1859108319914117,
+        "std": 0.21211271335338713,
+        "dark_fraction": 0.6280193236714976,
+        "hue": 27.502907205509754,
+        "saturation": 0.14285714285714285,
+        "highlights_075": 0.0322061191626409,
+        "core_090": 0.00644122383252818,
+        "mortar_contrast": 0.348118431372549,
+        "palette_max_delta": 11.491874867303105,
         "opaque_pixels": 621
       },
       "seam": {
@@ -157,23 +164,54 @@
         "wrap_x": 0.0,
         "wrap_y": 0.0,
         "interior_x_limit": 0.06652267156862743,
-        "interior_y_limit": 0.025696997549019593,
+        "interior_y_limit": 0.026043198529411754,
         "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "structural": {
+        "targets": [
+          {
+            "target": "approved shape parameters unchanged",
+            "value": 1.0,
+            "minimum": 1,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "details": {},
+        "edges": {
+          "orientation_histogram": [
+            0.07679566225874022,
+            0.06549003841884363,
+            0.06629399308584083,
+            0.10576621389132794,
+            0.3093248973155883,
+            0.12280775796925612,
+            0.14494959037978725,
+            0.053336691391290283,
+            0.055235155289325426
+          ],
+          "peak": 0.3093248973155883,
+          "horizontal": 0.16021137181855874,
+          "laplacian_variance": 0.012275970132121061
+        },
+        "passing": true,
+        "score": 1.0
       },
       "validator_pass": true
     },
     {
       "variant": 1,
       "metrics": {
-        "mean": 0.16552934482649745,
-        "std": 0.18289266775733598,
-        "dark_fraction": 0.789049919484702,
-        "hue": 27.375546420604913,
-        "saturation": 0.15789473684210525,
-        "highlights_075": 0.0,
-        "core_090": 0.0,
-        "mortar_contrast": 0.2882,
-        "palette_max_delta": 7.17026807343391,
+        "mean": 0.1859108319914117,
+        "std": 0.21211271335338713,
+        "dark_fraction": 0.6280193236714976,
+        "hue": 27.502907205509754,
+        "saturation": 0.14285714285714285,
+        "highlights_075": 0.0322061191626409,
+        "core_090": 0.00644122383252818,
+        "mortar_contrast": 0.348118431372549,
+        "palette_max_delta": 11.491874867303105,
         "opaque_pixels": 621
       },
       "seam": {
@@ -181,23 +219,54 @@
         "wrap_x": 0.0,
         "wrap_y": 0.0,
         "interior_x_limit": 0.06652267156862743,
-        "interior_y_limit": 0.025696997549019593,
+        "interior_y_limit": 0.026043198529411754,
         "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "structural": {
+        "targets": [
+          {
+            "target": "approved shape parameters unchanged",
+            "value": 1.0,
+            "minimum": 1,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "details": {},
+        "edges": {
+          "orientation_histogram": [
+            0.07679566225874022,
+            0.06549003841884363,
+            0.06629399308584083,
+            0.10576621389132794,
+            0.3093248973155883,
+            0.12280775796925612,
+            0.14494959037978725,
+            0.053336691391290283,
+            0.055235155289325426
+          ],
+          "peak": 0.3093248973155883,
+          "horizontal": 0.16021137181855874,
+          "laplacian_variance": 0.012275970132121061
+        },
+        "passing": true,
+        "score": 1.0
       },
       "validator_pass": true
     },
     {
       "variant": 2,
       "metrics": {
-        "mean": 0.16552934482649745,
-        "std": 0.18289266775733598,
-        "dark_fraction": 0.789049919484702,
-        "hue": 27.375546420604913,
-        "saturation": 0.15789473684210525,
-        "highlights_075": 0.0,
-        "core_090": 0.0,
-        "mortar_contrast": 0.2882,
-        "palette_max_delta": 7.17026807343391,
+        "mean": 0.1859108319914117,
+        "std": 0.21211271335338713,
+        "dark_fraction": 0.6280193236714976,
+        "hue": 27.502907205509754,
+        "saturation": 0.14285714285714285,
+        "highlights_075": 0.0322061191626409,
+        "core_090": 0.00644122383252818,
+        "mortar_contrast": 0.348118431372549,
+        "palette_max_delta": 11.491874867303105,
         "opaque_pixels": 621
       },
       "seam": {
@@ -205,18 +274,212 @@
         "wrap_x": 0.0,
         "wrap_y": 0.0,
         "interior_x_limit": 0.06652267156862743,
-        "interior_y_limit": 0.025696997549019593,
+        "interior_y_limit": 0.026043198529411754,
         "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "structural": {
+        "targets": [
+          {
+            "target": "approved shape parameters unchanged",
+            "value": 1.0,
+            "minimum": 1,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "details": {},
+        "edges": {
+          "orientation_histogram": [
+            0.07679566225874022,
+            0.06549003841884363,
+            0.06629399308584083,
+            0.10576621389132794,
+            0.3093248973155883,
+            0.12280775796925612,
+            0.14494959037978725,
+            0.053336691391290283,
+            0.055235155289325426
+          ],
+          "peak": 0.3093248973155883,
+          "horizontal": 0.16021137181855874,
+          "laplacian_variance": 0.012275970132121061
+        },
+        "passing": true,
+        "score": 1.0
       },
       "validator_pass": true
     }
   ],
+  "room": {
+    "passing": false,
+    "groups": [
+      {
+        "name": "Wall/floor distinctness",
+        "measurements": [
+          {
+            "target": "mean luminance difference",
+            "value": 0.21863955657330597,
+            "minimum": 0.1,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "representative pHash bits",
+            "value": 36.0,
+            "minimum": 12,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      },
+      {
+        "name": "Feature scale at 1x",
+        "measurements": [
+          {
+            "target": "median flagstone fraction",
+            "value": 0.9184027777777778,
+            "minimum": 0.12,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      },
+      {
+        "name": "Adjacent water/floor contrast",
+        "measurements": [
+          {
+            "target": "median luminance difference",
+            "value": 0.13230888191040308,
+            "minimum": 0.12,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "median hue difference",
+            "value": 23.32096363769662,
+            "minimum": 30,
+            "maximum": null,
+            "pass_": false,
+            "score": 0.7773654545898874
+          }
+        ],
+        "passing": false
+      },
+      {
+        "name": "No boundary halo",
+        "measurements": [
+          {
+            "target": "outer minus inner mean",
+            "value": -0.15941006828136345,
+            "minimum": null,
+            "maximum": 0,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "outer_mean": 0.057826988272739646,
+        "inner_mean": 0.2172370565541031,
+        "passing": true
+      },
+      {
+        "name": "Visible-cell value range",
+        "measurements": [
+          {
+            "target": "visible mean",
+            "value": 0.15240012558721405,
+            "minimum": 0.12,
+            "maximum": 0.2,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "visible std",
+            "value": 0.1295933649273977,
+            "minimum": 0.12,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      },
+      {
+        "name": "Hero / rat / item readability",
+        "measurements": [
+          {
+            "target": "hero bbox contrast",
+            "value": 0.39974431372549013,
+            "minimum": 0.2,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "rat bbox contrast",
+            "value": 0.3078931372549019,
+            "minimum": 0.2,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "item bbox contrast",
+            "value": 0.0,
+            "minimum": 0.2,
+            "maximum": null,
+            "pass_": false,
+            "score": 0
+          }
+        ],
+        "passing": false
+      }
+    ],
+    "global_targets": {
+      "region_mean_after_lighting": 0.15240012558721405,
+      "region_mean_pass": true,
+      "dominant_green_brown_fraction": 0.8229709201388888,
+      "hue_budget_pass": true,
+      "readability": "Existing mobs unchanged; sprite-pair histogram test 30 remains pending",
+      "composition": "Actual OpenGL screenshot; all heroFOV visible cells",
+      "ambient": [
+        0.5,
+        0.55,
+        0.45
+      ]
+    },
+    "screenshot_sha256": "33734a7974755c134b37d093a40cc10c63ab8707e2cd3f136f4b9590e72f9655",
+    "terrain_sha256": "b3aacaa2f367c8734662acae045265af14a85611bf864f802a18ccb521f5dcfb",
+    "sample_count": 80,
+    "seed": 417,
+    "lighting": true,
+    "zoom": 3.0,
+    "method": "Full visible-cell mask; class-median representative pHashes; all water/floor adjacencies; 4-neighbour rings; p95 paired-background absolute bbox luminance contrast"
+  },
+  "global_targets": {
+    "region_mean_after_lighting": 0.15240012558721405,
+    "region_mean_pass": true,
+    "dominant_green_brown_fraction": 0.8229709201388888,
+    "hue_budget_pass": true,
+    "readability": "Existing mobs unchanged; sprite-pair histogram test 30 remains pending",
+    "composition": "Actual OpenGL screenshot; all heroFOV visible cells",
+    "ambient": [
+      0.5,
+      0.55,
+      0.45
+    ]
+  },
   "passing": false,
   "converged": false,
   "cache_sha256": {
-    "tiles/wall_torch_0.png": "0d07604864a77ba09ef0c20c0bc8b52633fd3e9b1f9e8c0702093d37a0f73800",
-    "tiles/wall_torch_1.png": "2fedd3c0a73476c7386de93deda09cec44cef77d5e9f3550584703fe83a0e518",
-    "tiles/wall_torch_2.png": "4b2ce29c124e73e3cd3e288c105ff6559e1cf9a097cb4ed2870c3ac3dd7eaab3"
-  },
-  "reference_board_sha256": "60b32e4d79fce004e304853bfa926b135cba355ad307554daac0337ed6e0cf57"
+    "tiles/wall_torch_0.png": "4fda125c95c40f952da1946b676a4d4f0d91829b6e21cd3f7c52763613433750",
+    "tiles/wall_torch_1.png": "8596346e233a7dba304a437de733107fe4e55d9a7abd1524290ef11ce5f548cf",
+    "tiles/wall_torch_2.png": "b0ba7d9229e9dc6b73440d1d9d0ec1af74525077cd13bb245e2a6ef26c68f38d"
+  }
 }

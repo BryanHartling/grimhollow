@@ -42,15 +42,16 @@ def sewers_quantize(image,params,kind):
     emissive=flame_zone&((rgb[:,:,0]>rgb[:,:,1]*1.1)|(lum>.87))&active
     exposure_mask=active&~emissive if kind=='wall_torch' and params.get('separate_emission_curve') else active
     lo,hi=np.percentile(lum[exposure_mask],[3,97])
-    value=np.clip((lum-lo)/max(.02,hi-lo),0,1)**params['tone_gamma']
-    targets=np.array(params['tone_curve'])[np.searchsorted(params['tone_breaks'],value)]
+    value=(lum if params.get('absolute_tones') else np.clip((lum-lo)/max(.02,hi-lo),0,1))**params['tone_gamma']
+    targets=(np.interp(value,params['tone_positions'],params['tone_curve']) if params.get('smooth_tones')
+             else np.array(params['tone_curve'])[np.searchsorted(params['tone_breaks'],value)])
     rgb=np.clip(rgb*targets[:,:,None]/np.maximum(lum[:,:,None],.002),0,255)
     original=pixels[:,:,:3].astype(float)
     if kind=='wall_torch':rgb=np.where(emissive[:,:,None],original,rgb)
     flame_edge=params.get('flame_edge','782D17')
     swatches=np.concatenate([COLORS,np.array([tuple(bytes.fromhex(params[k])) for k in ('stone_color','moss_color','water_color')]),np.array([tuple(bytes.fromhex(flame_edge))])])
     candidates=[]
-    for level in params['tone_curve']:
+    for level in (np.linspace(0,.9,65) if params.get('smooth_tones') else params['tone_curve']):
         candidates.extend(np.clip(swatches*level/np.maximum(.001,swatches@np.array([.2126,.7152,.0722])/255)[:,None],0,255))
     if kind=='wall_torch':candidates.extend([tuple(bytes.fromhex(c)) for c in (flame_edge,'E0982F','E4C76A','EFE7D2')])
     palette=np.unique(np.rint(candidates).astype(np.uint8),axis=0)
@@ -110,7 +111,23 @@ def apply_tiles(spec,base):
         elif kind=='wall_torch':
             material=tile('wall',variant).copy();material.alpha_composite(tile('wall_torch',variant))
         else:material=tile(kind,variant).copy()
+        if kind=='floor' and 33<=index<=47:
+            params=json.loads((Path(__file__).parent/'blender/params/floor.json').read_text())
+            if 'bank_color' in params:
+                # Wet bank components retain the floor geometry but use the
+                # waterline's darker material/value range, not dry floor albedo.
+                a=np.array(material);lum=a[:,:,:3]@np.array([.2126,.7152,.0722])/255
+                color=np.array(tuple(bytes.fromhex(params['bank_color'])),dtype=float)
+                a[:,:,:3]=np.clip(lum[:,:,None]*color/(color@np.array([.2126,.7152,.0722])/255),0,255)
+                bank=dict(params,stone_color=params['bank_color'],tone_curve=params['bank_tone_curve'])
+                material=sewers_quantize(Image.fromarray(a),bank,'floor')
         bounds=original.getbbox()
+        if kind in ('floor','wall') and bounds and bounds!=(0,0,64,64):
+            # Upstream half-height walls and water-bank strips need the full
+            # material relief fitted into their logical component, like doors.
+            left,top,right,bottom=bounds
+            component=material.resize((right-left,bottom-top),Image.Resampling.NEAREST)
+            material=Image.new('RGBA',(64,64));material.paste(component,(left,top))
         if kind.startswith('door') and bounds:
             left,top,right,bottom=bounds
             # Upright partial door components use a compact projection of the

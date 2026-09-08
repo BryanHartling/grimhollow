@@ -1,0 +1,248 @@
+{
+  "asset_class": "door",
+  "round": 3,
+  "parameters": {
+    "seed": 5706,
+    "count": 3,
+    "relief": 0.07,
+    "displacement": 0.055,
+    "wall_height": 0.6,
+    "mortar_width": 0.025,
+    "chip": 0.012,
+    "bevel": 0.035,
+    "moss_density": 0.25,
+    "grain_frequency": 2.3,
+    "bump_depth": 0.055,
+    "ao_distance": 0.35,
+    "stone_roughness": 0.25,
+    "water_roughness": 0.19,
+    "specular": 0.18,
+    "water_depth": 0.025,
+    "decor_density": 7,
+    "light_strength": 1.0,
+    "light_angle": 0,
+    "stone_color": "75664F",
+    "moss_color": "4C5939",
+    "water_color": "3E4C35",
+    "tone_curve": [
+      0.025,
+      0.105,
+      0.24,
+      0.39
+    ],
+    "tone_breaks": [
+      0.25,
+      0.6,
+      0.89
+    ],
+    "tone_gamma": 1.28,
+    "light_steps": [
+      0,
+      0.8,
+      1.8,
+      3.2
+    ],
+    "grain_min": 0.12,
+    "grain_max": 1.8,
+    "core_emission": 8
+  },
+  "references": [
+    {
+      "reference": 2,
+      "weight": 0.5,
+      "targets": [
+        {
+          "target": "room mean luminance",
+          "value": 0.12248590766129025,
+          "minimum": 0.12,
+          "maximum": 0.2,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "room fraction below .15",
+          "value": 0.513801419005102,
+          "minimum": 0.6,
+          "maximum": null,
+          "pass_": false,
+          "score": 0.8563356983418368
+        },
+        {
+          "target": "warm lit hue",
+          "value": 37.94295489256217,
+          "minimum": 30,
+          "maximum": 40,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 0.9521118994472789
+    },
+    {
+      "reference": 1,
+      "weight": 0.9,
+      "targets": [
+        {
+          "target": "room mean luminance",
+          "value": 0.12248590766129025,
+          "minimum": 0.12,
+          "maximum": 0.2,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "room fraction below .15",
+          "value": 0.513801419005102,
+          "minimum": 0.6,
+          "maximum": null,
+          "pass_": false,
+          "score": 0.8563356983418368
+        },
+        {
+          "target": "warm lit hue",
+          "value": 37.94295489256217,
+          "minimum": 30,
+          "maximum": 40,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 0.9521118994472789
+    },
+    {
+      "reference": 21,
+      "weight": 0.7,
+      "targets": [
+        {
+          "target": "2x2 seam pass",
+          "value": 1.0,
+          "minimum": 1,
+          "maximum": null,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 1.0
+    }
+  ],
+  "composite": 0.9680745996315192,
+  "global_targets": {
+    "region_mean_after_lighting": 0.12248590766129025,
+    "region_mean_pass": true,
+    "dominant_green_brown_fraction": 0.9994021045918368,
+    "hue_budget_pass": true,
+    "accent_families": 1,
+    "accent_bins": [
+      0.0005978954081632653,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "readability": "N/A: no characters or mobs are iterated; full-game test 30 remains NOT RUN",
+    "composition": "7x7 fixed terrain sample; actual ambient/hero/torch equation, no fog or UI",
+    "ambient": [
+      0.5,
+      0.55,
+      0.45
+    ]
+  },
+  "variants": [
+    {
+      "variant": 0,
+      "metrics": {
+        "mean": 0.13628622510723043,
+        "std": 0.1071988569965364,
+        "dark_fraction": 0.637451171875,
+        "hue": 33.3470054705007,
+        "saturation": 0.4324324324324325,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.21503686274509806,
+        "palette_max_delta": 9.653697827965228,
+        "opaque_pixels": 4096
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.016390931372549017,
+        "wrap_y": 0.017815563725490195,
+        "interior_x_limit": 0.05666819852941173,
+        "interior_y_limit": 0.04173713235294118,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 1,
+      "metrics": {
+        "mean": 0.13661114889705883,
+        "std": 0.10602309064177723,
+        "dark_fraction": 0.637451171875,
+        "hue": 33.334279466478485,
+        "saturation": 0.4324324324324325,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.2147694117647059,
+        "palette_max_delta": 9.653697827965228,
+        "opaque_pixels": 4096
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.015471813725490197,
+        "wrap_y": 0.017815563725490195,
+        "interior_x_limit": 0.058075980392156834,
+        "interior_y_limit": 0.04380667892156862,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 2,
+      "metrics": {
+        "mean": 0.1367552257582721,
+        "std": 0.10689193774965597,
+        "dark_fraction": 0.637451171875,
+        "hue": 33.28424214056711,
+        "saturation": 0.4324324324324325,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.2147694117647059,
+        "palette_max_delta": 9.653697827965228,
+        "opaque_pixels": 4096
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.018872549019607842,
+        "wrap_y": 0.017815563725490195,
+        "interior_x_limit": 0.05305912990196077,
+        "interior_y_limit": 0.043337928921568625,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    }
+  ],
+  "passing": true,
+  "converged": true,
+  "cache_sha256": {
+    "tiles/door_0.png": "b8b50e8e74c7489e446c5b7248a152857ce4a3e11c441db3c07fe1435d4eb912",
+    "tiles/door_1.png": "fcb88d8a5bd9948a3fec42086042cdd3fdcfe5d2bde467c5f93725ad13916bcc",
+    "tiles/door_2.png": "a043da112c5aa6edbdb92ae4c429d79630381272a17b9f5a14e9325c5abb851b"
+  },
+  "reference_board_sha256": "60b32e4d79fce004e304853bfa926b135cba355ad307554daac0337ed6e0cf57",
+  "post_pack_validation": {
+    "passed": true,
+    "assets": [
+      "core/src/main/assets/environment/tiles_sewers.png",
+      "core/src/main/assets/environment/walls_sewers.png"
+    ],
+    "finding": "All generated atlas checks pass after shared upright-component fitting.",
+    "evidence": "verification/art-validation.log"
+  }
+}

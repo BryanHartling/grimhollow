@@ -1,2 +1,2 @@
-A white core is visible now, but the holder is too black and the flame perimeter too uniformly amber.
-Reduce core exposure slightly, preserve the separate red-edge material, and lift iron/wood response; runtime light-radius mismatch remains.
+Vision 0.95: The flame and holder remain immediately recognizable beside the cropped fire reference.
+Refine holder values without changing the approved outline.

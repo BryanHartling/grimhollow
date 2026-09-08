@@ -182,15 +182,22 @@ public class GameScene extends PixelScene {
 	private Group bloodDecals;
 
 	public static void bloodDecal(int cell) {
-		if (scene == null || scene.bloodDecals == null || java.util.concurrent.ThreadLocalRandom.current().nextInt(5)!=0) return;
-		Image decal=new Image("effects/blood_decals.png");
-		int variant=java.util.concurrent.ThreadLocalRandom.current().nextInt(3);
-		int frame=com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TILE_SIZE;
-		decal.frame(decal.texture.uvRect(variant*frame,0,(variant+1)*frame,frame));
-		decal.width=decal.height=DungeonTilemap.SIZE;
-		decal.point(DungeonTilemap.tileToWorld(cell));
-		scene.bloodDecals.add(decal);
+        if (scene == null || scene.bloodDecals == null || java.util.concurrent.ThreadLocalRandom.current().nextInt(5)!=0) return;
+        Image decal=createBloodDecal(cell,java.util.concurrent.ThreadLocalRandom.current().nextInt(3));
+        if(decal!=null)scene.bloodDecals.add(decal);
 	}
+    public static Image createBloodDecal(int cell,int variant) {
+        if(Dungeon.level==null || !Dungeon.level.insideMap(cell) || !Dungeon.level.passable[cell]
+                || Dungeon.level.pit[cell] || Dungeon.level.water[cell] || Dungeon.level.traps.get(cell)!=null
+                || Dungeon.level.map[cell]==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.TRAP
+                || Dungeon.level.map[cell]==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.SECRET_TRAP
+                || Dungeon.level.map[cell]==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.INACTIVE_TRAP)return null;
+        Image decal=new Image("effects/blood_decals.png");
+        decal.frame(variant*64,0,64,64);
+        decal.logicalSize(16,16);
+        decal.point(DungeonTilemap.tileToWorld(cell));
+        return decal;
+    }
 	private Group customTiles;
 	private Group levelVisuals;
 	private Group levelWallVisuals;

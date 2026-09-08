@@ -58,6 +58,7 @@ public class WardSprite extends MobSprite {
 
 		tierIdles[6] = new Animation( 1, true );
 		tierIdles[6].frames(texture.uvRect(52, 0, 60, 15));
+		updateTier(1);
 
 	}
 

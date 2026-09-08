@@ -51,9 +51,7 @@ import java.nio.Buffer;
 public class ItemSprite extends MovieClip {
     @Override public void frame(com.watabou.utils.RectF frame) {
         super.frame(frame);
-        width /= com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM / (float)SIZE;
-        height /= com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM / (float)SIZE;
-        updateVertices();
+        com.shatteredpixel.shatteredpixeldungeon.GameGeometry.fit(this, frame, SIZE);
     }
 
 

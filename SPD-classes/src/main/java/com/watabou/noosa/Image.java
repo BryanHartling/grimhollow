@@ -89,6 +89,9 @@ public class Image extends Visual {
 		return new RectF( frame );
 	}
 
+    /** Set logical dimensions and refresh the draw geometry together. */
+    public void logicalSize(float w, float h) { width=w; height=h; updateVertices(); }
+
 	public void copy( Image other ) {
 		texture = other.texture;
 		frame = new RectF( other.frame );

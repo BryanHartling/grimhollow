@@ -41,7 +41,7 @@ public class GnollGeomancerSprite extends MobSprite {
 
 		updateAnims();
 
-		scale.set(1.25f);
+		// Character footprint is normalized by CharSprite.
 	}
 
 	@Override

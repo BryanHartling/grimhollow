@@ -384,6 +384,7 @@ public abstract class Char extends Actor {
 		} else if (hit( this, enemy, accMulti, false )) {
 			
 			int dr = Math.round(enemy.drRoll() * AscensionChallenge.statModifier(enemy));
+            if(this instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroWraith)dr/=2;
 			
 			if (this instanceof Hero){
 				Hero h = (Hero)this;

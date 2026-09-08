@@ -1,8 +1,8 @@
 # Known issues
 
-- Stages 1 and 2 are complete; stage 3 was not started. Enchanter, Psychic, full art coverage and section 9 content remain undelivered.
+- Stages 1, 2 and 2.5 are complete; stage 3 has not started. Enchanter, Psychic, full art coverage and section 9 content remain undelivered.
 - Tests 4 and 17 fail: `Validated 47 generated specifications; 4 failures`; 103 existing sheets lack pipeline sources, Enchanter/Psychic hero sheets are absent, and complete style/frame coverage remains unfinished.
-- The Necromancer and its minions use transitional art; full new-character art, four remaining regions and transient lighting belong to stage 3. Bone Prison currently uses barricade visuals for its opaque, nonflammable terrain.
+- The Necromancer and its minions use transitional art; full new-character art, four remaining regions and transient lighting belong to stage 5. Bone Prison currently uses barricade visuals for its opaque, nonflammable terrain.
 - Full tests 5-9 and 14 are not run for all specified content; Necromancer kit, talent hooks, subclass spell sets, armor execution and curse/minion save-load are exercised by its smoke gate. The actual Tengu/crown UI selection flows have not been driven in automation.
 - Full test 15 remains failing for the absent Enchanter and Psychic; the Necromancer-only gate reports `Runs=10 failures=0` using generator/debug descent, not a combat-playing bot.
 - Tests 11-13, 16, 18 and 19 are NOT RUN: later-class behavior, full sprite-index coverage, five-region luminance and turn-performance measurements remain pending; Android device gameplay is also untested.

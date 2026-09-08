@@ -44,3 +44,16 @@ For more on this, please refer to https://docs.gradle.org/9.4.0/userguide/comman
 BUILD SUCCESSFUL in 11s
 13 actionable tasks: 1 executed, 12 up-to-date
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=C:/Users/Hartl/Documents/grimhollow/.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=C:/Users/Hartl/Documents/grimhollow/.local/acceptance/sewers-lighting-on.png
+RENDERED=GameScene SCREENSHOT=C:/Users/Hartl/Documents/grimhollow/.local/acceptance/sewers-lighting-off.png
+TEST 24: heroes=7 mob sprites=101 failures=0
+TEST 25: items=358 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TESTS 24-26 PASS
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active

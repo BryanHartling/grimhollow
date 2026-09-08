@@ -32,6 +32,23 @@ public final class GameGeometry {
         }
         return 1;
     }
+    // Alpha occupancy is measured once per atlas rectangle, not on every rendered frame.
+    private static final java.util.WeakHashMap<com.watabou.gltextures.SmartTexture,java.util.Map<String,Integer>> heights = new java.util.WeakHashMap<>();
+    public static int opaqueHeight(com.watabou.gltextures.SmartTexture tx, com.watabou.utils.RectF frame) {
+        int x=Math.round(frame.left*tx.width), y=Math.round(frame.top*tx.height);
+        int w=Math.round(frame.width()*tx.width), h=Math.round(frame.height()*tx.height);
+        String key=x+":"+y+":"+w+":"+h;
+        java.util.Map<String,Integer> cache=heights.computeIfAbsent(tx,t->new java.util.HashMap<>());
+        if(cache.containsKey(key))return cache.get(key);
+        int top=h,bottom=-1;
+        for(int j=0;j<h;j++)for(int i=0;i<w;i++)if((tx.bitmap.getPixel(x+i,y+j)&255)!=0){top=Math.min(top,j);bottom=Math.max(bottom,j);}
+        int result=Math.max(0,bottom-top+1);cache.put(key,result);return result;
+    }
+    public static void fit(com.watabou.noosa.Image image, com.watabou.utils.RectF reference, float visibleHeight) {
+        int opaque=opaqueHeight(image.texture,reference);
+        float factor=opaque==0?1:visibleHeight/opaque;
+        image.logicalSize(image.frame().width()*image.texture.width*factor,image.frame().height()*image.texture.height*factor);
+    }
     public static com.watabou.noosa.TextureFilm characterFilm(Object texture, int width, int height) {
         int density = characterDensity(texture);
         return new com.watabou.noosa.TextureFilm(texture, width*density, height*density);

@@ -63,9 +63,14 @@ import java.util.HashSet;
 public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip.Listener {
     @Override public void frame(com.watabou.utils.RectF frame) {
         super.frame(frame);
-        int density = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterDensity(texture);
-        width /= density; height /= density;
-        updateVertices();
+        if (idle != null && idle.frames != null && idle.frames.length > 0) {
+            // Use the standing pose for every animation: death and attack poses retain their proportions.
+            float footprint = (this instanceof DM300Sprite || this instanceof YogSprite) ? 32 : 16;
+            com.shatteredpixel.shatteredpixeldungeon.GameGeometry.fit(this, idle.frames[0], footprint*.90625f);
+        } else {
+            int density=com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterDensity(texture);
+            logicalSize(width/density,height/density);
+        }
     }
 	
 	// Color constants for floating text

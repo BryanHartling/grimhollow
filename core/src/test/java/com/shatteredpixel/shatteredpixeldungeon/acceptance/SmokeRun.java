@@ -97,25 +97,45 @@ public class SmokeRun {
     private static void necromancerScenario() throws Exception {
         Hero h=Dungeon.hero;Phylactery item=h.belongings.getItem(Phylactery.class);
         check(h.HT==20&&h.HP==20&&h.STR==10,"Necromancer base stats");
-        check(h.belongings.weapon instanceof BoneRod&&item!=null&&item.charges()==0&&item.cap()==3,"Necromancer equipment/charge kit");
+        check(h.belongings.weapon instanceof BoneRod&&item!=null&&item.charges()==1&&item.cap()==3,"Necromancer equipment/charge kit");
         check(h.belongings.getItem(Food.class).quantity()==2&&h.belongings.getItem(PotionOfToxicGas.class).isIdentified()&&h.belongings.getItem(ScrollOfIdentify.class)!=null,"Necromancer bag kit");
         check(h.talents.get(0).size()==4&&h.talents.get(1).size()==5,"Necromancer talent tiers");
         clearArena();item.gainCharge(3);
         check(item.cast(h,Phylactery.Spell.RAISE_SKELETON,h.pos),"First skeleton");
-        check(item.cast(h,Phylactery.Spell.RAISE_SKELETON,h.pos),"Second skeleton");
-        check(!item.cast(h,Phylactery.Spell.RAISE_SKELETON,h.pos)&&item.charges()==1,"Concurrent cap and no charge on failure");
-        NecroSkeleton skeleton=NecroSkeleton.minions().get(0);check(skeleton.HT==19&&skeleton.remaining==40,"Skeleton starting stats/lifetime");
+
+        check(!item.cast(h,Phylactery.Spell.RAISE_SKELETON,h.pos)&&item.charges()==2,"Concurrent cap and no charge on failure");
+        NecroSkeleton skeleton=NecroSkeleton.minions().get(0);check(skeleton.HT==19&&skeleton.remaining==30,"Skeleton starting stats/lifetime");
         skeleton.sprite=new NecroSkeletonSprite();skeleton.sprite.link(skeleton);
-        for(int i=0;i<39;i++)skeleton.buff(NecroSkeleton.Lifetime.class).act();
-        check(skeleton.isAlive(),"Minion lives through turn 39");skeleton.buff(NecroSkeleton.Lifetime.class).act();
-        check(!NecroSkeleton.minions().contains(skeleton)&&h.HP==20,"Minion expires at turn 40 without explosion");
+        for(int i=0;i<29;i++)skeleton.buff(NecroSkeleton.Lifetime.class).act();
+        check(skeleton.isAlive(),"Minion lives through turn 29");skeleton.buff(NecroSkeleton.Lifetime.class).act();
+        check(!NecroSkeleton.minions().contains(skeleton)&&h.HP==20,"Minion expires at turn 30 without explosion");
         clearArena();Rat enemy=target(h.pos+1);enemy.HP=1;enemy.damage(1,h);
-        check(item.charges()==2&&Dungeon.level.corpses.get(enemy.pos)==200,"Hero kill charge and corpse tracking");
+        check(item.charges()==3&&Dungeon.level.corpses.get(enemy.pos)==200,"Hero kill charge and corpse tracking");
+        // Acceptance 27: same equipped resource and scheduled keeper after a real kill, without further kills.
+        int stable=item.charges();
+        for(int turn=0;turn<300;turn++){h.buff(Phylactery.Keeper.class).act();item.charge(h,1);}
+        check(item.charges()==stable,"27: no time or external artifact regeneration after 300 turns");
+        enemy=target(h.pos+1);
+        // One charge was already spent raising the first skeleton; spend eleven more.
+        for(int i=0;i<11;i++){item.gainCharge(1);check(item.cast(h,Phylactery.Spell.WITHER,enemy.pos),"27: spell spending");}
+        check(item.level()==1&&item.spells(h).contains(Phylactery.Spell.RAISE_WRAITH),"27: twelve charges unlock Wraith at level one");
+        item.upgrade();item.transferUpgrade(10);check(item.level()==1,"Usage-only artifact growth");
+        clearArena();NecroSkeleton hunter=NecroSkeleton.raise(h.pos+1,false,false);
+        hunter.sprite=new NecroSkeletonSprite(){@Override public void showAlert(){} };hunter.sprite.link(hunter);hunter.sprite.visible=false;
+        Rat victim=target(h.pos+2);victim.sprite.visible=false;
+        Buff.prolong(victim,Paralysis.class,5);
+        int victimHP=victim.HP;
+        hunter.act();hunter.act();
+        check(victim.HP<victimHP,"27: uncommanded minion attacks a visible sleeping hostile within two turns");
+        hunter.defendPos(h.pos+1);hunter.act();check(hunter.pos==h.pos+1,"Hold command preserved");
+        System.out.println("TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns");
+        clearArena();enemy=target(h.pos+1);
+        while(item.level()<3){item.gainCharge(1);check(item.cast(h,Phylactery.Spell.WITHER,enemy.pos),"Growth to Ghoul");}
         // Exercise the two subclass sets, all new talent hooks and all class spells.
         h.lvl=21;h.HT=h.HP=120;h.subClass=HeroSubClass.DEATHSPEAKER;Talent.initSubclassTalents(h);maxTalents();
-        check(item.cap()==6&&h.heroClass.subClasses().length==2,"Deathspeaker subclass and Grave Wisdom");
+        check(item.cap()==5&&h.heroClass.subClasses().length==2,"Deathspeaker subclass and Grave Wisdom");
         item.gainCharge(20);check(item.cast(h,Phylactery.Spell.RAISE_GHOUL,h.pos),"Raise Ghoul");
-        NecroSkeleton ghoul=NecroSkeleton.minions().get(0);check(ghoul instanceof NecroGhoul&&ghoul.HT==Math.round(151*1.2f),"Ghoul and Sturdy Bones");
+        NecroSkeleton ghoul=NecroSkeleton.minions().get(0);check(ghoul instanceof NecroGhoul&&ghoul.HT==Math.round(156*1.15f*1.2f),"Ghoul and Sturdy Bones");
         ghoul.sprite=new GhoulSprite();ghoul.sprite.link(ghoul);
         ghoul.HP=1;Talent.onFoodEaten(h,100,new Food());check(ghoul.HP>1,"Bone Meal");
         enemy=target(h.pos+2);h.HP=50;ghoul.attackProc(enemy,10);check(h.HP==53,"Ghoul lifesteal");
@@ -128,16 +148,25 @@ public class SmokeRun {
         NecroSkeleton first=NecroSkeleton.raise(h.pos-1,false,false);
         NecroSkeleton second=NecroSkeleton.raise(h.pos+Dungeon.level.width(),false,false);
         NecroSkeleton third=NecroSkeleton.raise(h.pos-Dungeon.level.width(),false,false);
-        check(first!=null&&second!=null&&third!=null,"Bone Legion permits three minions");
+        check(first!=null&&second!=null&&third!=null,"Level 21 minion cap");
+        check(NecroSkeleton.raise(h.pos-2,false,false)!=null&&NecroSkeleton.raise(h.pos+Dungeon.level.width()-1,false,false)!=null,"Deathspeaker and Bone Legion each add one slot");
         NecroSkeleton extra=NecroSkeleton.raise(h.pos+Dungeon.level.width()+1,false,true);
         check(extra!=null&&NecroSkeleton.raise(h.pos-Dungeon.level.width()-1,false,true)==null,"Second Grave cap+1");
         extra.sprite=new NecroSkeletonSprite();extra.sprite.link(extra);
         for(int i=0;i<5;i++)extra.buff(NecroSkeleton.Lifetime.class).act();
-        check(NecroSkeleton.minions().size()==3,"Second Grave exemption lasts five turns");
+        check(NecroSkeleton.minions().size()==5,"Second Grave exemption lasts five turns");
         for(NecroSkeleton m:NecroSkeleton.minions()){m.sprite=new NecroSkeletonSprite();m.sprite.link(m);}
         // Death Pact must suppress Second Grave while consuming minions.
         ClassArmor armor=ClassArmor.upgrade(h,new ClothArmor());h.armorAbility=new DeathPact();Talent.initArmorTalents(h);maxTalents();armor.charge=100;
         ((DeathPact)h.armorAbility).activate(armor,h,h.pos);check(NecroSkeleton.minions().isEmpty()&&h.buff(Adrenaline.class)!=null,"Death Pact sacrifice and buff");
+        clearArena();enemy=target(h.pos+2);
+        while(item.level()<6){item.gainCharge(1);check(item.cast(h,Phylactery.Spell.WITHER,enemy.pos),"Growth to Revenant");}
+        item.gainCharge(20);check(item.cast(h,Phylactery.Spell.RAISE_REVENANT,h.pos),"Deathspeaker Revenant unlock");
+        NecroSkeleton revenant=NecroSkeleton.minions().get(0);
+        check(revenant.slots()==2&&revenant.remaining==50&&revenant.isImmune(Terror.class)&&revenant.isImmune(Amok.class),"Revenant slots lifetime immunities");
+        item.gainCharge(20);check(!item.cast(h,Phylactery.Spell.RAISE_REVENANT,h.pos),"Only one Revenant");
+        NecroGhoul rising=(NecroGhoul)NecroSkeleton.raise(h.pos-1,true,false);rising.HP=0;rising.die(h);check(rising.HP==rising.HT/2,"Ally-scoped Ghoul rises once");
+        rising.sacrificed=true;rising.sprite=new GhoulSprite();rising.sprite.link(rising);rising.HP=0;rising.die(h);check(!NecroSkeleton.minions().contains(rising),"Sacrifice suppresses Ghoul rise");
         clearArena();h.subClass=HeroSubClass.HEXWEAVER;h.talents.clear();Talent.initClassTalents(h);Talent.initSubclassTalents(h);maxTalents();
         enemy=target(h.pos+1);
         for(Phylactery.Spell spell:new Phylactery.Spell[]{Phylactery.Spell.WITHER,Phylactery.Spell.AMPLIFY,Phylactery.Spell.DECREPIFY,Phylactery.Spell.IRON_MAIDEN,Phylactery.Spell.LOWER_RESISTANCE}){
@@ -159,10 +188,11 @@ public class SmokeRun {
         clearArena();item.gainCharge(20);check(item.cast(h,Phylactery.Spell.RAISE_SKELETON,h.pos),"Saved minion");
         enemy=target(h.pos+2);NecroCurse.apply(enemy,NecroCurse.Kind.AMPLIFY,12);
         check(BoneWalls.prison(h.pos+3,10,1),"Saved prison");int[] walls=Dungeon.level.boneOriginal.keyArray();
-        int charges=item.charges();Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);
+        int charges=item.charges(),artifactLevel=item.level();Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);
         h=Dungeon.hero;h.sprite=new HeroSprite();item=h.belongings.getItem(Phylactery.class);
         check(item.charges()==charges&&NecroSkeleton.minions().size()==1,"Minion and Phylactery save/load");
-        check(NecroSkeleton.minions().get(0).remaining==40,"Minion lifetime save/load");
+        check(item.level()==artifactLevel,"Usage-grown artifact level survives save/load");
+        check(NecroSkeleton.minions().get(0).remaining==30,"Minion lifetime save/load");
         check(Dungeon.level.mobs.stream().anyMatch(m->NecroCurse.find(m)!=null),"Curse save/load");
         for(int cell:walls)check(Dungeon.level.map[cell]!=Terrain.BONE_WALL,"Bone Prison reverts on load");
         check(BoneWalls.prison(h.pos+3,10,1),"Exit prison");Level previous=Dungeon.level;Dungeon.newLevel();check(previous.boneOriginal.keyArray().length==0,"Bone Prison reverts on level exit");Dungeon.switchLevel(previous,h.pos);

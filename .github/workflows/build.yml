@@ -30,6 +30,9 @@ jobs:
         if: ${{ !cancelled() }}
         shell: bash
         run: ./gradlew core:test -PdesktopOnly=true --console=plain
+      - name: Offscreen geometry acceptance 24-26
+        if: ${{ !cancelled() && runner.os == 'Linux' }}
+        run: xvfb-run -a java -Dgrimhollow.geometryTests=true -jar desktop/build/libs/desktop-0.2.1.jar --smoke-sewers
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

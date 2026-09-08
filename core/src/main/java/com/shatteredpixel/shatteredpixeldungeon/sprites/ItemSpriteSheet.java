@@ -824,7 +824,7 @@ public class ItemSpriteSheet {
 		private static void assignIconRect( int item, int width, int height ){
 			int x = (item % WIDTH) * SIZE;
 			int y = (item / WIDTH) * SIZE;
-			film.add( item, x, y, x+width*com.shatteredpixel.shatteredpixeldungeon.GameGeometry.ITEM_DENSITY, y+height*com.shatteredpixel.shatteredpixeldungeon.GameGeometry.ITEM_DENSITY);
+			film.add( item, x, y, x+width, y+height);
 		}
 
 		private static final int RINGS          =                            xy(1, 1);  //16 slots

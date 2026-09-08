@@ -55,7 +55,7 @@ public abstract class CrystalGuardianSprite extends MobSprite {
 		crumple = die.clone();
 
 		//this is temporary, as ideally the sprite itself should be scaled to 15x19 or so
-		scale.set(1.25f);
+		// Character footprint is normalized by CharSprite.
 
 		play( idle );
 	}

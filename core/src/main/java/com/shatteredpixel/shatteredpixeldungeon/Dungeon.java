@@ -481,6 +481,7 @@ public class Dungeon {
 		
 		Dungeon.level = level;
 		hero.pos = pos;
+        com.shatteredpixel.shatteredpixeldungeon.items.Phylactery phylactery=hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.class);if(phylactery!=null)phylactery.arrive();
 
 		if (hero.buff(AscensionChallenge.class) != null){
 			hero.buff(AscensionChallenge.class).onLevelSwitch();

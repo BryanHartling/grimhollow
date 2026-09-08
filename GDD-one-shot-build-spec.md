@@ -1,4 +1,4 @@
-# Game Design Document & Build Specification (v0.6 — reference-guided render revision)
+# Game Design Document & Build Specification (v0.7 — loop calibration revision)
 ## Working title: **Grimhollow** (a Shattered Pixel Dungeon derivative)
 
 **Document purpose.** This is a complete, self-contained specification intended to be handed to an autonomous coding agent to produce a playable build in a single run. It defines the deliverable, the technical base, every new class and content item with concrete numbers, the art specification and pipeline, and the acceptance tests the build must pass. Where the spec is silent, follow existing Shattered Pixel Dungeon (SPD) conventions exactly.
@@ -367,7 +367,7 @@ Charges 0–10 (regen 1 per 30 turns, faster with upgrades). Activate: enemies i
 
 ---
 
-## 10. Acceptance tests (39 total; 28–39 in §15.7)
+## 10. Acceptance tests (40 total; 28–40 in §15.7)
 
 Implement as JUnit tests in `core/src/test/` where feasible; otherwise as a headless smoke script.
 
@@ -452,7 +452,8 @@ Headless render each sprite type into an offscreen framebuffer at default zoom a
    Tag `v0.3.2-fixup2`.
 5. ~~Rendered-art proof of concept~~ done (`v0.4.0-render-poc`, commit `07519a5`). **Human review outcome:** environment renders regressed against the procedural output (uniform fine brick grid, no relief or AO, flat water); character renders are not viable from primitive-built geometry. Decision: Blender continues for environments, props, items, and effects only; characters are removed from the Blender scope (see §15.5 revision).
 5.5. **Reference board (§15.8.1):** populate `references/` from `references/references.md`, CC0 or public domain only. Commit. **Stop for human review of the folder.** Tag `v0.4.1-references`.
-5.6. **Reference-guided environment iteration (§15.8.2–15.8.4):** on approval, run the loop for Sewers floor, wall, water, door, decor, and wall torch. Commit the score history and the final side-by-side. Tag `v0.4.2-sewers-iterated`. **Stop for human review.**
+5.6. ~~Reference-guided environment iteration~~ done (`v0.4.2-sewers-iterated`). **Human review outcome:** door and torch approved; floor improved in isolation; wall indistinguishable from floor; water reads as moss; stones too small and uniform at 1×; room-edge lighting halo regressed; set less readable in play than the procedural set. Scoring was satisfied by non-water and stopped after two rounds. See §15.8.5 for the corrections.
+5.7. **Calibrated Sewers pass (§15.8.5):** rerun the loop for Sewers with the corrected scoring, structural targets, and room-level gate. Tag `v0.4.3-sewers-calibrated`. **Stop for human review.**
 6. **Rendered-art coverage (§15.5, revised):** on approval, the remaining four regions through the same loop, then all items and props, title art, and effects sources. Characters and mobs use the procedural pipeline with the §15.5 silhouette redesign. Test 17 passes.
 7. **Enhanced effects (§15.6):** animated gas, fire and scorch, grass, water, spell and curse effects. Tag `v0.5.0-rendered`.
 8. **§9 content**, in listed order.
@@ -599,6 +600,29 @@ For each asset class in scope (per region: floor tiles, wall tiles, water/sewage
 #### 15.8.4 Review deliverable
 `verification/iteration/summary.png`: for each class, a row showing the top reference, the procedural version, POC round 0, and the best round, at 4× zoom, with the composite score history as a small line under it. Plus the in-game screenshot. Commit and stop.
 
+#### 15.8.5 Loop corrections after the Sewers review (supersede §15.8.2–15.8.3 where they conflict)
+
+**Stopping rule.** Minimum 6 rounds per class; stop at composite ≥ 0.90 *and* the room-level gate passing, or at 14 rounds. Keep the best round that passes everything. Never stop before round 6 regardless of score.
+
+**Composite score.** Weighted mean of (a) the numeric targets from the board, (b) the structural targets below, and (c) a **vision judgment**: after viewing the render beside its top reference and beside the procedural version, the critique step outputs a 0–1 number for "is this recognisably the thing the row describes" (floor, wall, water, torch), which carries **40%** of the composite. A render the critique judges as the wrong *kind* of thing (moss for water, floor for wall) scores ≤ 0.3 on (c) regardless of (a).
+
+**Structural targets by class.**
+- *Floor:* irregular polygonal flagstones, 2–3 across a tile edge with at least one stone spanning ≥ 40% of the tile; sizes vary by ≥ 2× within a tile; mortar width ≤ 6% of tile edge; mortar darker than stone by 0.15–0.25 luminance (not more). Edge-orientation histogram must not peak (no dominant grid direction).
+- *Wall:* must differ from floor. Horizontal courses: edge-orientation histogram ≥ 55% horizontal; a lit top band in the upper 20% of the tile at ≥ 0.15 luminance above the body; a dampness band in the lower 30% at ≤ 0.10 below the body. Wall/floor feature difference: perceptual hash distance ≥ 12 bits from the floor tile.
+- *Water/sewage:* a **surface**, not a texture: high-frequency energy (Laplacian variance) ≤ 25% of the floor tile's; a depth gradient darkening toward the tile centre by ≥ 0.08; specular highlights 1–4% of pixels at ≥ 0.70 luminance; hue 80–110°, saturation 0.20–0.35; luminance mean ≤ 0.12. The water tile must be distinguishable from any moss/grass tile by pHash ≥ 16 bits.
+- *Door, decor, torch:* approved shapes retained as round 0; iterate only on material and value range.
+- *Sprites on transparent backgrounds* (torch, decor, items) are scored against the reference **cropped to its subject's bounding box**, with transparent pixels excluded from every statistic.
+
+**Room-level gate (new; required to pass before any round can be "best").** Generate a fixed-seed Sewers room containing floor, wall, water, a bridge, a door, decor, and one wall torch; render it in-game **with dynamic lighting on at default zoom**; then measure on the screenshot:
+1. *Wall/floor distinctness:* mean luminance of wall cells differs from floor cells by ≥ 0.10 and pHash of a wall cell vs a floor cell ≥ 12 bits.
+2. *Feature scale at 1×:* median flagstone area ≥ 12% of a tile at screen resolution (no gravel).
+3. *Water/floor contrast:* adjacent water and floor cells differ by ≥ 0.12 luminance and ≥ 30° hue.
+4. *No boundary halo:* mean luminance of the outermost ring of visible cells ≤ mean luminance of the ring inside it (light must not rise at the edge). Regression test of the §4.3 fix.
+5. *Value range:* screenshot luminance std-dev ≥ 0.12 over visible cells; mean 0.12–0.20.
+6. *Readability:* the hero, a rat, and one item on the floor each have bounding-box contrast ≥ 0.20 against the cells beneath them.
+
+**Deliverables** as §15.8.4 plus, per class, the round in which the vision judgment first exceeded 0.7, and the final in-game screenshot with the six gate measurements printed beneath it.
+
 ### 15.7 Acceptance tests (extend §10)
 28. `python tools/artgen/build.py` (no `--render`) reproduces `assets/` byte-for-byte from the committed render cache.
 29. `python tools/artgen/build.py --render` on the host regenerates every render-cache frame within perceptual-hash tolerance of the committed frame.
@@ -611,4 +635,5 @@ For each asset class in scope (per region: floor tiles, wall tiles, water/sewage
 36. Every `HeroClass` has a non-empty avatar frame and a splash image; every `Talent` has a non-empty icon frame; an `ItemSlot` rendered with any item fills ≥ 70% of the slot.
 37. Rune Etching: Etch moves it to the wielded weapon and carries one upgrade level; the new weapon rolls a common enchantment on the next floor entry alongside its permanent one; dropping the carrying weapon returns the Etching to inventory; the Etching itself cannot be dropped.
 38. Reference board: every row in `references.md` has a file, a `SOURCES.md` entry with URL and license, and the license is on the allowed list; no file's perceptual hash matches any entry in a small blocklist of well-known game screenshots the run compiles from the §G list.
-39. Iteration loop: for each in-scope class, ≥ 1 round recorded, best round passes the validator and all §F global targets, and the seam test passes.
+39. Iteration loop: for each in-scope class, ≥ 6 rounds recorded, best round passes the validator, all §F global targets, the §15.8.5 structural targets, and the seam test.
+40. Room-level gate: all six §15.8.5 measurements pass on the committed in-game screenshot; the halo measurement (4) is also added to the standard CI rendering checks so it cannot regress silently again.

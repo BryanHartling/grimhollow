@@ -1,4 +1,4 @@
-# Game Design Document & Build Specification (v0.3 — playtest revision)
+# Game Design Document & Build Specification (v0.5 — second playtest revision)
 ## Working title: **Grimhollow** (a Shattered Pixel Dungeon derivative)
 
 **Document purpose.** This is a complete, self-contained specification intended to be handed to an autonomous coding agent to produce a playable build in a single run. It defines the deliverable, the technical base, every new class and content item with concrete numbers, the art specification and pipeline, and the acceptance tests the build must pass. Where the spec is silent, follow existing Shattered Pixel Dungeon (SPD) conventions exactly.
@@ -157,8 +157,8 @@ Enum entry `NECROMANCER`; subclass entries `DEATHSPEAKER`, `HEXWEAVER`. Sprite `
 
 ### 6.1 Stats and kit
 - Base stats identical to Mage (HP 20, +5/level; str 10).
-- **Bone Rod** (`items/weapon/melee/BoneRod.java`): tier 1, dmg 1–6, str req 10, delay 1. Unique class weapon (like Mage's Staff): cannot be dropped, can be upgraded. On killing blow: `Phylactery.gainCharge(1)`.
-- **Phylactery** (`items/Phylactery.java`): equipped in a dedicated slot like the Cleric's Holy Tome. **Charges start at 1**, cap per Phylactery level (below). **No time-based regeneration of any kind**; `gainCharge` fires only on kills by the hero or hero-owned minions. On arriving at a new floor, if charges are 0 they are set to 1. Opens a radial spell menu.
+- **Bone Rod** (`items/weapon/melee/BoneRod.java`): tier 1, dmg 1–6, str req 10, delay 1. Ordinary tier-1 starting weapon: droppable, sellable, replaceable, upgradeable. No class perk. (Kill-charges come from the Phylactery regardless of weapon.)
+- **Phylactery** (`items/Phylactery.java`): equipped in a dedicated slot like the Cleric's Holy Tome. Passive while equipped: hero-owned minions within 2 cells of the hero gain +1 accuracy. **Charges start at 1**, cap per Phylactery level (below). **No time-based regeneration of any kind**; `gainCharge` fires only on kills by the hero or hero-owned minions. On arriving at a new floor, if charges are 0 they are set to 1. Opens a radial spell menu.
 - **Phylactery growth (usage-based only).** Levels 0–10 like an artifact. Experience comes **only from charges spent** on any Phylactery spell: 10 charges per level at level 0, +5 per level thereafter (10, 15, 20 … 55; cumulative 325 to reach 10). **Scrolls of Upgrade, Magical Infusion, and the Alchemist's Toolkit do not affect it**; it is not a valid target for them.
   - Max charges: 3 at level 0; +1 at levels 2, 5, 8 (6 at level 8+).
   - Minion HP and damage: +5% per Phylactery level.
@@ -228,11 +228,13 @@ Enum `ENCHANTER`; subclasses `ARTIFICER`, `SCRIVENER` (display name "Scrivener";
 
 ### 7.1 Stats and kit
 - Base stats identical to Rogue (HP 20, +5/level; str 10).
-- **Runed Baton** (`RunedBaton.java`): tier 1, dmg 2–6, str 10. Unique class weapon. On floor entry, rolls a random *common* enchantment (Blazing, Shocking, Chilling, Kinetic, Lucky, Blooming) at 50% proc strength for that floor; shown in item description.
+- **Runed Baton** (`RunedBaton.java`): tier 1, dmg 2–6, str 10. Ordinary starting weapon: droppable, replaceable, upgradeable. Starts carrying the **Rune Etching** (below).
+- **Rune Etching** (`items/RuneEtching.java`, modelled on `BrokenSeal`): an attachment that lives on exactly one melee weapon. While attached, that weapon rolls a random *common* enchantment (Blazing, Shocking, Chilling, Kinetic, Lucky, Blooming) at 50% proc strength on each floor entry, shown in the item description, stacking alongside any permanent enchantment. Like the seal, it carries **one upgrade level** with it. The Sigil Brush gains an **Etch** action (1 turn, no charge cost): move the Etching from its current weapon to the currently wielded melee weapon. The Etching cannot be dropped or sold; if the weapon carrying it is lost (dropped, sold, destroyed), the Etching returns to the hero's inventory unattached and can be Etched onto the next weapon.
 - **Sigil Brush** (`SigilBrush.java`): charges start 2; +1 max at levels 7, 13, 20. Regen: 1 charge per (40 − 2×lvl) turns, min 20. Radial spell menu.
 - **Inscribe** (1 charge): choose from all enchantments/glyphs *identified this run* (tracked via upstream's `Catalog`/`Notes` knowledge of enchantments; if none, only the Runed Baton's current one). Applies as a temporary enchantment/glyph on the equipped weapon or armor for 30 turns. Does not replace a permanent enchantment; both proc (temporary at 100%, permanent normally). One temporary per item.
 - **Hex Sigil** (1 charge, target in sight): Hex 10 turns + new buff **Degraded Gear** 10 turns (enemy accuracy −20%, armor −30%).
-- Starting bag: Runed Baton, Sigil Brush, cloth armor, 2 food, 1 Scroll of Enchantment (identified), 1 Potion of Healing.
+- **Class passive — Runecraft.** Whenever the Enchanter applies a Scroll of Enchantment, a Stone of Enchantment, or any alchemical enchant/glyph source to an item, roll **two** distinct enchantments (or glyphs, for armor) using upstream's normal weights and the usual exclusion of the item's current enchantment, and present both in a picker with full identified descriptions. The chosen one is applied. Cancelling the picker consumes nothing. Does not apply to Scrolls of Upgrade, curses, or cursed drops; does not remove or avoid curses.
+- Starting bag: Runed Baton, Sigil Brush, cloth armor, 2 food, 1 Scroll of Identify, 1 Potion of Healing. (No starting Scroll of Enchantment: the Baton's per-floor enchant and Runecraft on found scrolls carry the early game.)
 - Identifies at start: Scroll of Enchantment.
 
 ### 7.2 Talents
@@ -259,8 +261,8 @@ Enum `ENCHANTER`; subclasses `ARTIFICER`, `SCRIVENER` (display name "Scrivener";
 - Scrivener: *Wide Field* (aura radius +0/+1/+2), *Counterweight* (each debuff applied grants 1/2/3 turns Barkskin at lvl/2).
 
 ### 7.3 Subclasses
-- **Artificer:** **Transmute Sigil** (2 charges): reroll the permanent enchantment/glyph on equipped weapon/armor to a random different one of the same rarity tier. **Reinforce** (1 charge): +1 temporary upgrade level on weapon or armor for 50 turns (uses upstream's temporary level system as in the Mage's Staff/Magical Infusion).
-- **Scrivener:** **Sanctify** (1 charge): 3×3 around hero: allies/hero gain Bless 8 + Haste 8. **Nullify** (2 charges): 5×5 around target: remove all buffs from enemies (`Buff.detach` on all non-permanent), and apply **Silenced** 5 turns (enemy `Mob` subclasses that cast — Warlock, Shaman, DM-100, Necromancer, Hexcaster — skip ranged/cast actions). **Fracture** (1 charge): target's `drRoll` returns 0 for 6 turns.
+- **Artificer:** Runecraft offers **three** options instead of two. **Transmute Sigil** (2 charges): reroll the permanent enchantment/glyph on equipped weapon/armor to a random different one of the same rarity tier, presented through the Runecraft picker. **Reinforce** (1 charge): +1 temporary upgrade level on weapon or armor for 50 turns (uses upstream's temporary level system as in the Mage's Staff/Magical Infusion).
+- **Scrivener:** Runecraft offers two options, one of which is always the enchantment or glyph the hero has inscribed most often this run (ties: most recent), if any. **Sanctify** (1 charge): 3×3 around hero: allies/hero gain Bless 8 + Haste 8. **Nullify** (2 charges): 5×5 around target: remove all buffs from enemies (`Buff.detach` on all non-permanent), and apply **Silenced** 5 turns (enemy `Mob` subclasses that cast — Warlock, Shaman, DM-100, Necromancer, Hexcaster — skip ranged/cast actions). **Fracture** (1 charge): target's `drRoll` returns 0 for 6 turns.
 
 ### 7.4 Armor abilities
 | Ability | Cost | Effect | Talents |
@@ -277,8 +279,8 @@ Enum `PSYCHIC`; subclasses `PUPPETEER`, `SEER`. Sprite `hero_psychic.png`. Domin
 
 ### 8.1 Stats and kit
 - Base stats identical to Huntress (HP 20, +5/level; str 10).
-- **Focus Ring** (`FocusRing.java`): tier 1, dmg 1–5, str 10. Unique class weapon.
-- **Focus Crystal** (`FocusCrystal.java`): charges start 2; +1 max at 7/13/20. Regen 1 per (40 − 2×lvl) turns, min 20.
+- **Focus Ring** (`FocusRing.java`): tier 1, dmg 1–5, str 10. Ordinary starting weapon: droppable, replaceable, upgradeable. No class perk.
+- **Focus Crystal** (`FocusCrystal.java`): charges start 2, cap 3; +1 max at 7/13/20. Regen 1 per (40 − 2×lvl) turns, min 20.
 - **Grasp** (1 charge, any cell in sight): if the cell holds an item heap, move the heap to the hero's cell (pick up as if walked over). If the cell holds a trap (visible or hidden but known), trigger it as if a `Char` stood there, then remove the trap. If both, prefer item. If neither, no effect and no charge cost.
 - **Glimpse** (1 charge): Mind Vision 5 turns.
 - **Class passive — Telekinetic Force:** all `MissileWeapon` damage from the hero: `+ floor(heroLevel / 5)` added after base roll, before enchant and `Fracture Point`. Displayed in thrown weapon descriptions.
@@ -365,7 +367,7 @@ Charges 0–10 (regen 1 per 30 turns, faster with upgrades). Activate: enemies i
 
 ---
 
-## 10. Acceptance tests (27 total)
+## 10. Acceptance tests (37 total; 28–37 in §15.7)
 
 Implement as JUnit tests in `core/src/test/` where feasible; otherwise as a headless smoke script.
 
@@ -418,6 +420,8 @@ Headless render each sprite type into an offscreen framebuffer at default zoom a
 
 **Checkpoint (commit `7931343`, tag `v0.2.0-necromancer`):** stages 1 and 2 complete per the stage-2 report. Playtesting on Windows found the defects listed in stage 2.5 below.
 
+**v0.5 delta:** stage 4.5 (second playtest fix-up) added; §7.1 Runecraft added (stage 3.5 applies because the Enchanter shipped without it); §13.6 attribution scrub and §13.7 launchers added; class weapons made droppable; Enchanter starting scroll removed.
+
 **Remaining work, in priority order.** Finish each stage to a clean, building, committed, pushed state before starting the next:
 
 1. ~~Stage 1~~ done.
@@ -432,9 +436,24 @@ Headless render each sprite type into an offscreen framebuffer at default zoom a
    - (g) **New acceptance tests 24–27** (§10.5) added and passing; Necromancer-only gate still `Runs=10 failures=0`.
    Tag `v0.2.1-necromancer-fixup`.
 3. **Enchanter complete** (§7). Enchanter-only gate green.
-4. **Psychic complete** (§8). Psychic-only gate green; the full three-class gate green. Tag `v0.3.0-three-classes`.
-5. **Art pipeline coverage and quality:** (a) remaining four regions, all upstream mobs, new-hero sheets, transient light sources (test 17 passes); (b) quality pass on the procedural pipeline: redesign character silhouettes natively at 48×60 with 3–4 tone shading and a soft drop shadow rather than tracing upstream's 12×15 vectors; ambient-occlusion darkening at wall bases; directional highlight on stone; specular ripple on water and sewage; higher decor density per region.
-6. **§9 content**, in listed order.
+3.5. **Runecraft fix-up (if the Enchanter shipped without it):** implement §7.1 Runecraft and the §7.3 Artificer/Scrivener variants; add test 33. Enchanter-only gate still green. Tag `v0.3.1-runecraft`.
+4. ~~Psychic complete~~ done (`v0.3.0-three-classes`, commit `6cfaa57`).
+4.5. **Second playtest fix-up (do before anything else in the v0.5 run):**
+   - (a) **Hero-select portraits are slivers**: avatar frames still use 12×15 geometry against 48×60 sheets. Fix the avatar lookup; extend test 24 to cover `HeroClass` avatars and the save-slot portrait.
+   - (b) **Hero-select right panel is blank** for all nine classes. Restore the class description; provide a pipeline-generated splash for every class (upstream splashes are not reused) at the size upstream expects.
+   - (c) **Talent icons missing** for all §6–8 talents. Generate them (32×32, palette, dark outline) via the pipeline; add a test that every `Talent` enum has a non-empty icon frame.
+   - (d) **UI item icons too small** in ItemSlot/ItemButton contexts (reward windows, quest dialogs, shop). Scale to fill the slot; extend test 25 to render an `ItemSlot` and check fill ≥ 70%.
+   - (e) **Washed-out tiles**: widen value range in tile materials (darker mortar, brighter wet highlights, water with visible depth variation); lower Sewers ambient to `0.50,0.55,0.45`; add validator rule 7: per-tile luminance standard deviation ≥ 0.08.
+   - (f) **Enchanter starting bag**: remove the Scroll of Enchantment per revised §7.1.
+   - (g) **Class weapons droppable** per revised §6.1, §7.1, §8.1: Necromancer and Psychic weapons are plain (perks moved to Phylactery and Focus Crystal); Enchanter's Runed Baton starts with the transferable Rune Etching and the Brush gains Etch. Class items remain mandatory. Test 37.
+   - (h) **Attribution scrub** per §13.6.
+   - (i) **Stale-save hardening**: a save slot whose data cannot be loaded (version mismatch, missing sprite, exception during portrait build) shows "Incompatible save" with a delete option instead of crashing. Test 34.
+   - (j) **Launchers** per §13.7.
+   Tag `v0.3.2-fixup2`.
+5. **Rendered-art proof of concept (§15.1–15.4):** Blender headless pipeline; Sewers tiles/walls, rat, crab, and the Necromancer rendered and post-processed; side-by-side comparison image against the procedural output committed under `verification/`. Tag `v0.4.0-render-poc`. **Stop and wait for human judgment before stage 6.**
+6. **Rendered-art coverage (§15.5):** on approval, all five regions, all mobs, all heroes, all items, and title art through the Blender pipeline; test 17 passes.
+7. **Enhanced effects (§15.6):** animated gas, fire and scorch, grass, water, spell and curse effects. Tag `v0.5.0-rendered`.
+8. **§9 content**, in listed order.
 
 ## 13. Build environment, packaging, and CI
 
@@ -480,6 +499,15 @@ Constraints:
 - On the device: enable Developer Options; allow "Install unknown apps" for the app used to open the APK; open the APK and install. Or `adb install -r grimhollow-debug.apk` over USB with USB debugging enabled.
 - The app installs alongside Shattered Pixel Dungeon without conflict (§13.1).
 
+### 13.6 Attribution and upstream-contact scrub (hard rule)
+Grimhollow must give full credit to its upstream authors and must not route support, money, bug reports, or updates to them. Specifically:
+- **Credits/About screen:** must name Oleg Dolya (Pixel Dungeon) and Evan Debenham and contributors (Shattered Pixel Dungeon), link to their real projects, and display the GPL-3.0 notice. This is preserved and prominent.
+- **Remove or repoint:** the crash-dialog email; About-screen website, Patreon/supporter, Discord, and social links; the update checker (repoint to `github.com/BryanHartling/grimhollow/releases`, or disable until releases exist; it must never prompt to install Shattered Pixel Dungeon); the news feed (disable); any "support the developer" or supporter-badge text; store links. Crash dialog directs to `github.com/BryanHartling/grimhollow/issues`.
+- Test 35: grep of the built jar's resources and the source tree for `shatteredpixel.com`, `ShatteredPixel.com`, `patreon`, and `Evan@` returns matches only inside the credits screen strings and the preserved copyright headers.
+
+### 13.7 Launchers
+Ship `tools/play.bat` (launches the newest `desktop/build/libs/desktop-*.jar` with `javaw` from `.toolchain/jdk-17`, no console) and `tools/rebuild.bat` (runs `desktop:dist -PdesktopOnly=true --no-daemon`, then `play.bat`). Both must work by double-click with no PowerShell, no execution-policy change, and no environment variables set. Document in README.
+
 ### 13.5 Additional acceptance tests (extend §10)
 20. `gradlew.bat desktop:run -PdesktopOnly=true` succeeds in an environment with no `ANDROID_HOME` set.
 21. The CI workflow file exists and all three jobs pass on the delivery commit.
@@ -501,3 +529,55 @@ These rules exist because the first run spent most of its time on verification s
 - **Report format is unchanged** (see the prompt's Finishing section), but keep the KNOWN_ISSUES entries to one line each.
 
 ---
+
+
+---
+
+## 15. Rendered-art pipeline (Blender) and enhanced effects
+
+Rationale: the procedural Pillow pipeline plateaus at "clean pixel art." The target look was achieved historically by rendering low-poly models under a fixed light rig to 2D frames. This section specifies that pipeline. It replaces the *source* of character, tile, item, and effect frames; the existing post-process (palette quantization, outline, validator) and the `.lock` override remain and run on every rendered output.
+
+### 15.1 Tooling and determinism
+- Blender 4.x LTS, installed under `.toolchain/blender/`, run headless (`blender -b <scene> -P <script>`). Eevee renderer. No GUI, no add-ons outside the default set.
+- All scenes, models, materials, and animations are built or loaded by `bpy` scripts in `tools/artgen/blender/`. Committed `.blend` files are allowed only as *sources* alongside the scripts that produced or modified them; the pipeline must regenerate every sheet from committed sources with fixed seeds. `python tools/artgen/build.py --render` performs the Blender step; `build.py` without the flag reuses committed renders and runs post-process only, so CI does not need Blender.
+- Rendered PNG frames go to `tools/artgen/render_cache/` (committed), then through the existing post-process to `assets/`. Byte-for-byte reproducibility applies to post-process; Blender renders are checked into the cache and compared by perceptual hash (≤ 2 bits difference) rather than byte equality, since GPU/driver differences make byte equality impractical.
+
+### 15.2 Render rig (fixed for every asset)
+- **Camera:** orthographic. Tiles: straight down (Z), 1 tile = 64 px. Characters and items: pitched 30° from vertical, facing the model's front, so figures read as front-facing on a top-down map (SPD's convention). Scale locked so a 1.0 m figure = 60 px tall.
+- **Lights:** warm key (`#E0982F` tint, 45° elevation, upper-left), cool fill (`#2E6F7A` tint, 25% key strength, right), faint rim from behind-above. No per-asset lighting changes; region ambient is applied at runtime by the lighting overlay, not baked.
+- **Shading:** toon shader with 4 hard steps plus a specular step for wet or metallic materials. Freestyle or a post-process outline of 2 px in `#0E0D0C`. No smooth gradients survive the post-process quantization.
+- **Materials** are a shared library (`materials.py`): wet stone, dry stone, mortar, mud, rotting wood, iron, bone, cloth, leather, flesh, mildew, sewage, blood. All albedo colors are §5.2 palette entries. Procedural texture nodes (noise, Voronoi, wave, musgrave) with per-asset seeds provide grain and variation.
+
+### 15.3 Asset construction
+- **Tiles:** each floor/wall tile is a displaced slab (0.05–0.15 m relief) with the region's material set. Walls are extruded 0.6 m so their bases receive ambient occlusion and their tops catch the key light. Tile edges are cut so neighbors tile seamlessly (render each tile with its neighbors present and crop the center). Decor (grates, bones, chains, barrels, statues) are separate props rendered onto transparent tiles.
+- **Characters:** one shared low-poly humanoid rig (`rig_biped.py`) with the four SPD animations authored once (idle 2, run 6, attack 5, die 5, special 4 frames). Quadruped and amorphous rigs (`rig_quad.py`, `rig_blob.py`) for rats, dogs, crabs, spiders, eyes, piranhas. Per-mob scripts swap mesh proportions, materials, and attachments (hood, weapon, shell). Bosses and large mobs use their own rigs at 96×96. Heroes render one sheet per armor tier by swapping the torso material and silhouette, as upstream's `HeroSprite` expects.
+- **Items:** props at 32 px under the character camera, on transparent background, single object, centered.
+- **Silhouette and readability constraints (validated):** fill 60–85% of frame height; one dominant material color and at most one accent per character; every mob must remain distinguishable from every other mob at 16 px (downsample each idle frame to 16 px, compute a 16-bin hue histogram, require pairwise L1 distance ≥ 0.25 across all mob pairs within the same region).
+
+### 15.4 Proof of concept (stage 5)
+Render and post-process: Sewers floor, wall, water, grass, and door tiles; rat; crab; Necromancer (all armor tiers); Skeleton and Ghoul minions. Produce `verification/render-poc.png`: a 2×N side-by-side of the procedural and rendered versions of each asset at 4× zoom, plus one in-game screenshot of a Sewers room with the rendered set. Commit and tag. Do not proceed to stage 6 without human approval recorded in the next continuation prompt.
+
+### 15.5 Coverage (stage 6)
+All five regions with decor; all upstream mobs and bosses; all nine heroes with armor tiers; all items; title wordmark and background; talent icons for §6–8. Test 17 passes with the render cache as source. The Pillow generators for these assets are removed once their rendered replacements pass validation; the post-process and validator stay.
+
+### 15.6 Enhanced effects (stage 7)
+Presentation only. No change to any mechanic, cell logic, duration, spread rate, or damage. Gated behind a new Settings → Display toggle "Enhanced effects" (default on); when off, upstream rendering is used.
+- **Gas blobs** (toxic, paralytic, corrosive, confusion, smoke, stench): render a 16-frame looping smoke simulation into a tiling sheet. Replace flat per-cell tint with an animated quad per cell whose opacity follows blob density (0–100 → 0.15–0.85 alpha) and whose UVs scroll slowly on a per-cell offset so adjacent cells don't repeat. Soft edges: cells with density < 20 render at half scale. Tint per gas type from the palette (necrotic green for toxic and corrosive, psychic violet for confusion, bone-grey for smoke, stone-grey for paralytic).
+- **Fire:** render a 6-frame flame-lick strip and three ember textures. `FlameParticle` uses the strip, vertical velocity ×1.5, turbulence via noise. Fire cells emit light (already). **Scorch decal:** when a burning cell stops burning, place a scorch decal (3 variants, 30–60% of tile) via the blood-decal system; never on chasm or water; fades on level exit.
+- **Grass:** render a 6-frame sway loop for tall grass. At runtime, phase per cell = noise(x, y, t) so patches sway out of phase; when a character enters a tall-grass cell, that cell plays the loop at 2× for 6 frames. Trampling to short grass is unchanged.
+- **Water and sewage:** 8-frame ripple loop with specular; when a character or item enters a water cell, spawn a single expanding ring ripple particle (rendered texture, 8 frames).
+- **Spells and curses:** rendered strips for necrotic particles, curse ring (Hexweaver curses), inscription glyphs (Enchanter), psychic ring (Psychic), bone wall and force wall, corpse explosion burst, Sanctuary zone edge. Replace the programmatic circles and squares from stage 2–4 with these; keep the same sizes and durations.
+- **Torches:** wall torch flame uses the flame strip at 32 px with a 4-frame flicker; light radius unchanged.
+- **Performance:** all effect sheets in one atlas ≤ 2048×2048; per-frame cost of enhanced effects on a floor with 40 gas cells and 10 fire cells must stay under 2 ms on the desktop headless timing harness (extend test 19 with this scenario).
+
+### 15.7 Acceptance tests (extend §10)
+28. `python tools/artgen/build.py` (no `--render`) reproduces `assets/` byte-for-byte from the committed render cache.
+29. `python tools/artgen/build.py --render` on the host regenerates every render-cache frame within perceptual-hash tolerance of the committed frame.
+30. Readability: pairwise 16-px hue-histogram distance ≥ 0.25 for all mob pairs within each region.
+31. Enhanced effects toggle: with it off, a screenshot of a burning grass cell matches the upstream-style rendering path; with it on, frame timing per §15.6 passes.
+32. Scorch decal appears after fire on floor; none on water or chasm.
+33. Runecraft: reading a Scroll of Enchantment as the Enchanter presents exactly two distinct options (three as Artificer), neither equal to the item's current enchantment; cancelling leaves the scroll in inventory; applying one sets that enchantment. As Scrivener, after inscribing Blazing three times, Blazing appears as one of the two options.
+34. Stale save: a save file with a mismatched version header or a corrupt portrait reference produces an "Incompatible save" slot with a working delete action; the title screen does not crash.
+35. Attribution scrub per §13.6.
+36. Every `HeroClass` has a non-empty avatar frame and a splash image; every `Talent` has a non-empty icon frame; an `ItemSlot` rendered with any item fills ≥ 70% of the slot.
+37. Rune Etching: Etch moves it to the wielded weapon and carries one upgrade level; the new weapon rolls a common enchantment on the next floor entry alongside its permanent one; dropping the carrying weapon returns the Etching to inventory; the Etching itself cannot be dropped.

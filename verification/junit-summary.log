@@ -76,3 +76,5 @@ BUILD SUCCESSFUL in 11s
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.0/userguide/configuration_cache_enabling.html
 
 Stage 5.6 fresh core:test --rerun: {'tests': 4, 'failures': 0, 'errors': 0, 'skipped': 0}
+
+Stage 5.7 fresh core:test --rerun: {'tests': 4, 'failures': 0, 'errors': 0, 'skipped': 0}

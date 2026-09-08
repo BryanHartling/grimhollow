@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.21939575500321212,
+          "value": 0.21932332595682502,
           "minimum": 0.1,
           "maximum": null,
           "pass_": true,
@@ -64,15 +64,15 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.14989730385064906,
+          "value": -0.14978693678158472,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.05373380182802288,
-      "inner_mean": 0.20363110567867193,
+      "outer_mean": 0.05380170405901076,
+      "inner_mean": 0.2035886408405955,
       "passing": true
     },
     {
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.1415961142897263,
+          "value": 0.14159652612677015,
           "minimum": 0.12,
           "maximum": 0.2,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.1301007825654443,
+          "value": 0.1301311780798819,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -110,7 +110,7 @@
         },
         {
           "target": "rat bbox contrast",
-          "value": 0.3180233333333333,
+          "value": 0.31711227450980384,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -129,9 +129,9 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.1415961142897263,
+    "region_mean_after_lighting": 0.14159652612677015,
     "region_mean_pass": true,
-    "dominant_green_brown_fraction": 0.8213161892361112,
+    "dominant_green_brown_fraction": 0.8212185329861111,
     "hue_budget_pass": true,
     "accent_families": 1,
     "accent_bins": [
@@ -139,8 +139,8 @@
       0.0,
       0.0,
       0.0,
-      0.00023328993055555557,
-      0.00015733506944444445,
+      0.00046657986111111113,
+      2.170138888888889e-05,
       0.0,
       0.0,
       0.0,
@@ -156,8 +156,8 @@
       0.45
     ]
   },
-  "screenshot_sha256": "5726f1beab1d95f3b908c30027e491f14b1d0bc0ffd73ff2b18e58ed09034988",
-  "terrain_sha256": "f668418a6d12fe4f7461a91df29667d3185fb422a982011d91b6dbd2783e86f0",
+  "screenshot_sha256": "c1b803b2dfb458f0ffcce179e61880b44b09f75e706e92a4b32fa39b38a4417e",
+  "terrain_sha256": "7147446a9bd417b02b055dc2042ad25f809b10ac5bb100d93e0da9a92f109a66",
   "sample_count": 80,
   "seed": 417,
   "lighting": true,

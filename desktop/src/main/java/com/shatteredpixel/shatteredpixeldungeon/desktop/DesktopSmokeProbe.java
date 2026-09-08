@@ -120,11 +120,11 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     floor.sort(java.util.Comparator.comparingDouble(c->Math.abs(c%w-(room.left+room.right)/2f)+Math.abs(c/w-(room.top+room.bottom)/2f)));
                     if(floor.size()<3)continue;
                     reviewBounds=new int[]{room.left,room.top,room.right,room.bottom};
-                    bridge=floor.get(0);
+                    int heroCell=floor.get(0);
                     reviewRat=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();reviewRat.pos=floor.get(1);reviewRat.state=reviewRat.PASSIVE;level.mobs.add(reviewRat);
                     reviewItem=level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing(),floor.get(2));
-                    Dungeon.switchLevel(level,bridge);Dungeon.observe();
-                    System.out.println("ITERATION ROOM: seed="+seed+" bounds="+room.left+","+room.top+","+room.right+","+room.bottom+" water="+water+" doors="+door+" rubble="+decor+" wallTorch="+torch+" bridgeCell="+bridge+" terrainEdits=0");
+                    Dungeon.switchLevel(level,heroCell);Dungeon.observe();
+                    System.out.println("ITERATION ROOM: seed="+seed+" bounds="+room.left+","+room.top+","+room.right+","+room.bottom+" water="+water+" doors="+door+" rubble="+decor+" wallTorch="+torch+" bridgeCell="+bridge+" heroCell="+heroCell+" terrainEdits=0");
                     return;
                 }
             }
@@ -142,7 +142,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     /** Pixel masks derive from the actual camera/terrain; no synthetic room is scored. */
     private void roomMetadata() {
         com.shatteredpixel.shatteredpixeldungeon.levels.Level l=Dungeon.level;int w=l.width();
-        StringBuilder json=new StringBuilder("{\"seed\":417,\"lighting\":true,\"zoom\":"+com.watabou.noosa.Camera.main.zoom+",\"bounds\":"+java.util.Arrays.toString(reviewBounds)+",\"cells\":[");
+        StringBuilder json=new StringBuilder("{\"seed\":"+Dungeon.seed+",\"lighting\":true,\"zoom\":"+com.watabou.noosa.Camera.main.zoom+",\"bounds\":"+java.util.Arrays.toString(reviewBounds)+",\"cells\":[");
         boolean first=true;
         for(int c=0;c<l.length();c++)if(l.heroFOV[c]) {
             int t=l.map[c];String kind="other";

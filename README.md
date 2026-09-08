@@ -2,7 +2,7 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), based on **v3.3.8**, commit `7b8b845a76fe76c6b7c031ae9e570852411f56db`. Upstream history and Java packages are preserved.
 
-**Stages 1, 2, 2.5, 3 and 4 complete.** Nine heroes are playable: the six upstream classes plus Necromancer, Enchanter and Psychic, each with two subclasses, talents and three armor abilities. Stage 5 art coverage and section 9 content remain pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.3 specification](GDD-one-shot-build-spec.md).
+**Stage 5.7: calibrated Sewers art for review.** Nine heroes are playable: the six upstream classes plus Necromancer, Enchanter and Psychic, each with two subclasses, talents and three armor abilities. Full stage-6 art coverage and section 9 content remain pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.7 specification](GDD-one-shot-build-spec.md).
 
 ## Build on Windows
 
@@ -18,7 +18,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true
-java -jar desktop\build\libs\desktop-0.3.0.jar
+java -jar desktop\build\libs\desktop-0.4.3.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.
@@ -98,7 +98,9 @@ The POC covers Sewers floor, wall, water, grass and doors; rat and crab; eight N
 PNG serialization uses fixed Sub filtering and Python standard-library Huffman-only compression, including the PNG payloads inside launcher ICO/ICNS files, to keep Windows and Linux post-process output identical.
 
 
-Stage 5.6 iterates only the six Sewers environment/prop classes. Review
-`verification/iteration/summary.png` and `verification/iteration/sewers-ingame.png`.
+Stage 5.7 iterates only the six Sewers environment/prop classes. Review
+`verification/iteration/summary.png` and `verification/iteration/sewers-gate.png`,
+which prints the six room measurements below the actual lit screenshot. The raw
+image remains `verification/iteration/sewers-ingame.png`.
 Parameters, score histories, visual critiques and regeneration commands are documented in
 [ART_PIPELINE.md](ART_PIPELINE.md). No subsequent art stage is started by these commands.

@@ -8,12 +8,12 @@
   "chip": 0.012,
   "bevel": 0.035,
   "moss_density": 0.25,
-  "grain_frequency": 2.4,
+  "grain_frequency": 2.6,
   "bump_depth": 0.025,
   "ao_distance": 0.08,
-  "stone_roughness": 0.25,
+  "stone_roughness": 0.3,
   "water_roughness": 0.19,
-  "specular": 0.12,
+  "specular": 0.1,
   "water_depth": 0.025,
   "decor_density": 7,
   "light_strength": 1.15,
@@ -22,27 +22,30 @@
   "moss_color": "4C5939",
   "water_color": "3E4C35",
   "tone_curve": [
-    0.025,
-    0.18,
-    0.32,
-    0.45
+    0.03,
+    0.21,
+    0.34,
+    0.46
   ],
   "tone_breaks": [
-    0.25,
-    0.6,
-    0.89
+    0.2,
+    0.5,
+    0.85
   ],
-  "tone_gamma": 1.2,
+  "tone_gamma": 0.8,
   "light_steps": [
     0,
     0.2,
     0.4,
     0.8
   ],
-  "grain_min": 0.3,
-  "grain_max": 1.8,
+  "grain_min": 0.5,
+  "grain_max": 1.35,
   "core_emission": 3.25,
   "flame_edge": "6C2A18",
   "separate_emission_curve": true,
-  "inner_emission": 1.35
+  "inner_emission": 1.35,
+  "wood_color": "5A4630",
+  "iron_color": "2C2F33",
+  "iron_glint_color": "6B645C"
 }

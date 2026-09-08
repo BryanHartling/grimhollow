@@ -78,3 +78,1537 @@ Blender 4.5.13 LTS (hash daeeeca98fb0 built 2026-08-25 01:50:50)
 TEST 29: 288 cached frames; max pHash distance=2; failures=0
 Validated 64 generated specifications; 0 failures. Subset diagnostic only.
 TEST 29 selected-cache retention: raw byte changes=288; asset byte changes=2; restored original selected bytes after comparison.
+
+Stage 5.7 host Blender regeneration: validate.py --rerender --generated-only
+Blender 4.5.13 LTS (hash daeeeca98fb0 built 2026-08-25 01:50:50)
+Fra:1 Mem:48.47M (Peak 48.47M) | Time:00:02.30 | Rendering 1 / 32 samples
+Fra:1 Mem:48.47M (Peak 48.47M) | Time:00:02.40 | Rendering 25 / 32 samples
+Fra:1 Mem:48.47M (Peak 48.47M) | Time:00:02.43 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\floor_0.png'
+Time: 00:02.53 (Saving: 00:00.01)
+
+Fra:1 Mem:49.01M (Peak 49.01M) | Time:00:00.19 | Rendering 1 / 32 samples
+Fra:1 Mem:49.01M (Peak 49.01M) | Time:00:00.36 | Rendering 25 / 32 samples
+Fra:1 Mem:49.01M (Peak 49.01M) | Time:00:00.41 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\floor_1.png'
+Time: 00:00.49 (Saving: 00:00.00)
+
+Fra:1 Mem:49.33M (Peak 49.33M) | Time:00:00.18 | Rendering 1 / 32 samples
+Fra:1 Mem:49.33M (Peak 49.33M) | Time:00:00.34 | Rendering 25 / 32 samples
+Fra:1 Mem:49.33M (Peak 49.33M) | Time:00:00.38 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\floor_2.png'
+Time: 00:00.47 (Saving: 00:00.00)
+
+Fra:1 Mem:50.13M (Peak 50.82M) | Time:00:00.29 | Rendering 1 / 32 samples
+Fra:1 Mem:50.13M (Peak 50.82M) | Time:00:00.36 | Rendering 25 / 32 samples
+Fra:1 Mem:50.13M (Peak 50.82M) | Time:00:00.38 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\wall_0.png'
+Time: 00:00.46 (Saving: 00:00.00)
+
+Fra:1 Mem:50.91M (Peak 51.30M) | Time:00:00.16 | Rendering 1 / 32 samples
+Fra:1 Mem:50.91M (Peak 51.30M) | Time:00:00.32 | Rendering 25 / 32 samples
+Fra:1 Mem:50.91M (Peak 51.30M) | Time:00:00.36 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\wall_1.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:51.33M (Peak 51.72M) | Time:00:00.19 | Rendering 1 / 32 samples
+Fra:1 Mem:51.33M (Peak 51.72M) | Time:00:00.34 | Rendering 25 / 32 samples
+Fra:1 Mem:51.33M (Peak 51.72M) | Time:00:00.39 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\wall_2.png'
+Time: 00:00.46 (Saving: 00:00.00)
+
+Fra:1 Mem:49.06M (Peak 54.36M) | Time:00:00.26 | Rendering 1 / 32 samples
+Fra:1 Mem:49.06M (Peak 54.36M) | Time:00:00.32 | Rendering 25 / 32 samples
+Fra:1 Mem:49.06M (Peak 54.36M) | Time:00:00.34 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\water_0.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:56.15M (Peak 59.20M) | Time:00:00.16 | Rendering 1 / 32 samples
+Fra:1 Mem:56.15M (Peak 59.20M) | Time:00:00.32 | Rendering 25 / 32 samples
+Fra:1 Mem:56.15M (Peak 59.20M) | Time:00:00.37 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\water_1.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:60.99M (Peak 64.04M) | Time:00:00.16 | Rendering 1 / 32 samples
+Fra:1 Mem:60.99M (Peak 64.04M) | Time:00:00.32 | Rendering 25 / 32 samples
+Fra:1 Mem:60.99M (Peak 64.04M) | Time:00:00.37 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\water_2.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:88.54M (Peak 88.98M) | Time:00:00.38 | Rendering 1 / 16 samples
+Fra:1 Mem:88.54M (Peak 88.98M) | Time:00:00.70 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\grass_0.png'
+Time: 00:00.79 (Saving: 00:00.00)
+
+Fra:1 Mem:90.91M (Peak 91.17M) | Time:00:00.23 | Rendering 1 / 16 samples
+Fra:1 Mem:90.91M (Peak 91.17M) | Time:00:00.53 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\grass_1.png'
+Time: 00:00.62 (Saving: 00:00.00)
+
+Fra:1 Mem:93.04M (Peak 93.04M) | Time:00:00.22 | Rendering 1 / 16 samples
+Fra:1 Mem:93.04M (Peak 93.04M) | Time:00:00.54 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\grass_2.png'
+Time: 00:00.63 (Saving: 00:00.00)
+
+Fra:1 Mem:94.23M (Peak 96.13M) | Time:00:00.49 | Rendering 1 / 32 samples
+Fra:1 Mem:94.23M (Peak 96.13M) | Time:00:00.85 | Rendering 25 / 32 samples
+Fra:1 Mem:94.23M (Peak 96.13M) | Time:00:00.95 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\door_0.png'
+Time: 00:01.06 (Saving: 00:00.00)
+
+Fra:1 Mem:96.61M (Peak 97.68M) | Time:00:00.23 | Rendering 1 / 32 samples
+Fra:1 Mem:96.61M (Peak 97.68M) | Time:00:00.68 | Rendering 25 / 32 samples
+Fra:1 Mem:96.61M (Peak 97.68M) | Time:00:00.80 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\door_1.png'
+Time: 00:00.89 (Saving: 00:00.00)
+
+Fra:1 Mem:98.32M (Peak 99.40M) | Time:00:00.23 | Rendering 1 / 32 samples
+Fra:1 Mem:98.32M (Peak 99.40M) | Time:00:00.69 | Rendering 25 / 32 samples
+Fra:1 Mem:98.32M (Peak 99.40M) | Time:00:00.81 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\door_2.png'
+Time: 00:00.89 (Saving: 00:00.00)
+
+Fra:1 Mem:90.09M (Peak 90.09M) | Time:00:00.19 | Rendering 1 / 32 samples
+Fra:1 Mem:90.09M (Peak 90.09M) | Time:00:00.54 | Rendering 25 / 32 samples
+Fra:1 Mem:90.09M (Peak 90.09M) | Time:00:00.64 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\door_open_0.png'
+Time: 00:00.73 (Saving: 00:00.00)
+
+Fra:1 Mem:91.14M (Peak 91.14M) | Time:00:00.18 | Rendering 1 / 32 samples
+Fra:1 Mem:91.14M (Peak 91.14M) | Time:00:00.53 | Rendering 25 / 32 samples
+Fra:1 Mem:91.14M (Peak 91.14M) | Time:00:00.64 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\door_open_1.png'
+Time: 00:00.72 (Saving: 00:00.00)
+
+Fra:1 Mem:92.20M (Peak 92.20M) | Time:00:00.18 | Rendering 1 / 32 samples
+Fra:1 Mem:92.20M (Peak 92.20M) | Time:00:00.53 | Rendering 25 / 32 samples
+Fra:1 Mem:92.20M (Peak 92.20M) | Time:00:00.63 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\door_open_2.png'
+Time: 00:00.71 (Saving: 00:00.00)
+
+Fra:1 Mem:91.57M (Peak 92.52M) | Time:00:00.18 | Rendering 1 / 32 samples
+Fra:1 Mem:91.57M (Peak 92.52M) | Time:00:00.46 | Rendering 25 / 32 samples
+Fra:1 Mem:91.57M (Peak 92.52M) | Time:00:00.54 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\decor_0.png'
+Time: 00:00.62 (Saving: 00:00.00)
+
+Fra:1 Mem:90.55M (Peak 90.66M) | Time:00:00.18 | Rendering 1 / 32 samples
+Fra:1 Mem:90.55M (Peak 90.66M) | Time:00:00.44 | Rendering 25 / 32 samples
+Fra:1 Mem:90.55M (Peak 90.66M) | Time:00:00.52 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\decor_1.png'
+Time: 00:00.60 (Saving: 00:00.00)
+
+Fra:1 Mem:93.49M (Peak 94.48M) | Time:00:00.20 | Rendering 1 / 32 samples
+Fra:1 Mem:93.49M (Peak 94.48M) | Time:00:00.51 | Rendering 25 / 32 samples
+Fra:1 Mem:93.49M (Peak 94.48M) | Time:00:00.59 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\decor_2.png'
+Time: 00:00.67 (Saving: 00:00.00)
+
+Fra:1 Mem:82.92M (Peak 83.75M) | Time:00:00.22 | Rendering 1 / 32 samples
+Fra:1 Mem:82.92M (Peak 83.75M) | Time:00:00.32 | Rendering 25 / 32 samples
+Fra:1 Mem:82.92M (Peak 83.75M) | Time:00:00.35 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\wall_torch_0.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:83.54M (Peak 83.54M) | Time:00:00.16 | Rendering 1 / 32 samples
+Fra:1 Mem:83.54M (Peak 83.54M) | Time:00:00.36 | Rendering 25 / 32 samples
+Fra:1 Mem:83.54M (Peak 83.54M) | Time:00:00.41 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\wall_torch_1.png'
+Time: 00:00.49 (Saving: 00:00.00)
+
+Fra:1 Mem:84.04M (Peak 84.04M) | Time:00:00.17 | Rendering 1 / 32 samples
+Fra:1 Mem:84.04M (Peak 84.04M) | Time:00:00.36 | Rendering 25 / 32 samples
+Fra:1 Mem:84.04M (Peak 84.04M) | Time:00:00.42 | Rendering 32 / 32 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\tiles\wall_torch_2.png'
+Time: 00:00.49 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\idle_0.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\idle_1.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\run_0.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\run_1.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\run_2.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\run_3.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\run_4.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\run_5.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\attack_0.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\attack_1.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\attack_2.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\attack_3.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\attack_4.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\die_0.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\die_1.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\die_2.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\die_3.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\die_4.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\special_0.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\special_1.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\special_2.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.50M (Peak 77.50M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\rat\0\special_3.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\idle_0.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\idle_1.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\run_0.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\run_1.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\run_2.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\run_3.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\run_4.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\run_5.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\attack_0.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\attack_1.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\attack_2.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\attack_3.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\attack_4.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\die_0.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\die_1.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\die_2.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\die_3.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\die_4.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\special_0.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\special_1.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\special_2.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.47M (Peak 77.47M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\crab\0\special_3.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.38 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\idle_0.png'
+Time: 00:00.48 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.48 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\idle_1.png'
+Time: 00:00.56 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.50 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\run_0.png'
+Time: 00:00.58 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.48 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\run_1.png'
+Time: 00:00.55 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.48 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\run_2.png'
+Time: 00:00.56 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.50 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\run_3.png'
+Time: 00:00.57 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.49 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\run_4.png'
+Time: 00:00.56 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.49 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\run_5.png'
+Time: 00:00.56 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.49 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\attack_0.png'
+Time: 00:00.56 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.47 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\attack_1.png'
+Time: 00:00.54 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.49 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\attack_2.png'
+Time: 00:00.56 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.21 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.50 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\attack_3.png'
+Time: 00:00.58 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.46 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\attack_4.png'
+Time: 00:00.54 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.50 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\die_0.png'
+Time: 00:00.57 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.49 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\die_1.png'
+Time: 00:00.56 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.48 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\die_2.png'
+Time: 00:00.56 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.48 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\die_3.png'
+Time: 00:00.56 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.47 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\die_4.png'
+Time: 00:00.54 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.40 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\special_0.png'
+Time: 00:00.47 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\special_1.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\special_2.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.82M (Peak 77.82M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\skeleton\0\special_3.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\idle_0.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\idle_1.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\run_0.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\run_1.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\run_2.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\run_3.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\run_4.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\run_5.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\attack_0.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\attack_1.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\attack_2.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\attack_3.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\attack_4.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\die_0.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\die_1.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\die_2.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\die_3.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\die_4.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\special_0.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\special_1.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\special_2.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\ghoul\0\special_3.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.67M (Peak 79.05M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:78.67M (Peak 79.05M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\idle_0.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.67M (Peak 78.67M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:78.67M (Peak 78.67M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\idle_1.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:78.67M (Peak 78.67M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:78.67M (Peak 78.67M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\run_0.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:78.67M (Peak 78.67M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:78.67M (Peak 78.67M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\run_1.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.67M (Peak 78.67M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.67M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\run_2.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\run_3.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\run_4.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\run_5.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\attack_0.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\attack_1.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\attack_2.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\attack_3.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\attack_4.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\die_0.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\die_1.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\die_2.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\die_3.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\die_4.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\special_0.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\special_1.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\special_2.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:78.66M (Peak 78.66M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\0\special_3.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\idle_0.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\idle_1.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\run_0.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\run_1.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\run_2.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\run_3.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\run_4.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\run_5.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\attack_0.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\attack_1.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\attack_2.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\attack_3.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\attack_4.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\die_0.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\die_1.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\die_2.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\die_3.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\die_4.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\special_0.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\special_1.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\special_2.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\1\special_3.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\idle_0.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\idle_1.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\run_0.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\run_1.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\run_2.png'
+Time: 00:00.47 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.23 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.34 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\run_3.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\run_4.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\run_5.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\attack_0.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.21 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\attack_1.png'
+Time: 00:00.46 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.38 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\attack_2.png'
+Time: 00:00.48 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\attack_3.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.23 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.42 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\attack_4.png'
+Time: 00:00.52 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.22 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.38 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\die_0.png'
+Time: 00:00.46 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.24 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.35 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\die_1.png'
+Time: 00:00.47 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.32 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\die_2.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\die_3.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.34 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\die_4.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\special_0.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\special_1.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\special_2.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.25 | Rendering 1 / 16 samples
+Fra:1 Mem:79.20M (Peak 79.20M) | Time:00:00.44 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\2\special_3.png'
+Time: 00:00.53 (Saving: 00:00.00)
+
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\idle_0.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\idle_1.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\run_0.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.21 | Rendering 1 / 16 samples
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.41 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\run_1.png'
+Time: 00:00.50 (Saving: 00:00.00)
+
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.22 | Rendering 1 / 16 samples
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.34 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\run_2.png'
+Time: 00:00.45 (Saving: 00:00.00)
+
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.31 | Rendering 1 / 16 samples
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.44 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\run_3.png'
+Time: 00:00.56 (Saving: 00:00.00)
+
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\run_4.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\run_5.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.53M (Peak 79.53M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.53M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\attack_0.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\attack_1.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\attack_2.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.35 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\attack_3.png'
+Time: 00:00.45 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\attack_4.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.24 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.42 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\die_0.png'
+Time: 00:00.50 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\die_1.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.35 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\die_2.png'
+Time: 00:00.45 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\die_3.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\die_4.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.21 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\special_0.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.35 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\special_1.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\special_2.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.22 | Rendering 1 / 16 samples
+Fra:1 Mem:79.51M (Peak 79.51M) | Time:00:00.41 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\3\special_3.png'
+Time: 00:00.50 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.21 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\idle_0.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\idle_1.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.38 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\run_0.png'
+Time: 00:00.47 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\run_1.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\run_2.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\run_3.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\run_4.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\run_5.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\attack_0.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.23 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\attack_1.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\attack_2.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\attack_3.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.32 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\attack_4.png'
+Time: 00:00.46 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\die_0.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\die_1.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.22 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\die_2.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\die_3.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\die_4.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\special_0.png'
+Time: 00:00.55 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\special_1.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\special_2.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\4\special_3.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\idle_0.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.35 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\idle_1.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\run_0.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.32 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\run_1.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\run_2.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.32 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\run_3.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\run_4.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\run_5.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.36 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\attack_0.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\attack_1.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\attack_2.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\attack_3.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\attack_4.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.23 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.34 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\die_0.png'
+Time: 00:00.45 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.37 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\die_1.png'
+Time: 00:00.49 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.21 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\die_2.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\die_3.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.34 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\die_4.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.24 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.35 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\special_0.png'
+Time: 00:00.54 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\special_1.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.32 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\special_2.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.85M (Peak 79.85M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\5\special_3.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\idle_0.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\idle_1.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\run_0.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\run_1.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\run_2.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.32 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\run_3.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\run_4.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.39 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\run_5.png'
+Time: 00:00.48 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\attack_0.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.40 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\attack_1.png'
+Time: 00:00.50 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\attack_2.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.34 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\attack_3.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.23 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\attack_4.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\die_0.png'
+Time: 00:00.47 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\die_1.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.34 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\die_2.png'
+Time: 00:00.51 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\die_3.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.23 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.41 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\die_4.png'
+Time: 00:00.49 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\special_0.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.32 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\special_1.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\special_2.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:79.94M (Peak 79.94M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\6\special_3.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.35 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\idle_0.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\idle_1.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.22 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.40 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\run_0.png'
+Time: 00:00.53 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\run_1.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.32 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\run_2.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.27 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.37 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\run_3.png'
+Time: 00:00.48 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.25 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.38 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\run_4.png'
+Time: 00:00.46 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\run_5.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.22 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.40 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\attack_0.png'
+Time: 00:00.52 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.25 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.38 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\attack_1.png'
+Time: 00:00.54 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.26 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.52 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\attack_2.png'
+Time: 00:00.64 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\attack_3.png'
+Time: 00:00.55 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.21 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\attack_4.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.22 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.44 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\die_0.png'
+Time: 00:00.54 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\die_1.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\die_2.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.23 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\die_3.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.34 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\die_4.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\special_0.png'
+Time: 00:00.47 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.21 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.33 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\special_1.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.35 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\special_2.png'
+Time: 00:00.55 (Saving: 00:00.00)
+
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.36 | Rendering 1 / 16 samples
+Fra:1 Mem:80.12M (Peak 80.12M) | Time:00:00.49 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\necromancer\7\special_3.png'
+Time: 00:00.63 (Saving: 00:00.00)
+
+POC rendering complete: 288 rendered files
+
+Blender quit
+f6e37a7eddb05a3a00c48d1373b34166d294fa620f005f2f65ab481977abcce6 android/src/main/res/mipmap-hdpi/ic_launcher_background.png
+e0a9a8ab1495d12ea373059de242e8571a0a8dd4d9d0fb91d05df8cc1c380f16 android/src/main/res/mipmap-hdpi/ic_launcher_foreground.png
+a016b55d28e812929aedce6c184370a8eff67d365a22acbc24643fcaae00aeff android/src/main/res/mipmap-hdpi/ic_launcher_monochrome.png
+1f102b0a8dfa0f6ef99201268691b8c150a780bd1e31f30a5f13d666919ee910 android/src/main/res/mipmap-hdpi/ic_launcher.png
+1f7e9bc5fc323aa84a3de51f47c57501e56b1b0ef2ffefef5bdc241a865fb9f3 android/src/main/res/mipmap-ldpi/ic_launcher_background.png
+66cbcfbed89bfc51b5d93142e9c97c08802e1004154637ac146f80c8dc2b2a4e android/src/main/res/mipmap-ldpi/ic_launcher_foreground.png
+2588c1e956e3d634f5f547a99dd01aa533008484807eaeb89a5d4e4b2a17f4fe android/src/main/res/mipmap-ldpi/ic_launcher_monochrome.png
+7077aa64c4418dfa7abd491aa69be8aab87f60fe98572d97c5dd2db38923b33e android/src/main/res/mipmap-ldpi/ic_launcher.png
+72b5539091a5bc03a30b83c63964aef83e6eb91922222e74e18c7ee1ad1752c6 android/src/main/res/mipmap-mdpi/ic_launcher_background.png
+6a2196adbf4810d7cc64d433db885fca7ff77ee431c458af66df771a339c411a android/src/main/res/mipmap-mdpi/ic_launcher_foreground.png
+683f726582be312a0416001472eab6911e035eebba532eaefcca58a07149463b android/src/main/res/mipmap-mdpi/ic_launcher_monochrome.png
+48091307b1087d3dc6cd776d55bb33f67ee72ee8bd08de6281254a97d7568631 android/src/main/res/mipmap-mdpi/ic_launcher.png
+61193b6076c8160aaeaab037a9f4d5a4bd95ce5be40e1d9c8a958591f636feb4 android/src/main/res/mipmap-xhdpi/ic_launcher_background.png
+5837b1be70549a33c97bae057d82918e524b5b3d7794a7dcd081aaa2c7cb1a83 android/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png
+45de6c354950db64b20b3f64b9b79095cf017c500f3f9d604404f917c24ee8ca android/src/main/res/mipmap-xhdpi/ic_launcher_monochrome.png
+0108f5c1a1523b81f8eb54d3f05700a7810ece7bf3f198fd46c902b08076f9f8 android/src/main/res/mipmap-xhdpi/ic_launcher.png
+e2d19792e1adb16852f8c73cc77fef6007d27b2a8a45c307a4d1b559effdeb6b android/src/main/res/mipmap-xxhdpi/ic_launcher_background.png
+03e3a9b78afa1ac0379f39d797c5e9af270e7349a8fadc749386207c7e6de8d8 android/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png
+8d359f6b7820f1e61f8b5933c1ac0e130851b8786f94b065609480b5890e632d android/src/main/res/mipmap-xxhdpi/ic_launcher_monochrome.png
+ebd502cc6b646466c2a33b83ffe1973c02e02d9a905f3bb882a249e10a4a6c58 android/src/main/res/mipmap-xxhdpi/ic_launcher.png
+07994e8eaa83589758b2e01e496a719d172f5456447817024b56c6ea73d5a8dc android/src/main/res/mipmap-xxxhdpi/ic_launcher_background.png
+18a3f504f9f388261d289014a90e82a15a96e12326e68b6bd95b140331e8558e android/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png
+ca68f8c215093e0b18525a87ca07852cb2704313daa67ad3aa6bdac7a78e6035 android/src/main/res/mipmap-xxxhdpi/ic_launcher_monochrome.png
+571ee8110131ac46509390a65815eb1a2348b1fef7c53fd48026d74e81ffcbc6 android/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+b0c7ace2f13d5147be89d4461e94f138f016610328be8bfbfd5c30f23470e0b0 core/src/main/assets/interfaces/banners.png
+a8b8fc76986de78cfd4231badc88bd22503acd3c8510d8d46930f3e51d5939d2 core/src/main/assets/effects/blood_decals.png
+bfa312403c41ffd8a29fd63a6f420c854446972b8cd693b0263f7f31ccbbcc16 desktop/src/main/assets/icons/icon_128.png
+f415d65bcde18cd5dbb97f61c62155a22d6d135240ff49a07f273d097da9a56a desktop/src/main/assets/icons/icon_16.png
+09050ad6051892b71f4894d26c8e4671163d7d384a4c8cd6c776c8dbd75301b9 desktop/src/main/assets/icons/icon_256.png
+2479decf9effdec5ccc5475106eb79ce21150a673541eab72b2bb7879f3a79ee desktop/src/main/assets/icons/icon_32.png
+48091307b1087d3dc6cd776d55bb33f67ee72ee8bd08de6281254a97d7568631 desktop/src/main/assets/icons/icon_48.png
+c2315076ccdf0c76665b0f78f76c57aaadd552c7694abdddc5609bc3c873f2a1 desktop/src/main/assets/icons/icon_64.png
+1fee53a08ea0a7db69170b39d82126382f6a769ca288f24794d7840d58225e5c desktop/src/main/assets/icons/mac.icns
+22debeaa5755ee71a8f5e6cfbeb3747dcabde75cd4512d0a34184dcd614fbc98 desktop/src/main/assets/icons/windows.ico
+04751213489e70f68e5a86c09533a3cc340a3dd93e772a5fc4080489e5667d7a core/src/main/assets/effects/force_wall.png
+cf9175f03157c4036a5a87875545f0749fa4f9712d7baaf44a4ad500fc435144 core/src/main/assets/effects/health_vignette.png
+14a3eaa5510a18fd3efebd4a332e12aae66506196bdbd9b3ddf0dc6913be7e72 core/src/main/assets/sprites/hero_cleric.png
+028b988313ddcee5996fd74c4d451701b154b1a3b88a14f68fae1533cabf5e80 core/src/main/assets/sprites/hero_duelist.png
+8544cf293495db6d3fe4d3393f35b8e2bd6557dc44a5c4102dcdbf56a55fc7a9 core/src/main/assets/sprites/hero_enchanter.png
+bc5cba29c707c7dfaa9db30fae9a31e08627a19dc0932dc3dba44c50fe9427a4 core/src/main/assets/sprites/hero_huntress.png
+5e0ae2b0857360068796c5924d0aa13673489a5bb7c0f3ec340e776d5bf3cc4c core/src/main/assets/sprites/hero_mage.png
+8a41d89cdfd91f38fdbbb917ec4458f28efe00c8992ff6796d85f8cc4ef80acf core/src/main/assets/sprites/hero_necromancer.png
+e6c1d4bebdeaa38dbf16dd2de39817ed5f963efadd8600738cfc02f90c65c89c core/src/main/assets/sprites/hero_psychic.png
+743bbbc7167c91b2e316b547cca8a10e1120c04c69a6d4d47ac273d0592e65d8 core/src/main/assets/sprites/hero_rogue.png
+5efac20836aefcf1308e05abfba89a941682edfd7a66953c0aebe67f6fa15daf core/src/main/assets/sprites/hero_warrior.png
+723ba8fe55e55930efc7703d360d28f40aa9b6193aba139af8a81b7071b1ebf7 core/src/main/assets/sprites/items.png
+226d94e963dc7cb92eb968f0c788bed4b045828bedad5e9d1a6a6f4aceaa5f94 core/src/main/assets/sprites/crab.png
+636a39f0d6fb9bcc43998271c02b262c9a1a1663e6cfaad59c24b801702f898a core/src/main/assets/sprites/minion_ghoul.png
+6f16a190eb9deb260d52a799a915db6c3c5857347da3520e815b4bddeb310551 core/src/main/assets/sprites/rat.png
+3a23a0006acf68b2ef2cda224adf588b2bab2b0c81c3e9418b6cf957bb536d62 core/src/main/assets/sprites/minion_skeleton.png
+23618fdf37e27cb9c3adc267f71a0bbe1bb8f2a13321a6b835048bf09c585f60 core/src/main/assets/environment/water0.png
+5531dd72e5b5cf7e162558d46767493d8a80971befcb206aac625075fd8a4cfa core/src/main/assets/splashes/cleric.png
+1c2a9ecfe8f0660489c852b46d2e0925b4f4b1c82651399bf8cdd743633dd875 core/src/main/assets/splashes/duelist.png
+5531dd72e5b5cf7e162558d46767493d8a80971befcb206aac625075fd8a4cfa core/src/main/assets/splashes/enchanter.png
+0099f4a576fffd59f92e6122cca9af90f06aca430da6defe304756fb72a0a64b core/src/main/assets/splashes/huntress.png
+6be3a345010c4154d42f7e330f5d237293ff845e0fc0b80dabf038738e1fbfbe core/src/main/assets/splashes/mage.png
+d0487bfdebde919c8a82059e2dbfac2136392a4dc35fa3265b4a1635daead72f core/src/main/assets/splashes/necromancer.png
+d755e2da1ec5ea71599afaf4a84765584e62bccf8655075a01309609319a6cc6 core/src/main/assets/splashes/psychic.png
+9d9e7c8f20a1ece05e618307ba3f95e5ce7060176b1de6ba14c0d49590bbeafd core/src/main/assets/splashes/rogue.png
+4628222c32785aa3701a0ac8ae830fcc277f6c114170fb5d7ef743507a958ca8 core/src/main/assets/splashes/warrior.png
+bad1b9946b65a7ab073d5d91905dc4d89283e50d31c4863b260bafca2cfe41c9 core/src/main/assets/interfaces/talent_icons.png
+0ad331d8624996d50c26b9edd5c5d9d04ecb62fc6ec844ee0459180a3a964c78 core/src/main/assets/environment/tiles_sewers.png
+4c04930a8f6617e1f27793e1cc959d6f22fe7d128c302befed67ad7cba9c47a4 core/src/main/assets/interfaces/title_grimhollow.png
+0ad331d8624996d50c26b9edd5c5d9d04ecb62fc6ec844ee0459180a3a964c78 core/src/main/assets/environment/walls_sewers.png
+TEST 29: 288 cached frames; max pHash distance=2; failures=0
+Validated 64 generated specifications; 0 failures. Subset diagnostic only.
+Preserved selected caches and all generated assets after tolerance measurement; restored 291 changed files.

@@ -4,3 +4,15 @@ Validated 48 generated specifications; 0 failures. Subset diagnostic only.
 Validated 50 generated specifications; 0 failures. Subset diagnostic only.
 
 v0.5 stage 4.5: Validated 59 generated specifications; 0 failures. Subset diagnostic only.
+
+Stage 5.7 ref-04: source SHA-256 matches; license CC0-1.0; blocklist=9 minimum pHash distance=26 PASS. Full test 38 retains 18 unresolved local-only licenses: FAIL.
+
+Stage 5.7 iteration.py --summary --check (exit 0)
+Wall/floor distinctness: mean luminance difference=0.2193, representative pHash bits=34.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.1810 PASS
+Adjacent water/floor contrast: median luminance difference=0.1794, median hue difference=37.9210 PASS
+No boundary halo: outer minus inner mean=-0.1498 PASS
+Visible-cell value range: visible mean=0.1416, visible std=0.1301 PASS
+Hero / rat / item readability: hero bbox contrast=0.4452, rat bbox contrast=0.3171, item bbox contrast=0.5366 PASS
+TEST 40: measurements=6 failures=0
+TEST 39: classes=6 failures=0

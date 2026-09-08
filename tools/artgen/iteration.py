@@ -1,9 +1,10 @@
-"""Stage 5.6 parameter iteration and its specified JSON/PNG review deliverables.
+"""Stage 5.7 parameter iteration and its specified JSON/PNG review deliverables.
 
 Measurements are pixel statistics, not similarity to a photograph. Targets and
 weights are transcribed from references.md and are never adjusted by the loop.
-Room-wide targets use one fixed composition with the runtime light equation;
-surface targets use visible, unlit pixels. No game mechanics are simulated here.
+Board numeric scores retain the fixed sample with the runtime light equation.
+Structural targets use unlit tiles; the global and six room gates use actual
+OpenGL screenshot pixels and camera metadata. No gameplay is simulated here.
 """
 import argparse
 import hashlib

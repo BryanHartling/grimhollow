@@ -1023,3 +1023,201 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `.github/workflows/build.yml`: Keep the full art gate; add committed-image tests 39–40 and rerun all six room checks, including the halo, after the standard Linux OpenGL capture.
 - Measurement choices where the spec is silent: nine 20-degree edge bins with no bin above 30%; damp band at least 0.10 below body; class-median representative pHashes; median adjacent-cell differences; p95 absolute luminance contrast against a paired background for sprite bounding boxes.
 - Prior stage-5.6 round files remain under each class's `stage-5.6/`; this pass starts at the last review set as round 0, retaining the approved prop shapes.
+- `tools/artgen/blender/render.py`: Accept a comma-separated active-class list so converged render caches remain untouched during later rounds.
+- `tools/artgen/blender/materials.py`: Expose wood/iron material colors for the approved torch and use periodic mineral/moss fields on the calibrated floor.
+- Stone segmentation correction from round six: separate eroded stone cores and grow them within the original mask so one-pixel sampling necks cannot inflate stone area; earlier measured records are preserved.
+- `build.gradle`, `README.md`, `ART_PIPELINE.md`: Set version 0.4.3, document the corrected loop, fixed measurement choices and actual screenshot workflow.
+
+- `verification/iteration/decor/round-00.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/decor/round-04.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/decor/round-04.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/decor/round-04.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/decor/round-05.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/decor/round-05.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/decor/round-05.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/decor/round-06.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/decor/round-06.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/decor/round-06.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/decor/stage-5.6/round-00.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/decor/stage-5.6/round-01.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/decor/stage-5.6/round-01.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/decor/stage-5.6/round-01.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/decor/stage-5.6/round-02.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/decor/stage-5.6/round-02.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/decor/stage-5.6/round-02.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/decor/stage-5.6/round-03.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/decor/stage-5.6/round-03.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/decor/stage-5.6/round-03.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/door/round-00.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/door/round-04.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/door/round-04.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/door/round-04.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/door/round-05.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/door/round-05.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/door/round-05.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/door/round-06.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/door/round-06.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/door/round-06.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/door/stage-5.6/round-00.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/door/stage-5.6/round-01.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/door/stage-5.6/round-01.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/door/stage-5.6/round-01.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/door/stage-5.6/round-02.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/door/stage-5.6/round-02.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/door/stage-5.6/round-02.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/door/stage-5.6/round-03.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/door/stage-5.6/round-03.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/door/stage-5.6/round-03.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/floor/round-00.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/floor/round-03.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/floor/round-03.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/floor/round-03.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/floor/round-04.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/floor/round-04.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/floor/round-04.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/floor/round-05.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/floor/round-05.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/floor/round-05.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/floor/round-06.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/floor/round-06.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/floor/round-06.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/floor/round-07.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/floor/round-07.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/floor/round-07.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/floor/stage-5.6/round-00.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/floor/stage-5.6/round-01.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/floor/stage-5.6/round-01.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/floor/stage-5.6/round-01.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/floor/stage-5.6/round-02.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/floor/stage-5.6/round-02.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/floor/stage-5.6/round-02.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/room-gate.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/room.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-01-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-01.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-01.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-02-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-02.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-02.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-03-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-03.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-03.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-04-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-04.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-04.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-05-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-05.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-05.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-06-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-06.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-06.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-07-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-07.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-07.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-08-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-08.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-08.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-09-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-09.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-09.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-10-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-10.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-10.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-11-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-11.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-11.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-12-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-12.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-12.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-13-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-13.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-13.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-14-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-14.json`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/rooms/round-14.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/sewers-gate.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/sewers-terrain.png`: Actual lit-room capture, paired background, camera masks or six gate measurements for this iteration.
+- `verification/iteration/wall/round-00.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/wall/round-03.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/wall/round-03.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/wall/round-03.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/wall/round-04.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/wall/round-04.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/wall/round-04.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/wall/round-05.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/wall/round-05.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/wall/round-05.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/wall/round-06.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/wall/round-06.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/wall/round-06.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/wall/stage-5.6/round-00.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall/stage-5.6/round-01.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall/stage-5.6/round-01.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall/stage-5.6/round-01.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall/stage-5.6/round-02.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall/stage-5.6/round-02.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall/stage-5.6/round-02.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/round-00.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/wall_torch/round-13.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/wall_torch/round-13.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/wall_torch/round-13.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/wall_torch/round-14.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/wall_torch/round-14.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/wall_torch/round-14.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/wall_torch/stage-5.6/round-00.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-01.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-01.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-01.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-02.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-02.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-02.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-03.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-03.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-03.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-04.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-04.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-04.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-05.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-05.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-05.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-06.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-06.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-06.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-07.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-07.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-07.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-08.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-08.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-08.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-09.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-09.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-09.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-10.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-10.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-10.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-11.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-11.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-11.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-12.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-12.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/wall_torch/stage-5.6/round-12.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/water/round-00.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/water/round-04.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/water/round-04.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/water/round-04.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/water/round-05.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/water/round-05.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/water/round-05.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/water/round-06.json`: Round parameters, weighted vision/numeric/structural scores, atlas validation, seams and actual room gates.
+- `verification/iteration/water/round-06.md`: Visual judgment number and one-line reason after viewing this round beside its reference and procedural source.
+- `verification/iteration/water/round-06.png`: Pipeline-generated round image or calibrated review summary.
+- `verification/iteration/water/stage-5.6/round-00.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/water/stage-5.6/round-01.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/water/stage-5.6/round-01.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/water/stage-5.6/round-01.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/water/stage-5.6/round-02.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/water/stage-5.6/round-02.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/water/stage-5.6/round-02.png`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/water/stage-5.6/round-03.json`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/water/stage-5.6/round-03.md`: Retain the previous review round unchanged as historical evidence.
+- `verification/iteration/water/stage-5.6/round-03.png`: Retain the previous review round unchanged as historical evidence.

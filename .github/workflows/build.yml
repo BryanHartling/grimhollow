@@ -23,7 +23,7 @@ jobs:
       - run: python -m pip install -r tools/artgen/requirements.txt
       - name: Build desktop distribution
         shell: bash
-        run: ./gradlew desktop:dist -PdesktopOnly=true --console=plain
+        run: ./gradlew desktop:dist -PdesktopOnly=true --no-daemon --console=plain
       - name: Full art acceptance gate
         run: python tools/artgen/validate.py --rebuild
       - name: Sewers iteration and room acceptance 39-40 (committed cache only)
@@ -32,7 +32,7 @@ jobs:
       - name: JUnit tests
         if: ${{ !cancelled() }}
         shell: bash
-        run: ./gradlew core:test -PdesktopOnly=true --console=plain
+        run: ./gradlew core:test -PdesktopOnly=true --no-daemon --console=plain
       - name: Offscreen geometry acceptance 24-26
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         run: xvfb-run -a java -Dgrimhollow.iteration=true -Dgrimhollow.geometryTests=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
@@ -59,7 +59,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - name: Install compile SDK and build tools
         run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0'
-      - run: ./gradlew android:assembleDebug --console=plain
+      - run: ./gradlew android:assembleDebug --no-daemon --console=plain
       - uses: actions/upload-artifact@v4
         with:
           name: grimhollow-android-debug
@@ -79,7 +79,7 @@ jobs:
           java-version: '17'
       - uses: gradle/actions/setup-gradle@v4
       - name: Three classes, ten seeds each, through floor 6
-        run: ./gradlew core:smokeRun -PdesktopOnly=true --console=plain
+        run: ./gradlew core:smokeRun -PdesktopOnly=true --no-daemon --console=plain
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -100,7 +100,7 @@ jobs:
           java-version: '17'
       - uses: gradle/actions/setup-gradle@v4
       - name: Necromancer, ten seeds, class features and floor 6
-        run: ./gradlew core:smokeRun -PsmokeClass=NECROMANCER -PdesktopOnly=true --console=plain
+        run: ./gradlew core:smokeRun -PsmokeClass=NECROMANCER -PdesktopOnly=true --no-daemon --console=plain
       - uses: actions/upload-artifact@v4
         if: always()
         with:

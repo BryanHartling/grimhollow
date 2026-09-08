@@ -40,8 +40,8 @@ def environment(p):
     character materials stay unchanged until the separate silhouette stage.
     """
     result={}
-    swatches={'stone':p['stone_color'],'mortar':'1A1816','wood':'5A4630',
-              'iron':'2C2F33','iron_glint':'6B645C','moss':p['moss_color'],
+    swatches={'stone':p['stone_color'],'mortar':'1A1816','wood':p.get('wood_color','5A4630'),
+              'iron':p.get('iron_color','2C2F33'),'iron_glint':p.get('iron_glint_color','6B645C'),'moss':p['moss_color'],
               'water':p['water_color'],'flame_edge':p.get('flame_edge','782D17'),'flame':'E0982F',
               'flame_inner':'E4C76A','hot_core':'EFE7D2'}
     for name,color in swatches.items():

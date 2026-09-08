@@ -20,3 +20,5 @@ Stage 2 CI, commit 9e2d52d642000ba9a193fe31d0767cdd8753bd63, run 34165648440:
 android completed success; necromancer-smoke completed success; desktop Windows/Linux completed failure (full art gate); headless-smoke completed failure (remaining two classes absent).
 
 Stage 4.5 fb691f1fc: run 34224213220. Android, three class-only jobs and combined headless: success. Desktop Ubuntu/Windows: build and geometry pass; Full art acceptance gate fails (103 uncovered sheets and unfinished coverage gate).
+
+Stage 5 initial CI 34229477429, commit 51a44d2a7: Android PASS; desktop distributions and JUnit PASS; Linux TESTS 24-26, 34-36 PASS; Necromancer/Enchanter/Psychic Runs=10 failures=0 each; combined Runs=30 failures=0. Full art gate retains 100 missing sheets and incomplete coverage; Linux additionally exposed TEST 28 byte differences=55 (Windows=0). Encoding correction retains all 62 PNG output pixels; local TEST 28 now has byte differences=0 and the subset validator has 0 failures.

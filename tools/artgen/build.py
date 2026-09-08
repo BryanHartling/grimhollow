@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
+import pngencode
+pngencode.register()
 
 ROOT = Path(__file__).resolve().parents[2]
 SPEC_DIR = Path(__file__).parent / 'specs'

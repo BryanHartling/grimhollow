@@ -772,3 +772,5 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `tools/rebuild.bat` — Support the staged Grimhollow implementation and its documented verification.
 - `verification/render-poc-ingame.png` — Pipeline-generated rendered POC output or requested verification image.
 - `verification/render-poc.png` — Pipeline-generated rendered POC output or requested verification image.
+
+- `tools/artgen/pngencode.py` - Serialize PNGs and embedded ICO/ICNS PNGs with fixed Sub filtering and standard-library Huffman-only compression; Linux CI exposed 55 byte differences with Pillow encoding despite the local rebuild passing.

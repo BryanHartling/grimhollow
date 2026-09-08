@@ -4,7 +4,7 @@ import sys,math,random
 import bpy
 from mathutils import Vector
 HERE=Path(__file__).resolve().parent;sys.path.insert(0,str(HERE))
-import materials,rig_biped,rig_quad
+import materials,rig_biped,rig_quad,sewers
 ROOT=HERE.parents[2];CACHE=ROOT/'tools/artgen/render_cache';CACHE.mkdir(parents=True,exist_ok=True);rendered_count=0
 ANIMATIONS={'idle':2,'run':6,'attack':5,'die':5,'special':4}
 
@@ -80,9 +80,11 @@ def character(kind,tier=0):
 
 import argparse
 parser=argparse.ArgumentParser();parser.add_argument('--asset');args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
-for kind in ['floor','wall','water','grass','door','door_open']:
-    if args.asset is None or args.asset==kind:
-        for variant in range(3):tiles(kind,variant)
+for kind in ['floor','wall','water','grass','door','door_open','decor','wall_torch']:
+    if args.asset is None or args.asset==kind or (args.asset=='sewers' and kind!='grass') or (args.asset=='door' and kind=='door_open'):
+        for variant in range(3):
+            if kind=='grass':tiles(kind,variant)
+            else:sewers.render(kind,variant,reset,camera,render,CACHE)
 for kind in ['rat','crab','skeleton','ghoul']:
     if args.asset is None or args.asset==kind:character(kind)
 if args.asset is None or args.asset=='necromancer':

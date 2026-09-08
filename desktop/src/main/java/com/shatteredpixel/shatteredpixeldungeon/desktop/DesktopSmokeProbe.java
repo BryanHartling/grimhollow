@@ -16,6 +16,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean sewers;
     private int frames;
     private boolean originalLighting;
+    private int originalZoom;
     DesktopSmokeProbe(boolean sewers) {
         super(new DesktopPlatformSupport());
         this.sewers=sewers;
@@ -24,6 +25,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     @Override public void create() {
         super.create();
         originalLighting=SPDSettings.dynamicLighting();
+        originalZoom=SPDSettings.zoom();
     }
     private void capture(String name) {
         Pixmap screenshot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());
@@ -41,25 +43,68 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if (!sewers) { Gdx.app.exit(); return; }
             GamesInProgress.selectedClass=Boolean.getBoolean("grimhollow.renderPoc")?HeroClass.NECROMANCER:HeroClass.WARRIOR;
             GamesInProgress.curSlot=99;
-            Dungeon.seed=417;
-            Dungeon.init();
-            Dungeon.switchLevel(Dungeon.newLevel(),-1);
-            if(Boolean.getBoolean("grimhollow.renderPoc"))pocRoom();
+            if(Boolean.getBoolean("grimhollow.iteration")) iterationRoom();
+            else {
+                Dungeon.seed=417;
+                Dungeon.init();
+                Dungeon.switchLevel(Dungeon.newLevel(),-1);
+                if(Boolean.getBoolean("grimhollow.renderPoc"))pocRoom();
+            }
             InterlevelScene.mode=InterlevelScene.Mode.DESCEND;
             SPDSettings.dynamicLighting(true);
             switchNoFade(GameScene.class);
         } else if (sewers && frames==360) {
             if (!(Game.scene() instanceof GameScene)) throw new AssertionError("Sewer scene did not launch");
             capture("sewers-lighting-on");
+            if(Boolean.getBoolean("grimhollow.iteration")) {
+                if (!SPDSettings.dynamicLighting() || com.watabou.noosa.Camera.main.zoom != com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.defaultZoom)
+                    throw new AssertionError("Iteration review requires lighting on and default zoom");
+                Pixmap shot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());
+                PixmapIO.writePNG(Gdx.files.absolute("verification/iteration/sewers-ingame.png"),shot,-1,true);shot.dispose();
+                System.out.println("ITERATION SCREENSHOT: lighting=true defaultZoom="+com.watabou.noosa.Camera.main.zoom);
+            }
             if(Boolean.getBoolean("grimhollow.renderPoc")){Pixmap shot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());PixmapIO.writePNG(Gdx.files.absolute("verification/render-poc-ingame.png"),shot,-1,true);shot.dispose();}
             SPDSettings.dynamicLighting(false);
         } else if (sewers && frames==420) {
             capture("sewers-lighting-off");
             SPDSettings.dynamicLighting(originalLighting);
+            SPDSettings.zoom(originalZoom);
             if (Boolean.getBoolean("grimhollow.geometryTests")) geometryTests();
             System.out.println("PASS: Sewer scene renders with dynamic lighting on and off.");
             Gdx.app.exit();
         }
+    }
+
+    /** Reuse the existing screenshot runner; select an unmodified upstream bridge room. */
+    private void iterationRoom() {
+        SPDSettings.zoom(0);
+        for (long seed=417;seed<929;seed++) {
+            Dungeon.seed=seed;Dungeon.init();
+            com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel level=(com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel)Dungeon.newLevel();
+            int w=level.width();
+            for(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room room:level.rooms()) {
+                if(!(room instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.WaterBridgeRoom) || room.width()>12 || room.height()>11)continue;
+                int water=0,door=0,decor=0,torch=0,bridge=-1;float nearest=Float.MAX_VALUE;
+                for(int y=room.top;y<=room.bottom;y++)for(int x=room.left;x<=room.right;x++) {
+                    int c=x+y*w,t=level.map[c];
+                    if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WATER)water++;
+                    if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.DOOR)door++;
+                    if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.EMPTY_DECO)decor++;
+                    if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WALL_DECO)torch++;
+                    if(x>room.left&&x<room.right&&y>room.top&&y<room.bottom&&level.passable[c]&&!level.water[c]&&level.findMob(c)==null &&
+                            ((level.water[c-1]&&level.water[c+1])||(level.water[c-w]&&level.water[c+w]))) {
+                        float distance=Math.abs(x-(room.left+room.right)/2f)+Math.abs(y-(room.top+room.bottom)/2f);
+                        if(distance<nearest){bridge=c;nearest=distance;}
+                    }
+                }
+                if(water>0&&door>0&&decor>0&&torch==1&&bridge>=0) {
+                    Dungeon.switchLevel(level,bridge);Dungeon.observe();
+                    System.out.println("ITERATION ROOM: seed="+seed+" bounds="+room.left+","+room.top+","+room.right+","+room.bottom+" water="+water+" doors="+door+" rubble="+decor+" wallTorch="+torch+" bridgeCell="+bridge+" terrainEdits=0");
+                    return;
+                }
+            }
+        }
+        throw new AssertionError("No generated Sewer bridge room satisfies the review scene");
     }
 
     private void pocRoom(){

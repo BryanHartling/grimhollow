@@ -28,6 +28,53 @@ def quantize(image,tile=False):
     pixels[:,:,:3]=result.reshape(rgb.shape);pixels[:,:,3]=active.astype(np.uint8)*255
     return Image.fromarray(pixels)
 
+def sewers_quantize(image,params,kind):
+    """Four value bands preserve material hue without bleaching bright slabs.
+
+    Candidates derive from the locked palette/material nodes, and each must
+    pass the existing CIE76 tolerance. Emissive torch pixels retain source values.
+    """
+    from validate import lab
+    pixels=np.array(image.convert('RGBA'));active=pixels[:,:,3]>100
+    rgb=pixels[:,:,:3].astype(float);lum=rgb@np.array([.2126,.7152,.0722])/255
+    if not active.any():raise ValueError('Empty Sewers render')
+    flame_zone=np.indices(lum.shape)[0]<31
+    emissive=flame_zone&((rgb[:,:,0]>rgb[:,:,1]*1.1)|(lum>.87))&active
+    exposure_mask=active&~emissive if kind=='wall_torch' and params.get('separate_emission_curve') else active
+    lo,hi=np.percentile(lum[exposure_mask],[3,97])
+    value=np.clip((lum-lo)/max(.02,hi-lo),0,1)**params['tone_gamma']
+    targets=np.array(params['tone_curve'])[np.searchsorted(params['tone_breaks'],value)]
+    rgb=np.clip(rgb*targets[:,:,None]/np.maximum(lum[:,:,None],.002),0,255)
+    original=pixels[:,:,:3].astype(float)
+    if kind=='wall_torch':rgb=np.where(emissive[:,:,None],original,rgb)
+    flame_edge=params.get('flame_edge','782D17')
+    swatches=np.concatenate([COLORS,np.array([tuple(bytes.fromhex(params[k])) for k in ('stone_color','moss_color','water_color')]),np.array([tuple(bytes.fromhex(flame_edge))])])
+    candidates=[]
+    for level in params['tone_curve']:
+        candidates.extend(np.clip(swatches*level/np.maximum(.001,swatches@np.array([.2126,.7152,.0722])/255)[:,None],0,255))
+    if kind=='wall_torch':candidates.extend([tuple(bytes.fromhex(c)) for c in (flame_edge,'E0982F','E4C76A','EFE7D2')])
+    palette=np.unique(np.rint(candidates).astype(np.uint8),axis=0)
+    allowed=np.concatenate([COLORS*s for s in np.linspace(0,1,101)]+[COLORS+(255-COLORS)*s for s in np.linspace(0,1,101)])
+    distances=((lab(palette)[:,None,:]-lab(allowed)[None,:,:])**2).sum(axis=2)
+    palette=palette[distances.min(axis=1)<=12**2]
+    flat=rgb.reshape(-1,3);result=np.empty_like(flat,dtype=np.uint8)
+    for start in range(0,len(flat),2048):
+        chunk=flat[start:start+2048]
+        distance=((chunk[:,None,:]-palette[None,:,:])**2*np.array([.2126,.7152,.0722])).sum(axis=2)
+        result[start:start+len(chunk)]=palette[distance.argmin(axis=1)]
+    pixels[:,:,:3]=result.reshape(rgb.shape);pixels[:,:,3]=active.astype(np.uint8)*255
+    if kind=='wall_torch':
+        flame_palette=np.array([tuple(bytes.fromhex(c)) for c in (flame_edge,'E0982F','E4C76A','EFE7D2')])
+        flat=original[emissive]
+        if len(flat):pixels[:,:,:3][emissive]=flame_palette[((flat[:,None,:]-flame_palette[None,:,:])**2).sum(axis=2).argmin(axis=1)]
+    output=Image.fromarray(pixels)
+    if kind in ('decor','wall_torch'):
+        outline=Image.new('RGBA',output.size,'#0E0D0C')
+        outline.putalpha(output.getchannel('A').filter(ImageFilter.MaxFilter(5)))
+        outline.alpha_composite(output);output=outline
+    return output
+
+
 def frame(path,size):
     image=Image.open(CACHE/path).convert('RGBA');box=image.getbbox()
     if not box:raise ValueError('Empty Blender frame: '+str(path))
@@ -39,7 +86,10 @@ def frame(path,size):
 @lru_cache(maxsize=32)
 def tile(kind,variant=0):
     # Blender renders a 3x3 neighborhood; only its center is used in the atlas.
-    return quantize(Image.open(CACHE/f'tiles/{kind}_{variant}.png').crop((64,64,128,128)),True)
+    source=Image.open(CACHE/f'tiles/{kind}_{variant}.png').crop((64,64,128,128))
+    params=Path(__file__).parent/'blender/params'/f'{"door" if kind=="door_open" else kind}.json'
+    if params.exists():return sewers_quantize(source,json.loads(params.read_text()),kind)
+    return quantize(source,True)
 
 def character(spec,base=None):
     # Shared upstream atlases also contain variants outside the rendered POC.
@@ -54,7 +104,13 @@ def apply_tiles(spec,base):
     output=base.copy()
     for index,kind in spec['rendered_tiles'].items():
         index=int(index);x=index%16*64;y=index//16*64;original=base.crop((x,y,x+64,y+64))
-        material=tile(kind,index%3).copy();material.putalpha(original.getchannel('A'));output.paste(material,(x,y))
+        variant=(index//6)%3 if kind in ('floor','decor') and index<16 else index%3
+        if kind=='decor':
+            material=tile('floor',variant).copy();material.alpha_composite(tile('decor',variant))
+        elif kind=='wall_torch':
+            material=tile('wall',variant).copy();material.alpha_composite(tile('wall_torch',variant))
+        else:material=tile(kind,variant).copy()
+        material.putalpha(original.getchannel('A'));output.paste(material,(x,y))
     return output
 
 def comparison(specs,procedural):

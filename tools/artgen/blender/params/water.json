@@ -1,0 +1,51 @@
+{
+  "seed": 5706,
+  "count": 3,
+  "relief": 0.07,
+  "displacement": 0.018,
+  "wall_height": 0.6,
+  "mortar_width": 0.025,
+  "chip": 0.012,
+  "bevel": 0.035,
+  "moss_density": 0.25,
+  "grain_frequency": 1.25,
+  "bump_depth": 0.015,
+  "ao_distance": 0.35,
+  "stone_roughness": 0.25,
+  "water_roughness": 0.45,
+  "specular": 0.006,
+  "water_depth": 0.025,
+  "decor_density": 7,
+  "light_strength": 1.0,
+  "light_angle": 0,
+  "stone_color": "75664F",
+  "moss_color": "4C5939",
+  "water_color": "3D5334",
+  "tone_curve": [
+    0.012,
+    0.06,
+    0.18,
+    0.4
+  ],
+  "tone_breaks": [
+    0.2,
+    0.65,
+    0.92
+  ],
+  "tone_gamma": 1.0,
+  "light_steps": [
+    0,
+    0.8,
+    1.8,
+    3.2
+  ],
+  "grain_min": 0.12,
+  "grain_max": 1.8,
+  "core_emission": 8,
+  "water_steps": [
+    0,
+    0.4,
+    0.53,
+    0.66
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "asset_class": "door",
+  "round": 1,
+  "parameters": {
+    "seed": 5706,
+    "count": 3,
+    "relief": 0.07,
+    "displacement": 0.055,
+    "wall_height": 0.6,
+    "mortar_width": 0.025,
+    "chip": 0.012,
+    "bevel": 0.025,
+    "moss_density": 0.25,
+    "grain_frequency": 3,
+    "bump_depth": 0.035,
+    "ao_distance": 0.26,
+    "stone_roughness": 0.25,
+    "water_roughness": 0.19,
+    "specular": 0.18,
+    "water_depth": 0.025,
+    "decor_density": 7,
+    "light_strength": 1.0,
+    "light_angle": 0,
+    "stone_color": "6B645C",
+    "moss_color": "4C5939",
+    "water_color": "3E4C35",
+    "tone_curve": [
+      0.035,
+      0.11,
+      0.32,
+      0.51
+    ],
+    "tone_breaks": [
+      0.2,
+      0.55,
+      0.84
+    ],
+    "tone_gamma": 1.0
+  },
+  "references": [
+    {
+      "reference": 2,
+      "weight": 0.5,
+      "targets": [
+        {
+          "target": "room mean luminance",
+          "value": 0.24142170598361182,
+          "minimum": 0.12,
+          "maximum": 0.2,
+          "pass_": false,
+          "score": 0.7928914700819409
+        },
+        {
+          "target": "room fraction below .15",
+          "value": 0.36240931919642855,
+          "minimum": 0.6,
+          "maximum": null,
+          "pass_": false,
+          "score": 0.6040155319940476
+        },
+        {
+          "target": "warm lit hue",
+          "value": 40.673637690064936,
+          "minimum": 30,
+          "maximum": 40,
+          "pass_": false,
+          "score": 0.9831590577483766
+        }
+      ],
+      "score": 0.7933553532747885
+    },
+    {
+      "reference": 1,
+      "weight": 0.9,
+      "targets": [
+        {
+          "target": "room mean luminance",
+          "value": 0.24142170598361182,
+          "minimum": 0.12,
+          "maximum": 0.2,
+          "pass_": false,
+          "score": 0.7928914700819409
+        },
+        {
+          "target": "room fraction below .15",
+          "value": 0.36240931919642855,
+          "minimum": 0.6,
+          "maximum": null,
+          "pass_": false,
+          "score": 0.6040155319940476
+        },
+        {
+          "target": "warm lit hue",
+          "value": 40.673637690064936,
+          "minimum": 30,
+          "maximum": 40,
+          "pass_": false,
+          "score": 0.9831590577483766
+        }
+      ],
+      "score": 0.7933553532747885
+    },
+    {
+      "reference": 21,
+      "weight": 0.7,
+      "targets": [
+        {
+          "target": "2x2 seam pass",
+          "value": 1.0,
+          "minimum": 1,
+          "maximum": null,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 1.0
+    }
+  ],
+  "composite": 0.8622369021831923,
+  "global_targets": {
+    "region_mean_after_lighting": 0.24142170598361182,
+    "region_mean_pass": false,
+    "dominant_green_brown_fraction": 0.9996761399872449,
+    "hue_budget_pass": true,
+    "accent_families": 0,
+    "accent_bins": [
+      0.000323860012755102,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "readability": "N/A: no characters or mobs are iterated; full-game test 30 remains NOT RUN",
+    "composition": "7x7 fixed terrain sample; actual ambient/hero/torch equation, no fog or UI",
+    "ambient": [
+      0.5,
+      0.55,
+      0.45
+    ]
+  },
+  "variants": [
+    {
+      "variant": 0,
+      "metrics": {
+        "mean": 0.2677055466835171,
+        "std": 0.18598188406058952,
+        "dark_fraction": 0.4296875,
+        "hue": 32.269518554783055,
+        "saturation": 0.2,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.4752603921568627,
+        "palette_max_delta": 6.231490270918865,
+        "opaque_pixels": 4096
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.024555759803921568,
+        "wrap_y": 0.02097120098039216,
+        "interior_x_limit": 0.0993887867647059,
+        "interior_y_limit": 0.07829503676470585,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 1,
+      "metrics": {
+        "mean": 0.26747518899356615,
+        "std": 0.1857285919803318,
+        "dark_fraction": 0.428466796875,
+        "hue": 32.3168925565039,
+        "saturation": 0.2,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.4752603921568627,
+        "palette_max_delta": 6.231490270918865,
+        "opaque_pixels": 4096
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.06775428921568627,
+        "wrap_y": 0.02097120098039216,
+        "interior_x_limit": 0.09869638480392158,
+        "interior_y_limit": 0.08005974264705883,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 2,
+      "metrics": {
+        "mean": 0.26663559340533083,
+        "std": 0.1860513166216133,
+        "dark_fraction": 0.43359375,
+        "hue": 32.40970950474249,
+        "saturation": 0.2,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.4752603921568627,
+        "palette_max_delta": 6.231490270918865,
+        "opaque_pixels": 4096
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0673406862745098,
+        "wrap_y": 0.0210171568627451,
+        "interior_x_limit": 0.09941636029411767,
+        "interior_y_limit": 0.076953125,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    }
+  ],
+  "passing": false,
+  "converged": false,
+  "cache_sha256": {
+    "tiles/door_0.png": "88fc13db5c8fa7a4a855e27f0baf3b22bd9fea89252102f094378af4bb792cea",
+    "tiles/door_1.png": "0351f0d13c5ade60fa71f9abb26790e8d14e6c367ab9242c87c1cfd0cbbd9fa9",
+    "tiles/door_2.png": "32397a9010aab4f7b197b0c32b82c22f149c896f6326547212f934430b36e1e9"
+  },
+  "reference_board_sha256": "60b32e4d79fce004e304853bfa926b135cba355ad307554daac0337ed6e0cf57"
+}

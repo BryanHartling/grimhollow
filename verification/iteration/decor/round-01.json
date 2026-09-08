@@ -1,0 +1,230 @@
+{
+  "asset_class": "decor",
+  "round": 1,
+  "parameters": {
+    "seed": 5706,
+    "count": 3,
+    "relief": 0.07,
+    "displacement": 0.055,
+    "wall_height": 0.6,
+    "mortar_width": 0.025,
+    "chip": 0.012,
+    "bevel": 0.025,
+    "moss_density": 0.25,
+    "grain_frequency": 3,
+    "bump_depth": 0.035,
+    "ao_distance": 0.26,
+    "stone_roughness": 0.25,
+    "water_roughness": 0.19,
+    "specular": 0.18,
+    "water_depth": 0.025,
+    "decor_density": 7,
+    "light_strength": 1.0,
+    "light_angle": 0,
+    "stone_color": "6B645C",
+    "moss_color": "4C5939",
+    "water_color": "3E4C35",
+    "tone_curve": [
+      0.045,
+      0.14,
+      0.34,
+      0.52
+    ],
+    "tone_breaks": [
+      0.2,
+      0.55,
+      0.84
+    ],
+    "tone_gamma": 1.0
+  },
+  "references": [
+    {
+      "reference": 2,
+      "weight": 0.5,
+      "targets": [
+        {
+          "target": "room mean luminance",
+          "value": 0.24142170598361182,
+          "minimum": 0.12,
+          "maximum": 0.2,
+          "pass_": false,
+          "score": 0.7928914700819409
+        },
+        {
+          "target": "room fraction below .15",
+          "value": 0.36240931919642855,
+          "minimum": 0.6,
+          "maximum": null,
+          "pass_": false,
+          "score": 0.6040155319940476
+        },
+        {
+          "target": "warm lit hue",
+          "value": 40.673637690064936,
+          "minimum": 30,
+          "maximum": 40,
+          "pass_": false,
+          "score": 0.9831590577483766
+        }
+      ],
+      "score": 0.7933553532747885
+    },
+    {
+      "reference": 20,
+      "weight": 0.8,
+      "targets": [
+        {
+          "target": "moss/wet-edge hue",
+          "value": 90.0,
+          "minimum": 75,
+          "maximum": 100,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "moss/wet-edge saturation",
+          "value": 0.3333333333333333,
+          "minimum": 0.3,
+          "maximum": 0.5,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "moss/wet-edge luminance std",
+          "value": 0.03283355838218904,
+          "minimum": 0.08,
+          "maximum": null,
+          "pass_": false,
+          "score": 0.41041947977736304
+        }
+      ],
+      "score": 0.8034731599257876
+    },
+    {
+      "reference": 21,
+      "weight": 0.7,
+      "targets": [
+        {
+          "target": "2x2 seam pass",
+          "value": 1.0,
+          "minimum": 1,
+          "maximum": null,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 1.0
+    }
+  ],
+  "composite": 0.8697281022890122,
+  "global_targets": {
+    "region_mean_after_lighting": 0.24142170598361182,
+    "region_mean_pass": false,
+    "dominant_green_brown_fraction": 0.9996761399872449,
+    "hue_budget_pass": true,
+    "accent_families": 0,
+    "accent_bins": [
+      0.000323860012755102,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "readability": "N/A: no characters or mobs are iterated; full-game test 30 remains NOT RUN",
+    "composition": "7x7 fixed terrain sample; actual ambient/hero/torch equation, no fog or UI",
+    "ambient": [
+      0.5,
+      0.55,
+      0.45
+    ]
+  },
+  "variants": [
+    {
+      "variant": 0,
+      "metrics": {
+        "mean": 0.22847748720821662,
+        "std": 0.18882227903689508,
+        "dark_fraction": 0.5323809523809524,
+        "hue": 31.449869171088157,
+        "saturation": 0.14285714285714285,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.46770039215686277,
+        "palette_max_delta": 5.600033334087794,
+        "opaque_pixels": 1050
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0,
+        "wrap_y": 0.0,
+        "interior_x_limit": 0.05309436274509802,
+        "interior_y_limit": 0.07958333333333331,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 1,
+      "metrics": {
+        "mean": 0.2705374451562803,
+        "std": 0.20660130030537954,
+        "dark_fraction": 0.47648514851485146,
+        "hue": 31.88132742137997,
+        "saturation": 0.14285714285714285,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.46825098039215685,
+        "palette_max_delta": 5.600033334087794,
+        "opaque_pixels": 808
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0,
+        "wrap_y": 0.0,
+        "interior_x_limit": 0.044021139705882346,
+        "interior_y_limit": 0.050958946078431364,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 2,
+      "metrics": {
+        "mean": 0.23824624514122827,
+        "std": 0.20543431056231545,
+        "dark_fraction": 0.5473568281938326,
+        "hue": 31.236105254377005,
+        "saturation": 0.14285714285714285,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.46825098039215685,
+        "palette_max_delta": 5.600033334087794,
+        "opaque_pixels": 908
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0,
+        "wrap_y": 0.0,
+        "interior_x_limit": 0.057909007352941154,
+        "interior_y_limit": 0.08248774509803919,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "validator_pass": true
+    }
+  ],
+  "passing": false,
+  "converged": false,
+  "cache_sha256": {
+    "tiles/decor_0.png": "384750865099cc88c797efd41edd914fa7179e3a683e5871158ec6b9f035924d",
+    "tiles/decor_1.png": "7e31377c69a39e81b596f71cc2e967036a7c8285a253643378ea258cd0fc90ba",
+    "tiles/decor_2.png": "1d7f13f3ad36c7131ed3201ed786a0162c5d433690d6630d571ccbfb7a0d36db"
+  },
+  "reference_board_sha256": "60b32e4d79fce004e304853bfa926b135cba355ad307554daac0337ed6e0cf57"
+}

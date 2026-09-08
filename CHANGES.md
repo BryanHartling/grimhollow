@@ -864,3 +864,21 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `references/new additions/underground-mining-mystery-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 15; source and checksum in SOURCES.md.
 - `references/new additions/weathered-dungeon-chains-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 11; source and checksum in SOURCES.md.
 - User-supplied AI illustrations supplement photographic references as mood/material studies; they do not change numeric targets or establish historical/physical accuracy.
+
+## Stage 5.6 — Sewers reference-guided iteration
+
+- `tools/artgen/blender/sewers.py` — Build coarse displaced masonry, continuous water, an arched gate, loose mossy rubble and a static iron wall sconce with the fixed camera.
+- `tools/artgen/blender/materials.py` — Add periodic surface grain, contact occlusion, wet specular and parameterized material response for environments; keep POC character materials unchanged.
+- `tools/artgen/blender/params/*.json` — Store the six shipped parameter sets; each recorded round includes its complete parameters and cache hashes.
+- `tools/artgen/blender/render.py` — Route Sewers classes through the parameterized renderer; retain the existing grass and experimental character paths for this scoped stage.
+- `tools/artgen/rendered.py` — Preserve material hue in four value bands, keep emissive flame colors, outline isolated props, and composite rubble/sconces at existing atlas indices.
+- `tools/artgen/specs/tiles_sewers.json`, `tools/artgen/specs/walls_sewers.json` — Map existing floor/wall decor indices to the new rendered props without changing terrain or lighting mechanics.
+- `tools/artgen/build.py` — Preserve the historical POC comparison while ordinary asset rebuilding remains deterministic.
+- `tools/artgen/iteration.py` — Implement only the specified parameter scoring, per-round validation, comparison image and test 39.
+- `desktop/src/main/java/com/shatteredpixel/shatteredpixeldungeon/desktop/DesktopSmokeProbe.java` — Reuse the existing screenshot runner to select an unmodified generated water-bridge room and capture it with lighting on/default zoom.
+- `build.gradle` — Label this review build 0.4.2; save-format code remains unchanged.
+- `ART_PIPELINE.md`, `README.md` — Document parameters, scoring scope, cache-only rebuilding and the lit screenshot command.
+- Region-wide global targets are measured on a fixed lit terrain composition; transparent props and dark water are not incorrectly treated as entire regions, and mob readability remains outside this environment-only loop.
+- The existing three-tile wall-light radius is retained per the presentation-only constraint; the board's two-tile falloff target remains a recorded miss rather than changing game lighting to inflate a score.
+- Water neighbours share one displaced mesh instead of nine disconnected patches, eliminating mismatched boundary normals; only material/geometry construction changes, not camera framing.
+- Flame scoring excludes the wooden holder, and summary references select the source photograph/albedo rather than accidentally choosing a companion displacement map.

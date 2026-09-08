@@ -156,7 +156,8 @@ def build():
         elif path.suffix == '.icns': image.save(path,format='ICNS')
         else: image.save(path,format='PNG',compress_level=9,optimize=False)
         print(hashlib.sha256(path.read_bytes()).hexdigest(),spec['output'])
-    if (Path(__file__).parent/'render_cache/necromancer/0/idle_0.png').exists():
+    # Historical POC evidence is immutable; stage 5.6 has its own comparison.
+    if not (ROOT/'verification/render-poc.png').exists() and (Path(__file__).parent/'render_cache/necromancer/0/idle_0.png').exists():
         import rendered
         rendered.comparison([json.loads(p.read_text()) for p in sorted(SPEC_DIR.glob('*.json'))],procedural)
 

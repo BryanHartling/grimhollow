@@ -1,6 +1,6 @@
 # Known issues
 
-- Stage 5.5 remains at the review boundary: 45 original references, 10 maps/companions and 33 indexed user additions (15 verified CC0, 18 local only); the original board passed test 38, but the expanded local intake fails its license requirement for 18 files; stage 5.6/test 39 and later art/content work remain pending.
+- Stage 5.6 Sewers iteration is in progress after reference approval; five classes have converged and the wall torch remains below the composite target; final stage verification and test 39 are pending.
 - Tests 4 and 17 fail: `Validated 64 generated specifications; 2 failures`; 100 existing sheets lack pipeline sources, and full character/item style and referenced-frame coverage remain unfinished. The implemented 64-specification subset passes; cache-only rebuilding has zero byte differences.
 - The unchanged POC covers Sewers, rat, crab, eight Necromancer armor tiers and Skeleton/Ghoul minions; human review rejected its visual quality and v0.6 assigns future Blender work to environments/props/items/effects and future characters to procedural silhouettes; Bone Prison still uses barricade visuals.
 - Full tests 6, 7 and 8 are NOT RUN: scripted talent maps and representative hooks pass, and all nine new armor abilities execute, but exhaustive talent-selection and actual Tengu/crown UI flows were not driven.
@@ -11,7 +11,7 @@
 - Test 21 remains failing because the full art gate is retained; separate class gates and the combined three-class gate pass locally. Platform artifacts upload despite the overall workflow's art failure.
 - Tests 20 and 22 retain checkpoint PASS results under section 14; this references-only run does not repeat the no-SDK launcher or APK identity inspection, and Android device gameplay remains untested.
 - GitHub Actions dispatch/settings requests return HTTP 403 with the supplied token; push-triggered workflows work but may appear after a delay.
-- The stage 5.5 sandbox fetch and .git scratch write failed in the default sandbox and passed via the documented escalation route; network downloads and Git writes used that route; future local Gradle builds require `--no-daemon`.
+- The stage 5.5/5.6 sandbox fetch and .git scratch write failed in the default sandbox and passed via the documented escalation route; network downloads and Git writes used that route; future local Gradle builds require `--no-daemon`.
 - One compile approval review timed out; its permitted retry succeeded. A later runner spawn timed out; the existing build session remained available and completed.
 - Reference fit limits are recorded per file in SOURCES.md: monochrome sewer, stone culvert equivalent, unlit material maps, torch holder without a wall-light cone, unhooded seated statue, burned-ground scorch study and blood stain of unverified age; test 38 establishes coverage/licenses/exclusion hashes, not artistic approval or stage 5.6 scores.
 - All 33 supplied images are mapped in references.md and SOURCES.md; 18 files are excluded from Git because no CC0/public-domain grant is verified or standalone redistribution is restricted; U17 also has unresolved original/game provenance, and U08/U09 are alternate crops of one photograph.

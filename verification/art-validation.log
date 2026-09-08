@@ -93,3 +93,9 @@ Validated 64 generated specifications; 2 failures.
 Stage 5.5 (v0.6), 2026-09-08: inline Python test 38, using the existing tools/artgen/rendered.py phash function; no harness or pipeline changes.
 TEST 38 PASS: rows=45 covered=45 files=55 missing=0 provenance=55/55; CC0=40 public-domain=15; B maps=12 at 1024x1024; blocklist=9 (3 games); collisions=0 at Hamming<=8; minimum-distance=18; negative-controls=9/9; gallery-links=PASS.
 No reference pixels changed; all 55 SHA-256 values match downloaded source bytes. TEST 39 NOT RUN: stage 5.6 is outside this run.
+
+User reference ingestion, 2026-09-08: inline Python integrity/mapping/link/exclusion-hash check using the existing phash function; no harness changes.
+INGEST PASS: 33/33 originals decode and match SHA-256; 33/33 mapped; 15 verified CC0 publishable; 18 local-only ignore rules verified; all original numbered rows and weights unchanged.
+GALLERY PASS: 33 additions + 45 original images; local links and anchors valid; 88 image provenance checks; 9 exclusion hashes; collisions=0 at Hamming<=8; minimum-distance=18.
+TEST 38 FAIL (expanded local folder): 18 of 88 files have unresolved/incompatible licenses; 70 verified CC0/public-domain files remain eligible. No missing images or exclusion-hash collisions. The earlier checkpoint PASS does not certify the intake.
+Stage 5.6 / test 39 NOT RUN; no game or art-pipeline change.

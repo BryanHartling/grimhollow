@@ -24,3 +24,21 @@ local.properties
 .gradle-user-home/
 .local/
 __pycache__/
+
+# User-supplied references: only individually verified CC0 images may be published.
+/references/new additions/*
+!/references/new additions/ancient-chains-decay-stockcake.jpg
+!/references/new additions/ancient-mine-interior-stockcake.jpg
+!/references/new additions/ancient-stone-chain-stockcake.jpg
+!/references/new additions/ancient-torch-burns-stockcake.jpg
+!/references/new additions/dancing-fire-torch-stockcake.jpg
+!/references/new additions/dancing-flame-light-stockcake.jpg
+!/references/new additions/gothic-cathedral-depths-stockcake.jpg
+!/references/new additions/gothic-crypt-ambiance-stockcake.jpg
+!/references/new additions/gothic-ruin-interior-stockcake.jpg
+!/references/new additions/illuminated-medieval-manuscript-stockcake.jpg
+!/references/new additions/medieval-treasury-chamber-stockcake.jpg
+!/references/new additions/sacred-underground-vault-stockcake.jpg
+!/references/new additions/shadowed-mining-history-stockcake.jpg
+!/references/new additions/underground-mining-mystery-stockcake.jpg
+!/references/new additions/weathered-dungeon-chains-stockcake.jpg

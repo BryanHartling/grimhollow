@@ -839,3 +839,28 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `references/ref-44-antique-glass-vial.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
 - `references/ref-45-red-wax-seal.jpg` — Unmodified CC0/public-domain reference download; provenance and intended visual qualities in SOURCES.md.
 - Reference equivalents are selected for visual qualities, not exact historical locations; source-side previews and unmodified archive members avoid inventing art or changing targets.
+
+## User reference additions — 2026-09-08
+
+- `.gitignore` — Keep the 18 unresolved/restricted originals local while allowing the 15 individually reviewed StockCake CC0 supplements.
+- `references/references.md` — Map all 33 supplied files to existing numbered rows, preserve targets/weights and identify the shared catacomb source.
+- `references/SOURCES.md` — Recover exact origins from download metadata and record SHA-256, medium, date and honest license status for every addition.
+- `references/index.html` — Show all additions with mapped-row links, rights labels, filters and a local-file fallback on other checkouts.
+- `KNOWN_ISSUES.md` — Distinguish the prior board pass from the expanded intake with 18 unresolved/incompatible licenses.
+- `verification/art-validation.log` — Append ingestion, integrity, mapping and exclusion-hash results without changing the harness.
+- `references/new additions/ancient-chains-decay-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 10; source and checksum in SOURCES.md.
+- `references/new additions/ancient-mine-interior-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 13; source and checksum in SOURCES.md.
+- `references/new additions/ancient-stone-chain-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 12; source and checksum in SOURCES.md.
+- `references/new additions/ancient-torch-burns-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 24, 22; source and checksum in SOURCES.md.
+- `references/new additions/dancing-fire-torch-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 22; source and checksum in SOURCES.md.
+- `references/new additions/dancing-flame-light-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 23; source and checksum in SOURCES.md.
+- `references/new additions/gothic-cathedral-depths-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 18, 17; source and checksum in SOURCES.md.
+- `references/new additions/gothic-crypt-ambiance-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 8, 9; source and checksum in SOURCES.md.
+- `references/new additions/gothic-ruin-interior-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 16, 17; source and checksum in SOURCES.md.
+- `references/new additions/illuminated-medieval-manuscript-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 31, 32; source and checksum in SOURCES.md.
+- `references/new additions/medieval-treasury-chamber-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 9; source and checksum in SOURCES.md.
+- `references/new additions/sacred-underground-vault-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 7; source and checksum in SOURCES.md.
+- `references/new additions/shadowed-mining-history-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 14; source and checksum in SOURCES.md.
+- `references/new additions/underground-mining-mystery-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 15; source and checksum in SOURCES.md.
+- `references/new additions/weathered-dungeon-chains-stockcake.jpg` — Unmodified, user-supplied StockCake CC0 ai illustration for rows 11; source and checksum in SOURCES.md.
+- User-supplied AI illustrations supplement photographic references as mood/material studies; they do not change numeric targets or establish historical/physical accuracy.

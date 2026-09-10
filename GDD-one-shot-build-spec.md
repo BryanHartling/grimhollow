@@ -1,4 +1,4 @@
-# Game Design Document & Build Specification (v0.7 — loop calibration revision)
+# Game Design Document & Build Specification (v0.8 — completion revision)
 ## Working title: **Grimhollow** (a Shattered Pixel Dungeon derivative)
 
 **Document purpose.** This is a complete, self-contained specification intended to be handed to an autonomous coding agent to produce a playable build in a single run. It defines the deliverable, the technical base, every new class and content item with concrete numbers, the art specification and pipeline, and the acceptance tests the build must pass. Where the spec is silent, follow existing Shattered Pixel Dungeon (SPD) conventions exactly.
@@ -367,7 +367,7 @@ Charges 0–10 (regen 1 per 30 turns, faster with upgrades). Activate: enemies i
 
 ---
 
-## 10. Acceptance tests (40 total; 28–40 in §15.7)
+## 10. Acceptance tests (42 total; 28–42 in §15.7)
 
 Implement as JUnit tests in `core/src/test/` where feasible; otherwise as a headless smoke script.
 
@@ -453,10 +453,16 @@ Headless render each sprite type into an offscreen framebuffer at default zoom a
 5. ~~Rendered-art proof of concept~~ done (`v0.4.0-render-poc`, commit `07519a5`). **Human review outcome:** environment renders regressed against the procedural output (uniform fine brick grid, no relief or AO, flat water); character renders are not viable from primitive-built geometry. Decision: Blender continues for environments, props, items, and effects only; characters are removed from the Blender scope (see §15.5 revision).
 5.5. **Reference board (§15.8.1):** populate `references/` from `references/references.md`, CC0 or public domain only. Commit. **Stop for human review of the folder.** Tag `v0.4.1-references`.
 5.6. ~~Reference-guided environment iteration~~ done (`v0.4.2-sewers-iterated`). **Human review outcome:** door and torch approved; floor improved in isolation; wall indistinguishable from floor; water reads as moss; stones too small and uniform at 1×; room-edge lighting halo regressed; set less readable in play than the procedural set. Scoring was satisfied by non-water and stopped after two rounds. See §15.8.5 for the corrections.
-5.7. **Calibrated Sewers pass (§15.8.5):** rerun the loop for Sewers with the corrected scoring, structural targets, and room-level gate. Tag `v0.4.3-sewers-calibrated`. **Stop for human review.**
-6. **Rendered-art coverage (§15.5, revised):** on approval, the remaining four regions through the same loop, then all items and props, title art, and effects sources. Characters and mobs use the procedural pipeline with the §15.5 silhouette redesign. Test 17 passes.
-7. **Enhanced effects (§15.6):** animated gas, fire and scorch, grass, water, spell and curse effects. Tag `v0.5.0-rendered`.
-8. **§9 content**, in listed order.
+5.7. ~~Calibrated Sewers pass~~ done (`v0.4.3-sewers-calibrated`). **Human review outcome: floor, wall, door, decor, and wall torch APPROVED and locked** — do not re-iterate them. **Water REJECTED**: the loop satisfied the numeric targets with one repeated crescent highlight per tile on a near-black base, which reads as a column of eyes rather than liquid. Water is removed from the parameter loop and specified directly in §15.8.6. The torch's 0.863 ceiling is a reference artifact (the photo has no wall cone or far-wall hue) and is accepted as final.
+
+**Stages 6–8 run together as one completion pass.** Deliver in the order below, committing and tagging at each boundary so a short run still lands cleanly:
+6a. **Animated water and liquids (§15.8.6)** for all regions. Tag `v0.5.0-water`.
+6b. **Prison region** through the calibrated loop (§15.8.7), room gate passing. Tag `v0.5.1-prison`.
+6c. **Caves, City, and Halls** through the same loop, room gate passing per region. Tag `v0.5.2-regions`.
+6d. **Character silhouette redesign (§15.5)**: all nine heroes with armor tiers, all mobs and bosses, minions, through the procedural pipeline with natively authored 48×60 silhouettes. Test 30 passes. Tag `v0.5.3-characters`.
+6e. **Items, props, title art, talent icons**; **test 17 passes** (full art coverage), turning CI green for the first time. Tag `v0.6.0-art-complete`.
+7. **Enhanced effects (§15.6):** gas, fire and scorch, grass, spell and curse effects (liquids already done in 6a). Tests 31, 32. Tag `v0.7.0-effects`.
+8. **§9 content**, in listed order: curses, wands/spells, weapons, armor, artifact, mobs. Tag `v1.0.0-content-complete`.
 
 ## 13. Build environment, packaging, and CI
 
@@ -623,6 +629,28 @@ For each asset class in scope (per region: floor tiles, wall tiles, water/sewage
 
 **Deliverables** as §15.8.4 plus, per class, the round in which the vision judgment first exceeded 0.7, and the final in-game screenshot with the six gate measurements printed beneath it.
 
+#### 15.8.6 Liquids: animated surfaces (not parameter-searched)
+
+Water, sewage, and lava are **animated** and specified directly; they are excluded from the §15.8.2 loop because no static tile reads as liquid under the lighting overlay.
+
+- **Frames:** 4 base tile variants × an 8-frame loop per liquid type. Rendered in Blender from an animated surface (wave/noise displacement), then post-processed as usual.
+- **Highlights:** short broken streaks following the wave crests. **Never a closed shape, ring, crescent, or blob.** 1–4% of pixels at ≥ 0.70 luminance, distributed across at least three separate streaks per tile.
+- **Value and hue:** luminance mean 0.10–0.18 (not a void); sewage hue 80–110° at saturation 0.20–0.35; clean water hue 190–215°; lava hue 10–25° with emissive contribution to the lighting overlay.
+- **Depth:** a gradient darkening toward the tile centre by 0.05–0.10, subtle enough not to outline the tile.
+- **Per-cell phase:** each cell's animation offset is `hash(x, y) mod 8`, so neighbours never sync.
+- **Anti-repetition (test 41):** for a 3×3 tiling of any single frame, normalized autocorrelation at exactly one-tile offset must be ≤ 0.35; and across the 4 base variants, no two may have pHash distance < 10. A repeated identical feature at tile spacing is an automatic failure.
+- **Vision check:** the round's critique must answer, on the room screenshot, "does this read as liquid?" and "is any feature visibly repeating?" A yes to the second fails the round regardless of numbers.
+- **In-game:** ripple ring on entry (§15.6) ships with this stage.
+
+#### 15.8.7 Applying the calibrated loop to remaining regions
+
+Per region (Prison, Caves, City, Halls), iterate floor, wall, door, decor, and the region's light source under §15.8.5 rules, with each region's own board rows and ambient target from §5.2 and board §F. The Sewers-approved classes are **locked** and are not re-run. Region-specific structural targets:
+- *Prison:* dressed slabs, more regular than Sewers (size variation ≥ 1.5× rather than 2×), dry (specular ≤ 1%), iron props; walls with heavier courses and visible block joints.
+- *Caves:* no masonry — packed earth and rubble floors (edge-orientation histogram flat), raw rock walls with timber supports as a decor class; warmest ambient.
+- *City:* patterned floor tiles with ≥ 2 pattern repeats per tile and visible wear breaking the pattern; columns and arches as decor; coolest ambient with larger light pools.
+- *Halls:* near-black dressed stone (mean luminance 0.06–0.12), ritual geometry inscribed in the floor as a decor class, bone props. The room gate's value-range floor is relaxed to std-dev ≥ 0.09 for this region only.
+Each region must pass the §15.8.5 room gate before its tag.
+
 ### 15.7 Acceptance tests (extend §10)
 28. `python tools/artgen/build.py` (no `--render`) reproduces `assets/` byte-for-byte from the committed render cache.
 29. `python tools/artgen/build.py --render` on the host regenerates every render-cache frame within perceptual-hash tolerance of the committed frame.
@@ -637,3 +665,5 @@ For each asset class in scope (per region: floor tiles, wall tiles, water/sewage
 38. Reference board: every row in `references.md` has a file, a `SOURCES.md` entry with URL and license, and the license is on the allowed list; no file's perceptual hash matches any entry in a small blocklist of well-known game screenshots the run compiles from the §G list.
 39. Iteration loop: for each in-scope class, ≥ 6 rounds recorded, best round passes the validator, all §F global targets, the §15.8.5 structural targets, and the seam test.
 40. Room-level gate: all six §15.8.5 measurements pass on the committed in-game screenshot; the halo measurement (4) is also added to the standard CI rendering checks so it cannot regress silently again.
+41. Liquids: §15.8.6 anti-repetition, value, hue, streak-count, and per-cell phase checks pass for water, sewage, and lava; the room screenshot's liquid cells show no feature repeating at tile spacing.
+42. Every region passes the §15.8.5 room gate with its own ambient target; a committed lit screenshot per region with the six measurements printed.

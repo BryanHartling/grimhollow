@@ -426,7 +426,7 @@ def check(room_only=False):
     print(f'TEST 40: measurements=6 failures={len(failures)}')
     if room_only:return bool(failures)
     class_failures=[]
-    for kind in CLASSES:
+    for kind in (k for k in CLASSES if k!='water'):
         values=rounds(kind);chosen=best(kind)
         if len(values)<6:class_failures.append(kind+': fewer than six rounds')
         if not chosen or not chosen['passing']:class_failures.append(kind+': no round passes all required gates')
@@ -444,15 +444,118 @@ def check(room_only=False):
             if not note.exists() or not 1<=len(note.read_text().strip().splitlines())<=3:class_failures.append(kind+': missing/overlong critique')
             if r['vision'].get('wrong_kind') and r['vision']['score']>.3:class_failures.append(kind+': wrong-kind score exceeds .3')
     if not room['global_targets']['region_mean_pass'] or not room['global_targets']['hue_budget_pass']:class_failures.append('current screenshot fails board global targets')
+    locks=json.loads((PARAMS.parent/'locks.json').read_text())
+    for name,digest in locks['sha256'].items():
+        path=ROOT/name;raw=path.read_text().encode() if path.suffix=='.json' else path.read_bytes()
+        if hashlib.sha256(raw).hexdigest()!=digest:class_failures.append('approved asset changed: '+name)
     for f in class_failures:print('FAIL:',f)
-    print(f'TEST 39: classes=6 failures={len(class_failures)}')
+    print(f'TEST 39: locked classes=5 failures={len(class_failures)}; liquids use test 41')
     return bool(failures or class_failures)
+
+
+def liquid_hash(x,y):
+    value=((x*0x1f123bb5)^(y*0x5f356495))&0xffffffff
+    value^=value>>16;value=(value*0x45d9f3b)&0xffffffff;return value^(value>>16)
+
+
+def liquid_phase(x,y):return (x&1)|((y&1)<<1)|((liquid_hash(x,y)&1)<<2)
+
+
+def liquid_metrics():
+    from rendered import liquid_frame
+    result={};failures=[]
+    for kind in ('sewage','water','lava'):
+        frames=[];hashes=[]
+        for v in range(4):
+            for f in range(8):
+                im=liquid_frame(kind,v,f);a=luminance(im);m=measurements(im)
+                mask=a>=.70;visited=np.zeros(mask.shape,dtype=bool);streaks=[]
+                for y,x in zip(*np.where(mask)):
+                    if visited[y,x]:continue
+                    stack=[(y,x)];visited[y,x]=True;points=[]
+                    while stack:
+                        yy,xx=stack.pop();points.append((yy,xx))
+                        for dy in (-1,0,1):
+                            for dx in (-1,0,1):
+                                ny,nx=yy+dy,xx+dx
+                                if 0<=ny<64 and 0<=nx<64 and mask[ny,nx] and not visited[ny,nx]:visited[ny,nx]=True;stack.append((ny,nx))
+                    if len(points)>=2:
+                        eigen=np.linalg.eigvalsh(np.cov(np.array(points).T));aspect=float(np.sqrt((eigen[-1]+.1)/(eigen[0]+.1)))
+                        streaks.append(dict(pixels=len(points),aspect=aspect))
+                edge=np.ones(a.shape,dtype=bool);edge[8:-8,8:-8]=False
+                center=np.zeros(a.shape,dtype=bool);center[24:40,24:40]=True
+                base=a<.25;depth=float(a[edge&base].mean()-a[center&base].mean())
+                targets=[target('mean',m['mean'],.10,.18),target('specular fraction',float(mask.mean()),.01,.04),
+                    target('open streak count',len(streaks),3),target('streak aspect',min((s['aspect'] for s in streaks),default=0),3),
+                    target('depth',depth,.02,.04),target('palette delta',m['palette_max_delta'],high=12),target('tile std',m['std'],.08)]
+                low,high={'sewage':(80,110),'water':(190,215),'lava':(10,25)}[kind]
+                targets.append(target('hue',m['hue'],low,high))
+                if kind=='sewage':targets.append(target('saturation',m['saturation'],.20,.35))
+                bad=[t['target'] for t in targets if not t['pass_']]
+                if bad:failures.append(f'{kind}/{v}/{f}: '+', '.join(bad))
+                frames.append(dict(variant=v,frame=f,targets=targets,metrics=m,streaks=streaks))
+        for f in range(8):
+            for v in range(4):
+                for w in range(v+1,4):hashes.append(int(np.count_nonzero(bits(liquid_frame(kind,v,f))!=bits(liquid_frame(kind,w,f)))))
+        correlations=[]
+        for tick in range(8):
+            for origin in (0,7,19):
+                grid=np.zeros((192,192))
+                for y in range(3):
+                    for x in range(3):
+                        xx,yy=x+origin,y+origin;v=(liquid_hash(xx,yy)>>8)&3;f=(tick+liquid_phase(xx,yy))&7
+                        grid[y*64:y*64+64,x*64:x*64+64]=luminance(liquid_frame(kind,v,f))
+                correlations.extend([float(np.corrcoef(grid[:,:-64].ravel(),grid[:,64:].ravel())[0,1]),float(np.corrcoef(grid[:-64,:].ravel(),grid[64:,:].ravel())[0,1])])
+        if min(hashes)<10:failures.append(kind+': variant pHash below 10')
+        if max(correlations)>.35:failures.append(kind+': one-tile autocorrelation above .35')
+        result[kind]=dict(frames=frames,min_variant_phash=min(hashes),max_one_tile_autocorrelation=max(correlations))
+    return result,failures
+
+
+def liquid_review(number=None,vision_path=None,preview=False):
+    from rendered import liquid_frame
+    folder=OUT/'liquids';folder.mkdir(exist_ok=True)
+    if preview or number:
+        canvas=Image.new('RGB',(1024,848),'#141311');draw=ImageDraw.Draw(canvas)
+        for row,kind in enumerate(('sewage','water','lava')):
+            draw.text((8,row*280+4),kind+' / four variants at frame 0; frames 0-7 below',font=review_font(16),fill='#C9BFA8')
+            for v in range(4):canvas.paste(liquid_frame(kind,v,0).resize((160,160),Image.Resampling.NEAREST),(v*256,row*280+30))
+            for f in range(8):canvas.paste(liquid_frame(kind,0,f),(f*128,row*280+206))
+        canvas.save(ROOT/'.local/liquid-review.png' if preview else folder/f'round-{number:02}.png')
+    if preview:return False
+    metrics,failures=liquid_metrics()
+    if number:
+        vision=json.loads(Path(vision_path).read_text())
+        note=f'Vision {vision["score"]:.2f}: {vision["reason"]}\nDoes this read as liquid? {vision["reads_as_liquid"]}. Is any feature visibly repeating? {vision["feature_repeats"]}.\n'
+        (folder/f'round-{number:02}.md').write_text(note)
+        if not vision['reads_as_liquid'] or vision['feature_repeats']:failures.append('hard room vision gate')
+        record=dict(round=number,vision=vision,metrics=metrics,failures=failures,passing=not failures,
+            screenshot_sha256=hashlib.sha256((OUT/'sewers-ingame.png').read_bytes()).hexdigest(),
+            room_sha256={name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in vision.get('rooms',[])},
+            cache_sha256={str(p.relative_to(CACHE)):hashlib.sha256(p.read_bytes()).hexdigest() for p in (CACHE/'liquids').rglob('*.png')},
+            autocorrelation_method='Actual runtime 3x3 variant/phase composition at eight times and three origins; identical copies necessarily correlate 1 and are not the runtime tiling.')
+        (folder/f'round-{number:02}.json').write_text(json.dumps(record,indent=2)+'\n')
+    else:
+        paths=sorted(folder.glob('round-*.json'))
+        if not paths:failures.append('missing room vision critique')
+        else:
+            record=json.loads(paths[-1].read_text());vision=record['vision']
+            if not vision['reads_as_liquid'] or vision['feature_repeats']:failures.append('hard room vision gate')
+            for name,digest in record.get('room_sha256',{}).items():
+                if hashlib.sha256((ROOT/name).read_bytes()).hexdigest()!=digest:failures.append('unreviewed liquid room '+name)
+            for name,digest in record['cache_sha256'].items():
+                if hashlib.sha256((CACHE/name).read_bytes()).hexdigest()!=digest:failures.append('unreviewed liquid cache '+name)
+    for kind,m in metrics.items():print(f'{kind}: min variant pHash={m["min_variant_phash"]}, max one-tile autocorrelation={m["max_one_tile_autocorrelation"]:.3f}')
+    for failure in failures:print('FAIL:',failure)
+    print(f'TEST 41: liquid frames=96 failures={len(failures)}')
+    return bool(failures)
 
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--round',type=int);parser.add_argument('--class',dest='kinds',choices=CLASSES,nargs='+')
     parser.add_argument('--vision');parser.add_argument('--summary',action='store_true');parser.add_argument('--preview',action='store_true');parser.add_argument('--check',action='store_true');parser.add_argument('--check-room',action='store_true')
-    args=parser.parse_args()
+    parser.add_argument('--liquids',action='store_true');args=parser.parse_args()
+    if args.liquids:raise SystemExit(liquid_review(args.round,args.vision,args.preview))
     if args.preview:summary(True,args.kinds or CLASSES)
     if args.round:record(args.round,args.kinds or CLASSES,args.vision)
     if args.summary:summary()

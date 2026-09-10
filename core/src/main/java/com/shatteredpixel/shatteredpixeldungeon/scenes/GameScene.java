@@ -159,7 +159,7 @@ public class GameScene extends PixelScene {
 
 	static GameScene scene;
 
-	private SkinnedBlock water;
+	private com.shatteredpixel.shatteredpixeldungeon.tiles.LiquidTilemap water;
 	private DungeonTerrainTilemap tiles;
 	private GridTileMap visualGrid;
 	private TerrainFeaturesTilemap terrainFeatures;
@@ -264,26 +264,7 @@ public class GameScene extends PixelScene {
 		terrain = new Group();
 		add( terrain );
 
-		water = new SkinnedBlock(
-			Dungeon.level.width() * DungeonTilemap.SIZE,
-			Dungeon.level.height() * DungeonTilemap.SIZE,
-			Dungeon.level.waterTex() ){
-
-			@Override
-			protected NoosaScript script() {
-				return NoosaScriptNoLighting.get();
-			}
-
-			@Override
-			public void draw() {
-				//water has no alpha component, this improves performance
-				Blending.disable();
-				super.draw();
-				Blending.enable();
-			}
-		};
-		if(Dungeon.level.waterTex().equals(Assets.Environment.WATER_SEWERS))water.scale(.25f,.25f);
-		water.autoAdjust = true;
+		water = new com.shatteredpixel.shatteredpixeldungeon.tiles.LiquidTilemap();
 		terrain.add( water );
 
 		ripples = new Group();
@@ -857,7 +838,6 @@ public class GameScene extends PixelScene {
 	public static boolean tagDisappeared = false;
 	public static boolean updateTags = false;
 
-	private static float waterOfs = 0;
 
 	@Override
 	public synchronized void update() {
@@ -881,11 +861,6 @@ public class GameScene extends PixelScene {
 
 		if (notifyDelay > 0) notifyDelay -= Game.elapsed;
 
-		if (!Emitter.freezeEmitters) {
-			waterOfs -= 5 * Game.elapsed;
-			water.offsetTo( 0, waterOfs );
-			waterOfs = water.offsetY(); //re-assign to account for auto adjust
-		}
 
 		if (!Actor.processing() && Dungeon.hero.isAlive()) {
 			if (actorThread == null || !actorThread.isAlive()) {

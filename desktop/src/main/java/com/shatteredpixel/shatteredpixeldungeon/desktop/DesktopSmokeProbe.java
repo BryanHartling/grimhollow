@@ -18,6 +18,11 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private boolean originalLighting;
     private int originalZoom;
     private int[] reviewBounds;
+    private final int reviewRegion=Integer.getInteger("grimhollow.region",0);
+    private String reviewPath(String name) {
+        String[] regions={"sewers","prison","caves","city","halls"};
+        return "verification/iteration/"+(reviewRegion==0?"":regions[reviewRegion]+"/")+name;
+    }
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat reviewRat;
     private com.shatteredpixel.shatteredpixeldungeon.items.Heap reviewItem;
     DesktopSmokeProbe(boolean sewers) {
@@ -63,14 +68,14 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if (!SPDSettings.dynamicLighting() || com.watabou.noosa.Camera.main.zoom != com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.defaultZoom)
                     throw new AssertionError("Iteration review requires lighting on and default zoom");
                 Pixmap shot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());
-                PixmapIO.writePNG(Gdx.files.absolute("verification/iteration/sewers-ingame.png"),shot,-1,true);shot.dispose();
+                PixmapIO.writePNG(Gdx.files.absolute(reviewPath("sewers-ingame.png")),shot,-1,true);shot.dispose();
                 roomMetadata();
                 Dungeon.hero.sprite.visible=false;reviewRat.sprite.visible=false;reviewItem.sprite.visible=false;
                 // Draw the exact same frame without subjects; ItemSprite.update would
                 // otherwise restore visibility before a later-frame background capture.
                 Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);Game.scene().draw();
                 Pixmap ground=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());
-                PixmapIO.writePNG(Gdx.files.absolute("verification/iteration/sewers-terrain.png"),ground,-1,true);ground.dispose();
+                PixmapIO.writePNG(Gdx.files.absolute(reviewPath("sewers-terrain.png")),ground,-1,true);ground.dispose();
                 Dungeon.hero.sprite.visible=true;reviewRat.sprite.visible=true;reviewItem.sprite.visible=true;
                 System.out.println("ITERATION SCREENSHOT: lighting=true defaultZoom="+com.watabou.noosa.Camera.main.zoom);
             }
@@ -81,20 +86,37 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             SPDSettings.dynamicLighting(originalLighting);
             SPDSettings.zoom(originalZoom);
             if (Boolean.getBoolean("grimhollow.geometryTests")) geometryTests();
+            if (Boolean.getBoolean("grimhollow.iteration")) liquidTests();
             System.out.println("PASS: Sewer scene renders with dynamic lighting on and off.");
             Gdx.app.exit();
         }
+    }
+
+    private void liquidTests() {
+        int checked=0;
+        for(int y=-16;y<16;y++)for(int x=-16;x<16;x++) {
+            int phase=com.shatteredpixel.shatteredpixeldungeon.tiles.LiquidTilemap.phase(x,y);
+            if(phase<0||phase>7)throw new AssertionError("Liquid phase outside loop");
+            for(int dy=-1;dy<=1;dy++)for(int dx=-1;dx<=1;dx++)if(dx!=0||dy!=0)
+                if(phase==com.shatteredpixel.shatteredpixeldungeon.tiles.LiquidTilemap.phase(x+dx,y+dy))throw new AssertionError("Adjacent liquids synchronize");
+            for(int tick=0;tick<8;tick++) {
+                int frame=com.shatteredpixel.shatteredpixeldungeon.tiles.LiquidTilemap.frame(x,y,tick);
+                if(frame<0||frame>=32||frame%8!=((phase+tick)&7))throw new AssertionError("Wrong liquid animation frame");
+                checked++;
+            }
+        }
+        System.out.println("TEST 41 runtime: phase/frame checks="+checked+" adjacent synchronization failures=0");
     }
 
     /** Reuse the existing screenshot runner; select an unmodified upstream bridge room. */
     private void iterationRoom() {
         SPDSettings.zoom(0);
         for (long seed=417;seed<929;seed++) {
-            Dungeon.seed=seed;Dungeon.init();
+            Dungeon.seed=seed;Dungeon.init();Dungeon.depth=reviewRegion*5+1;
             com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel level=(com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel)Dungeon.newLevel();
             int w=level.width();
             for(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room room:level.rooms()) {
-                if(!(room instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.WaterBridgeRoom) || room.width()>12 || room.height()>11)continue;
+                if((reviewRegion==0 && !(room instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.WaterBridgeRoom)) || room.width()>12 || room.height()>11)continue;
                 int water=0,door=0,decor=0,torch=0,bridge=-1;float nearest=Float.MAX_VALUE;
                 for(int y=room.top;y<=room.bottom;y++)for(int x=room.left;x<=room.right;x++) {
                     int c=x+y*w,t=level.map[c];
@@ -103,12 +125,12 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.EMPTY_DECO)decor++;
                     if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WALL_DECO)torch++;
                     if(x>room.left&&x<room.right&&y>room.top&&y<room.bottom&&level.passable[c]&&!level.water[c]&&level.findMob(c)==null &&
-                            ((level.water[c-1]&&level.water[c+1])||(level.water[c-w]&&level.water[c+w]))) {
+                            (reviewRegion!=0 || (level.water[c-1]&&level.water[c+1])||(level.water[c-w]&&level.water[c+w]))) {
                         float distance=Math.abs(x-(room.left+room.right)/2f)+Math.abs(y-(room.top+room.bottom)/2f);
                         if(distance<nearest){bridge=c;nearest=distance;}
                     }
                 }
-                if(water>0&&door>0&&decor>0&&torch==1&&bridge>=0) {
+                if(water>=4&&door>0&&(reviewRegion!=0 || (decor>0&&torch==1))&&bridge>=0) {
                     for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:level.mobs)
                         com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(mob);
                     level.mobs.clear();level.heaps.clear();
@@ -157,7 +179,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         String[] names={"hero","rat","item"};int[] cells={Dungeon.hero.pos,reviewRat.pos,reviewItem.pos};
         for(int i=0;i<3;i++) { if(i>0)json.append(',');com.watabou.noosa.Visual s=sprites[i];json.append("{\"name\":\"").append(names[i]).append("\",\"cell\":").append(cells[i]).append(",\"box\":").append(screenBox(s.x,s.y,s.width(),s.height())).append('}'); }
         json.append("]}");
-        Gdx.files.absolute("verification/iteration/room.json").writeString(json.toString(),false,"UTF-8");
+        Gdx.files.absolute(reviewPath("room.json")).writeString(json.toString(),false,"UTF-8");
     }
 
     private void pocRoom(){

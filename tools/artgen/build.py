@@ -129,6 +129,8 @@ def procedural(spec):
 
 def paint(spec):
     import rendered
+    if spec.get('rendered_liquid'):return rendered.liquid_atlas(spec['rendered_liquid'])
+    if spec.get('rendered_ripple'):return rendered.ripple_atlas()
     if spec.get('rendered_character'):return rendered.character(spec,procedural(spec))
     if spec.get('rendered_water'):return rendered.tile('water')
     base=procedural(spec)
@@ -143,6 +145,7 @@ def render(asset=None):
     subprocess.run(command,check=True,env=env)
     import rendered
     rendered.tile.cache_clear()
+    rendered.liquid_frame.cache_clear()
 
 def build():
     for source in sorted(SPEC_DIR.glob('*.json')):

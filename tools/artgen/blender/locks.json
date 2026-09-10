@@ -1,0 +1,38 @@
+{
+  "approved_tag": "v0.4.3-sewers-calibrated",
+  "classes": [
+    "floor",
+    "wall",
+    "door",
+    "door_open",
+    "decor",
+    "wall_torch"
+  ],
+  "sha256": {
+    "tools/artgen/render_cache/tiles/floor_0.png": "fc45e4995e801c1719679398c55760ede4ce9484e2786ebf5ff38e2828948e6a",
+    "tools/artgen/render_cache/tiles/floor_1.png": "4f022336d1dcc54dc957ed0fa1f95ee05925ac2b373960e59ee902d991164c86",
+    "tools/artgen/render_cache/tiles/floor_2.png": "6c28293284d2fe62a35991f2f47941343efe6ed457543790ef9883f830d17a43",
+    "tools/artgen/render_cache/tiles/wall_0.png": "17bff5d6c347ddcf9fd0e87d02ef23ef353f7ec8a75ba172889594db0744229a",
+    "tools/artgen/render_cache/tiles/wall_1.png": "f53bae52eade253537d18e14a0d158cbc8193e3d19e6f14fc89a12410d1dfb1a",
+    "tools/artgen/render_cache/tiles/wall_2.png": "bf9da2e7eabf7fd38d018ff669f027d07f8912758bd0d9beab38ac2e2be79598",
+    "tools/artgen/render_cache/tiles/wall_torch_0.png": "a8eb684c038960a6c3a37824c2b9de4bfa885defe559dc0fb99c5ffa3bdd5356",
+    "tools/artgen/render_cache/tiles/wall_torch_1.png": "6b7fa157b2d55f34e287201f01b92ffbb6f039e527246ad64dcbec413b1d740d",
+    "tools/artgen/render_cache/tiles/wall_torch_2.png": "4a54fa1ffa95f7d0528abf69e1a0164ca0cc1000028d3893acc3814c1435cf42",
+    "tools/artgen/render_cache/tiles/door_0.png": "f7f0152f298f6120c33249b2c0de08d67b94d735aaa96264e46e60d751db2d7a",
+    "tools/artgen/render_cache/tiles/door_1.png": "9e92cc045db2a9b5a961df573263678cdecfe2c18c6dd233660c3a56237c4fd7",
+    "tools/artgen/render_cache/tiles/door_2.png": "e3d20545da9e61cfd7f25216d9497a7cf92a7bae91bca8b108cefa7cee757bdb",
+    "tools/artgen/render_cache/tiles/door_open_0.png": "2412ac70fcd639b748c62d58a5aa2daf405bff04c4d7f3bed5c700543c6d4d0a",
+    "tools/artgen/render_cache/tiles/door_open_1.png": "ab854d0a69aa81a33a6e320b2ddac26b44ae331c6da264512f3c55273f79b6d3",
+    "tools/artgen/render_cache/tiles/door_open_2.png": "493be7f0e90426e8108e5c9f6cf54200b244b43b1c766d075f67fae103938765",
+    "tools/artgen/render_cache/tiles/decor_0.png": "fe39cd6843b57c8cbdc848f0073516bb7a4a0c6a7988b99a2832af00d66d1c31",
+    "tools/artgen/render_cache/tiles/decor_1.png": "1148650d4f74c48efa6600c886973d136e56478f34ed8ac4b65e4da43f5fed3b",
+    "tools/artgen/render_cache/tiles/decor_2.png": "0f6ec080068990c529ea6412a6c2657cdc474d9b080f214400123d9a4168bbff",
+    "tools/artgen/blender/params/floor.json": "30b137c69385f529c3e1586d17992838adf8fe13d35be3383b88fa7e702d1ee8",
+    "tools/artgen/blender/params/wall.json": "06265f7604d66d2b8542cc50a3e02cca4d2a22f0f799ee66534befcb68e5470c",
+    "tools/artgen/blender/params/door.json": "53ca768d9dd4ea31928a033446a2f6729e926efe483c29e123052c2d69ebc0ec",
+    "tools/artgen/blender/params/decor.json": "447cd364b74f95470a5ea2fbb5a730a2b1e6e5f6b45cacbaadf1b3c4d7381e9e",
+    "tools/artgen/blender/params/wall_torch.json": "d5170bbdd6f263f432982e99c1a6db042ba8e2c39b077f291a1bbe25626db2d8",
+    "core/src/main/assets/environment/tiles_sewers.png": "0ad331d8624996d50c26b9edd5c5d9d04ecb62fc6ec844ee0459180a3a964c78",
+    "core/src/main/assets/environment/walls_sewers.png": "0ad331d8624996d50c26b9edd5c5d9d04ecb62fc6ec844ee0459180a3a964c78"
+  }
+}

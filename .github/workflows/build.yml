@@ -33,6 +33,9 @@ jobs:
         if: ${{ !cancelled() }}
         shell: bash
         run: ./gradlew core:test -PdesktopOnly=true --no-daemon --console=plain
+      - name: Animated liquid acceptance 41 (committed cache only)
+        if: ${{ !cancelled() }}
+        run: python tools/artgen/iteration.py --liquids --check
       - name: Offscreen geometry acceptance 24-26
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         run: xvfb-run -a java -Dgrimhollow.iteration=true -Dgrimhollow.geometryTests=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers

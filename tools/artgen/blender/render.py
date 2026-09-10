@@ -5,6 +5,7 @@ import bpy
 from mathutils import Vector
 HERE=Path(__file__).resolve().parent;sys.path.insert(0,str(HERE))
 import materials,rig_biped,rig_quad,sewers
+import liquids,json
 ROOT=HERE.parents[2];CACHE=ROOT/'tools/artgen/render_cache';CACHE.mkdir(parents=True,exist_ok=True);rendered_count=0
 ANIMATIONS={'idle':2,'run':6,'attack':5,'die':5,'special':4}
 
@@ -81,7 +82,9 @@ def character(kind,tier=0):
 import argparse
 parser=argparse.ArgumentParser();parser.add_argument('--asset');args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
 assets=set(args.asset.split(',')) if args.asset else None
+locked=set(json.loads((HERE/'locks.json').read_text())['classes'])
 for kind in ['floor','wall','water','grass','door','door_open','decor','wall_torch']:
+    if kind in locked or kind=='water':continue
     if assets is None or kind in assets or ('sewers' in assets and kind!='grass') or ('door' in assets and kind=='door_open'):
         for variant in range(3):
             if kind=='grass':tiles(kind,variant)
@@ -90,4 +93,9 @@ for kind in ['rat','crab','skeleton','ghoul']:
     if args.asset is None or args.asset==kind:character(kind)
 if args.asset is None or args.asset=='necromancer':
     for tier in range(8):character('necromancer',tier)
+if assets is None or 'liquids' in assets:
+    for kind in liquids.COLORS:
+        for variant in range(4):
+            for frame in range(8):liquids.render(kind,variant,frame,reset,camera,render,CACHE)
+    for frame in range(8):liquids.ripple(frame,reset,camera,render,CACHE)
 print(f'POC rendering complete: {rendered_count} rendered files')

@@ -2,7 +2,7 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), based on **v3.3.8**, commit `7b8b845a76fe76c6b7c031ae9e570852411f56db`. Upstream history and Java packages are preserved.
 
-**Stage 5.7: calibrated Sewers art for review.** Nine heroes are playable: the six upstream classes plus Necromancer, Enchanter and Psychic, each with two subclasses, talents and three armor abilities. Full stage-6 art coverage and section 9 content remain pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.7 specification](GDD-one-shot-build-spec.md).
+**Stage 6a: animated liquids.** Nine heroes are playable: the six upstream classes plus Necromancer, Enchanter and Psychic, each with two subclasses, talents and three armor abilities. Full art coverage, enhanced effects and section 9 content remain pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.8 specification](GDD-one-shot-build-spec.md).
 
 ## Build on Windows
 
@@ -104,3 +104,9 @@ which prints the six room measurements below the actual lit screenshot. The raw
 image remains `verification/iteration/sewers-ingame.png`.
 Parameters, score histories, visual critiques and regeneration commands are documented in
 [ART_PIPELINE.md](ART_PIPELINE.md). No subsequent art stage is started by these commands.
+
+The five approved Sewers classes are now locked. Animated sewage, clean water and
+lava use four variants with eight frames each, separate cell phases, and an entry
+ripple. Review `verification/iteration/liquids/` and the lit Sewers image above;
+the Prison and Halls subfolders contain liquid previews with their existing region
+art. These previews do not certify the later regional art gates.

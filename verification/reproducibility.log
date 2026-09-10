@@ -1612,3 +1612,7 @@ bad1b9946b65a7ab073d5d91905dc4d89283e50d31c4863b260bafca2cfe41c9 core/src/main/a
 TEST 29: 288 cached frames; max pHash distance=2; failures=0
 Validated 64 generated specifications; 0 failures. Subset diagnostic only.
 Preserved selected caches and all generated assets after tolerance measurement; restored 291 changed files.
+
+Stage 6a scoped fresh-render check; approved caches skipped and reviewed cache restored
+TEST 28: 69 rebuilt files; byte differences=0; Blender not invoked
+TEST 29: 104 cached frames; max pHash distance=0; failures=0

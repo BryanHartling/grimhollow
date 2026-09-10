@@ -1,0 +1,9 @@
+{
+  "kind": "tile",
+  "dimensions": [
+    512,
+    256
+  ],
+  "rendered_liquid": "water",
+  "output": "core/src/main/assets/environment/water1.png"
+}

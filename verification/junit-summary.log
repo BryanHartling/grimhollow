@@ -78,3 +78,5 @@ Consider enabling configuration cache to speed up this build: https://docs.gradl
 Stage 5.6 fresh core:test --rerun: {'tests': 4, 'failures': 0, 'errors': 0, 'skipped': 0}
 
 Stage 5.7 fresh core:test --rerun: {'tests': 4, 'failures': 0, 'errors': 0, 'skipped': 0}
+
+Stage 6a: core:test --rerun-tasks; tests=4 failures=0 errors=0

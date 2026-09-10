@@ -50,6 +50,10 @@ public class LightingOverlay extends Image {
     private void rebuild() {
         map.clear((Dungeon.depth-1)/5);
         source(Dungeon.hero.pos, Dungeon.hero.viewDistance, .45f, .31f, .12f);
+        if (Dungeon.level.waterTex().equals(com.shatteredpixel.shatteredpixeldungeon.Assets.Environment.WATER_HALLS)) {
+            for (int cell=0;cell<Dungeon.level.length();cell++)
+                if (Dungeon.level.water[cell] && Dungeon.level.heroFOV[cell]) source(cell,1.25f,.13f,.045f,.01f);
+        }
         for (int cell=0; cell<Dungeon.level.length(); cell++) {
             if (Dungeon.level.heroFOV[cell] && Dungeon.level.map[cell] == Terrain.WALL_DECO)
                 source(cell, 3, .38f, .24f, .08f);

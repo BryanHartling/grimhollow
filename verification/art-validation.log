@@ -315,3 +315,10 @@ TEST 28: 64 rebuilt files; byte differences=0; Blender not invoked
 FAIL: Incomplete art inventory: 100 existing sheets lack pipeline specs (including terrain_features.png, tiles_caves.png, tiles_caves_crystal.png, tiles_caves_gnoll.png, tiles_city.png, tiles_halls.png, tiles_prison.png, visual_grid.png).
 FAIL: Full character/item style and referenced-frame coverage gates are not implemented; tests 16 and 17 cannot be certified.
 Validated 64 generated specifications; 2 failures.
+
+Stage 6a validate.py --rebuild --rerender --asset liquids
+TEST 28: 69 rebuilt files; byte differences=0; Blender not invoked
+TEST 29: 104 cached frames; max pHash distance=0; failures=0
+FAIL: Incomplete art inventory: 96 existing sheets lack pipeline specs (including terrain_features.png, tiles_caves.png, tiles_caves_crystal.png, tiles_caves_gnoll.png, tiles_city.png, tiles_halls.png, tiles_prison.png, visual_grid.png).
+FAIL: Full character/item style and referenced-frame coverage gates are not implemented; tests 16 and 17 cannot be certified.
+Validated 69 generated specifications; 2 failures.

@@ -114,3 +114,33 @@ decor 05 (0.920), torch 13 (0.863). Recorded counts are 7/6/6/6/6/14. First visi
 ends at the fourteen-round limit: the existing radius-three source still has residual
 light at two tiles, and distant walls remain warm rather than blue. These numeric
 reference misses are retained; no targets were reduced to certify convergence.
+
+## Stage 6a: animated liquids
+
+The v0.8 review locks floor, wall, door, decor and torch from stage 5.7. Their
+parameter files, raw renders and packed Sewers terrain are pinned in
+`tools/artgen/blender/locks.json`; Blender skips these approved sources.
+The rejected static water rounds remain historical evidence only.
+
+`python tools/artgen/build.py --render --asset liquids` renders four variants by
+eight frames of sewage, clean water and lava, plus eight entry-ripple frames.
+`blender/liquids.py` directly authors displaced surfaces and disconnected, open
+crest ribbons; no reference pixels or parameter-search loop are used. Runtime
+variant/phase hashing breaks both horizontal and diagonal synchronization. Sewers
+uses sewage; Prison, Caves and City use clean water; Halls uses emissive lava.
+The terrain remains upstream water for all movement and interaction rules.
+
+`python tools/artgen/iteration.py --liquids --check` validates every frame and
+requires a recorded room vision judgment rejecting visibly repeated features.
+Autocorrelation retains the 0.35 ceiling, measured on the actual mixed variant/phase
+3x3 runtime composition: identical tile copies would necessarily correlate 1.
+Two room reviews rejected the specified centre-depth contrast; the accepted numeric
+adjustment is 0.02-0.04, preserving the gradient without tile outlines.
+Critiques and the review sheet use the existing round format under
+`verification/iteration/liquids/`.
+
+`python tools/artgen/validate.py --generated-only --rerender --asset liquids`
+checks all 104 new raw frames against the two-bit pHash tolerance, then restores
+the reviewed cache and rebuilds it. CI uses only committed renders; it runs test 41
+on both desktop platforms and the runtime phase checks in the existing Linux
+OpenGL runner. No Blender installation is required by CI.

@@ -79,3 +79,24 @@ PASS: Sewer scene renders with dynamic lighting on and off.
 [Controllers] removed manager for application, 0 managers active
 
 Stage 5 launchers: tools/rebuild.bat BUILD SUCCESSFUL; tools/play.bat created a responding Grimhollow window, then the created window was closed. Initial rendered-atlas test 24 found four empty shared variant rows; pipeline-source preservation fixed all four with the original bounds unchanged.
+
+Stage 6a packaged desktop 0.5.0
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+ITERATION ROOM: seed=417 bounds=1,15,10,22 water=15 doors=2 rubble=2 wallTorch=1 bridgeCell=725 heroCell=726 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 24: heroes=9 mob sprites=102 failures=0
+TEST 25: items=365 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35: packaged classes/resources and source contact scan failures=0
+TESTS 24-26, 34-36 PASS
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active

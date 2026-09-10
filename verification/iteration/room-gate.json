@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.21932332595682502,
+          "value": 0.21956194259398915,
           "minimum": 0.1,
           "maximum": null,
           "pass_": true,
@@ -42,7 +42,7 @@
       "measurements": [
         {
           "target": "median luminance difference",
-          "value": 0.17938605511301747,
+          "value": 0.16106125646786495,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -50,7 +50,7 @@
         },
         {
           "target": "median hue difference",
-          "value": 37.92096114090715,
+          "value": 34.657036255510135,
           "minimum": 30,
           "maximum": null,
           "pass_": true,
@@ -64,15 +64,15 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.14978693678158472,
+          "value": -0.15500880757250818,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.05380170405901076,
-      "inner_mean": 0.2035886408405955,
+      "outer_mean": 0.053578000961669384,
+      "inner_mean": 0.20858680853417755,
       "passing": true
     },
     {
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.14159652612677015,
+          "value": 0.14519278798168572,
           "minimum": 0.12,
           "maximum": 0.2,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.1301311780798819,
+          "value": 0.1268088400593665,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -110,7 +110,7 @@
         },
         {
           "target": "rat bbox contrast",
-          "value": 0.31711227450980384,
+          "value": 0.3180233333333333,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -129,9 +129,9 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.14159652612677015,
+    "region_mean_after_lighting": 0.14519278798168572,
     "region_mean_pass": true,
-    "dominant_green_brown_fraction": 0.8212185329861111,
+    "dominant_green_brown_fraction": 0.8214789496527778,
     "hue_budget_pass": true,
     "accent_families": 1,
     "accent_bins": [
@@ -139,8 +139,8 @@
       0.0,
       0.0,
       0.0,
-      0.00046657986111111113,
-      2.170138888888889e-05,
+      0.00042860243055555555,
+      5.967881944444444e-05,
       0.0,
       0.0,
       0.0,
@@ -156,8 +156,8 @@
       0.45
     ]
   },
-  "screenshot_sha256": "c1b803b2dfb458f0ffcce179e61880b44b09f75e706e92a4b32fa39b38a4417e",
-  "terrain_sha256": "7147446a9bd417b02b055dc2042ad25f809b10ac5bb100d93e0da9a92f109a66",
+  "screenshot_sha256": "71d41ba655167b0f784eb763d4b4a6228bc2fe917e0849d80dd5fd5ba0ef59d1",
+  "terrain_sha256": "9ab32485a8e65012ebadc17c42f9b5a4906df641961ce6b83ff3505d257ea06d",
   "sample_count": 80,
   "seed": 417,
   "lighting": true,

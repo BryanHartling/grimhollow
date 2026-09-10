@@ -69,6 +69,7 @@ def validate(generated_only=False):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(); parser.add_argument('--generated-only',action='store_true');parser.add_argument('--rerender',action='store_true');parser.add_argument('--rebuild',action='store_true')
+    parser.add_argument('--asset',help='Scope a fresh Blender reproducibility run, preserving approved classes')
     args=parser.parse_args();render_fail=False
     if args.rebuild:
         import hashlib
@@ -80,9 +81,15 @@ if __name__=='__main__':
     if args.rerender:
         from rendered import CACHE,phash
         from build import render,build
-        before={p:phash(p) for p in CACHE.rglob('*.png')};render();build()
+        paths=list((CACHE/args.asset).rglob('*.png')) if args.asset else list(CACHE.rglob('*.png'))
+        # A tolerance check must not replace the reviewed cache with a different render.
+        original={p:p.read_bytes() for p in paths}
+        before={p:phash(p) for p in paths};render(args.asset);build()
         changed=[(str(p.relative_to(CACHE)),int(np.count_nonzero(bits!=phash(p)))) for p,bits in before.items()]
         bad=[(name,bits) for name,bits in changed if bits>2];render_fail=render_fail or bool(bad) or not before
         for name,bits in bad:print('FAIL: render pHash',name,bits,'bits')
         print(f'TEST 29: {len(changed)} cached frames; max pHash distance={max((v for _,v in changed),default=-1)}; failures={len(bad)}')
+        for path,data in original.items():path.write_bytes(data)
+        import rendered
+        rendered.tile.cache_clear();rendered.liquid_frame.cache_clear();build()
     sys.exit(validate(args.generated_only) or render_fail)

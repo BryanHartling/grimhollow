@@ -1,0 +1,9 @@
+{
+  "kind": "items",
+  "dimensions": [
+    512,
+    64
+  ],
+  "rendered_ripple": true,
+  "output": "core/src/main/assets/effects/liquid_ripple.png"
+}

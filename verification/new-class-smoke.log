@@ -1251,3 +1251,157 @@ TEST 35: packaged classes/resources and source contact scan failures=0
 TESTS 24-26, 34-36 PASS
 PASS: Sewer scene renders with dynamic lighting on and off.
 [Controllers] removed manager for application, 0 managers active
+
+Stage 6a core:smokeRun --rerun-tasks
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.4.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :services:compileJava
+> Task :services:processResources NO-SOURCE
+> Task :services:classes
+> Task :services:jar
+
+> Task :SPD-classes:compileJava
+Note: C:\Users\Hartl\Documents\grimhollow\SPD-classes\src\main\java\com\watabou\noosa\TextInput.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes
+> Task :SPD-classes:jar
+
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+> Task :core:compileJava
+
+> Task :core:classes
+> Task :core:compileTestJava
+> Task :core:testClasses
+> Task :core:test
+
+> Task :core:smokeRun
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=0 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=0 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=1 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=2 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=3 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=4 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=5 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=6 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=7 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=8 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=9 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=0 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=1 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=2 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=3 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=4 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=5 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=6 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=7 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=8 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=9 floor=6 save/load=ok
+Runs=30 failures=0
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.4.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 13s
+8 actionable tasks: 8 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.0/userguide/configuration_cache_enabling.html

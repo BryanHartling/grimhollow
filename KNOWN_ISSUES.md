@@ -1,18 +1,18 @@
 # Known issues
 
-- Stage 5.7 is at the human-review boundary: tests 39 and 40 pass for six Sewers classes; floor/wall/water/door/decor converge, while the torch stops after 14 rounds with best round 13 at composite 0.863 because the existing radius and far-wall hue miss reference targets 24/05; stage 6 has not started.
-- Tests 4 and 17 fail: `Validated 64 generated specifications; 2 failures`; 100 existing sheets lack pipeline sources, and full character/item style and referenced-frame coverage remain unfinished. The implemented 64-specification subset passes; cache-only rebuilding has zero byte differences.
-- Characters and mobs retain the rejected POC or procedural checkpoint art pending the stage-6 silhouette redesign; special terrain outside the six iterated archetypes retains its procedural base, including the bridge surface; Bone Prison still uses barricade visuals.
-- Full tests 6, 7 and 8 are NOT RUN: scripted talent maps and representative hooks pass, and all nine new armor abilities execute, but exhaustive talent-selection and actual Tengu/crown UI flows were not driven.
-- Test 9 is NOT RUN in full: Bone Prison and Force Wall restore correctly, but Wand of Bone belongs to the undelivered content stage.
-- Tests 16, 18, 19 and 30 are NOT RUN: complete sprite-index coverage, five-region luminance, floor-15 turn-performance and regional mob-histogram measurements remain pending; Android device gameplay is untested.
-- Tests 31 and 32 are NOT RUN because enhanced effects and scorch decals belong to stage 7.
-- Test 15 retains `Runs=90 failures=0` for all nine heroes and this stage reruns the three new heroes with `Runs=30 failures=0`; the harness uses upstream generation/debug descent and does not play combats or search for stairs as a player would.
-- Test 21 cannot pass while the full art gate reports its two existing coverage failures; the gate remains active and platform artifacts still upload; the stage-5.7 local three-class gate reports Runs=30 failures=0.
-- Tests 20 and 22 retain their checkpoint PASS under section 14: no-SDK desktop launch and APK identity com.grimhollow.dungeon / Grimhollow; Android device gameplay remains untested.
-- GitHub Actions dispatch/settings requests return HTTP 403 with the supplied token; push-triggered workflows work but may appear after a delay.
-- The documented escalation route handles restricted Git/network/Blender/Java commands; stage-5.7 fetch and .git scratch write succeeded through it, and Gradle commands use --no-daemon.
-- One earlier compile approval review timed out; its permitted retry succeeded. An earlier runner spawn timed out; the existing build session remained available and completed.
-- Reference fit limits are recorded per file in SOURCES.md: amber-reflecting colour sewer rather than green water, stone culvert equivalent, unlit material maps, torch holder without a wall-light cone, unhooded seated statue, burned-ground scorch study and blood stain of unverified age; numerical loop scores do not replace this human art review.
-- Test 38 remains FAIL for the expanded local intake: all 33 supplied images are indexed, but 18 lack a verified CC0/public-domain grant or restrict standalone redistribution and are excluded from Git/optimization; U17 also has unresolved original/game provenance, and U08/U09 are alternate crops of one photograph. The original 55-file board passed; 70 licensed files are eligible.
-- Test 29 passes for 288 frames with maximum pHash distance 2 and zero failures; the tolerance run changed 291 cache/generated files, which were restored afterward to preserve selected rounds and out-of-scope art.
+- Stage 6a ships animated sewage, water and lava; Prison/Caves/City/Halls art, character redesign, items/title, enhanced effects and section 9 content remain pending in stages 6b-8.
+- Tests 4 and 17 remain incomplete: 96 existing sheets lack pipeline sources and full character/item style and referenced-frame coverage are unfinished; the implemented inventory is 69 specifications.
+- Test 41 uses actual runtime mixed variant/phase tiling for the unchanged 0.35 autocorrelation ceiling because identical tile copies necessarily correlate 1; centre-depth contrast is adjusted to 0.02-0.04 after two visual failures, as documented in CHANGES.md.
+- Characters and mobs retain rejected POC or procedural checkpoint art pending stage 6d; special terrain retains its procedural base, including bridge surfaces, and Bone Prison still uses barricade visuals.
+- Tests 6, 7 and 8 are NOT RUN in full: representative talent hooks and all nine armor abilities execute, but exhaustive selection and actual Tengu/crown UI flows were not driven.
+- Test 9 is NOT RUN in full: Bone Prison and Force Wall restoration pass representative scenarios, but Wand of Bone belongs to the undelivered content stage.
+- Tests 16, 18, 19, 30 and 42 are NOT RUN in full: complete sprite-index coverage, five-region luminance/room gates, floor-15 timing and regional mob-histogram checks remain pending; Prison/Halls screenshots currently certify liquid appearance only.
+- Tests 31 and 32 are NOT RUN because enhanced effects and scorch decals belong to stage 7; Halls retains its upstream ember particles around the new lava.
+- Test 15 reports Runs=30 failures=0 for the three new classes; the retained nine-hero result is Runs=90 failures=0, using upstream generation/debug descent rather than simulated player combat and stair search.
+- Test 21 remains blocked by the full art gate until stage 6e; checks remain enabled and platform build artifacts still upload.
+- Tests 20, 22 and 23 retain checkpoint results per section 14; Android device gameplay remains untested.
+- GitHub Actions dispatch/settings requests previously returned HTTP 403; push-triggered workflows are the working route and may appear after a delay.
+- Restricted Git/network/Blender/Java commands use the documented escalation route and Gradle --no-daemon; fetch and the .git scratch write/delete succeeded, while optional sandboxed Get-CimInstance inspection was denied and existing command output supplied the needed status.
+- Test 38 remains FAIL for the expanded local intake: 18 of 33 supplied images lack verified CC0/public-domain redistribution permission and remain excluded from Git/optimization; U17 has unresolved game provenance and U08/U09 are alternate crops; 70 licensed reference files are eligible.
+- Reference-fit limitations remain recorded in SOURCES.md, including amber sewer water, equivalent culvert architecture, unlit maps, a torch without a wall cone, an unhooded statue, a burned-ground study and a blood stain of unverified age.
+- Test 29 passes for all 104 new liquid/ripple frames with maximum pHash distance 0; approved Sewers caches were skipped, the prior 288-frame result is retained, and the reviewed liquid cache was restored after verification.

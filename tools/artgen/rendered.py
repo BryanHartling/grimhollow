@@ -28,6 +28,21 @@ def quantize(image,tile=False):
     pixels[:,:,:3]=result.reshape(rgb.shape);pixels[:,:,3]=active.astype(np.uint8)*255
     return Image.fromarray(pixels)
 
+@lru_cache(maxsize=32)
+def material_palette(parameters,kind):
+    from validate import lab
+    params=json.loads(parameters);flame_edge=params.get('flame_edge','782D17')
+    swatches=np.concatenate([COLORS,np.array([tuple(bytes.fromhex(params[k])) for k in ('stone_color','moss_color','water_color')]),np.array([tuple(bytes.fromhex(flame_edge))])])
+    candidates=[]
+    for level in (np.linspace(0,.9,65) if params.get('smooth_tones') else params['tone_curve']):
+        candidates.extend(np.clip(swatches*level/np.maximum(.001,swatches@np.array([.2126,.7152,.0722])/255)[:,None],0,255))
+    if kind=='wall_torch':candidates.extend([tuple(bytes.fromhex(c)) for c in (flame_edge,'E0982F','E4C76A','EFE7D2')])
+    palette=np.unique(np.rint(candidates).astype(np.uint8),axis=0)
+    allowed=np.concatenate([COLORS*s for s in np.linspace(0,1,101)]+[COLORS+(255-COLORS)*s for s in np.linspace(0,1,101)])
+    distances=((lab(palette)[:,None,:]-lab(allowed)[None,:,:])**2).sum(axis=2)
+    return palette[distances.min(axis=1)<=12**2]
+
+
 def sewers_quantize(image,params,kind):
     """Four value bands preserve material hue without bleaching bright slabs.
 
@@ -49,15 +64,7 @@ def sewers_quantize(image,params,kind):
     original=pixels[:,:,:3].astype(float)
     if kind=='wall_torch':rgb=np.where(emissive[:,:,None],original,rgb)
     flame_edge=params.get('flame_edge','782D17')
-    swatches=np.concatenate([COLORS,np.array([tuple(bytes.fromhex(params[k])) for k in ('stone_color','moss_color','water_color')]),np.array([tuple(bytes.fromhex(flame_edge))])])
-    candidates=[]
-    for level in (np.linspace(0,.9,65) if params.get('smooth_tones') else params['tone_curve']):
-        candidates.extend(np.clip(swatches*level/np.maximum(.001,swatches@np.array([.2126,.7152,.0722])/255)[:,None],0,255))
-    if kind=='wall_torch':candidates.extend([tuple(bytes.fromhex(c)) for c in (flame_edge,'E0982F','E4C76A','EFE7D2')])
-    palette=np.unique(np.rint(candidates).astype(np.uint8),axis=0)
-    allowed=np.concatenate([COLORS*s for s in np.linspace(0,1,101)]+[COLORS+(255-COLORS)*s for s in np.linspace(0,1,101)])
-    distances=((lab(palette)[:,None,:]-lab(allowed)[None,:,:])**2).sum(axis=2)
-    palette=palette[distances.min(axis=1)<=12**2]
+    palette=material_palette(json.dumps(params,sort_keys=True),kind)
     flat=rgb.reshape(-1,3);result=np.empty_like(flat,dtype=np.uint8)
     for start in range(0,len(flat),2048):
         chunk=flat[start:start+2048]
@@ -91,6 +98,28 @@ def tile(kind,variant=0):
     params=Path(__file__).parent/'blender/params'/f'{"door" if kind=="door_open" else kind}.json'
     if params.exists():return sewers_quantize(source,json.loads(params.read_text()),kind)
     return quantize(source,True)
+
+
+@lru_cache(maxsize=104)
+def liquid_frame(kind,variant,frame):
+    colors={'sewage':'506344','water':'486678','lava':'783D24'}
+    params=dict(absolute_tones=True,smooth_tones=True,tone_gamma=1,
+        tone_positions=[0,1],tone_curve=[0,1],stone_color=colors[kind],
+        moss_color='506344',water_color=colors[kind])
+    return sewers_quantize(Image.open(CACHE/f'liquids/{kind}/{variant}_{frame}.png'),params,kind)
+
+
+def liquid_atlas(kind):
+    image=Image.new('RGBA',(512,256))
+    for variant in range(4):
+        for frame in range(8):image.paste(liquid_frame(kind,variant,frame),(frame*64,variant*64))
+    return image
+
+
+def ripple_atlas():
+    image=Image.new('RGBA',(512,64))
+    for frame in range(8):image.paste(quantize(Image.open(CACHE/f'liquids/ripple/{frame}.png')),(frame*64,0))
+    return image
 
 def character(spec,base=None):
     # Shared upstream atlases also contain variants outside the rendered POC.

@@ -16,3 +16,17 @@ Visible-cell value range: visible mean=0.1416, visible std=0.1301 PASS
 Hero / rat / item readability: hero bbox contrast=0.4452, rat bbox contrast=0.3171, item bbox contrast=0.5366 PASS
 TEST 40: measurements=6 failures=0
 TEST 39: classes=6 failures=0
+
+Stage 6a iteration and liquid gates
+Wall/floor distinctness: mean luminance difference=0.2196, representative pHash bits=34.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.1810 PASS
+Adjacent water/floor contrast: median luminance difference=0.1611, median hue difference=34.6570 PASS
+No boundary halo: outer minus inner mean=-0.1550 PASS
+Visible-cell value range: visible mean=0.1452, visible std=0.1268 PASS
+Hero / rat / item readability: hero bbox contrast=0.4452, rat bbox contrast=0.3180, item bbox contrast=0.5366 PASS
+TEST 40: measurements=6 failures=0
+TEST 39: locked classes=5 failures=0; liquids use test 41
+sewage: min variant pHash=28, max one-tile autocorrelation=0.340
+water: min variant pHash=28, max one-tile autocorrelation=0.340
+lava: min variant pHash=28, max one-tile autocorrelation=0.340
+TEST 41: liquid frames=96 failures=0

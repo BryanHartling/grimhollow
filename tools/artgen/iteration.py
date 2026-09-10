@@ -532,7 +532,7 @@ def liquid_review(number=None,vision_path=None,preview=False):
         record=dict(round=number,vision=vision,metrics=metrics,failures=failures,passing=not failures,
             screenshot_sha256=hashlib.sha256((OUT/'sewers-ingame.png').read_bytes()).hexdigest(),
             room_sha256={name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in vision.get('rooms',[])},
-            cache_sha256={str(p.relative_to(CACHE)):hashlib.sha256(p.read_bytes()).hexdigest() for p in (CACHE/'liquids').rglob('*.png')},
+            cache_sha256={p.relative_to(CACHE).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in (CACHE/'liquids').rglob('*.png')},
             autocorrelation_method='Actual runtime 3x3 variant/phase composition at eight times and three origins; identical copies necessarily correlate 1 and are not the runtime tiling.')
         (folder/f'round-{number:02}.json').write_text(json.dumps(record,indent=2)+'\n')
     else:

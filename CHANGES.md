@@ -1370,3 +1370,5 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `verification/iteration/prison/sewers-terrain.png`: Actual OpenGL room capture, derived measurements or recorded liquid critique.
 
 - Cache the pure material-palette calculation across frames; the quantization candidates and output pixels are unchanged.
+
+- Store render-cache evidence paths with POSIX separators so the same liquid gate resolves frames on Windows and Linux; SHA-256 values and image pixels are unchanged.

@@ -145,6 +145,7 @@ def render(asset=None):
     subprocess.run(command,check=True,env=env)
     import rendered
     rendered.tile.cache_clear()
+    rendered.region_tile.cache_clear()
     rendered.liquid_frame.cache_clear()
 
 def build():

@@ -91,5 +91,5 @@ if __name__=='__main__':
         print(f'TEST 29: {len(changed)} cached frames; max pHash distance={max((v for _,v in changed),default=-1)}; failures={len(bad)}')
         for path,data in original.items():path.write_bytes(data)
         import rendered
-        rendered.tile.cache_clear();rendered.liquid_frame.cache_clear();build()
+        rendered.tile.cache_clear();rendered.liquid_frame.cache_clear();rendered.region_tile.cache_clear();build()
     sys.exit(validate(args.generated_only) or render_fail)

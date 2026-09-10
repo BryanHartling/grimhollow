@@ -79,7 +79,7 @@ def character(kind,tier=0):
             module.pose(root,joints,animation,frame/max(1,count-1))
             render(CACHE/f'{kind}/{tier}/{animation}_{frame}.png')
 
-import argparse
+import argparse,regions
 parser=argparse.ArgumentParser();parser.add_argument('--asset');args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
 assets=set(args.asset.split(',')) if args.asset else None
 locked=set(json.loads((HERE/'locks.json').read_text())['classes'])
@@ -98,4 +98,10 @@ if assets is None or 'liquids' in assets:
         for variant in range(4):
             for frame in range(8):liquids.render(kind,variant,frame,reset,camera,render,CACHE)
     for frame in range(8):liquids.ripple(frame,reset,camera,render,CACHE)
-print(f'POC rendering complete: {rendered_count} rendered files')
+
+if assets is None or any(a.startswith('prison') for a in assets):
+    for kind in ('floor','wall','door','door_open','decor','wall_torch'):
+        if assets is None or 'prison' in assets or 'prison:'+kind in assets or (kind=='door_open' and 'prison:door' in assets):
+            for variant in range(3):regions.render('prison',kind,variant,reset,camera,render,CACHE)
+
+print(f'Rendering complete: {rendered_count} rendered files')

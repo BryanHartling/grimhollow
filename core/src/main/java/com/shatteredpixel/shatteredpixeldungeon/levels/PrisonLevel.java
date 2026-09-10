@@ -225,6 +225,7 @@ public class PrisonLevel extends RegularLevel {
 	public static class Torch extends Emitter {
 		
 		private int pos;
+        private final Halo halo;
 		
 		public Torch( int pos ) {
 			super();
@@ -236,12 +237,15 @@ public class PrisonLevel extends RegularLevel {
 			
 			pour( FlameParticle.FACTORY, 0.15f );
 			
-			add( new Halo( 12, 0xFFFFCC, 0.4f ).point( p.x, p.y + 1 ) );
+            halo = new Halo(12, 0xFFFFCC, 0.4f);
+            add(halo.point(p.x, p.y + 1));
+            halo.visible = !com.shatteredpixel.shatteredpixeldungeon.SPDSettings.dynamicLighting();
 		}
 		
 		@Override
 		public void update() {
-			if (visible = (pos < Dungeon.level.heroFOV.length && Dungeon.level.heroFOV[pos])) {
+			halo.visible = !com.shatteredpixel.shatteredpixeldungeon.SPDSettings.dynamicLighting();
+            if (visible = (pos < Dungeon.level.heroFOV.length && Dungeon.level.heroFOV[pos])) {
 				super.update();
 			}
 		}

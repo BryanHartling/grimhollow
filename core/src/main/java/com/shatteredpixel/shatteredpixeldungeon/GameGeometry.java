@@ -16,7 +16,8 @@ public final class GameGeometry {
 
     public static int tileFrame(String texture) {
         return texture.equals(Assets.Environment.TILES_SEWERS)
-                || texture.equals("environment/walls_sewers.png") ? TILE_SIZE : WORLD_TILE_SIZE;
+                || texture.equals("environment/walls_sewers.png")
+                || texture.equals("environment/tiles_prison.png") ? TILE_SIZE : WORLD_TILE_SIZE;
     }
     public static final int LOGICAL_TILE = WORLD_TILE_SIZE;
     public static final int TEX_TILE = TILE_SIZE, TEX_HERO_W = HERO_FRAME_W, TEX_HERO_H = HERO_FRAME_H;

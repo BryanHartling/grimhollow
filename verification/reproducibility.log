@@ -1616,3 +1616,7 @@ Preserved selected caches and all generated assets after tolerance measurement; 
 Stage 6a scoped fresh-render check; approved caches skipped and reviewed cache restored
 TEST 28: 69 rebuilt files; byte differences=0; Blender not invoked
 TEST 29: 104 cached frames; max pHash distance=0; failures=0
+
+Stage 6b: python tools/artgen/validate.py --rebuild --rerender --asset prison
+TEST 28: 70 rebuilt files; byte differences=0; Blender not invoked
+TEST 29: 24 cached frames; max pHash distance=0; failures=0

@@ -95,7 +95,7 @@ public class LightingOverlay extends Image {
 
     /** Walls draw after actors for occlusion, so sample the same map in their own pass. */
     public static NoosaScript walls() {
-        if (active == null || !SPDSettings.dynamicLighting() || Dungeon.depth > 5)
+        if (active == null || !SPDSettings.dynamicLighting() || Dungeon.depth > 10)
             return NoosaScriptNoLighting.get();
         WallLightScript script = com.watabou.glscripts.Script.use(WallLightScript.class);
         Gdx.gl.glActiveTexture(Gdx.gl.GL_TEXTURE1);

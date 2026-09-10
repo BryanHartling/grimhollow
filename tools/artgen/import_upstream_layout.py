@@ -12,6 +12,25 @@ from build import ROOT, SPEC_DIR, COLORS
 
 BASE = '7b8b845a76fe76c6b7c031ae9e570852411f56db'
 git = shutil.which('git')
+if '--region' in __import__('sys').argv:
+    region=__import__('sys').argv[__import__('sys').argv.index('--region')+1]
+    if region not in ('prison','caves','city','halls'):raise ValueError('Unknown region')
+    name='tiles_'+region;source=subprocess.check_output([git,'show',BASE+':core/src/main/assets/environment/'+name+'.png'],cwd=ROOT)
+    image=Image.open(io.BytesIO(source)).convert('RGBA');pixels=np.array(image);runs=[]
+    for y,row in enumerate(pixels):
+        x=0
+        while x<len(row):
+            if row[x,3]<128:x+=1;continue
+            role=int(np.argmin(np.sum((COLORS.astype(np.int32)-row[x,:3].astype(np.int32))**2,axis=1)))
+            end=x+1
+            while end<len(row) and np.array_equal(row[end],row[x]):end+=1
+            runs.append([y,x,end-x,role]);x=end
+    mapping=json.loads((SPEC_DIR/'tiles_sewers.json').read_text())['rendered_tiles']
+    spec=dict(kind='tile',dimensions=[image.width*4,image.height*4],source_dimensions=list(image.size),frame=[64,64],
+        silhouette=runs,seed=417,region=region,rendered_tiles={i:k for i,k in mapping.items() if k!='grass'},
+        provenance='GPL-3.0-or-later upstream '+BASE,output='core/src/main/assets/environment/'+name+'.png')
+    (SPEC_DIR/(name+'.json')).write_text(json.dumps(spec,separators=(',',':'))+'\n')
+    print('Imported '+region+' layout; approved Sewers inputs unchanged.');raise SystemExit(0)
 source = subprocess.check_output([git,'show',BASE+':core/src/main/assets/environment/tiles_sewers.png'],cwd=ROOT)
 image = Image.open(io.BytesIO(source)).convert('RGBA')
 pixels = np.array(image)

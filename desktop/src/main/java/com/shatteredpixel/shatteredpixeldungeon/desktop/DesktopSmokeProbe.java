@@ -71,12 +71,16 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 PixmapIO.writePNG(Gdx.files.absolute(reviewPath("sewers-ingame.png")),shot,-1,true);shot.dispose();
                 roomMetadata();
                 Dungeon.hero.sprite.visible=false;reviewRat.sprite.visible=false;reviewItem.sprite.visible=false;
+                com.shatteredpixel.shatteredpixeldungeon.ui.TargetHealthIndicator targetBar=com.shatteredpixel.shatteredpixeldungeon.ui.TargetHealthIndicator.instance;
+                boolean targetBarVisible=targetBar!=null&&targetBar.visible;
+                if(targetBar!=null)targetBar.visible=false;
                 // Draw the exact same frame without subjects; ItemSprite.update would
                 // otherwise restore visibility before a later-frame background capture.
                 Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);Game.scene().draw();
                 Pixmap ground=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());
                 PixmapIO.writePNG(Gdx.files.absolute(reviewPath("sewers-terrain.png")),ground,-1,true);ground.dispose();
                 Dungeon.hero.sprite.visible=true;reviewRat.sprite.visible=true;reviewItem.sprite.visible=true;
+                if(targetBar!=null)targetBar.visible=targetBarVisible;
                 System.out.println("ITERATION SCREENSHOT: lighting=true defaultZoom="+com.watabou.noosa.Camera.main.zoom);
             }
             if(Boolean.getBoolean("grimhollow.renderPoc")){Pixmap shot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());PixmapIO.writePNG(Gdx.files.absolute("verification/render-poc-ingame.png"),shot,-1,true);shot.dispose();}
@@ -130,7 +134,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                         if(distance<nearest){bridge=c;nearest=distance;}
                     }
                 }
-                if(water>=4&&door>0&&(reviewRegion!=0 || (decor>0&&torch==1))&&bridge>=0) {
+                if(water>=4&&door>0&&((reviewRegion==0||reviewRegion==1)?(decor>0&&torch==1):true)&&bridge>=0) {
                     for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:level.mobs)
                         com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(mob);
                     level.mobs.clear();level.heaps.clear();

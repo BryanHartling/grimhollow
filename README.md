@@ -2,7 +2,7 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), based on **v3.3.8**, commit `7b8b845a76fe76c6b7c031ae9e570852411f56db`. Upstream history and Java packages are preserved.
 
-**Stage 6a: animated liquids.** Nine heroes are playable: the six upstream classes plus Necromancer, Enchanter and Psychic, each with two subclasses, talents and three armor abilities. Full art coverage, enhanced effects and section 9 content remain pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.8 specification](GDD-one-shot-build-spec.md).
+**Stage 6b: Prison environment and animated liquids.** Nine heroes are playable: the six upstream classes plus Necromancer, Enchanter and Psychic, each with two subclasses, talents and three armor abilities. Full art coverage, enhanced effects and section 9 content remain pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.8 specification](GDD-one-shot-build-spec.md).
 
 ## Build on Windows
 
@@ -18,7 +18,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true
-java -jar desktop\build\libs\desktop-0.4.3.jar
+java -jar desktop\build\libs\desktop-0.5.1.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.

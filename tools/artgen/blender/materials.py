@@ -90,7 +90,13 @@ def environment(p):
             e=ramp.color_ramp.elements[0] if i==0 else ramp.color_ramp.elements.new(at)
             e.position=at;e.color=tuple(v*value for v in rgb(color))+(1,)
         links.new(noise.outputs['Fac'] if name=='water' and 'water_steps' in p else shaded.outputs[0],ramp.inputs['Fac'])
-        emission=nodes.new('ShaderNodeEmission');links.new(ramp.outputs[0],emission.inputs['Color'])
+        painted=ramp.outputs[0]
+        if name in ('iron','iron_glint') and 'rust_threshold' in p:
+            spots=nodes.new('ShaderNodeTexNoise');spots.inputs['Scale'].default_value=p.get('rust_frequency',18);spots.inputs['Detail'].default_value=1
+            links.new(combine.outputs[0],spots.inputs['Vector'])
+            threshold=nodes.new('ShaderNodeMath');threshold.operation='GREATER_THAN';threshold.inputs[1].default_value=p['rust_threshold'];links.new(spots.outputs['Fac'],threshold.inputs[0])
+            mix=nodes.new('ShaderNodeMixRGB');links.new(threshold.outputs[0],mix.inputs[0]);links.new(painted,mix.inputs[1]);mix.inputs[2].default_value=(*rgb(p.get('rust_color','8A4B12')),1);painted=mix.outputs[0]
+        emission=nodes.new('ShaderNodeEmission');links.new(painted,emission.inputs['Color'])
         if name in ('stone','water','iron_glint'):
             gloss=nodes.new('ShaderNodeBsdfGlossy')
             gloss.inputs['Color'].default_value=(.7,.65,.50,1)

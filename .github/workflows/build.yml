@@ -36,12 +36,21 @@ jobs:
       - name: Animated liquid acceptance 41 (committed cache only)
         if: ${{ !cancelled() }}
         run: python tools/artgen/iteration.py --liquids --check
+      - name: Prison iteration and room acceptance 39/42 (committed cache only)
+        if: ${{ !cancelled() }}
+        run: python tools/artgen/iteration.py --region prison --check
       - name: Offscreen geometry acceptance 24-26
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         run: xvfb-run -a java -Dgrimhollow.iteration=true -Dgrimhollow.geometryTests=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
       - name: Live room gate including boundary halo regression
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         run: python tools/artgen/iteration.py --check-room
+      - name: Render live Prison room
+        if: ${{ !cancelled() && runner.os == 'Linux' }}
+        run: xvfb-run -a java -Dgrimhollow.iteration=true -Dgrimhollow.region=1 -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
+      - name: Live Prison room gate
+        if: ${{ !cancelled() && runner.os == 'Linux' }}
+        run: python tools/artgen/iteration.py --region prison --check-room
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

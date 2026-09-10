@@ -34,7 +34,7 @@ def material_palette(parameters,kind):
     params=json.loads(parameters);flame_edge=params.get('flame_edge','782D17')
     swatches=np.concatenate([COLORS,np.array([tuple(bytes.fromhex(params[k])) for k in ('stone_color','moss_color','water_color')]),np.array([tuple(bytes.fromhex(flame_edge))])])
     candidates=[]
-    for level in (np.linspace(0,.9,65) if params.get('smooth_tones') else params['tone_curve']):
+    for level in (np.linspace(0,.9,65) if params.get('smooth_tones') else sorted(set(params['tone_curve']+params.get('iron_tone_curve',[])))):
         candidates.extend(np.clip(swatches*level/np.maximum(.001,swatches@np.array([.2126,.7152,.0722])/255)[:,None],0,255))
     if kind=='wall_torch':candidates.extend([tuple(bytes.fromhex(c)) for c in (flame_edge,'E0982F','E4C76A','EFE7D2')])
     palette=np.unique(np.rint(candidates).astype(np.uint8),axis=0)
@@ -43,7 +43,7 @@ def material_palette(parameters,kind):
     return palette[distances.min(axis=1)<=12**2]
 
 
-def sewers_quantize(image,params,kind):
+def sewers_quantize(image,params,kind,material_mask=None):
     """Four value bands preserve material hue without bleaching bright slabs.
 
     Candidates derive from the locked palette/material nodes, and each must
@@ -60,6 +60,11 @@ def sewers_quantize(image,params,kind):
     value=(lum if params.get('absolute_tones') else np.clip((lum-lo)/max(.02,hi-lo),0,1))**params['tone_gamma']
     targets=(np.interp(value,params['tone_positions'],params['tone_curve']) if params.get('smooth_tones')
              else np.array(params['tone_curve'])[np.searchsorted(params['tone_breaks'],value)])
+    if 'iron_tone_curve' in params:
+        # Cold iron has its own four material values, distinct from stone jambs.
+        iron=(np.asarray(material_mask.convert('L'))>127)&active if material_mask is not None else (rgb[:,:,2]>rgb[:,:,0]*1.04)&active
+        metal=np.array(params['iron_tone_curve'])[np.searchsorted(params['tone_breaks'],value)]
+        targets=np.where(iron,metal,targets)
     rgb=np.clip(rgb*targets[:,:,None]/np.maximum(lum[:,:,None],.002),0,255)
     original=pixels[:,:,:3].astype(float)
     if kind=='wall_torch':rgb=np.where(emissive[:,:,None],original,rgb)
@@ -121,6 +126,15 @@ def ripple_atlas():
     for frame in range(8):image.paste(quantize(Image.open(CACHE/f'liquids/ripple/{frame}.png')),(frame*64,0))
     return image
 
+@lru_cache(maxsize=96)
+def region_tile(region,kind,variant=0):
+    if kind=='water':return liquid_frame('water',variant,0)
+    p=json.loads((Path(__file__).parent/'blender/params'/region/(('door' if kind=='door_open' else kind)+'.json')).read_text())
+    image=Image.open(CACHE/region/f'{kind}_{variant}.png').crop((64,64,128,128))
+    mask=Image.open(CACHE/region/f'{kind}_{variant}_metal.png').crop((64,64,128,128)) if kind.startswith('door') else None
+    return sewers_quantize(image,p,kind,mask)
+
+
 def character(spec,base=None):
     # Shared upstream atlases also contain variants outside the rendered POC.
     # Keep their generated source frames until those variants reach stage 6.
@@ -132,16 +146,18 @@ def character(spec,base=None):
 
 def apply_tiles(spec,base):
     output=base.copy()
+    region=spec.get('region','sewers')
+    get_tile=tile if region=='sewers' else lambda kind,v=0:region_tile(region,kind,v)
     for index,kind in spec['rendered_tiles'].items():
         index=int(index);x=index%16*64;y=index//16*64;original=base.crop((x,y,x+64,y+64))
         variant=(index//6)%3 if kind in ('floor','decor') and index<16 else index%3
         if kind=='decor':
-            material=tile('floor',variant).copy();material.alpha_composite(tile('decor',variant))
+            material=get_tile('floor',variant).copy();material.alpha_composite(get_tile('decor',variant))
         elif kind=='wall_torch':
-            material=tile('wall',variant).copy();material.alpha_composite(tile('wall_torch',variant))
-        else:material=tile(kind,variant).copy()
+            material=get_tile('wall',variant).copy();material.alpha_composite(get_tile('wall_torch',variant))
+        else:material=get_tile(kind,variant).copy()
         if kind=='floor' and 33<=index<=47:
-            params=json.loads((Path(__file__).parent/'blender/params/floor.json').read_text())
+            params=json.loads((Path(__file__).parent/'blender/params'/('' if region=='sewers' else region)/'floor.json').read_text())
             if 'bank_color' in params:
                 # Wet bank components retain the floor geometry but use the
                 # waterline's darker material/value range, not dry floor albedo.

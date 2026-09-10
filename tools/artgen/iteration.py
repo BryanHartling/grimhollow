@@ -13,13 +13,29 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 from build import ROOT, COLORS
-from rendered import tile, CACHE
+from rendered import tile, region_tile, CACHE
 from validate import lab
 
 CLASSES=('floor','wall','water','door','decor','wall_torch')
 OUT=ROOT/'verification/iteration'
 PARAMS=ROOT/'tools/artgen/blender/params'
 LUMA=np.array([.2126,.7152,.0722])
+REGION='sewers'
+REGIONS={'sewers':dict(ambient=[.50,.55,.45],mean=.14), 'prison':dict(ambient=[.50,.50,.58],mean=.12)}
+
+def select_region(region):
+    global REGION,OUT,PARAMS,REFERENCES,tile
+    REGION=region
+    if region=='sewers':return
+    OUT=ROOT/'verification/iteration'/region;PARAMS=ROOT/'tools/artgen/blender/params'/region
+    tile=lambda kind,variant=0:region_tile(region,kind,variant)
+    REFERENCES={'floor':[(7,1),(21,.7)],'wall':[(7,1),(12,.5)],'door':[(10,.9),(12,.5)],
+                'decor':[(10,.9),(11,.5),(12,.5)],'wall_torch':[(7,1),(9,.4)]}
+
+def dominant_hues(h,s,rgb):
+    if REGION=='sewers':return (h>=15)&(h<=125)
+    chroma=np.linalg.norm(lab(rgb)[:,1:],axis=1)
+    return (chroma<8)|((h>=25)&(h<=65))
 REFERENCES={
  'floor':[(4,1),(19,1),(20,.8),(21,.7)],
  'wall':[(4,1),(1,.9),(3,.4),(5,.6),(21,.7)],
@@ -89,7 +105,7 @@ def scene(images):
     raw=np.array(canvas)[:,:,:3].astype(float)/255
     yy,xx=np.mgrid[:448,:448];xx=(xx//16+.5)/4;yy=(yy//16+.5)/4
     # Actual LightMap AMBIENT[0] and LightingOverlay hero/torch source values.
-    light=np.broadcast_to(np.array([.50,.55,.45]),raw.shape).copy()
+    light=np.broadcast_to(np.array(REGIONS[REGION]['ambient']),raw.shape).copy()
     for x,y,radius,color in [(3.5,3.5,8,[.45,.31,.12]),(3.5,.5,3,[.38,.24,.08])]:
         strength=np.maximum(0,1-np.hypot(xx-x,yy-y)/radius)**2
         light+=strength[:,:,None]*color
@@ -124,6 +140,7 @@ def target(name,value,low=None,high=None):
 
 
 def scores(kind,metrics,p,seam,images):
+    if REGION!='sewers':return region_scores(kind,metrics,p,seam,images)
     lit,raw,light=scene(images);room_lum=lit@LUMA
     h,s,v=hsv(lit*255)
     # Lighting split is sampled close to and far from the existing wall source.
@@ -164,6 +181,34 @@ def scores(kind,metrics,p,seam,images):
     for number,weight in REFERENCES[kind]:
         targets=all_rows[number]
         rows.append(dict(reference=number,weight=weight,targets=targets,score=float(np.mean([t['score'] for t in targets]))))
+    return rows,float(sum(r['weight']*r['score'] for r in rows)/sum(r['weight'] for r in rows))
+
+
+def region_scores(kind,m,p,seam,images):
+    room,_,_=scene(images);room_h,room_s,room_v=hsv(room*255)
+    a=luminance(images[kind]);h,s,v=hsv(np.asarray(images[kind])[:,:,:3].astype(float));active=np.asarray(images[kind])[:,:,3]>0
+    metal=images['decor'] if kind=='wall' else images[kind]
+    metal_rgb=np.asarray(metal);metal_lum=luminance(metal);mh,ms,mv=hsv(metal_rgb[:,:,:3].astype(float))
+    iron=(metal_rgb[:,:,3]>0)&(metal_lum>=.04)&(ms<.22)
+    if kind=='door':
+        material=Image.open(CACHE/REGION/'door_0_metal.png').crop((64,64,128,128)).convert('L')
+        iron=(np.asarray(material)>127)&(ms<.22)
+    rust=active&(h>=10)&(h<=35)&(s>=.22)
+    iron_mean=float(metal_lum[iron].mean()) if iron.any() else 0
+    stone=measurements(images['wall']);light=images['wall_torch'];l=np.asarray(light);fl=luminance(light)
+    flame=(l[:,:,3]>0)&(fl>.60)
+    rows_by_number={
+        7:([target('stone hue',m['hue'],30,50),target('stone saturation',m['saturation'],high=.15)] if kind in ('floor','wall') else [])+
+          ([target('light source frame fraction',float(flame.mean()),high=.05)] if kind=='wall_torch' else []),
+        9:[target('room gold accent fraction',float(((room_h>=20)&(room_h<=65)&(room_s>.3)&(room_v>.3)).mean()),high=.08)],
+        10:[target('iron luminance',iron_mean,.08,.20)]+([target('rust hue',float(np.median(h[rust])),15,30)] if rust.any() else []),
+        11:[],12:[target('iron/stone luminance gap',abs(stone['mean']-iron_mean),.15)],
+        21:[target('2x2 seam pass',int(seam['pass_']),1)]}
+    rows=[]
+    for number,weight in REFERENCES[kind]:
+        targets=rows_by_number[number]
+        # Qualitative-only rows inform vision and are not assigned invented scores.
+        if targets:rows.append(dict(reference=number,weight=weight,targets=targets,score=float(np.mean([t['score'] for t in targets]))))
     return rows,float(sum(r['weight']*r['score'] for r in rows)/sum(r['weight'] for r in rows))
 
 
@@ -237,7 +282,7 @@ def structural(kind,image,images,p):
     if kind=='floor':
         details=stone_components(image)
         targets=[target('stones across tile edge',p['count'],2,3),target('largest stone span',details['largest_span'],.40),
-                 target('stone area size ratio',details['area_ratio'],2),target('mortar width / edge',details['mortar_width'],high=.06),
+                 target('stone area size ratio',details['area_ratio'],1.5 if REGION=='prison' else 2),target('mortar width / edge',details['mortar_width'],high=.06),
                  target('mortar luminance separation',details['mortar_contrast'],.15,.25),target('orientation histogram peak',e['peak'],high=.30)]
     elif kind=='wall':
         body=float(a[13:45].mean());top=float(a[:13].mean());damp=float(a[45:].mean())
@@ -258,6 +303,8 @@ def structural(kind,image,images,p):
         keys=('seed','count','relief','displacement','wall_height','mortar_width','chip','bevel','decor_density','water_depth','light_angle','light_strength')
         same=all(p.get(k)==baseline.get(k) for k in keys)
         targets=[target('approved shape parameters unchanged',int(same),1)]
+    if REGION=='prison' and kind in ('floor','wall'):
+        targets.append(target('dry specular fraction',float((a>=.70).mean()),high=.01))
     return dict(targets=targets,details=details,edges=e,passing=all(t['pass_'] for t in targets),score=float(np.mean([t['score'] for t in targets])))
 
 
@@ -303,14 +350,14 @@ def room_gate(annotate=False):
             dict(name='Visible-cell value range',measurements=[target('visible mean',float(a[visible].mean()),.12,.20),target('visible std',float(a[visible].std()),.12)]),
             dict(name='Hero / rat / item readability',measurements=[target(x['name']+' bbox contrast',x['contrast'],.20) for x in readability])]
     for g in groups:g['passing']=all(m['pass_'] for m in g['measurements'])
-    hue,sat,val=hsv(np.array(terrain,dtype=float)[visible]);dominant=(hue>=15)&(hue<=125)
+    terrain_rgb=np.array(terrain,dtype=float)[visible];hue,sat,val=hsv(terrain_rgb);dominant=dominant_hues(hue,sat,terrain_rgb)
     accent=(~dominant)&(sat>=.10)&(val>.025)
     bins=np.bincount((hue[accent]//30).astype(int),minlength=12)/max(1,len(hue));present=bins>0
     accents=int(sum(present[i] and not present[(i-1)%12] for i in range(12)))
     if present.all():accents=1
-    mean=float(a[visible].mean());globals_=dict(region_mean_after_lighting=mean,region_mean_pass=.11<=mean<=.17,
+    mean=float(a[visible].mean());desired=REGIONS[REGION]['mean'];globals_=dict(region_mean_after_lighting=mean,region_mean_pass=desired-.03<=mean<=desired+.03,
         dominant_green_brown_fraction=float(dominant.mean()),hue_budget_pass=float(dominant.mean())>=.70 and accents<=1,accent_families=accents,accent_bins=bins.tolist(),
-        readability='Existing mobs unchanged; sprite-pair histogram test 30 remains pending',composition='Actual OpenGL screenshot; all heroFOV visible cells',ambient=[.50,.55,.45])
+        readability='Existing mobs unchanged; sprite-pair histogram test 30 remains pending',composition='Actual OpenGL screenshot; all heroFOV visible cells',ambient=REGIONS[REGION]['ambient'])
     result=dict(passing=all(g['passing'] for g in groups),groups=groups,global_targets=globals_,
                 screenshot_sha256=hashlib.sha256((OUT/'sewers-ingame.png').read_bytes()).hexdigest(),
                 terrain_sha256=hashlib.sha256((OUT/'sewers-terrain.png').read_bytes()).hexdigest(),
@@ -405,17 +452,19 @@ def record(number,kinds,vision_path):
         data=dict(asset_class=kind,round=number,parameters=p,references=rows,reference_subject=ref,vision=vision,
                   weights=dict(numeric=.30,structural=.30,vision=.40),numeric=numeric,structural_score=structure_score,composite=score,
                   variants=variants,room=room,atlas_validator=atlas,global_targets=g,passing=bool(passed),converged=bool(passed and score>=.90 and number>=6),
-                  cache_sha256={f'tiles/{kind}_{i}.png':hashlib.sha256((CACHE/f'tiles/{kind}_{i}.png').read_bytes()).hexdigest() for i in range(3)})
+                  cache_sha256={f'{"tiles" if REGION=="sewers" else REGION}/{kind}_{i}.png':hashlib.sha256((CACHE/('tiles' if REGION=='sewers' else REGION)/f'{kind}_{i}.png').read_bytes()).hexdigest() for i in range(3)})
         path.write_text(json.dumps(data,indent=2)+'\n');images[kind].save(folder/f'round-{number:02}.png')
-        retained=ROOT/'.local/iteration-cache'/kind/f'round-{number:02}';retained.mkdir(parents=True,exist_ok=True)
+        retained=ROOT/'.local/iteration-cache'/REGION/kind/f'round-{number:02}';retained.mkdir(parents=True,exist_ok=True)
         for cached_kind in ([kind,'door_open'] if kind=='door' else [kind]):
             for variant in range(3):
-                filename=f'{cached_kind}_{variant}.png';(retained/filename).write_bytes((CACHE/'tiles'/filename).read_bytes())
+                filename=f'{cached_kind}_{variant}.png';(retained/filename).write_bytes((CACHE/('tiles' if REGION=='sewers' else REGION)/filename).read_bytes())
+                mask=CACHE/REGION/f'{cached_kind}_{variant}_metal.png'
+                if mask.exists():(retained/mask.name).write_bytes(mask.read_bytes())
         critique=f'Vision {vision["score"]:.2f}: {vision["reason"]}\n'+vision.get('gap','Material/value refinement follows the measured failures.')+'\n'
         if len(critique.strip().splitlines())>3:raise ValueError('Critique must fit three lines')
         (folder/f'round-{number:02}.md').write_text(critique)
         print(f'{kind} r{number:02}: composite={score:.3f} vision={vision["score"]:.2f} passing={passed}; structural failures='+str([t['target'] for v in variants for t in v['structural']['targets'] if not t['pass_']]))
-    summary()
+    summary(kinds=[k for k in CLASSES if REGION=='sewers' or k!='water'])
 
 
 def check(room_only=False):
@@ -423,7 +472,7 @@ def check(room_only=False):
     for g in room['groups']:
         print(g['name']+': '+', '.join(f'{m["target"]}={m["value"]:.4f}' for m in g['measurements'])+(' PASS' if g['passing'] else ' FAIL'))
         if not g['passing']:failures.append(g['name'])
-    print(f'TEST 40: measurements=6 failures={len(failures)}')
+    print(f'TEST {40 if REGION=="sewers" else 42}: region={REGION} measurements=6 failures={len(failures)}')
     if room_only:return bool(failures)
     class_failures=[]
     for kind in (k for k in CLASSES if k!='water'):
@@ -444,12 +493,12 @@ def check(room_only=False):
             if not note.exists() or not 1<=len(note.read_text().strip().splitlines())<=3:class_failures.append(kind+': missing/overlong critique')
             if r['vision'].get('wrong_kind') and r['vision']['score']>.3:class_failures.append(kind+': wrong-kind score exceeds .3')
     if not room['global_targets']['region_mean_pass'] or not room['global_targets']['hue_budget_pass']:class_failures.append('current screenshot fails board global targets')
-    locks=json.loads((PARAMS.parent/'locks.json').read_text())
+    locks=json.loads((ROOT/'tools/artgen/blender/locks.json').read_text())
     for name,digest in locks['sha256'].items():
         path=ROOT/name;raw=path.read_text().encode() if path.suffix=='.json' else path.read_bytes()
         if hashlib.sha256(raw).hexdigest()!=digest:class_failures.append('approved asset changed: '+name)
     for f in class_failures:print('FAIL:',f)
-    print(f'TEST 39: locked classes=5 failures={len(class_failures)}; liquids use test 41')
+    print(f'TEST 39: region={REGION} classes=5 failures={len(class_failures)}; liquids use test 41')
     return bool(failures or class_failures)
 
 
@@ -554,11 +603,13 @@ def liquid_review(number=None,vision_path=None,preview=False):
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--round',type=int);parser.add_argument('--class',dest='kinds',choices=CLASSES,nargs='+')
     parser.add_argument('--vision');parser.add_argument('--summary',action='store_true');parser.add_argument('--preview',action='store_true');parser.add_argument('--check',action='store_true');parser.add_argument('--check-room',action='store_true')
-    parser.add_argument('--liquids',action='store_true');args=parser.parse_args()
+    parser.add_argument('--liquids',action='store_true');parser.add_argument('--region',choices=list(REGIONS),default='sewers');args=parser.parse_args()
+    select_region(args.region)
     if args.liquids:raise SystemExit(liquid_review(args.round,args.vision,args.preview))
-    if args.preview:summary(True,args.kinds or CLASSES)
-    if args.round:record(args.round,args.kinds or CLASSES,args.vision)
-    if args.summary:summary()
+    kinds=args.kinds or [k for k in CLASSES if REGION=='sewers' or k!='water']
+    if args.preview:summary(True,kinds)
+    if args.round:record(args.round,kinds,args.vision)
+    if args.summary:summary(kinds=kinds)
     if args.check or args.check_room:raise SystemExit(check(args.check_room))
 
 

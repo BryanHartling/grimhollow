@@ -98,7 +98,7 @@ inner visible rings; visible screenshot mean and standard deviation; and p95 abs
 luminance differences in each subject box against a same-frame terrain-only capture.
 The paired capture redraws without updating or moving the subjects. Wall layers now
 sample the same cached light map as the floor, preserving draw order for occlusion.
-This shared fix applies only to Sewers; light radii and other regions stay unchanged.
+This shared fix now applies to Sewers and Prison; light radii stay unchanged.
 
 The raw screenshot is `verification/iteration/sewers-ingame.png`; the paired background
 is `sewers-terrain.png`, with camera masks in `room.json`. `sewers-gate.png` prints all
@@ -144,3 +144,24 @@ checks all 104 new raw frames against the two-bit pHash tolerance, then restores
 the reviewed cache and rebuilds it. CI uses only committed renders; it runs test 41
 on both desktop platforms and the runtime phase checks in the existing Linux
 OpenGL runner. No Blender installation is required by CI.
+
+
+## Stage 6b: Prison
+
+Prison has independent parameters under `blender/params/prison/`, authored models
+in `blender/regions.py`, and eighteen visible frames plus six material masks under `render_cache/prison/`.
+The dressed floor and heavy courses use dry grey stone; the door is an iron
+barred gate, decor is linked manacles, and the light source is an enclosed candle
+lantern. Door and prop geometry is fixed after round zero; later rounds adjust
+materials and value range. `--render --asset prison` scopes Blender to these
+sources and never touches the locked Sewers cache.
+
+`python tools/artgen/iteration.py --region prison --check` checks the five class
+histories and the actual lit Prison room. The existing desktop runner accepts
+`-Dgrimhollow.region=1` with `-Dgrimhollow.iteration=true` and `--smoke-sewers`.
+Evidence and the comparison sheet are under `verification/iteration/prison/`.
+CI validates the committed evidence on both desktop platforms and repeats the
+live Prison room gate on Linux. Test 42 remains incomplete until the other three
+regions reach stage 6c.
+
+Prison selected rounds: floor 06 (0.952), wall 05 (0.946), door 08 (0.926), decor 07 (0.929), lantern 05 (0.944). Recorded counts are 6/6/8/7/6; all classes first exceed vision 0.7 at round 1. The remaining door iron/wall reference score misses the 0.15 gap by 0.014, retained in its critique rather than lowering the target.

@@ -1405,3 +1405,96 @@ For more on this, please refer to https://docs.gradle.org/9.4.0/userguide/comman
 BUILD SUCCESSFUL in 1m 13s
 8 actionable tasks: 8 executed
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.0/userguide/configuration_cache_enabling.html
+
+Stage 6b combined gate
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=0 floor=6 save/load=ok
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=0 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=1 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=2 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=3 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=4 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=5 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=6 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=7 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=8 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=9 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=0 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=1 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=2 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=3 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=4 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=5 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=6 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=7 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=8 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=9 floor=6 save/load=ok
+Runs=30 failures=0

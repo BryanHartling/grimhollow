@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.2142870352237654,
+          "value": 0.21494191448801742,
           "minimum": 0.1,
           "maximum": null,
           "pass_": true,
@@ -14,7 +14,7 @@
         },
         {
           "target": "representative pHash bits",
-          "value": 34.0,
+          "value": 36.0,
           "minimum": 12,
           "maximum": null,
           "pass_": true,
@@ -28,7 +28,7 @@
       "measurements": [
         {
           "target": "median flagstone fraction",
-          "value": 0.1540798611111111,
+          "value": 0.15028211805555555,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -42,7 +42,7 @@
       "measurements": [
         {
           "target": "median luminance difference",
-          "value": 0.15958428240740735,
+          "value": 0.14440849281726578,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -50,7 +50,7 @@
         },
         {
           "target": "median hue difference",
-          "value": 34.7088664186396,
+          "value": 34.76248227201033,
           "minimum": 30,
           "maximum": null,
           "pass_": true,
@@ -64,15 +64,15 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.14942470651708306,
+          "value": -0.15040934112134274,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.05064322281581904,
-      "inner_mean": 0.2000679293329021,
+      "outer_mean": 0.04974735666225302,
+      "inner_mean": 0.20015669778359577,
       "passing": true
     },
     {
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.13716529868171548,
+          "value": 0.1290780780084921,
           "minimum": 0.12,
           "maximum": 0.2,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.1251372265572735,
+          "value": 0.12496943280786527,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -102,7 +102,7 @@
       "measurements": [
         {
           "target": "hero bbox contrast",
-          "value": 0.42942650980392166,
+          "value": 0.4264580392156863,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -110,7 +110,7 @@
         },
         {
           "target": "rat bbox contrast",
-          "value": 0.29517247058823526,
+          "value": 0.28738274509803924,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -118,7 +118,7 @@
         },
         {
           "target": "item bbox contrast",
-          "value": 0.50415231372549,
+          "value": 0.4899915686274509,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -129,9 +129,9 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.13716529868171548,
+    "region_mean_after_lighting": 0.1290780780084921,
     "region_mean_pass": true,
-    "dominant_green_brown_fraction": 0.7981985168038409,
+    "dominant_green_brown_fraction": 0.7858592527386542,
     "hue_budget_pass": true,
     "accent_families": 0,
     "accent_bins": [
@@ -139,8 +139,8 @@
       0.0,
       0.0,
       0.0,
-      0.000589420438957476,
-      2.6791838134430726e-05,
+      0.0,
+      0.0,
       0.0,
       0.0,
       0.0,
@@ -156,10 +156,10 @@
       0.45
     ]
   },
-  "screenshot_sha256": "edbd9c71f4a96f6c3c258c00134e5b7eb9ecf113dd8edb52a6403fc02da5936c",
-  "terrain_sha256": "ac681646fa0528e9d009987d6a58ca352e143baaa9c09be3ddd2d6b81aa1d0e6",
-  "sample_count": 81,
-  "seed": 418,
+  "screenshot_sha256": "71620403e5da28a85ebcc89baf00dd642560b6258c67812a335c94d36adfb4da",
+  "terrain_sha256": "45153aae81119a791fd4710c044462f36abd499b87ce24a364bf1ebd68a50869",
+  "sample_count": 71,
+  "seed": 419,
   "lighting": true,
   "zoom": 3.0,
   "method": "Full visible-cell mask; class-median representative pHashes; all water/floor adjacencies; 4-neighbour rings; p95 paired-background absolute bbox luminance contrast"

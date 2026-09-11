@@ -11,6 +11,8 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - Art compatibility: import v4 changed silhouettes as alpha-preserving palette vectors, retain approved regional atlas bytes and preserve existing spell/class item IDs while appending four elemental summon variants.
 - Vault rendering: designate the 31x30 elemental sprite a two-tile boss footprint and reuse the existing desktop runner for arena spawn, three forms and scripted death/unlock checks.
 - Visual review correction: the unchanged stage-6c liquids show repeated bright wavelets in fresh v4 room captures; numeric tests pass but the hard vision gate is recorded as failing instead of retaining the previous favorable judgment.
+- Lighting compatibility: apply v4's added wall occlusion at 25% strength over the existing baked shading; Linux initially measured Halls at 0.0595, and the unchanged 0.06 minimum remains enforced.
+- Halls calibration: raise ambient RGB from (0.40,0.40,0.52) to (0.42,0.42,0.54) to leave margin above the unchanged 0.06 room minimum across Windows/Linux particle frames, preserving its cool near-black palette and locked texture pixels.
 
 - `.gitattributes`: Portable wrapper line endings and binary-asset treatment.
 - `.github/workflows/build.yml`: Linux/Windows desktop, Android and headless CI with artifacts and active acceptance failures.
@@ -2752,3 +2754,6 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `verification/iteration/liquids/round-08.md`: Fresh v4 room critique records the liquid vision failure without changing cached art or weakening targets.
 - `verification/iteration/liquids/round-08.png`: Fresh v4 room critique records the liquid vision failure without changing cached art or weakening targets.
 - `verification/iteration/sewers-ingame.png`: Record actual v4 build, rendering and acceptance output, including failures.
+- `verification/iteration/liquids/round-09.json`: Preserve the negative liquid vision judgment on all five refreshed v4 lighting captures.
+- `verification/iteration/liquids/round-09.md`: Preserve the negative liquid vision judgment on all five refreshed v4 lighting captures.
+- `verification/iteration/liquids/round-09.png`: Preserve the negative liquid vision judgment on all five refreshed v4 lighting captures.

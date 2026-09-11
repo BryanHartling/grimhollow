@@ -336,3 +336,163 @@ water: min variant pHash=28, max one-tile autocorrelation=0.340
 lava: min variant pHash=28, max one-tile autocorrelation=0.340
 FAIL: hard room vision gate
 TEST 41: liquid frames=96 failures=1
+
+V4 occlusion integration correction: .local/v4-shadow-regions.txt
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+ITERATION ROOM: seed=419 bounds=13,14,20,22 water=18 doors=1 rubble=2 wallTorch=1 torchCell=761 bridgeCell=594 heroCell=627 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+Wall/floor distinctness: mean luminance difference=0.2149, representative pHash bits=36.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.1503 PASS
+Adjacent water/floor contrast: median luminance difference=0.1444, median hue difference=34.7625 PASS
+No boundary halo: outer minus inner mean=-0.1504 PASS
+Visible-cell value range: visible mean=0.1291, visible std=0.1250 PASS
+Hero / rat / item readability: hero bbox contrast=0.4265, rat bbox contrast=0.2874, item bbox contrast=0.4900 PASS
+TEST 40: region=sewers measurements=6 failures=0
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+ITERATION ROOM: seed=417 bounds=29,25,37,32 water=7 doors=1 rubble=1 wallTorch=1 torchCell=1056 bridgeCell=1181 heroCell=1181 terrainEdits=0
+[GAME] @@ You descend to floor 6 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+Wall/floor distinctness: mean luminance difference=0.2371, representative pHash bits=36.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.3477 PASS
+Adjacent water/floor contrast: median luminance difference=0.1405, median hue difference=168.6791 PASS
+No boundary halo: outer minus inner mean=-0.1554 PASS
+Visible-cell value range: visible mean=0.1711, visible std=0.1853 PASS
+Hero / rat / item readability: hero bbox contrast=0.4151, rat bbox contrast=0.2747, item bbox contrast=0.4775 PASS
+TEST 42: region=prison measurements=6 failures=0
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+ITERATION ROOM: seed=422 bounds=29,29,35,35 water=5 doors=2 rubble=4 wallTorch=1 torchCell=1309 bridgeCell=1440 heroCell=1528 terrainEdits=0
+[GAME] @@ You descend to floor 11 of the dungeon.
+[GAME] ** The ground seems especially treacherous here.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+Wall/floor distinctness: mean luminance difference=0.2059, representative pHash bits=32.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.7031 PASS
+Adjacent water/floor contrast: median luminance difference=0.1868, median hue difference=30.8526 PASS
+No boundary halo: outer minus inner mean=-0.1352 PASS
+Visible-cell value range: visible mean=0.1344, visible std=0.1357 PASS
+Hero / rat / item readability: hero bbox contrast=0.4239, rat bbox contrast=0.2211, item bbox contrast=0.4880 PASS
+TEST 42: region=caves measurements=6 failures=0
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+ITERATION ROOM: seed=426 bounds=7,10,14,18 water=12 doors=3 rubble=1 wallTorch=1 torchCell=332 bridgeCell=458 heroCell=362 terrainEdits=0
+[GAME] @@ You descend to floor 16 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+Wall/floor distinctness: mean luminance difference=0.1762, representative pHash bits=28.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.8049 PASS
+Adjacent water/floor contrast: median luminance difference=0.1783, median hue difference=62.4094 PASS
+No boundary halo: outer minus inner mean=-0.0778 PASS
+Visible-cell value range: visible mean=0.1310, visible std=0.1365 PASS
+Hero / rat / item readability: hero bbox contrast=0.5628, rat bbox contrast=0.2673, item bbox contrast=0.5442 PASS
+TEST 42: region=city measurements=6 failures=0
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+ITERATION ROOM: seed=454 bounds=26,23,33,28 water=4 doors=2 rubble=1 wallTorch=1 torchCell=1178 bridgeCell=1329 heroCell=1329 terrainEdits=0
+[GAME] @@ You descend to floor 21 of the dungeon.
+[GAME] -- You feel that there's a source of demonic energy above you...
+[GAME] ** You hear water splashing around you.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+Wall/floor distinctness: mean luminance difference=0.0423, representative pHash bits=28.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.9167 PASS
+Adjacent water/floor contrast: median luminance difference=0.0903, median hue difference=136.8813 PASS
+No boundary halo: outer minus inner mean=-0.0570 PASS
+Visible-cell value range: visible mean=0.0601, visible std=0.1032 PASS
+Hero / rat / item readability: hero bbox contrast=0.6635, rat bbox contrast=0.2144, item bbox contrast=0.7550 PASS
+TEST 42: region=halls measurements=6 failures=0
+
+V4 occlusion integration correction: .local/v4-halls-check.txt
+Wall/floor distinctness: mean luminance difference=0.0435, representative pHash bits=30.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.9258 PASS
+Adjacent water/floor contrast: median luminance difference=0.0776, median hue difference=134.5323 PASS
+No boundary halo: outer minus inner mean=-0.0571 PASS
+Visible-cell value range: visible mean=0.0615, visible std=0.1054 PASS
+Hero / rat / item readability: hero bbox contrast=0.6710, rat bbox contrast=0.2155, item bbox contrast=0.7550 PASS
+TEST 42: region=halls measurements=6 failures=0
+TEST 39: region=halls classes=5 failures=0; liquids use test 41
+
+V4 final rendering acceptance: .local/v4-final-rooms.txt
+Wall/floor distinctness: mean luminance difference=0.2149, representative pHash bits=36.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.1503 PASS
+Adjacent water/floor contrast: median luminance difference=0.1444, median hue difference=34.7625 PASS
+No boundary halo: outer minus inner mean=-0.1504 PASS
+Visible-cell value range: visible mean=0.1291, visible std=0.1250 PASS
+Hero / rat / item readability: hero bbox contrast=0.4265, rat bbox contrast=0.2874, item bbox contrast=0.4900 PASS
+TEST 40: region=sewers measurements=6 failures=0
+TEST 39: region=sewers classes=5 failures=0; liquids use test 41
+Wall/floor distinctness: mean luminance difference=0.2371, representative pHash bits=36.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.3477 PASS
+Adjacent water/floor contrast: median luminance difference=0.1405, median hue difference=168.6791 PASS
+No boundary halo: outer minus inner mean=-0.1554 PASS
+Visible-cell value range: visible mean=0.1711, visible std=0.1853 PASS
+Hero / rat / item readability: hero bbox contrast=0.4151, rat bbox contrast=0.2747, item bbox contrast=0.4775 PASS
+TEST 42: region=prison measurements=6 failures=0
+FAIL: current screenshot fails board global targets
+TEST 39: region=prison classes=5 failures=1; liquids use test 41
+Wall/floor distinctness: mean luminance difference=0.2059, representative pHash bits=32.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.7031 PASS
+Adjacent water/floor contrast: median luminance difference=0.1868, median hue difference=30.8526 PASS
+No boundary halo: outer minus inner mean=-0.1352 PASS
+Visible-cell value range: visible mean=0.1344, visible std=0.1357 PASS
+Hero / rat / item readability: hero bbox contrast=0.4239, rat bbox contrast=0.2211, item bbox contrast=0.4880 PASS
+TEST 42: region=caves measurements=6 failures=0
+TEST 39: region=caves classes=5 failures=0; liquids use test 41
+Wall/floor distinctness: mean luminance difference=0.1762, representative pHash bits=28.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.8049 PASS
+Adjacent water/floor contrast: median luminance difference=0.1783, median hue difference=62.4094 PASS
+No boundary halo: outer minus inner mean=-0.0778 PASS
+Visible-cell value range: visible mean=0.1310, visible std=0.1365 PASS
+Hero / rat / item readability: hero bbox contrast=0.5628, rat bbox contrast=0.2673, item bbox contrast=0.5442 PASS
+TEST 42: region=city measurements=6 failures=0
+TEST 39: region=city classes=5 failures=0; liquids use test 41
+Wall/floor distinctness: mean luminance difference=0.0435, representative pHash bits=30.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.9258 PASS
+Adjacent water/floor contrast: median luminance difference=0.0776, median hue difference=134.5323 PASS
+No boundary halo: outer minus inner mean=-0.0571 PASS
+Visible-cell value range: visible mean=0.0615, visible std=0.1054 PASS
+Hero / rat / item readability: hero bbox contrast=0.6710, rat bbox contrast=0.2155, item bbox contrast=0.7550 PASS
+TEST 42: region=halls measurements=6 failures=0
+TEST 39: region=halls classes=5 failures=0; liquids use test 41
+
+V4 final rendering acceptance: .local/v4-liquid-final.txt
+sewage: min variant pHash=28, max one-tile autocorrelation=0.340
+water: min variant pHash=28, max one-tile autocorrelation=0.340
+lava: min variant pHash=28, max one-tile autocorrelation=0.340
+FAIL: hard room vision gate
+TEST 41: liquid frames=96 failures=1

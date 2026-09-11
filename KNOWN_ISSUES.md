@@ -7,11 +7,11 @@
 - Tests 6, 7 and 8 are NOT RUN in full: representative talent hooks and all nine armor abilities execute, but exhaustive selection and actual Tengu/crown UI flows were not driven.
 - Test 9 is NOT RUN in full: Bone Prison and Force Wall restoration pass representative scenarios, but Wand of Bone belongs to the undelivered content stage.
 - Tests 16, 19 and 30 are NOT RUN in full: complete sprite-index coverage, floor-15 timing and regional mob-histogram checks remain pending.
-- Test 18 FAILS its original 0.15-0.35 range: fresh v4 visible means are Sewers 0.1372, Prison 0.1709, Caves 0.1345, City 0.1310 and Halls 0.0603; all five six-measurement room gates pass, but Prison fails the separate global board palette target.
+- Test 18 FAILS its original 0.15-0.35 range: fresh v4 visible means are Sewers 0.1291, Prison 0.1711, Caves 0.1344, City 0.1310 and Halls 0.0615; all five six-measurement room gates pass, but Prison fails the separate global board mean and hue targets.
 - Tests 31 and 32 are NOT RUN because enhanced effects and scorch decals belong to stage 7; Halls retains its upstream ember particles around the new lava.
 - Test 15 reports Runs=30 failures=0 for the three new classes; the fresh v4 nine-hero result is Runs=90 failures=0, using upstream generation/debug descent rather than simulated player combat and stair search.
 - Test 21 remains blocked by full art coverage, the Prison global palette gate and the recorded liquid vision failure; checks remain enabled and platform build artifacts still upload.
-- Tests 20, 22 and 23 retain checkpoint results per section 14; Android device gameplay remains untested.
+- Test 20 retains its checkpoint result per section 14; tests 22 and 23 were rechecked for v4 APK identity and isolated desktop paths; Android device gameplay remains untested.
 - GitHub Actions dispatch/settings requests previously returned HTTP 403; push-triggered workflows are the working route and may appear after a delay.
 - Restricted Git/network/Blender/Java commands use the documented escalation route and Gradle --no-daemon; fetch and the .git scratch write/delete succeeded, while optional sandboxed Get-CimInstance inspection was denied and existing command output supplied the needed status.
 - Test 38 remains FAIL for the expanded local intake: 18 of 33 supplied images lack verified CC0/public-domain redistribution permission and remain excluded from Git/optimization; U17 has unresolved game provenance and U08/U09 are alternate crops; 70 licensed reference files are eligible.
@@ -23,3 +23,4 @@
 - Test 39 now FAILS for Prison (current screenshot fails board global targets); all 25 stored class histories/parameters/locked assets match, and the other four regions have zero failures.
 - Test 41 now FAILS its hard vision gate: fresh room review sees repeated bright dash-shaped wavelets in unchanged stage-6c liquids, despite 96 numeric frames passing with min variant pHash 28 and max one-tile autocorrelation 0.340475; targets were not lowered.
 - Automatic review initially rejected excluding incoming SPD store metadata; read-only comparison proved all 14 files identical to recoverable v4 Git objects with no pre-existing Grimhollow files, and the same cleanup command then succeeded.
+- The first v4 Linux CI render measured Halls mean 0.0595; added occlusion is now 25% over baked shading and Halls ambient is raised by 0.02 per RGB channel, with the 0.06 minimum unchanged and the fresh Windows room gate passing at 0.0615.

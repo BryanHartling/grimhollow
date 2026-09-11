@@ -5,7 +5,7 @@ package com.shatteredpixel.shatteredpixeldungeon.tiles;
 public final class LightMap {
     public static final float[][] AMBIENT = {
         {.50f, .55f, .45f}, {.50f, .50f, .58f}, {.60f, .45f, .35f},
-        {.50f, .55f, .62f}, {.40f, .40f, .52f}
+        {.50f, .55f, .62f}, {.42f, .42f, .54f}
     };
     public final int width, height, samples;
     private final float[] rgb;

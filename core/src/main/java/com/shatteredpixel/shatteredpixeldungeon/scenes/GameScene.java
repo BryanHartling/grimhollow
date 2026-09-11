@@ -289,6 +289,9 @@ public class GameScene extends PixelScene {
 		terrain.add( visualGrid );
 
 		occlusion = new WallOcclusionTilemap();
+		// Rendered Grimhollow terrain already contains baked surface occlusion.
+		// Keep v4's corner cues without applying a second full-strength shadow.
+		occlusion.alpha(0.25f);
 		terrain.add( occlusion );
 
 		terrainFeatures = new TerrainFeaturesTilemap(Dungeon.level.plants, Dungeon.level.traps);

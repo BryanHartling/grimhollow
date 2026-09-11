@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.20576638016685428,
+          "value": 0.20593355819533693,
           "minimum": 0.1,
           "maximum": null,
           "pass_": true,
@@ -64,14 +64,14 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.13504429464609916,
+          "value": -0.13517962924058508,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.07329818345393713,
+      "outer_mean": 0.0731628488594512,
       "inner_mean": 0.20834247810003628,
       "passing": true
     },
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.13449026070034495,
+          "value": 0.1343826913882837,
           "minimum": 0.12,
           "maximum": 0.2,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.1358801122936033,
+          "value": 0.1357006583351472,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -110,7 +110,7 @@
         },
         {
           "target": "rat bbox contrast",
-          "value": 0.22520549019607838,
+          "value": 0.22105254901960786,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -129,7 +129,7 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.13449026070034495,
+    "region_mean_after_lighting": 0.1343826913882837,
     "region_mean_pass": true,
     "dominant_green_brown_fraction": 0.9966965663580247,
     "hue_budget_pass": true,
@@ -156,8 +156,8 @@
       0.35
     ]
   },
-  "screenshot_sha256": "27ea8a8ae7c1d47d22d29a054e332f140143152159a2ede5748331499202bc26",
-  "terrain_sha256": "4e791d8be758346dd35a278b0c2acd6d6f7a2c0b7833a4df820a1754692fee72",
+  "screenshot_sha256": "85ab9b09061835cfa4548072b4065cb5142e04cdb79301070bf1be9702b61ae0",
+  "terrain_sha256": "4e44e67005e7f8d4c9cd9f163f0ee28c9cbd1a6790c1659495ac94a04614e694",
   "sample_count": 36,
   "seed": 422,
   "lighting": true,

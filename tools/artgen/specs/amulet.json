@@ -1,0 +1,9 @@
+{
+  "output": "core/src/main/assets/sprites/amulet.png",
+  "kind": "items",
+  "dimensions": [
+    32,
+    32
+  ],
+  "rendered_item": 61
+}

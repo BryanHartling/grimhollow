@@ -39,24 +39,28 @@ public class BannerSprites {
 		Image icon = new Image( Assets.Interfaces.BANNERS );
 		switch (type) {
 			case TITLE_PORT:
-				icon.frame( icon.texture.uvRect( 0, 0, 139, 100 ) );
+				frame(icon, 0, 0, 139, 100);
 				break;
 			case TITLE_GLOW_PORT:
-				icon.frame( icon.texture.uvRect( 139, 0, 278, 100 ) );
+				frame(icon, 139, 0, 278, 100);
 				break;
 			case TITLE_LAND:
-				icon.frame( icon.texture.uvRect( 0, 100, 240, 157) );
+				frame(icon, 0, 100, 240, 157);
 				break;
 			case TITLE_GLOW_LAND:
-				icon.frame( icon.texture.uvRect( 240, 100, 480, 157 ) );
+				frame(icon, 240, 100, 480, 157);
 				break;
 			case BOSS_SLAIN:
-				icon.frame( icon.texture.uvRect( 0, 157, 127, 225 ) );
+				frame(icon, 0, 157, 127, 225);
 				break;
 			case GAME_OVER:
-				icon.frame( icon.texture.uvRect( 128, 157, 256, 192 ) );
+				frame(icon, 128, 157, 256, 192);
 				break;
 		}
 		return icon;
 	}
+    private static void frame(Image icon, int x, int y, int right, int bottom) {
+        icon.frame(icon.texture.uvRect(x*2, y*2, right*2, bottom*2));
+        icon.logicalSize(right-x, bottom-y);
+    }
 }

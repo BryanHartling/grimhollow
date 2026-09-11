@@ -83,7 +83,18 @@ def character(kind,tier=0):
 import argparse,regions
 parser=argparse.ArgumentParser();parser.add_argument('--asset');args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
 assets=set(args.asset.split(',')) if args.asset else None
+if assets is None or any(a=='items' or a.startswith('items/') for a in assets):
+    import props
+    for entry in json.loads((HERE/'items.json').read_text())['items']:
+        if assets is None or 'items' in assets or 'items/'+str(entry['index']) in assets:
+            props.render(entry,reset,camera,render,CACHE)
 locked=set(json.loads((HERE/'locks.json').read_text())['classes'])
+if assets is None or 'title' in assets:
+    import title
+    title.render(reset,camera,render,CACHE)
+if assets is None or 'surfaces' in assets:
+    import surfaces
+    for index in range(len(surfaces.COLORS)):surfaces.render(index,reset,camera,render,CACHE)
 for kind in ['floor','wall','water','grass','door','door_open','decor','wall_torch']:
     if kind in locked or kind=='water':continue
     if assets is None or kind in assets or ('sewers' in assets and kind!='grass') or ('door' in assets and kind=='door_open'):

@@ -416,8 +416,8 @@ public class SurfaceScene extends PixelScene {
 		private static final int HEIGHT	= 32;
 		
 		public Avatar( HeroClass cl ) {
-			super( Assets.Sprites.AVATARS );
-			frame( new TextureFilm( texture, WIDTH, HEIGHT ).get( cl.ordinal() ) );
+			super( com.shatteredpixel.shatteredpixeldungeon.GameGeometry.portrait(cl, Dungeon.hero.tier()) );
+			com.shatteredpixel.shatteredpixeldungeon.GameGeometry.fitBox(this, WIDTH, HEIGHT);
 		}
 	}
 	

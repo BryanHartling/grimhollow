@@ -3007,3 +3007,542 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `verification/junit-summary.log`: Append actual stage-6d build and verification output, retaining prior evidence.
 - `verification/new-class-smoke.log`: Append actual stage-6d build and verification output, retaining prior evidence.
 - `verification/reproducibility.log`: Append actual stage-6d build and verification output, retaining prior evidence.
+
+
+Stage 6e engineering decisions:
+- Preserve v4 multipart special-room contours and cell IDs while replacing their surface pixels with native Blender relief materials; this retains the Vault quest's required apertures and aligned geometry.
+- Keep 16-unit world cells and 8-unit identification icons while sampling 64px terrain and 32px glyphs; all four identification-icon UI consumers use the same logical size.
+- Keep existing UI, mathematical masks and baseline FX as reproducible vector sources; enhanced FX rendering remains the following stage, preserving its required off path.
+- Use direct item silhouette/material validation and title stroke/ornament review for global props and lettering: the six-round floor/wall room metrics have no meaningful interpretation for an inventory object or a wordmark.
+- Remove unused six-class sprite duplicates and reuse the nine native portraits at the surface ending, avoiding a stale six-class avatar atlas.
+
+
+Stage 6e file changes:
+- `ART_PIPELINE.md`: Document the full-art delivery and remaining limitations.
+- `CHANGES.md`: Document the full-art delivery and remaining limitations.
+- `KNOWN_ISSUES.md`: Document the full-art delivery and remaining limitations.
+- `README.md`: Document the full-art delivery and remaining limitations.
+- `build.gradle`: Version the full-art checkpoint as 0.6.0, Android code 915.
+- `core/src/main/assets/effects/effects.png`: Make the existing effect and UI fallback reproducible from palette vectors.
+- `core/src/main/assets/effects/fireball-short.png`: Make the existing effect and UI fallback reproducible from palette vectors.
+- `core/src/main/assets/effects/fireball-tall.png`: Make the existing effect and UI fallback reproducible from palette vectors.
+- `core/src/main/assets/effects/specks.png`: Make the existing effect and UI fallback reproducible from palette vectors.
+- `core/src/main/assets/effects/spell_icons.png`: Make the existing effect and UI fallback reproducible from palette vectors.
+- `core/src/main/assets/effects/text_icons.png`: Make the existing effect and UI fallback reproducible from palette vectors.
+- `core/src/main/assets/environment/custom_tiles/carpet.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/custom_tiles/caves_boss.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/custom_tiles/caves_quest.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/custom_tiles/city_boss.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/custom_tiles/city_quest.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/custom_tiles/halls_special.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/custom_tiles/prison_exit.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/custom_tiles/prison_quest.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/custom_tiles/rat_king_room.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/custom_tiles/sewer_boss.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/custom_tiles/weak_floor.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/raised_terrain.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/terrain_features.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/tiles_caves_crystal.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/tiles_caves_gnoll.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/visual_grid.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/environment/wall_blocking.png`: Regenerate special-room relief surfaces or mathematical masks at unchanged logical geometry.
+- `core/src/main/assets/interfaces/banners.png`: Generate the title composition, high-resolution lettering or semantic talent pictograms.
+- `core/src/main/assets/interfaces/talent_icons.png`: Generate the title composition, high-resolution lettering or semantic talent pictograms.
+- `core/src/main/assets/interfaces/title_grimhollow.png`: Generate the title composition, high-resolution lettering or semantic talent pictograms.
+- `core/src/main/assets/sprites/amulet.png`: Pack original item props and identification glyphs at native resolution.
+- `core/src/main/assets/sprites/avatars.png`: Remove unused upstream hero/pet/ending duplicates now covered by native sprites.
+- `core/src/main/assets/sprites/cleric.png`: Remove unused upstream hero/pet/ending duplicates now covered by native sprites.
+- `core/src/main/assets/sprites/duelist.png`: Remove unused upstream hero/pet/ending duplicates now covered by native sprites.
+- `core/src/main/assets/sprites/huntress.png`: Remove unused upstream hero/pet/ending duplicates now covered by native sprites.
+- `core/src/main/assets/sprites/item_icons.png`: Pack original item props and identification glyphs at native resolution.
+- `core/src/main/assets/sprites/items.png`: Pack original item props and identification glyphs at native resolution.
+- `core/src/main/assets/sprites/mage.png`: Remove unused upstream hero/pet/ending duplicates now covered by native sprites.
+- `core/src/main/assets/sprites/pet.png`: Remove unused upstream hero/pet/ending duplicates now covered by native sprites.
+- `core/src/main/assets/sprites/rogue.png`: Remove unused upstream hero/pet/ending duplicates now covered by native sprites.
+- `core/src/main/assets/sprites/warrior.png`: Remove unused upstream hero/pet/ending duplicates now covered by native sprites.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/Assets.java`: Separate native texture frames from logical item, portrait, banner or room layout.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/GameGeometry.java`: Separate native texture frames from logical item, portrait, banner or room layout.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/BannerSprites.java`: Separate native texture frames from logical item, portrait, banner or room layout.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/stones/StoneOfIntuition.java`: Separate native texture frames from logical item, portrait, banner or room layout.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/journal/Notes.java`: Separate native texture frames from logical item, portrait, banner or room layout.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/SurfaceScene.java`: Separate native texture frames from logical item, portrait, banner or room layout.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/ItemSpriteSheet.java`: Separate native texture frames from logical item, portrait, banner or room layout.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/CustomTilemap.java`: Separate native texture frames from logical item, portrait, banner or room layout.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/ItemSlot.java`: Separate native texture frames from logical item, portrait, banner or room layout.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndJournal.java`: Separate native texture frames from logical item, portrait, banner or room layout.
+- `desktop/src/main/java/com/shatteredpixel/shatteredpixeldungeon/desktop/DesktopSmokeProbe.java`: Align exact-pixel icon checks with the new 32px texture cells.
+- `tools/artgen/blender/items.json`: Generate and validate reproducible item, title, glyph and special-room art.
+- `tools/artgen/blender/props.py`: Generate and validate reproducible item, title, glyph and special-room art.
+- `tools/artgen/blender/render.py`: Generate and validate reproducible item, title, glyph and special-room art.
+- `tools/artgen/blender/surfaces.py`: Generate and validate reproducible item, title, glyph and special-room art.
+- `tools/artgen/blender/title.py`: Generate and validate reproducible item, title, glyph and special-room art.
+- `tools/artgen/build.py`: Generate and validate reproducible item, title, glyph and special-room art.
+- `tools/artgen/glyphs.py`: Generate and validate reproducible item, title, glyph and special-room art.
+- `tools/artgen/item_catalog.py`: Generate and validate reproducible item, title, glyph and special-room art.
+- `tools/artgen/items.py`: Generate and validate reproducible item, title, glyph and special-room art.
+- `tools/artgen/layouts.py`: Generate and validate reproducible item, title, glyph and special-room art.
+- `tools/artgen/render_cache/items/000.png`: Commit the reproducible Blender render for SOMETHING.
+- `tools/artgen/render_cache/items/001.png`: Commit the reproducible Blender render for WEAPON_HOLDER.
+- `tools/artgen/render_cache/items/002.png`: Commit the reproducible Blender render for ARMOR_HOLDER.
+- `tools/artgen/render_cache/items/003.png`: Commit the reproducible Blender render for MISSILE_HOLDER.
+- `tools/artgen/render_cache/items/004.png`: Commit the reproducible Blender render for WAND_HOLDER.
+- `tools/artgen/render_cache/items/005.png`: Commit the reproducible Blender render for RING_HOLDER.
+- `tools/artgen/render_cache/items/006.png`: Commit the reproducible Blender render for ARTIFACT_HOLDER.
+- `tools/artgen/render_cache/items/007.png`: Commit the reproducible Blender render for TRINKET_HOLDER.
+- `tools/artgen/render_cache/items/008.png`: Commit the reproducible Blender render for FOOD_HOLDER.
+- `tools/artgen/render_cache/items/009.png`: Commit the reproducible Blender render for BOMB_HOLDER.
+- `tools/artgen/render_cache/items/010.png`: Commit the reproducible Blender render for POTION_HOLDER.
+- `tools/artgen/render_cache/items/011.png`: Commit the reproducible Blender render for SEED_HOLDER.
+- `tools/artgen/render_cache/items/012.png`: Commit the reproducible Blender render for SCROLL_HOLDER.
+- `tools/artgen/render_cache/items/013.png`: Commit the reproducible Blender render for STONE_HOLDER.
+- `tools/artgen/render_cache/items/014.png`: Commit the reproducible Blender render for ELIXIR_HOLDER.
+- `tools/artgen/render_cache/items/015.png`: Commit the reproducible Blender render for SPELL_HOLDER.
+- `tools/artgen/render_cache/items/016.png`: Commit the reproducible Blender render for MOB_HOLDER.
+- `tools/artgen/render_cache/items/017.png`: Commit the reproducible Blender render for DOCUMENT_HOLDER.
+- `tools/artgen/render_cache/items/018.png`: Commit the reproducible Blender render for GOLD.
+- `tools/artgen/render_cache/items/019.png`: Commit the reproducible Blender render for ENERGY.
+- `tools/artgen/render_cache/items/021.png`: Commit the reproducible Blender render for DEWDROP.
+- `tools/artgen/render_cache/items/022.png`: Commit the reproducible Blender render for PETAL.
+- `tools/artgen/render_cache/items/023.png`: Commit the reproducible Blender render for SANDBAG.
+- `tools/artgen/render_cache/items/024.png`: Commit the reproducible Blender render for SPIRIT_ARROW.
+- `tools/artgen/render_cache/items/026.png`: Commit the reproducible Blender render for TENGU_BOMB.
+- `tools/artgen/render_cache/items/027.png`: Commit the reproducible Blender render for TENGU_SHOCKER.
+- `tools/artgen/render_cache/items/028.png`: Commit the reproducible Blender render for GEO_BOULDER.
+- `tools/artgen/render_cache/items/032.png`: Commit the reproducible Blender render for BONES.
+- `tools/artgen/render_cache/items/033.png`: Commit the reproducible Blender render for REMAINS.
+- `tools/artgen/render_cache/items/034.png`: Commit the reproducible Blender render for TOMB.
+- `tools/artgen/render_cache/items/035.png`: Commit the reproducible Blender render for GRAVE.
+- `tools/artgen/render_cache/items/036.png`: Commit the reproducible Blender render for CHEST.
+- `tools/artgen/render_cache/items/037.png`: Commit the reproducible Blender render for LOCKED_CHEST.
+- `tools/artgen/render_cache/items/038.png`: Commit the reproducible Blender render for CRYSTAL_CHEST.
+- `tools/artgen/render_cache/items/039.png`: Commit the reproducible Blender render for EBONY_CHEST.
+- `tools/artgen/render_cache/items/048.png`: Commit the reproducible Blender render for ANKH.
+- `tools/artgen/render_cache/items/049.png`: Commit the reproducible Blender render for STYLUS.
+- `tools/artgen/render_cache/items/050.png`: Commit the reproducible Blender render for SEAL.
+- `tools/artgen/render_cache/items/051.png`: Commit the reproducible Blender render for TORCH.
+- `tools/artgen/render_cache/items/052.png`: Commit the reproducible Blender render for BEACON.
+- `tools/artgen/render_cache/items/053.png`: Commit the reproducible Blender render for HONEYPOT.
+- `tools/artgen/render_cache/items/054.png`: Commit the reproducible Blender render for SHATTPOT.
+- `tools/artgen/render_cache/items/055.png`: Commit the reproducible Blender render for IRON_KEY.
+- `tools/artgen/render_cache/items/056.png`: Commit the reproducible Blender render for GOLDEN_KEY.
+- `tools/artgen/render_cache/items/057.png`: Commit the reproducible Blender render for CRYSTAL_KEY.
+- `tools/artgen/render_cache/items/058.png`: Commit the reproducible Blender render for WORN_KEY.
+- `tools/artgen/render_cache/items/059.png`: Commit the reproducible Blender render for MASK.
+- `tools/artgen/render_cache/items/060.png`: Commit the reproducible Blender render for CROWN.
+- `tools/artgen/render_cache/items/061.png`: Commit the reproducible Blender render for AMULET.
+- `tools/artgen/render_cache/items/062.png`: Commit the reproducible Blender render for MASTERY.
+- `tools/artgen/render_cache/items/063.png`: Commit the reproducible Blender render for KIT.
+- `tools/artgen/render_cache/items/064.png`: Commit the reproducible Blender render for SEAL_SHARD.
+- `tools/artgen/render_cache/items/065.png`: Commit the reproducible Blender render for BROKEN_STAFF.
+- `tools/artgen/render_cache/items/066.png`: Commit the reproducible Blender render for CLOAK_SCRAP.
+- `tools/artgen/render_cache/items/067.png`: Commit the reproducible Blender render for BOW_FRAGMENT.
+- `tools/artgen/render_cache/items/068.png`: Commit the reproducible Blender render for BROKEN_HILT.
+- `tools/artgen/render_cache/items/069.png`: Commit the reproducible Blender render for TORN_PAGE.
+- `tools/artgen/render_cache/items/070.png`: Commit the reproducible Blender render for TRINKET_CATA.
+- `tools/artgen/render_cache/items/080.png`: Commit the reproducible Blender render for BOMB.
+- `tools/artgen/render_cache/items/081.png`: Commit the reproducible Blender render for DBL_BOMB.
+- `tools/artgen/render_cache/items/082.png`: Commit the reproducible Blender render for FIRE_BOMB.
+- `tools/artgen/render_cache/items/083.png`: Commit the reproducible Blender render for FROST_BOMB.
+- `tools/artgen/render_cache/items/084.png`: Commit the reproducible Blender render for REGROWTH_BOMB.
+- `tools/artgen/render_cache/items/085.png`: Commit the reproducible Blender render for SMOKE_BOMB.
+- `tools/artgen/render_cache/items/086.png`: Commit the reproducible Blender render for FLASHBANG.
+- `tools/artgen/render_cache/items/087.png`: Commit the reproducible Blender render for HOLY_BOMB.
+- `tools/artgen/render_cache/items/088.png`: Commit the reproducible Blender render for WOOLY_BOMB.
+- `tools/artgen/render_cache/items/089.png`: Commit the reproducible Blender render for NOISEMAKER.
+- `tools/artgen/render_cache/items/090.png`: Commit the reproducible Blender render for ARCANE_BOMB.
+- `tools/artgen/render_cache/items/091.png`: Commit the reproducible Blender render for SHRAPNEL_BOMB.
+- `tools/artgen/render_cache/items/096.png`: Commit the reproducible Blender render for WORN_SHORTSWORD.
+- `tools/artgen/render_cache/items/097.png`: Commit the reproducible Blender render for CUDGEL.
+- `tools/artgen/render_cache/items/098.png`: Commit the reproducible Blender render for GLOVES.
+- `tools/artgen/render_cache/items/099.png`: Commit the reproducible Blender render for RAPIER.
+- `tools/artgen/render_cache/items/100.png`: Commit the reproducible Blender render for DAGGER.
+- `tools/artgen/render_cache/items/101.png`: Commit the reproducible Blender render for MAGES_STAFF.
+- `tools/artgen/render_cache/items/104.png`: Commit the reproducible Blender render for SHORTSWORD.
+- `tools/artgen/render_cache/items/105.png`: Commit the reproducible Blender render for HAND_AXE.
+- `tools/artgen/render_cache/items/106.png`: Commit the reproducible Blender render for SPEAR.
+- `tools/artgen/render_cache/items/107.png`: Commit the reproducible Blender render for QUARTERSTAFF.
+- `tools/artgen/render_cache/items/108.png`: Commit the reproducible Blender render for DIRK.
+- `tools/artgen/render_cache/items/109.png`: Commit the reproducible Blender render for SICKLE.
+- `tools/artgen/render_cache/items/112.png`: Commit the reproducible Blender render for SWORD.
+- `tools/artgen/render_cache/items/113.png`: Commit the reproducible Blender render for MACE.
+- `tools/artgen/render_cache/items/114.png`: Commit the reproducible Blender render for SCIMITAR.
+- `tools/artgen/render_cache/items/115.png`: Commit the reproducible Blender render for ROUND_SHIELD.
+- `tools/artgen/render_cache/items/116.png`: Commit the reproducible Blender render for SAI.
+- `tools/artgen/render_cache/items/117.png`: Commit the reproducible Blender render for WHIP.
+- `tools/artgen/render_cache/items/120.png`: Commit the reproducible Blender render for LONGSWORD.
+- `tools/artgen/render_cache/items/121.png`: Commit the reproducible Blender render for BATTLE_AXE.
+- `tools/artgen/render_cache/items/122.png`: Commit the reproducible Blender render for FLAIL.
+- `tools/artgen/render_cache/items/123.png`: Commit the reproducible Blender render for RUNIC_BLADE.
+- `tools/artgen/render_cache/items/124.png`: Commit the reproducible Blender render for ASSASSINS_BLADE.
+- `tools/artgen/render_cache/items/125.png`: Commit the reproducible Blender render for CROSSBOW.
+- `tools/artgen/render_cache/items/126.png`: Commit the reproducible Blender render for KATANA.
+- `tools/artgen/render_cache/items/128.png`: Commit the reproducible Blender render for GREATSWORD.
+- `tools/artgen/render_cache/items/129.png`: Commit the reproducible Blender render for WAR_HAMMER.
+- `tools/artgen/render_cache/items/130.png`: Commit the reproducible Blender render for GLAIVE.
+- `tools/artgen/render_cache/items/131.png`: Commit the reproducible Blender render for GREATAXE.
+- `tools/artgen/render_cache/items/132.png`: Commit the reproducible Blender render for GREATSHIELD.
+- `tools/artgen/render_cache/items/133.png`: Commit the reproducible Blender render for GAUNTLETS.
+- `tools/artgen/render_cache/items/134.png`: Commit the reproducible Blender render for WAR_SCYTHE.
+- `tools/artgen/render_cache/items/144.png`: Commit the reproducible Blender render for SPIRIT_BOW.
+- `tools/artgen/render_cache/items/145.png`: Commit the reproducible Blender render for THROWING_SPIKE.
+- `tools/artgen/render_cache/items/146.png`: Commit the reproducible Blender render for THROWING_KNIFE.
+- `tools/artgen/render_cache/items/147.png`: Commit the reproducible Blender render for THROWING_STONE.
+- `tools/artgen/render_cache/items/148.png`: Commit the reproducible Blender render for FISHING_SPEAR.
+- `tools/artgen/render_cache/items/149.png`: Commit the reproducible Blender render for SHURIKEN.
+- `tools/artgen/render_cache/items/150.png`: Commit the reproducible Blender render for THROWING_CLUB.
+- `tools/artgen/render_cache/items/151.png`: Commit the reproducible Blender render for THROWING_SPEAR.
+- `tools/artgen/render_cache/items/152.png`: Commit the reproducible Blender render for BOLAS.
+- `tools/artgen/render_cache/items/153.png`: Commit the reproducible Blender render for KUNAI.
+- `tools/artgen/render_cache/items/154.png`: Commit the reproducible Blender render for JAVELIN.
+- `tools/artgen/render_cache/items/155.png`: Commit the reproducible Blender render for TOMAHAWK.
+- `tools/artgen/render_cache/items/156.png`: Commit the reproducible Blender render for BOOMERANG.
+- `tools/artgen/render_cache/items/157.png`: Commit the reproducible Blender render for TRIDENT.
+- `tools/artgen/render_cache/items/158.png`: Commit the reproducible Blender render for THROWING_HAMMER.
+- `tools/artgen/render_cache/items/159.png`: Commit the reproducible Blender render for FORCE_CUBE.
+- `tools/artgen/render_cache/items/160.png`: Commit the reproducible Blender render for DARTS.
+- `tools/artgen/render_cache/items/161.png`: Commit the reproducible Blender render for ROT_DART.
+- `tools/artgen/render_cache/items/162.png`: Commit the reproducible Blender render for INCENDIARY_DART.
+- `tools/artgen/render_cache/items/163.png`: Commit the reproducible Blender render for ADRENALINE_DART.
+- `tools/artgen/render_cache/items/164.png`: Commit the reproducible Blender render for HEALING_DART.
+- `tools/artgen/render_cache/items/165.png`: Commit the reproducible Blender render for CHILLING_DART.
+- `tools/artgen/render_cache/items/166.png`: Commit the reproducible Blender render for SHOCKING_DART.
+- `tools/artgen/render_cache/items/167.png`: Commit the reproducible Blender render for POISON_DART.
+- `tools/artgen/render_cache/items/168.png`: Commit the reproducible Blender render for CLEANSING_DART.
+- `tools/artgen/render_cache/items/169.png`: Commit the reproducible Blender render for PARALYTIC_DART.
+- `tools/artgen/render_cache/items/170.png`: Commit the reproducible Blender render for HOLY_DART.
+- `tools/artgen/render_cache/items/171.png`: Commit the reproducible Blender render for DISPLACING_DART.
+- `tools/artgen/render_cache/items/172.png`: Commit the reproducible Blender render for BLINDING_DART.
+- `tools/artgen/render_cache/items/176.png`: Commit the reproducible Blender render for ARMOR_CLOTH.
+- `tools/artgen/render_cache/items/177.png`: Commit the reproducible Blender render for ARMOR_LEATHER.
+- `tools/artgen/render_cache/items/178.png`: Commit the reproducible Blender render for ARMOR_MAIL.
+- `tools/artgen/render_cache/items/179.png`: Commit the reproducible Blender render for ARMOR_SCALE.
+- `tools/artgen/render_cache/items/180.png`: Commit the reproducible Blender render for ARMOR_PLATE.
+- `tools/artgen/render_cache/items/181.png`: Commit the reproducible Blender render for ARMOR_WARRIOR.
+- `tools/artgen/render_cache/items/182.png`: Commit the reproducible Blender render for ARMOR_MAGE.
+- `tools/artgen/render_cache/items/183.png`: Commit the reproducible Blender render for ARMOR_ROGUE.
+- `tools/artgen/render_cache/items/184.png`: Commit the reproducible Blender render for ARMOR_HUNTRESS.
+- `tools/artgen/render_cache/items/185.png`: Commit the reproducible Blender render for ARMOR_DUELIST.
+- `tools/artgen/render_cache/items/186.png`: Commit the reproducible Blender render for ARMOR_CLERIC.
+- `tools/artgen/render_cache/items/208.png`: Commit the reproducible Blender render for WAND_MAGIC_MISSILE.
+- `tools/artgen/render_cache/items/209.png`: Commit the reproducible Blender render for WAND_FIREBOLT.
+- `tools/artgen/render_cache/items/210.png`: Commit the reproducible Blender render for WAND_FROST.
+- `tools/artgen/render_cache/items/211.png`: Commit the reproducible Blender render for WAND_LIGHTNING.
+- `tools/artgen/render_cache/items/212.png`: Commit the reproducible Blender render for WAND_DISINTEGRATION.
+- `tools/artgen/render_cache/items/213.png`: Commit the reproducible Blender render for WAND_PRISMATIC_LIGHT.
+- `tools/artgen/render_cache/items/214.png`: Commit the reproducible Blender render for WAND_CORROSION.
+- `tools/artgen/render_cache/items/215.png`: Commit the reproducible Blender render for WAND_LIVING_EARTH.
+- `tools/artgen/render_cache/items/216.png`: Commit the reproducible Blender render for WAND_BLAST_WAVE.
+- `tools/artgen/render_cache/items/217.png`: Commit the reproducible Blender render for WAND_CORRUPTION.
+- `tools/artgen/render_cache/items/218.png`: Commit the reproducible Blender render for WAND_WARDING.
+- `tools/artgen/render_cache/items/219.png`: Commit the reproducible Blender render for WAND_REGROWTH.
+- `tools/artgen/render_cache/items/220.png`: Commit the reproducible Blender render for WAND_TRANSFUSION.
+- `tools/artgen/render_cache/items/224.png`: Commit the reproducible Blender render for RING_GARNET.
+- `tools/artgen/render_cache/items/225.png`: Commit the reproducible Blender render for RING_RUBY.
+- `tools/artgen/render_cache/items/226.png`: Commit the reproducible Blender render for RING_TOPAZ.
+- `tools/artgen/render_cache/items/227.png`: Commit the reproducible Blender render for RING_EMERALD.
+- `tools/artgen/render_cache/items/228.png`: Commit the reproducible Blender render for RING_ONYX.
+- `tools/artgen/render_cache/items/229.png`: Commit the reproducible Blender render for RING_OPAL.
+- `tools/artgen/render_cache/items/230.png`: Commit the reproducible Blender render for RING_TOURMALINE.
+- `tools/artgen/render_cache/items/231.png`: Commit the reproducible Blender render for RING_SAPPHIRE.
+- `tools/artgen/render_cache/items/232.png`: Commit the reproducible Blender render for RING_AMETHYST.
+- `tools/artgen/render_cache/items/233.png`: Commit the reproducible Blender render for RING_QUARTZ.
+- `tools/artgen/render_cache/items/234.png`: Commit the reproducible Blender render for RING_AGATE.
+- `tools/artgen/render_cache/items/235.png`: Commit the reproducible Blender render for RING_DIAMOND.
+- `tools/artgen/render_cache/items/240.png`: Commit the reproducible Blender render for ARTIFACT_CLOAK.
+- `tools/artgen/render_cache/items/241.png`: Commit the reproducible Blender render for ARTIFACT_ARMBAND.
+- `tools/artgen/render_cache/items/242.png`: Commit the reproducible Blender render for ARTIFACT_CAPE.
+- `tools/artgen/render_cache/items/243.png`: Commit the reproducible Blender render for ARTIFACT_TALISMAN.
+- `tools/artgen/render_cache/items/244.png`: Commit the reproducible Blender render for ARTIFACT_HOURGLASS.
+- `tools/artgen/render_cache/items/245.png`: Commit the reproducible Blender render for ARTIFACT_TOOLKIT.
+- `tools/artgen/render_cache/items/246.png`: Commit the reproducible Blender render for ARTIFACT_SPELLBOOK.
+- `tools/artgen/render_cache/items/247.png`: Commit the reproducible Blender render for ARTIFACT_BEACON.
+- `tools/artgen/render_cache/items/248.png`: Commit the reproducible Blender render for ARTIFACT_CHAINS.
+- `tools/artgen/render_cache/items/249.png`: Commit the reproducible Blender render for ARTIFACT_HORN1.
+- `tools/artgen/render_cache/items/250.png`: Commit the reproducible Blender render for ARTIFACT_HORN2.
+- `tools/artgen/render_cache/items/251.png`: Commit the reproducible Blender render for ARTIFACT_HORN3.
+- `tools/artgen/render_cache/items/252.png`: Commit the reproducible Blender render for ARTIFACT_HORN4.
+- `tools/artgen/render_cache/items/253.png`: Commit the reproducible Blender render for ARTIFACT_CHALICE1.
+- `tools/artgen/render_cache/items/254.png`: Commit the reproducible Blender render for ARTIFACT_CHALICE2.
+- `tools/artgen/render_cache/items/255.png`: Commit the reproducible Blender render for ARTIFACT_CHALICE3.
+- `tools/artgen/render_cache/items/256.png`: Commit the reproducible Blender render for ARTIFACT_SANDALS.
+- `tools/artgen/render_cache/items/257.png`: Commit the reproducible Blender render for ARTIFACT_SHOES.
+- `tools/artgen/render_cache/items/258.png`: Commit the reproducible Blender render for ARTIFACT_BOOTS.
+- `tools/artgen/render_cache/items/259.png`: Commit the reproducible Blender render for ARTIFACT_GREAVES.
+- `tools/artgen/render_cache/items/260.png`: Commit the reproducible Blender render for ARTIFACT_ROSE1.
+- `tools/artgen/render_cache/items/261.png`: Commit the reproducible Blender render for ARTIFACT_ROSE2.
+- `tools/artgen/render_cache/items/262.png`: Commit the reproducible Blender render for ARTIFACT_ROSE3.
+- `tools/artgen/render_cache/items/263.png`: Commit the reproducible Blender render for ARTIFACT_TOME.
+- `tools/artgen/render_cache/items/264.png`: Commit the reproducible Blender render for ARTIFACT_KEY.
+- `tools/artgen/render_cache/items/272.png`: Commit the reproducible Blender render for RAT_SKULL.
+- `tools/artgen/render_cache/items/273.png`: Commit the reproducible Blender render for PARCHMENT_SCRAP.
+- `tools/artgen/render_cache/items/274.png`: Commit the reproducible Blender render for PETRIFIED_SEED.
+- `tools/artgen/render_cache/items/275.png`: Commit the reproducible Blender render for EXOTIC_CRYSTALS.
+- `tools/artgen/render_cache/items/276.png`: Commit the reproducible Blender render for MOSSY_CLUMP.
+- `tools/artgen/render_cache/items/277.png`: Commit the reproducible Blender render for SUNDIAL.
+- `tools/artgen/render_cache/items/278.png`: Commit the reproducible Blender render for CLOVER.
+- `tools/artgen/render_cache/items/279.png`: Commit the reproducible Blender render for TRAP_MECHANISM.
+- `tools/artgen/render_cache/items/280.png`: Commit the reproducible Blender render for MIMIC_TOOTH.
+- `tools/artgen/render_cache/items/281.png`: Commit the reproducible Blender render for WONDROUS_RESIN.
+- `tools/artgen/render_cache/items/282.png`: Commit the reproducible Blender render for EYE_OF_NEWT.
+- `tools/artgen/render_cache/items/283.png`: Commit the reproducible Blender render for SALT_CUBE.
+- `tools/artgen/render_cache/items/284.png`: Commit the reproducible Blender render for BLOOD_VIAL.
+- `tools/artgen/render_cache/items/285.png`: Commit the reproducible Blender render for OBLIVION_SHARD.
+- `tools/artgen/render_cache/items/286.png`: Commit the reproducible Blender render for CHAOTIC_CENSER.
+- `tools/artgen/render_cache/items/287.png`: Commit the reproducible Blender render for FERRET_TUFT.
+- `tools/artgen/render_cache/items/288.png`: Commit the reproducible Blender render for SPYGLASS.
+- `tools/artgen/render_cache/items/304.png`: Commit the reproducible Blender render for SCROLL_KAUNAN.
+- `tools/artgen/render_cache/items/305.png`: Commit the reproducible Blender render for SCROLL_SOWILO.
+- `tools/artgen/render_cache/items/306.png`: Commit the reproducible Blender render for SCROLL_LAGUZ.
+- `tools/artgen/render_cache/items/307.png`: Commit the reproducible Blender render for SCROLL_YNGVI.
+- `tools/artgen/render_cache/items/308.png`: Commit the reproducible Blender render for SCROLL_GYFU.
+- `tools/artgen/render_cache/items/309.png`: Commit the reproducible Blender render for SCROLL_RAIDO.
+- `tools/artgen/render_cache/items/310.png`: Commit the reproducible Blender render for SCROLL_ISAZ.
+- `tools/artgen/render_cache/items/311.png`: Commit the reproducible Blender render for SCROLL_MANNAZ.
+- `tools/artgen/render_cache/items/312.png`: Commit the reproducible Blender render for SCROLL_NAUDIZ.
+- `tools/artgen/render_cache/items/313.png`: Commit the reproducible Blender render for SCROLL_BERKANAN.
+- `tools/artgen/render_cache/items/314.png`: Commit the reproducible Blender render for SCROLL_ODAL.
+- `tools/artgen/render_cache/items/315.png`: Commit the reproducible Blender render for SCROLL_TIWAZ.
+- `tools/artgen/render_cache/items/317.png`: Commit the reproducible Blender render for ARCANE_RESIN.
+- `tools/artgen/render_cache/items/320.png`: Commit the reproducible Blender render for EXOTIC_KAUNAN.
+- `tools/artgen/render_cache/items/321.png`: Commit the reproducible Blender render for EXOTIC_SOWILO.
+- `tools/artgen/render_cache/items/322.png`: Commit the reproducible Blender render for EXOTIC_LAGUZ.
+- `tools/artgen/render_cache/items/323.png`: Commit the reproducible Blender render for EXOTIC_YNGVI.
+- `tools/artgen/render_cache/items/324.png`: Commit the reproducible Blender render for EXOTIC_GYFU.
+- `tools/artgen/render_cache/items/325.png`: Commit the reproducible Blender render for EXOTIC_RAIDO.
+- `tools/artgen/render_cache/items/326.png`: Commit the reproducible Blender render for EXOTIC_ISAZ.
+- `tools/artgen/render_cache/items/327.png`: Commit the reproducible Blender render for EXOTIC_MANNAZ.
+- `tools/artgen/render_cache/items/328.png`: Commit the reproducible Blender render for EXOTIC_NAUDIZ.
+- `tools/artgen/render_cache/items/329.png`: Commit the reproducible Blender render for EXOTIC_BERKANAN.
+- `tools/artgen/render_cache/items/330.png`: Commit the reproducible Blender render for EXOTIC_ODAL.
+- `tools/artgen/render_cache/items/331.png`: Commit the reproducible Blender render for EXOTIC_TIWAZ.
+- `tools/artgen/render_cache/items/336.png`: Commit the reproducible Blender render for STONE_AGGRESSION.
+- `tools/artgen/render_cache/items/337.png`: Commit the reproducible Blender render for STONE_AUGMENTATION.
+- `tools/artgen/render_cache/items/338.png`: Commit the reproducible Blender render for STONE_FEAR.
+- `tools/artgen/render_cache/items/339.png`: Commit the reproducible Blender render for STONE_BLAST.
+- `tools/artgen/render_cache/items/340.png`: Commit the reproducible Blender render for STONE_BLINK.
+- `tools/artgen/render_cache/items/341.png`: Commit the reproducible Blender render for STONE_CLAIRVOYANCE.
+- `tools/artgen/render_cache/items/342.png`: Commit the reproducible Blender render for STONE_SLEEP.
+- `tools/artgen/render_cache/items/343.png`: Commit the reproducible Blender render for STONE_DETECT.
+- `tools/artgen/render_cache/items/344.png`: Commit the reproducible Blender render for STONE_ENCHANT.
+- `tools/artgen/render_cache/items/345.png`: Commit the reproducible Blender render for STONE_FLOCK.
+- `tools/artgen/render_cache/items/346.png`: Commit the reproducible Blender render for STONE_INTUITION.
+- `tools/artgen/render_cache/items/347.png`: Commit the reproducible Blender render for STONE_SHOCK.
+- `tools/artgen/render_cache/items/352.png`: Commit the reproducible Blender render for POTION_CRIMSON.
+- `tools/artgen/render_cache/items/353.png`: Commit the reproducible Blender render for POTION_AMBER.
+- `tools/artgen/render_cache/items/354.png`: Commit the reproducible Blender render for POTION_GOLDEN.
+- `tools/artgen/render_cache/items/355.png`: Commit the reproducible Blender render for POTION_JADE.
+- `tools/artgen/render_cache/items/356.png`: Commit the reproducible Blender render for POTION_TURQUOISE.
+- `tools/artgen/render_cache/items/357.png`: Commit the reproducible Blender render for POTION_AZURE.
+- `tools/artgen/render_cache/items/358.png`: Commit the reproducible Blender render for POTION_INDIGO.
+- `tools/artgen/render_cache/items/359.png`: Commit the reproducible Blender render for POTION_MAGENTA.
+- `tools/artgen/render_cache/items/360.png`: Commit the reproducible Blender render for POTION_BISTRE.
+- `tools/artgen/render_cache/items/361.png`: Commit the reproducible Blender render for POTION_CHARCOAL.
+- `tools/artgen/render_cache/items/362.png`: Commit the reproducible Blender render for POTION_SILVER.
+- `tools/artgen/render_cache/items/363.png`: Commit the reproducible Blender render for POTION_IVORY.
+- `tools/artgen/render_cache/items/365.png`: Commit the reproducible Blender render for LIQUID_METAL.
+- `tools/artgen/render_cache/items/368.png`: Commit the reproducible Blender render for EXOTIC_CRIMSON.
+- `tools/artgen/render_cache/items/369.png`: Commit the reproducible Blender render for EXOTIC_AMBER.
+- `tools/artgen/render_cache/items/370.png`: Commit the reproducible Blender render for EXOTIC_GOLDEN.
+- `tools/artgen/render_cache/items/371.png`: Commit the reproducible Blender render for EXOTIC_JADE.
+- `tools/artgen/render_cache/items/372.png`: Commit the reproducible Blender render for EXOTIC_TURQUOISE.
+- `tools/artgen/render_cache/items/373.png`: Commit the reproducible Blender render for EXOTIC_AZURE.
+- `tools/artgen/render_cache/items/374.png`: Commit the reproducible Blender render for EXOTIC_INDIGO.
+- `tools/artgen/render_cache/items/375.png`: Commit the reproducible Blender render for EXOTIC_MAGENTA.
+- `tools/artgen/render_cache/items/376.png`: Commit the reproducible Blender render for EXOTIC_BISTRE.
+- `tools/artgen/render_cache/items/377.png`: Commit the reproducible Blender render for EXOTIC_CHARCOAL.
+- `tools/artgen/render_cache/items/378.png`: Commit the reproducible Blender render for EXOTIC_SILVER.
+- `tools/artgen/render_cache/items/379.png`: Commit the reproducible Blender render for EXOTIC_IVORY.
+- `tools/artgen/render_cache/items/384.png`: Commit the reproducible Blender render for SEED_ROTBERRY.
+- `tools/artgen/render_cache/items/385.png`: Commit the reproducible Blender render for SEED_FIREBLOOM.
+- `tools/artgen/render_cache/items/386.png`: Commit the reproducible Blender render for SEED_SWIFTTHISTLE.
+- `tools/artgen/render_cache/items/387.png`: Commit the reproducible Blender render for SEED_SUNGRASS.
+- `tools/artgen/render_cache/items/388.png`: Commit the reproducible Blender render for SEED_ICECAP.
+- `tools/artgen/render_cache/items/389.png`: Commit the reproducible Blender render for SEED_STORMVINE.
+- `tools/artgen/render_cache/items/390.png`: Commit the reproducible Blender render for SEED_SORROWMOSS.
+- `tools/artgen/render_cache/items/391.png`: Commit the reproducible Blender render for SEED_MAGEROYAL.
+- `tools/artgen/render_cache/items/392.png`: Commit the reproducible Blender render for SEED_EARTHROOT.
+- `tools/artgen/render_cache/items/393.png`: Commit the reproducible Blender render for SEED_STARFLOWER.
+- `tools/artgen/render_cache/items/394.png`: Commit the reproducible Blender render for SEED_FADELEAF.
+- `tools/artgen/render_cache/items/395.png`: Commit the reproducible Blender render for SEED_BLINDWEED.
+- `tools/artgen/render_cache/items/400.png`: Commit the reproducible Blender render for BREW_INFERNAL.
+- `tools/artgen/render_cache/items/401.png`: Commit the reproducible Blender render for BREW_BLIZZARD.
+- `tools/artgen/render_cache/items/402.png`: Commit the reproducible Blender render for BREW_SHOCKING.
+- `tools/artgen/render_cache/items/403.png`: Commit the reproducible Blender render for BREW_CAUSTIC.
+- `tools/artgen/render_cache/items/404.png`: Commit the reproducible Blender render for BREW_AQUA.
+- `tools/artgen/render_cache/items/405.png`: Commit the reproducible Blender render for BREW_UNSTABLE.
+- `tools/artgen/render_cache/items/408.png`: Commit the reproducible Blender render for ELIXIR_HONEY.
+- `tools/artgen/render_cache/items/409.png`: Commit the reproducible Blender render for ELIXIR_AQUA.
+- `tools/artgen/render_cache/items/410.png`: Commit the reproducible Blender render for ELIXIR_MIGHT.
+- `tools/artgen/render_cache/items/411.png`: Commit the reproducible Blender render for ELIXIR_DRAGON.
+- `tools/artgen/render_cache/items/412.png`: Commit the reproducible Blender render for ELIXIR_TOXIC.
+- `tools/artgen/render_cache/items/413.png`: Commit the reproducible Blender render for ELIXIR_ICY.
+- `tools/artgen/render_cache/items/414.png`: Commit the reproducible Blender render for ELIXIR_ARCANE.
+- `tools/artgen/render_cache/items/415.png`: Commit the reproducible Blender render for ELIXIR_FEATHER.
+- `tools/artgen/render_cache/items/416.png`: Commit the reproducible Blender render for WILD_ENERGY.
+- `tools/artgen/render_cache/items/417.png`: Commit the reproducible Blender render for PHASE_SHIFT.
+- `tools/artgen/render_cache/items/418.png`: Commit the reproducible Blender render for TELE_GRAB.
+- `tools/artgen/render_cache/items/419.png`: Commit the reproducible Blender render for UNSTABLE_SPELL.
+- `tools/artgen/render_cache/items/421.png`: Commit the reproducible Blender render for CURSE_INFUSE.
+- `tools/artgen/render_cache/items/422.png`: Commit the reproducible Blender render for MAGIC_INFUSE.
+- `tools/artgen/render_cache/items/423.png`: Commit the reproducible Blender render for ALCHEMIZE.
+- `tools/artgen/render_cache/items/424.png`: Commit the reproducible Blender render for RECYCLE.
+- `tools/artgen/render_cache/items/426.png`: Commit the reproducible Blender render for RECLAIM_TRAP.
+- `tools/artgen/render_cache/items/427.png`: Commit the reproducible Blender render for RETURN_BEACON.
+- `tools/artgen/render_cache/items/428.png`: Commit the reproducible Blender render for SUMMON_ELE.
+- `tools/artgen/render_cache/items/432.png`: Commit the reproducible Blender render for MEAT.
+- `tools/artgen/render_cache/items/433.png`: Commit the reproducible Blender render for STEAK.
+- `tools/artgen/render_cache/items/434.png`: Commit the reproducible Blender render for STEWED.
+- `tools/artgen/render_cache/items/435.png`: Commit the reproducible Blender render for OVERPRICED.
+- `tools/artgen/render_cache/items/436.png`: Commit the reproducible Blender render for CARPACCIO.
+- `tools/artgen/render_cache/items/437.png`: Commit the reproducible Blender render for RATION.
+- `tools/artgen/render_cache/items/438.png`: Commit the reproducible Blender render for PASTY.
+- `tools/artgen/render_cache/items/439.png`: Commit the reproducible Blender render for MEAT_PIE.
+- `tools/artgen/render_cache/items/440.png`: Commit the reproducible Blender render for BLANDFRUIT.
+- `tools/artgen/render_cache/items/441.png`: Commit the reproducible Blender render for BLAND_CHUNKS.
+- `tools/artgen/render_cache/items/442.png`: Commit the reproducible Blender render for BERRY.
+- `tools/artgen/render_cache/items/443.png`: Commit the reproducible Blender render for PHANTOM_MEAT.
+- `tools/artgen/render_cache/items/444.png`: Commit the reproducible Blender render for SUPPLY_RATION.
+- `tools/artgen/render_cache/items/448.png`: Commit the reproducible Blender render for STEAMED_FISH.
+- `tools/artgen/render_cache/items/449.png`: Commit the reproducible Blender render for FISH_LEFTOVER.
+- `tools/artgen/render_cache/items/450.png`: Commit the reproducible Blender render for CHOC_AMULET.
+- `tools/artgen/render_cache/items/451.png`: Commit the reproducible Blender render for EASTER_EGG.
+- `tools/artgen/render_cache/items/452.png`: Commit the reproducible Blender render for RAINBOW_POTION.
+- `tools/artgen/render_cache/items/453.png`: Commit the reproducible Blender render for SHATTERED_CAKE.
+- `tools/artgen/render_cache/items/454.png`: Commit the reproducible Blender render for PUMPKIN_PIE.
+- `tools/artgen/render_cache/items/455.png`: Commit the reproducible Blender render for VANILLA_CAKE.
+- `tools/artgen/render_cache/items/456.png`: Commit the reproducible Blender render for CANDY_CANE.
+- `tools/artgen/render_cache/items/457.png`: Commit the reproducible Blender render for SPARKLING_POTION.
+- `tools/artgen/render_cache/items/465.png`: Commit the reproducible Blender render for DUST.
+- `tools/artgen/render_cache/items/466.png`: Commit the reproducible Blender render for CANDLE.
+- `tools/artgen/render_cache/items/467.png`: Commit the reproducible Blender render for EMBER.
+- `tools/artgen/render_cache/items/468.png`: Commit the reproducible Blender render for PICKAXE.
+- `tools/artgen/render_cache/items/469.png`: Commit the reproducible Blender render for ORE.
+- `tools/artgen/render_cache/items/470.png`: Commit the reproducible Blender render for TOKEN.
+- `tools/artgen/render_cache/items/471.png`: Commit the reproducible Blender render for BLOB.
+- `tools/artgen/render_cache/items/472.png`: Commit the reproducible Blender render for SHARD.
+- `tools/artgen/render_cache/items/473.png`: Commit the reproducible Blender render for ESCAPE.
+- `tools/artgen/render_cache/items/474.png`: Commit the reproducible Blender render for STATUE.
+- `tools/artgen/render_cache/items/480.png`: Commit the reproducible Blender render for WATERSKIN.
+- `tools/artgen/render_cache/items/481.png`: Commit the reproducible Blender render for BACKPACK.
+- `tools/artgen/render_cache/items/482.png`: Commit the reproducible Blender render for POUCH.
+- `tools/artgen/render_cache/items/483.png`: Commit the reproducible Blender render for HOLDER.
+- `tools/artgen/render_cache/items/484.png`: Commit the reproducible Blender render for BANDOLIER.
+- `tools/artgen/render_cache/items/485.png`: Commit the reproducible Blender render for HOLSTER.
+- `tools/artgen/render_cache/items/486.png`: Commit the reproducible Blender render for VIAL.
+- `tools/artgen/render_cache/items/496.png`: Commit the reproducible Blender render for GUIDE_PAGE.
+- `tools/artgen/render_cache/items/497.png`: Commit the reproducible Blender render for ALCH_PAGE.
+- `tools/artgen/render_cache/items/498.png`: Commit the reproducible Blender render for SEWER_PAGE.
+- `tools/artgen/render_cache/items/499.png`: Commit the reproducible Blender render for PRISON_PAGE.
+- `tools/artgen/render_cache/items/500.png`: Commit the reproducible Blender render for CAVES_PAGE.
+- `tools/artgen/render_cache/items/501.png`: Commit the reproducible Blender render for CITY_PAGE.
+- `tools/artgen/render_cache/items/502.png`: Commit the reproducible Blender render for HALLS_PAGE.
+- `tools/artgen/render_cache/items/512.png`: Commit the reproducible Blender render for BONE_ROD.
+- `tools/artgen/render_cache/items/513.png`: Commit the reproducible Blender render for PHYLACTERY.
+- `tools/artgen/render_cache/items/514.png`: Commit the reproducible Blender render for ARMOR_NECROMANCER.
+- `tools/artgen/render_cache/items/515.png`: Commit the reproducible Blender render for RUNED_BATON.
+- `tools/artgen/render_cache/items/516.png`: Commit the reproducible Blender render for SIGIL_BRUSH.
+- `tools/artgen/render_cache/items/517.png`: Commit the reproducible Blender render for ARMOR_ENCHANTER.
+- `tools/artgen/render_cache/items/518.png`: Commit the reproducible Blender render for FOCUS_RING.
+- `tools/artgen/render_cache/items/519.png`: Commit the reproducible Blender render for FOCUS_CRYSTAL.
+- `tools/artgen/render_cache/items/520.png`: Commit the reproducible Blender render for ARMOR_PSYCHIC.
+- `tools/artgen/render_cache/items/521.png`: Commit the reproducible Blender render for RUNE_ETCHING.
+- `tools/artgen/render_cache/items/522.png`: Commit the reproducible Blender render for SUMMON_ELE_FIRE.
+- `tools/artgen/render_cache/items/523.png`: Commit the reproducible Blender render for SUMMON_ELE_FROST.
+- `tools/artgen/render_cache/items/524.png`: Commit the reproducible Blender render for SUMMON_ELE_SHOCK.
+- `tools/artgen/render_cache/items/525.png`: Commit the reproducible Blender render for SUMMON_ELE_CHAOS.
+- `tools/artgen/render_cache/surfaces/00.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/01.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/02.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/03.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/04.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/05.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/06.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/07.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/08.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/09.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/10.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/11.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/12.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/13.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/14.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/15.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/16.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/17.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/18.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/19.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/20.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/21.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/surfaces/22.png`: Commit the native relief material used by the special-room layouts.
+- `tools/artgen/render_cache/title/background.png`: Commit the original Blender title composition or lettering.
+- `tools/artgen/render_cache/title/boss_slain.png`: Commit the original Blender title composition or lettering.
+- `tools/artgen/render_cache/title/game_over.png`: Commit the original Blender title composition or lettering.
+- `tools/artgen/render_cache/title/wordmark.png`: Commit the original Blender title composition or lettering.
+- `tools/artgen/specs/amulet.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/banners.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/complete_effects.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/complete_fireball_short.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/complete_fireball_tall.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/complete_halls_special.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/complete_prison_exit.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/complete_sewer_boss.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/complete_specks.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/complete_spell_icons.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/complete_text_icons.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/complete_visual_grid.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/complete_wall_blocking.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/complete_weak_floor.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/item_icons.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/items.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/talent_icons.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/title_grimhollow.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_carpet.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_caves_boss.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_caves_quest.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_city_boss.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_city_quest.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_prison_quest.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_rat_king_room.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/upstream_v4_environment_raised_terrain.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/upstream_v4_environment_terrain_features.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/upstream_v4_environment_tiles_caves_crystal.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/specs/upstream_v4_environment_tiles_caves_gnoll.json`: Declare source dimensions and non-empty frame contracts for complete art coverage.
+- `tools/artgen/titles.py`: Generate and validate reproducible item, title, glyph and special-room art.
+- `tools/artgen/validate.py`: Generate and validate reproducible item, title, glyph and special-room art.
+- `verification/items.png`: Review every rendered item at enlarged and 16px sizes.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/TitleScene.java`: Keep title flames clear of the new wordmark.
+- `verification/art-validation.log`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/clean-build.log`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/desktop-only.log`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/caves/room-gate.json`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/caves/room.json`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/caves/sewers-gate.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/caves/sewers-ingame.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/caves/sewers-terrain.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/city/room-gate.json`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/city/room.json`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/city/sewers-gate.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/city/sewers-ingame.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/city/sewers-terrain.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/halls/room-gate.json`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/halls/room.json`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/halls/sewers-gate.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/halls/sewers-ingame.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/halls/sewers-terrain.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/liquids/round-16.json`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/liquids/round-16.md`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/liquids/round-16.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/prison/room-gate.json`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/prison/room.json`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/prison/sewers-gate.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/prison/sewers-ingame.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/prison/sewers-terrain.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/room-gate.json`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/room.json`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/sewers-gate.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/sewers-ingame.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/iteration/sewers-terrain.png`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/junit-summary.log`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/new-class-smoke.log`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/reproducibility.log`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
+- `verification/apk-identity.log`: Append final 0.6.0 APK identity and package/label output.
+- `verification/title.png`: Commit the actual OpenGL title capture after positioning flames outside the wordmark.

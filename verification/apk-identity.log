@@ -13,3 +13,7 @@ v4 integration: aapt dump badging -> package=com.grimhollow.dungeon versionCode=
 Stage 6d: aapt dump badging android/build/outputs/apk/debug/android-debug.apk
 package: name='com.grimhollow.dungeon' versionCode='914' versionName='0.5.3-INDEV'
 application-label:'Grimhollow'
+
+Stage 6e final APK (2026-09-11)
+package: name='com.grimhollow.dungeon' versionCode='915' versionName='0.6.0-INDEV' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+application-label:'Grimhollow'

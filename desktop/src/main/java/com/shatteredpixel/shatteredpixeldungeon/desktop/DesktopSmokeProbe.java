@@ -334,7 +334,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 int index=field.getInt(null);if(index<0)continue;
                 com.watabou.noosa.Image icon=new com.watabou.noosa.Image(Assets.Sprites.ITEM_ICONS);
                 icon.frame(com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.Icons.film.get(index));
-                exactRectangle(icon,index,8,buffer,camera,zoom,failures,"icon "+field.getName());icons++;icon.destroy();
+                exactRectangle(icon,index,32,buffer,camera,zoom,failures,"icon "+field.getName());icons++;icon.destroy();
             }
             System.out.println("TEST 25: items="+items+" identification icons="+icons+" failures="+(failures.size()-before));before=failures.size();
             int cell=Dungeon.hero.pos,terrain=Dungeon.level.map[cell];

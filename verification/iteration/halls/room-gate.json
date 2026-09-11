@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.04662412391067538,
+          "value": 0.04439311784158108,
           "minimum": 0.02,
           "maximum": null,
           "pass_": true,
@@ -14,7 +14,7 @@
         },
         {
           "target": "representative pHash bits",
-          "value": 26.0,
+          "value": 30.0,
           "minimum": 12,
           "maximum": null,
           "pass_": true,
@@ -28,7 +28,7 @@
       "measurements": [
         {
           "target": "median flagstone fraction",
-          "value": 0.9461805555555556,
+          "value": 0.9375,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -42,7 +42,7 @@
       "measurements": [
         {
           "target": "median luminance difference",
-          "value": 0.07937526892701526,
+          "value": 0.07777600081699346,
           "minimum": 0.04,
           "maximum": null,
           "pass_": true,
@@ -50,7 +50,7 @@
         },
         {
           "target": "median hue difference",
-          "value": 135.07101425635614,
+          "value": 130.13555880052638,
           "minimum": 30,
           "maximum": null,
           "pass_": true,
@@ -64,15 +64,15 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.06005230621936275,
+          "value": -0.0586514174552923,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.02343585503472222,
-      "inner_mean": 0.08348816125408497,
+      "outer_mean": 0.02750128981424746,
+      "inner_mean": 0.08615270726953976,
       "passing": true
     },
     {
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.06176983250215596,
+          "value": 0.06499682267554012,
           "minimum": 0.06,
           "maximum": 0.12,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.10006032827877313,
+          "value": 0.10183511144035531,
           "minimum": 0.09,
           "maximum": null,
           "pass_": true,
@@ -118,7 +118,7 @@
         },
         {
           "target": "item bbox contrast",
-          "value": 0.744623607843137,
+          "value": 0.7547090196078431,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -129,15 +129,15 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.06176983250215596,
+    "region_mean_after_lighting": 0.06499682267554012,
     "region_mean_pass": true,
-    "dominant_green_brown_fraction": 0.9257450810185185,
+    "dominant_green_brown_fraction": 0.9247685185185185,
     "hue_budget_pass": true,
     "accent_families": 1,
     "accent_bins": [
-      0.07081886574074074,
-      0.0017903645833333333,
-      0.00011754918981481481,
+      0.07195818865740741,
+      0.001736111111111111,
+      9.04224537037037e-06,
       0.0,
       0.0,
       0.0,
@@ -156,8 +156,8 @@
       0.57
     ]
   },
-  "screenshot_sha256": "a0078b34a61f35ea748640810a47d54a794265dec5c38531f74c181cbfec1d6f",
-  "terrain_sha256": "a9a77b6acd4ed9bbb5fb1bf40f188c557add9686abc677dfb78dbff64b9dac56",
+  "screenshot_sha256": "f8c89cc8d336ad686f60d512e56d20517189a7547fcf33a80b923e5db0a619bd",
+  "terrain_sha256": "4b245cc369ceef63297b84278c929d3a25330cbd2ff79b6c9446ace9740823c9",
   "sample_count": 48,
   "seed": 454,
   "lighting": true,

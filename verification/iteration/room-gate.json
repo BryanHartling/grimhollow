@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.213329172737382,
+          "value": 0.21058993253676467,
           "minimum": 0.1,
           "maximum": null,
           "pass_": true,
@@ -14,7 +14,7 @@
         },
         {
           "target": "representative pHash bits",
-          "value": 34.0,
+          "value": 36.0,
           "minimum": 12,
           "maximum": null,
           "pass_": true,
@@ -42,7 +42,7 @@
       "measurements": [
         {
           "target": "median luminance difference",
-          "value": 0.14954279241557739,
+          "value": 0.14694726341230935,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -50,7 +50,7 @@
         },
         {
           "target": "median hue difference",
-          "value": 33.80576077749201,
+          "value": 33.58327742346748,
           "minimum": 30,
           "maximum": null,
           "pass_": true,
@@ -64,15 +64,15 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.15040981707714912,
+          "value": -0.1475846638979666,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.05060635771973719,
-      "inner_mean": 0.2010161747968863,
+      "outer_mean": 0.05465135676232298,
+      "inner_mean": 0.20223602066028956,
       "passing": true
     },
     {
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.13557264974010869,
+          "value": 0.1380680992714301,
           "minimum": 0.12,
           "maximum": 0.2,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.12110437450728885,
+          "value": 0.12031725862226232,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -102,7 +102,7 @@
       "measurements": [
         {
           "target": "hero bbox contrast",
-          "value": 0.3206745098039216,
+          "value": 0.3210972549019607,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -118,7 +118,7 @@
         },
         {
           "target": "item bbox contrast",
-          "value": 0.5016711764705882,
+          "value": 0.4765796078431372,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -129,18 +129,18 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.13557264974010869,
+    "region_mean_after_lighting": 0.1380680992714301,
     "region_mean_pass": true,
-    "dominant_green_brown_fraction": 0.7979627486282579,
+    "dominant_green_brown_fraction": 0.8264853395061729,
     "hue_budget_pass": true,
-    "accent_families": 0,
+    "accent_families": 1,
     "accent_bins": [
+      0.00797860939643347,
       0.0,
       0.0,
       0.0,
+      0.0005733453360768176,
       0.0,
-      0.0006108539094650206,
-      3.2150205761316875e-05,
       0.0,
       0.0,
       0.0,
@@ -156,8 +156,8 @@
       0.45
     ]
   },
-  "screenshot_sha256": "eb66e3a413f9b5de696c3c6e2981c33ee397d94244fd73584b7eb447ac42f74f",
-  "terrain_sha256": "8eef78c38dc229bb8fb5f30125c226db7d59d9d81e62a8d9762ee03a343ca563",
+  "screenshot_sha256": "1d262b76863957d0ae928f7dd1d224750cd7a0a0548e95883e705e897ae1543f",
+  "terrain_sha256": "ea347f50b0986344001c979481e41909e8811fbffcf3d6313c1cdd506acc6ef4",
   "sample_count": 81,
   "seed": 418,
   "lighting": true,

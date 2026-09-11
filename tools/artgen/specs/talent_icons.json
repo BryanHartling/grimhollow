@@ -1,1 +1,9 @@
-{"kind":"talents","dimensions":[512,640],"seed":4502,"palette_roles":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22],"animation_keyframes":[],"output":"core/src/main/assets/interfaces/talent_icons.png","provenance":"GPL upstream v3.3.8 vectors with original Necromancer talent pictograms","source_dimensions":[512,304]}
+{
+  "output": "core/src/main/assets/interfaces/talent_icons.png",
+  "kind": "talents",
+  "dimensions": [
+    512,
+    640
+  ],
+  "native_glyphs": "talents"
+}

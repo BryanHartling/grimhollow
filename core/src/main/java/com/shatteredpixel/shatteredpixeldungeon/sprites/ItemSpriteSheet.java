@@ -44,7 +44,8 @@ public class ItemSpriteSheet {
 	private static void assignItemRect( int item, int width, int height ){
 		int x = (item % WIDTH) * SIZE;
 		int y = (item / WIDTH) * SIZE;
-		film.add( item, x, y, x+width*com.shatteredpixel.shatteredpixeldungeon.GameGeometry.ITEM_DENSITY, y+height*com.shatteredpixel.shatteredpixeldungeon.GameGeometry.ITEM_DENSITY);
+		// Native props are centred within a full cell; legacy crop widths cut them off.
+		film.add( item, x, y, x+SIZE, y+SIZE);
 	}
 
 	private static final int PLACEHOLDERS   =                               xy(1, 1);   //18 slots
@@ -825,7 +826,8 @@ public class ItemSpriteSheet {
 		private static final int WIDTH = 16;
 		public static final int SIZE = 8;
 
-		public static TextureFilm film = new TextureFilm( Assets.Sprites.ITEM_ICONS, SIZE, SIZE );
+		private static final int TEXTURE_SIZE = 32;
+		public static TextureFilm film = new TextureFilm( Assets.Sprites.ITEM_ICONS, TEXTURE_SIZE, TEXTURE_SIZE );
 
 		private static int xy(int x, int y){
 			x -= 1; y -= 1;
@@ -833,9 +835,9 @@ public class ItemSpriteSheet {
 		}
 
 		private static void assignIconRect( int item, int width, int height ){
-			int x = (item % WIDTH) * SIZE;
-			int y = (item / WIDTH) * SIZE;
-			film.add( item, x, y, x+width, y+height);
+			int x = (item % WIDTH) * TEXTURE_SIZE;
+			int y = (item / WIDTH) * TEXTURE_SIZE;
+			film.add( item, x, y, x+TEXTURE_SIZE, y+TEXTURE_SIZE);
 		}
 
 		private static final int RINGS          =                            xy(1, 1);  //16 slots

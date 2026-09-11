@@ -1,0 +1,4872 @@
+{
+  "dimensions": [
+    512,
+    1056
+  ],
+  "frame": [
+    32,
+    32
+  ],
+  "items": [
+    {
+      "index": 0,
+      "name": "SOMETHING",
+      "aliases": [
+        "SOMETHING"
+      ],
+      "kind": "chest",
+      "seed": 2254993585,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 1,
+      "name": "WEAPON_HOLDER",
+      "aliases": [
+        "WEAPON_HOLDER"
+      ],
+      "kind": "sword",
+      "seed": 2941157146,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 2,
+      "name": "ARMOR_HOLDER",
+      "aliases": [
+        "ARMOR_HOLDER"
+      ],
+      "kind": "armor",
+      "seed": 3884175146,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 3,
+      "name": "MISSILE_HOLDER",
+      "aliases": [
+        "MISSILE_HOLDER"
+      ],
+      "kind": "arrow",
+      "seed": 2686531903,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 4,
+      "name": "WAND_HOLDER",
+      "aliases": [
+        "WAND_HOLDER"
+      ],
+      "kind": "wand",
+      "seed": 3342458346,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 5,
+      "name": "RING_HOLDER",
+      "aliases": [
+        "RING_HOLDER"
+      ],
+      "kind": "ring",
+      "seed": 3784596884,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "5A4630",
+      "variant": 0
+    },
+    {
+      "index": 6,
+      "name": "ARTIFACT_HOLDER",
+      "aliases": [
+        "ARTIFACT_HOLDER"
+      ],
+      "kind": "amulet",
+      "seed": 720170959,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 7,
+      "name": "TRINKET_HOLDER",
+      "aliases": [
+        "TRINKET_HOLDER"
+      ],
+      "kind": "crystal",
+      "seed": 2459358090,
+      "primary": "4A2C6E",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 8,
+      "name": "FOOD_HOLDER",
+      "aliases": [
+        "FOOD_HOLDER"
+      ],
+      "kind": "ration",
+      "seed": 2699594556,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 9,
+      "name": "BOMB_HOLDER",
+      "aliases": [
+        "BOMB_HOLDER"
+      ],
+      "kind": "bomb",
+      "seed": 1986979083,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 10,
+      "name": "POTION_HOLDER",
+      "aliases": [
+        "POTION_HOLDER"
+      ],
+      "kind": "bottle",
+      "seed": 2566388624,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 11,
+      "name": "SEED_HOLDER",
+      "aliases": [
+        "SEED_HOLDER"
+      ],
+      "kind": "seed",
+      "seed": 4030179369,
+      "primary": "2C2F33",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 12,
+      "name": "SCROLL_HOLDER",
+      "aliases": [
+        "SCROLL_HOLDER"
+      ],
+      "kind": "scroll",
+      "seed": 4102796952,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 13,
+      "name": "STONE_HOLDER",
+      "aliases": [
+        "STONE_HOLDER"
+      ],
+      "kind": "stone",
+      "seed": 737671783,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 14,
+      "name": "ELIXIR_HOLDER",
+      "aliases": [
+        "ELIXIR_HOLDER"
+      ],
+      "kind": "bottle",
+      "seed": 925231998,
+      "primary": "4A2C6E",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 15,
+      "name": "SPELL_HOLDER",
+      "aliases": [
+        "SPELL_HOLDER"
+      ],
+      "kind": "tablet",
+      "seed": 1679233629,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 16,
+      "name": "MOB_HOLDER",
+      "aliases": [
+        "MOB_HOLDER"
+      ],
+      "kind": "skull",
+      "seed": 1168871440,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 17,
+      "name": "DOCUMENT_HOLDER",
+      "aliases": [
+        "DOCUMENT_HOLDER"
+      ],
+      "kind": "scroll",
+      "seed": 1836600934,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 18,
+      "name": "GOLD",
+      "aliases": [
+        "GOLD"
+      ],
+      "kind": "coins",
+      "seed": 4217080544,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "5A4630",
+      "variant": 0
+    },
+    {
+      "index": 19,
+      "name": "ENERGY",
+      "aliases": [
+        "ENERGY"
+      ],
+      "kind": "crystal",
+      "seed": 2123134155,
+      "primary": "7BB33B",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 3
+    },
+    {
+      "index": 21,
+      "name": "DEWDROP",
+      "aliases": [
+        "DEWDROP"
+      ],
+      "kind": "drop",
+      "seed": 3077830409,
+      "primary": "6FD3E0",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 22,
+      "name": "PETAL",
+      "aliases": [
+        "PETAL"
+      ],
+      "kind": "leaf",
+      "seed": 25050342,
+      "primary": "4A2C6E",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 23,
+      "name": "SANDBAG",
+      "aliases": [
+        "SANDBAG"
+      ],
+      "kind": "bag",
+      "seed": 1516989384,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 24,
+      "name": "SPIRIT_ARROW",
+      "aliases": [
+        "SPIRIT_ARROW"
+      ],
+      "kind": "arrow",
+      "seed": 3083982801,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 26,
+      "name": "TENGU_BOMB",
+      "aliases": [
+        "TENGU_BOMB"
+      ],
+      "kind": "bomb",
+      "seed": 1827346371,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 27,
+      "name": "TENGU_SHOCKER",
+      "aliases": [
+        "TENGU_SHOCKER"
+      ],
+      "kind": "bomb",
+      "seed": 2869929540,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 28,
+      "name": "GEO_BOULDER",
+      "aliases": [
+        "GEO_BOULDER"
+      ],
+      "kind": "stone",
+      "seed": 1171087712,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 32,
+      "name": "BONES",
+      "aliases": [
+        "BONES"
+      ],
+      "kind": "bones",
+      "seed": 1561070519,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 33,
+      "name": "REMAINS",
+      "aliases": [
+        "REMAINS"
+      ],
+      "kind": "bones",
+      "seed": 1382718000,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 34,
+      "name": "TOMB",
+      "aliases": [
+        "TOMB"
+      ],
+      "kind": "tomb",
+      "seed": 1212480334,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 35,
+      "name": "GRAVE",
+      "aliases": [
+        "GRAVE"
+      ],
+      "kind": "tomb",
+      "seed": 2035400509,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 36,
+      "name": "CHEST",
+      "aliases": [
+        "CHEST"
+      ],
+      "kind": "chest",
+      "seed": 1791860375,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 37,
+      "name": "LOCKED_CHEST",
+      "aliases": [
+        "LOCKED_CHEST"
+      ],
+      "kind": "chest",
+      "seed": 450100172,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 38,
+      "name": "CRYSTAL_CHEST",
+      "aliases": [
+        "CRYSTAL_CHEST"
+      ],
+      "kind": "chest",
+      "seed": 2133812974,
+      "primary": "6FD3E0",
+      "secondary": "565B62",
+      "accent": "EFE7D2",
+      "variant": 2
+    },
+    {
+      "index": 39,
+      "name": "EBONY_CHEST",
+      "aliases": [
+        "EBONY_CHEST"
+      ],
+      "kind": "chest",
+      "seed": 490046065,
+      "primary": "1A1816",
+      "secondary": "8A7331",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 48,
+      "name": "ANKH",
+      "aliases": [
+        "ANKH"
+      ],
+      "kind": "ankh",
+      "seed": 225654394,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "565B62",
+      "variant": 2
+    },
+    {
+      "index": 49,
+      "name": "STYLUS",
+      "aliases": [
+        "STYLUS"
+      ],
+      "kind": "wand",
+      "seed": 1983490835,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 50,
+      "name": "SEAL",
+      "aliases": [
+        "SEAL"
+      ],
+      "kind": "seal",
+      "seed": 2784861548,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "5A4630",
+      "variant": 0
+    },
+    {
+      "index": 51,
+      "name": "TORCH",
+      "aliases": [
+        "TORCH"
+      ],
+      "kind": "torch",
+      "seed": 1193066325,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 52,
+      "name": "BEACON",
+      "aliases": [
+        "BEACON"
+      ],
+      "kind": "lantern",
+      "seed": 2068003479,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 53,
+      "name": "HONEYPOT",
+      "aliases": [
+        "HONEYPOT"
+      ],
+      "kind": "pot",
+      "seed": 3157154669,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 54,
+      "name": "SHATTPOT",
+      "aliases": [
+        "SHATTPOT"
+      ],
+      "kind": "pot",
+      "seed": 2516015185,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 55,
+      "name": "IRON_KEY",
+      "aliases": [
+        "IRON_KEY"
+      ],
+      "kind": "key",
+      "seed": 2747793508,
+      "primary": "565B62",
+      "secondary": "C9BFA8",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 56,
+      "name": "GOLDEN_KEY",
+      "aliases": [
+        "GOLDEN_KEY"
+      ],
+      "kind": "key",
+      "seed": 2277678404,
+      "primary": "E4C76A",
+      "secondary": "C9BFA8",
+      "accent": "5A4630",
+      "variant": 0
+    },
+    {
+      "index": 57,
+      "name": "CRYSTAL_KEY",
+      "aliases": [
+        "CRYSTAL_KEY"
+      ],
+      "kind": "key",
+      "seed": 2985553361,
+      "primary": "6FD3E0",
+      "secondary": "C9BFA8",
+      "accent": "EFE7D2",
+      "variant": 1
+    },
+    {
+      "index": 58,
+      "name": "WORN_KEY",
+      "aliases": [
+        "WORN_KEY"
+      ],
+      "kind": "key",
+      "seed": 837878628,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 59,
+      "name": "MASK",
+      "aliases": [
+        "MASK"
+      ],
+      "kind": "mask",
+      "seed": 3769660805,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 60,
+      "name": "CROWN",
+      "aliases": [
+        "CROWN"
+      ],
+      "kind": "crown",
+      "seed": 146511402,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 61,
+      "name": "AMULET",
+      "aliases": [
+        "AMULET"
+      ],
+      "kind": "amulet",
+      "seed": 3228772228,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 62,
+      "name": "MASTERY",
+      "aliases": [
+        "MASTERY"
+      ],
+      "kind": "book",
+      "seed": 3965435897,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 63,
+      "name": "KIT",
+      "aliases": [
+        "KIT"
+      ],
+      "kind": "toolkit",
+      "seed": 1274552979,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 64,
+      "name": "SEAL_SHARD",
+      "aliases": [
+        "SEAL_SHARD"
+      ],
+      "kind": "shard",
+      "seed": 1707676668,
+      "primary": "9E1B24",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 65,
+      "name": "BROKEN_STAFF",
+      "aliases": [
+        "BROKEN_STAFF"
+      ],
+      "kind": "wand",
+      "seed": 2707978778,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 66,
+      "name": "CLOAK_SCRAP",
+      "aliases": [
+        "CLOAK_SCRAP"
+      ],
+      "kind": "cloak",
+      "seed": 1604206877,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 67,
+      "name": "BOW_FRAGMENT",
+      "aliases": [
+        "BOW_FRAGMENT"
+      ],
+      "kind": "bow",
+      "seed": 1710939193,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 68,
+      "name": "BROKEN_HILT",
+      "aliases": [
+        "BROKEN_HILT"
+      ],
+      "kind": "sword",
+      "seed": 1801173587,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 69,
+      "name": "TORN_PAGE",
+      "aliases": [
+        "TORN_PAGE"
+      ],
+      "kind": "scroll",
+      "seed": 2686564544,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 70,
+      "name": "TRINKET_CATA",
+      "aliases": [
+        "TRINKET_CATA"
+      ],
+      "kind": "crystal",
+      "seed": 401546028,
+      "primary": "9E1B24",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 80,
+      "name": "BOMB",
+      "aliases": [
+        "BOMB"
+      ],
+      "kind": "bomb",
+      "seed": 2681693073,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 81,
+      "name": "DBL_BOMB",
+      "aliases": [
+        "DBL_BOMB"
+      ],
+      "kind": "bomb",
+      "seed": 162495079,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 82,
+      "name": "FIRE_BOMB",
+      "aliases": [
+        "FIRE_BOMB"
+      ],
+      "kind": "bomb",
+      "seed": 2474818298,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 83,
+      "name": "FROST_BOMB",
+      "aliases": [
+        "FROST_BOMB"
+      ],
+      "kind": "bomb",
+      "seed": 15181741,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 84,
+      "name": "REGROWTH_BOMB",
+      "aliases": [
+        "REGROWTH_BOMB"
+      ],
+      "kind": "bomb",
+      "seed": 2299871276,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 85,
+      "name": "SMOKE_BOMB",
+      "aliases": [
+        "SMOKE_BOMB"
+      ],
+      "kind": "bomb",
+      "seed": 3455765076,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 86,
+      "name": "FLASHBANG",
+      "aliases": [
+        "FLASHBANG"
+      ],
+      "kind": "bomb",
+      "seed": 1660048694,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 87,
+      "name": "HOLY_BOMB",
+      "aliases": [
+        "HOLY_BOMB"
+      ],
+      "kind": "bomb",
+      "seed": 1544308104,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 88,
+      "name": "WOOLY_BOMB",
+      "aliases": [
+        "WOOLY_BOMB"
+      ],
+      "kind": "bomb",
+      "seed": 3662836249,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 89,
+      "name": "NOISEMAKER",
+      "aliases": [
+        "NOISEMAKER"
+      ],
+      "kind": "bomb",
+      "seed": 3311821210,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 90,
+      "name": "ARCANE_BOMB",
+      "aliases": [
+        "ARCANE_BOMB"
+      ],
+      "kind": "bomb",
+      "seed": 4178217466,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 91,
+      "name": "SHRAPNEL_BOMB",
+      "aliases": [
+        "SHRAPNEL_BOMB"
+      ],
+      "kind": "bomb",
+      "seed": 1632886325,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 96,
+      "name": "WORN_SHORTSWORD",
+      "aliases": [
+        "WORN_SHORTSWORD"
+      ],
+      "kind": "sword",
+      "seed": 1509332880,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 97,
+      "name": "CUDGEL",
+      "aliases": [
+        "CUDGEL"
+      ],
+      "kind": "club",
+      "seed": 1406254298,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 98,
+      "name": "GLOVES",
+      "aliases": [
+        "GLOVES"
+      ],
+      "kind": "glove",
+      "seed": 2416690763,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 99,
+      "name": "RAPIER",
+      "aliases": [
+        "RAPIER"
+      ],
+      "kind": "sword",
+      "seed": 231081876,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 100,
+      "name": "DAGGER",
+      "aliases": [
+        "DAGGER"
+      ],
+      "kind": "dagger",
+      "seed": 3115693520,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 101,
+      "name": "MAGES_STAFF",
+      "aliases": [
+        "MAGES_STAFF"
+      ],
+      "kind": "staff",
+      "seed": 1874065854,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 104,
+      "name": "SHORTSWORD",
+      "aliases": [
+        "SHORTSWORD"
+      ],
+      "kind": "sword",
+      "seed": 1414556964,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 105,
+      "name": "HAND_AXE",
+      "aliases": [
+        "HAND_AXE"
+      ],
+      "kind": "axe",
+      "seed": 330579091,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 106,
+      "name": "SPEAR",
+      "aliases": [
+        "SPEAR"
+      ],
+      "kind": "spear",
+      "seed": 4125702793,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 107,
+      "name": "QUARTERSTAFF",
+      "aliases": [
+        "QUARTERSTAFF"
+      ],
+      "kind": "staff",
+      "seed": 1253346271,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 108,
+      "name": "DIRK",
+      "aliases": [
+        "DIRK"
+      ],
+      "kind": "dagger",
+      "seed": 2741223769,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 109,
+      "name": "SICKLE",
+      "aliases": [
+        "SICKLE"
+      ],
+      "kind": "scythe",
+      "seed": 427115718,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 112,
+      "name": "SWORD",
+      "aliases": [
+        "SWORD"
+      ],
+      "kind": "sword",
+      "seed": 1909684183,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 113,
+      "name": "MACE",
+      "aliases": [
+        "MACE"
+      ],
+      "kind": "mace",
+      "seed": 1615013148,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 114,
+      "name": "SCIMITAR",
+      "aliases": [
+        "SCIMITAR"
+      ],
+      "kind": "sword",
+      "seed": 110372838,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 115,
+      "name": "ROUND_SHIELD",
+      "aliases": [
+        "ROUND_SHIELD"
+      ],
+      "kind": "shield",
+      "seed": 2893372816,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 116,
+      "name": "SAI",
+      "aliases": [
+        "SAI"
+      ],
+      "kind": "trident",
+      "seed": 3796876680,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 117,
+      "name": "WHIP",
+      "aliases": [
+        "WHIP"
+      ],
+      "kind": "whip",
+      "seed": 1026547862,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 120,
+      "name": "LONGSWORD",
+      "aliases": [
+        "LONGSWORD"
+      ],
+      "kind": "sword",
+      "seed": 3055198547,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 121,
+      "name": "BATTLE_AXE",
+      "aliases": [
+        "BATTLE_AXE"
+      ],
+      "kind": "axe",
+      "seed": 4059442780,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 122,
+      "name": "FLAIL",
+      "aliases": [
+        "FLAIL"
+      ],
+      "kind": "flail",
+      "seed": 3016341827,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 123,
+      "name": "RUNIC_BLADE",
+      "aliases": [
+        "RUNIC_BLADE"
+      ],
+      "kind": "sword",
+      "seed": 773861769,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 124,
+      "name": "ASSASSINS_BLADE",
+      "aliases": [
+        "ASSASSINS_BLADE"
+      ],
+      "kind": "sword",
+      "seed": 4289796246,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 125,
+      "name": "CROSSBOW",
+      "aliases": [
+        "CROSSBOW"
+      ],
+      "kind": "crossbow",
+      "seed": 26988715,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 126,
+      "name": "KATANA",
+      "aliases": [
+        "KATANA"
+      ],
+      "kind": "sword",
+      "seed": 3198194309,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 128,
+      "name": "GREATSWORD",
+      "aliases": [
+        "GREATSWORD"
+      ],
+      "kind": "sword",
+      "seed": 4174100515,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 129,
+      "name": "WAR_HAMMER",
+      "aliases": [
+        "WAR_HAMMER"
+      ],
+      "kind": "hammer",
+      "seed": 3748650838,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 130,
+      "name": "GLAIVE",
+      "aliases": [
+        "GLAIVE"
+      ],
+      "kind": "spear",
+      "seed": 1751745021,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 131,
+      "name": "GREATAXE",
+      "aliases": [
+        "GREATAXE"
+      ],
+      "kind": "axe",
+      "seed": 2030024664,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 132,
+      "name": "GREATSHIELD",
+      "aliases": [
+        "GREATSHIELD"
+      ],
+      "kind": "shield",
+      "seed": 3865396331,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 133,
+      "name": "GAUNTLETS",
+      "aliases": [
+        "GAUNTLETS"
+      ],
+      "kind": "glove",
+      "seed": 3291537435,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 134,
+      "name": "WAR_SCYTHE",
+      "aliases": [
+        "WAR_SCYTHE"
+      ],
+      "kind": "scythe",
+      "seed": 1035222,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 144,
+      "name": "SPIRIT_BOW",
+      "aliases": [
+        "SPIRIT_BOW"
+      ],
+      "kind": "bow",
+      "seed": 78500956,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 145,
+      "name": "THROWING_SPIKE",
+      "aliases": [
+        "THROWING_SPIKE"
+      ],
+      "kind": "arrow",
+      "seed": 2822338174,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 146,
+      "name": "THROWING_KNIFE",
+      "aliases": [
+        "THROWING_KNIFE"
+      ],
+      "kind": "dagger",
+      "seed": 1954509261,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 147,
+      "name": "THROWING_STONE",
+      "aliases": [
+        "THROWING_STONE"
+      ],
+      "kind": "stone",
+      "seed": 1012062956,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 148,
+      "name": "FISHING_SPEAR",
+      "aliases": [
+        "FISHING_SPEAR"
+      ],
+      "kind": "spear",
+      "seed": 3245780221,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 149,
+      "name": "SHURIKEN",
+      "aliases": [
+        "SHURIKEN"
+      ],
+      "kind": "shuriken",
+      "seed": 2909131709,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 150,
+      "name": "THROWING_CLUB",
+      "aliases": [
+        "THROWING_CLUB"
+      ],
+      "kind": "club",
+      "seed": 1773461656,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 151,
+      "name": "THROWING_SPEAR",
+      "aliases": [
+        "THROWING_SPEAR"
+      ],
+      "kind": "spear",
+      "seed": 2655763804,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 152,
+      "name": "BOLAS",
+      "aliases": [
+        "BOLAS"
+      ],
+      "kind": "bolas",
+      "seed": 1567797780,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 153,
+      "name": "KUNAI",
+      "aliases": [
+        "KUNAI"
+      ],
+      "kind": "dagger",
+      "seed": 1088341496,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 154,
+      "name": "JAVELIN",
+      "aliases": [
+        "JAVELIN"
+      ],
+      "kind": "spear",
+      "seed": 80367165,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 155,
+      "name": "TOMAHAWK",
+      "aliases": [
+        "TOMAHAWK"
+      ],
+      "kind": "axe",
+      "seed": 2082011574,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 156,
+      "name": "BOOMERANG",
+      "aliases": [
+        "BOOMERANG"
+      ],
+      "kind": "boomerang",
+      "seed": 340682585,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 157,
+      "name": "TRIDENT",
+      "aliases": [
+        "TRIDENT"
+      ],
+      "kind": "trident",
+      "seed": 4286655150,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 158,
+      "name": "THROWING_HAMMER",
+      "aliases": [
+        "THROWING_HAMMER"
+      ],
+      "kind": "hammer",
+      "seed": 2701648041,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 159,
+      "name": "FORCE_CUBE",
+      "aliases": [
+        "FORCE_CUBE"
+      ],
+      "kind": "cube",
+      "seed": 2851867656,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 160,
+      "name": "DARTS",
+      "aliases": [
+        "DARTS",
+        "DART"
+      ],
+      "kind": "arrow",
+      "seed": 2894573130,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 161,
+      "name": "ROT_DART",
+      "aliases": [
+        "ROT_DART"
+      ],
+      "kind": "arrow",
+      "seed": 2738819718,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 162,
+      "name": "INCENDIARY_DART",
+      "aliases": [
+        "INCENDIARY_DART"
+      ],
+      "kind": "arrow",
+      "seed": 909597418,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 163,
+      "name": "ADRENALINE_DART",
+      "aliases": [
+        "ADRENALINE_DART"
+      ],
+      "kind": "arrow",
+      "seed": 638995971,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 164,
+      "name": "HEALING_DART",
+      "aliases": [
+        "HEALING_DART"
+      ],
+      "kind": "arrow",
+      "seed": 3697894544,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 165,
+      "name": "CHILLING_DART",
+      "aliases": [
+        "CHILLING_DART"
+      ],
+      "kind": "arrow",
+      "seed": 466623425,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 166,
+      "name": "SHOCKING_DART",
+      "aliases": [
+        "SHOCKING_DART"
+      ],
+      "kind": "arrow",
+      "seed": 3813968581,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 167,
+      "name": "POISON_DART",
+      "aliases": [
+        "POISON_DART"
+      ],
+      "kind": "arrow",
+      "seed": 1658375322,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 168,
+      "name": "CLEANSING_DART",
+      "aliases": [
+        "CLEANSING_DART"
+      ],
+      "kind": "arrow",
+      "seed": 3881023509,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 169,
+      "name": "PARALYTIC_DART",
+      "aliases": [
+        "PARALYTIC_DART"
+      ],
+      "kind": "arrow",
+      "seed": 344976334,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 170,
+      "name": "HOLY_DART",
+      "aliases": [
+        "HOLY_DART"
+      ],
+      "kind": "arrow",
+      "seed": 292005231,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 171,
+      "name": "DISPLACING_DART",
+      "aliases": [
+        "DISPLACING_DART"
+      ],
+      "kind": "arrow",
+      "seed": 1945590199,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 172,
+      "name": "BLINDING_DART",
+      "aliases": [
+        "BLINDING_DART"
+      ],
+      "kind": "arrow",
+      "seed": 3782759737,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 176,
+      "name": "ARMOR_CLOTH",
+      "aliases": [
+        "ARMOR_CLOTH"
+      ],
+      "kind": "armor",
+      "seed": 3340906434,
+      "primary": "4A3B2A",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 177,
+      "name": "ARMOR_LEATHER",
+      "aliases": [
+        "ARMOR_LEATHER"
+      ],
+      "kind": "armor",
+      "seed": 2391698484,
+      "primary": "4A3B2A",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 178,
+      "name": "ARMOR_MAIL",
+      "aliases": [
+        "ARMOR_MAIL"
+      ],
+      "kind": "armor",
+      "seed": 789777573,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 179,
+      "name": "ARMOR_SCALE",
+      "aliases": [
+        "ARMOR_SCALE"
+      ],
+      "kind": "armor",
+      "seed": 1965600734,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 180,
+      "name": "ARMOR_PLATE",
+      "aliases": [
+        "ARMOR_PLATE"
+      ],
+      "kind": "armor",
+      "seed": 3743085588,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 181,
+      "name": "ARMOR_WARRIOR",
+      "aliases": [
+        "ARMOR_WARRIOR"
+      ],
+      "kind": "armor",
+      "seed": 2466835390,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 182,
+      "name": "ARMOR_MAGE",
+      "aliases": [
+        "ARMOR_MAGE"
+      ],
+      "kind": "armor",
+      "seed": 354617087,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 183,
+      "name": "ARMOR_ROGUE",
+      "aliases": [
+        "ARMOR_ROGUE"
+      ],
+      "kind": "armor",
+      "seed": 2643292581,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 184,
+      "name": "ARMOR_HUNTRESS",
+      "aliases": [
+        "ARMOR_HUNTRESS"
+      ],
+      "kind": "armor",
+      "seed": 1820765560,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 185,
+      "name": "ARMOR_DUELIST",
+      "aliases": [
+        "ARMOR_DUELIST"
+      ],
+      "kind": "armor",
+      "seed": 1998033158,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 186,
+      "name": "ARMOR_CLERIC",
+      "aliases": [
+        "ARMOR_CLERIC"
+      ],
+      "kind": "armor",
+      "seed": 1472197361,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 208,
+      "name": "WAND_MAGIC_MISSILE",
+      "aliases": [
+        "WAND_MAGIC_MISSILE"
+      ],
+      "kind": "wand",
+      "seed": 1259912381,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 209,
+      "name": "WAND_FIREBOLT",
+      "aliases": [
+        "WAND_FIREBOLT"
+      ],
+      "kind": "wand",
+      "seed": 2850914323,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 210,
+      "name": "WAND_FROST",
+      "aliases": [
+        "WAND_FROST"
+      ],
+      "kind": "wand",
+      "seed": 3438734263,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 211,
+      "name": "WAND_LIGHTNING",
+      "aliases": [
+        "WAND_LIGHTNING"
+      ],
+      "kind": "wand",
+      "seed": 1471427133,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 212,
+      "name": "WAND_DISINTEGRATION",
+      "aliases": [
+        "WAND_DISINTEGRATION"
+      ],
+      "kind": "wand",
+      "seed": 648413249,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 213,
+      "name": "WAND_PRISMATIC_LIGHT",
+      "aliases": [
+        "WAND_PRISMATIC_LIGHT"
+      ],
+      "kind": "wand",
+      "seed": 2478233642,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 214,
+      "name": "WAND_CORROSION",
+      "aliases": [
+        "WAND_CORROSION"
+      ],
+      "kind": "wand",
+      "seed": 4048084528,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 215,
+      "name": "WAND_LIVING_EARTH",
+      "aliases": [
+        "WAND_LIVING_EARTH"
+      ],
+      "kind": "wand",
+      "seed": 3958913287,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 216,
+      "name": "WAND_BLAST_WAVE",
+      "aliases": [
+        "WAND_BLAST_WAVE"
+      ],
+      "kind": "wand",
+      "seed": 1839789485,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 217,
+      "name": "WAND_CORRUPTION",
+      "aliases": [
+        "WAND_CORRUPTION"
+      ],
+      "kind": "wand",
+      "seed": 22630187,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 218,
+      "name": "WAND_WARDING",
+      "aliases": [
+        "WAND_WARDING"
+      ],
+      "kind": "wand",
+      "seed": 2357966967,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 219,
+      "name": "WAND_REGROWTH",
+      "aliases": [
+        "WAND_REGROWTH"
+      ],
+      "kind": "wand",
+      "seed": 3372122636,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 220,
+      "name": "WAND_TRANSFUSION",
+      "aliases": [
+        "WAND_TRANSFUSION"
+      ],
+      "kind": "wand",
+      "seed": 862252381,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 224,
+      "name": "RING_GARNET",
+      "aliases": [
+        "RING_GARNET"
+      ],
+      "kind": "ring",
+      "seed": 2634727588,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "5E0D12",
+      "variant": 0
+    },
+    {
+      "index": 225,
+      "name": "RING_RUBY",
+      "aliases": [
+        "RING_RUBY"
+      ],
+      "kind": "ring",
+      "seed": 272321462,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "9E1B24",
+      "variant": 2
+    },
+    {
+      "index": 226,
+      "name": "RING_TOPAZ",
+      "aliases": [
+        "RING_TOPAZ"
+      ],
+      "kind": "ring",
+      "seed": 888397739,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "E0982F",
+      "variant": 3
+    },
+    {
+      "index": 227,
+      "name": "RING_EMERALD",
+      "aliases": [
+        "RING_EMERALD"
+      ],
+      "kind": "ring",
+      "seed": 3368258237,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "7BB33B",
+      "variant": 1
+    },
+    {
+      "index": 228,
+      "name": "RING_ONYX",
+      "aliases": [
+        "RING_ONYX"
+      ],
+      "kind": "ring",
+      "seed": 1956179486,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "2C2F33",
+      "variant": 2
+    },
+    {
+      "index": 229,
+      "name": "RING_OPAL",
+      "aliases": [
+        "RING_OPAL"
+      ],
+      "kind": "ring",
+      "seed": 3816911171,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 230,
+      "name": "RING_TOURMALINE",
+      "aliases": [
+        "RING_TOURMALINE"
+      ],
+      "kind": "ring",
+      "seed": 3111738623,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 231,
+      "name": "RING_SAPPHIRE",
+      "aliases": [
+        "RING_SAPPHIRE"
+      ],
+      "kind": "ring",
+      "seed": 790107662,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "2E6F7A",
+      "variant": 2
+    },
+    {
+      "index": 232,
+      "name": "RING_AMETHYST",
+      "aliases": [
+        "RING_AMETHYST"
+      ],
+      "kind": "ring",
+      "seed": 3590662018,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 233,
+      "name": "RING_QUARTZ",
+      "aliases": [
+        "RING_QUARTZ"
+      ],
+      "kind": "ring",
+      "seed": 2050422127,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "EFE7D2",
+      "variant": 3
+    },
+    {
+      "index": 234,
+      "name": "RING_AGATE",
+      "aliases": [
+        "RING_AGATE"
+      ],
+      "kind": "ring",
+      "seed": 1423408967,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "8A4B12",
+      "variant": 3
+    },
+    {
+      "index": 235,
+      "name": "RING_DIAMOND",
+      "aliases": [
+        "RING_DIAMOND"
+      ],
+      "kind": "ring",
+      "seed": 483173713,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 240,
+      "name": "ARTIFACT_CLOAK",
+      "aliases": [
+        "ARTIFACT_CLOAK"
+      ],
+      "kind": "cloak",
+      "seed": 1254957829,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 241,
+      "name": "ARTIFACT_ARMBAND",
+      "aliases": [
+        "ARTIFACT_ARMBAND"
+      ],
+      "kind": "bracelet",
+      "seed": 2519403448,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 242,
+      "name": "ARTIFACT_CAPE",
+      "aliases": [
+        "ARTIFACT_CAPE"
+      ],
+      "kind": "cloak",
+      "seed": 200866775,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 243,
+      "name": "ARTIFACT_TALISMAN",
+      "aliases": [
+        "ARTIFACT_TALISMAN"
+      ],
+      "kind": "amulet",
+      "seed": 19355727,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 244,
+      "name": "ARTIFACT_HOURGLASS",
+      "aliases": [
+        "ARTIFACT_HOURGLASS"
+      ],
+      "kind": "hourglass",
+      "seed": 3387769293,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 245,
+      "name": "ARTIFACT_TOOLKIT",
+      "aliases": [
+        "ARTIFACT_TOOLKIT"
+      ],
+      "kind": "toolkit",
+      "seed": 3422397743,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 246,
+      "name": "ARTIFACT_SPELLBOOK",
+      "aliases": [
+        "ARTIFACT_SPELLBOOK"
+      ],
+      "kind": "book",
+      "seed": 3031263874,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 247,
+      "name": "ARTIFACT_BEACON",
+      "aliases": [
+        "ARTIFACT_BEACON"
+      ],
+      "kind": "lantern",
+      "seed": 2802032280,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 248,
+      "name": "ARTIFACT_CHAINS",
+      "aliases": [
+        "ARTIFACT_CHAINS"
+      ],
+      "kind": "chain",
+      "seed": 110786332,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 249,
+      "name": "ARTIFACT_HORN1",
+      "aliases": [
+        "ARTIFACT_HORN1"
+      ],
+      "kind": "horn",
+      "seed": 1355818855,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 250,
+      "name": "ARTIFACT_HORN2",
+      "aliases": [
+        "ARTIFACT_HORN2"
+      ],
+      "kind": "horn",
+      "seed": 2089618307,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 251,
+      "name": "ARTIFACT_HORN3",
+      "aliases": [
+        "ARTIFACT_HORN3"
+      ],
+      "kind": "horn",
+      "seed": 2290120727,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 252,
+      "name": "ARTIFACT_HORN4",
+      "aliases": [
+        "ARTIFACT_HORN4"
+      ],
+      "kind": "horn",
+      "seed": 4130322779,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 253,
+      "name": "ARTIFACT_CHALICE1",
+      "aliases": [
+        "ARTIFACT_CHALICE1"
+      ],
+      "kind": "chalice",
+      "seed": 3917813200,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 254,
+      "name": "ARTIFACT_CHALICE2",
+      "aliases": [
+        "ARTIFACT_CHALICE2"
+      ],
+      "kind": "chalice",
+      "seed": 3248779090,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "565B62",
+      "variant": 2
+    },
+    {
+      "index": 255,
+      "name": "ARTIFACT_CHALICE3",
+      "aliases": [
+        "ARTIFACT_CHALICE3"
+      ],
+      "kind": "chalice",
+      "seed": 2454141105,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 256,
+      "name": "ARTIFACT_SANDALS",
+      "aliases": [
+        "ARTIFACT_SANDALS"
+      ],
+      "kind": "boot",
+      "seed": 395828078,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 257,
+      "name": "ARTIFACT_SHOES",
+      "aliases": [
+        "ARTIFACT_SHOES"
+      ],
+      "kind": "boot",
+      "seed": 1351281319,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 258,
+      "name": "ARTIFACT_BOOTS",
+      "aliases": [
+        "ARTIFACT_BOOTS"
+      ],
+      "kind": "boot",
+      "seed": 2273591779,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 259,
+      "name": "ARTIFACT_GREAVES",
+      "aliases": [
+        "ARTIFACT_GREAVES"
+      ],
+      "kind": "boot",
+      "seed": 2968460075,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 260,
+      "name": "ARTIFACT_ROSE1",
+      "aliases": [
+        "ARTIFACT_ROSE1"
+      ],
+      "kind": "rose",
+      "seed": 2865435532,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 261,
+      "name": "ARTIFACT_ROSE2",
+      "aliases": [
+        "ARTIFACT_ROSE2"
+      ],
+      "kind": "rose",
+      "seed": 190440466,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 262,
+      "name": "ARTIFACT_ROSE3",
+      "aliases": [
+        "ARTIFACT_ROSE3"
+      ],
+      "kind": "rose",
+      "seed": 3027565290,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 263,
+      "name": "ARTIFACT_TOME",
+      "aliases": [
+        "ARTIFACT_TOME"
+      ],
+      "kind": "book",
+      "seed": 787162534,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 264,
+      "name": "ARTIFACT_KEY",
+      "aliases": [
+        "ARTIFACT_KEY"
+      ],
+      "kind": "key",
+      "seed": 3226706028,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 272,
+      "name": "RAT_SKULL",
+      "aliases": [
+        "RAT_SKULL"
+      ],
+      "kind": "skull",
+      "seed": 4120022485,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 1
+    },
+    {
+      "index": 273,
+      "name": "PARCHMENT_SCRAP",
+      "aliases": [
+        "PARCHMENT_SCRAP"
+      ],
+      "kind": "scroll",
+      "seed": 293739060,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 274,
+      "name": "PETRIFIED_SEED",
+      "aliases": [
+        "PETRIFIED_SEED"
+      ],
+      "kind": "seed",
+      "seed": 3523924658,
+      "primary": "E4C76A",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 2
+    },
+    {
+      "index": 275,
+      "name": "EXOTIC_CRYSTALS",
+      "aliases": [
+        "EXOTIC_CRYSTALS"
+      ],
+      "kind": "crystal",
+      "seed": 3303072226,
+      "primary": "565B62",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 276,
+      "name": "MOSSY_CLUMP",
+      "aliases": [
+        "MOSSY_CLUMP"
+      ],
+      "kind": "moss",
+      "seed": 1280500033,
+      "primary": "E0982F",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 277,
+      "name": "SUNDIAL",
+      "aliases": [
+        "SUNDIAL"
+      ],
+      "kind": "sundial",
+      "seed": 819471670,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "565B62",
+      "variant": 2
+    },
+    {
+      "index": 278,
+      "name": "CLOVER",
+      "aliases": [
+        "CLOVER"
+      ],
+      "kind": "leaf",
+      "seed": 2035973398,
+      "primary": "565B62",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 279,
+      "name": "TRAP_MECHANISM",
+      "aliases": [
+        "TRAP_MECHANISM"
+      ],
+      "kind": "trap",
+      "seed": 4233032415,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 280,
+      "name": "MIMIC_TOOTH",
+      "aliases": [
+        "MIMIC_TOOTH"
+      ],
+      "kind": "fang",
+      "seed": 2735081387,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 281,
+      "name": "WONDROUS_RESIN",
+      "aliases": [
+        "WONDROUS_RESIN"
+      ],
+      "kind": "resin",
+      "seed": 788852599,
+      "primary": "9D6BD1",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 3
+    },
+    {
+      "index": 282,
+      "name": "EYE_OF_NEWT",
+      "aliases": [
+        "EYE_OF_NEWT"
+      ],
+      "kind": "eye",
+      "seed": 1996520969,
+      "primary": "6FD3E0",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 283,
+      "name": "SALT_CUBE",
+      "aliases": [
+        "SALT_CUBE"
+      ],
+      "kind": "cube",
+      "seed": 1202169293,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 284,
+      "name": "BLOOD_VIAL",
+      "aliases": [
+        "BLOOD_VIAL"
+      ],
+      "kind": "bottle",
+      "seed": 3837622230,
+      "primary": "4A2C6E",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 285,
+      "name": "OBLIVION_SHARD",
+      "aliases": [
+        "OBLIVION_SHARD"
+      ],
+      "kind": "shard",
+      "seed": 4101700309,
+      "primary": "E0982F",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 286,
+      "name": "CHAOTIC_CENSER",
+      "aliases": [
+        "CHAOTIC_CENSER"
+      ],
+      "kind": "censer",
+      "seed": 3765671520,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 287,
+      "name": "FERRET_TUFT",
+      "aliases": [
+        "FERRET_TUFT"
+      ],
+      "kind": "tuft",
+      "seed": 867448981,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 288,
+      "name": "SPYGLASS",
+      "aliases": [
+        "SPYGLASS"
+      ],
+      "kind": "spyglass",
+      "seed": 3256287644,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 304,
+      "name": "SCROLL_KAUNAN",
+      "aliases": [
+        "SCROLL_KAUNAN"
+      ],
+      "kind": "scroll",
+      "seed": 2176061690,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 305,
+      "name": "SCROLL_SOWILO",
+      "aliases": [
+        "SCROLL_SOWILO"
+      ],
+      "kind": "scroll",
+      "seed": 2783913534,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 306,
+      "name": "SCROLL_LAGUZ",
+      "aliases": [
+        "SCROLL_LAGUZ"
+      ],
+      "kind": "scroll",
+      "seed": 2686459847,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 307,
+      "name": "SCROLL_YNGVI",
+      "aliases": [
+        "SCROLL_YNGVI"
+      ],
+      "kind": "scroll",
+      "seed": 2492472963,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 308,
+      "name": "SCROLL_GYFU",
+      "aliases": [
+        "SCROLL_GYFU"
+      ],
+      "kind": "scroll",
+      "seed": 2746255401,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 1
+    },
+    {
+      "index": 309,
+      "name": "SCROLL_RAIDO",
+      "aliases": [
+        "SCROLL_RAIDO"
+      ],
+      "kind": "scroll",
+      "seed": 1398662553,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 1
+    },
+    {
+      "index": 310,
+      "name": "SCROLL_ISAZ",
+      "aliases": [
+        "SCROLL_ISAZ"
+      ],
+      "kind": "scroll",
+      "seed": 1812725422,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 311,
+      "name": "SCROLL_MANNAZ",
+      "aliases": [
+        "SCROLL_MANNAZ"
+      ],
+      "kind": "scroll",
+      "seed": 132644260,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 312,
+      "name": "SCROLL_NAUDIZ",
+      "aliases": [
+        "SCROLL_NAUDIZ"
+      ],
+      "kind": "scroll",
+      "seed": 339123297,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 1
+    },
+    {
+      "index": 313,
+      "name": "SCROLL_BERKANAN",
+      "aliases": [
+        "SCROLL_BERKANAN"
+      ],
+      "kind": "scroll",
+      "seed": 4204081207,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 314,
+      "name": "SCROLL_ODAL",
+      "aliases": [
+        "SCROLL_ODAL"
+      ],
+      "kind": "scroll",
+      "seed": 782759126,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 315,
+      "name": "SCROLL_TIWAZ",
+      "aliases": [
+        "SCROLL_TIWAZ"
+      ],
+      "kind": "scroll",
+      "seed": 640813783,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 317,
+      "name": "ARCANE_RESIN",
+      "aliases": [
+        "ARCANE_RESIN"
+      ],
+      "kind": "resin",
+      "seed": 3059394646,
+      "primary": "565B62",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 320,
+      "name": "EXOTIC_KAUNAN",
+      "aliases": [
+        "EXOTIC_KAUNAN"
+      ],
+      "kind": "scroll",
+      "seed": 754806467,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 321,
+      "name": "EXOTIC_SOWILO",
+      "aliases": [
+        "EXOTIC_SOWILO"
+      ],
+      "kind": "scroll",
+      "seed": 3844740790,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 322,
+      "name": "EXOTIC_LAGUZ",
+      "aliases": [
+        "EXOTIC_LAGUZ"
+      ],
+      "kind": "scroll",
+      "seed": 4231383870,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 323,
+      "name": "EXOTIC_YNGVI",
+      "aliases": [
+        "EXOTIC_YNGVI"
+      ],
+      "kind": "scroll",
+      "seed": 2077480132,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 324,
+      "name": "EXOTIC_GYFU",
+      "aliases": [
+        "EXOTIC_GYFU"
+      ],
+      "kind": "scroll",
+      "seed": 2575576062,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 325,
+      "name": "EXOTIC_RAIDO",
+      "aliases": [
+        "EXOTIC_RAIDO"
+      ],
+      "kind": "scroll",
+      "seed": 2544647292,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 326,
+      "name": "EXOTIC_ISAZ",
+      "aliases": [
+        "EXOTIC_ISAZ"
+      ],
+      "kind": "scroll",
+      "seed": 922455783,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 327,
+      "name": "EXOTIC_MANNAZ",
+      "aliases": [
+        "EXOTIC_MANNAZ"
+      ],
+      "kind": "scroll",
+      "seed": 1040442094,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 328,
+      "name": "EXOTIC_NAUDIZ",
+      "aliases": [
+        "EXOTIC_NAUDIZ"
+      ],
+      "kind": "scroll",
+      "seed": 1367917362,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 329,
+      "name": "EXOTIC_BERKANAN",
+      "aliases": [
+        "EXOTIC_BERKANAN"
+      ],
+      "kind": "scroll",
+      "seed": 2927781809,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 1
+    },
+    {
+      "index": 330,
+      "name": "EXOTIC_ODAL",
+      "aliases": [
+        "EXOTIC_ODAL"
+      ],
+      "kind": "scroll",
+      "seed": 2261703096,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 331,
+      "name": "EXOTIC_TIWAZ",
+      "aliases": [
+        "EXOTIC_TIWAZ"
+      ],
+      "kind": "scroll",
+      "seed": 2506309728,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 336,
+      "name": "STONE_AGGRESSION",
+      "aliases": [
+        "STONE_AGGRESSION"
+      ],
+      "kind": "runestone",
+      "seed": 2838491831,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 337,
+      "name": "STONE_AUGMENTATION",
+      "aliases": [
+        "STONE_AUGMENTATION"
+      ],
+      "kind": "runestone",
+      "seed": 3892974286,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 338,
+      "name": "STONE_FEAR",
+      "aliases": [
+        "STONE_FEAR"
+      ],
+      "kind": "runestone",
+      "seed": 2771324321,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 339,
+      "name": "STONE_BLAST",
+      "aliases": [
+        "STONE_BLAST"
+      ],
+      "kind": "runestone",
+      "seed": 1101362438,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 340,
+      "name": "STONE_BLINK",
+      "aliases": [
+        "STONE_BLINK"
+      ],
+      "kind": "runestone",
+      "seed": 4147323830,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 341,
+      "name": "STONE_CLAIRVOYANCE",
+      "aliases": [
+        "STONE_CLAIRVOYANCE"
+      ],
+      "kind": "runestone",
+      "seed": 4042315314,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 342,
+      "name": "STONE_SLEEP",
+      "aliases": [
+        "STONE_SLEEP"
+      ],
+      "kind": "runestone",
+      "seed": 837751095,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 343,
+      "name": "STONE_DETECT",
+      "aliases": [
+        "STONE_DETECT"
+      ],
+      "kind": "runestone",
+      "seed": 4201671960,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 344,
+      "name": "STONE_ENCHANT",
+      "aliases": [
+        "STONE_ENCHANT"
+      ],
+      "kind": "runestone",
+      "seed": 475840446,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 345,
+      "name": "STONE_FLOCK",
+      "aliases": [
+        "STONE_FLOCK"
+      ],
+      "kind": "runestone",
+      "seed": 3316628278,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 346,
+      "name": "STONE_INTUITION",
+      "aliases": [
+        "STONE_INTUITION"
+      ],
+      "kind": "runestone",
+      "seed": 3156316373,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 347,
+      "name": "STONE_SHOCK",
+      "aliases": [
+        "STONE_SHOCK"
+      ],
+      "kind": "runestone",
+      "seed": 632074428,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 352,
+      "name": "POTION_CRIMSON",
+      "aliases": [
+        "POTION_CRIMSON"
+      ],
+      "kind": "bottle",
+      "seed": 1651786074,
+      "primary": "9E1B24",
+      "secondary": "565B62",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 353,
+      "name": "POTION_AMBER",
+      "aliases": [
+        "POTION_AMBER"
+      ],
+      "kind": "bottle",
+      "seed": 337505362,
+      "primary": "E0982F",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 354,
+      "name": "POTION_GOLDEN",
+      "aliases": [
+        "POTION_GOLDEN"
+      ],
+      "kind": "bottle",
+      "seed": 1941407034,
+      "primary": "E4C76A",
+      "secondary": "565B62",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 355,
+      "name": "POTION_JADE",
+      "aliases": [
+        "POTION_JADE"
+      ],
+      "kind": "bottle",
+      "seed": 79444647,
+      "primary": "7BB33B",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 3
+    },
+    {
+      "index": 356,
+      "name": "POTION_TURQUOISE",
+      "aliases": [
+        "POTION_TURQUOISE"
+      ],
+      "kind": "bottle",
+      "seed": 1741320621,
+      "primary": "2E6F7A",
+      "secondary": "565B62",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 357,
+      "name": "POTION_AZURE",
+      "aliases": [
+        "POTION_AZURE"
+      ],
+      "kind": "bottle",
+      "seed": 4280646055,
+      "primary": "6FD3E0",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 358,
+      "name": "POTION_INDIGO",
+      "aliases": [
+        "POTION_INDIGO"
+      ],
+      "kind": "bottle",
+      "seed": 232797423,
+      "primary": "4A2C6E",
+      "secondary": "565B62",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 359,
+      "name": "POTION_MAGENTA",
+      "aliases": [
+        "POTION_MAGENTA"
+      ],
+      "kind": "bottle",
+      "seed": 1505845320,
+      "primary": "9D6BD1",
+      "secondary": "565B62",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 360,
+      "name": "POTION_BISTRE",
+      "aliases": [
+        "POTION_BISTRE"
+      ],
+      "kind": "bottle",
+      "seed": 3176886521,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 361,
+      "name": "POTION_CHARCOAL",
+      "aliases": [
+        "POTION_CHARCOAL"
+      ],
+      "kind": "bottle",
+      "seed": 2379606387,
+      "primary": "2C2F33",
+      "secondary": "565B62",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 362,
+      "name": "POTION_SILVER",
+      "aliases": [
+        "POTION_SILVER"
+      ],
+      "kind": "bottle",
+      "seed": 3116886297,
+      "primary": "565B62",
+      "secondary": "565B62",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 363,
+      "name": "POTION_IVORY",
+      "aliases": [
+        "POTION_IVORY"
+      ],
+      "kind": "bottle",
+      "seed": 4035550311,
+      "primary": "C9BFA8",
+      "secondary": "565B62",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 365,
+      "name": "LIQUID_METAL",
+      "aliases": [
+        "LIQUID_METAL"
+      ],
+      "kind": "pot",
+      "seed": 4054003730,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 368,
+      "name": "EXOTIC_CRIMSON",
+      "aliases": [
+        "EXOTIC_CRIMSON"
+      ],
+      "kind": "bottle",
+      "seed": 2264532488,
+      "primary": "9E1B24",
+      "secondary": "565B62",
+      "accent": "5A4630",
+      "variant": 0
+    },
+    {
+      "index": 369,
+      "name": "EXOTIC_AMBER",
+      "aliases": [
+        "EXOTIC_AMBER"
+      ],
+      "kind": "bottle",
+      "seed": 1177709164,
+      "primary": "E0982F",
+      "secondary": "565B62",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 370,
+      "name": "EXOTIC_GOLDEN",
+      "aliases": [
+        "EXOTIC_GOLDEN"
+      ],
+      "kind": "bottle",
+      "seed": 937915022,
+      "primary": "E4C76A",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 2
+    },
+    {
+      "index": 371,
+      "name": "EXOTIC_JADE",
+      "aliases": [
+        "EXOTIC_JADE"
+      ],
+      "kind": "bottle",
+      "seed": 3757446745,
+      "primary": "7BB33B",
+      "secondary": "565B62",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 372,
+      "name": "EXOTIC_TURQUOISE",
+      "aliases": [
+        "EXOTIC_TURQUOISE"
+      ],
+      "kind": "bottle",
+      "seed": 1772232175,
+      "primary": "2E6F7A",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 373,
+      "name": "EXOTIC_AZURE",
+      "aliases": [
+        "EXOTIC_AZURE"
+      ],
+      "kind": "bottle",
+      "seed": 1884434806,
+      "primary": "6FD3E0",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 374,
+      "name": "EXOTIC_INDIGO",
+      "aliases": [
+        "EXOTIC_INDIGO"
+      ],
+      "kind": "bottle",
+      "seed": 3500538027,
+      "primary": "4A2C6E",
+      "secondary": "565B62",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 375,
+      "name": "EXOTIC_MAGENTA",
+      "aliases": [
+        "EXOTIC_MAGENTA"
+      ],
+      "kind": "bottle",
+      "seed": 1700684141,
+      "primary": "9D6BD1",
+      "secondary": "565B62",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 376,
+      "name": "EXOTIC_BISTRE",
+      "aliases": [
+        "EXOTIC_BISTRE"
+      ],
+      "kind": "bottle",
+      "seed": 3436200258,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 377,
+      "name": "EXOTIC_CHARCOAL",
+      "aliases": [
+        "EXOTIC_CHARCOAL"
+      ],
+      "kind": "bottle",
+      "seed": 3970221225,
+      "primary": "2C2F33",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 378,
+      "name": "EXOTIC_SILVER",
+      "aliases": [
+        "EXOTIC_SILVER"
+      ],
+      "kind": "bottle",
+      "seed": 1599444426,
+      "primary": "565B62",
+      "secondary": "565B62",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 379,
+      "name": "EXOTIC_IVORY",
+      "aliases": [
+        "EXOTIC_IVORY"
+      ],
+      "kind": "bottle",
+      "seed": 2538465357,
+      "primary": "C9BFA8",
+      "secondary": "565B62",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 384,
+      "name": "SEED_ROTBERRY",
+      "aliases": [
+        "SEED_ROTBERRY"
+      ],
+      "kind": "seed",
+      "seed": 3234838074,
+      "primary": "4A2C6E",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 385,
+      "name": "SEED_FIREBLOOM",
+      "aliases": [
+        "SEED_FIREBLOOM"
+      ],
+      "kind": "seed",
+      "seed": 549837537,
+      "primary": "2C2F33",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 386,
+      "name": "SEED_SWIFTTHISTLE",
+      "aliases": [
+        "SEED_SWIFTTHISTLE"
+      ],
+      "kind": "seed",
+      "seed": 1463253856,
+      "primary": "2E6F7A",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 387,
+      "name": "SEED_SUNGRASS",
+      "aliases": [
+        "SEED_SUNGRASS"
+      ],
+      "kind": "seed",
+      "seed": 1361631524,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 388,
+      "name": "SEED_ICECAP",
+      "aliases": [
+        "SEED_ICECAP"
+      ],
+      "kind": "seed",
+      "seed": 2859594624,
+      "primary": "9E1B24",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 389,
+      "name": "SEED_STORMVINE",
+      "aliases": [
+        "SEED_STORMVINE"
+      ],
+      "kind": "seed",
+      "seed": 1946200270,
+      "primary": "565B62",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 390,
+      "name": "SEED_SORROWMOSS",
+      "aliases": [
+        "SEED_SORROWMOSS"
+      ],
+      "kind": "seed",
+      "seed": 1440835150,
+      "primary": "565B62",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 391,
+      "name": "SEED_MAGEROYAL",
+      "aliases": [
+        "SEED_MAGEROYAL"
+      ],
+      "kind": "seed",
+      "seed": 3138309879,
+      "primary": "7BB33B",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 3
+    },
+    {
+      "index": 392,
+      "name": "SEED_EARTHROOT",
+      "aliases": [
+        "SEED_EARTHROOT"
+      ],
+      "kind": "seed",
+      "seed": 692070500,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 393,
+      "name": "SEED_STARFLOWER",
+      "aliases": [
+        "SEED_STARFLOWER"
+      ],
+      "kind": "seed",
+      "seed": 4010393582,
+      "primary": "E4C76A",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 2
+    },
+    {
+      "index": 394,
+      "name": "SEED_FADELEAF",
+      "aliases": [
+        "SEED_FADELEAF"
+      ],
+      "kind": "seed",
+      "seed": 2743826867,
+      "primary": "C9BFA8",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 3
+    },
+    {
+      "index": 395,
+      "name": "SEED_BLINDWEED",
+      "aliases": [
+        "SEED_BLINDWEED"
+      ],
+      "kind": "seed",
+      "seed": 1975210490,
+      "primary": "E4C76A",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 2
+    },
+    {
+      "index": 400,
+      "name": "BREW_INFERNAL",
+      "aliases": [
+        "BREW_INFERNAL"
+      ],
+      "kind": "bottle",
+      "seed": 2512521564,
+      "primary": "9E1B24",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 401,
+      "name": "BREW_BLIZZARD",
+      "aliases": [
+        "BREW_BLIZZARD"
+      ],
+      "kind": "bottle",
+      "seed": 1432997412,
+      "primary": "9E1B24",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 402,
+      "name": "BREW_SHOCKING",
+      "aliases": [
+        "BREW_SHOCKING"
+      ],
+      "kind": "bottle",
+      "seed": 1177420177,
+      "primary": "E0982F",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 403,
+      "name": "BREW_CAUSTIC",
+      "aliases": [
+        "BREW_CAUSTIC"
+      ],
+      "kind": "bottle",
+      "seed": 1005103434,
+      "primary": "4A2C6E",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 404,
+      "name": "BREW_AQUA",
+      "aliases": [
+        "BREW_AQUA"
+      ],
+      "kind": "bottle",
+      "seed": 598702082,
+      "primary": "E4C76A",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 2
+    },
+    {
+      "index": 405,
+      "name": "BREW_UNSTABLE",
+      "aliases": [
+        "BREW_UNSTABLE"
+      ],
+      "kind": "bottle",
+      "seed": 2035302808,
+      "primary": "2E6F7A",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 408,
+      "name": "ELIXIR_HONEY",
+      "aliases": [
+        "ELIXIR_HONEY"
+      ],
+      "kind": "bottle",
+      "seed": 2390814812,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 409,
+      "name": "ELIXIR_AQUA",
+      "aliases": [
+        "ELIXIR_AQUA"
+      ],
+      "kind": "bottle",
+      "seed": 3187865840,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 410,
+      "name": "ELIXIR_MIGHT",
+      "aliases": [
+        "ELIXIR_MIGHT"
+      ],
+      "kind": "bottle",
+      "seed": 2053235547,
+      "primary": "7BB33B",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 3
+    },
+    {
+      "index": 411,
+      "name": "ELIXIR_DRAGON",
+      "aliases": [
+        "ELIXIR_DRAGON"
+      ],
+      "kind": "bottle",
+      "seed": 3382286441,
+      "primary": "6FD3E0",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 412,
+      "name": "ELIXIR_TOXIC",
+      "aliases": [
+        "ELIXIR_TOXIC"
+      ],
+      "kind": "bottle",
+      "seed": 1620318881,
+      "primary": "6FD3E0",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 413,
+      "name": "ELIXIR_ICY",
+      "aliases": [
+        "ELIXIR_ICY"
+      ],
+      "kind": "bottle",
+      "seed": 3962069282,
+      "primary": "E4C76A",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 2
+    },
+    {
+      "index": 414,
+      "name": "ELIXIR_ARCANE",
+      "aliases": [
+        "ELIXIR_ARCANE"
+      ],
+      "kind": "bottle",
+      "seed": 1039998729,
+      "primary": "2C2F33",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 415,
+      "name": "ELIXIR_FEATHER",
+      "aliases": [
+        "ELIXIR_FEATHER"
+      ],
+      "kind": "bottle",
+      "seed": 1322123742,
+      "primary": "4A2C6E",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 416,
+      "name": "WILD_ENERGY",
+      "aliases": [
+        "WILD_ENERGY"
+      ],
+      "kind": "tablet",
+      "seed": 708173012,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 417,
+      "name": "PHASE_SHIFT",
+      "aliases": [
+        "PHASE_SHIFT"
+      ],
+      "kind": "tablet",
+      "seed": 969871642,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 418,
+      "name": "TELE_GRAB",
+      "aliases": [
+        "TELE_GRAB"
+      ],
+      "kind": "tablet",
+      "seed": 866080629,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 419,
+      "name": "UNSTABLE_SPELL",
+      "aliases": [
+        "UNSTABLE_SPELL"
+      ],
+      "kind": "tablet",
+      "seed": 2845341966,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 421,
+      "name": "CURSE_INFUSE",
+      "aliases": [
+        "CURSE_INFUSE"
+      ],
+      "kind": "tablet",
+      "seed": 366478203,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 422,
+      "name": "MAGIC_INFUSE",
+      "aliases": [
+        "MAGIC_INFUSE"
+      ],
+      "kind": "tablet",
+      "seed": 2841644823,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 423,
+      "name": "ALCHEMIZE",
+      "aliases": [
+        "ALCHEMIZE"
+      ],
+      "kind": "tablet",
+      "seed": 1799288505,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 424,
+      "name": "RECYCLE",
+      "aliases": [
+        "RECYCLE"
+      ],
+      "kind": "tablet",
+      "seed": 778335288,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 426,
+      "name": "RECLAIM_TRAP",
+      "aliases": [
+        "RECLAIM_TRAP"
+      ],
+      "kind": "tablet",
+      "seed": 3670419235,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 427,
+      "name": "RETURN_BEACON",
+      "aliases": [
+        "RETURN_BEACON"
+      ],
+      "kind": "tablet",
+      "seed": 2950336242,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 428,
+      "name": "SUMMON_ELE",
+      "aliases": [
+        "SUMMON_ELE"
+      ],
+      "kind": "tablet",
+      "seed": 465855611,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 432,
+      "name": "MEAT",
+      "aliases": [
+        "MEAT"
+      ],
+      "kind": "meat",
+      "seed": 283132055,
+      "primary": "9E1B24",
+      "secondary": "C9BFA8",
+      "accent": "5A4630",
+      "variant": 3
+    },
+    {
+      "index": 433,
+      "name": "STEAK",
+      "aliases": [
+        "STEAK"
+      ],
+      "kind": "meat",
+      "seed": 600995690,
+      "primary": "9E1B24",
+      "secondary": "C9BFA8",
+      "accent": "5A4630",
+      "variant": 2
+    },
+    {
+      "index": 434,
+      "name": "STEWED",
+      "aliases": [
+        "STEWED"
+      ],
+      "kind": "pot",
+      "seed": 2998101311,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 435,
+      "name": "OVERPRICED",
+      "aliases": [
+        "OVERPRICED"
+      ],
+      "kind": "ration",
+      "seed": 503819516,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 436,
+      "name": "CARPACCIO",
+      "aliases": [
+        "CARPACCIO"
+      ],
+      "kind": "meat",
+      "seed": 285872005,
+      "primary": "9E1B24",
+      "secondary": "C9BFA8",
+      "accent": "5A4630",
+      "variant": 1
+    },
+    {
+      "index": 437,
+      "name": "RATION",
+      "aliases": [
+        "RATION"
+      ],
+      "kind": "ration",
+      "seed": 1673458897,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 1
+    },
+    {
+      "index": 438,
+      "name": "PASTY",
+      "aliases": [
+        "PASTY"
+      ],
+      "kind": "pie",
+      "seed": 1092651064,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 439,
+      "name": "MEAT_PIE",
+      "aliases": [
+        "MEAT_PIE"
+      ],
+      "kind": "pie",
+      "seed": 3172782291,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 3
+    },
+    {
+      "index": 440,
+      "name": "BLANDFRUIT",
+      "aliases": [
+        "BLANDFRUIT"
+      ],
+      "kind": "fruit",
+      "seed": 976886933,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 1
+    },
+    {
+      "index": 441,
+      "name": "BLAND_CHUNKS",
+      "aliases": [
+        "BLAND_CHUNKS"
+      ],
+      "kind": "fruit",
+      "seed": 146712016,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 442,
+      "name": "BERRY",
+      "aliases": [
+        "BERRY"
+      ],
+      "kind": "fruit",
+      "seed": 2929060152,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 443,
+      "name": "PHANTOM_MEAT",
+      "aliases": [
+        "PHANTOM_MEAT"
+      ],
+      "kind": "meat",
+      "seed": 390257796,
+      "primary": "9E1B24",
+      "secondary": "C9BFA8",
+      "accent": "5A4630",
+      "variant": 0
+    },
+    {
+      "index": 444,
+      "name": "SUPPLY_RATION",
+      "aliases": [
+        "SUPPLY_RATION"
+      ],
+      "kind": "ration",
+      "seed": 2202255170,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 2
+    },
+    {
+      "index": 448,
+      "name": "STEAMED_FISH",
+      "aliases": [
+        "STEAMED_FISH"
+      ],
+      "kind": "fish",
+      "seed": 2486948419,
+      "primary": "9E1B24",
+      "secondary": "C9BFA8",
+      "accent": "5A4630",
+      "variant": 3
+    },
+    {
+      "index": 449,
+      "name": "FISH_LEFTOVER",
+      "aliases": [
+        "FISH_LEFTOVER"
+      ],
+      "kind": "fish",
+      "seed": 3398768889,
+      "primary": "9E1B24",
+      "secondary": "C9BFA8",
+      "accent": "5A4630",
+      "variant": 1
+    },
+    {
+      "index": 450,
+      "name": "CHOC_AMULET",
+      "aliases": [
+        "CHOC_AMULET"
+      ],
+      "kind": "amulet",
+      "seed": 2956098565,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 451,
+      "name": "EASTER_EGG",
+      "aliases": [
+        "EASTER_EGG"
+      ],
+      "kind": "egg",
+      "seed": 1433451091,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 3
+    },
+    {
+      "index": 452,
+      "name": "RAINBOW_POTION",
+      "aliases": [
+        "RAINBOW_POTION"
+      ],
+      "kind": "bottle",
+      "seed": 1256979857,
+      "primary": "6FD3E0",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 453,
+      "name": "SHATTERED_CAKE",
+      "aliases": [
+        "SHATTERED_CAKE"
+      ],
+      "kind": "cake",
+      "seed": 1619189596,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 454,
+      "name": "PUMPKIN_PIE",
+      "aliases": [
+        "PUMPKIN_PIE"
+      ],
+      "kind": "pie",
+      "seed": 1542818255,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 3
+    },
+    {
+      "index": 455,
+      "name": "VANILLA_CAKE",
+      "aliases": [
+        "VANILLA_CAKE"
+      ],
+      "kind": "cake",
+      "seed": 223690251,
+      "primary": "C9BFA8",
+      "secondary": "8A4B12",
+      "accent": "9E1B24",
+      "variant": 3
+    },
+    {
+      "index": 456,
+      "name": "CANDY_CANE",
+      "aliases": [
+        "CANDY_CANE"
+      ],
+      "kind": "cane",
+      "seed": 1008565729,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E0982F",
+      "variant": 1
+    },
+    {
+      "index": 457,
+      "name": "SPARKLING_POTION",
+      "aliases": [
+        "SPARKLING_POTION"
+      ],
+      "kind": "bottle",
+      "seed": 3016441039,
+      "primary": "9D6BD1",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 3
+    },
+    {
+      "index": 465,
+      "name": "DUST",
+      "aliases": [
+        "DUST"
+      ],
+      "kind": "dust",
+      "seed": 796496649,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 466,
+      "name": "CANDLE",
+      "aliases": [
+        "CANDLE"
+      ],
+      "kind": "candle",
+      "seed": 3582312299,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 467,
+      "name": "EMBER",
+      "aliases": [
+        "EMBER"
+      ],
+      "kind": "ember",
+      "seed": 180326142,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 468,
+      "name": "PICKAXE",
+      "aliases": [
+        "PICKAXE"
+      ],
+      "kind": "pickaxe",
+      "seed": 3634789054,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 469,
+      "name": "ORE",
+      "aliases": [
+        "ORE"
+      ],
+      "kind": "ore",
+      "seed": 2020511301,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 470,
+      "name": "TOKEN",
+      "aliases": [
+        "TOKEN"
+      ],
+      "kind": "coins",
+      "seed": 4185981929,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 471,
+      "name": "BLOB",
+      "aliases": [
+        "BLOB"
+      ],
+      "kind": "drop",
+      "seed": 1729760534,
+      "primary": "E4C76A",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 2
+    },
+    {
+      "index": 472,
+      "name": "SHARD",
+      "aliases": [
+        "SHARD"
+      ],
+      "kind": "shard",
+      "seed": 383561790,
+      "primary": "4A2C6E",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 473,
+      "name": "ESCAPE",
+      "aliases": [
+        "ESCAPE"
+      ],
+      "kind": "amulet",
+      "seed": 1119145312,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "2E6F7A",
+      "variant": 0
+    },
+    {
+      "index": 474,
+      "name": "STATUE",
+      "aliases": [
+        "STATUE"
+      ],
+      "kind": "statue",
+      "seed": 2741912199,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 480,
+      "name": "WATERSKIN",
+      "aliases": [
+        "WATERSKIN"
+      ],
+      "kind": "bag",
+      "seed": 3461776224,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "9E1B24",
+      "variant": 0
+    },
+    {
+      "index": 481,
+      "name": "BACKPACK",
+      "aliases": [
+        "BACKPACK"
+      ],
+      "kind": "bag",
+      "seed": 2784867131,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 482,
+      "name": "POUCH",
+      "aliases": [
+        "POUCH"
+      ],
+      "kind": "bag",
+      "seed": 3550544915,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 483,
+      "name": "HOLDER",
+      "aliases": [
+        "HOLDER"
+      ],
+      "kind": "quiver",
+      "seed": 2155834941,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 484,
+      "name": "BANDOLIER",
+      "aliases": [
+        "BANDOLIER"
+      ],
+      "kind": "bandolier",
+      "seed": 1729933871,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "C9BFA8",
+      "variant": 3
+    },
+    {
+      "index": 485,
+      "name": "HOLSTER",
+      "aliases": [
+        "HOLSTER"
+      ],
+      "kind": "quiver",
+      "seed": 954903957,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 486,
+      "name": "VIAL",
+      "aliases": [
+        "VIAL"
+      ],
+      "kind": "bottle",
+      "seed": 4225915808,
+      "primary": "5A4630",
+      "secondary": "565B62",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 496,
+      "name": "GUIDE_PAGE",
+      "aliases": [
+        "GUIDE_PAGE"
+      ],
+      "kind": "scroll",
+      "seed": 470077909,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 1
+    },
+    {
+      "index": 497,
+      "name": "ALCH_PAGE",
+      "aliases": [
+        "ALCH_PAGE"
+      ],
+      "kind": "scroll",
+      "seed": 659031166,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 498,
+      "name": "SEWER_PAGE",
+      "aliases": [
+        "SEWER_PAGE"
+      ],
+      "kind": "scroll",
+      "seed": 513369199,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 499,
+      "name": "PRISON_PAGE",
+      "aliases": [
+        "PRISON_PAGE"
+      ],
+      "kind": "scroll",
+      "seed": 659069463,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 500,
+      "name": "CAVES_PAGE",
+      "aliases": [
+        "CAVES_PAGE"
+      ],
+      "kind": "scroll",
+      "seed": 3976888002,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 501,
+      "name": "CITY_PAGE",
+      "aliases": [
+        "CITY_PAGE"
+      ],
+      "kind": "scroll",
+      "seed": 3406044874,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 502,
+      "name": "HALLS_PAGE",
+      "aliases": [
+        "HALLS_PAGE"
+      ],
+      "kind": "scroll",
+      "seed": 3942740620,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 512,
+      "name": "BONE_ROD",
+      "aliases": [
+        "BONE_ROD"
+      ],
+      "kind": "skull_staff",
+      "seed": 404871868,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 513,
+      "name": "PHYLACTERY",
+      "aliases": [
+        "PHYLACTERY"
+      ],
+      "kind": "phylactery",
+      "seed": 587685511,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 514,
+      "name": "ARMOR_NECROMANCER",
+      "aliases": [
+        "ARMOR_NECROMANCER"
+      ],
+      "kind": "armor",
+      "seed": 976478670,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 515,
+      "name": "RUNED_BATON",
+      "aliases": [
+        "RUNED_BATON"
+      ],
+      "kind": "wand",
+      "seed": 2015974764,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 516,
+      "name": "SIGIL_BRUSH",
+      "aliases": [
+        "SIGIL_BRUSH"
+      ],
+      "kind": "brush",
+      "seed": 2795279109,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 1
+    },
+    {
+      "index": 517,
+      "name": "ARMOR_ENCHANTER",
+      "aliases": [
+        "ARMOR_ENCHANTER"
+      ],
+      "kind": "armor",
+      "seed": 3886752564,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 0
+    },
+    {
+      "index": 518,
+      "name": "FOCUS_RING",
+      "aliases": [
+        "FOCUS_RING"
+      ],
+      "kind": "ring",
+      "seed": 1957995636,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "9D6BD1",
+      "variant": 0
+    },
+    {
+      "index": 519,
+      "name": "FOCUS_CRYSTAL",
+      "aliases": [
+        "FOCUS_CRYSTAL"
+      ],
+      "kind": "crystal",
+      "seed": 989369099,
+      "primary": "C9BFA8",
+      "secondary": "565B62",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 520,
+      "name": "ARMOR_PSYCHIC",
+      "aliases": [
+        "ARMOR_PSYCHIC"
+      ],
+      "kind": "armor",
+      "seed": 4031874515,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 521,
+      "name": "RUNE_ETCHING",
+      "aliases": [
+        "RUNE_ETCHING"
+      ],
+      "kind": "tablet",
+      "seed": 3753877054,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 522,
+      "name": "SUMMON_ELE_FIRE",
+      "aliases": [
+        "SUMMON_ELE_FIRE"
+      ],
+      "kind": "tablet",
+      "seed": 1720024323,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 3
+    },
+    {
+      "index": 523,
+      "name": "SUMMON_ELE_FROST",
+      "aliases": [
+        "SUMMON_ELE_FROST"
+      ],
+      "kind": "tablet",
+      "seed": 1231640250,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "4A2C6E",
+      "variant": 2
+    },
+    {
+      "index": 524,
+      "name": "SUMMON_ELE_SHOCK",
+      "aliases": [
+        "SUMMON_ELE_SHOCK"
+      ],
+      "kind": "tablet",
+      "seed": 1211434034,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    },
+    {
+      "index": 525,
+      "name": "SUMMON_ELE_CHAOS",
+      "aliases": [
+        "SUMMON_ELE_CHAOS"
+      ],
+      "kind": "tablet",
+      "seed": 2108756002,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "E4C76A",
+      "variant": 2
+    }
+  ],
+  "identifications": {
+    "RING_ACCURACY": 0,
+    "RING_ARCANA": 1,
+    "RING_ELEMENTS": 2,
+    "RING_ENERGY": 3,
+    "RING_EVASION": 4,
+    "RING_FORCE": 5,
+    "RING_FUROR": 6,
+    "RING_HASTE": 7,
+    "RING_MIGHT": 8,
+    "RING_SHARPSHOOT": 9,
+    "RING_TENACITY": 10,
+    "RING_WEALTH": 11,
+    "SCROLL_UPGRADE": 32,
+    "SCROLL_IDENTIFY": 33,
+    "SCROLL_REMCURSE": 34,
+    "SCROLL_MIRRORIMG": 35,
+    "SCROLL_RECHARGE": 36,
+    "SCROLL_TELEPORT": 37,
+    "SCROLL_LULLABY": 38,
+    "SCROLL_MAGICMAP": 39,
+    "SCROLL_RAGE": 40,
+    "SCROLL_RETRIB": 41,
+    "SCROLL_TERROR": 42,
+    "SCROLL_TRANSMUTE": 43,
+    "SCROLL_ENCHANT": 48,
+    "SCROLL_DIVINATE": 49,
+    "SCROLL_ANTIMAGIC": 50,
+    "SCROLL_PRISIMG": 51,
+    "SCROLL_MYSTENRG": 52,
+    "SCROLL_PASSAGE": 53,
+    "SCROLL_SIREN": 54,
+    "SCROLL_FORESIGHT": 55,
+    "SCROLL_CHALLENGE": 56,
+    "SCROLL_PSIBLAST": 57,
+    "SCROLL_DREAD": 58,
+    "SCROLL_METAMORPH": 59,
+    "POTION_STRENGTH": 80,
+    "POTION_HEALING": 81,
+    "POTION_MINDVIS": 82,
+    "POTION_FROST": 83,
+    "POTION_LIQFLAME": 84,
+    "POTION_TOXICGAS": 85,
+    "POTION_HASTE": 86,
+    "POTION_INVIS": 87,
+    "POTION_LEVITATE": 88,
+    "POTION_PARAGAS": 89,
+    "POTION_PURITY": 90,
+    "POTION_EXP": 91,
+    "POTION_MASTERY": 96,
+    "POTION_SHIELDING": 97,
+    "POTION_MAGISIGHT": 98,
+    "POTION_SNAPFREEZ": 99,
+    "POTION_DRGBREATH": 100,
+    "POTION_CORROGAS": 101,
+    "POTION_STAMINA": 102,
+    "POTION_SHROUDFOG": 103,
+    "POTION_STRMCLOUD": 104,
+    "POTION_EARTHARMR": 105,
+    "POTION_CLEANSE": 106,
+    "POTION_DIVINE": 107
+  }
+}

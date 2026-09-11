@@ -58,6 +58,39 @@ def lab(rgb):
     f = np.where(xyz>(6/29)**3,np.cbrt(xyz),xyz/(3*(6/29)**2)+4/29)
     return np.stack([116*f[:,1]-16,500*(f[:,0]-f[:,1]),200*(f[:,1]-f[:,2])],axis=1)
 
+def item_checks(spec,pixels,errors):
+    import items,item_catalog
+    entries=items.catalog()['items'];compiled={e['index'] for e in entries}
+    java=item_catalog.constants(item_catalog.SOURCE.read_text().split('public static class Icons')[0])
+    if compiled!=set(java.values()):errors.append('Item catalog does not cover the current Java indices')
+    for entry in entries:
+        index=entry['index'];x=index%16*32;y=index//16*32;frame=pixels[y:y+32,x:x+32]
+        if frame.shape!=(32,32,4):errors.append(f'Item {entry["name"]}: atlas index outside sheet');continue
+        opaque=frame[:,:,3]>0
+        if not opaque.any():errors.append(f'Item {entry["name"]}: empty frame');continue
+        yy,xx=np.where(opaque)
+        if abs((xx.min()+xx.max())/2-15.5)>1 or abs((yy.min()+yy.max())/2-15.5)>1:
+            errors.append(f'Item {entry["name"]}: object is not centred')
+        eroded=np.array(Image.fromarray(np.pad(opaque.astype('uint8')*255,2)).filter(ImageFilter.MinFilter(5)))[2:-2,2:-2]>0
+        if (opaque&~eroded&np.any(frame[:,:,:3]!=[14,13,12],axis=2)).any():errors.append(f'Item {entry["name"]}: two-pixel outline damaged')
+        allowed={tuple(c) for c in items.tones(entry)}|{(14,13,12)}
+        if any(tuple(c) not in allowed for c in np.unique(frame[:,:,:3][opaque],axis=0)):
+            errors.append(f'Item {entry["name"]}: more than three source material colors')
+    print(f'Item style and frame coverage: public indices={len(java)} unique props={len(entries)}')
+
+def frame_checks(spec,pixels,errors):
+    if spec.get('native_glyphs'):
+        import glyphs
+        entries=glyphs.entries(spec['native_glyphs']);fw=fh=32;cols=16
+        for name,index in entries.items():
+            patch=pixels[index//cols*fh:(index//cols+1)*fh,index%cols*fw:(index%cols+1)*fw]
+            if patch.shape!=(fh,fw,4) or not patch[:,:,3].any():errors.append(f'{spec["output"]}: missing {name} glyph {index}')
+        print(f'{spec["native_glyphs"]} frame coverage: {len(entries)}')
+    for index in spec.get('required_frames',[]):
+        fw,fh=spec['frame'];cols=spec['dimensions'][0]//fw
+        patch=pixels[index//cols*fh:(index//cols+1)*fh,index%cols*fw:(index%cols+1)*fw]
+        if patch.shape!=(fh,fw,4) or not patch[:,:,3].any():errors.append(f'{spec["output"]}: referenced frame {index} empty')
+
 def validate(generated_only=False):
     errors=[]; outputs=set(); count=0;regional={};native=0
     # Finite tints/shades used by this painter; CIE76 tolerance remains the spec's 12.
@@ -73,6 +106,8 @@ def validate(generated_only=False):
         if not visible.any(): errors.append(f'{spec["output"]}: empty asset'); continue
         if spec.get('native_character'):
             character_checks(spec,pixels,errors,regional);native+=1
+        if spec.get('rendered_items'):item_checks(spec,pixels,errors)
+        frame_checks(spec,pixels,errors)
         if spec.get('rendered_character'):
             fw,fh=spec['frame']
             for row in range(spec.get('tiers',1)):
@@ -107,7 +142,9 @@ def validate(generated_only=False):
         if missing: errors.append(f'Incomplete art inventory: {len(missing)} existing sheets lack pipeline specs (including {", ".join(p.name for p in missing[:8])}).')
         for hero in ['necromancer','enchanter','psychic']:
             if not (ROOT/'core/src/main/assets/sprites'/f'hero_{hero}.png').exists(): errors.append(f'Missing hero_{hero}.png; character outline, occupancy and animation tests cannot pass.')
-        errors.append('Full item style and complete referenced-frame coverage gates remain unfinished; tests 16 and 17 cannot be certified.')
+        item_specs=[json.loads(p.read_text()) for p in SPEC_DIR.glob('*.json') if json.loads(p.read_text()).get('rendered_items')]
+        if len(item_specs)!=1:errors.append('Full art requires one validated native item atlas')
+        if native!=78:errors.append(f'Native character atlas coverage changed: {native}, expected 78; audit new sprites')
     for error in errors: print('FAIL:',error)
     print(f'Validated {count} generated specifications; {len(errors)} failures.' + (' Subset diagnostic only.' if generated_only else ''))
     return bool(errors)

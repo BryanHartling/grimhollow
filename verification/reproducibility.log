@@ -1647,3 +1647,54 @@ TEST 41: liquid frames=96 failures=0
 Stage 6d native characters - 2026-09-11 16:05 UTC
 TEST 28: 152 rebuilt files; byte differences=0; Blender not invoked
 TEST 30: 5 regions; idle pairs=15025; minimum hue L1=0.2568; failing species pairs=0
+
+
+STAGE 6e - 2026-09-11 - full art checkpoint
+
+art-complete-region-gates.txt
+Wall/floor distinctness: mean luminance difference=0.2106, representative pHash bits=36.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.1541 PASS
+Adjacent water/floor contrast: median luminance difference=0.1469, median hue difference=33.5833 PASS
+No boundary halo: outer minus inner mean=-0.1476 PASS
+Visible-cell value range: visible mean=0.1381, visible std=0.1203 PASS
+Hero / rat / item readability: hero bbox contrast=0.3211, rat bbox contrast=0.2797, item bbox contrast=0.4766 PASS
+TEST 40: region=sewers measurements=6 failures=0
+TEST 39: region=sewers classes=5 failures=0; liquids use test 41
+Wall/floor distinctness: mean luminance difference=0.2392, representative pHash bits=34.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.3633 PASS
+Adjacent water/floor contrast: median luminance difference=0.1491, median hue difference=122.5726 PASS
+No boundary halo: outer minus inner mean=-0.1156 PASS
+Visible-cell value range: visible mean=0.1448, visible std=0.1719 PASS
+Hero / rat / item readability: hero bbox contrast=0.3454, rat bbox contrast=0.2738, item bbox contrast=0.3243 PASS
+TEST 42: region=prison measurements=6 failures=0
+TEST 39: region=prison classes=5 failures=0; liquids use test 41
+Wall/floor distinctness: mean luminance difference=0.2042, representative pHash bits=24.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.7062 PASS
+Adjacent water/floor contrast: median luminance difference=0.1867, median hue difference=44.3007 PASS
+No boundary halo: outer minus inner mean=-0.1339 PASS
+Visible-cell value range: visible mean=0.1319, visible std=0.1249 PASS
+Hero / rat / item readability: hero bbox contrast=0.2662, rat bbox contrast=0.2825, item bbox contrast=0.5012 PASS
+TEST 42: region=caves measurements=6 failures=0
+TEST 39: region=caves classes=5 failures=0; liquids use test 41
+Wall/floor distinctness: mean luminance difference=0.1809, representative pHash bits=30.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.8079 PASS
+Adjacent water/floor contrast: median luminance difference=0.1846, median hue difference=52.2909 PASS
+No boundary halo: outer minus inner mean=-0.0808 PASS
+Visible-cell value range: visible mean=0.1458, visible std=0.1357 PASS
+Hero / rat / item readability: hero bbox contrast=0.3599, rat bbox contrast=0.2799, item bbox contrast=0.5906 PASS
+TEST 42: region=city measurements=6 failures=0
+TEST 39: region=city classes=5 failures=0; liquids use test 41
+Wall/floor distinctness: mean luminance difference=0.0444, representative pHash bits=30.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.9375 PASS
+Adjacent water/floor contrast: median luminance difference=0.0778, median hue difference=130.1356 PASS
+No boundary halo: outer minus inner mean=-0.0587 PASS
+Visible-cell value range: visible mean=0.0650, visible std=0.1018 PASS
+Hero / rat / item readability: hero bbox contrast=0.2244, rat bbox contrast=0.2331, item bbox contrast=0.7547 PASS
+TEST 42: region=halls measurements=6 failures=0
+TEST 39: region=halls classes=5 failures=0; liquids use test 41
+
+art-complete-liquid.txt
+sewage: min variant pHash=12, max one-tile autocorrelation=0.056
+water: min variant pHash=14, max one-tile autocorrelation=0.056
+lava: min variant pHash=14, max one-tile autocorrelation=0.057
+TEST 41: liquid frames=96 failures=0

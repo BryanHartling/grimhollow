@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.18344511424985377,
+          "value": 0.1809285718327004,
           "minimum": 0.1,
           "maximum": null,
           "pass_": true,
@@ -14,7 +14,7 @@
         },
         {
           "target": "representative pHash bits",
-          "value": 28.0,
+          "value": 30.0,
           "minimum": 12,
           "maximum": null,
           "pass_": true,
@@ -28,7 +28,7 @@
       "measurements": [
         {
           "target": "median flagstone fraction",
-          "value": 0.8068576388888888,
+          "value": 0.8079427083333333,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -42,7 +42,7 @@
       "measurements": [
         {
           "target": "median luminance difference",
-          "value": 0.18189646514161217,
+          "value": 0.18459526875680826,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -50,7 +50,7 @@
         },
         {
           "target": "median hue difference",
-          "value": 53.39187122777477,
+          "value": 52.29091803278768,
           "minimum": 30,
           "maximum": null,
           "pass_": true,
@@ -64,15 +64,15 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.08306752765295931,
+          "value": -0.08077763369293428,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.10025758519426288,
-      "inner_mean": 0.1833251128472222,
+      "outer_mean": 0.10374518583197165,
+      "inner_mean": 0.18452281952490593,
       "passing": true
     },
     {
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.1327327043287415,
+          "value": 0.14584734747091352,
           "minimum": 0.12,
           "maximum": 0.2,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.13614134189607313,
+          "value": 0.13566533426146402,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -110,7 +110,7 @@
         },
         {
           "target": "rat bbox contrast",
-          "value": 0.27677960784313727,
+          "value": 0.2798674509803922,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -118,7 +118,7 @@
         },
         {
           "target": "item bbox contrast",
-          "value": 0.5353174117647058,
+          "value": 0.5905694117647059,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -129,24 +129,24 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.1327327043287415,
+    "region_mean_after_lighting": 0.14584734747091352,
     "region_mean_pass": true,
-    "dominant_green_brown_fraction": 0.7634910300925926,
+    "dominant_green_brown_fraction": 0.7890926408179012,
     "hue_budget_pass": true,
     "accent_families": 1,
     "accent_bins": [
-      0.012062355324074073,
-      0.02922453703703704,
-      0.0010247878086419753,
+      0.044927903163580245,
+      0.014841338734567902,
+      0.0011272665895061729,
       0.0,
       0.0,
-      3.616898148148148e-05,
-      0.00015070408950617283,
+      0.00011453510802469135,
+      0.00019290123456790122,
       0.0,
       0.0,
       0.0,
       0.0,
-      0.19401041666666666
+      0.14970341435185186
     ],
     "readability": "Native character silhouettes; regional idle-pair test 30 runs in validate.py",
     "composition": "Actual OpenGL screenshot; all heroFOV visible cells",
@@ -156,8 +156,8 @@
       0.64
     ]
   },
-  "screenshot_sha256": "964ea25a2266d3b68c18d586f69f348feb0c7c4e5576c2be8b0dbe4a52144984",
-  "terrain_sha256": "197d898086447642ac90447f7d4878fac15e684b71d0095410b76b688ca60e69",
+  "screenshot_sha256": "7910c9e128241eb4b4b91f00b1a3ccc00246ba9b619854b3af124cd147097948",
+  "terrain_sha256": "3b3c91cf16ad36b4425cf6dbe7e0a47204423eca017c6c10b4b1b2ae6fd55ec0",
   "sample_count": 72,
   "seed": 426,
   "lighting": true,

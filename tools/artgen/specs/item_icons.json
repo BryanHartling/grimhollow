@@ -1,0 +1,9 @@
+{
+  "output": "core/src/main/assets/sprites/item_icons.png",
+  "kind": "icons",
+  "dimensions": [
+    512,
+    256
+  ],
+  "native_glyphs": "identification"
+}

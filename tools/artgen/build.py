@@ -142,6 +142,21 @@ def procedural(spec):
 
 def paint(spec):
     import rendered
+    if spec.get('rendered_title'):
+        import titles
+        return titles.paint(spec)
+    if spec.get('rendered_layout'):
+        import layouts
+        return layouts.paint(spec)
+    if spec.get('native_glyphs'):
+        import glyphs
+        return glyphs.atlas(spec)
+    if spec.get('rendered_items'):
+        import items
+        return items.atlas(spec)
+    if 'rendered_item' in spec:
+        import items
+        return items.frame(spec['rendered_item'])
     if spec.get('native_character'):
         import characters
         return characters.paint(spec)
@@ -189,6 +204,10 @@ def build():
         if not metadata.exists() or metadata.read_bytes()!=encoded:metadata.write_bytes(encoded)
         import characters
         preview=ROOT/'verification/characters.png';buffer=io.BytesIO();characters.gallery(character_specs).save(buffer,format='PNG')
+        if not preview.exists() or preview.read_bytes()!=buffer.getvalue():preview.write_bytes(buffer.getvalue())
+    if (Path(__file__).parent/'render_cache/items/000.png').exists():
+        import items
+        preview=ROOT/'verification/items.png';buffer=io.BytesIO();items.gallery().save(buffer,format='PNG')
         if not preview.exists() or preview.read_bytes()!=buffer.getvalue():preview.write_bytes(buffer.getvalue())
     # Historical POC evidence is immutable; stage 5.6 has its own comparison.
     if not (ROOT/'verification/render-poc.png').exists() and (Path(__file__).parent/'render_cache/necromancer/0/idle_0.png').exists():

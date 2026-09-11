@@ -248,6 +248,7 @@ public class ItemSlot extends Button {
 
 			itemIcon = new Image(Assets.Sprites.ITEM_ICONS);
 			itemIcon.frame(ItemSpriteSheet.Icons.film.get(item.icon));
+			itemIcon.logicalSize(ItemSpriteSheet.Icons.SIZE, ItemSpriteSheet.Icons.SIZE);
 			add(itemIcon);
 
 		} else if (item instanceof Weapon || item instanceof Armor) {

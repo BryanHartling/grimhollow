@@ -466,6 +466,7 @@ public class Notes {
 					if (item.isIdentified() && item.icon != -1) {
 						Image secondIcon = new Image(Assets.Sprites.ITEM_ICONS);
 						secondIcon.frame(ItemSpriteSheet.Icons.film.get(item.icon));
+						secondIcon.logicalSize(ItemSpriteSheet.Icons.SIZE, ItemSpriteSheet.Icons.SIZE);
 						return secondIcon;
 					}
 					return null;

@@ -2,7 +2,7 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), now incorporating **v4.0.0**, commit `2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`. The fork began at v3.3.8; upstream history and Java packages are preserved.
 
-**Stage 6d: native character silhouettes, five regional environments and animated liquids.** Nine heroes are playable: the six upstream classes plus Necromancer, Enchanter and Psychic, each with two subclasses, talents and three armor abilities. All 78 character atlases now have original vector silhouettes, including armor tiers, enemy variants, bosses and minions. Review [the character sheet](verification/characters.png). Items/title, enhanced effects and section 9 content remain pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.8 specification](GDD-one-shot-build-spec.md).
+**Stage 6e: complete generated art inventory.** Nine heroes are playable: the six upstream classes plus Necromancer, Enchanter and Psychic, each with two subclasses, talents and three armor abilities. All 78 character atlases use native silhouettes; 369 item props, special-room materials and the title are rendered from committed Blender sources. Review [the characters](verification/characters.png) and [the items](verification/items.png). Enhanced effects and section 9 content remain pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.8 specification](GDD-one-shot-build-spec.md).
 
 **v4 content integration, version 0.5.2-v4:** the Ambitious Imp's expanded Vault quest, elemental boss, hazards, patrol AI, quest loot and equipment exchange are included. Weapon pools include Venomous, Vorpal, Eldritch and Crystal enchantments plus Pressurized and Wondrous curses. Upstream item balance, combat, save/load, generation, UI and audio fixes are incorporated. The Vault mirror supports all nine heroes. Approved regional atlases remain unchanged; v4 special-room and item visuals regenerate from palette-vector sources. The visual correction replaces stamped liquid highlights with reflections from travelling surface waves; tests 39-42 now pass locally, including the five-room vision review. Full art coverage remains the CI blocker.
 
@@ -20,7 +20,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-0.5.3.jar
+java -jar desktop\build\libs\desktop-0.6.0.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.
@@ -114,3 +114,9 @@ lava use four variants with eight frames each, separate cell phases, and an entr
 ripple. Review `verification/iteration/liquids/` and the lit Sewers image above;
 the Prison and Halls subfolders contain liquid previews with their existing region
 art. These previews do not certify the later regional art gates.
+
+Stage 6e keeps every special-room cell at 16 logical units while replacing its
+texture material at 64px. Talent and identification glyphs are native 32px
+pictograms. Item IDs, animation timing, collision and quest layouts retain v4
+contracts. `python tools/artgen/build.py` regenerates the complete 166-sheet
+inventory from source and committed caches; CI does not install Blender.

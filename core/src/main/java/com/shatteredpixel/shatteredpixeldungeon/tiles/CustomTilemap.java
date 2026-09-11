@@ -88,7 +88,9 @@ public abstract class CustomTilemap implements Bundlable {
 	
 	public Tilemap create(){
 		if (vis != null && vis.alive) vis.killAndErase();
-		vis = new Tilemap(texture, new TextureFilm( texture, SIZE, SIZE )){
+		int frame = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.tileFrame(String.valueOf(texture));
+		vis = new Tilemap(texture, new TextureFilm( texture, frame, frame )){
+			{ cellSize(SIZE, SIZE); }
 			@Override
 			protected NoosaScript script() {
 				//allow lighting for custom tilemaps

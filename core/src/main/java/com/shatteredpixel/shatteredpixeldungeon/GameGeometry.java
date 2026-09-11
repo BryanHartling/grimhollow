@@ -20,7 +20,12 @@ public final class GameGeometry {
                 || texture.equals("environment/tiles_prison.png")
                 || texture.equals("environment/tiles_caves.png")
                 || texture.equals("environment/tiles_city.png")
-                || texture.equals("environment/tiles_halls.png") ? TILE_SIZE : WORLD_TILE_SIZE;
+                || texture.equals("environment/tiles_halls.png")
+                || texture.startsWith("environment/custom_tiles/")
+                || texture.equals(Assets.Environment.TERRAIN_FEATURES)
+                || texture.equals(Assets.Environment.RAISED_TERRAIN)
+                || texture.equals(Assets.Environment.TILES_CAVES_CRYSTAL)
+                || texture.equals(Assets.Environment.TILES_CAVES_GNOLL) ? TILE_SIZE : WORLD_TILE_SIZE;
     }
     public static final int LOGICAL_TILE = WORLD_TILE_SIZE;
     public static final int TEX_TILE = TILE_SIZE, TEX_HERO_W = HERO_FRAME_W, TEX_HERO_H = HERO_FRAME_H;

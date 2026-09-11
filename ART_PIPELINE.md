@@ -222,3 +222,23 @@ They are not called for shipped characters. Shared environment mesh primitives w
 moved unchanged into `blender/primitives.py`; all environment render caches, including
 the locked Sewers classes, retain their approved bytes. Full items and props coverage
 remains the next stage's full-validator gate.
+
+
+Stage 6e renders every public item index from `blender/items.json` with the original
+mesh profiles in `blender/props.py`. Recompile the catalog with
+`python tools/artgen/item_catalog.py` when Java item constants change; unknown
+identities fail explicitly. `build.py --render --asset items,surfaces,title` updates
+only those caches. The normal build packs 32px items with three source material
+colors, a two-pixel outline and centered bounds; it never needs Blender.
+
+Special-room atlases retain the GPL v4 semantic contours and cell IDs, with new
+64px rendered relief materials. Their logical cells remain 16 units. The original
+Sewers floor/wall/door/decor/torch caches and atlases are unchanged. Mathematical
+occlusion/grid masks retain their pixel geometry. Native 32px semantic talent and
+identification pictograms are drawn by `glyphs.py`; logical UI sizes remain 16/8.
+
+The title uses an original extruded blackletter alphabet (heavy stems and fine
+joiners, with only the G ornamented) and a modeled ruined nave. Required title and
+end-state lettering is the explicit exception to the no-asset-text rule. Baseline
+upstream FX shapes are reproducible palette-vector sources for the off path; the
+next stage adds the enhanced rendered FX without changing mechanics.

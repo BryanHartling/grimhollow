@@ -144,7 +144,7 @@ def validate(generated_only=False):
             if not (ROOT/'core/src/main/assets/sprites'/f'hero_{hero}.png').exists(): errors.append(f'Missing hero_{hero}.png; character outline, occupancy and animation tests cannot pass.')
         item_specs=[json.loads(p.read_text()) for p in SPEC_DIR.glob('*.json') if json.loads(p.read_text()).get('rendered_items')]
         if len(item_specs)!=1:errors.append('Full art requires one validated native item atlas')
-        if native!=78:errors.append(f'Native character atlas coverage changed: {native}, expected 78; audit new sprites')
+        if native!=80:errors.append(f'Native character atlas coverage changed: {native}, expected 80 (including Hexcaster and Chainwarden); audit new sprites')
     for error in errors: print('FAIL:',error)
     print(f'Validated {count} generated specifications; {len(errors)} failures.' + (' Subset diagnostic only.' if generated_only else ''))
     return bool(errors)

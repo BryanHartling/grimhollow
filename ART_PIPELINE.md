@@ -242,3 +242,11 @@ joiners, with only the G ornamented) and a modeled ruined nave. Required title a
 end-state lettering is the explicit exception to the no-asset-text rule. Baseline
 upstream FX shapes are reproducible palette-vector sources for the off path; the
 next stage adds the enhanced rendered FX without changing mechanics.
+
+Stage 8 adds Hexcaster and Chainwarden as native character specifications, plus
+11 new Blender item models at unused indices 526-536. There are now 80 character
+atlases, 380 distinct props and 381 public item indices; the four v4 elemental
+summon spells retain 522-525. Leather variants reuse their parent mesh seed and
+variant and change only materials. Bone Armor adds an ivory rib cage. Chainwarden
+uses turquoise steel, an amber tabard and prison chains to distinguish it from
+ordinary guards and thieves without changing the hue-distance gate.

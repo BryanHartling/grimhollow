@@ -596,7 +596,7 @@ public class PrisonBossLevel extends Level {
 	
 	@Override
 	protected void createMobs() {
-		tengu = new Tengu(); //We want to keep track of tengu independently of other mobs, he's not always in the level.
+		tengu = Random.Int(10)<3?new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Chainwarden():new Tengu(); //We want to keep track of tengu independently of other mobs, he's not always in the level.
 	}
 	
 	public Actor addRespawner() {
@@ -713,7 +713,7 @@ public class PrisonBossLevel extends Level {
 						&& Dungeon.level.plants.get(cell) == null
 						&& Actor.findChar(cell) == null) {
 					Level.set(cell, Terrain.SECRET_TRAP);
-					setTrap(new TenguDartTrap().hide(), cell);
+					setTrap((tengu instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Chainwarden?new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ChainTrap():new TenguDartTrap()).hide(), cell);
 					CellEmitter.get(cell).burst(Speck.factory(Speck.LIGHT), 2);
 				}
 			}

@@ -546,7 +546,7 @@ abstract public class Weapon extends KindOfWeapon {
 
 		public static final Class<?>[] curses = new Class<?>[]{
 				Annoying.class, Displacing.class, Dazzling.class, Explosive.class, Friendly.class,
-				Polarized.class, Pressurized.class, Sacrificial.class, Wayward.class, Wondrous.class
+				Polarized.class, Pressurized.class, Sacrificial.class, Wayward.class, Wondrous.class, com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Leech.class, com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Echo.class, com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.DarkBlessing.class
 		};
 			
 		public abstract int proc( Weapon weapon, Char attacker, Char defender, int damage );
@@ -669,7 +669,8 @@ abstract public class Weapon extends KindOfWeapon {
 			if (enchants.isEmpty()) {
 				return random();
 			} else {
-				return (Enchantment) Reflection.newInstance(Random.element(enchants));
+				float[] weights=new float[enchants.size()];for(int i=0;i<weights.length;i++)weights[i]=enchants.get(i)==com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.DarkBlessing.class?1:3;
+                return (Enchantment) Reflection.newInstance(enchants.get(Random.chances(weights)));
 			}
 		}
 		

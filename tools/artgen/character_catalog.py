@@ -10,6 +10,8 @@ from build import ROOT, SPEC_DIR
 JAVA=ROOT/'core/src/main/java/com/shatteredpixel/shatteredpixeldungeon'
 # path | legacy columns | native size | silhouette | materials | features | animation source
 DESIGNS='''
+hexcaster|21|48|humanoid|4A2C6E|7BB33B|hood robe crook book|Hexcaster
+chainwarden|18|96|humanoid|2E6F7A|E0982F|helm guard tabard flail chain|Chainwarden
 rat|16|48|rat|565B62|9E1B24||Rat
 brute|21|48|humanoid|8A4B12|9E1B24|gnoll brute axe|Brute
 spinner|16|48|spider|3F6A1F|C9BFA8||Spinner
@@ -127,9 +129,9 @@ HEROES={
 # encounter-room enemies. Armour/state changes of one species are one identity.
 POPULATIONS={
  'sewers':'rat gnoll crab slime snake swarm goo',
- 'prison':'skeleton thief dm100 guard necromancer bat tengu rot_lasher rot_heart elemental:14',
- 'caves':'bat brute shaman spinner dm200 ghoul dm300 pylon crystal_wisp crystal_guardian crystal_spire gnoll_guard gnoll_sapper gnoll_geomancer fungal_spinner fungal_sentry fungal_core',
- 'city':'ghoul elemental warlock monk golem king succubus vault_boss_elemental vault_mirror skeleton:21 shaman:63 dm100:16 dm200:24',
+ 'prison':'skeleton thief dm100 guard necromancer bat tengu chainwarden rot_lasher rot_heart elemental:14',
+ 'caves':'hexcaster bat brute shaman spinner dm200 ghoul dm300 pylon crystal_wisp crystal_guardian crystal_spire gnoll_guard gnoll_sapper gnoll_geomancer fungal_spinner fungal_sentry fungal_core',
+ 'city':'hexcaster ghoul elemental warlock monk golem king succubus vault_boss_elemental vault_mirror skeleton:21 shaman:63 dm100:16 dm200:24',
  'halls':'succubus eye scorpio ripper spawner larva yog yog_fists',
 }
 SHARED='piranha mimic statue wraith bee'

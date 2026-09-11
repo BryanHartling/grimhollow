@@ -145,7 +145,7 @@ public class HallowedGround extends TargetedClericSpell {
 			} else {
 				int barrier = 15 - (ch.HT - ch.HP);
 				barrier = Math.max(barrier, 0);
-				ch.HP += 15 - barrier;
+				ch.heal(15 - barrier);
 				ch.sprite.showStatusWithIcon( CharSprite.POSITIVE, Integer.toString(15-barrier), FloatingText.HEALING );
 				if (barrier > 0){
 					Buff.affect(ch, Barrier.class).incShield(barrier);
@@ -245,7 +245,7 @@ public class HallowedGround extends TargetedClericSpell {
 					Buff.affect(ch, Barrier.class).incShield(1);
 					ch.sprite.showStatusWithIcon( CharSprite.POSITIVE, "1", FloatingText.SHIELDING );
 				} else {
-					ch.HP++;
+					ch.heal(1);
 					ch.sprite.showStatusWithIcon( CharSprite.POSITIVE, "1", FloatingText.HEALING );
 				}
 			} else if (!ch.flying && ch.buff(Roots.class) == null){

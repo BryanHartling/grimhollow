@@ -179,6 +179,8 @@ def humanoid(f,features,tier):
         f.poly([(13,13),(18,9),(30,10),(35,15),(27,17),(16,16)],f.dark)
         f.line([(15,14),(24,15),(33,14)],f.light,2)
         f.poly([(27,12),(29,7),(34,6),(31,10)],f.accent)
+    if 'chain' in features:
+        for y in range(24,42,4):f.ellipse((9,y,14,y+6),f.accent);f.ellipse((10,y+1,13,y+4),f.dark)
     if 'crown' in features:
         f.poly([(17,11),(16,6),(21,9),(24,5),(27,9),(32,6),(30,13)],f.accent)
     if 'cleric' in features:

@@ -11,6 +11,11 @@ import com.watabou.utils.*;
 /** Terrain ownership lives on the level. Saving records originals; loading always restores them. */
 public class BoneWalls extends Buff {
     private int depth,branch,keys;
+    public static boolean raise(int cell,int turns){
+        Level l=Dungeon.level;if(!l.insideMap(cell)||!l.passable[cell]||Actor.findChar(cell)!=null||l.heaps.get(cell)!=null||l.traps.get(cell)!=null||l.map[cell]==Terrain.ENTRANCE||l.map[cell]==Terrain.EXIT)return false;
+        l.boneOriginal.put(cell,l.map[cell]);l.boneTurns.put(cell,turns);Level.set(cell,Terrain.BONE_WALL);GameScene.updateMap(cell);
+        BoneWalls buff=Buff.affect(Dungeon.hero,BoneWalls.class);buff.depth=Dungeon.depth;buff.branch=Dungeon.branch;Dungeon.observe();return true;
+    }
     public static boolean prison(int center,int turns,int keys){
         Level l=Dungeon.level;boolean made=false;
         for(int offset:PathFinder.NEIGHBOURS8){int cell=center+offset;

@@ -1,0 +1,200 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/hexcaster.png",
+  "dimensions": [
+    1008,
+    60
+  ],
+  "frame": [
+    48,
+    60
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "Hexcaster",
+      "kind": "humanoid",
+      "primary": "4A2C6E",
+      "accent": "7BB33B",
+      "features": [
+        "hood",
+        "robe",
+        "crook",
+        "book"
+      ],
+      "idle": 0,
+      "regions": [
+        "caves",
+        "city"
+      ],
+      "species": "hexcaster:0",
+      "animations": {
+        "idle": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1
+        ],
+        "run": [
+          0,
+          2,
+          3,
+          4
+        ],
+        "attack": [
+          0,
+          5,
+          6
+        ],
+        "die": [
+          0,
+          7,
+          8,
+          8,
+          9,
+          10
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.25
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.75
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.25
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.75
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    }
+  ]
+}

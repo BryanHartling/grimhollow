@@ -25,12 +25,13 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.watabou.noosa.TextureFilm;
 
 public class ItemSpriteSheet {
+    public static final int WAND_NECROSIS=526, WAND_GRAVITY=527, WAND_BONE=528, SOULFIRE=529, BONE_SCYTHE=530, REAPER_SCYTHE=531, GRAVE_SCYTHE=532, ARMOR_BONE=533, ARMOR_LEATHER_OCHRE=534, ARMOR_LEATHER_ASH=535, HOURGLASS_ASHES=536;
     public static final int BONE_ROD=512, PHYLACTERY=513, ARMOR_NECROMANCER=514, RUNED_BATON=515, SIGIL_BRUSH=516, ARMOR_ENCHANTER=517, FOCUS_RING=518, FOCUS_CRYSTAL=519, ARMOR_PSYCHIC=520, RUNE_ETCHING=521;
 
 	public static final int SIZE = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM;
 
 	private static final int TX_WIDTH = 512;
-	private static final int TX_HEIGHT = 1056;
+	private static final int TX_HEIGHT = 1088;
 
 	private static final int WIDTH = TX_WIDTH / SIZE;
 

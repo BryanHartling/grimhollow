@@ -2714,3 +2714,2423 @@ Item style and frame coverage: public indices=370 unique props=369
 talents frame coverage: 242
 TEST 30: 5 regions; idle pairs=15025; minimum hue L1=0.2568; failing species pairs=0
 Validated 167 generated specifications; 0 failures.
+
+STAGE 8 FINAL: content-repro-final.txt
+b44f3d83014c06b8d3b0543ff780625e4376cd262bf60da193ee9292a1978a50 core/src/main/assets/sprites/amulet.png
+f6e37a7eddb05a3a00c48d1373b34166d294fa620f005f2f65ab481977abcce6 android/src/main/res/mipmap-hdpi/ic_launcher_background.png
+e0a9a8ab1495d12ea373059de242e8571a0a8dd4d9d0fb91d05df8cc1c380f16 android/src/main/res/mipmap-hdpi/ic_launcher_foreground.png
+a016b55d28e812929aedce6c184370a8eff67d365a22acbc24643fcaae00aeff android/src/main/res/mipmap-hdpi/ic_launcher_monochrome.png
+1f102b0a8dfa0f6ef99201268691b8c150a780bd1e31f30a5f13d666919ee910 android/src/main/res/mipmap-hdpi/ic_launcher.png
+1f7e9bc5fc323aa84a3de51f47c57501e56b1b0ef2ffefef5bdc241a865fb9f3 android/src/main/res/mipmap-ldpi/ic_launcher_background.png
+66cbcfbed89bfc51b5d93142e9c97c08802e1004154637ac146f80c8dc2b2a4e android/src/main/res/mipmap-ldpi/ic_launcher_foreground.png
+2588c1e956e3d634f5f547a99dd01aa533008484807eaeb89a5d4e4b2a17f4fe android/src/main/res/mipmap-ldpi/ic_launcher_monochrome.png
+7077aa64c4418dfa7abd491aa69be8aab87f60fe98572d97c5dd2db38923b33e android/src/main/res/mipmap-ldpi/ic_launcher.png
+72b5539091a5bc03a30b83c63964aef83e6eb91922222e74e18c7ee1ad1752c6 android/src/main/res/mipmap-mdpi/ic_launcher_background.png
+6a2196adbf4810d7cc64d433db885fca7ff77ee431c458af66df771a339c411a android/src/main/res/mipmap-mdpi/ic_launcher_foreground.png
+683f726582be312a0416001472eab6911e035eebba532eaefcca58a07149463b android/src/main/res/mipmap-mdpi/ic_launcher_monochrome.png
+48091307b1087d3dc6cd776d55bb33f67ee72ee8bd08de6281254a97d7568631 android/src/main/res/mipmap-mdpi/ic_launcher.png
+61193b6076c8160aaeaab037a9f4d5a4bd95ce5be40e1d9c8a958591f636feb4 android/src/main/res/mipmap-xhdpi/ic_launcher_background.png
+5837b1be70549a33c97bae057d82918e524b5b3d7794a7dcd081aaa2c7cb1a83 android/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png
+45de6c354950db64b20b3f64b9b79095cf017c500f3f9d604404f917c24ee8ca android/src/main/res/mipmap-xhdpi/ic_launcher_monochrome.png
+0108f5c1a1523b81f8eb54d3f05700a7810ece7bf3f198fd46c902b08076f9f8 android/src/main/res/mipmap-xhdpi/ic_launcher.png
+e2d19792e1adb16852f8c73cc77fef6007d27b2a8a45c307a4d1b559effdeb6b android/src/main/res/mipmap-xxhdpi/ic_launcher_background.png
+03e3a9b78afa1ac0379f39d797c5e9af270e7349a8fadc749386207c7e6de8d8 android/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png
+8d359f6b7820f1e61f8b5933c1ac0e130851b8786f94b065609480b5890e632d android/src/main/res/mipmap-xxhdpi/ic_launcher_monochrome.png
+ebd502cc6b646466c2a33b83ffe1973c02e02d9a905f3bb882a249e10a4a6c58 android/src/main/res/mipmap-xxhdpi/ic_launcher.png
+07994e8eaa83589758b2e01e496a719d172f5456447817024b56c6ea73d5a8dc android/src/main/res/mipmap-xxxhdpi/ic_launcher_background.png
+18a3f504f9f388261d289014a90e82a15a96e12326e68b6bd95b140331e8558e android/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png
+ca68f8c215093e0b18525a87ca07852cb2704313daa67ad3aa6bdac7a78e6035 android/src/main/res/mipmap-xxxhdpi/ic_launcher_monochrome.png
+571ee8110131ac46509390a65815eb1a2348b1fef7c53fd48026d74e81ffcbc6 android/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+4e1954be73258182a23eec576c74e0aece1e4a355a5f59c42728598c2f177d4a core/src/main/assets/interfaces/banners.png
+a8b8fc76986de78cfd4231badc88bd22503acd3c8510d8d46930f3e51d5939d2 core/src/main/assets/effects/blood_decals.png
+a376384456e9be7b2a82320124c0593f8812639dfe4af552bc3135446104aa87 core/src/main/assets/sprites/bat.png
+63e2aec7ed951b67d527f59900519f6d6b3f2479dd9dc19e7372f50aff1a567a core/src/main/assets/sprites/bee.png
+20c53f16f177a96c6e6fb5057c238ce05256ea5310f0c74fd65d9226594dc742 core/src/main/assets/sprites/blacksmith.png
+799b91009e160648e6ff73dcc9e93628630b1ec970ee824ae63cf00c45ae3a14 core/src/main/assets/sprites/brute.png
+1bd8632ad4b68d285d4033bdb1682784d0286b210105fafe56164787ceb059b1 core/src/main/assets/sprites/chainwarden.png
+d9b8ec4901172ff8aa6e7a617dd822da81ac9074da0ccc65616ce132c812b136 core/src/main/assets/sprites/crystal_guardian.png
+fd90486d1f290e2700b5abdb314bbc3b95253ae71fcb76451523b1bd0e866796 core/src/main/assets/sprites/crystal_wisp.png
+01646b7c2f282bd2e96b9eb415f160cd0749a9aee7d03bacb64ecafbbd651f4d core/src/main/assets/sprites/dm300.png
+bf65ef341f41c0645796060b85dc8d415006f7301bb742af9caaa5095308ba18 core/src/main/assets/sprites/elemental.png
+9d1a6a6177e9069ffdf654c13d4820b9cb108fc1e53c5a10b563e32f7e192fce core/src/main/assets/sprites/eye.png
+20f93342907205530c3eb227ea901825231a1744277a52a59089d96f25a06b3e core/src/main/assets/sprites/fungal_core.png
+33a3cb4f4f60fae98cc91bac12b7ec59c472e2539726afbd865c010f5ab5d2fb core/src/main/assets/sprites/fungal_sentry.png
+031ef7f6856c999800a97aa95e7788d72ded396e92b192fa1d5833fd2d26bbef core/src/main/assets/sprites/fungal_spinner.png
+2025ab1d0c68a5baaa6e3b80a308f2d6ededc7fc2aad15bc03df74064dd53f5f core/src/main/assets/sprites/ghost.png
+94e77cd05fbeefbcf3af6c97f8b8131989949d9483d42383e5343f6d8428786f core/src/main/assets/sprites/ghoul.png
+5e74e552abc3f3c6cc983d46858af8c373e7941ffa3a33ea6ad4c0f9aa1aabc8 core/src/main/assets/sprites/gnoll.png
+e0b22ace15c18ae898a7b8b6c199768d32ccb378abc3418068ed3e5d29aa86af core/src/main/assets/sprites/gnoll_geomancer.png
+d7cda8ba505e024dac397d657b53f3fcaac019c27c8b037229011b0ddf86a2b7 core/src/main/assets/sprites/gnoll_guard.png
+b8660f17b246e71f11faf8e890903821714f9aac75f9036bc1bdf566811f5344 core/src/main/assets/sprites/gnoll_sapper.png
+7c9eb68de623deba81e81728df5a66745dfcd4ff7647649520635b3bffc6428c core/src/main/assets/sprites/golem.png
+387a0f28ab181963367b44bc4b556a4a4650cb308641482196ab875ab3ec2cc4 core/src/main/assets/sprites/goo.png
+e99067e73cc349bde5dccdf1354a97f41d2957a895e30f7c3bfc231af3b82d8d core/src/main/assets/sprites/guard.png
+ceb32d5efe8439cfa3b38749399fa8c4c2ceab2f692caa53bc07ee190e3809d5 core/src/main/assets/sprites/guardian.png
+d1ae087112b615493d2444d4ed567d4f4f481b9158896f54c0423dffc76ea077 core/src/main/assets/sprites/hexcaster.png
+1d39ec482d7aa3163a0889a4c16032b2ffcb85fabd07bf373f527da4ad1f99ca core/src/main/assets/sprites/imp.png
+94d7c0f33c0d7d5da3fee7918707f4da5634e910d0b37fc30182e0cd1905f1ee core/src/main/assets/sprites/king.png
+59baaffbc90858f5256a79bc189bd131ea15882d65903c0169afa4a59cf22da2 core/src/main/assets/sprites/larva.png
+7889eb3deeabbd0dc4c6b28cc3d129cdfd02da12e82728ca6a08ef425dae2cbd core/src/main/assets/sprites/lotus.png
+78214ad2e21a4add2c79cc8314e3726979c33acc3b9bda6bf2b10ee5caab68de core/src/main/assets/sprites/mimic.png
+447cff18eb626d12b1110a581e9825b5981de7537ca914382299dd9497b03c9e core/src/main/assets/sprites/monk.png
+aec2ac380c6187abadd34598bcd9cf63b5ea701067b8f655fb9967876359b9b8 core/src/main/assets/sprites/necromancer.png
+476b22f59cccbdfd91f0ed09ff914761765d66cff8e68bc30395da1bc206c0bd core/src/main/assets/sprites/ninja_log.png
+5473871c0cd7bf1bf3c9b843c67dabe7e998f87c241f5f1c5adefebaadb8f247 core/src/main/assets/sprites/piranha.png
+5ea3b2fe8f5bf415534eed56e53cf206ea0e14ee72ad4c785dcef3374bc45c6b core/src/main/assets/sprites/pylon.png
+51d4d82b4e9e47a38135694ad1a4e56faab3cdf39b44cc2ff27711aebee4d16d core/src/main/assets/sprites/ripper.png
+697801fe185850ed3e44415899e2d7d4b49bef09c92fc036aee5a55e785a80fd core/src/main/assets/sprites/rot_heart.png
+cefae3d48722dc82251adeb05d6bda1d577a0afe92f372c0918319882d73bc82 core/src/main/assets/sprites/rot_lasher.png
+c04c7d70cf72c7f954c771943d8bbfdc97a8be2aa73e0493a89e2db1e0a4b226 core/src/main/assets/sprites/scorpio.png
+febde6b26c27fab82ae6ed13101c0aedfc8022292834a806f65fabc084a1816b core/src/main/assets/sprites/sheep.png
+dc47c293bee2fafdea992716c71b5718c1723096fdf15628e67e7289f70f664b core/src/main/assets/sprites/shopkeeper.png
+b0160c583f77ba310bffe3afd59abeb3871f242c381414d5264480d43524703c core/src/main/assets/sprites/slime.png
+763abdf5157d9997dc3698f772a5bc0cea395b3504778b500f47330a27d56ac7 core/src/main/assets/sprites/snake.png
+b2f97edf0e0f298b81570a3264584e455ad73f7c39a9bfab22c4be0cef5c711f core/src/main/assets/sprites/spawner.png
+99943cd407a11db0c05d713466e8b7fb2cbf27e41a92f08d9a24be22b4e1af3a core/src/main/assets/sprites/spinner.png
+724ece619a33e4dc9bd477dd16b38fc22ee96c45f33b8f24edf7e6ce28b884d9 core/src/main/assets/sprites/spirit_hawk.png
+6c98d0e4d7b808a2ec6274ebe66cd8be0f6e00efe6e1206b5797109cca112ae7 core/src/main/assets/sprites/statue.png
+2744872ee27b6f9d6f378b8efb4a36155f1df5051c17baea34d033f53a425344 core/src/main/assets/sprites/succubus.png
+1ab4adf82dd56365126234adeb5d4a086e0b4a497c7cb1ed57385a9770da7dfb core/src/main/assets/sprites/swarm.png
+ea32de394e9136990e9b512262d478c8969987deadbefb4c3ed2bf4404f54d7c core/src/main/assets/sprites/tengu.png
+8393649f754abe14265e0612ad26f7ac544a6c7b96f801b4764b1aa2cac7609b core/src/main/assets/sprites/thief.png
+2a598fbbbbccb5e7bbb03c79a6138bfe65e9a3479cdc5e7b56468900f9a7860e core/src/main/assets/sprites/undead.png
+e33de9678a1bce79efac7e5a400cdcbc2dd6c826847aa54363132cf4532a9aca core/src/main/assets/sprites/wandmaker.png
+d4f2ca8e6090649a22c085fd8a570ee46b4059f205d36c6d76b2c62473d21f5f core/src/main/assets/sprites/wards.png
+1d00be24fd7df8abc22369a8a709e313e17f5a066b30efe4bc0e396a2b580cc9 core/src/main/assets/sprites/warlock.png
+1cd268a379b08196f0d1ae094baebfa6a16e714d53e34ca420fcb72bd23cccbd core/src/main/assets/sprites/wraith.png
+861f2f8b612cbc369e6a2f2ef3b20cc1365ed334befeff195d86c8954381d8f0 core/src/main/assets/sprites/yog.png
+0e209260d85e656475892f5691f75a0b0955942a21e80e92504b575d803ebe94 core/src/main/assets/sprites/yog_fists.png
+b3a94d914bebc7139b1684de19fd6233a68d40dcc089017381718dff1f0df552 core/src/main/assets/effects/effects.png
+bd14fdf7103377cbc0935cdc0f31c24969a65bab07fcf89b90c7158409a7def1 core/src/main/assets/effects/fireball-short.png
+0b29fcf173ed3a5a7b651e9134808a03735874d7edc32d8715aa3e98f624af00 core/src/main/assets/effects/fireball-tall.png
+2df5dbf55f0377bca142abc2b6b79637fe3658dca17e32c44ebb3b09ef5af1b9 core/src/main/assets/environment/custom_tiles/halls_special.png
+6aa6b2019f4c1b6e063d01130f43b233c6b38c222306164c806aeb888378bd17 core/src/main/assets/environment/custom_tiles/prison_exit.png
+b6def35b16e32205ddcc3cd36598d9b8097a69896992ac98e21996d319cc6050 core/src/main/assets/environment/custom_tiles/sewer_boss.png
+b902f20a2c5d9f11e783dc35525e8e150807f217a0bff25cde8ad7dc533ea5b0 core/src/main/assets/effects/specks.png
+d38befd93b32a92dde52107888ba4352e36fa1f08a9a8397b8d54861fccbe110 core/src/main/assets/effects/spell_icons.png
+d6d47431923f3838e4ba650aa7a2a32c1600495061b87294e990c422de15d7b5 core/src/main/assets/effects/text_icons.png
+8e3d3b8ba09944073fd8aa5e3d28b14a5e93fa290c5eceaf8678ff4a6664286d core/src/main/assets/environment/visual_grid.png
+b012a0346ddc50889cdd8dad45efa4ab49ea80bfa160bff2a77bb388182de9f0 core/src/main/assets/environment/wall_blocking.png
+bb0d66270f4c20011a131b5fae75166bc39132795be795bc7878aa5255e5ad64 core/src/main/assets/environment/custom_tiles/weak_floor.png
+bfa312403c41ffd8a29fd63a6f420c854446972b8cd693b0263f7f31ccbbcc16 desktop/src/main/assets/icons/icon_128.png
+f415d65bcde18cd5dbb97f61c62155a22d6d135240ff49a07f273d097da9a56a desktop/src/main/assets/icons/icon_16.png
+09050ad6051892b71f4894d26c8e4671163d7d384a4c8cd6c776c8dbd75301b9 desktop/src/main/assets/icons/icon_256.png
+2479decf9effdec5ccc5475106eb79ce21150a673541eab72b2bb7879f3a79ee desktop/src/main/assets/icons/icon_32.png
+48091307b1087d3dc6cd776d55bb33f67ee72ee8bd08de6281254a97d7568631 desktop/src/main/assets/icons/icon_48.png
+c2315076ccdf0c76665b0f78f76c57aaadd552c7694abdddc5609bc3c873f2a1 desktop/src/main/assets/icons/icon_64.png
+1fee53a08ea0a7db69170b39d82126382f6a769ca288f24794d7840d58225e5c desktop/src/main/assets/icons/mac.icns
+22debeaa5755ee71a8f5e6cfbeb3747dcabde75cd4512d0a34184dcd614fbc98 desktop/src/main/assets/icons/windows.ico
+f03eb2c9d4d9260a07cb8b6cb09b7da0c06ec2747018dac8d56423359efa6290 core/src/main/assets/effects/enhanced.png
+04751213489e70f68e5a86c09533a3cc340a3dd93e772a5fc4080489e5667d7a core/src/main/assets/effects/force_wall.png
+cf9175f03157c4036a5a87875545f0749fa4f9712d7baaf44a4ad500fc435144 core/src/main/assets/effects/health_vignette.png
+9ae01300ea77e6dc08865f5f43776909f49545fcce372210cb4719114ca86a8b core/src/main/assets/sprites/hero_cleric.png
+84110c4a1d68137d2581d97c0a842785667c636a90b42a95b53e7f69e79fbcae core/src/main/assets/sprites/hero_duelist.png
+2a7c70cc02f0b93d20a8c8b14f473ab0a0dc29260d1cbea7b997d2426bca2f01 core/src/main/assets/sprites/hero_enchanter.png
+55172bd630ec046c3c714a9300618917ea8be05fad5c0a85ad93b1ae72486b0b core/src/main/assets/sprites/hero_huntress.png
+ddec0a84850ce22794fed6d7080bfba4042a01a351191c8eed16a5ce5bd6bca8 core/src/main/assets/sprites/hero_mage.png
+12930a053db73646f81a66760eaa8e9151a517c6393efefe7e444b5d1f5d7cf7 core/src/main/assets/sprites/hero_necromancer.png
+43c4077f8e720db840478711b283b7e09013d17759c86afcc3e24cae54d3741a core/src/main/assets/sprites/hero_psychic.png
+c88ef9588e6cf213fa240c69c9d610c413c3183e69a5d8de26341a10739b1b24 core/src/main/assets/sprites/hero_rogue.png
+445cfdf7729b142e4a089388a39844d20e8ed88b84e19b74d9abf48a6a6f777b core/src/main/assets/sprites/hero_warrior.png
+f27b9ab7732d2d0dc0050e33905f6c15f4073cdf029ada79bbe7a8c1a165265f core/src/main/assets/sprites/item_icons.png
+4f4525add70966c29ae5577ddd1846078845c066b7f5d6924e808ee1ec99dc2d core/src/main/assets/sprites/items.png
+d54865ba6eabe72148dfdb26a157f1e6739ed07b9759414ecea6e14293c36ad2 core/src/main/assets/effects/liquid_ripple.png
+2e78d0e457c67173019593c1e0b55790f624bc6c649a005ad3db8d9c64a33f7d core/src/main/assets/environment/water1.png
+2e78d0e457c67173019593c1e0b55790f624bc6c649a005ad3db8d9c64a33f7d core/src/main/assets/environment/water2.png
+2e78d0e457c67173019593c1e0b55790f624bc6c649a005ad3db8d9c64a33f7d core/src/main/assets/environment/water3.png
+175feb7be22c8d59e6199e279c4f358844ad1050d8637b81b7e1e8b8bcd31aff core/src/main/assets/environment/water4.png
+602fbddee782119e4ed83fad8de3824a15d4ec216dbc19a8bb7c8bb45dd7db2a core/src/main/assets/sprites/crab.png
+01308c382b2f83563bfe384646bcfff28097301c03ef7f168d71636f87106ec4 core/src/main/assets/sprites/minion_ghoul.png
+6729505aaf17f42de50a0098f2e24e2ef6354db7bbecee46da15435bf905e070 core/src/main/assets/sprites/rat.png
+011bb8dad5f6ef05d5cbf73cb4f7fd45ccae8671a97f0a28e4f3c89d9fc3d3f7 core/src/main/assets/sprites/minion_skeleton.png
+c5c44ec00f98da890173fe0b680a75a0a27812c66c6f09b0e5a27f592caa2956 core/src/main/assets/environment/water0.png
+5531dd72e5b5cf7e162558d46767493d8a80971befcb206aac625075fd8a4cfa core/src/main/assets/splashes/cleric.png
+1c2a9ecfe8f0660489c852b46d2e0925b4f4b1c82651399bf8cdd743633dd875 core/src/main/assets/splashes/duelist.png
+5531dd72e5b5cf7e162558d46767493d8a80971befcb206aac625075fd8a4cfa core/src/main/assets/splashes/enchanter.png
+0099f4a576fffd59f92e6122cca9af90f06aca430da6defe304756fb72a0a64b core/src/main/assets/splashes/huntress.png
+6be3a345010c4154d42f7e330f5d237293ff845e0fc0b80dabf038738e1fbfbe core/src/main/assets/splashes/mage.png
+d0487bfdebde919c8a82059e2dbfac2136392a4dc35fa3265b4a1635daead72f core/src/main/assets/splashes/necromancer.png
+d755e2da1ec5ea71599afaf4a84765584e62bccf8655075a01309609319a6cc6 core/src/main/assets/splashes/psychic.png
+9d9e7c8f20a1ece05e618307ba3f95e5ce7060176b1de6ba14c0d49590bbeafd core/src/main/assets/splashes/rogue.png
+4628222c32785aa3701a0ac8ae830fcc277f6c114170fb5d7ef743507a958ca8 core/src/main/assets/splashes/warrior.png
+731cd8b84426175d70c2d51b462ce4412aa553180df56ad91f86f7bff5850670 core/src/main/assets/interfaces/talent_icons.png
+0a0246f3e57f00a418e4eb1b79c1c6a4f6f2d5e6f0c778e018530cc756e3f147 core/src/main/assets/environment/tiles_caves.png
+05829af16756aca6409a420e0a3b3a45d9a7db4ef3642a169a387511e8c7ce3d core/src/main/assets/environment/tiles_city.png
+40d1a2051076113b0a03b3c54311420c6a7301b27a309ee1746ae54aeb3ef984 core/src/main/assets/environment/tiles_halls.png
+bc8c4693eef9bed48611dddb4f91ec15f4d336c794fd633dbfc0a69abd91a03f core/src/main/assets/environment/tiles_prison.png
+0ad331d8624996d50c26b9edd5c5d9d04ecb62fc6ec844ee0459180a3a964c78 core/src/main/assets/environment/tiles_sewers.png
+c5cf78ac2587e06eca7b39d3c3703e15a468edffd240c605390e0525b441f6c2 core/src/main/assets/interfaces/title_grimhollow.png
+2963f2ad615e64fab7b3f49b293a653c8ef80755e5c99139277f66274a1cd1e8 core/src/main/assets/environment/custom_tiles/carpet.png
+bf0dc54714c9dc2a64ce951e2c0dc30e2aac48b86953b1a42ec00430f15996e4 core/src/main/assets/environment/custom_tiles/caves_boss.png
+7c9c97ed78a397520cd18672a079ba2cae41051b28bf0ada8a6ceec10e7843beBlender 4.5.13 LTS (hash daeeeca98fb0 built 2026-08-25 01:50:50)
+Fra:1 Mem:40.21M (Peak 40.65M) | Time:00:02.33 | Rendering 1 / 16 samples
+Fra:1 Mem:40.21M (Peak 40.65M) | Time:00:02.36 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\000.png'
+Time: 00:02.45 (Saving: 00:00.01)
+
+Fra:1 Mem:40.12M (Peak 40.12M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:40.12M (Peak 40.12M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\001.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:40.28M (Peak 40.28M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:40.28M (Peak 40.28M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\002.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:40.13M (Peak 40.13M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.13M (Peak 40.13M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\003.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:40.17M (Peak 40.17M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.17M (Peak 40.17M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\004.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:39.96M (Peak 39.96M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:39.96M (Peak 39.96M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\005.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:40.14M (Peak 40.14M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.14M (Peak 40.14M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\006.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:40.25M (Peak 40.25M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:40.25M (Peak 40.25M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\007.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:40.28M (Peak 40.28M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:40.28M (Peak 40.28M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\008.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:40.29M (Peak 40.29M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:40.29M (Peak 40.29M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\009.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:40.27M (Peak 40.27M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.27M (Peak 40.27M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\010.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:40.26M (Peak 40.26M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:40.26M (Peak 40.26M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\011.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:40.46M (Peak 40.46M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.46M (Peak 40.46M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\012.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:40.03M (Peak 40.03M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:40.03M (Peak 40.03M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\013.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:40.36M (Peak 40.36M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.36M (Peak 40.36M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\014.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:40.37M (Peak 40.37M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.37M (Peak 40.37M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\015.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:40.51M (Peak 40.51M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:40.51M (Peak 40.51M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\016.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:40.61M (Peak 40.61M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:40.61M (Peak 40.61M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\017.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:40.85M (Peak 40.85M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:40.85M (Peak 40.85M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\018.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:40.66M (Peak 40.66M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.66M (Peak 40.66M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\019.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:40.44M (Peak 40.44M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.44M (Peak 40.44M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\021.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:40.61M (Peak 40.61M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:40.61M (Peak 40.61M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\022.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:40.66M (Peak 40.66M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.66M (Peak 40.66M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\023.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:40.74M (Peak 40.74M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:40.74M (Peak 40.74M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\024.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:40.76M (Peak 40.76M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.76M (Peak 40.76M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\026.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:40.79M (Peak 40.79M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.79M (Peak 40.79M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\027.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:40.45M (Peak 40.45M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:40.45M (Peak 40.45M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\028.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:40.86M (Peak 40.86M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:40.86M (Peak 40.86M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\032.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:40.91M (Peak 40.91M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.91M (Peak 40.91M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\033.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:40.96M (Peak 40.96M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:40.96M (Peak 40.96M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\034.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:41.01M (Peak 41.01M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:41.01M (Peak 41.01M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\035.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:41.23M (Peak 41.23M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:41.23M (Peak 41.23M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\036.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:41.27M (Peak 41.27M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:41.27M (Peak 41.27M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\037.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:41.30M (Peak 41.30M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:41.30M (Peak 41.30M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\038.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:41.34M (Peak 41.34M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:41.34M (Peak 41.34M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\039.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:40.98M (Peak 40.98M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:40.98M (Peak 40.98M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\048.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:41.38M (Peak 41.38M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:41.38M (Peak 41.38M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\049.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:41.17M (Peak 41.17M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:41.17M (Peak 41.17M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\050.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:41.05M (Peak 41.05M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:41.05M (Peak 41.05M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\051.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:41.41M (Peak 41.41M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:41.41M (Peak 41.41M) | Time:00:00.32 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\052.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:41.26M (Peak 41.26M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:41.26M (Peak 41.26M) | Time:00:00.39 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\053.png'
+Time: 00:00.47 (Saving: 00:00.00)
+
+Fra:1 Mem:41.29M (Peak 41.29M) | Time:00:00.22 | Rendering 1 / 16 samples
+Fra:1 Mem:41.29M (Peak 41.29M) | Time:00:00.49 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\054.png'
+Time: 00:00.58 (Saving: 00:00.00)
+
+Fra:1 Mem:41.29M (Peak 41.29M) | Time:00:00.21 | Rendering 1 / 16 samples
+Fra:1 Mem:41.29M (Peak 41.29M) | Time:00:00.46 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\055.png'
+Time: 00:00.54 (Saving: 00:00.00)
+
+Fra:1 Mem:41.32M (Peak 41.32M) | Time:00:00.24 | Rendering 1 / 16 samples
+Fra:1 Mem:41.32M (Peak 41.32M) | Time:00:00.49 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\056.png'
+Time: 00:00.57 (Saving: 00:00.00)
+
+Fra:1 Mem:41.36M (Peak 41.36M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:41.36M (Peak 41.36M) | Time:00:00.45 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\057.png'
+Time: 00:00.54 (Saving: 00:00.00)
+
+Fra:1 Mem:41.39M (Peak 41.39M) | Time:00:00.22 | Rendering 1 / 16 samples
+Fra:1 Mem:41.39M (Peak 41.39M) | Time:00:00.47 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\058.png'
+Time: 00:00.54 (Saving: 00:00.00)
+
+Fra:1 Mem:41.81M (Peak 41.81M) | Time:00:00.21 | Rendering 1 / 16 samples
+Fra:1 Mem:41.81M (Peak 41.81M) | Time:00:00.46 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\059.png'
+Time: 00:00.54 (Saving: 00:00.00)
+
+Fra:1 Mem:41.56M (Peak 41.56M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:41.56M (Peak 41.56M) | Time:00:00.43 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\060.png'
+Time: 00:00.52 (Saving: 00:00.00)
+
+Fra:1 Mem:41.56M (Peak 41.56M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:41.56M (Peak 41.56M) | Time:00:00.45 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\061.png'
+Time: 00:00.53 (Saving: 00:00.00)
+
+Fra:1 Mem:41.83M (Peak 41.83M) | Time:00:00.21 | Rendering 1 / 16 samples
+Fra:1 Mem:41.83M (Peak 41.83M) | Time:00:00.46 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\062.png'
+Time: 00:00.54 (Saving: 00:00.00)
+
+Fra:1 Mem:41.99M (Peak 41.99M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:41.99M (Peak 41.99M) | Time:00:00.45 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\063.png'
+Time: 00:00.52 (Saving: 00:00.00)
+
+Fra:1 Mem:41.75M (Peak 41.75M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:41.75M (Peak 41.75M) | Time:00:00.45 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\064.png'
+Time: 00:00.52 (Saving: 00:00.00)
+
+Fra:1 Mem:41.78M (Peak 41.78M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:41.78M (Peak 41.78M) | Time:00:00.43 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\065.png'
+Time: 00:00.51 (Saving: 00:00.00)
+
+Fra:1 Mem:41.90M (Peak 41.90M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:41.90M (Peak 41.90M) | Time:00:00.47 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\066.png'
+Time: 00:00.55 (Saving: 00:00.00)
+
+Fra:1 Mem:41.83M (Peak 41.83M) | Time:00:00.22 | Rendering 1 / 16 samples
+Fra:1 Mem:41.83M (Peak 41.83M) | Time:00:00.46 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\067.png'
+Time: 00:00.55 (Saving: 00:00.00)
+
+Fra:1 Mem:41.95M (Peak 41.95M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:41.95M (Peak 41.95M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\068.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:41.99M (Peak 41.99M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:41.99M (Peak 41.99M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\069.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:41.96M (Peak 41.96M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:41.96M (Peak 41.96M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\070.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:41.99M (Peak 41.99M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:41.99M (Peak 41.99M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\080.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:42.03M (Peak 42.03M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:42.03M (Peak 42.03M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\081.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:42.06M (Peak 42.06M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:42.06M (Peak 42.06M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\082.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:42.09M (Peak 42.09M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:42.09M (Peak 42.09M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\083.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:42.12M (Peak 42.12M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:42.12M (Peak 42.12M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\084.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:42.16M (Peak 42.16M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:42.16M (Peak 42.16M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\085.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:42.19M (Peak 42.19M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:42.19M (Peak 42.19M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\086.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:42.23M (Peak 42.23M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:42.23M (Peak 42.23M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\087.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:42.26M (Peak 42.26M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:42.26M (Peak 42.26M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\088.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:42.29M (Peak 42.29M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:42.29M (Peak 42.29M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\089.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:42.32M (Peak 42.32M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:42.32M (Peak 42.32M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\090.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:42.35M (Peak 42.35M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:42.35M (Peak 42.35M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\091.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:42.47M (Peak 42.47M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:42.47M (Peak 42.47M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\096.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:42.71M (Peak 42.71M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:42.71M (Peak 42.71M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\097.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:42.65M (Peak 42.65M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:42.65M (Peak 42.65M) | Time:00:00.34 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\098.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:42.60M (Peak 42.60M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:42.60M (Peak 42.60M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\099.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:42.64M (Peak 42.64M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:42.64M (Peak 42.64M) | Time:00:01.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\100.png'
+Time: 00:01.30 (Saving: 00:00.00)
+
+Fra:1 Mem:42.62M (Peak 42.62M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:42.62M (Peak 42.62M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\101.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:42.71M (Peak 42.71M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:42.71M (Peak 42.71M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\104.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:42.60M (Peak 42.60M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:42.60M (Peak 42.60M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\105.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:42.61M (Peak 42.61M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:42.61M (Peak 42.61M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\106.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:42.81M (Peak 42.81M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:42.81M (Peak 42.81M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\107.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:42.83M (Peak 42.83M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:42.83M (Peak 42.83M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\108.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:42.71M (Peak 42.71M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:42.71M (Peak 42.71M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\109.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:42.88M (Peak 42.88M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:42.88M (Peak 42.88M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\112.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:43.13M (Peak 43.13M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:43.13M (Peak 43.13M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\113.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:42.97M (Peak 42.97M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:42.97M (Peak 42.97M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\114.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:42.89M (Peak 42.89M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:42.89M (Peak 42.89M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\115.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:43.00M (Peak 43.00M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.00M (Peak 43.00M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\116.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:42.93M (Peak 42.93M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:42.93M (Peak 42.93M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\117.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:43.12M (Peak 43.12M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:43.12M (Peak 43.12M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\120.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:43.00M (Peak 43.00M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:43.00M (Peak 43.00M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\121.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:43.26M (Peak 43.26M) | Time:00:00.72 | Rendering 1 / 16 samples
+Fra:1 Mem:43.26M (Peak 43.26M) | Time:00:00.84 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\122.png'
+Time: 00:00.97 (Saving: 00:00.00)
+
+Fra:1 Mem:43.23M (Peak 43.23M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:43.23M (Peak 43.23M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\123.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:43.26M (Peak 43.26M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:43.26M (Peak 43.26M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\124.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:43.39M (Peak 43.39M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:43.39M (Peak 43.39M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\125.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:43.35M (Peak 43.35M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:43.35M (Peak 43.35M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\126.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:43.38M (Peak 43.38M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:43.38M (Peak 43.38M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\128.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:43.27M (Peak 43.27M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:43.27M (Peak 43.27M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\129.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:43.28M (Peak 43.28M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:43.28M (Peak 43.28M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\130.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:43.31M (Peak 43.31M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:43.31M (Peak 43.31M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\131.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:43.34M (Peak 43.34M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.34M (Peak 43.34M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\132.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:43.60M (Peak 43.60M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.60M (Peak 43.60M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\133.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:43.40M (Peak 43.40M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.40M (Peak 43.40M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\134.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:43.49M (Peak 43.49M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:43.49M (Peak 43.49M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\144.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:43.53M (Peak 43.53M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:43.53M (Peak 43.53M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\145.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:43.63M (Peak 43.63M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:43.63M (Peak 43.63M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\146.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:43.21M (Peak 43.21M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:43.21M (Peak 43.21M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\147.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:43.51M (Peak 43.51M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:43.51M (Peak 43.51M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\148.png'
+Time: 00:00.32 (Saving: 00:00.00)
+
+Fra:1 Mem:43.40M (Peak 43.40M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.40M (Peak 43.40M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\149.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:43.93M (Peak 43.93M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.93M (Peak 43.93M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\150.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:43.61M (Peak 43.61M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.61M (Peak 43.61M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\151.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:43.80M (Peak 43.80M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.80M (Peak 43.80M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\152.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:43.84M (Peak 43.84M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:43.84M (Peak 43.84M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\153.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:43.71M (Peak 43.71M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:43.71M (Peak 43.71M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\154.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:43.75M (Peak 43.75M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.75M (Peak 43.75M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\155.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:43.47M (Peak 43.47M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.47M (Peak 43.47M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\156.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:43.88M (Peak 43.88M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.88M (Peak 43.88M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\157.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:43.86M (Peak 43.86M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.86M (Peak 43.86M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\158.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:43.88M (Peak 43.88M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.88M (Peak 43.88M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\159.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:43.99M (Peak 43.99M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:43.99M (Peak 43.99M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\160.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:44.01M (Peak 44.01M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:44.01M (Peak 44.01M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\161.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:44.04M (Peak 44.04M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:44.04M (Peak 44.04M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\162.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:44.06M (Peak 44.06M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:44.06M (Peak 44.06M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\163.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:44.09M (Peak 44.09M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:44.09M (Peak 44.09M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\164.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:44.11M (Peak 44.11M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:44.11M (Peak 44.11M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\165.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:44.14M (Peak 44.14M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:44.14M (Peak 44.14M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\166.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:44.17M (Peak 44.17M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:44.17M (Peak 44.17M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\167.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:44.19M (Peak 44.19M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:44.19M (Peak 44.19M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\168.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:44.23M (Peak 44.23M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:44.23M (Peak 44.23M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\169.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:44.26M (Peak 44.26M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:44.26M (Peak 44.26M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\170.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:44.28M (Peak 44.28M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:44.28M (Peak 44.28M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\171.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:44.31M (Peak 44.31M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:44.31M (Peak 44.31M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\172.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:44.53M (Peak 44.53M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:44.53M (Peak 44.53M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\176.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:44.57M (Peak 44.57M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:44.57M (Peak 44.57M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\177.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:44.61M (Peak 44.61M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:44.61M (Peak 44.61M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\178.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:44.66M (Peak 44.66M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:44.66M (Peak 44.66M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\179.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:44.70M (Peak 44.70M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:44.70M (Peak 44.70M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\180.png'
+Time: 00:00.25 (Saving: 00:00.00)
+
+Fra:1 Mem:44.74M (Peak 44.74M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:44.74M (Peak 44.74M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\181.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:44.79M (Peak 44.79M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:44.79M (Peak 44.79M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\182.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:44.83M (Peak 44.83M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:44.83M (Peak 44.83M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\183.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:44.87M (Peak 44.87M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:44.87M (Peak 44.87M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\184.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:44.92M (Peak 44.92M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:44.92M (Peak 44.92M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\185.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:44.96M (Peak 44.96M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:44.96M (Peak 44.96M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\186.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:44.90M (Peak 44.90M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:44.90M (Peak 44.90M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\208.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:45.03M (Peak 45.03M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:45.03M (Peak 45.03M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\209.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:45.08M (Peak 45.08M) | Time:00:00.67 | Rendering 1 / 16 samples
+Fra:1 Mem:45.08M (Peak 45.08M) | Time:00:00.75 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\210.png'
+Time: 00:00.82 (Saving: 00:00.00)
+
+Fra:1 Mem:45.05M (Peak 45.05M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:45.05M (Peak 45.05M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\211.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:45.09M (Peak 45.09M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.09M (Peak 45.09M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\212.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:45.04M (Peak 45.04M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.04M (Peak 45.04M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\213.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:45.07M (Peak 45.07M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:45.07M (Peak 45.07M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\214.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:45.26M (Peak 45.26M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.26M (Peak 45.26M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\215.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:45.23M (Peak 45.23M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.23M (Peak 45.23M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\216.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:45.39M (Peak 45.39M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.39M (Peak 45.39M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\217.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:45.43M (Peak 45.43M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:45.43M (Peak 45.43M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\218.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:45.32M (Peak 45.32M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.32M (Peak 45.32M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\219.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:45.43M (Peak 45.43M) | Time:00:00.10 | Rendering 1 / 16 samples
+Fra:1 Mem:45.43M (Peak 45.43M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\220.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:45.15M (Peak 45.15M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:45.15M (Peak 45.15M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\224.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:45.17M (Peak 45.17M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:45.17M (Peak 45.17M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\225.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:45.19M (Peak 45.19M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:45.19M (Peak 45.19M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\226.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:45.21M (Peak 45.21M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.21M (Peak 45.21M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\227.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:45.24M (Peak 45.24M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.24M (Peak 45.24M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\228.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:45.26M (Peak 45.26M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.26M (Peak 45.26M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\229.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:45.28M (Peak 45.28M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.28M (Peak 45.28M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\230.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:45.30M (Peak 45.30M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.30M (Peak 45.30M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\231.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:45.33M (Peak 45.33M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:45.33M (Peak 45.33M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\232.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:45.35M (Peak 45.35M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.35M (Peak 45.35M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\233.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:45.37M (Peak 45.37M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.37M (Peak 45.37M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\234.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:45.39M (Peak 45.39M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:45.39M (Peak 45.39M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\235.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:45.74M (Peak 45.74M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:45.74M (Peak 45.74M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\240.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:45.45M (Peak 45.45M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:45.45M (Peak 45.45M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\241.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:45.80M (Peak 45.80M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.80M (Peak 45.80M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\242.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:45.73M (Peak 45.73M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:45.73M (Peak 45.73M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\243.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:46.00M (Peak 46.00M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.00M (Peak 46.00M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\244.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:46.16M (Peak 46.16M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.16M (Peak 46.16M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\245.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:46.08M (Peak 46.08M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.08M (Peak 46.08M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\246.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:46.07M (Peak 46.07M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.07M (Peak 46.07M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\247.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:45.97M (Peak 45.97M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.97M (Peak 45.97M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\248.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:45.83M (Peak 45.83M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:45.83M (Peak 45.83M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\249.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:45.84M (Peak 45.84M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:45.84M (Peak 45.84M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\250.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:45.86M (Peak 45.86M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:45.86M (Peak 45.86M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\251.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:45.87M (Peak 45.87M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:45.87M (Peak 45.87M) | Time:00:00.19 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\252.png'
+Time: 00:00.26 (Saving: 00:00.00)
+
+Fra:1 Mem:46.07M (Peak 46.07M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.07M (Peak 46.07M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\253.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:46.10M (Peak 46.10M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.10M (Peak 46.10M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\254.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:46.12M (Peak 46.12M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.12M (Peak 46.12M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\255.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:45.98M (Peak 45.98M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:45.98M (Peak 45.98M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\256.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:46.00M (Peak 46.00M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:46.00M (Peak 46.00M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\257.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:46.01M (Peak 46.01M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:46.01M (Peak 46.01M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\258.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:46.03M (Peak 46.03M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.03M (Peak 46.03M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\259.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:46.68M (Peak 47.10M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.68M (Peak 47.10M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\260.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:46.75M (Peak 46.75M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:46.75M (Peak 46.75M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\261.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:46.82M (Peak 46.82M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.82M (Peak 46.82M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\262.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:46.66M (Peak 46.66M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.66M (Peak 46.66M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\263.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:46.40M (Peak 46.40M) | Time:00:00.10 | Rendering 1 / 16 samples
+Fra:1 Mem:46.40M (Peak 46.40M) | Time:00:00.18 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\264.png'
+Time: 00:00.27 (Saving: 00:00.00)
+
+Fra:1 Mem:46.58M (Peak 46.58M) | Time:00:00.11 | Rendering 1 / 16 samples
+Fra:1 Mem:46.58M (Peak 46.58M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\272.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:46.68M (Peak 46.68M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.68M (Peak 46.68M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\273.png'
+Time: 00:00.28 (Saving: 00:00.00)
+
+Fra:1 Mem:46.55M (Peak 46.55M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:46.55M (Peak 46.55M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\274.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:46.67M (Peak 46.67M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:46.67M (Peak 46.67M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\275.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:46.73M (Peak 46.73M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:46.73M (Peak 46.73M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\276.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:46.57M (Peak 46.57M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.57M (Peak 46.57M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\277.png'
+Time: 00:00.31 (Saving: 00:00.00)
+
+Fra:1 Mem:46.66M (Peak 46.66M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.66M (Peak 46.66M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\278.png'
+Time: 00:00.29 (Saving: 00:00.00)
+
+Fra:1 Mem:47.32M (Peak 47.32M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:47.32M (Peak 47.32M) | Time:00:00.21 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\279.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:46.46M (Peak 46.46M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:46.46M (Peak 46.46M) | Time:00:00.20 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\280.png'
+Time: 00:00.30 (Saving: 00:00.00)
+
+Fra:1 Mem:46.86M (Peak 46.86M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:46.86M (Peak 46.86M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\281.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:46.79M (Peak 46.79M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:46.79M (Peak 46.79M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\282.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:46.83M (Peak 46.83M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:46.83M (Peak 46.83M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\283.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:46.87M (Peak 46.87M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:46.87M (Peak 46.87M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\284.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:46.96M (Peak 46.96M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:46.96M (Peak 46.96M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\285.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:47.40M (Peak 47.40M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:47.40M (Peak 47.40M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\286.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:47.08M (Peak 47.08M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:47.08M (Peak 47.08M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\287.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:47.01M (Peak 47.01M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:47.01M (Peak 47.01M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\288.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:47.18M (Peak 47.18M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:47.18M (Peak 47.18M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\304.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:47.22M (Peak 47.22M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:47.22M (Peak 47.22M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\305.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:47.26M (Peak 47.26M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:47.26M (Peak 47.26M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\306.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:47.30M (Peak 47.30M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:47.30M (Peak 47.30M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\307.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:47.34M (Peak 47.34M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:47.34M (Peak 47.34M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\308.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:47.38M (Peak 47.38M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:47.38M (Peak 47.38M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\309.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:47.43M (Peak 47.43M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:47.43M (Peak 47.43M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\310.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:47.47M (Peak 47.47M) | Time:00:00.72 | Rendering 1 / 16 samples
+Fra:1 Mem:47.47M (Peak 47.47M) | Time:00:00.84 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\311.png'
+Time: 00:00.98 (Saving: 00:00.00)
+
+Fra:1 Mem:47.51M (Peak 47.51M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:47.51M (Peak 47.51M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\312.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:47.55M (Peak 47.55M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:47.55M (Peak 47.55M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\313.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:47.59M (Peak 47.59M) | Time:00:00.70 | Rendering 1 / 16 samples
+Fra:1 Mem:47.59M (Peak 47.59M) | Time:00:00.84 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\314.png'
+Time: 00:00.94 (Saving: 00:00.00)
+
+Fra:1 Mem:47.63M (Peak 47.63M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:47.63M (Peak 47.63M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\315.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:47.59M (Peak 47.59M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:47.59M (Peak 47.59M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\317.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:47.70M (Peak 47.70M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:47.70M (Peak 47.70M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\320.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:47.74M (Peak 47.74M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:47.74M (Peak 47.74M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\321.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:47.78M (Peak 47.78M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:47.78M (Peak 47.78M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\322.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:47.82M (Peak 47.82M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:47.82M (Peak 47.82M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\323.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:47.86M (Peak 47.86M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:47.86M (Peak 47.86M) | Time:00:00.32 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\324.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:47.90M (Peak 47.90M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:47.90M (Peak 47.90M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\325.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:48.04M (Peak 48.04M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:48.04M (Peak 48.04M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\326.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:48.08M (Peak 48.08M) | Time:00:00.12 | Rendering 1 / 16 samples
+Fra:1 Mem:48.08M (Peak 48.08M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\327.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:48.12M (Peak 48.12M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:48.12M (Peak 48.12M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\328.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:48.16M (Peak 48.16M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:48.16M (Peak 48.16M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\329.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:48.20M (Peak 48.20M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:48.20M (Peak 48.20M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\330.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:48.24M (Peak 48.24M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:48.24M (Peak 48.24M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\331.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:48.12M (Peak 48.12M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:48.12M (Peak 48.12M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\336.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:48.15M (Peak 48.15M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:48.15M (Peak 48.15M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\337.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:48.18M (Peak 48.18M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:48.18M (Peak 48.18M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\338.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:48.21M (Peak 48.21M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:48.21M (Peak 48.21M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\339.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:48.24M (Peak 48.24M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:48.24M (Peak 48.24M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\340.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:48.26M (Peak 48.26M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:48.26M (Peak 48.26M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\341.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:48.29M (Peak 48.29M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:48.29M (Peak 48.29M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\342.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:48.32M (Peak 48.32M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:48.32M (Peak 48.32M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\343.png'
+Time: 00:00.33 (Saving: 00:00.00)
+
+Fra:1 Mem:48.35M (Peak 48.35M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:48.35M (Peak 48.35M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\344.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:48.38M (Peak 48.38M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:48.38M (Peak 48.38M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\345.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:48.40M (Peak 48.40M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:48.40M (Peak 48.40M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\346.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:48.43M (Peak 48.43M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:48.43M (Peak 48.43M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\347.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:48.47M (Peak 48.47M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:48.47M (Peak 48.47M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\352.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:48.49M (Peak 48.49M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:48.49M (Peak 48.49M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\353.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:48.52M (Peak 48.52M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:48.52M (Peak 48.52M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\354.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:48.54M (Peak 48.54M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:48.54M (Peak 48.54M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\355.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:48.56M (Peak 48.56M) | Time:00:00.25 | Rendering 1 / 16 samples
+Fra:1 Mem:48.56M (Peak 48.56M) | Time:00:00.37 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\356.png'
+Time: 00:00.51 (Saving: 00:00.00)
+
+Fra:1 Mem:48.58M (Peak 48.58M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:48.58M (Peak 48.58M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\357.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:48.60M (Peak 48.60M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:48.60M (Peak 48.60M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\358.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:48.62M (Peak 48.62M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:48.62M (Peak 48.62M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\359.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:48.64M (Peak 48.64M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:48.64M (Peak 48.64M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\360.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:48.68M (Peak 48.68M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:48.68M (Peak 48.68M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\361.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:48.70M (Peak 48.70M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:48.70M (Peak 48.70M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\362.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:48.73M (Peak 48.73M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:48.73M (Peak 48.73M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\363.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:48.73M (Peak 48.73M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:48.73M (Peak 48.73M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\365.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:48.78M (Peak 48.78M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:48.78M (Peak 48.78M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\368.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:48.80M (Peak 48.80M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:48.80M (Peak 48.80M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\369.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:48.82M (Peak 48.82M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:48.82M (Peak 48.82M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\370.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:48.84M (Peak 48.84M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:48.84M (Peak 48.84M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\371.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:48.86M (Peak 48.86M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:48.86M (Peak 48.86M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\372.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:48.88M (Peak 48.88M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:48.88M (Peak 48.88M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\373.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:48.90M (Peak 48.90M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:48.90M (Peak 48.90M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\374.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:48.92M (Peak 48.92M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:48.92M (Peak 48.92M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\375.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:48.94M (Peak 48.94M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:48.94M (Peak 48.94M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\376.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:48.96M (Peak 48.96M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:48.96M (Peak 48.96M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\377.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:48.99M (Peak 48.99M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:48.99M (Peak 48.99M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\378.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:49.01M (Peak 49.01M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:49.01M (Peak 49.01M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\379.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:49.00M (Peak 49.00M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:49.00M (Peak 49.00M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\384.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:49.03M (Peak 49.03M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:49.03M (Peak 49.03M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\385.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:49.05M (Peak 49.05M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:49.05M (Peak 49.05M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\386.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:49.08M (Peak 49.08M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:49.08M (Peak 49.08M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\387.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:49.10M (Peak 49.10M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:49.10M (Peak 49.10M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\388.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:49.12M (Peak 49.12M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:49.12M (Peak 49.12M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\389.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:49.15M (Peak 49.15M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:49.15M (Peak 49.15M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\390.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:49.17M (Peak 49.17M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:49.17M (Peak 49.17M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\391.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:49.20M (Peak 49.20M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:49.20M (Peak 49.20M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\392.png'
+Time: 00:00.45 (Saving: 00:00.00)
+
+Fra:1 Mem:49.22M (Peak 49.22M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:49.22M (Peak 49.22M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\393.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:49.24M (Peak 49.24M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:49.24M (Peak 49.24M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\394.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:49.27M (Peak 49.27M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:49.27M (Peak 49.27M) | Time:00:00.31 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\395.png'
+Time: 00:00.46 (Saving: 00:00.00)
+
+Fra:1 Mem:49.31M (Peak 49.31M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:49.31M (Peak 49.31M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\400.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:49.33M (Peak 49.33M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:49.33M (Peak 49.33M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\401.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:49.35M (Peak 49.35M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:49.35M (Peak 49.35M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\402.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:49.37M (Peak 49.37M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:49.37M (Peak 49.37M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\403.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:49.40M (Peak 49.40M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:49.40M (Peak 49.40M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\404.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:49.42M (Peak 49.42M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:49.42M (Peak 49.42M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\405.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:49.44M (Peak 49.44M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:49.44M (Peak 49.44M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\408.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:49.46M (Peak 49.46M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:49.46M (Peak 49.46M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\409.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:49.48M (Peak 49.48M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:49.48M (Peak 49.48M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\410.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:49.50M (Peak 49.50M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:49.50M (Peak 49.50M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\411.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:49.52M (Peak 49.52M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:49.52M (Peak 49.52M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\412.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:49.54M (Peak 49.54M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:49.54M (Peak 49.54M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\413.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:49.56M (Peak 49.56M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:49.56M (Peak 49.56M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\414.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:49.58M (Peak 49.58M) | Time:00:00.75 | Rendering 1 / 16 samples
+Fra:1 Mem:49.58M (Peak 49.58M) | Time:00:00.86 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\415.png'
+Time: 00:01.01 (Saving: 00:00.00)
+
+Fra:1 Mem:49.59M (Peak 49.59M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:49.59M (Peak 49.59M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\416.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:49.62M (Peak 49.62M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:49.62M (Peak 49.62M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\417.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:49.65M (Peak 49.65M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:49.65M (Peak 49.65M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\418.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:49.68M (Peak 49.68M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:49.68M (Peak 49.68M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\419.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:49.70M (Peak 49.70M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:49.70M (Peak 49.70M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\421.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:49.73M (Peak 49.73M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:49.73M (Peak 49.73M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\422.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:49.76M (Peak 49.76M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:49.76M (Peak 49.76M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\423.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:49.79M (Peak 49.79M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:49.79M (Peak 49.79M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\424.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:49.82M (Peak 49.82M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:49.82M (Peak 49.82M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\426.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:49.85M (Peak 49.85M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:49.85M (Peak 49.85M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\427.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:49.87M (Peak 49.87M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:49.87M (Peak 49.87M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\428.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:49.82M (Peak 49.82M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:49.82M (Peak 49.82M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\432.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:49.85M (Peak 49.85M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:49.85M (Peak 49.85M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\433.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:49.96M (Peak 49.96M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:49.96M (Peak 49.96M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\434.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:50.07M (Peak 50.07M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:50.07M (Peak 50.07M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\435.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:49.93M (Peak 49.93M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:49.93M (Peak 49.93M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\436.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:50.13M (Peak 50.13M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:50.13M (Peak 50.13M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\437.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:50.06M (Peak 50.06M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:50.06M (Peak 50.06M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\438.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:50.09M (Peak 50.09M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:50.09M (Peak 50.09M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\439.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:50.19M (Peak 50.19M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:50.19M (Peak 50.19M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\440.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:50.22M (Peak 50.22M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:50.22M (Peak 50.22M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\441.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:50.25M (Peak 50.25M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:50.25M (Peak 50.25M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\442.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:50.13M (Peak 50.13M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:50.13M (Peak 50.13M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\443.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:50.33M (Peak 50.33M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:50.33M (Peak 50.33M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\444.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:50.26M (Peak 50.26M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:50.26M (Peak 50.26M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\448.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:50.28M (Peak 50.28M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:50.28M (Peak 50.28M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\449.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:50.33M (Peak 50.33M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:50.33M (Peak 50.33M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\450.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:50.40M (Peak 50.40M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:50.40M (Peak 50.40M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\451.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:50.45M (Peak 50.45M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:50.45M (Peak 50.45M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\452.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:50.45M (Peak 50.45M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:50.45M (Peak 50.45M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\453.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:50.48M (Peak 50.48M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:50.48M (Peak 50.48M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\454.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:50.50M (Peak 50.50M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:50.50M (Peak 50.50M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\455.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:50.53M (Peak 50.53M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:50.53M (Peak 50.53M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\456.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:50.58M (Peak 50.58M) | Time:00:00.23 | Rendering 1 / 16 samples
+Fra:1 Mem:50.58M (Peak 50.58M) | Time:00:00.34 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\457.png'
+Time: 00:00.48 (Saving: 00:00.00)
+
+Fra:1 Mem:50.70M (Peak 50.70M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:50.70M (Peak 50.70M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\465.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:50.47M (Peak 50.47M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:50.47M (Peak 50.47M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\466.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:50.75M (Peak 50.75M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:50.75M (Peak 50.75M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\467.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:50.66M (Peak 50.66M) | Time:00:00.71 | Rendering 1 / 16 samples
+Fra:1 Mem:50.66M (Peak 50.66M) | Time:00:00.80 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\468.png'
+Time: 00:00.91 (Saving: 00:00.00)
+
+Fra:1 Mem:50.77M (Peak 50.77M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:50.77M (Peak 50.77M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\469.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:51.08M (Peak 51.08M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:51.08M (Peak 51.08M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\470.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:50.64M (Peak 50.64M) | Time:00:00.20 | Rendering 1 / 16 samples
+Fra:1 Mem:50.64M (Peak 50.64M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\471.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:50.90M (Peak 50.90M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:50.90M (Peak 50.90M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\472.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:50.85M (Peak 50.85M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:50.85M (Peak 50.85M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\473.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:50.80M (Peak 50.80M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:50.80M (Peak 50.80M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\474.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:51.00M (Peak 51.00M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:51.00M (Peak 51.00M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\480.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:51.02M (Peak 51.02M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:51.02M (Peak 51.02M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\481.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:51.04M (Peak 51.04M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:51.04M (Peak 51.04M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\482.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:51.47M (Peak 51.47M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:51.47M (Peak 51.47M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\483.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:51.12M (Peak 51.12M) | Time:00:00.19 | Rendering 1 / 16 samples
+Fra:1 Mem:51.12M (Peak 51.12M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\484.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:51.55M (Peak 51.55M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:51.55M (Peak 51.55M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\485.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:51.19M (Peak 51.19M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:51.19M (Peak 51.19M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\486.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:51.36M (Peak 51.36M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:51.36M (Peak 51.36M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\496.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:51.40M (Peak 51.40M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:51.40M (Peak 51.40M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\497.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:51.44M (Peak 51.44M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:51.44M (Peak 51.44M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\498.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:51.48M (Peak 51.48M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:51.48M (Peak 51.48M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\499.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:51.52M (Peak 51.52M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:51.52M (Peak 51.52M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\500.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Fra:1 Mem:51.56M (Peak 51.56M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:51.56M (Peak 51.56M) | Time:00:00.23 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\501.png'
+Time: 00:00.35 (Saving: 00:00.00)
+
+Fra:1 Mem:51.60M (Peak 51.60M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:51.60M (Peak 51.60M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\502.png'
+Time: 00:00.37 (Saving: 00:00.00)
+
+Fra:1 Mem:51.82M (Peak 51.82M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:51.82M (Peak 51.82M) | Time:00:00.30 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\512.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:52.23M (Peak 52.23M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:52.23M (Peak 52.23M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\513.png'
+Time: 00:00.44 (Saving: 00:00.00)
+
+Fra:1 Mem:51.89M (Peak 51.89M) | Time:00:00.18 | Rendering 1 / 16 samples
+Fra:1 Mem:51.89M (Peak 51.89M) | Time:00:00.29 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\514.png'
+Time: 00:00.43 (Saving: 00:00.00)
+
+Fra:1 Mem:51.75M (Peak 51.75M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:51.75M (Peak 51.75M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\515.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:51.69M (Peak 51.69M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:51.69M (Peak 51.69M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\516.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:51.98M (Peak 51.98M) | Time:00:00.23 | Rendering 1 / 16 samples
+Fra:1 Mem:51.98M (Peak 51.98M) | Time:00:00.35 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\517.png'
+Time: 00:00.49 (Saving: 00:00.00)
+
+Fra:1 Mem:51.60M (Peak 51.60M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:51.60M (Peak 51.60M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\518.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:51.86M (Peak 51.86M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:51.86M (Peak 51.86M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\519.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:52.08M (Peak 52.08M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:52.08M (Peak 52.08M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\520.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:51.85M (Peak 51.85M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:51.85M (Peak 51.85M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\521.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:51.88M (Peak 51.88M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:51.88M (Peak 51.88M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\522.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:51.91M (Peak 51.91M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:51.91M (Peak 51.91M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\523.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:51.93M (Peak 51.93M) | Time:00:00.13 | Rendering 1 / 16 samples
+Fra:1 Mem:51.93M (Peak 51.93M) | Time:00:00.22 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\524.png'
+Time: 00:00.34 (Saving: 00:00.00)
+
+Fra:1 Mem:51.96M (Peak 51.96M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:51.96M (Peak 51.96M) | Time:00:00.24 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\525.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:52.08M (Peak 52.08M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:52.08M (Peak 52.08M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\526.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:52.27M (Peak 52.27M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:52.27M (Peak 52.27M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\527.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:52.15M (Peak 52.15M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:52.15M (Peak 52.15M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\528.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:52.09M (Peak 52.09M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:52.09M (Peak 52.09M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\529.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:52.12M (Peak 52.12M) | Time:00:00.17 | Rendering 1 / 16 samples
+Fra:1 Mem:52.12M (Peak 52.12M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\530.png'
+Time: 00:00.42 (Saving: 00:00.00)
+
+Fra:1 Mem:52.14M (Peak 52.14M) | Time:00:00.23 | Rendering 1 / 16 samples
+Fra:1 Mem:52.14M (Peak 52.14M) | Time:00:00.35 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\531.png'
+Time: 00:00.47 (Saving: 00:00.00)
+
+Fra:1 Mem:52.16M (Peak 52.16M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:52.16M (Peak 52.16M) | Time:00:00.27 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\532.png'
+Time: 00:00.39 (Saving: 00:00.00)
+
+Fra:1 Mem:52.78M (Peak 52.78M) | Time:00:00.16 | Rendering 1 / 16 samples
+Fra:1 Mem:52.78M (Peak 52.78M) | Time:00:00.28 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\533.png'
+Time: 00:00.41 (Saving: 00:00.00)
+
+Fra:1 Mem:52.52M (Peak 52.52M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:52.52M (Peak 52.52M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\534.png'
+Time: 00:00.38 (Saving: 00:00.00)
+
+Fra:1 Mem:52.57M (Peak 52.57M) | Time:00:00.14 | Rendering 1 / 16 samples
+Fra:1 Mem:52.57M (Peak 52.57M) | Time:00:00.25 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\535.png'
+Time: 00:00.36 (Saving: 00:00.00)
+
+Fra:1 Mem:52.60M (Peak 52.60M) | Time:00:00.15 | Rendering 1 / 16 samples
+Fra:1 Mem:52.60M (Peak 52.60M) | Time:00:00.26 | Rendering 16 / 16 samples
+Saved: 'C:\Users\Hartl\Documents\grimhollow\tools\artgen\render_cache\items\536.png'
+Time: 00:00.40 (Saving: 00:00.00)
+
+Rendering complete: 380 rendered files
+
+Blender quit
+ core/src/main/assets/environment/custom_tiles/caves_quest.png
+178326392aabd6bfbebc35ca661f260cdaaae35d18ca73e84789e388d5a78ce6 core/src/main/assets/environment/custom_tiles/city_boss.png
+c4796096f3d2df7bfd786ad407127ec201f182902c3e7f7c590754e16891c0aa core/src/main/assets/environment/custom_tiles/city_quest.png
+3d8002545e7dae0991d876ae77908d8a7a406f416bc6f05991b448b705209164 core/src/main/assets/environment/custom_tiles/prison_quest.png
+63cfffe802728c6d15e3a3d1cd7e613a65701de02bdb7ebc19c3da8fe4f18f91 core/src/main/assets/environment/custom_tiles/rat_king_room.png
+85845795fe9790f23ed8e9609738784d8bf1ec8f567adefb2db77071b5265320 core/src/main/assets/environment/occlusion_shadows.png
+254a3e022675e6e2733cfd7bf06e5e4734e6866fec9716df9c2d230696f63105 core/src/main/assets/environment/raised_terrain.png
+7249a0cdd23ff0ae770e2eab03f95ce1c41f1420a26f7e447de35b9bce00da67 core/src/main/assets/environment/terrain_features.png
+dbf2c4456e5febeb891cbbc7d6cbd8026e84f6dd9258d25a6c9907994d561804 core/src/main/assets/environment/tiles_caves_crystal.png
+46ac90d6e732704990180e26c9948392c931ce93d82fce89d44ad1369bf9618f core/src/main/assets/environment/tiles_caves_gnoll.png
+0bcc209bcff81ec7a2cab68f3533dce39087d9cfad3d46b4170141fe5711592b core/src/main/assets/interfaces/change_icons.png
+d96ffc513c4985cc2355754ddac66d4a0f6e3258f016daf47abf699b3b0bce67 core/src/main/assets/interfaces/icons.png
+ef5e88c1abaa35ee947d30f807ff72beadd8cf3a08411df76ae43edba88452d0 core/src/main/assets/sprites/crystal_spire.png
+5dfce68f7f6aba4ca3ea245e3567d8bb5b3a8ae05eba45f4c5b50f6e70c5ab58 core/src/main/assets/sprites/dm100.png
+9854aafef717b5707d4e517a4795ee837f4216573666e2101638cc50efa62998 core/src/main/assets/sprites/dm200.png
+3caaea588eb65abeeebf5139940e6630f1a62250c181b3e73854af40053d52cc core/src/main/assets/sprites/ratking.png
+aa2ddbbf9acf5d10cd929097587ba7418e9756bb8e645748ec18edbd4c0c3d20 core/src/main/assets/sprites/sentry.png
+13caa5f9aadcae94baab42fdab9d639a9b6bbeeb8535d65b0196caccb9644577 core/src/main/assets/sprites/shaman.png
+f869184fdeaf625891852e49e9f2a9bc6866997d67715c36772668c2f50e532d core/src/main/assets/sprites/skeleton.png
+f6e31ac27aadb215cf4e60941b5a025ce6ac8095e7398748cbb962da67a9809d core/src/main/assets/sprites/vault_boss_elemental.png
+4f495a3c6edf15ba9113c6f5b8f63533cc668cbd7a587f30d862fb84241093df core/src/main/assets/sprites/vault_mirror.png
+8bf27b44c7839e44fb5c55e07cc22fcd7907bccf182893289ae5dd0cc0bc7dbb core/src/main/assets/sprites/vault_tokens_door.png
+0ad331d8624996d50c26b9edd5c5d9d04ecb62fc6ec844ee0459180a3a964c78 core/src/main/assets/environment/walls_sewers.png
+TEST 28: 169 rebuilt files; byte differences=0; Blender not invoked
+b44f3d83014c06b8d3b0543ff780625e4376cd262bf60da193ee9292a1978a50 core/src/main/assets/sprites/amulet.png
+f6e37a7eddb05a3a00c48d1373b34166d294fa620f005f2f65ab481977abcce6 android/src/main/res/mipmap-hdpi/ic_launcher_background.png
+e0a9a8ab1495d12ea373059de242e8571a0a8dd4d9d0fb91d05df8cc1c380f16 android/src/main/res/mipmap-hdpi/ic_launcher_foreground.png
+a016b55d28e812929aedce6c184370a8eff67d365a22acbc24643fcaae00aeff android/src/main/res/mipmap-hdpi/ic_launcher_monochrome.png
+1f102b0a8dfa0f6ef99201268691b8c150a780bd1e31f30a5f13d666919ee910 android/src/main/res/mipmap-hdpi/ic_launcher.png
+1f7e9bc5fc323aa84a3de51f47c57501e56b1b0ef2ffefef5bdc241a865fb9f3 android/src/main/res/mipmap-ldpi/ic_launcher_background.png
+66cbcfbed89bfc51b5d93142e9c97c08802e1004154637ac146f80c8dc2b2a4e android/src/main/res/mipmap-ldpi/ic_launcher_foreground.png
+2588c1e956e3d634f5f547a99dd01aa533008484807eaeb89a5d4e4b2a17f4fe android/src/main/res/mipmap-ldpi/ic_launcher_monochrome.png
+7077aa64c4418dfa7abd491aa69be8aab87f60fe98572d97c5dd2db38923b33e android/src/main/res/mipmap-ldpi/ic_launcher.png
+72b5539091a5bc03a30b83c63964aef83e6eb91922222e74e18c7ee1ad1752c6 android/src/main/res/mipmap-mdpi/ic_launcher_background.png
+6a2196adbf4810d7cc64d433db885fca7ff77ee431c458af66df771a339c411a android/src/main/res/mipmap-mdpi/ic_launcher_foreground.png
+683f726582be312a0416001472eab6911e035eebba532eaefcca58a07149463b android/src/main/res/mipmap-mdpi/ic_launcher_monochrome.png
+48091307b1087d3dc6cd776d55bb33f67ee72ee8bd08de6281254a97d7568631 android/src/main/res/mipmap-mdpi/ic_launcher.png
+61193b6076c8160aaeaab037a9f4d5a4bd95ce5be40e1d9c8a958591f636feb4 android/src/main/res/mipmap-xhdpi/ic_launcher_background.png
+5837b1be70549a33c97bae057d82918e524b5b3d7794a7dcd081aaa2c7cb1a83 android/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png
+45de6c354950db64b20b3f64b9b79095cf017c500f3f9d604404f917c24ee8ca android/src/main/res/mipmap-xhdpi/ic_launcher_monochrome.png
+0108f5c1a1523b81f8eb54d3f05700a7810ece7bf3f198fd46c902b08076f9f8 android/src/main/res/mipmap-xhdpi/ic_launcher.png
+e2d19792e1adb16852f8c73cc77fef6007d27b2a8a45c307a4d1b559effdeb6b android/src/main/res/mipmap-xxhdpi/ic_launcher_background.png
+03e3a9b78afa1ac0379f39d797c5e9af270e7349a8fadc749386207c7e6de8d8 android/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png
+8d359f6b7820f1e61f8b5933c1ac0e130851b8786f94b065609480b5890e632d android/src/main/res/mipmap-xxhdpi/ic_launcher_monochrome.png
+ebd502cc6b646466c2a33b83ffe1973c02e02d9a905f3bb882a249e10a4a6c58 android/src/main/res/mipmap-xxhdpi/ic_launcher.png
+07994e8eaa83589758b2e01e496a719d172f5456447817024b56c6ea73d5a8dc android/src/main/res/mipmap-xxxhdpi/ic_launcher_background.png
+18a3f504f9f388261d289014a90e82a15a96e12326e68b6bd95b140331e8558e android/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png
+ca68f8c215093e0b18525a87ca07852cb2704313daa67ad3aa6bdac7a78e6035 android/src/main/res/mipmap-xxxhdpi/ic_launcher_monochrome.png
+571ee8110131ac46509390a65815eb1a2348b1fef7c53fd48026d74e81ffcbc6 android/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+4e1954be73258182a23eec576c74e0aece1e4a355a5f59c42728598c2f177d4a core/src/main/assets/interfaces/banners.png
+a8b8fc76986de78cfd4231badc88bd22503acd3c8510d8d46930f3e51d5939d2 core/src/main/assets/effects/blood_decals.png
+a376384456e9be7b2a82320124c0593f8812639dfe4af552bc3135446104aa87 core/src/main/assets/sprites/bat.png
+63e2aec7ed951b67d527f59900519f6d6b3f2479dd9dc19e7372f50aff1a567a core/src/main/assets/sprites/bee.png
+20c53f16f177a96c6e6fb5057c238ce05256ea5310f0c74fd65d9226594dc742 core/src/main/assets/sprites/blacksmith.png
+799b91009e160648e6ff73dcc9e93628630b1ec970ee824ae63cf00c45ae3a14 core/src/main/assets/sprites/brute.png
+1bd8632ad4b68d285d4033bdb1682784d0286b210105fafe56164787ceb059b1 core/src/main/assets/sprites/chainwarden.png
+d9b8ec4901172ff8aa6e7a617dd822da81ac9074da0ccc65616ce132c812b136 core/src/main/assets/sprites/crystal_guardian.png
+fd90486d1f290e2700b5abdb314bbc3b95253ae71fcb76451523b1bd0e866796 core/src/main/assets/sprites/crystal_wisp.png
+01646b7c2f282bd2e96b9eb415f160cd0749a9aee7d03bacb64ecafbbd651f4d core/src/main/assets/sprites/dm300.png
+bf65ef341f41c0645796060b85dc8d415006f7301bb742af9caaa5095308ba18 core/src/main/assets/sprites/elemental.png
+9d1a6a6177e9069ffdf654c13d4820b9cb108fc1e53c5a10b563e32f7e192fce core/src/main/assets/sprites/eye.png
+20f93342907205530c3eb227ea901825231a1744277a52a59089d96f25a06b3e core/src/main/assets/sprites/fungal_core.png
+33a3cb4f4f60fae98cc91bac12b7ec59c472e2539726afbd865c010f5ab5d2fb core/src/main/assets/sprites/fungal_sentry.png
+031ef7f6856c999800a97aa95e7788d72ded396e92b192fa1d5833fd2d26bbef core/src/main/assets/sprites/fungal_spinner.png
+2025ab1d0c68a5baaa6e3b80a308f2d6ededc7fc2aad15bc03df74064dd53f5f core/src/main/assets/sprites/ghost.png
+94e77cd05fbeefbcf3af6c97f8b8131989949d9483d42383e5343f6d8428786f core/src/main/assets/sprites/ghoul.png
+5e74e552abc3f3c6cc983d46858af8c373e7941ffa3a33ea6ad4c0f9aa1aabc8 core/src/main/assets/sprites/gnoll.png
+e0b22ace15c18ae898a7b8b6c199768d32ccb378abc3418068ed3e5d29aa86af core/src/main/assets/sprites/gnoll_geomancer.png
+d7cda8ba505e024dac397d657b53f3fcaac019c27c8b037229011b0ddf86a2b7 core/src/main/assets/sprites/gnoll_guard.png
+b8660f17b246e71f11faf8e890903821714f9aac75f9036bc1bdf566811f5344 core/src/main/assets/sprites/gnoll_sapper.png
+7c9eb68de623deba81e81728df5a66745dfcd4ff7647649520635b3bffc6428c core/src/main/assets/sprites/golem.png
+387a0f28ab181963367b44bc4b556a4a4650cb308641482196ab875ab3ec2cc4 core/src/main/assets/sprites/goo.png
+e99067e73cc349bde5dccdf1354a97f41d2957a895e30f7c3bfc231af3b82d8d core/src/main/assets/sprites/guard.png
+ceb32d5efe8439cfa3b38749399fa8c4c2ceab2f692caa53bc07ee190e3809d5 core/src/main/assets/sprites/guardian.png
+d1ae087112b615493d2444d4ed567d4f4f481b9158896f54c0423dffc76ea077 core/src/main/assets/sprites/hexcaster.png
+1d39ec482d7aa3163a0889a4c16032b2ffcb85fabd07bf373f527da4ad1f99ca core/src/main/assets/sprites/imp.png
+94d7c0f33c0d7d5da3fee7918707f4da5634e910d0b37fc30182e0cd1905f1ee core/src/main/assets/sprites/king.png
+59baaffbc90858f5256a79bc189bd131ea15882d65903c0169afa4a59cf22da2 core/src/main/assets/sprites/larva.png
+7889eb3deeabbd0dc4c6b28cc3d129cdfd02da12e82728ca6a08ef425dae2cbd core/src/main/assets/sprites/lotus.png
+78214ad2e21a4add2c79cc8314e3726979c33acc3b9bda6bf2b10ee5caab68de core/src/main/assets/sprites/mimic.png
+447cff18eb626d12b1110a581e9825b5981de7537ca914382299dd9497b03c9e core/src/main/assets/sprites/monk.png
+aec2ac380c6187abadd34598bcd9cf63b5ea701067b8f655fb9967876359b9b8 core/src/main/assets/sprites/necromancer.png
+476b22f59cccbdfd91f0ed09ff914761765d66cff8e68bc30395da1bc206c0bd core/src/main/assets/sprites/ninja_log.png
+5473871c0cd7bf1bf3c9b843c67dabe7e998f87c241f5f1c5adefebaadb8f247 core/src/main/assets/sprites/piranha.png
+5ea3b2fe8f5bf415534eed56e53cf206ea0e14ee72ad4c785dcef3374bc45c6b core/src/main/assets/sprites/pylon.png
+51d4d82b4e9e47a38135694ad1a4e56faab3cdf39b44cc2ff27711aebee4d16d core/src/main/assets/sprites/ripper.png
+697801fe185850ed3e44415899e2d7d4b49bef09c92fc036aee5a55e785a80fd core/src/main/assets/sprites/rot_heart.png
+cefae3d48722dc82251adeb05d6bda1d577a0afe92f372c0918319882d73bc82 core/src/main/assets/sprites/rot_lasher.png
+c04c7d70cf72c7f954c771943d8bbfdc97a8be2aa73e0493a89e2db1e0a4b226 core/src/main/assets/sprites/scorpio.png
+febde6b26c27fab82ae6ed13101c0aedfc8022292834a806f65fabc084a1816b core/src/main/assets/sprites/sheep.png
+dc47c293bee2fafdea992716c71b5718c1723096fdf15628e67e7289f70f664b core/src/main/assets/sprites/shopkeeper.png
+b0160c583f77ba310bffe3afd59abeb3871f242c381414d5264480d43524703c core/src/main/assets/sprites/slime.png
+763abdf5157d9997dc3698f772a5bc0cea395b3504778b500f47330a27d56ac7 core/src/main/assets/sprites/snake.png
+b2f97edf0e0f298b81570a3264584e455ad73f7c39a9bfab22c4be0cef5c711f core/src/main/assets/sprites/spawner.png
+99943cd407a11db0c05d713466e8b7fb2cbf27e41a92f08d9a24be22b4e1af3a core/src/main/assets/sprites/spinner.png
+724ece619a33e4dc9bd477dd16b38fc22ee96c45f33b8f24edf7e6ce28b884d9 core/src/main/assets/sprites/spirit_hawk.png
+6c98d0e4d7b808a2ec6274ebe66cd8be0f6e00efe6e1206b5797109cca112ae7 core/src/main/assets/sprites/statue.png
+2744872ee27b6f9d6f378b8efb4a36155f1df5051c17baea34d033f53a425344 core/src/main/assets/sprites/succubus.png
+1ab4adf82dd56365126234adeb5d4a086e0b4a497c7cb1ed57385a9770da7dfb core/src/main/assets/sprites/swarm.png
+ea32de394e9136990e9b512262d478c8969987deadbefb4c3ed2bf4404f54d7c core/src/main/assets/sprites/tengu.png
+8393649f754abe14265e0612ad26f7ac544a6c7b96f801b4764b1aa2cac7609b core/src/main/assets/sprites/thief.png
+2a598fbbbbccb5e7bbb03c79a6138bfe65e9a3479cdc5e7b56468900f9a7860e core/src/main/assets/sprites/undead.png
+e33de9678a1bce79efac7e5a400cdcbc2dd6c826847aa54363132cf4532a9aca core/src/main/assets/sprites/wandmaker.png
+d4f2ca8e6090649a22c085fd8a570ee46b4059f205d36c6d76b2c62473d21f5f core/src/main/assets/sprites/wards.png
+1d00be24fd7df8abc22369a8a709e313e17f5a066b30efe4bc0e396a2b580cc9 core/src/main/assets/sprites/warlock.png
+1cd268a379b08196f0d1ae094baebfa6a16e714d53e34ca420fcb72bd23cccbd core/src/main/assets/sprites/wraith.png
+861f2f8b612cbc369e6a2f2ef3b20cc1365ed334befeff195d86c8954381d8f0 core/src/main/assets/sprites/yog.png
+0e209260d85e656475892f5691f75a0b0955942a21e80e92504b575d803ebe94 core/src/main/assets/sprites/yog_fists.png
+b3a94d914bebc7139b1684de19fd6233a68d40dcc089017381718dff1f0df552 core/src/main/assets/effects/effects.png
+bd14fdf7103377cbc0935cdc0f31c24969a65bab07fcf89b90c7158409a7def1 core/src/main/assets/effects/fireball-short.png
+0b29fcf173ed3a5a7b651e9134808a03735874d7edc32d8715aa3e98f624af00 core/src/main/assets/effects/fireball-tall.png
+2df5dbf55f0377bca142abc2b6b79637fe3658dca17e32c44ebb3b09ef5af1b9 core/src/main/assets/environment/custom_tiles/halls_special.png
+6aa6b2019f4c1b6e063d01130f43b233c6b38c222306164c806aeb888378bd17 core/src/main/assets/environment/custom_tiles/prison_exit.png
+b6def35b16e32205ddcc3cd36598d9b8097a69896992ac98e21996d319cc6050 core/src/main/assets/environment/custom_tiles/sewer_boss.png
+b902f20a2c5d9f11e783dc35525e8e150807f217a0bff25cde8ad7dc533ea5b0 core/src/main/assets/effects/specks.png
+d38befd93b32a92dde52107888ba4352e36fa1f08a9a8397b8d54861fccbe110 core/src/main/assets/effects/spell_icons.png
+d6d47431923f3838e4ba650aa7a2a32c1600495061b87294e990c422de15d7b5 core/src/main/assets/effects/text_icons.png
+8e3d3b8ba09944073fd8aa5e3d28b14a5e93fa290c5eceaf8678ff4a6664286d core/src/main/assets/environment/visual_grid.png
+b012a0346ddc50889cdd8dad45efa4ab49ea80bfa160bff2a77bb388182de9f0 core/src/main/assets/environment/wall_blocking.png
+bb0d66270f4c20011a131b5fae75166bc39132795be795bc7878aa5255e5ad64 core/src/main/assets/environment/custom_tiles/weak_floor.png
+bfa312403c41ffd8a29fd63a6f420c854446972b8cd693b0263f7f31ccbbcc16 desktop/src/main/assets/icons/icon_128.png
+f415d65bcde18cd5dbb97f61c62155a22d6d135240ff49a07f273d097da9a56a desktop/src/main/assets/icons/icon_16.png
+09050ad6051892b71f4894d26c8e4671163d7d384a4c8cd6c776c8dbd75301b9 desktop/src/main/assets/icons/icon_256.png
+2479decf9effdec5ccc5475106eb79ce21150a673541eab72b2bb7879f3a79ee desktop/src/main/assets/icons/icon_32.png
+48091307b1087d3dc6cd776d55bb33f67ee72ee8bd08de6281254a97d7568631 desktop/src/main/assets/icons/icon_48.png
+c2315076ccdf0c76665b0f78f76c57aaadd552c7694abdddc5609bc3c873f2a1 desktop/src/main/assets/icons/icon_64.png
+1fee53a08ea0a7db69170b39d82126382f6a769ca288f24794d7840d58225e5c desktop/src/main/assets/icons/mac.icns
+22debeaa5755ee71a8f5e6cfbeb3747dcabde75cd4512d0a34184dcd614fbc98 desktop/src/main/assets/icons/windows.ico
+f03eb2c9d4d9260a07cb8b6cb09b7da0c06ec2747018dac8d56423359efa6290 core/src/main/assets/effects/enhanced.png
+04751213489e70f68e5a86c09533a3cc340a3dd93e772a5fc4080489e5667d7a core/src/main/assets/effects/force_wall.png
+cf9175f03157c4036a5a87875545f0749fa4f9712d7baaf44a4ad500fc435144 core/src/main/assets/effects/health_vignette.png
+9ae01300ea77e6dc08865f5f43776909f49545fcce372210cb4719114ca86a8b core/src/main/assets/sprites/hero_cleric.png
+84110c4a1d68137d2581d97c0a842785667c636a90b42a95b53e7f69e79fbcae core/src/main/assets/sprites/hero_duelist.png
+2a7c70cc02f0b93d20a8c8b14f473ab0a0dc29260d1cbea7b997d2426bca2f01 core/src/main/assets/sprites/hero_enchanter.png
+55172bd630ec046c3c714a9300618917ea8be05fad5c0a85ad93b1ae72486b0b core/src/main/assets/sprites/hero_huntress.png
+ddec0a84850ce22794fed6d7080bfba4042a01a351191c8eed16a5ce5bd6bca8 core/src/main/assets/sprites/hero_mage.png
+12930a053db73646f81a66760eaa8e9151a517c6393efefe7e444b5d1f5d7cf7 core/src/main/assets/sprites/hero_necromancer.png
+43c4077f8e720db840478711b283b7e09013d17759c86afcc3e24cae54d3741a core/src/main/assets/sprites/hero_psychic.png
+c88ef9588e6cf213fa240c69c9d610c413c3183e69a5d8de26341a10739b1b24 core/src/main/assets/sprites/hero_rogue.png
+445cfdf7729b142e4a089388a39844d20e8ed88b84e19b74d9abf48a6a6f777b core/src/main/assets/sprites/hero_warrior.png
+f27b9ab7732d2d0dc0050e33905f6c15f4073cdf029ada79bbe7a8c1a165265f core/src/main/assets/sprites/item_icons.png
+4f4525add70966c29ae5577ddd1846078845c066b7f5d6924e808ee1ec99dc2d core/src/main/assets/sprites/items.png
+d54865ba6eabe72148dfdb26a157f1e6739ed07b9759414ecea6e14293c36ad2 core/src/main/assets/effects/liquid_ripple.png
+2e78d0e457c67173019593c1e0b55790f624bc6c649a005ad3db8d9c64a33f7d core/src/main/assets/environment/water1.png
+2e78d0e457c67173019593c1e0b55790f624bc6c649a005ad3db8d9c64a33f7d core/src/main/assets/environment/water2.png
+2e78d0e457c67173019593c1e0b55790f624bc6c649a005ad3db8d9c64a33f7d core/src/main/assets/environment/water3.png
+175feb7be22c8d59e6199e279c4f358844ad1050d8637b81b7e1e8b8bcd31aff core/src/main/assets/environment/water4.png
+602fbddee782119e4ed83fad8de3824a15d4ec216dbc19a8bb7c8bb45dd7db2a core/src/main/assets/sprites/crab.png
+01308c382b2f83563bfe384646bcfff28097301c03ef7f168d71636f87106ec4 core/src/main/assets/sprites/minion_ghoul.png
+6729505aaf17f42de50a0098f2e24e2ef6354db7bbecee46da15435bf905e070 core/src/main/assets/sprites/rat.png
+011bb8dad5f6ef05d5cbf73cb4f7fd45ccae8671a97f0a28e4f3c89d9fc3d3f7 core/src/main/assets/sprites/minion_skeleton.png
+c5c44ec00f98da890173fe0b680a75a0a27812c66c6f09b0e5a27f592caa2956 core/src/main/assets/environment/water0.png
+5531dd72e5b5cf7e162558d46767493d8a80971befcb206aac625075fd8a4cfa core/src/main/assets/splashes/cleric.png
+1c2a9ecfe8f0660489c852b46d2e0925b4f4b1c82651399bf8cdd743633dd875 core/src/main/assets/splashes/duelist.png
+5531dd72e5b5cf7e162558d46767493d8a80971befcb206aac625075fd8a4cfa core/src/main/assets/splashes/enchanter.png
+0099f4a576fffd59f92e6122cca9af90f06aca430da6defe304756fb72a0a64b core/src/main/assets/splashes/huntress.png
+6be3a345010c4154d42f7e330f5d237293ff845e0fc0b80dabf038738e1fbfbe core/src/main/assets/splashes/mage.png
+d0487bfdebde919c8a82059e2dbfac2136392a4dc35fa3265b4a1635daead72f core/src/main/assets/splashes/necromancer.png
+d755e2da1ec5ea71599afaf4a84765584e62bccf8655075a01309609319a6cc6 core/src/main/assets/splashes/psychic.png
+9d9e7c8f20a1ece05e618307ba3f95e5ce7060176b1de6ba14c0d49590bbeafd core/src/main/assets/splashes/rogue.png
+4628222c32785aa3701a0ac8ae830fcc277f6c114170fb5d7ef743507a958ca8 core/src/main/assets/splashes/warrior.png
+731cd8b84426175d70c2d51b462ce4412aa553180df56ad91f86f7bff5850670 core/src/main/assets/interfaces/talent_icons.png
+0a0246f3e57f00a418e4eb1b79c1c6a4f6f2d5e6f0c778e018530cc756e3f147 core/src/main/assets/environment/tiles_caves.png
+05829af16756aca6409a420e0a3b3a45d9a7db4ef3642a169a387511e8c7ce3d core/src/main/assets/environment/tiles_city.png
+40d1a2051076113b0a03b3c54311420c6a7301b27a309ee1746ae54aeb3ef984 core/src/main/assets/environment/tiles_halls.png
+bc8c4693eef9bed48611dddb4f91ec15f4d336c794fd633dbfc0a69abd91a03f core/src/main/assets/environment/tiles_prison.png
+0ad331d8624996d50c26b9edd5c5d9d04ecb62fc6ec844ee0459180a3a964c78 core/src/main/assets/environment/tiles_sewers.png
+c5cf78ac2587e06eca7b39d3c3703e15a468edffd240c605390e0525b441f6c2 core/src/main/assets/interfaces/title_grimhollow.png
+2963f2ad615e64fab7b3f49b293a653c8ef80755e5c99139277f66274a1cd1e8 core/src/main/assets/environment/custom_tiles/carpet.png
+bf0dc54714c9dc2a64ce951e2c0dc30e2aac48b86953b1a42ec00430f15996e4 core/src/main/assets/environment/custom_tiles/caves_boss.png
+7c9c97ed78a397520cd18672a079ba2cae41051b28bf0ada8a6ceec10e7843be core/src/main/assets/environment/custom_tiles/caves_quest.png
+178326392aabd6bfbebc35ca661f260cdaaae35d18ca73e84789e388d5a78ce6 core/src/main/assets/environment/custom_tiles/city_boss.png
+c4796096f3d2df7bfd786ad407127ec201f182902c3e7f7c590754e16891c0aa core/src/main/assets/environment/custom_tiles/city_quest.png
+3d8002545e7dae0991d876ae77908d8a7a406f416bc6f05991b448b705209164 core/src/main/assets/environment/custom_tiles/prison_quest.png
+63cfffe802728c6d15e3a3d1cd7e613a65701de02bdb7ebc19c3da8fe4f18f91 core/src/main/assets/environment/custom_tiles/rat_king_room.png
+85845795fe9790f23ed8e9609738784d8bf1ec8f567adefb2db77071b5265320 core/src/main/assets/environment/occlusion_shadows.png
+254a3e022675e6e2733cfd7bf06e5e4734e6866fec9716df9c2d230696f63105 core/src/main/assets/environment/raised_terrain.png
+7249a0cdd23ff0ae770e2eab03f95ce1c41f1420a26f7e447de35b9bce00da67 core/src/main/assets/environment/terrain_features.png
+dbf2c4456e5febeb891cbbc7d6cbd8026e84f6dd9258d25a6c9907994d561804 core/src/main/assets/environment/tiles_caves_crystal.png
+46ac90d6e732704990180e26c9948392c931ce93d82fce89d44ad1369bf9618f core/src/main/assets/environment/tiles_caves_gnoll.png
+0bcc209bcff81ec7a2cab68f3533dce39087d9cfad3d46b4170141fe5711592b core/src/main/assets/interfaces/change_icons.png
+d96ffc513c4985cc2355754ddac66d4a0f6e3258f016daf47abf699b3b0bce67 core/src/main/assets/interfaces/icons.png
+ef5e88c1abaa35ee947d30f807ff72beadd8cf3a08411df76ae43edba88452d0 core/src/main/assets/sprites/crystal_spire.png
+5dfce68f7f6aba4ca3ea245e3567d8bb5b3a8ae05eba45f4c5b50f6e70c5ab58 core/src/main/assets/sprites/dm100.png
+9854aafef717b5707d4e517a4795ee837f4216573666e2101638cc50efa62998 core/src/main/assets/sprites/dm200.png
+3caaea588eb65abeeebf5139940e6630f1a62250c181b3e73854af40053d52cc core/src/main/assets/sprites/ratking.png
+aa2ddbbf9acf5d10cd929097587ba7418e9756bb8e645748ec18edbd4c0c3d20 core/src/main/assets/sprites/sentry.png
+13caa5f9aadcae94baab42fdab9d639a9b6bbeeb8535d65b0196caccb9644577 core/src/main/assets/sprites/shaman.png
+f869184fdeaf625891852e49e9f2a9bc6866997d67715c36772668c2f50e532d core/src/main/assets/sprites/skeleton.png
+f6e31ac27aadb215cf4e60941b5a025ce6ac8095e7398748cbb962da67a9809d core/src/main/assets/sprites/vault_boss_elemental.png
+4f495a3c6edf15ba9113c6f5b8f63533cc668cbd7a587f30d862fb84241093df core/src/main/assets/sprites/vault_mirror.png
+8bf27b44c7839e44fb5c55e07cc22fcd7907bccf182893289ae5dd0cc0bc7dbb core/src/main/assets/sprites/vault_tokens_door.png
+0ad331d8624996d50c26b9edd5c5d9d04ecb62fc6ec844ee0459180a3a964c78 core/src/main/assets/environment/walls_sewers.png
+TEST 29: 380 cached frames; max pHash distance=2; failures=0
+b44f3d83014c06b8d3b0543ff780625e4376cd262bf60da193ee9292a1978a50 core/src/main/assets/sprites/amulet.png
+f6e37a7eddb05a3a00c48d1373b34166d294fa620f005f2f65ab481977abcce6 android/src/main/res/mipmap-hdpi/ic_launcher_background.png
+e0a9a8ab1495d12ea373059de242e8571a0a8dd4d9d0fb91d05df8cc1c380f16 android/src/main/res/mipmap-hdpi/ic_launcher_foreground.png
+a016b55d28e812929aedce6c184370a8eff67d365a22acbc24643fcaae00aeff android/src/main/res/mipmap-hdpi/ic_launcher_monochrome.png
+1f102b0a8dfa0f6ef99201268691b8c150a780bd1e31f30a5f13d666919ee910 android/src/main/res/mipmap-hdpi/ic_launcher.png
+1f7e9bc5fc323aa84a3de51f47c57501e56b1b0ef2ffefef5bdc241a865fb9f3 android/src/main/res/mipmap-ldpi/ic_launcher_background.png
+66cbcfbed89bfc51b5d93142e9c97c08802e1004154637ac146f80c8dc2b2a4e android/src/main/res/mipmap-ldpi/ic_launcher_foreground.png
+2588c1e956e3d634f5f547a99dd01aa533008484807eaeb89a5d4e4b2a17f4fe android/src/main/res/mipmap-ldpi/ic_launcher_monochrome.png
+7077aa64c4418dfa7abd491aa69be8aab87f60fe98572d97c5dd2db38923b33e android/src/main/res/mipmap-ldpi/ic_launcher.png
+72b5539091a5bc03a30b83c63964aef83e6eb91922222e74e18c7ee1ad1752c6 android/src/main/res/mipmap-mdpi/ic_launcher_background.png
+6a2196adbf4810d7cc64d433db885fca7ff77ee431c458af66df771a339c411a android/src/main/res/mipmap-mdpi/ic_launcher_foreground.png
+683f726582be312a0416001472eab6911e035eebba532eaefcca58a07149463b android/src/main/res/mipmap-mdpi/ic_launcher_monochrome.png
+48091307b1087d3dc6cd776d55bb33f67ee72ee8bd08de6281254a97d7568631 android/src/main/res/mipmap-mdpi/ic_launcher.png
+61193b6076c8160aaeaab037a9f4d5a4bd95ce5be40e1d9c8a958591f636feb4 android/src/main/res/mipmap-xhdpi/ic_launcher_background.png
+5837b1be70549a33c97bae057d82918e524b5b3d7794a7dcd081aaa2c7cb1a83 android/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png
+45de6c354950db64b20b3f64b9b79095cf017c500f3f9d604404f917c24ee8ca android/src/main/res/mipmap-xhdpi/ic_launcher_monochrome.png
+0108f5c1a1523b81f8eb54d3f05700a7810ece7bf3f198fd46c902b08076f9f8 android/src/main/res/mipmap-xhdpi/ic_launcher.png
+e2d19792e1adb16852f8c73cc77fef6007d27b2a8a45c307a4d1b559effdeb6b android/src/main/res/mipmap-xxhdpi/ic_launcher_background.png
+03e3a9b78afa1ac0379f39d797c5e9af270e7349a8fadc749386207c7e6de8d8 android/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png
+8d359f6b7820f1e61f8b5933c1ac0e130851b8786f94b065609480b5890e632d android/src/main/res/mipmap-xxhdpi/ic_launcher_monochrome.png
+ebd502cc6b646466c2a33b83ffe1973c02e02d9a905f3bb882a249e10a4a6c58 android/src/main/res/mipmap-xxhdpi/ic_launcher.png
+07994e8eaa83589758b2e01e496a719d172f5456447817024b56c6ea73d5a8dc android/src/main/res/mipmap-xxxhdpi/ic_launcher_background.png
+18a3f504f9f388261d289014a90e82a15a96e12326e68b6bd95b140331e8558e android/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png
+ca68f8c215093e0b18525a87ca07852cb2704313daa67ad3aa6bdac7a78e6035 android/src/main/res/mipmap-xxxhdpi/ic_launcher_monochrome.png
+571ee8110131ac46509390a65815eb1a2348b1fef7c53fd48026d74e81ffcbc6 android/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+4e1954be73258182a23eec576c74e0aece1e4a355a5f59c42728598c2f177d4a core/src/main/assets/interfaces/banners.png
+a8b8fc76986de78cfd4231badc88bd22503acd3c8510d8d46930f3e51d5939d2 core/src/main/assets/effects/blood_decals.png
+a376384456e9be7b2a82320124c0593f8812639dfe4af552bc3135446104aa87 core/src/main/assets/sprites/bat.png
+63e2aec7ed951b67d527f59900519f6d6b3f2479dd9dc19e7372f50aff1a567a core/src/main/assets/sprites/bee.png
+20c53f16f177a96c6e6fb5057c238ce05256ea5310f0c74fd65d9226594dc742 core/src/main/assets/sprites/blacksmith.png
+799b91009e160648e6ff73dcc9e93628630b1ec970ee824ae63cf00c45ae3a14 core/src/main/assets/sprites/brute.png
+1bd8632ad4b68d285d4033bdb1682784d0286b210105fafe56164787ceb059b1 core/src/main/assets/sprites/chainwarden.png
+d9b8ec4901172ff8aa6e7a617dd822da81ac9074da0ccc65616ce132c812b136 core/src/main/assets/sprites/crystal_guardian.png
+fd90486d1f290e2700b5abdb314bbc3b95253ae71fcb76451523b1bd0e866796 core/src/main/assets/sprites/crystal_wisp.png
+01646b7c2f282bd2e96b9eb415f160cd0749a9aee7d03bacb64ecafbbd651f4d core/src/main/assets/sprites/dm300.png
+bf65ef341f41c0645796060b85dc8d415006f7301bb742af9caaa5095308ba18 core/src/main/assets/sprites/elemental.png
+9d1a6a6177e9069ffdf654c13d4820b9cb108fc1e53c5a10b563e32f7e192fce core/src/main/assets/sprites/eye.png
+20f93342907205530c3eb227ea901825231a1744277a52a59089d96f25a06b3e core/src/main/assets/sprites/fungal_core.png
+33a3cb4f4f60fae98cc91bac12b7ec59c472e2539726afbd865c010f5ab5d2fb core/src/main/assets/sprites/fungal_sentry.png
+031ef7f6856c999800a97aa95e7788d72ded396e92b192fa1d5833fd2d26bbef core/src/main/assets/sprites/fungal_spinner.png
+2025ab1d0c68a5baaa6e3b80a308f2d6ededc7fc2aad15bc03df74064dd53f5f core/src/main/assets/sprites/ghost.png
+94e77cd05fbeefbcf3af6c97f8b8131989949d9483d42383e5343f6d8428786f core/src/main/assets/sprites/ghoul.png
+5e74e552abc3f3c6cc983d46858af8c373e7941ffa3a33ea6ad4c0f9aa1aabc8 core/src/main/assets/sprites/gnoll.png
+e0b22ace15c18ae898a7b8b6c199768d32ccb378abc3418068ed3e5d29aa86af core/src/main/assets/sprites/gnoll_geomancer.png
+d7cda8ba505e024dac397d657b53f3fcaac019c27c8b037229011b0ddf86a2b7 core/src/main/assets/sprites/gnoll_guard.png
+b8660f17b246e71f11faf8e890903821714f9aac75f9036bc1bdf566811f5344 core/src/main/assets/sprites/gnoll_sapper.png
+7c9eb68de623deba81e81728df5a66745dfcd4ff7647649520635b3bffc6428c core/src/main/assets/sprites/golem.png
+387a0f28ab181963367b44bc4b556a4a4650cb308641482196ab875ab3ec2cc4 core/src/main/assets/sprites/goo.png
+e99067e73cc349bde5dccdf1354a97f41d2957a895e30f7c3bfc231af3b82d8d core/src/main/assets/sprites/guard.png
+ceb32d5efe8439cfa3b38749399fa8c4c2ceab2f692caa53bc07ee190e3809d5 core/src/main/assets/sprites/guardian.png
+d1ae087112b615493d2444d4ed567d4f4f481b9158896f54c0423dffc76ea077 core/src/main/assets/sprites/hexcaster.png
+1d39ec482d7aa3163a0889a4c16032b2ffcb85fabd07bf373f527da4ad1f99ca core/src/main/assets/sprites/imp.png
+94d7c0f33c0d7d5da3fee7918707f4da5634e910d0b37fc30182e0cd1905f1ee core/src/main/assets/sprites/king.png
+59baaffbc90858f5256a79bc189bd131ea15882d65903c0169afa4a59cf22da2 core/src/main/assets/sprites/larva.png
+7889eb3deeabbd0dc4c6b28cc3d129cdfd02da12e82728ca6a08ef425dae2cbd core/src/main/assets/sprites/lotus.png
+78214ad2e21a4add2c79cc8314e3726979c33acc3b9bda6bf2b10ee5caab68de core/src/main/assets/sprites/mimic.png
+447cff18eb626d12b1110a581e9825b5981de7537ca914382299dd9497b03c9e core/src/main/assets/sprites/monk.png
+aec2ac380c6187abadd34598bcd9cf63b5ea701067b8f655fb9967876359b9b8 core/src/main/assets/sprites/necromancer.png
+476b22f59cccbdfd91f0ed09ff914761765d66cff8e68bc30395da1bc206c0bd core/src/main/assets/sprites/ninja_log.png
+5473871c0cd7bf1bf3c9b843c67dabe7e998f87c241f5f1c5adefebaadb8f247 core/src/main/assets/sprites/piranha.png
+5ea3b2fe8f5bf415534eed56e53cf206ea0e14ee72ad4c785dcef3374bc45c6b core/src/main/assets/sprites/pylon.png
+51d4d82b4e9e47a38135694ad1a4e56faab3cdf39b44cc2ff27711aebee4d16d core/src/main/assets/sprites/ripper.png
+697801fe185850ed3e44415899e2d7d4b49bef09c92fc036aee5a55e785a80fd core/src/main/assets/sprites/rot_heart.png
+cefae3d48722dc82251adeb05d6bda1d577a0afe92f372c0918319882d73bc82 core/src/main/assets/sprites/rot_lasher.png
+c04c7d70cf72c7f954c771943d8bbfdc97a8be2aa73e0493a89e2db1e0a4b226 core/src/main/assets/sprites/scorpio.png
+febde6b26c27fab82ae6ed13101c0aedfc8022292834a806f65fabc084a1816b core/src/main/assets/sprites/sheep.png
+dc47c293bee2fafdea992716c71b5718c1723096fdf15628e67e7289f70f664b core/src/main/assets/sprites/shopkeeper.png
+b0160c583f77ba310bffe3afd59abeb3871f242c381414d5264480d43524703c core/src/main/assets/sprites/slime.png
+763abdf5157d9997dc3698f772a5bc0cea395b3504778b500f47330a27d56ac7 core/src/main/assets/sprites/snake.png
+b2f97edf0e0f298b81570a3264584e455ad73f7c39a9bfab22c4be0cef5c711f core/src/main/assets/sprites/spawner.png
+99943cd407a11db0c05d713466e8b7fb2cbf27e41a92f08d9a24be22b4e1af3a core/src/main/assets/sprites/spinner.png
+724ece619a33e4dc9bd477dd16b38fc22ee96c45f33b8f24edf7e6ce28b884d9 core/src/main/assets/sprites/spirit_hawk.png
+6c98d0e4d7b808a2ec6274ebe66cd8be0f6e00efe6e1206b5797109cca112ae7 core/src/main/assets/sprites/statue.png
+2744872ee27b6f9d6f378b8efb4a36155f1df5051c17baea34d033f53a425344 core/src/main/assets/sprites/succubus.png
+1ab4adf82dd56365126234adeb5d4a086e0b4a497c7cb1ed57385a9770da7dfb core/src/main/assets/sprites/swarm.png
+ea32de394e9136990e9b512262d478c8969987deadbefb4c3ed2bf4404f54d7c core/src/main/assets/sprites/tengu.png
+8393649f754abe14265e0612ad26f7ac544a6c7b96f801b4764b1aa2cac7609b core/src/main/assets/sprites/thief.png
+2a598fbbbbccb5e7bbb03c79a6138bfe65e9a3479cdc5e7b56468900f9a7860e core/src/main/assets/sprites/undead.png
+e33de9678a1bce79efac7e5a400cdcbc2dd6c826847aa54363132cf4532a9aca core/src/main/assets/sprites/wandmaker.png
+d4f2ca8e6090649a22c085fd8a570ee46b4059f205d36c6d76b2c62473d21f5f core/src/main/assets/sprites/wards.png
+1d00be24fd7df8abc22369a8a709e313e17f5a066b30efe4bc0e396a2b580cc9 core/src/main/assets/sprites/warlock.png
+1cd268a379b08196f0d1ae094baebfa6a16e714d53e34ca420fcb72bd23cccbd core/src/main/assets/sprites/wraith.png
+861f2f8b612cbc369e6a2f2ef3b20cc1365ed334befeff195d86c8954381d8f0 core/src/main/assets/sprites/yog.png
+0e209260d85e656475892f5691f75a0b0955942a21e80e92504b575d803ebe94 core/src/main/assets/sprites/yog_fists.png
+b3a94d914bebc7139b1684de19fd6233a68d40dcc089017381718dff1f0df552 core/src/main/assets/effects/effects.png
+bd14fdf7103377cbc0935cdc0f31c24969a65bab07fcf89b90c7158409a7def1 core/src/main/assets/effects/fireball-short.png
+0b29fcf173ed3a5a7b651e9134808a03735874d7edc32d8715aa3e98f624af00 core/src/main/assets/effects/fireball-tall.png
+2df5dbf55f0377bca142abc2b6b79637fe3658dca17e32c44ebb3b09ef5af1b9 core/src/main/assets/environment/custom_tiles/halls_special.png
+6aa6b2019f4c1b6e063d01130f43b233c6b38c222306164c806aeb888378bd17 core/src/main/assets/environment/custom_tiles/prison_exit.png
+b6def35b16e32205ddcc3cd36598d9b8097a69896992ac98e21996d319cc6050 core/src/main/assets/environment/custom_tiles/sewer_boss.png
+b902f20a2c5d9f11e783dc35525e8e150807f217a0bff25cde8ad7dc533ea5b0 core/src/main/assets/effects/specks.png
+d38befd93b32a92dde52107888ba4352e36fa1f08a9a8397b8d54861fccbe110 core/src/main/assets/effects/spell_icons.png
+d6d47431923f3838e4ba650aa7a2a32c1600495061b87294e990c422de15d7b5 core/src/main/assets/effects/text_icons.png
+8e3d3b8ba09944073fd8aa5e3d28b14a5e93fa290c5eceaf8678ff4a6664286d core/src/main/assets/environment/visual_grid.png
+b012a0346ddc50889cdd8dad45efa4ab49ea80bfa160bff2a77bb388182de9f0 core/src/main/assets/environment/wall_blocking.png
+bb0d66270f4c20011a131b5fae75166bc39132795be795bc7878aa5255e5ad64 core/src/main/assets/environment/custom_tiles/weak_floor.png
+bfa312403c41ffd8a29fd63a6f420c854446972b8cd693b0263f7f31ccbbcc16 desktop/src/main/assets/icons/icon_128.png
+f415d65bcde18cd5dbb97f61c62155a22d6d135240ff49a07f273d097da9a56a desktop/src/main/assets/icons/icon_16.png
+09050ad6051892b71f4894d26c8e4671163d7d384a4c8cd6c776c8dbd75301b9 desktop/src/main/assets/icons/icon_256.png
+2479decf9effdec5ccc5475106eb79ce21150a673541eab72b2bb7879f3a79ee desktop/src/main/assets/icons/icon_32.png
+48091307b1087d3dc6cd776d55bb33f67ee72ee8bd08de6281254a97d7568631 desktop/src/main/assets/icons/icon_48.png
+c2315076ccdf0c76665b0f78f76c57aaadd552c7694abdddc5609bc3c873f2a1 desktop/src/main/assets/icons/icon_64.png
+1fee53a08ea0a7db69170b39d82126382f6a769ca288f24794d7840d58225e5c desktop/src/main/assets/icons/mac.icns
+22debeaa5755ee71a8f5e6cfbeb3747dcabde75cd4512d0a34184dcd614fbc98 desktop/src/main/assets/icons/windows.ico
+f03eb2c9d4d9260a07cb8b6cb09b7da0c06ec2747018dac8d56423359efa6290 core/src/main/assets/effects/enhanced.png
+04751213489e70f68e5a86c09533a3cc340a3dd93e772a5fc4080489e5667d7a core/src/main/assets/effects/force_wall.png
+cf9175f03157c4036a5a87875545f0749fa4f9712d7baaf44a4ad500fc435144 core/src/main/assets/effects/health_vignette.png
+9ae01300ea77e6dc08865f5f43776909f49545fcce372210cb4719114ca86a8b core/src/main/assets/sprites/hero_cleric.png
+84110c4a1d68137d2581d97c0a842785667c636a90b42a95b53e7f69e79fbcae core/src/main/assets/sprites/hero_duelist.png
+2a7c70cc02f0b93d20a8c8b14f473ab0a0dc29260d1cbea7b997d2426bca2f01 core/src/main/assets/sprites/hero_enchanter.png
+55172bd630ec046c3c714a9300618917ea8be05fad5c0a85ad93b1ae72486b0b core/src/main/assets/sprites/hero_huntress.png
+ddec0a84850ce22794fed6d7080bfba4042a01a351191c8eed16a5ce5bd6bca8 core/src/main/assets/sprites/hero_mage.png
+12930a053db73646f81a66760eaa8e9151a517c6393efefe7e444b5d1f5d7cf7 core/src/main/assets/sprites/hero_necromancer.png
+43c4077f8e720db840478711b283b7e09013d17759c86afcc3e24cae54d3741a core/src/main/assets/sprites/hero_psychic.png
+c88ef9588e6cf213fa240c69c9d610c413c3183e69a5d8de26341a10739b1b24 core/src/main/assets/sprites/hero_rogue.png
+445cfdf7729b142e4a089388a39844d20e8ed88b84e19b74d9abf48a6a6f777b core/src/main/assets/sprites/hero_warrior.png
+f27b9ab7732d2d0dc0050e33905f6c15f4073cdf029ada79bbe7a8c1a165265f core/src/main/assets/sprites/item_icons.png
+4f4525add70966c29ae5577ddd1846078845c066b7f5d6924e808ee1ec99dc2d core/src/main/assets/sprites/items.png
+d54865ba6eabe72148dfdb26a157f1e6739ed07b9759414ecea6e14293c36ad2 core/src/main/assets/effects/liquid_ripple.png
+2e78d0e457c67173019593c1e0b55790f624bc6c649a005ad3db8d9c64a33f7d core/src/main/assets/environment/water1.png
+2e78d0e457c67173019593c1e0b55790f624bc6c649a005ad3db8d9c64a33f7d core/src/main/assets/environment/water2.png
+2e78d0e457c67173019593c1e0b55790f624bc6c649a005ad3db8d9c64a33f7d core/src/main/assets/environment/water3.png
+175feb7be22c8d59e6199e279c4f358844ad1050d8637b81b7e1e8b8bcd31aff core/src/main/assets/environment/water4.png
+602fbddee782119e4ed83fad8de3824a15d4ec216dbc19a8bb7c8bb45dd7db2a core/src/main/assets/sprites/crab.png
+01308c382b2f83563bfe384646bcfff28097301c03ef7f168d71636f87106ec4 core/src/main/assets/sprites/minion_ghoul.png
+6729505aaf17f42de50a0098f2e24e2ef6354db7bbecee46da15435bf905e070 core/src/main/assets/sprites/rat.png
+011bb8dad5f6ef05d5cbf73cb4f7fd45ccae8671a97f0a28e4f3c89d9fc3d3f7 core/src/main/assets/sprites/minion_skeleton.png
+c5c44ec00f98da890173fe0b680a75a0a27812c66c6f09b0e5a27f592caa2956 core/src/main/assets/environment/water0.png
+5531dd72e5b5cf7e162558d46767493d8a80971befcb206aac625075fd8a4cfa core/src/main/assets/splashes/cleric.png
+1c2a9ecfe8f0660489c852b46d2e0925b4f4b1c82651399bf8cdd743633dd875 core/src/main/assets/splashes/duelist.png
+5531dd72e5b5cf7e162558d46767493d8a80971befcb206aac625075fd8a4cfa core/src/main/assets/splashes/enchanter.png
+0099f4a576fffd59f92e6122cca9af90f06aca430da6defe304756fb72a0a64b core/src/main/assets/splashes/huntress.png
+6be3a345010c4154d42f7e330f5d237293ff845e0fc0b80dabf038738e1fbfbe core/src/main/assets/splashes/mage.png
+d0487bfdebde919c8a82059e2dbfac2136392a4dc35fa3265b4a1635daead72f core/src/main/assets/splashes/necromancer.png
+d755e2da1ec5ea71599afaf4a84765584e62bccf8655075a01309609319a6cc6 core/src/main/assets/splashes/psychic.png
+9d9e7c8f20a1ece05e618307ba3f95e5ce7060176b1de6ba14c0d49590bbeafd core/src/main/assets/splashes/rogue.png
+4628222c32785aa3701a0ac8ae830fcc277f6c114170fb5d7ef743507a958ca8 core/src/main/assets/splashes/warrior.png
+731cd8b84426175d70c2d51b462ce4412aa553180df56ad91f86f7bff5850670 core/src/main/assets/interfaces/talent_icons.png
+0a0246f3e57f00a418e4eb1b79c1c6a4f6f2d5e6f0c778e018530cc756e3f147 core/src/main/assets/environment/tiles_caves.png
+05829af16756aca6409a420e0a3b3a45d9a7db4ef3642a169a387511e8c7ce3d core/src/main/assets/environment/tiles_city.png
+40d1a2051076113b0a03b3c54311420c6a7301b27a309ee1746ae54aeb3ef984 core/src/main/assets/environment/tiles_halls.png
+bc8c4693eef9bed48611dddb4f91ec15f4d336c794fd633dbfc0a69abd91a03f core/src/main/assets/environment/tiles_prison.png
+0ad331d8624996d50c26b9edd5c5d9d04ecb62fc6ec844ee0459180a3a964c78 core/src/main/assets/environment/tiles_sewers.png
+c5cf78ac2587e06eca7b39d3c3703e15a468edffd240c605390e0525b441f6c2 core/src/main/assets/interfaces/title_grimhollow.png
+2963f2ad615e64fab7b3f49b293a653c8ef80755e5c99139277f66274a1cd1e8 core/src/main/assets/environment/custom_tiles/carpet.png
+bf0dc54714c9dc2a64ce951e2c0dc30e2aac48b86953b1a42ec00430f15996e4 core/src/main/assets/environment/custom_tiles/caves_boss.png
+7c9c97ed78a397520cd18672a079ba2cae41051b28bf0ada8a6ceec10e7843be core/src/main/assets/environment/custom_tiles/caves_quest.png
+178326392aabd6bfbebc35ca661f260cdaaae35d18ca73e84789e388d5a78ce6 core/src/main/assets/environment/custom_tiles/city_boss.png
+c4796096f3d2df7bfd786ad407127ec201f182902c3e7f7c590754e16891c0aa core/src/main/assets/environment/custom_tiles/city_quest.png
+3d8002545e7dae0991d876ae77908d8a7a406f416bc6f05991b448b705209164 core/src/main/assets/environment/custom_tiles/prison_quest.png
+63cfffe802728c6d15e3a3d1cd7e613a65701de02bdb7ebc19c3da8fe4f18f91 core/src/main/assets/environment/custom_tiles/rat_king_room.png
+85845795fe9790f23ed8e9609738784d8bf1ec8f567adefb2db77071b5265320 core/src/main/assets/environment/occlusion_shadows.png
+254a3e022675e6e2733cfd7bf06e5e4734e6866fec9716df9c2d230696f63105 core/src/main/assets/environment/raised_terrain.png
+7249a0cdd23ff0ae770e2eab03f95ce1c41f1420a26f7e447de35b9bce00da67 core/src/main/assets/environment/terrain_features.png
+dbf2c4456e5febeb891cbbc7d6cbd8026e84f6dd9258d25a6c9907994d561804 core/src/main/assets/environment/tiles_caves_crystal.png
+46ac90d6e732704990180e26c9948392c931ce93d82fce89d44ad1369bf9618f core/src/main/assets/environment/tiles_caves_gnoll.png
+0bcc209bcff81ec7a2cab68f3533dce39087d9cfad3d46b4170141fe5711592b core/src/main/assets/interfaces/change_icons.png
+d96ffc513c4985cc2355754ddac66d4a0f6e3258f016daf47abf699b3b0bce67 core/src/main/assets/interfaces/icons.png
+ef5e88c1abaa35ee947d30f807ff72beadd8cf3a08411df76ae43edba88452d0 core/src/main/assets/sprites/crystal_spire.png
+5dfce68f7f6aba4ca3ea245e3567d8bb5b3a8ae05eba45f4c5b50f6e70c5ab58 core/src/main/assets/sprites/dm100.png
+9854aafef717b5707d4e517a4795ee837f4216573666e2101638cc50efa62998 core/src/main/assets/sprites/dm200.png
+3caaea588eb65abeeebf5139940e6630f1a62250c181b3e73854af40053d52cc core/src/main/assets/sprites/ratking.png
+aa2ddbbf9acf5d10cd929097587ba7418e9756bb8e645748ec18edbd4c0c3d20 core/src/main/assets/sprites/sentry.png
+13caa5f9aadcae94baab42fdab9d639a9b6bbeeb8535d65b0196caccb9644577 core/src/main/assets/sprites/shaman.png
+f869184fdeaf625891852e49e9f2a9bc6866997d67715c36772668c2f50e532d core/src/main/assets/sprites/skeleton.png
+f6e31ac27aadb215cf4e60941b5a025ce6ac8095e7398748cbb962da67a9809d core/src/main/assets/sprites/vault_boss_elemental.png
+4f495a3c6edf15ba9113c6f5b8f63533cc668cbd7a587f30d862fb84241093df core/src/main/assets/sprites/vault_mirror.png
+8bf27b44c7839e44fb5c55e07cc22fcd7907bccf182893289ae5dd0cc0bc7dbb core/src/main/assets/sprites/vault_tokens_door.png
+0ad331d8624996d50c26b9edd5c5d9d04ecb62fc6ec844ee0459180a3a964c78 core/src/main/assets/environment/walls_sewers.png
+identification frame coverage: 60
+Item style and frame coverage: public indices=381 unique props=380
+talents frame coverage: 242
+TEST 30: 5 regions; idle pairs=15495; minimum hue L1=0.2514; failing species pairs=0
+Validated 169 generated specifications; 0 failures.

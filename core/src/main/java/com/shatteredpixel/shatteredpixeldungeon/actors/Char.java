@@ -225,7 +225,17 @@ public abstract class Char extends Actor {
 		}
 	}
 
-	public String name(){
+	private float healingFraction;
+    /** All actual healing uses one path so equipment penalties include one-point regeneration. */
+    public int heal(int amount){
+        if(amount<=0||HP>=HT||!isAlive())return 0;
+        boolean reduced=this instanceof com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero
+                &&((com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero)this).belongings.armor()!=null
+                &&((com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero)this).belongings.armor().hasGlyph(com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.DarkBlessing.class,this);
+        if(reduced){healingFraction+=amount*.8f;amount=(int)(healingFraction+.00001f);healingFraction-=amount;}else healingFraction=0;
+        int received=Math.min(HT-HP,amount);HP+=received;return received;
+    }
+    public String name(){
 		return Messages.get(this, "name");
 	}
 
@@ -340,6 +350,7 @@ public abstract class Char extends Actor {
 	public void storeInBundle( Bundle bundle ) {
 		
 		super.storeInBundle( bundle );
+        bundle.put("healing_fraction",healingFraction);
 		
 		bundle.put( POS, pos );
 		bundle.put( PREV_POS, previousPos );
@@ -352,6 +363,7 @@ public abstract class Char extends Actor {
 	public void restoreFromBundle( Bundle bundle ) {
 		
 		super.restoreFromBundle( bundle );
+        healingFraction=bundle.getFloat("healing_fraction");
 		
 		pos = bundle.getInt( POS );
 		previousPos = bundle.getInt( PREV_POS );
@@ -514,7 +526,12 @@ public abstract class Char extends Actor {
 
 			com.shatteredpixel.shatteredpixeldungeon.actors.buffs.NecroCurse maiden=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.NecroCurse.find(enemy);
             int reflected=maiden!=null && maiden.kind==com.shatteredpixel.shatteredpixeldungeon.actors.buffs.NecroCurse.Kind.IRON_MAIDEN && Dungeon.level.adjacent(pos,enemy.pos)?Math.round(Math.max(0,effectiveDamage)*.5f):0;
+            int priorHP=enemy.HP;
+            com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Leech.Recovery recovery=enemy.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Leech.Recovery.class);
+            com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Echo.Recoil recoil=enemy.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Echo.Recoil.class);
             enemy.damage( effectiveDamage, this );
+            if(recovery!=null)recovery.recover(this,priorHP-enemy.HP);
+            if(recoil!=null)recoil.reflect(this,priorHP-enemy.HP);
             if(reflected>0 && isAlive())damage(reflected,maiden);
 
 			if (buff(FireImbue.class) != null)  buff(FireImbue.class).proc(enemy);
@@ -721,6 +738,8 @@ public abstract class Char extends Actor {
 	// atm attack is always post-armor and defence is already pre-armor
 	
 	public int attackProc( Char enemy, int damage ) {
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant variant=buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant.class);
+        if(variant!=null)variant.onHit(enemy);
 		for (ChampionEnemy buff : buffs(ChampionEnemy.class)){
 			buff.onAttackProc( enemy );
 		}

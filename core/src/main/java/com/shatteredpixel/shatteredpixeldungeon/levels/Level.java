@@ -551,6 +551,7 @@ public abstract class Level implements Bundlable {
 
 		Mob m = Reflection.newInstance(mobsToSpawn.remove(0));
 		ChampionEnemy.rollForChampion(m);
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant.roll(m);
 		return m;
 	}
 

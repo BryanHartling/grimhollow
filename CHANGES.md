@@ -3720,3 +3720,165 @@ Stage 6e file changes:
 - `verification/junit-summary.log`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
 - `verification/new-class-smoke.log`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
 - `verification/reproducibility.log`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+
+
+## Stage 8 — section 9 content and final delivery
+
+- Resolve section 9.1's 5% Dark Blessing wording in favour of section 9.7's explicit curse weights 3/1: full-pool weapon chance 1/37 and armor chance 1/28; existing curse-selection conventions remain intact.
+- Resolve Bone Armor's tier-3/Scale wording as tier-3 generation, strength and cost with Scale-derived DR plus one and flat minus-one evasion; persist its construction through crown conversion and ignore Withering on this material.
+- Use one actual-healing receiver with a saved fractional remainder so Dark Blessing also reduces one-HP regeneration by 20%; initial/max-health assignment and resurrection remain separate upstream operations.
+- Apply Leech and Echo/Dark Blessing recoil after target damage modifiers using actual HP lost, prevent resurrection through Leech, and retain correct lethal-recoil identification.
+- Give Soulfire the upstream fire damage range 1..3+depth/4 and five turns in a fixed 3x3 footprint; it bypasses ordinary fire immunity, applies Terror 4 and uses the existing alchemy identification rules.
+- Define Hourglass activation cost as one charge, regeneration as 30-2*level turns, and upgrade thresholds as 20+10*level Corrosion damage; remove positive enemy buffs gained within the last level turns and persist refund debt to prevent chaining across saves or equipment swaps.
+- Preserve parent Mage's Staff abilities for the new wand subclasses; use Glaive reach/delay/spike conventions for scythes, tier-based spike scaling and weight 2 in their existing tier pools.
+- Place Bone Armor in half of existing tier-3 armor rolls and cosmetic leather appearances in half of eligible rolls; category and tier probabilities are unchanged.
+- Add Hexcaster to a floor-11-20 rotation with 10% probability where the spec leaves its rare-spawn rate unspecified; Chainwarden retains Tengu arenas, stats, reward and persistence while replacing attack traps and adding a four-turn pull.
+- Keep cursed monsters' self-curse permanent with a finite five-turn transferable duration, preventing overflow and permanent-curse transfer to unrelated actors; award the extra floor-scaled loot only once and support offscreen deaths without sprites.
+- Allocate new item indices 526-536 because SPD v4 already owns 522-525 for summon spells; expand the atlas to 512x1088 without shifting existing frames.
+- Raise Sewers ambient by 0.03 per RGB channel after the content-stage room had mean 0.1296/std 0.1161; the unchanged 0.13/0.12 gates pass in the final selected room at 0.1500/0.1300. The renderer selected different room seeds across runs; this is not a controlled same-room comparison. Approved terrain and liquid caches are unchanged.
+- Verify the stage once as a final gate, resolving observed failures without adding probes: desktop/Android builds, four JUnit checks, nine heroes over 90 seeds, 169 byte-identical generated sheets, 380 Blender item rerenders within two pHash bits, five live regional scenes, title/APK identity and the existing geometry/effects gates. Earlier failures remain in the existing logs.
+
+Per-file additions and changes:
+
+- `ART_PIPELINE.md`: Document regeneration of the new content props and two native enemy atlases.
+- `CHANGES.md`: Record section-9 engineering decisions and every file changed for the content delivery.
+- `KNOWN_ISSUES.md`: Replace superseded stage-7 status with final content results and unresolved acceptance limitations.
+- `README.md`: Document the complete 1.0.0 content, native asset inventory, artifact rules and build outputs.
+- `build.gradle`: Set desktop version 1.0.0 and Android version code 917.
+- `core/src/main/assets/messages/actors/actors.properties`: Add player-facing names and mechanics descriptions for the new items, creatures and chain traps.
+- `core/src/main/assets/messages/items/items.properties`: Add player-facing names and mechanics descriptions for the new items, creatures and chain traps.
+- `core/src/main/assets/messages/levels/levels.properties`: Add player-facing names and mechanics descriptions for the new items, creatures and chain traps.
+- `core/src/main/assets/sprites/chainwarden.png`: Pack the reproducible new content atlas or native sprite-layout metadata.
+- `core/src/main/assets/sprites/character-layouts.json`: Pack the reproducible new content atlas or native sprite-layout metadata.
+- `core/src/main/assets/sprites/hexcaster.png`: Pack the reproducible new content atlas or native sprite-layout metadata.
+- `core/src/main/assets/sprites/items.png`: Pack the reproducible new content atlas or native sprite-layout metadata.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/Dungeon.java`: Advance worn Withering armor on actual floor entry.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/Actor.java`: Expose a direct protected time refund without triggering secondary time-control resources.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/Char.java`: Centralize healing with fractional reduction and resolve actual-damage recoil, Leech recovery and cursed-mob hit transmission.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/blobs/SanctuaryZone.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/blobs/Soulfire.java`: Implement the alchemy spell or its fixed-area, immunity-bypassing damage and Terror blob.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/blobs/WaterOfHealth.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Buff.java`: Persist application timestamps so Hourglass can remove only recently gained positive buffs.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Corrosion.java`: Recognize Corrosion wand subclasses for death attribution.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/CursedVariant.java`: Implement persistent self-curse, increased HP, transmission, green aura and one-time floor loot.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Healing.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/MagicalSleep.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/NecroCurse.java`: Persist a permanent self-curse marker while retaining bounded durations for transfers.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Necromancy.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Regeneration.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/WellFed.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/Hero.java`: Persist action/refund debt, update Withering max health and route healing through its shared receiver.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/Talent.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/duelist/Challenge.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/duelist/ElementalStrike.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/enchanter/Unmaking.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/spells/BlessSpell.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/spells/HallowedGround.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/spells/LayOnHands.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Chainwarden.java`: Reuse Tengu arenas and rewards with rooting chains and timed Gravity pulls.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Eye.java`: Transmit a cursed variant effect after a successful ranged death gaze.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Hexcaster.java`: Implement alternating ranged curses, melee retreat and the quarter-chance wand drop.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Mob.java`: Show the cursed aura and award one extra item on death.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/MobSpawner.java`: Add the rare Hexcaster rotation entry on floors 11-20.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Shaman.java`: Transmit a cursed variant effect on a successful magic attack.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Warlock.java`: Transmit a cursed variant effect on a successful ranged attack.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/Dewdrop.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/Generator.java`: Register new weighted wands, scythes, armor variants and the unique Hourglass artifact.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/Recipe.java`: Register the two-ingredient, six-energy Soulfire recipe.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/Armor.java`: Integrate Withering, Bone construction, Dark Blessing DR/healing and persistent leather appearance.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/BoneArmor.java`: Provide tier-3 Bone Armor with Scale-based defense, evasion cost and Withering immunity.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/ClassArmor.java`: Preserve Bone Armor material through crown conversion.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/curses/DarkBlessing.java`: Provide the rare weighted weapon damage/recoil or armor defense/healing curse.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/curses/Metabolism.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/curses/Withering.java`: Track and persist per-floor maximum-health loss and restore it on removal or uncursing.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/artifacts/ChaliceOfBlood.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/artifacts/HourglassOfAshes.java`: Implement charged recent-buff removal, bounded action refunds and Corrosion-based upgrades.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/food/FrozenCarpaccio.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/food/Pasty.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/food/PhantomMeat.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/food/SupplyRation.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/potions/elixirs/ElixirOfAquaticRejuvenation.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/remains/TornPage.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/spells/Soulfire.java`: Implement the alchemy spell or its fixed-area, immunity-bypassing damage and Terror blob.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/wands/CursedWand.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/wands/WandOfBone.java`: Raise one temporary bone-wall cell through the shared terrain lifecycle.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/wands/WandOfGravity.java`: Pull enemies with upstream collision, movement and Vertigo conventions.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/wands/WandOfNecrosis.java`: Chain decreasing Corrosion through adjacent hostile creatures.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/wands/WandOfTransfusion.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/Weapon.java`: Add Leech, Echo and weighted Dark Blessing to the normal curse pool.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/curses/DarkBlessing.java`: Provide the rare weighted weapon damage/recoil or armor defense/healing curse.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/curses/Echo.java`: Apply one-quarter actual-damage recoil with correct death attribution.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/curses/Leech.java`: Give a thirty-percent chance of healing the surviving defender by one-fifth actual damage.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/enchantments/Vampiric.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/BoneScythe.java`: Implement tier-2 Glaive reach and perpendicular half-damage sweep.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/GraveScythe.java`: Provide tier-5 scythe damage, full sweep and cursed-target bonus.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/ReapersScythe.java`: Provide tier-4 scythe damage and three-quarter sweep.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/CityLevel.java`: Allow shared healing semantics in the existing well effect.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/Level.java`: Apply the ten-percent cursed variant roll to eligible generated mobs.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/PrisonBossLevel.java`: Roll the thirty-percent Chainwarden replacement in the existing Tengu arena.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/features/BoneWalls.java`: Expose shared one-cell bone-wall creation for Wand of Bone.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/traps/ChainTrap.java`: Use Prison chain visuals and two-turn rooting while excluding the boss and flying actors.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/plants/Sungrass.java`: Route actual healing through Char.heal so the armor penalty applies consistently.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/ChainwardenSprite.java`: Bind the new native Chainwarden atlas to Tengu animation callbacks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/HexcasterSprite.java`: Bind the new native Hexcaster atlas to Warlock animation callbacks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/ItemSpriteSheet.java`: Reserve 526-536 for new content and increase atlas height without moving v4 spell frames.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/LightMap.java`: Raise Sewers ambient by 0.03 after an observed room-gate failure without changing thresholds or textures.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/LightingOverlay.java`: Give Soulfire its green local illumination through the existing lighting pass.
+- `core/src/test/java/com/shatteredpixel/shatteredpixeldungeon/acceptance/SmokeRun.java`: Add bounded section-9 mechanics, generation, persistence and Wand of Bone lifecycle cases to the existing gate.
+- `tools/artgen/blender/items.json`: Declare the reproducible content frames, material variants or native character sheet layout.
+- `tools/artgen/blender/props.py`: Model native ivory rib construction for Bone Armor and content props.
+- `tools/artgen/character_catalog.py`: Add readable Hexcaster and Chainwarden forms, hue families and native frame contracts.
+- `tools/artgen/characters.py`: Build the two new silhouettes with existing native pose construction.
+- `tools/artgen/item_catalog.py`: Map all eleven new content objects and preserve parent geometry for cosmetic leather variants.
+- `tools/artgen/render_cache/items/526.png`: Commit the Blender-generated cache frame for its new content prop so CI can reproduce the atlas without Blender.
+- `tools/artgen/render_cache/items/527.png`: Commit the Blender-generated cache frame for its new content prop so CI can reproduce the atlas without Blender.
+- `tools/artgen/render_cache/items/528.png`: Commit the Blender-generated cache frame for its new content prop so CI can reproduce the atlas without Blender.
+- `tools/artgen/render_cache/items/529.png`: Commit the Blender-generated cache frame for its new content prop so CI can reproduce the atlas without Blender.
+- `tools/artgen/render_cache/items/530.png`: Commit the Blender-generated cache frame for its new content prop so CI can reproduce the atlas without Blender.
+- `tools/artgen/render_cache/items/531.png`: Commit the Blender-generated cache frame for its new content prop so CI can reproduce the atlas without Blender.
+- `tools/artgen/render_cache/items/532.png`: Commit the Blender-generated cache frame for its new content prop so CI can reproduce the atlas without Blender.
+- `tools/artgen/render_cache/items/533.png`: Commit the Blender-generated cache frame for its new content prop so CI can reproduce the atlas without Blender.
+- `tools/artgen/render_cache/items/534.png`: Commit the Blender-generated cache frame for its new content prop so CI can reproduce the atlas without Blender.
+- `tools/artgen/render_cache/items/535.png`: Commit the Blender-generated cache frame for its new content prop so CI can reproduce the atlas without Blender.
+- `tools/artgen/render_cache/items/536.png`: Commit the Blender-generated cache frame for its new content prop so CI can reproduce the atlas without Blender.
+- `tools/artgen/specs/character_chainwarden.json`: Declare the reproducible content frames, material variants or native character sheet layout.
+- `tools/artgen/specs/character_hexcaster.json`: Declare the reproducible content frames, material variants or native character sheet layout.
+- `tools/artgen/specs/items.json`: Declare the reproducible content frames, material variants or native character sheet layout.
+- `tools/artgen/validate.py`: Require the expanded eighty-atlas native character inventory.
+- `verification/apk-identity.log`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/art-validation.log`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/characters.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/ci-status.log`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/clean-build.log`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/desktop-only.log`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/effects-off.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/effects-on.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/effects-upstream.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/items.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/caves/room-gate.json`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/caves/sewers-gate.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/caves/sewers-ingame.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/caves/sewers-terrain.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/city/room-gate.json`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/city/sewers-gate.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/city/sewers-ingame.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/city/sewers-terrain.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/halls/room-gate.json`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/halls/sewers-gate.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/halls/sewers-ingame.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/halls/sewers-terrain.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/liquids/round-18.json`: Record the final five-room liquid vision judgment, screenshot hashes and unchanged-cache measurements.
+- `verification/iteration/liquids/round-18.md`: Record the final five-room liquid vision judgment, screenshot hashes and unchanged-cache measurements.
+- `verification/iteration/liquids/round-18.png`: Record the final five-room liquid vision judgment, screenshot hashes and unchanged-cache measurements.
+- `verification/iteration/prison/room-gate.json`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/prison/sewers-gate.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/prison/sewers-ingame.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/prison/sewers-terrain.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/room-gate.json`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/sewers-gate.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/sewers-ingame.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/iteration/sewers-terrain.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/junit-summary.log`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/new-class-smoke.log`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/reproducibility.log`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.
+- `verification/title.png`: Append final stage evidence or capture the actual title, content galleries, effects and regional room output in the existing verification artifacts.

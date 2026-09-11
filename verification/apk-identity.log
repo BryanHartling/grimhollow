@@ -23,3 +23,9 @@ Stage 7 enhanced effects
 .local/effects-apk.txt
 package: name='com.grimhollow.dungeon' versionCode='916' versionName='0.7.0-INDEV' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
 application-label:'Grimhollow'
+
+STAGE 8 FINAL: content-apk.txt
+package: name='com.grimhollow.dungeon' versionCode='917' versionName='1.0.0-INDEV' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+sdkVersion:'21'
+targetSdkVersion:'36'
+application-label:'Grimhollow'

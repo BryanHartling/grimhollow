@@ -110,7 +110,7 @@ public class BlessSpell extends TargetedClericSpell {
 				int barrier = totalHeal - (ch.HT - ch.HP);
 				barrier = Math.max(barrier, 0);
 				if (ch.HP != ch.HT) {
-					ch.HP = ch.HT;
+					ch.heal(ch.HT-ch.HP);
 					ch.sprite.showStatusWithIcon(CharSprite.POSITIVE, Integer.toString(totalHeal - barrier), FloatingText.HEALING);
 				}
 				if (barrier > 0) {
@@ -118,7 +118,7 @@ public class BlessSpell extends TargetedClericSpell {
 					ch.sprite.showStatusWithIcon(CharSprite.POSITIVE, Integer.toString(barrier), FloatingText.SHIELDING);
 				}
 			} else {
-				ch.HP = ch.HP + totalHeal;
+				ch.heal(totalHeal);
 				ch.sprite.showStatusWithIcon( CharSprite.POSITIVE, Integer.toString(totalHeal), FloatingText.HEALING );
 			}
 		}

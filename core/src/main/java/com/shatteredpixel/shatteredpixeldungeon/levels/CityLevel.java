@@ -160,7 +160,7 @@ public class CityLevel extends RegularLevel {
 							if (index == 0){
 
 								Dungeon.hero.live(); //clears all non-persist buffs, resets hunger/regen
-								hero.HP = hero.HT; //full heal
+								hero.heal(hero.HT-hero.HP); //full heal
 
 								EscapeCrystal crystal = hero.belongings.getItem(EscapeCrystal.class);
 								if (crystal == null) {

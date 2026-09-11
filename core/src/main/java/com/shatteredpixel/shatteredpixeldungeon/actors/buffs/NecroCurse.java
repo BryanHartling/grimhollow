@@ -12,6 +12,7 @@ public class NecroCurse extends Buff {
     public enum Kind { WITHER, AMPLIFY, DECREPIFY, IRON_MAIDEN, LOWER_RESISTANCE }
     public Kind kind=Kind.WITHER;
     public int remaining;
+    public boolean permanent;
     private boolean ownWeakness,ownVulnerable,ownSlow,ownCripple;
     { type=buffType.NEGATIVE; }
     public static NecroCurse find(Char target) { for (NecroCurse b:target.buffs(NecroCurse.class)) return b; return null; }
@@ -39,7 +40,13 @@ public class NecroCurse extends Buff {
         if(remaining<=0 || !target.isAlive()) {detach();return true;}
         Necromancy passive=Dungeon.hero.buff(Necromancy.class);
         if(passive!=null && target.alignment==Char.Alignment.ENEMY)passive.siphon(target);
-        spark();remaining--;spend(TICK);return true;
+        spark();
+        if(permanent){
+            if(kind==Kind.WITHER||kind==Kind.DECREPIFY)Buff.prolong(target,Weakness.class,5);
+            if(kind==Kind.WITHER)Buff.prolong(target,Vulnerable.class,5);
+            if(kind==Kind.DECREPIFY){Buff.prolong(target,Slow.class,5);Buff.prolong(target,Cripple.class,5);}
+        }else remaining--;
+        spend(TICK);return true;
     }
     @Override public void detach() {
         if(target!=null) { if(ownWeakness)Buff.detach(target,Weakness.class);if(ownVulnerable)Buff.detach(target,Vulnerable.class);if(ownSlow)Buff.detach(target,Slow.class);if(ownCripple)Buff.detach(target,Cripple.class); }
@@ -47,7 +54,7 @@ public class NecroCurse extends Buff {
     }
     @Override public int icon() {return BuffIndicator.HEX;}
     @Override public String name() {return Messages.get(NecroCurse.class,kind.name());}
-    @Override public String desc() {return Messages.get(NecroCurse.class,kind.name()+"_desc",remaining);}
-    @Override public void storeInBundle(Bundle b) {super.storeInBundle(b);b.put("kind",kind);b.put("remaining",remaining);b.put("owned",new boolean[]{ownWeakness,ownVulnerable,ownSlow,ownCripple});}
-    @Override public void restoreFromBundle(Bundle b) {super.restoreFromBundle(b);kind=b.getEnum("kind",Kind.class);remaining=b.getInt("remaining");boolean[] owned=b.getBooleanArray("owned");if(owned.length==4){ownWeakness=owned[0];ownVulnerable=owned[1];ownSlow=owned[2];ownCripple=owned[3];}}
+    @Override public String desc() {return permanent?Messages.get(NecroCurse.class,"permanent_desc",name()):Messages.get(NecroCurse.class,kind.name()+"_desc",remaining);}
+    @Override public void storeInBundle(Bundle b) {super.storeInBundle(b);b.put("permanent",permanent);b.put("kind",kind);b.put("remaining",remaining);b.put("owned",new boolean[]{ownWeakness,ownVulnerable,ownSlow,ownCripple});}
+    @Override public void restoreFromBundle(Bundle b) {super.restoreFromBundle(b);permanent=b.getBoolean("permanent");kind=b.getEnum("kind",Kind.class);remaining=b.getInt("remaining");boolean[] owned=b.getBooleanArray("owned");if(owned.length==4){ownWeakness=owned[0];ownVulnerable=owned[1];ownSlow=owned[2];ownCripple=owned[3];}}
 }

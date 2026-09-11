@@ -130,6 +130,9 @@ import com.shatteredpixel.shatteredpixeldungeon.items.trinkets.TrinketCatalyst;
 import com.shatteredpixel.shatteredpixeldungeon.items.trinkets.VialOfBlood;
 import com.shatteredpixel.shatteredpixeldungeon.items.trinkets.WondrousResin;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfNecrosis;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfGravity;
+import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBone;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBlastWave;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfCorrosion;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfCorruption;
@@ -407,8 +410,8 @@ public class Generator {
 					WandOfWarding.class,
 					WandOfTransfusion.class,
 					WandOfCorruption.class,
-					WandOfRegrowth.class };
-			WAND.defaultProbs = new float[]{ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 };
+					WandOfRegrowth.class , WandOfNecrosis.class, WandOfGravity.class, WandOfBone.class};
+			WAND.defaultProbs = new float[]{ 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3 , 3, 3, 3};
 			WAND.probs = WAND.defaultProbs.clone();
 			
 			//see generator.randomWeapon
@@ -434,8 +437,8 @@ public class Generator {
 					Dirk.class,
 					Sickle.class,
 					Pickaxe.class
-			};
-			WEP_T2.defaultProbs = new float[]{ 2, 2, 2, 2, 2, 2, 0 };
+			, com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneScythe.class};
+			WEP_T2.defaultProbs = new float[]{ 2, 2, 2, 2, 2, 2, 0 , 2};
 			WEP_T2.probs = WEP_T2.defaultProbs.clone();
 			
 			WEP_T3.classes = new Class<?>[]{
@@ -457,8 +460,8 @@ public class Generator {
 					AssassinsBlade.class,
 					Crossbow.class,
 					Katana.class
-			};
-			WEP_T4.defaultProbs = new float[]{ 2, 2, 2, 2, 2, 2, 2 };
+			, com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.ReapersScythe.class};
+			WEP_T4.defaultProbs = new float[]{ 2, 2, 2, 2, 2, 2, 2 , 2};
 			WEP_T4.probs = WEP_T4.defaultProbs.clone();
 			
 			WEP_T5.classes = new Class<?>[]{
@@ -469,8 +472,8 @@ public class Generator {
 					Greatshield.class,
 					Gauntlet.class,
 					WarScythe.class
-			};
-			WEP_T5.defaultProbs = new float[]{ 2, 2, 2, 2, 2, 2, 2 };
+			, com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.GraveScythe.class};
+			WEP_T5.defaultProbs = new float[]{ 2, 2, 2, 2, 2, 2, 2 , 2};
 			WEP_T5.probs = WEP_T5.defaultProbs.clone();
 			
 			//see Generator.randomArmor
@@ -485,9 +488,9 @@ public class Generator {
 					RogueArmor.class,
 					HuntressArmor.class,
 					DuelistArmor.class,
-					ClericArmor.class
+					ClericArmor.class, com.shatteredpixel.shatteredpixeldungeon.items.armor.BoneArmor.class
 			};
-			ARMOR.probs = new float[]{ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0 };
+			ARMOR.probs = new float[]{ 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0 };
 			
 			//see Generator.randomMissile
 			MISSILE.classes = new Class<?>[]{};
@@ -569,10 +572,10 @@ public class Generator {
 					SandalsOfNature.class,
 					SkeletonKey.class,
 					TalismanOfForesight.class,
-					TimekeepersHourglass.class,
+					TimekeepersHourglass.class, com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HourglassOfAshes.class,
 					UnstableSpellbook.class
 			};
-			ARTIFACT.defaultProbs = new float[]{ 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1 };
+			ARTIFACT.defaultProbs = new float[]{ 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 };
 			ARTIFACT.probs = ARTIFACT.defaultProbs.clone();
 
 			//Trinkets are unique like artifacts, but unlike them you can only have one at once
@@ -782,6 +785,7 @@ public class Generator {
 		floorSet = (int)GameMath.gate(0, floorSet, floorSetTierProbs.length-1);
 		
 		Armor a = (Armor)Reflection.newInstance(Category.ARMOR.classes[Random.chances(floorSetTierProbs[floorSet])]);
+        if(a instanceof MailArmor&&Random.Int(2)==0)a=new com.shatteredpixel.shatteredpixeldungeon.items.armor.BoneArmor();
 		a.random();
 		return a;
 	}

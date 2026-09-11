@@ -62,6 +62,7 @@ public class MobSpawner extends Actor {
 	public static ArrayList<Class<? extends Mob>> getMobRotation(int depth ){
 		ArrayList<Class<? extends Mob>> mobs = standardMobRotation( depth );
 		addRareMobs(depth, mobs);
+        if(depth>=11&&depth<=20&&Random.Int(10)==0)mobs.add(Hexcaster.class);
 		swapMobAlts(mobs);
 		Random.shuffle(mobs);
 		return mobs;

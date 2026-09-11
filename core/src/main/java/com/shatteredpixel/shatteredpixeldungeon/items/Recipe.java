@@ -198,6 +198,7 @@ public abstract class Recipe {
 	};
 	
 	private static Recipe[] twoIngredientRecipes = new Recipe[]{
+        new com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire.Recipe(),
 		new Blandfruit.CookFruit(),
 		new Bomb.EnhanceBomb(),
 		new UnstableBrew.Recipe(),

@@ -132,7 +132,7 @@ public class Corrosion extends Buff implements Hero.Doom, Buff.DOTbuff {
 	
 	@Override
 	public void onDeath() {
-		if (source == WandOfCorrosion.class){
+		if (source != null && WandOfCorrosion.class.isAssignableFrom(source)){
 			Badges.validateDeathFromFriendlyMagic();
 		}
 

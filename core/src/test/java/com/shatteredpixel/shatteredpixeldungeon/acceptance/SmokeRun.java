@@ -69,7 +69,7 @@ public class SmokeRun {
                             if(Dungeon.depth!=6) throw new AssertionError("Save/load depth mismatch");
                         }
                     }
-                    if(seed==0)v4Scenario();
+                    if(seed==0){v4Scenario();contentScenario();}
                     String line="PASS "+name+" seed="+seed+" floor=6 save/load=ok";
                     System.out.println(line); log.println(line);
                 } catch(Throwable error) {
@@ -86,6 +86,112 @@ public class SmokeRun {
         if(failures>0) System.exit(1);
     }
     private static void check(boolean condition,String message){if(!condition)throw new AssertionError(message);}
+
+    private static void contentScenario() throws Exception {
+        // Required content is exercised inside the established real-game smoke harness.
+        Dungeon.init();Dungeon.depth=1;Dungeon.branch=0;Dungeon.switchLevel(Dungeon.newLevel(),-1);clearArena();
+        Hero h=Dungeon.hero;for(Buff b:h.buffs())b.detach();h.belongings.weapon=null;h.belongings.armor=null;
+        h.HT=h.HP=200;h.STR=30;
+        int center=h.pos,w=Dungeon.level.width();
+        Rat primary=target(center+2),side=target(center+2+w),other=target(center+2-w);
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneScythe bone=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneScythe();
+        h.belongings.weapon=bone;check(bone.tier==2&&bone.min(0)==4&&bone.max(0)==14&&bone.reachFactor(h)==2,"Bone Scythe stats/reach");
+        bone.proc(h,primary,20);check(side.HP==190&&other.HP==190,"Bone Scythe perpendicular sweep");
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.ReapersScythe reaper=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.ReapersScythe();
+        reaper.proc(h,primary,20);check(side.HP==175&&other.HP==175&&reaper.min(0)==8&&reaper.max(0)==28,"Reaper sweep/stats");
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.GraveScythe grave=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.GraveScythe();
+        NecroCurse.apply(primary,NecroCurse.Kind.AMPLIFY,5);int boosted=grave.proc(h,primary,20);
+        check(boosted==22&&side.HP==153&&other.HP==153&&grave.min(0)==10&&grave.max(0)==36,"Grave curse bonus/sweep");
+        for(Buff b:primary.buffs())b.detach();
+        Weapon testWeapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger();
+        h.belongings.weapon=testWeapon;testWeapon.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Echo());h.HP=200;primary.HP=200;
+        check(h.attack(primary,1f,0f,Float.POSITIVE_INFINITY),"Echo attack hits");check(h.HP==200-Math.round((200-primary.HP)*.25f),"Echo reflects actual damage after mitigation");
+        h.HP=200;primary.HP=200;testWeapon.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.DarkBlessing());NecroCurse.apply(primary,NecroCurse.Kind.AMPLIFY,5);
+        check(h.attack(primary,1f,0f,Float.POSITIVE_INFINITY),"Dark Blessing attack hits");check(h.HP==200-Math.round((200-primary.HP)*.1f),"Dark Blessing recoil includes amplified damage");
+        for(Buff buff:primary.buffs())buff.detach();h.belongings.weapon=bone;testWeapon.enchant(null);
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Leech leech=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Leech();
+        int triggered=0;
+        for(int i=0;i<100;i++){
+            leech.proc(testWeapon,h,primary,20);
+            com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Leech.Recovery recovery=primary.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Leech.Recovery.class);
+            if(recovery!=null){primary.HP=100;recovery.recover(h,20);check(primary.HP==104,"Leech restores actual damage fraction");triggered++;}
+        }
+        check(triggered>10&&triggered<50,"Leech probabilistic proc");
+        BoneArmor boneArmor=new BoneArmor();ScaleArmor scale=new ScaleArmor();
+        check(boneArmor.tier==3&&boneArmor.DRMax(0)==scale.DRMax(0)+1&&boneArmor.DRMin(0)==scale.DRMin(0)+1,"Bone armor relative protection");
+        check(boneArmor.evasionFactor(h,10)==scale.evasionFactor(h,10)-1,"Bone armor evasion penalty");
+        com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering withering=new com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering();
+        h.belongings.armor=new LeatherArmor().inscribe(withering);h.updateHT(false);int max=h.HT;
+        com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering.arrive(h);Dungeon.depth++;
+        com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering.arrive(h);check(h.HT==max-1,"Withering descent");
+        Bundle armorSave=new Bundle();armorSave.put("armor",h.belongings.armor);h.belongings.armor=(Armor)armorSave.get("armor");h.updateHT(false);check(h.HT==max-1,"Withering survives serialization");
+        h.belongings.armor.inscribe(null);check(h.HT==max,"Withering removal restores maximum health");
+        boneArmor.inscribe(new com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering());h.belongings.armor=boneArmor;
+        com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering.arrive(h);Dungeon.depth++;com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering.arrive(h);check(h.HT==max,"Bone armor Withering immunity");
+        armorSave=new Bundle();armorSave.put("armor",ClassArmor.upgrade(h,boneArmor));check(((Armor)armorSave.get("armor")).boneConstruction,"Bone construction survives crown and serialization");
+        Armor dark=new LeatherArmor().inscribe(new com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.DarkBlessing());h.belongings.armor=dark;
+        check(dark.DRMax()==new LeatherArmor().DRMax()+3&&dark.DRMin()==new LeatherArmor().DRMin()+3,"Dark armor +3 protection");
+        h.HP=1;h.heal(10);check(h.HP==9,"Dark armor reduces burst healing");
+        for(int i=0;i<5;i++)h.heal(1);check(h.HP==13,"Dark armor reduces one-point regeneration without rounding it away");
+        h.belongings.armor=null;h.HT=h.HP=200;
+        clearArena();primary=target(center+2);side=target(center+2+w);other=target(center+2+2*w);
+        com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfNecrosis necrosis=new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfNecrosis();necrosis.upgrade(2);
+        necrosis.onZap(new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(center,primary.pos,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.MAGIC_BOLT));
+        check(primary.buff(Corrosion.class)!=null&&side.buff(Corrosion.class)!=null&&other.buff(Corrosion.class)!=null,"Necrosis chains to two additional adjacent enemies at level 2");
+        check(primary.buff(Corrosion.class).iconTextDisplay().equals("4")&&side.buff(Corrosion.class).iconTextDisplay().equals("3")&&other.buff(Corrosion.class).iconTextDisplay().equals("2"),"Necrosis minus one damage per hop");
+        clearArena();primary=target(center+4);
+        com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfGravity gravity=new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfGravity();
+        gravity.onZap(new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(center,primary.pos,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.MAGIC_BOLT));check(primary.pos==center+2,"Gravity pull two cells");
+        side=target(center+1);com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfGravity.pull(primary,center,2,gravity);
+        check(primary.pos==center+2&&primary.buff(Vertigo.class)!=null&&side.buff(Vertigo.class)!=null,"Gravity collision stops at blocker and gives both Vertigo");
+        clearArena();Dungeon.depth=1;int wallCell=center+2;
+        com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBone wandBone=new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBone();
+        wandBone.onZap(new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(center,wallCell,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.STOP_TARGET));
+        check(Dungeon.level.map[wallCell]==Terrain.BONE_WALL&&Dungeon.level.solid[wallCell]&&!Dungeon.level.passable[wallCell],"9: Wand of Bone blocks movement and LOS");
+        check(new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(center,center+3,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.MAGIC_BOLT).collisionPos==wallCell-1,"9: Wand of Bone stops bolts before the solid cell (upstream Ballistica)");
+        for(int i=0;i<5;i++)h.buff(BoneWalls.class).act();check(Dungeon.level.map[wallCell]==Terrain.EMPTY,"9: Wand wall expires after five turns");
+        BoneWalls.raise(wallCell,5);Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);h=Dungeon.hero;
+        check(Dungeon.level.map[wallCell]==Terrain.EMPTY&&Dungeon.level.boneOriginal.keyArray().length==0,"9: Wand wall cleanup on real save/reload");
+        BoneWalls.raise(wallCell,5);Level previousWallLevel=Dungeon.level;Dungeon.newLevel();check(previousWallLevel.map[wallCell]==Terrain.EMPTY&&previousWallLevel.boneOriginal.keyArray().length==0,"9: Wand of Bone reverts on actual level exit");Dungeon.switchLevel(previousWallLevel,h.pos);
+        System.out.println("TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load");
+        clearArena();center=h.pos;w=Dungeon.level.width();h.HT=h.HP=200;
+        Elemental.FireElemental fire=new Elemental.FireElemental();fire.pos=center+2;fire.sprite=new ElementalSprite.Fire(){@Override protected com.watabou.noosa.particles.Emitter createEmitter(){return new com.watabou.noosa.particles.Emitter();}};fire.sprite.link(fire);Dungeon.level.mobs.add(fire);Actor.add(fire);int before=fire.HP;
+        com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire soulfire=new com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire();soulfire.ignite(fire.pos,h);
+        com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Soulfire flame=(com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Soulfire)Dungeon.level.blobs.get(com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Soulfire.class);
+        check(flame!=null&&flame.volume==45&&fire.buff(Terror.class)!=null,"Soulfire 3x3 and terror");flame.act();check(fire.HP<before,"Soulfire bypasses fire elemental immunity");
+        java.util.ArrayList<Item> ingredients=new java.util.ArrayList<>(Arrays.asList(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame(),new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTerror()));
+        for(Item ingredient:ingredients)ingredient.identify();
+        com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire.Recipe recipe=new com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire.Recipe();check(recipe.testIngredients(ingredients)&&recipe.cost(ingredients)==6&&recipe.brew(ingredients) instanceof com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire,"Soulfire alchemy recipe");
+        clearArena();for(Buff b:h.buffs())b.detach();
+        com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HourglassOfAshes ashes=new com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HourglassOfAshes();h.belongings.artifact=ashes;h.belongings.misc=null;ashes.activate(h);
+        com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HourglassOfAshes.AshKeeper keeper=h.buff(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HourglassOfAshes.AshKeeper.class);
+        for(int i=0;i<29;i++)keeper.act();check(ashes.charges()==0,"Ashes no premature charge");keeper.act();check(ashes.charges()==1,"Ashes charge at 30 turns");
+        for(int i=0;i<300;i++)keeper.act();check(ashes.charges()==10,"Ashes charge cap");
+        h.HT=h.HP=200;h.damage(20,new Corrosion());check(ashes.level()==1&&ashes.turnsPerCharge()==28,"Ashes upgrades from Corrosion actually taken");
+        primary=target(center+2);side=target(center+3);Buff recent=Buff.prolong(primary,Bless.class,10),old=Buff.prolong(side,Bless.class,10);old.fixTime(5);Buff.prolong(primary,Weakness.class,10);
+        h.spendConstant(1);float time=h.cooldown();check(ashes.rewind(h)&&h.cooldown()==time-1,"Ashes refunds last action");
+        check(primary.buff(Bless.class)==null&&primary.buff(Weakness.class)!=null&&side.buff(Bless.class)!=null,"Ashes erases only recently gained positive buffs");
+        check(!ashes.rewind(h),"Ashes cannot immediately chain");h.spendConstant(1);check(!ashes.rewind(h),"Refunded time cannot charge another rewind");h.spendConstant(1);check(ashes.rewind(h),"Next paid action can be refunded");
+        Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);h=Dungeon.hero;
+        ashes=(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HourglassOfAshes)h.belongings.artifact;
+        check(ashes.level()==1&&ashes.charges()==8&&!ashes.rewind(h),"Ashes charges/upgrade/no-chain state persist");
+        clearArena();h.HT=h.HP=200;primary=target(h.pos+1);CursedVariant.apply(primary,NecroCurse.Kind.DECREPIFY);
+        check(primary.HT==260&&primary.buff(CursedVariant.class)!=null&&NecroCurse.find(primary).kind==NecroCurse.Kind.DECREPIFY,"Cursed variant health and own curse");
+        primary.attackProc(h,1);check(NecroCurse.find(h).kind==NecroCurse.Kind.DECREPIFY&&NecroCurse.find(h).remaining==5,"Cursed creature passes its curse on hit");
+        Bundle saved=new Bundle();saved.put("mob",primary);Rat restored=(Rat)saved.get("mob");check(restored.HT==260&&restored.buff(CursedVariant.class).kind==NecroCurse.Kind.DECREPIFY,"Cursed variant serialization does not multiply stats");
+        primary.buff(CursedVariant.class).drop();int loot=Dungeon.level.heaps.get(primary.pos).items.size();primary.buff(CursedVariant.class).drop();check(loot==1&&Dungeon.level.heaps.get(primary.pos).items.size()==1,"Cursed variant drops exactly one bonus item");
+        clearArena();Hexcaster hex=new Hexcaster();check(hex.HT==60&&hex.lootChance()==.25f&&hex.createLoot() instanceof com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand,"Hexcaster stats/loot");hex.curse(h);check(NecroCurse.find(h).kind==NecroCurse.Kind.AMPLIFY,"Hexcaster first curse");saved=new Bundle();saved.put("mob",hex);hex=(Hexcaster)saved.get("mob");hex.curse(h);check(NecroCurse.find(h).kind==NecroCurse.Kind.DECREPIFY,"Hexcaster alternation persists");
+        hex.pos=h.pos+1;hex.sprite=new HexcasterSprite();hex.sprite.link(hex);hex.sprite.visible=false;hex.state=hex.HUNTING;Dungeon.level.mobs.add(hex);Actor.add(hex);
+        java.lang.reflect.Method mobAct=Mob.class.getDeclaredMethod("act");mobAct.setAccessible(true);int distance=Dungeon.level.distance(hex.pos,h.pos);mobAct.invoke(hex);check(Dungeon.level.distance(hex.pos,h.pos)>distance,"Hexcaster flees adjacent hero using actual AI");
+        Dungeon.level.mobs.remove(hex);Actor.remove(hex);
+        for(Buff b:h.buffs())if(b instanceof NecroCurse||b instanceof Slow||b instanceof Cripple)b.detach();
+        Chainwarden boss=new Chainwarden();boss.pos=h.pos+4;boss.sprite=new ChainwardenSprite();boss.sprite.link(boss);Dungeon.level.mobs.add(boss);Actor.add(boss);
+        check(boss.HT==new Tengu().HT&&boss.attackSkill(h)==new Tengu().attackSkill(h),"Chainwarden retains Tengu stats");int initial=h.pos;boss.advanceChains(3);check(h.pos==initial,"Chainwarden waits four turns");boss.advanceChains(1);check(h.pos==initial+2,"Chainwarden pulls two cells at fourth turn");
+        com.shatteredpixel.shatteredpixeldungeon.levels.traps.ChainTrap trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ChainTrap();trap.set(h.pos);trap.activate();check(h.buff(Roots.class)!=null&&h.buff(Roots.class).cooldown()==2,"Chain Trap roots two turns");
+        for(Class<?> kind:new Class<?>[]{com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfNecrosis.class,com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfGravity.class,com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBone.class}){int index=Arrays.asList(Generator.Category.WAND.classes).indexOf(kind);check(index>=0&&Generator.Category.WAND.defaultProbs[index]==3,"New wand generator weight");}
+        check(Arrays.asList(Weapon.Enchantment.curses).contains(com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Echo.class)&&Arrays.asList(Armor.Glyph.curses).contains(com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering.class),"New curse pools");
+        System.out.println("PASS CONTENT "+h.heroClass+": curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden");
+    }
     private static void v4Scenario() throws Exception {
         // Exercise the merge boundary: actual City/Vault generation, serialized quest and
         // equipment exchange. Dialog navigation and a played boss fight are separate checks.

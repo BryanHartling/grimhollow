@@ -62,7 +62,7 @@ public class WaterOfHealth extends WellWater {
 			Healing healing = Buff.affect(hero, Healing.class);
 			healing.setHeal(hero.HT, 0, VialOfBlood.maxHealPerTurn(), true);
 		} else {
-			hero.HP = hero.HT;
+			hero.heal(hero.HT-hero.HP);
 			hero.sprite.emitter().start(Speck.factory(Speck.HEALING), 0.4f, 4);
 			hero.sprite.showStatusWithIcon(CharSprite.POSITIVE, Integer.toString(hero.HT), FloatingText.HEALING);
 		}

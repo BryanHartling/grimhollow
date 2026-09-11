@@ -98,7 +98,7 @@ public class Sungrass extends Plant {
 
 				if (target.HP < target.HT) {
 
-					target.HP += healThisTurn;
+					target.heal(healThisTurn);
 					target.sprite.showStatusWithIcon(CharSprite.POSITIVE, Integer.toString(healThisTurn), FloatingText.HEALING);
 
 					if (target.HP >= target.HT) {

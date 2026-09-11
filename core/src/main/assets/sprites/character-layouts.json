@@ -15,6 +15,10 @@
     48,
     60
   ],
+  "sprites/chainwarden.png": [
+    96,
+    96
+  ],
   "sprites/crab.png": [
     48,
     60
@@ -136,6 +140,10 @@
     60
   ],
   "sprites/hero_warrior.png": [
+    48,
+    60
+  ],
+  "sprites/hexcaster.png": [
     48,
     60
   ],

@@ -14,7 +14,7 @@ public class Necromancy extends Buff {
     private final java.util.HashSet<Integer> wardFloors=new java.util.HashSet<>();
     private float siphonTurn=-100;
     public static int points(Talent talent) { return Dungeon.hero == null ? 0 : Dungeon.hero.pointsInTalent(talent); }
-    public static void heal(int amount) { if (Dungeon.hero != null && Dungeon.hero.isAlive()) Dungeon.hero.HP=Math.min(Dungeon.hero.HT,Dungeon.hero.HP+Math.max(0,amount)); }
+    public static void heal(int amount) { if (Dungeon.hero != null && Dungeon.hero.isAlive()) Dungeon.hero.heal(Math.max(0,amount)); }
     public static void onFood() { for (NecroSkeleton m : NecroSkeleton.minions()) m.HP=Math.min(m.HT,m.HP+Math.round(m.HT*.25f*points(Talent.BONE_MEAL))); }
     public static void onHit(Char enemy) {
         int p=points(Talent.NECROTIC_TOUCH);

@@ -860,7 +860,7 @@ public abstract class Mob extends Char {
 
 				if (Dungeon.hero.HP < Dungeon.hero.HT) {
 					int heal = (int)Math.ceil(restoration * 0.4f);
-					Dungeon.hero.HP = Math.min(Dungeon.hero.HT, Dungeon.hero.HP + heal);
+					Dungeon.hero.heal(heal);
 					Dungeon.hero.sprite.showStatusWithIcon(CharSprite.POSITIVE, Integer.toString(heal), FloatingText.HEALING);
 				}
 			}
@@ -1008,6 +1008,8 @@ public abstract class Mob extends Char {
 			}
 
 			rollToDropLoot();
+            com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant variant=buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant.class);
+            if(variant!=null)variant.drop();
 
 			if (cause == Dungeon.hero || cause instanceof Weapon || cause instanceof Weapon.Enchantment){
 				if (Dungeon.hero.hasTalent(Talent.LETHAL_MOMENTUM)

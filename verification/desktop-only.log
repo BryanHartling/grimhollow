@@ -963,3 +963,131 @@ RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
 TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
 PASS: Sewer scene renders with dynamic lighting on and off.
 [Controllers] removed manager for application, 0 managers active
+
+STAGE 8 FINAL: content-render-0.txt
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+ITERATION ROOM: seed=418 bounds=14,29,22,37 water=18 doors=2 rubble=2 wallTorch=1 torchCell=1031 bridgeCell=1208 heroCell=1174 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 24: heroes=9 mob sprites=114 failures=0
+TEST 25: items=381 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35: packaged classes/resources and source contact scan failures=0
+TESTS 24-26, 34-36 PASS
+TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0
+TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.8173ms p95=1.2131ms failures=0
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+Wall/floor distinctness: mean luminance difference=0.2285, representative pHash bits=36.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.1649 PASS
+Adjacent water/floor contrast: median luminance difference=0.1602, median hue difference=34.9245 PASS
+No boundary halo: outer minus inner mean=-0.1612 PASS
+Visible-cell value range: visible mean=0.1500, visible std=0.1300 PASS
+Hero / rat / item readability: hero bbox contrast=0.3484, rat bbox contrast=0.3034, item bbox contrast=0.4564 PASS
+TEST 40: region=sewers measurements=6 failures=0
+
+
+STAGE 8 FINAL: content-render-1.txt
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+ITERATION ROOM: seed=417 bounds=29,25,37,32 water=7 doors=1 rubble=1 wallTorch=1 torchCell=1056 bridgeCell=1181 heroCell=1181 terrainEdits=0
+[GAME] @@ You descend to floor 6 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+Wall/floor distinctness: mean luminance difference=0.2371, representative pHash bits=34.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.3633 PASS
+Adjacent water/floor contrast: median luminance difference=0.1490, median hue difference=121.8960 PASS
+No boundary halo: outer minus inner mean=-0.0962 PASS
+Visible-cell value range: visible mean=0.1235, visible std=0.1262 PASS
+Hero / rat / item readability: hero bbox contrast=0.3469, rat bbox contrast=0.2738, item bbox contrast=0.3148 PASS
+TEST 42: region=prison measurements=6 failures=0
+
+
+STAGE 8 FINAL: content-render-2.txt
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+ITERATION ROOM: seed=422 bounds=29,29,35,35 water=5 doors=2 rubble=4 wallTorch=1 torchCell=1309 bridgeCell=1440 heroCell=1528 terrainEdits=0
+[GAME] @@ You descend to floor 11 of the dungeon.
+[GAME] ** The ground seems especially treacherous here.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+Wall/floor distinctness: mean luminance difference=0.2034, representative pHash bits=24.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.7062 PASS
+Adjacent water/floor contrast: median luminance difference=0.1858, median hue difference=44.3012 PASS
+No boundary halo: outer minus inner mean=-0.1333 PASS
+Visible-cell value range: visible mean=0.1322, visible std=0.1255 PASS
+Hero / rat / item readability: hero bbox contrast=0.2664, rat bbox contrast=0.2825, item bbox contrast=0.5012 PASS
+TEST 42: region=caves measurements=6 failures=0
+
+
+STAGE 8 FINAL: content-render-3.txt
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+ITERATION ROOM: seed=426 bounds=7,10,14,18 water=12 doors=3 rubble=1 wallTorch=1 torchCell=332 bridgeCell=458 heroCell=362 terrainEdits=0
+[GAME] @@ You descend to floor 16 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+Wall/floor distinctness: mean luminance difference=0.1805, representative pHash bits=30.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.8079 PASS
+Adjacent water/floor contrast: median luminance difference=0.1846, median hue difference=52.2909 PASS
+No boundary halo: outer minus inner mean=-0.0804 PASS
+Visible-cell value range: visible mean=0.1461, visible std=0.1360 PASS
+Hero / rat / item readability: hero bbox contrast=0.3745, rat bbox contrast=0.2799, item bbox contrast=0.5906 PASS
+TEST 42: region=city measurements=6 failures=0
+
+
+STAGE 8 FINAL: content-render-4.txt
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+ITERATION ROOM: seed=454 bounds=26,23,33,28 water=4 doors=2 rubble=1 wallTorch=1 torchCell=1178 bridgeCell=1329 heroCell=1329 terrainEdits=0
+[GAME] @@ You descend to floor 21 of the dungeon.
+[GAME] -- You feel that there's a source of demonic energy above you...
+[GAME] ** You hear water splashing around you.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+Wall/floor distinctness: mean luminance difference=0.0450, representative pHash bits=26.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.9375 PASS
+Adjacent water/floor contrast: median luminance difference=0.0721, median hue difference=129.5329 PASS
+No boundary halo: outer minus inner mean=-0.0578 PASS
+Visible-cell value range: visible mean=0.0646, visible std=0.1010 PASS
+Hero / rat / item readability: hero bbox contrast=0.2244, rat bbox contrast=0.2331, item bbox contrast=0.7547 PASS
+TEST 42: region=halls measurements=6 failures=0
+
+
+STAGE 8 FINAL: content-title.txt
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[Controllers] removed manager for application, 0 managers active

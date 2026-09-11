@@ -1853,3 +1853,315 @@ For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/comman
 BUILD SUCCESSFUL in 1m 18s
 55 actionable tasks: 8 executed, 47 up-to-date
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+Stage 8 initial verification (failure retained)
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :services:news:shatteredNews:processResources NO-SOURCE
+> Task :services:updates:githubUpdates:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :services:updates:debugUpdates:processResources NO-SOURCE
+> Task :services:news:debugNews:processResources NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :services:updates:githubUpdates:compileJava UP-TO-DATE
+> Task :services:news:shatteredNews:compileJava UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :services:jar
+> Task :SPD-classes:jar
+> Task :services:news:shatteredNews:classes UP-TO-DATE
+> Task :services:updates:githubUpdates:classes UP-TO-DATE
+> Task :services:updates:githubUpdates:jar
+> Task :services:news:shatteredNews:jar
+> Task :services:news:debugNews:compileJava UP-TO-DATE
+> Task :services:updates:debugUpdates:compileJava UP-TO-DATE
+> Task :services:updates:debugUpdates:classes UP-TO-DATE
+> Task :services:news:debugNews:classes UP-TO-DATE
+> Task :services:updates:debugUpdates:jar
+> Task :services:news:debugNews:jar
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets
+> Task :android:compressDebugAssets
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :desktop:processResources
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest
+> Task :android:processDebugManifest
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:processDebugManifestForPackage
+> Task :android:processDebugResources
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :desktop:compileJava
+> Task :desktop:classes
+
+> Task :core:compileTestJava FAILED
+C:\Users\Hartl\Documents\grimhollow\core\src\test\java\com\shatteredpixel\shatteredpixeldungeon\acceptance\SmokeRun.java:151: error: cannot find symbol
+        check(Dungeon.level.map[wallCell]==Terrain.EMPTY&&Dungeon.level.boneOriginal.size()==0,"9: Wand wall cleanup on real save/reload");
+                                                                                    ^
+  symbol:   method size()
+  location: variable boneOriginal of type SparseArray<Integer>
+C:\Users\Hartl\Documents\grimhollow\core\src\test\java\com\shatteredpixel\shatteredpixeldungeon\acceptance\SmokeRun.java:156: error: incompatible types: Blob cannot be converted to Soulfire
+        com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Soulfire flame=Dungeon.level.blobs.get(com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Soulfire.class);
+                                                                                                    ^
+2 errors
+
+> Task :android:compileDebugJavaWithJavac
+> Task :desktop:release
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':core:compileTestJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  C:\Users\Hartl\Documents\grimhollow\core\src\test\java\com\shatteredpixel\shatteredpixeldungeon\acceptance\SmokeRun.java:156: error: incompatible types: Blob cannot be converted to Soulfire
+          com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Soulfire flame=Dungeon.level.blobs.get(com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Soulfire.class);
+                                                                                                      ^
+  C:\Users\Hartl\Documents\grimhollow\core\src\test\java\com\shatteredpixel\shatteredpixeldungeon\acceptance\SmokeRun.java:151: error: cannot find symbol
+          check(Dungeon.level.map[wallCell]==Terrain.EMPTY&&Dungeon.level.boneOriginal.size()==0,"9: Wand wall cleanup on real save/reload");
+                                                                                      ^
+    symbol:   method size()
+    location: variable boneOriginal of type SparseArray<Integer>
+  2 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 1m 38s
+46 actionable tasks: 21 executed, 25 up-to-date
+
+STAGE 8 FINAL: content-build-final.txt
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :services:news:shatteredNews:processResources NO-SOURCE
+> Task :services:updates:githubUpdates:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :services:updates:debugUpdates:processResources NO-SOURCE
+> Task :services:news:debugNews:processResources NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:news:shatteredNews:compileJava UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :services:updates:githubUpdates:compileJava UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :services:news:shatteredNews:classes UP-TO-DATE
+> Task :services:updates:githubUpdates:classes UP-TO-DATE
+> Task :services:updates:githubUpdates:jar UP-TO-DATE
+> Task :services:news:shatteredNews:jar UP-TO-DATE
+> Task :services:updates:debugUpdates:compileJava UP-TO-DATE
+> Task :services:updates:debugUpdates:classes UP-TO-DATE
+> Task :services:news:debugNews:compileJava UP-TO-DATE
+> Task :services:news:debugNews:classes UP-TO-DATE
+> Task :services:updates:debugUpdates:jar UP-TO-DATE
+> Task :services:news:debugNews:jar UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:compressDebugAssets
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :desktop:processResources
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :core:compileTestJava
+> Task :core:testClasses
+> Task :android:compileDebugJavaWithJavac
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource
+> Task :android:dexBuilderDebug
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :core:test
+> Task :desktop:release
+> Task :desktop:dist
+> Task :android:mergeLibDexDebug
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 44s
+55 actionable tasks: 15 executed, 40 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+
+STAGE 8 FINAL: content-build-lighting.txt
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :services:news:shatteredNews:processResources NO-SOURCE
+> Task :services:updates:githubUpdates:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :services:updates:debugUpdates:processResources NO-SOURCE
+> Task :services:news:debugNews:processResources NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :services:news:shatteredNews:compileJava UP-TO-DATE
+> Task :services:updates:githubUpdates:compileJava UP-TO-DATE
+> Task :services:news:shatteredNews:classes UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :services:news:shatteredNews:jar UP-TO-DATE
+> Task :services:updates:githubUpdates:classes UP-TO-DATE
+> Task :services:updates:githubUpdates:jar UP-TO-DATE
+> Task :services:updates:debugUpdates:compileJava UP-TO-DATE
+> Task :services:news:debugNews:compileJava UP-TO-DATE
+> Task :services:updates:debugUpdates:classes UP-TO-DATE
+> Task :services:news:debugNews:classes UP-TO-DATE
+> Task :services:updates:debugUpdates:jar UP-TO-DATE
+> Task :services:news:debugNews:jar UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :core:compileJava
+> Task :core:classes
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes UP-TO-DATE
+> Task :core:jar
+> Task :core:compileTestJava UP-TO-DATE
+> Task :core:testClasses UP-TO-DATE
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :core:test
+> Task :desktop:release
+> Task :desktop:dist
+> Task :android:mergeLibDexDebug
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 40s
+55 actionable tasks: 8 executed, 47 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html

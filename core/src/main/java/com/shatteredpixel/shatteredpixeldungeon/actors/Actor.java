@@ -73,6 +73,8 @@ public abstract class Actor implements Bundlable {
 		spendConstant( time );
 	}
 
+	protected final void refundTime(float amount){time-=amount;}
+
 	public void spendToWhole(){
 		time = (float)Math.ceil(time);
 	}

@@ -268,6 +268,7 @@ public class Hero extends Char {
 			HT += buff(ElixirOfMight.HTBoost.class).boost();
 		}
 		
+		HT=Math.max(1,HT-com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering.penalty(this));
 		if (boostHP){
 			HP += Math.max(HT - curHT, 0);
 		}
@@ -306,6 +307,7 @@ public class Hero extends Char {
 	public void storeInBundle( Bundle bundle ) {
 
 		super.storeInBundle( bundle );
+        bundle.put("ashes_last_cost",ashesLastCost);bundle.put("ashes_debt",ashesDebt);
 
 		bundle.put( CLASS, heroClass );
 		bundle.put( SUBCLASS, subClass );
@@ -334,6 +336,7 @@ public class Hero extends Char {
 		HTBoost = bundle.getInt(HTBOOST);
 
 		super.restoreFromBundle( bundle );
+        ashesLastCost=bundle.getFloat("ashes_last_cost");ashesDebt=bundle.getFloat("ashes_debt");
 
 		heroClass = bundle.getEnum( CLASS, HeroClass.class );
 		subClass = bundle.getEnum( SUBCLASS, HeroSubClass.class );
@@ -818,10 +821,24 @@ public class Hero extends Char {
 
 	@Override
 	public void spendConstant(float time) {
-		super.spendConstant(time);
+        float before=cooldown();
+        super.spendConstant(time);
+        float paid=cooldown()-before;
+        if(paid>0){
+            if(ashesDebt>0){ashesDebt=Math.max(0,ashesDebt-paid);ashesLastCost=0;}
+            else ashesLastCost=paid;
+        }
 	}
 
-	public void spendAndNextConstant(float time ) {
+	private float ashesLastCost,ashesDebt;
+    public boolean canRefundAshes(){return ashesLastCost>0&&ashesDebt==0;}
+    public void refundAshes(){
+        if(!canRefundAshes())return;
+        float cost=ashesLastCost;ashesLastCost=0;ashesDebt=cost;
+        // Direct actor time prevents Time Freeze from turning this into a second resource.
+        refundTime(cost);
+    }
+    public void spendAndNextConstant(float time ) {
 		busy();
 		spendConstant( time );
 		next();
@@ -1686,6 +1703,10 @@ public class Hero extends Char {
 		int effectiveDamage = preHP - postHP;
 
 		if (effectiveDamage <= 0) return;
+        if(src instanceof com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Corrosion){
+            com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HourglassOfAshes.AshKeeper keeper=buff(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HourglassOfAshes.AshKeeper.class);
+            if(keeper!=null)keeper.absorb(effectiveDamage);
+        }
 
 		if (buff(Challenge.DuelParticipant.class) != null){
 			buff(Challenge.DuelParticipant.class).addDamage(effectiveDamage);

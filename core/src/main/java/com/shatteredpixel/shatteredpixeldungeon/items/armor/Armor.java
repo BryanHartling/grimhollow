@@ -122,6 +122,9 @@ public class Armor extends EquipableItem {
 	protected BrokenSeal seal;
 	
 	public int tier;
+    public boolean boneConstruction;
+    private boolean leatherVariant;
+    private void updateAppearance(){if(leatherVariant){if(getClass()==LeatherArmor.class)image=ItemSpriteSheet.ARMOR_LEATHER_OCHRE;else if(getClass()==MailArmor.class)image=ItemSpriteSheet.ARMOR_LEATHER_ASH;}}
 	
 	private static final int USES_TO_ID = 10;
 	private float usesLeftToID = USES_TO_ID;
@@ -143,6 +146,7 @@ public class Armor extends EquipableItem {
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
+        bundle.put("bone_construction",boneConstruction);bundle.put("leather_variant",leatherVariant);
         bundle.put("inscribed",inscribed);
 		bundle.put( USES_LEFT_TO_ID, usesLeftToID );
 		bundle.put( AVAILABLE_USES, availableUsesToID );
@@ -157,6 +161,7 @@ public class Armor extends EquipableItem {
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		super.restoreFromBundle(bundle);
+        boneConstruction=bundle.getBoolean("bone_construction")||this instanceof BoneArmor;leatherVariant=bundle.getBoolean("leather_variant");updateAppearance();
         inscribed=(Glyph)bundle.get("inscribed");
 		usesLeftToID = bundle.getInt( USES_LEFT_TO_ID );
 		availableUsesToID = bundle.getInt( AVAILABLE_USES );
@@ -304,6 +309,7 @@ public class Armor extends EquipableItem {
 
 	@Override
 	public void activate(Char ch) {
+        if(ch instanceof Hero)com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering.arrive((Hero)ch);
 		if (seal != null) Buff.affect(ch, BrokenSeal.WarriorShield.class).setArmor(this);
 	}
 
@@ -357,6 +363,7 @@ public class Armor extends EquipableItem {
 		if (super.doUnequip( hero, collect, single )) {
 
 			hero.belongings.armor = null;
+            if(glyph instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering)((com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering)glyph).removed();hero.updateHT(false);
 			((HeroSprite)hero.sprite).updateArmor();
 
 			BrokenSeal.WarriorShield sealBuff = hero.buff(BrokenSeal.WarriorShield.class);
@@ -377,7 +384,7 @@ public class Armor extends EquipableItem {
 	}
 
 	public final int DRMax(){
-		return DRMax(buffedLvl())+reinforceFlat;
+		return DRMax(buffedLvl())+reinforceFlat+(((glyph instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.DarkBlessing||inscribed instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.DarkBlessing)&&(Dungeon.hero==null||!isEquipped(Dungeon.hero)||Dungeon.hero.buff(MagicImmune.class)==null))?3:0);
 	}
 
 	public int DRMax(int lvl){
@@ -385,7 +392,7 @@ public class Armor extends EquipableItem {
 			return 1 + tier + lvl + augment.defenseFactor(lvl);
 		}
 
-		int max = tier * (2 + lvl) + augment.defenseFactor(lvl);
+		int max = (boneConstruction?4:tier) * (2 + lvl) + augment.defenseFactor(lvl)+(boneConstruction?1:0);
 		if (lvl > max){
 			return ((lvl - max)+1)/2;
 		} else {
@@ -394,7 +401,7 @@ public class Armor extends EquipableItem {
 	}
 
 	public final int DRMin(){
-		return DRMin(buffedLvl())+reinforceFlat;
+		return DRMin(buffedLvl())+reinforceFlat+(((glyph instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.DarkBlessing||inscribed instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.DarkBlessing)&&(Dungeon.hero==null||!isEquipped(Dungeon.hero)||Dungeon.hero.buff(MagicImmune.class)==null))?3:0);
 	}
 
 	public int DRMin(int lvl){
@@ -406,7 +413,7 @@ public class Armor extends EquipableItem {
 		if (lvl >= max){
 			return (lvl - max);
 		} else {
-			return lvl;
+			return lvl+(boneConstruction?1:0);
 		}
 	}
 
@@ -431,7 +438,7 @@ public class Armor extends EquipableItem {
 			}
 		}
 		
-		return evasion + augment.evasionFactor(buffedLvl());
+		return evasion + augment.evasionFactor(buffedLvl())-(boneConstruction?1:0);
 	}
 	
 	public float speedFactor( Char owner, float speed ){
@@ -657,6 +664,7 @@ public class Armor extends EquipableItem {
 
 	@Override
 	public Item random() {
+        if(getClass()==LeatherArmor.class||getClass()==MailArmor.class){leatherVariant=Random.Int(2)==0;updateAppearance();}
 		//+0: 75% (3/4)
 		//+1: 20% (4/20)
 		//+2: 5%  (1/20)
@@ -730,6 +738,7 @@ public class Armor extends EquipableItem {
 	public Armor inscribe( Glyph glyph ) {
 		if (glyph == null || !glyph.curse()) curseInfusionBonus = false;
 		this.glyph = glyph;
+        if(isEquipped(Dungeon.hero))com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering.arrive(Dungeon.hero);
 		updateQuickslot();
 		//the hero needs runic transference to actually transfer, but we still attach the glyph here
 		// in case they take that talent in the future
@@ -816,7 +825,7 @@ public class Armor extends EquipableItem {
 		public static final Class<?>[] curses = new Class<?>[]{
 				AntiEntropy.class, Corrosion.class, Displacement.class, Metabolism.class,
 				Multiplicity.class, Stench.class, Overgrowth.class, Bulk.class
-		};
+		, com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering.class, com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.DarkBlessing.class};
 		
 		public abstract int proc( Armor armor, Char attacker, Char defender, int damage );
 
@@ -917,7 +926,8 @@ public class Armor extends EquipableItem {
 			if (glyphs.isEmpty()) {
 				return random();
 			} else {
-				return (Glyph) Reflection.newInstance(Random.element(glyphs));
+				float[] weights=new float[glyphs.size()];for(int i=0;i<weights.length;i++)weights[i]=glyphs.get(i)==com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.DarkBlessing.class?1:3;
+                return (Glyph) Reflection.newInstance(glyphs.get(Random.chances(weights)));
 			}
 		}
 		

@@ -119,7 +119,9 @@ public class Warlock extends Mob {
 			int dmg = Random.NormalIntRange( 12, 18 );
 			dmg = Math.round(dmg * AscensionChallenge.statModifier(this));
 
-			enemy.damage( dmg, new DarkBolt() );
+			com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant variant=buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant.class);
+            if(variant!=null)variant.onHit(enemy);
+            enemy.damage( dmg, new DarkBolt() );
 			
 			if (enemy == Dungeon.hero && !enemy.isAlive()) {
 				Badges.validateDeathFromEnemyMagic();

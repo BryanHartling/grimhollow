@@ -64,7 +64,11 @@ public class Buff extends Actor {
 		return new HashSet<>(immunities);
 	}
 	
-	public float trapPower=1;
+	private float appliedAt;
+    private boolean hasAppliedTime;
+    public float age(){return Math.max(0,Actor.now()-appliedAt);}
+    @Override public void fixTime(float decrement){super.fixTime(decrement);appliedAt-=decrement;}
+    public float trapPower=1;
     public boolean attachTo( Char target ) {
         trapPower=Math.max(trapPower,com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap.POWER.get());
 
@@ -73,6 +77,7 @@ public class Buff extends Actor {
 		}
 		
 		this.target = target;
+        if(!hasAppliedTime){appliedAt=Actor.now();hasAppliedTime=true;}
 
 		if (target.add( this )){
 			if (target.sprite != null) fx( true );
@@ -149,6 +154,7 @@ public class Buff extends Actor {
 	@Override
 	public void storeInBundle(Bundle bundle) {
 		super.storeInBundle(bundle);
+        bundle.put("applied_at",appliedAt);
         if(trapPower>1)bundle.put("trap_power",trapPower);
 		if (mnemonicExtended) bundle.put(MNEMONIC_EXTENDED, mnemonicExtended);
 	}
@@ -156,6 +162,7 @@ public class Buff extends Actor {
 	@Override
 	public void restoreFromBundle(Bundle bundle) {
 		super.restoreFromBundle(bundle);
+        hasAppliedTime=bundle.contains("applied_at");appliedAt=bundle.getFloat("applied_at");
         trapPower=bundle.contains("trap_power")?bundle.getFloat("trap_power"):1;
 		if (bundle.contains(MNEMONIC_EXTENDED)) {
 			mnemonicExtended = bundle.getBoolean(MNEMONIC_EXTENDED);

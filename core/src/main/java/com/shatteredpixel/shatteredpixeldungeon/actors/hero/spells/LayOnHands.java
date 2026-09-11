@@ -118,7 +118,7 @@ public class LayOnHands extends TargetedClericSpell {
 			if (ch.HT - ch.HP < totalHeal){
 				totalBarrier = totalHeal - (ch.HT - ch.HP);
 				if (ch.HP != ch.HT) {
-					ch.HP = ch.HT;
+					ch.heal(ch.HT-ch.HP);
 					ch.sprite.showStatusWithIcon(CharSprite.POSITIVE, Integer.toString(totalHeal - totalBarrier), FloatingText.HEALING);
 				}
 				if (totalBarrier > 0) {
@@ -131,7 +131,7 @@ public class LayOnHands extends TargetedClericSpell {
 					}
 				}
 			} else {
-				ch.HP = ch.HP + totalHeal;
+				ch.heal(totalHeal);
 				ch.sprite.showStatusWithIcon( CharSprite.POSITIVE, Integer.toString(totalHeal), FloatingText.HEALING );
 			}
 		}

@@ -2,7 +2,7 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), now incorporating **v4.0.0**, commit `2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`. The fork began at v3.3.8; upstream history and Java packages are preserved.
 
-**Stage 7: generated art and enhanced effects.** Nine heroes are playable: the six upstream classes plus Necromancer, Enchanter and Psychic, each with two subclasses, talents and three armor abilities. All 78 character atlases use native silhouettes; 369 item props, special-room materials and the title are rendered from committed Blender sources. Review [the characters](verification/characters.png) and [the items](verification/items.png). Enhanced effects add animated gas, fire, grass, spell rings, temporary walls and scorch marks; Settings → Display → Enhanced effects restores the previous rendering when disabled. Section 9 content remains pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.8 specification](GDD-one-shot-build-spec.md).
+**Stage 8: all numbered development stages implemented.** Nine heroes are playable: six upstream classes plus Necromancer, Enchanter and Psychic, each with two subclasses, talents and three armor abilities. All 80 character atlases use native silhouettes; 380 item props, special-room materials and the title come from the reproducible pipeline. Review [the characters](verification/characters.png), [the items](verification/items.png), and [the enhanced effects](verification/effects.png). Settings → Display → Enhanced effects restores the original rendering when disabled. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) for acceptance gaps and [the v0.8 specification](GDD-one-shot-build-spec.md).
 
 **v4 content integration, version 0.5.2-v4:** the Ambitious Imp's expanded Vault quest, elemental boss, hazards, patrol AI, quest loot and equipment exchange are included. Weapon pools include Venomous, Vorpal, Eldritch and Crystal enchantments plus Pressurized and Wondrous curses. Upstream item balance, combat, save/load, generation, UI and audio fixes are incorporated. The Vault mirror supports all nine heroes. Approved regional atlases remain unchanged; v4 special-room and item visuals regenerate from palette-vector sources. The visual correction replaces stamped liquid highlights with reflections from travelling surface waves; tests 39-42 now pass locally, including the five-room vision review. The complete art gate and all platform jobs passed at v0.6.0-art-complete.
 
@@ -20,7 +20,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-0.7.0.jar
+java -jar desktop\build\libs\desktop-1.0.0.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.
@@ -63,11 +63,11 @@ python tools/artgen/validate.py
 
 The optional desktop probe renders actual OpenGL frames into `.local/acceptance/` and exits. The Sewer probe uses test save slot 99. The default headless gate targets the three new heroes. `-PsmokeUpstream=true` runs all nine classes, including the six retained classes: generate floors 1–6, save/load, ten seeds each. This diagnostic does not count as new-class acceptance or simulated combat.
 
-The same headless gate now checks City/Vault generation, mirror rewards, equipment and charge restoration, save/load, quest completion/shop state and serialization of the six new enchantments/curses. `java -Dgrimhollow.vault=true -jar desktop/build/libs/desktop-0.5.2-v4.jar --smoke-sewers` exercises the real Vault arena trigger, its three rendered boss forms and scripted death/door unlocking. These checks do not constitute a player-driven quest or boss fight. Gradle 9.5.0 and Android Gradle Plugin 9.2.0 are inherited from v4 and run with the existing JDK 17/SDK 36 toolchain; use `--no-daemon` for every local Gradle invocation.
+The same headless gate now checks City/Vault generation, mirror rewards, equipment and charge restoration, save/load, quest completion/shop state and serialization of the six new enchantments/curses. `java -Dgrimhollow.vault=true -jar desktop/build/libs/desktop-1.0.0.jar --smoke-sewers` exercises the real Vault arena trigger, its three rendered boss forms and scripted death/door unlocking. These checks do not constitute a player-driven quest or boss fight. Gradle 9.5.0 and Android Gradle Plugin 9.2.0 are inherited from v4 and run with the existing JDK 17/SDK 36 toolchain; use `--no-daemon` for every local Gradle invocation.
 
 CI runs Linux/Windows desktop builds, JUnit, full art validation, Android packaging, and the headless gate. Failed gates remain active; jars upload even when a later acceptance gate fails. Artifact retention: 14 days.
 
-Art: [ART_PIPELINE.md](ART_PIPELINE.md). Dynamic lighting is in Settings → Display, upstream's graphics tab. Ambient, hero, decorative-wall and persistent blob sources are implemented; transient effects remain incomplete.
+Art: [ART_PIPELINE.md](ART_PIPELINE.md). Dynamic lighting is in Settings → Display, upstream's graphics tab. Ambient, hero, decorative-wall and persistent blob sources are implemented; enhanced effects are available independently of the dynamic-lighting toggle.
 
 ## Attribution
 
@@ -118,7 +118,17 @@ art. These previews do not certify the later regional art gates.
 Stage 6e keeps every special-room cell at 16 logical units while replacing its
 texture material at 64px. Talent and identification glyphs are native 32px
 pictograms. Item IDs, animation timing, collision and quest layouts retain v4
-contracts. `python tools/artgen/build.py` regenerates the complete 166-sheet
+contracts. `python tools/artgen/build.py` regenerates the complete 169-sheet
 inventory from source and committed caches; CI does not install Blender.
 
 Enhanced effects are generated by `python tools/artgen/build.py --render --asset effects`; CI rebuilds the single 1024×960 atlas from committed renders without Blender. `verification/effects.png` shows all strips. The existing desktop renderer runs tests 31–32 with `-Dgrimhollow.effectsTests=true --smoke-sewers`, including the disabled-path pixel comparison and 40-gas/10-fire timing.
+
+## Added dungeon content
+
+The ordinary dungeon pools now include Leech, Echo, Withering and rare Dark Blessing curses; Wands of Necrosis, Gravity and Bone; three tiered scythes; Bone Armor; cosmetic leather variants; and the Hourglass of Ashes. Craft Soulfire with a Potion of Liquid Flame, Scroll of Terror and six energy. Soulfire damages fire-immune creatures and frightens targets in its three-by-three area.
+
+The Hourglass holds ten charges and regenerates one every 30 turns, dropping by two turns per upgrade. One charge removes recently gained positive enemy buffs and refunds your last action. You must spend the refunded time before another paid action becomes eligible. Corrosion damage upgrades it, starting at 20 damage and adding ten to the next threshold each level.
+
+Eligible ordinary mobs have a 10% chance to be cursed, with 30% more health, a persistent self-curse, five-turn curse transmission on hit, and one extra floor-scaled loot item. Hexcasters appear as rare rotation additions on floors 11–20, alternate two ranged curses, retreat from melee, and drop a wand 25% of the time. Chainwarden replaces Tengu in 30% of floor-10 generations, retaining the arena and rewards while using rooting chain traps and a two-cell pull every four turns.
+
+The existing `core:smokeRun` gate also exercises the new content, including real Wand of Bone save/load cleanup, Soulfire against a fire elemental, Hourglass refund persistence, curse and armor serialization, and enemy mechanics. These scripted checks are distinct from a complete player-driven campaign and Android device testing.

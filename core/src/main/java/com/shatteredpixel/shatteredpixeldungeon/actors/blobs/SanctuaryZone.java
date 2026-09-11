@@ -21,7 +21,7 @@ public class SanctuaryZone extends Blob {
         for(int cell=0;cell<cur.length;cell++)if(Dungeon.level.distance(center,cell)<=radius&&Dungeon.level.passable[cell]){
             off[cell]=Math.max(0,remaining);volume+=off[cell];area.union(cell%Dungeon.level.width(),cell/Dungeon.level.width());
             Char ch=Actor.findChar(cell);if(ch==null)continue;
-            if(ch.alignment==Char.Alignment.ALLY){if(turn%2==0)ch.HP=Math.min(ch.HT,ch.HP+1);}
+            if(ch.alignment==Char.Alignment.ALLY){if(turn%2==0)ch.heal(1);}
             else if(ch.alignment==Char.Alignment.ENEMY){Buff.prolong(ch,Slow.class,2);Buff.prolong(ch,Hex.class,2);int p=Dungeon.hero.pointsInTalent(Talent.CONSECRATED);if(p>0)Buff.affect(ch,Corrosion.class).set(2,p);Buff.prolong(ch,EnchanterMagic.EnchanterDamage.class,3);}
         }
     }

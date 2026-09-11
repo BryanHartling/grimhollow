@@ -1,7 +1,7 @@
 {
   "dimensions": [
     512,
-    1056
+    1088
   ],
   "frame": [
     32,
@@ -4805,6 +4805,149 @@
       "secondary": "5A4630",
       "accent": "E4C76A",
       "variant": 2
+    },
+    {
+      "index": 526,
+      "name": "WAND_NECROSIS",
+      "aliases": [
+        "WAND_NECROSIS"
+      ],
+      "kind": "wand",
+      "seed": 2716027590,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 527,
+      "name": "WAND_GRAVITY",
+      "aliases": [
+        "WAND_GRAVITY"
+      ],
+      "kind": "wand",
+      "seed": 1074970267,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "9D6BD1",
+      "variant": 3
+    },
+    {
+      "index": 528,
+      "name": "WAND_BONE",
+      "aliases": [
+        "WAND_BONE"
+      ],
+      "kind": "wand",
+      "seed": 1920825112,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 529,
+      "name": "SOULFIRE",
+      "aliases": [
+        "SOULFIRE"
+      ],
+      "kind": "tablet",
+      "seed": 1264521218,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 530,
+      "name": "BONE_SCYTHE",
+      "aliases": [
+        "BONE_SCYTHE"
+      ],
+      "kind": "scythe",
+      "seed": 1261618546,
+      "primary": "C9BFA8",
+      "secondary": "5A4630",
+      "accent": "7BB33B",
+      "variant": 2
+    },
+    {
+      "index": 531,
+      "name": "REAPER_SCYTHE",
+      "aliases": [
+        "REAPER_SCYTHE"
+      ],
+      "kind": "scythe",
+      "seed": 2160889025,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "6FD3E0",
+      "variant": 1
+    },
+    {
+      "index": 532,
+      "name": "GRAVE_SCYTHE",
+      "aliases": [
+        "GRAVE_SCYTHE"
+      ],
+      "kind": "scythe",
+      "seed": 1562150469,
+      "primary": "565B62",
+      "secondary": "5A4630",
+      "accent": "2C2F33",
+      "variant": 1
+    },
+    {
+      "index": 533,
+      "name": "ARMOR_BONE",
+      "aliases": [
+        "ARMOR_BONE"
+      ],
+      "kind": "armor",
+      "seed": 3622427900,
+      "primary": "C9BFA8",
+      "secondary": "565B62",
+      "accent": "7BB33B",
+      "variant": 0
+    },
+    {
+      "index": 534,
+      "name": "ARMOR_LEATHER_OCHRE",
+      "aliases": [
+        "ARMOR_LEATHER_OCHRE"
+      ],
+      "kind": "armor",
+      "seed": 2391698484,
+      "primary": "8A4B12",
+      "secondary": "5A4630",
+      "accent": "C9BFA8",
+      "variant": 0
+    },
+    {
+      "index": 535,
+      "name": "ARMOR_LEATHER_ASH",
+      "aliases": [
+        "ARMOR_LEATHER_ASH"
+      ],
+      "kind": "armor",
+      "seed": 789777573,
+      "primary": "6B645C",
+      "secondary": "4A3B2A",
+      "accent": "C9BFA8",
+      "variant": 1
+    },
+    {
+      "index": 536,
+      "name": "HOURGLASS_ASHES",
+      "aliases": [
+        "HOURGLASS_ASHES"
+      ],
+      "kind": "hourglass",
+      "seed": 3724160587,
+      "primary": "8A7331",
+      "secondary": "C9BFA8",
+      "accent": "7BB33B",
+      "variant": 3
     }
   ],
   "identifications": {

@@ -67,7 +67,7 @@ public class FrozenCarpaccio extends Food {
 				break;
 			case 3:
 				GLog.i( Messages.get(FrozenCarpaccio.class, "better") );
-				hero.HP = Math.min( hero.HP + hero.HT / 4, hero.HT );
+				hero.heal(hero.HT / 4);
 				hero.sprite.showStatusWithIcon( CharSprite.POSITIVE, Integer.toString(hero.HT / 4), FloatingText.HEALING );
 				break;
 		}

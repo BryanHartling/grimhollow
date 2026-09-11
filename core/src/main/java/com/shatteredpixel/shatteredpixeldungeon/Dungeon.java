@@ -481,6 +481,7 @@ public class Dungeon {
 		
 		Dungeon.level = level;
 		hero.pos = pos;
+        com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering.arrive(hero);
         com.shatteredpixel.shatteredpixeldungeon.items.Phylactery phylactery=hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.class);if(phylactery!=null)phylactery.arrive();
         if(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.state()!=null)com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.state().arrive();
         if(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.state()!=null)com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.state().arrive();

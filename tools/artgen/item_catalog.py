@@ -38,7 +38,7 @@ def constants(text):
 def classify(name):
     n=name.upper()
     exact={
-        'BONE_ROD':'skull_staff','PHYLACTERY':'phylactery','SIGIL_BRUSH':'brush','RUNED_BATON':'wand',
+        'SOULFIRE':'tablet','HOURGLASS_ASHES':'hourglass','BONE_ROD':'skull_staff','PHYLACTERY':'phylactery','SIGIL_BRUSH':'brush','RUNED_BATON':'wand',
         'FOCUS_CRYSTAL':'crystal','FOCUS_RING':'ring','RUNE_ETCHING':'tablet',
         'BONES':'bones','REMAINS':'bones','TOMB':'tomb','GRAVE':'tomb','GEO_BOULDER':'stone',
         'GOLD':'coins','ENERGY':'crystal','DEWDROP':'drop','PETAL':'leaf','SANDBAG':'bag',
@@ -122,6 +122,10 @@ def colors(name,kind,seed):
     if accent in (primary,secondary):accent='E4C76A' if primary!='E4C76A' else '9D6BD1'
     gems={'GARNET':'5E0D12','RUBY':'9E1B24','TOPAZ':'E0982F','EMERALD':'7BB33B','ONYX':'2C2F33','OPAL':'C9BFA8','TOURMALINE':'9D6BD1','SAPPHIRE':'2E6F7A','AMETHYST':'4A2C6E','QUARTZ':'EFE7D2','AGATE':'8A4B12','DIAMOND':'6FD3E0'}
     if name.startswith('RING_') and name[5:] in gems:accent=gems[name[5:]]
+    if name=='ARMOR_BONE':primary='C9BFA8';secondary='565B62';accent='7BB33B'
+    if name=='ARMOR_LEATHER_OCHRE':primary='8A4B12';secondary='5A4630';accent='C9BFA8'
+    if name=='ARMOR_LEATHER_ASH':primary='6B645C';secondary='4A3B2A';accent='C9BFA8'
+    if name in ('SOULFIRE','WAND_NECROSIS','WAND_BONE','HOURGLASS_ASHES'):accent='7BB33B'
     if name=='IRON_KEY':primary='565B62'
     if name in ('CRYSTAL_CHEST','CRYSTAL_KEY'):primary='6FD3E0';accent='EFE7D2'
     if name=='EBONY_CHEST':primary='1A1816';secondary='8A7331'
@@ -137,7 +141,13 @@ def compile_catalog():
         name=names[0];kind=classify(name);seed=int(hashlib.sha256(name.encode()).hexdigest()[:8],16)
         primary,secondary,accent=colors(name,kind,seed)
         entries.append(dict(index=index,name=name,aliases=names,kind=kind,seed=seed,primary=primary,secondary=secondary,accent=accent,variant=seed%4))
-    result=dict(dimensions=[512,1056],frame=[32,32],items=entries,identifications=identifications)
+    # Leather variants change materials only, preserving the exact parent geometry.
+    for entry in entries:
+        base={'ARMOR_LEATHER_OCHRE':'ARMOR_LEATHER','ARMOR_LEATHER_ASH':'ARMOR_MAIL'}.get(entry['name'])
+        if base:
+            source=next(e for e in entries if e['name']==base)
+            entry['seed']=source['seed'];entry['variant']=source['variant']
+    result=dict(dimensions=[512,1088],frame=[32,32],items=entries,identifications=identifications)
     (HERE/'blender/items.json').write_text(json.dumps(result,indent=2)+'\n')
     print('Item models:',len(entries),'public indices:',len(public),'identification glyphs:',len(identifications))
 

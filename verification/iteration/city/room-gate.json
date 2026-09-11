@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.180283202458356,
+          "value": 0.18049369244009975,
           "minimum": 0.1,
           "maximum": null,
           "pass_": true,
@@ -64,15 +64,15 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.08017695311262134,
+          "value": -0.08039407107946296,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.10433724601715684,
-      "inner_mean": 0.18451419912977818,
+      "outer_mean": 0.10412874844544297,
+      "inner_mean": 0.18452281952490593,
       "passing": true
     },
     {
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.1460680976723251,
+          "value": 0.14607387374992434,
           "minimum": 0.12,
           "maximum": 0.2,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.13598334800017461,
+          "value": 0.13598919701662732,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -102,7 +102,7 @@
       "measurements": [
         {
           "target": "hero bbox contrast",
-          "value": 0.3599035294117647,
+          "value": 0.37445254901960784,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -110,7 +110,7 @@
         },
         {
           "target": "rat bbox contrast",
-          "value": 0.27988313725490194,
+          "value": 0.2798674509803922,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -129,15 +129,15 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.1460680976723251,
+    "region_mean_after_lighting": 0.14607387374992434,
     "region_mean_pass": true,
-    "dominant_green_brown_fraction": 0.7884657118055556,
+    "dominant_green_brown_fraction": 0.7887128665123457,
     "hue_budget_pass": true,
     "accent_families": 1,
     "accent_bins": [
       0.04498818479938271,
-      0.015148775077160493,
-      0.0009886188271604939,
+      0.015106577932098766,
+      0.0007836612654320988,
       0.0,
       0.0,
       0.00011453510802469135,
@@ -156,8 +156,8 @@
       0.64
     ]
   },
-  "screenshot_sha256": "ce6ced9697c96374958fcf80d2071b7ff45dea387ccbd2fb635eee8cd9d09819",
-  "terrain_sha256": "45a005fa69bb39f27db11fbd092b0688bbb547468d46fb43750a75434b2434ac",
+  "screenshot_sha256": "94f36c63848ab3750c1555cfdc63d8fe82407b5445cc191e0c059ab4deb11f21",
+  "terrain_sha256": "19cbae48ff20545cf1576d941cc543dd51633d5f5c0aa7715c055dc3e5a0b569",
   "sample_count": 72,
   "seed": 426,
   "lighting": true,

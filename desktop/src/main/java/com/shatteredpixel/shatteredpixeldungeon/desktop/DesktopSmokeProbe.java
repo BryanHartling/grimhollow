@@ -121,23 +121,28 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             int w=level.width();
             for(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room room:level.rooms()) {
                 if((reviewRegion==0 && !(room instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.WaterBridgeRoom)) || room.width()>12 || room.height()>11)continue;
-                int water=0,door=0,decor=0,torch=0,bridge=-1;float nearest=Float.MAX_VALUE;
+                int water=0,door=0,decor=0,torch=0,torchCell=-1,bridge=-1,openBoundary=0;float nearest=Float.MAX_VALUE;
                 for(int y=room.top;y<=room.bottom;y++)for(int x=room.left;x<=room.right;x++) {
                     int c=x+y*w,t=level.map[c];
+                    if ((x==room.left || x==room.right || y==room.top || y==room.bottom) &&
+                            !com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet.wallStitcheable(t) &&
+                            !com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet.doorTile(t))openBoundary++;
                     if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WATER)water++;
                     if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.DOOR)door++;
                     if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.EMPTY_DECO)decor++;
-                    if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WALL_DECO)torch++;
+                    if(t==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WALL_DECO){torch++;torchCell=c;}
                     if(x>room.left&&x<room.right&&y>room.top&&y<room.bottom&&level.passable[c]&&!level.water[c]&&level.findMob(c)==null &&
                             (reviewRegion!=0 || (level.water[c-1]&&level.water[c+1])||(level.water[c-w]&&level.water[c+w]))) {
                         float distance=Math.abs(x-(room.left+room.right)/2f)+Math.abs(y-(room.top+room.bottom)/2f);
                         if(distance<nearest){bridge=c;nearest=distance;}
                     }
                 }
-                if(water>=4&&door>0&&((reviewRegion==0||reviewRegion==1)?(decor>0&&torch==1):true)&&bridge>=0) {
-                    for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:level.mobs)
-                        com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(mob);
-                    level.mobs.clear();level.heaps.clear();
+                if(water>=4&&door>0&&(decor>0&&torch==1)&&bridge>=0) {
+                    // Merged room outlines can include an open corridor into unrelated special rooms.
+                    if(reviewRegion>=2 && openBoundary>0)continue;
+                    if(reviewRegion>=2 && (torchCell/w!=room.top || torchCell%w<=room.left || torchCell%w>=room.right || torchCell+w>=level.length() ||
+                            com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet.wallStitcheable(level.map[torchCell+w]) ||
+                            com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet.doorTile(level.map[torchCell+w])))continue;
                     java.util.ArrayList<Integer> floor=new java.util.ArrayList<>();
                     for(int y=room.top+1;y<room.bottom;y++)for(int x=room.left+1;x<room.right;x++) {
                         int c=x+y*w;
@@ -145,12 +150,16 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     }
                     floor.sort(java.util.Comparator.comparingDouble(c->Math.abs(c%w-(room.left+room.right)/2f)+Math.abs(c/w-(room.top+room.bottom)/2f)));
                     if(floor.size()<3)continue;
-                    reviewBounds=new int[]{room.left,room.top,room.right,room.bottom};
                     int heroCell=floor.get(0);
+                    if(reviewRegion>=2 && Math.hypot(heroCell%w-torchCell%w,heroCell/w-torchCell/w)>6)continue;
+                    for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:level.mobs)
+                        com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(mob);
+                    level.mobs.clear();level.heaps.clear();
+                    reviewBounds=new int[]{room.left,room.top,room.right,room.bottom};
                     reviewRat=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();reviewRat.pos=floor.get(1);reviewRat.state=reviewRat.PASSIVE;level.mobs.add(reviewRat);
                     reviewItem=level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing(),floor.get(2));
                     Dungeon.switchLevel(level,heroCell);Dungeon.observe();
-                    System.out.println("ITERATION ROOM: seed="+seed+" bounds="+room.left+","+room.top+","+room.right+","+room.bottom+" water="+water+" doors="+door+" rubble="+decor+" wallTorch="+torch+" bridgeCell="+bridge+" heroCell="+heroCell+" terrainEdits=0");
+                    System.out.println("ITERATION ROOM: seed="+seed+" bounds="+room.left+","+room.top+","+room.right+","+room.bottom+" water="+water+" doors="+door+" rubble="+decor+" wallTorch="+torch+" torchCell="+torchCell+" bridgeCell="+bridge+" heroCell="+heroCell+" terrainEdits=0");
                     return;
                 }
             }

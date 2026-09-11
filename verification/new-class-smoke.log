@@ -1498,3 +1498,36 @@ PASS PSYCHIC seed=8 floor=6 save/load=ok
 PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
 PASS PSYCHIC seed=9 floor=6 save/load=ok
 Runs=30 failures=0
+
+Stage 6c
+PASS NECROMANCER seed=0 floor=6 save/load=ok
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+PASS ENCHANTER seed=0 floor=6 save/load=ok
+PASS ENCHANTER seed=1 floor=6 save/load=ok
+PASS ENCHANTER seed=2 floor=6 save/load=ok
+PASS ENCHANTER seed=3 floor=6 save/load=ok
+PASS ENCHANTER seed=4 floor=6 save/load=ok
+PASS ENCHANTER seed=5 floor=6 save/load=ok
+PASS ENCHANTER seed=6 floor=6 save/load=ok
+PASS ENCHANTER seed=7 floor=6 save/load=ok
+PASS ENCHANTER seed=8 floor=6 save/load=ok
+PASS ENCHANTER seed=9 floor=6 save/load=ok
+PASS PSYCHIC seed=0 floor=6 save/load=ok
+PASS PSYCHIC seed=1 floor=6 save/load=ok
+PASS PSYCHIC seed=2 floor=6 save/load=ok
+PASS PSYCHIC seed=3 floor=6 save/load=ok
+PASS PSYCHIC seed=4 floor=6 save/load=ok
+PASS PSYCHIC seed=5 floor=6 save/load=ok
+PASS PSYCHIC seed=6 floor=6 save/load=ok
+PASS PSYCHIC seed=7 floor=6 save/load=ok
+PASS PSYCHIC seed=8 floor=6 save/load=ok
+PASS PSYCHIC seed=9 floor=6 save/load=ok
+Runs=30 failures=0

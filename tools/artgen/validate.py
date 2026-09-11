@@ -81,7 +81,7 @@ if __name__=='__main__':
     if args.rerender:
         from rendered import CACHE,phash
         from build import render,build
-        paths=list((CACHE/args.asset).rglob('*.png')) if args.asset else list(CACHE.rglob('*.png'))
+        paths=[p for name in args.asset.split(',') for p in (CACHE/name).rglob('*.png')] if args.asset else list(CACHE.rglob('*.png'))
         # A tolerance check must not replace the reviewed cache with a different render.
         original={p:p.read_bytes() for p in paths}
         before={p:phash(p) for p in paths};render(args.asset);build()

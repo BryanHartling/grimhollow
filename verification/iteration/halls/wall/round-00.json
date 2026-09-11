@@ -1,0 +1,58 @@
+{
+  "asset_class": "wall",
+  "round": 0,
+  "parameters": {
+    "seed": 911,
+    "count": 2,
+    "relief": 0.07,
+    "displacement": 0.09,
+    "wall_height": 0.6,
+    "mortar_width": 0.045,
+    "chip": 0.006,
+    "bevel": 0.014,
+    "moss_density": 0,
+    "grain_frequency": 2.2,
+    "bump_depth": 0.055,
+    "ao_distance": 0.35,
+    "stone_roughness": 0.9,
+    "water_roughness": 0.19,
+    "specular": 0.015,
+    "water_depth": 0.025,
+    "decor_density": 7,
+    "light_strength": 1,
+    "light_angle": 0,
+    "stone_color": "2C2F33",
+    "moss_color": "2C2F33",
+    "water_color": "486678",
+    "tone_curve": [
+      0.015,
+      0.035,
+      0.065,
+      0.28
+    ],
+    "tone_breaks": [
+      0.025,
+      0.05,
+      0.17
+    ],
+    "tone_gamma": 1,
+    "light_steps": [
+      0,
+      0.8,
+      1.8,
+      3.2
+    ],
+    "grain_min": 0.12,
+    "grain_max": 1.8,
+    "core_emission": 8,
+    "calibrated": true,
+    "absolute_tones": true,
+    "grain_amplitude": 0.05,
+    "stone_value": 0.065,
+    "mortar_value": 0.018,
+    "cap_light": 0.21,
+    "damp_dark": 0.035,
+    "bone_color": "C9BFA8",
+    "ritual_color": "9E1B24"
+  }
+}

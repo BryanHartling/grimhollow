@@ -99,9 +99,10 @@ if assets is None or 'liquids' in assets:
             for frame in range(8):liquids.render(kind,variant,frame,reset,camera,render,CACHE)
     for frame in range(8):liquids.ripple(frame,reset,camera,render,CACHE)
 
-if assets is None or any(a.startswith('prison') for a in assets):
-    for kind in ('floor','wall','door','door_open','decor','wall_torch'):
-        if assets is None or 'prison' in assets or 'prison:'+kind in assets or (kind=='door_open' and 'prison:door' in assets):
-            for variant in range(3):regions.render('prison',kind,variant,reset,camera,render,CACHE)
-
+for region in ('prison','caves','city','halls'):
+    if not (HERE/'params'/region).exists():continue
+    if assets is None or any(a.startswith(region) for a in assets):
+        for kind in ('floor','wall','door','door_open','decor','wall_torch'):
+            if assets is None or region in assets or region+':'+kind in assets or (kind=='door_open' and region+':door' in assets):
+                for variant in range(3):regions.render(region,kind,variant,reset,camera,render,CACHE)
 print(f'Rendering complete: {rendered_count} rendered files')

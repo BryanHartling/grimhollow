@@ -1,0 +1,90 @@
+{
+  "seed": 710,
+  "count": 2,
+  "relief": 0.1,
+  "displacement": 0.025,
+  "wall_height": 0.6,
+  "mortar_width": 0.052,
+  "chip": 0.006,
+  "bevel": 0.016,
+  "moss_density": 0,
+  "grain_frequency": 0.95,
+  "bump_depth": 0.055,
+  "ao_distance": 0.35,
+  "stone_roughness": 0.9,
+  "water_roughness": 0.19,
+  "specular": 0.015,
+  "water_depth": 0.025,
+  "decor_density": 7,
+  "light_strength": 1,
+  "light_angle": 0,
+  "stone_color": "6B625F",
+  "moss_color": "6B625F",
+  "water_color": "486678",
+  "tone_curve": [
+    0.15,
+    0.28,
+    0.42,
+    0.55
+  ],
+  "tone_breaks": [
+    0.23,
+    0.34,
+    0.47
+  ],
+  "tone_gamma": 1,
+  "light_steps": [
+    0,
+    0.8,
+    1.8,
+    3.2
+  ],
+  "grain_min": 0.12,
+  "grain_max": 1.8,
+  "core_emission": 8,
+  "calibrated": true,
+  "absolute_tones": true,
+  "grain_amplitude": 0.4,
+  "stone_value": 0.435,
+  "mortar_value": 0.08,
+  "stone_values": [
+    0.95,
+    1.05,
+    1.13,
+    0.96,
+    1.03
+  ],
+  "stone_sites": [
+    [
+      0.12,
+      0.14
+    ],
+    [
+      0.63,
+      0.1
+    ],
+    [
+      0.21,
+      0.65
+    ],
+    [
+      0.68,
+      0.7
+    ],
+    [
+      0.9,
+      0.37
+    ]
+  ],
+  "stone_weights": [
+    0.016,
+    0,
+    0,
+    0.005,
+    -0.01
+  ],
+  "wood_color": "5A4630",
+  "mortar_color": "3C2E1F",
+  "facet_shade": 0.4,
+  "bank_surface": "wall"
+}

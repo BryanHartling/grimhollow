@@ -34,7 +34,7 @@ def material_palette(parameters,kind):
     params=json.loads(parameters);flame_edge=params.get('flame_edge','782D17')
     swatches=np.concatenate([COLORS,np.array([tuple(bytes.fromhex(params[k])) for k in ('stone_color','moss_color','water_color')]),np.array([tuple(bytes.fromhex(flame_edge))])])
     candidates=[]
-    for level in (np.linspace(0,.9,65) if params.get('smooth_tones') else sorted(set(params['tone_curve']+params.get('iron_tone_curve',[])))):
+    for level in (np.linspace(0,.9,65) if params.get('smooth_tones') else sorted(set(params['tone_curve']+params.get('iron_tone_curve',[])+params.get('ritual_tone_curve',[])))):
         candidates.extend(np.clip(swatches*level/np.maximum(.001,swatches@np.array([.2126,.7152,.0722])/255)[:,None],0,255))
     if kind=='wall_torch':candidates.extend([tuple(bytes.fromhex(c)) for c in (flame_edge,'E0982F','E4C76A','EFE7D2')])
     palette=np.unique(np.rint(candidates).astype(np.uint8),axis=0)
@@ -65,6 +65,9 @@ def sewers_quantize(image,params,kind,material_mask=None):
         iron=(np.asarray(material_mask.convert('L'))>127)&active if material_mask is not None else (rgb[:,:,2]>rgb[:,:,0]*1.04)&active
         metal=np.array(params['iron_tone_curve'])[np.searchsorted(params['tone_breaks'],value)]
         targets=np.where(iron,metal,targets)
+    if 'ritual_tone_curve' in params and kind=='decor':
+        inscription=(rgb[:,:,0]>rgb[:,:,1]*1.7)&(rgb[:,:,0]>rgb[:,:,2]*1.5)&active
+        targets=np.where(inscription,np.array(params['ritual_tone_curve'])[np.searchsorted(params['tone_breaks'],value)],targets)
     rgb=np.clip(rgb*targets[:,:,None]/np.maximum(lum[:,:,None],.002),0,255)
     original=pixels[:,:,:3].astype(float)
     if kind=='wall_torch':rgb=np.where(emissive[:,:,None],original,rgb)
@@ -128,7 +131,7 @@ def ripple_atlas():
 
 @lru_cache(maxsize=96)
 def region_tile(region,kind,variant=0):
-    if kind=='water':return liquid_frame('water',variant,0)
+    if kind=='water':return liquid_frame('lava' if region=='halls' else 'water',variant,0)
     p=json.loads((Path(__file__).parent/'blender/params'/region/(('door' if kind=='door_open' else kind)+'.json')).read_text())
     image=Image.open(CACHE/region/f'{kind}_{variant}.png').crop((64,64,128,128))
     mask=Image.open(CACHE/region/f'{kind}_{variant}_metal.png').crop((64,64,128,128)) if kind.startswith('door') else None
@@ -154,25 +157,46 @@ def apply_tiles(spec,base):
         if kind=='decor':
             material=get_tile('floor',variant).copy();material.alpha_composite(get_tile('decor',variant))
         elif kind=='wall_torch':
-            material=get_tile('wall',variant).copy();material.alpha_composite(get_tile('wall_torch',variant))
+            material=get_tile('wall',variant).copy();fixture=get_tile('wall_torch',variant)
+            if region in ('caves','city','halls') and 80<=index<112:
+                # The raised-wall overhang covers the upper half of this cell.
+                fixture=fixture.resize((32,32),Image.Resampling.NEAREST)
+                material.alpha_composite(fixture,(16,32))
+            else:material.alpha_composite(fixture)
         else:material=get_tile(kind,variant).copy()
         if kind=='floor' and 33<=index<=47:
             params=json.loads((Path(__file__).parent/'blender/params'/('' if region=='sewers' else region)/'floor.json').read_text())
+            if params.get('bank_surface')=='wall':
+                # Banks expose the vertical rock/stone face beneath the pavement.
+                material=get_tile('wall',variant).copy()
             if 'bank_color' in params:
                 # Wet bank components retain the floor geometry but use the
                 # waterline's darker material/value range, not dry floor albedo.
                 a=np.array(material);lum=a[:,:,:3]@np.array([.2126,.7152,.0722])/255
                 color=np.array(tuple(bytes.fromhex(params['bank_color'])),dtype=float)
                 a[:,:,:3]=np.clip(lum[:,:,None]*color/(color@np.array([.2126,.7152,.0722])/255),0,255)
-                bank=dict(params,stone_color=params['bank_color'],tone_curve=params['bank_tone_curve'])
+                bank=dict(params,stone_color=params['bank_color'],tone_curve=params['bank_tone_curve'],
+                          tone_breaks=params.get('bank_tone_breaks',params['tone_breaks']))
                 material=sewers_quantize(Image.fromarray(a),bank,'floor')
         bounds=original.getbbox()
-        if kind in ('floor','wall') and bounds and bounds!=(0,0,64,64):
+        component_kind=kind in ('floor','wall')
+        if component_kind and bounds and bounds!=(0,0,64,64):
             # Upstream half-height walls and water-bank strips need the full
             # material relief fitted into their logical component, like doors.
             left,top,right,bottom=bounds
             component=material.resize((right-left,bottom-top),Image.Resampling.NEAREST)
             material=Image.new('RGBA',(64,64));material.paste(component,(left,top))
+            if region in ('caves','city','halls'):
+                # Project relief through each stepped component's visible height.
+                # A rectangular crop can erase a wall cap behind a jagged alpha edge.
+                source=np.asarray(component);alpha=np.asarray(original)[:,:,3]
+                fitted=np.asarray(material).copy()
+                for px in range(left,right):
+                    ys=np.flatnonzero(alpha[:,px])
+                    if len(ys):
+                        rows=np.minimum(source.shape[0]-1,((ys-ys[0]+.5)*source.shape[0]/(ys[-1]-ys[0]+1)).astype(int))
+                        fitted[ys,px]=source[rows,px-left]
+                material=Image.fromarray(fitted)
         if kind.startswith('door') and bounds:
             left,top,right,bottom=bounds
             # Upright partial door components use a compact projection of the

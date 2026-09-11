@@ -1,0 +1,59 @@
+{
+  "asset_class": "decor",
+  "round": 0,
+  "parameters": {
+    "seed": 913,
+    "count": 3,
+    "relief": 0.07,
+    "displacement": 0.055,
+    "wall_height": 0.6,
+    "mortar_width": 0.025,
+    "chip": 0.012,
+    "bevel": 0.035,
+    "moss_density": 0,
+    "grain_frequency": 2.2,
+    "bump_depth": 0.055,
+    "ao_distance": 0.35,
+    "stone_roughness": 0.9,
+    "water_roughness": 0.19,
+    "specular": 0.015,
+    "water_depth": 0.025,
+    "decor_density": 9,
+    "light_strength": 1,
+    "light_angle": 0,
+    "stone_color": "2C2F33",
+    "moss_color": "2C2F33",
+    "water_color": "486678",
+    "tone_curve": [
+      0.025,
+      0.13,
+      0.32,
+      0.62
+    ],
+    "tone_breaks": [
+      0.25,
+      0.6,
+      0.89
+    ],
+    "tone_gamma": 1.2,
+    "light_steps": [
+      0,
+      0.2,
+      0.48,
+      0.85
+    ],
+    "grain_min": 0.12,
+    "grain_max": 1.8,
+    "core_emission": 8,
+    "moss_light_steps": [
+      0,
+      0.08,
+      0.2,
+      0.5
+    ],
+    "iron_color": "6B645C",
+    "iron_glint_color": "6B645C",
+    "bone_color": "C9BFA8",
+    "ritual_color": "9E1B24"
+  }
+}

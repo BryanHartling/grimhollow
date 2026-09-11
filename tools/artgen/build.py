@@ -1,5 +1,6 @@
 """SPDX-License-Identifier: GPL-3.0-or-later. Deterministic, source-only asset painter."""
 import hashlib
+import io
 import json
 from pathlib import Path
 import numpy as np
@@ -156,10 +157,14 @@ def build():
             print('LOCKED',spec['output']); continue
         image = paint(spec)
         path.parent.mkdir(parents=True,exist_ok=True)
-        if path.suffix == '.ico': image.save(path,format='ICO',sizes=[(16,16),(32,32),(48,48),(64,64),(128,128),(256,256)])
-        elif path.suffix == '.icns': image.save(path,format='ICNS')
-        else: image.save(path,format='PNG',compress_level=9,optimize=False)
-        print(hashlib.sha256(path.read_bytes()).hexdigest(),spec['output'])
+        buffer=io.BytesIO()
+        if path.suffix == '.ico': image.save(buffer,format='ICO',sizes=[(16,16),(32,32),(48,48),(64,64),(128,128),(256,256)])
+        elif path.suffix == '.icns': image.save(buffer,format='ICNS')
+        else: image.save(buffer,format='PNG',compress_level=9,optimize=False)
+        encoded=buffer.getvalue()
+        # Reproduce every byte, but leave identical files untouched by Windows readers.
+        if not path.exists() or path.read_bytes()!=encoded:path.write_bytes(encoded)
+        print(hashlib.sha256(encoded).hexdigest(),spec['output'])
     # Historical POC evidence is immutable; stage 5.6 has its own comparison.
     if not (ROOT/'verification/render-poc.png').exists() and (Path(__file__).parent/'render_cache/necromancer/0/idle_0.png').exists():
         import rendered

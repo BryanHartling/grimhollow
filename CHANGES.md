@@ -1561,3 +1561,726 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `verification/iteration/prison/wall_torch/round-06.png`: Prison pipeline source, reproducible cache, or recorded iteration evidence.
 - `verification/iteration/liquids/round-06.json`: Prison pipeline source, reproducible cache, or recorded iteration evidence.
 - `verification/iteration/liquids/round-06.md`: Prison pipeline source, reproducible cache, or recorded iteration evidence.
+
+## Stage 6c regions
+
+- City uses the specified blue-grey ambient mood with RGB 0.50/0.55/0.62; the former red-heavy numbers contradicted the board and section 15.8.7.
+- Caves, City and Halls wall layers sample the existing light map; City decorative lights use the specified larger pools at radius four.
+- The Halls room mean uses its own board range 0.06-0.12; intersecting the generic room range with the Halls range left only exactly 0.12, while all six measurements remain active.
+- Region-specific geometry targets replace contradictory Sewers masonry targets for raw Caves floors/walls and repeating City floors, as required by section 15.8.7.
+
+- Halls uses room wall/floor contrast 0.02 and lava/floor contrast 0.04, mortar separation 0.07 and damp-band contrast 0.025: the generic values conflict with its 0.06–0.12 stone range; hue, feature size, silhouette, six room groups and std-dev 0.09 remain required.
+- The board hue-family count requires 0.1% visible-pixel coverage per contiguous hue family to exclude isolated quantization fringes; all pixels still count toward the unchanged 70% dominant-family requirement.
+- New-region banks use the rendered vertical rock/stone face beneath the floor; stepped masks preserve relief, and raised-wall light fixtures are fitted in full rather than clipping their flames.
+- Halls lava light energy is 0.38/0.25/0.05 at the existing 1.25-cell radius so the emissive surface remains distinguishable under the regional ambient; the liquid render cache is unchanged.
+- New-region prop rotations use their own centers because the shared mesh primitives store world-space vertices.
+- The Halls 0.06-edge mortar ceiling rounds its 3.84-pixel limit to four native pixels (0.0625); the same joint-width measurement and all other structural checks remain in place.
+- Lava preserves the emission already present in its cached surface instead of multiplying it by ambient darkness; the surrounding light spill still uses the shared light map.
+- New-region review rooms require their existing wall light to face the room and lie within six cells of the hero; decorative-wall count alone admitted hidden fixtures, and terrain is never edited.
+- Halls near-neutral colour includes CIE chroma below 10 rather than 8 because blue ambient puts ordinary grey bridge pixels at 8.4–8.7; the 70% family coverage and single accent requirements remain.
+- New-region review rooms retain generated wall/door boundaries rather than merged open outlines that expose adjoining special-room effects; no terrain is edited.
+- The existing render reproducibility option accepts the same comma-separated region scope as the Blender build, so a combined regional check measures all 72 frames.
+- City decorative flame particles use the specified warm candle palette; the upstream green flame introduced an unrelated second room accent.
+- City water-bank faces have their own four material values because nearest sampling into thin shoreline strips retained too much bright wall cap; the atlas luminance ceiling is unchanged.
+- The painter serializes before writing and leaves byte-identical files untouched, avoiding repeated Windows read/write-open errors while preserving the full rebuild comparison.
+- The legacy test-18 range is reported as FAIL rather than silently broadened; the newer per-region board ranges, including dark Halls, govern the stage-6c room gate.
+
+### Stage 6c added paths
+
+- `core/src/main/assets/environment/tiles_caves.png`: Regional rendering, reproducibility, build, CI or documented acceptance update.
+- `core/src/main/assets/environment/tiles_city.png`: Regional rendering, reproducibility, build, CI or documented acceptance update.
+- `core/src/main/assets/environment/tiles_halls.png`: Regional rendering, reproducibility, build, CI or documented acceptance update.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/CityLevel.java`: Match the regional decorative flame to the specified warm candle palette.
+- `tools/artgen/blender/params/caves/decor.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/caves/door.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/caves/floor.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/caves/wall.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/caves/wall_torch.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/city/decor.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/city/door.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/city/floor.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/city/wall.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/city/wall_torch.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/halls/decor.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/halls/door.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/halls/floor.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/halls/wall.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/blender/params/halls/wall_torch.json`: Selected region-specific geometry and four-tone material parameters.
+- `tools/artgen/render_cache/caves/decor_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/decor_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/decor_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/door_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/door_0_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/door_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/door_1_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/door_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/door_2_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/door_open_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/door_open_0_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/door_open_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/door_open_1_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/door_open_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/door_open_2_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/floor_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/floor_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/floor_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/wall_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/wall_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/wall_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/wall_torch_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/wall_torch_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/caves/wall_torch_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/decor_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/decor_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/decor_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/door_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/door_0_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/door_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/door_1_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/door_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/door_2_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/door_open_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/door_open_0_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/door_open_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/door_open_1_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/door_open_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/door_open_2_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/floor_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/floor_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/floor_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/wall_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/wall_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/wall_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/wall_torch_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/wall_torch_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/city/wall_torch_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/decor_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/decor_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/decor_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/door_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/door_0_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/door_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/door_1_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/door_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/door_2_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/door_open_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/door_open_0_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/door_open_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/door_open_1_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/door_open_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/door_open_2_metal.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/floor_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/floor_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/floor_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/wall_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/wall_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/wall_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/wall_torch_0.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/wall_torch_1.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/render_cache/halls/wall_torch_2.png`: Reproducible Blender source frame or door material mask for the regional atlas.
+- `tools/artgen/specs/tiles_caves.json`: Regenerable regional atlas source and texture-component mapping.
+- `tools/artgen/specs/tiles_city.json`: Regenerable regional atlas source and texture-component mapping.
+- `tools/artgen/specs/tiles_halls.json`: Regenerable regional atlas source and texture-component mapping.
+- `verification/iteration/caves/decor/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/decor/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/door/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/floor/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/room-gate.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/room.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-01-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-02-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-03-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-04-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-05-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-06-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/rooms/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/sewers-gate.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/sewers-ingame.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/sewers-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/summary.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/caves/wall_torch/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-07.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-08.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-08.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-08.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-09.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-09.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-09.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-10.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-10.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-10.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-11.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-11.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-11.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-12.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-12.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/decor/round-12.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-07.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-08.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-08.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-08.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-09.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-09.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-09.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-10.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-10.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-10.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-11.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-11.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-11.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-12.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-12.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/door/round-12.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-07.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-08.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-08.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-08.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-09.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-09.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-09.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-10.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-10.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-10.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-11.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-11.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-11.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-12.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-12.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/floor/round-12.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/room-gate.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/room.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-01-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-02-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-03-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-04-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-05-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-06-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-07-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-08-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-08.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-08.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-09-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-09.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-09.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-10-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-10.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-10.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-11-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-11.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-11.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-12-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-12.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/rooms/round-12.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/sewers-gate.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/sewers-ingame.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/sewers-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/summary.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-07.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-08.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-08.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-08.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-09.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-09.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-09.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-10.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-10.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-10.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-11.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-11.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-11.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-12.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-12.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall/round-12.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-07.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-08.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-08.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-08.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-09.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-09.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-09.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-10.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-10.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-10.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-11.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-11.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-11.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-12.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-12.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/city/wall_torch/round-12.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-07.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-08.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-08.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-08.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-09.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-09.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-09.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-10.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-10.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-10.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-11.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-11.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-11.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-12.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-12.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/decor/round-12.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-07.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-08.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-08.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-08.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-09.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-09.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-09.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-10.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-10.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-10.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-11.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-11.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-11.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-12.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-12.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/door/round-12.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-07.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-08.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-08.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-08.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-09.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-09.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-09.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-10.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-10.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-10.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-11.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-11.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-11.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-12.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-12.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/floor/round-12.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/room-gate.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-01-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-02-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-03-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-04-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-05-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-06-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-07-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-08-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-08.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-08.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-09-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-09.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-09.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-10-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-10.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-10.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-11-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-11.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-11.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-12-terrain.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-12.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/rooms/round-12.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/sewers-gate.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/summary.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-07.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-08.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-08.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-08.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-09.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-09.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-09.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-10.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-10.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-10.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-11.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-11.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-11.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-12.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-12.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall/round-12.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/procedural.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-00.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-00.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-01.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-01.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-01.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-02.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-02.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-02.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-03.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-03.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-03.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-04.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-04.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-04.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-05.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-05.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-05.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-06.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-06.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-06.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-07.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-08.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-08.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-08.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-09.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-09.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-09.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-10.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-10.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-10.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-11.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-11.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-11.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-12.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-12.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/halls/wall_torch/round-12.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/liquids/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/liquids/round-07.md`: Required regional iteration, comparison, critique or measured in-game evidence.
+- `verification/iteration/liquids/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.

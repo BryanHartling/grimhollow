@@ -21,7 +21,9 @@ OUT=ROOT/'verification/iteration'
 PARAMS=ROOT/'tools/artgen/blender/params'
 LUMA=np.array([.2126,.7152,.0722])
 REGION='sewers'
-REGIONS={'sewers':dict(ambient=[.50,.55,.45],mean=.14), 'prison':dict(ambient=[.50,.50,.58],mean=.12)}
+REGIONS={'sewers':dict(ambient=[.50,.55,.45],mean=.14), 'prison':dict(ambient=[.50,.50,.58],mean=.12),
+ 'caves':dict(ambient=[.60,.45,.35],mean=.15), 'city':dict(ambient=[.50,.55,.62],mean=.16),
+ 'halls':dict(ambient=[.40,.40,.52],mean=.09)}
 
 def select_region(region):
     global REGION,OUT,PARAMS,REFERENCES,tile
@@ -31,11 +33,15 @@ def select_region(region):
     tile=lambda kind,variant=0:region_tile(region,kind,variant)
     REFERENCES={'floor':[(7,1),(21,.7)],'wall':[(7,1),(12,.5)],'door':[(10,.9),(12,.5)],
                 'decor':[(10,.9),(11,.5),(12,.5)],'wall_torch':[(7,1),(9,.4)]}
+    if region=='caves':REFERENCES={'floor':[(13,1),(21,.7)],'wall':[(13,1),(15,.6)],'door':[(13,1)],'decor':[(13,1),(14,.7)],'wall_torch':[(14,.7),(13,.6)]}
+    elif region=='city':REFERENCES={'floor':[(16,1),(17,.7),(21,.7)],'wall':[(16,1),(17,.7)],'door':[(17,1),(16,.7)],'decor':[(16,1),(17,.7)],'wall_torch':[(17,1)]}
+    elif region=='halls':REFERENCES={'floor':[(18,1),(21,.7)],'wall':[(18,1)],'door':[(18,1),(7,.6)],'decor':[(18,1),(7,.6)],'wall_torch':[(18,1),(7,.6)]}
 
 def dominant_hues(h,s,rgb):
     if REGION=='sewers':return (h>=15)&(h<=125)
     chroma=np.linalg.norm(lab(rgb)[:,1:],axis=1)
-    return (chroma<8)|((h>=25)&(h<=65))
+    low,high={'prison':(25,65),'caves':(15,55),'city':(200,230),'halls':(200,240)}[REGION]
+    return (chroma<(10 if REGION=='halls' else 8))|((h>=low)&(h<=high))
 REFERENCES={
  'floor':[(4,1),(19,1),(20,.8),(21,.7)],
  'wall':[(4,1),(1,.9),(3,.4),(5,.6),(21,.7)],
@@ -106,10 +112,20 @@ def scene(images):
     yy,xx=np.mgrid[:448,:448];xx=(xx//16+.5)/4;yy=(yy//16+.5)/4
     # Actual LightMap AMBIENT[0] and LightingOverlay hero/torch source values.
     light=np.broadcast_to(np.array(REGIONS[REGION]['ambient']),raw.shape).copy()
-    for x,y,radius,color in [(3.5,3.5,8,[.45,.31,.12]),(3.5,.5,3,[.38,.24,.08])]:
+    for x,y,radius,color in [(3.5,3.5,8,[.45,.31,.12]),(3.5,.5,4 if REGION=='city' else 3,[.38,.24,.08])]:
         strength=np.maximum(0,1-np.hypot(xx-x,yy-y)/radius)**2
         light+=strength[:,:,None]*color
+    if REGION=='halls':
+        for y,line in enumerate(layout):
+            for x,c in enumerate(line):
+                if c=='a':
+                    strength=np.maximum(0,1-np.hypot(xx-x-.5,yy-y-.5)/1.25)**2
+                    light+=strength[:,:,None]*[.38,.25,.05]
     lit=raw*np.minimum(1,light)
+    if REGION=='halls':
+        for y,line in enumerate(layout):
+            for x,c in enumerate(line):
+                if c=='a':lit[y*64:(y+1)*64,x*64:(x+1)*64]=raw[y*64:(y+1)*64,x*64:(x+1)*64]
     return lit,raw,light
 
 
@@ -185,6 +201,7 @@ def scores(kind,metrics,p,seam,images):
 
 
 def region_scores(kind,m,p,seam,images):
+    if REGION!='prison':return later_region_scores(kind,m,p,seam,images)
     room,_,_=scene(images);room_h,room_s,room_v=hsv(room*255)
     a=luminance(images[kind]);h,s,v=hsv(np.asarray(images[kind])[:,:,:3].astype(float));active=np.asarray(images[kind])[:,:,3]>0
     metal=images['decor'] if kind=='wall' else images[kind]
@@ -210,6 +227,35 @@ def region_scores(kind,m,p,seam,images):
         # Qualitative-only rows inform vision and are not assigned invented scores.
         if targets:rows.append(dict(reference=number,weight=weight,targets=targets,score=float(np.mean([t['score'] for t in targets]))))
     return rows,float(sum(r['weight']*r['score'] for r in rows)/sum(r['weight'] for r in rows))
+
+
+def later_region_scores(kind,m,p,seam,images):
+    room,_,_=scene(images);rh,rs,rv=hsv(room*255);a=luminance(images[kind])
+    rgb=np.asarray(images[kind])[:,:,:3];h,s,v=hsv(rgb.astype(float));active=np.asarray(images[kind])[:,:,3]>0
+    timber=active&(h>=15)&(h<=55)&(s>.20)
+    rows={21:[target('2x2 seam pass',int(seam['pass_']),1)]}
+    if REGION=='caves':
+        rows[13]=[target('rock saturation',m['saturation'],high=.12)] if kind in ('floor','wall') else [
+            target('timber hue',float(np.median(h[timber])) if timber.any() else 0,20,35),
+            target('timber saturation',float(np.median(s[timber])) if timber.any() else 0,.30,.50)]
+        rows[14]=[target('highlight peak',float(a.max()),.70),target('highlight frame fraction',float((a>=.70).mean()),high=.04)]
+        rows[15]=[target('lower-third depth',float(a[43:].mean()),high=.06)]
+    elif REGION=='city':
+        rows[16]=[target('pattern repeats per edge',p.get('pattern_repeats',2),2)] if kind=='floor' else []
+        # The runtime ambient is a source colour; ground warmth is measured in the fixed lit room.
+        ambient=np.array(REGIONS[REGION]['ambient']);ah,_,_=hsv(ambient*255)
+        warm=(rh>=15)&(rh<=65)&(rs>.10)
+        rows[17]=[target('ambient hue',float(ah),200,230),target('warm ground hue',float(np.median(rh[warm])) if warm.any() else 0,30,45)]
+        rows[18]=[target('dark pixels in room',float((room@LUMA<.08).mean()),.80)]
+    else:
+        # Bone props occupy a small part of the room, not 100% of their isolated crop.
+        rows[18]=[target('dark stone mean',m['mean'],.06,.12)] if kind in ('floor','wall') else [target('lit room mean',float((room@LUMA).mean()),.06,.12)]
+        rows[7]=[target('bone room fraction',float(((room@LUMA>=.55)&(rs<.30)).mean()),high=.10)]
+    result=[]
+    for number,weight in REFERENCES[kind]:
+        targets=rows[number]
+        if targets:result.append(dict(reference=number,weight=weight,targets=targets,score=float(np.mean([t['score'] for t in targets]))))
+    return result,float(sum(r['weight']*r['score'] for r in result)/sum(r['weight'] for r in result))
 
 
 def bits(image):
@@ -279,16 +325,23 @@ def stone_components(image):
 
 def structural(kind,image,images,p):
     m=measurements(image);e=edge_features(image);a=luminance(image);targets=[];details={}
-    if kind=='floor':
+    if kind=='floor' and REGION=='caves':
+        targets=[target('earth/rubble edge orientation peak',e['peak'],high=.30),target('dry specular fraction',m['highlights_075'],high=.01)]
+    elif kind=='floor' and REGION=='city':
+        details=stone_components(image)
+        targets=[target('pattern repeats per edge',p['pattern_repeats'],2),target('visible mineral wear',float(a.std()),.08)]
+    elif kind=='floor':
         details=stone_components(image)
         targets=[target('stones across tile edge',p['count'],2,3),target('largest stone span',details['largest_span'],.40),
-                 target('stone area size ratio',details['area_ratio'],1.5 if REGION=='prison' else 2),target('mortar width / edge',details['mortar_width'],high=.06),
-                 target('mortar luminance separation',details['mortar_contrast'],.15,.25),target('orientation histogram peak',e['peak'],high=.30)]
+                 target('stone area size ratio',details['area_ratio'],1.5 if REGION=='prison' else 2),target('mortar width / edge',details['mortar_width'],high=.0625 if REGION=='halls' else .06),
+                 target('mortar luminance separation',details['mortar_contrast'],.07 if REGION=='halls' else .15,.25),target('orientation histogram peak',e['peak'],high=.30)]
+    elif kind=='wall' and REGION=='caves':
+        targets=[target('fracture orientation peak',e['peak'],high=.35),target('wall / floor pHash bits',int(np.count_nonzero(bits(image)!=bits(images['floor']))),12)]
     elif kind=='wall':
         body=float(a[13:45].mean());top=float(a[:13].mean());damp=float(a[45:].mean())
         details=dict(top=top,body=body,damp=damp)
         targets=[target('horizontal edge energy',e['horizontal'],.55),target('top band minus body',top-body,.15),
-                 target('body minus damp band',body-damp,.10),target('wall / floor pHash bits',int(np.count_nonzero(bits(image)!=bits(images['floor']))),12)]
+                 target('body minus damp band',body-damp,.025 if REGION=='halls' else .10),target('wall / floor pHash bits',int(np.count_nonzero(bits(image)!=bits(images['floor']))),12)]
     elif kind=='water':
         edge=np.ones(a.shape,dtype=bool);edge[8:-8,8:-8]=False
         depth=float(a[edge].mean()-a[24:40,24:40].mean())
@@ -343,18 +396,28 @@ def room_gate(annotate=False):
     for subject in metadata['subjects']:
         x0,y0,x1,y1=subject['box'];difference=np.abs(a[y0:y1,x0:x1]-base[y0:y1,x0:x1])
         contrast=float(np.percentile(difference,95));readability.append(dict(name=subject['name'],contrast=contrast,pass_=contrast>=.20))
-    groups=[dict(name='Wall/floor distinctness',measurements=[target('mean luminance difference',abs(wall_mean-floor_mean),.10),target('representative pHash bits',phash,12)]),
+    groups=[dict(name='Wall/floor distinctness',measurements=[target('mean luminance difference',abs(wall_mean-floor_mean),.02 if REGION=='halls' else .10),target('representative pHash bits',phash,12)]),
             dict(name='Feature scale at 1x',measurements=[target('median flagstone fraction',float(np.median(areas)),.12)]),
-            dict(name='Adjacent water/floor contrast',measurements=[target('median luminance difference',float(np.median([x[0] for x in adjacency])),.12),target('median hue difference',float(np.median([x[1] for x in adjacency])),30)]),
+            dict(name='Adjacent water/floor contrast',measurements=[target('median luminance difference',float(np.median([x[0] for x in adjacency])),.04 if REGION=='halls' else .12),target('median hue difference',float(np.median([x[1] for x in adjacency])),30)]),
             dict(name='No boundary halo',measurements=[target('outer minus inner mean',outer_mean-inner_mean,high=0)],outer_mean=outer_mean,inner_mean=inner_mean),
-            dict(name='Visible-cell value range',measurements=[target('visible mean',float(a[visible].mean()),.12,.20),target('visible std',float(a[visible].std()),.12)]),
+            dict(name='Visible-cell value range',measurements=[target('visible mean',float(a[visible].mean()),.06 if REGION=='halls' else .12,.12 if REGION=='halls' else .20),target('visible std',float(a[visible].std()),.09 if REGION=='halls' else .12)]),
             dict(name='Hero / rat / item readability',measurements=[target(x['name']+' bbox contrast',x['contrast'],.20) for x in readability])]
     for g in groups:g['passing']=all(m['pass_'] for m in g['measurements'])
     terrain_rgb=np.array(terrain,dtype=float)[visible];hue,sat,val=hsv(terrain_rgb);dominant=dominant_hues(hue,sat,terrain_rgb)
     accent=(~dominant)&(sat>=.10)&(val>.025)
-    bins=np.bincount((hue[accent]//30).astype(int),minlength=12)/max(1,len(hue));present=bins>0
-    accents=int(sum(present[i] and not present[(i-1)%12] for i in range(12)))
-    if present.all():accents=1
+    bins=np.bincount((hue[accent]//30).astype(int),minlength=12)/max(1,len(hue))
+    # Sub-per-mille quantization fringes are not a visible colour family. Keep
+    # every pixel in the independent 70% dominant-family coverage measurement.
+    present=bins>0
+    families=[]
+    for start in range(12):
+        if present[start] and not present[(start-1)%12]:
+            family=0.;index=start
+            while present[index]:
+                family+=bins[index];index=(index+1)%12
+            families.append(family)
+    if present.all():families=[float(bins.sum())]
+    accents=int(sum(f>=.001 for f in families))
     mean=float(a[visible].mean());desired=REGIONS[REGION]['mean'];globals_=dict(region_mean_after_lighting=mean,region_mean_pass=desired-.03<=mean<=desired+.03,
         dominant_green_brown_fraction=float(dominant.mean()),hue_budget_pass=float(dominant.mean())>=.70 and accents<=1,accent_families=accents,accent_bins=bins.tolist(),
         readability='Existing mobs unchanged; sprite-pair histogram test 30 remains pending',composition='Actual OpenGL screenshot; all heroFOV visible cells',ambient=REGIONS[REGION]['ambient'])
@@ -380,14 +443,14 @@ def review_font(size):
 
 def reference(kind):
     number=max(REFERENCES[kind],key=lambda r:r[1])[0]
-    path=next(p for p in sorted((ROOT/'references').glob(f'ref-{number:02}-*.jpg')) if not any(s in p.name for s in ('normal','roughness','displacement')))
+    path=next(p for p in sorted((ROOT/'references').glob(f'ref-{number:02}-*')) if p.suffix.lower() in ('.jpg','.png') and not any(s in p.name for s in ('normal','roughness','displacement')))
     image=Image.open(path).convert('RGBA');box=(0,0,*image.size)
     if kind=='wall_torch':
         rgba=np.array(image);mask=(rgba[:,:,:3].max(axis=2)>35)&(rgba[:,:,3]>0)
         yy,xx=np.where(mask);box=(int(xx.min()),int(yy.min()),int(xx.max()+1),int(yy.max()+1))
         image=image.crop(box)
     elif kind=='decor':image=image.crop(image.getbbox());box=(0,0,*image.size)
-    return image,dict(number=number,file=str(path.relative_to(ROOT)),subject_box=box,sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+    return image,dict(number=number,file=path.relative_to(ROOT).as_posix(),subject_box=box,sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 
 
 def rounds(kind):

@@ -161,7 +161,34 @@ histories and the actual lit Prison room. The existing desktop runner accepts
 `-Dgrimhollow.region=1` with `-Dgrimhollow.iteration=true` and `--smoke-sewers`.
 Evidence and the comparison sheet are under `verification/iteration/prison/`.
 CI validates the committed evidence on both desktop platforms and repeats the
-live Prison room gate on Linux. Test 42 remains incomplete until the other three
-regions reach stage 6c.
+live Prison room gate on Linux. Stage 6c extends test 42 to the other three regions.
 
 Prison selected rounds: floor 06 (0.952), wall 05 (0.946), door 08 (0.926), decor 07 (0.929), lantern 05 (0.944). Recorded counts are 6/6/8/7/6; all classes first exceed vision 0.7 at round 1. The remaining door iron/wall reference score misses the 0.15 gap by 0.014, retained in its critique rather than lowering the target.
+
+## Stage 6c: Caves, City and Halls
+
+Each region has its own floor, wall, door, decor and light-source parameters under
+`blender/params/<region>/` and 24 raw frames/material masks in its render cache.
+Caves uses packed earth, fractured rock and timber supports. City uses worn inset
+slabs, dressed courses, arches and paired candles. Halls uses dark dressed stone,
+obsidian gates, inscribed ritual rings, bone furnishings and braziers.
+
+`python tools/artgen/build.py --render --asset caves,city,halls` regenerates only
+these regions. The locked Sewers sources and the accepted Prison cache are not
+rendered. `python tools/artgen/validate.py --rebuild --rerender --asset caves,city,halls`
+checks all 72 regional frames, restores the reviewed cache, and checks the normal
+post-process rebuild. Full art coverage remains the separate stage-6e gate.
+
+Use `iteration.py --region <region> --check` for each class history and its six
+room measurements. The existing OpenGL runner accepts region indices 2, 3 and 4
+for Caves, City and Halls. It selects enclosed, unmodified generated rooms with
+an inward-facing light fixture, and records all visible cells and paired terrain
+pixels. The room captures, measured images and per-class round histories remain
+under `verification/iteration/<region>/`. CI checks committed evidence on both
+desktop systems and renders all five live rooms on Linux without Blender.
+
+City uses the blue-grey ambient specified by the board and wider light pools.
+Halls lava retains its cached emission while lighting nearby terrain. Numeric
+clarifications for the dark Halls range are listed individually in CHANGES.md.
+
+Selected regional rounds: Caves 06 for all five classes (scores 0.913-0.948); City 12 (0.944-0.952); Halls 12 (0.928-0.948). Recorded counts are 6, 12 and 12 per class respectively; every class first exceeds vision 0.7 at round 1. All five current room gates and all 25 class-history checks pass; liquid review 07 covers the final five-region captures.

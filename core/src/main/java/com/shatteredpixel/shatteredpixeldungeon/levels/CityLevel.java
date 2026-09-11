@@ -314,6 +314,7 @@ public class CityLevel extends RegularLevel {
 
 		public GreenFlameParticle(){
 			super();
+			color( 0xE0982F );
 			acc.set( 0, -40 );
 		}
 

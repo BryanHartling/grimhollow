@@ -40,7 +40,7 @@ def environment(p):
     character materials stay unchanged until the separate silhouette stage.
     """
     result={}
-    swatches={'stone':p['stone_color'],'mortar':'1A1816','wood':p.get('wood_color','5A4630'),
+    swatches={'stone':p['stone_color'],'mortar':p.get('mortar_color','1A1816'),'bone':p.get('bone_color','C9BFA8'),'ritual':p.get('ritual_color','5E0D12'),'wood':p.get('wood_color','5A4630'),
               'iron':p.get('iron_color','2C2F33'),'iron_glint':p.get('iron_glint_color','6B645C'),'moss':p['moss_color'],
               'water':p['water_color'],'flame_edge':p.get('flame_edge','782D17'),'flame':'E0982F',
               'flame_inner':'E4C76A','hot_core':'EFE7D2'}
@@ -120,7 +120,7 @@ def calibrated_surface(nodes,links,out,name,color,p):
     pos=nodes.new('ShaderNodeNewGeometry');sep=nodes.new('ShaderNodeSeparateXYZ');links.new(pos.outputs['Position'],sep.inputs[0])
     x,y=sep.outputs['X'],sep.outputs['Y'];kind=p['asset_class']
     noise=nodes.new('ShaderNodeTexNoise')
-    if kind=='floor':
+    if kind=='floor' or p.get('organic_bands'):
         # Periodic coordinates keep mineral and moss variation continuous at joins.
         periodic=nodes.new('ShaderNodeCombineXYZ')
         for i,v in enumerate((mathnode('SINE',mathnode('MULTIPLY',x,6.2831853)),mathnode('COSINE',mathnode('MULTIPLY',x,6.2831853)),mathnode('SINE',mathnode('MULTIPLY',y,6.2831853)))):links.new(v,periodic.inputs[i])
@@ -133,9 +133,16 @@ def calibrated_surface(nodes,links,out,name,color,p):
         if kind=='floor':
             info=nodes.new('ShaderNodeObjectInfo');value=mathnode('MULTIPLY',value,info.outputs['Color'])
         value=mathnode('ADD',value,mathnode('MULTIPLY',mathnode('SUBTRACT',noise.outputs['Fac'],.5),p.get('grain_amplitude',.04)))
+        if p.get('facet_shade'):
+            normal=nodes.new('ShaderNodeSeparateXYZ');links.new(pos.outputs['Normal'],normal.inputs[0])
+            value=mathnode('MULTIPLY',value,mathnode('ADD',1-p['facet_shade'],mathnode('MULTIPLY',mathnode('MAXIMUM',normal.outputs['Z'],0),p['facet_shade'])))
         if kind=='wall':
             fy=mathnode('FRACT',mathnode('ADD',y,.5))
             cap=mathnode('GREATER_THAN',fy,.80);damp=mathnode('LESS_THAN',fy,.30)
+            if p.get('organic_bands'):
+                ridge=mathnode('ADD',fy,mathnode('MULTIPLY',mathnode('SINE',mathnode('MULTIPLY',x,6.2831853)),.10))
+                cap=mathnode('MULTIPLY',mathnode('GREATER_THAN',ridge,.60),mathnode('LESS_THAN',ridge,.87))
+                damp=mathnode('MAXIMUM',mathnode('LESS_THAN',fy,.34),mathnode('GREATER_THAN',fy,.94))
             value=mathnode('ADD',value,mathnode('MULTIPLY',cap,p.get('cap_light',.25)))
             value=mathnode('SUBTRACT',value,mathnode('MULTIPLY',damp,p.get('damp_dark',.12)))
     if name=='water':

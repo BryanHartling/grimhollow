@@ -1,0 +1,497 @@
+{
+  "asset_class": "decor",
+  "round": 3,
+  "parameters": {
+    "seed": 813,
+    "count": 3,
+    "relief": 0.07,
+    "displacement": 0.055,
+    "wall_height": 0.6,
+    "mortar_width": 0.025,
+    "chip": 0.012,
+    "bevel": 0.035,
+    "moss_density": 0,
+    "grain_frequency": 0.85,
+    "bump_depth": 0.055,
+    "ao_distance": 0.35,
+    "stone_roughness": 0.9,
+    "water_roughness": 0.19,
+    "specular": 0.015,
+    "water_depth": 0.025,
+    "decor_density": 9,
+    "light_strength": 1,
+    "light_angle": 0,
+    "stone_color": "565B62",
+    "moss_color": "565B62",
+    "water_color": "486678",
+    "tone_curve": [
+      0.025,
+      0.22,
+      0.42,
+      0.58
+    ],
+    "tone_breaks": [
+      0.25,
+      0.6,
+      0.89
+    ],
+    "tone_gamma": 0.95,
+    "light_steps": [
+      0,
+      0.35,
+      0.8,
+      1.7
+    ],
+    "grain_min": 0.25,
+    "grain_max": 1.8,
+    "core_emission": 8,
+    "moss_light_steps": [
+      0,
+      0.08,
+      0.2,
+      0.5
+    ],
+    "iron_color": "3B3733",
+    "iron_glint_color": "6B645C",
+    "wood_color": "3B3733",
+    "bone_color": "C9BFA8"
+  },
+  "references": [
+    {
+      "reference": 17,
+      "weight": 0.7,
+      "targets": [
+        {
+          "target": "ambient hue",
+          "value": 214.99999999999997,
+          "minimum": 200,
+          "maximum": 230,
+          "pass_": true,
+          "score": 1.0
+        },
+        {
+          "target": "warm ground hue",
+          "value": 30.81199061798813,
+          "minimum": 30,
+          "maximum": 45,
+          "pass_": true,
+          "score": 1.0
+        }
+      ],
+      "score": 1.0
+    }
+  ],
+  "reference_subject": {
+    "number": 16,
+    "file": "references/ref-16-cathedral-ruin.jpg",
+    "subject_box": [
+      0,
+      0,
+      1200,
+      797
+    ],
+    "sha256": "39cdaa6174add17aef054c35725f7e6ca19d351b2dd40eaa72d72641ee87069b"
+  },
+  "vision": {
+    "score": 0.88,
+    "reason": "The broken arch and capitals read clearly with broader surface wear."
+  },
+  "weights": {
+    "numeric": 0.3,
+    "structural": 0.3,
+    "vision": 0.4
+  },
+  "numeric": 1.0,
+  "structural_score": 1.0,
+  "composite": 0.952,
+  "variants": [
+    {
+      "variant": 0,
+      "metrics": {
+        "mean": 0.32026626506024086,
+        "std": 0.2502950518234516,
+        "dark_fraction": 0.4350736278447122,
+        "hue": 223.21230473251552,
+        "saturation": 0.12068965517241373,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.529227450980392,
+        "palette_max_delta": 3.9717166872607113,
+        "opaque_pixels": 1494
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0,
+        "wrap_y": 0.0,
+        "interior_x_limit": 0.11913143382352939,
+        "interior_y_limit": 0.09098498774509803,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "structural": {
+        "targets": [
+          {
+            "target": "approved shape parameters unchanged",
+            "value": 1.0,
+            "minimum": 1,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "details": {},
+        "edges": {
+          "orientation_histogram": [
+            0.154173154239498,
+            0.0675212194967321,
+            0.032447263471031024,
+            0.04869346227797363,
+            0.39852189160898704,
+            0.0405074542213532,
+            0.038917208080172114,
+            0.06710513186199632,
+            0.15211321474225656
+          ],
+          "peak": 0.39852189160898704,
+          "horizontal": 0.32867335476802034,
+          "laplacian_variance": 0.04249746669049072
+        },
+        "passing": true,
+        "score": 1.0
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 1,
+      "metrics": {
+        "mean": 0.32026626506024086,
+        "std": 0.2502950518234516,
+        "dark_fraction": 0.4350736278447122,
+        "hue": 223.21230473251552,
+        "saturation": 0.12068965517241373,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.529227450980392,
+        "palette_max_delta": 3.9717166872607113,
+        "opaque_pixels": 1494
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0,
+        "wrap_y": 0.0,
+        "interior_x_limit": 0.11913143382352939,
+        "interior_y_limit": 0.09098498774509803,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "structural": {
+        "targets": [
+          {
+            "target": "approved shape parameters unchanged",
+            "value": 1.0,
+            "minimum": 1,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "details": {},
+        "edges": {
+          "orientation_histogram": [
+            0.154173154239498,
+            0.0675212194967321,
+            0.032447263471031024,
+            0.04869346227797363,
+            0.39852189160898704,
+            0.0405074542213532,
+            0.038917208080172114,
+            0.06710513186199632,
+            0.15211321474225656
+          ],
+          "peak": 0.39852189160898704,
+          "horizontal": 0.32867335476802034,
+          "laplacian_variance": 0.04249746669049072
+        },
+        "passing": true,
+        "score": 1.0
+      },
+      "validator_pass": true
+    },
+    {
+      "variant": 2,
+      "metrics": {
+        "mean": 0.32026626506024086,
+        "std": 0.2502950518234516,
+        "dark_fraction": 0.4350736278447122,
+        "hue": 223.21230473251552,
+        "saturation": 0.12068965517241373,
+        "highlights_075": 0.0,
+        "core_090": 0.0,
+        "mortar_contrast": 0.529227450980392,
+        "palette_max_delta": 3.9717166872607113,
+        "opaque_pixels": 1494
+      },
+      "seam": {
+        "pass_": true,
+        "wrap_x": 0.0,
+        "wrap_y": 0.0,
+        "interior_x_limit": 0.11913143382352939,
+        "interior_y_limit": 0.09098498774509803,
+        "method": "2x2 wrap; mean boundary gradient <= interior edge p95 + 1/255; props require transparent perimeter"
+      },
+      "structural": {
+        "targets": [
+          {
+            "target": "approved shape parameters unchanged",
+            "value": 1.0,
+            "minimum": 1,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "details": {},
+        "edges": {
+          "orientation_histogram": [
+            0.154173154239498,
+            0.0675212194967321,
+            0.032447263471031024,
+            0.04869346227797363,
+            0.39852189160898704,
+            0.0405074542213532,
+            0.038917208080172114,
+            0.06710513186199632,
+            0.15211321474225656
+          ],
+          "peak": 0.39852189160898704,
+          "horizontal": 0.32867335476802034,
+          "laplacian_variance": 0.04249746669049072
+        },
+        "passing": true,
+        "score": 1.0
+      },
+      "validator_pass": true
+    }
+  ],
+  "room": {
+    "passing": true,
+    "groups": [
+      {
+        "name": "Wall/floor distinctness",
+        "measurements": [
+          {
+            "target": "mean luminance difference",
+            "value": 0.2296860321350762,
+            "minimum": 0.1,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "representative pHash bits",
+            "value": 34.0,
+            "minimum": 12,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      },
+      {
+        "name": "Feature scale at 1x",
+        "measurements": [
+          {
+            "target": "median flagstone fraction",
+            "value": 0.7784288194444444,
+            "minimum": 0.12,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      },
+      {
+        "name": "Adjacent water/floor contrast",
+        "measurements": [
+          {
+            "target": "median luminance difference",
+            "value": 0.15886214494825707,
+            "minimum": 0.12,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "median hue difference",
+            "value": 159.48456930803772,
+            "minimum": 30,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      },
+      {
+        "name": "No boundary halo",
+        "measurements": [
+          {
+            "target": "outer minus inner mean",
+            "value": -0.07559685731256102,
+            "minimum": null,
+            "maximum": 0,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "outer_mean": 0.09209777565312524,
+        "inner_mean": 0.16769463296568626,
+        "passing": true
+      },
+      {
+        "name": "Visible-cell value range",
+        "measurements": [
+          {
+            "target": "visible mean",
+            "value": 0.13364357530895501,
+            "minimum": 0.12,
+            "maximum": 0.2,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "visible std",
+            "value": 0.12515006027245168,
+            "minimum": 0.12,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      },
+      {
+        "name": "Hero / rat / item readability",
+        "measurements": [
+          {
+            "target": "hero bbox contrast",
+            "value": 0.39180156862745114,
+            "minimum": 0.2,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "rat bbox contrast",
+            "value": 0.24458901960784313,
+            "minimum": 0.2,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          },
+          {
+            "target": "item bbox contrast",
+            "value": 0.485568784313725,
+            "minimum": 0.2,
+            "maximum": null,
+            "pass_": true,
+            "score": 1.0
+          }
+        ],
+        "passing": true
+      }
+    ],
+    "global_targets": {
+      "region_mean_after_lighting": 0.13364357530895501,
+      "region_mean_pass": true,
+      "dominant_green_brown_fraction": 0.9084201388888888,
+      "hue_budget_pass": true,
+      "accent_families": 1,
+      "accent_bins": [
+        0.0007707734674329502,
+        0.07726442768199233,
+        0.002940912356321839,
+        0.010005088601532567,
+        0.0003068127394636015,
+        0.0,
+        4.489942528735632e-05,
+        0.0,
+        0.0002469468390804598,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "readability": "Existing mobs unchanged; sprite-pair histogram test 30 remains pending",
+      "composition": "Actual OpenGL screenshot; all heroFOV visible cells",
+      "ambient": [
+        0.5,
+        0.55,
+        0.62
+      ]
+    },
+    "screenshot_sha256": "97919b8cae1722884a8684129e0cfcf5ef095e6146339a22927ba39f4aafe04f",
+    "terrain_sha256": "2d4aa372330d794965ea3be5b3e31e53f3beb7087421836588d590e9c2b43e20",
+    "sample_count": 58,
+    "seed": 417,
+    "lighting": true,
+    "zoom": 3.0,
+    "method": "Full visible-cell mask; class-median representative pHashes; all water/floor adjacencies; 4-neighbour rings; p95 paired-background absolute bbox luminance contrast"
+  },
+  "atlas_validator": {
+    "passing": false,
+    "output": [
+      "FAIL: core/src/main/assets/environment/tiles_caves.png: tile (3,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_caves.png: tile (5,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_caves.png: tile (6,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_caves.png: tile (11,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_caves.png: tile (14,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_city.png: tile (1,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_city.png: tile (4,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_halls.png: tile (1,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_halls.png: tile (4,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_halls.png: tile (5,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_halls.png: tile (7,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_halls.png: tile (8,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_halls.png: tile (9,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_halls.png: tile (12,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_halls.png: tile (13,2) luminance std below .08",
+      "FAIL: core/src/main/assets/environment/tiles_halls.png: tile (15,2) luminance std below .08",
+      "Validated 73 generated specifications; 16 failures. Subset diagnostic only."
+    ]
+  },
+  "global_targets": {
+    "region_mean_after_lighting": 0.13364357530895501,
+    "region_mean_pass": true,
+    "dominant_green_brown_fraction": 0.9084201388888888,
+    "hue_budget_pass": true,
+    "accent_families": 1,
+    "accent_bins": [
+      0.0007707734674329502,
+      0.07726442768199233,
+      0.002940912356321839,
+      0.010005088601532567,
+      0.0003068127394636015,
+      0.0,
+      4.489942528735632e-05,
+      0.0,
+      0.0002469468390804598,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "readability": "Existing mobs unchanged; sprite-pair histogram test 30 remains pending",
+    "composition": "Actual OpenGL screenshot; all heroFOV visible cells",
+    "ambient": [
+      0.5,
+      0.55,
+      0.62
+    ]
+  },
+  "passing": false,
+  "converged": false,
+  "cache_sha256": {
+    "city/decor_0.png": "50e8a258c18aa36de8dca4a82792600d5b2080cc2e268b3bd176d916e0f6009a",
+    "city/decor_1.png": "16db28d4f34ce382b6df5df4a4a334a6b5a3623d9aeff4442c57a2326b690280",
+    "city/decor_2.png": "864eacdf11c8262734c74387f91ebd595b5d9d99b5c8b49061e11ae51afbf93f"
+  }
+}

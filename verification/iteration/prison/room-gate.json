@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.22713556206886032,
+          "value": 0.22718296632089235,
           "minimum": 0.1,
           "maximum": null,
           "pass_": true,
@@ -64,15 +64,15 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.14856491931946386,
+          "value": -0.14888411198159818,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.05662181078334111,
-      "inner_mean": 0.20518673010280497,
+      "outer_mean": 0.05657779254931138,
+      "inner_mean": 0.20546190453090957,
       "passing": true
     },
     {
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.14607118129311908,
+          "value": 0.14617131847993825,
           "minimum": 0.12,
           "maximum": 0.2,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.13010093830789005,
+          "value": 0.1302343498840804,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -102,7 +102,7 @@
       "measurements": [
         {
           "target": "hero bbox contrast",
-          "value": 0.43331733333333333,
+          "value": 0.4361458823529414,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -129,13 +129,13 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.14607118129311908,
+    "region_mean_after_lighting": 0.14617131847993825,
     "region_mean_pass": true,
-    "dominant_green_brown_fraction": 0.9757233796296296,
+    "dominant_green_brown_fraction": 0.9759620949074074,
     "hue_budget_pass": true,
     "accent_families": 1,
     "accent_bins": [
-      0.024276620370370372,
+      0.02403790509259259,
       0.0,
       0.0,
       0.0,
@@ -156,8 +156,8 @@
       0.58
     ]
   },
-  "screenshot_sha256": "88ad12040e200e188b349d0e3d975a5ec8e8e02ca9486ae62dc2bfaf0d0f7b0c",
-  "terrain_sha256": "9933c37d1e5ec9bb4fadd431269623571397b294d60c1aa6b6bffdfd5e0ea111",
+  "screenshot_sha256": "f171e57f6fe4cf9a9eff565a90ff5fd00e0e026dc29323fa6a9252583c524553",
+  "terrain_sha256": "d222eaa252dd820cf219c3d3c6fcefd6c65b95d726c20859351f8d11f3079fe4",
   "sample_count": 60,
   "seed": 417,
   "lighting": true,

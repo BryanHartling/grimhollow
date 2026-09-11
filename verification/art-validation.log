@@ -327,3 +327,9 @@ Stage 6b: python tools/artgen/validate.py --rebuild --rerender --asset prison
 FAIL: Incomplete art inventory: 95 existing sheets lack pipeline specs (including terrain_features.png, tiles_caves.png, tiles_caves_crystal.png, tiles_caves_gnoll.png, tiles_city.png, tiles_halls.png, visual_grid.png, wall_blocking.png).
 FAIL: Full character/item style and referenced-frame coverage gates are not implemented; tests 16 and 17 cannot be certified.
 Validated 70 generated specifications; 2 failures.
+
+Stage 6c full validator after writer correction
+TEST 28: 73 rebuilt files; byte differences=0; Blender not invoked
+FAIL: Incomplete art inventory: 92 existing sheets lack pipeline specs (including terrain_features.png, tiles_caves_crystal.png, tiles_caves_gnoll.png, visual_grid.png, wall_blocking.png, caves_boss.png, caves_quest.png, city_boss.png).
+FAIL: Full character/item style and referenced-frame coverage gates are not implemented; tests 16 and 17 cannot be certified.
+Validated 73 generated specifications; 2 failures.

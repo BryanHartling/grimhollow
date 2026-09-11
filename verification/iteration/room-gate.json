@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.21787851979638007,
+          "value": 0.2179730067471789,
           "minimum": 0.1,
           "maximum": null,
           "pass_": true,
@@ -64,15 +64,15 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.15494342025945212,
+          "value": -0.15512799171375724,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.05364614291853894,
-      "inner_mean": 0.20858956317799107,
+      "outer_mean": 0.05355756140216503,
+      "inner_mean": 0.20868555311592227,
       "passing": true
     },
     {
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.1451572969047862,
+          "value": 0.14519904319001903,
           "minimum": 0.12,
           "maximum": 0.2,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.12675182971745244,
+          "value": 0.126791462833171,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -129,18 +129,18 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.1451572969047862,
+    "region_mean_after_lighting": 0.14519904319001903,
     "region_mean_pass": true,
-    "dominant_green_brown_fraction": 0.8213595920138889,
+    "dominant_green_brown_fraction": 0.8215169270833333,
     "hue_budget_pass": true,
-    "accent_families": 1,
+    "accent_families": 0,
     "accent_bins": [
       0.0,
       0.0,
       0.0,
       0.0,
-      0.0005316840277777777,
-      2.712673611111111e-05,
+      0.00034722222222222224,
+      0.00010308159722222222,
       0.0,
       0.0,
       0.0,
@@ -156,8 +156,8 @@
       0.45
     ]
   },
-  "screenshot_sha256": "bc243bc604183ceeff72c4f197bb970cabb647ab74553855f64317910eaae1bc",
-  "terrain_sha256": "2a64abaa1d9cd78250721d4df0185b9fc785f5a477437e50624eb6d941157cf2",
+  "screenshot_sha256": "4a22624badc6e729248fb877c3cdf6c4c2091d626f1398ae2d0a15d696cd84bb",
+  "terrain_sha256": "2e8cca440c8fb81f97efd39da856322200c1390b225ace9788a86fbbd2d7e4ea",
   "sample_count": 80,
   "seed": 417,
   "lighting": true,

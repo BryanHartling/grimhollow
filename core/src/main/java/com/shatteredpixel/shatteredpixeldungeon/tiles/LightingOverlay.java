@@ -50,13 +50,14 @@ public class LightingOverlay extends Image {
     private void rebuild() {
         map.clear((Dungeon.depth-1)/5);
         source(Dungeon.hero.pos, Dungeon.hero.viewDistance, .45f, .31f, .12f);
-        if (Dungeon.level.waterTex().equals(com.shatteredpixel.shatteredpixeldungeon.Assets.Environment.WATER_HALLS)) {
+        boolean lavaSurface = Dungeon.level.waterTex().equals(com.shatteredpixel.shatteredpixeldungeon.Assets.Environment.WATER_HALLS);
+        if (lavaSurface) {
             for (int cell=0;cell<Dungeon.level.length();cell++)
-                if (Dungeon.level.water[cell] && Dungeon.level.heroFOV[cell]) source(cell,1.25f,.13f,.045f,.01f);
+                if (Dungeon.level.water[cell] && Dungeon.level.heroFOV[cell]) source(cell,1.25f,.38f,.25f,.05f);
         }
         for (int cell=0; cell<Dungeon.level.length(); cell++) {
             if (Dungeon.level.heroFOV[cell] && Dungeon.level.map[cell] == Terrain.WALL_DECO)
-                source(cell, 3, .38f, .24f, .08f);
+                source(cell, Dungeon.depth >= 16 && Dungeon.depth <= 20 ? 4 : 3, .38f, .24f, .08f);
         }
         for (Blob blob : Dungeon.level.blobs.values()) {
             if (blob.cur == null || blob.volume <= 0) continue;
@@ -73,7 +74,9 @@ public class LightingOverlay extends Image {
         bitmap.setBlending(Pixmap.Blending.None);
         for (int y=0; y<map.height; y++) for (int x=0; x<map.width; x++) {
             int cell = x/map.samples + (y/map.samples)*Dungeon.level.width();
-            bitmap.drawPixel(x, y, map.rgba(x,y));
+            // The rendered lava already carries its emission. Its light spills
+            // onto neighbours, while the emitting surface keeps that radiance.
+            bitmap.drawPixel(x, y, lavaSurface && Dungeon.level.water[cell] ? 0xFFFFFFFF : map.rgba(x,y));
         }
         texture.bitmap(bitmap);
         rebuilds++;
@@ -95,7 +98,7 @@ public class LightingOverlay extends Image {
 
     /** Walls draw after actors for occlusion, so sample the same map in their own pass. */
     public static NoosaScript walls() {
-        if (active == null || !SPDSettings.dynamicLighting() || Dungeon.depth > 10)
+        if (active == null || !SPDSettings.dynamicLighting())
             return NoosaScriptNoLighting.get();
         WallLightScript script = com.watabou.glscripts.Script.use(WallLightScript.class);
         Gdx.gl.glActiveTexture(Gdx.gl.GL_TEXTURE1);

@@ -91,3 +91,16 @@ v4 integration: LightMapTest tests=4 skipped=0 failures=0 errors=0, time=0.028s.
 
 Visual correction stage:
 {'name': 'com.shatteredpixel.shatteredpixeldungeon.tiles.LightMapTest', 'tests': '4', 'failures': '0', 'errors': '0', 'skipped': '0', 'time': '0.039'}
+
+
+Stage 6d native characters - 2026-09-11 16:05 UTC
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.shatteredpixel.shatteredpixeldungeon.tiles.LightMapTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-09-11T16:01:19.630Z" hostname="ACURITE_WEATHER" time="0.02">
+  <properties/>
+  <testcase name="accumulationClampsAndDoesNotReachOutsideRadius" classname="com.shatteredpixel.shatteredpixeldungeon.tiles.LightMapTest" time="0.012"/>
+  <testcase name="falloffIsQuadraticAndBounded" classname="com.shatteredpixel.shatteredpixeldungeon.tiles.LightMapTest" time="0.0"/>
+  <testcase name="healthVignetteUsesSpecifiedThresholds" classname="com.shatteredpixel.shatteredpixeldungeon.tiles.LightMapTest" time="0.001"/>
+  <testcase name="sourcesOutsideEdgesAreClippedSafely" classname="com.shatteredpixel.shatteredpixeldungeon.tiles.LightMapTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

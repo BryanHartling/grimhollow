@@ -22,8 +22,8 @@ PARAMS=ROOT/'tools/artgen/blender/params'
 LUMA=np.array([.2126,.7152,.0722])
 REGION='sewers'
 REGIONS={'sewers':dict(ambient=[.50,.55,.45],mean=.14), 'prison':dict(ambient=[.50,.50,.58],mean=.12),
- 'caves':dict(ambient=[.60,.45,.35],mean=.15), 'city':dict(ambient=[.50,.55,.62],mean=.16),
- 'halls':dict(ambient=[.40,.40,.52],mean=.09)}
+ 'caves':dict(ambient=[.60,.45,.35],mean=.15), 'city':dict(ambient=[.52,.57,.64],mean=.16),
+ 'halls':dict(ambient=[.45,.45,.57],mean=.09)}
 
 def select_region(region):
     global REGION,OUT,PARAMS,REFERENCES,tile
@@ -422,7 +422,7 @@ def room_gate(annotate=False):
     accents=int(sum(f>=.001 for f in families))
     mean=float(a[visible].mean());desired=REGIONS[REGION]['mean'];globals_=dict(region_mean_after_lighting=mean,region_mean_pass=desired-.03<=mean<=desired+.03,
         dominant_green_brown_fraction=float(dominant.mean()),hue_budget_pass=float(dominant.mean())>=.70 and accents<=1,accent_families=accents,accent_bins=bins.tolist(),
-        readability='Existing mobs unchanged; sprite-pair histogram test 30 remains pending',composition='Actual OpenGL screenshot; all heroFOV visible cells',ambient=REGIONS[REGION]['ambient'])
+        readability='Native character silhouettes; regional idle-pair test 30 runs in validate.py',composition='Actual OpenGL screenshot; all heroFOV visible cells',ambient=REGIONS[REGION]['ambient'])
     result=dict(passing=all(g['passing'] for g in groups),groups=groups,global_targets=globals_,
                 screenshot_sha256=hashlib.sha256((OUT/'sewers-ingame.png').read_bytes()).hexdigest(),
                 terrain_sha256=hashlib.sha256((OUT/'sewers-terrain.png').read_bytes()).hexdigest(),

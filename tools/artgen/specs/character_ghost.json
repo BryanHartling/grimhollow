@@ -1,0 +1,165 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/ghost.png",
+  "dimensions": [
+    432,
+    120
+  ],
+  "frame": [
+    48,
+    60
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "Ghost",
+      "kind": "ghost",
+      "primary": "565B62",
+      "accent": "EFE7D2",
+      "features": [],
+      "idle": 0,
+      "regions": [],
+      "species": "ghost:0",
+      "animations": {
+        "idle": [
+          0,
+          1
+        ],
+        "run": [
+          0,
+          1
+        ],
+        "attack": [
+          0,
+          2,
+          3
+        ],
+        "die": [
+          0,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.25
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.75
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/rot_lasher.png",
+  "dimensions": [
+    480,
+    120
+  ],
+  "frame": [
+    48,
+    60
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "RotLasher",
+      "kind": "plant",
+      "primary": "3F6A1F",
+      "accent": "9E1B24",
+      "features": [],
+      "idle": 0,
+      "regions": [
+        "prison"
+      ],
+      "species": "rot_lasher:0",
+      "animations": {
+        "idle": [
+          0
+        ],
+        "run": [
+          0
+        ],
+        "attack": [
+          0,
+          1,
+          2,
+          2,
+          1
+        ],
+        "die": [
+          3,
+          4,
+          5,
+          6
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.3333
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.6667
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    }
+  ]
+}

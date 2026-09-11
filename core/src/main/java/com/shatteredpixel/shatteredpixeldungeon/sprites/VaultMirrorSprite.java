@@ -35,7 +35,7 @@ public class VaultMirrorSprite extends MobSprite {
 
 		texture( Assets.Sprites.VAULT_MIRROR );
 
-		TextureFilm frames = new TextureFilm( texture, 16, 23 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm( texture, 16, 23 );
 
 		idle = new Animation( 15, true );
 		//4 seconds of nothing, then shine animation

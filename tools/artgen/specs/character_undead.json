@@ -1,0 +1,203 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/undead.png",
+  "dimensions": [
+    1008,
+    60
+  ],
+  "frame": [
+    48,
+    60
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "Undead",
+      "kind": "humanoid",
+      "primary": "6B645C",
+      "accent": "C9BFA8",
+      "features": [
+        "skeleton",
+        "sword"
+      ],
+      "idle": 0,
+      "regions": [],
+      "species": "undead:0",
+      "animations": {
+        "idle": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          3
+        ],
+        "run": [
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "attack": [
+          14,
+          15,
+          16
+        ],
+        "die": [
+          10,
+          11,
+          12,
+          13
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.25
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.75
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.1667
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.3333
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.6667
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.8333
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.3333
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.6667
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    }
+  ]
+}

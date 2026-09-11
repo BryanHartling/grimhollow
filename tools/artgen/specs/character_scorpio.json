@@ -1,0 +1,317 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/scorpio.png",
+  "dimensions": [
+    720,
+    180
+  ],
+  "frame": [
+    48,
+    60
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "Scorpio-0",
+      "kind": "scorpio",
+      "primary": "2E6F7A",
+      "accent": "6FD3E0",
+      "features": [],
+      "idle": 0,
+      "regions": [
+        "halls"
+      ],
+      "species": "scorpio:0",
+      "animations": {
+        "idle": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2
+        ],
+        "run": [
+          5,
+          5,
+          6,
+          6
+        ],
+        "attack": [
+          0,
+          3,
+          4
+        ],
+        "die": [
+          0,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    },
+    {
+      "name": "Acidic-15",
+      "kind": "scorpio",
+      "primary": "3F6A1F",
+      "accent": "7BB33B",
+      "features": [],
+      "idle": 15,
+      "regions": [
+        "halls"
+      ],
+      "species": "scorpio:15",
+      "animations": {
+        "idle": [
+          15,
+          15,
+          15,
+          15,
+          15,
+          15,
+          15,
+          15,
+          16,
+          17,
+          16,
+          17,
+          16,
+          17
+        ],
+        "run": [
+          20,
+          21
+        ],
+        "attack": [
+          15,
+          18,
+          19
+        ],
+        "die": [
+          15,
+          22,
+          23,
+          24,
+          25
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.3333
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.6667
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.25
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.75
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.3333
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.6667
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.25
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.75
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    }
+  ]
+}

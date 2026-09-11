@@ -205,7 +205,7 @@ public class SmokeBomb extends ArmorAbility {
 
 			texture( Assets.Sprites.NINJA_LOG );
 
-			TextureFilm frames = new TextureFilm( texture, 11, 12 );
+			TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm( texture, 11, 12 );
 
 			idle = new Animation( 0, true );
 			idle.frames( frames, 0 );

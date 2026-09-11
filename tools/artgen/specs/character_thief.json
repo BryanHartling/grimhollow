@@ -1,0 +1,374 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/thief.png",
+  "dimensions": [
+    1008,
+    120
+  ],
+  "frame": [
+    48,
+    60
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "Thief-0",
+      "kind": "humanoid",
+      "primary": "2E6F7A",
+      "accent": "6FD3E0",
+      "features": [
+        "hood",
+        "dagger"
+      ],
+      "idle": 0,
+      "regions": [
+        "prison"
+      ],
+      "species": "thief:0",
+      "animations": {
+        "idle": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "run": [
+          0,
+          0,
+          2,
+          3,
+          3,
+          4
+        ],
+        "die": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "attack": [
+          10,
+          11,
+          12,
+          0
+        ]
+      }
+    },
+    {
+      "name": "Bandit-21",
+      "kind": "humanoid",
+      "primary": "5E0D12",
+      "accent": "E0982F",
+      "features": [
+        "hood",
+        "dagger"
+      ],
+      "idle": 21,
+      "regions": [
+        "prison"
+      ],
+      "species": "thief:21",
+      "animations": {
+        "idle": [
+          21,
+          21,
+          21,
+          22,
+          21,
+          21,
+          21,
+          21,
+          22
+        ],
+        "run": [
+          21,
+          21,
+          23,
+          24,
+          24,
+          25
+        ],
+        "die": [
+          25,
+          27,
+          28,
+          29,
+          30
+        ],
+        "attack": [
+          31,
+          32,
+          33
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.25
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.75
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.25
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.75
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.3333
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.6667
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.25
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.75
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.25
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.75
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    }
+  ]
+}

@@ -1,0 +1,547 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/crystal_guardian.png",
+  "dimensions": [
+    1008,
+    180
+  ],
+  "frame": [
+    48,
+    60
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "CrystalGuardian-0",
+      "kind": "humanoid",
+      "primary": "565B62",
+      "accent": "6FD3E0",
+      "features": [
+        "helm",
+        "guard",
+        "mace"
+      ],
+      "idle": 0,
+      "regions": [
+        "caves"
+      ],
+      "species": "crystal_guardian:0",
+      "animations": {
+        "idle": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "run": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "attack": [
+          8,
+          9,
+          10
+        ],
+        "die": [
+          11,
+          12,
+          13,
+          14,
+          15,
+          15
+        ]
+      }
+    },
+    {
+      "name": "CrystalGuardian-21",
+      "kind": "humanoid",
+      "primary": "565B62",
+      "accent": "7BB33B",
+      "features": [
+        "helm",
+        "guard",
+        "mace"
+      ],
+      "idle": 21,
+      "regions": [
+        "caves"
+      ],
+      "species": "crystal_guardian:21",
+      "animations": {
+        "idle": [
+          21,
+          21,
+          21,
+          21,
+          21,
+          22,
+          22
+        ],
+        "run": [
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "attack": [
+          29,
+          30,
+          31
+        ],
+        "die": [
+          32,
+          33,
+          34,
+          35,
+          36,
+          36
+        ]
+      }
+    },
+    {
+      "name": "CrystalGuardian-42",
+      "kind": "humanoid",
+      "primary": "565B62",
+      "accent": "9E1B24",
+      "features": [
+        "helm",
+        "guard",
+        "mace"
+      ],
+      "idle": 42,
+      "regions": [
+        "caves"
+      ],
+      "species": "crystal_guardian:42",
+      "animations": {
+        "idle": [
+          42,
+          42,
+          42,
+          42,
+          42,
+          43,
+          43
+        ],
+        "run": [
+          44,
+          45,
+          46,
+          47,
+          48,
+          49
+        ],
+        "attack": [
+          50,
+          51,
+          52
+        ],
+        "die": [
+          53,
+          54,
+          55,
+          56,
+          57,
+          57
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.1667
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.3333
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.6667
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.8333
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.25
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.75
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.1667
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.3333
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.6667
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.8333
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.25
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.75
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.1667
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.3333
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.6667
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.8333
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.25
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.75
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    }
+  ]
+}

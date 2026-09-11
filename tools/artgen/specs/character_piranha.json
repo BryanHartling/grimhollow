@@ -1,0 +1,369 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/piranha.png",
+  "dimensions": [
+    1008,
+    120
+  ],
+  "frame": [
+    48,
+    60
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "Piranha-0",
+      "kind": "fish",
+      "primary": "2E6F7A",
+      "accent": "9E1B24",
+      "features": [],
+      "idle": 0,
+      "regions": [
+        "sewers",
+        "prison",
+        "caves",
+        "city",
+        "halls"
+      ],
+      "species": "piranha:0",
+      "animations": {
+        "idle": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "run": [
+          0,
+          1,
+          2,
+          1
+        ],
+        "attack": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "die": [
+          12,
+          13,
+          14
+        ]
+      }
+    },
+    {
+      "name": "PhantomPiranha-21",
+      "kind": "fish",
+      "primary": "4A2C6E",
+      "accent": "6FD3E0",
+      "features": [],
+      "idle": 21,
+      "regions": [
+        "sewers",
+        "prison",
+        "caves",
+        "city",
+        "halls"
+      ],
+      "species": "piranha:21",
+      "animations": {
+        "idle": [
+          21,
+          22,
+          23,
+          22
+        ],
+        "run": [
+          21,
+          22,
+          23,
+          22
+        ],
+        "attack": [
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ],
+        "die": [
+          33,
+          34,
+          35
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.3333
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.6667
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.125
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.25
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.375
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.625
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.75
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.875
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.3333
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.6667
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.125
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.25
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.375
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.625
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.75
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.875
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    }
+  ]
+}

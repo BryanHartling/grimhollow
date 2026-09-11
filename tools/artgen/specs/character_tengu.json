@@ -1,0 +1,180 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/tengu.png",
+  "dimensions": [
+    1728,
+    96
+  ],
+  "frame": [
+    96,
+    96
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "Tengu",
+      "kind": "humanoid",
+      "primary": "9E1B24",
+      "accent": "C9BFA8",
+      "features": [
+        "hood",
+        "dagger",
+        "guard"
+      ],
+      "idle": 0,
+      "regions": [
+        "prison"
+      ],
+      "species": "tengu:0",
+      "animations": {
+        "idle": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "run": [
+          2,
+          3,
+          4,
+          5,
+          0
+        ],
+        "attack": [
+          6,
+          7,
+          7,
+          0
+        ],
+        "die": [
+          8,
+          9,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.2
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.4
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.6
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    }
+  ]
+}

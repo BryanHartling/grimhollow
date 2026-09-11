@@ -34,7 +34,7 @@ public class NewbornElementalSprite extends MobSprite{
 
 		texture( Assets.Sprites.ELEMENTAL );
 
-		int ofs = 21;
+		int ofs = 14; // Current shared atlas: newborn green fire starts at frame 14.
 
 		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 14 );
 

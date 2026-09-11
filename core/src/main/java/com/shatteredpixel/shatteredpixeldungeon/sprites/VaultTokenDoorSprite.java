@@ -36,7 +36,7 @@ public class VaultTokenDoorSprite extends MobSprite {
 
 		texture(Assets.Sprites.VAULT_TOKENS_DOOR );
 
-		TextureFilm frames = new TextureFilm( texture, 16, 16 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm( texture, 16, 16 );
 
 		idle = new Animation( 1, false );
 		idle.frames( frames, 0 );

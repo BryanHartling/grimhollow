@@ -1,0 +1,305 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/dm300.png",
+  "dimensions": [
+    960,
+    288
+  ],
+  "frame": [
+    96,
+    96
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "DM300-0",
+      "kind": "machine",
+      "primary": "8A4B12",
+      "accent": "E4C76A",
+      "features": [
+        "crawler"
+      ],
+      "idle": 0,
+      "regions": [
+        "caves"
+      ],
+      "species": "dm300",
+      "animations": {
+        "idle": [
+          0,
+          1
+        ],
+        "run": [
+          0,
+          2
+        ],
+        "attack": [
+          3,
+          4,
+          5
+        ],
+        "charge": [
+          0
+        ],
+        "zap": [
+          6,
+          7,
+          7,
+          6
+        ],
+        "die": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "DM300-10",
+      "kind": "machine",
+      "primary": "565B62",
+      "accent": "9E1B24",
+      "features": [
+        "crawler",
+        "gash"
+      ],
+      "idle": 10,
+      "regions": [
+        "caves"
+      ],
+      "species": "dm300",
+      "animations": {
+        "idle": [
+          10,
+          11
+        ],
+        "run": [
+          10,
+          12
+        ],
+        "attack": [
+          13,
+          14,
+          15
+        ],
+        "charge": [
+          10,
+          10
+        ],
+        "zap": [
+          16,
+          17,
+          17,
+          16
+        ],
+        "die": [
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10,
+          10
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "zap",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "zap",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "zap",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "zap",
+      "phase": 1.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    }
+  ]
+}

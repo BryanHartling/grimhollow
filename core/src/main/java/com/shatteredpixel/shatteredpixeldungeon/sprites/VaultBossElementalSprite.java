@@ -83,7 +83,7 @@ public class VaultBossElementalSprite extends MobSprite {
 
 		int c = 16*form.ordinal();
 
-		TextureFilm frames = new TextureFilm( texture, 31, 30 );
+		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm( texture, 31, 30 );
 
 		idle = new Animation( 10, true );
 		idle.frames( frames, c+0, c+1, c+2, c+3 );

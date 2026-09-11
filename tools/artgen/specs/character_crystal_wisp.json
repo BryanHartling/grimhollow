@@ -1,0 +1,550 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/crystal_wisp.png",
+  "dimensions": [
+    2016,
+    120
+  ],
+  "frame": [
+    48,
+    60
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "CrystalWisp-0",
+      "kind": "elemental",
+      "primary": "2E6F7A",
+      "accent": "6FD3E0",
+      "features": [],
+      "idle": 0,
+      "regions": [
+        "caves"
+      ],
+      "species": "crystal_wisp:0",
+      "animations": {
+        "idle": [
+          0
+        ],
+        "run": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "attack": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "die": [
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          11
+        ]
+      }
+    },
+    {
+      "name": "CrystalWisp-13",
+      "kind": "elemental",
+      "primary": "3F6A1F",
+      "accent": "7BB33B",
+      "features": [],
+      "idle": 13,
+      "regions": [
+        "caves"
+      ],
+      "species": "crystal_wisp:13",
+      "animations": {
+        "idle": [
+          13
+        ],
+        "run": [
+          13,
+          13,
+          13,
+          14
+        ],
+        "attack": [
+          15,
+          16,
+          17,
+          18
+        ],
+        "die": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          24
+        ]
+      }
+    },
+    {
+      "name": "CrystalWisp-26",
+      "kind": "elemental",
+      "primary": "9E1B24",
+      "accent": "E0982F",
+      "features": [],
+      "idle": 26,
+      "regions": [
+        "caves"
+      ],
+      "species": "crystal_wisp:26",
+      "animations": {
+        "idle": [
+          26
+        ],
+        "run": [
+          26,
+          26,
+          26,
+          27
+        ],
+        "attack": [
+          28,
+          29,
+          30,
+          31
+        ],
+        "die": [
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          37
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.3333
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.6667
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.1667
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.3333
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.6667
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.8333
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.3333
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.6667
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.1667
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.3333
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.6667
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.8333
+    },
+    {
+      "form": 1,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.3333
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.6667
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.1667
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.3333
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.6667
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.8333
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    }
+  ]
+}

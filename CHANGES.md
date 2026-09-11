@@ -2776,3 +2776,234 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `verification/iteration/liquids/round-14.json`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
 - `verification/iteration/liquids/round-14.md`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
 - `verification/iteration/liquids/round-14.png`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+
+
+## Stage 6d character redesign
+- All 78 character atlases now use original native vector silhouettes; 48x60 regular frames and 96x96 large/boss frames preserve the logical world footprints and existing animation timing.
+- Shared generated character-layout metadata replaces per-sprite density inference and the remaining Ward, Sentry, Vault, spirit-hawk and ninja-log legacy frame rectangles.
+- Palette highlights interpolate toward white instead of clipping scaled RGB channels, keeping CIE76 distance within 12 without changing the palette gate.
+- Two-frame loops use distinct cosine endpoints; action and death poses retain complete outlines and do not silently become static frames.
+- Test 30 checks all regional idle pairs, including rare and quest enemies; Vault-only sprite variants belong to City and upstream's unused UNSTABLE slot is covered without spawning new content.
+- The unused legacy NewbornElementalSprite now addresses v4's newborn-fire row at frame 14 instead of the obsolete frame 21.
+- City ambient increases by 0.02 per channel to clear the 0.1291 room-mean regression; Halls increases by 0.03 from the visual-fixup value to give native silhouettes margin above 0.06, with every room threshold unchanged.
+- The rejected Blender character rigs move under experimental; shared environment primitives are extracted unchanged and the approved environment render cache is not regenerated.
+
+- `ART_PIPELINE.md`: Explain native character source generation, validation and retained experimental rigs.
+- `KNOWN_ISSUES.md`: Record current coverage, measured gates and unfinished stages.
+- `README.md`: Document the current playable checkpoint, native pipeline and launch commands.
+- `build.gradle`: Release the native character checkpoint as version 0.5.3, code 914.
+- `core/src/main/assets/sprites/bat.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/bee.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/blacksmith.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/brute.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/character-layouts.json`: Supply the pipeline-owned frame sizes to all runtime character consumers.
+- `core/src/main/assets/sprites/crab.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/crystal_guardian.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/crystal_spire.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/crystal_wisp.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/dm100.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/dm200.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/dm300.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/elemental.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/eye.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/fungal_core.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/fungal_sentry.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/fungal_spinner.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/ghost.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/ghoul.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/gnoll.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/gnoll_geomancer.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/gnoll_guard.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/gnoll_sapper.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/golem.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/goo.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/guard.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/guardian.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/hero_cleric.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/hero_duelist.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/hero_enchanter.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/hero_huntress.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/hero_mage.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/hero_necromancer.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/hero_psychic.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/hero_rogue.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/hero_warrior.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/imp.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/king.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/larva.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/lotus.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/mimic.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/minion_ghoul.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/minion_skeleton.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/monk.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/necromancer.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/ninja_log.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/piranha.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/pylon.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/rat.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/ratking.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/ripper.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/rot_heart.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/rot_lasher.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/scorpio.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/sentry.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/shaman.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/sheep.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/shopkeeper.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/skeleton.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/slime.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/snake.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/spawner.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/spinner.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/spirit_hawk.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/statue.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/succubus.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/swarm.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/tengu.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/thief.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/undead.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/vault_boss_elemental.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/vault_mirror.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/vault_tokens_door.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/wandmaker.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/wards.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/warlock.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/wraith.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/yog.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/assets/sprites/yog_fists.png`: Replace the character atlas with original native vector poses, preserving animation indices.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/GameGeometry.java`: Read generated frame layouts and normalize every character through the shared geometry path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/huntress/SpiritHawk.java`: Use the common native character frame layout instead of legacy pixel rectangles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/rogue/SmokeBomb.java`: Use the common native character frame layout instead of legacy pixel rectangles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/NewbornElementalSprite.java`: Use the common native character frame layout instead of legacy pixel rectangles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SentrySprite.java`: Use the common native character frame layout instead of legacy pixel rectangles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/VaultBossElementalSprite.java`: Use the common native character frame layout instead of legacy pixel rectangles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/VaultMirrorSprite.java`: Use the common native character frame layout instead of legacy pixel rectangles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/VaultTokenDoorSprite.java`: Use the common native character frame layout instead of legacy pixel rectangles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/WardSprite.java`: Use the common native character frame layout instead of legacy pixel rectangles.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/LightMap.java`: Restore City room value and Halls regression margin after the native sprite change.
+- `tools/artgen/blender/experimental/rig_biped.py`: Retain the rejected POC character rig as an explicitly selected experiment.
+- `tools/artgen/blender/experimental/rig_blob.py`: Retain the rejected POC character rig as an explicitly selected experiment.
+- `tools/artgen/blender/experimental/rig_quad.py`: Retain the rejected POC character rig as an explicitly selected experiment.
+- `tools/artgen/blender/primitives.py`: Extract existing environment mesh helpers without changing their geometry.
+- `tools/artgen/blender/render.py`: Keep rejected character rigs opt-in under experimental; use unchanged shared prop primitives.
+- `tools/artgen/blender/rig_biped.py`: Move this rejected POC rig to the experimental directory.
+- `tools/artgen/blender/rig_blob.py`: Move this rejected POC rig to the experimental directory.
+- `tools/artgen/blender/rig_quad.py`: Move this rejected POC rig to the experimental directory.
+- `tools/artgen/build.py`: Paint native character specs and emit runtime layouts and the review sheet.
+- `tools/artgen/character_catalog.py`: Compile all hero tiers and enemy forms from original designs and existing animation indices.
+- `tools/artgen/characters.py`: Author native silhouettes, material bands, complete outlines, animated poses and the review gallery.
+- `tools/artgen/iteration.py`: Record current character coverage and actual City/Halls ambient values in room checks.
+- `tools/artgen/specs/character_bat.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_bee.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_blacksmith.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_brute.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_crystal_guardian.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_crystal_wisp.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_dm300.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_elemental.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_eye.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_fungal_core.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_fungal_sentry.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_fungal_spinner.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_ghost.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_ghoul.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_gnoll.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_gnoll_geomancer.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_gnoll_guard.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_gnoll_sapper.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_golem.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_goo.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_guard.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_guardian.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_imp.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_king.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_larva.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_lotus.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_mimic.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_monk.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_necromancer.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_ninja_log.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_piranha.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_pylon.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_ripper.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_rot_heart.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_rot_lasher.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_scorpio.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_sheep.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_shopkeeper.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_slime.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_snake.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_spawner.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_spinner.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_spirit_hawk.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_statue.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_succubus.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_swarm.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_tengu.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_thief.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_undead.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_wandmaker.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_wards.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_warlock.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_wraith.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_yog.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/character_yog_fists.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/hero_cleric.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/hero_duelist.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/hero_enchanter.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/hero_huntress.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/hero_mage.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/hero_necromancer.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/hero_psychic.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/hero_rogue.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/hero_warrior.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/render_crab.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/render_ghoul.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/render_rat.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/render_skeleton.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/upstream_v4_sprites_crystal_spire.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/upstream_v4_sprites_dm100.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/upstream_v4_sprites_dm200.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/upstream_v4_sprites_ratking.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/upstream_v4_sprites_sentry.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/upstream_v4_sprites_shaman.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/upstream_v4_sprites_skeleton.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/upstream_v4_sprites_vault_boss_elemental.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/upstream_v4_sprites_vault_mirror.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/specs/upstream_v4_sprites_vault_tokens_door.json`: Define native character forms, palette materials, frame dimensions and animation poses.
+- `tools/artgen/validate.py`: Validate native pose occupancy, outlines, animation change, palette and regional hue separation.
+- `verification/art-validation.log`: Append actual stage-6d build and verification output, retaining prior evidence.
+- `verification/characters.png`: Show all 200 character forms beside their actual 16-pixel previews.
+- `verification/clean-build.log`: Append actual stage-6d build and verification output, retaining prior evidence.
+- `verification/desktop-only.log`: Append actual stage-6d build and verification output, retaining prior evidence.
+- `verification/iteration/caves/room-gate.json`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/caves/room.json`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/caves/sewers-gate.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/caves/sewers-ingame.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/caves/sewers-terrain.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/city/room-gate.json`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/city/room.json`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/city/sewers-gate.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/city/sewers-ingame.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/city/sewers-terrain.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/halls/room-gate.json`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/halls/room.json`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/halls/sewers-gate.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/halls/sewers-ingame.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/halls/sewers-terrain.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/liquids/round-15.json`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/liquids/round-15.md`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/liquids/round-15.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/prison/room-gate.json`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/prison/room.json`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/prison/sewers-gate.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/prison/sewers-ingame.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/prison/sewers-terrain.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/room-gate.json`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/room.json`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/sewers-gate.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/sewers-ingame.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/iteration/sewers-terrain.png`: Refresh the actual lit room, measured gate or hash-bound liquid review for native character art.
+- `verification/junit-summary.log`: Append actual stage-6d build and verification output, retaining prior evidence.
+- `verification/new-class-smoke.log`: Append actual stage-6d build and verification output, retaining prior evidence.
+- `verification/reproducibility.log`: Append actual stage-6d build and verification output, retaining prior evidence.

@@ -1,0 +1,151 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/wards.png",
+  "dimensions": [
+    288,
+    60
+  ],
+  "frame": [
+    48,
+    60
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "--0",
+      "kind": "tower",
+      "primary": "4A2C6E",
+      "accent": "9D6BD1",
+      "features": [],
+      "idle": 0,
+      "regions": [],
+      "species": "wards:0",
+      "animations": {
+        "idle": [
+          0
+        ]
+      }
+    },
+    {
+      "name": "--1",
+      "kind": "tower",
+      "primary": "4A2C6E",
+      "accent": "9D6BD1",
+      "features": [],
+      "idle": 1,
+      "regions": [],
+      "species": "wards:1",
+      "animations": {
+        "idle": [
+          1
+        ]
+      }
+    },
+    {
+      "name": "--2",
+      "kind": "tower",
+      "primary": "4A2C6E",
+      "accent": "9D6BD1",
+      "features": [],
+      "idle": 2,
+      "regions": [],
+      "species": "wards:2",
+      "animations": {
+        "idle": [
+          2
+        ]
+      }
+    },
+    {
+      "name": "--3",
+      "kind": "tower",
+      "primary": "4A2C6E",
+      "accent": "9D6BD1",
+      "features": [],
+      "idle": 3,
+      "regions": [],
+      "species": "wards:3",
+      "animations": {
+        "idle": [
+          3
+        ]
+      }
+    },
+    {
+      "name": "--4",
+      "kind": "tower",
+      "primary": "4A2C6E",
+      "accent": "9D6BD1",
+      "features": [],
+      "idle": 4,
+      "regions": [],
+      "species": "wards:4",
+      "animations": {
+        "idle": [
+          4
+        ]
+      }
+    },
+    {
+      "name": "--5",
+      "kind": "tower",
+      "primary": "4A2C6E",
+      "accent": "9D6BD1",
+      "features": [],
+      "idle": 5,
+      "regions": [],
+      "species": "wards:5",
+      "animations": {
+        "idle": [
+          5
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 1,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 2,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 3,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 4,
+      "tier": 4,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "idle",
+      "phase": 0.0
+    }
+  ]
+}

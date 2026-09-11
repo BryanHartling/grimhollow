@@ -5,8 +5,50 @@ import argparse
 import json
 import sys
 import numpy as np
-from PIL import Image
+import colorsys
+from PIL import Image,ImageFilter
 from build import ROOT, SPEC_DIR, COLORS, paint, locked
+
+def character_checks(spec,pixels,errors,regional):
+    fw,fh=spec['frame'];cols=spec['dimensions'][0]//fw
+    if (fw,fh) not in ((48,60),(96,96)):errors.append(spec['output']+': not a native character frame')
+    for i,entry in enumerate(spec['poses']):
+        frame=pixels[i//cols*fh:(i//cols+1)*fh,i%cols*fw:(i%cols+1)*fw]
+        active=frame[:,:,3]>0
+        if not active.any():errors.append(f'{spec["output"]}: missing frame {i}')
+        opaque=frame[:,:,3]==255
+        eroded=np.array(Image.fromarray(np.pad(opaque.astype('uint8')*255,2)).filter(ImageFilter.MinFilter(5)))[2:-2,2:-2]>0
+        if (opaque&~eroded&np.any(frame[:,:,:3]!=[14,13,12],axis=2)).any():
+            errors.append(f'{spec["output"]}: frame {i} lacks an intact two-pixel outline')
+        if entry['pose']=='idle' and active.any():
+            y=np.where(active)[0];occupancy=(y.max()-y.min()+1)/fh
+            if not .60<=occupancy<=.85:errors.append(f'{spec["output"]}: idle {i} occupancy {occupancy:.3f} outside .60-.85')
+    for form in spec['forms']:
+        for name,ids in form['animations'].items():
+            if len(set(ids))>1:
+                frames={pixels[i//cols*fh:(i//cols+1)*fh,i%cols*fw:(i%cols+1)*fw].tobytes() for i in set(ids)}
+                if len(frames)<2:errors.append(f'{spec["output"]}: {form["name"]} {name} has no animated change')
+        indices=set(form['animations'].get('idle',[form['idle']]))
+        for i in indices:
+            frame=Image.fromarray(pixels[i//cols*fh:(i//cols+1)*fh,i%cols*fw:(i%cols+1)*fw])
+            frame.thumbnail((16,16),Image.Resampling.LANCZOS)
+            tiny=np.array(frame);rgb=tiny[:,:,:3][tiny[:,:,3]>=128]
+            hist=np.histogram([colorsys.rgb_to_hsv(*color)[0] for color in rgb/255],bins=16,range=(0,1))[0].astype(float)
+            hist/=max(1,hist.sum())
+            for region in form['regions']:regional.setdefault(region,[]).append((form['species'],form['name'],i,hist))
+
+def readability(regional,errors):
+    total=0;minimum=2.;bad={}
+    for region,entries in regional.items():
+        for j,(species,name,index,hist) in enumerate(entries):
+            for other,oname,oi,ohist in entries[j+1:]:
+                if species==other:continue
+                distance=float(np.abs(hist-ohist).sum());total+=1;minimum=min(minimum,distance)
+                if distance<.25:
+                    key=(region,name,oname);bad[key]=min(bad.get(key,2),distance)
+    for (region,name,other),value in bad.items():errors.append(f'TEST 30 {region}: {name}/{other} hue L1={value:.4f} below .25')
+    if not regional:errors.append('TEST 30: native regional character coverage missing')
+    print(f'TEST 30: {len(regional)} regions; idle pairs={total}; minimum hue L1={minimum:.4f}; failing species pairs={len(bad)}')
 
 def lab(rgb):
     rgb = rgb/255.0
@@ -17,7 +59,7 @@ def lab(rgb):
     return np.stack([116*f[:,1]-16,500*(f[:,0]-f[:,1]),200*(f[:,1]-f[:,2])],axis=1)
 
 def validate(generated_only=False):
-    errors=[]; outputs=set(); count=0
+    errors=[]; outputs=set(); count=0;regional={};native=0
     # Finite tints/shades used by this painter; CIE76 tolerance remains the spec's 12.
     candidates=np.concatenate([COLORS*s for s in np.linspace(0,1,101)]+[COLORS+(255-COLORS)*s for s in np.linspace(0,1,101)])
     palette_lab=lab(candidates)
@@ -29,6 +71,8 @@ def validate(generated_only=False):
         if list(image.size)!=spec['dimensions']: errors.append(f'{spec["output"]}: wrong dimensions')
         pixels=np.array(image); visible=pixels[:,:,3]>0
         if not visible.any(): errors.append(f'{spec["output"]}: empty asset'); continue
+        if spec.get('native_character'):
+            character_checks(spec,pixels,errors,regional);native+=1
         if spec.get('rendered_character'):
             fw,fh=spec['frame']
             for row in range(spec.get('tiers',1)):
@@ -54,6 +98,7 @@ def validate(generated_only=False):
         # Locked human replacements need separate review; they are never automatically certified.
         if locked(path): errors.append(f'{spec["output"]}: locked human override requires style review')
         elif path.suffix=='.png' and image.tobytes()!=paint(spec).tobytes(): errors.append(f'{spec["output"]}: differs from source painting')
+    if native:readability(regional,errors)
     if not generated_only:
         inventory=[]
         for directory in ['environment','sprites','effects']:
@@ -62,7 +107,7 @@ def validate(generated_only=False):
         if missing: errors.append(f'Incomplete art inventory: {len(missing)} existing sheets lack pipeline specs (including {", ".join(p.name for p in missing[:8])}).')
         for hero in ['necromancer','enchanter','psychic']:
             if not (ROOT/'core/src/main/assets/sprites'/f'hero_{hero}.png').exists(): errors.append(f'Missing hero_{hero}.png; character outline, occupancy and animation tests cannot pass.')
-        errors.append('Full character/item style and referenced-frame coverage gates are not implemented; tests 16 and 17 cannot be certified.')
+        errors.append('Full item style and complete referenced-frame coverage gates remain unfinished; tests 16 and 17 cannot be certified.')
     for error in errors: print('FAIL:',error)
     print(f'Validated {count} generated specifications; {len(errors)} failures.' + (' Subset diagnostic only.' if generated_only else ''))
     return bool(errors)

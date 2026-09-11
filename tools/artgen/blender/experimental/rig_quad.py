@@ -1,6 +1,6 @@
 """Shared articulated limb rig for rat and crab silhouettes."""
 import math
-from rig_biped import joint,mesh
+from primitives import joint,mesh
 def build(kind,m):
     root=joint('root',None,(0,0,0));legs=[]
     if kind=='rat':

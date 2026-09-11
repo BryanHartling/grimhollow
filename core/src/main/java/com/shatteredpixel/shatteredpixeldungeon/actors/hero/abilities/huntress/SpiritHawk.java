@@ -299,7 +299,7 @@ public class SpiritHawk extends ArmorAbility {
 
 			texture( Assets.Sprites.SPIRIT_HAWK );
 
-			TextureFilm frames = new TextureFilm( texture, 15, 15 );
+			TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm( texture, 15, 15 );
 
 			int c = 0;
 

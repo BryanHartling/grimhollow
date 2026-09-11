@@ -4,7 +4,7 @@ import sys,math,random
 import bpy
 from mathutils import Vector
 HERE=Path(__file__).resolve().parent;sys.path.insert(0,str(HERE))
-import materials,rig_biped,rig_quad,sewers
+import materials,primitives,sewers
 import liquids,json
 ROOT=HERE.parents[2];CACHE=ROOT/'tools/artgen/render_cache';CACHE.mkdir(parents=True,exist_ok=True);rendered_count=0
 ANIMATIONS={'idle':2,'run':6,'attack':5,'die':5,'special':4}
@@ -41,35 +41,36 @@ def render(path):
 
 def tiles(kind,variant):
     scene=reset();camera(scene,True);m=materials.library(501+variant);rng=random.Random(501+variant)
-    root=rig_biped.joint('tiles with seamless neighbors',None,(0,0,0))
+    root=primitives.joint('tiles with seamless neighbors',None,(0,0,0))
     for ty in [-1,0,1]:
         for tx in [-1,0,1]:
-            base='mud' if kind=='grass' else 'mortar';rig_biped.mesh('cube','mortar',root,(tx,ty,-.04),(.5,.5,.04),m[base])
+            base='mud' if kind=='grass' else 'mortar';primitives.mesh('cube','mortar',root,(tx,ty,-.04),(.5,.5,.04),m[base])
             if kind=='water':
                 # A seeded, displaced surface with broad depth changes and wet highlights.
                 for y in range(8):
-                    for x in range(8):rig_biped.mesh('cube','sewage surface',root,(tx+(x+.5)/8-.5,ty+(y+.5)/8-.5,.035+.025*math.sin((x+variant)*.8+y*.7)),(.063,.063,.035),m['sewage'])
+                    for x in range(8):primitives.mesh('cube','sewage surface',root,(tx+(x+.5)/8-.5,ty+(y+.5)/8-.5,.035+.025*math.sin((x+variant)*.8+y*.7)),(.063,.063,.035),m['sewage'])
             else:
                 for y in range(4):
                     for x in range(4):
                         z=(.6 if kind=='wall' else .05)+rng.random()*.075
-                        slab=rig_biped.mesh('cube','relief slab',root,(tx+(x+.5)/4-.5,ty+(y+.5)/4-.5,z/2),(.119,.118,z/2),m['wet_stone'])
+                        slab=primitives.mesh('cube','relief slab',root,(tx+(x+.5)/4-.5,ty+(y+.5)/4-.5,z/2),(.119,.118,z/2),m['wet_stone'])
                         bpy.context.view_layer.objects.active=slab;slab.select_set(True);bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
                         bevel=slab.modifiers.new('Chipped wet bevel','BEVEL');bevel.width=.018;bevel.segments=1
             if kind=='grass':
                 for i in range(23):
-                    obj=rig_biped.mesh('cone','mildew reed',root,(tx+rng.uniform(-.44,.44),ty+rng.uniform(-.44,.44),.14),(.022,.022,rng.uniform(.09,.22)),m['mildew'],5)
+                    obj=primitives.mesh('cone','mildew reed',root,(tx+rng.uniform(-.44,.44),ty+rng.uniform(-.44,.44),.14),(.022,.022,rng.uniform(.09,.22)),m['mildew'],5)
                     obj.rotation_euler=(rng.uniform(-.4,.4),rng.uniform(-.4,.4),0)
             if kind.startswith('door'):
-                for side in [-1,1]:rig_biped.mesh('cube','door post',root,(tx+side*.39,ty,.32),(.075,.12,.32),m['dry_stone'])
+                for side in [-1,1]:primitives.mesh('cube','door post',root,(tx+side*.39,ty,.32),(.075,.12,.32),m['dry_stone'])
                 for i in range(5):
                     x=tx+(i-2)*.13;y=ty
                     if kind=='door_open':x=tx-.32;y=ty+(i-2)*.13
-                    rig_biped.mesh('cube','rotting plank',root,(x,y,.30),(.060,.065,.30) if kind=='door' else (.065,.060,.30),m['rotting_wood'])
-                rig_biped.mesh('cube','iron band',root,(tx,ty-.072,.39),(.32,.025,.025),m['iron'])
+                    primitives.mesh('cube','rotting plank',root,(x,y,.30),(.060,.065,.30) if kind=='door' else (.065,.060,.30),m['rotting_wood'])
+                primitives.mesh('cube','iron band',root,(tx,ty-.072,.39),(.32,.025,.025),m['iron'])
     render(CACHE/f'tiles/{kind}_{variant}.png')
 
 def character(kind,tier=0):
+    from experimental import rig_biped,rig_quad
     scene=reset();camera(scene);m=materials.library(570+tier)
     biped=kind not in ('rat','crab');module=rig_biped if biped else rig_quad
     root,joints=module.build(kind,tier,m) if biped else module.build(kind,m)
@@ -90,8 +91,8 @@ for kind in ['floor','wall','water','grass','door','door_open','decor','wall_tor
             if kind=='grass':tiles(kind,variant)
             else:sewers.render(kind,variant,reset,camera,render,CACHE)
 for kind in ['rat','crab','skeleton','ghoul']:
-    if args.asset is None or args.asset==kind:character(kind)
-if args.asset is None or args.asset=='necromancer':
+    if args.asset=='experimental/'+kind:character(kind)
+if args.asset=='experimental/necromancer':
     for tier in range(8):character('necromancer',tier)
 if assets is None or any(a=='liquids' or a.startswith('liquids/') for a in assets):
     for kind in liquids.COLORS:

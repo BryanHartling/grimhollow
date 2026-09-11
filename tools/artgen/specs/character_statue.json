@@ -1,0 +1,821 @@
+{
+  "kind": "character",
+  "native_character": true,
+  "output": "core/src/main/assets/sprites/statue.png",
+  "dimensions": [
+    1008,
+    300
+  ],
+  "frame": [
+    48,
+    60
+  ],
+  "seed": 603,
+  "references": [
+    "ref-25",
+    "ref-26",
+    "ref-28",
+    "ref-29",
+    "ref-30"
+  ],
+  "forms": [
+    {
+      "name": "Statue-0",
+      "kind": "humanoid",
+      "primary": "565B62",
+      "accent": "C9BFA8",
+      "features": [
+        "helm",
+        "guard",
+        "sword"
+      ],
+      "idle": 0,
+      "regions": [
+        "sewers",
+        "prison",
+        "caves",
+        "city",
+        "halls"
+      ],
+      "species": "statue",
+      "animations": {
+        "idle": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "run": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "attack": [
+          8,
+          9,
+          10
+        ],
+        "die": [
+          11,
+          12,
+          13,
+          14,
+          15,
+          15
+        ]
+      }
+    },
+    {
+      "name": "Statue-21",
+      "kind": "humanoid",
+      "primary": "565B62",
+      "accent": "C9BFA8",
+      "features": [
+        "helm",
+        "guard",
+        "sword"
+      ],
+      "idle": 21,
+      "regions": [
+        "sewers",
+        "prison",
+        "caves",
+        "city",
+        "halls"
+      ],
+      "species": "statue",
+      "animations": {
+        "idle": [
+          21,
+          21,
+          21,
+          21,
+          21,
+          22,
+          22
+        ],
+        "run": [
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "attack": [
+          29,
+          30,
+          31
+        ]
+      }
+    },
+    {
+      "name": "Statue-32",
+      "kind": "humanoid",
+      "primary": "565B62",
+      "accent": "C9BFA8",
+      "features": [
+        "helm",
+        "guard",
+        "sword"
+      ],
+      "idle": 32,
+      "regions": [
+        "sewers",
+        "prison",
+        "caves",
+        "city",
+        "halls"
+      ],
+      "species": "statue",
+      "animations": {
+        "idle": [
+          32,
+          32,
+          32,
+          32,
+          32,
+          33,
+          33
+        ],
+        "run": [
+          34,
+          35,
+          36,
+          37,
+          38,
+          39
+        ],
+        "attack": [
+          40,
+          41,
+          42
+        ]
+      }
+    },
+    {
+      "name": "Statue-43",
+      "kind": "humanoid",
+      "primary": "565B62",
+      "accent": "C9BFA8",
+      "features": [
+        "helm",
+        "guard",
+        "sword"
+      ],
+      "idle": 43,
+      "regions": [
+        "sewers",
+        "prison",
+        "caves",
+        "city",
+        "halls"
+      ],
+      "species": "statue",
+      "animations": {
+        "idle": [
+          43,
+          43,
+          43,
+          43,
+          43,
+          44,
+          44
+        ],
+        "run": [
+          45,
+          46,
+          47,
+          48,
+          49,
+          50
+        ],
+        "attack": [
+          51,
+          52,
+          53
+        ]
+      }
+    },
+    {
+      "name": "Statue-54",
+      "kind": "humanoid",
+      "primary": "565B62",
+      "accent": "C9BFA8",
+      "features": [
+        "helm",
+        "guard",
+        "sword"
+      ],
+      "idle": 54,
+      "regions": [
+        "sewers",
+        "prison",
+        "caves",
+        "city",
+        "halls"
+      ],
+      "species": "statue",
+      "animations": {
+        "idle": [
+          54,
+          54,
+          54,
+          54,
+          54,
+          55,
+          55
+        ],
+        "run": [
+          56,
+          57,
+          58,
+          59,
+          60,
+          61
+        ],
+        "attack": [
+          62,
+          63,
+          64
+        ]
+      }
+    },
+    {
+      "name": "Statue-65",
+      "kind": "humanoid",
+      "primary": "565B62",
+      "accent": "C9BFA8",
+      "features": [
+        "helm",
+        "guard",
+        "sword"
+      ],
+      "idle": 65,
+      "regions": [
+        "sewers",
+        "prison",
+        "caves",
+        "city",
+        "halls"
+      ],
+      "species": "statue",
+      "animations": {
+        "idle": [
+          65,
+          65,
+          65,
+          65,
+          65,
+          66,
+          66
+        ],
+        "run": [
+          67,
+          68,
+          69,
+          70,
+          71,
+          72
+        ],
+        "attack": [
+          73,
+          74,
+          75
+        ],
+        "die": [
+          76,
+          77,
+          78,
+          79,
+          80,
+          80
+        ]
+      }
+    }
+  ],
+  "poses": [
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.1667
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.3333
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.6667
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "run",
+      "phase": 0.8333
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.25
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 0.75
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 0,
+      "tier": 0,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 1,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 1,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 1,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 1,
+      "pose": "run",
+      "phase": 0.1667
+    },
+    {
+      "form": 1,
+      "tier": 1,
+      "pose": "run",
+      "phase": 0.3333
+    },
+    {
+      "form": 1,
+      "tier": 1,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 1,
+      "pose": "run",
+      "phase": 0.6667
+    },
+    {
+      "form": 1,
+      "tier": 1,
+      "pose": "run",
+      "phase": 0.8333
+    },
+    {
+      "form": 1,
+      "tier": 1,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 1,
+      "tier": 1,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 1,
+      "tier": 1,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 2,
+      "tier": 2,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 2,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 2,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 2,
+      "pose": "run",
+      "phase": 0.1667
+    },
+    {
+      "form": 2,
+      "tier": 2,
+      "pose": "run",
+      "phase": 0.3333
+    },
+    {
+      "form": 2,
+      "tier": 2,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 2,
+      "pose": "run",
+      "phase": 0.6667
+    },
+    {
+      "form": 2,
+      "tier": 2,
+      "pose": "run",
+      "phase": 0.8333
+    },
+    {
+      "form": 2,
+      "tier": 2,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 2,
+      "tier": 2,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 2,
+      "tier": 2,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 3,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 3,
+      "tier": 3,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 3,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 3,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.1667
+    },
+    {
+      "form": 3,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.3333
+    },
+    {
+      "form": 3,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 3,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.6667
+    },
+    {
+      "form": 3,
+      "tier": 3,
+      "pose": "run",
+      "phase": 0.8333
+    },
+    {
+      "form": 3,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 3,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 3,
+      "tier": 3,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 4,
+      "tier": 4,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 4,
+      "tier": 4,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 4,
+      "tier": 4,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 4,
+      "tier": 4,
+      "pose": "run",
+      "phase": 0.1667
+    },
+    {
+      "form": 4,
+      "tier": 4,
+      "pose": "run",
+      "phase": 0.3333
+    },
+    {
+      "form": 4,
+      "tier": 4,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 4,
+      "tier": 4,
+      "pose": "run",
+      "phase": 0.6667
+    },
+    {
+      "form": 4,
+      "tier": 4,
+      "pose": "run",
+      "phase": 0.8333
+    },
+    {
+      "form": 4,
+      "tier": 4,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 4,
+      "tier": 4,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 4,
+      "tier": 4,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "run",
+      "phase": 0.0
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "run",
+      "phase": 0.1667
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "run",
+      "phase": 0.3333
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "run",
+      "phase": 0.5
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "run",
+      "phase": 0.6667
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "run",
+      "phase": 0.8333
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "attack",
+      "phase": 0.0
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "attack",
+      "phase": 0.5
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "attack",
+      "phase": 1.0
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "die",
+      "phase": 0.0
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "die",
+      "phase": 0.25
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "die",
+      "phase": 0.5
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "die",
+      "phase": 0.75
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "die",
+      "phase": 1.0
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "idle",
+      "phase": 0.5
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "idle",
+      "phase": 0.0
+    },
+    {
+      "form": 5,
+      "tier": 5,
+      "pose": "idle",
+      "phase": 0.5
+    }
+  ]
+}

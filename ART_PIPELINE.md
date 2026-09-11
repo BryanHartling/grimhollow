@@ -194,3 +194,31 @@ Halls lava retains its cached emission while lighting nearby terrain. Numeric
 clarifications for the dark Halls range are listed individually in CHANGES.md.
 
 Selected regional rounds: Caves 06 for all five classes (scores 0.913-0.948); City 12 (0.944-0.952); Halls 12 (0.928-0.948). Recorded counts are 6, 12 and 12 per class respectively; every class first exceeds vision 0.7 at round 1. All five current room gates and all 25 class-history checks pass; liquid review 07 covers the final five-region captures.
+
+## Stage 6d: native character silhouettes
+
+`python tools/artgen/character_catalog.py` compiles the original material/form catalog
+and the existing Java animation indices into 78 committed character specifications.
+`python tools/artgen/build.py` paints their vector geometry directly at 48x60 or
+96x96, emits shared runtime frame metadata, and recreates `verification/characters.png`.
+There are no enlarged upstream pixel shapes in these character sources. All nine
+heroes retain eight armor rows; the existing sprite classes retain animation indices
+and timing. The painter supplies distinct idle, movement, action and death poses,
+three/four material tone bands, a two-pixel dark outline and a soft ground shadow.
+Reference-board D's armor planes, pointed hoods, shoulder drapes and restrained folds
+guide the silhouettes. Bone, iron, cloth, fur and magical accents remain palette based.
+
+The existing validator checks all native frames, standing height occupancy, complete
+outlines, animation variation, palette distance and the unchanged test-30 hue threshold.
+The regional populations include rare and quest enemies; Vault-only variants are
+compared in City. Armor/enraged states of the same species are compared against other
+species, not against themselves. The explicit unused Vault UNSTABLE enum slot has
+frames but introduces no new encounter. Tests 24-26 and 34-36 still use the existing
+OpenGL renderer and all 112 concrete sprite classes in its established inventory.
+
+The old Blender character rigs live in `blender/experimental/`; explicit commands such
+as `build.py --render --asset experimental/rat` can reproduce historical POC sources.
+They are not called for shipped characters. Shared environment mesh primitives were
+moved unchanged into `blender/primitives.py`; all environment render caches, including
+the locked Sewers classes, retain their approved bytes. Full items and props coverage
+remains the next stage's full-validator gate.

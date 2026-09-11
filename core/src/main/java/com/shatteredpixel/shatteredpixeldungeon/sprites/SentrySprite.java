@@ -46,7 +46,7 @@ public abstract class SentrySprite extends MobSprite {
 
 		idle = new Animation(1, true);
 		int ofs = texOffset();
-		idle.frames(texture.uvRect(ofs*8, 0, (ofs+1)*8, 15));
+		idle.frames(com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 1, 1), ofs);
 
 		run = idle.clone();
 		attack = idle.clone();

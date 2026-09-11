@@ -142,6 +142,9 @@ def procedural(spec):
 
 def paint(spec):
     import rendered
+    if spec.get('native_character'):
+        import characters
+        return characters.paint(spec)
     if spec.get('rendered_liquid'):return rendered.liquid_atlas(spec['rendered_liquid'])
     if spec.get('rendered_ripple'):return rendered.ripple_atlas()
     if spec.get('rendered_character'):return rendered.character(spec,procedural(spec))
@@ -162,8 +165,11 @@ def render(asset=None):
     rendered.liquid_frame.cache_clear()
 
 def build():
+    character_layouts={};character_specs=[]
     for source in sorted(SPEC_DIR.glob('*.json')):
         spec = json.loads(source.read_text())
+        if spec.get('native_character'):
+            character_layouts[spec['output'].split('/assets/')[1]]=spec['frame'];character_specs.append(spec)
         path = ROOT / spec['output']
         if locked(path):
             print('LOCKED',spec['output']); continue
@@ -177,6 +183,13 @@ def build():
         # Reproduce every byte, but leave identical files untouched by Windows readers.
         if not path.exists() or path.read_bytes()!=encoded:path.write_bytes(encoded)
         print(hashlib.sha256(encoded).hexdigest(),spec['output'])
+    if character_layouts:
+        metadata=ROOT/'core/src/main/assets/sprites/character-layouts.json'
+        encoded=(json.dumps(character_layouts,sort_keys=True,indent=2)+'\n').encode()
+        if not metadata.exists() or metadata.read_bytes()!=encoded:metadata.write_bytes(encoded)
+        import characters
+        preview=ROOT/'verification/characters.png';buffer=io.BytesIO();characters.gallery(character_specs).save(buffer,format='PNG')
+        if not preview.exists() or preview.read_bytes()!=buffer.getvalue():preview.write_bytes(buffer.getvalue())
     # Historical POC evidence is immutable; stage 5.6 has its own comparison.
     if not (ROOT/'verification/render-poc.png').exists() and (Path(__file__).parent/'render_cache/necromancer/0/idle_0.png').exists():
         import rendered

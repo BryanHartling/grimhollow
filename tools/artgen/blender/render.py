@@ -93,11 +93,13 @@ for kind in ['rat','crab','skeleton','ghoul']:
     if args.asset is None or args.asset==kind:character(kind)
 if args.asset is None or args.asset=='necromancer':
     for tier in range(8):character('necromancer',tier)
-if assets is None or 'liquids' in assets:
+if assets is None or any(a=='liquids' or a.startswith('liquids/') for a in assets):
     for kind in liquids.COLORS:
-        for variant in range(4):
-            for frame in range(8):liquids.render(kind,variant,frame,reset,camera,render,CACHE)
-    for frame in range(8):liquids.ripple(frame,reset,camera,render,CACHE)
+        if assets is None or 'liquids' in assets or 'liquids/'+kind in assets:
+            for variant in range(4):
+                for frame in range(8):liquids.render(kind,variant,frame,reset,camera,render,CACHE)
+    if assets is None or 'liquids' in assets or 'liquids/ripple' in assets:
+        for frame in range(8):liquids.ripple(frame,reset,camera,render,CACHE)
 
 for region in ('prison','caves','city','halls'):
     if not (HERE/'params'/region).exists():continue

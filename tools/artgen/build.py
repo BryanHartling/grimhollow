@@ -118,6 +118,15 @@ def procedural(spec):
         tint=np.clip((target-lum)/np.maximum(1-lum,.001),0,1)
         rgb=np.where((target<lum)[:,:,None],rgb*ratio[:,:,None],rgb+(255-rgb)*tint[:,:,None])
         pixels[:,:,:3]=np.rint(rgb).clip(0,255).astype(np.uint8)
+        for index,material in spec.get('material_overrides',{}).items():
+            index=int(index);x=index%16*64;y=index//16*64
+            patch=pixels[y:y+64,x:x+64,:3].astype(float)/255
+            lum=patch@np.array([.2126,.7152,.0722])
+            color=np.array(tuple(bytes.fromhex(material['color'])),dtype=float)/255
+            # Refit the existing relief to its material, retaining the dark joints
+            # and reflected edges instead of applying a flat colour overlay.
+            value=lum**material['value_exponent']
+            pixels[y:y+64,x:x+64,:3]=np.rint(np.clip(value[:,:,None]*color/(color@np.array([.2126,.7152,.0722])),0,1)*255).astype(np.uint8)
         return Image.fromarray(pixels)
     canvas = Image.new('RGBA',(256,256))
     draw = ImageDraw.Draw(canvas)

@@ -1625,3 +1625,9 @@ Stage 6c: 73-asset rebuild and 72-frame regional rerender
 TEST 28: 73 rebuilt files; byte differences=0; Blender not invoked
 TEST 29: 72 cached frames; max pHash distance=0; failures=0
 Final post-process hit Windows Errno 22; reviewed cache had already been restored. Idempotent-write correction verified by another 73-file rebuild with byte differences=0.
+
+Visual correction stage:
+TEST 29: 104 cached frames; max pHash distance=0; failures=0
+Validated 97 generated specifications; 0 failures. Subset diagnostic only.
+TEST 29: 32 cached frames; max pHash distance=0; failures=0
+Validated 97 generated specifications; 0 failures. Subset diagnostic only.

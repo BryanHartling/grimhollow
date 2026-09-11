@@ -40,7 +40,9 @@ def select_region(region):
 def dominant_hues(h,s,rgb):
     if REGION=='sewers':return (h>=15)&(h<=125)
     chroma=np.linalg.norm(lab(rgb)[:,1:],axis=1)
-    low,high={'prison':(25,65),'caves':(15,55),'city':(200,230),'halls':(200,240)}[REGION]
+    # Amber illumination shifts Prison's warm grey stone into reddish brown.
+    # Use the same brown lower bound as Caves; it is not an extra accent family.
+    low,high={'prison':(15,65),'caves':(15,55),'city':(200,230),'halls':(200,240)}[REGION]
     return (chroma<(10 if REGION=='halls' else 8))|((h>=low)&(h<=high))
 REFERENCES={
  'floor':[(4,1),(19,1),(20,.8),(21,.7)],

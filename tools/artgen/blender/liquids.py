@@ -4,7 +4,7 @@ import bpy
 from sewers import mesh
 from materials import rgb
 
-COLORS={'sewage':'506344','water':'486678','lava':'783D24'}
+COLORS={'sewage':'506344','water':'486E78','lava':'783D24'}
 
 def emission(name,color,value):
     mat=bpy.data.materials.new(name);mat.use_nodes=True
@@ -22,45 +22,56 @@ def render(kind,variant,frame,reset,camera,save,cache):
     phase=2*math.pi*frame/8;rng=random.Random(8631+variant*901)
     # A connected, animated mesh. Colour bands follow the displaced wave surface.
     levels=[emission('liquid depth '+str(i),COLORS[kind],.075+i*.0025) for i in range(49)]
-    n=96;vertices=[];values=[]
-    waves=[(rng.uniform(3,7),rng.uniform(-3,3),rng.uniform(0,6.28),rng.uniform(.2,.5)) for _ in range(4)]
-    def wave(x,y):return sum(a*math.sin(kx*x+ky*y+offset+phase) for kx,ky,offset,a in waves)
+    # The specular band comes from the slope of the same displaced surface.
+    # Nothing is stamped over it: interference between two travelling waves
+    # breaks reflected crests into irregular, open segments as time advances.
+    levels.extend([emission('wave shoulder',COLORS[kind],.28),
+                   emission('reflected wave normal','EFE7D2',.90)])
+    n=64;vertices=[];values=[]
+    ky=rng.uniform(3.2,4.0);kx=rng.uniform(1.5,1.9)
+    offset=rng.uniform(0,math.tau);cross=rng.uniform(0,math.tau)
+    bend=rng.uniform(.5,1.1);slope=rng.uniform(-.15,.15)
+    def surface(x,y):
+        a=math.tau*(ky*y+slope*x)+bend*math.sin(math.tau*x+cross)+.45*math.sin(5*y+offset)+phase
+        b=math.tau*(kx*x+.15*y)+cross-phase
+        return .014*math.sin(a)+.006*math.sin(b),a,b
     for y in range(n+1):
         for x in range(n+1):
-            u=x/n-.5;v=y/n-.5;w=wave(u,v)
-            vertices.append((u,v,.012*w))
+            u=x/n-.5;v=y/n-.5;z,_,_=surface(u,v)
+            vertices.append((u,v,z))
+    faces=[]
+    for y in range(n):
+        for x in range(n):
+            u=(x+.5)/n-.5;v=(y+.5)/n-.5;z,a,b=surface(u,v)
             angle=variant*.73+.2
             across=u*math.cos(angle)+v*math.sin(angle)
             along=-u*math.sin(angle)+v*math.cos(angle)
             depth=math.exp(-((across/.27)**4+(along/.47)**4))
-            values.append(.137-.037*depth+.006*w)
-    faces=[(y*(n+1)+x,y*(n+1)+x+1,(y+1)*(n+1)+x+1,(y+1)*(n+1)+x) for y in range(n) for x in range(n)]
-    surface=mesh('animated continuous liquid',vertices,faces,levels[0])
-    for mat in levels[1:]:surface.data.materials.append(mat)
-    for face,poly in zip(faces,surface.data.polygons):
-        value=sum(values[v] for v in face)/4
-        poly.material_index=max(0,min(48,round((value-.075)/.0025)));poly.use_smooth=True
-    # Unevenly spaced open crest fragments, with independently moving lengths.
-    bright=emission('reflected crest','EFE7D2',.90)
-    soft=emission('soft crest edge',COLORS[kind],.27)
-    centers=[]
-    for streak in range(4):
-        for attempt in range(100):
-            cx=rng.uniform(-.34,.34);cy=rng.uniform(-.39,.39)
-            if all(abs(cy-y)>.13 or abs(cx-x)>.36 for x,y in centers):break
-        centers.append((cx,cy))
-        offset=rng.uniform(0,6.28)
-        length=rng.uniform(.21,.28)*(1+.1*math.sin(phase+offset));angle=rng.uniform(-.22,.22)
-        drift=.022*math.sin(phase+offset);cy+=drift
-        for width,z,mat in ((.047,.047,soft),(.032,.049,bright)):
-            points=[]
-            for side in (-1,1):
-                for i in range(13):
-                    t=i/12;along=(t-.5)*length
-                    bend=.003*math.sin(t*math.pi*1.6+phase)
-                    taper=math.sin(math.pi*t)**.35
-                    points.append((cx+along*math.cos(angle),cy+along*math.sin(angle)+bend+side*width*taper/2,z))
-            mesh('open reflected wave streak',points,[(i,i+1,14+i,13+i) for i in range(12)],mat)
+            reflection=((math.cos(a)+1)/2)**35*((math.sin(b)+1)/2)**1.1
+            value=.137-.037*depth+.15*z
+            material=max(0,min(48,round((value-.075)/.0025)))
+            if reflection>.30:material=49
+            if reflection>.62:material=50
+            faces.append((y*(n+1)+x,y*(n+1)+x+1,(y+1)*(n+1)+x+1,(y+1)*(n+1)+x))
+            values.append(material)
+    # Sub-pixel glints become flickering dots at gameplay zoom. Keep them in the
+    # lower reflection band; only coherent crest segments catch the bright key.
+    visited=set()
+    for cell,material in enumerate(values):
+        if material!=50 or cell in visited:continue
+        pending=[cell];visited.add(cell);component=[]
+        while pending:
+            c=pending.pop();component.append(c);x=c%n;y=c//n
+            for dy in (-1,0,1):
+                for dx in (-1,0,1):
+                    xx=x+dx;yy=y+dy;j=yy*n+xx
+                    if 0<=xx<n and 0<=yy<n and j not in visited and values[j]==50:
+                        visited.add(j);pending.append(j)
+        if max(c%n for c in component)-min(c%n for c in component)<7:
+            for c in component:values[c]=49
+    obj=mesh('continuous animated reflective surface',vertices,faces,levels[0])
+    for mat in levels[1:]:obj.data.materials.append(mat)
+    for material,poly in zip(values,obj.data.polygons):poly.material_index=material
     save(cache/f'liquids/{kind}/{variant}_{frame}.png')
 
 def ripple(frame,reset,camera,save,cache):

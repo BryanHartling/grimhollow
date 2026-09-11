@@ -110,7 +110,7 @@ def tile(kind,variant=0):
 
 @lru_cache(maxsize=104)
 def liquid_frame(kind,variant,frame):
-    colors={'sewage':'506344','water':'486678','lava':'783D24'}
+    colors={'sewage':'506344','water':'486E78','lava':'783D24'}
     params=dict(absolute_tones=True,smooth_tones=True,tone_gamma=1,
         tone_positions=[0,1],tone_curve=[0,1],stone_color=colors[kind],
         moss_color='506344',water_color=colors[kind])

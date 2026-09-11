@@ -2757,3 +2757,22 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `verification/iteration/liquids/round-09.json`: Preserve the negative liquid vision judgment on all five refreshed v4 lighting captures.
 - `verification/iteration/liquids/round-09.md`: Preserve the negative liquid vision judgment on all five refreshed v4 lighting captures.
 - `verification/iteration/liquids/round-09.png`: Preserve the negative liquid vision judgment on all five refreshed v4 lighting captures.
+- Prison palette classification: warm grey stone under amber light is brown at 15–65 degrees (matching the Caves brown lower bound); retain 70% dominant coverage and the one-accent limit.
+- LightingOverlay.java: green EternalFire now casts green magical light instead of the orange light selected by a Fire substring match; hazard mechanics and particle visibility are unchanged.
+- Prison special floor slots 4/10: refit retained procedural relief to dark iron with a 1.65 value curve, removing the unconverted reddish material without changing approved Sewers assets.
+- Liquid surface correction: reflections are derived from travelling wave slopes with short glints suppressed; clean-water hue is 192.5 degrees so warm Caves lighting preserves separation, within the specified 190-215 range.
+- `verification/iteration/liquids/round-10.json`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-10.md`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-10.png`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-11.json`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-11.md`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-11.png`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-12.json`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-12.md`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-12.png`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-13.json`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-13.md`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-13.png`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-14.json`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-14.md`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.
+- `verification/iteration/liquids/round-14.png`: Preserve this liquid round and its honest vision/structural results through the existing iteration pipeline.

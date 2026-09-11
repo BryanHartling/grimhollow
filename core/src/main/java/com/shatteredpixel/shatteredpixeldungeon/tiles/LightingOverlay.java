@@ -64,7 +64,9 @@ public class LightingOverlay extends Image {
             String type = blob.getClass().getSimpleName();
             for (int cell=0; cell<blob.cur.length; cell++) {
                 if (blob.cur[cell] <= 0 || !Dungeon.level.heroFOV[cell]) continue;
-                if (type.contains("Fire")) source(cell, 2, .48f, .20f, .04f);
+                if (blob instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.MagicalFireRoom.EternalFire)
+                    source(cell, 2, .05f, .26f, .10f);
+                else if (type.contains("Fire")) source(cell, 2, .48f, .20f, .04f);
                 else if (type.contains("Electric")) source(cell, 2, .06f, .35f, .4f);
                 else if (type.contains("Freez") || type.contains("Frost")) source(cell, 1, .14f, .3f, .35f);
                 else if (type.contains("Corro") || type.contains("Toxic")) source(cell, 2, .12f, .32f, .04f);

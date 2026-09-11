@@ -83,6 +83,10 @@ def character(kind,tier=0):
 import argparse,regions
 parser=argparse.ArgumentParser();parser.add_argument('--asset');args=parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
 assets=set(args.asset.split(',')) if args.asset else None
+if assets is None or 'effects' in assets:
+    import effects
+    for kind,count in effects.STYLES.items():
+        for frame in range(count):effects.render(kind,frame,reset,camera,render,CACHE)
 if assets is None or any(a=='items' or a.startswith('items/') for a in assets):
     import props
     for entry in json.loads((HERE/'items.json').read_text())['items']:

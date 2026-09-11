@@ -190,6 +190,19 @@ public class GameScene extends PixelScene {
         Image decal=createBloodDecal(cell,java.util.concurrent.ThreadLocalRandom.current().nextInt(3));
         if(decal!=null)scene.bloodDecals.add(decal);
 	}
+    public static void scorchDecal(int cell) {
+        if(scene==null||scene.bloodDecals==null||!com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled())return;
+        Image decal=createScorchDecal(cell,com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.phase(cell)%3);
+        if(decal!=null)scene.bloodDecals.add(decal);
+    }
+    public static Image createScorchDecal(int cell,int variant) {
+        Image eligible=createBloodDecal(cell,0);if(eligible==null)return null;eligible.destroy();
+        Image image=new Image(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.ATLAS){
+            @Override public void update(){super.update();visible=com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled();}
+        };
+        com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.frame(image,com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Style.SCORCH,variant,16,16);
+        image.point(DungeonTilemap.tileToWorld(cell));return image;
+    }
     public static Image createBloodDecal(int cell,int variant) {
         if(Dungeon.level==null || !Dungeon.level.insideMap(cell) || !Dungeon.level.passable[cell]
                 || Dungeon.level.pit[cell] || Dungeon.level.water[cell] || Dungeon.level.traps.get(cell)!=null
@@ -302,6 +315,7 @@ public class GameScene extends PixelScene {
 
 		bloodDecals=new Group();
 		terrain.add(bloodDecals);
+        terrain.add(new com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.FloorLayer());
 		add(new LightingOverlay());
 		
 		levelVisuals = Dungeon.level.addVisuals();
@@ -346,6 +360,7 @@ public class GameScene extends PixelScene {
 
 		levelWallVisuals = Dungeon.level.addWallVisuals();
 		add( levelWallVisuals );
+        for(int cell=0;cell<Dungeon.level.length();cell++)if(Dungeon.level.map[cell]==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WALL_DECO)add(new com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Torch(cell));
 
 		wallBlocking = new WallBlockingTilemap();
 		add (wallBlocking);

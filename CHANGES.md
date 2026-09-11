@@ -3546,3 +3546,177 @@ Stage 6e file changes:
 - `verification/reproducibility.log`: Append or refresh the existing stage-boundary verification result without replacing historical evidence.
 - `verification/apk-identity.log`: Append final 0.6.0 APK identity and package/label output.
 - `verification/title.png`: Commit the actual OpenGL title capture after positioning flames outside the wordmark.
+
+## Stage 7: enhanced effects
+
+- Engineering choices: periodic analytic density advection gives a reproducible looping smoke field without a fluid-cache dependency; 4 wrapped gas sub-quads preserve atlas borders and equal-density cells share a draw call.
+- Numeric adjustment: Sewers ambient RGB +0.03 compensates for native grass after a live mean of 0.1282; the 0.13 room minimum, light radii, gameplay and locked render caches remain unchanged.
+- `.github/workflows/build.yml`: Run effects toggle, placement and performance gates through the existing Linux offscreen renderer.
+- `CHANGES.md`: Document stage 7, the Display toggle and upgradeable version 0.7.0 / Android code 916.
+- `KNOWN_ISSUES.md`: Document stage 7, the Display toggle and upgradeable version 0.7.0 / Android code 916.
+- `README.md`: Document stage 7, the Display toggle and upgradeable version 0.7.0 / Android code 916.
+- `build.gradle`: Document stage 7, the Display toggle and upgradeable version 0.7.0 / Android code 916.
+- `core/src/main/assets/effects/enhanced.png`: Pack every enhanced strip into the reproducible 1024x960 atlas.
+- `core/src/main/assets/messages/windows/windows.properties`: Document stage 7, the Display toggle and upgradeable version 0.7.0 / Android code 916.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/SPDSettings.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/blobs/Fire.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/NecroCurse.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/necromancer/CorpseExplosion.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/BlobEmitter.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/EnhancedEffects.java`: Render batched density-aware gas, grass entry/sway, spell loops, temporary walls, embers and wall flames without changing mechanics.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/Ripple.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/particles/ElmoParticle.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/particles/FlameParticle.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/particles/NecroticParticle.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/FocusCrystal.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/SigilBrush.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/PrisonLevel.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/features/ForceWalls.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/GameScene.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/CharSprite.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/DungeonTerrainTilemap.java`: Select the original or animated vegetation/wall path and preserve 16-unit terrain-feature geometry.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/LightMap.java`: Restore the live Sewers value margin after native grass replaces the old vegetation, retaining the gate threshold.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/RaisedTerrainTilemap.java`: Select the original or animated vegetation/wall path and preserve 16-unit terrain-feature geometry.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/TerrainFeaturesTilemap.java`: Select the original or animated vegetation/wall path and preserve 16-unit terrain-feature geometry.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndSettings.java`: Connect enhanced visual effects to existing events and preserve the disabled rendering path.
+- `desktop/src/main/java/com/shatteredpixel/shatteredpixeldungeon/desktop/DesktopSmokeProbe.java`: Extend the existing renderer for tests 31-32: off-path pixels, real fire expiration, scorch sizes and GPU-completed mean/p95 timing.
+- `tools/artgen/blender/effects.py`: Generate, pack and validate the shared 108-frame enhanced-effects atlas from committed render sources.
+- `tools/artgen/blender/render.py`: Generate, pack and validate the shared 108-frame enhanced-effects atlas from committed render sources.
+- `tools/artgen/build.py`: Generate, pack and validate the shared 108-frame enhanced-effects atlas from committed render sources.
+- `tools/artgen/fx.py`: Generate, pack and validate the shared 108-frame enhanced-effects atlas from committed render sources.
+- `tools/artgen/render_cache/effects/bone_wall/00.png`: Commit the reproducible bone_wall animation frame from Blender.
+- `tools/artgen/render_cache/effects/bone_wall/01.png`: Commit the reproducible bone_wall animation frame from Blender.
+- `tools/artgen/render_cache/effects/bone_wall/02.png`: Commit the reproducible bone_wall animation frame from Blender.
+- `tools/artgen/render_cache/effects/bone_wall/03.png`: Commit the reproducible bone_wall animation frame from Blender.
+- `tools/artgen/render_cache/effects/corpse/00.png`: Commit the reproducible corpse animation frame from Blender.
+- `tools/artgen/render_cache/effects/corpse/01.png`: Commit the reproducible corpse animation frame from Blender.
+- `tools/artgen/render_cache/effects/corpse/02.png`: Commit the reproducible corpse animation frame from Blender.
+- `tools/artgen/render_cache/effects/corpse/03.png`: Commit the reproducible corpse animation frame from Blender.
+- `tools/artgen/render_cache/effects/corpse/04.png`: Commit the reproducible corpse animation frame from Blender.
+- `tools/artgen/render_cache/effects/corpse/05.png`: Commit the reproducible corpse animation frame from Blender.
+- `tools/artgen/render_cache/effects/corpse/06.png`: Commit the reproducible corpse animation frame from Blender.
+- `tools/artgen/render_cache/effects/corpse/07.png`: Commit the reproducible corpse animation frame from Blender.
+- `tools/artgen/render_cache/effects/curse/00.png`: Commit the reproducible curse animation frame from Blender.
+- `tools/artgen/render_cache/effects/curse/01.png`: Commit the reproducible curse animation frame from Blender.
+- `tools/artgen/render_cache/effects/curse/02.png`: Commit the reproducible curse animation frame from Blender.
+- `tools/artgen/render_cache/effects/curse/03.png`: Commit the reproducible curse animation frame from Blender.
+- `tools/artgen/render_cache/effects/curse/04.png`: Commit the reproducible curse animation frame from Blender.
+- `tools/artgen/render_cache/effects/curse/05.png`: Commit the reproducible curse animation frame from Blender.
+- `tools/artgen/render_cache/effects/curse/06.png`: Commit the reproducible curse animation frame from Blender.
+- `tools/artgen/render_cache/effects/curse/07.png`: Commit the reproducible curse animation frame from Blender.
+- `tools/artgen/render_cache/effects/ember/00.png`: Commit the reproducible ember animation frame from Blender.
+- `tools/artgen/render_cache/effects/ember/01.png`: Commit the reproducible ember animation frame from Blender.
+- `tools/artgen/render_cache/effects/ember/02.png`: Commit the reproducible ember animation frame from Blender.
+- `tools/artgen/render_cache/effects/flame/00.png`: Commit the reproducible flame animation frame from Blender.
+- `tools/artgen/render_cache/effects/flame/01.png`: Commit the reproducible flame animation frame from Blender.
+- `tools/artgen/render_cache/effects/flame/02.png`: Commit the reproducible flame animation frame from Blender.
+- `tools/artgen/render_cache/effects/flame/03.png`: Commit the reproducible flame animation frame from Blender.
+- `tools/artgen/render_cache/effects/flame/04.png`: Commit the reproducible flame animation frame from Blender.
+- `tools/artgen/render_cache/effects/flame/05.png`: Commit the reproducible flame animation frame from Blender.
+- `tools/artgen/render_cache/effects/force_wall/00.png`: Commit the reproducible force_wall animation frame from Blender.
+- `tools/artgen/render_cache/effects/force_wall/01.png`: Commit the reproducible force_wall animation frame from Blender.
+- `tools/artgen/render_cache/effects/force_wall/02.png`: Commit the reproducible force_wall animation frame from Blender.
+- `tools/artgen/render_cache/effects/force_wall/03.png`: Commit the reproducible force_wall animation frame from Blender.
+- `tools/artgen/render_cache/effects/force_wall/04.png`: Commit the reproducible force_wall animation frame from Blender.
+- `tools/artgen/render_cache/effects/force_wall/05.png`: Commit the reproducible force_wall animation frame from Blender.
+- `tools/artgen/render_cache/effects/force_wall/06.png`: Commit the reproducible force_wall animation frame from Blender.
+- `tools/artgen/render_cache/effects/force_wall/07.png`: Commit the reproducible force_wall animation frame from Blender.
+- `tools/artgen/render_cache/effects/grass/00.png`: Commit the reproducible grass animation frame from Blender.
+- `tools/artgen/render_cache/effects/grass/01.png`: Commit the reproducible grass animation frame from Blender.
+- `tools/artgen/render_cache/effects/grass/02.png`: Commit the reproducible grass animation frame from Blender.
+- `tools/artgen/render_cache/effects/grass/03.png`: Commit the reproducible grass animation frame from Blender.
+- `tools/artgen/render_cache/effects/grass/04.png`: Commit the reproducible grass animation frame from Blender.
+- `tools/artgen/render_cache/effects/grass/05.png`: Commit the reproducible grass animation frame from Blender.
+- `tools/artgen/render_cache/effects/green_flame/00.png`: Commit the reproducible green_flame animation frame from Blender.
+- `tools/artgen/render_cache/effects/green_flame/01.png`: Commit the reproducible green_flame animation frame from Blender.
+- `tools/artgen/render_cache/effects/green_flame/02.png`: Commit the reproducible green_flame animation frame from Blender.
+- `tools/artgen/render_cache/effects/green_flame/03.png`: Commit the reproducible green_flame animation frame from Blender.
+- `tools/artgen/render_cache/effects/green_flame/04.png`: Commit the reproducible green_flame animation frame from Blender.
+- `tools/artgen/render_cache/effects/green_flame/05.png`: Commit the reproducible green_flame animation frame from Blender.
+- `tools/artgen/render_cache/effects/inscription/00.png`: Commit the reproducible inscription animation frame from Blender.
+- `tools/artgen/render_cache/effects/inscription/01.png`: Commit the reproducible inscription animation frame from Blender.
+- `tools/artgen/render_cache/effects/inscription/02.png`: Commit the reproducible inscription animation frame from Blender.
+- `tools/artgen/render_cache/effects/inscription/03.png`: Commit the reproducible inscription animation frame from Blender.
+- `tools/artgen/render_cache/effects/inscription/04.png`: Commit the reproducible inscription animation frame from Blender.
+- `tools/artgen/render_cache/effects/inscription/05.png`: Commit the reproducible inscription animation frame from Blender.
+- `tools/artgen/render_cache/effects/inscription/06.png`: Commit the reproducible inscription animation frame from Blender.
+- `tools/artgen/render_cache/effects/inscription/07.png`: Commit the reproducible inscription animation frame from Blender.
+- `tools/artgen/render_cache/effects/necrotic/00.png`: Commit the reproducible necrotic animation frame from Blender.
+- `tools/artgen/render_cache/effects/necrotic/01.png`: Commit the reproducible necrotic animation frame from Blender.
+- `tools/artgen/render_cache/effects/necrotic/02.png`: Commit the reproducible necrotic animation frame from Blender.
+- `tools/artgen/render_cache/effects/necrotic/03.png`: Commit the reproducible necrotic animation frame from Blender.
+- `tools/artgen/render_cache/effects/necrotic/04.png`: Commit the reproducible necrotic animation frame from Blender.
+- `tools/artgen/render_cache/effects/necrotic/05.png`: Commit the reproducible necrotic animation frame from Blender.
+- `tools/artgen/render_cache/effects/necrotic/06.png`: Commit the reproducible necrotic animation frame from Blender.
+- `tools/artgen/render_cache/effects/necrotic/07.png`: Commit the reproducible necrotic animation frame from Blender.
+- `tools/artgen/render_cache/effects/psychic/00.png`: Commit the reproducible psychic animation frame from Blender.
+- `tools/artgen/render_cache/effects/psychic/01.png`: Commit the reproducible psychic animation frame from Blender.
+- `tools/artgen/render_cache/effects/psychic/02.png`: Commit the reproducible psychic animation frame from Blender.
+- `tools/artgen/render_cache/effects/psychic/03.png`: Commit the reproducible psychic animation frame from Blender.
+- `tools/artgen/render_cache/effects/psychic/04.png`: Commit the reproducible psychic animation frame from Blender.
+- `tools/artgen/render_cache/effects/psychic/05.png`: Commit the reproducible psychic animation frame from Blender.
+- `tools/artgen/render_cache/effects/psychic/06.png`: Commit the reproducible psychic animation frame from Blender.
+- `tools/artgen/render_cache/effects/psychic/07.png`: Commit the reproducible psychic animation frame from Blender.
+- `tools/artgen/render_cache/effects/sanctuary/00.png`: Commit the reproducible sanctuary animation frame from Blender.
+- `tools/artgen/render_cache/effects/sanctuary/01.png`: Commit the reproducible sanctuary animation frame from Blender.
+- `tools/artgen/render_cache/effects/sanctuary/02.png`: Commit the reproducible sanctuary animation frame from Blender.
+- `tools/artgen/render_cache/effects/sanctuary/03.png`: Commit the reproducible sanctuary animation frame from Blender.
+- `tools/artgen/render_cache/effects/sanctuary/04.png`: Commit the reproducible sanctuary animation frame from Blender.
+- `tools/artgen/render_cache/effects/sanctuary/05.png`: Commit the reproducible sanctuary animation frame from Blender.
+- `tools/artgen/render_cache/effects/sanctuary/06.png`: Commit the reproducible sanctuary animation frame from Blender.
+- `tools/artgen/render_cache/effects/sanctuary/07.png`: Commit the reproducible sanctuary animation frame from Blender.
+- `tools/artgen/render_cache/effects/scorch/00.png`: Commit the reproducible scorch animation frame from Blender.
+- `tools/artgen/render_cache/effects/scorch/01.png`: Commit the reproducible scorch animation frame from Blender.
+- `tools/artgen/render_cache/effects/scorch/02.png`: Commit the reproducible scorch animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/00.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/01.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/02.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/03.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/04.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/05.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/06.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/07.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/08.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/09.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/10.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/11.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/12.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/13.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/14.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/render_cache/effects/smoke/15.png`: Commit the reproducible smoke animation frame from Blender.
+- `tools/artgen/specs/enhanced_effects.json`: Generate, pack and validate the shared 108-frame enhanced-effects atlas from committed render sources.
+- `verification/apk-identity.log`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/art-validation.log`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/ci-status.log`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/clean-build.log`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/desktop-only.log`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/effects-off.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/effects-on.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/effects-upstream.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/effects.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/caves/room-gate.json`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/caves/sewers-gate.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/caves/sewers-ingame.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/caves/sewers-terrain.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/city/room-gate.json`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/city/sewers-gate.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/city/sewers-ingame.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/city/sewers-terrain.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/halls/room-gate.json`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/halls/sewers-gate.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/halls/sewers-ingame.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/halls/sewers-terrain.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/liquids/round-17.json`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/liquids/round-17.md`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/liquids/round-17.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/prison/room-gate.json`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/prison/sewers-gate.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/prison/sewers-ingame.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/prison/sewers-terrain.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/room-gate.json`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/sewers-gate.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/sewers-ingame.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/iteration/sewers-terrain.png`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/junit-summary.log`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/new-class-smoke.log`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.
+- `verification/reproducibility.log`: Record the stage-end rendering, build or gameplay result in the existing verification outputs.

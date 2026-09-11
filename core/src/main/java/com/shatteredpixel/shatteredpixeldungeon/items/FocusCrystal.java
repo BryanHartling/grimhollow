@@ -23,7 +23,7 @@ public class FocusCrystal extends ClassSpellItem {
     }
     public boolean cast(Hero h,String spell,Integer cell,Integer direction){
         int cost=spell.equals("dominate")?2:1;if(!Arrays.asList(spells(h)).contains(spell)||!ready(h,cost))return false;
-        if(spell.equals("glimpse")){Buff.prolong(h,MindVision.class,5);Dungeon.observe();finish(h,cost);return true;}
+        if(spell.equals("glimpse")){Buff.prolong(h,MindVision.class,5);Dungeon.observe();com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.burst(cell==null?h.pos:cell,com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Style.PSYCHIC,16,.6f);finish(h,cost);return true;}
         if(cell==null||!Dungeon.level.insideMap(cell)||!Dungeon.level.heroFOV[cell])return false;
         Char enemy=Actor.findChar(cell);
         if(spell.equals("grasp")){
@@ -50,6 +50,6 @@ public class FocusCrystal extends ClassSpellItem {
             }else return false;
             Buff.prolong(enemy,PsychicMind.PsychicDamage.class,20);
         }
-        finish(h,cost);return true;
+        com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.burst(cell==null?h.pos:cell,com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Style.PSYCHIC,16,.6f);finish(h,cost);return true;
     }
 }

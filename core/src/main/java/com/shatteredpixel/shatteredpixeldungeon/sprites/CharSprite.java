@@ -228,6 +228,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 	}
 	
 	public void move( int from, int to ) {
+        com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.step(to);
 		turnTo( from , to );
 
 		play( run );

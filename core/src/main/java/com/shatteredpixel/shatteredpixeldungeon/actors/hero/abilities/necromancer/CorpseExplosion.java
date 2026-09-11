@@ -26,8 +26,9 @@ public class CorpseExplosion extends ArmorAbility {
             Buff.prolong(m,Necromancy.HeroDamage.class,8);
             m.damage(m.buff(AmplifySuffering.class)!=null?Math.round(damage*1.5f):damage,hero);
             if(!m.isAlive()&&Random.Float()<hero.pointsInTalent(Talent.SOUL_REFUND)/3f){Phylactery item=hero.belongings.getItem(Phylactery.class);if(item!=null)item.gainCharge(1);}
-            if(m.sprite!=null&&m.sprite.parent!=null)m.sprite.centerEmitter().burst(com.shatteredpixel.shatteredpixeldungeon.effects.particles.NecroticParticle.FACTORY,10);
+            if(!com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled()&&m.sprite!=null&&m.sprite.parent!=null)m.sprite.centerEmitter().burst(com.shatteredpixel.shatteredpixeldungeon.effects.particles.NecroticParticle.FACTORY,10);
         }
+        com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.burst(cell,com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Style.CORPSE,(radius*2+1)*16,.6f);
         com.shatteredpixel.shatteredpixeldungeon.items.Item.updateQuickslot();hero.spendAndNext(Actor.TICK);
     }
     @Override public Talent[] talents(){return new Talent[]{Talent.WIDER_BLAST,Talent.ROT,Talent.SOUL_REFUND,Talent.HEROIC_ENERGY};}

@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.23918381086998605,
+          "value": 0.2361092712044477,
           "minimum": 0.1,
           "maximum": null,
           "pass_": true,
@@ -28,7 +28,7 @@
       "measurements": [
         {
           "target": "median flagstone fraction",
-          "value": 0.36328125,
+          "value": 0.3641493055555556,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -42,7 +42,7 @@
       "measurements": [
         {
           "target": "median luminance difference",
-          "value": 0.14910486077069718,
+          "value": 0.14554469107434642,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -50,7 +50,7 @@
         },
         {
           "target": "median hue difference",
-          "value": 122.57258325226691,
+          "value": 121.28127690626988,
           "minimum": 30,
           "maximum": null,
           "pass_": true,
@@ -64,15 +64,15 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.11557074592019045,
+          "value": -0.0960609642286839,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.06068535708287945,
-      "inner_mean": 0.1762561030030699,
+      "outer_mean": 0.05962525268927015,
+      "inner_mean": 0.15568621691795406,
       "passing": true
     },
     {
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.14477877365876904,
+          "value": 0.12321498262470497,
           "minimum": 0.12,
           "maximum": 0.2,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.1719435213661885,
+          "value": 0.12564047103332251,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -102,7 +102,7 @@
       "measurements": [
         {
           "target": "hero bbox contrast",
-          "value": 0.3454308235294116,
+          "value": 0.3469231372549019,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -118,7 +118,7 @@
         },
         {
           "target": "item bbox contrast",
-          "value": 0.3242854509803921,
+          "value": 0.3235503921568625,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -129,24 +129,24 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.14477877365876904,
+    "region_mean_after_lighting": 0.12321498262470497,
     "region_mean_pass": true,
-    "dominant_green_brown_fraction": 0.9386634355709876,
+    "dominant_green_brown_fraction": 0.9684666763117284,
     "hue_budget_pass": true,
     "accent_families": 1,
     "accent_bins": [
       0.0,
       0.0,
-      0.00814404899691358,
-      0.0004099151234567901,
-      0.04519314236111111,
-      0.006064332561728395,
-      0.0015251253858024692,
+      0.011429398148148149,
+      0.009657118055555556,
+      0.009138695987654322,
+      0.0008258584104938271,
+      1.808449074074074e-05,
       0.0,
       0.0,
       0.0,
       0.0,
-      0.0
+      0.0004038869598765432
     ],
     "readability": "Native character silhouettes; regional idle-pair test 30 runs in validate.py",
     "composition": "Actual OpenGL screenshot; all heroFOV visible cells",
@@ -156,8 +156,8 @@
       0.58
     ]
   },
-  "screenshot_sha256": "ffb40e3918f680d7705b8d37e4fa25717f9022f443b4e0bf645f3c6f3b03f7b7",
-  "terrain_sha256": "24961f31ad4cb2f2fda0dd2c95693a5e5f244539c8de685b0c19bfa83122fab2",
+  "screenshot_sha256": "a4084a37907a423898a1ec49553972951b01365164d6dbbb894cd98e8dcdc997",
+  "terrain_sha256": "70ca1e707170b2ac635aff2e0194af40dff9b1be0c04ad778016788386ba0c56",
   "sample_count": 72,
   "seed": 417,
   "lighting": true,

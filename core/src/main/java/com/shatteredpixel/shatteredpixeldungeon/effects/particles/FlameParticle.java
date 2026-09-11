@@ -25,12 +25,15 @@ import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.particles.Emitter.Factory;
 import com.watabou.noosa.particles.PixelParticle;
 
+import com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects;
+
 public class FlameParticle extends PixelParticle.Shrinking {
 	
 	public static final Emitter.Factory FACTORY = new Factory() {
 		@Override
 		public void emit( Emitter emitter, int index, float x, float y ) {
 			((FlameParticle)emitter.recycle( FlameParticle.class )).reset( x, y );
+            EnhancedEffects.Ember.emit(emitter,index,x,y);
 		}
 		@Override
 		public boolean lightMode() {
@@ -38,6 +41,7 @@ public class FlameParticle extends PixelParticle.Shrinking {
 		}
 	};
 	
+	private boolean enhanced;
 	public FlameParticle() {
 		super();
 		
@@ -54,6 +58,10 @@ public class FlameParticle extends PixelParticle.Shrinking {
 		this.y = y;
 		
 		left = lifespan;
+        enhanced=EnhancedEffects.enabled();
+        texture(enhanced?EnhancedEffects.ATLAS:com.watabou.gltextures.TextureCache.createSolid(0xFFFFFFFF));
+        logicalSize(1,1);if(enhanced)resetColor();else color(0xEE7722);
+        acc.set(0,enhanced?-120:-80);
 		
 		size = 4;
 		speed.set( 0 );
@@ -63,6 +71,8 @@ public class FlameParticle extends PixelParticle.Shrinking {
 	public void update() {
 		super.update();
 		float p = left / lifespan;
+        if(enhanced){EnhancedEffects.frame(this,EnhancedEffects.Style.FLAME,(int)((1-p)*6),1,1);
+            speed.x=(float)Math.sin((lifespan-left)*19+x*.17)*3;}
 		am = p > 0.8f ? (1 - p) * 5 : 1;
 	}
 }

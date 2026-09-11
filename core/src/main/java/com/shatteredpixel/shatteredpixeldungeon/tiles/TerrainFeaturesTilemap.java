@@ -66,7 +66,8 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 			return plants.get(pos).image + 7*16;
 		}
 
-		int stage = (Dungeon.depth-1)/5;
+		if(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled() && (tile==Terrain.HIGH_GRASS || tile==Terrain.FURROWED_GRASS))return -1;
+        int stage = (Dungeon.depth-1)/5;
 		if (Dungeon.depth == 21 && Dungeon.level instanceof LastShopLevel) stage--;
 		stage = Math.min(stage, 4);
 		if (tile == Terrain.HIGH_GRASS){
@@ -145,6 +146,7 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 
 		Image img = new Image( instance.texture );
 		img.frame(uv);
+		img.logicalSize(SIZE, SIZE);
 		return img;
 	}
 
@@ -156,6 +158,7 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 
 		Image img = new Image( instance.texture );
 		img.frame(uv);
+		img.logicalSize(SIZE, SIZE);
 		return img;
 	}
 
@@ -165,6 +168,7 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 		
 		Image img = new Image( instance.texture );
 		img.frame(uv);
+		img.logicalSize(SIZE, SIZE);
 		return img;
 	}
 

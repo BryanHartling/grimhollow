@@ -221,6 +221,7 @@ public class WndSettings extends WndTabbed {
 		ColorBlock sep1;
 		CheckBox chkFullscreen;
 		CheckBox chkDynamicLighting;
+		CheckBox chkEnhancedEffects;
 		CheckBox chkLandscape;
 		ColorBlock sep2;
 		OptionSlider optBrightness;
@@ -321,6 +322,10 @@ public class WndSettings extends WndTabbed {
 			};
 			chkDynamicLighting.checked(SPDSettings.dynamicLighting());
 			add(chkDynamicLighting);
+            chkEnhancedEffects=new CheckBox(Messages.get(this,"enhanced_effects")) {
+                @Override protected void onClick(){super.onClick();SPDSettings.enhancedEffects(checked());GameScene.updateMap();}
+            };
+            chkEnhancedEffects.checked(SPDSettings.enhancedEffects());add(chkEnhancedEffects);
 
 		}
 
@@ -362,7 +367,8 @@ public class WndSettings extends WndTabbed {
 			}
 
 			chkDynamicLighting.setRect(0, optScreenShake.bottom() + GAP, width, BTN_HEIGHT);
-			height = chkDynamicLighting.bottom();
+			chkEnhancedEffects.setRect(0,chkDynamicLighting.bottom()+GAP,width,BTN_HEIGHT);
+            height=chkEnhancedEffects.bottom();
 		}
 
 	}

@@ -38,14 +38,20 @@ public class BlobEmitter extends Emitter {
 		
 		this.blob = blob;
 		blob.use( this );
+        if(EnhancedEffects.replaces(blob))add(new EnhancedEffects.GasLayer(blob));
 	}
 
-	public RectF bound = new RectF(0, 0, 1, 1);
+	@Override public void update(){
+        super.update();
+        if(EnhancedEffects.replaces(blob))for(com.watabou.noosa.Gizmo child:members)
+            if(child!=null&&!(child instanceof EnhancedEffects.GasLayer))child.visible=!EnhancedEffects.enabled();
+    }
+    public RectF bound = new RectF(0, 0, 1, 1);
 	
 	@Override
 	protected void emit( int index ) {
 		
-		if (blob.volume <= 0) {
+		if ((EnhancedEffects.enabled() && EnhancedEffects.replaces(blob)) || blob.volume <= 0) {
 			return;
 		}
 

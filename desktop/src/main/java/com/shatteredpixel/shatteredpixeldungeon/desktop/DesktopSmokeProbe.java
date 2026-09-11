@@ -10,6 +10,14 @@ import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.TitleScene;
 import com.watabou.noosa.Game;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.Group;
+import com.watabou.noosa.Camera;
+import com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects;
+import com.shatteredpixel.shatteredpixeldungeon.effects.BlobEmitter;
+import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.*;
+import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
+import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 
 /** Opt-in launch diagnostic: renders real OpenGL frames, writes evidence, exits. */
 final class DesktopSmokeProbe extends ShatteredPixelDungeon {
@@ -95,6 +103,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             SPDSettings.dynamicLighting(originalLighting);
             SPDSettings.zoom(originalZoom);
             if (Boolean.getBoolean("grimhollow.geometryTests")) geometryTests();
+            if(Boolean.getBoolean("grimhollow.effectsTests"))effectsTests();
             if (Boolean.getBoolean("grimhollow.iteration")) liquidTests();
             System.out.println("PASS: "+(vault?"Vault":"Sewer")+" scene renders with dynamic lighting on and off.");
             Gdx.app.exit();
@@ -399,6 +408,75 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             }catch(Exception e){throw new RuntimeException(e);}});
         }
         System.out.println("TEST 35: packaged classes/resources and source contact scan failures="+(failures.size()-before));
+    }
+    /** Stage 7 extends this renderer, including GPU completion in the effects timing. */
+    private void effectsTests() {
+        boolean original=SPDSettings.enhancedEffects();float elapsed=Game.elapsed;
+        try {
+            java.util.List<String> failures=new java.util.ArrayList<>();
+            float zoom=com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.defaultZoom;
+            Camera camera=new Camera(0,0,256,256,zoom);camera.fullScreen=true;
+            camera.matrix[0]=2*zoom/256;camera.matrix[5]=-2*zoom/256;camera.matrix[12]=-1;camera.matrix[13]=1;
+            com.badlogic.gdx.graphics.glutils.FrameBuffer buffer=new com.badlogic.gdx.graphics.glutils.FrameBuffer(Pixmap.Format.RGBA8888,256,256,false);
+            SPDSettings.enhancedEffects(false);GameScene.updateMap();Game.elapsed=1f/60;
+            Image grass=com.shatteredpixel.shatteredpixeldungeon.tiles.TerrainFeaturesTilemap.tile(Dungeon.hero.pos,Terrain.HIGH_GRASS);
+            com.shatteredpixel.shatteredpixeldungeon.effects.particles.FlameParticle actual=new com.shatteredpixel.shatteredpixeldungeon.effects.particles.FlameParticle();actual.reset(0,0);
+            // The retained upstream particle is the reference, with its original lifetime and acceleration.
+            com.watabou.noosa.particles.PixelParticle.Shrinking legacy=new com.watabou.noosa.particles.PixelParticle.Shrinking(){
+                {color(0xEE7722);left=lifespan=.6f;size=4;acc.set(0,-80);}
+                @Override public void update(){super.update();float p=left/lifespan;am=p>.8f?(1-p)*5:1;}
+            };
+            int changed=0;
+            for(int f=0;f<20;f++){
+                actual.update();legacy.update();
+                Pixmap a=renderBurningGrass(grass,actual,buffer,camera),b=renderBurningGrass(grass,legacy,buffer,camera);
+                for(int y=0;y<256;y++)for(int x=0;x<256;x++)if(a.getPixel(x,y)!=b.getPixel(x,y))changed++;
+                if(f==12){PixmapIO.writePNG(Gdx.files.absolute("verification/effects-off.png"),a);PixmapIO.writePNG(Gdx.files.absolute("verification/effects-upstream.png"),b);}
+                a.dispose();b.dispose();
+            }
+            actual.destroy();legacy.destroy();grass.destroy();
+            if(changed!=0)failures.add("31 upstream-style burning grass pixel differences="+changed);
+            SPDSettings.enhancedEffects(true);GameScene.updateMap();
+            // Test actual fire expiration through the decal owner, including forbidden terrain.
+            int cell=-1;for(int c=0;c<Dungeon.level.length();c++)if(Dungeon.level.insideMap(c)&&Dungeon.level.map[c]==Terrain.EMPTY
+                    &&com.shatteredpixel.shatteredpixeldungeon.actors.Actor.findChar(c)==null&&Dungeon.level.heaps.get(c)==null&&Dungeon.level.traps.get(c)==null){cell=c;break;}
+            if(cell<0)throw new AssertionError("No floor for scorch test");
+            java.lang.reflect.Field field=GameScene.class.getDeclaredField("bloodDecals");field.setAccessible(true);Group decals=(Group)field.get(Game.scene());
+            for(int i=0;i<3;i++){Image decal=GameScene.createScorchDecal(cell,i);if(decal==null)failures.add("32 floor missing");else{band(decal,16,.3f,.6f,buffer,camera,zoom,failures,"32 scorch "+i);decal.destroy();}}
+            for(int terrain:new int[]{Terrain.EMPTY,Terrain.WATER,Terrain.CHASM}){
+                Level.set(cell,terrain);int before=decals.length;Fire fire=new Fire();fire.seed(Dungeon.level,cell,1);fire.act();
+                int expected=terrain==Terrain.EMPTY?1:0;if(decals.length-before!=expected)failures.add("32 expiration terrain="+terrain+" decals="+(decals.length-before));
+                if(terrain!=Terrain.EMPTY&&GameScene.createScorchDecal(cell,0)!=null)failures.add("32 forbidden scorch "+terrain);
+            }
+            Level.set(cell,Terrain.EMPTY);
+            System.out.println("TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures="+failures.size());
+            // Forty gas and ten fire cells inside one viewport, with the same emitter path as GameScene.
+            ToxicGas gas=new ToxicGas();Fire fire=new Fire();int width=Dungeon.level.width();
+            int start=2+2*width;boolean[] fov=Dungeon.level.heroFOV.clone();
+            for(int i=0;i<40;i++){int c=start+i%8+(i/8)*width;gas.seed(Dungeon.level,c,100);Dungeon.level.heroFOV[c]=true;if(i<10)fire.seed(Dungeon.level,c,4);}
+            buffer.dispose();buffer=new com.badlogic.gdx.graphics.glutils.FrameBuffer(Pixmap.Format.RGBA8888,768,768,false);
+            camera.matrix[0]=2*zoom/768;camera.matrix[5]=-2*zoom/768;
+            Group fx=new Group();fx.camera=camera;fx.add(new BlobEmitter(gas));fx.add(new BlobEmitter(fire));
+            camera.matrix[12]=-1-32*2*zoom/768;camera.matrix[13]=1+32*2*zoom/768;
+            double[] millis=new double[240];
+            for(int i=-90;i<millis.length;i++){
+                buffer.begin();Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);com.watabou.glwrap.Texture.clear();com.watabou.noosa.NoosaScript.get().resetCamera();Gdx.gl.glFinish();
+                long begin=System.nanoTime();fx.update();fx.draw();Gdx.gl.glFinish();double ms=(System.nanoTime()-begin)/1e6;
+                if(i>=0)millis[i]=ms;if(i==120){Pixmap image=Pixmap.createFromFrameBuffer(0,0,768,768);PixmapIO.writePNG(Gdx.files.absolute("verification/effects-on.png"),image);image.dispose();}buffer.end();
+            }
+            double average=java.util.Arrays.stream(millis).average().getAsDouble();java.util.Arrays.sort(millis);double p95=millis[227];
+            if(average>=2||p95>=2)failures.add("31 enhanced mean="+average+"ms p95="+p95+"ms must both be < 2ms");
+            System.out.printf(java.util.Locale.ROOT,"TEST 31: off pixel differences=%d; 40 gas + 10 fire cells, 240 GPU-completed frames mean=%.4fms p95=%.4fms failures=%d%n",changed,average,p95,failures.size());
+            fx.destroy();System.arraycopy(fov,0,Dungeon.level.heroFOV,0,fov.length);buffer.dispose();
+            if(!failures.isEmpty())throw new AssertionError(failures.toString());
+        }catch(Exception e){throw new RuntimeException(e);}
+        finally{SPDSettings.enhancedEffects(original);Game.elapsed=elapsed;GameScene.updateMap();}
+    }
+    private Pixmap renderBurningGrass(Image grass,Image flame,com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,Camera camera){
+        buffer.begin();Gdx.gl.glDisable(Gdx.gl.GL_SCISSOR_TEST);Gdx.gl.glClearColor(0,0,0,0);Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);
+        com.watabou.glwrap.Blending.useDefault();com.watabou.glwrap.Texture.clear();com.watabou.noosa.NoosaScript.get().resetCamera();
+        grass.x=grass.y=16;grass.camera=camera;grass.draw();flame.x=22;flame.y=24;flame.camera=camera;flame.draw();
+        Pixmap image=Pixmap.createFromFrameBuffer(0,0,256,256);buffer.end();return image;
     }
     private Pixmap renderSprite(com.watabou.noosa.Image image,com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,com.watabou.noosa.Camera camera)throws Exception {
         // Generated ground shadows are separate from the sprite's alpha silhouette.

@@ -46,9 +46,9 @@ jobs:
           for region in caves city halls; do
             python tools/artgen/iteration.py --region "$region" --check
           done
-      - name: Offscreen geometry acceptance 24-26
+      - name: Offscreen geometry and effects acceptance 24-26, 31-32
         if: ${{ !cancelled() && runner.os == 'Linux' }}
-        run: xvfb-run -a java -Dgrimhollow.iteration=true -Dgrimhollow.geometryTests=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
+        run: xvfb-run -a java -Dgrimhollow.iteration=true -Dgrimhollow.geometryTests=true -Dgrimhollow.effectsTests=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
       - name: Live room gate including boundary halo regression
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         run: python tools/artgen/iteration.py --check-room

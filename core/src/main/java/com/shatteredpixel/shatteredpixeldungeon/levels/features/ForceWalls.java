@@ -21,7 +21,7 @@ public class ForceWalls extends Buff {
         for(int step=-1;step<=1;step++){int cell=center+step*offset;
             if(!l.insideMap(cell)||l.distance(center,cell)>1||!l.passable[cell]||Actor.findChar(cell)!=null||l.heaps.get(cell)!=null||l.traps.get(cell)!=null||l.map[cell]==Terrain.ENTRANCE||l.map[cell]==Terrain.EXIT)continue;
             l.forceOriginal.put(cell,l.map[cell]);l.forceTurns.put(cell,turns);Level.set(cell,Terrain.FORCE_WALL);GameScene.updateMap(cell);made=true;
-            if(com.watabou.noosa.Game.scene() instanceof GameScene){Image image=new Image("effects/force_wall.png");image.logicalSize(16,16);image.alpha(.75f);image.point(DungeonTilemap.tileToWorld(cell));GameScene.effect(image);visuals.put(cell,image);}
+            if(com.watabou.noosa.Game.scene() instanceof GameScene){Image image=new Image("effects/force_wall.png"){@Override public void update(){super.update();visible=!com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled();}};image.logicalSize(16,16);image.alpha(.75f);image.point(DungeonTilemap.tileToWorld(cell));GameScene.effect(image);visuals.put(cell,image);}
         }
         if(made){ForceWalls buff=Buff.affect(Dungeon.hero,ForceWalls.class);buff.depth=Dungeon.depth;buff.branch=Dungeon.branch;Dungeon.observe();}return made;
     }

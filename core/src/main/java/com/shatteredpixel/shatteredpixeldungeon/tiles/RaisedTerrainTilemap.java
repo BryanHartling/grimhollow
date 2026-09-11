@@ -40,7 +40,8 @@ public class RaisedTerrainTilemap extends DungeonTilemap {
 	@Override
 	protected int getTileVisual(int pos, int tile, boolean flat) {
 		
-		if (flat) return -1;
+		if(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled() && (tile==Terrain.HIGH_GRASS || tile==Terrain.FURROWED_GRASS))return -1;
+        if (flat) return -1;
 
 		if (skipCells.contains(pos)){
 			return -1;

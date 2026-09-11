@@ -107,3 +107,6 @@ Stage 6d native characters - 2026-09-11 16:05 UTC
 
 Stage 6e (2026-09-11): desktop:dist core:test android:assembleDebug --no-daemon
 com.shatteredpixel.shatteredpixeldungeon.tiles.LightMapTest tests=4 failures=0 errors=0
+
+Stage 7 enhanced effects
+com.shatteredpixel.shatteredpixeldungeon.tiles.LightMapTest: tests=4 failures=0 errors=0

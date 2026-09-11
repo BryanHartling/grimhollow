@@ -68,7 +68,7 @@ public class SigilBrush extends ClassSpellItem {
                     Buff.prolong(target,EnchanterMagic.EnchanterDamage.class,20);EnchanterMagic.counterweight();
                 }
         }
-        finish(h,cost);return true;
+        com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.burst(cell==null?h.pos:cell,com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Style.INSCRIPTION,16,.6f);finish(h,cost);return true;
     }
     public Runecraft.Offer transmuteOffer(Hero h,Item item){if(h.subClass!=HeroSubClass.ARTIFICER||item==null||!item.isEquipped(h)||!ready(h,2))return null;return Runecraft.offer(h,item,true,()->{if(!ready(h,2))return false;finish(h,2);return true;});}
     private void inscribe(Item item,Class<?> type,int turns){if(item instanceof Weapon)((Weapon)item).inscribed=(Weapon.Enchantment)Reflection.newInstance(type);else ((Armor)item).inscribed=(Armor.Glyph)Reflection.newInstance(type);item.inscriptionTurns=turns;EnchanterMagic.state().record(type);}

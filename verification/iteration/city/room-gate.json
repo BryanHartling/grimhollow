@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.1809285718327004,
+          "value": 0.180283202458356,
           "minimum": 0.1,
           "maximum": null,
           "pass_": true,
@@ -64,15 +64,15 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.08077763369293428,
+          "value": -0.08017695311262134,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.10374518583197165,
-      "inner_mean": 0.18452281952490593,
+      "outer_mean": 0.10433724601715684,
+      "inner_mean": 0.18451419912977818,
       "passing": true
     },
     {
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.14584734747091352,
+          "value": 0.1460680976723251,
           "minimum": 0.12,
           "maximum": 0.2,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.13566533426146402,
+          "value": 0.13598334800017461,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -110,7 +110,7 @@
         },
         {
           "target": "rat bbox contrast",
-          "value": 0.2798674509803922,
+          "value": 0.27988313725490194,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -129,15 +129,15 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.14584734747091352,
+    "region_mean_after_lighting": 0.1460680976723251,
     "region_mean_pass": true,
-    "dominant_green_brown_fraction": 0.7890926408179012,
+    "dominant_green_brown_fraction": 0.7884657118055556,
     "hue_budget_pass": true,
     "accent_families": 1,
     "accent_bins": [
-      0.044927903163580245,
-      0.014841338734567902,
-      0.0011272665895061729,
+      0.04498818479938271,
+      0.015148775077160493,
+      0.0009886188271604939,
       0.0,
       0.0,
       0.00011453510802469135,
@@ -146,7 +146,7 @@
       0.0,
       0.0,
       0.0,
-      0.14970341435185186
+      0.15010127314814814
     ],
     "readability": "Native character silhouettes; regional idle-pair test 30 runs in validate.py",
     "composition": "Actual OpenGL screenshot; all heroFOV visible cells",
@@ -156,8 +156,8 @@
       0.64
     ]
   },
-  "screenshot_sha256": "7910c9e128241eb4b4b91f00b1a3ccc00246ba9b619854b3af124cd147097948",
-  "terrain_sha256": "3b3c91cf16ad36b4425cf6dbe7e0a47204423eca017c6c10b4b1b2ae6fd55ec0",
+  "screenshot_sha256": "ce6ced9697c96374958fcf80d2071b7ff45dea387ccbd2fb635eee8cd9d09819",
+  "terrain_sha256": "45a005fa69bb39f27db11fbd092b0688bbb547468d46fb43750a75434b2434ac",
   "sample_count": 72,
   "seed": 426,
   "lighting": true,

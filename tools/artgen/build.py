@@ -142,6 +142,9 @@ def procedural(spec):
 
 def paint(spec):
     import rendered
+    if spec.get('rendered_effects'):
+        import fx
+        return fx.paint(spec)
     if spec.get('rendered_title'):
         import titles
         return titles.paint(spec)
@@ -208,6 +211,10 @@ def build():
     if (Path(__file__).parent/'render_cache/items/000.png').exists():
         import items
         preview=ROOT/'verification/items.png';buffer=io.BytesIO();items.gallery().save(buffer,format='PNG')
+        if not preview.exists() or preview.read_bytes()!=buffer.getvalue():preview.write_bytes(buffer.getvalue())
+    if (Path(__file__).parent/'render_cache/effects/smoke/00.png').exists():
+        import fx
+        preview=ROOT/'verification/effects.png';buffer=io.BytesIO();fx.gallery().save(buffer,format='PNG')
         if not preview.exists() or preview.read_bytes()!=buffer.getvalue():preview.write_bytes(buffer.getvalue())
     # Historical POC evidence is immutable; stage 5.6 has its own comparison.
     if not (ROOT/'verification/render-poc.png').exists() and (Path(__file__).parent/'render_cache/necromancer/0/idle_0.png').exists():

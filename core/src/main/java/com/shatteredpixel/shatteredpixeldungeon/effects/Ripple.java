@@ -31,23 +31,25 @@ public class Ripple extends Image {
 	private static final float TIME_TO_FADE = 0.5f;
 	
 	private float time;
+    private boolean enhanced;
 	private final com.watabou.noosa.TextureFilm frames;
 	
 	public Ripple() {
 		super("effects/liquid_ripple.png");
 		frames=new com.watabou.noosa.TextureFilm(texture,64,64);
-		frame(frames.get(0));
+		if(enhanced)EnhancedEffects.frame(this,EnhancedEffects.Style.RIPPLE,0,64,64);else frame(frames.get(0));
 	}
 	
 	public void reset( int p ) {
 		revive();
+        enhanced=EnhancedEffects.enabled();texture(enhanced?EnhancedEffects.ATLAS:"effects/liquid_ripple.png");
 		
 		x = (p % Dungeon.level.width()) * DungeonTilemap.SIZE;
 		y = (p / Dungeon.level.width()) * DungeonTilemap.SIZE;
 		
 		origin.set( 0, 0 );
 		scale.set( .25f );
-		frame(frames.get(0));
+		if(enhanced)EnhancedEffects.frame(this,EnhancedEffects.Style.RIPPLE,0,64,64);else frame(frames.get(0));
 		
 		time = TIME_TO_FADE;
 	}
@@ -60,7 +62,7 @@ public class Ripple extends Image {
 			kill();
 		} else {
 			float p = time / TIME_TO_FADE;
-			frame(frames.get(Math.min(7,(int)((1-p)*8))));
+			if(enhanced)EnhancedEffects.frame(this,EnhancedEffects.Style.RIPPLE,(int)((1-p)*8),64,64);else frame(frames.get(Math.min(7,(int)((1-p)*8))));
 			scale.set( .25f );
 			alpha( p );
 		}

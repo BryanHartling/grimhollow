@@ -54,6 +54,7 @@ public class Fire extends Blob {
 					if (freeze != null && freeze.volume > 0 && freeze.cur[cell] > 0){
 						freeze.clear(cell);
 						off[cell] = cur[cell] = 0;
+                        GameScene.scorchDecal(cell);
 						continue;
 					}
 
@@ -87,6 +88,7 @@ public class Fire extends Blob {
 					fire = 0;
 				}
 
+				if(cur[cell]>0 && fire<=0)GameScene.scorchDecal(cell);
 				volume += (off[cell] = fire);
 			}
 		}

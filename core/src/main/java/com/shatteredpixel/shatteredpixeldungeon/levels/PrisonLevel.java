@@ -223,6 +223,7 @@ public class PrisonLevel extends RegularLevel {
 	}
 	
 	public static class Torch extends Emitter {
+        @Override protected void emit(int index){if(!com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled())super.emit(index);}
 		
 		private int pos;
         private final Halo halo;

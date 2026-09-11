@@ -35,6 +35,8 @@ import java.util.Locale;
 
 public class SPDSettings extends GameSettings {
 
+	public static boolean enhancedEffects(){return getBoolean("enhanced_effects",true);}
+	public static void enhancedEffects(boolean value){put("enhanced_effects",value);}
 	public static boolean dynamicLighting() { return getBoolean("dynamic_lighting", true); }
 	public static void dynamicLighting(boolean enabled) { put("dynamic_lighting", enabled); }
 	

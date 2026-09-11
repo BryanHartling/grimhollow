@@ -261,3 +261,78 @@ For more on this, please refer to https://docs.gradle.org/9.4.0/userguide/comman
 BUILD SUCCESSFUL in 34s
 16 actionable tasks: 10 executed, 6 up-to-date
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.4.0/userguide/configuration_cache_enabling.html
+
+Upstream v4.0.0 integration, 2026-09-11; .local/v4-vault.txt:
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 19 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-fire.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-frost.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-shock.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-lighting-on.png
+PASS V4 rendering: arena trigger, FIRE/FROST/SHOCK, scripted boss death and treasure door unlock (not a played fight)
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-lighting-off.png
+TEST 24: heroes=9 mob sprites=112 failures=0
+TEST 25: items=370 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35: packaged classes/resources and source contact scan failures=0
+TESTS 24-26, 34-36 PASS
+PASS: Vault scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+
+
+Upstream v4.0.0 integration, 2026-09-11; .local/v4-iteration-checks.txt:
+Wall/floor distinctness: mean luminance difference=0.2143, representative pHash bits=34.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.1541 PASS
+Adjacent water/floor contrast: median luminance difference=0.1596, median hue difference=34.7089 PASS
+No boundary halo: outer minus inner mean=-0.1494 PASS
+Visible-cell value range: visible mean=0.1372, visible std=0.1251 PASS
+Hero / rat / item readability: hero bbox contrast=0.4294, rat bbox contrast=0.2952, item bbox contrast=0.5042 PASS
+TEST 40: region=sewers measurements=6 failures=0
+TEST 39: region=sewers classes=5 failures=0; liquids use test 41
+Wall/floor distinctness: mean luminance difference=0.2385, representative pHash bits=36.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.3472 PASS
+Adjacent water/floor contrast: median luminance difference=0.1372, median hue difference=163.3458 PASS
+No boundary halo: outer minus inner mean=-0.1566 PASS
+Visible-cell value range: visible mean=0.1709, visible std=0.1855 PASS
+Hero / rat / item readability: hero bbox contrast=0.4023, rat bbox contrast=0.2747, item bbox contrast=0.4920 PASS
+TEST 42: region=prison measurements=6 failures=0
+FAIL: current screenshot fails board global targets
+TEST 39: region=prison classes=5 failures=1; liquids use test 41
+Wall/floor distinctness: mean luminance difference=0.2058, representative pHash bits=32.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.7031 PASS
+Adjacent water/floor contrast: median luminance difference=0.1868, median hue difference=30.8526 PASS
+No boundary halo: outer minus inner mean=-0.1350 PASS
+Visible-cell value range: visible mean=0.1345, visible std=0.1359 PASS
+Hero / rat / item readability: hero bbox contrast=0.4239, rat bbox contrast=0.2252, item bbox contrast=0.4880 PASS
+TEST 42: region=caves measurements=6 failures=0
+TEST 39: region=caves classes=5 failures=0; liquids use test 41
+Wall/floor distinctness: mean luminance difference=0.1761, representative pHash bits=28.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.8049 PASS
+Adjacent water/floor contrast: median luminance difference=0.1783, median hue difference=62.4094 PASS
+No boundary halo: outer minus inner mean=-0.0777 PASS
+Visible-cell value range: visible mean=0.1310, visible std=0.1366 PASS
+Hero / rat / item readability: hero bbox contrast=0.5628, rat bbox contrast=0.2673, item bbox contrast=0.5442 PASS
+TEST 42: region=city measurements=6 failures=0
+TEST 39: region=city classes=5 failures=0; liquids use test 41
+Wall/floor distinctness: mean luminance difference=0.0423, representative pHash bits=30.0000 PASS
+Feature scale at 1x: median flagstone fraction=0.9149 PASS
+Adjacent water/floor contrast: median luminance difference=0.0825, median hue difference=136.5498 PASS
+No boundary halo: outer minus inner mean=-0.0580 PASS
+Visible-cell value range: visible mean=0.0603, visible std=0.1041 PASS
+Hero / rat / item readability: hero bbox contrast=0.6635, rat bbox contrast=0.2144, item bbox contrast=0.7550 PASS
+TEST 42: region=halls measurements=6 failures=0
+TEST 39: region=halls classes=5 failures=0; liquids use test 41
+
+
+Upstream v4.0.0 integration, 2026-09-11; .local/v4-liquid.txt:
+sewage: min variant pHash=28, max one-tile autocorrelation=0.340
+water: min variant pHash=28, max one-tile autocorrelation=0.340
+lava: min variant pHash=28, max one-tile autocorrelation=0.340
+FAIL: hard room vision gate
+TEST 41: liquid frames=96 failures=1

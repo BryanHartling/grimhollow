@@ -10,6 +10,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap;
 import com.watabou.utils.*;
 import java.util.HashSet;
 public class PsychicMind extends Buff {
+    { revivePersists = true; }
     private final HashSet<Integer> floors=new HashSet<>(),precognitionFloors=new HashSet<>();
     public static int points(Talent t){return Dungeon.hero==null?0:Dungeon.hero.pointsInTalent(t);}
     public static PsychicMind state(){return Dungeon.hero==null?null:Dungeon.hero.buff(PsychicMind.class);}

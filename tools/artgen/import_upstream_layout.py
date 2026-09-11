@@ -12,6 +12,10 @@ from build import ROOT, SPEC_DIR, COLORS
 
 BASE = '7b8b845a76fe76c6b7c031ae9e570852411f56db'
 git = shutil.which('git')
+if '--upstream-v4' in __import__('sys').argv:
+    from upstream_v4 import import_assets
+    import_assets()
+    raise SystemExit(0)
 if '--region' in __import__('sys').argv:
     region=__import__('sys').argv[__import__('sys').argv.index('--region')+1]
     if region not in ('prison','caves','city','halls'):raise ValueError('Unknown region')

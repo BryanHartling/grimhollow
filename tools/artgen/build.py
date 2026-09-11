@@ -56,8 +56,11 @@ def procedural(spec):
     if spec['kind'] in ['hero','items','vectors']:
         sw,sh = spec.get('source_dimensions', [w,h])
         original = Image.new('RGBA',(sw,sh)); draw = ImageDraw.Draw(original)
-        for y,x,length,role in spec.get('runs', []):
-            draw.line((x,y,x+length-1,y), fill=tuple(COLORS[role])+(255,))
+        for run in spec.get('runs', []):
+            y,x,length,role = run[:4]
+            alpha = run[4] if len(run)>4 else 255
+            color = tuple(COLORS[role]) if role>=0 else (0,0,0)
+            draw.line((x,y,x+length-1,y), fill=color+(alpha,))
         for shape in spec.get('silhouette', []):
             points=shape['points']; color='#'+PALETTE[shape['role']]
             if shape['type']=='rect': draw.rectangle(points,fill=color)

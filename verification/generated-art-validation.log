@@ -166,3 +166,5 @@ TEST 39: region=halls classes=5 failures=0; liquids use test 41
 
 Stage 6c liquid review 07: all five final room captures
 TEST 41: liquid frames=96 failures=0; minimum variant pHash=28; maximum one-tile correlation=0.340474898847667
+
+v4 integration: validate.py --generated-only: Validated 97 generated specifications; 0 failures. Subset diagnostic only.

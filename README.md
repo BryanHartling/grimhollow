@@ -1,8 +1,10 @@
 # Grimhollow
 
-GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), based on **v3.3.8**, commit `7b8b845a76fe76c6b7c031ae9e570852411f56db`. Upstream history and Java packages are preserved.
+GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), now incorporating **v4.0.0**, commit `2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`. The fork began at v3.3.8; upstream history and Java packages are preserved.
 
 **Stage 6c: five regional environments and animated liquids.** Nine heroes are playable: the six upstream classes plus Necromancer, Enchanter and Psychic, each with two subclasses, talents and three armor abilities. Full art coverage, enhanced effects and section 9 content remain pending. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and the [v0.8 specification](GDD-one-shot-build-spec.md).
+
+**v4 content integration, version 0.5.2-v4:** the Ambitious Imp's expanded Vault quest, elemental boss, hazards, patrol AI, quest loot and equipment exchange are included. Weapon pools include Venomous, Vorpal, Eldritch and Crystal enchantments plus Pressurized and Wondrous curses. Upstream item balance, combat, save/load, generation, UI and audio fixes are incorporated. The Vault mirror supports all nine heroes. Approved regional atlases remain unchanged; v4 special-room and item visuals regenerate from palette-vector sources. The liquid numeric checks pass, but fresh review flags repeated bright wavelets and leaves the hard visual gate failing.
 
 ## Build on Windows
 
@@ -11,14 +13,14 @@ Requires Temurin **JDK 17**. Install JDK and Android tools locally, then configu
 ```powershell
 .\tools\bootstrap-windows.ps1
 . .\tools\env.ps1
-.\gradlew.bat desktop:run -PdesktopOnly=true
+.\gradlew.bat desktop:run -PdesktopOnly=true --no-daemon
 ```
 
 Desktop-only excludes the Android module and Android plugin and works with no SDK or `ANDROID_HOME`. For a runnable jar:
 
 ```powershell
-.\gradlew.bat desktop:dist -PdesktopOnly=true
-java -jar desktop\build\libs\desktop-0.5.2.jar
+.\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
+java -jar desktop\build\libs\desktop-0.5.2-v4.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.
@@ -27,7 +29,7 @@ Full build needs SDK platform 36 and build-tools 36.0.0:
 
 ```powershell
 . .\tools\env.ps1
-.\gradlew.bat desktop:dist core:test android:assembleDebug
+.\gradlew.bat desktop:dist core:test android:assembleDebug --no-daemon
 ```
 
 Paths on this host:
@@ -60,6 +62,8 @@ python tools/artgen/validate.py
 ```
 
 The optional desktop probe renders actual OpenGL frames into `.local/acceptance/` and exits. The Sewer probe uses test save slot 99. The default headless gate targets the three new heroes. `-PsmokeUpstream=true` runs all nine classes, including the six retained classes: generate floors 1–6, save/load, ten seeds each. This diagnostic does not count as new-class acceptance or simulated combat.
+
+The same headless gate now checks City/Vault generation, mirror rewards, equipment and charge restoration, save/load, quest completion/shop state and serialization of the six new enchantments/curses. `java -Dgrimhollow.vault=true -jar desktop/build/libs/desktop-0.5.2-v4.jar --smoke-sewers` exercises the real Vault arena trigger, its three rendered boss forms and scripted death/door unlocking. These checks do not constitute a player-driven quest or boss fight. Gradle 9.5.0 and Android Gradle Plugin 9.2.0 are inherited from v4 and run with the existing JDK 17/SDK 36 toolchain; use `--no-daemon` for every local Gradle invocation.
 
 CI runs Linux/Windows desktop builds, JUnit, full art validation, Android packaging, and the headless gate. Failed gates remain active; jars upload even when a later acceptance gate fails. Artifact retention: 14 days.
 

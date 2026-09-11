@@ -21,6 +21,8 @@ tasks.register('smokeRun', JavaExec) {
     mainClass = 'com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun'
     workingDir = file('src/main/assets')
     systemProperty 'grimhollow.smokeOutput', layout.buildDirectory.dir('reports/smoke').get().asFile.absolutePath
+    systemProperty 'grimhollow.version', appVersionName
+    systemProperty 'grimhollow.versionCode', appVersionCode
     if (providers.gradleProperty('smokeClass').isPresent()) args '--class=' + providers.gradleProperty('smokeClass').get()
     if (providers.gradleProperty('smokeUpstream').getOrElse('false').toBoolean()) args '--upstream'
 }

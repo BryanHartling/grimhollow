@@ -94,6 +94,8 @@ public class AndroidLauncher extends AndroidApplication {
 			if (UpdateImpl.supportsUpdates()) {
 				Updates.service = null; // Fork releases are not published yet.
 			}
+
+			//F-Droid specifically considers auto news checking to be an 'anti-feature', so default it to false
 			if (NewsImpl.supportsNews()) {
 				News.service = null; // No fork news service.
 			}

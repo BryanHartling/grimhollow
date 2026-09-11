@@ -20,6 +20,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfToxicGas;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.BoneWalls;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.*;
+import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.watabou.utils.Bundle;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.watabou.noosa.Game;
@@ -44,7 +45,7 @@ public class SmokeRun {
             config.preferencesDirectory=output.resolve("prefs").toString();
             HeadlessApplication app=new HeadlessApplication(new ApplicationAdapter(){},config);
             new ShatteredPixelDungeon(null);
-            Game.version="0.3.0"; Game.versionCode=899;
+            Game.version=System.getProperty("grimhollow.version"); Game.versionCode=Integer.getInteger("grimhollow.versionCode");
             FileUtils.setDefaultFileProperties(Files.FileType.Absolute,output.resolve("saves").toString()+"/");
             for(String name:classes) for(int seed=0;seed<10;seed++) {
                 try {
@@ -68,6 +69,7 @@ public class SmokeRun {
                             if(Dungeon.depth!=6) throw new AssertionError("Save/load depth mismatch");
                         }
                     }
+                    if(seed==0)v4Scenario();
                     String line="PASS "+name+" seed="+seed+" floor=6 save/load=ok";
                     System.out.println(line); log.println(line);
                 } catch(Throwable error) {
@@ -84,6 +86,65 @@ public class SmokeRun {
         if(failures>0) System.exit(1);
     }
     private static void check(boolean condition,String message){if(!condition)throw new AssertionError(message);}
+    private static void v4Scenario() throws Exception {
+        // Exercise the merge boundary: actual City/Vault generation, serialized quest and
+        // equipment exchange. Dialog navigation and a played boss fight are separate checks.
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.reset();
+        Dungeon.depth=19; Dungeon.branch=0;
+        Level city=Dungeon.newLevel(); Dungeon.switchLevel(city,-1);
+        check(city.mobs.stream().anyMatch(m->m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp),"v4 Imp missing");
+        check(!com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.isOld(),"v4 generated old Imp quest");
+        check(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.rewardOptions.size()==6,"v4 quest rewards missing");
+        check(city.transitions.stream().anyMatch(t->t.destBranch==1),"v4 Vault entrance missing");
+        Dungeon.saveAll();
+        Item originalArtifact=Dungeon.hero.belongings.artifact;
+        int originalArtifactLevel=originalArtifact==null?-1:originalArtifact.level();
+        int originalClassCharges=originalArtifact instanceof Phylactery?((Phylactery)originalArtifact).charges():originalArtifact instanceof ClassSpellItem?((ClassSpellItem)originalArtifact).charges():-1;
+        int gold=Dungeon.gold,energy=Dungeon.energy;
+        Dungeon.hero.live();
+        switch(Dungeon.hero.heroClass){
+            case NECROMANCER:check(Dungeon.hero.buff(Necromancy.class)!=null,"Vault cleared Necromancer state");break;
+            case ENCHANTER:check(Dungeon.hero.buff(EnchanterMagic.class)!=null,"Vault cleared Enchanter state");break;
+            case PSYCHIC:check(Dungeon.hero.buff(PsychicMind.class)!=null,"Vault cleared Psychic state");break;
+        }
+        com.shatteredpixel.shatteredpixeldungeon.items.quest.EscapeCrystal escape=new com.shatteredpixel.shatteredpixeldungeon.items.quest.EscapeCrystal();
+        escape.storeHeroBelongings(Dungeon.hero);escape.collect();
+        Dungeon.hero.belongings.armor=new com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor();
+        Dungeon.branch=1;
+        Level vault=Dungeon.newLevel();Dungeon.switchLevel(vault,-1);
+        check(vault instanceof com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel,"v4 wrong branch level");
+        check(((com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel)vault).room(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultFinalRoom.class)!=null,"v4 final arena missing");
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.VaultMirror mirror=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.VaultMirror)vault.mobs.stream().filter(m->m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.VaultMirror).findFirst().orElseThrow();
+        check(mirror.reward!=null,"v4 mirror reward missing for "+Dungeon.hero.heroClass);
+        Class<?> mirrorReward=mirror.reward.getClass();
+        check(vault.heaps.valueList().stream().anyMatch(h->h.items.stream().anyMatch(i->i instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.ImpStatue)),"v4 final reward missing");
+        Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);
+        check(Dungeon.branch==1&&Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel,"v4 Vault save/load failed");
+        mirror=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.VaultMirror)Dungeon.level.mobs.stream().filter(m->m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.VaultMirror).findFirst().orElseThrow();
+        check(mirror.reward!=null&&mirror.reward.getClass()==mirrorReward,"v4 mirror reward lost on reload");
+        escape=Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.quest.EscapeCrystal.class);
+        check(escape!=null&&escape.storedItems!=null,"v4 stored equipment lost");
+        Dungeon.hero.live();escape.restoreHeroBelongings(Dungeon.hero,null);
+        check(Dungeon.gold==gold&&Dungeon.energy==energy,"v4 currency restore failed");
+        if(originalArtifact!=null)check(Dungeon.hero.belongings.artifact!=null&&Dungeon.hero.belongings.artifact.getClass()==originalArtifact.getClass()&&Dungeon.hero.belongings.artifact.level()==originalArtifactLevel,"v4 class item restore failed");
+        Item restoredArtifact=Dungeon.hero.belongings.artifact;
+        if(originalClassCharges>=0)check(originalClassCharges==(restoredArtifact instanceof Phylactery?((Phylactery)restoredArtifact).charges():((ClassSpellItem)restoredArtifact).charges()),"v4 class charges changed while stored");
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.complete(4000);
+        Bundle quest=new Bundle();com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.storeInBundle(quest);
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.reset();
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.restoreFromBundle(quest);
+        check(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.isCompleted()&&com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.earnedShop(),"v4 completion/shop state lost");
+        for(Weapon.Enchantment enchant:new Weapon.Enchantment[]{new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Vorpal(),new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Venomous(),new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Crystal(),new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Eldritch(),new com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Pressurized(),new com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Wondrous()}){
+            Weapon weapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger();weapon.enchant(enchant);
+            Bundle bundle=new Bundle();bundle.put("weapon",weapon);Weapon restored=(Weapon)bundle.get("weapon");
+            check(restored.enchantment.getClass()==enchant.getClass(),"v4 enchantment serialization failed");
+            if(Dungeon.hero.heroClass==HeroClass.ENCHANTER&&!enchant.curse()){
+                weapon.identify();EnchanterMagic.learn(weapon);
+                check(EnchanterMagic.state().choices(false).contains(enchant.getClass()),"v4 enchantment cannot be learned for inscription");
+            }
+        }
+        System.out.println("PASS V4 "+Dungeon.hero.heroClass+" Vault generation/save/load, mirror="+mirrorReward.getSimpleName()+", equipment restore, quest completion/shop and six enchantment/curses serialized");
+    }
     private static void clearArena(){
         if(com.watabou.noosa.Camera.main==null)com.watabou.noosa.Camera.main=new com.watabou.noosa.Camera(0,0,320,240,1);
         for(Mob m:Dungeon.level.mobs.toArray(new Mob[0])){Actor.remove(m);for(Buff buff:m.buffs())Actor.remove(buff);}

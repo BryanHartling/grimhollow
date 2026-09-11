@@ -52,6 +52,9 @@ jobs:
       - name: Live room gate including boundary halo regression
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         run: python tools/artgen/iteration.py --check-room
+      - name: Vault boss arena and elemental forms in the existing renderer
+        if: ${{ !cancelled() && runner.os == 'Linux' }}
+        run: xvfb-run -a java -Dgrimhollow.vault=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
       - name: Render live Prison room
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         run: xvfb-run -a java -Dgrimhollow.iteration=true -Dgrimhollow.region=1 -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers

@@ -8,3 +8,4 @@ sdkVersion:'21'
 targetSdkVersion:'36'
 application-label:'Grimhollow'
 
+v4 integration: aapt dump badging -> package=com.grimhollow.dungeon versionCode=913 versionName=0.5.2-v4-INDEV minSdk=21 targetSdk=36 label=Grimhollow.

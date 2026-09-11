@@ -14,6 +14,9 @@ import com.watabou.noosa.Game;
 /** Opt-in launch diagnostic: renders real OpenGL frames, writes evidence, exits. */
 final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean sewers;
+    private final boolean vault=Boolean.getBoolean("grimhollow.vault");
+    private com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultFinalRoom vaultArena;
+    private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental vaultBoss;
     private int frames;
     private boolean originalLighting;
     private int originalZoom;
@@ -45,13 +48,15 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     @Override public void render() {
         super.render();
         frames++;
+        if (vault && sewers) vaultFrames();
         if (frames==180) {
             if (!(Game.scene() instanceof TitleScene)) throw new AssertionError("Title scene did not launch");
             capture("title");
             if (!sewers) { Gdx.app.exit(); return; }
-            GamesInProgress.selectedClass=Boolean.getBoolean("grimhollow.renderPoc")?HeroClass.NECROMANCER:HeroClass.WARRIOR;
+            GamesInProgress.selectedClass=(vault||Boolean.getBoolean("grimhollow.renderPoc"))?HeroClass.NECROMANCER:HeroClass.WARRIOR;
             GamesInProgress.curSlot=99;
-            if(Boolean.getBoolean("grimhollow.iteration")) iterationRoom();
+            if(vault) vaultRoom();
+            else if(Boolean.getBoolean("grimhollow.iteration")) iterationRoom();
             else {
                 Dungeon.seed=417;
                 Dungeon.init();
@@ -63,7 +68,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             switchNoFade(GameScene.class);
         } else if (sewers && frames==360) {
             if (!(Game.scene() instanceof GameScene)) throw new AssertionError("Sewer scene did not launch");
-            capture("sewers-lighting-on");
+            capture(vault?"vault-lighting-on":"sewers-lighting-on");
             if(Boolean.getBoolean("grimhollow.iteration")) {
                 if (!SPDSettings.dynamicLighting() || com.watabou.noosa.Camera.main.zoom != com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.defaultZoom)
                     throw new AssertionError("Iteration review requires lighting on and default zoom");
@@ -86,13 +91,59 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if(Boolean.getBoolean("grimhollow.renderPoc")){Pixmap shot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());PixmapIO.writePNG(Gdx.files.absolute("verification/render-poc-ingame.png"),shot,-1,true);shot.dispose();}
             SPDSettings.dynamicLighting(false);
         } else if (sewers && frames==420) {
-            capture("sewers-lighting-off");
+            capture(vault?"vault-lighting-off":"sewers-lighting-off");
             SPDSettings.dynamicLighting(originalLighting);
             SPDSettings.zoom(originalZoom);
             if (Boolean.getBoolean("grimhollow.geometryTests")) geometryTests();
             if (Boolean.getBoolean("grimhollow.iteration")) liquidTests();
-            System.out.println("PASS: Sewer scene renders with dynamic lighting on and off.");
+            System.out.println("PASS: "+(vault?"Vault":"Sewer")+" scene renders with dynamic lighting on and off.");
             Gdx.app.exit();
+        }
+    }
+
+    /** Reuse the real renderer for v4 arena spawning, three forms and door-unlock behavior. */
+    private void vaultRoom() {
+        SPDSettings.zoom(0);
+        Dungeon.seed=417;Dungeon.init();Dungeon.depth=19;
+        Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        Dungeon.hero.lvl=20;Dungeon.hero.HT=Dungeon.hero.HP=200;
+        Dungeon.hero.live();
+        com.shatteredpixel.shatteredpixeldungeon.items.quest.EscapeCrystal escape=new com.shatteredpixel.shatteredpixeldungeon.items.quest.EscapeCrystal();
+        escape.storeHeroBelongings(Dungeon.hero);escape.collect();
+        Dungeon.hero.belongings.armor=new com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor();
+        Dungeon.branch=1;
+        com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel level=(com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel)Dungeon.newLevel();
+        vaultArena=(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultFinalRoom)level.room(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultFinalRoom.class);
+        if(vaultArena==null)throw new AssertionError("Vault arena missing");
+        com.watabou.utils.Bundle data=new com.watabou.utils.Bundle();vaultArena.storeInBundle(data);
+        int dx=data.getInt("locked_door_x"),dy=data.getInt("locked_door_y");
+        com.watabou.utils.Point center=vaultArena.center();
+        int heroCell=dx+Integer.signum(center.x-dx)*2+(dy+Integer.signum(center.y-dy)*2)*level.width();
+        if(!level.passable[heroCell])throw new AssertionError("Vault arena entry is blocked");
+        Dungeon.switchLevel(level,heroCell);Dungeon.observe();
+    }
+
+    private void vaultFrames() {
+        if(frames==240) {
+            vaultArena.processHeroStep(Dungeon.hero);
+            for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs)
+                if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental)
+                    vaultBoss=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental)mob;
+            if(vaultBoss==null||!Dungeon.level.locked)throw new AssertionError("Vault boss did not seal its arena");
+            vaultBoss.setElementalForm(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental.ElementalForm.FIRE);
+            Dungeon.observe();
+        } else if(frames==275) capture("vault-fire");
+        else if(frames==280) vaultBoss.setElementalForm(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental.ElementalForm.FROST);
+        else if(frames==315) capture("vault-frost");
+        else if(frames==320) vaultBoss.setElementalForm(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental.ElementalForm.SHOCK);
+        else if(frames==355) capture("vault-shock");
+        else if(frames==400) {
+            vaultBoss.die(Dungeon.hero);
+            if(Dungeon.level.locked)throw new AssertionError("Vault boss death did not unseal arena");
+            com.watabou.utils.Bundle data=new com.watabou.utils.Bundle();vaultArena.storeInBundle(data);
+            int door=data.getInt("locked_door_x")+data.getInt("locked_door_y")*Dungeon.level.width();
+            if(Dungeon.level.map[door]!=com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.DOOR)throw new AssertionError("Vault treasure door did not unlock");
+            System.out.println("PASS V4 rendering: arena trigger, FIRE/FROST/SHOCK, scripted boss death and treasure door unlock (not a played fight)");
         }
     }
 
@@ -255,7 +306,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                             || java.lang.reflect.Modifier.isAbstract(type.getModifiers()))continue;
                     com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite sprite=(com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite)type.getDeclaredConstructor().newInstance();
                     if(sprite.texture==null)continue; // Base sprite classes have no art or frame.
-                    float footprint=sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.DM300Sprite||sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.YogSprite?32:16;
+                    float footprint=sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.DM300Sprite||sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.YogSprite||sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.VaultBossElementalSprite?32:16;
                     band(sprite,footprint,.85f,.95f,buffer,camera,zoom,failures,"24 "+type.getSimpleName());mobs++;sprite.destroy();
                 }
             }

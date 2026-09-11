@@ -6,7 +6,7 @@
       "measurements": [
         {
           "target": "mean luminance difference",
-          "value": 0.22902316506672113,
+          "value": 0.20576638016685428,
           "minimum": 0.1,
           "maximum": null,
           "pass_": true,
@@ -14,7 +14,7 @@
         },
         {
           "target": "representative pHash bits",
-          "value": 30.0,
+          "value": 32.0,
           "minimum": 12,
           "maximum": null,
           "pass_": true,
@@ -28,7 +28,7 @@
       "measurements": [
         {
           "target": "median flagstone fraction",
-          "value": 0.8695746527777778,
+          "value": 0.703125,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -42,7 +42,7 @@
       "measurements": [
         {
           "target": "median luminance difference",
-          "value": 0.18981882114651422,
+          "value": 0.1867722869008714,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -50,7 +50,7 @@
         },
         {
           "target": "median hue difference",
-          "value": 32.07048338009923,
+          "value": 30.85257981611398,
           "minimum": 30,
           "maximum": null,
           "pass_": true,
@@ -64,15 +64,15 @@
       "measurements": [
         {
           "target": "outer minus inner mean",
-          "value": -0.09146275049927377,
+          "value": -0.13504429464609916,
           "minimum": null,
           "maximum": 0,
           "pass_": true,
           "score": 1.0
         }
       ],
-      "outer_mean": 0.06007697893972403,
-      "inner_mean": 0.1515397294389978,
+      "outer_mean": 0.07329818345393713,
+      "inner_mean": 0.20834247810003628,
       "passing": true
     },
     {
@@ -80,7 +80,7 @@
       "measurements": [
         {
           "target": "visible mean",
-          "value": 0.12232158937108793,
+          "value": 0.13449026070034495,
           "minimum": 0.12,
           "maximum": 0.2,
           "pass_": true,
@@ -88,7 +88,7 @@
         },
         {
           "target": "visible std",
-          "value": 0.12610990306341688,
+          "value": 0.1358801122936033,
           "minimum": 0.12,
           "maximum": null,
           "pass_": true,
@@ -102,7 +102,7 @@
       "measurements": [
         {
           "target": "hero bbox contrast",
-          "value": 0.535964078431373,
+          "value": 0.42392549019607845,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -110,7 +110,7 @@
         },
         {
           "target": "rat bbox contrast",
-          "value": 0.24004235294117648,
+          "value": 0.22520549019607838,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -118,7 +118,7 @@
         },
         {
           "target": "item bbox contrast",
-          "value": 0.48732501960784297,
+          "value": 0.4880440784313723,
           "minimum": 0.2,
           "maximum": null,
           "pass_": true,
@@ -129,17 +129,17 @@
     }
   ],
   "global_targets": {
-    "region_mean_after_lighting": 0.12232158937108793,
+    "region_mean_after_lighting": 0.13449026070034495,
     "region_mean_pass": true,
-    "dominant_green_brown_fraction": 0.9976162918871252,
+    "dominant_green_brown_fraction": 0.9966965663580247,
     "hue_budget_pass": true,
     "accent_families": 1,
     "accent_bins": [
-      0.0001515652557319224,
+      0.0030864197530864196,
       0.0,
       0.0,
-      0.002232142857142857,
       0.0,
+      0.00021701388888888888,
       0.0,
       0.0,
       0.0,
@@ -156,9 +156,9 @@
       0.35
     ]
   },
-  "screenshot_sha256": "98ce577aa3d4c2edf6e609484e6e2caa41a8413a0e808482c5548046f2200a4b",
-  "terrain_sha256": "c1910be3dc70d361ade6d69c5bceb8666d424f72370369cf1765d43b947a779e",
-  "sample_count": 63,
+  "screenshot_sha256": "27ea8a8ae7c1d47d22d29a054e332f140143152159a2ede5748331499202bc26",
+  "terrain_sha256": "4e791d8be758346dd35a278b0c2acd6d6f7a2c0b7833a4df820a1754692fee72",
+  "sample_count": 36,
   "seed": 422,
   "lighting": true,
   "zoom": 3.0,

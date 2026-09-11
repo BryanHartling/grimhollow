@@ -13,6 +13,7 @@ import java.util.*;
 import com.watabou.utils.Random;
 /** Run knowledge, item-bound temporary effects, and Enchanter talent hooks. */
 public class EnchanterMagic extends Buff {
+    { revivePersists = true; }
     private final LinkedHashMap<String,Integer> inscriptions=new LinkedHashMap<>();
     public void record(Class<?> type){String key=type.getName();int count=inscriptions.getOrDefault(key,0)+1;inscriptions.remove(key);inscriptions.put(key,count);}
     public Class<?> favorite(boolean armor,Class<?> excluded){

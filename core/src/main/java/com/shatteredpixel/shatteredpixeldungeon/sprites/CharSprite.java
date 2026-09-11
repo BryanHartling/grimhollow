@@ -65,7 +65,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
         super.frame(frame);
         if (idle != null && idle.frames != null && idle.frames.length > 0) {
             // Use the standing pose for every animation: death and attack poses retain their proportions.
-            float footprint = (this instanceof DM300Sprite || this instanceof YogSprite) ? 32 : 16;
+            float footprint = (this instanceof DM300Sprite || this instanceof YogSprite || this instanceof VaultBossElementalSprite) ? 32 : 16;
             com.shatteredpixel.shatteredpixeldungeon.GameGeometry.fit(this, idle.frames[0], footprint*.90625f);
         } else {
             int density=com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterDensity(texture);
@@ -93,6 +93,8 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 	protected float shadowWidth     = 1.2f;
 	protected float shadowHeight    = 0.25f;
 	protected float shadowOffset    = 0.25f;
+
+	public boolean visibleOutOfFFOV = false;
 
 	public enum State {
 		BURNING, LEVITATING, INVISIBLE, PARALYSED, FROZEN, ILLUMINATED, CHILLED, DARKENED, MARKED, HEALING, SHIELDED, HEARTS, GLOWING, AURA

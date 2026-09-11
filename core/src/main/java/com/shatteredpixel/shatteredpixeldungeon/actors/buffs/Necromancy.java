@@ -10,6 +10,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.watabou.utils.*;
 /** Persistent once-per-floor and once-per-turn talent state. No regenerating resource. */
 public class Necromancy extends Buff {
+    { revivePersists = true; }
     private final java.util.HashSet<Integer> wardFloors=new java.util.HashSet<>();
     private float siphonTurn=-100;
     public static int points(Talent talent) { return Dungeon.hero == null ? 0 : Dungeon.hero.pointsInTalent(talent); }

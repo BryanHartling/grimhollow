@@ -4,6 +4,14 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 
 - User scope amendment 2026-09-11: adopt upstream v4.0.0 content and fixes, including the complete Imp/Vault quest, while preserving Grimhollow's classes, identity and approved art; this explicitly supersedes the original v3.3.8-only scope.
 
+- v4 integration: retain the full upstream merge ancestry, gameplay/fixes and Gradle 9.5.0/AGP 9.2.0, while keeping Grimhollow's identity and excluding the unchanged, recoverable SPD store listing.
+- Vault compatibility: all nine classes receive mirror rewards; permanent class state survives the Vault's Hero.live equipment swap, and stored class items retain their charges and levels on return.
+- Terrain compatibility: move BONE_WALL from 39 to 41 because upstream v4 assigns 39 to CUSTOM_DECO_WTR; Force Wall remains 40 and saved temporary walls restore their original terrain.
+- Enchantment compatibility: preserve Enchanter inscription/Overcharge hooks in the new proc paths and read Grim's forced flag from the upstream tracker on the attacker.
+- Art compatibility: import v4 changed silhouettes as alpha-preserving palette vectors, retain approved regional atlas bytes and preserve existing spell/class item IDs while appending four elemental summon variants.
+- Vault rendering: designate the 31x30 elemental sprite a two-tile boss footprint and reuse the existing desktop runner for arena spawn, three forms and scripted death/unlock checks.
+- Visual review correction: the unchanged stage-6c liquids show repeated bright wavelets in fresh v4 room captures; numeric tests pass but the hard vision gate is recorded as failing instead of retaining the previous favorable judgment.
+
 - `.gitattributes`: Portable wrapper line endings and binary-asset treatment.
 - `.github/workflows/build.yml`: Linux/Windows desktop, Android and headless CI with artifacts and active acceptance failures.
 - `.gitignore`: Exclude machine-local toolchains, caches and temporary credentials.
@@ -2286,3 +2294,461 @@ Upstream history retained; branch `grimhollow`. Each changed path is listed belo
 - `verification/iteration/liquids/round-07.json`: Required regional iteration, comparison, critique or measured in-game evidence.
 - `verification/iteration/liquids/round-07.md`: Required regional iteration, comparison, critique or measured in-game evidence.
 - `verification/iteration/liquids/round-07.png`: Required regional iteration, comparison, critique or measured in-game evidence.
+
+- `SPD-classes/src/main/java/com/watabou/noosa/Game.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `SPD-classes/src/main/java/com/watabou/noosa/audio/Music.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `SPD-classes/src/main/java/com/watabou/noosa/particles/Emitter.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `android/src/main/java/com/shatteredpixel/shatteredpixeldungeon/android/AndroidLauncher.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `android/src/main/java/com/shatteredpixel/shatteredpixeldungeon/android/AndroidMissingNativesHandler.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/assets/environment/custom_tiles/carpet.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/environment/custom_tiles/caves_boss.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/environment/custom_tiles/caves_quest.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/environment/custom_tiles/city_boss.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/environment/custom_tiles/city_quest.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/environment/custom_tiles/prison_quest.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/environment/custom_tiles/rat_king_room.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/environment/occlusion_shadows.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/environment/raised_terrain.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/environment/terrain_features.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/environment/tiles_caves_crystal.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/environment/tiles_caves_gnoll.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/fonts/pixel_font.ttf`: Upstream v4 integration support and recorded compatibility behavior.
+- `core/src/main/assets/interfaces/change_icons.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/interfaces/icons.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/messages/actors/actors_be.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_cs.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_de.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_el.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_eo.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_es.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_fr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_hu.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_in.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_it.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_ja.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_ko.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_nl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_pl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_pt.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_ru.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_sv.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_tr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_uk.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_vi.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_zh-hant.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/actors/actors_zh.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_be.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_cs.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_de.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_el.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_eo.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_es.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_fr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_hu.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_in.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_it.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_ja.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_ko.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_nl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_pl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_pt.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_ru.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_sv.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_tr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_uk.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_vi.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_zh-hant.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/items/items_zh.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/journal/journal_el.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/journal/journal_eo.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/journal/journal_in.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/journal/journal_it.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/journal/journal_nl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/journal/journal_pl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/journal/journal_tr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/journal/journal_vi.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/journal/journal_zh-hant.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_be.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_cs.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_de.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_el.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_eo.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_es.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_fr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_hu.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_in.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_it.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_ja.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_ko.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_nl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_pl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_pt.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_ru.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_sv.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_tr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_uk.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_vi.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_zh-hant.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/levels/levels_zh.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_be.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_cs.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_de.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_el.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_eo.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_es.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_fr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_hu.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_in.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_it.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_ja.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_ko.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_nl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_pl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_pt.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_ru.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_sv.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_tr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_uk.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_vi.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_zh-hant.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/misc/misc_zh.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/plants/plants_ja.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/plants/plants_pl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/plants/plants_tr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/plants/plants_vi.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/plants/plants_zh.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_be.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_cs.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_de.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_el.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_eo.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_es.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_fr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_hu.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_in.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_it.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_ja.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_ko.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_nl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_pl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_pt.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_ru.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_sv.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_tr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_uk.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_vi.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_zh-hant.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/scenes/scenes_zh.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/ui/ui_de.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/ui/ui_el.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/ui/ui_it.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_be.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_cs.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_de.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_el.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_eo.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_es.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_fr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_hu.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_in.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_it.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_ja.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_ko.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_nl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_pl.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_pt.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_ru.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_sv.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_tr.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_uk.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_vi.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_zh-hant.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/messages/windows/windows_zh.properties`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/assets/sprites/crystal_spire.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/sprites/dm100.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/sprites/dm200.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/sprites/imp.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/sprites/ratking.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/sprites/red_sentry.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/sprites/sentry.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/sprites/shaman.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/sprites/skeleton.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/sprites/vault_boss_elemental.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/sprites/vault_mirror.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/assets/sprites/vault_tokens_door.png`: Pipeline-generated v4 quest, enemy, item or special-terrain visual from the matching editable source.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/Rankings.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ShatteredPixelDungeon.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/Statistics.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/Actor.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/blobs/Alchemy.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/blobs/VaultFlameTraps.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/blobs/WaterOfHealth.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/blobs/WellWater.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/AscensionChallenge.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Bleeding.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/BlobImmunity.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Burning.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Combo.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Corruption.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Frost.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Healing.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/HoldFast.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Hunger.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/MonkEnergy.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Ooze.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Poison.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Regeneration.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/SnipersMark.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/SuperNovaTracker.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/SwarmIntelTracker.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/Ratmogrify.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/cleric/Trinity.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/duelist/Challenge.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/duelist/ElementalStrike.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/duelist/Feint.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/mage/WarpBeacon.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/mage/WildMagic.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/rogue/DeathMark.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/spells/MindForm.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/spells/Radiance.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/spells/WallOfLight.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/ArmoredBrute.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/ArmoredStatue.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/CrystalGuardian.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/CrystalSpire.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/DM300.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Elemental.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Eye.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/GnollExile.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/GnollGeomancer.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/GnollSapper.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Golem.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Monk.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/RipperDemon.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/Statue.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/VaultMob.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/YogDzewa.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/YogFist.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/npcs/Blacksmith.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/npcs/Imp.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/npcs/VaultLaser.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/npcs/VaultMirror.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/npcs/VaultSentry.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/npcs/VaultTokenDoor.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/quest/vault/VaultBossElemental.java`: Adopt upstream v4 Vault enemy, patrol AI or elemental boss behavior.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/quest/vault/VaultDM100.java`: Adopt upstream v4 Vault enemy, patrol AI or elemental boss behavior.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/quest/vault/VaultDM200.java`: Adopt upstream v4 Vault enemy, patrol AI or elemental boss behavior.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/quest/vault/VaultElemental.java`: Adopt upstream v4 Vault enemy, patrol AI or elemental boss behavior.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/quest/vault/VaultGhoul.java`: Adopt upstream v4 Vault enemy, patrol AI or elemental boss behavior.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/quest/vault/VaultGolem.java`: Adopt upstream v4 Vault enemy, patrol AI or elemental boss behavior.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/quest/vault/VaultRat.java`: Adopt upstream v4 Vault enemy, patrol AI or elemental boss behavior.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/quest/vault/VaultShaman.java`: Adopt upstream v4 Vault enemy, patrol AI or elemental boss behavior.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/mobs/quest/vault/VaultSkeleton.java`: Adopt upstream v4 Vault enemy, patrol AI or elemental boss behavior.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/BlobEmitter.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/CheckedCell.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/MagicMissile.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/TargetedCell.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/TorchHalo.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/effects/particles/SpectralWallParticle.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/BrokenSeal.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/Dewdrop.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/Generator.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/Heap.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/glyphs/AntiMagic.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/glyphs/Flow.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/glyphs/Swiftness.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/glyphs/Viscosity.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/artifacts/DriedRose.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/artifacts/HornOfPlenty.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/artifacts/MasterThievesArmband.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/artifacts/SandalsOfNature.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/artifacts/SkeletonKey.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/artifacts/TalismanOfForesight.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/bombs/ArcaneBomb.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/potions/Potion.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/potions/PotionOfHealing.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/potions/elixirs/ElixirOfHoneyedHealing.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/quest/DwarfToken.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/quest/EscapeCrystal.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/quest/ImpStatue.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/quest/VaultBeacon.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/rings/RingOfForce.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/rings/RingOfHaste.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/rings/RingOfMight.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/scrolls/ScrollOfTeleportation.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/spells/ReclaimTrap.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/spells/SummonElemental.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/stones/StoneOfAggression.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/stones/StoneOfAugmentation.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/stones/StoneOfClairvoyance.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/ChaoticCenser.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/CrackedSpyglass.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/DimensionalSundial.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/ExoticCrystals.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/EyeOfNewt.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/FerretTuft.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/MimicTooth.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/PetrifiedSeed.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/RatSkull.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/SaltCube.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/ShardOfOblivion.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/ThirteenLeafClover.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/TrapMechanism.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/trinkets/VialOfBlood.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/wands/CursedWand.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/wands/Wand.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/wands/WandOfFireblast.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/wands/WandOfLightning.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/curses/Explosive.java`: Adopt upstream v4 weapon effects and fixes; retain Enchanter proc integration where required.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/curses/Pressurized.java`: Adopt upstream v4 weapon effects and fixes; retain Enchanter proc integration where required.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/curses/Wondrous.java`: Adopt upstream v4 weapon effects and fixes; retain Enchanter proc integration where required.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/enchantments/Crystal.java`: Adopt upstream v4 weapon effects and fixes; retain Enchanter proc integration where required.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/enchantments/Eldritch.java`: Adopt upstream v4 weapon effects and fixes; retain Enchanter proc integration where required.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/enchantments/Kinetic.java`: Adopt upstream v4 weapon effects and fixes; retain Enchanter proc integration where required.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/enchantments/Unstable.java`: Adopt upstream v4 weapon effects and fixes; retain Enchanter proc integration where required.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/enchantments/Venomous.java`: Adopt upstream v4 weapon effects and fixes; retain Enchanter proc integration where required.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/enchantments/Vorpal.java`: Adopt upstream v4 weapon effects and fixes; retain Enchanter proc integration where required.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/MagesStaff.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/Rapier.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/Sai.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/Sickle.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/missiles/ForceCube.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/missiles/darts/AdrenalineDart.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/missiles/darts/CleansingDart.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/missiles/darts/HealingDart.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/missiles/darts/HolyDart.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/journal/Bestiary.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/journal/Catalog.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/journal/Notes.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/CavesBossLevel.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/CityBossLevel.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/LastLevel.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/LastShopLevel.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/PrisonBossLevel.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/VaultLevel.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/builders/Builder.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/builders/GridBuilder.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/features/HighGrass.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/painters/CavesPainter.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/painters/MiningLevelPainter.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/painters/RegularPainter.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/AmbitiousImpRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/BlacksmithRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/MassGraveRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/MineEntrance.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/RitualSiteRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultAlternatingFireRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultCircleRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultCrossRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultEnemyCenterRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultEntranceRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultFinalRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultHallwayRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultLasersRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultLongRingsRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultLongRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultQuadrantsRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultRingRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultRingsRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultSimpleEnemyTreasureRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/VaultTokensRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/treasure/VaultBookcaseTreasureRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/treasure/VaultCircleScanTreasureRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/treasure/VaultFlamePathRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/treasure/VaultFlamesTreasureRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/treasure/VaultHardLaserTreasureRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/treasure/VaultLaserTreasureRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/treasure/VaultManyScansRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/treasure/VaultMultipleEnemyTreasureRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/treasure/VaultSingleEnemyTreasureRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/quest/vault/treasure/VaultTreasureRoom.java`: Adopt upstream v4 Vault room layout, hazards or treasure progression.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/secret/RatKingRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/special/SentryRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/special/ToxicGasRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/standard/HallwayRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/standard/ImpShopRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/standard/SegmentedLibraryRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/standard/StatuesRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/standard/entrance/HallwayEntranceRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/standard/entrance/LibraryRingEntranceRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/standard/entrance/StatuesEntranceRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/standard/exit/HallwayExitRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/standard/exit/LibraryRingExitRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/rooms/standard/exit/StatuesExitRoom.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/levels/traps/CursingTrap.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/messages/Languages.java`: Adopt upstream v4 quest, item and interface localization; preserve fork class strings.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/plants/Plant.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/ChangesScene.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/scenes/WelcomeScene.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/SentrySprite.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/VaultBossElementalSprite.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/VaultMirrorSprite.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/sprites/VaultTokenDoorSprite.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/CustomTilemap.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/RaisedTerrainTilemap.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/TerrainFeaturesTilemap.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/WallOcclusionTilemap.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/tiles/custom/Carpet.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/AttackIndicator.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/BossHealthBar.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/Button.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/CharHealthIndicator.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/HealthBar.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/Icons.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/InventoryPane.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/KeyDisplay.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/QuickSlotButton.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/RightClickMenu.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/StatusPane.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/Toolbar.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/ChangeButton.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/ChangeIcons.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/Pixel_Dungeon_Changes.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v0_1_X_Changes.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v0_2_X_Changes.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v0_4_X_Changes.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v0_5_X_Changes.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v2_X_Changes.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v3_X_Changes.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/ui/changelist/v4_X_Changes.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndImpOld.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndInfoCell.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndInfoMob.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndInfoTrap.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndRanking.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/windows/WndUpgrade.java`: Adopt upstream v4 gameplay, rendering or bug fixes while preserving Grimhollow class/geometry hooks.
+- `gradle/wrapper/gradle-wrapper.jar`: Adopt the v4 Gradle/toolchain versions while retaining fork build identity and desktop-only support.
+- `gradle/wrapper/gradle-wrapper.properties`: Adopt the v4 Gradle/toolchain versions while retaining fork build identity and desktop-only support.
+- `gradlew`: Adopt the v4 Gradle/toolchain versions while retaining fork build identity and desktop-only support.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_carpet.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_caves_boss.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_caves_quest.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_city_boss.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_city_quest.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_prison_quest.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_environment_custom_tiles_rat_king_room.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_environment_occlusion_shadows.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_environment_raised_terrain.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_environment_terrain_features.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_environment_tiles_caves_crystal.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_environment_tiles_caves_gnoll.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_interfaces_change_icons.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_interfaces_icons.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_sprites_crystal_spire.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_sprites_dm100.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_sprites_dm200.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_sprites_ratking.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_sprites_sentry.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_sprites_shaman.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_sprites_skeleton.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_sprites_vault_boss_elemental.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_sprites_vault_mirror.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/specs/upstream_v4_sprites_vault_tokens_door.json`: Editable palette-vector source for the corresponding upstream v4 visual; no network or Blender needed for normal rebuilds.
+- `tools/artgen/upstream_v4.py`: Pinned v4 visual importer that preserves approved atlas bytes, alpha, and Grimhollow item IDs.
+- `verification/iteration/liquids/round-08.json`: Fresh v4 room critique records the liquid vision failure without changing cached art or weakening targets.
+- `verification/iteration/liquids/round-08.md`: Fresh v4 room critique records the liquid vision failure without changing cached art or weakening targets.
+- `verification/iteration/liquids/round-08.png`: Fresh v4 room critique records the liquid vision failure without changing cached art or weakening targets.
+- `verification/iteration/sewers-ingame.png`: Record actual v4 build, rendering and acceptance output, including failures.

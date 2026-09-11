@@ -1,5 +1,7 @@
 # Reproducible art pipeline
 
+The v4.0.0 integration adds 24 editable palette-vector specifications for changed special terrain, interface icons and quest/enemy sprites, and updates the existing item source. All 97 current specifications rebuild byte-for-byte. `python tools/artgen/import_upstream_layout.py --upstream-v4` recreates this import from pinned commit `2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`; normal builds consume only committed JSON and cached renders. Original alpha is retained, including occlusion shadows. The import preserves the five approved region atlases, original spell IDs and class item slots 512-521; four elemental summon variants occupy 522-525. These GPL upstream silhouettes are provisional game art, excluded from CC0 reference optimization, and do not certify the later native 64px character/item redesign. Full validation still reports 77 uncovered sheets and unfinished style/frame gates.
+
 Stage 1 generates Sewer tile/wall atlases, six upstream hero atlases (48x60 frames), the item atlas (32x32 frames), Grimhollow banners and a stone/bone title composition, launcher icons, a vignette and blood decals. It is **not the complete §5 asset set**. Remaining assets are upstream or unimplemented; the default validator reports incomplete coverage as a failure.
 
 Requires Python 3.11+ (host: 3.12.14), Pillow 12.3.0, NumPy 2.3.5:

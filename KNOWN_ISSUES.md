@@ -1,16 +1,16 @@
 # Known issues
 
 - Stages 6a-6c implement animated liquids and calibrated environments for all five regions; character redesign, items/title, enhanced effects and section 9 content remain in stages 6d-8.
-- Tests 4 and 17 remain incomplete: 92 existing sheets lack pipeline sources and full character/item style and referenced-frame coverage are unfinished; the implemented inventory is 73 specifications.
+- Tests 4 and 17 remain incomplete: 77 existing sheets lack pipeline sources and full character/item style and referenced-frame coverage are unfinished; the implemented inventory is 97 specifications (full validator: 2 failures; subset: 0).
 - Test 41 uses actual runtime mixed variant/phase tiling for the unchanged 0.35 autocorrelation ceiling because identical tile copies necessarily correlate 1; centre-depth contrast is adjusted to 0.02-0.04 after two visual failures, as documented in CHANGES.md.
-- Characters and mobs retain rejected POC or procedural checkpoint art pending stage 6d; special terrain retains its procedural base, including bridge and carpet surfaces, and Bone Prison still uses barricade visuals.
+- Characters and mobs retain rejected POC or procedural checkpoint art pending stage 6d; v4 special-room/quest sprites use interim palette-vector imports, older special terrain retains its procedural base, and Bone Prison still uses barricade visuals.
 - Tests 6, 7 and 8 are NOT RUN in full: representative talent hooks and all nine armor abilities execute, but exhaustive selection and actual Tengu/crown UI flows were not driven.
 - Test 9 is NOT RUN in full: Bone Prison and Force Wall restoration pass representative scenarios, but Wand of Bone belongs to the undelivered content stage.
 - Tests 16, 19 and 30 are NOT RUN in full: complete sprite-index coverage, floor-15 timing and regional mob-histogram checks remain pending.
-- Test 18 FAILS its original 0.15-0.35 range: visible means are Sewers 0.1452, Prison 0.1462, Caves 0.1223, City 0.1329 and Halls 0.0613; the newer region-specific board ranges and all five room gates pass test 42.
+- Test 18 FAILS its original 0.15-0.35 range: fresh v4 visible means are Sewers 0.1372, Prison 0.1709, Caves 0.1345, City 0.1310 and Halls 0.0603; all five six-measurement room gates pass, but Prison fails the separate global board palette target.
 - Tests 31 and 32 are NOT RUN because enhanced effects and scorch decals belong to stage 7; Halls retains its upstream ember particles around the new lava.
-- Test 15 reports Runs=30 failures=0 for the three new classes; the retained nine-hero result is Runs=90 failures=0, using upstream generation/debug descent rather than simulated player combat and stair search.
-- Test 21 remains blocked by the full art gate until stage 6e; checks remain enabled and platform build artifacts still upload.
+- Test 15 reports Runs=30 failures=0 for the three new classes; the fresh v4 nine-hero result is Runs=90 failures=0, using upstream generation/debug descent rather than simulated player combat and stair search.
+- Test 21 remains blocked by full art coverage, the Prison global palette gate and the recorded liquid vision failure; checks remain enabled and platform build artifacts still upload.
 - Tests 20, 22 and 23 retain checkpoint results per section 14; Android device gameplay remains untested.
 - GitHub Actions dispatch/settings requests previously returned HTTP 403; push-triggered workflows are the working route and may appear after a delay.
 - Restricted Git/network/Blender/Java commands use the documented escalation route and Gradle --no-daemon; fetch and the .git scratch write/delete succeeded, while optional sandboxed Get-CimInstance inspection was denied and existing command output supplied the needed status.
@@ -18,4 +18,8 @@
 - Reference-fit limitations remain recorded in SOURCES.md, including amber sewer water, equivalent culvert architecture, unlit maps, a torch without a wall cone, an unhooded statue, a burned-ground study and a blood stain of unverified age.
 - Halls uses the documented dark-region contrast and four-pixel mortar adjustments; hue-family counting excludes sub-per-mille quantization fringes, with all numeric changes listed in CHANGES.md and all six room measurements retained.
 - Test 29 passes for all 72 new regional frames/masks with maximum pHash distance 0; the prior 24 Prison, 104 liquid/ripple and 288-frame checks are retained, and reviewed caches are restored after verification.
-- Windows returned Errno 22 on two post-process file opens; the painter now skips writing identical bytes, and the corrected 73-file rebuild has byte differences=0.
+- Windows previously returned Errno 22 on two post-process file opens; the painter skips writing identical bytes, and the fresh v4 97-file rebuild has byte differences=0.
+- Vault generation, mirror rewards, equipment/charge restoration, quest/shop state and all three rendered boss forms pass scripted checks; a player-driven Vault playthrough, reward dialogs, hazard traversal and Android device gameplay have not been run.
+- Test 39 now FAILS for Prison (current screenshot fails board global targets); all 25 stored class histories/parameters/locked assets match, and the other four regions have zero failures.
+- Test 41 now FAILS its hard vision gate: fresh room review sees repeated bright dash-shaped wavelets in unchanged stage-6c liquids, despite 96 numeric frames passing with min variant pHash 28 and max one-tile autocorrelation 0.340475; targets were not lowered.
+- Automatic review initially rejected excluding incoming SPD store metadata; read-only comparison proved all 14 files identical to recoverable v4 Git objects with no pre-existing Grimhollow files, and the same cleanup command then succeeded.

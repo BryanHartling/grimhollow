@@ -2,6 +2,8 @@
 
 Upstream history retained; branch `grimhollow`. Each changed path is listed below.
 
+- User scope amendment 2026-09-11: adopt upstream v4.0.0 content and fixes, including the complete Imp/Vault quest, while preserving Grimhollow's classes, identity and approved art; this explicitly supersedes the original v3.3.8-only scope.
+
 - `.gitattributes`: Portable wrapper line endings and binary-asset treatment.
 - `.github/workflows/build.yml`: Linux/Windows desktop, Android and headless CI with artifacts and active acceptance failures.
 - `.gitignore`: Exclude machine-local toolchains, caches and temporary credentials.

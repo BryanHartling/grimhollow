@@ -1,6 +1,8 @@
 # Game Design Document & Build Specification (v0.8 — completion revision)
 ## Working title: **Grimhollow** (a Shattered Pixel Dungeon derivative)
 
+**User-authorized scope amendment (2026-09-11):** Integrate Shattered Pixel Dungeon v4.0.0 (`2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`), including the expanded Imp/Vault quest, new enchantments, curses, items, other content, balance changes and bug fixes. This supersedes the v3.3.8-only base and exclusions that would prevent upstream v4 content. Preserve Grimhollow's nine classes, class mechanics, identity, reproducible asset pipeline, approved locked Sewers art and existing acceptance checks. The remaining Grimhollow stages 6d–8 still apply.
+
 **Document purpose.** This is a complete, self-contained specification intended to be handed to an autonomous coding agent to produce a playable build in a single run. It defines the deliverable, the technical base, every new class and content item with concrete numbers, the art specification and pipeline, and the acceptance tests the build must pass. Where the spec is silent, follow existing Shattered Pixel Dungeon (SPD) conventions exactly.
 
 **Reading order for the agent:** §1 (deliverable) → §2 (base and constraints) → §3 (architecture map) → §4 (resolution and rendering) → §5 (art) → §6–8 (classes) → §9 (content) → §10 (acceptance tests) → §11 (delivery).

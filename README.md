@@ -2,9 +2,9 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), now incorporating **v4.0.0**, commit `2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`. The fork began at v3.3.8; upstream history and Java packages are preserved.
 
-**Painted world v1.1.0:** original painted materials and props replace the dense pixel treatment across all five regions. Floors, wall faces/coping, vegetation, stairs, wells, cages, mine structures, statues and water have distinct material identities. Gameplay, balance, content, input, camera geometry and animation timings are unchanged. Animated characters, items, approved title, UI/talent icons and Sewer doors/torches retain their existing artwork.
+**Painted assets v1.2.0:** the five painted regions now have nine painted hero animation sheets and 202 painted inventory cells, including the new class kits and every section-9 item. Each hero keeps all 21 pose indices and eight armor rows. Gameplay, balance, content, input, camera geometry and animation timings are unchanged. Monster/NPC art, class splashes, remaining inventory families, approved title, UI/talent icons and Sewer doors/torches retain their existing artwork.
 
-Eight authored source atlases and their exact built-in imagegen prompts are in [tools/painted](tools/painted/README.md). `python tools/painted/pack.py` rebuilds thirteen shipping atlases offline; `--check` validates every pixel and source hash. Generation services and Blender are not needed for builds or CI. This is an environment art pass, not a claim that all animated character art has been repainted.
+Thirty authored source sheets and their exact built-in imagegen prompts are in [tools/painted](tools/painted/README.md). `python tools/painted/pack.py` rebuilds 23 shipping atlases offline; `--check` validates every pixel, source hash and the named item reference contract. Generation services and Blender are not needed for builds or CI. [Hero animation samples](verification/characters.png), [painted inventory](verification/items.png) and [actual lit game capture](verification/iteration/sewers-ingame.png) show the current pass. Chests/mimics and multi-state artifact/coated-dart families remain paired with their existing artwork.
 
 **Rendering fix v1.0.2 retained:** fog has one nearest-sampled texel per 16-unit world cell. Shader camera caches track changing transforms, so walls and lighting follow camera pans and door movement. Painted textures use linear filtering with half-texel atlas guards; fog remains nearest-sampled. Mind Vision keeps the corrected eye symbol.
 
@@ -28,7 +28,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-1.1.0.jar
+java -jar desktop\build\libs\desktop-1.2.0.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.

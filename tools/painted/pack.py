@@ -176,6 +176,8 @@ def outputs():
     result['environment/raised_terrain.png']=raised
     from actors import outputs as actors
     result.update(actors())
+    from inventory import outputs as inventory
+    result.update(inventory())
     return result
 
 
@@ -189,16 +191,21 @@ def main():
     sources={p.relative_to(HERE/'sources').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'sources').rglob('*.png'))}
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
     for path,im in built.items():
-        expected=(1024,512) if path.startswith('sprites/hero_') else (512,512) if '/water' in path else (256,512) if '/raised_terrain' in path else (1024,1024)
+        expected=(512,1088) if path=='sprites/items.png' else (1024,512) if path.startswith('sprites/hero_') else (512,512) if '/water' in path else (256,512) if '/raised_terrain' in path else (1024,1024)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         target=ASSETS/path
         if args.check:
             if not target.exists() or digest(Image.open(target))!=digest(im):failures.append(path)
         else:im.save(target,optimize=False)
+    from inventory import semantic_bytes, SEMANTICS
+    expected_semantics=semantic_bytes()
     if args.check:
+        if (ROOT/SEMANTICS).read_bytes().replace(b'\r\n',b'\n')!=expected_semantics:failures.append(SEMANTICS)
         if not MANIFEST.exists() or json.loads(MANIFEST.read_text(encoding='utf-8'))!=manifest:failures.append('painted-assets.json')
-    else:MANIFEST.write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
+    else:
+        (ROOT/SEMANTICS).write_bytes(expected_semantics)
+        MANIFEST.write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     print(f'PAINTED assets={len(built)} source sheets={len(sources)} failures={len(failures)}')
     for failure in failures:print('FAIL:',failure)
     return bool(failures)

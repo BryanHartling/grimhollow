@@ -51,6 +51,7 @@ import java.nio.Buffer;
 public class ItemSprite extends MovieClip {
     @Override public void frame(com.watabou.utils.RectF frame) {
         super.frame(frame);
+        texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR, com.badlogic.gdx.graphics.GL20.GL_LINEAR);
         com.shatteredpixel.shatteredpixeldungeon.GameGeometry.fit(this, frame, SIZE);
     }
 

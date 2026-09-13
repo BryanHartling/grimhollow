@@ -16,6 +16,18 @@
     "city-materials.png": "f3316e1efa15a6b91712798d1bc54397fdc2563b9f589cdb89d85c275869cafc",
     "details.png": "e00209673cb5d728a3fbc173f1ede610c474d37c8ab7f5f33eae0c56fda72631",
     "halls-materials.png": "ca23d09f9bcbcf2bcae30ffc4f906539c5d7a39889f521ce3f537a5661235d00",
+    "items/artifacts.png": "f20c43dbe96e2dcfa06ea98a32178586097ebf9e3f1c91a2028f59c4e95eb544",
+    "items/bombs.png": "3bcd12a395e105db08dec845531441f59ce1f8e51f47037efa6a26bdd188ddc6",
+    "items/class-kit.png": "590b04ac662584c0106a97191921dec36b55d939d11cb785a26a6f3f8a87ff3b",
+    "items/missiles.png": "fd0b7a31bf6a408fa29bf938cb3e1ffcc13f377d9f497f61eaeca12dc2630d23",
+    "items/potions.png": "19f187ea92fab80e9571a8ba3dc0bd60d1e283bb38b5cc8074559bd924cac95b",
+    "items/rings.png": "0649a6030511d281c91c5b4ffdc9568028e30107354937e4793a5c7c0646d387",
+    "items/supplies.png": "2927a01b4e7bb84ed85a4d08cb8080545aa5bd8d2f398501bb6657c2c4e05082",
+    "items/treasures.png": "e456bc78a775e6cd5acb8ee785da6781f8d1c758d66962c6baefbbccf9e66e87",
+    "items/trinkets.png": "46c2629c6b550eef134d4eadf277043a90b17a6befd87e42915777b283c39c10",
+    "items/wands.png": "1ed7236765e5985f9f5638eae9586d4bb990153d18262f896f6b9f11da48bea9",
+    "items/weapons-a.png": "bbfe5b4d5e77adcf88e3e7c88c712e18d4d28b3a7936649780330283a4f63dc3",
+    "items/weapons-b.png": "9bbd1c0373663b3259182068b3588e72f49c2a6b6cc4cdaed02b3ad803b83bd3",
     "prison-materials.png": "69e2f5f0680c84a175a8f2e0313f3e0119e1fafd0b0545dbfe8deb4fb961bab4",
     "props.png": "7bc14b1ce174949d144b92c45909858026bfb1c3832748c6f2f53f6fe629ab02",
     "region-props.png": "fcdfa9075ad79fe4e4755a242bbbe4cb29cd579c9d66ab6a6dfd004e3defecde",
@@ -175,6 +187,13 @@
         512
       ],
       "rgba_sha256": "cbe97691101803407b2271fb27f02b3bb59c6fd81de66d2f6e6fe3023e8aad83"
+    },
+    "sprites/items.png": {
+      "size": [
+        512,
+        1088
+      ],
+      "rgba_sha256": "b31ee8390f2ab0b0fabba0a472bf257d558970998e57d2d9acee1ed724f4067f"
     }
   }
 }

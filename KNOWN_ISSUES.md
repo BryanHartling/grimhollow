@@ -1,8 +1,8 @@
 # Known issues
 
 - Test 45 retains its 0.12 luminance / 40-degree hue thresholds and fails 29/76 local comparisons after the painted pass: Sewers 7/15, Prison 2/10, Caves 9/21, City 1/15, Halls 10/15; it remains enforced in CI. The prior restored-art count was 47/76, and human readability review is still required.
-- The new visual-overhaul request authorizes painted world art; all animated hero/monster sheets, item icons, the approved title/UI and Sewer doors/torches remain unchanged. Their pixel styling, along with retained special-room artwork, is still visible beside the new environment art.
-- Waterskin already resolves to its catalogued bag at atlas cell 480; no index mismatch was reproduced. Its unchanged artwork may still be visually unclear. Test 25 checks named pixel identities, not human approval of the art.
+- Nine hero sheets and 202 inventory cells now use painted art. Monster/NPC sheets, class splashes, remaining inventory families, approved title/UI, Sewer doors/torches and retained special-room artwork still use their previous art. This continuation is not a complete replacement of every game image.
+- Chests/mimics, horn/chalice/rose upgrade states and coated darts retain their existing families together; unused painted source concepts are cached for a later complete companion pass. Waterskin ID 480 now depicts a capped leather water canteen; human review of the new sprites is still pending.
 - Tests 6, 7 and 8 carry permanent known issues: representative talent hooks and all nine armor abilities execute, but exhaustive talent selection and actual Tengu/crown UI flows remain unrun.
 - Tests 16 and 19 carry permanent known issues: rendered sprite/item/talent checks cover representative contracts, but exhaustive every-code-path frame coverage and the floor-15 1,000-turn timing scenario remain unrun.
 - Test 38 carries a permanent known issue: 18 of 33 supplied reference images lack verified CC0/public-domain redistribution permission and remain excluded from Git; U17 has unresolved game provenance and U08/U09 are alternate crops; 70 licensed files are eligible.

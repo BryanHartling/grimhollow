@@ -1,8 +1,10 @@
-# Current painted world presentation
+# Current painted presentation
 
-The September 2026 visual-overhaul request authorizes original painted art and supersedes the recovery-only ban below. `tools/painted/README.md` documents the new authored-source workflow. Eight original source atlases and exact imagegen prompts are committed; `python tools/painted/pack.py` deterministically packs them without a generation service or Blender. `--check` validates every pixel and source hash. The rejected procedural loops remain archived.
+The September 2026 visual-overhaul request authorizes original painted art and supersedes the recovery-only ban below. `tools/painted/README.md` documents the authored-source workflow. Thirty original source sheets and exact imagegen prompts are committed; `python tools/painted/pack.py` deterministically packs twenty-three atlases without a generation service or Blender. `--check` validates every pixel, source hash and named inventory mapping. The rejected procedural loops remain archived.
 
-The five regions now use painted floors, separate wall face/coping materials, organic vegetation, region-specific props, stairs, wells and scrolling water. Existing logical coordinates, terrain IDs, character animations, approved title, Sewer doors/torches, items and UI/talent icons are retained. Test 44 still checks all upstream character pixels and unaffected restoration assets; its historical-world portion is explicitly superseded only for the thirteen reproducibly packed assets in `painted-assets.json`. Test 45 is unchanged and remains a separate room measurement.
+The five regions use painted materials and props. This continuation adds nine complete hero sheets, preserving the existing 21 pose slots and eight armor rows, plus 202 named inventory cells. The offline cutout compositor changes no animation timings or callbacks. Hero, portrait and item filtering is linear; logical coordinates, terrain IDs, fog and all game rules are unchanged. Monster/NPC sheets, class splashes, remaining item families, title/UI and approved Sewer doors/torches are retained.
+
+Test 44 checks all unaffected upstream/restoration pixels and independently reconstructs the declared painted replacements. Test 25 keeps all names, IDs and art-index remaps; its source hashes are compiled from the declared named source cells. Test 45 is unchanged and remains a separate room measurement.
 
 ---
 

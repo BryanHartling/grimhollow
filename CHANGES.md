@@ -2,6 +2,9 @@
 
 Upstream history retained; branch `grimhollow`. Each changed path is listed below.
 
+- Painted inventory continuation replaces 202 named atlas cells, including all class equipment and section-9 items, from reviewed source sheets; test 25 retains every name/ID/remap and checks the new independently packed source pixels. Chests/mimics, multi-state horns/chalices/roses and coated darts retain their complete existing families.
+- Waterskin retains ID 480 and now uses an explicitly painted capped water canteen instead of the ambiguous bag image. Item texture filtering is linear; sprite footprint targets and all item mechanics are unchanged. The packer removes sub-3% alpha residue after downsampling so invisible pixels cannot shrink the visible icon.
+
 - Painted continuation: nine complete hero atlases use original painted cutout parts and distinct armor overlays; all 21 pose indices, eight tier rows, animation rates and gameplay callbacks are preserved. Hero and portrait filtering is linear; logical tile units and fog are unchanged.
 - Test 44's original-pixel requirement is superseded for the nine named hero atlases by exact reconstruction from committed painted sources; remaining upstream characters retain the original provenance check.
 

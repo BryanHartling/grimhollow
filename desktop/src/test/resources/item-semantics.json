@@ -1,5 +1,5 @@
 {
-  "source": "v1.0.1-recovery; existing Blender catalog identities and committed atlas bytes; no renderer or art generator invoked",
+  "source": "v1.1.0-painted-world identities; declared painted source cells in tools/painted/items.json; unchanged names, IDs, icon remaps and non-replaced pixels",
   "items": {
     "SOMETHING": {
       "id": 0,
@@ -113,25 +113,25 @@
       "id": 18,
       "artIndex": 18,
       "kind": "coins",
-      "rgbaSha256": "361364468b09bfd5b47c301eb7d329e65bff3b33b8ecb686b8094f90584355df"
+      "rgbaSha256": "c4215f7c0552d3ab9f0f86978f4b861b4a55c900da68c96abee6c95b41060eee"
     },
     "ENERGY": {
       "id": 19,
       "artIndex": 19,
       "kind": "crystal",
-      "rgbaSha256": "2eb016fed9c0c92b8560e2770d61c838ec041cf7d16f2f7c98b5383c4bebe45e"
+      "rgbaSha256": "780f4174dad11507893124721a0566bd63600aede16222e6a19e2373df7b9f09"
     },
     "DEWDROP": {
       "id": 21,
       "artIndex": 21,
       "kind": "drop",
-      "rgbaSha256": "d1d4e099710ab1eaf2236d3c6ed46067096f5f07c541ce9b607806717daa1783"
+      "rgbaSha256": "9be793f8ceb0da7b8df9de3a13274285eeeaf21d9e7a8948ad1b1e992d3e2e4f"
     },
     "PETAL": {
       "id": 22,
       "artIndex": 22,
       "kind": "leaf",
-      "rgbaSha256": "7c83b81830afe0659bb1ffcada8b69c864335359de4e3ec79f4795b8a79c4713"
+      "rgbaSha256": "65625ea267f08600a5cdfb11e363f861bd4bebb376db7081878db5a5a132d1a3"
     },
     "SANDBAG": {
       "id": 23,
@@ -167,25 +167,25 @@
       "id": 32,
       "artIndex": 32,
       "kind": "bones",
-      "rgbaSha256": "adca850b40aa09f732d605a05ce2f1f68ab4faea9d03d1432587b4e50dd4e0d6"
+      "rgbaSha256": "c8ce5d7a7ef9f6229317456e80bd7ce19be700e5e24bf4611acc8b4af7d70331"
     },
     "REMAINS": {
       "id": 33,
       "artIndex": 33,
       "kind": "bones",
-      "rgbaSha256": "adca850b40aa09f732d605a05ce2f1f68ab4faea9d03d1432587b4e50dd4e0d6"
+      "rgbaSha256": "6000d5c995e081324315417794db70e027a9b6a98571e3ed38d7f41c2b50ad4d"
     },
     "TOMB": {
       "id": 34,
       "artIndex": 34,
       "kind": "tomb",
-      "rgbaSha256": "73a428de509cd1a415286d5a3733721255c2aba7921d3d27a1f26be226914fc1"
+      "rgbaSha256": "36cb3749099759dbb6c392496904867917c278a62c3dfe5d3659f7ed21dcab88"
     },
     "GRAVE": {
       "id": 35,
       "artIndex": 35,
       "kind": "tomb",
-      "rgbaSha256": "28b55008d7b45fb2b5677cba50d9ce784764973ca8d4f74d130ba4a0c1e9502c"
+      "rgbaSha256": "40a10d81afb95a6570792b059853055b9f7781e96daeea61e12a1b964806ee10"
     },
     "CHEST": {
       "id": 36,
@@ -215,7 +215,7 @@
       "id": 48,
       "artIndex": 48,
       "kind": "ankh",
-      "rgbaSha256": "1a85ccffe97633ad7017e8bda92b556fecd5785380a1776dfdcece74fd00b4f0"
+      "rgbaSha256": "5be2bac15d4129293fb49b405696e5f568bd2adb6893b1d01eb52683e97c7f94"
     },
     "STYLUS": {
       "id": 49,
@@ -227,85 +227,85 @@
       "id": 50,
       "artIndex": 50,
       "kind": "seal",
-      "rgbaSha256": "c0fe3692e210fde6fe70df99e2ed2f60c276f95b924af2c9e0c3ac842be78d1b"
+      "rgbaSha256": "9d95e2c0540f808621029c1ab59f602695bf39882d011e76303f1c5ca9fa09fd"
     },
     "TORCH": {
       "id": 51,
       "artIndex": 51,
       "kind": "torch",
-      "rgbaSha256": "f79dcc06f0ee6a5f2ae516a08ce020afe8cf2a24269c93c23b482e4b20b1735d"
+      "rgbaSha256": "1ee82715ae0ebebc8c8cd6c309ad467c0fe506d87394833332820a78a18d3e54"
     },
     "BEACON": {
       "id": 52,
       "artIndex": 52,
       "kind": "lantern",
-      "rgbaSha256": "444b611223909a3bf23ffd401ff1e9cbd3360a3b4e6d662baf5481faa369695a"
+      "rgbaSha256": "6c352f1e084835c4e20b08b03ef252aee83d9eff3aba52daa84f168b46f8a088"
     },
     "HONEYPOT": {
       "id": 53,
       "artIndex": 53,
       "kind": "pot",
-      "rgbaSha256": "c228b361f7fc4f4b1186e36a1ed710731d4be02b57a147edb852ce63853bf3e2"
+      "rgbaSha256": "814733c5e37adecc1e07b03b9bec362c4cadb51d3908ab67735046750ebc70e2"
     },
     "SHATTPOT": {
       "id": 54,
       "artIndex": 54,
       "kind": "pot",
-      "rgbaSha256": "272c72970525aeffb925de417dbc18220a1e2bb5d693f752db13ae08d6b8460b"
+      "rgbaSha256": "1b21a303d175e3e9662c288c12d281c08a0d21d550bf119ef9e07e4df06c9938"
     },
     "IRON_KEY": {
       "id": 55,
       "artIndex": 55,
       "kind": "key",
-      "rgbaSha256": "fdb069952e706aeed070420efac32d79df14dd914f18bf6d4ed2fa2cab53b092"
+      "rgbaSha256": "20d5cbdf851ce3b0655854167ef37992082eefcf5f04d8eedb19f726bfffd203"
     },
     "GOLDEN_KEY": {
       "id": 56,
       "artIndex": 56,
       "kind": "key",
-      "rgbaSha256": "9a5ac8fe8d5f8342bcc65095c2a2206253f5949e41e9137ab7cd16920888b2d5"
+      "rgbaSha256": "6188f22063f45abe10e7cb3275d98d39419e95c3401c49b598b5bcf1bc3a2b82"
     },
     "CRYSTAL_KEY": {
       "id": 57,
       "artIndex": 57,
       "kind": "key",
-      "rgbaSha256": "af7a97525eef8a7f565704fd788c2d8a2e43e529c7d7a1969398c3d68ce46f80"
+      "rgbaSha256": "383be3e38fd2fad0a4157c9f61133b97a9e146395e875e82ea432bc605f8a897"
     },
     "WORN_KEY": {
       "id": 58,
       "artIndex": 58,
       "kind": "key",
-      "rgbaSha256": "ce241c02ca2904e9b69f3bc07e75c5648ea5ac0dc84af24afbfe245ca23ed63d"
+      "rgbaSha256": "b8e838c0da34550aefd83dd2fe6d70b8cef7cb11a2cd7c4a4edf90787796adfb"
     },
     "MASK": {
       "id": 59,
       "artIndex": 59,
       "kind": "mask",
-      "rgbaSha256": "7ed018aee63db0d09470d8a9f9fa392e8b89ecff1b172ee9489f1a7aa5180720"
+      "rgbaSha256": "aadccd2bf777f8b2591f93174c0cdabd2ce33a0183ed768997835916d3f1b590"
     },
     "CROWN": {
       "id": 60,
       "artIndex": 60,
       "kind": "crown",
-      "rgbaSha256": "b1a5ef34999fa5cb4355b02a07e760c67a67be028c28ac1a4d4c8691f610933d"
+      "rgbaSha256": "ade355a84e0a6c1c876bb628bca870e6827b30ce8c6377d8f917c81a069f7fd7"
     },
     "AMULET": {
       "id": 61,
       "artIndex": 61,
       "kind": "amulet",
-      "rgbaSha256": "7123293bb45a511c6042309039dfc1b21ab8ce88a71e2d5d75f46586bcf2063d"
+      "rgbaSha256": "ab8220e1261605cef9e60a68d8ce4fd4fabdc1da3b07e9a146fdbccfd1a9820e"
     },
     "MASTERY": {
       "id": 62,
       "artIndex": 62,
       "kind": "book",
-      "rgbaSha256": "19709f16f00f4149be46bd5ecd887b2198833e417badf8a2930ddb08b3294d34"
+      "rgbaSha256": "f629d32daab3fc4d29d2227212424ccd30ede26ea537d03cd9ac58f6a28e9c9a"
     },
     "KIT": {
       "id": 63,
       "artIndex": 63,
       "kind": "toolkit",
-      "rgbaSha256": "8233b4d0b68414f606babc596dac87d40d7920fb5b3283cdc8e0930924a3115a"
+      "rgbaSha256": "34d00bac53651b23cb2bcc2bb8ab278236d380e7aabaea147419876da9db0b0b"
     },
     "SEAL_SHARD": {
       "id": 64,
@@ -353,361 +353,361 @@
       "id": 80,
       "artIndex": 80,
       "kind": "bomb",
-      "rgbaSha256": "ede89b2655204bcb1835decfce8930d104e9e72ea3a9bcbea35506a9bc91b6a8"
+      "rgbaSha256": "84e7c56a54865edea7b9539fdfc8aa3813f19439f9cf015b5a7ac644bd274575"
     },
     "DBL_BOMB": {
       "id": 81,
       "artIndex": 81,
       "kind": "bomb",
-      "rgbaSha256": "98acf0ff7d0087a78e6397beeb3ba37bb7de3473d7bab043e642820d6d62cee9"
+      "rgbaSha256": "bce6edeb714880733e1be43cf34834f03f5a7a6e3040c3f1790e8174f6b2a5fc"
     },
     "FIRE_BOMB": {
       "id": 82,
       "artIndex": 82,
       "kind": "bomb",
-      "rgbaSha256": "959e891961807be93c7b41e50157d56138793355364de9964bd21e119e2b96b6"
+      "rgbaSha256": "f456d4a1c9ff31b7b948baf4a8861139e8dfabb147049147d2a476aecca5e11f"
     },
     "FROST_BOMB": {
       "id": 83,
       "artIndex": 83,
       "kind": "bomb",
-      "rgbaSha256": "9505bd641c477ac271292079831491b152d8008be41717b253ea019350e3797d"
+      "rgbaSha256": "ca89f40265fd146992ea094024da6c3c0b06fac9ba8f38bd531c357950776b1b"
     },
     "REGROWTH_BOMB": {
       "id": 84,
       "artIndex": 84,
       "kind": "bomb",
-      "rgbaSha256": "959e891961807be93c7b41e50157d56138793355364de9964bd21e119e2b96b6"
+      "rgbaSha256": "f32327f51a5545b9d1a8fd122cba304a5b5414dee1a50c3deb334c3f5e27cf74"
     },
     "SMOKE_BOMB": {
       "id": 85,
       "artIndex": 85,
       "kind": "bomb",
-      "rgbaSha256": "b95af6cf6678bcb1929e27c8b80fbd7f2d6cd7731e83a15fa8ee0c2e3115f35a"
+      "rgbaSha256": "6b0a13a47f507bd38bb864b7edf05a6338dbc590820411c9f69c4f2ab4036a55"
     },
     "FLASHBANG": {
       "id": 86,
       "artIndex": 86,
       "kind": "bomb",
-      "rgbaSha256": "959e891961807be93c7b41e50157d56138793355364de9964bd21e119e2b96b6"
+      "rgbaSha256": "670e1b8936dfd4ac0bdb7d70769700184fd89db7f5900512021bd30d232165f5"
     },
     "HOLY_BOMB": {
       "id": 87,
       "artIndex": 87,
       "kind": "bomb",
-      "rgbaSha256": "b95af6cf6678bcb1929e27c8b80fbd7f2d6cd7731e83a15fa8ee0c2e3115f35a"
+      "rgbaSha256": "ca1481779635f728bb731426b5c93317e44eade585bd8637e0d07290ac6dc6ba"
     },
     "WOOLY_BOMB": {
       "id": 88,
       "artIndex": 88,
       "kind": "bomb",
-      "rgbaSha256": "9505bd641c477ac271292079831491b152d8008be41717b253ea019350e3797d"
+      "rgbaSha256": "bf4eec235f1ce8756f854b8ba0008129f5618eccb2bd8cad1065ec382c3e9eb5"
     },
     "NOISEMAKER": {
       "id": 89,
       "artIndex": 89,
       "kind": "bomb",
-      "rgbaSha256": "959e891961807be93c7b41e50157d56138793355364de9964bd21e119e2b96b6"
+      "rgbaSha256": "d105f628847020d36b6fae39a7713bdc0cd377905608f3a694290696490c4409"
     },
     "ARCANE_BOMB": {
       "id": 90,
       "artIndex": 90,
       "kind": "bomb",
-      "rgbaSha256": "959e891961807be93c7b41e50157d56138793355364de9964bd21e119e2b96b6"
+      "rgbaSha256": "cafa85ec909ea1574eb7456a9c484715996720acc5baddc7399ed61191502e32"
     },
     "SHRAPNEL_BOMB": {
       "id": 91,
       "artIndex": 91,
       "kind": "bomb",
-      "rgbaSha256": "40cf052e857cf025899315fee53635807f72f5310b3fdb161d9e3e9db93387d2"
+      "rgbaSha256": "838b133afd6be7a72ae4cd1e881ffda9560d9ea05064411d739eb770986ec254"
     },
     "WORN_SHORTSWORD": {
       "id": 96,
       "artIndex": 96,
       "kind": "sword",
-      "rgbaSha256": "9eb49522f0f7914e584f02a14b5e8a88ccb75464f552c8d6a3581b4e4a3fc877"
+      "rgbaSha256": "d378f724b8ef104aee959698908521cd519789f013bd0b0899fa3c2f4ba17a1f"
     },
     "CUDGEL": {
       "id": 97,
       "artIndex": 97,
       "kind": "club",
-      "rgbaSha256": "64943f09f3ba19628238611c63dca2ccb1a5694442aa935d17a7178504ccae96"
+      "rgbaSha256": "1d52db30f21f7ace6a73308f80a0376c7d459c878e8ab25bea15e8b05deef1bd"
     },
     "GLOVES": {
       "id": 98,
       "artIndex": 98,
       "kind": "glove",
-      "rgbaSha256": "5905313f34f71fca0b365cd06e20e4561b563a4b904757004723f77d27b611f2"
+      "rgbaSha256": "2551abe8737195ea0e3059a2a1d58fac1ab4fccf644433641250ab0ebab85002"
     },
     "RAPIER": {
       "id": 99,
       "artIndex": 99,
       "kind": "sword",
-      "rgbaSha256": "9eb49522f0f7914e584f02a14b5e8a88ccb75464f552c8d6a3581b4e4a3fc877"
+      "rgbaSha256": "d0f3305dd51efbfd13f025456d6dc22bf0c820c4fd5681ff285ed373d9d17595"
     },
     "DAGGER": {
       "id": 100,
       "artIndex": 100,
       "kind": "dagger",
-      "rgbaSha256": "0224c8ccfcc34ab48ed0d11556b6fab2732622ae88e6cee0af201d5ef7622ded"
+      "rgbaSha256": "8cd37dbaacb447c6f99d64c37957125a83a91aeba58d27c14d0df3437f1ed698"
     },
     "MAGES_STAFF": {
       "id": 101,
       "artIndex": 101,
       "kind": "staff",
-      "rgbaSha256": "368b1b83054fb4e1316959138e5856ba258880d9d6c851cb8778edf3502460d9"
+      "rgbaSha256": "5bee4d414d83fa8ebc083555d34d8940c6ac80f804744e3587c7e84059d782cb"
     },
     "SHORTSWORD": {
       "id": 104,
       "artIndex": 104,
       "kind": "sword",
-      "rgbaSha256": "9eb49522f0f7914e584f02a14b5e8a88ccb75464f552c8d6a3581b4e4a3fc877"
+      "rgbaSha256": "0bcfd7652c91f1433db0e1621ca0be3b5bdfb0e57639863058c0f2c42b9dfdfa"
     },
     "HAND_AXE": {
       "id": 105,
       "artIndex": 105,
       "kind": "axe",
-      "rgbaSha256": "352293f0a25d16ef80942ef5188361e62326f8cc709ea752e410d650149d0c17"
+      "rgbaSha256": "898219a3e9b016fddc13197770550c16e87998573369cba3443f64cf684070ab"
     },
     "SPEAR": {
       "id": 106,
       "artIndex": 106,
       "kind": "spear",
-      "rgbaSha256": "da3d6d97421cb38e8283e8b848fa9c5ca461478edf69bd621cead91746f27577"
+      "rgbaSha256": "620f6072937ad7ef00d5055692d67bea5cf1268cbaeadc102f94df326fb7ad01"
     },
     "QUARTERSTAFF": {
       "id": 107,
       "artIndex": 107,
       "kind": "staff",
-      "rgbaSha256": "e70d7b627d9c6f645099ac7b241139d556265ddec71e155663d99f20e198f360"
+      "rgbaSha256": "7fbcdb0a5b9abe92e311f1908c2fff94106bff39c0041d8d4d71e6be61cfdc47"
     },
     "DIRK": {
       "id": 108,
       "artIndex": 108,
       "kind": "dagger",
-      "rgbaSha256": "8f12de69ce59b770081a6522bf3a1c6dba6efe47a500403d2166c4d0e31cf104"
+      "rgbaSha256": "ca038773fc7385fcfd3ff5dcdf902089f8faa6850b65d39e2ee3f779c514256e"
     },
     "SICKLE": {
       "id": 109,
       "artIndex": 109,
       "kind": "scythe",
-      "rgbaSha256": "95685f3e01f64ce501bb2dbc99f823990866cd72506b90ff17e4161112260677"
+      "rgbaSha256": "f20b76f90f7d98fde56828b49543940c926b5d886e844c54b3ac9be73f4ebbbe"
     },
     "SWORD": {
       "id": 112,
       "artIndex": 112,
       "kind": "sword",
-      "rgbaSha256": "21584fbdcddbbf3542a111f3a8e1f58e64fe7c6af42751c2c80e433896e4ab47"
+      "rgbaSha256": "97db500ffd9672d4e23c2e544cc28af873e3d8c31b554176d054e4f8cbfdc5da"
     },
     "MACE": {
       "id": 113,
       "artIndex": 113,
       "kind": "mace",
-      "rgbaSha256": "b97910f5a95d05fb578d9ffa724f89228bef80654ddf912cb4e941436d1ea3c6"
+      "rgbaSha256": "36c84ac73e8f1cd23b9ebbc7348eb8f2782703a1e9f221bfcd70e2ecaa2f23c5"
     },
     "SCIMITAR": {
       "id": 114,
       "artIndex": 114,
       "kind": "sword",
-      "rgbaSha256": "b157f87f14037b4706bbc258d0edeaccb00f41b06e723b9d8e591453cdba7ca2"
+      "rgbaSha256": "339bb90e739ca17a0a5a32b6b2ebb29155b33208f5126db7dcaef72d7cfe64e0"
     },
     "ROUND_SHIELD": {
       "id": 115,
       "artIndex": 115,
       "kind": "shield",
-      "rgbaSha256": "79aa18fa7668ef0a2933eef39ee6a82a399712201660fa42ddce2bfae700d348"
+      "rgbaSha256": "451eae11ae36ad46c634c6355f3867fef6145bc614d82c2f3e24b0202b623997"
     },
     "SAI": {
       "id": 116,
       "artIndex": 116,
       "kind": "trident",
-      "rgbaSha256": "f2e05f0538b916364feb6fbe3ef3dcd253466b1350b3bdc52f0736778146ea7a"
+      "rgbaSha256": "6ae391c62056aa8b19a70150d80575bfd23eb31bfe2d0e141313cc41e4a00dd6"
     },
     "WHIP": {
       "id": 117,
       "artIndex": 117,
       "kind": "whip",
-      "rgbaSha256": "ce0a15562f9de5ebd8c551db409cd8df164993c620a17f378672c87c965fe053"
+      "rgbaSha256": "e39f12a82bc5a0969d35c6df0df55095b7b17accaeb39450402f4c96ad853311"
     },
     "LONGSWORD": {
       "id": 120,
       "artIndex": 120,
       "kind": "sword",
-      "rgbaSha256": "b8fd750a295909b334669ee85f0737384f171917c6d655c694e70789dd0779d5"
+      "rgbaSha256": "6624c0caaed0fedc92080d863573b65f6d4f4a5766754c98c4bd92d999e7f918"
     },
     "BATTLE_AXE": {
       "id": 121,
       "artIndex": 121,
       "kind": "axe",
-      "rgbaSha256": "4c886876e0363211f93ba34d48f8110d8b00044bd314f8c69d9367c268203ea9"
+      "rgbaSha256": "0c88c100965726b3bf1ec50f336e56afc254387fce2cd43dcf78d72adcb6a296"
     },
     "FLAIL": {
       "id": 122,
       "artIndex": 122,
       "kind": "flail",
-      "rgbaSha256": "1aceee1b756a531bafcfde7dcfeaefd389bcf55eb5bdcb3532ab6b7f0f3efc8a"
+      "rgbaSha256": "8b824879cac2161757c5084c299d9782bdb847db6eda27fbbbb0c64a31b9462e"
     },
     "RUNIC_BLADE": {
       "id": 123,
       "artIndex": 123,
       "kind": "sword",
-      "rgbaSha256": "26a1de6a5a4ffc7016388999c65871317829d203853d0f011040d8defbd620a1"
+      "rgbaSha256": "fc24553f8b5a695fd5fe0e155751eff5f41580e96562a1048196fcbe4c875970"
     },
     "ASSASSINS_BLADE": {
       "id": 124,
       "artIndex": 124,
       "kind": "sword",
-      "rgbaSha256": "b157f87f14037b4706bbc258d0edeaccb00f41b06e723b9d8e591453cdba7ca2"
+      "rgbaSha256": "06deeefbc78e42174342931cd179772f536b97659628b9819e1f15eac32415f3"
     },
     "CROSSBOW": {
       "id": 125,
       "artIndex": 125,
       "kind": "crossbow",
-      "rgbaSha256": "79c564acc8d98e79ff970a6f8e7c04e01b46b1b8fffb33cf4a0e381d043bfb81"
+      "rgbaSha256": "91bd7752f53ef55800943ec265f9b65dc091fbbef024d6b0a6ebd3f0552f9bef"
     },
     "KATANA": {
       "id": 126,
       "artIndex": 126,
       "kind": "sword",
-      "rgbaSha256": "f68def05b2c6dc713fb38e847276b53aa9e1e088d9484cb75927f499e80c628b"
+      "rgbaSha256": "64dbd19631ee1a9c1d85507e33c7090799d0cc0ee0c0898dd28584c34e6624ea"
     },
     "GREATSWORD": {
       "id": 128,
       "artIndex": 128,
       "kind": "sword",
-      "rgbaSha256": "21584fbdcddbbf3542a111f3a8e1f58e64fe7c6af42751c2c80e433896e4ab47"
+      "rgbaSha256": "5bf4de2e6cef7293fc809ee50e4143d07baffcd9d9e4730262db6164b83de3d9"
     },
     "WAR_HAMMER": {
       "id": 129,
       "artIndex": 129,
       "kind": "hammer",
-      "rgbaSha256": "789c303754fccb9a7aab069a21c5d1e9ea373a489c9109b63328295eae9d5a7a"
+      "rgbaSha256": "cba0ff65cd3e78e6397b9fe52d1cc2506902bb541179047a83abd07a2d4bd691"
     },
     "GLAIVE": {
       "id": 130,
       "artIndex": 130,
       "kind": "spear",
-      "rgbaSha256": "76f4e8e77bfeecde1752c0089b0e21fa3bb2645bb2e97dbcccba6ca9c19ae33f"
+      "rgbaSha256": "b2e998926756e0ff0e83b2ccc15bafa4d4c9c4b9d7e04cbd6ad026839204a3aa"
     },
     "GREATAXE": {
       "id": 131,
       "artIndex": 131,
       "kind": "axe",
-      "rgbaSha256": "0c8459f5830f51c959ec6a25ae8398b1719ad20275314886f19e0824198f33c7"
+      "rgbaSha256": "f7837a029b25b1befe406d96aa26d42b6767521f833561ecec45ce4ecc467a3a"
     },
     "GREATSHIELD": {
       "id": 132,
       "artIndex": 132,
       "kind": "shield",
-      "rgbaSha256": "06c5e0d0a1e3c8941714e711e11b3b689a6e04f3a6c65e867931eff18b78360d"
+      "rgbaSha256": "d7e9fde2f5ee7512cb15156ab05ad36fd42a1090c362ca1f5db1ddde546322b7"
     },
     "GAUNTLETS": {
       "id": 133,
       "artIndex": 133,
       "kind": "glove",
-      "rgbaSha256": "ca0c6b4c1eee98cf9c06e58cec1484e2a7d67ac97147161d508a531f4f0bf9b9"
+      "rgbaSha256": "07fcd43210befeb0defecb0521a8e44b1a9f2fcc14214d83973b820605d87792"
     },
     "WAR_SCYTHE": {
       "id": 134,
       "artIndex": 134,
       "kind": "scythe",
-      "rgbaSha256": "95685f3e01f64ce501bb2dbc99f823990866cd72506b90ff17e4161112260677"
+      "rgbaSha256": "5074b5e45fea970fa16744828043934db78bc47e58afa027523404609fc69636"
     },
     "SPIRIT_BOW": {
       "id": 144,
       "artIndex": 144,
       "kind": "bow",
-      "rgbaSha256": "265f4cdf4f40869ab1a629390a71f50582f1d153e2e5eb2563a561c022708667"
+      "rgbaSha256": "95619e99af21e8bc92a0cdba6ba457896d89b47e012b2e71d8fe3ab69b245322"
     },
     "THROWING_SPIKE": {
       "id": 145,
       "artIndex": 145,
       "kind": "arrow",
-      "rgbaSha256": "8d2ab47161450c768437280a1e963915284f1f70543c99a558f96b41ab4732c6"
+      "rgbaSha256": "ebf939afe9e398d5699086ccc010d65ee6144a25895b42f52a61a0c07f0def81"
     },
     "THROWING_KNIFE": {
       "id": 146,
       "artIndex": 146,
       "kind": "dagger",
-      "rgbaSha256": "5279321cbcc474cff97f8fcfc12df42c2ea90a7eb9931ce7719e99a62fa0a668"
+      "rgbaSha256": "b5c54c00c587cbaa3e34a3c67bfaa200e17a433f711c3a578d7eac08907e783d"
     },
     "THROWING_STONE": {
       "id": 147,
       "artIndex": 147,
       "kind": "stone",
-      "rgbaSha256": "a5d3e6cb99c4b532503d2ea63c493f65e8cb716fe75e7ed0b4fb0b730406c91a"
+      "rgbaSha256": "57c4f0e2f0e0a551ee4fcf251cba67d499d8712ff03429be3ca00cfa69bc53aa"
     },
     "FISHING_SPEAR": {
       "id": 148,
       "artIndex": 148,
       "kind": "spear",
-      "rgbaSha256": "da3d6d97421cb38e8283e8b848fa9c5ca461478edf69bd621cead91746f27577"
+      "rgbaSha256": "6df2a24121013030c6aa46d43280751c1f0ebd1207056497f2888c14b5e81ab8"
     },
     "SHURIKEN": {
       "id": 149,
       "artIndex": 149,
       "kind": "shuriken",
-      "rgbaSha256": "cc112684d89aab15efaf1520fe9bafa69088b7ef180ffb3b6ffee9e7610bf5d1"
+      "rgbaSha256": "3343584cfa5a863310ba4ad1ed5cbf6088b8592c88d60768f8dee50b21c29ac9"
     },
     "THROWING_CLUB": {
       "id": 150,
       "artIndex": 150,
       "kind": "club",
-      "rgbaSha256": "c65144b8d9e2ced4736e1719e8f5b449cba1d70346496e93355cca0ccd58627f"
+      "rgbaSha256": "5e8662634e3008d482d02e8accaff4f6f5ae0667ef1c6d02abc1955ffae01727"
     },
     "THROWING_SPEAR": {
       "id": 151,
       "artIndex": 151,
       "kind": "spear",
-      "rgbaSha256": "cd0e1504c1cd0b32b97785e0b9ad1c0e839abd621c63872c94db2107a86a4301"
+      "rgbaSha256": "46aff11747b0c1acab765670d1ed20f557dfcc3e9f614b1d26f714b2824edbea"
     },
     "BOLAS": {
       "id": 152,
       "artIndex": 152,
       "kind": "bolas",
-      "rgbaSha256": "9329263bf01d2e65c135164742cbb421973a39027ca985bde47453d1ed8796aa"
+      "rgbaSha256": "889bc36361abc1ab99c758a47a75a2c11f99d192f00c966c9137893dbad2122e"
     },
     "KUNAI": {
       "id": 153,
       "artIndex": 153,
       "kind": "dagger",
-      "rgbaSha256": "0224c8ccfcc34ab48ed0d11556b6fab2732622ae88e6cee0af201d5ef7622ded"
+      "rgbaSha256": "8c019c8441782abff9fcb1a5271b4834ced231346e03879cb5da43af78400cec"
     },
     "JAVELIN": {
       "id": 154,
       "artIndex": 154,
       "kind": "spear",
-      "rgbaSha256": "76f4e8e77bfeecde1752c0089b0e21fa3bb2645bb2e97dbcccba6ca9c19ae33f"
+      "rgbaSha256": "b72ab8f0c10d5515f6cc58725b5647f92294cf7048d00905826e9b11b826ef2c"
     },
     "TOMAHAWK": {
       "id": 155,
       "artIndex": 155,
       "kind": "axe",
-      "rgbaSha256": "0b5477bc5a04f540e1dce4474dbc4ba22adb7387bfa0eeb434227cc13125634a"
+      "rgbaSha256": "e0e5b5e90f4be8e0c967a3ed5efba5c79617651ac52de7eb35b07013f23997da"
     },
     "BOOMERANG": {
       "id": 156,
       "artIndex": 156,
       "kind": "boomerang",
-      "rgbaSha256": "b6bf35ec192849934f9d313a8b5bf92295f2e1cb752264653c9aa23bbbc2f4bf"
+      "rgbaSha256": "e7c7e4ba93e9173e6a5e870180fd7cbe5de6ce775b02b988032296e5d1295f7e"
     },
     "TRIDENT": {
       "id": 157,
       "artIndex": 157,
       "kind": "trident",
-      "rgbaSha256": "f2e05f0538b916364feb6fbe3ef3dcd253466b1350b3bdc52f0736778146ea7a"
+      "rgbaSha256": "bb0964d56b4b4dff1ab9b07e9e6b0647dc5473569337b63689c81672ce2c04c8"
     },
     "THROWING_HAMMER": {
       "id": 158,
       "artIndex": 158,
       "kind": "hammer",
-      "rgbaSha256": "f1e5723339795a58e6eba43e594c059158aa2845d6b7b174c5747a0b0c6803b5"
+      "rgbaSha256": "0290eb9dc88b8d5952ae0a766757e62971002b7f3940bb2c1ed79867df5ea50c"
     },
     "FORCE_CUBE": {
       "id": 159,
       "artIndex": 159,
       "kind": "cube",
-      "rgbaSha256": "e5bbfb6e1ca0b284a1c57189b46106c062e8ce639f84951a84b362add17c0e67"
+      "rgbaSha256": "a085bff3acba749a537d8fed512baa6300d3d912ee47ccfb1c05d657b0b781e4"
     },
     "DARTS": {
       "id": 160,
@@ -797,271 +797,271 @@
       "id": 176,
       "artIndex": 176,
       "kind": "armor",
-      "rgbaSha256": "1afd9604b3389abbdf88eb42f1a4f32c67ba2b6db6e008bd80ea7e4cfb0c1b1d"
+      "rgbaSha256": "9fcea1d731470eb0ec58fceb75ec598aace034d21e876f59caf63c000c06cb25"
     },
     "ARMOR_LEATHER": {
       "id": 177,
       "artIndex": 177,
       "kind": "armor",
-      "rgbaSha256": "fc3a2c55236984e537e2661535fe1570c33e33b267fb1d14d8da94ec482972c4"
+      "rgbaSha256": "528139cd101589eba6e85ac946fe1d638c00d1d092f9c5113d40ca79dc2911e0"
     },
     "ARMOR_MAIL": {
       "id": 178,
       "artIndex": 178,
       "kind": "armor",
-      "rgbaSha256": "6f6dadf46c494e818f20613fb85e648383cf080c571152eba8e505636df00009"
+      "rgbaSha256": "c0aa7958015012b3dd62ee9bea7f297052f6dcee36efecf1866cb7e33dc72a42"
     },
     "ARMOR_SCALE": {
       "id": 179,
       "artIndex": 179,
       "kind": "armor",
-      "rgbaSha256": "fe14844bad958444cb920f17be0b856339c3a7a7ce4879d022fac555f11e259b"
+      "rgbaSha256": "b5ea569f38c6b08b4e531b62c6e04dbef254f4c12216af1c0bcef91bbc6f5888"
     },
     "ARMOR_PLATE": {
       "id": 180,
       "artIndex": 180,
       "kind": "armor",
-      "rgbaSha256": "d65cb8b677b86b6dccde30a83de37635c3044b075ba896e18a192e6e565d5a39"
+      "rgbaSha256": "abf035daf3db0b266e50efae872868401b623bf227cc4219d57bdf149b47f7e6"
     },
     "ARMOR_WARRIOR": {
       "id": 181,
       "artIndex": 181,
       "kind": "armor",
-      "rgbaSha256": "fe14844bad958444cb920f17be0b856339c3a7a7ce4879d022fac555f11e259b"
+      "rgbaSha256": "50cf8a49d9c157cca68ccf2f954de1d1b9bc4d49bf01339af56409c8d92bb646"
     },
     "ARMOR_MAGE": {
       "id": 182,
       "artIndex": 182,
       "kind": "armor",
-      "rgbaSha256": "fcd9047bd090df574272bff2327975cb76a8c979a89d6d4a016b3512bbf0267d"
+      "rgbaSha256": "22bed95d23a99c32db161c7c68e1d8e237171fd6b98c1d84be517f83d2b6fb7a"
     },
     "ARMOR_ROGUE": {
       "id": 183,
       "artIndex": 183,
       "kind": "armor",
-      "rgbaSha256": "6f6dadf46c494e818f20613fb85e648383cf080c571152eba8e505636df00009"
+      "rgbaSha256": "61ac338a68991ac43a88f2b441bfd758820df3af72879da66d5be4eebedd2b27"
     },
     "ARMOR_HUNTRESS": {
       "id": 184,
       "artIndex": 184,
       "kind": "armor",
-      "rgbaSha256": "11d70d1c9f661a24890e353b774c7b480ac22bdd667174b351f57d73d462d9e1"
+      "rgbaSha256": "214ec2b04ef2d58fb1e60fedf59781c8d266733746b54d205ed1203bab866713"
     },
     "ARMOR_DUELIST": {
       "id": 185,
       "artIndex": 185,
       "kind": "armor",
-      "rgbaSha256": "fe14844bad958444cb920f17be0b856339c3a7a7ce4879d022fac555f11e259b"
+      "rgbaSha256": "10bdb14b014e632fcfb296e95fb602a5d038391d9aba6fdd7fb7614bb1f16a85"
     },
     "ARMOR_CLERIC": {
       "id": 186,
       "artIndex": 186,
       "kind": "armor",
-      "rgbaSha256": "ed0ec6364c9cb552f548a314f1ee27d5ef3d8057dd91e2055b8b20609f2b69a8"
+      "rgbaSha256": "55d323d835a61741050d871e6e778f8dc46719a01a92d43b8cf31250741ba6b7"
     },
     "WAND_MAGIC_MISSILE": {
       "id": 208,
       "artIndex": 208,
       "kind": "wand",
-      "rgbaSha256": "c08d4235f3d5f86936d16e638e4737e5372e46a1de5e38539d561fc2e37db2db"
+      "rgbaSha256": "a83e092b332b049a6fffe81e8f1dcba974773b1a4e01188a182a9dbb1379bdcf"
     },
     "WAND_FIREBOLT": {
       "id": 209,
       "artIndex": 209,
       "kind": "wand",
-      "rgbaSha256": "7c1d45f83f50397779c843c7a387028a5c69dd7d44b193b933a0e81bc8bb6246"
+      "rgbaSha256": "502168994e5bfec12e414c017f1c6b23eaaa67fa45785e3c6bf0aeab364a8cd9"
     },
     "WAND_FROST": {
       "id": 210,
       "artIndex": 210,
       "kind": "wand",
-      "rgbaSha256": "7c1d45f83f50397779c843c7a387028a5c69dd7d44b193b933a0e81bc8bb6246"
+      "rgbaSha256": "ba94930b8598276d31d618e63d057014d86d2dba50e3216cbe72986d5225e566"
     },
     "WAND_LIGHTNING": {
       "id": 211,
       "artIndex": 211,
       "kind": "wand",
-      "rgbaSha256": "26a292b1d06fea59781d8af55ff1c6488b289b149a083bc3ebeac74792f80273"
+      "rgbaSha256": "67d1fe49b452ce11b52dff668beb31cb198732d15adbc379ac11b3d04ce7d0d1"
     },
     "WAND_DISINTEGRATION": {
       "id": 212,
       "artIndex": 212,
       "kind": "wand",
-      "rgbaSha256": "c08d4235f3d5f86936d16e638e4737e5372e46a1de5e38539d561fc2e37db2db"
+      "rgbaSha256": "ab75688c028cbf5d346eb634868c37bd0ab3a6d5a0d088f9ff02c08a25a5f376"
     },
     "WAND_PRISMATIC_LIGHT": {
       "id": 213,
       "artIndex": 213,
       "kind": "wand",
-      "rgbaSha256": "ab6a7e33fcf8cd4ef4d9a951db3a46f0a66195eea3c2311f5d422bb53b42cb1e"
+      "rgbaSha256": "80d25d8911c4e121a328cead4f63a7952628359dca055e8b29703cf174f56c01"
     },
     "WAND_CORROSION": {
       "id": 214,
       "artIndex": 214,
       "kind": "wand",
-      "rgbaSha256": "e65094304957ea82c2745e9a718b9660e568eb9ae22c90e7a06d82ba6ee45d5d"
+      "rgbaSha256": "1e7454b79621135938974e59bba7012f8931d224ffb67d332c8176144048ce8e"
     },
     "WAND_LIVING_EARTH": {
       "id": 215,
       "artIndex": 215,
       "kind": "wand",
-      "rgbaSha256": "7c1d45f83f50397779c843c7a387028a5c69dd7d44b193b933a0e81bc8bb6246"
+      "rgbaSha256": "2986afaddf8097a72e4dced565d28816964a0289023f723435730a2303736c34"
     },
     "WAND_BLAST_WAVE": {
       "id": 216,
       "artIndex": 216,
       "kind": "wand",
-      "rgbaSha256": "c08d4235f3d5f86936d16e638e4737e5372e46a1de5e38539d561fc2e37db2db"
+      "rgbaSha256": "a38569c9bbe6966bda0b6166923d863e04741cf38a5a9ef5f35477499274a745"
     },
     "WAND_CORRUPTION": {
       "id": 217,
       "artIndex": 217,
       "kind": "wand",
-      "rgbaSha256": "14540c15943fb1d630f834d1886ebf1e3232acaaaf3b8b21223b5581c5fbd2d0"
+      "rgbaSha256": "a3999ae9173613b0fcb55f95aacff9e1ce29dd5cb404a6b0a4639779e9a66e7c"
     },
     "WAND_WARDING": {
       "id": 218,
       "artIndex": 218,
       "kind": "wand",
-      "rgbaSha256": "1a704f534c0afb71a76bcd526c66fa6997b8faf51ed6f5f87c60a2b6c0c106a7"
+      "rgbaSha256": "bfa2fed07cfdb7894b021dd109342696803ad22e5ddaee7fb0ce6ef87334ca69"
     },
     "WAND_REGROWTH": {
       "id": 219,
       "artIndex": 219,
       "kind": "wand",
-      "rgbaSha256": "ab6a7e33fcf8cd4ef4d9a951db3a46f0a66195eea3c2311f5d422bb53b42cb1e"
+      "rgbaSha256": "8cd519df1fba2865fd51b2d2cb89f11db323f201140d2f895f7433cdb7fbe84a"
     },
     "WAND_TRANSFUSION": {
       "id": 220,
       "artIndex": 220,
       "kind": "wand",
-      "rgbaSha256": "c9aaca525c5d0e7a12bb20c296083726c44eadae833929bf161991fda732cc34"
+      "rgbaSha256": "619419e64943207f3ddd101b331e17a1f1d6a6c3f47fc6da02080b7626a2ef45"
     },
     "RING_GARNET": {
       "id": 224,
       "artIndex": 224,
       "kind": "ring",
-      "rgbaSha256": "4dea537a9d91f027d773b03a7d7b358f5621dad5b9dc0286e2e629e3eef13e6c"
+      "rgbaSha256": "33fd3c5a016eaac10315f02bd2a0e9a7489bffcd1a79ef84a138dbc6206b4f14"
     },
     "RING_RUBY": {
       "id": 225,
       "artIndex": 225,
       "kind": "ring",
-      "rgbaSha256": "fe23128bd531d0fffaca190c1205d3c96355e7f1504ce50552473afdc0361073"
+      "rgbaSha256": "bc508d339b2bf1b72b662a0f1ec8c97f3f30f4a7ce58b5e47bd5bbf4f89223da"
     },
     "RING_TOPAZ": {
       "id": 226,
       "artIndex": 226,
       "kind": "ring",
-      "rgbaSha256": "9911789af0b5cf6fb8bd88ae65ff36f920bbf9c1cfc7264e9c286ec40e045bd4"
+      "rgbaSha256": "3ce333c08052e0bad596874354ed91e958b5d2f64fe79482cc4eaebe41d507a8"
     },
     "RING_EMERALD": {
       "id": 227,
       "artIndex": 227,
       "kind": "ring",
-      "rgbaSha256": "1e238382addeb217203e1d5f1963d7d212f5b5c09c1b200803e577edb6d253c6"
+      "rgbaSha256": "457c5f0dffdac2652398afb439dd6c1fe5d38d31e3ef829cff1251d65c752512"
     },
     "RING_ONYX": {
       "id": 228,
       "artIndex": 228,
       "kind": "ring",
-      "rgbaSha256": "992a58c8df02b8cb1410ed5840be4c0fc656b4614ee82590b520330f059198df"
+      "rgbaSha256": "035ede094bffd34d9079d151fbb850e84ad784318cab9aa3102d1f08527d9198"
     },
     "RING_OPAL": {
       "id": 229,
       "artIndex": 229,
       "kind": "ring",
-      "rgbaSha256": "c5eb3b22d010a6dbdc9934bc1ae33cbed798051e2295551f51bbceffb36b36a4"
+      "rgbaSha256": "64566a1cb145d459911027623b503859751e0d81e1cce51548175809283d41dc"
     },
     "RING_TOURMALINE": {
       "id": 230,
       "artIndex": 230,
       "kind": "ring",
-      "rgbaSha256": "6839683914e2bd503e6297dd17647516f80e55738808d6f030097df7086f4e1c"
+      "rgbaSha256": "48fb2c9cbfc16b63839fd793d2d52d8b2c8b69661c47a02b16c6edb8953b30a6"
     },
     "RING_SAPPHIRE": {
       "id": 231,
       "artIndex": 231,
       "kind": "ring",
-      "rgbaSha256": "42e31310b09a38729f7d2b403a9e6a9a50de824716e2c4740d36d2947819e851"
+      "rgbaSha256": "0e584cae25c42a17e673e2958aeaa6d3becbb28e7d64cd80a7d62937a68c8651"
     },
     "RING_AMETHYST": {
       "id": 232,
       "artIndex": 232,
       "kind": "ring",
-      "rgbaSha256": "ab7e0d5a82ce5f560ca6aa33f6083af9ff29e0a4e61133c711238e02b30c5219"
+      "rgbaSha256": "c08242fe65aa49246e17e55f43ad4b020f73db824e220cb5b385781eb4f25baa"
     },
     "RING_QUARTZ": {
       "id": 233,
       "artIndex": 233,
       "kind": "ring",
-      "rgbaSha256": "06fdca83e4d3a11fee8d20987f4754abfe5bd084e546ca18506489464000b813"
+      "rgbaSha256": "ed803d4cd64f44925a385b8bd4e24fc6046dd49b6fb85ad38dc961bb85abbdec"
     },
     "RING_AGATE": {
       "id": 234,
       "artIndex": 234,
       "kind": "ring",
-      "rgbaSha256": "00a0915aa63dee88758e29066d8d38a53fb4d2f74162db329980839c120140fb"
+      "rgbaSha256": "a9f787871299a9ede5dbc889eaf309a33cf828b7bf2fadd56b435398f52dd2fe"
     },
     "RING_DIAMOND": {
       "id": 235,
       "artIndex": 235,
       "kind": "ring",
-      "rgbaSha256": "cf8f678b3aa8f9b13c0b485334660951ff4500d3947504a63b139c7ab7298b67"
+      "rgbaSha256": "9045678fb0af32a993d6c1bc9f1470839b239b1bc547380a94d87bd497cbd2eb"
     },
     "ARTIFACT_CLOAK": {
       "id": 240,
       "artIndex": 240,
       "kind": "cloak",
-      "rgbaSha256": "516f3ee1f3dc66342a3c699e74416dcd73fb82e047f110a66700dd54cc958329"
+      "rgbaSha256": "786391c73b5d49752d3985b55810e6600e354bf2e88d2adad5c8d092023014f8"
     },
     "ARTIFACT_ARMBAND": {
       "id": 241,
       "artIndex": 241,
       "kind": "bracelet",
-      "rgbaSha256": "5ade70f638f737547750980501e932f5003198000984bac7dd03d476daad0804"
+      "rgbaSha256": "91c2c044e089e9f89023ed83b9ffa4fefc627bb489f9f4e08da9fee973779500"
     },
     "ARTIFACT_CAPE": {
       "id": 242,
       "artIndex": 242,
       "kind": "cloak",
-      "rgbaSha256": "4e0da8258cf87c6ce8991cc01c2dd8071d557d0b822789d4e13d64bfa1427580"
+      "rgbaSha256": "05da68f89d1ead6364fad24e371fa1d4b4993d0da9d6153c6a867abfa77b7dec"
     },
     "ARTIFACT_TALISMAN": {
       "id": 243,
       "artIndex": 243,
       "kind": "amulet",
-      "rgbaSha256": "bdac5c47e03b181832b2db242826d03f5fdd33f074412a5218b155f60e7a4849"
+      "rgbaSha256": "5e75f342d59a6301280b268e8f61a516b7f9a06afed6997cbc50545d10187436"
     },
     "ARTIFACT_HOURGLASS": {
       "id": 244,
       "artIndex": 244,
       "kind": "hourglass",
-      "rgbaSha256": "e9fd7e176563232fa77ea7226c349bea8c9fe25a161d6d9f0e1948bece5f96cc"
+      "rgbaSha256": "690a47bbaad49d198e467c98e90a5ce8a57eb77bdf8362a8e18eb0a9fc29117b"
     },
     "ARTIFACT_TOOLKIT": {
       "id": 245,
       "artIndex": 245,
       "kind": "toolkit",
-      "rgbaSha256": "22d1bd445bee4182c223591c024c4dbbcacb3e3e6760e4477a8c52bac09bf5f1"
+      "rgbaSha256": "34d00bac53651b23cb2bcc2bb8ab278236d380e7aabaea147419876da9db0b0b"
     },
     "ARTIFACT_SPELLBOOK": {
       "id": 246,
       "artIndex": 246,
       "kind": "book",
-      "rgbaSha256": "4c621b09db9d1189cde5c02b5af7f9fb75a4bf968b49c8d7c6784a9e282c3a64"
+      "rgbaSha256": "2a43235931a0e58e8f98b6568f71a0d67de94df8bc2877789e04cda91d6d8ed4"
     },
     "ARTIFACT_BEACON": {
       "id": 247,
       "artIndex": 247,
       "kind": "lantern",
-      "rgbaSha256": "fa558f3a43f9117cd1b24c0f814fe7c623102f4edec81dc1b92492faf4c786e4"
+      "rgbaSha256": "6c352f1e084835c4e20b08b03ef252aee83d9eff3aba52daa84f168b46f8a088"
     },
     "ARTIFACT_CHAINS": {
       "id": 248,
       "artIndex": 248,
       "kind": "chain",
-      "rgbaSha256": "18d99e316c1280c5893ce8f1b8418044a745aef3c33e2e83f7e196e69cf968e8"
+      "rgbaSha256": "387aa453a8789e617f70232b846c12c40536cbb6903598279688040aadcf681f"
     },
     "ARTIFACT_HORN1": {
       "id": 249,
@@ -1109,25 +1109,25 @@
       "id": 256,
       "artIndex": 256,
       "kind": "boot",
-      "rgbaSha256": "252464d80117544c787abd554a33bba2dd5a9d84337f24201d206309607a7d95"
+      "rgbaSha256": "3daa5888e2bd48dabd5c6733dc7faeb13794c9f3a4bf8c1bc916f76cc961275b"
     },
     "ARTIFACT_SHOES": {
       "id": 257,
       "artIndex": 257,
       "kind": "boot",
-      "rgbaSha256": "8938a99b3ca60e8b1bbbeeb5cbe29674dd5c7f36d0abfeaba2c4619826a3a158"
+      "rgbaSha256": "1ba4c9d1f436b21a656ddf29c0b0ad1e088bdc26e5e9372c2f35237107417941"
     },
     "ARTIFACT_BOOTS": {
       "id": 258,
       "artIndex": 258,
       "kind": "boot",
-      "rgbaSha256": "8938a99b3ca60e8b1bbbeeb5cbe29674dd5c7f36d0abfeaba2c4619826a3a158"
+      "rgbaSha256": "a50ed8311c9a5b14d585d1b17bcbe5b47d20cd5305cfacd2674795b011e149cf"
     },
     "ARTIFACT_GREAVES": {
       "id": 259,
       "artIndex": 259,
       "kind": "boot",
-      "rgbaSha256": "f92592a282ae6c34c8bedbd50929948fe8b1b98763799423f1ff8ef582c16f94"
+      "rgbaSha256": "a8bbddc995628eca7748efe339d32f024fa677b71476df0aa574f128430b084c"
     },
     "ARTIFACT_ROSE1": {
       "id": 260,
@@ -1151,115 +1151,115 @@
       "id": 263,
       "artIndex": 263,
       "kind": "book",
-      "rgbaSha256": "4c621b09db9d1189cde5c02b5af7f9fb75a4bf968b49c8d7c6784a9e282c3a64"
+      "rgbaSha256": "c562f44883e0f697cb44ee80e20c33aa3a2bb3d71bb813a5a32eee81050d774b"
     },
     "ARTIFACT_KEY": {
       "id": 264,
       "artIndex": 264,
       "kind": "key",
-      "rgbaSha256": "ce241c02ca2904e9b69f3bc07e75c5648ea5ac0dc84af24afbfe245ca23ed63d"
+      "rgbaSha256": "965c096a78df8e35b26cda8357b0e3d3f82f02a4b8dea228ea3a420f26a34210"
     },
     "RAT_SKULL": {
       "id": 272,
       "artIndex": 272,
       "kind": "skull",
-      "rgbaSha256": "164b90e0247e586f0a1e611d7a9ae624118d444db3ad4d1861a063bf3e97fc7a"
+      "rgbaSha256": "f47e6a2a0d4546ff5d9231df3ffdc089b752a8baa39034c4a83839eac1ba9c10"
     },
     "PARCHMENT_SCRAP": {
       "id": 273,
       "artIndex": 273,
       "kind": "scroll",
-      "rgbaSha256": "6c78220a39385070cedbfb67ba8bef524483827fa1ca26f5ac9dc526c89e8e33"
+      "rgbaSha256": "9c3dcc6a578ad531c35867235bc7171e00b1c8d73024ad5e224bc0457af5f401"
     },
     "PETRIFIED_SEED": {
       "id": 274,
       "artIndex": 274,
       "kind": "seed",
-      "rgbaSha256": "d1ea405c5662253020d7abdc754dacede9dac9cfb22f9fa538d541b2c78ade84"
+      "rgbaSha256": "e18b1073ff02ed2181b1b8365d9a9c8470c66b2f7ee433c2b401e3324d7b45c0"
     },
     "EXOTIC_CRYSTALS": {
       "id": 275,
       "artIndex": 275,
       "kind": "crystal",
-      "rgbaSha256": "54fb4f55a13e0096d9b08f5c29d3818a71f600c90235eb0934e27387d01c52bc"
+      "rgbaSha256": "911c054fc1a9df32284fa503a390b4fcf7344e092bfc4106acc7c32e79b1d0fa"
     },
     "MOSSY_CLUMP": {
       "id": 276,
       "artIndex": 276,
       "kind": "moss",
-      "rgbaSha256": "9d80dd3cf6c28d0f17784056fdf375dd5209c201796340398627b1e52a0f5d27"
+      "rgbaSha256": "e182fa4344eef8023494e2cd9c99d27caea483ec442610b846a332c0961b0890"
     },
     "SUNDIAL": {
       "id": 277,
       "artIndex": 277,
       "kind": "sundial",
-      "rgbaSha256": "5fe98084906033bc852ad92e0cbb20387e7050a798b657731b13964bd4893ce0"
+      "rgbaSha256": "c6ddd26c6f82a28386559117043f4924c09e8b2dee93acbd25e91f77673c25de"
     },
     "CLOVER": {
       "id": 278,
       "artIndex": 278,
       "kind": "leaf",
-      "rgbaSha256": "c027bfbc8393891d13e32975ece43ab44cf56166c874eb712a3e2f7de34c04ca"
+      "rgbaSha256": "4b1f5aa32d8f8aca22ad542a98045502b6811125e12691fb3cc81cf803fd95c0"
     },
     "TRAP_MECHANISM": {
       "id": 279,
       "artIndex": 279,
       "kind": "trap",
-      "rgbaSha256": "fe277d1224079791ada1c026e443fc1f4b9b06fe5cba2cc3bc2917e0d85c8f26"
+      "rgbaSha256": "f35dee829e0291c517b3f7def8ff98abc94d3585cb05a78972624a84d0fcd3d2"
     },
     "MIMIC_TOOTH": {
       "id": 280,
       "artIndex": 280,
       "kind": "fang",
-      "rgbaSha256": "ef2633f807dacc9539bed53f0be45f6779463dbf3f117f8abf15e169a0ed22cc"
+      "rgbaSha256": "e9342883199a372356fcdddba8845a45e9a5d6d973814197ca3aeb371fe64bde"
     },
     "WONDROUS_RESIN": {
       "id": 281,
       "artIndex": 281,
       "kind": "resin",
-      "rgbaSha256": "de76c3443f62ff9d62232e60f3892a28d64aca6d029fef924b83ac9acc595691"
+      "rgbaSha256": "f2d4b829db2ca5034fc30e853896d0d5eb46bf1af72c821ecce567b64917eedf"
     },
     "EYE_OF_NEWT": {
       "id": 282,
       "artIndex": 282,
       "kind": "eye",
-      "rgbaSha256": "1e7e26d719bc041ab5e53020f3c6487823b842613279cbfa67920b79b447ebf8"
+      "rgbaSha256": "b3838596e29758a041550330e3ad67175004115ab0c393353c130e5a071214b0"
     },
     "SALT_CUBE": {
       "id": 283,
       "artIndex": 283,
       "kind": "cube",
-      "rgbaSha256": "047599d0515cbe8a1a96c13749519307bc524c63ab374a5b4f728a4e66b15a00"
+      "rgbaSha256": "d858fd78bb7261c1b5e859fda6fd5983e8c86715e5c5b3ccb52c181406685b28"
     },
     "BLOOD_VIAL": {
       "id": 284,
       "artIndex": 284,
       "kind": "bottle",
-      "rgbaSha256": "5660811c6f8822d1cfc20bafaf7db347859db56d291b7d6baf8a304e7650f527"
+      "rgbaSha256": "d54ca93ea733ac9b78310803943fe197a8726e198b2ba6d6f32566cb9170d31c"
     },
     "OBLIVION_SHARD": {
       "id": 285,
       "artIndex": 285,
       "kind": "shard",
-      "rgbaSha256": "02a1016efcd83cc5ff76a33c81df1e77394f859b959a75e1cbe13350648b3e41"
+      "rgbaSha256": "50edac84a614007a36bb386de7336cb3a434238dc0e477feea0fc1dbcf6ae3d2"
     },
     "CHAOTIC_CENSER": {
       "id": 286,
       "artIndex": 286,
       "kind": "censer",
-      "rgbaSha256": "e51f59d591b868d544ce8f1c5fb698ea45651d26bb699924d822a2a33759f271"
+      "rgbaSha256": "20213bac2cf27954b760497555fd07647df7d2f873be406cad63bc1321246602"
     },
     "FERRET_TUFT": {
       "id": 287,
       "artIndex": 287,
       "kind": "tuft",
-      "rgbaSha256": "bfee45fa12287b38642b5d09b6e18f97ebbe4019364f285efdcfd5d80e18acb5"
+      "rgbaSha256": "5bf40ed89483e00dcab22be0f73c992975cb228226f52558fe65bf44b543cd2e"
     },
     "SPYGLASS": {
       "id": 288,
       "artIndex": 288,
       "kind": "spyglass",
-      "rgbaSha256": "8bb26eccd6d68a72a84c6387c93bbc7c3b4906a3135f31626ad99f7943bdd888"
+      "rgbaSha256": "a1019148d32565be9685baeeefbe26a10463a44888c6d9435cce02e5f6b7fbb0"
     },
     "SCROLL_KAUNAN": {
       "id": 304,
@@ -1487,79 +1487,79 @@
       "id": 352,
       "artIndex": 352,
       "kind": "bottle",
-      "rgbaSha256": "3ac3d7942f821143424ecb1771352bb8e19aecdfb9106e6f56cc7a23ef4ce6da"
+      "rgbaSha256": "cc39347b93720c970a70951d68d24f104e530349c4beacc8058edf8e4ec07d09"
     },
     "POTION_AMBER": {
       "id": 353,
       "artIndex": 353,
       "kind": "bottle",
-      "rgbaSha256": "8a2e3760fb67f85d1de4612a58a66d9d53e61d946472784be49549d3b5db1e26"
+      "rgbaSha256": "963dbbfe64887aebcf1e020f7c4d2db791a22f436a42fcdf1e58e22733af11b4"
     },
     "POTION_GOLDEN": {
       "id": 354,
       "artIndex": 354,
       "kind": "bottle",
-      "rgbaSha256": "7501bbc4926a57aaeaaa0688302ea7b79aa064f2087384dfe83c50dd1cf1982a"
+      "rgbaSha256": "3d3b2aea11047a1cb70e57a2bc8d480951cbecdbe17f891f7405c3babcedc4ac"
     },
     "POTION_JADE": {
       "id": 355,
       "artIndex": 355,
       "kind": "bottle",
-      "rgbaSha256": "b0814e8353c4c3b7e03b41f63463c7aaf3901a1f4cd964c96ab3fe7b2905db30"
+      "rgbaSha256": "4a3820cef7cd08a82d4fa0e91f48b1d682aa39e2d3469e18f6e701e00e8cf9b1"
     },
     "POTION_TURQUOISE": {
       "id": 356,
       "artIndex": 356,
       "kind": "bottle",
-      "rgbaSha256": "056c1054763b02956422351fccde115566dc7e83b5371bba500fb0c99470b71a"
+      "rgbaSha256": "0d0b12674da14665c79b1e1ec6f5e8fa8ae0b504e3404998ffd7afa01e85607c"
     },
     "POTION_AZURE": {
       "id": 357,
       "artIndex": 357,
       "kind": "bottle",
-      "rgbaSha256": "beede462e8b959c7e682c11d1c5257de923194160fb10d7a20ba90708937891d"
+      "rgbaSha256": "9018cbc375555cdac43f1e03cf83bad9431cf9b56fa046a2c8df768615e1b645"
     },
     "POTION_INDIGO": {
       "id": 358,
       "artIndex": 358,
       "kind": "bottle",
-      "rgbaSha256": "d6aadbd42b1a5f6ccef934277efa5a60464562f3c7d6f13328a9ddcc90e86ff3"
+      "rgbaSha256": "b5ba3abac082b3103a4f6102737cb8071cc465e8a3491f56fdaa30ace9428af7"
     },
     "POTION_MAGENTA": {
       "id": 359,
       "artIndex": 359,
       "kind": "bottle",
-      "rgbaSha256": "7bf0b2b252f75b57c8ecfba3e9e3615855daef285c2ac33e8a1d4e976311f117"
+      "rgbaSha256": "599d2cf179c899843d64057ff7e63928096ed135087e78f3e398e6ec97c492bb"
     },
     "POTION_BISTRE": {
       "id": 360,
       "artIndex": 360,
       "kind": "bottle",
-      "rgbaSha256": "2b7f458785b37bc7147b3017631d3ea9815817573841e581538a6698a226f4dd"
+      "rgbaSha256": "8e38a6b79d0e86b2fc50038fbfcbda1ceadfe45cc196bd8161ad4aea0c011f9e"
     },
     "POTION_CHARCOAL": {
       "id": 361,
       "artIndex": 361,
       "kind": "bottle",
-      "rgbaSha256": "76932d039327afb1aa46242f0027fa52b6fad5eb0b8361bafd46fa6458edc425"
+      "rgbaSha256": "21fde459056f6d1098de4d9e383015e29dcf0216c5bf47871b30d0f3a380cf42"
     },
     "POTION_SILVER": {
       "id": 362,
       "artIndex": 362,
       "kind": "bottle",
-      "rgbaSha256": "8e0836139807b6736838b381a728c9aaa8bddcfec0c477d190a446399a3d021c"
+      "rgbaSha256": "05f5821cd02652eb1a4aa45aa79d24901d708ad5a3ebdef76d038139d81643ce"
     },
     "POTION_IVORY": {
       "id": 363,
       "artIndex": 363,
       "kind": "bottle",
-      "rgbaSha256": "8802e8a28c97bf98759a144b62c18ffb80040257359eb42a238e9564618c7d69"
+      "rgbaSha256": "8072c1d345460a0a3c4c93ed55154df31b2908f2761da4da7310b5ef27782a15"
     },
     "LIQUID_METAL": {
       "id": 365,
       "artIndex": 365,
       "kind": "pot",
-      "rgbaSha256": "7fd6f5f1c11b093322d19ba361a703abdc370bd82ec06a638e64fabe970bc745"
+      "rgbaSha256": "753e24744caf127a456bd77593125340f341fb5c91bb84a8f0a0d7cca5d15359"
     },
     "EXOTIC_CRIMSON": {
       "id": 368,
@@ -1745,7 +1745,7 @@
       "id": 408,
       "artIndex": 408,
       "kind": "bottle",
-      "rgbaSha256": "e0b8d4ac6dafddae76343cc1470178ecf2781a2d6984a8ab957d939f901951a6"
+      "rgbaSha256": "b822b438434b7ee3d64d13264c769ea0344be73ee7f34a9dff8d31757de3013a"
     },
     "ELIXIR_AQUA": {
       "id": 409,
@@ -1757,7 +1757,7 @@
       "id": 410,
       "artIndex": 410,
       "kind": "bottle",
-      "rgbaSha256": "b0814e8353c4c3b7e03b41f63463c7aaf3901a1f4cd964c96ab3fe7b2905db30"
+      "rgbaSha256": "326c033743ea5cc60c0776df41342a6d37b664d3e46b74cdbe0bdc74d98301d7"
     },
     "ELIXIR_DRAGON": {
       "id": 411,
@@ -1859,13 +1859,13 @@
       "id": 432,
       "artIndex": 432,
       "kind": "meat",
-      "rgbaSha256": "4e796bc80c2d59764222cc766b09a33424b9f5f8d3f84d820764ba42a42a4d7b"
+      "rgbaSha256": "52ec9f1cac8735512fc6d2325a89869defb949ea1b72488aaade398533f4b9b9"
     },
     "STEAK": {
       "id": 433,
       "artIndex": 433,
       "kind": "meat",
-      "rgbaSha256": "4e796bc80c2d59764222cc766b09a33424b9f5f8d3f84d820764ba42a42a4d7b"
+      "rgbaSha256": "043a74dd952c4cd8661a2e71521d0a67f9cbac65367655ce4be691feca8d0f96"
     },
     "STEWED": {
       "id": 434,
@@ -1889,25 +1889,25 @@
       "id": 437,
       "artIndex": 437,
       "kind": "ration",
-      "rgbaSha256": "0ea18a457b90380b6f31425622cddb2d6a7a8bdc6df919f8ab1cb8e438882c44"
+      "rgbaSha256": "03c4cad4e49c0ff9c140306c92b0286956f1b21dca8f4d5fe2c9797b895e1429"
     },
     "PASTY": {
       "id": 438,
       "artIndex": 438,
       "kind": "pie",
-      "rgbaSha256": "d976f373b38fc58e9c07d1259afd728dffa0f9f1702f4ba79acb6422130449d3"
+      "rgbaSha256": "2bad2db656fd942f1e309242e736bdc78354f37c156b1c91ad7dcb5d58cb8f96"
     },
     "MEAT_PIE": {
       "id": 439,
       "artIndex": 439,
       "kind": "pie",
-      "rgbaSha256": "d976f373b38fc58e9c07d1259afd728dffa0f9f1702f4ba79acb6422130449d3"
+      "rgbaSha256": "9184831a48097ad7042bf8570a5de1bbbf39fc6bbf463529c92a128508760b7e"
     },
     "BLANDFRUIT": {
       "id": 440,
       "artIndex": 440,
       "kind": "fruit",
-      "rgbaSha256": "904d0b333382ba57eb68ae8d9a0d7a5f3f4b443e8f7c22b5767fa27311f76e77"
+      "rgbaSha256": "f297d4eb13441092a8262ed1caf75885ec1f1a95e1143e1e2b298d92590cca72"
     },
     "BLAND_CHUNKS": {
       "id": 441,
@@ -1919,7 +1919,7 @@
       "id": 442,
       "artIndex": 442,
       "kind": "fruit",
-      "rgbaSha256": "904d0b333382ba57eb68ae8d9a0d7a5f3f4b443e8f7c22b5767fa27311f76e77"
+      "rgbaSha256": "d3456a850249e21801df243e323a4e0f1714a146680c954a40fc9cab2f159146"
     },
     "PHANTOM_MEAT": {
       "id": 443,
@@ -1991,7 +1991,7 @@
       "id": 457,
       "artIndex": 457,
       "kind": "bottle",
-      "rgbaSha256": "ca47ae6ce7c227ae42c1fc1734d0dc7314ca366dfd8b181d9e0dd210588dedb3"
+      "rgbaSha256": "4186904831942d251810756c9706ec090f9288f27973281c6fafc5a1a6aea8ae"
     },
     "DUST": {
       "id": 465,
@@ -2057,43 +2057,43 @@
       "id": 480,
       "artIndex": 480,
       "kind": "bag",
-      "rgbaSha256": "f0f969ee0a0c09a0058ee685de57b2c2fb01809129dac08532d1ce6f2ea5cef8"
+      "rgbaSha256": "3963a1e0fec342527ccee851b637e009113c59c495a0ceee994873613b8a26a3"
     },
     "BACKPACK": {
       "id": 481,
       "artIndex": 481,
       "kind": "bag",
-      "rgbaSha256": "ab167e82a8aff4941a50d111b614fa6c042dfbaeae2cea264c5d069f6c12770d"
+      "rgbaSha256": "60a08214882c10ee8d0751918d625e8ddc653ed08f2c77cbf82577b5377f905c"
     },
     "POUCH": {
       "id": 482,
       "artIndex": 482,
       "kind": "bag",
-      "rgbaSha256": "ab167e82a8aff4941a50d111b614fa6c042dfbaeae2cea264c5d069f6c12770d"
+      "rgbaSha256": "57fd58094160326f2aa6e313aa0a79fd3f92420d051aecacd8ae7d81d63e6657"
     },
     "HOLDER": {
       "id": 483,
       "artIndex": 483,
       "kind": "quiver",
-      "rgbaSha256": "4d28a6169cd9f71866ab6941d018a1de255eb59d4d9d3c104aad61922bafbfca"
+      "rgbaSha256": "0f395835b87acff741cc227d03a10005c351a378955c34bd378662ed1846cfee"
     },
     "BANDOLIER": {
       "id": 484,
       "artIndex": 484,
       "kind": "bandolier",
-      "rgbaSha256": "2823bf806c336273871d7a7f5cd939c9a844ad826aa7db46a420510cf4477ca8"
+      "rgbaSha256": "ecee661393970fbde16696d170ff12d496e36c59184fd8c0af21bf1a94f8a356"
     },
     "HOLSTER": {
       "id": 485,
       "artIndex": 485,
       "kind": "quiver",
-      "rgbaSha256": "4d28a6169cd9f71866ab6941d018a1de255eb59d4d9d3c104aad61922bafbfca"
+      "rgbaSha256": "619fe838e9c7c8c92769d4e3c6b854ed489af5e2ca4e89e63d04d93905970cdd"
     },
     "VIAL": {
       "id": 486,
       "artIndex": 486,
       "kind": "bottle",
-      "rgbaSha256": "e0b8d4ac6dafddae76343cc1470178ecf2781a2d6984a8ab957d939f901951a6"
+      "rgbaSha256": "bd7cb89d624c2b181dd0a02a065e5106cf2e7bfd3cae1a5034b3f297a4756c3b"
     },
     "GUIDE_PAGE": {
       "id": 496,
@@ -2141,61 +2141,61 @@
       "id": 512,
       "artIndex": 512,
       "kind": "skull_staff",
-      "rgbaSha256": "eb63d067e7b1ffde1aa746239ef5bcd640a1ea2670eebd47d9c46d248f504470"
+      "rgbaSha256": "d3fd3b2f76ae47c2738463444d495eb15734046a4ec54f77312b6cdda43415e7"
     },
     "PHYLACTERY": {
       "id": 513,
       "artIndex": 513,
       "kind": "phylactery",
-      "rgbaSha256": "53ec37cd1e5c9afd244ecd1b47c2792c371c88ce4bd6098ae44d0f11cd329b90"
+      "rgbaSha256": "249463dd2baef2e7e04e73108bdfef56d8932cbe8bb1a8a191454a9f9f693336"
     },
     "ARMOR_NECROMANCER": {
       "id": 514,
       "artIndex": 514,
       "kind": "armor",
-      "rgbaSha256": "4d22b1a81935a074396ddc9e7b930a92552d62571c9edc24bd7bd89abb4ad771"
+      "rgbaSha256": "a614a0ea16fd1fbba76a2b402462bda376178b47844c599335e7c1102542204e"
     },
     "RUNED_BATON": {
       "id": 515,
       "artIndex": 515,
       "kind": "wand",
-      "rgbaSha256": "ab6a7e33fcf8cd4ef4d9a951db3a46f0a66195eea3c2311f5d422bb53b42cb1e"
+      "rgbaSha256": "b2f3d1c4323cb66a16a935951cb87eb600aba7eef93cd565d35e97d9dcb0eff8"
     },
     "SIGIL_BRUSH": {
       "id": 516,
       "artIndex": 516,
       "kind": "brush",
-      "rgbaSha256": "427be1a04550cf18f05fb1eb3c5348da10c423044b5dd52135f9f7d2ef8e8fa9"
+      "rgbaSha256": "6e473fc53268f76df4293f492e6d70ad015616ebd77991ec355863220c8f4c82"
     },
     "ARMOR_ENCHANTER": {
       "id": 517,
       "artIndex": 517,
       "kind": "armor",
-      "rgbaSha256": "fe14844bad958444cb920f17be0b856339c3a7a7ce4879d022fac555f11e259b"
+      "rgbaSha256": "39f24ed7b2594e39edff62fd77f7f9f9dc2a00c609c8d561efc3cc13cc86a7b9"
     },
     "FOCUS_RING": {
       "id": 518,
       "artIndex": 518,
       "kind": "ring",
-      "rgbaSha256": "6839683914e2bd503e6297dd17647516f80e55738808d6f030097df7086f4e1c"
+      "rgbaSha256": "b6bff9b668326888bf69d4f24562395cd0f6f3bb7ff06fcf0baeb918c91580bb"
     },
     "FOCUS_CRYSTAL": {
       "id": 519,
       "artIndex": 519,
       "kind": "crystal",
-      "rgbaSha256": "ece34aefe10cefd480e1422238f6ecaa65e5ea215a8ba4e1aa4f3eb43d12041a"
+      "rgbaSha256": "498b78187b4d0236daed1397426b62f1293dfb500d39ca401e63e4041487ab3a"
     },
     "ARMOR_PSYCHIC": {
       "id": 520,
       "artIndex": 520,
       "kind": "armor",
-      "rgbaSha256": "c398cd8fd7a828b6e7614b09704722a98412ef1e24683f7514af56b7789b6a1a"
+      "rgbaSha256": "47ce00c47ebedc3a707799fbed1741df4c821f88acc50b19c266167a259d6c5b"
     },
     "RUNE_ETCHING": {
       "id": 521,
       "artIndex": 521,
       "kind": "tablet",
-      "rgbaSha256": "1501d92027bdb469199f1d3682f655bf5625c93c9af167da3950058018555e78"
+      "rgbaSha256": "3a48232af348bf103afcf301f45d8059c2317164edbab115f770337e6f26b20f"
     },
     "SUMMON_ELE_FIRE": {
       "id": 522,
@@ -2225,67 +2225,67 @@
       "id": 526,
       "artIndex": 526,
       "kind": "wand",
-      "rgbaSha256": "e216b7c6415ad4e042fcc9fbf4e2dc6fd7b5610c318a5e5e3a0fd7d44b6a2c21"
+      "rgbaSha256": "af3b69b46433ff5482e0ac746af7ca102f4f1a079af005656c98b9cef938e9b4"
     },
     "WAND_GRAVITY": {
       "id": 527,
       "artIndex": 527,
       "kind": "wand",
-      "rgbaSha256": "7c1d45f83f50397779c843c7a387028a5c69dd7d44b193b933a0e81bc8bb6246"
+      "rgbaSha256": "b88dcc5e4df94112621e61e8ecb6438a6d2d3857a6b488a1dfb723d7e876b4ea"
     },
     "WAND_BONE": {
       "id": 528,
       "artIndex": 528,
       "kind": "wand",
-      "rgbaSha256": "e216b7c6415ad4e042fcc9fbf4e2dc6fd7b5610c318a5e5e3a0fd7d44b6a2c21"
+      "rgbaSha256": "40bd84a923c33dd0253c5284a7f73d1bda02bdffac8bc478a776e391f954844b"
     },
     "SOULFIRE": {
       "id": 529,
       "artIndex": 529,
       "kind": "tablet",
-      "rgbaSha256": "7f2f69c2efb85b026b4d226ed312aa97b8037698988a474d47e59a9374b0501e"
+      "rgbaSha256": "c5ed64056803e3b82a7defc7edc93e2160a9f56374678bb8dab0f86b5efbf695"
     },
     "BONE_SCYTHE": {
       "id": 530,
       "artIndex": 530,
       "kind": "scythe",
-      "rgbaSha256": "7ecc4769627c69505f087938663ceb298b5c82e1c9dcb28aadbc779d11d93d29"
+      "rgbaSha256": "f43b632a2d0d5f8b64b13528d94fbc5d201ec0fdde1954e5758bc8e0d49df590"
     },
     "REAPER_SCYTHE": {
       "id": 531,
       "artIndex": 531,
       "kind": "scythe",
-      "rgbaSha256": "d9bdf4c3c3f9e40195dece798b002772eb6311665602e7382b388066d9d351b0"
+      "rgbaSha256": "6a5fe242eabd115f1115a71d8433f30860ad09f6239288104c4551e84888871c"
     },
     "GRAVE_SCYTHE": {
       "id": 532,
       "artIndex": 532,
       "kind": "scythe",
-      "rgbaSha256": "eb17dee8ad501d412fe4a44722bd9e0eb83c3d8d164a3fc050e7ab130268de29"
+      "rgbaSha256": "f151d20dffad0e25df4f8307308c13e5378a20c7b2afef5d96dd0b3c473afd97"
     },
     "ARMOR_BONE": {
       "id": 533,
       "artIndex": 533,
       "kind": "armor",
-      "rgbaSha256": "3ce61792cb9d91138ad422c434f5ffd68952aba9193ab63c4c0c351809f71563"
+      "rgbaSha256": "c97b782b11e0ed074e74912bd3acdc21daa4805e980def42b6240f3780aa069a"
     },
     "ARMOR_LEATHER_OCHRE": {
       "id": 534,
       "artIndex": 534,
       "kind": "armor",
-      "rgbaSha256": "a2c1f16606f296e31d06e1797eaeba3b50e64701c014ef8f1d6a5d0411f1890f"
+      "rgbaSha256": "5e7d0f5e1ce14fdc3ca56be343e7f6a04f3babaa846f5774ce5f69792440a3ed"
     },
     "ARMOR_LEATHER_ASH": {
       "id": 535,
       "artIndex": 535,
       "kind": "armor",
-      "rgbaSha256": "554661bb73510ecfdaa037edcab5407751d07d85d45b4da5d56607b36a5ada84"
+      "rgbaSha256": "0cc48847bcabb393e5071aa13abdbb029deab1ed861186a57023cc137ff14244"
     },
     "HOURGLASS_ASHES": {
       "id": 536,
       "artIndex": 536,
       "kind": "hourglass",
-      "rgbaSha256": "84a163ba8b7d9c31f16d36444c1c4446c8ad70ebc9b1f1933e3e0b7e7daf86ab"
+      "rgbaSha256": "a8cf72378f55d67bafd7103e60a09b17d62bb0a5fba4dddeb969ac7ce16c7457"
     }
   },
   "icons": {

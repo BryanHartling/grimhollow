@@ -188,7 +188,7 @@ def main():
                 failures.append('Unaccounted character '+path)
         for name in ('warrior','mage','rogue','huntress','duelist','cleric','necromancer','enchanter','psychic'):
             if (ASSETS/f'splashes/{name}.png').exists():failures.append('Rejected splash still packaged '+name)
-    print(f'TEST 44: upstream-derived character sheets={characters}; restored assets={len(entries)-len(painted)}; verified painted replacements={len(painted)}; failures={len(failures)}')
+    print(f'TEST 44: upstream-derived character sheets={characters}; restored assets={len(set(entries)-set(painted))}; verified painted replacements={len(painted)}; failures={len(failures)}')
     for failure in failures: print('FAIL:',failure)
     return bool(failures)
 

@@ -1,0 +1,269 @@
+{
+  "tool": "built-in imagegen",
+  "assets": [
+    {
+      "file": "sources/items/class-kit.png",
+      "names": [
+        "BONE_ROD",
+        "PHYLACTERY",
+        "RUNED_BATON",
+        "SIGIL_BRUSH",
+        "FOCUS_RING",
+        "FOCUS_CRYSTAL",
+        "RUNE_ETCHING",
+        "WAND_NECROSIS",
+        "WAND_GRAVITY",
+        "WAND_BONE",
+        "SOULFIRE",
+        "BONE_SCYTHE",
+        "REAPER_SCYTHE",
+        "GRAVE_SCYTHE",
+        "ARMOR_BONE",
+        "HOURGLASS_ASHES"
+      ],
+      "prompt": "Use case: stylized-concept. Production inventory sprite source atlas for an original dark fantasy RPG. REAL TRANSPARENT RGBA PNG 1280x1280. Exact 4 columns x 4 rows, 16 isolated objects, ONE centered object in every cell with 15 percent transparent margins. No lettering, labels, borders, scenery, ground shadows, hands or figures. Painted realistic worn craftsmanship, broad readable shapes, ivory bone and tarnished metal, muted coloured magic, strong highlights against dark edges, not pixel art, not glossy mobile-game cartoons, no borrowed franchise art. Items entirely visible and separated. Exact row-major order: Row1 [a short ivory bone rod with a tiny skull tip; a squat silver funerary phylactery urn with a green glass inset and lid; a straight blue-rune carved walnut baton; an ivory-handled calligraphy brush with dark ink bristles]. Row2 [a silver focus ring with one violet gemstone; a freestanding faceted pale violet focus crystal; an etched dark blue rune tablet; a necrosis wand with a crooked black shaft and small green skull tip]. Row3 [a gravity wand with a round violet orb caught in iron prongs; a bone wand made from a forked white femur; a dark soul-fire spell tablet bearing one small blue-green flame; a short bone-bladed harvesting scythe]. Row4 [a long black iron reaper scythe with large curved steel blade; a worn grey grave scythe with angular pale blade; a wearable rib-cage bone breastplate; a silver hourglass containing grey ashes]. Keep equipment silhouettes distinct. All long implements fit diagonally within their cells. Sixteen complete objects, exactly four objects per row. True transparency between objects, never a drawn checkerboard."
+    },
+    {
+      "file": "sources/items/weapons-a.png",
+      "names": [
+        "WORN_SHORTSWORD",
+        "CUDGEL",
+        "GLOVES",
+        "RAPIER",
+        "DAGGER",
+        "MAGES_STAFF",
+        "SHORTSWORD",
+        "HAND_AXE",
+        "SPEAR",
+        "QUARTERSTAFF",
+        "DIRK",
+        "SICKLE",
+        "SWORD",
+        "MACE",
+        "SCIMITAR",
+        "ROUND_SHIELD"
+      ],
+      "prompt": "Use case: stylized-concept. Production inventory source sheet for an original dark fantasy RPG. REAL TRANSPARENT RGBA PNG 1280x1280. Exact 4 columns by 4 rows of sixteen isolated objects, one centered object per cell with 15% clear margins. No grid lines, labels, writing, borders, figures, hands, scenery or cast shadows. Realistic PAINTED worn materials, broad readable shapes and warm directional highlights, dark edge shading without black cartoon outlines. Not pixel art; no borrowed franchise designs. Long implements fit diagonally entirely within their own cell. Equal cell sizes and consistent spacing; genuine alpha, never a painted checkerboard. Exact object order, left to right in each row: Row 1: [a short chipped iron sword; a knotted hardwood cudgel; a pair of tough leather fighting gloves; a slender rapier with swept hilt]. Row 2: [a short broad dagger; a long crooked wooden mage staff with a small violet crystal; a clean plain steel shortsword; a compact iron hand axe]. Row 3: [a wood spear with simple leaf point; a plain iron-capped wooden quarterstaff; a narrow long dirk; a short curved farm sickle]. Row 4: [a broad straight one-handed steel sword; a flanged iron mace; a broad curved scimitar; a round wood shield with iron boss]."
+    },
+    {
+      "file": "sources/items/weapons-b.png",
+      "names": [
+        "SAI",
+        "WHIP",
+        "LONGSWORD",
+        "BATTLE_AXE",
+        "FLAIL",
+        "RUNIC_BLADE",
+        "ASSASSINS_BLADE",
+        "CROSSBOW",
+        "KATANA",
+        "GREATSWORD",
+        "WAR_HAMMER",
+        "GLAIVE",
+        "GREATAXE",
+        "GREATSHIELD",
+        "GAUNTLETS",
+        "WAR_SCYTHE"
+      ],
+      "prompt": "Use case: stylized-concept. Production inventory source sheet for an original dark fantasy RPG. REAL TRANSPARENT RGBA PNG 1280x1280. Exact 4 columns by 4 rows of sixteen isolated objects, one centered object per cell with 15% clear margins. No grid lines, labels, writing, borders, figures, hands, scenery or cast shadows. Realistic PAINTED worn materials, broad readable shapes and warm directional highlights, dark edge shading without black cartoon outlines. Not pixel art; no borrowed franchise designs. Long implements fit diagonally entirely within their own cell. Equal cell sizes and consistent spacing; genuine alpha, never a painted checkerboard. Exact object order, left to right in each row: Row 1: [a pair of steel three-pronged sai; a coiled dark leather whip; a long two-handed straight sword; a heavy double-bladed battle axe]. Row 2: [an iron spiked ball joined by chain to a handle; a heavy steel blade with faint blue runes; a wide dark hooked assassin dagger; a wooden crossbow]. Row 3: [a single-edged curved katana; an enormous broad two-handed greatsword; a long-shaft square-headed steel war hammer; a long pole with a single curved blade]. Row 4: [a large crescent-bladed two-handed axe; a tall steel kite shield; a pair of heavy steel fighting gauntlets; a long black war scythe]."
+    },
+    {
+      "file": "sources/items/missiles.png",
+      "names": [
+        "SPIRIT_BOW",
+        "THROWING_SPIKE",
+        "THROWING_KNIFE",
+        "THROWING_STONE",
+        "FISHING_SPEAR",
+        "SHURIKEN",
+        "THROWING_CLUB",
+        "THROWING_SPEAR",
+        "BOLAS",
+        "KUNAI",
+        "JAVELIN",
+        "TOMAHAWK",
+        "BOOMERANG",
+        "TRIDENT",
+        "THROWING_HAMMER",
+        "FORCE_CUBE"
+      ],
+      "prompt": "Use case: stylized-concept. Production inventory source sheet for an original dark fantasy RPG. REAL TRANSPARENT RGBA PNG 1280x1280. Exact 4 columns by 4 rows of sixteen isolated objects, one centered object per cell with 15% clear margins. No grid lines, labels, writing, borders, figures, hands, scenery or cast shadows. Realistic PAINTED worn materials, broad readable shapes and warm directional highlights, dark edge shading without black cartoon outlines. Not pixel art; no borrowed franchise designs. Long implements fit diagonally entirely within their own cell. Equal cell sizes and consistent spacing; genuine alpha, never a painted checkerboard. Exact object order, left to right in each row: Row 1: [an elegant pale wooden bow with muted green inlay; a short pointed throwing spike; a small throwing knife; a round rough throwing stone]. Row 2: [a three-barbed short fishing spear; a steel four-point throwing star; a compact knotted throwing club; a light throwing spear]. Row 3: [three iron weights on leather cords; a dark ring-handled kunai; a long slender javelin with narrow steel point; a light tomahawk with wrapped handle]. Row 4: [a curved wood boomerang; a three-pronged iron trident; a short balanced throwing hammer; an engraved purple metal cube]."
+    },
+    {
+      "file": "sources/items/wands.png",
+      "names": [
+        "WAND_MAGIC_MISSILE",
+        "WAND_FIREBOLT",
+        "WAND_FROST",
+        "WAND_LIGHTNING",
+        "WAND_DISINTEGRATION",
+        "WAND_PRISMATIC_LIGHT",
+        "WAND_CORROSION",
+        "WAND_LIVING_EARTH",
+        "WAND_BLAST_WAVE",
+        "WAND_CORRUPTION",
+        "WAND_WARDING",
+        "WAND_REGROWTH",
+        "WAND_TRANSFUSION",
+        "DART",
+        "ARTIFACT_CHAINS",
+        "TORCH"
+      ],
+      "prompt": "Use case: stylized-concept. Production inventory source sheet for an original dark fantasy RPG. REAL TRANSPARENT RGBA PNG 1280x1280. Exact 4 columns by 4 rows of sixteen isolated objects, one centered object per cell with 15% clear margins. No grid lines, labels, writing, borders, figures, hands, scenery or cast shadows. Realistic PAINTED worn materials, broad readable shapes and warm directional highlights, dark edge shading without black cartoon outlines. Not pixel art; no borrowed franchise designs. Long implements fit diagonally entirely within their own cell. Equal cell sizes and consistent spacing; genuine alpha, never a painted checkerboard. Exact object order, left to right in each row: Row 1: [a slender ivory wand with a white gem; a charred wood wand with a red ember tip; a silver wand with a pale blue ice point; a twisted copper wand with forked blue crystal]. Row 2: [a black metal wand with long violet crystal; a gold wand holding a clear faceted prism; a corroded copper wand with a green glass orb; a thick root wand with a brown stone head]. Row 3: [a steel wand ending in a broad grey hammer-shaped head; a black thorn wand with purple eye-shaped stone; a bronze wand holding a small blue carved obelisk; a living twig wand with two green leaves]. Row 4: [a dark red wand with a ruby heart-shaped inset; a single wood dart with white feather fletching; a short length of heavy ethereal silver chain; a burning wooden torch wrapped in linen]."
+    },
+    {
+      "file": "sources/items/rings.png",
+      "names": [
+        "RING_GARNET",
+        "RING_RUBY",
+        "RING_TOPAZ",
+        "RING_EMERALD",
+        "RING_ONYX",
+        "RING_OPAL",
+        "RING_TOURMALINE",
+        "RING_SAPPHIRE",
+        "RING_AMETHYST",
+        "RING_QUARTZ",
+        "RING_AGATE",
+        "RING_DIAMOND",
+        "IRON_KEY",
+        "GOLDEN_KEY",
+        "CRYSTAL_KEY",
+        "WORN_KEY"
+      ],
+      "prompt": "Use case: stylized-concept. Production inventory source sheet for an original dark fantasy RPG. REAL TRANSPARENT RGBA PNG 1280x1280. Exact 4 columns by 4 rows of sixteen isolated objects, one centered object per cell with 15% clear margins. No grid lines, labels, writing, borders, figures, hands, scenery or cast shadows. Realistic PAINTED worn materials, broad readable shapes and warm directional highlights, dark edge shading without black cartoon outlines. Not pixel art; no borrowed franchise designs. Long implements fit diagonally entirely within their own cell. Equal cell sizes and consistent spacing; genuine alpha, never a painted checkerboard. Exact object order, left to right in each row: Row 1: [a dark red garnet set in a silver ring; a bright red ruby set in a gold ring; an amber topaz set in a silver ring; a green emerald set in a silver ring]. Row 2: [a black onyx set in a silver ring; a pale iridescent opal set in a silver ring; a pink tourmaline set in a silver ring; a deep blue sapphire set in a silver ring]. Row 3: [a violet amethyst set in a silver ring; a white quartz crystal set in a dark metal ring; a striped brown agate set in a silver ring; a clear sparkling diamond set in a silver ring]. Row 4: [a plain iron dungeon key; an ornate gold dungeon key; a blue translucent crystal key; a rusted ancient key]."
+    },
+    {
+      "file": "sources/items/potions.png",
+      "names": [
+        "POTION_CRIMSON",
+        "POTION_AMBER",
+        "POTION_GOLDEN",
+        "POTION_JADE",
+        "POTION_TURQUOISE",
+        "POTION_AZURE",
+        "POTION_INDIGO",
+        "POTION_MAGENTA",
+        "POTION_BISTRE",
+        "POTION_CHARCOAL",
+        "POTION_SILVER",
+        "POTION_IVORY",
+        "LIQUID_METAL",
+        "ELIXIR_HONEY",
+        "ELIXIR_MIGHT",
+        "SPARKLING_POTION"
+      ],
+      "prompt": "Use case: stylized-concept. Production inventory source sheet for an original dark fantasy RPG. REAL TRANSPARENT RGBA PNG 1280x1280. Exact 4 columns by 4 rows of sixteen isolated objects, one centered object per cell with 15% clear margins. No grid lines, labels, writing, borders, figures, hands, scenery or cast shadows. Realistic PAINTED worn materials, broad readable shapes and warm directional highlights, dark edge shading without black cartoon outlines. Not pixel art; no borrowed franchise designs. Long implements fit diagonally entirely within their own cell. Equal cell sizes and consistent spacing; genuine alpha, never a painted checkerboard. Exact object order, left to right in each row: Row 1: [a small corked round glass potion bottle filled with crimson red liquid; a small corked round glass potion bottle filled with warm amber orange liquid; a small corked round glass potion bottle filled with golden yellow liquid; a small corked round glass potion bottle filled with jade green liquid]. Row 2: [a small corked round glass potion bottle filled with turquoise liquid; a small corked round glass potion bottle filled with azure blue liquid; a small corked round glass potion bottle filled with deep indigo blue liquid; a small corked round glass potion bottle filled with magenta purple liquid]. Row 3: [a small corked round glass potion bottle filled with bistre brown liquid; a small corked round glass potion bottle filled with charcoal black liquid; a small corked round glass potion bottle filled with metallic silver liquid; a small corked round glass potion bottle filled with ivory white liquid]. Row 4: [a small clay crucible full of molten silver; a tall sealed honey-gold elixir flask; a tall ornate red elixir flask with a broad base; a corked gold-flecked purple sparkling potion bottle]."
+    },
+    {
+      "file": "sources/items/supplies.png",
+      "names": [
+        "WATERSKIN",
+        "BACKPACK",
+        "POUCH",
+        "HOLDER",
+        "BANDOLIER",
+        "HOLSTER",
+        "VIAL",
+        "RATION",
+        "MEAT",
+        "STEAK",
+        "PASTY",
+        "MEAT_PIE",
+        "BLANDFRUIT",
+        "BERRY",
+        "HONEYPOT",
+        "SHATTPOT"
+      ],
+      "prompt": "Use case: stylized-concept. Production inventory source sheet for an original dark fantasy RPG. REAL TRANSPARENT RGBA PNG 1280x1280. Exact 4 columns by 4 rows of sixteen isolated objects, one centered object per cell with 15% clear margins. No grid lines, labels, writing, borders, figures, hands, scenery or cast shadows. Realistic PAINTED worn materials, broad readable shapes and warm directional highlights, dark edge shading without black cartoon outlines. Not pixel art; no borrowed franchise designs. Long implements fit diagonally entirely within their own cell. Equal cell sizes and consistent spacing; genuine alpha, never a painted checkerboard. Exact object order, left to right in each row: Row 1: [a ROUND stitched leather WATER CANTEEN with narrow capped spout and shoulder strap, clearly a water vessel not a backpack; a large worn leather backpack with two shoulder straps; a small drawstring seed pouch; a leather cylindrical scroll case with a rolled parchment inside]. Row 2: [a leather bandolier belt holding tiny glass bottles; a narrow leather holster holding two wooden wands; a small delicate round dew vial with silver stopper and blue water; a ration of bread and dried meat wrapped in tan cloth]. Row 3: [a raw red meat joint on bone; a cooked brown steak; a golden crescent baked pasty; a round browned meat pie]. Row 4: [a pale yellow pear-shaped fruit; a cluster of ripe red berries with two leaves; a stoppered terracotta honey jar with gold wax; a broken terracotta honey jar with large missing pieces]."
+    },
+    {
+      "file": "sources/items/treasures.png",
+      "names": [
+        "BONES",
+        "REMAINS",
+        "TOMB",
+        "GRAVE",
+        "CHEST",
+        "LOCKED_CHEST",
+        "CRYSTAL_CHEST",
+        "EBONY_CHEST",
+        "ANKH",
+        "SEAL",
+        "BEACON",
+        "MASK",
+        "CROWN",
+        "AMULET",
+        "MASTERY",
+        "KIT"
+      ],
+      "prompt": "Use case: stylized-concept. Production inventory source sheet for an original dark fantasy RPG. REAL TRANSPARENT RGBA PNG 1280x1280. Exact 4 columns by 4 rows of sixteen isolated objects, one centered object per cell with 15% clear margins. No grid lines, labels, writing, borders, figures, hands, scenery or cast shadows. Realistic PAINTED worn materials, broad readable shapes and warm directional highlights, dark edge shading without black cartoon outlines. Not pixel art; no borrowed franchise designs. Long implements fit diagonally entirely within their own cell. Equal cell sizes and consistent spacing; genuine alpha, never a painted checkerboard. Exact object order, left to right in each row: Row 1: [a small scattered pile of ivory bones; a human skull with a few charred bones; a carved rectangular stone sarcophagus viewed from above at an angle; an upright worn gravestone on a small earth mound]. Row 2: [a plain wooden chest with iron bands; a wooden chest with a large GOLD padlock; a pale blue translucent crystal treasure chest; a black ebony chest with dark iron ribs]. Row 3: [a small golden ankh; a cracked red wax seal; a brass lantern holding a blue crystal light; a sinister red carved wooden mask]. Row 4: [a battered gold crown; an original golden sunburst amulet with a small green center; a closed leather book with a gold clasp; an open leather toolkit roll with small tools]."
+    },
+    {
+      "file": "sources/items/artifacts.png",
+      "names": [
+        "ARTIFACT_CLOAK",
+        "ARTIFACT_ARMBAND",
+        "ARTIFACT_CAPE",
+        "ARTIFACT_TALISMAN",
+        "ARTIFACT_HOURGLASS",
+        "ARTIFACT_SPELLBOOK",
+        "ARTIFACT_HORN1",
+        "ARTIFACT_CHALICE1",
+        "ARTIFACT_SANDALS",
+        "ARTIFACT_SHOES",
+        "ARTIFACT_BOOTS",
+        "ARTIFACT_GREAVES",
+        "ARTIFACT_ROSE1",
+        "ARTIFACT_TOME",
+        "ARTIFACT_KEY",
+        "SPYGLASS"
+      ],
+      "prompt": "Use case: stylized-concept. Production inventory source sheet for an original dark fantasy RPG. REAL TRANSPARENT RGBA PNG 1280x1280. Exact 4 columns by 4 rows of sixteen isolated objects, one centered object per cell with 15% clear margins. No grid lines, labels, writing, borders, figures, hands, scenery or cast shadows. Realistic PAINTED worn materials, broad readable shapes and warm directional highlights, dark edge shading without black cartoon outlines. Not pixel art; no borrowed franchise designs. Long implements fit diagonally entirely within their own cell. Equal cell sizes and consistent spacing; genuine alpha, never a painted checkerboard. Exact object order, left to right in each row: Row 1: [a charcoal hooded cloak; a thick ornate bronze armband; a red and gold ceremonial cape; a carved bronze talisman on cord]. Row 2: [a brass hourglass with pale sand; a closed violet spellbook with silver corner plates; a small curved ivory horn containing a little food; a dark red goblet with silver rim]. Row 3: [a pair of simple leather sandals with tiny green shoots; a pair of brown leather shoes with small green leaves; a pair of tall leather boots with vines; a pair of ornate iron greaves with green leaves]. Row 4: [one dried red rose; a thick ivory prayer tome with golden clasps; a mysterious dark iron master key; a brass telescoping spyglass]."
+    },
+    {
+      "file": "sources/items/trinkets.png",
+      "names": [
+        "RAT_SKULL",
+        "PARCHMENT_SCRAP",
+        "PETRIFIED_SEED",
+        "EXOTIC_CRYSTALS",
+        "MOSSY_CLUMP",
+        "SUNDIAL",
+        "CLOVER",
+        "TRAP_MECHANISM",
+        "MIMIC_TOOTH",
+        "WONDROUS_RESIN",
+        "EYE_OF_NEWT",
+        "SALT_CUBE",
+        "BLOOD_VIAL",
+        "OBLIVION_SHARD",
+        "CHAOTIC_CENSER",
+        "FERRET_TUFT"
+      ],
+      "prompt": "Use case: stylized-concept. Production inventory source sheet for an original dark fantasy RPG. REAL TRANSPARENT RGBA PNG 1280x1280. Exact 4 columns by 4 rows of sixteen isolated objects, one centered object per cell with 15% clear margins. No grid lines, labels, writing, borders, figures, hands, scenery or cast shadows. Realistic PAINTED worn materials, broad readable shapes and warm directional highlights, dark edge shading without black cartoon outlines. Not pixel art; no borrowed franchise designs. Long implements fit diagonally entirely within their own cell. Equal cell sizes and consistent spacing; genuine alpha, never a painted checkerboard. Exact object order, left to right in each row: Row 1: [a small rat skull with long snout; a torn scrap of aged parchment; a fossilized large seed; a cluster of small differently coloured crystals]. Row 2: [a small lump of rich green moss; a miniature weathered bronze sundial; a four-leaf green clover; a small dismantled iron spring trap mechanism]. Row 3: [a large crooked mimic tooth; a translucent amber resin lump; a small green eye suspended in a tiny clear vessel; a rough white salt crystal cube]. Row 4: [a narrow sealed vial of dark red blood; a jagged black glass shard edged faint violet; a brass hanging incense censer; a small tuft of cream and brown ferret fur]."
+    },
+    {
+      "file": "sources/items/bombs.png",
+      "names": [
+        "BOMB",
+        "DBL_BOMB",
+        "FIRE_BOMB",
+        "FROST_BOMB",
+        "REGROWTH_BOMB",
+        "SMOKE_BOMB",
+        "FLASHBANG",
+        "HOLY_BOMB",
+        "WOOLY_BOMB",
+        "NOISEMAKER",
+        "ARCANE_BOMB",
+        "SHRAPNEL_BOMB",
+        "GOLD",
+        "ENERGY",
+        "DEWDROP",
+        "PETAL"
+      ],
+      "prompt": "Use case: stylized-concept. Production inventory source sheet for an original dark fantasy RPG. REAL TRANSPARENT RGBA PNG 1280x1280. Exact 4 columns by 4 rows of sixteen isolated objects, one centered object per cell with 15% clear margins. No grid lines, labels, writing, borders, figures, hands, scenery or cast shadows. Realistic PAINTED worn materials, broad readable shapes and warm directional highlights, dark edge shading without black cartoon outlines. Not pixel art; no borrowed franchise designs. Long implements fit diagonally entirely within their own cell. Equal cell sizes and consistent spacing; genuine alpha, never a painted checkerboard. Exact object order, left to right in each row: Row 1: [a black iron ball bomb with short fuse; two black iron ball bombs tied together; a black bomb with a red band and smouldering fuse; a frost-covered pale blue iron bomb]. Row 2: [a green moss-covered seed bomb; a dark grey smoke grenade; a polished silver flash bomb; a gold-banded ivory bomb]. Row 3: [a wool-wrapped sheep-shaped bomb; a brass noisemaker bomb with bells; a purple-rune iron bomb; a riveted iron canister grenade]. Row 4: [a small heap of gold coins; a small glowing turquoise energy crystal; a clear blue water droplet; a pale rose petal]."
+    }
+  ]
+}

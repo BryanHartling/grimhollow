@@ -61,6 +61,30 @@ import java.nio.Buffer;
 import java.util.HashSet;
 
 public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip.Listener {
+    @Override protected void updateFrame() {
+        super.updateFrame();
+        if (texture != null && texture.fModeMax == com.badlogic.gdx.graphics.GL20.GL_LINEAR) {
+            // Linear filtering must never borrow pixels from an adjacent pose or variant.
+            // Keep the public frame rectangle intact for animation/layout contracts.
+            float insetU=.5f/texture.width, insetV=.5f/texture.height;
+            for (int i=0;i<4;i++) {
+                vertices[i*4+2]=Math.max(frame.left+insetU,Math.min(frame.right-insetU,vertices[i*4+2]));
+                vertices[i*4+3]=Math.max(frame.top+insetV,Math.min(frame.bottom-insetV,vertices[i*4+3]));
+            }
+        }
+    }
+    @Override protected void updateVertices() {
+        super.updateVertices();
+        if (texture != null && texture.fModeMax == com.badlogic.gdx.graphics.GL20.GL_LINEAR) {
+            // Inset the quad by the same half texel as its UVs, retaining pixel-to-world scale.
+            float dx=width/(frame.width()*texture.width)*.5f;
+            float dy=height/(frame.height()*texture.height)*.5f;
+            vertices[0]=vertices[12]=dx;
+            vertices[4]=vertices[8]=width-dx;
+            vertices[1]=vertices[5]=dy;
+            vertices[9]=vertices[13]=height-dy;
+        }
+    }
     @Override public void frame(com.watabou.utils.RectF frame) {
         super.frame(frame);
         if (idle != null && idle.frames != null && idle.frames.length > 0) {

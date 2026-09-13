@@ -1,0 +1,1182 @@
+{
+  "base": "v1.2.0-painted-assets",
+  "note": "Existing sprite frame rectangles only. Shared animation indices have one authored pose; all other atlas pixels remain pinned.",
+  "monsters": [
+    {
+      "name": "rat",
+      "sheet": "sewers-a",
+      "row": 0,
+      "frame": [
+        16,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "attack": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "defeated": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "name": "snake",
+      "sheet": "sewers-a",
+      "row": 1,
+      "frame": [
+        12,
+        11
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "move": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        8,
+        9,
+        10
+      ],
+      "defeated": [
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "gnoll",
+      "sheet": "sewers-a",
+      "row": 2,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        2,
+        3
+      ],
+      "defeated": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "crab",
+      "sheet": "sewers-a",
+      "row": 3,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        0,
+        1,
+        2
+      ],
+      "move": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "attack": [
+        7,
+        8,
+        9
+      ],
+      "defeated": [
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "slime",
+      "sheet": "sewers-prison",
+      "row": 0,
+      "frame": [
+        14,
+        12
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3
+      ],
+      "attack": [
+        4,
+        6,
+        5
+      ],
+      "defeated": [
+        7
+      ]
+    },
+    {
+      "name": "goo",
+      "sheet": "sewers-prison",
+      "row": 1,
+      "frame": [
+        20,
+        14
+      ],
+      "idle": [
+        0,
+        1,
+        2
+      ],
+      "move": [
+        3,
+        4
+      ],
+      "attack": [
+        8,
+        9,
+        10
+      ],
+      "defeated": [
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "name": "thief",
+      "sheet": "sewers-prison",
+      "row": 2,
+      "frame": [
+        12,
+        13
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4
+      ],
+      "attack": [
+        10,
+        11,
+        12
+      ],
+      "defeated": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "name": "skeleton",
+      "sheet": "sewers-prison",
+      "row": 3,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "move": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "attack": [
+        14,
+        15,
+        16
+      ],
+      "defeated": [
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "guard",
+      "sheet": "prison",
+      "row": 0,
+      "frame": [
+        12,
+        16
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        8,
+        9,
+        10
+      ],
+      "defeated": [
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "name": "necromancer",
+      "sheet": "prison",
+      "row": 1,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4
+      ],
+      "attack": [
+        5,
+        6,
+        7,
+        8
+      ],
+      "defeated": [
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "name": "dm100",
+      "sheet": "prison",
+      "row": 2,
+      "frame": [
+        16,
+        14
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "attack": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "defeated": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "name": "tengu",
+      "sheet": "prison",
+      "row": 3,
+      "frame": [
+        14,
+        16
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "attack": [
+        6,
+        7
+      ],
+      "defeated": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "bat",
+      "sheet": "caves",
+      "row": 0,
+      "frame": [
+        15,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [],
+      "attack": [
+        2,
+        3
+      ],
+      "defeated": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "name": "spinner",
+      "sheet": "caves",
+      "row": 1,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3
+      ],
+      "attack": [
+        4,
+        5
+      ],
+      "defeated": [
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "name": "brute",
+      "sheet": "caves",
+      "row": 2,
+      "frame": [
+        12,
+        16
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        2,
+        3
+      ],
+      "defeated": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "shaman",
+      "sheet": "caves",
+      "row": 3,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        2,
+        3
+      ],
+      "defeated": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "dm200",
+      "sheet": "caves-city",
+      "row": 0,
+      "frame": [
+        21,
+        18
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3
+      ],
+      "attack": [
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "defeated": [
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "name": "dm300",
+      "sheet": "caves-city",
+      "row": 1,
+      "frame": [
+        25,
+        22
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2
+      ],
+      "attack": [
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "defeated": []
+    },
+    {
+      "name": "ghoul",
+      "sheet": "caves-city",
+      "row": 2,
+      "frame": [
+        12,
+        14
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        8,
+        9
+      ],
+      "defeated": [
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "monk",
+      "sheet": "caves-city",
+      "row": 3,
+      "frame": [
+        15,
+        14
+      ],
+      "idle": [
+        0,
+        1,
+        2
+      ],
+      "move": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "attack": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "defeated": [
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "warlock",
+      "sheet": "city",
+      "row": 0,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4
+      ],
+      "attack": [
+        5,
+        6
+      ],
+      "defeated": [
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "golem",
+      "sheet": "city",
+      "row": 1,
+      "frame": [
+        17,
+        19
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "attack": [
+        6,
+        7,
+        8
+      ],
+      "defeated": [
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "elemental",
+      "sheet": "city",
+      "row": 2,
+      "frame": [
+        12,
+        14
+      ],
+      "idle": [
+        0,
+        1,
+        2
+      ],
+      "move": [
+        3
+      ],
+      "attack": [
+        4,
+        5,
+        6
+      ],
+      "defeated": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "king",
+      "sheet": "city",
+      "row": 3,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        0,
+        1,
+        2
+      ],
+      "move": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "attack": [
+        9,
+        10,
+        11
+      ],
+      "defeated": [
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "name": "succubus",
+      "sheet": "halls",
+      "row": 0,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        0,
+        1,
+        2
+      ],
+      "move": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "attack": [
+        9,
+        10,
+        11
+      ],
+      "defeated": [
+        12
+      ]
+    },
+    {
+      "name": "eye",
+      "sheet": "halls",
+      "row": 1,
+      "frame": [
+        16,
+        18
+      ],
+      "idle": [
+        0,
+        1,
+        2
+      ],
+      "move": [
+        5,
+        6
+      ],
+      "attack": [
+        3,
+        4
+      ],
+      "defeated": [
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "name": "scorpio",
+      "sheet": "halls",
+      "row": 2,
+      "frame": [
+        17,
+        17
+      ],
+      "idle": [
+        0,
+        1,
+        2
+      ],
+      "move": [
+        5,
+        6
+      ],
+      "attack": [
+        3,
+        4
+      ],
+      "defeated": [
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "ripper",
+      "sheet": "halls",
+      "row": 3,
+      "frame": [
+        15,
+        14
+      ],
+      "idle": [
+        0,
+        1,
+        2
+      ],
+      "move": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "attack": [
+        9,
+        10,
+        11,
+        12
+      ],
+      "defeated": [
+        13,
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "name": "spawner",
+      "sheet": "halls-spirits",
+      "row": 0,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "yog",
+      "sheet": "halls-spirits",
+      "row": 1,
+      "frame": [
+        20,
+        19
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": [
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "name": "piranha",
+      "sheet": "halls-spirits",
+      "row": 2,
+      "frame": [
+        12,
+        16
+      ],
+      "idle": [
+        0,
+        1,
+        2
+      ],
+      "move": [],
+      "attack": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "defeated": [
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "name": "wraith",
+      "sheet": "halls-spirits",
+      "row": 3,
+      "frame": [
+        14,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [],
+      "attack": [
+        2,
+        3
+      ],
+      "defeated": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "name": "dm300-charged",
+      "sheet": "charged-shamans",
+      "row": 0,
+      "frame": [
+        25,
+        22
+      ],
+      "idle": [
+        10,
+        11
+      ],
+      "move": [
+        12
+      ],
+      "attack": [
+        13,
+        14,
+        15
+      ],
+      "defeated": [],
+      "atlas": "dm300"
+    },
+    {
+      "name": "shaman-blue",
+      "sheet": "charged-shamans",
+      "row": 1,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        21,
+        22
+      ],
+      "move": [
+        25,
+        26,
+        27,
+        28
+      ],
+      "attack": [
+        23,
+        24
+      ],
+      "defeated": [
+        29,
+        30,
+        31
+      ],
+      "atlas": "shaman"
+    },
+    {
+      "name": "shaman-purple",
+      "sheet": "charged-shamans",
+      "row": 2,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        42,
+        43
+      ],
+      "move": [
+        46,
+        47,
+        48,
+        49
+      ],
+      "attack": [
+        44,
+        45
+      ],
+      "defeated": [
+        50,
+        51,
+        52
+      ],
+      "atlas": "shaman"
+    },
+    {
+      "name": "shaman-vault",
+      "sheet": "charged-shamans",
+      "row": 3,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        63,
+        64
+      ],
+      "move": [
+        67,
+        68,
+        69,
+        70
+      ],
+      "attack": [
+        65,
+        66
+      ],
+      "defeated": [
+        71,
+        72,
+        73
+      ],
+      "atlas": "shaman"
+    },
+    {
+      "name": "elemental-newborn",
+      "sheet": "elementals",
+      "row": 0,
+      "frame": [
+        12,
+        14
+      ],
+      "idle": [
+        14,
+        15,
+        16
+      ],
+      "move": [
+        17
+      ],
+      "attack": [
+        18,
+        19,
+        20
+      ],
+      "defeated": [
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "atlas": "elemental"
+    },
+    {
+      "name": "elemental-frost",
+      "sheet": "elementals",
+      "row": 1,
+      "frame": [
+        12,
+        14
+      ],
+      "idle": [
+        28,
+        29,
+        30
+      ],
+      "move": [
+        31
+      ],
+      "attack": [
+        32,
+        33,
+        34
+      ],
+      "defeated": [
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "atlas": "elemental"
+    },
+    {
+      "name": "elemental-shock",
+      "sheet": "elementals",
+      "row": 2,
+      "frame": [
+        12,
+        14
+      ],
+      "idle": [
+        42,
+        43,
+        44
+      ],
+      "move": [
+        45
+      ],
+      "attack": [
+        46,
+        47,
+        48
+      ],
+      "defeated": [
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ],
+      "atlas": "elemental"
+    },
+    {
+      "name": "elemental-chaos",
+      "sheet": "elementals",
+      "row": 3,
+      "frame": [
+        12,
+        14
+      ],
+      "idle": [
+        56,
+        57,
+        58
+      ],
+      "move": [
+        59
+      ],
+      "attack": [
+        60,
+        61,
+        62
+      ],
+      "defeated": [
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
+      ],
+      "atlas": "elemental"
+    }
+  ]
+}

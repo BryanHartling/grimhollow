@@ -88,7 +88,29 @@ public final class GameGeometry {
     }
     public static com.watabou.noosa.TextureFilm characterFilm(Object texture, int width, int height) {
         int density=characterDensity(texture);
+        filterPaintedCharacter(texture);
         return new com.watabou.noosa.TextureFilm(texture, width*density, height*density);
+    }
+    private static java.util.Set<String> paintedCharacters;
+    private static final java.util.WeakHashMap<com.watabou.gltextures.SmartTexture,Boolean> filteredCharacters = new java.util.WeakHashMap<>();
+    private static void filterPaintedCharacter(Object source) {
+        com.watabou.gltextures.SmartTexture texture = com.watabou.gltextures.TextureCache.get(source);
+        if(filteredCharacters.containsKey(texture))return;
+        if(paintedCharacters==null){
+            paintedCharacters=new java.util.HashSet<>();
+            com.badlogic.gdx.utils.JsonValue assets=new com.badlogic.gdx.utils.JsonReader().parse(
+                    com.badlogic.gdx.Gdx.files.internal("painted-assets.json")).get("assets");
+            for(com.badlogic.gdx.utils.JsonValue entry:assets)
+                if(entry.name.startsWith("sprites/"))paintedCharacters.add(entry.name);
+        }
+        for(String path:paintedCharacters){
+            if(com.watabou.gltextures.TextureCache.contains(path)
+                    && com.watabou.gltextures.TextureCache.get(path)==texture){
+                texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR,com.badlogic.gdx.graphics.GL20.GL_LINEAR);
+                break;
+            }
+        }
+        filteredCharacters.put(texture,Boolean.TRUE);
     }
     public static com.watabou.noosa.Image heroImage(Object texture) {
         com.watabou.noosa.Image image = new com.watabou.noosa.Image(texture) {

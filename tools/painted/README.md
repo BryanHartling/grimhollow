@@ -1,3 +1,9 @@
+# Living dungeon continuation
+
+`monsters.py` packs 40 authored forms/states into 32 existing monster atlases. `monsters.json` pins source rows, native frame sizes and exact indices; untouched rectangles come from `v1.2.0-painted-assets`. Source alpha connectivity extracts complete sprites even where a limb crosses a nominal grid boundary. Packing fits all poses at one scale per form, anchors their feet, and removes faint downsampling residue. Small offline pose offsets supply breathing/stride variation without changing game animation definitions. Shared character draw UVs have half-texel guards, preventing smooth sampling from leaking another row into a pose while retaining the public frame rectangles. `monsters-prompts.json` records all ten accepted sheets. The rejected opaque checkerboard variant was not imported.
+
+`title.py` packs the crypt painting, transparent engraved wordmark and mist ribbon. `TitleBackground` animates mist, brazier halos and embers from elapsed display time without using gameplay randomness. Existing menu handlers are unchanged. Exact source prompts are in `title-prompts.json`.
+
 # Door and vegetation continuation
 
 `terrain_details.py` assembles matching door families and three readable vegetation states from two new source sheets. `details-prompts.json` records the exact built-in prompts. The upper/lower vegetation slices share one source silhouette, and sideways door thresholds are paving rather than another leaf. Existing terrain IDs, overlays and gameplay transitions remain unchanged.
@@ -14,6 +20,6 @@ Original painted material and prop source sheets are made with the built-in imag
 
 Source generation is an authored step, not a reproducible AI call. The offline atlas packer is deterministic from the committed source sheets and pinned Git templates. CI never invokes a generator, API, Blender or the rejected artgen loops. Packing consists of cropping, resizing and applying the game's existing tile silhouettes/cutouts. It does not change terrain selection or game rules.
 
-Judge the result in real lit rooms, at play scale. A colour statistic is supporting evidence, not aesthetic approval. The latest review authorizes replacing the title and door artwork. Preserve UI/talent icons, item semantics and approved wall torches. Monster/NPC sheets, class splashes and special quest art stay intact until there is a coherent replacement with all required frames.
+Judge the result in real lit rooms, at play scale. A colour statistic is supporting evidence, not aesthetic approval. The latest review authorizes replacing the title and door artwork. Preserve UI/talent icons, item semantics and approved wall torches. NPC sheets, remaining rare/quest frames and class splashes retain their previous art. All other rectangles on shared monster sheets stay pinned, preserving their identities.
 
-Run: python tools/painted/pack.py (write) or python tools/painted/pack.py --check (verify only). Requires Pillow 12.3.0 and numpy 2.3.5. Twenty-three shipping atlases reconstruct from thirty source sheets and pinned Git layout templates. New artwork is distributed with this project under GPL-3.0-or-later. Image generation is not repeated in CI.
+Run: python tools/painted/pack.py (write) or python tools/painted/pack.py --check (verify only). Requires Pillow 12.3.0 and numpy 2.3.5. Fifty-eight shipping images reconstruct from forty-five source sheets and pinned Git layout templates. New artwork is distributed with this project under GPL-3.0-or-later. Image generation is not repeated in CI.

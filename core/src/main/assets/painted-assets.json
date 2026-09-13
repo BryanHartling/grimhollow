@@ -29,6 +29,16 @@
     "items/wands.png": "1ed7236765e5985f9f5638eae9586d4bb990153d18262f896f6b9f11da48bea9",
     "items/weapons-a.png": "bbfe5b4d5e77adcf88e3e7c88c712e18d4d28b3a7936649780330283a4f63dc3",
     "items/weapons-b.png": "9bbd1c0373663b3259182068b3588e72f49c2a6b6cc4cdaed02b3ad803b83bd3",
+    "monsters/caves-city.png": "60dd3d8fef26ca9d2edacc0bc33089fde4ab225b641c16979a5f98de7e5477f6",
+    "monsters/caves.png": "bf9c5ecc7c1856d37d199a8fa8f644ac80e99144aebba0373782268af3fca348",
+    "monsters/charged-shamans.png": "e97585bc5b98795265ca66b33449f8a92682b5d1e00cca50005fc0ca2fb79abf",
+    "monsters/city.png": "0a991fc19125e5820722a1cb24155c9f53dbfcb39e7db3b70997219a1ec8c584",
+    "monsters/elementals.png": "fc0290b492e56d21fe7cf549847f4454d96bd67f10ca828e6f0b4fc59af5e108",
+    "monsters/halls-spirits.png": "0b2526f63ad5eb7b30c596e6740d00cff6f44fb237802fca174635bae323810a",
+    "monsters/halls.png": "101624cb4b26d9c919cd25789cd404afd274fac917a9559cd5c5b6f18d7d8b67",
+    "monsters/prison.png": "8931af0d51aec3097ac7b899daaf135c1b64e59e5fbf0d904e931ed15d415113",
+    "monsters/sewers-a.png": "1e402ac70d1c17f8d9800e3125702a8f54171cf05becc7cdf1ea23c97a50b101",
+    "monsters/sewers-prison.png": "8bcbbdf0622e75cc28372426d4f2fb56f682a792916d7300d742b2d55c4cb4e4",
     "prison-materials.png": "69e2f5f0680c84a175a8f2e0313f3e0119e1fafd0b0545dbfe8deb4fb961bab4",
     "props.png": "7bc14b1ce174949d144b92c45909858026bfb1c3832748c6f2f53f6fe629ab02",
     "region-props.png": "fcdfa9075ad79fe4e4755a242bbbe4cb29cd579c9d66ab6a6dfd004e3defecde",
@@ -220,6 +230,230 @@
         342
       ],
       "rgba_sha256": "848a7deefa77207112ae60dbe09e3372a0017d8d84f14aac034e1a40eae83559"
+    },
+    "sprites/rat.png": {
+      "size": [
+        1024,
+        256
+      ],
+      "rgba_sha256": "ce9fe0219cebae3f8688150cec4c704d8130aba7c660bd58a5d94e1c63b1e747"
+    },
+    "sprites/snake.png": {
+      "size": [
+        1024,
+        64
+      ],
+      "rgba_sha256": "62b47a35e7af33bc45db1b79591be46a82589f45334162af7098196e02cc1be4"
+    },
+    "sprites/gnoll.png": {
+      "size": [
+        1024,
+        256
+      ],
+      "rgba_sha256": "686fadc5197171cca1aa8369f32172fe92d038da740a7c29ea46950018aae0eb"
+    },
+    "sprites/crab.png": {
+      "size": [
+        1024,
+        256
+      ],
+      "rgba_sha256": "c0decdda0b8ae960905b834c640391f8e060618b0848bab581607a6e5ddcab23"
+    },
+    "sprites/slime.png": {
+      "size": [
+        512,
+        128
+      ],
+      "rgba_sha256": "df541d3689d71c4d696596ad944f6dd50304bc030fdd1ae53d2d599ef2c425b8"
+    },
+    "sprites/goo.png": {
+      "size": [
+        1024,
+        64
+      ],
+      "rgba_sha256": "2e137d87a59a449e8712777d4e7d14322ad0d05b4166ea95b003c1e68f32942c"
+    },
+    "sprites/thief.png": {
+      "size": [
+        1024,
+        128
+      ],
+      "rgba_sha256": "a40ae4544720a9c1422547939b5737f054384c5eb86cbbe72351027fb8835613"
+    },
+    "sprites/skeleton.png": {
+      "size": [
+        1024,
+        128
+      ],
+      "rgba_sha256": "5702e989ecaad78042cd92afb395f4382df9ae30e3a25276404523cc136c5b05"
+    },
+    "sprites/guard.png": {
+      "size": [
+        1024,
+        64
+      ],
+      "rgba_sha256": "c777fb97219f1effac8774185eeb658573c31e3122de23ef3233ed3bb4b47203"
+    },
+    "sprites/necromancer.png": {
+      "size": [
+        1024,
+        256
+      ],
+      "rgba_sha256": "388b1f3e546e6e00e7e56b5f55d06cdff29827676a0f233c47c8d4bb1c59faf8"
+    },
+    "sprites/dm100.png": {
+      "size": [
+        1024,
+        128
+      ],
+      "rgba_sha256": "50f3ee38c509c495e117fea7fbf662fedde16476217410e33810efdb111c2e2d"
+    },
+    "sprites/tengu.png": {
+      "size": [
+        1024,
+        64
+      ],
+      "rgba_sha256": "897b9ede48947497e46cb7498bf593a67db9c2ceb3a604cb926651c4607eb9e1"
+    },
+    "sprites/bat.png": {
+      "size": [
+        512,
+        64
+      ],
+      "rgba_sha256": "a0d74d1b018d5272f4f586f3878cc42b7f1f2e8531221f6092bc2a659cf7bd3b"
+    },
+    "sprites/spinner.png": {
+      "size": [
+        1024,
+        64
+      ],
+      "rgba_sha256": "f92c5aaa09ced274c7f2d14415c3827827192a1e527b6eeca389cfaa216df688"
+    },
+    "sprites/brute.png": {
+      "size": [
+        1024,
+        128
+      ],
+      "rgba_sha256": "7150964496e2f1e1d9d24f8ef3ef411c5861f17ae2d8abe7af311766cb521784"
+    },
+    "sprites/shaman.png": {
+      "size": [
+        1024,
+        256
+      ],
+      "rgba_sha256": "3a1c23a03eb4984291d602ad977f8a91db23c1be52b426e7ec61a03cb901f47a"
+    },
+    "sprites/dm200.png": {
+      "size": [
+        1024,
+        256
+      ],
+      "rgba_sha256": "49d4c26805300780d10e18c161549c6eccfacd07012354d43943aa434b412d2b"
+    },
+    "sprites/dm300.png": {
+      "size": [
+        1024,
+        256
+      ],
+      "rgba_sha256": "1d705bcef55f654fa9ce4fc8125bd1c0ac7c17fa0dd1e695486cdcdb7a2db98d"
+    },
+    "sprites/ghoul.png": {
+      "size": [
+        1024,
+        64
+      ],
+      "rgba_sha256": "c993f97a88c7735bd5bd3f150393a123804429a99043d7173396b55129db91f2"
+    },
+    "sprites/monk.png": {
+      "size": [
+        1024,
+        128
+      ],
+      "rgba_sha256": "5dd77873723712a19037099aa4c1101589572873d93ccd8abc36a99e031f46bf"
+    },
+    "sprites/warlock.png": {
+      "size": [
+        1024,
+        64
+      ],
+      "rgba_sha256": "26f11877034d1446b2ea404bcf3f061115a225d47fcf47d0dbe0be310e6f2db1"
+    },
+    "sprites/golem.png": {
+      "size": [
+        1024,
+        128
+      ],
+      "rgba_sha256": "3530e380c6a9a58fd62b9ce39fd41ec46d7c3ce8e73b99ca03362e8110bde863"
+    },
+    "sprites/elemental.png": {
+      "size": [
+        2048,
+        128
+      ],
+      "rgba_sha256": "0755dbf44120f2c862c9e5e9d42ba8cdea7504b89cf33721e0fbc4aaabead660"
+    },
+    "sprites/king.png": {
+      "size": [
+        1024,
+        64
+      ],
+      "rgba_sha256": "ac1d1ba63a527022e759adbed6a0d9efc863df55638c84bb46afb816bbe1c24a"
+    },
+    "sprites/succubus.png": {
+      "size": [
+        1024,
+        64
+      ],
+      "rgba_sha256": "d268dc9c799ecb95e456b506f6ce712df88ebff3e4584d335ac944549f643cb9"
+    },
+    "sprites/eye.png": {
+      "size": [
+        1024,
+        128
+      ],
+      "rgba_sha256": "ebaf23d8787c581334ebe0c1ce291bd8b919f592a65a8229bda2cda5d258c34c"
+    },
+    "sprites/scorpio.png": {
+      "size": [
+        1024,
+        256
+      ],
+      "rgba_sha256": "157aa9f0586a197ceed6990ec36a20d83f8da25266f21fb025a2070ef2d5d81f"
+    },
+    "sprites/ripper.png": {
+      "size": [
+        1024,
+        64
+      ],
+      "rgba_sha256": "ae1dadaf53b2687c5c3b6cf72be451526d6bb8ea681796b5e6505b9c26a1c255"
+    },
+    "sprites/spawner.png": {
+      "size": [
+        1024,
+        64
+      ],
+      "rgba_sha256": "ad53f6787ed2b296dfc57f1f50ded7320e18f899467ba64ccb1a3fcebd9c4c63"
+    },
+    "sprites/yog.png": {
+      "size": [
+        1024,
+        128
+      ],
+      "rgba_sha256": "4fcb3ace53b7a1220d4035a56f4b5ef1ba39b20da5f23c0dd6b5a1b629cb1b91"
+    },
+    "sprites/piranha.png": {
+      "size": [
+        1024,
+        128
+      ],
+      "rgba_sha256": "29e9f2cc326dcc8388cc09bb8b05d3d07462c6d1c099b799e340647972076c16"
+    },
+    "sprites/wraith.png": {
+      "size": [
+        512,
+        128
+      ],
+      "rgba_sha256": "72055c69a315c55c4be7847eaff0c103422a96b7823e8b5d63da7f7636a686f7"
     }
   }
 }

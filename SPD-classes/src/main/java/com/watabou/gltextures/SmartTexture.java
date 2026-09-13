@@ -22,6 +22,9 @@
 package com.watabou.gltextures;
 
 import com.badlogic.gdx.graphics.Pixmap;
+import static com.badlogic.gdx.graphics.GL20.GL_TEXTURE_2D;
+import static com.badlogic.gdx.graphics.GL20.GL_TEXTURE_MIN_FILTER;
+import static com.badlogic.gdx.graphics.GL20.GL_TEXTURE_MAG_FILTER;
 import com.watabou.glwrap.Texture;
 import com.watabou.utils.RectF;
 
@@ -30,8 +33,10 @@ public class SmartTexture extends Texture {
 	public int width;
 	public int height;
 	
-	public int fModeMin;
-	public int fModeMax;
+	public volatile int fModeMin;
+	public volatile int fModeMax;
+	private int appliedMin = -1;
+	private int appliedMax = -1;
 	
 	public int wModeH;
 	public int wModeV;
@@ -58,6 +63,7 @@ public class SmartTexture extends Texture {
 	@Override
 	protected void generate() {
 		super.generate();
+		appliedMin = appliedMax = -1;
 		bitmap( bitmap );
 		filter( fModeMin, fModeMax );
 		wrap( wModeH, wModeV );
@@ -67,8 +73,20 @@ public class SmartTexture extends Texture {
 	public void filter(int minMode, int maxMode) {
 		fModeMin = minMode;
 		fModeMax = maxMode;
-		if (id != -1)
-			super.filter( fModeMin, fModeMax );
+		// Sprite frames can change on the actor thread (loot, grass drops, summons).
+		// Only bind() runs with the render thread's current OpenGL context.
+	}
+
+	@Override
+	public void bind() {
+		super.bind();
+		int minMode = fModeMin, maxMode = fModeMax;
+		if (appliedMin != minMode || appliedMax != maxMode) {
+			com.badlogic.gdx.Gdx.gl.glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minMode);
+			com.badlogic.gdx.Gdx.gl.glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, maxMode);
+			appliedMin = minMode;
+			appliedMax = maxMode;
+		}
 	}
 
 	@Override

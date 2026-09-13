@@ -1,3 +1,26 @@
+# Native crash repair - v1.3.2
+
+The reported shutdown was reproduced on a private copy of the player's Necromancer save (seed 5039256467331). The unfixed renderer aborted in `SHPD Actor Thread`: `No context is current`, through `Texture.bind -> SmartTexture.filter -> ItemSprite.frame -> Level.drop`. This is a native OpenGL abort, not a game-over or a Java gameplay exception. The user's original save files were left untouched.
+
+The fix defers texture filtering until the rendering thread binds the texture. It covers all existing SmartTexture callers and preserves requested filters across texture recreation. Shipping artwork, gameplay, balance and save formats are unchanged.
+
+Actual checks run for this repair:
+
+- Windows desktop and Android debug: `desktop:dist core:test android:assembleDebug core:smokeRun -PsmokeClass=NECROMANCER --no-daemon`; BUILD SUCCESSFUL in 2m 2s.
+- JUnit: six tests, zero failures/errors/skips, including actor-thread filter requests, render-thread GPU application and texture reload.
+- Necromancer class-only headless: `Runs=10 failures=0`.
+- Copied saved-level renderer: 150 actions, 128 movement steps, 21 attack actions; actor-thread item drops/pickup and skeleton summon; 120 frames rendered after forced death; failures=0. This opt-in fixture grants 1000 health to extend coverage; it is not a campaign/balance playtest.
+- Fresh ordinary dungeon (seed 417): 150 actions, 126 movement steps, 24 attack actions; actor drops/pickup/summon and 120 death frames; failures=0.
+- Final renderer geometry: nine heroes, 114 monster sprites, 381 item IDs, 60 icons; tests 24-26, 34 and 36 failures=0.
+- Final desktop/JAR and Android/APK: all 484 packaged assets match source bytes, mismatches=0. No artwork changed.
+- Compiled menu/network audit: classes=2877, guarded browser sinks=1, HTTP/socket calls=0, failures=0.
+
+The existing desktop fixture now retains hostile AI for this regression and is included in Linux CI. Native failure output and follow-up validation are appended to clean-build.log. Initial fresh-settings replays failed their combat-coverage assertion because first-launch settings created the sealed tutorial room, where search is disabled. The encounter fixture now disables the tutorial in its isolated settings before generating a normal level; it also permits normal item pickups/search input. No acceptance threshold was lowered.
+
+Tests 1-47 retain the full status table below, except that test 2 now builds version 1.3.2/code 942, the JUnit count is six, and the current Necromancer-only result is 10/0. Other historical checks are retained results unless explicitly rerun above. Test 45 remains an enforced known failure; no art was changed to address it. Exact final-tag CI is reported with delivery.
+
+---
+
 # Living dungeon acceptance - v1.3.1
 
 The v1.3.1 follow-up anchors health bars and status icons to visible standing-body bounds. Its final build, all 114 monster/nine hero geometry checks, item/placement/menu gates, actual title/monster screenshots and compiled handler audit pass. Art is unchanged from `v1.3.0-living-dungeon` (`5229c1f526821fd9ad414c4873532702e8f70fa4`); the complete local five-region walking/fog/effects run and contrast measurements below were recorded at that checkpoint and are retained. Exact-tag CI repeats those checks.

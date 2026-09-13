@@ -23,6 +23,11 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean sewers;
     private final boolean vault=Boolean.getBoolean("grimhollow.vault");
+    private final boolean encounters=Boolean.getBoolean("grimhollow.encounterTests");
+    private int encounterActions, encounterSteps, encounterAttacks, encounterLastCell=-1;
+    private int[] encounterVisits;
+    private volatile boolean encounterDrops, encounterSummon, encounterDeath;
+    private int encounterDeathFrames;
     private com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultFinalRoom vaultArena;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental vaultBoss;
     private int frames;
@@ -46,6 +51,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         super.create();
         originalLighting=SPDSettings.dynamicLighting();
         originalZoom=SPDSettings.zoom();
+        // A fresh isolated settings directory defaults to the sealed tutorial room.
+        // Encounter coverage requires an ordinary generated dungeon, like the saved run.
+        if(encounters)SPDSettings.intro(false);
     }
     private void capture(String name) {
         Pixmap screenshot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());
@@ -57,6 +65,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     @Override public void render() {
         super.render();
         frames++;
+        if(encounters && frames>180) { encounterTick(); return; }
         if(recovery!=null&&frames>180) {
             if(recovery.tick()) {
                 if(Boolean.getBoolean("grimhollow.geometryTests"))geometryTests();
@@ -78,13 +87,20 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(reviewRegion==0)RecoveryChecks.linkHandlers();
             }
             if (!sewers) { Gdx.app.exit(); return; }
-            GamesInProgress.selectedClass=(vault||Boolean.getBoolean("grimhollow.renderPoc"))?HeroClass.NECROMANCER:HeroClass.WARRIOR;
+            GamesInProgress.selectedClass=(encounters||vault||Boolean.getBoolean("grimhollow.renderPoc"))?HeroClass.NECROMANCER:HeroClass.WARRIOR;
             GamesInProgress.curSlot=99;
-            if(recovery!=null) recovery.prepare();
+            if(encounters && Integer.getInteger("grimhollow.saveSlot",0)>0) {
+                try {
+                    GamesInProgress.curSlot=Integer.getInteger("grimhollow.saveSlot");
+                    Dungeon.loadGame(GamesInProgress.curSlot);
+                    Dungeon.switchLevel(Dungeon.loadLevel(GamesInProgress.curSlot),Dungeon.hero.pos);
+                } catch(java.io.IOException e) { throw new AssertionError(e); }
+            }
+            else if(recovery!=null) recovery.prepare();
             else if(vault) vaultRoom();
             else if(Boolean.getBoolean("grimhollow.iteration")) iterationRoom();
             else {
-                Dungeon.seed=417;
+                Dungeon.seed=Long.getLong("grimhollow.seed",417L);
                 Dungeon.init();
                 Dungeon.switchLevel(Dungeon.newLevel(),-1);
                 if(Boolean.getBoolean("grimhollow.renderPoc"))pocRoom();
@@ -126,6 +142,98 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             System.out.println("PASS: "+(vault?"Vault":"Sewer")+" scene renders with dynamic lighting on and off.");
             Gdx.app.exit();
         }
+    }
+
+    /** Exercise real movement/combat with mobs retained, using an isolated save home. */
+    private void encounterTick() {
+        if(!(Game.scene() instanceof GameScene)||frames<240)return;
+        if(frames>36000)throw new AssertionError("Encounter replay stalled");
+        if(encounterDeath) {
+            if(++encounterDeathFrames<120)return;
+            if(Dungeon.hero.isAlive()||!encounterDrops||!encounterSummon)throw new AssertionError("Incomplete encounter/death coverage");
+            System.out.println("ENCOUNTERS actions="+encounterActions+" steps="+encounterSteps+" attacks="+encounterAttacks
+                    +" actorDrops=true actorPickup=true summon=true deathFrames="+encounterDeathFrames+" failures=0");
+            Gdx.app.exit();return;
+        }
+        if(!Dungeon.hero.isAlive())throw new AssertionError("Encounter hero died after "+encounterActions+" actions");
+        if(!Dungeon.hero.ready||Dungeon.hero.sprite.isMoving||frames%6!=0)return;
+        Level level=Dungeon.level;
+        if(encounterVisits==null) {
+            encounterVisits=new int[level.length()];
+            encounterLastCell=Dungeon.hero.pos;
+            System.out.println("ENCOUNTER START class="+Dungeon.hero.heroClass+" seed="+Dungeon.seed+" pos="+Dungeon.hero.pos);
+            if(Boolean.getBoolean("grimhollow.encounterFixture")) {
+                // Extra health is confined to this opt-in renderer fixture, not normal play.
+                Dungeon.hero.HT=Dungeon.hero.HP=1000;
+                System.out.println("ENCOUNTER FIXTURE health=1000; terrain and hostile AI retained");
+                com.shatteredpixel.shatteredpixeldungeon.actors.Actor.add(new com.shatteredpixel.shatteredpixeldungeon.actors.Actor() {
+                    { actPriority=VFX_PRIO; }
+                    @Override protected boolean act() {
+                        for(int offset:com.watabou.utils.PathFinder.NEIGHBOURS8) {
+                            int cell=Dungeon.hero.pos+offset;
+                            if(level.insideMap(cell)&&level.passable[cell]&&!level.avoid[cell]&&level.findMob(cell)==null
+                                    &&!level.heaps.containsKey(cell)&&cell!=Dungeon.hero.pos) {
+                                com.shatteredpixel.shatteredpixeldungeon.items.Heap heap=level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.food.Food(),cell);
+                                heap.drop(new com.shatteredpixel.shatteredpixeldungeon.items.Gold());
+                                // Removing the top item changes the already uploaded atlas frame.
+                                if(heap.pickUp()==null)throw new AssertionError("Actor pickup failed");
+                                encounterDrops=true;
+                                encounterSummon=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroSkeleton.raise(cell,false,false)!=null;
+                                break;
+                            }
+                        }
+                        com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(this);return true;
+                    }
+                });
+            }
+        }
+        if(encounterLastCell!=Dungeon.hero.pos) {encounterSteps++;encounterLastCell=Dungeon.hero.pos;}
+        encounterVisits[Dungeon.hero.pos]++;
+        if(encounterActions>=150) {
+            if(encounterSteps<50||encounterAttacks==0)throw new AssertionError("Insufficient live encounter coverage");
+            if(!Boolean.getBoolean("grimhollow.encounterFixture")) {
+                System.out.println("ENCOUNTER REPLAY actions="+encounterActions+" steps="+encounterSteps+" attacks="+encounterAttacks+" failures=0");
+                Gdx.app.exit();return;
+            }
+            com.shatteredpixel.shatteredpixeldungeon.actors.Actor.add(new com.shatteredpixel.shatteredpixeldungeon.actors.Actor() {
+                { actPriority=VFX_PRIO; }
+                @Override protected boolean act() {
+                    Dungeon.hero.HP=0;Dungeon.hero.die(this);
+                    encounterDeath=true;com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(this);return true;
+                }
+            });
+            Dungeon.hero.rest(false);return;
+        }
+        int destination=-1;
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:level.mobs)
+            if(mob.isAlive()&&mob.alignment==com.shatteredpixel.shatteredpixeldungeon.actors.Char.Alignment.ENEMY
+                    &&level.heroFOV[mob.pos]&&level.adjacent(Dungeon.hero.pos,mob.pos)) {
+                destination=mob.pos;encounterAttacks++;break;
+            }
+        if(destination<0) {
+            int[] previous=new int[level.length()];java.util.Arrays.fill(previous,-1);
+            java.util.ArrayDeque<Integer> queue=new java.util.ArrayDeque<>();
+            int start=Dungeon.hero.pos;previous[start]=start;queue.add(start);
+            int best=-1,bestVisits=Integer.MAX_VALUE;
+            while(!queue.isEmpty()) {
+                int cell=queue.remove();
+                if(cell!=start&&encounterVisits[cell]<bestVisits) {best=cell;bestVisits=encounterVisits[cell];if(bestVisits==0)break;}
+                for(int offset:com.watabou.utils.PathFinder.NEIGHBOURS8) {
+                    int next=cell+offset;
+                    if(level.insideMap(next)&&previous[next]<0&&(level.passable[next]||level.map[next]==Terrain.SECRET_DOOR)&&!level.avoid[next]
+                            &&!level.traps.containsKey(next)&&level.findMob(next)==null
+                            &&(!level.heaps.containsKey(next)||level.heaps.get(next).type==com.shatteredpixel.shatteredpixeldungeon.items.Heap.Type.HEAP)
+                            &&level.map[next]!=Terrain.EXIT) {previous[next]=cell;queue.add(next);}
+                }
+            }
+            if(best>=0) {while(previous[best]!=start)best=previous[best];destination=best;}
+        }
+        if(!Boolean.getBoolean("grimhollow.encounterFixture")||encounterActions%25==0)
+            System.out.println("ENCOUNTER action="+encounterActions+" pos="+Dungeon.hero.pos+" to="+destination+" hp="+Dungeon.hero.HP);
+        encounterActions++;
+        if(destination<0)Dungeon.hero.rest(false);
+        else if(level.map[destination]==Terrain.SECRET_DOOR)Dungeon.hero.search(true);
+        else if(Dungeon.hero.handle(destination))Dungeon.hero.next();
     }
 
     /** Reuse the real renderer for v4 arena spawning, three forms and door-unlock behavior. */

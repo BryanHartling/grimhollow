@@ -2,6 +2,8 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), now incorporating **v4.0.0**, commit `2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`. The fork began at v3.3.8; upstream history and Java packages are preserved.
 
+**Crash fix v1.3.2:** texture filtering is applied when the render thread binds a texture. Item drops, pickups, summons and death effects no longer invoke OpenGL from the actor thread. Art and gameplay are unchanged.
+
 **Living dungeon v1.3.1:** matching open/closed/locked/crystal doors, distinct tall/parted/flattened vegetation, a painted crypt title with drifting mist, warm braziers and embers, and 32 painted monster atlas families (40 forms/states including charged DM-300, every shaman color and every elemental). Health bars and status icons now follow visible body bounds instead of transparent pose padding. The nine painted heroes and 202 inventory cells carry forward. Gameplay, balance, content, input, camera geometry and existing monster animation timings/callbacks are unchanged.
 
 Forty-five authored source sheets and exact built-in imagegen prompts are in [tools/painted](tools/painted/README.md). `python tools/painted/pack.py` rebuilds 58 shipping images offline; `--check` validates every pixel, source hash and named item contract. Generation services and Blender are not needed for builds or CI. See the [visual review](verification/painted-world.html), [monster board](verification/monsters.png), [terrain states](verification/terrain-states.png) and [actual title capture](verification/title.png). NPCs, remaining rare/quest creature frames, class splashes, some inventory families, UI/talent icons and approved wall torches retain their prior artwork.
@@ -28,7 +30,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-1.3.1.jar
+java -jar desktop\build\libs\desktop-1.3.2.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.
@@ -65,9 +67,9 @@ The exact debug application ID is `com.grimhollow.dungeon` (no `.indev` suffix);
 . .\tools\env.ps1
 .\gradlew.bat core:test core:smokeRun -PsmokeUpstream=true -PdesktopOnly=true --no-daemon
 python tools/recovery_assets.py --check
-java "-Dgrimhollow.recovery=true" "-Dgrimhollow.fogTests=true" "-Dgrimhollow.region=0" "-Dgrimhollow.geometryTests=true" "-Dgrimhollow.effectsTests=true" -jar desktop/build/libs/desktop-1.3.1.jar --smoke-sewers
+java "-Dgrimhollow.recovery=true" "-Dgrimhollow.fogTests=true" "-Dgrimhollow.region=0" "-Dgrimhollow.geometryTests=true" "-Dgrimhollow.effectsTests=true" -jar desktop/build/libs/desktop-1.3.2.jar --smoke-sewers
 python tools/recovery_checks.py --all-regions
-python tools/recovery_checks.py --jar desktop/build/libs/desktop-1.3.1.jar
+python tools/recovery_checks.py --jar desktop/build/libs/desktop-1.3.2.jar
 ```
 
 Repeat the recovery renderer with region indices 1–4 for Prison, Caves, City and Halls. It walks normal adjacent moves on generated terrain in diagnostic slot 99, captures remembered terrain and verifies remembered-cell fog compositing. Test 47 checks all pixels of every visible and never-seen cell in five generated regions, before and after walking, at three zooms and four camera offsets, plus the shared wall-light shader during intermediate door frames. Test 25 pins every named item/identification index to existing atlas pixels and checks all section 9 items. Waterskin maps to its painted capped leather canteen at 480. Potion bottle colours retain their randomized identification mapping. Test 45 measures every pair of types in each lit room, including decor; failures remain active in CI. Test 44 reconstructs expected pixels in memory from Git objects and does not overwrite assets. Test 46 inspects compiled invocation sites and exercises actual menu handlers with a recording network adapter.
@@ -75,7 +77,15 @@ Repeat the recovery renderer with region indices 1–4 for Prison, Caves, City a
 
 The optional desktop probe renders actual OpenGL frames into `.local/acceptance/` and exits. The Sewer probe uses test save slot 99. The default headless gate targets the three new heroes. `-PsmokeUpstream=true` runs all nine classes, including the six retained classes: generate floors 1–6, save/load, ten seeds each. This diagnostic does not count as new-class acceptance or simulated combat.
 
-The same headless gate now checks City/Vault generation, mirror rewards, equipment and charge restoration, save/load, quest completion/shop state and serialization of the six new enchantments/curses. `java "-Dgrimhollow.vault=true" -jar desktop/build/libs/desktop-1.3.1.jar --smoke-sewers` exercises the real Vault arena trigger, its three rendered boss forms and scripted death/door unlocking. These checks do not constitute a player-driven quest or boss fight. Gradle 9.5.0 and Android Gradle Plugin 9.2.0 are inherited from v4 and run with the existing JDK 17/SDK 36 toolchain; use `--no-daemon` for every local Gradle invocation.
+The same headless gate now checks City/Vault generation, mirror rewards, equipment and charge restoration, save/load, quest completion/shop state and serialization of the six new enchantments/curses. `java "-Dgrimhollow.vault=true" -jar desktop/build/libs/desktop-1.3.2.jar --smoke-sewers` exercises the real Vault arena trigger, its three rendered boss forms and scripted death/door unlocking. These checks do not constitute a player-driven quest or boss fight. Gradle 9.5.0 and Android Gradle Plugin 9.2.0 are inherited from v4 and run with the existing JDK 17/SDK 36 toolchain; use `--no-daemon` for every local Gradle invocation.
+
+The native-crash regression uses the existing desktop fixture with an isolated, disposable save home:
+
+```powershell
+java "-Duser.home=$PWD/.local/encounters" "-Dgrimhollow.encounterTests=true" "-Dgrimhollow.encounterFixture=true" -jar desktop/build/libs/desktop-1.3.2.jar --smoke-sewers
+```
+
+It keeps hostile AI and normal movement/combat, grants 1000 health for coverage, exercises actor-thread drops/pickup/summoning, and renders a forced death after 150 actions. Normal play never enables this fixture. The JUnit regression separately rejects all OpenGL calls from the actor thread and checks texture reload.
 
 CI runs Linux/Windows desktop builds, JUnit, recovery provenance/handler/room checks, Android packaging, and the headless gates. Failed gates remain active; jars upload even when a later acceptance gate fails. Artifact retention: 14 days.
 

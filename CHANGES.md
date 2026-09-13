@@ -3935,3 +3935,6 @@ Painted monsters v1.3.0: 32 atlas families now include 40 painted forms/states, 
 Smooth character filtering now clamps draw UVs half a texel inside each animation cell while preserving the public frame rectangle. The existing GPU test exposed next-row bleed in Brute, Gnoll, Monk, Necromancer and Thief; its size thresholds are unchanged.
 
 v1.3.1 display follow-up: health bars, target bars and status icons anchor to cached visible standing-body bounds instead of transparent animation-frame padding; actor positions, collisions, targeting, health and combat remain unchanged.
+
+
+v1.3.2 crash fix: defer SmartTexture filtering until the render-thread bind; a copied Necromancer save reproduced a fatal actor-thread OpenGL call through ItemSprite.frame during an item drop. All existing sprite-filter callers now use the same safe path, including loot, pickups, grass drops, summons and death effects. No art, content, combat, balance or save-format changes. The existing JUnit/desktop fixture now covers cross-thread filtering, reload, live encounters and death rendering.

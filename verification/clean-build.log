@@ -4830,3 +4830,553 @@ TEST 46 runtime: title controls=5 credits handlers=4 repository URLs=4 external 
 v1.3.1 packaged assets=484 failures=0
 v1.3.1 JUnit: tests=5 failures=0 errors=0 skipped=0
 TEST 46 final v1.3.1 compiled handlers: classes=2875 guarded browser sinks=1 HTTP/socket calls=0 failures=0
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\crashfix-home\AppData\Roaming\.grimhollow\Grimhollow
+[LWJGL] Version: 3.3.3+941
+	 OS: Windows 11 v10.0
+	JRE: Windows amd64 17.0.20.1
+	JVM: OpenJDK 64-Bit Server VM v17.0.20.1+1 by Eclipse Adoptium
+[LWJGL] Loading JNI library: lwjgl
+	Module: org.lwjgl
+	Loaded from org.lwjgl.librarypath: C:\Users\Hartl\AppData\Local\Temp\lwjgl_Hartl\3.3.3+941\x64\lwjgl.dll
+[LWJGL] Closure Registry: simple
+[LWJGL] Loading library: jemalloc
+	Module: org.lwjgl.jemalloc
+	Loaded from org.lwjgl.librarypath: C:\Users\Hartl\AppData\Local\Temp\lwjgl_Hartl\3.3.3+941\x64\jemalloc.dll
+[LWJGL] MemoryUtil allocator: JEmallocAllocator
+[LWJGL] Loading library: glfw
+	Module: org.lwjgl.glfw
+	Loaded from org.lwjgl.librarypath: C:\Users\Hartl\AppData\Local\Temp\lwjgl_Hartl\3.3.3+941\x64\glfw.dll
+[LWJGL] Loading library: OpenAL
+	Module: org.lwjgl.openal
+	Loaded from org.lwjgl.librarypath: C:\Users\Hartl\AppData\Local\Temp\lwjgl_Hartl\3.3.3+941\x64\OpenAL.dll
+[LWJGL] Loading JNI library: lwjgl_opengl
+	Module: org.lwjgl.opengl
+	Loaded from org.lwjgl.librarypath: C:\Users\Hartl\AppData\Local\Temp\lwjgl_Hartl\3.3.3+941\x64\lwjgl_opengl.dll
+[LWJGL] Loading library: opengl32
+	Module: org.lwjgl.opengl
+	opengl32.dll not found in org.lwjgl.librarypath=C:\Users\Hartl\AppData\Local\Temp\lwjgl_Hartl\3.3.3+941\x64
+	Loaded from system paths: C:\WINDOWS\SYSTEM32\opengl32.dll
+[LWJGL] [GL] OpenGL46 was reported as available but an entry point is missing.
+[LWJGL] [GL] GL_OVR_multiview was reported as available but an entry point is missing.
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+ENCOUNTER START class=NECROMANCER seed=5039256467331 pos=156
+ENCOUNTER action=0 pos=156 to=119 hp=20
+ENCOUNTER action=1 pos=119 to=82 hp=20
+ENCOUNTER action=2 pos=82 to=81 hp=20
+ENCOUNTER action=3 pos=81 to=80 hp=20
+ENCOUNTER action=4 pos=80 to=116 hp=20
+ENCOUNTER action=5 pos=116 to=117 hp=20
+ENCOUNTER action=6 pos=117 to=118 hp=20
+ENCOUNTER action=7 pos=118 to=83 hp=20
+ENCOUNTER action=8 pos=83 to=84 hp=20
+ENCOUNTER action=9 pos=84 to=85 hp=20
+ENCOUNTER action=10 pos=85 to=120 hp=20
+ENCOUNTER action=11 pos=120 to=121 hp=20
+ENCOUNTER action=12 pos=121 to=157 hp=20
+ENCOUNTER action=13 pos=157 to=192 hp=20
+ENCOUNTER action=14 pos=192 to=155 hp=20
+ENCOUNTER action=15 pos=155 to=154 hp=20
+ENCOUNTER action=16 pos=154 to=153 hp=20
+ENCOUNTER action=17 pos=153 to=152 hp=20
+ENCOUNTER action=18 pos=152 to=188 hp=20
+ENCOUNTER action=19 pos=188 to=189 hp=20
+ENCOUNTER action=20 pos=189 to=190 hp=20
+ENCOUNTER action=21 pos=190 to=191 hp=20
+ENCOUNTER action=22 pos=191 to=226 hp=20
+ENCOUNTER action=23 pos=226 to=225 hp=20
+ENCOUNTER action=24 pos=225 to=224 hp=20
+ENCOUNTER action=25 pos=224 to=260 hp=20
+ENCOUNTER action=26 pos=260 to=261 hp=20
+ENCOUNTER action=27 pos=261 to=262 hp=20
+ENCOUNTER action=28 pos=262 to=227 hp=20
+ENCOUNTER action=29 pos=227 to=228 hp=20
+ENCOUNTER action=30 pos=228 to=193 hp=20
+ENCOUNTER action=31 pos=193 to=194 hp=20
+ENCOUNTER action=32 pos=194 to=195 hp=20
+ENCOUNTER action=33 pos=195 to=196 hp=20
+ENCOUNTER action=34 pos=196 to=197 hp=20
+ENCOUNTER action=35 pos=197 to=162 hp=20
+ENCOUNTER action=36 pos=162 to=163 hp=20
+ENCOUNTER action=37 pos=163 to=164 hp=20
+ENCOUNTER action=38 pos=164 to=165 hp=20
+ENCOUNTER action=39 pos=165 to=166 hp=20
+ENCOUNTER action=40 pos=166 to=131 hp=20
+ENCOUNTER action=41 pos=131 to=95 hp=20
+ENCOUNTER action=42 pos=95 to=96 hp=20
+ENCOUNTER action=43 pos=96 to=97 hp=20
+ENCOUNTER action=44 pos=97 to=98 hp=20
+ENCOUNTER action=45 pos=98 to=99 hp=20
+ENCOUNTER action=46 pos=99 to=100 hp=20
+ENCOUNTER action=47 pos=100 to=101 hp=20
+ENCOUNTER action=48 pos=101 to=102 hp=20
+ENCOUNTER action=49 pos=102 to=103 hp=20
+ENCOUNTER action=50 pos=103 to=104 hp=20
+ENCOUNTER action=51 pos=104 to=139 hp=20
+ENCOUNTER action=52 pos=139 to=138 hp=20
+ENCOUNTER action=53 pos=138 to=137 hp=20
+ENCOUNTER action=54 pos=137 to=136 hp=20
+ENCOUNTER action=55 pos=136 to=135 hp=20
+ENCOUNTER action=56 pos=135 to=134 hp=20
+ENCOUNTER action=57 pos=134 to=133 hp=20
+ENCOUNTER action=58 pos=133 to=132 hp=20
+ENCOUNTER action=59 pos=132 to=167 hp=20
+ENCOUNTER action=60 pos=167 to=168 hp=20
+ENCOUNTER action=61 pos=168 to=169 hp=20
+ENCOUNTER action=62 pos=169 to=170 hp=20
+ENCOUNTER action=63 pos=170 to=171 hp=20
+ENCOUNTER action=64 pos=171 to=172 hp=20
+ENCOUNTER action=65 pos=172 to=173 hp=20
+ENCOUNTER action=66 pos=173 to=174 hp=20
+ENCOUNTER action=67 pos=174 to=175 hp=20
+ENCOUNTER action=68 pos=175 to=140 hp=20
+ENCOUNTER action=69 pos=140 to=176 hp=20
+ENCOUNTER action=70 pos=176 to=211 hp=20
+ENCOUNTER action=71 pos=211 to=212 hp=20
+ENCOUNTER action=72 pos=212 to=247 hp=20
+ENCOUNTER action=73 pos=247 to=246 hp=20
+ENCOUNTER action=74 pos=246 to=281 hp=20
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+ENCOUNTER action=75 pos=281 to=280 hp=20
+ENCOUNTER action=76 pos=281 to=280 hp=18
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+ENCOUNTER action=77 pos=281 to=280 hp=16
+ENCOUNTER action=78 pos=281 to=280 hp=14
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+ENCOUNTER action=79 pos=281 to=280 hp=14
+ENCOUNTER action=80 pos=281 to=280 hp=12
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+ENCOUNTER action=81 pos=281 to=280 hp=11
+ENCOUNTER action=82 pos=281 to=280 hp=10
+[GAME] You defeated sewer snake.
+ENCOUNTER action=83 pos=281 to=280 hp=10
+[GAME] ** You are bleeding!
+ENCOUNTER action=84 pos=281 to=280 hp=5
+FATAL ERROR in native method: Thread[SHPD Actor Thread,5,main]: No context is current or a function that is not available in the current context was called. The JVM will abort execution.
+	at org.lwjgl.opengl.GL11C.glBindTexture(Native Method)
+	at org.lwjgl.opengl.GL11.glBindTexture(GL11.java:854)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3GL20.glBindTexture(Lwjgl3GL20.java:92)
+	at com.watabou.glwrap.Texture.bind(Texture.java:59)
+	at com.watabou.glwrap.Texture.filter(Texture.java:69)
+	at com.watabou.gltextures.SmartTexture.filter(SmartTexture.java:71)
+	at com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite.frame(ItemSprite.java:54)
+	at com.watabou.noosa.Image.texture(Image.java:71)
+	at com.watabou.noosa.Image.<init>(Image.java:61)
+	at com.watabou.noosa.MovieClip.<init>(MovieClip.java:42)
+	at com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite.<init>(ItemSprite.java:103)
+	at com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite.<init>(ItemSprite.java:85)
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(java.base@17.0.20.1/Native Method)
+	at jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(java.base@17.0.20.1/NativeConstructorAccessorImpl.java:77)
+	at jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(java.base@17.0.20.1/DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstanceWithCaller(java.base@17.0.20.1/Constructor.java:500)
+	at java.lang.reflect.ReflectAccess.newInstance(java.base@17.0.20.1/ReflectAccess.java:128)
+	at jdk.internal.reflect.ReflectionFactory.newInstance(java.base@17.0.20.1/ReflectionFactory.java:347)
+	at java.lang.Class.newInstance(java.base@17.0.20.1/Class.java:647)
+	at com.badlogic.gdx.utils.reflect.ClassReflection.newInstance(ClassReflection.java:93)
+	at com.watabou.utils.Reflection.newInstance(Reflection.java:40)
+	at com.watabou.noosa.Group.recycle(Group.java:190)
+	- locked <0x0000000622314510> (a com.watabou.noosa.Group)
+	at com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.addHeapSprite(GameScene.java:1114)
+	at com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.add(GameScene.java:1214)
+	at com.shatteredpixel.shatteredpixeldungeon.levels.Level.drop(Level.java:1039)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero.reallyDie(Hero.java:2309)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero.die(Hero.java:2261)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.Char.damage(Char.java:1099)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero.damage(Hero.java:1699)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bleeding.act(Bleeding.java:109)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.Actor.process(Actor.java:303)
+	at com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene$4.run(GameScene.java:946)
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :desktop:processResources UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :core:processTestResources NO-SOURCE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :services:jar
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest
+
+> Task :SPD-classes:compileJava
+Note: C:\Users\Hartl\Documents\grimhollow\SPD-classes\src\main\java\com\watabou\noosa\TextInput.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: C:\Users\Hartl\Documents\grimhollow\SPD-classes\src\main\java\com\watabou\noosa\TextInput.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :android:processDebugManifest
+> Task :android:copyAndroidNatives
+> Task :android:processDebugManifestForPackage
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes
+> Task :SPD-classes:jar
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:processDebugResources
+
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+> Task :core:compileJava
+
+> Task :core:classes
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :core:compileTestJava
+> Task :core:testClasses
+
+> Task :android:compileDebugJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :core:test
+> Task :android:mergeDebugJavaResource
+> Task :android:dexBuilderDebug
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+
+> Task :core:smokeRun
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS NECROMANCER seed=0 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+Runs=10 failures=0
+
+> Task :desktop:release
+> Task :desktop:dist
+> Task :android:mergeLibDexDebug
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 2m 2s
+48 actionable tasks: 22 executed, 26 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\crashfix-home\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+ENCOUNTER START class=NECROMANCER seed=5039256467331 pos=156
+ENCOUNTER FIXTURE health=1000; terrain and hostile AI retained
+ENCOUNTER action=0 pos=156 to=119 hp=1000
+ENCOUNTER action=25 pos=193 to=194 hp=1000
+ENCOUNTER action=50 pos=135 to=134 hp=1000
+[GAME] You defeated marsupial rat.
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+ENCOUNTER action=75 pos=281 to=280 hp=990
+[GAME] You defeated sewer snake.
+[GAME] You defeated marsupial rat.
+[GAME] ** You are bleeding!
+[GAME] You defeated albino rat.
+ENCOUNTER action=100 pos=240 to=241 hp=970
+ENCOUNTER action=125 pos=391 to=390 hp=973
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+ENCOUNTERS actions=150 steps=128 attacks=21 actorDrops=true actorPickup=true summon=true deathFrames=120 failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\crashfix-fresh\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+ENCOUNTER START class=NECROMANCER seed=417 pos=756
+ENCOUNTER FIXTURE health=1000; terrain and hostile AI retained
+ENCOUNTER action=0 pos=756 to=723 hp=1000
+ENCOUNTER action=25 pos=755 to=786 hp=1000
+ENCOUNTER action=50 pos=660 to=661 hp=1000
+ENCOUNTER action=75 pos=656 to=657 hp=1000
+ENCOUNTER action=100 pos=756 to=789 hp=1000
+ENCOUNTER action=125 pos=753 to=752 hp=1000
+com.badlogic.gdx.utils.GdxRuntimeException: java.lang.AssertionError: Insufficient live encounter coverage
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:159)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:193)
+Caused by: java.lang.AssertionError: Insufficient live encounter coverage
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.encounterTick(DesktopSmokeProbe.java:189)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:65)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	... 1 more
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:classes UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :desktop:release
+> Task :desktop:dist
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 19s
+9 actionable tasks: 2 executed, 7 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\crashfix-fresh2\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+ENCOUNTER START class=NECROMANCER seed=417 pos=756
+ENCOUNTER FIXTURE health=1000; terrain and hostile AI retained
+ENCOUNTER action=0 pos=756 to=723 hp=1000
+[GAME] You picked up: tome of dungeon mastery.
+[GAME] ++ Select the flashing journal button (J) on the top-right to read the book you just picked up.
+[GAME] You picked up: ration of food.
+ENCOUNTER action=25 pos=725 to=757 hp=1000
+ENCOUNTER action=50 pos=660 to=659 hp=1000
+[GAME] You collect the dewdrop into your waterskin.
+ENCOUNTER action=75 pos=725 to=692 hp=1000
+ENCOUNTER action=100 pos=753 to=752 hp=1000
+ENCOUNTER action=125 pos=688 to=720 hp=1000
+com.badlogic.gdx.utils.GdxRuntimeException: java.lang.AssertionError: Insufficient live encounter coverage
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:159)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:193)
+Caused by: java.lang.AssertionError: Insufficient live encounter coverage
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.encounterTick(DesktopSmokeProbe.java:190)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:65)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	... 1 more
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :desktop:release
+> Task :desktop:dist
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 18s
+9 actionable tasks: 2 executed, 7 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\crashfix-fresh3\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+ENCOUNTER START class=NECROMANCER seed=417 pos=756
+ENCOUNTER FIXTURE health=1000; terrain and hostile AI retained
+ENCOUNTER action=0 pos=756 to=723 hp=1000
+ENCOUNTER action=25 pos=628 to=597 hp=1000
+ENCOUNTER action=50 pos=628 to=597 hp=1000
+ENCOUNTER action=75 pos=628 to=597 hp=1000
+[GAME] ** You are hungry.
+ENCOUNTER action=100 pos=628 to=597 hp=1000
+[GAME] -- You are starving!
+ENCOUNTER action=125 pos=628 to=597 hp=993
+com.badlogic.gdx.utils.GdxRuntimeException: java.lang.AssertionError: Insufficient live encounter coverage
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:159)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:193)
+Caused by: java.lang.AssertionError: Insufficient live encounter coverage
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.encounterTick(DesktopSmokeProbe.java:190)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:65)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	... 1 more
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :desktop:release
+> Task :desktop:dist
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 18s
+9 actionable tasks: 2 executed, 7 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\crashfix-fresh4\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+ENCOUNTER START class=NECROMANCER seed=417 pos=756
+ENCOUNTER FIXTURE health=1000; terrain and hostile AI retained
+ENCOUNTER action=0 pos=756 to=723 hp=1000
+[GAME] You picked up: tome of dungeon mastery.
+[GAME] ++ Select the flashing journal button (J) on the top-right to read the book you just picked up.
+[GAME] You defeated marsupial rat.
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+ENCOUNTER action=25 pos=428 to=395 hp=992
+[GAME] You defeated sewer snake.
+[GAME] You defeated marsupial rat.
+[GAME] You defeated marsupial rat.
+ENCOUNTER action=50 pos=300 to=299 hp=989
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+[GAME] You defeated sewer snake.
+ENCOUNTER action=75 pos=520 to=519 hp=990
+[GAME] You picked up: scroll of LAGUZ.
+ENCOUNTER action=100 pos=616 to=585 hp=993
+ENCOUNTER action=125 pos=838 to=870 hp=995
+[GAME] ++ Level up! +Accuracy, +Evasion, +5 HP!
+[GAME] ++ +1 Talent Point!
+[GAME] You defeated marsupial rat.
+ENCOUNTERS actions=150 steps=126 attacks=24 actorDrops=true actorPickup=true summon=true deathFrames=120 failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\crashfix-geometry\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 24: heroes=9 mob sprites=114 failures=0
+TEST 25 semantics: all 381 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10
+TEST 25: items=381 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+TESTS 24-26, 34, 36 PASS; test 35 retired by recovery
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active

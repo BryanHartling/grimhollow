@@ -174,6 +174,8 @@ def outputs():
         result.update(region_atlas(region,features,raised))
     result['environment/terrain_features.png']=features
     result['environment/raised_terrain.png']=raised
+    from actors import outputs as actors
+    result.update(actors())
     return result
 
 
@@ -184,10 +186,10 @@ def digest(im):
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true')
     args=parser.parse_args();built=outputs();failures=[]
-    sources={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'sources').glob('*.png'))}
+    sources={p.relative_to(HERE/'sources').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'sources').rglob('*.png'))}
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
     for path,im in built.items():
-        expected=(512,512) if '/water' in path else (256,512) if '/raised_terrain' in path else (1024,1024)
+        expected=(1024,512) if path.startswith('sprites/hero_') else (512,512) if '/water' in path else (256,512) if '/raised_terrain' in path else (1024,1024)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         target=ASSETS/path

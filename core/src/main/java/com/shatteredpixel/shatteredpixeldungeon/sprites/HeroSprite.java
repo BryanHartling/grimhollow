@@ -54,6 +54,7 @@ public class HeroSprite extends CharSprite {
 		super();
 		
 		texture( Dungeon.hero.heroClass.spritesheet() );
+		texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR, com.badlogic.gdx.graphics.GL20.GL_LINEAR);
 		updateArmor();
 		
 		link( Dungeon.hero );
@@ -66,6 +67,7 @@ public class HeroSprite extends CharSprite {
 
 	public void disguise(HeroClass cls){
 		texture( cls.spritesheet() );
+		texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR, com.badlogic.gdx.graphics.GL20.GL_LINEAR);
 		updateArmor();
 	}
 	

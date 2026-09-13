@@ -1,5 +1,7 @@
 # Painted presentation pass
 
+The follow-up pass extends this approach to nine heroes. `actors.py` packs 21 poses across eight armor rows from ten painted cutout source sheets. The original HeroSprite pose indices, frame rates and callbacks remain intact. Cloth, leather, mail, scale, plate and class armor use distinct authored torso pieces; heads, sleeves and capes retain each class identity. The offline rig is an atlas compiler only and does not run in the game. Exact prompts are in `actors-prompts.json`.
+
 The September 2026 visual-overhaul request supersedes the recovery run's prohibition on new art. Gameplay, content, animation timings, camera, input, logical 16-unit tiles and fog sampling remain unchanged.
 
 Original painted material and prop source sheets are made with the built-in imagegen tool. Exact prompts are in `prompts.json`; selected, unmodified tool outputs are committed in `sources/`. They contain no Diablo assets. The direction uses worn natural materials, broad value groups, restrained colour and warm light.

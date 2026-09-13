@@ -91,11 +91,13 @@ public final class GameGeometry {
         return new com.watabou.noosa.TextureFilm(texture, width*density, height*density);
     }
     public static com.watabou.noosa.Image heroImage(Object texture) {
-        return new com.watabou.noosa.Image(texture) {
+        com.watabou.noosa.Image image = new com.watabou.noosa.Image(texture) {
             @Override public void frame(com.watabou.utils.RectF frame) {
                 super.frame(frame); width /= HERO_DENSITY; height /= HERO_DENSITY; updateVertices();
             }
         };
+        image.texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR, com.badlogic.gdx.graphics.GL20.GL_LINEAR);
+        return image;
     }
     public static com.watabou.noosa.Image heroImage(Object texture, int x, int y, int w, int h) {
         com.watabou.noosa.Image image = heroImage(texture);

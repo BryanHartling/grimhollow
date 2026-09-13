@@ -2,6 +2,9 @@
 
 Upstream history retained; branch `grimhollow`. Each changed path is listed below.
 
+- Painted continuation: nine complete hero atlases use original painted cutout parts and distinct armor overlays; all 21 pose indices, eight tier rows, animation rates and gameplay callbacks are preserved. Hero and portrait filtering is linear; logical tile units and fog are unchanged.
+- Test 44's original-pixel requirement is superseded for the nine named hero atlases by exact reconstruction from committed painted sources; remaining upstream characters retain the original provenance check.
+
 - v1.1.0 visual-overhaul request supersedes the recovery-only art ban; original painted source sheets replace world materials and props while all gameplay, content, tile coordinates and animation timing remain unchanged.
 - `tools/painted/`: eight committed imagegen source atlases and exact prompts; an offline deterministic crop/resize/layout packer produces thirteen atlases without Blender, remote APIs or the rejected procedural iteration loops.
 - `environment/`: distinct painted surfaces for all five regions, matching stairs/wells/vegetation and region-specific props; correct shared terrain/foreground layers; approved Sewer door/torch cells remain byte-for-byte identical in decoded pixels.

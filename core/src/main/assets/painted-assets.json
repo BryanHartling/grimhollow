@@ -2,6 +2,16 @@
   "base": "v1.0.2-fogfix",
   "layout": "v4.0.0",
   "source_sha256": {
+    "actors/armor.png": "1ef17b23b2361f911f04056003ef998afe9869574a5a47988c8a2079cc520d27",
+    "actors/cleric.png": "ca396ccdc3f7c29e0d432f755dd77cf7151a06aac030dc66bf2634106409f794",
+    "actors/duelist.png": "4fc5021fe2078aafffd69013e0aa3c78d1b7e7c62efc42063314edfc0caf98e8",
+    "actors/enchanter.png": "c0e2d1474d6dbc9d427aeb48911ed37d196218ba6cb2446337631fa57813c1ec",
+    "actors/huntress.png": "1b4b7da4b83b2c8d08c4eada3c84acc55f4822006d7886d0c85f365ac98b69bd",
+    "actors/mage.png": "ffa34d8d326e225b93cfbe1b09c36b3cf612d78cb1c45562c2d290cfe1e09221",
+    "actors/necromancer.png": "5c2006965fca010d12f616979f84c7eccdef41ed4b3cb9afe40c6bb1d1709097",
+    "actors/psychic.png": "85abffd17f66c3bf14ab959135eeef66e0b49488a5604a633b071eeee3cc3374",
+    "actors/rogue.png": "1039b33005ba7cf2f49d3c0ec882a10d3f23a80eeaafda58a4095dc8f979f1b7",
+    "actors/warrior.png": "cf1d042e9d648f1188621e218310a63010f16565d0b2f98bd3d10e789b0c7f40",
     "caves-materials.png": "55e4629826ed07495ec5a2ad8b6577ab69f9fb85609161d6c8ca875bf68f75fa",
     "city-materials.png": "f3316e1efa15a6b91712798d1bc54397fdc2563b9f589cdb89d85c275869cafc",
     "details.png": "e00209673cb5d728a3fbc173f1ede610c474d37c8ab7f5f33eae0c56fda72631",
@@ -102,6 +112,69 @@
         512
       ],
       "rgba_sha256": "3cc263a7a4580d6af2feea9758277c4c1e36d393c23240c07e9a104856f7c95b"
+    },
+    "sprites/hero_warrior.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "4e5c950175b595648a1cb92d0447e433f7f81c2dc52e012bf58ff4b1503169aa"
+    },
+    "sprites/hero_mage.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "ef44fcd9a9debed716e908ee74f098258faac766d853c9c4b15e0f4d2c7952a0"
+    },
+    "sprites/hero_rogue.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "3f803f19053f8707de2a1e5bd7456ca87e39df6c6b384db66faf571a8a85f24c"
+    },
+    "sprites/hero_huntress.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "0c237e61eeefc0332cae3347d124d246d4e0464824a31c40755d9e8dea727106"
+    },
+    "sprites/hero_duelist.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "337b9559d314825c7c147a713de25bb0f11cd4b09f6397a7259bfeb5427d173d"
+    },
+    "sprites/hero_cleric.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "a38ce3a8d63727f83e799657f29258d21e3e90100e6e7151462fb9106d391291"
+    },
+    "sprites/hero_necromancer.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "0afe6f10201094c93d8e5b8a7ab6ce2cda0a751986bd9d1891045cd85e326424"
+    },
+    "sprites/hero_enchanter.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "2b37b521546b476d47ad2381ad77b535a2105f2fd11aa789c5c441798494e067"
+    },
+    "sprites/hero_psychic.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "cbe97691101803407b2271fb27f02b3bb59c6fd81de66d2f6e6fe3023e8aad83"
     }
   }
 }

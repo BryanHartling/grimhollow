@@ -155,7 +155,7 @@ def main():
     painted={}
     painted_manifest=ASSETS/'painted-assets.json'
     if args.check and painted_manifest.exists():
-        # The later visual-overhaul request replaces only these world assets.
+        # The later visual-overhaul requests replace these world/hero assets.
         # Verify their complete reconstruction before exempting historical pixels.
         subprocess.run([sys.executable,str(ROOT/'tools/painted/pack.py'),'--check'],cwd=ROOT,check=True)
         painted=json.loads(painted_manifest.read_text(encoding='utf-8'))['assets']

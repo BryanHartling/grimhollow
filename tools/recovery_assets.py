@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import json
 import subprocess
+import sys
 
 from PIL import Image
 
@@ -151,10 +152,19 @@ def main():
     parser.add_argument('--characters',action='store_true'); parser.add_argument('--check',action='store_true')
     args=parser.parse_args()
     entries=json.loads(MANIFEST.read_text(encoding='utf-8')) if MANIFEST.exists() else {}
+    painted={}
+    painted_manifest=ASSETS/'painted-assets.json'
+    if args.check and painted_manifest.exists():
+        # The later visual-overhaul request replaces only these world assets.
+        # Verify their complete reconstruction before exempting historical pixels.
+        subprocess.run([sys.executable,str(ROOT/'tools/painted/pack.py'),'--check'],cwd=ROOT,check=True)
+        painted=json.loads(painted_manifest.read_text(encoding='utf-8'))['assets']
     if args.world: restore_world(entries)
     if args.characters: restore_characters(entries)
     failures=[]; characters=0
     for path,e in sorted(entries.items()):
+        if args.check and path in painted:
+            continue
         expected=reconstruct(e); p=ASSETS/path
         if args.check:
             if not p.exists():
@@ -178,7 +188,7 @@ def main():
                 failures.append('Unaccounted character '+path)
         for name in ('warrior','mage','rogue','huntress','duelist','cleric','necromancer','enchanter','psychic'):
             if (ASSETS/f'splashes/{name}.png').exists():failures.append('Rejected splash still packaged '+name)
-    print(f'TEST 44: upstream-derived character sheets={characters}; restored assets={len(entries)}; failures={len(failures)}')
+    print(f'TEST 44: upstream-derived character sheets={characters}; restored assets={len(entries)-len(painted)}; verified painted replacements={len(painted)}; failures={len(failures)}')
     for failure in failures: print('FAIL:',failure)
     return bool(failures)
 

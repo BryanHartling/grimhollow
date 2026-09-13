@@ -257,6 +257,10 @@ final class RecoveryChecks {
                 if(actual==null)throw new AssertionError("Missing remembered terrain "+type);
                 com.watabou.noosa.TextureFilm film=new com.watabou.noosa.TextureFilm(actual.texture,64,64);
                 com.watabou.utils.RectF a=actual.frame(),b=film.get(expected);
+                // Painted atlas frames address texel centres to prevent bilinear
+                // bleed. Still require the exact expected cell and all four UVs.
+                b.left+=.5f/actual.texture.width;b.right-=.5f/actual.texture.width;
+                b.top+=.5f/actual.texture.height;b.bottom-=.5f/actual.texture.height;
                 if(a.left!=b.left||a.right!=b.right||a.top!=b.top||a.bottom!=b.bottom)
                     throw new AssertionError("Wrong remembered terrain frame "+type+" at "+c);
             }

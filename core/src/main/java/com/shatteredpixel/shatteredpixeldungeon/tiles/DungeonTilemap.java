@@ -41,6 +41,18 @@ public abstract class DungeonTilemap extends Tilemap {
 	public DungeonTilemap(String tex) {
 		super(tex, new TextureFilm( tex, GameGeometry.tileFrame(tex), GameGeometry.tileFrame(tex) ) );
 		cellSize(SIZE, SIZE);
+
+		// Painted texels remain independent of the 16-unit logical tile. Clamp
+		// sampling to texel centres so linear filtering cannot bleed atlas slots.
+		texture.filter(com.watabou.glwrap.Texture.LINEAR, com.watabou.glwrap.Texture.LINEAR);
+		for (int i = 0; i < texture.width / GameGeometry.tileFrame(tex)
+				* (texture.height / GameGeometry.tileFrame(tex)); i++) {
+			com.watabou.utils.RectF uv = tileset.get(i);
+			uv.left += .5f / texture.width;
+			uv.right -= .5f / texture.width;
+			uv.top += .5f / texture.height;
+			uv.bottom -= .5f / texture.height;
+		}
 	}
 
 	@Override

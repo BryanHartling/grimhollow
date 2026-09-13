@@ -1,0 +1,107 @@
+{
+  "base": "v1.0.2-fogfix",
+  "layout": "v4.0.0",
+  "source_sha256": {
+    "caves-materials.png": "55e4629826ed07495ec5a2ad8b6577ab69f9fb85609161d6c8ca875bf68f75fa",
+    "city-materials.png": "f3316e1efa15a6b91712798d1bc54397fdc2563b9f589cdb89d85c275869cafc",
+    "details.png": "e00209673cb5d728a3fbc173f1ede610c474d37c8ab7f5f33eae0c56fda72631",
+    "halls-materials.png": "ca23d09f9bcbcf2bcae30ffc4f906539c5d7a39889f521ce3f537a5661235d00",
+    "prison-materials.png": "69e2f5f0680c84a175a8f2e0313f3e0119e1fafd0b0545dbfe8deb4fb961bab4",
+    "props.png": "7bc14b1ce174949d144b92c45909858026bfb1c3832748c6f2f53f6fe629ab02",
+    "region-props.png": "fcdfa9075ad79fe4e4755a242bbbe4cb29cd579c9d66ab6a6dfd004e3defecde",
+    "sewers-materials.png": "0b951d4ce0bb5902c6a940c1bc56db1173580ca57c33d652c16754dd91c9ddc2"
+  },
+  "assets": {
+    "environment/tiles_sewers.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "80cdc00e83ea4726c310b25f374bb2186d7719f8030356bae7970fa92ffda6fa"
+    },
+    "environment/water0.png": {
+      "size": [
+        512,
+        512
+      ],
+      "rgba_sha256": "2c535c999854f546dfd99a4d6768056f7dcd91d02ece18546e04694b89f99249"
+    },
+    "environment/walls_sewers.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "80cdc00e83ea4726c310b25f374bb2186d7719f8030356bae7970fa92ffda6fa"
+    },
+    "environment/tiles_prison.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "ea14056943bc59075fea3890bca03886e5fc48a0a0996c3196cb823afe3e9810"
+    },
+    "environment/water1.png": {
+      "size": [
+        512,
+        512
+      ],
+      "rgba_sha256": "a4697455489bf2c794991ac664d9b9b580a5040824189956dd8de2d984de0536"
+    },
+    "environment/tiles_caves.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "509f7325269174b87e7b2bddfdf9deb397b48e6949108585baf79a97a93828e5"
+    },
+    "environment/water2.png": {
+      "size": [
+        512,
+        512
+      ],
+      "rgba_sha256": "d8225d96d26f18a9618b7ad10e0cb56d48b59e769935c6e5fdfb68c58e8177a1"
+    },
+    "environment/tiles_city.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "e5d6b7f66a37958dea195d854dcd43e6a9f73bebb926db558776d09a3c4bf2ef"
+    },
+    "environment/water3.png": {
+      "size": [
+        512,
+        512
+      ],
+      "rgba_sha256": "a94a144524c09405ce931ad662b90f28d98f719d7ba967fefcad99369767b84b"
+    },
+    "environment/tiles_halls.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "21af113dcf9b3ddb891bb8f52980629a5855874cacf96d8ac79144b6bd3abf6a"
+    },
+    "environment/water4.png": {
+      "size": [
+        512,
+        512
+      ],
+      "rgba_sha256": "87dbf3e5ff838f8a635e3a76ec5d3e84d854ce028b87d5a9b60560427e1c064c"
+    },
+    "environment/terrain_features.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "750b1ded087a10ee56d00e80fe72d0206ef054c17bafba97aadec716221a7371"
+    },
+    "environment/raised_terrain.png": {
+      "size": [
+        256,
+        512
+      ],
+      "rgba_sha256": "3cc263a7a4580d6af2feea9758277c4c1e36d393c23240c07e9a104856f7c95b"
+    }
+  }
+}

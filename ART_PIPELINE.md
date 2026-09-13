@@ -1,3 +1,11 @@
+# Current painted world presentation
+
+The September 2026 visual-overhaul request authorizes original painted art and supersedes the recovery-only ban below. `tools/painted/README.md` documents the new authored-source workflow. Eight original source atlases and exact imagegen prompts are committed; `python tools/painted/pack.py` deterministically packs them without a generation service or Blender. `--check` validates every pixel and source hash. The rejected procedural loops remain archived.
+
+The five regions now use painted floors, separate wall face/coping materials, organic vegetation, region-specific props, stairs, wells and scrolling water. Existing logical coordinates, terrain IDs, character animations, approved title, Sewer doors/torches, items and UI/talent icons are retained. Test 44 still checks all upstream character pixels and unaffected restoration assets; its historical-world portion is explicitly superseded only for the thirteen reproducibly packed assets in `painted-assets.json`. Test 45 is unchanged and remains a separate room measurement.
+
+---
+
 # Recovery supersession
 
 For v1.0.1, the following pipeline is retained **unused**. Do not regenerate the rejected character/world/liquid art. `tools/recovery_assets.py` restores historical Git pixels; `--check` reconstructs and compares them in memory. `core/src/main/assets/recovery-assets.json` records each source, scale, approved patch and palette swap. Terrain comes from `v0.3.2-fixup2`; v4-only special-room extensions and all character/splash sources come from upstream `v4.0.0`. Approved Sewers door/torch cells come from `v1.0.0-content-complete`. Titles, UI/talent icons and other retained item/effect assets keep their existing provenance.

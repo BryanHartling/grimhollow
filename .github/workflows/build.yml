@@ -30,8 +30,9 @@ jobs:
         run: ./gradlew desktop:dist -PdesktopOnly=true --no-daemon --console=plain
       # Recovery supersedes generated-art tests 3/4/17/18/28-30/35/39-42.
       # Their implementations and historical evidence remain in the repository.
-      # No artgen or Blender production/check loop runs for the restored assets.
-      - name: Upstream pixel provenance (test 44)
+      # Painted world sources are committed; CI verifies the offline packer too.
+      # No generation service, artgen iteration or Blender is required.
+      - name: Character provenance and reproducible painted atlases (test 44)
         run: python tools/recovery_assets.py --check
       - name: JUnit tests including navigation policy
         if: ${{ !cancelled() }}

@@ -2,6 +2,13 @@
 
 Upstream history retained; branch `grimhollow`. Each changed path is listed below.
 
+- v1.1.0 visual-overhaul request supersedes the recovery-only art ban; original painted source sheets replace world materials and props while all gameplay, content, tile coordinates and animation timing remain unchanged.
+- `tools/painted/`: eight committed imagegen source atlases and exact prompts; an offline deterministic crop/resize/layout packer produces thirteen atlases without Blender, remote APIs or the rejected procedural iteration loops.
+- `environment/`: distinct painted surfaces for all five regions, matching stairs/wells/vegetation and region-specific props; correct shared terrain/foreground layers; approved Sewer door/torch cells remain byte-for-byte identical in decoded pixels.
+- `DungeonTilemap.java`, `GameScene.java`: texel-centre atlas guards and linear filtering for painted surfaces; water texture density is four pixels per world unit, while fog stays nearest-sampled at one texel per 16-unit cell.
+- Test 44's historical world-pixel requirement is superseded only for the thirteen painted replacements, which must reconstruct exactly; all 87 upstream character sheets and all other retained recovery assets are still checked. Test 45 thresholds are unchanged.
+- Test 43's exact UV expectation follows the new half-texel sampling inset; it still requires the independently selected terrain index and equality of all four UV coordinates, with no tolerance or skipped terrain types.
+
 - v1.0.2 rendering brief supersedes the suspected diagnosis where evidence differs: FogOfWar already covered 16-unit cells, but linear filtering leaked across visibility boundaries, and the custom wall-light shader retained a stale camera transform.
 - `NoosaScript.java`: cache camera matrix values as well as camera identity, fixing displaced walls/torch surroundings and door-transition pans for custom shaders.
 - `FogOfWar.java`, `GameGeometry.java`: one nearest-sampled visibility texel per logical cell; visible walls use their own FOV; correct fog texture disposal key; light-map sampling is explicitly independent of art resolution.

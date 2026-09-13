@@ -304,6 +304,9 @@ public class GameScene extends PixelScene {
 			}
 		};
 		water.autoAdjust = true;
+		// Painted water has four texture pixels per logical world unit.
+		water.scale(.25f, .25f);
+		water.texture.filter(com.watabou.glwrap.Texture.LINEAR, com.watabou.glwrap.Texture.LINEAR);
 		terrain.add( water );
 
 		ripples = new Group();

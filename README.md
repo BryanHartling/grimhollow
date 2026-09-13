@@ -2,13 +2,17 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), now incorporating **v4.0.0**, commit `2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`. The fork began at v3.3.8; upstream history and Java packages are preserved.
 
-**Rendering fix v1.0.2:** fog has one nearest-sampled texel per 16-unit world cell. Shader camera caches track changing transforms, so walls and lighting follow camera pans and door movement. Mind Vision reuses the existing eye symbol; no asset bytes, gameplay, balance or content changed in this fix.
+**Painted world v1.1.0:** original painted materials and props replace the dense pixel treatment across all five regions. Floors, wall faces/coping, vegetation, stairs, wells, cages, mine structures, statues and water have distinct material identities. Gameplay, balance, content, input, camera geometry and animation timings are unchanged. Animated characters, items, approved title, UI/talent icons and Sewer doors/torches retain their existing artwork.
+
+Eight authored source atlases and their exact built-in imagegen prompts are in [tools/painted](tools/painted/README.md). `python tools/painted/pack.py` rebuilds thirteen shipping atlases offline; `--check` validates every pixel and source hash. Generation services and Blender are not needed for builds or CI. This is an environment art pass, not a claim that all animated character art has been repainted.
+
+**Rendering fix v1.0.2 retained:** fog has one nearest-sampled texel per 16-unit world cell. Shader camera caches track changing transforms, so walls and lighting follow camera pans and door movement. Painted textures use linear filtering with half-texel atlas guards; fog remains nearest-sampled. Mind Vision keeps the corrected eye symbol.
 
 **Recovery baseline v1.0.1:** historical terrain and scrolling water are restored from `v0.3.2-fixup2`; characters use upstream v4 pixels with fixed palette swaps for the new classes. The approved title, Sewers doors/torches and UI/talent icons remain. The art generators and Blender cache are archived in place and are not used for this release. Recovery acceptance is in [RECOVERY-spec-v1.0.1.md](RECOVERY-spec-v1.0.1.md).
 
-The terrain distinctness gate currently fails on restored rooms in all five regions. A passing build is not a claim that recovery acceptance is complete; see [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and [the acceptance report](verification/ACCEPTANCE.md). Actual lit rooms and corridor/turn/door screenshot sequences are in [verification/recovery](verification/recovery/).
+The unchanged numerical terrain distinctness gate is measured separately from art review; see [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and [the acceptance report](verification/ACCEPTANCE.md) for actual results. Actual lit rooms and corridor/turn/door screenshot sequences are in [verification/recovery](verification/recovery/).
 
-All nine heroes, the expanded v4 Imp/Vault quest, new enchantments and curses, and Grimhollow's added content remain unchanged. No gameplay or balance changes are part of this recovery.
+All nine heroes, the expanded v4 Imp/Vault quest, new enchantments and curses, and Grimhollow's added content remain unchanged.
 
 ## Build on Windows
 
@@ -24,7 +28,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-1.0.2.jar
+java -jar desktop\build\libs\desktop-1.1.0.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.

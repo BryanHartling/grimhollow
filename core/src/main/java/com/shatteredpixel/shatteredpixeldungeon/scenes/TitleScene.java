@@ -28,8 +28,6 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.GamesInProgress;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
-import com.shatteredpixel.shatteredpixeldungeon.effects.BannerSprites;
-import com.shatteredpixel.shatteredpixeldungeon.effects.Fireball;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Languages;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.services.news.News;
@@ -64,9 +62,6 @@ import java.util.Date;
 public class TitleScene extends PixelScene {
 
 	private Image title;
-	private Fireball leftFB;
-	private Fireball rightFB;
-	private Image signs;
 
 	private StyledButton btnPlay;
 	private StyledButton btnRankings;
@@ -101,7 +96,10 @@ public class TitleScene extends PixelScene {
 		w -= insets.left + insets.right;
 		h -= insets.top + insets.bottom;
 
-		title = BannerSprites.get( landscape() ? BannerSprites.Type.TITLE_LAND : BannerSprites.Type.TITLE_PORT);
+		title = new Image("interfaces/title_wordmark.png");
+        title.texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR, com.badlogic.gdx.graphics.GL20.GL_LINEAR);
+        float titleWidth=Math.min(w*.82f,240f);
+        title.logicalSize(titleWidth,titleWidth*144f/1024f);
 		add( title );
 
 		float topRegion = Math.max(title.height - 6, h*0.45f);
@@ -110,34 +108,6 @@ public class TitleScene extends PixelScene {
 		title.y = insets.top + 2 + (topRegion - title.height()) / 2f;
 
 		align(title);
-
-		if (landscape()){
-			leftFB = placeTorch(Math.max(32, title.x - 36), title.y + 55);
-			rightFB = placeTorch(Math.min(w - 32, title.x + title.width + 36), title.y + 55);
-		} else {
-			leftFB = placeTorch(title.x + 16, title.y + 110);
-			rightFB = placeTorch(title.x + title.width - 16, title.y + 110);
-		}
-
-		signs = new Image(BannerSprites.get( landscape() ? BannerSprites.Type.TITLE_GLOW_LAND : BannerSprites.Type.TITLE_GLOW_PORT)){
-			private float time = 0;
-			@Override
-			public void update() {
-				super.update();
-				am = Math.max(0f, (float)Math.sin( time += Game.elapsed ));
-				am = Math.min(am, title.am);
-				if (time >= 1.5f*Math.PI) time = 0;
-			}
-			@Override
-			public void draw() {
-				Blending.setLightMode();
-				super.draw();
-				Blending.setNormalMode();
-			}
-		};
-		signs.x = title.x + (title.width() - signs.width())/2f;
-		signs.y = title.y;
-		add( signs );
 
 		final Chrome.Type GREY_TR = Chrome.Type.GREY_BUTTON_TR;
 		
@@ -281,9 +251,6 @@ public class TitleScene extends PixelScene {
 		float alpha = GameMath.gate(0f, uiAlpha, 1f);
 
 		title.am = alpha;
-		leftFB.am = alpha;
-		rightFB.am = alpha;
-		//signs.am = alpha; handles this itself
 
 		btnPlay.enable(alpha != 0);
 		btnRankings.enable(alpha != 0);
@@ -304,16 +271,6 @@ public class TitleScene extends PixelScene {
 			btnExit.icon().alpha(alpha);
 		}
 
-	}
-
-	private Fireball placeTorch(float x, float y ) {
-		Fireball fb = new Fireball();
-		fb.x = x - fb.width()/2f;
-		fb.y = y - fb.height();
-
-		align(fb);
-		add( fb );
-		return fb;
 	}
 
 	private static class SettingsButton extends StyledButton {

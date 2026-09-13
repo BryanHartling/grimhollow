@@ -180,6 +180,8 @@ def outputs():
     result.update(actors())
     from inventory import outputs as inventory
     result.update(inventory())
+    from title import outputs as title
+    result.update(title())
     return result
 
 
@@ -194,6 +196,7 @@ def main():
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
     for path,im in built.items():
         expected=(512,1088) if path=='sprites/items.png' else (1024,512) if path.startswith('sprites/hero_') else (512,512) if '/water' in path else (256,512) if '/raised_terrain' in path else (1024,1024)
+        expected={'interfaces/title_grimhollow.png':(1920,1080),'interfaces/title_wordmark.png':(1024,144),'interfaces/title_mist.png':(1024,342)}.get(path,expected)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         target=ASSETS/path

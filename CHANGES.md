@@ -2,6 +2,8 @@
 
 Upstream history retained; branch `grimhollow`. Each changed path is listed below.
 
+- The main menu now uses an original painted crypt and ivory-metal wordmark with slow camera drift, layered mist, warm brazier flicker and rising embers. Animation uses scene-local elapsed time and no gameplay random calls; all five handlers and the fade control are retained.
+
 - Door/grass review: matching painted door states replace the mixed legacy door family in all five regions; sideways thresholds now contain floor rather than a duplicate closed leaf, and wall-cap masks retain their existing geometry. The new request supersedes the old approved-door lock, while wall torches stay unchanged.
 - Tall, Huntress-rustled and trampled vegetation now use distinct upright, parted and flattened silhouettes in the existing terrain, feature and foreground slots. Growth height extends into the existing upper layer; no terrain flags, drops, visibility rules or Huntress effects change.
 

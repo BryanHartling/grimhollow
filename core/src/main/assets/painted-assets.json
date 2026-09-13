@@ -33,6 +33,9 @@
     "props.png": "7bc14b1ce174949d144b92c45909858026bfb1c3832748c6f2f53f6fe629ab02",
     "region-props.png": "fcdfa9075ad79fe4e4755a242bbbe4cb29cd579c9d66ab6a6dfd004e3defecde",
     "sewers-materials.png": "0b951d4ce0bb5902c6a940c1bc56db1173580ca57c33d652c16754dd91c9ddc2",
+    "title-crypt.png": "66fd899845160ef31bce8c3193c8bb126788672e621563d44ca51d3d92dff04d",
+    "title-mist.png": "8686123f111541d132b3aec2f81194cb470545da3af65c9487b9252aea159cb0",
+    "title-wordmark.png": "9eabb2f05d010aea0edf720a4897ebd7e33e3bcf8c1a4d01270d9ae4cda322a2",
     "vegetation-states.png": "845fd40c6899b40d19a52fc603342666c5345562fd489714c23ac3f614719e42"
   },
   "assets": {
@@ -196,6 +199,27 @@
         1088
       ],
       "rgba_sha256": "b31ee8390f2ab0b0fabba0a472bf257d558970998e57d2d9acee1ed724f4067f"
+    },
+    "interfaces/title_grimhollow.png": {
+      "size": [
+        1920,
+        1080
+      ],
+      "rgba_sha256": "0c7b3a74d79b3ade904e0a2980654a533465d6645742ed594648a3c2c3a89f6d"
+    },
+    "interfaces/title_wordmark.png": {
+      "size": [
+        1024,
+        144
+      ],
+      "rgba_sha256": "53aacd68261cdbf47f7a90c962601f09b5fd3910e9205f3cdcb4d1f1921974c3"
+    },
+    "interfaces/title_mist.png": {
+      "size": [
+        1024,
+        342
+      ],
+      "rgba_sha256": "848a7deefa77207112ae60dbe09e3372a0017d8d84f14aac034e1a40eae83559"
     }
   }
 }

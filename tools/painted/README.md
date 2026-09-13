@@ -2,6 +2,8 @@
 
 `monsters.py` packs 40 authored forms/states into 32 existing monster atlases. `monsters.json` pins source rows, native frame sizes and exact indices; untouched rectangles come from `v1.2.0-painted-assets`. Source alpha connectivity extracts complete sprites even where a limb crosses a nominal grid boundary. Packing fits all poses at one scale per form, anchors their feet, and removes faint downsampling residue. Small offline pose offsets supply breathing/stride variation without changing game animation definitions. Shared character draw UVs have half-texel guards, preventing smooth sampling from leaking another row into a pose while retaining the public frame rectangles. `monsters-prompts.json` records all ten accepted sheets. The rejected opaque checkerboard variant was not imported.
 
+Health, target and status widgets use cached standing-body alpha bounds so oversized transparent pose cells do not move labels away from the creature. This changes display layout only.
+
 `title.py` packs the crypt painting, transparent engraved wordmark and mist ribbon. `TitleBackground` animates mist, brazier halos and embers from elapsed display time without using gameplay randomness. Existing menu handlers are unchanged. Exact source prompts are in `title-prompts.json`.
 
 # Door and vegetation continuation

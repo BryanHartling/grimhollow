@@ -61,6 +61,17 @@ import java.nio.Buffer;
 import java.util.HashSet;
 
 public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip.Listener {
+    /** Stable standing-body bounds for display widgets, excluding transparent pose padding. */
+    public com.watabou.utils.RectF visibleBounds() {
+        if (texture==null) return new com.watabou.utils.RectF(x,y,x+width(),y+height());
+        com.watabou.utils.RectF reference=idle!=null && idle.frames!=null && idle.frames.length>0?idle.frames[0]:frame;
+        com.watabou.utils.RectF body=com.shatteredpixel.shatteredpixeldungeon.GameGeometry.opaqueBounds(texture,reference);
+        float fw=reference.width()*texture.width, fh=reference.height()*texture.height;
+        float left=flipHorizontal?fw-body.right:body.left;
+        float right=flipHorizontal?fw-body.left:body.right;
+        return new com.watabou.utils.RectF(x+left*width()/fw,y+body.top*height()/fh,
+                x+right*width()/fw,y+body.bottom*height()/fh);
+    }
     @Override protected void updateFrame() {
         super.updateFrame();
         if (texture != null && texture.fModeMax == com.badlogic.gdx.graphics.GL20.GL_LINEAR) {

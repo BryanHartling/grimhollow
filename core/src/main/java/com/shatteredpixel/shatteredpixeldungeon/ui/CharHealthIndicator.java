@@ -48,9 +48,10 @@ public class CharHealthIndicator extends HealthBar {
 		
 		if (target != null && target.isAlive() && target.isActive() && target.sprite.visible) {
 			CharSprite sprite = target.sprite;
-			width = sprite.width()*(4/6f);
-			x = sprite.x + sprite.width()/6f;
-			y = sprite.y - 2;
+			com.watabou.utils.RectF body = sprite.visibleBounds();
+			width = body.width()*(4/6f);
+			x = body.left + body.width()/6f;
+			y = body.top - 2;
 			level( target );
 			visible = target.HP < target.HT || target.shielding() > 0 || target.incomingDOT() > 0;
 		} else {

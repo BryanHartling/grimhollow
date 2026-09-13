@@ -1,4 +1,6 @@
-# Living dungeon acceptance - v1.3.0
+# Living dungeon acceptance - v1.3.1
+
+The v1.3.1 follow-up anchors health bars and status icons to visible standing-body bounds. Its final build, all 114 monster/nine hero geometry checks, item/placement/menu gates, actual title/monster screenshots and compiled handler audit pass. Art is unchanged from `v1.3.0-living-dungeon` (`5229c1f526821fd9ad414c4873532702e8f70fa4`); the complete local five-region walking/fog/effects run and contrast measurements below were recorded at that checkpoint and are retained. Exact-tag CI repeats those checks.
 
 Runtime/art source checkpoint: `d9190cd097bf5dc01fcf1f2a4ff745d4c8aa107b`. Door/vegetation checkpoint: `5ba2a96aa`; title checkpoint: `08d2ed2aa`. This pass adds coherent door transitions, tall/parted/flattened vegetation, an animated painted crypt title, and 40 monster forms/states across 32 atlas families. Gameplay, balance, content, logical geometry, camera, input and existing combat animation timings/callbacks remain unchanged.
 
@@ -15,7 +17,7 @@ The updated `painted-world.html` links the title, monster and terrain boards and
 | Test | Status | Actual output or reason |
 |---|---|---|
 | 1 | PASS | Retained v1.0.2 fresh desktop-only checkout result; not repeated locally in this art pass. Current title and real renderer launch pass. |
-| 2 | PASS | desktop:dist core:test android:assembleDebug core:smokeRun -PsmokeUpstream=true --no-daemon: BUILD SUCCESSFUL in 1m 37s; Runs=90 failures=0. Final UV/mesh correction rebuild: BUILD SUCCESSFUL in 1m 28s; JUnit tests=5 failures=0 errors=0 skipped=0. |
+| 2 | PASS | desktop:dist core:test android:assembleDebug core:smokeRun -PsmokeUpstream=true --no-daemon: BUILD SUCCESSFUL in 1m 37s; Runs=90 failures=0. Final v1.3.1 body-bound layout rebuild: BUILD SUCCESSFUL in 1m 24s; JUnit tests=5 failures=0 errors=0 skipped=0. |
 | 3 | RETIRED | Old procedural-art rebuild no longer ships; committed painted sources reconstruct exactly under test 44. |
 | 4 | RETIRED | Old generated-style validator was superseded by source provenance/reconstruction 44 and room distinctness 45. |
 | 5 | PASS | All nine hero kits; ten seeds each; Runs=90 failures=0. |
@@ -35,7 +37,7 @@ The updated `painted-world.html` links the title, monster and terrain boards and
 | 19 | permanent known issue | The floor-15 1,000-turn/20-mob timing scenario remains unrun. |
 | 20 | PASS | Retained v1.0.2 SDK-unset desktop-only build result; build configuration unchanged except version metadata. New CI uses desktopOnly=true. |
 | 21 | permanent known issue | The unchanged contrast gate 45 still fails (25/76 locally). Desktop and Android packages build. Exact delivered tag CI is reported separately; no workflow step or threshold changed. |
-| 22 | PASS | aapt: com.grimhollow.dungeon; label Grimhollow; versionCode 940; versionName 1.3.0-INDEV. |
+| 22 | PASS | aapt: com.grimhollow.dungeon; label Grimhollow; versionCode 941; versionName 1.3.1-INDEV. |
 | 23 | PASS | PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow. |
 | 24 | PASS | TEST 24: heroes=9 mob sprites=114 failures=0. Native 0.85-0.95 height band retained after paired half-texel UV/mesh guards removed adjacent-frame bleed. |
 | 25 | PASS | TEST 25: 381 named IDs + 60 icons; Waterskin=480, MindVision=eye@98 (ID 82), eleven section-9 and ten class items; failures=0. Prior 202 painted item identities/pixels unchanged. |
@@ -56,11 +58,11 @@ The updated `painted-world.html` links the title, monster and terrain boards and
 | 40 | RETIRED | Superseded by recovery: generated-room isolated metrics replaced by remembered-terrain 43 and distinctness 45. |
 | 41 | RETIRED | Superseded by recovery: generated animated liquid atlas replaced by historical scrolling water. |
 | 42 | RETIRED | Superseded by recovery: calibrated generated-region gates replaced by restored-region test 45. |
-| 43 | PASS | Five generated regions; 788 walking steps, 254 turns, 75 door openings; failures=0. Exact remembered-terrain UV equality remains enforced. |
+| 43 | PASS | Retained v1.3.0 local five-region run; 788 walking steps, 254 turns, 75 door openings; failures=0. Exact remembered-terrain UV equality remains enforced. |
 | 44 | PASS | PAINTED assets=58 source sheets=45 failures=0; upstream-derived character sheets=46; restored assets=68; verified painted replacements=58; failures=0. All 484 packaged assets match final JAR and APK bytes. |
 | 45 | permanent known issue | Unchanged thresholds fail 25/76 local pairs: Sewers 5/15, Prison 1/10, Caves 8/21, City 3/15, Halls 8/15. Actual metrics and captures retained; previous continuation was 30/76. |
-| 46 | PASS | Runtime title controls=5, credits handlers=4, external opens=0, scene fetches=0; compiled classes=2875, guarded browser sink=1, HTTP/socket calls=0, failures=0. Compiled audit preceded the UV/mesh-only correction; exact-tag CI repeats it. |
-| 47 | PASS | All five regions, 120 camera configurations, 212316160 hidden and 8888320 visible pixels, 1408 door-transition frames; fogTexel/cell=1:1, worldUnits=16, lightQuad=aligned, failures=0. |
+| 46 | PASS | Runtime title controls=5, credits handlers=4, external opens=0, scene fetches=0; compiled classes=2875, guarded browser sink=1, HTTP/socket calls=0, failures=0. Final v1.3.1 compiled audit and actual title-handler checks both pass. |
+| 47 | PASS | Retained v1.3.0 local five-region run: 120 camera configurations, 212316160 hidden and 8888320 visible pixels, 1408 door-transition frames; fogTexel/cell=1:1, worldUnits=16, lightQuad=aligned, failures=0. |
 
 Current Windows floor/wall measurements (delta L >= 0.12 OR circular mean hue >= 40 degrees):
 

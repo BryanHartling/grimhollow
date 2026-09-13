@@ -65,8 +65,9 @@ public class EmoIcon extends Image {
 
 			if (camera != null) {
 				PointF center = centerPoint();
-				x = PixelScene.align(camera, owner.x + owner.width() - center.x);
-				y = PixelScene.align(camera, owner.y - center.y);
+				com.watabou.utils.RectF body = owner.visibleBounds();
+				x = PixelScene.align(camera, body.right - center.x);
+				y = PixelScene.align(camera, body.top - center.y);
 			}
 		}
 	}

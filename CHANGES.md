@@ -3933,3 +3933,5 @@ Per-file additions and changes:
 Painted monsters v1.3.0: 32 atlas families now include 40 painted forms/states, preserving all native frame indices, rates, combat callbacks, variant offsets and untouched quest pixels. Charged DM-300, all shaman colors and all elemental forms keep distinct cues. Linear filtering applies only to declared painted character sheets. Ten committed source sheets and explicit rectangle contracts reproduce the new frames; no gameplay changes.
 
 Smooth character filtering now clamps draw UVs half a texel inside each animation cell while preserving the public frame rectangle. The existing GPU test exposed next-row bleed in Brute, Gnoll, Monk, Necromancer and Thief; its size thresholds are unchanged.
+
+v1.3.1 display follow-up: health bars, target bars and status icons anchor to cached visible standing-body bounds instead of transparent animation-frame padding; actor positions, collisions, targeting, health and combat remain unchanged.

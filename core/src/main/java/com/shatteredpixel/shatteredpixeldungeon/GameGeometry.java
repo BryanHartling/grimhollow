@@ -57,16 +57,22 @@ public final class GameGeometry {
         return characterLayout(texture)==null?1:HERO_DENSITY;
     }
     // Alpha occupancy is measured once per atlas rectangle, not on every rendered frame.
-    private static final java.util.WeakHashMap<com.watabou.gltextures.SmartTexture,java.util.Map<String,Integer>> heights = new java.util.WeakHashMap<>();
-    public static int opaqueHeight(com.watabou.gltextures.SmartTexture tx, com.watabou.utils.RectF frame) {
+    private static final java.util.WeakHashMap<com.watabou.gltextures.SmartTexture,java.util.Map<String,com.watabou.utils.RectF>> bounds = new java.util.WeakHashMap<>();
+    public static com.watabou.utils.RectF opaqueBounds(com.watabou.gltextures.SmartTexture tx, com.watabou.utils.RectF frame) {
         int x=Math.round(frame.left*tx.width), y=Math.round(frame.top*tx.height);
         int w=Math.round(frame.width()*tx.width), h=Math.round(frame.height()*tx.height);
         String key=x+":"+y+":"+w+":"+h;
-        java.util.Map<String,Integer> cache=heights.computeIfAbsent(tx,t->new java.util.HashMap<>());
-        if(cache.containsKey(key))return cache.get(key);
-        int top=h,bottom=-1;
-        for(int j=0;j<h;j++)for(int i=0;i<w;i++)if((tx.bitmap.getPixel(x+i,y+j)&255)!=0){top=Math.min(top,j);bottom=Math.max(bottom,j);}
-        int result=Math.max(0,bottom-top+1);cache.put(key,result);return result;
+        java.util.Map<String,com.watabou.utils.RectF> cache=bounds.computeIfAbsent(tx,t->new java.util.HashMap<>());
+        if(cache.containsKey(key))return new com.watabou.utils.RectF(cache.get(key));
+        int left=w,right=-1,top=h,bottom=-1;
+        for(int j=0;j<h;j++)for(int i=0;i<w;i++)if((tx.bitmap.getPixel(x+i,y+j)&255)!=0){
+            left=Math.min(left,i);right=Math.max(right,i);top=Math.min(top,j);bottom=Math.max(bottom,j);
+        }
+        com.watabou.utils.RectF result=bottom<top?new com.watabou.utils.RectF():new com.watabou.utils.RectF(left,top,right+1,bottom+1);
+        cache.put(key,result);return new com.watabou.utils.RectF(result);
+    }
+    public static int opaqueHeight(com.watabou.gltextures.SmartTexture tx, com.watabou.utils.RectF frame) {
+        return Math.round(opaqueBounds(tx,frame).height());
     }
     public static void fit(com.watabou.noosa.Image image, com.watabou.utils.RectF reference, float visibleHeight) {
         int opaque=opaqueHeight(image.texture,reference);

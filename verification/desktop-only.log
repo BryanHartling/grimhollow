@@ -1091,3 +1091,87 @@ PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
 [Controllers] added manager for application, 1 managers active
 RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
 [Controllers] removed manager for application, 0 managers active
+
+
+=== Recovery v1.0.1: fresh source checkout e4f1f9977; Android SDK environment unset ===
+
+--- .local/recovery-clean-build.txt ---
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :services:compileJava
+> Task :services:processResources NO-SOURCE
+> Task :services:classes
+> Task :services:jar
+
+> Task :SPD-classes:compileJava
+Note: C:\Users\Hartl\Documents\grimhollow\.local\recovery-clean\SPD-classes\src\main\java\com\watabou\noosa\TextInput.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes
+> Task :SPD-classes:jar
+> Task :desktop:processResources
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :core:jar
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :desktop:release
+> Task :desktop:dist
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/.local/recovery-clean/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 37s
+9 actionable tasks: 9 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+
+--- .local/recovery-clean-title.txt ---
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes UP-TO-DATE
+
+> Task :desktop:run
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow\.local\recovery-clean\.local\acceptance/title.png
+[Controllers] removed manager for application, 0 managers active
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/.local/recovery-clean/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 11s
+9 actionable tasks: 1 executed, 8 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+

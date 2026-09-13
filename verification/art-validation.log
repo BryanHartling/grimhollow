@@ -6589,3 +6589,278 @@ TEST 39: region=caves classes=5 failures=0; liquids use test 41
 TEST 39: region=city classes=5 failures=0; liquids use test 41
 TEST 39: region=halls classes=5 failures=0; liquids use test 41
 Vision 0.82: All five live rooms show broad flowing surface reflections with readable stone banks and distinct liquid colour; no isolated eye, crescent or dash is visibly stamped across neighbouring tiles. Dark Halls lava remains readable by its warm reflections. Reads as liquid=True; feature repeats=False.
+
+
+=== Recovery v1.0.1: retired generated-art gates; actual recovery checks and failed attempts ===
+
+--- .local/recovery-render-0.txt ---
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=0 seed=417 room=[5, 8, 10, 15] fixed-path steps=100 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 43: region=0 steps=100 remembered={chasm=1263, door=349, floor=3091, grass=317, water=1571} fogPixels=604 unseenBlackPixels=885 turns=23 doors=8 failures=0
+TEST 24: heroes=9 mob sprites=114 failures=0
+TEST 25: items=381 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+TESTS 24-26, 34-36 PASS
+TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0
+TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.7360ms p95=1.2532ms failures=0
+TEST 46 runtime: title controls=5 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0
+[Controllers] removed manager for application, 0 managers active
+java.lang.NullPointerException: Cannot read field "ready" because "com.shatteredpixel.shatteredpixeldungeon.Dungeon.hero" is null
+	at com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.onPause(GameScene.java:884)
+	at com.watabou.noosa.Game.pause(Game.java:176)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.dispose(Lwjgl3Window.java:484)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.cleanupWindows(Lwjgl3Application.java:246)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:154)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:193)
+
+
+--- .local/recovery-render-final-0.txt ---
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=0 seed=417 room=[5, 8, 10, 15] fixed-path steps=100 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 43: region=0 steps=100 remembered={chasm=1263, door=349, floor=3091, grass=317, water=1571} fogPixels=604 unseenBlackPixels=885 turns=23 doors=8 failures=0
+TEST 24: heroes=9 mob sprites=114 failures=0
+TEST 25: items=381 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+TESTS 24-26, 34, 36 PASS; test 35 retired by recovery
+TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0
+TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.7773ms p95=1.2389ms failures=0
+TEST 46 runtime: title controls=5 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0
+[Controllers] removed manager for application, 0 managers active
+java.lang.NullPointerException: Cannot invoke "com.shatteredpixel.shatteredpixeldungeon.items.ItemStatusHandler.save(com.watabou.utils.Bundle)" because "com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll.handler" is null
+	at com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll.save(Scroll.java:114)
+	at com.shatteredpixel.shatteredpixeldungeon.Dungeon.saveGame(Dungeon.java:687)
+	at com.shatteredpixel.shatteredpixeldungeon.Dungeon.saveAll(Dungeon.java:717)
+	at com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.onPause(GameScene.java:885)
+	at com.watabou.noosa.Game.pause(Game.java:176)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.dispose(Lwjgl3Window.java:484)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.cleanupWindows(Lwjgl3Application.java:246)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:154)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:193)
+
+
+--- .local/recovery-verified-0.txt ---
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+TEST 46 runtime: title controls=5 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0
+RECOVERY generated region=0 seed=417 room=[5, 8, 10, 15] fixed-path steps=100 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 43: region=0 steps=100 remembered={chasm=1263, door=349, floor=3091, grass=317, water=1571} fogPixels=604 unseenBlackPixels=885 turns=23 doors=8 failures=0
+TEST 24: heroes=9 mob sprites=114 failures=0
+TEST 25: items=381 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+TESTS 24-26, 34, 36 PASS; test 35 retired by recovery
+TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0
+TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.8114ms p95=1.3019ms failures=0
+[Controllers] removed manager for application, 0 managers active
+
+
+--- .local/recovery-verified-1.txt ---
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=1 seed=417 room=[29, 25, 37, 32] fixed-path steps=202 terrainEdits=0
+[GAME] @@ You descend to floor 6 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+[GAME] ** You catch fire!
+TEST 43: region=1 steps=202 remembered={chasm=565, door=1415, floor=27380, grass=2473, water=8230} fogPixels=1619 unseenBlackPixels=1608 turns=56 doors=16 failures=0
+[Controllers] removed manager for application, 0 managers active
+
+
+--- .local/recovery-verified-2.txt ---
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=2 seed=417 room=[23, 5, 30, 14] fixed-path steps=200 terrainEdits=0
+[GAME] @@ You descend to floor 11 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 43: region=2 steps=200 remembered={chasm=5742, door=694, floor=16771, grass=477, water=3379} fogPixels=1912 unseenBlackPixels=1963 turns=85 doors=23 failures=0
+[Controllers] removed manager for application, 0 managers active
+
+
+--- .local/recovery-verified-3.txt ---
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=3 seed=417 room=[16, 23, 23, 30] fixed-path steps=172 terrainEdits=0
+[GAME] @@ You descend to floor 16 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 43: region=3 steps=172 remembered={chasm=1929, door=1212, floor=12206, grass=715, water=5082} fogPixels=1369 unseenBlackPixels=1920 turns=54 doors=18 failures=0
+[Controllers] removed manager for application, 0 managers active
+
+
+--- .local/recovery-verified-4.txt ---
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=4 seed=417 room=[24, 17, 32, 25] fixed-path steps=114 terrainEdits=0
+[GAME] @@ You descend to floor 21 of the dungeon.
+[GAME] -- You feel that there's a source of demonic energy above you...
+[GAME] ** Your steps echo across the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 43: region=4 steps=114 remembered={chasm=7238, door=250, floor=4823, grass=1571, water=2529} fogPixels=1006 unseenBlackPixels=3247 turns=36 doors=10 failures=0
+[Controllers] removed manager for application, 0 managers active
+
+
+--- .local/recovery-distinctness-0.txt ---
+TEST 45: region=sewers types=6 pairs=15 failures=9
+decor/door: delta L=0.0444, delta hue=13.06 FAIL
+decor/floor: delta L=0.0221, delta hue=8.03 FAIL
+decor/grass: delta L=0.0643, delta hue=3.10 FAIL
+decor/wall: delta L=0.0901, delta hue=3.84 FAIL
+decor/water: delta L=0.0661, delta hue=51.83 PASS
+door/floor: delta L=0.0665, delta hue=5.03 FAIL
+door/grass: delta L=0.1086, delta hue=16.16 FAIL
+door/wall: delta L=0.0458, delta hue=16.90 FAIL
+door/water: delta L=0.1104, delta hue=64.90 PASS
+floor/grass: delta L=0.0422, delta hue=11.13 FAIL
+floor/wall: delta L=0.1122, delta hue=11.87 FAIL
+floor/water: delta L=0.0440, delta hue=59.86 PASS
+grass/wall: delta L=0.1544, delta hue=0.74 PASS
+grass/water: delta L=0.0018, delta hue=48.74 PASS
+wall/water: delta L=0.1562, delta hue=47.99 PASS
+
+
+--- .local/recovery-distinctness-1.txt ---
+TEST 45: region=prison types=5 pairs=10 failures=6
+decor/door: delta L=0.0315, delta hue=1.58 FAIL
+decor/floor: delta L=0.0108, delta hue=20.54 FAIL
+decor/wall: delta L=0.1060, delta hue=9.86 FAIL
+decor/water: delta L=0.0102, delta hue=142.85 PASS
+door/floor: delta L=0.0207, delta hue=22.12 FAIL
+door/wall: delta L=0.0745, delta hue=11.44 FAIL
+door/water: delta L=0.0213, delta hue=144.43 PASS
+floor/wall: delta L=0.0952, delta hue=10.68 FAIL
+floor/water: delta L=0.0006, delta hue=122.31 PASS
+wall/water: delta L=0.0958, delta hue=133.00 PASS
+
+
+--- .local/recovery-distinctness-2.txt ---
+TEST 45: region=caves types=7 pairs=21 failures=15
+chasm/decor: delta L=0.1060, delta hue=0.45 FAIL
+chasm/door: delta L=0.0852, delta hue=2.67 FAIL
+chasm/floor: delta L=0.0810, delta hue=1.67 FAIL
+chasm/grass: delta L=0.0793, delta hue=0.40 FAIL
+chasm/wall: delta L=0.0384, delta hue=0.46 FAIL
+chasm/water: delta L=0.0647, delta hue=92.93 PASS
+decor/door: delta L=0.0208, delta hue=2.22 FAIL
+decor/floor: delta L=0.0250, delta hue=1.23 FAIL
+decor/grass: delta L=0.0266, delta hue=0.84 FAIL
+decor/wall: delta L=0.0676, delta hue=0.02 FAIL
+decor/water: delta L=0.0413, delta hue=93.37 PASS
+door/floor: delta L=0.0042, delta hue=0.99 FAIL
+door/grass: delta L=0.0058, delta hue=3.06 FAIL
+door/wall: delta L=0.0468, delta hue=2.20 FAIL
+door/water: delta L=0.0205, delta hue=95.59 PASS
+floor/grass: delta L=0.0016, delta hue=2.07 FAIL
+floor/wall: delta L=0.0426, delta hue=1.21 FAIL
+floor/water: delta L=0.0163, delta hue=94.60 PASS
+grass/wall: delta L=0.0409, delta hue=0.86 FAIL
+grass/water: delta L=0.0147, delta hue=92.53 PASS
+wall/water: delta L=0.0262, delta hue=93.39 PASS
+
+
+--- .local/recovery-distinctness-3.txt ---
+TEST 45: region=city types=6 pairs=15 failures=5
+decor/door: delta L=0.0158, delta hue=31.28 FAIL
+decor/floor: delta L=0.0322, delta hue=30.10 FAIL
+decor/grass: delta L=0.0289, delta hue=21.41 FAIL
+decor/wall: delta L=0.0902, delta hue=120.38 PASS
+decor/water: delta L=0.0286, delta hue=100.88 PASS
+door/floor: delta L=0.0163, delta hue=1.18 FAIL
+door/grass: delta L=0.0448, delta hue=52.68 PASS
+door/wall: delta L=0.0744, delta hue=89.10 PASS
+door/water: delta L=0.0128, delta hue=69.60 PASS
+floor/grass: delta L=0.0611, delta hue=51.50 PASS
+floor/wall: delta L=0.0581, delta hue=90.28 PASS
+floor/water: delta L=0.0035, delta hue=70.78 PASS
+grass/wall: delta L=0.1191, delta hue=141.79 PASS
+grass/water: delta L=0.0575, delta hue=122.28 PASS
+wall/water: delta L=0.0616, delta hue=19.50 FAIL
+
+
+--- .local/recovery-distinctness-4.txt ---
+TEST 45: region=halls types=6 pairs=15 failures=14
+decor/door: delta L=0.0076, delta hue=29.28 FAIL
+decor/floor: delta L=0.0323, delta hue=1.25 FAIL
+decor/grass: delta L=0.0179, delta hue=6.69 FAIL
+decor/wall: delta L=0.0811, delta hue=18.95 FAIL
+decor/water: delta L=0.0735, delta hue=23.57 FAIL
+door/floor: delta L=0.0399, delta hue=30.53 FAIL
+door/grass: delta L=0.0255, delta hue=22.59 FAIL
+door/wall: delta L=0.0887, delta hue=10.33 FAIL
+door/water: delta L=0.0659, delta hue=5.71 FAIL
+floor/grass: delta L=0.0144, delta hue=7.94 FAIL
+floor/wall: delta L=0.0488, delta hue=20.20 FAIL
+floor/water: delta L=0.1058, delta hue=24.82 FAIL
+grass/wall: delta L=0.0632, delta hue=12.26 FAIL
+grass/water: delta L=0.0914, delta hue=16.88 FAIL
+wall/water: delta L=0.1546, delta hue=4.62 PASS
+
+
+--- .local/recovery-handlers.txt ---
+Error: internal error: java.nio.file.AccessDeniedException: C:\Users\Hartl\Documents\grimhollow\desktop\build\libs\desktop-1.0.1.jar {1} {2}
+Traceback (most recent call last):
+  File "C:\Users\Hartl\Documents\grimhollow\tools\recovery_checks.py", line 96, in <module>
+    if args.jar:failed|=handlers(args.jar)
+                        ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hartl\Documents\grimhollow\tools\recovery_checks.py", line 69, in handlers
+    text=subprocess.check_output([str(java),'-c','-p','-classpath',str(jar)]+classes[offset:offset+30],text=True,encoding='utf-8')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hartl\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\subprocess.py", line 466, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hartl\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Hartl\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\subprocess.py", line 1196, in communicate
+    stdout = self.stdout.read()
+             ^^^^^^^^^^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x92 in position 13457: invalid start byte
+
+
+--- .local/recovery-handler-final.txt ---
+TEST 46 compiled handlers: classes=2875 guarded browser sinks=1 HTTP/socket calls=0 failures=0
+
+
+--- .local/recovery-provenance-final.txt ---
+C:\Users\Hartl\Documents\grimhollow\tools\recovery_assets.py:46: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  out.putdata([palette.get(pixel[:3], pixel[:3]) + (pixel[3],) for pixel in image.getdata()])
+TEST 44: upstream-derived character sheets=87; restored assets=122; failures=0
+
+
+--- .local/recovery-vault.txt ---
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 19 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-fire.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-frost.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-shock.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-lighting-on.png
+PASS V4 rendering: arena trigger, FIRE/FROST/SHOCK, scripted boss death and treasure door unlock (not a played fight)
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-lighting-off.png
+PASS: Vault scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+

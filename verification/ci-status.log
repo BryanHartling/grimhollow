@@ -32,3 +32,5 @@ v4 integration 20e6040ad45d066f60d496fe3be6340b3badc99e, run 34608373259: Androi
 Stage 6e exact commit 6467a4b6e0b5af9c9d1c5b6df5a1a43a07cbe3e9: run 34625263228 SUCCESS; Android, Windows, Linux, Necromancer Runs=10 failures=0, Enchanter Runs=10 failures=0, Psychic Runs=10 failures=0, combined Runs=30 failures=0.
 
 Stage 7 exact commit 04de625e0588be35ba4bb4aa01fee1493e8fb68e: run 34629728416 SUCCESS; Android, Windows, Linux, Necromancer Runs=10 failures=0, Enchanter Runs=10 failures=0, Psychic Runs=10 failures=0, combined Runs=30 failures=0. Linux TEST 31 mean=1.2390 ms p95=1.8209 ms, off-path pixel differences=0, TEST 32 failures=0.
+
+Recovery v1.0.1 before push: local mandatory test 45 fails in all five regions. The CI workflow retains this gate and retires only superseded art checks; the exact remote run and delivered commit are reported in the delivery response after execution. No green CI result is claimed here.

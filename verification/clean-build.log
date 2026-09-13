@@ -2165,3 +2165,659 @@ For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/comman
 BUILD SUCCESSFUL in 40s
 55 actionable tasks: 8 executed, 47 up-to-date
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+
+=== Recovery v1.0.1: build attempts and final desktop/Android build ===
+
+--- .local/recovery-build.txt ---
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :core:processTestResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :services:updates:debugUpdates:processResources NO-SOURCE
+> Task :services:news:debugNews:processResources NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :services:jar
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets
+> Task :android:compressDebugAssets
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+
+> Task :SPD-classes:compileJava
+Note: C:\Users\Hartl\Documents\grimhollow\SPD-classes\src\main\java\com\watabou\noosa\TextInput.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: C:\Users\Hartl\Documents\grimhollow\SPD-classes\src\main\java\com\watabou\noosa\TextInput.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes
+> Task :SPD-classes:jar
+> Task :services:updates:debugUpdates:compileJava
+> Task :services:updates:debugUpdates:classes
+> Task :services:updates:debugUpdates:jar
+> Task :services:news:debugNews:compileJava
+> Task :services:news:debugNews:classes
+> Task :services:news:debugNews:jar
+> Task :desktop:processResources
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest
+> Task :android:processDebugManifest
+> Task :android:copyAndroidNatives
+> Task :android:processDebugManifestForPackage
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:processDebugResources
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\DesktopLauncher.java:35: error: cannot find symbol
+import com.shatteredpixel.shatteredpixeldungeon.services.news.NewsImpl;
+                                                             ^
+  symbol:   class NewsImpl
+  location: package com.shatteredpixel.shatteredpixeldungeon.services.news
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\DesktopLauncher.java:36: error: cannot find symbol
+import com.shatteredpixel.shatteredpixeldungeon.services.updates.UpdateImpl;
+                                                                ^
+  symbol:   class UpdateImpl
+> Task :desktop:compileJava
+  location: package com.shatteredpixel.shatteredpixeldungeon.services.updates
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\DesktopLauncher.java:132: error: cannot find symbol
+		if (UpdateImpl.supportsUpdates()){
+		    ^
+  symbol:   variable UpdateImpl
+  location: class DesktopLauncher
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\DesktopLauncher.java:133: error: cannot access UpdateService
+			Updates.service = null; // Fork releases are not published yet.
+			                ^
+  class file for com.shatteredpixel.shatteredpixeldungeon.services.updates.UpdateService not found
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\DesktopLauncher.java:135: error: cannot find symbol
+		if (NewsImpl.supportsNews()){
+		    ^
+  symbol:   variable NewsImpl
+  location: class DesktopLauncher
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\DesktopLauncher.java:136: error: cannot access NewsService
+			News.service = null; // No fork news service.
+			             ^
+  class file for com.shatteredpixel.shatteredpixeldungeon.services.news.NewsService not found
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:40: error: members has protected access in Group
+        for(Gizmo child:((Group)Game.scene()).members)if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)controls++;
+                                             ^
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:54: error: members has protected access in Group
+            for(Gizmo child:credits.members)if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.RedButton) {
+                                   ^
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:227: error: texture has protected access in Tilemap
+                com.watabou.noosa.TextureFilm film=new com.watabou.noosa.TextureFilm(terrain.texture,64,64);
+                                                                                            ^
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:237: error: visible has private access in FogOfWar
+        fog.visible=false;Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);scene.draw();Pixmap raw=screen();fog.visible=true;
+           ^
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:237: error: incompatible types: boolean cannot be converted to boolean[]
+        fog.visible=false;Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);scene.draw();Pixmap raw=screen();fog.visible=true;
+                    ^
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:237: error: visible has private access in FogOfWar
+        fog.visible=false;Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);scene.draw();Pixmap raw=screen();fog.visible=true;
+                                                                                                         ^
+C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:237: error: incompatible types: boolean cannot be converted to boolean[]
+        fog.visible=false;Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);scene.draw();Pixmap raw=screen();fog.visible=true;
+                                                                                                                  ^
+13 errors
+
+> Task :core:compileTestJava
+> Task :core:testClasses
+> Task :desktop:compileJava FAILED
+
+> Task :android:compileDebugJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :core:test
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':desktop:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:237: error: incompatible types: boolean cannot be converted to boolean[]
+          fog.visible=false;Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);scene.draw();Pixmap raw=screen();fog.visible=true;
+                      ^
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:237: error: incompatible types: boolean cannot be converted to boolean[]
+          fog.visible=false;Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);scene.draw();Pixmap raw=screen();fog.visible=true;
+                                                                                                                    ^
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\DesktopLauncher.java:133: error: cannot access UpdateService
+  			Updates.service = null; // Fork releases are not published yet.
+  			                ^
+    class file for com.shatteredpixel.shatteredpixeldungeon.services.updates.UpdateService not found
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\DesktopLauncher.java:136: error: cannot access NewsService
+  			News.service = null; // No fork news service.
+  			             ^
+    class file for com.shatteredpixel.shatteredpixeldungeon.services.news.NewsService not found
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\DesktopLauncher.java:35: error: cannot find symbol
+  import com.shatteredpixel.shatteredpixeldungeon.services.news.NewsImpl;
+                                                               ^
+    symbol:   class NewsImpl
+    location: package com.shatteredpixel.shatteredpixeldungeon.services.news
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\DesktopLauncher.java:36: error: cannot find symbol
+  import com.shatteredpixel.shatteredpixeldungeon.services.updates.UpdateImpl;
+                                                                  ^
+    symbol:   class UpdateImpl
+    location: package com.shatteredpixel.shatteredpixeldungeon.services.updates
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\DesktopLauncher.java:132: error: cannot find symbol
+  		if (UpdateImpl.supportsUpdates()){
+  		    ^
+    symbol:   variable UpdateImpl
+    location: class DesktopLauncher
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\DesktopLauncher.java:135: error: cannot find symbol
+  		if (NewsImpl.supportsNews()){
+  		    ^
+    symbol:   variable NewsImpl
+    location: class DesktopLauncher
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:40: error: members has protected access in Group
+          for(Gizmo child:((Group)Game.scene()).members)if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)controls++;
+                                               ^
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:54: error: members has protected access in Group
+              for(Gizmo child:credits.members)if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.RedButton) {
+                                     ^
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:227: error: texture has protected access in Tilemap
+                  com.watabou.noosa.TextureFilm film=new com.watabou.noosa.TextureFilm(terrain.texture,64,64);
+                                                                                              ^
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:237: error: visible has private access in FogOfWar
+          fog.visible=false;Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);scene.draw();Pixmap raw=screen();fog.visible=true;
+             ^
+  C:\Users\Hartl\Documents\grimhollow\desktop\src\main\java\com\shatteredpixel\shatteredpixeldungeon\desktop\RecoveryChecks.java:237: error: visible has private access in FogOfWar
+          fog.visible=false;Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);scene.draw();Pixmap raw=screen();fog.visible=true;
+                                                                                                           ^
+  13 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 3h 16m 47s
+42 actionable tasks: 22 executed, 20 up-to-date
+
+
+--- .local/recovery-build-2.txt ---
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :core:compileTestJava UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :core:testClasses UP-TO-DATE
+> Task :core:test UP-TO-DATE
+> Task :android:compileDebugKotlin NO-SOURCE
+
+> Task :android:compileDebugJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :android:mergeDebugJavaResource
+> Task :android:dexBuilderDebug
+> Task :android:copyAndroidNatives
+> Task :android:mergeProjectDexDebug
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :desktop:release
+> Task :desktop:dist
+> Task :android:mergeLibDexDebug
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 42s
+47 actionable tasks: 10 executed, 37 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+
+--- .local/recovery-build-3.txt ---
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :desktop:release
+> Task :desktop:dist
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 15s
+9 actionable tasks: 2 executed, 7 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+
+--- .local/recovery-final-build-smoke.txt ---
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :core:compileTestJava UP-TO-DATE
+> Task :core:testClasses UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :core:test UP-TO-DATE
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource UP-TO-DATE
+> Task :android:mergeLibDexDebug UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:packageDebug UP-TO-DATE
+> Task :android:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :android:assembleDebug UP-TO-DATE
+
+> Task :core:smokeRun
+PASS V4 WARRIOR Vault generation/save/load, mirror=BrokenSeal, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT WARRIOR: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS WARRIOR seed=0 floor=6 save/load=ok
+PASS WARRIOR seed=1 floor=6 save/load=ok
+PASS WARRIOR seed=2 floor=6 save/load=ok
+PASS WARRIOR seed=3 floor=6 save/load=ok
+PASS WARRIOR seed=4 floor=6 save/load=ok
+PASS WARRIOR seed=5 floor=6 save/load=ok
+PASS WARRIOR seed=6 floor=6 save/load=ok
+PASS WARRIOR seed=7 floor=6 save/load=ok
+PASS WARRIOR seed=8 floor=6 save/load=ok
+
+> Task :desktop:compileJava
+> Task :desktop:classes
+
+> Task :core:smokeRun
+PASS WARRIOR seed=9 floor=6 save/load=ok
+PASS V4 MAGE Vault generation/save/load, mirror=MagesStaff, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT MAGE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS MAGE seed=0 floor=6 save/load=ok
+PASS MAGE seed=1 floor=6 save/load=ok
+PASS MAGE seed=2 floor=6 save/load=ok
+PASS MAGE seed=3 floor=6 save/load=ok
+PASS MAGE seed=4 floor=6 save/load=ok
+PASS MAGE seed=5 floor=6 save/load=ok
+PASS MAGE seed=6 floor=6 save/load=ok
+PASS MAGE seed=7 floor=6 save/load=ok
+PASS MAGE seed=8 floor=6 save/load=ok
+PASS MAGE seed=9 floor=6 save/load=ok
+PASS V4 ROGUE Vault generation/save/load, mirror=CloakOfShadows, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ROGUE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS ROGUE seed=0 floor=6 save/load=ok
+PASS ROGUE seed=1 floor=6 save/load=ok
+PASS ROGUE seed=2 floor=6 save/load=ok
+PASS ROGUE seed=3 floor=6 save/load=ok
+PASS ROGUE seed=4 floor=6 save/load=ok
+PASS ROGUE seed=5 floor=6 save/load=ok
+PASS ROGUE seed=6 floor=6 save/load=ok
+PASS ROGUE seed=7 floor=6 save/load=ok
+PASS ROGUE seed=8 floor=6 save/load=ok
+PASS ROGUE seed=9 floor=6 save/load=ok
+PASS V4 HUNTRESS Vault generation/save/load, mirror=SpiritBow, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT HUNTRESS: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS HUNTRESS seed=0 floor=6 save/load=ok
+PASS HUNTRESS seed=1 floor=6 save/load=ok
+PASS HUNTRESS seed=2 floor=6 save/load=ok
+PASS HUNTRESS seed=3 floor=6 save/load=ok
+PASS HUNTRESS seed=4 floor=6 save/load=ok
+PASS HUNTRESS seed=5 floor=6 save/load=ok
+PASS HUNTRESS seed=6 floor=6 save/load=ok
+PASS HUNTRESS seed=7 floor=6 save/load=ok
+PASS HUNTRESS seed=8 floor=6 save/load=ok
+PASS HUNTRESS seed=9 floor=6 save/load=ok
+PASS V4 DUELIST Vault generation/save/load, mirror=MirrorSword, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT DUELIST: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS DUELIST seed=0 floor=6 save/load=ok
+PASS DUELIST seed=1 floor=6 save/load=ok
+PASS DUELIST seed=2 floor=6 save/load=ok
+PASS DUELIST seed=3 floor=6 save/load=ok
+PASS DUELIST seed=4 floor=6 save/load=ok
+PASS DUELIST seed=5 floor=6 save/load=ok
+PASS DUELIST seed=6 floor=6 save/load=ok
+PASS DUELIST seed=7 floor=6 save/load=ok
+PASS DUELIST seed=8 floor=6 save/load=ok
+PASS DUELIST seed=9 floor=6 save/load=ok
+PASS V4 CLERIC Vault generation/save/load, mirror=HolyTome, equipment restore, quest completion/shop and six enchantment/curses serialized
+
+> Task :desktop:release
+> Task :desktop:dist
+
+> Task :core:smokeRun
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT CLERIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS CLERIC seed=0 floor=6 save/load=ok
+PASS CLERIC seed=1 floor=6 save/load=ok
+PASS CLERIC seed=2 floor=6 save/load=ok
+PASS CLERIC seed=3 floor=6 save/load=ok
+PASS CLERIC seed=4 floor=6 save/load=ok
+PASS CLERIC seed=5 floor=6 save/load=ok
+PASS CLERIC seed=6 floor=6 save/load=ok
+PASS CLERIC seed=7 floor=6 save/load=ok
+PASS CLERIC seed=8 floor=6 save/load=ok
+PASS CLERIC seed=9 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS NECROMANCER seed=0 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+[GAME] @@ Badge unlocked: Novice Researcher (Fill in 40 catalog entries in your journal).
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS V4 ENCHANTER Vault generation/save/load, mirror=SigilBrush, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ENCHANTER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS ENCHANTER seed=0 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=1 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=2 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=3 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=4 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=5 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=6 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=7 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=8 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=9 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS V4 PSYCHIC Vault generation/save/load, mirror=FocusCrystal, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT PSYCHIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS PSYCHIC seed=0 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=1 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=2 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=3 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=4 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=5 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=6 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=7 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=8 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=9 floor=6 save/load=ok
+Runs=90 failures=0
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 28s
+48 actionable tasks: 4 executed, 44 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+

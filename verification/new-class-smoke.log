@@ -3449,3 +3449,339 @@ For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/comman
 BUILD SUCCESSFUL in 25s
 7 actionable tasks: 1 executed, 6 up-to-date
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+
+=== Recovery v1.0.1: nine heroes; ten seeds each ===
+
+--- .local/recovery-final-build-smoke.txt ---
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :core:compileTestJava UP-TO-DATE
+> Task :core:testClasses UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :core:test UP-TO-DATE
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource UP-TO-DATE
+> Task :android:mergeLibDexDebug UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:packageDebug UP-TO-DATE
+> Task :android:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :android:assembleDebug UP-TO-DATE
+
+> Task :core:smokeRun
+PASS V4 WARRIOR Vault generation/save/load, mirror=BrokenSeal, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT WARRIOR: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS WARRIOR seed=0 floor=6 save/load=ok
+PASS WARRIOR seed=1 floor=6 save/load=ok
+PASS WARRIOR seed=2 floor=6 save/load=ok
+PASS WARRIOR seed=3 floor=6 save/load=ok
+PASS WARRIOR seed=4 floor=6 save/load=ok
+PASS WARRIOR seed=5 floor=6 save/load=ok
+PASS WARRIOR seed=6 floor=6 save/load=ok
+PASS WARRIOR seed=7 floor=6 save/load=ok
+PASS WARRIOR seed=8 floor=6 save/load=ok
+
+> Task :desktop:compileJava
+> Task :desktop:classes
+
+> Task :core:smokeRun
+PASS WARRIOR seed=9 floor=6 save/load=ok
+PASS V4 MAGE Vault generation/save/load, mirror=MagesStaff, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT MAGE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS MAGE seed=0 floor=6 save/load=ok
+PASS MAGE seed=1 floor=6 save/load=ok
+PASS MAGE seed=2 floor=6 save/load=ok
+PASS MAGE seed=3 floor=6 save/load=ok
+PASS MAGE seed=4 floor=6 save/load=ok
+PASS MAGE seed=5 floor=6 save/load=ok
+PASS MAGE seed=6 floor=6 save/load=ok
+PASS MAGE seed=7 floor=6 save/load=ok
+PASS MAGE seed=8 floor=6 save/load=ok
+PASS MAGE seed=9 floor=6 save/load=ok
+PASS V4 ROGUE Vault generation/save/load, mirror=CloakOfShadows, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ROGUE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS ROGUE seed=0 floor=6 save/load=ok
+PASS ROGUE seed=1 floor=6 save/load=ok
+PASS ROGUE seed=2 floor=6 save/load=ok
+PASS ROGUE seed=3 floor=6 save/load=ok
+PASS ROGUE seed=4 floor=6 save/load=ok
+PASS ROGUE seed=5 floor=6 save/load=ok
+PASS ROGUE seed=6 floor=6 save/load=ok
+PASS ROGUE seed=7 floor=6 save/load=ok
+PASS ROGUE seed=8 floor=6 save/load=ok
+PASS ROGUE seed=9 floor=6 save/load=ok
+PASS V4 HUNTRESS Vault generation/save/load, mirror=SpiritBow, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT HUNTRESS: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS HUNTRESS seed=0 floor=6 save/load=ok
+PASS HUNTRESS seed=1 floor=6 save/load=ok
+PASS HUNTRESS seed=2 floor=6 save/load=ok
+PASS HUNTRESS seed=3 floor=6 save/load=ok
+PASS HUNTRESS seed=4 floor=6 save/load=ok
+PASS HUNTRESS seed=5 floor=6 save/load=ok
+PASS HUNTRESS seed=6 floor=6 save/load=ok
+PASS HUNTRESS seed=7 floor=6 save/load=ok
+PASS HUNTRESS seed=8 floor=6 save/load=ok
+PASS HUNTRESS seed=9 floor=6 save/load=ok
+PASS V4 DUELIST Vault generation/save/load, mirror=MirrorSword, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT DUELIST: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS DUELIST seed=0 floor=6 save/load=ok
+PASS DUELIST seed=1 floor=6 save/load=ok
+PASS DUELIST seed=2 floor=6 save/load=ok
+PASS DUELIST seed=3 floor=6 save/load=ok
+PASS DUELIST seed=4 floor=6 save/load=ok
+PASS DUELIST seed=5 floor=6 save/load=ok
+PASS DUELIST seed=6 floor=6 save/load=ok
+PASS DUELIST seed=7 floor=6 save/load=ok
+PASS DUELIST seed=8 floor=6 save/load=ok
+PASS DUELIST seed=9 floor=6 save/load=ok
+PASS V4 CLERIC Vault generation/save/load, mirror=HolyTome, equipment restore, quest completion/shop and six enchantment/curses serialized
+
+> Task :desktop:release
+> Task :desktop:dist
+
+> Task :core:smokeRun
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT CLERIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS CLERIC seed=0 floor=6 save/load=ok
+PASS CLERIC seed=1 floor=6 save/load=ok
+PASS CLERIC seed=2 floor=6 save/load=ok
+PASS CLERIC seed=3 floor=6 save/load=ok
+PASS CLERIC seed=4 floor=6 save/load=ok
+PASS CLERIC seed=5 floor=6 save/load=ok
+PASS CLERIC seed=6 floor=6 save/load=ok
+PASS CLERIC seed=7 floor=6 save/load=ok
+PASS CLERIC seed=8 floor=6 save/load=ok
+PASS CLERIC seed=9 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS NECROMANCER seed=0 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+[GAME] @@ Badge unlocked: Novice Researcher (Fill in 40 catalog entries in your journal).
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS V4 ENCHANTER Vault generation/save/load, mirror=SigilBrush, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ENCHANTER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS ENCHANTER seed=0 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=1 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=2 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=3 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=4 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=5 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=6 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=7 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=8 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=9 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS V4 PSYCHIC Vault generation/save/load, mirror=FocusCrystal, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT PSYCHIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS PSYCHIC seed=0 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=1 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=2 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=3 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=4 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=5 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=6 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=7 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=8 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=9 floor=6 save/load=ok
+Runs=90 failures=0
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 28s
+48 actionable tasks: 4 executed, 44 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+

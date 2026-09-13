@@ -5134,3 +5134,13 @@ Item style and frame coverage: public indices=381 unique props=380
 talents frame coverage: 242
 TEST 30: 5 regions; idle pairs=15495; minimum hue L1=0.2514; failing species pairs=0
 Validated 169 generated specifications; 0 failures.
+
+
+=== Recovery v1.0.1: source-pixel restoration, not art generation or Blender rerender ===
+
+--- .local/recovery-provenance-final.txt ---
+C:\Users\Hartl\Documents\grimhollow\tools\recovery_assets.py:46: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  out.putdata([palette.get(pixel[:3], pixel[:3]) + (pixel[3],) for pixel in image.getdata()])
+TEST 44: upstream-derived character sheets=87; restored assets=122; failures=0
+
+Both desktop-1.0.1.jar and android-debug.apk contain byte-identical copies of all 122 restored asset files. The nine rejected class splash PNGs are absent; four approved title PNG layers remain.

@@ -29,3 +29,5 @@ package: name='com.grimhollow.dungeon' versionCode='917' versionName='1.0.0-INDE
 sdkVersion:'21'
 targetSdkVersion:'36'
 application-label:'Grimhollow'
+
+Recovery aapt dump badging: package name='com.grimhollow.dungeon' versionCode='918' versionName='1.0.1-INDEV'; application-label='Grimhollow'; sdkVersion='21'; compileSdkVersion='36'.

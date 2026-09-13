@@ -26,6 +26,7 @@ final class RecoveryChecks {
     private int index, waiting, lastCell, lastDirection, turns, doors, screenshots, fogPixels, blackPixels;
     private boolean started, pending;
     private int beforeDoor;
+    private int doorFrames;
 
     RecoveryChecks(int region) {
         this.region=region;
@@ -169,9 +170,13 @@ final class RecoveryChecks {
         if(!(Game.scene() instanceof GameScene))return false;
         if(!started) {
             if(++waiting<50)return false;
+            if(Boolean.getBoolean("grimhollow.fogTests"))fogAlignment("start");
             room();started=true;waiting=0;return false;
         }
         if(!Dungeon.hero.isAlive())throw new AssertionError("Recovery walking hero died");
+        if(Boolean.getBoolean("grimhollow.fogTests")&&pending&&beforeDoor==Terrain.DOOR) {
+            FogAlignmentChecks.cameraDuringDoor();doorFrames++;
+        }
         if(!Dungeon.hero.ready||Dungeon.hero.sprite.isMoving) {waiting=0;return false;}
         if(++waiting<12)return false;
         waiting=0;
@@ -188,6 +193,11 @@ final class RecoveryChecks {
                 snapshot(opened?"open-door":turned?"turn":"walk");
         }
         if(index>=route.size()) {
+            if(Boolean.getBoolean("grimhollow.fogTests")) {
+                fogAlignment("after-walk-and-doors");
+                if(doorFrames==0)throw new AssertionError("No door transition frames checked");
+                System.out.println("TEST 47: region="+region+" doorTransitionFrames="+doorFrames+" failures=0");
+            }
             for(Map.Entry<String,Integer> count:remembered.entrySet())
                 if(count.getValue()==0)throw new AssertionError("No remembered "+count.getKey()+" coverage in region "+region);
             if(turns==0||doors==0||fogPixels==0||blackPixels==0)throw new AssertionError("Incomplete walking/fog evidence");
@@ -218,6 +228,11 @@ final class RecoveryChecks {
             throw new NoSuchFieldException(name);
         }
         catch(Exception e){throw new AssertionError(e);}
+    }
+
+    private void fogAlignment(String phase) {
+        FogAlignmentChecks.run((FogOfWar)field(Game.scene(),"fog"),members(Game.scene()),region,phase);
+        Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);Game.scene().draw();
     }
 
     @SuppressWarnings("unchecked")
@@ -255,7 +270,8 @@ final class RecoveryChecks {
             Point p=Camera.main.cameraToScreen(c%w*16+8,c/w*16+8);
             int x=p.x,y=dim.getHeight()-1-p.y;
             if(x<20||x>=dim.getWidth()-20||y<40||y>=dim.getHeight()-100)continue;
-            int mask=fog.texture.bitmap.getPixel(c%w*2+1,c/w*2+1),alpha=mask&255;
+            int samples=GameGeometry.FOG_SAMPLES_PER_TILE;
+            int mask=fog.texture.bitmap.getPixel(c%w*samples+samples/2,c/w*samples+samples/2),alpha=mask&255;
             int a=dim.getPixel(x,y),b=raw.getPixel(x,y);
             if(!l.visited[c]&&!l.mapped[c]&&alpha==255) {
                 if((a>>>8)!=0)throw new AssertionError("Never-seen cell not black at "+c);

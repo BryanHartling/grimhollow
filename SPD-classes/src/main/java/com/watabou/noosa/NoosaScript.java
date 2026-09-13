@@ -44,6 +44,7 @@ public class NoosaScript extends Script {
 	public Attribute aUV;
 	
 	private Camera lastCamera;
+	private final float[] lastCameraMatrix = new float[16];
 	
 	public NoosaScript() {
 
@@ -157,8 +158,12 @@ public class NoosaScript extends Script {
 		if (camera == null) {
 			camera = Camera.main;
 		}
-		if (camera != lastCamera && camera.matrix != null) {
+		// Camera objects are reused while panning/zooming. Custom programs do not
+		// necessarily participate in Game's per-frame reset of the two base scripts.
+		if (camera.matrix != null && (camera != lastCamera
+				|| !java.util.Arrays.equals(lastCameraMatrix, camera.matrix))) {
 			lastCamera = camera;
+			System.arraycopy(camera.matrix, 0, lastCameraMatrix, 0, 16);
 			uCamera.valueM4( camera.matrix );
 
 			if (!camera.fullScreen) {

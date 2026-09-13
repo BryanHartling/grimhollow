@@ -2,6 +2,13 @@
 
 Upstream history retained; branch `grimhollow`. Each changed path is listed below.
 
+- v1.0.2 rendering brief supersedes the suspected diagnosis where evidence differs: FogOfWar already covered 16-unit cells, but linear filtering leaked across visibility boundaries, and the custom wall-light shader retained a stale camera transform.
+- `NoosaScript.java`: cache camera matrix values as well as camera identity, fixing displaced walls/torch surroundings and door-transition pans for custom shaders.
+- `FogOfWar.java`, `GameGeometry.java`: one nearest-sampled visibility texel per logical cell; visible walls use their own FOV; correct fog texture disposal key; light-map sampling is explicitly independent of art resolution.
+- `ItemSpriteSheet.java`: Mind Vision's ring-shaped generated identification cell remaps to the existing eye at 98 while retaining ID 82; Waterskin and all 381 named item IDs match the committed catalog, so no item atlas was replaced or re-derived.
+- `FogAlignmentChecks.java`, `RecoveryChecks.java`, `DesktopSmokeProbe.java`, `desktop/src/test/resources/item-semantics.json`: test 47 GPU coverage/camera/door checks and test 25 named pixel identities plus all section 9 items; no art pipeline executes.
+- `.github/workflows/build.yml`, `build.gradle`, `README.md`: require test 47 in the existing Linux renderer, preserve failing contrast test 45, and publish rendering fix version 1.0.2/code 919.
+
 - Recovery v1.0.1 supersedes generated world/character/liquid art checks; artgen and Blender remain unused, while historical tests and evidence remain in the tree.
 - The named GDD-build-spec-v0.9.md was absent from both the repository and supplied Downloads; recovery is applied to the actual v1.0.0 tree and its existing GDD-one-shot-build-spec.md, without inventing missing requirements.
 - Remembered non-wall cells no longer receive neighbouring raised-wall overhangs; field-of-view updates invalidate the wall tilemap while retaining upstream FogOfWar compositing.

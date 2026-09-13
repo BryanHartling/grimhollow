@@ -41,7 +41,7 @@ jobs:
         if: ${{ !cancelled() }}
         shell: bash
         run: python tools/recovery_checks.py --jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)"
-      - name: Remembered terrain, walking evidence, geometry, effects and menu handlers
+      - name: Fog alignment (47), remembered terrain, walking, geometry and menu handlers
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         shell: bash
         run: |
@@ -52,7 +52,7 @@ jobs:
             if [ "$index" = 0 ]; then
               options=(-Dgrimhollow.geometryTests=true -Dgrimhollow.effectsTests=true)
             fi
-            xvfb-run -a java -Dgrimhollow.recovery=true -Dgrimhollow.region=$index "${options[@]}" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers || result=1
+            xvfb-run -a java -Dgrimhollow.recovery=true -Dgrimhollow.fogTests=true -Dgrimhollow.region=$index "${options[@]}" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers || result=1
             python tools/recovery_checks.py --region "${regions[$index]}" || result=1
           done
           exit "$result"

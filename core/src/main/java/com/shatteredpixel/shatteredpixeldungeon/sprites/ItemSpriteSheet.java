@@ -985,6 +985,13 @@ public class ItemSpriteSheet {
 			assignIconRect( POTION_DIVINE,      7, 7 );
 		}
 
+        static {
+            // The committed MINDVIS cell is a ring from the old name classifier.
+            // Reuse the existing vision eye; IDs and atlas pixels stay unchanged.
+            film.add(POTION_MINDVIS, film.get(POTION_MAGISIGHT));
+        }
+
+
 		                                                                                //16 free slots
 
 	}

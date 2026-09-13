@@ -305,6 +305,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             com.badlogic.gdx.graphics.glutils.FrameBuffer buffer=new com.badlogic.gdx.graphics.glutils.FrameBuffer(Pixmap.Format.RGBA8888,256,256,false);
             java.util.List<String> failures=new java.util.ArrayList<>();
             int heroes=0,mobs=0,items=0,icons=0;
+            com.badlogic.gdx.utils.JsonValue semantics=new com.badlogic.gdx.utils.JsonReader().parse(
+                    Gdx.files.local("desktop/src/test/resources/item-semantics.json"));
             HeroClass original=Dungeon.hero.heroClass;
             com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite originalSprite=Dungeon.hero.sprite;
             for(HeroClass hero:HeroClass.values()) {
@@ -345,7 +347,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite(index);
                 if(GameGeometry.opaqueHeight(sprite.texture,sprite.frame())==0){failures.add("25 empty "+field.getName());continue;}
                 band(sprite,16,.45f,.55f,buffer,camera,zoom,failures,"25 "+field.getName());
-                exactRectangle(sprite,index,32,buffer,camera,zoom,failures,field.getName());items++;sprite.destroy();
+                com.badlogic.gdx.utils.JsonValue expected=semantics.get("items").get(field.getName());
+                semanticItem(sprite,index,expected,field.getName(),failures);
+                exactRectangle(sprite,expected.getInt("artIndex"),32,buffer,camera,zoom,failures,field.getName());items++;sprite.destroy();
                 final int itemIndex=index;
                 com.shatteredpixel.shatteredpixeldungeon.ui.ItemSlot slot=new com.shatteredpixel.shatteredpixeldungeon.ui.ItemSlot(new com.shatteredpixel.shatteredpixeldungeon.items.Item(){@Override public int image(){return itemIndex;}});
                 slot.setRect(16,8,24,24);slot.camera=camera;
@@ -361,8 +365,12 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 int index=field.getInt(null);if(index<0)continue;
                 com.watabou.noosa.Image icon=new com.watabou.noosa.Image(Assets.Sprites.ITEM_ICONS);
                 icon.frame(com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.Icons.film.get(index));
-                exactRectangle(icon,index,32,buffer,camera,zoom,failures,"icon "+field.getName());icons++;icon.destroy();
+                com.badlogic.gdx.utils.JsonValue expected=semantics.get("icons").get(field.getName());
+                semanticItem(icon,index,expected,"icon "+field.getName(),failures);
+                exactRectangle(icon,expected.getInt("artIndex"),32,buffer,camera,zoom,failures,"icon "+field.getName());icons++;icon.destroy();
             }
+            if(items!=semantics.get("items").size||icons!=semantics.get("icons").size)failures.add("25 incomplete named atlas inventory");
+            namedItems(semantics,failures);
             System.out.println("TEST 25: items="+items+" identification icons="+icons+" failures="+(failures.size()-before));before=failures.size();
             int cell=Dungeon.hero.pos,terrain=Dungeon.level.map[cell];
             com.shatteredpixel.shatteredpixeldungeon.levels.Level.set(cell,com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.EMPTY);
@@ -523,5 +531,47 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if(actual!=expected){failures.add("25 pixel mismatch "+name+" at "+i+","+j);p.dispose();return;}
         }
         p.dispose();
+    }
+
+    private void semanticItem(Image image,int id,com.badlogic.gdx.utils.JsonValue expected,String name,java.util.List<String> failures)throws Exception {
+        if(expected==null)throw new AssertionError("25 no semantic reference for "+name);
+        if(id!=expected.getInt("id"))failures.add("25 changed identity "+name);
+        java.security.MessageDigest digest=java.security.MessageDigest.getInstance("SHA-256");
+        com.watabou.utils.RectF uv=image.frame();int x=Math.round(uv.left*image.texture.width),y=Math.round(uv.top*image.texture.height);
+        for(int j=0;j<32;j++)for(int i=0;i<32;i++) {
+            int rgba=image.texture.bitmap.getPixel(x+i,y+j);
+            digest.update(new byte[]{(byte)(rgba>>>24),(byte)(rgba>>>16),(byte)(rgba>>>8),(byte)rgba});
+        }
+        StringBuilder hash=new StringBuilder();for(byte b:digest.digest())hash.append(String.format(java.util.Locale.ROOT,"%02x",b&255));
+        if(!hash.toString().equals(expected.getString("rgbaSha256")))failures.add("25 wrong semantic art "+name);
+    }
+
+    private void namedItems(com.badlogic.gdx.utils.JsonValue semantics,java.util.List<String> failures)throws Exception {
+        String[][] names={
+            {"Waterskin","WATERSKIN"},{"wands.WandOfNecrosis","WAND_NECROSIS"},{"wands.WandOfGravity","WAND_GRAVITY"},
+            {"wands.WandOfBone","WAND_BONE"},{"spells.Soulfire","SOULFIRE"},{"weapon.melee.BoneScythe","BONE_SCYTHE"},
+            {"weapon.melee.ReapersScythe","REAPER_SCYTHE"},{"weapon.melee.GraveScythe","GRAVE_SCYTHE"},
+            {"armor.BoneArmor","ARMOR_BONE"},{"artifacts.HourglassOfAshes","HOURGLASS_ASHES"},
+            {"weapon.melee.BoneRod","BONE_ROD"},{"Phylactery","PHYLACTERY"},{"armor.NecromancerArmor","ARMOR_NECROMANCER"},
+            {"weapon.melee.RunedBaton","RUNED_BATON"},{"SigilBrush","SIGIL_BRUSH"},{"armor.EnchanterArmor","ARMOR_ENCHANTER"},
+            {"weapon.melee.FocusRing","FOCUS_RING"},{"FocusCrystal","FOCUS_CRYSTAL"},{"armor.PsychicArmor","ARMOR_PSYCHIC"},{"RuneEtching","RUNE_ETCHING"}
+        };
+        for(String[] row:names) {
+            com.shatteredpixel.shatteredpixeldungeon.items.Item item=(com.shatteredpixel.shatteredpixeldungeon.items.Item)
+                    Class.forName("com.shatteredpixel.shatteredpixeldungeon.items."+row[0]).getDeclaredConstructor().newInstance();
+            if(item.image()!=semantics.get("items").get(row[1]).getInt("id"))failures.add("25 item class maps to wrong art: "+row[0]);
+        }
+        for(com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor armor:new com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor[]{
+                new com.shatteredpixel.shatteredpixeldungeon.items.armor.LeatherArmor(),new com.shatteredpixel.shatteredpixeldungeon.items.armor.MailArmor()}) {
+            com.watabou.utils.Bundle b=new com.watabou.utils.Bundle();armor.storeInBundle(b);b.put("leather_variant",true);armor.restoreFromBundle(b);
+            String name=armor.tier==2?"ARMOR_LEATHER_OCHRE":"ARMOR_LEATHER_ASH";
+            if(armor.image()!=semantics.get("items").get(name).getInt("id"))failures.add("25 leather variant "+name);
+        }
+        com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision mind=new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision();
+        // Bottle colours are randomized by the saved identification handler, not by effect.
+        if(mind.image()<352||mind.image()>363||mind.icon!=82)failures.add("25 Mind Vision bottle/identity");
+        Image eye=new Image(Assets.Sprites.ITEM_ICONS);eye.frame(com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.Icons.film.get(mind.icon));
+        semanticItem(eye,mind.icon,semantics.get("icons").get("POTION_MINDVIS"),"Potion of Mind Vision eye",failures);eye.destroy();
+        System.out.println("TEST 25 semantics: all 381 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10");
     }
 }

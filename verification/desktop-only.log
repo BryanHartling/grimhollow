@@ -1175,3 +1175,106 @@ BUILD SUCCESSFUL in 11s
 9 actionable tasks: 1 executed, 8 up-to-date
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
 
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+TEST 46 runtime: title controls=5 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0
+RECOVERY generated region=0 seed=417 room=[5, 8, 10, 15] fixed-path steps=100 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=0 phase=start zooms=3 pans=4 cameras=12 everyCell=1152 hiddenPixels=15869952 visiblePixels=645120 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=0 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1152 hiddenPixels=12500992 visiblePixels=645120 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=0 doorTransitionFrames=150 failures=0
+TEST 43: region=0 steps=100 remembered={chasm=1263, door=349, floor=3091, grass=317, water=1571} fogPixels=604 unseenBlackPixels=885 turns=23 doors=8 failures=0
+[Controllers] removed manager for application, 0 managers active
+
+Fogfix red regression on recovery renderer (before fixes): java -Dgrimhollow.recovery=true -Dgrimhollow.fogTests=true -Dgrimhollow.region=0 -jar desktop/build/libs/desktop-1.0.1.jar --smoke-sewers
+Exit 1: TEST 47 region=0 phase=start [fog never-seen cell=229 zoom=1 pan=[32, 32] pixel=4,12 rgb=10101; pixel=5,12 rgb=30303; pixel=6,12 rgb=50505] (excerpt; linear-filter boundary leakage). Initial unquoted PowerShell JVM options failed to launch and were retried quoted.
+TEST 46 compiled handlers: classes=2876 guarded browser sinks=1 HTTP/socket calls=0 failures=0
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+TEST 46 runtime: title controls=5 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0
+RECOVERY generated region=0 seed=417 room=[5, 8, 10, 15] fixed-path steps=100 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=0 phase=start zooms=3 pans=4 cameras=12 everyCell=1152 hiddenPixels=15869952 visiblePixels=645120 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=0 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1152 hiddenPixels=12500992 visiblePixels=645120 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=0 doorTransitionFrames=150 failures=0
+TEST 43: region=0 steps=100 remembered={chasm=1263, door=349, floor=3091, grass=317, water=1571} fogPixels=604 unseenBlackPixels=885 turns=23 doors=8 failures=0
+TEST 24: heroes=9 mob sprites=114 failures=0
+TEST 25 semantics: all 381 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10
+TEST 25: items=381 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+TESTS 24-26, 34, 36 PASS; test 35 retired by recovery
+TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0
+TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.7373ms p95=1.0453ms failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=1 seed=417 room=[29, 25, 37, 32] fixed-path steps=202 terrainEdits=0
+[GAME] @@ You descend to floor 6 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=1 phase=start zooms=3 pans=4 cameras=12 everyCell=1681 hiddenPixels=23066624 visiblePixels=1032192 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+[GAME] ** You catch fire!
+TEST 47: region=1 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1681 hiddenPixels=16228352 visiblePixels=1032192 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=1 doorTransitionFrames=292 failures=0
+TEST 43: region=1 steps=202 remembered={chasm=565, door=1415, floor=27380, grass=2473, water=8230} fogPixels=1619 unseenBlackPixels=1608 turns=56 doors=16 failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=2 seed=417 room=[23, 5, 30, 14] fixed-path steps=200 terrainEdits=0
+[GAME] @@ You descend to floor 11 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=2 phase=start zooms=3 pans=4 cameras=12 everyCell=2067 hiddenPixels=28528640 visiblePixels=1103872 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=2 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=2067 hiddenPixels=25145344 visiblePixels=1103872 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=2 doorTransitionFrames=429 failures=0
+TEST 43: region=2 steps=200 remembered={chasm=5742, door=694, floor=16771, grass=477, water=3379} fogPixels=1912 unseenBlackPixels=1963 turns=85 doors=23 failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=3 seed=417 room=[16, 23, 23, 30] fixed-path steps=172 terrainEdits=0
+[GAME] @@ You descend to floor 16 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=3 phase=start zooms=3 pans=4 cameras=12 everyCell=1722 hiddenPixels=23769088 visiblePixels=917504 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=3 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1722 hiddenPixels=18049024 visiblePixels=917504 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=3 doorTransitionFrames=337 failures=0
+TEST 43: region=3 steps=172 remembered={chasm=1929, door=1212, floor=12206, grass=715, water=5082} fogPixels=1369 unseenBlackPixels=1920 turns=54 doors=18 failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=4 seed=417 room=[24, 17, 32, 25] fixed-path steps=114 terrainEdits=0
+[GAME] @@ You descend to floor 21 of the dungeon.
+[GAME] -- You feel that there's a source of demonic energy above you...
+[GAME] ** Your steps echo across the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=4 phase=start zooms=3 pans=4 cameras=12 everyCell=1925 hiddenPixels=26851328 visiblePixels=745472 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=4 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1925 hiddenPixels=22306816 visiblePixels=745472 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=4 doorTransitionFrames=184 failures=0
+TEST 43: region=4 steps=114 remembered={chasm=7238, door=250, floor=4823, grass=1571, water=2529} fogPixels=1006 unseenBlackPixels=3247 turns=36 doors=10 failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 19 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-fire.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-frost.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-shock.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-lighting-on.png
+PASS V4 rendering: arena trigger, FIRE/FROST/SHOCK, scripted boss death and treasure door unlock (not a played fight)
+RENDERED=GameScene SCREENSHOT=.local/acceptance/vault-lighting-off.png
+PASS: Vault scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active

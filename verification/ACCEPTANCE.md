@@ -1,3 +1,79 @@
+# Rendering fix acceptance - v1.0.2
+
+Runtime/test source checkpoint: `bcee035c2`. Tests 25, 43 and 47 pass locally; the unchanged numeric contrast gate 45 still fails and remains enforced in CI. The exact delivered commit, tag and CI result appear in the delivery response. No gameplay, balance, content or shipping asset bytes changed. No artgen/Blender loop ran.
+
+Test 47 first failed on the unmodified recovery renderer: never-seen cell 229 at zoom 1/pan [32,32] contained nonblack edge pixels (0x010101, 0x030303, 0x050505). Fog used linear filtering across cell boundaries. Separately, the custom wall-light program cached a mutable camera by identity; matrix changes now invalidate that cache. Fog has exactly one nearest-sampled texel per 16-unit cell. The light-map quad retains the correct level bounds and its sample density is independent of texture art resolution.
+
+Test 47 reads actual GPU pixels for every visible/never-seen cell, including cell edges and visible walls, over both an opaque witness background and the actual lit world. It changes the same camera object's zoom/pan, reads the uploaded wall-light camera matrix, checks light-map world bounds, repeats after normal walking, and checks intermediate door movement frames. It changes no level terrain or FOV flags. Test 43's existing remembered-terrain checks remain active.
+
+The item atlas was not reverted in v1.0.1 and all 381 IDs match its committed catalog. Mind Vision's old identification cell contains a ring due to the historical name classifier; the film now reuses the existing eye at cell 98 while ID 82 remains stable. Waterskin already points to its bag at 480: no index mismatch was reproduced, and its art remains unchanged for human review. Test 25 pins all named cells to existing pixels and checks actual classes, all eleven section 9 items (including both leather variants), and the ten new-class items. Potion bottle colours remain randomized by their saved identification handler.
+
+| Test | Status | Actual output or reason |
+|---|---|---|
+| 1 | PASS | Fresh clone bcee035c2: RENDERED=TitleScene from desktop-1.0.2.jar; Android SDK environment unset. |
+| 2 | PASS | desktop:dist core:test android:assembleDebug core:smokeRun: BUILD SUCCESSFUL in 1m34s; APK code 919. |
+| 3 | RETIRED | Superseded by recovery: generated-art rebuild prohibited; source-pixel restoration is checked by 44. |
+| 4 | RETIRED | Superseded by recovery: generated style validator replaced by restored-pixel 44 and room 45. |
+| 5 | PASS | All nine kits execute; ten seeds per hero; Runs=90 failures=0. |
+| 6 | permanent known issue | Representative hooks pass; exhaustive talent selection/hook scenarios remain unrun. |
+| 7 | permanent known issue | Subclass hooks pass; actual Tengu reward selection flow remains unrun. |
+| 8 | permanent known issue | Nine armor abilities execute; actual crown selection flow remains unrun. |
+| 9 | PASS | TEST 9 PASS; temporary Bone/Force terrain persistence, expiry and floor-exit checks execute. |
+| 10 | PASS | Necromancer minion cap and Second Grave checks pass in the existing class suite. |
+| 11 | PASS | TESTS 11-13 PASS: Grasp heap/trap/empty-cell cases. |
+| 12 | PASS | TESTS 11-13 PASS: thrown damage at the required levels. |
+| 13 | PASS | TESTS 11-13 PASS: domination retargeting and duration. |
+| 14 | PASS | All nine classes: active-state save/load and floor-6 round trips; 90/0. |
+| 15 | PASS | Runs=90 failures=0; includes all three new classes with ten seeds each; generation/debug descent, not player combat. |
+| 16 | permanent known issue | Representative sprite/item/talent coverage passes; exhaustive every-code-path frame audit remains unrun. |
+| 17 | RETIRED | Superseded by recovery: generated style requirements do not apply to restored upstream character/world pixels. |
+| 18 | RETIRED | Superseded by recovery: generated-region brightness target replaced by within-room distinctness 45. |
+| 19 | permanent known issue | The floor-15 1,000-turn/20-mob timing scenario remains unrun. |
+| 20 | PASS | Fresh desktop-only clone bcee035c2 builds in 1m46s with ANDROID_HOME/ANDROID_SDK_ROOT unset; title launches. |
+| 21 | permanent known issue | Test 45 remains active and failing; exact remote CI status and run URL are in the delivery response. |
+| 22 | PASS | aapt: com.grimhollow.dungeon; label Grimhollow; versionCode 919; versionName 1.0.2-INDEV. |
+| 23 | PASS | PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow. |
+| 24 | PASS | TEST 24: heroes=9 mob sprites=114 failures=0. |
+| 25 | PASS | 381 named item IDs and 60 icons match pinned RGBA references; every section 9 item and class item maps correctly; Mind Vision reuses eye cell 98. |
+| 26 | PASS | TEST 26: three stains and floor/chasm/water/trap placement failures=0. |
+| 27 | PASS | TEST 27 PASS: 300 turns unchanged; 12 charges level=1; Wraith offered; hostile attacked within 2 turns. |
+| 28 | RETIRED | Superseded by recovery: rendered-cache rebuild no longer produces the restored shipping world/characters. |
+| 29 | RETIRED | Superseded by recovery: rerendering is prohibited; Blender/cache retained unused. |
+| 30 | RETIRED | Superseded by recovery: generated character hue-distance gate replaced by upstream pixel provenance 44. |
+| 31 | PASS | Off pixel differences=0; 240 GPU-completed frames mean=0.7373ms, p95=1.0453ms. |
+| 32 | PASS | Three scorch sizes; actual floor fire expiry; water/chasm rejection failures=0. |
+| 33 | PASS | TEST 33 PASS: scroll/stone offers, exclusions, cancel/apply, subclasses and history persistence. |
+| 34 | PASS | TEST 34: old/future version, portrait exception and deletion failures=0. |
+| 35 | RETIRED | Superseded by recovery: source-string grep replaced by compiled/runtime handler and network test 46. |
+| 36 | PASS | TEST 36: nine upstream splashes, descriptions, portraits, talent icons and ItemSlots failures=0. |
+| 37 | PASS | TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment. |
+| 38 | permanent known issue | 18 supplied images lack verified allowed redistribution licenses; excluded from Git; 70 licensed files eligible. |
+| 39 | RETIRED | Superseded by recovery: rejected regional iteration histories remain archival; their art no longer ships. |
+| 40 | RETIRED | Superseded by recovery: generated-room isolated metrics replaced by remembered-terrain 43 and distinctness 45. |
+| 41 | RETIRED | Superseded by recovery: generated animated liquid atlas replaced by historical scrolling water. |
+| 42 | RETIRED | Superseded by recovery: calibrated generated-region gates replaced by restored-region test 45. |
+| 43 | PASS | Five generated regions, seed 417: 788 normal moves, 254 turns, 75 opened doors; failures=0. |
+| 44 | PASS | 87 upstream-derived character sheets; 122 restored assets; failures=0. All 481 shipping asset files match both jar and APK; zero asset changes. |
+| 45 | permanent known issue | FAIL after fog/camera fix: Sewers 9/15; Prison 5/10; Caves 14/21; City 5/15; Halls 14/15. Total 47/76. No threshold or art changes. |
+| 46 | PASS | 5 title controls; 4 repository-only Credits handlers; 2,876 compiled classes; 1 guarded browser sink; 0 HTTP/socket calls; failures=0. |
+| 47 | PASS | All five generated regions; 3 zooms x 4 pans before/after walking = 120 configurations; 212,316,160 hidden and 8,888,320 visible pixels checked against FOV; 1,392 door frames; failures=0. |
+
+Local headless suite: `Runs=90 failures=0` (ten seeds for each of nine heroes, including all three new classes). JUnit: five tests, zero failures/errors/skips. The separate class-only and combined CI jobs remain unchanged. Actual outputs and failed diagnostic attempts are appended to the existing verification logs.
+
+| Region | Steps | Turns | Opened doors | Door transition frames | Test 45 failed pairs | Floor/wall delta luminance | Floor/wall delta hue |
+|---|---|---|---|---|---|---|---|
+| sewers | 100 | 23 | 8 | 150 | 9/15 | 0.1033 | 9.62 degrees |
+| prison | 202 | 56 | 16 | 292 | 5/10 | 0.0919 | 14.32 degrees |
+| caves | 200 | 85 | 23 | 429 | 14/21 | 0.0162 | 0.96 degrees |
+| city | 172 | 54 | 18 | 337 | 5/15 | 0.0366 | 75.75 degrees |
+| halls | 114 | 36 | 10 | 184 | 14/15 | 0.0276 | 15.25 degrees |
+
+Every measured pair and per-type mean is recorded in `recovery/<region>/distinctness.json`; the lit screenshots and 80 stepwise walk images are from the actual Windows renderer. The threshold remains delta luminance >= 0.12 OR delta hue >= 40 degrees. Human contrast review is pending; these measurements do not establish legibility.
+
+---
+
+## Historical recovery checkpoint (superseded by the rendering fix)
+
 # Recovery acceptance — v1.0.1
 
 Runtime/test source checkpoint: `e4f1f9977`. **Recovery is not accepted:** test 45 fails in all five regions. The exact delivered commit, tag and remote CI run are stated in the delivery response. No artgen or Blender loop ran. No gameplay, balance or content changes were made. The existing historical report is preserved below.

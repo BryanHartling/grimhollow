@@ -32,8 +32,6 @@ import com.badlogic.gdx.utils.SharedLibraryLoader;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.services.news.News;
-import com.shatteredpixel.shatteredpixeldungeon.services.news.NewsImpl;
-import com.shatteredpixel.shatteredpixeldungeon.services.updates.UpdateImpl;
 import com.shatteredpixel.shatteredpixeldungeon.services.updates.Updates;
 import com.watabou.noosa.Game;
 import com.watabou.utils.FileUtils;
@@ -129,12 +127,8 @@ public class DesktopLauncher {
 			Game.versionCode = Integer.parseInt(System.getProperty("Implementation-Version"));
 		}
 
-		if (UpdateImpl.supportsUpdates()){
-			Updates.service = null; // Fork releases are not published yet.
-		}
-		if (NewsImpl.supportsNews()){
-			News.service = null; // No fork news service.
-		}
+		Updates.service = null;
+		News.service = null;
 		
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		

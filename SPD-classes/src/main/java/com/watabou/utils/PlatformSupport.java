@@ -76,8 +76,8 @@ public abstract class PlatformSupport {
 		//does nothing by default
 	}
 
-	public boolean openURI( String uri ){
-		return Gdx.net.openURI( uri );
+	public final boolean openURI( String uri ){
+		return RepositoryUris.allowed(uri) && Gdx.net.openURI( uri );
 	}
 
 	public void setOnscreenKeyboardVisible(boolean value, boolean multiline){

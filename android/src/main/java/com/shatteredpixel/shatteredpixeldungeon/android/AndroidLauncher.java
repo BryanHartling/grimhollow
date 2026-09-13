@@ -43,8 +43,6 @@ import com.badlogic.gdx.utils.GdxNativesLoader;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.services.news.News;
-import com.shatteredpixel.shatteredpixeldungeon.services.news.NewsImpl;
-import com.shatteredpixel.shatteredpixeldungeon.services.updates.UpdateImpl;
 import com.shatteredpixel.shatteredpixeldungeon.services.updates.Updates;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Button;
 import com.watabou.input.KeyEvent;
@@ -91,14 +89,8 @@ public class AndroidLauncher extends AndroidApplication {
 			}
 
 			Gdx.app = this;
-			if (UpdateImpl.supportsUpdates()) {
-				Updates.service = null; // Fork releases are not published yet.
-			}
-
-			//F-Droid specifically considers auto news checking to be an 'anti-feature', so default it to false
-			if (NewsImpl.supportsNews()) {
-				News.service = null; // No fork news service.
-			}
+			Updates.service = null;
+			News.service = null;
 
 			FileUtils.setDefaultFileProperties(Files.FileType.Local, "");
 

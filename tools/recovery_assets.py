@@ -157,14 +157,24 @@ def main():
     for path,e in sorted(entries.items()):
         expected=reconstruct(e); p=ASSETS/path
         if args.check:
-            if not p.exists() or p.read_bytes()!=expected: failures.append(path)
+            if not p.exists():
+                failures.append(path)
+            elif e.get('raw'):
+                if p.read_bytes()!=expected: failures.append(path)
+            else:
+                # PNG compressors differ between platform wheels; the recovery
+                # contract is exact source pixels, alpha and frame dimensions.
+                actual=Image.open(p).convert('RGBA')
+                original=Image.open(BytesIO(expected)).convert('RGBA')
+                if actual.size!=original.size or actual.tobytes()!=original.tobytes(): failures.append(path)
         else:
             p.parent.mkdir(parents=True,exist_ok=True); p.write_bytes(expected)
         characters+=bool(e.get('character'))
     if not args.check: MANIFEST.write_text(json.dumps(entries,indent=2)+'\n',encoding='utf-8')
     if args.check:
-        for path in files(APPROVED,'sprites'):
-            if Path(path).name not in {'items.png','item_icons.png','avatars.png','amulet.png'} and path not in entries:
+        for current in (ASSETS/'sprites').glob('*.png'):
+            path=current.relative_to(ASSETS).as_posix()
+            if current.name not in {'items.png','item_icons.png','avatars.png','amulet.png'} and not entries.get(path,{}).get('character'):
                 failures.append('Unaccounted character '+path)
         for name in ('warrior','mage','rogue','huntress','duelist','cleric','necromancer','enchanter','psychic'):
             if (ASSETS/f'splashes/{name}.png').exists():failures.append('Rejected splash still packaged '+name)

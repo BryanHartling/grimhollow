@@ -1,3 +1,11 @@
+# Recovery supersession
+
+For v1.0.1, the following pipeline is retained **unused**. Do not regenerate the rejected character/world/liquid art. `tools/recovery_assets.py` restores historical Git pixels; `--check` reconstructs and compares them in memory. `core/src/main/assets/recovery-assets.json` records each source, scale, approved patch and palette swap. Terrain comes from `v0.3.2-fixup2`; v4-only special-room extensions and all character/splash sources come from upstream `v4.0.0`. Approved Sewers door/torch cells come from `v1.0.0-content-complete`. Titles, UI/talent icons and other retained item/effect assets keep their existing provenance.
+
+Tests 3, 4, 17, 18, 28–30, 39–42 are retired by the recovery art-scope supersession; tests 43–45 replace those shipping-art gates. Test 35 is replaced by handler/network test 46. The historical instructions and evidence below are preserved, not current acceptance claims.
+
+---
+
 # Reproducible art pipeline
 
 The v4.0.0 integration adds 24 editable palette-vector specifications for changed special terrain, interface icons and quest/enemy sprites, and updates the existing item source. All 97 current specifications rebuild byte-for-byte. `python tools/artgen/import_upstream_layout.py --upstream-v4` recreates this import from pinned commit `2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`; normal builds consume only committed JSON and cached renders. Original alpha is retained, including occlusion shadows. The import preserves the five approved region atlases, original spell IDs and class item slots 512-521; four elemental summon variants occupy 522-525. These GPL upstream silhouettes are provisional game art, excluded from CC0 reference optimization, and do not certify the later native 64px character/item redesign. Full validation still reports 77 uncovered sheets and unfinished style/frame gates.

@@ -2,6 +2,28 @@
 
 Upstream history retained; branch `grimhollow`. Each changed path is listed below.
 
+- Recovery v1.0.1 supersedes generated world/character/liquid art checks; artgen and Blender remain unused, while historical tests and evidence remain in the tree.
+- The named GDD-build-spec-v0.9.md was absent from both the repository and supplied Downloads; recovery is applied to the actual v1.0.0 tree and its existing GDD-one-shot-build-spec.md, without inventing missing requirements.
+- Remembered non-wall cells no longer receive neighbouring raised-wall overhangs; field-of-view updates invalidate the wall tilemap while retaining upstream FogOfWar compositing.
+- Historical world pixels use integer nearest-neighbour scaling; v4-only special-room rows retain upstream pixels to avoid removing approved v4 content.
+- Character frames keep upstream per-sprite rectangles and alpha, including Ward and Sentry special frames; new class/minion distinctions use fixed palette substitutions only.
+- Credits project links resolve to repository attribution anchors, which contain the upstream links, reconciling required attribution with test 46's repository-only browser policy.
+- Test 45 retains the exact 0.12 luminance / 40-degree hue thresholds; restoration-only constraints do not authorize recoloring assets to conceal a failed comparison.
+- Test 44 compares decoded PNG pixels and alpha exactly, and upstream JPEG bytes exactly, avoiding platform compressor differences without tolerating changed pixels.
+- Test 45 uses the circular mean of per-pixel hue (achromatic pixels have undefined hue), retaining every pixel in the existing Rec.709 luminance mean; all visible room terrain and decor participates.
+- `RECOVERY-spec-v1.0.1.md`: exact user-supplied recovery specification, committed before implementation.
+- `tools/recovery_assets.py` and `core/src/main/assets/recovery-assets.json`: direct Git-source restoration and exact pixel/palette provenance for every restored environment, character and splash file named in the manifest.
+- `core/src/main/assets/environment/`: historical terrain/liquids/props with the approved Sewers door/torch patches; cached rejected regional art remains outside shipped assets.
+- `core/src/main/assets/sprites/` and `splashes/`: upstream character sheets and painted splashes; remove all nine rejected generated splash PNGs and document source dimensions in character-layouts.json.
+- `GameGeometry.java`, `HeroClass.java`, `WardSprite.java`, `SentrySprite.java`: preserve upstream frame layouts, special rectangles and splash references at integer texture density.
+- `GameScene.java`, `DungeonWallsTilemap.java`, `DungeonTerrainTilemap.java`, `RaisedTerrainTilemap.java`, `TerrainFeaturesTilemap.java`, `EnhancedEffects.java`: restore scrolling water and normal grass; invalidate remembered-wall overhangs without changing terrain or actors.
+- `RepositoryUris.java`, `PlatformSupport.java`, `TitleScene.java`, `AboutScene.java`, `NewsScene.java`: five-control title, minimal Credits, repository-only navigation and no news scene fetches.
+- `android/build.gradle`, `desktop/build.gradle`, both launchers: remove packaged update/news client implementations; retain only inert service interfaces.
+- `RecoveryTest.java`, `RecoveryChecks.java`, `tools/recovery_checks.py`, `DesktopSmokeProbe.java`: tests 43–46 over generated paths, actual pixels, upstream provenance and compiled/runtime handlers; preserve retired methods and existing gameplay harness.
+- `.github/workflows/build.yml`: active recovery gates on both desktop jobs with Linux renderer walks and Android packaging; rejected-art checks are explicitly superseded, not silently ignored.
+- `build.gradle`: recovery version 1.0.1, Android code 918.
+- `README.md`, `ART_PIPELINE.md`, `KNOWN_ISSUES.md`, existing verification records: recovery usage, current limitations, historical supersession and actual outputs.
+
 - User scope amendment 2026-09-11: adopt upstream v4.0.0 content and fixes, including the complete Imp/Vault quest, while preserving Grimhollow's classes, identity and approved art; this explicitly supersedes the original v3.3.8-only scope.
 
 - v4 integration: retain the full upstream merge ancestry, gameplay/fixes and Gradle 9.5.0/AGP 9.2.0, while keeping Grimhollow's identity and excluding the unchanged, recoverable SPD store listing.

@@ -2,9 +2,11 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), now incorporating **v4.0.0**, commit `2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`. The fork began at v3.3.8; upstream history and Java packages are preserved.
 
-**Stage 8: all numbered development stages implemented.** Nine heroes are playable: six upstream classes plus Necromancer, Enchanter and Psychic, each with two subclasses, talents and three armor abilities. All 80 character atlases use native silhouettes; 380 item props, special-room materials and the title come from the reproducible pipeline. Review [the characters](verification/characters.png), [the items](verification/items.png), and [the enhanced effects](verification/effects.png). Settings → Display → Enhanced effects restores the original rendering when disabled. See [KNOWN_ISSUES.md](KNOWN_ISSUES.md) for acceptance gaps and [the v0.8 specification](GDD-one-shot-build-spec.md).
+**Recovery v1.0.1:** historical terrain and scrolling water are restored from `v0.3.2-fixup2`; characters use upstream v4 pixels with fixed palette swaps for the new classes. The approved title, Sewers doors/torches and UI/talent icons remain. The art generators and Blender cache are archived in place and are not used for this release. Recovery acceptance is in [RECOVERY-spec-v1.0.1.md](RECOVERY-spec-v1.0.1.md).
 
-**v4 content integration, version 0.5.2-v4:** the Ambitious Imp's expanded Vault quest, elemental boss, hazards, patrol AI, quest loot and equipment exchange are included. Weapon pools include Venomous, Vorpal, Eldritch and Crystal enchantments plus Pressurized and Wondrous curses. Upstream item balance, combat, save/load, generation, UI and audio fixes are incorporated. The Vault mirror supports all nine heroes. Approved regional atlases remain unchanged; v4 special-room and item visuals regenerate from palette-vector sources. The visual correction replaces stamped liquid highlights with reflections from travelling surface waves; tests 39-42 now pass locally, including the five-room vision review. The complete art gate and all platform jobs passed at v0.6.0-art-complete.
+The terrain distinctness gate currently fails on restored rooms in all five regions. A passing build is not a claim that recovery acceptance is complete; see [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and [the acceptance report](verification/ACCEPTANCE.md). Actual lit rooms and corridor/turn/door screenshot sequences are in [verification/recovery](verification/recovery/).
+
+All nine heroes, the expanded v4 Imp/Vault quest, new enchantments and curses, and Grimhollow's added content remain unchanged. No gameplay or balance changes are part of this recovery.
 
 ## Build on Windows
 
@@ -20,7 +22,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-1.0.0.jar
+java -jar desktop\build\libs\desktop-1.0.1.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.
@@ -54,18 +56,22 @@ The exact debug application ID is `com.grimhollow.dungeon` (no `.indev` suffix);
 ## Verify
 
 ```powershell
-.\gradlew.bat core:test -PdesktopOnly=true
-.\gradlew.bat desktop:run -PdesktopOnly=true --args=--smoke-title
-.\gradlew.bat desktop:run -PdesktopOnly=true --args=--smoke-sewers
-.\gradlew.bat core:smokeRun -PdesktopOnly=true
-python tools/artgen/validate.py
+. .\tools\env.ps1
+.\gradlew.bat core:test core:smokeRun -PsmokeUpstream=true -PdesktopOnly=true --no-daemon
+python tools/recovery_assets.py --check
+java -Dgrimhollow.recovery=true -Dgrimhollow.region=0 -Dgrimhollow.geometryTests=true -Dgrimhollow.effectsTests=true -jar desktop/build/libs/desktop-1.0.1.jar --smoke-sewers
+python tools/recovery_checks.py --all-regions
+python tools/recovery_checks.py --jar desktop/build/libs/desktop-1.0.1.jar
 ```
+
+Repeat the recovery renderer with region indices 1–4 for Prison, Caves, City and Halls. It walks normal adjacent moves on generated terrain in diagnostic slot 99, captures remembered terrain and verifies upstream fog compositing. Test 45 measures every pair of types in each lit room, including decor; failures remain active in CI. Test 44 reconstructs expected pixels in memory from Git objects and does not overwrite assets. Test 46 inspects compiled invocation sites and exercises actual menu handlers with a recording network adapter.
+
 
 The optional desktop probe renders actual OpenGL frames into `.local/acceptance/` and exits. The Sewer probe uses test save slot 99. The default headless gate targets the three new heroes. `-PsmokeUpstream=true` runs all nine classes, including the six retained classes: generate floors 1–6, save/load, ten seeds each. This diagnostic does not count as new-class acceptance or simulated combat.
 
-The same headless gate now checks City/Vault generation, mirror rewards, equipment and charge restoration, save/load, quest completion/shop state and serialization of the six new enchantments/curses. `java -Dgrimhollow.vault=true -jar desktop/build/libs/desktop-1.0.0.jar --smoke-sewers` exercises the real Vault arena trigger, its three rendered boss forms and scripted death/door unlocking. These checks do not constitute a player-driven quest or boss fight. Gradle 9.5.0 and Android Gradle Plugin 9.2.0 are inherited from v4 and run with the existing JDK 17/SDK 36 toolchain; use `--no-daemon` for every local Gradle invocation.
+The same headless gate now checks City/Vault generation, mirror rewards, equipment and charge restoration, save/load, quest completion/shop state and serialization of the six new enchantments/curses. `java -Dgrimhollow.vault=true -jar desktop/build/libs/desktop-1.0.1.jar --smoke-sewers` exercises the real Vault arena trigger, its three rendered boss forms and scripted death/door unlocking. These checks do not constitute a player-driven quest or boss fight. Gradle 9.5.0 and Android Gradle Plugin 9.2.0 are inherited from v4 and run with the existing JDK 17/SDK 36 toolchain; use `--no-daemon` for every local Gradle invocation.
 
-CI runs Linux/Windows desktop builds, JUnit, full art validation, Android packaging, and the headless gate. Failed gates remain active; jars upload even when a later acceptance gate fails. Artifact retention: 14 days.
+CI runs Linux/Windows desktop builds, JUnit, recovery provenance/handler/room checks, Android packaging, and the headless gates. Failed gates remain active; jars upload even when a later acceptance gate fails. Artifact retention: 14 days.
 
 Art: [ART_PIPELINE.md](ART_PIPELINE.md). Dynamic lighting is in Settings → Display, upstream's graphics tab. Ambient, hero, decorative-wall and persistent blob sources are implemented; enhanced effects are available independently of the dynamic-lighting toggle.
 
@@ -79,7 +85,7 @@ For continuation builds on this host, add `--no-daemon` to avoid reusing a Gradl
 
 Choose Necromancer in hero selection. Kills charge the equipped Phylactery; click it to open the spell circle. Skeletons follow and fight automatically. Tengu's mask offers Deathspeaker (an additional minion slot, Revenants and shared buffs) or Hexweaver (four curses). Upgrade armor with the Dwarf King's crown for Corpse Explosion, Death Pact or Bone Prison.
 
-Run the class-specific gate with `gradlew.bat core:smokeRun -PsmokeClass=NECROMANCER -PdesktopOnly=true --no-daemon`. It exercises class features and generator/debug descent to floor 6 for ten seeds. The default `core:smokeRun` covers all three new classes and reports `Runs=30 failures=0`. CI preserves that gate and the full art validator, with separate class gates for Necromancer, Enchanter and Psychic. Both platform builds upload their artifacts even when later-stage gates fail.
+Run the class-specific gate with `gradlew.bat core:smokeRun -PsmokeClass=NECROMANCER -PdesktopOnly=true --no-daemon`. It exercises class features and generator/debug descent to floor 6 for ten seeds. The default `core:smokeRun` covers all three new classes and reports `Runs=30 failures=0`. CI preserves that gate and the recovery checks, with separate class gates for Necromancer, Enchanter and Psychic. Both platform builds upload their artifacts even when later-stage gates fail.
 
 Phylactery starts with one charge and restores a minimum of one on first arrival at each floor. Only spending spell charges levels it; kills replenish charges. Raise Dead offers Skeleton, Wraith (artifact level 1), Ghoul (3), and Deathspeaker Revenant (6).
 
@@ -91,37 +97,11 @@ Psychic: use the Focus Crystal to retrieve items, trigger traps and glimpse enem
 
 Double-click `tools/play.bat` to launch the newest desktop jar without a console. Double-click `tools/rebuild.bat` to build it with the repository's JDK and then launch it. Both resolve their own paths and need no PowerShell session.
 
-The stage-5 proof of concept uses Blender 4.5.13 LTS at `C:\Users\Hartl\Documents\grimhollow\.toolchain\blender\blender.exe`. `python tools/artgen/install_blender.py` installs the pinned portable release and checks its official SHA-256 manifest; the [Blender 4.5 LTS release page](https://www.blender.org/releases/4-5/) documents the release family.
+## Archived art work
 
-Run `python tools/artgen/build.py --render` to render the active environment sources with Eevee, then post-process the output; approved Sewers classes remain locked. Character source geometry is in `tools/artgen/characters.py`; `character_catalog.py` compiles material choices and existing Java animation indices into the committed specifications. The rejected POC rigs are retained under `tools/artgen/blender/experimental/` and are accessible only with explicit `--asset experimental/<name>`. Normal builds and CI reuse committed environment renders and paint native character vectors without Blender.
+`tools/artgen/`, the Blender pipeline, render caches and earlier verification images remain for history. Their generated world/character/liquid checks are **RETIRED — superseded by recovery**; do not run their build commands to restore this release. See [ART_PIPELINE.md](ART_PIPELINE.md) for provenance and historical instructions. Current assets restore through `python tools/recovery_assets.py --world --characters`, using only Git extraction, integer nearest-neighbour scaling, approved rectangular patches and fixed palette substitutions.
 
-`python tools/artgen/validate.py --generated-only --rebuild` checks the implemented assets and byte-for-byte rebuilds without Blender. `--rerender` additionally rerenders the cache and enforces at most two changed pHash bits per frame. The unqualified validator remains the full-delivery gate and reports unfinished stage-6 coverage.
-
-`verification/render-poc.png` and `render-poc-ingame.png` preserve the historical POC. Current character review is `verification/characters.png`; current lit room captures are under `verification/iteration/`. The stage-6d validator checks every native pose, its intact two-pixel outline, standing occupancy, non-static animations and regional 16-pixel hue distances.
-
-PNG serialization uses fixed Sub filtering and Python standard-library Huffman-only compression, including the PNG payloads inside launcher ICO/ICNS files, to keep Windows and Linux post-process output identical.
-
-
-Stage 5.7 iterates only the six Sewers environment/prop classes. Review
-`verification/iteration/summary.png` and `verification/iteration/sewers-gate.png`,
-which prints the six room measurements below the actual lit screenshot. The raw
-image remains `verification/iteration/sewers-ingame.png`.
-Parameters, score histories, visual critiques and regeneration commands are documented in
-[ART_PIPELINE.md](ART_PIPELINE.md). No subsequent art stage is started by these commands.
-
-The five approved Sewers classes are now locked. Animated sewage, clean water and
-lava use four variants with eight frames each, separate cell phases, and an entry
-ripple. Review `verification/iteration/liquids/` and the lit Sewers image above;
-the Prison and Halls subfolders contain liquid previews with their existing region
-art. These previews do not certify the later regional art gates.
-
-Stage 6e keeps every special-room cell at 16 logical units while replacing its
-texture material at 64px. Talent and identification glyphs are native 32px
-pictograms. Item IDs, animation timing, collision and quest layouts retain v4
-contracts. `python tools/artgen/build.py` regenerates the complete 169-sheet
-inventory from source and committed caches; CI does not install Blender.
-
-Enhanced effects are generated by `python tools/artgen/build.py --render --asset effects`; CI rebuilds the single 1024×960 atlas from committed renders without Blender. `verification/effects.png` shows all strips. The existing desktop renderer runs tests 31–32 with `-Dgrimhollow.effectsTests=true --smoke-sewers`, including the disabled-path pixel comparison and 40-gas/10-fire timing.
+The enhanced effects toggle and its existing tests 31–32 remain active. The normal grass sprite is restored; other shipped item/effect assets are retained.
 
 ## Added dungeon content
 
@@ -132,3 +112,11 @@ The Hourglass holds ten charges and regenerates one every 30 turns, dropping by 
 Eligible ordinary mobs have a 10% chance to be cursed, with 30% more health, a persistent self-curse, five-turn curse transmission on hit, and one extra floor-scaled loot item. Hexcasters appear as rare rotation additions on floors 11–20, alternate two ranged curses, retreat from melee, and drop a wand 25% of the time. Chainwarden replaces Tengu in 30% of floor-10 generations, retaining the arena and rewards while using rooting chain traps and a two-cell pull every four turns.
 
 The existing `core:smokeRun` gate also exercises the new content, including real Wand of Bone save/load cleanup, Soulfire against a fire elemental, Hourglass refund persistence, curse and armor serialization, and enemy mechanics. These scripted checks are distinct from a complete player-driven campaign and Android device testing.
+
+## Pixel Dungeon
+
+Original game by **Oleg Dolya**: [Pixel Dungeon project](https://github.com/watabou/pixel-dungeon).
+
+## Shattered Pixel Dungeon
+
+By **Evan Debenham and contributors**: [Shattered Pixel Dungeon project](https://github.com/00-Evan/shattered-pixel-dungeon). Upstream sprites and paintings are used under GPL-3.0-or-later; [license](LICENSE.txt).

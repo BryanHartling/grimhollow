@@ -126,6 +126,7 @@ runtime {
 
 dependencies {
     implementation project(':core')
+    implementation project(':services')
 
     implementation "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
     implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
@@ -141,6 +142,4 @@ dependencies {
     implementation "org.lwjgl:lwjgl-tinyfd:3.3.3:natives-linux"
     implementation "org.lwjgl:lwjgl-tinyfd:3.3.3:natives-linux-arm64"
 
-    implementation project(':services:updates:githubUpdates')
-    implementation project(':services:news:shatteredNews')
 }

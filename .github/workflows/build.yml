@@ -9,9 +9,13 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fetch immutable upstream restoration source
+        run: git fetch https://github.com/00-Evan/shattered-pixel-dungeon.git refs/tags/v4.0.0:refs/tags/v4.0.0
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -20,55 +24,50 @@ jobs:
         with:
           python-version: '3.11'
       - uses: gradle/actions/setup-gradle@v4
-      - run: python -m pip install -r tools/artgen/requirements.txt
+      - run: python -m pip install Pillow==12.3.0 numpy==2.3.5
       - name: Build desktop distribution
         shell: bash
         run: ./gradlew desktop:dist -PdesktopOnly=true --no-daemon --console=plain
-      - name: Full art acceptance gate
-        run: python tools/artgen/validate.py --rebuild
-      - name: Sewers iteration and room acceptance 39-40 (committed cache only)
-        if: ${{ !cancelled() }}
-        run: python tools/artgen/iteration.py --check
-      - name: JUnit tests
+      # Recovery supersedes generated-art tests 3/4/17/18/28-30/35/39-42.
+      # Their implementations and historical evidence remain in the repository.
+      # No artgen or Blender production/check loop runs for the restored assets.
+      - name: Upstream pixel provenance (test 44)
+        run: python tools/recovery_assets.py --check
+      - name: JUnit tests including navigation policy
         if: ${{ !cancelled() }}
         shell: bash
         run: ./gradlew core:test -PdesktopOnly=true --no-daemon --console=plain
-      - name: Animated liquid acceptance 41 (committed cache only)
-        if: ${{ !cancelled() }}
-        run: python tools/artgen/iteration.py --liquids --check
-      - name: Prison iteration and room acceptance 39/42 (committed cache only)
-        if: ${{ !cancelled() }}
-        run: python tools/artgen/iteration.py --region prison --check
-      - name: Caves City Halls iteration and room acceptance 39/42 (committed cache only)
+      - name: Compiled handlers and network call audit (test 46)
         if: ${{ !cancelled() }}
         shell: bash
+        run: python tools/recovery_checks.py --jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)"
+      - name: Remembered terrain, walking evidence, geometry, effects and menu handlers
+        if: ${{ !cancelled() && runner.os == 'Linux' }}
+        shell: bash
         run: |
-          for region in caves city halls; do
-            python tools/artgen/iteration.py --region "$region" --check
+          regions=(sewers prison caves city halls)
+          result=0
+          for index in 0 1 2 3 4; do
+            options=()
+            if [ "$index" = 0 ]; then
+              options=(-Dgrimhollow.geometryTests=true -Dgrimhollow.effectsTests=true)
+            fi
+            xvfb-run -a java -Dgrimhollow.recovery=true -Dgrimhollow.region=$index "${options[@]}" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers || result=1
+            python tools/recovery_checks.py --region "${regions[$index]}" || result=1
           done
-      - name: Offscreen geometry and effects acceptance 24-26, 31-32
-        if: ${{ !cancelled() && runner.os == 'Linux' }}
-        run: xvfb-run -a java -Dgrimhollow.iteration=true -Dgrimhollow.geometryTests=true -Dgrimhollow.effectsTests=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
-      - name: Live room gate including boundary halo regression
-        if: ${{ !cancelled() && runner.os == 'Linux' }}
-        run: python tools/artgen/iteration.py --check-room
+          exit "$result"
+      - name: Committed Windows room distinctness evidence (test 45)
+        if: ${{ !cancelled() && runner.os == 'Windows' }}
+        run: python tools/recovery_checks.py --all-regions
       - name: Vault boss arena and elemental forms in the existing renderer
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         run: xvfb-run -a java -Dgrimhollow.vault=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
-      - name: Render live Prison room
-        if: ${{ !cancelled() && runner.os == 'Linux' }}
-        run: xvfb-run -a java -Dgrimhollow.iteration=true -Dgrimhollow.region=1 -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
-      - name: Live Prison room gate
-        if: ${{ !cancelled() && runner.os == 'Linux' }}
-        run: python tools/artgen/iteration.py --region prison --check-room
-      - name: Live Caves City Halls room gates including boundary halos
-        if: ${{ !cancelled() && runner.os == 'Linux' }}
-        run: |
-          regions=(caves city halls)
-          for index in 0 1 2; do
-            xvfb-run -a java -Dgrimhollow.iteration=true -Dgrimhollow.region=$((index+2)) -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
-            python tools/artgen/iteration.py --region "${regions[$index]}" --check-room
-          done
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: grimhollow-recovery-evidence-${{ matrix.os }}
+          path: verification/recovery/
+          retention-days: 14
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

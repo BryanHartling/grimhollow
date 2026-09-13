@@ -1,7 +1,7 @@
 # Known issues
 
-- The painted environment pass is undergoing the unchanged test 45 room measurement (0.12 mean luminance or 40 degrees mean hue); the prior restored-art result was 47/76 failing pairs and is historical, not the new art result.
-- The new visual-overhaul request authorizes painted world art; all animated hero/monster sheets, item icons, the approved title/UI and Sewer doors/torches remain unchanged. Their pixel styling is still visible beside the new environment art.
+- Test 45 retains its 0.12 luminance / 40-degree hue thresholds and fails 29/76 local comparisons after the painted pass: Sewers 7/15, Prison 2/10, Caves 9/21, City 1/15, Halls 10/15; it remains enforced in CI. The prior restored-art count was 47/76, and human readability review is still required.
+- The new visual-overhaul request authorizes painted world art; all animated hero/monster sheets, item icons, the approved title/UI and Sewer doors/torches remain unchanged. Their pixel styling, along with retained special-room artwork, is still visible beside the new environment art.
 - Waterskin already resolves to its catalogued bag at atlas cell 480; no index mismatch was reproduced. Its unchanged artwork may still be visually unclear. Test 25 checks named pixel identities, not human approval of the art.
 - Tests 6, 7 and 8 carry permanent known issues: representative talent hooks and all nine armor abilities execute, but exhaustive talent selection and actual Tengu/crown UI flows remain unrun.
 - Tests 16 and 19 carry permanent known issues: rendered sprite/item/talent checks cover representative contracts, but exhaustive every-code-path frame coverage and the floor-15 1,000-turn timing scenario remain unrun.

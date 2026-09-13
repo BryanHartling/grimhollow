@@ -42,22 +42,22 @@ public class WardSprite extends MobSprite {
 		texture(Assets.Sprites.WARDS);
 
 		tierIdles[1] = new Animation( 1, true );
-		tierIdles[1].frames(com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 1, 1), 0);
+		tierIdles[1].frames(texture.uvRect(0, 0, 36, 40));
 
 		tierIdles[2] = new Animation( 1, true );
-		tierIdles[2].frames(com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 1, 1), 1);
+		tierIdles[2].frames(texture.uvRect(40, 0, 84, 48));
 
 		tierIdles[3] = new Animation( 1, true );
-		tierIdles[3].frames(com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 1, 1), 2);
+		tierIdles[3].frames(texture.uvRect(88, 0, 148, 64));
 
 		tierIdles[4] = new Animation( 1, true );
-		tierIdles[4].frames(com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 1, 1), 3);
+		tierIdles[4].frames(texture.uvRect(152, 0, 176, 52));
 
 		tierIdles[5] = new Animation( 1, true );
-		tierIdles[5].frames(com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 1, 1), 4);
+		tierIdles[5].frames(texture.uvRect(180, 0, 204, 60));
 
 		tierIdles[6] = new Animation( 1, true );
-		tierIdles[6].frames(com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 1, 1), 5);
+		tierIdles[6].frames(texture.uvRect(208, 0, 240, 60));
 		updateTier(1);
 
 	}

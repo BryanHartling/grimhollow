@@ -351,7 +351,11 @@ public enum HeroClass {
 		}
 	}
 
-    public String splashArt(){return "splashes/"+name().toLowerCase(java.util.Locale.ROOT)+".png";}
+    public String splashArt(){
+        String source = this == NECROMANCER || this == ENCHANTER ? "mage"
+                : this == PSYCHIC ? "cleric" : name().toLowerCase(java.util.Locale.ROOT);
+        return "splashes/"+source+".jpg";
+    }
     
 	public boolean isUnlocked(){
 		//always unlock on debug builds

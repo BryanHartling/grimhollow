@@ -42,7 +42,6 @@ public class DungeonTerrainTilemap extends DungeonTilemap {
 	@Override
 	protected int getTileVisual(int pos, int tile, boolean flat) {
         if(tile==Terrain.BONE_WALL)tile=com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled()?Terrain.EMPTY:Terrain.BARRICADE;
-        if(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled() && (tile==Terrain.HIGH_GRASS||tile==Terrain.FURROWED_GRASS))tile=Terrain.GRASS;
         if(tile==Terrain.FORCE_WALL)tile=Terrain.EMPTY;
 		int visual = DungeonTileSheet.directVisuals.get(tile, -1);
 		if (visual != -1) {

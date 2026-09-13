@@ -65,8 +65,6 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 		if (plants.get(pos) != null){
 			return plants.get(pos).image + 7*16;
 		}
-
-		if(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled() && (tile==Terrain.HIGH_GRASS || tile==Terrain.FURROWED_GRASS))return -1;
         int stage = (Dungeon.depth-1)/5;
 		if (Dungeon.depth == 21 && Dungeon.level instanceof LastShopLevel) stage--;
 		stage = Math.min(stage, 4);

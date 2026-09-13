@@ -1,322 +1,350 @@
 {
   "sprites/bat.png": [
-    48,
-    60
+    128,
+    16
   ],
   "sprites/bee.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/blacksmith.png": [
-    48,
-    60
+    64,
+    16
   ],
   "sprites/brute.png": [
-    48,
-    60
+    256,
+    32
   ],
   "sprites/chainwarden.png": [
-    96,
-    96
+    256,
+    16
+  ],
+  "sprites/cleric.png": [
+    256,
+    128
   ],
   "sprites/crab.png": [
-    48,
-    60
+    256,
+    64
   ],
   "sprites/crystal_guardian.png": [
-    48,
-    60
+    256,
+    64
   ],
   "sprites/crystal_spire.png": [
-    96,
-    96
+    256,
+    128
   ],
   "sprites/crystal_wisp.png": [
-    48,
-    60
+    512,
+    16
   ],
   "sprites/dm100.png": [
-    48,
-    60
+    256,
+    32
   ],
   "sprites/dm200.png": [
-    48,
-    60
+    256,
+    64
   ],
   "sprites/dm300.png": [
-    96,
-    96
+    256,
+    64
+  ],
+  "sprites/duelist.png": [
+    256,
+    128
   ],
   "sprites/elemental.png": [
-    48,
-    60
+    512,
+    32
   ],
   "sprites/eye.png": [
-    48,
-    60
+    256,
+    32
   ],
   "sprites/fungal_core.png": [
-    96,
-    96
+    128,
+    32
   ],
   "sprites/fungal_sentry.png": [
-    48,
-    60
+    128,
+    32
   ],
   "sprites/fungal_spinner.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/ghost.png": [
-    48,
-    60
+    128,
+    16
   ],
   "sprites/ghoul.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/gnoll.png": [
-    48,
-    60
+    256,
+    64
   ],
   "sprites/gnoll_geomancer.png": [
-    96,
-    96
+    256,
+    32
   ],
   "sprites/gnoll_guard.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/gnoll_sapper.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/golem.png": [
-    48,
-    60
+    256,
+    32
   ],
   "sprites/goo.png": [
-    96,
-    96
+    256,
+    16
   ],
   "sprites/guard.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/guardian.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/hero_cleric.png": [
-    48,
-    60
+    256,
+    128
   ],
   "sprites/hero_duelist.png": [
-    48,
-    60
+    256,
+    128
   ],
   "sprites/hero_enchanter.png": [
-    48,
-    60
+    256,
+    128
   ],
   "sprites/hero_huntress.png": [
-    48,
-    60
+    256,
+    128
   ],
   "sprites/hero_mage.png": [
-    48,
-    60
+    256,
+    128
   ],
   "sprites/hero_necromancer.png": [
-    48,
-    60
+    256,
+    128
   ],
   "sprites/hero_psychic.png": [
-    48,
-    60
+    256,
+    128
   ],
   "sprites/hero_rogue.png": [
-    48,
-    60
+    256,
+    128
   ],
   "sprites/hero_warrior.png": [
-    48,
-    60
+    256,
+    128
   ],
   "sprites/hexcaster.png": [
-    48,
-    60
+    256,
+    16
+  ],
+  "sprites/huntress.png": [
+    256,
+    128
   ],
   "sprites/imp.png": [
-    48,
-    60
+    64,
+    16
   ],
   "sprites/king.png": [
-    96,
-    96
+    256,
+    16
   ],
   "sprites/larva.png": [
-    48,
-    60
+    128,
+    8
   ],
   "sprites/lotus.png": [
-    48,
-    60
+    32,
+    16
+  ],
+  "sprites/mage.png": [
+    256,
+    128
   ],
   "sprites/mimic.png": [
-    48,
-    60
+    256,
+    64
   ],
   "sprites/minion_ghoul.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/minion_skeleton.png": [
-    48,
-    60
+    256,
+    32
   ],
   "sprites/monk.png": [
-    48,
-    60
+    256,
+    32
   ],
   "sprites/necromancer.png": [
-    48,
-    60
+    256,
+    64
   ],
   "sprites/ninja_log.png": [
-    48,
-    60
+    64,
+    16
+  ],
+  "sprites/pet.png": [
+    128,
+    16
   ],
   "sprites/piranha.png": [
-    48,
-    60
+    256,
+    32
   ],
   "sprites/pylon.png": [
-    48,
-    60
+    32,
+    32
   ],
   "sprites/rat.png": [
-    48,
-    60
+    256,
+    64
   ],
   "sprites/ratking.png": [
-    48,
-    60
+    128,
+    128
   ],
   "sprites/ripper.png": [
-    48,
-    60
+    256,
+    16
+  ],
+  "sprites/rogue.png": [
+    256,
+    128
   ],
   "sprites/rot_heart.png": [
-    48,
-    60
+    128,
+    16
   ],
   "sprites/rot_lasher.png": [
-    48,
-    60
+    128,
+    16
   ],
   "sprites/scorpio.png": [
-    48,
-    60
+    256,
+    64
   ],
   "sprites/sentry.png": [
-    48,
-    60
+    32,
+    16
   ],
   "sprites/shaman.png": [
-    48,
-    60
+    256,
+    64
   ],
   "sprites/sheep.png": [
-    48,
-    60
+    64,
+    16
   ],
   "sprites/shopkeeper.png": [
-    48,
-    60
+    32,
+    16
   ],
   "sprites/skeleton.png": [
-    48,
-    60
+    256,
+    32
   ],
   "sprites/slime.png": [
-    48,
-    60
+    128,
+    32
   ],
   "sprites/snake.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/spawner.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/spinner.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/spirit_hawk.png": [
-    48,
-    60
+    128,
+    16
   ],
   "sprites/statue.png": [
-    48,
-    60
+    256,
+    64
   ],
   "sprites/succubus.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/swarm.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/tengu.png": [
-    96,
-    96
+    256,
+    16
   ],
   "sprites/thief.png": [
-    48,
-    60
+    256,
+    32
   ],
   "sprites/undead.png": [
-    48,
-    60
+    256,
+    16
   ],
   "sprites/vault_boss_elemental.png": [
-    96,
-    96
+    512,
+    128
   ],
   "sprites/vault_mirror.png": [
-    48,
-    60
+    256,
+    32
   ],
   "sprites/vault_tokens_door.png": [
-    48,
-    60
+    16,
+    16
   ],
   "sprites/wandmaker.png": [
-    48,
-    60
+    64,
+    16
   ],
   "sprites/wards.png": [
-    48,
-    60
+    64,
+    16
   ],
   "sprites/warlock.png": [
-    48,
-    60
+    256,
+    16
+  ],
+  "sprites/warrior.png": [
+    256,
+    128
   ],
   "sprites/wraith.png": [
-    48,
-    60
+    128,
+    32
   ],
   "sprites/yog.png": [
-    96,
-    96
+    256,
+    32
   ],
   "sprites/yog_fists.png": [
-    96,
-    96
+    256,
+    128
   ]
 }

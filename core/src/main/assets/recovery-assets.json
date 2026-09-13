@@ -1,0 +1,1352 @@
+{
+  "environment/custom_tiles/carpet.png": {
+    "ref": "v4.0.0",
+    "source": "environment/custom_tiles/carpet.png",
+    "source_blob": "11fce863198a81347cc6017d60e1072f472912f4",
+    "scale": 4
+  },
+  "environment/custom_tiles/caves_boss.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/custom_tiles/caves_boss.png",
+    "source_blob": "69cf318af99301cfa93b484922e8c87deaf6bed3",
+    "scale": 4
+  },
+  "environment/custom_tiles/caves_quest.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/custom_tiles/caves_quest.png",
+    "source_blob": "868987fba80b5aed89a5996cbb38f10706581630",
+    "scale": 4
+  },
+  "environment/custom_tiles/city_boss.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/custom_tiles/city_boss.png",
+    "source_blob": "5338ade52b833363f5fce88bd7e9aa1c04ce18ad",
+    "scale": 4
+  },
+  "environment/custom_tiles/city_quest.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/custom_tiles/city_quest.png",
+    "source_blob": "88b5e64444f8dd1154975c1823cde42bc8d4bb2b",
+    "scale": 4
+  },
+  "environment/custom_tiles/halls_special.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/custom_tiles/halls_special.png",
+    "source_blob": "fc3b51d33525af279a7f4315a9d20dfad8811440",
+    "scale": 4
+  },
+  "environment/custom_tiles/prison_exit.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/custom_tiles/prison_exit.png",
+    "source_blob": "8f445ccc8a97c6176f48f62a7ef5103fa1cd08e1",
+    "scale": 4
+  },
+  "environment/custom_tiles/prison_quest.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/custom_tiles/prison_quest.png",
+    "source_blob": "6bf5d07223297cc1d816cfb9077ea0d3f97d0bc9",
+    "scale": 4
+  },
+  "environment/custom_tiles/rat_king_room.png": {
+    "ref": "v4.0.0",
+    "source": "environment/custom_tiles/rat_king_room.png",
+    "source_blob": "473b6f0e3a98c001393d3efbee3c4fdc1cb3d41a",
+    "scale": 4
+  },
+  "environment/custom_tiles/sewer_boss.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/custom_tiles/sewer_boss.png",
+    "source_blob": "4d7edc74c6995aa2650b91feacd8f23c33e22d51",
+    "scale": 4
+  },
+  "environment/custom_tiles/weak_floor.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/custom_tiles/weak_floor.png",
+    "source_blob": "fb3d9552be0ddf4b668f1aa506c3bfaee926973e",
+    "scale": 4
+  },
+  "environment/occlusion_shadows.png": {
+    "ref": "v4.0.0",
+    "source": "environment/occlusion_shadows.png",
+    "source_blob": "c6624cb2417edbfdcb258bb242137b7c86f969a2",
+    "scale": 1
+  },
+  "environment/raised_terrain.png": {
+    "ref": "v4.0.0",
+    "source": "environment/raised_terrain.png",
+    "source_blob": "18510bcfa4dc153a04eac1dcfd79cb1b4be7b605",
+    "scale": 4
+  },
+  "environment/terrain_features.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/terrain_features.png",
+    "source_blob": "dade5e800cae4a0626aebda8ac125073a2b16407",
+    "scale": 4,
+    "canvas_from": {
+      "ref": "v4.0.0",
+      "source": "environment/terrain_features.png"
+    }
+  },
+  "environment/tiles_caves.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/tiles_caves.png",
+    "source_blob": "cc12807b894a18e3490ad83daea31d0d309121a2",
+    "scale": 4
+  },
+  "environment/tiles_caves_crystal.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/tiles_caves_crystal.png",
+    "source_blob": "442ba0bf7069f824f38f74de1ab0cd69c8185976",
+    "scale": 4
+  },
+  "environment/tiles_caves_gnoll.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/tiles_caves_gnoll.png",
+    "source_blob": "aaa2fbe242ceb01ee183219018e82700a819ce54",
+    "scale": 4
+  },
+  "environment/tiles_city.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/tiles_city.png",
+    "source_blob": "4775e08db8f80fe97ac7de330dfe2b2fe205dcb4",
+    "scale": 4
+  },
+  "environment/tiles_halls.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/tiles_halls.png",
+    "source_blob": "2bbe449f839f7895bbcea467afd15687130bc169",
+    "scale": 4
+  },
+  "environment/tiles_prison.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/tiles_prison.png",
+    "source_blob": "e12f8afd10b75816c58ff1e8e7b3e017aaa154b9",
+    "scale": 4
+  },
+  "environment/tiles_sewers.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/tiles_sewers.png",
+    "source_blob": "c00ade3fc0549ed4f22f02c49d7b8a18aab712d6",
+    "scale": 1,
+    "patches": [
+      {
+        "ref": "v1.0.0-content-complete",
+        "source": "environment/tiles_sewers.png",
+        "rectangles": [
+          [
+            64,
+            192,
+            128,
+            256
+          ],
+          [
+            320,
+            192,
+            384,
+            256
+          ],
+          [
+            256,
+            320,
+            320,
+            384
+          ],
+          [
+            320,
+            320,
+            384,
+            384
+          ],
+          [
+            384,
+            320,
+            448,
+            384
+          ],
+          [
+            448,
+            320,
+            512,
+            384
+          ],
+          [
+            256,
+            384,
+            320,
+            448
+          ],
+          [
+            320,
+            384,
+            384,
+            448
+          ],
+          [
+            384,
+            384,
+            448,
+            448
+          ],
+          [
+            448,
+            384,
+            512,
+            448
+          ],
+          [
+            512,
+            192,
+            576,
+            256
+          ],
+          [
+            576,
+            192,
+            640,
+            256
+          ],
+          [
+            640,
+            192,
+            704,
+            256
+          ],
+          [
+            704,
+            192,
+            768,
+            256
+          ],
+          [
+            768,
+            192,
+            832,
+            256
+          ],
+          [
+            832,
+            192,
+            896,
+            256
+          ],
+          [
+            0,
+            448,
+            64,
+            512
+          ],
+          [
+            64,
+            448,
+            128,
+            512
+          ],
+          [
+            128,
+            448,
+            192,
+            512
+          ],
+          [
+            192,
+            448,
+            256,
+            512
+          ],
+          [
+            256,
+            448,
+            320,
+            512
+          ],
+          [
+            0,
+            896,
+            64,
+            960
+          ],
+          [
+            64,
+            896,
+            128,
+            960
+          ],
+          [
+            128,
+            896,
+            192,
+            960
+          ],
+          [
+            192,
+            896,
+            256,
+            960
+          ],
+          [
+            256,
+            896,
+            320,
+            960
+          ],
+          [
+            320,
+            896,
+            384,
+            960
+          ]
+        ]
+      }
+    ]
+  },
+  "environment/visual_grid.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/visual_grid.png",
+    "source_blob": "d659ff3235f450bf778904519bd8fd6cd4b21c44",
+    "scale": 1
+  },
+  "environment/wall_blocking.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/wall_blocking.png",
+    "source_blob": "86b8f413038aad4de1446d6e484fe1664f13b4d5",
+    "scale": 1
+  },
+  "environment/walls_sewers.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/walls_sewers.png",
+    "source_blob": "c00ade3fc0549ed4f22f02c49d7b8a18aab712d6",
+    "scale": 1,
+    "patches": [
+      {
+        "ref": "v1.0.0-content-complete",
+        "source": "environment/walls_sewers.png",
+        "rectangles": [
+          [
+            64,
+            192,
+            128,
+            256
+          ],
+          [
+            320,
+            192,
+            384,
+            256
+          ],
+          [
+            256,
+            320,
+            320,
+            384
+          ],
+          [
+            320,
+            320,
+            384,
+            384
+          ],
+          [
+            384,
+            320,
+            448,
+            384
+          ],
+          [
+            448,
+            320,
+            512,
+            384
+          ],
+          [
+            256,
+            384,
+            320,
+            448
+          ],
+          [
+            320,
+            384,
+            384,
+            448
+          ],
+          [
+            384,
+            384,
+            448,
+            448
+          ],
+          [
+            448,
+            384,
+            512,
+            448
+          ],
+          [
+            512,
+            192,
+            576,
+            256
+          ],
+          [
+            576,
+            192,
+            640,
+            256
+          ],
+          [
+            640,
+            192,
+            704,
+            256
+          ],
+          [
+            704,
+            192,
+            768,
+            256
+          ],
+          [
+            768,
+            192,
+            832,
+            256
+          ],
+          [
+            832,
+            192,
+            896,
+            256
+          ],
+          [
+            0,
+            448,
+            64,
+            512
+          ],
+          [
+            64,
+            448,
+            128,
+            512
+          ],
+          [
+            128,
+            448,
+            192,
+            512
+          ],
+          [
+            192,
+            448,
+            256,
+            512
+          ],
+          [
+            256,
+            448,
+            320,
+            512
+          ],
+          [
+            0,
+            896,
+            64,
+            960
+          ],
+          [
+            64,
+            896,
+            128,
+            960
+          ],
+          [
+            128,
+            896,
+            192,
+            960
+          ],
+          [
+            192,
+            896,
+            256,
+            960
+          ],
+          [
+            256,
+            896,
+            320,
+            960
+          ],
+          [
+            320,
+            896,
+            384,
+            960
+          ]
+        ]
+      }
+    ]
+  },
+  "environment/water0.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/water0.png",
+    "source_blob": "f7d23764984312ed79393c36a013ae82e5f53a0e",
+    "scale": 1
+  },
+  "environment/water1.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/water1.png",
+    "source_blob": "c81b0a387123a9660a7147459dc49ce45ac017bb",
+    "scale": 1
+  },
+  "environment/water2.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/water2.png",
+    "source_blob": "6c7057428488d1962e36d466075fc5285c7fbf38",
+    "scale": 1
+  },
+  "environment/water3.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/water3.png",
+    "source_blob": "5944b6bb8b83055cd32d0b9e0faa69f796fb3116",
+    "scale": 1
+  },
+  "environment/water4.png": {
+    "ref": "v0.3.2-fixup2",
+    "source": "environment/water4.png",
+    "source_blob": "df6601ca5cd6a2496dfa0ea332825b6fc69acaab",
+    "scale": 1
+  },
+  "sprites/bat.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/bat.png",
+    "source_blob": "837abb944ba05a95478afe5ef6f835d2b082e7a6",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/bee.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/bee.png",
+    "source_blob": "9a42f212df0216de364446e3b367d6ec1e8dc0ba",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/blacksmith.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/blacksmith.png",
+    "source_blob": "66a99f4f94dee4b38d2a8b26527f0c68d1d70f8c",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/brute.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/brute.png",
+    "source_blob": "8eacd450d975b3b8921abcf5b32234ef665c53c0",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/chainwarden.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/tengu.png",
+    "source_blob": "0856250282233216b31dc198653cb11ce2d51c75",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/cleric.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/cleric.png",
+    "source_blob": "ac2d1ca3c3b97e62e5099281524ffeede2d9bfb8",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/crab.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/crab.png",
+    "source_blob": "be4c25beacc81d64271673b1981389588100a60a",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/crystal_guardian.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/crystal_guardian.png",
+    "source_blob": "f16f1f032dbd3de6f414636aca50e1c2517405c4",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/crystal_spire.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/crystal_spire.png",
+    "source_blob": "82ebb0d47db8d1278f4064955534f5e467521566",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/crystal_wisp.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/crystal_wisp.png",
+    "source_blob": "8bc3241b99b5807da97fbaffbac3879c30fa9160",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/dm100.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/dm100.png",
+    "source_blob": "c5f08c8a1e186e98a1cef235ea951da26ffa46ab",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/dm200.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/dm200.png",
+    "source_blob": "0b28eb523db80100fcad1938f3917dac53f128d3",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/dm300.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/dm300.png",
+    "source_blob": "4a6377aba2945e22f462b22a2ed1fd52830a6096",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/duelist.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/duelist.png",
+    "source_blob": "1914f770c025a1a55ae8b8b2989c4bbf0bc35b0c",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/elemental.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/elemental.png",
+    "source_blob": "5d2487d00e6edeb49f9a102c65fed17503cebefa",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/eye.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/eye.png",
+    "source_blob": "b727e164320695edbea5f41a7e49ebd4d0556120",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/fungal_core.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/fungal_core.png",
+    "source_blob": "6e44829e1b3c582ad0fa490be33a509842c319ee",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/fungal_sentry.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/fungal_sentry.png",
+    "source_blob": "5a323833770ee82a8c85ab68d8dae0a87e350acf",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/fungal_spinner.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/fungal_spinner.png",
+    "source_blob": "99c8dbde18f9fc2ecbc56ec35ad83ddc6c6ab8eb",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/ghost.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/ghost.png",
+    "source_blob": "7729864e93aff9975d3e4fc44ff48ac11b1d265e",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/ghoul.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/ghoul.png",
+    "source_blob": "eba07634c658595a927440f477fb29948371f1fa",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/gnoll.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/gnoll.png",
+    "source_blob": "7c74c6a3bc3c0dec5295ac9d0dc8e803f7e67a1b",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/gnoll_geomancer.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/gnoll_geomancer.png",
+    "source_blob": "c6c557c8da95440c8b4b422e24e002766133ef35",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/gnoll_guard.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/gnoll_guard.png",
+    "source_blob": "53e13a0fd0ed75a644b75ce4c80079a5ff6f2db4",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/gnoll_sapper.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/gnoll_sapper.png",
+    "source_blob": "f16295c305ce0d2a456b8b22f4f9f3a66b51df19",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/golem.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/golem.png",
+    "source_blob": "0a5c517908d4a1fb3ab529c410be3e6f9677a362",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/goo.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/goo.png",
+    "source_blob": "92a1d2ebde567eb9c8138951d56c1754b212f488",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/guard.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/guard.png",
+    "source_blob": "6ccabf25005541019a7c22a0fb8d9fd1b7412e96",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/guardian.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/guardian.png",
+    "source_blob": "4816c71009e59fce6731964586a82df0a7a8dbd4",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/hero_cleric.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/cleric.png",
+    "source_blob": "ac2d1ca3c3b97e62e5099281524ffeede2d9bfb8",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/hero_duelist.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/duelist.png",
+    "source_blob": "1914f770c025a1a55ae8b8b2989c4bbf0bc35b0c",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/hero_enchanter.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/mage.png",
+    "source_blob": "fb48ce3d2834168d5e823fc91d55602368d20626",
+    "scale": 4,
+    "character": true,
+    "palette": {
+      "00134d": "00284d",
+      "001c6c": "00386c",
+      "00468c": "00498c",
+      "0054a6": "0056a6",
+      "2f0401": "01192f",
+      "3333ff": "339dff",
+      "360a59": "0a3359",
+      "3d689a": "3d6d9a",
+      "403d1c": "1c2f40",
+      "500501": "012a50",
+      "552674": "264f74",
+      "584478": "445f78",
+      "648aaf": "648baf",
+      "6c0101": "01396c",
+      "6c672f": "2f4f6c",
+      "753297": "326797",
+      "7da3c6": "7da3c6",
+      "8e883e": "3e688e",
+      "9363ac": "6389ac",
+      "950500": "004d95",
+      "a30202": "0256a3",
+      "a61111": "115ea6",
+      "b483ce": "83aace",
+      "bab252": "5288ba",
+      "cc1414": "1474cc",
+      "cec885": "85abce",
+      "ff0202": "0286ff",
+      "ff1919": "1991ff"
+    }
+  },
+  "sprites/hero_huntress.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/huntress.png",
+    "source_blob": "9b4612afac60ec4cd8387dfd33278048567dc7fc",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/hero_mage.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/mage.png",
+    "source_blob": "fb48ce3d2834168d5e823fc91d55602368d20626",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/hero_necromancer.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/mage.png",
+    "source_blob": "fb48ce3d2834168d5e823fc91d55602368d20626",
+    "scale": 4,
+    "character": true,
+    "palette": {
+      "00134d": "194d00",
+      "001c6c": "236c00",
+      "00468c": "2d8c00",
+      "0054a6": "35a600",
+      "2f0401": "102f01",
+      "3333ff": "74ff33",
+      "360a59": "23590a",
+      "3d689a": "5b9a3d",
+      "403d1c": "28401c",
+      "500501": "1a5001",
+      "552674": "3f7426",
+      "584478": "557844",
+      "648aaf": "7caf64",
+      "6c0101": "236c01",
+      "6c672f": "436c2f",
+      "753297": "529732",
+      "7da3c6": "94c67d",
+      "8e883e": "588e3e",
+      "9363ac": "7aac63",
+      "950500": "309500",
+      "a30202": "36a302",
+      "a61111": "41a611",
+      "b483ce": "9bce83",
+      "bab252": "73ba52",
+      "cc1414": "4fcc14",
+      "cec885": "9cce85",
+      "ff0202": "53ff02",
+      "ff1919": "63ff19"
+    }
+  },
+  "sprites/hero_psychic.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/cleric.png",
+    "source_blob": "ac2d1ca3c3b97e62e5099281524ffeede2d9bfb8",
+    "scale": 4,
+    "character": true,
+    "palette": {
+      "00134d": "2b004d",
+      "001c6c": "3c006c",
+      "00468c": "4e008c",
+      "0054a6": "5d00a6",
+      "111429": "1e1129",
+      "1c2a41": "311c41",
+      "2a2840": "352840",
+      "360a59": "360a59",
+      "3d689a": "713d9a",
+      "403d1c": "301c40",
+      "424866": "564266",
+      "4a7386": "6c4a86",
+      "552674": "522674",
+      "584478": "614478",
+      "648aaf": "8e64af",
+      "6c0101": "3d016c",
+      "6c672f": "512f6c",
+      "753297": "6b3297",
+      "7da3c6": "a67dc6",
+      "8e883e": "6b3e8e",
+      "9363ac": "8c63ac",
+      "a30202": "5c02a3",
+      "a61111": "6411a6",
+      "b483ce": "ad83ce",
+      "bab252": "8c52ba",
+      "cc1414": "7b14cc",
+      "cec885": "ae85ce",
+      "ff0202": "9002ff",
+      "ff1919": "9a19ff"
+    }
+  },
+  "sprites/hero_rogue.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/rogue.png",
+    "source_blob": "f7f400f3f5291073a0cbbd7f7710292d1826e760",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/hero_warrior.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/warrior.png",
+    "source_blob": "d9a5bb715dd8c917ab7b892edea87e0bcf52a6dc",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/hexcaster.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/warlock.png",
+    "source_blob": "25ca9e70b045c61cce79c217415cd2a701516f5b",
+    "scale": 4,
+    "character": true,
+    "palette": {
+      "1f0640": "260640",
+      "290852": "310852",
+      "3b116c": "44116c",
+      "592880": "592880",
+      "662d91": "652d91"
+    }
+  },
+  "sprites/huntress.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/huntress.png",
+    "source_blob": "9b4612afac60ec4cd8387dfd33278048567dc7fc",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/imp.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/imp.png",
+    "source_blob": "c4903fd85da6764c938f2d027e248a5527740d41",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/king.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/king.png",
+    "source_blob": "ea09c419d7de1ea47b2a3a5d327b15222da92338",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/larva.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/larva.png",
+    "source_blob": "a389c4c33017c96d0d26472c563b6ab1485efdf2",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/lotus.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/lotus.png",
+    "source_blob": "e739c96dd8b2d489857bfc3d3b3d76ecb1373005",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/mage.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/mage.png",
+    "source_blob": "fb48ce3d2834168d5e823fc91d55602368d20626",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/mimic.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/mimic.png",
+    "source_blob": "7f13275b983591dcf80ad15af1c4543f46077a18",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/minion_ghoul.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/ghoul.png",
+    "source_blob": "eba07634c658595a927440f477fb29948371f1fa",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/minion_skeleton.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/skeleton.png",
+    "source_blob": "a7a183f3b8d599e830ac577d74a2a21e538f5c98",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/monk.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/monk.png",
+    "source_blob": "80f25c3a11c7362185eec559e8dc2038256aacc0",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/necromancer.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/necromancer.png",
+    "source_blob": "f17b14abf23292d49527fabf2112aba29b0ebce5",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/ninja_log.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/ninja_log.png",
+    "source_blob": "4f7ca25f017bf5658ecc4183ac197fca83d21f0b",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/pet.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/pet.png",
+    "source_blob": "2aacda4940eb95b7c90afa8976ffaf86581e6a22",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/piranha.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/piranha.png",
+    "source_blob": "6ab0f16d70005c4b38f105643aa17d203614c256",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/pylon.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/pylon.png",
+    "source_blob": "abc42afaae6df05f9fe0aee678e02dc17f624067",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/rat.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/rat.png",
+    "source_blob": "0783908faf6bf65d01e6a0b246d074898af7235a",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/ratking.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/ratking.png",
+    "source_blob": "fef4a71a6d2386cf588a0e3586ddc0e8ebefb964",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/ripper.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/ripper.png",
+    "source_blob": "77f31ebf7d898196470aae929e442932d6d2d814",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/rogue.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/rogue.png",
+    "source_blob": "f7f400f3f5291073a0cbbd7f7710292d1826e760",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/rot_heart.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/rot_heart.png",
+    "source_blob": "27173f7eecc8ccebc6b98a2309b8b96125206f6c",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/rot_lasher.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/rot_lasher.png",
+    "source_blob": "562a5860645a2a88caf3d5c68a65ed460a598e36",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/scorpio.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/scorpio.png",
+    "source_blob": "a65aebee9f5cd3ee9a3164223452acc357dc30e5",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/sentry.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/sentry.png",
+    "source_blob": "a1abd21eab1c9a87ed151117da9c9a3807c431d7",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/shaman.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/shaman.png",
+    "source_blob": "2558b505e6dd552a738d95ad49de07ce6dc6c051",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/sheep.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/sheep.png",
+    "source_blob": "f9c2ff98229a90b98272d199322d20402b3c2125",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/shopkeeper.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/shopkeeper.png",
+    "source_blob": "70bc8d79219f8c8e46214e233b5afed7ea15bbdf",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/skeleton.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/skeleton.png",
+    "source_blob": "a7a183f3b8d599e830ac577d74a2a21e538f5c98",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/slime.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/slime.png",
+    "source_blob": "38f2adf48a448e09905a85e6f0385edf951d8837",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/snake.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/snake.png",
+    "source_blob": "f302039cba6865ec8bca9d4401b87e5f4b069392",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/spawner.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/spawner.png",
+    "source_blob": "003f7501c8378ad0af50ca815625c4bf47725b65",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/spinner.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/spinner.png",
+    "source_blob": "7664cc1701faca700066dc220cf0e155806808e4",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/spirit_hawk.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/spirit_hawk.png",
+    "source_blob": "f567a52cbf581ba96cff81030fe1232f121ce33d",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/statue.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/statue.png",
+    "source_blob": "d33e1e84824367368561a32914884c9e6650a50a",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/succubus.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/succubus.png",
+    "source_blob": "1544fa799968211add73259884b30309db8454fc",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/swarm.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/swarm.png",
+    "source_blob": "b66dfbfbff8595a2f7c1b71cc6406dd0084642b9",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/tengu.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/tengu.png",
+    "source_blob": "0856250282233216b31dc198653cb11ce2d51c75",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/thief.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/thief.png",
+    "source_blob": "2f1a0eabcbc108701fc6cd9df8114c9893438616",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/undead.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/undead.png",
+    "source_blob": "071d80c84cfbec416be05e8c183da3216d0908ac",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/vault_boss_elemental.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/vault_boss_elemental.png",
+    "source_blob": "8690369d9cc653cb7c214d96487feb5895beaf69",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/vault_mirror.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/vault_mirror.png",
+    "source_blob": "ea690ee19aaac6dd535d927e5879906d9f7b7ac2",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/vault_tokens_door.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/vault_tokens_door.png",
+    "source_blob": "634c9726833411214a7bf286b428e90897c063a2",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/wandmaker.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/wandmaker.png",
+    "source_blob": "9a91385e6fb398aeea815dff4e0bb3344484a467",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/wards.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/wards.png",
+    "source_blob": "2091f27f3a23c688a67157d255e3d0a7d5bf8a70",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/warlock.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/warlock.png",
+    "source_blob": "25ca9e70b045c61cce79c217415cd2a701516f5b",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/warrior.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/warrior.png",
+    "source_blob": "d9a5bb715dd8c917ab7b892edea87e0bcf52a6dc",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/wraith.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/wraith.png",
+    "source_blob": "0799079e15c5e50fd886c42edf908362cc204dca",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/yog.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/yog.png",
+    "source_blob": "db3432233ae33b98fec1d12e957d23004ddb8d48",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "sprites/yog_fists.png": {
+    "ref": "v4.0.0",
+    "source": "sprites/yog_fists.png",
+    "source_blob": "676e87621cb40ff9fb0b9dfc774628880c88789b",
+    "scale": 4,
+    "character": true,
+    "palette": {}
+  },
+  "splashes/warrior.jpg": {
+    "ref": "v4.0.0",
+    "source": "splashes/warrior.jpg",
+    "source_blob": "712eb1b5b4e210025f09665c817fbcde3d92124f",
+    "scale": 1,
+    "raw": true
+  },
+  "splashes/mage.jpg": {
+    "ref": "v4.0.0",
+    "source": "splashes/mage.jpg",
+    "source_blob": "fed8fc650d5af9072facbaece57cf1be4cda53bd",
+    "scale": 1,
+    "raw": true
+  },
+  "splashes/rogue.jpg": {
+    "ref": "v4.0.0",
+    "source": "splashes/rogue.jpg",
+    "source_blob": "3a1099a4451e1f44eb17e31bfec385018eb47c53",
+    "scale": 1,
+    "raw": true
+  },
+  "splashes/huntress.jpg": {
+    "ref": "v4.0.0",
+    "source": "splashes/huntress.jpg",
+    "source_blob": "994a82c02240664a544ccb23766e678c0c057522",
+    "scale": 1,
+    "raw": true
+  },
+  "splashes/duelist.jpg": {
+    "ref": "v4.0.0",
+    "source": "splashes/duelist.jpg",
+    "source_blob": "5cc8499c95aaaad3efa34ff96b540afe0fbb551b",
+    "scale": 1,
+    "raw": true
+  },
+  "splashes/cleric.jpg": {
+    "ref": "v4.0.0",
+    "source": "splashes/cleric.jpg",
+    "source_blob": "84fe1fde31dfb749031d958bcff066f8a93a329f",
+    "scale": 1,
+    "raw": true
+  }
+}

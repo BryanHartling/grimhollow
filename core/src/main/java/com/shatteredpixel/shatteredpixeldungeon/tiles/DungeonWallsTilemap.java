@@ -46,6 +46,15 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 
 		if (flat) return -1;
 
+		// An overhang belongs to a neighbouring wall, not this cell's terrain.
+		// Once a non-wall cell is remembered, leave its own terrain visible under
+		// upstream FogOfWar dimming instead of painting the neighbouring wall on it.
+		if (!DungeonTileSheet.wallStitcheable(tile)
+				&& !Dungeon.level.heroFOV[pos]
+				&& (Dungeon.level.visited[pos] || Dungeon.level.mapped[pos])) {
+			return -1;
+		}
+
 		if (DungeonTileSheet.wallStitcheable(tile)) {
 			if (pos + mapWidth < size && !DungeonTileSheet.wallStitcheable(map[pos + mapWidth])){
 

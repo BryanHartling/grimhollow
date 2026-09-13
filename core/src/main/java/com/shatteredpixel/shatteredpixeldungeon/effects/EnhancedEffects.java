@@ -58,8 +58,7 @@ public final class EnhancedEffects {
         @Override public void update(){time+=Game.elapsed;visible=enabled();if(!visible)return;
             for(int cell=0;cell<images.length;cell++){
                 int tile=Dungeon.level.map[cell];Style style=null;
-                if(tile==Terrain.HIGH_GRASS||tile==Terrain.FURROWED_GRASS||steps[cell]>0)style=Style.GRASS;
-                else if(tile==Terrain.BONE_WALL)style=Style.BONE_WALL;
+                if(tile==Terrain.BONE_WALL)style=Style.BONE_WALL;
                 else if(tile==Terrain.FORCE_WALL)style=Style.FORCE_WALL;
                 boolean shown=style!=null&&(Dungeon.level.heroFOV[cell]||Dungeon.level.visited[cell]||Dungeon.level.mapped[cell]);
                 Image image=images[cell];

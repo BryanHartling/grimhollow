@@ -162,7 +162,8 @@ public class GameScene extends PixelScene {
 
 	static GameScene scene;
 
-	private com.shatteredpixel.shatteredpixeldungeon.tiles.LiquidTilemap water;
+	private SkinnedBlock water;
+	private float waterOfs;
 	private DungeonTerrainTilemap tiles;
 	private GridTileMap visualGrid;
 	private WallOcclusionTilemap occlusion;
@@ -284,7 +285,25 @@ public class GameScene extends PixelScene {
 		terrain = new Group();
 		add( terrain );
 
-		water = new com.shatteredpixel.shatteredpixeldungeon.tiles.LiquidTilemap();
+		water = new SkinnedBlock(
+			Dungeon.level.width() * DungeonTilemap.SIZE,
+			Dungeon.level.height() * DungeonTilemap.SIZE,
+			Dungeon.level.waterTex() ){
+
+			@Override
+			protected NoosaScript script() {
+				return NoosaScriptNoLighting.get();
+			}
+
+			@Override
+			public void draw() {
+				//water has no alpha component, this improves performance
+				Blending.disable();
+				super.draw();
+				Blending.enable();
+			}
+		};
+		water.autoAdjust = true;
 		terrain.add( water );
 
 		ripples = new Group();
@@ -906,6 +925,11 @@ public class GameScene extends PixelScene {
 		}
 
 		super.update();
+		if (!Emitter.freezeEmitters) {
+			waterOfs -= 5 * Game.elapsed;
+			water.offsetTo( 0, waterOfs );
+			waterOfs = water.offsetY(); //re-assign to account for auto adjust
+		}
 
 		if (notifyDelay > 0) notifyDelay -= Game.elapsed;
 
@@ -1512,6 +1536,7 @@ public class GameScene extends PixelScene {
 		if (scene != null) {
 			scene.fog.updateFog();
 			scene.wallBlocking.updateMap();
+			scene.walls.updateMap();
 		}
 	}
 
@@ -1519,6 +1544,7 @@ public class GameScene extends PixelScene {
 		if (scene != null) {
 			scene.fog.updateFogArea(x, y, w, h);
 			scene.wallBlocking.updateArea(x, y, w, h);
+			scene.walls.updateMap();
 		}
 	}
 	
@@ -1526,6 +1552,7 @@ public class GameScene extends PixelScene {
 		if (scene != null) {
 			scene.fog.updateFog( cell, radius );
 			scene.wallBlocking.updateArea( cell, radius );
+			scene.walls.updateMap();
 		}
 	}
 	
@@ -1592,6 +1619,7 @@ public class GameScene extends PixelScene {
 			public void update() {
 				alpha((float)Math.pow(gameOver.am, 2));
 				super.update();
+
 			}
 		};
 		restart.icon(Icons.get(Icons.ENTER));

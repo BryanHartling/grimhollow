@@ -15,6 +15,7 @@
     "caves-materials.png": "55e4629826ed07495ec5a2ad8b6577ab69f9fb85609161d6c8ca875bf68f75fa",
     "city-materials.png": "f3316e1efa15a6b91712798d1bc54397fdc2563b9f589cdb89d85c275869cafc",
     "details.png": "e00209673cb5d728a3fbc173f1ede610c474d37c8ab7f5f33eae0c56fda72631",
+    "door-states.png": "83e3ee128b98dcd8cd669dc6112bee07175544ed4a9f70711581aebb50b9853f",
     "halls-materials.png": "ca23d09f9bcbcf2bcae30ffc4f906539c5d7a39889f521ce3f537a5661235d00",
     "items/artifacts.png": "f20c43dbe96e2dcfa06ea98a32178586097ebf9e3f1c91a2028f59c4e95eb544",
     "items/bombs.png": "3bcd12a395e105db08dec845531441f59ce1f8e51f47037efa6a26bdd188ddc6",
@@ -31,7 +32,8 @@
     "prison-materials.png": "69e2f5f0680c84a175a8f2e0313f3e0119e1fafd0b0545dbfe8deb4fb961bab4",
     "props.png": "7bc14b1ce174949d144b92c45909858026bfb1c3832748c6f2f53f6fe629ab02",
     "region-props.png": "fcdfa9075ad79fe4e4755a242bbbe4cb29cd579c9d66ab6a6dfd004e3defecde",
-    "sewers-materials.png": "0b951d4ce0bb5902c6a940c1bc56db1173580ca57c33d652c16754dd91c9ddc2"
+    "sewers-materials.png": "0b951d4ce0bb5902c6a940c1bc56db1173580ca57c33d652c16754dd91c9ddc2",
+    "vegetation-states.png": "845fd40c6899b40d19a52fc603342666c5345562fd489714c23ac3f614719e42"
   },
   "assets": {
     "environment/tiles_sewers.png": {
@@ -39,7 +41,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "80cdc00e83ea4726c310b25f374bb2186d7719f8030356bae7970fa92ffda6fa"
+      "rgba_sha256": "07c6f5682556dce56c9e9135361058d759905ae738dbe43275e7e2478ce50f89"
     },
     "environment/water0.png": {
       "size": [
@@ -53,14 +55,14 @@
         1024,
         1024
       ],
-      "rgba_sha256": "80cdc00e83ea4726c310b25f374bb2186d7719f8030356bae7970fa92ffda6fa"
+      "rgba_sha256": "07c6f5682556dce56c9e9135361058d759905ae738dbe43275e7e2478ce50f89"
     },
     "environment/tiles_prison.png": {
       "size": [
         1024,
         1024
       ],
-      "rgba_sha256": "ea14056943bc59075fea3890bca03886e5fc48a0a0996c3196cb823afe3e9810"
+      "rgba_sha256": "51a77bc4421db23b7ed5ff3f2db404598cfc3706ca2655cee6291d921f8f2da4"
     },
     "environment/water1.png": {
       "size": [
@@ -74,7 +76,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "509f7325269174b87e7b2bddfdf9deb397b48e6949108585baf79a97a93828e5"
+      "rgba_sha256": "e4baeb3fcba8513dbcb37c3ac0edbedbbe4d9ebacfecca3bb4d57b23fb376416"
     },
     "environment/water2.png": {
       "size": [
@@ -88,7 +90,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "e5d6b7f66a37958dea195d854dcd43e6a9f73bebb926db558776d09a3c4bf2ef"
+      "rgba_sha256": "6220be9baf8667f0bc2956adbe40a9f7eaad1c64466ff943758c978a6c24d609"
     },
     "environment/water3.png": {
       "size": [
@@ -102,7 +104,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "21af113dcf9b3ddb891bb8f52980629a5855874cacf96d8ac79144b6bd3abf6a"
+      "rgba_sha256": "b01420d4458fc2adaf668d4bc1e3d14bf8fe5f5e45a983060d1dc8d42aa1bd31"
     },
     "environment/water4.png": {
       "size": [
@@ -116,14 +118,14 @@
         1024,
         1024
       ],
-      "rgba_sha256": "750b1ded087a10ee56d00e80fe72d0206ef054c17bafba97aadec716221a7371"
+      "rgba_sha256": "7038d58ecd9a6f7d211bcfb0f2c911602f873c4a08460af694a75006777e53da"
     },
     "environment/raised_terrain.png": {
       "size": [
         256,
         512
       ],
-      "rgba_sha256": "3cc263a7a4580d6af2feea9758277c4c1e36d393c23240c07e9a104856f7c95b"
+      "rgba_sha256": "797111cdae37913f97ccb6972862e129480fc8ff4cdda457db978c4937a48a11"
     },
     "sprites/hero_warrior.png": {
       "size": [

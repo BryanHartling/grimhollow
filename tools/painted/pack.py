@@ -154,6 +154,8 @@ def region_atlas(region, features, raised):
     if region=='sewers':
         approved=historical(BASE,path)
         for i in APPROVED:put(atlas,i,cell(approved,i))
+    from terrain_details import patch
+    patch(region,atlas,old,floor,cap,features,raised)
     outputs={path:atlas}
     # 512 source pixels cover eight world cells. Scrolling still uses SkinnedBlock.
     water_path='environment/water'+str(['sewers','prison','caves','city','halls'].index(region))+'.png'
@@ -161,7 +163,7 @@ def region_atlas(region, features, raised):
     if region=='sewers':
         walls=atlas.copy()
         approved=historical(BASE,'environment/walls_sewers.png')
-        for i in APPROVED:put(walls,i,cell(approved,i))
+        for i in [49,53,84,85,86,87,100,101,102,103]:put(walls,i,cell(approved,i))
         outputs['environment/walls_sewers.png']=walls
     return outputs
 

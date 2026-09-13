@@ -1,3 +1,7 @@
+# Door and vegetation continuation
+
+`terrain_details.py` assembles matching door families and three readable vegetation states from two new source sheets. `details-prompts.json` records the exact built-in prompts. The upper/lower vegetation slices share one source silhouette, and sideways door thresholds are paving rather than another leaf. Existing terrain IDs, overlays and gameplay transitions remain unchanged.
+
 # Painted presentation pass
 
 Inventory continuation: `inventory.py` replaces 202 declared atlas cells from twelve original painted sheets plus the hero armor sources, and reconstructs the test-25 reference hashes from those sources. The pinned names, IDs, art-index remaps, all 60 identification icons and all remaining item pixels stay unchanged. `items.json` and `items-prompts.json` identify each source cell. Chests/mimics, horn/chalice/rose upgrade families and coated darts stay together on their existing art; their unused source concepts remain available for the later companion pass. Waterskin cell 480 now depicts a capped leather water canteen. The packer removes alpha below 8/255 after downsampling so detached Lanczos residue cannot inflate runtime occupancy bounds; meaningful antialiasing remains. No stats or item behavior change.
@@ -10,6 +14,6 @@ Original painted material and prop source sheets are made with the built-in imag
 
 Source generation is an authored step, not a reproducible AI call. The offline atlas packer is deterministic from the committed source sheets and pinned Git templates. CI never invokes a generator, API, Blender or the rejected artgen loops. Packing consists of cropping, resizing and applying the game's existing tile silhouettes/cutouts. It does not change terrain selection or game rules.
 
-Judge the result in real lit rooms, at play scale. A colour statistic is supporting evidence, not aesthetic approval. Preserve existing title artwork, UI/talent icons, item semantics, and the approved Sewer doors and wall torches. Monster/NPC sheets, class splashes and special quest art stay intact until there is a coherent replacement with all required frames.
+Judge the result in real lit rooms, at play scale. A colour statistic is supporting evidence, not aesthetic approval. The latest review authorizes replacing the title and door artwork. Preserve UI/talent icons, item semantics and approved wall torches. Monster/NPC sheets, class splashes and special quest art stay intact until there is a coherent replacement with all required frames.
 
 Run: python tools/painted/pack.py (write) or python tools/painted/pack.py --check (verify only). Requires Pillow 12.3.0 and numpy 2.3.5. Twenty-three shipping atlases reconstruct from thirty source sheets and pinned Git layout templates. New artwork is distributed with this project under GPL-3.0-or-later. Image generation is not repeated in CI.

@@ -2,6 +2,9 @@
 
 Upstream history retained; branch `grimhollow`. Each changed path is listed below.
 
+- Door/grass review: matching painted door states replace the mixed legacy door family in all five regions; sideways thresholds now contain floor rather than a duplicate closed leaf, and wall-cap masks retain their existing geometry. The new request supersedes the old approved-door lock, while wall torches stay unchanged.
+- Tall, Huntress-rustled and trampled vegetation now use distinct upright, parted and flattened silhouettes in the existing terrain, feature and foreground slots. Growth height extends into the existing upper layer; no terrain flags, drops, visibility rules or Huntress effects change.
+
 - Painted inventory continuation replaces 202 named atlas cells, including all class equipment and section-9 items, from reviewed source sheets; test 25 retains every name/ID/remap and checks the new independently packed source pixels. Chests/mimics, multi-state horns/chalices/roses and coated darts retain their complete existing families.
 - Waterskin retains ID 480 and now uses an explicitly painted capped water canteen instead of the ambiguous bag image. Item texture filtering is linear; sprite footprint targets and all item mechanics are unchanged. The packer removes sub-3% alpha residue after downsampling so invisible pixels cannot shrink the visible icon.
 

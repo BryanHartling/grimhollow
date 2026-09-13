@@ -7033,3 +7033,11 @@ floor/water: delta L=0.0261, delta hue=51.22 PASS
 grass/wall: delta L=0.0715, delta hue=12.71 FAIL
 grass/water: delta L=0.0218, delta hue=15.30 FAIL
 wall/water: delta L=0.0933, delta hue=28.01 FAIL
+PAINTED assets=23 source sheets=30 failures=0
+C:\Users\Hartl\Documents\grimhollow\tools\recovery_assets.py:47: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  out.putdata([palette.get(pixel[:3], pixel[:3]) + (pixel[3],) for pixel in image.getdata()])
+TEST 44: upstream-derived character sheets=78; restored assets=100; verified painted replacements=23; failures=0
+PAINTED assets=23 source sheets=30 failures=0
+C:\Users\Hartl\Documents\grimhollow\tools\recovery_assets.py:47: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  out.putdata([palette.get(pixel[:3], pixel[:3]) + (pixel[3],) for pixel in image.getdata()])
+TEST 44: upstream-derived character sheets=78; restored assets=100; verified painted replacements=23; failures=0

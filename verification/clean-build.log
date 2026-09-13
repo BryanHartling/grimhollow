@@ -3200,3 +3200,517 @@ For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/comman
 BUILD SUCCESSFUL in 1m 46s
 9 actionable tasks: 9 executed
 Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:classes UP-TO-DATE
+> Task :services:jar
+> Task :SPD-classes:jar
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets
+> Task :android:compressDebugAssets
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :desktop:processResources
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest
+> Task :android:processDebugManifest
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:processDebugManifestForPackage
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:processDebugResources
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :core:compileTestJava UP-TO-DATE
+> Task :core:testClasses UP-TO-DATE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :core:test
+
+> Task :core:smokeRun
+PASS V4 WARRIOR Vault generation/save/load, mirror=BrokenSeal, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT WARRIOR: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS WARRIOR seed=0 floor=6 save/load=ok
+PASS WARRIOR seed=1 floor=6 save/load=ok
+PASS WARRIOR seed=2 floor=6 save/load=ok
+PASS WARRIOR seed=3 floor=6 save/load=ok
+PASS WARRIOR seed=4 floor=6 save/load=ok
+PASS WARRIOR seed=5 floor=6 save/load=ok
+PASS WARRIOR seed=6 floor=6 save/load=ok
+PASS WARRIOR seed=7 floor=6 save/load=ok
+PASS WARRIOR seed=8 floor=6 save/load=ok
+PASS WARRIOR seed=9 floor=6 save/load=ok
+PASS V4 MAGE Vault generation/save/load, mirror=MagesStaff, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT MAGE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS MAGE seed=0 floor=6 save/load=ok
+PASS MAGE seed=1 floor=6 save/load=ok
+PASS MAGE seed=2 floor=6 save/load=ok
+PASS MAGE seed=3 floor=6 save/load=ok
+PASS MAGE seed=4 floor=6 save/load=ok
+PASS MAGE seed=5 floor=6 save/load=ok
+PASS MAGE seed=6 floor=6 save/load=ok
+PASS MAGE seed=7 floor=6 save/load=ok
+PASS MAGE seed=8 floor=6 save/load=ok
+PASS MAGE seed=9 floor=6 save/load=ok
+PASS V4 ROGUE Vault generation/save/load, mirror=CloakOfShadows, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ROGUE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS ROGUE seed=0 floor=6 save/load=ok
+PASS ROGUE seed=1 floor=6 save/load=ok
+PASS ROGUE seed=2 floor=6 save/load=ok
+PASS ROGUE seed=3 floor=6 save/load=ok
+PASS ROGUE seed=4 floor=6 save/load=ok
+PASS ROGUE seed=5 floor=6 save/load=ok
+PASS ROGUE seed=6 floor=6 save/load=ok
+PASS ROGUE seed=7 floor=6 save/load=ok
+PASS ROGUE seed=8 floor=6 save/load=ok
+PASS ROGUE seed=9 floor=6 save/load=ok
+PASS V4 HUNTRESS Vault generation/save/load, mirror=SpiritBow, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+
+> Task :desktop:release
+> Task :desktop:dist
+
+> Task :core:smokeRun
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT HUNTRESS: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS HUNTRESS seed=0 floor=6 save/load=ok
+PASS HUNTRESS seed=1 floor=6 save/load=ok
+PASS HUNTRESS seed=2 floor=6 save/load=ok
+PASS HUNTRESS seed=3 floor=6 save/load=ok
+PASS HUNTRESS seed=4 floor=6 save/load=ok
+PASS HUNTRESS seed=5 floor=6 save/load=ok
+PASS HUNTRESS seed=6 floor=6 save/load=ok
+PASS HUNTRESS seed=7 floor=6 save/load=ok
+PASS HUNTRESS seed=8 floor=6 save/load=ok
+PASS HUNTRESS seed=9 floor=6 save/load=ok
+PASS V4 DUELIST Vault generation/save/load, mirror=MirrorSword, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT DUELIST: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS DUELIST seed=0 floor=6 save/load=ok
+PASS DUELIST seed=1 floor=6 save/load=ok
+PASS DUELIST seed=2 floor=6 save/load=ok
+PASS DUELIST seed=3 floor=6 save/load=ok
+PASS DUELIST seed=4 floor=6 save/load=ok
+PASS DUELIST seed=5 floor=6 save/load=ok
+PASS DUELIST seed=6 floor=6 save/load=ok
+PASS DUELIST seed=7 floor=6 save/load=ok
+PASS DUELIST seed=8 floor=6 save/load=ok
+PASS DUELIST seed=9 floor=6 save/load=ok
+PASS V4 CLERIC Vault generation/save/load, mirror=HolyTome, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT CLERIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS CLERIC seed=0 floor=6 save/load=ok
+PASS CLERIC seed=1 floor=6 save/load=ok
+PASS CLERIC seed=2 floor=6 save/load=ok
+PASS CLERIC seed=3 floor=6 save/load=ok
+PASS CLERIC seed=4 floor=6 save/load=ok
+PASS CLERIC seed=5 floor=6 save/load=ok
+PASS CLERIC seed=6 floor=6 save/load=ok
+PASS CLERIC seed=7 floor=6 save/load=ok
+PASS CLERIC seed=8 floor=6 save/load=ok
+PASS CLERIC seed=9 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS NECROMANCER seed=0 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+[GAME] @@ Badge unlocked: Novice Researcher (Fill in 40 catalog entries in your journal).
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS V4 ENCHANTER Vault generation/save/load, mirror=SigilBrush, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ENCHANTER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS ENCHANTER seed=0 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=1 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=2 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=3 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=4 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=5 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=6 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=7 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=8 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=9 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS V4 PSYCHIC Vault generation/save/load, mirror=FocusCrystal, equipment restore, quest completion/shop and six enchantment/curses serialized
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT PSYCHIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS PSYCHIC seed=0 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=1 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=2 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=3 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=4 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=5 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=6 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+
+> Task :android:mergeLibDexDebug
+
+> Task :core:smokeRun
+PASS PSYCHIC seed=7 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=8 floor=6 save/load=ok
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=9 floor=6 save/load=ok
+Runs=90 failures=0
+
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 54s
+48 actionable tasks: 20 executed, 28 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+TEST 46 runtime: title controls=5 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0
+RECOVERY generated region=0 seed=417 room=[5, 8, 10, 15] fixed-path steps=100 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=0 phase=start zooms=3 pans=4 cameras=12 everyCell=1152 hiddenPixels=15869952 visiblePixels=645120 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=0 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1152 hiddenPixels=12500992 visiblePixels=645120 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=0 doorTransitionFrames=153 failures=0
+TEST 43: region=0 steps=100 remembered={chasm=1263, door=349, floor=3091, grass=317, water=1571} fogPixels=604 unseenBlackPixels=885 turns=23 doors=8 failures=0
+TEST 24: heroes=9 mob sprites=114 failures=0
+TEST 25 semantics: all 381 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10
+TEST 25: items=381 identification icons=60 failures=1
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+FAIL 25 ARTIFACT_SANDALS height/tile=0.4375 logical=9.846154x9.846153 opaque=26 frame=com.watabou.utils.RectF@32c0915e scale=com.watabou.utils.PointF@106faf11
+com.badlogic.gdx.utils.GdxRuntimeException: java.lang.AssertionError: Rendering acceptance failures=1
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:159)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:193)
+Caused by: java.lang.AssertionError: Rendering acceptance failures=1
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.geometryTests(DesktopSmokeProbe.java:398)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:62)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	... 1 more
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :android:mergeDebugAssets
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource UP-TO-DATE
+> Task :android:compressDebugAssets
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:mergeLibDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :android:assembleDebug
+> Task :desktop:processResources
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes
+> Task :desktop:release
+> Task :desktop:dist
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 25s
+45 actionable tasks: 6 executed, 39 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+TEST 46 runtime: title controls=5 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0
+RECOVERY generated region=0 seed=417 room=[5, 8, 10, 15] fixed-path steps=100 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=0 phase=start zooms=3 pans=4 cameras=12 everyCell=1152 hiddenPixels=15869952 visiblePixels=645120 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=0 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1152 hiddenPixels=12500992 visiblePixels=645120 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=0 doorTransitionFrames=149 failures=0
+TEST 43: region=0 steps=100 remembered={chasm=1263, door=349, floor=3091, grass=317, water=1571} fogPixels=604 unseenBlackPixels=885 turns=23 doors=8 failures=0
+TEST 24: heroes=9 mob sprites=114 failures=0
+TEST 25 semantics: all 381 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10
+TEST 25: items=381 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+TESTS 24-26, 34, 36 PASS; test 35 retired by recovery
+TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0
+TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.7303ms p95=0.8809ms failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=1 seed=417 room=[29, 25, 37, 32] fixed-path steps=202 terrainEdits=0
+[GAME] @@ You descend to floor 6 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=1 phase=start zooms=3 pans=4 cameras=12 everyCell=1681 hiddenPixels=23066624 visiblePixels=1032192 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+[GAME] ** You catch fire!
+TEST 47: region=1 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1681 hiddenPixels=16228352 visiblePixels=1032192 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=1 doorTransitionFrames=299 failures=0
+TEST 43: region=1 steps=202 remembered={chasm=565, door=1415, floor=27380, grass=2473, water=8230} fogPixels=1619 unseenBlackPixels=1608 turns=56 doors=16 failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=2 seed=417 room=[23, 5, 30, 14] fixed-path steps=200 terrainEdits=0
+[GAME] @@ You descend to floor 11 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=2 phase=start zooms=3 pans=4 cameras=12 everyCell=2067 hiddenPixels=28528640 visiblePixels=1103872 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=2 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=2067 hiddenPixels=25145344 visiblePixels=1103872 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=2 doorTransitionFrames=430 failures=0
+TEST 43: region=2 steps=200 remembered={chasm=5742, door=694, floor=16771, grass=477, water=3379} fogPixels=1912 unseenBlackPixels=1963 turns=85 doors=23 failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=3 seed=417 room=[16, 23, 23, 30] fixed-path steps=172 terrainEdits=0
+[GAME] @@ You descend to floor 16 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=3 phase=start zooms=3 pans=4 cameras=12 everyCell=1722 hiddenPixels=23769088 visiblePixels=917504 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=3 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1722 hiddenPixels=18049024 visiblePixels=917504 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=3 doorTransitionFrames=335 failures=0
+TEST 43: region=3 steps=172 remembered={chasm=1929, door=1212, floor=12206, grass=715, water=5082} fogPixels=1369 unseenBlackPixels=1920 turns=54 doors=18 failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=4 seed=417 room=[24, 17, 32, 25] fixed-path steps=114 terrainEdits=0
+[GAME] @@ You descend to floor 21 of the dungeon.
+[GAME] -- You feel that there's a source of demonic energy above you...
+[GAME] ** Your steps echo across the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=4 phase=start zooms=3 pans=4 cameras=12 everyCell=1925 hiddenPixels=26851328 visiblePixels=745472 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=4 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1925 hiddenPixels=22306816 visiblePixels=745472 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=4 doorTransitionFrames=186 failures=0
+TEST 43: region=4 steps=114 remembered={chasm=7238, door=250, floor=4823, grass=1571, water=2529} fogPixels=1006 unseenBlackPixels=3247 turns=36 doors=10 failures=0
+[Controllers] removed manager for application, 0 managers active
+
+TEST 46 compiled handlers: classes=2876 guarded browser sinks=1 HTTP/socket calls=0 failures=0
+Packaged asset byte comparison: assets=482; JAR and APK match; failures=0
+TEST 45: region=sewers types=6 pairs=15 failures=7
+TEST 45: region=prison types=5 pairs=10 failures=2
+TEST 45: region=caves types=7 pairs=21 failures=10
+TEST 45: region=city types=6 pairs=15 failures=1
+TEST 45: region=halls types=6 pairs=15 failures=10

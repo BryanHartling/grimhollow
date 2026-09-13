@@ -1,6 +1,6 @@
 # Known issues
 
-- Test 45 retains its 0.12 luminance / 40-degree hue thresholds and fails 29/76 local comparisons after the painted pass: Sewers 7/15, Prison 2/10, Caves 9/21, City 1/15, Halls 10/15; it remains enforced in CI. The prior restored-art count was 47/76, and human readability review is still required.
+- Test 45 retains its 0.12 luminance / 40-degree hue thresholds and fails 30/76 current local comparisons after the painted hero/item continuation: Sewers 7/15, Prison 2/10, Caves 10/21, City 1/15, Halls 10/15; it remains enforced in CI. The preceding painted-world count was 29/76 and the prior restored-art count was 47/76, and human readability review is still required.
 - Nine hero sheets and 202 inventory cells now use painted art. Monster/NPC sheets, class splashes, remaining inventory families, approved title/UI, Sewer doors/torches and retained special-room artwork still use their previous art. This continuation is not a complete replacement of every game image.
 - Chests/mimics, horn/chalice/rose upgrade states and coated darts retain their existing families together; unused painted source concepts are cached for a later complete companion pass. Waterskin ID 480 now depicts a capped leather water canteen; human review of the new sprites is still pending.
 - Tests 6, 7 and 8 carry permanent known issues: representative talent hooks and all nine armor abilities execute, but exhaustive talent selection and actual Tengu/crown UI flows remain unrun.

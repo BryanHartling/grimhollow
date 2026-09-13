@@ -1,21 +1,23 @@
-# Painted world acceptance - v1.1.0
+# Painted hero and inventory acceptance - v1.2.0
 
-Runtime/art source checkpoint: `a053d6c1a9528b65f4d32d106761219556f2f7ca`. The new request authorizes a visual overhaul; gameplay, balance, content, input, camera geometry and animation timings are unchanged. Eight original imagegen source sheets are packed offline into thirteen world atlases. Animated character sheets, items, title, UI/talent icons and approved Sewer door/torch pixels are retained.
+Runtime/art source checkpoint: `c9f575ee58e5fdcb09dae09dbbcfa8b631d3a9ea`; hero checkpoint: `6cccbb982a9370f4b065cd4b647cf924d5dc9e1c`. This continuation adds nine painted hero sheets (21 pose slots across eight armor rows) and 202 named inventory cells. All gameplay, balance, content, animation timings, fog sampling, input and logical geometry remain unchanged. Thirty committed imagegen source sheets now reconstruct twenty-three shipping atlases, including the prior world pass.
 
-Local desktop and Android builds pass; JUnit tests=5 failures=0 errors=0 skipped=0; all-nine-hero smoke Runs=90 failures=0. Fog and remembered-terrain tests pass across all five regions. **The unchanged contrast gate 45 still fails.** This is not a claim of complete art acceptance or a green full CI workflow.
+Desktop and Android builds pass; JUnit tests=5 failures=0 errors=0 skipped=0; all-nine-hero smoke Runs=90 failures=0. Local fog, remembered-terrain, sprite, icon, effects and handler checks pass. **The unchanged contrast gate 45 fails 30/76 local comparisons.** This is not a claim of full visual acceptance or a green CI workflow.
 
-The former restoration-only world portion of test 44 is explicitly superseded for the thirteen assets listed in `painted-assets.json`; these must now reconstruct exactly from the committed painted sources. All other restoration and character checks remain. The old retired iterative-art tests remain retired; the incidental test-41 print from the reused screenshot fixture is not claimed as a shipping liquid gate.
+The initial inventory GPU run exposed detached alpha residue above the sandals: height/tile=0.4375. The packer now removes alpha below 8/255 after downsampling so invisible pixels cannot enlarge occupancy bounds. All 381 items then passed the original 0.45-0.55 footprint band. The failed run remains in clean-build.log. No threshold was relaxed.
 
-The first renderer attempt rejected the new half-texel UVs against the old full-cell expectation in test 43. The expectation now independently selects the same terrain index and requires exact equality of all four inset coordinates; no tolerance or skipped terrain was introduced. An audit log append conflicted with the live renderer's file handle; the compiled audit was rerun to stdout and passed. Earlier output is retained in the existing logs.
+The all-nine-hero invocation includes Necromancer 10/0, Enchanter 10/0 and Psychic 10/0. These are groups within the 90-run command, not additional local class-only invocations. The workflow also runs each class separately and the combined three-class gate; exact-tag job results are supplied with delivery.
 
-`painted-world.html` is an interactive review gallery of actual game screenshots, with cropped room and full-frame views. `recovery/<region>/` contains current lit frames, measurements and 16 walking captures per region; obsolete generated walking filenames were removed using each run's screenshot inventory. Historical evidence remains in Git.
+Test 44 reconstructs the declared painted replacements and retains original provenance for all other restoration assets and 78 upstream-derived character sheets. Test 25 retains every name, ID and art-index remap; only the 202 explicitly named source-cell hashes change. Retired iterative-art tests remain retired. Incidental test-41 output from the reused screenshot fixture is not claimed as an active liquid gate.
+
+`painted-world.html` links both art boards and actual current `recovery/<region>/lit.png` captures. Each region includes its measurements and 16 walking captures. Monster/NPC sheets, class splash paintings, remaining inventory families, title/UI and approved Sewer doors/torches retain their prior artwork. Chests/mimics and multi-state item families stay together until their companion frames are ready.
 
 | Test | Status | Actual output or reason |
 |---|---|---|
 | 1 | PASS | Retained v1.0.2 fresh desktop-only checkout result; not repeated locally in this art pass. Current title and real renderer launch pass. |
-| 2 | PASS | desktop:dist core:test android:assembleDebug core:smokeRun: BUILD SUCCESSFUL in 58s; APK code 920. |
-| 3 | RETIRED | Superseded by recovery: generated-art rebuild prohibited; source-pixel restoration is checked by 44. |
-| 4 | RETIRED | Superseded by recovery: generated style validator replaced by restored-pixel 44 and room 45. |
+| 2 | PASS | desktop:dist core:test android:assembleDebug core:smokeRun -PsmokeUpstream=true: BUILD SUCCESSFUL in 1m54s; JUnit tests=5 failures=0 errors=0 skipped=0; final alpha-packing rebuild: BUILD SUCCESSFUL in 25s. |
+| 3 | RETIRED | Old procedural-art rebuild no longer ships; committed painted sources reconstruct exactly under test 44. |
+| 4 | RETIRED | Old generated-style validator was superseded by source provenance/reconstruction 44 and room distinctness 45. |
 | 5 | PASS | All nine hero kits; ten seeds each; Runs=90 failures=0. |
 | 6 | permanent known issue | Representative hooks pass; exhaustive talent selection/hook scenarios remain unrun. |
 | 7 | permanent known issue | Subclass hooks pass; actual Tengu reward selection flow remains unrun. |
@@ -32,17 +34,17 @@ The first renderer attempt rejected the new half-texel UVs against the old full-
 | 18 | RETIRED | Superseded by recovery: generated-region brightness target replaced by within-room distinctness 45. |
 | 19 | permanent known issue | The floor-15 1,000-turn/20-mob timing scenario remains unrun. |
 | 20 | PASS | Retained v1.0.2 SDK-unset desktop-only build result; build configuration unchanged except version metadata. New CI uses desktopOnly=true. |
-| 21 | permanent known issue | Test 45 remains active and failing. Source run 34763311592 builds Android successfully; desktop contrast failure is retained. Exact delivered tag CI is reported separately. |
-| 22 | PASS | aapt: com.grimhollow.dungeon; label Grimhollow; versionCode 920; versionName 1.1.0-INDEV. |
+| 21 | permanent known issue | Test 45 remains active and fails locally. Android CI passed for source c9f575ee5; the exact delivered tag CI is reported separately. Checks are unchanged. |
+| 22 | PASS | aapt: com.grimhollow.dungeon; label Grimhollow; versionCode 930; versionName 1.2.0-INDEV. |
 | 23 | PASS | PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow. |
 | 24 | PASS | TEST 24: heroes=9 mob sprites=114 failures=0. |
-| 25 | PASS | TEST 25: 381 named item IDs and 60 icons; Waterskin=480, MindVision=eye@98 (ID 82), eleven section-9 and ten class items; failures=0. |
+| 25 | PASS | TEST 25: 381 named IDs + 60 icons; Waterskin=480, MindVision=eye@98 (ID 82), eleven section-9 and ten class items; failures=0. All 202 replacements are pinned to independently packed named source cells. |
 | 26 | PASS | TEST 26: three stains and floor/chasm/water/trap placement failures=0. |
 | 27 | PASS | TEST 27 PASS: 300 turns unchanged; 12 charges level=1; Wraith offered; hostile attacked within 2 turns. |
 | 28 | RETIRED | Superseded by recovery: rendered-cache rebuild no longer produces the restored shipping world/characters. |
 | 29 | RETIRED | Superseded by recovery: rerendering is prohibited; Blender/cache retained unused. |
 | 30 | RETIRED | Superseded by recovery: generated character hue-distance gate replaced by upstream pixel provenance 44. |
-| 31 | PASS | TEST 31: off pixel differences=0; 40 gas + 10 fire cells; 240 GPU-completed frames mean=0.7854ms, p95=1.2126ms; failures=0. |
+| 31 | PASS | TEST 31: off pixel differences=0; 40 gas + 10 fire cells; 240 GPU-completed frames mean=0.7303ms, p95=0.8809ms; failures=0. |
 | 32 | PASS | Three scorch sizes; actual floor fire expiry; water/chasm rejection failures=0. |
 | 33 | PASS | TEST 33 PASS: scroll/stone offers, exclusions, cancel/apply, subclasses and history persistence. |
 | 34 | PASS | TEST 34: old/future version, portrait exception and deletion failures=0. |
@@ -54,23 +56,23 @@ The first renderer attempt rejected the new half-texel UVs against the old full-
 | 40 | RETIRED | Superseded by recovery: generated-room isolated metrics replaced by remembered-terrain 43 and distinctness 45. |
 | 41 | RETIRED | Superseded by recovery: generated animated liquid atlas replaced by historical scrolling water. |
 | 42 | RETIRED | Superseded by recovery: calibrated generated-region gates replaced by restored-region test 45. |
-| 43 | PASS | Five generated regions; 788 walking steps, 254 turns, 75 door openings; failures=0. Exact UV equality includes the new half-texel sampling guard. |
-| 44 | PASS | PAINTED assets=13 source sheets=8 failures=0; upstream character sheets=87, retained restored assets=109, verified painted replacements=13; failures=0. All 482 packaged assets match JAR and APK bytes. |
-| 45 | permanent known issue | Unchanged thresholds fail 29/76 local pairs: Sewers 7/15, Prison 2/10, Caves 9/21, City 1/15, Halls 10/15. Actual metrics and images retained. |
+| 43 | PASS | Five generated regions; 788 walking steps, 254 turns, 75 door openings; failures=0. Exact remembered-terrain UV equality remains enforced. |
+| 44 | PASS | PAINTED assets=23 source sheets=30 failures=0; upstream-derived character sheets=78; restored assets=100; verified painted replacements=23; failures=0. All 482 packaged assets match JAR and APK bytes. |
+| 45 | permanent known issue | Unchanged thresholds fail 30/76 current local pairs: Sewers 7/15, Prison 2/10, Caves 10/21, City 1/15, Halls 10/15. Actual metrics and images retained; previous pass was 29/76. |
 | 46 | PASS | Runtime title controls=5, credits handlers=4, external opens=0, scene fetches=0; compiled classes=2876, guarded sink=1, HTTP/socket calls=0, failures=0. |
-| 47 | PASS | All five regions, 120 camera configurations, 212316160 hidden and 8888320 visible pixels, 1396 door-transition frames; fogTexel/cell=1:1, worldUnits=16, lightQuad=aligned, failures=0. |
+| 47 | PASS | All five regions, 120 camera configurations, 212316160 hidden and 8888320 visible pixels, 1399 door-transition frames; fogTexel/cell=1:1, worldUnits=16, lightQuad=aligned, failures=0. |
 
-Windows floor/wall measurements (unchanged delta L >= 0.12 OR circular mean hue >= 40 degrees):
+Current Windows floor/wall measurements (delta L >= 0.12 OR circular mean hue >= 40 degrees):
 
 | Region | Delta L | Delta hue | Failing pairs |
 |---|---|---|---|
-| Sewers | 0.1989 | 3.39 degrees | 7/15 |
-| Prison | 0.2877 | 12.66 degrees | 2/10 |
-| Caves | 0.1658 | 2.25 degrees | 9/21 |
-| City | 0.1387 | 36.99 degrees | 1/15 |
-| Halls | 0.1194 | 23.21 degrees | 10/15 |
+| Sewers | 0.1971 | 3.63 degrees | 7/15 |
+| Prison | 0.2863 | 12.59 degrees | 2/10 |
+| Caves | 0.1628 | 2.11 degrees | 10/21 |
+| City | 0.1386 | 37.21 degrees | 1/15 |
+| Halls | 0.1179 | 23.23 degrees | 10/15 |
 
-A lower failure count is not a substitute for human readability review. Character, item and special-room pixel art remains visible alongside the painted world.
+Environment pixels are unchanged in this continuation. The current live-room measurements, including the extra Caves failure, are reported without adjusting art or targets to chase the statistic. Human readability and animation review remain necessary.
 
 ---
 

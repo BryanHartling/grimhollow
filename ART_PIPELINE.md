@@ -1,10 +1,10 @@
 # Current painted presentation
 
-The September 2026 visual-overhaul request authorizes original painted art and supersedes the recovery-only ban below. `tools/painted/README.md` documents the authored-source workflow. Thirty original source sheets and exact imagegen prompts are committed; `python tools/painted/pack.py` deterministically packs twenty-three atlases without a generation service or Blender. `--check` validates every pixel, source hash and named inventory mapping. The rejected procedural loops remain archived.
+The September 2026 visual-overhaul requests authorize original painted art and supersede the historical recovery-only restrictions below. `tools/painted/README.md` documents the workflow. Forty-five original source sheets and exact imagegen prompts reconstruct 58 shipping images with Pillow/numpy and pinned Git templates. CI needs neither a generator nor Blender; rejected procedural loops remain archived.
 
-The five regions use painted materials and props. This continuation adds nine complete hero sheets, preserving the existing 21 pose slots and eight armor rows, plus 202 named inventory cells. The offline cutout compositor changes no animation timings or callbacks. Hero, portrait and item filtering is linear; logical coordinates, terrain IDs, fog and all game rules are unchanged. Monster/NPC sheets, class splashes, remaining item families, title/UI and approved Sewer doors/torches are retained.
+This pass adds matching door transitions and three distinct vegetation silhouettes, an animated painted crypt menu, and 40 monster forms/states across 32 atlas families. The character packer places authored key poses into explicit native rectangles, retaining every existing animation rate and callback. It preserves all other variant/quest pixels from v1.2.0. DM-300's charged state, all shaman colors and all elemental materials have separate authored sources. Linear sampling applies to declared painted sheets; world coordinates, fog and game rules remain unchanged.
 
-Test 44 checks all unaffected upstream/restoration pixels and independently reconstructs the declared painted replacements. Test 25 keeps all names, IDs and art-index remaps; its source hashes are compiled from the declared named source cells. Test 45 is unchanged and remains a separate room measurement.
+The previous nine hero sheets, 202 inventory cells and five regions remain included. NPCs, other rare/quest creature frames, class splashes, remaining inventory families, UI/talent icons and approved wall torches retain their previous artwork. Test 44 reconstructs painted outputs and verifies unaffected restoration assets; test 25 retains named item semantics; test 45 keeps its existing room thresholds.
 
 ---
 

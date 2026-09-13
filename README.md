@@ -2,13 +2,13 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), now incorporating **v4.0.0**, commit `2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`. The fork began at v3.3.8; upstream history and Java packages are preserved.
 
-**Painted assets v1.2.0:** the five painted regions now have nine painted hero animation sheets and 202 painted inventory cells, including the new class kits and every section-9 item. Each hero keeps all 21 pose indices and eight armor rows. Gameplay, balance, content, input, camera geometry and animation timings are unchanged. Monster/NPC art, class splashes, remaining inventory families, approved title, UI/talent icons and Sewer doors/torches retain their existing artwork.
+**Living dungeon v1.3.0:** matching open/closed/locked/crystal doors, distinct tall/parted/flattened vegetation, a painted crypt title with drifting mist, warm braziers and embers, and 32 painted monster atlas families (40 forms/states including charged DM-300, every shaman color and every elemental). The nine painted heroes and 202 inventory cells carry forward. Gameplay, balance, content, input, camera geometry and existing monster animation timings/callbacks are unchanged.
 
-Thirty authored source sheets and their exact built-in imagegen prompts are in [tools/painted](tools/painted/README.md). `python tools/painted/pack.py` rebuilds 23 shipping atlases offline; `--check` validates every pixel, source hash and the named item reference contract. Generation services and Blender are not needed for builds or CI. [Hero animation samples](verification/characters.png), [painted inventory](verification/items.png) and [actual lit game capture](verification/iteration/sewers-ingame.png) show the current pass. Chests/mimics and multi-state artifact/coated-dart families remain paired with their existing artwork.
+Forty-five authored source sheets and exact built-in imagegen prompts are in [tools/painted](tools/painted/README.md). `python tools/painted/pack.py` rebuilds 58 shipping images offline; `--check` validates every pixel, source hash and named item contract. Generation services and Blender are not needed for builds or CI. See the [visual review](verification/painted-world.html), [monster board](verification/monsters.png), [terrain states](verification/terrain-states.png) and [actual title capture](verification/title.png). NPCs, remaining rare/quest creature frames, class splashes, some inventory families, UI/talent icons and approved wall torches retain their prior artwork.
 
 **Rendering fix v1.0.2 retained:** fog has one nearest-sampled texel per 16-unit world cell. Shader camera caches track changing transforms, so walls and lighting follow camera pans and door movement. Painted textures use linear filtering with half-texel atlas guards; fog remains nearest-sampled. Mind Vision keeps the corrected eye symbol.
 
-**Recovery baseline v1.0.1:** historical terrain and scrolling water are restored from `v0.3.2-fixup2`; characters use upstream v4 pixels with fixed palette swaps for the new classes. The approved title, Sewers doors/torches and UI/talent icons remain. The art generators and Blender cache are archived in place and are not used for this release. Recovery acceptance is in [RECOVERY-spec-v1.0.1.md](RECOVERY-spec-v1.0.1.md).
+**Historical recovery baseline v1.0.1:** terrain and scrolling water were restored from `v0.3.2-fixup2`; characters use upstream v4 pixels with fixed palette swaps for the new classes. The approved title, Sewers doors/torches and UI/talent icons remain. The old art generators and Blender cache remain archived and unused; the current painted-source pass described above supersedes that art scope. Recovery acceptance is in [RECOVERY-spec-v1.0.1.md](RECOVERY-spec-v1.0.1.md).
 
 The unchanged numerical terrain distinctness gate is measured separately from art review; see [KNOWN_ISSUES.md](KNOWN_ISSUES.md) and [the acceptance report](verification/ACCEPTANCE.md) for actual results. Actual lit rooms and corridor/turn/door screenshot sequences are in [verification/recovery](verification/recovery/).
 
@@ -28,7 +28,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-1.2.0.jar
+java -jar desktop\build\libs\desktop-1.3.0.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.
@@ -65,17 +65,17 @@ The exact debug application ID is `com.grimhollow.dungeon` (no `.indev` suffix);
 . .\tools\env.ps1
 .\gradlew.bat core:test core:smokeRun -PsmokeUpstream=true -PdesktopOnly=true --no-daemon
 python tools/recovery_assets.py --check
-java "-Dgrimhollow.recovery=true" "-Dgrimhollow.fogTests=true" "-Dgrimhollow.region=0" "-Dgrimhollow.geometryTests=true" "-Dgrimhollow.effectsTests=true" -jar desktop/build/libs/desktop-1.0.2.jar --smoke-sewers
+java "-Dgrimhollow.recovery=true" "-Dgrimhollow.fogTests=true" "-Dgrimhollow.region=0" "-Dgrimhollow.geometryTests=true" "-Dgrimhollow.effectsTests=true" -jar desktop/build/libs/desktop-1.3.0.jar --smoke-sewers
 python tools/recovery_checks.py --all-regions
-python tools/recovery_checks.py --jar desktop/build/libs/desktop-1.0.2.jar
+python tools/recovery_checks.py --jar desktop/build/libs/desktop-1.3.0.jar
 ```
 
-Repeat the recovery renderer with region indices 1–4 for Prison, Caves, City and Halls. It walks normal adjacent moves on generated terrain in diagnostic slot 99, captures remembered terrain and verifies remembered-cell fog compositing. Test 47 checks all pixels of every visible and never-seen cell in five generated regions, before and after walking, at three zooms and four camera offsets, plus the shared wall-light shader during intermediate door frames. Test 25 pins every named item/identification index to existing atlas pixels and checks all section 9 items. Waterskin already maps to its catalogued bag at 480; this run does not redesign that art. Potion bottle colours retain their randomized identification mapping. Test 45 measures every pair of types in each lit room, including decor; failures remain active in CI. Test 44 reconstructs expected pixels in memory from Git objects and does not overwrite assets. Test 46 inspects compiled invocation sites and exercises actual menu handlers with a recording network adapter.
+Repeat the recovery renderer with region indices 1–4 for Prison, Caves, City and Halls. It walks normal adjacent moves on generated terrain in diagnostic slot 99, captures remembered terrain and verifies remembered-cell fog compositing. Test 47 checks all pixels of every visible and never-seen cell in five generated regions, before and after walking, at three zooms and four camera offsets, plus the shared wall-light shader during intermediate door frames. Test 25 pins every named item/identification index to existing atlas pixels and checks all section 9 items. Waterskin maps to its painted capped leather canteen at 480. Potion bottle colours retain their randomized identification mapping. Test 45 measures every pair of types in each lit room, including decor; failures remain active in CI. Test 44 reconstructs expected pixels in memory from Git objects and does not overwrite assets. Test 46 inspects compiled invocation sites and exercises actual menu handlers with a recording network adapter.
 
 
 The optional desktop probe renders actual OpenGL frames into `.local/acceptance/` and exits. The Sewer probe uses test save slot 99. The default headless gate targets the three new heroes. `-PsmokeUpstream=true` runs all nine classes, including the six retained classes: generate floors 1–6, save/load, ten seeds each. This diagnostic does not count as new-class acceptance or simulated combat.
 
-The same headless gate now checks City/Vault generation, mirror rewards, equipment and charge restoration, save/load, quest completion/shop state and serialization of the six new enchantments/curses. `java "-Dgrimhollow.vault=true" -jar desktop/build/libs/desktop-1.0.2.jar --smoke-sewers` exercises the real Vault arena trigger, its three rendered boss forms and scripted death/door unlocking. These checks do not constitute a player-driven quest or boss fight. Gradle 9.5.0 and Android Gradle Plugin 9.2.0 are inherited from v4 and run with the existing JDK 17/SDK 36 toolchain; use `--no-daemon` for every local Gradle invocation.
+The same headless gate now checks City/Vault generation, mirror rewards, equipment and charge restoration, save/load, quest completion/shop state and serialization of the six new enchantments/curses. `java "-Dgrimhollow.vault=true" -jar desktop/build/libs/desktop-1.3.0.jar --smoke-sewers` exercises the real Vault arena trigger, its three rendered boss forms and scripted death/door unlocking. These checks do not constitute a player-driven quest or boss fight. Gradle 9.5.0 and Android Gradle Plugin 9.2.0 are inherited from v4 and run with the existing JDK 17/SDK 36 toolchain; use `--no-daemon` for every local Gradle invocation.
 
 CI runs Linux/Windows desktop builds, JUnit, recovery provenance/handler/room checks, Android packaging, and the headless gates. Failed gates remain active; jars upload even when a later acceptance gate fails. Artifact retention: 14 days.
 

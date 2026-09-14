@@ -38,3 +38,5 @@ Recovery v1.0.1 before push: local mandatory test 45 fails in all five regions. 
 v1.0.2 source bcee035c2 pushed: https://github.com/BryanHartling/grimhollow/actions/runs/34758797422; Android success; Windows desktop build/44/JUnit/46 pass, test45 fails; Linux renderer in progress when evidence commit prepared. Exact delivered-head outcome is in the delivery response.
 
 v1.4.0-painted-bestiary publication: supplied project credential rejected by GitHub HTTP 401. Credential-helper stall terminated; no saved credential or local SSH configuration. Remote grimhollow remains e91123eb4ca41b20fb48a4e8985acfd368199b49. Current branch/tag local only; exact-head CI NOT RUN. Local builds and verification are recorded in ACCEPTANCE.md; test 45 remains enforced and fails 26/82 pairs.
+
+v1.4.0-painted-bestiary publication resumed: replacement fine-grained credential authenticated with repository push access and git fetch succeeded. Earlier HTTP 401 is resolved; no credential stored in project files or logs. Runtime source remains 99a1f4371 and locally verified results are unchanged. Exact release-head CI outcome is reported with delivery; test 45 remains enforced.

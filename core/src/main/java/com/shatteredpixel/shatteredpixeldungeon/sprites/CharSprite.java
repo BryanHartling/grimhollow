@@ -64,7 +64,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
     /** Stable standing-body bounds for display widgets, excluding transparent pose padding. */
     public com.watabou.utils.RectF visibleBounds() {
         if (texture==null) return new com.watabou.utils.RectF(x,y,x+width(),y+height());
-        com.watabou.utils.RectF reference=idle!=null && idle.frames!=null && idle.frames.length>0?idle.frames[0]:frame;
+        com.watabou.utils.RectF reference=idle!=null && idle.frames!=null && idle.frames.length>0?scaleReference():frame;
         com.watabou.utils.RectF body=com.shatteredpixel.shatteredpixeldungeon.GameGeometry.opaqueBounds(texture,reference);
         float fw=reference.width()*texture.width, fh=reference.height()*texture.height;
         float left=flipHorizontal?fw-body.right:body.left;
@@ -97,18 +97,42 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
         }
     }
     @Override public void frame(com.watabou.utils.RectF frame) {
+        // Covers direct UV users and hero reflections as well as TextureFilm users.
+        if (texture != null) com.shatteredpixel.shatteredpixeldungeon.GameGeometry.filterPaintedCharacter(texture);
         super.frame(frame);
         if (idle != null && idle.frames != null && idle.frames.length > 0) {
             // Use the standing pose for every animation: death and attack poses retain their proportions.
-            float footprint = (this instanceof DM300Sprite || this instanceof YogSprite || this instanceof VaultBossElementalSprite) ? 32 : 16;
-            com.shatteredpixel.shatteredpixeldungeon.GameGeometry.fit(this, idle.frames[0], footprint*.90625f);
+            com.shatteredpixel.shatteredpixeldungeon.GameGeometry.fit(this, scaleReference(), visualFootprint()*.90625f);
         } else {
             int density=com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterDensity(texture);
             logicalSize(width/density,height/density);
         }
     }
 	
-	// Color constants for floating text
+    protected com.watabou.utils.RectF scaleReference() { return idle.frames[0]; }
+
+    /** Display height in world units; collision and movement still use 16-unit cells. */
+    public float visualFootprint() {
+        if (this instanceof HeroSprite || this instanceof MirrorSprite
+                || this instanceof com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.rogue.ShadowClone.ShadowSprite
+                || this instanceof com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.cleric.PowerOfMany.LightAllySprite) return 20;
+        if (this instanceof DM300Sprite || this instanceof YogSprite || this instanceof VaultBossElementalSprite) return 32;
+        if (this instanceof CrystalSpireSprite) return 28;
+        if (this instanceof DM200Sprite || this instanceof DM201Sprite || this instanceof GolemSprite || this instanceof FistSprite) return 24;
+        if (this instanceof BruteSprite || this instanceof ShieldedSprite || this instanceof GuardSprite
+                || this instanceof EarthGuardianSprite || this instanceof ChainwardenSprite) return 20;
+        if (this instanceof SnakeSprite || this instanceof LarvaSprite) return 7;
+        if (this instanceof RatSprite || this instanceof AlbinoSprite || this instanceof BeeSprite || this instanceof BatSprite) return 9;
+        if (this instanceof FetidRatSprite) return 13;
+        if (this instanceof CrabSprite || this instanceof HermitCrabSprite || this instanceof SpinnerSprite
+                || this instanceof FungalSpinnerSprite || this instanceof SwarmSprite
+                || this instanceof com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.huntress.SpiritHawk.HawkSprite
+                || this instanceof PiranhaSprite || this instanceof PhantomPiranhaSprite) return 11;
+        if (this instanceof SlimeSprite || this instanceof CausticSlimeSprite || this instanceof SheepSprite || this instanceof ImpSprite) return 12;
+        return 16;
+    }
+
+    // Color constants for floating text
 	public static final int DEFAULT		= 0xFFFFFF;
 	public static final int POSITIVE	= 0x00FF00;
 	public static final int NEGATIVE	= 0xFF0000;

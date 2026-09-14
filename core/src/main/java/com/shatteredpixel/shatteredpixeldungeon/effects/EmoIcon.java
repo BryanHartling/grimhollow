@@ -24,7 +24,6 @@ package com.shatteredpixel.shatteredpixeldungeon.effects;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
-import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
 import com.watabou.utils.PointF;
@@ -38,6 +37,13 @@ public class EmoIcon extends Image {
 	protected boolean growing	= true;
 	
 	protected CharSprite owner;
+
+	protected final void paintedSymbol(int index) {
+		com.shatteredpixel.shatteredpixeldungeon.ui.BuffIcon symbol=new com.shatteredpixel.shatteredpixeldungeon.ui.BuffIcon(index,true);
+		copy(symbol);
+		logicalSize(6,6);
+		symbol.destroy();
+	}
 	
 	public EmoIcon( CharSprite owner ) {
 		super();
@@ -82,7 +88,7 @@ public class EmoIcon extends Image {
 			
 			super( owner );
 			
-			copy( Icons.get( Icons.SLEEP ) );
+			paintedSymbol(88);
 			
 			maxSize = 1.2f;
 			timeScale = 0.5f;
@@ -106,7 +112,7 @@ public class EmoIcon extends Image {
 			
 			super( owner );
 			
-			copy( Icons.get( Icons.ALERT ) );
+			paintedSymbol(86);
 			
 			maxSize = 1.3f;
 			timeScale = 2;
@@ -130,7 +136,7 @@ public class EmoIcon extends Image {
 
 			super( owner );
 
-			copy( Icons.get( Icons.INVESTIGATE ) );
+			paintedSymbol(87);
 
 			maxSize = 1.3f;
 			timeScale = 1.5f;
@@ -153,7 +159,7 @@ public class EmoIcon extends Image {
 		public Lost( CharSprite owner ){
 			super( owner );
 			
-			copy( Icons.get( Icons.LOST ) );
+			paintedSymbol(87);
 			
 			maxSize = 1.25f;
 			timeScale = 1;

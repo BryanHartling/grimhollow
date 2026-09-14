@@ -99,7 +99,7 @@ public final class GameGeometry {
     }
     private static java.util.Set<String> paintedCharacters;
     private static final java.util.WeakHashMap<com.watabou.gltextures.SmartTexture,Boolean> filteredCharacters = new java.util.WeakHashMap<>();
-    private static void filterPaintedCharacter(Object source) {
+    public static void filterPaintedCharacter(Object source) {
         com.watabou.gltextures.SmartTexture texture = com.watabou.gltextures.TextureCache.get(source);
         if(filteredCharacters.containsKey(texture))return;
         if(paintedCharacters==null){

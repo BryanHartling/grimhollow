@@ -35,6 +35,9 @@ import com.watabou.noosa.tweeners.AlphaTweener;
 public class WardSprite extends MobSprite {
 
 	private Animation tierIdles[] = new Animation[7];
+	private int visualTier=1;
+
+	@Override public float visualFootprint() { return visualTier<=3?4+2*visualTier:8+visualTier; }
 
 	public WardSprite(){
 		super();
@@ -118,6 +121,7 @@ public class WardSprite extends MobSprite {
 	}
 
 	public void updateTier(int tier){
+		visualTier=tier;
 
 		idle = tierIdles[tier];
 		run = idle.clone();

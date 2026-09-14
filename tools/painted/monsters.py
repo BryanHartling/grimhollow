@@ -2,7 +2,7 @@
 
 No animation definitions, callbacks, combat rules or random numbers are changed.
 Components are extracted by alpha connectivity because authored limbs can cross
-the nominal source grid. All unassigned variant/quest frames remain pinned.
+the nominal source grid. Explicit rectangles cover irregular ward tiers too.
 """
 from collections import deque
 from functools import lru_cache
@@ -42,10 +42,21 @@ def parts(name):
         col = min(3, int(xs.mean()*4/size[0]))
         index = row*4+col
         labels[ys, xs] = index
-        groups[index].append(len(points))
+        groups[index].append((ys, xs))
     result = []
     for index in range(16):
-        assert groups[index] and max(groups[index]) > 400, (name, index, groups[index])
+        # Stationary actors use only the declared source poses. Do not turn an
+        # unused, connected magic trail into part of a different creature.
+        largest = max((len(ys) for ys, _ in groups[index]), default=0)
+        if largest <= 400:
+            result.append(Image.new('RGBA',(1,1)))
+            continue
+        # Small detached particles can cross into a neighboring source cell.
+        # Keep bodies and meaningful debris, not foreign one-percent specks.
+        # Swarms retain their similarly-sized disconnected insects.
+        for ys, xs in groups[index]:
+            if len(ys) < largest/100:
+                labels[ys, xs] = -1
         mask = Image.fromarray(np.uint8(labels == index)*255).resize(source.size, Image.Resampling.NEAREST)
         mask = mask.filter(ImageFilter.MaxFilter(7))
         pixels = np.array(source)
@@ -65,24 +76,36 @@ def rectangle(atlas, frame, index):
     return x, y, x+w, y+h
 
 
+def pose_choice(mode, step, name):
+    if name == 'pylon' and mode == 'attack': return 1  # Active idle, not a projectile.
+    if mode == 'closed': return 0
+    if mode == 'idle':
+        if name.startswith('mimic'): return 1
+        if name in ('bat', 'piranha'): return step % 2
+        if name == 'spawner': return 1 if 4 <= step <= 11 else 0
+        return 0
+    if mode == 'move': return 1 if name.startswith('mimic') else step % 2
+    return 2 if mode == 'attack' else 3
+
+
 def pose(art, size, scale, mode, step, count, name):
     phase = step/max(1,count-1)
-    choice, angle, bob = 0, 0, 0
-    if mode == 'idle':
+    choice, angle, bob = pose_choice(mode, step, name), 0, 0
+    if mode == 'closed':
+        # Retain the ordinary mimic's occasional disguise twitch. The advanced
+        # hiding pose (step zero) remains identical to the real closed chest.
+        angle = 1.4 if step == 2 else 0
+    elif mode == 'idle':
         bob = -math.sin(phase*math.tau)*.7
-        if name in ('bat','piranha'): choice = step%2
-        if name == 'spawner': choice = 1 if 4 <= step <= 11 else 0
     elif mode == 'move':
-        choice = step%2
         angle = (-1 if step%2 else 1)*1.4
         bob = -1 if step%2 else 0
     elif mode == 'attack':
-        choice = 2
         angle = 2*(1-phase)
     else:
-        choice = 3
         bob = 0
     original = art[choice]
+    assert original.getbbox(), ('Missing declared source pose',name,mode,choice)
     im = original.resize((max(1,round(original.width*scale)),max(1,round(original.height*scale))),Image.Resampling.LANCZOS)
     if angle: im = im.rotate(angle,Image.Resampling.BICUBIC,expand=True)
     canvas = Image.new('RGBA',size)
@@ -99,14 +122,21 @@ def outputs():
         if atlas is None: atlas = historical(CONTRACT['base'],path).copy()
         art = parts(spec['sheet'])[spec['row']*4:spec['row']*4+4]
         size = tuple(v*4 for v in spec['frame'])
-        scale = min((size[0]-8)/max(p.width for p in art), (size[1]-8)/max(p.height for p in art))
+        # A stationary sentry/ward uses no attack or death pose. Fitting an
+        # unused beam would unnecessarily discard its idle body's resolution.
+        used = {pose_choice(mode, step, name)
+                for mode in ('closed','idle','move','attack','defeated')
+                for step, _ in enumerate(spec.get(mode, []))}
+        scale = min((size[0]-8)/max(art[i].width for i in used),
+                    (size[1]-8)/max(art[i].height for i in used))
         occupied = set()
-        for mode in ('idle','move','attack','defeated'):
-            indices = spec[mode]
+        for mode in ('closed','idle','move','attack','defeated'):
+            indices = spec.get(mode,[])
             for step, index in enumerate(indices):
                 assert index not in occupied, (name,index)
                 occupied.add(index)
-                atlas.paste(pose(art,size,scale,mode,step,len(indices),name),rectangle(atlas,spec['frame'],index))
+                box = tuple(spec['rects'][str(index)]) if 'rects' in spec else rectangle(atlas,spec['frame'],index)
+                atlas.paste(pose(art,size,scale,mode,step,len(indices),name),box)
         result[path] = atlas
     return result
 
@@ -114,3 +144,16 @@ def outputs():
 def sizes():
     paths = {f"sprites/{m.get('atlas',m['name'])}.png" for m in CONTRACT['monsters']}
     return {p: historical(CONTRACT['base'],p).size for p in paths}
+
+
+def coverage():
+    result={}
+    for spec in CONTRACT['monsters']:
+        path=f"sprites/{spec.get('atlas',spec['name'])}.png"
+        atlas=historical(CONTRACT['base'],path)
+        boxes=result.setdefault(path,set())
+        for mode in ('closed','idle','move','attack','defeated'):
+            for index in spec.get(mode,[]):
+                box=tuple(spec['rects'][str(index)]) if 'rects' in spec else rectangle(atlas,spec['frame'],index)
+                boxes.add(box)
+    return {path:[list(box) for box in sorted(boxes)] for path,boxes in result.items()}

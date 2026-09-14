@@ -3938,3 +3938,9 @@ v1.3.1 display follow-up: health bars, target bars and status icons anchor to ca
 
 
 v1.3.2 crash fix: defer SmartTexture filtering until the render-thread bind; a copied Necromancer save reproduced a fatal actor-thread OpenGL call through ItemSprite.frame during an item drop. All existing sprite-filter callers now use the same safe path, including loot, pickups, grass drops, summons and death effects. No art, content, combat, balance or save-format changes. The existing JUnit/desktop fixture now covers cross-thread filtering, reload, live encounters and death rendering.
+
+v1.4.0 bestiary: 129 forms across all 71 shipping creature sheets now use painted sources, including NPCs, minions, disguises, statue tiers, ward tiers, quest and Vault variants. Chests share the mimic closed poses; original animation indices, rates and callbacks remain intact.
+v1.4.0 display scale: replace the uniform creature-height rule with species sizes and enlarge heroes 25%; keep logical cell geometry and gameplay unchanged. Ordinary chest and concealed mimic heights match at eight world units.
+v1.4.0 text: correct 49 missing items/actors/levels/windows key prefixes. Gravity had inherited the Blast Wave name and a two-argument damage format while supplying one pull-distance argument; actual wand behavior and balance are unchanged.
+v1.4.0 effects and walls: 86 painted HUD status symbols plus overhead alert/question/sleep; preserve tint and duration displays. Composite approved torch foreground pixels over current regional masonry instead of preserving the obsolete wall patch.
+v1.4.0 verification: test 43 now measures world/fog separately from HUD text; the larger hero shifted a sampled unseen cell onto the green movement hint (screen 144,135, RGBA 000400FF). Exact black/remembered-pixel requirements are unchanged, and samples now include the previously excluded screen margins.

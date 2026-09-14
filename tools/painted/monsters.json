@@ -1,6 +1,6 @@
 {
   "base": "v1.2.0-painted-assets",
-  "note": "Existing sprite frame rectangles only. Shared animation indices have one authored pose; all other atlas pixels remain pinned.",
+  "note": "Every shipping creature family and variant mapped to authored painted source poses; original runtime animation rectangles and timing retained. Shared hero reflections and revenants use the same painted family.",
   "monsters": [
     {
       "name": "rat",
@@ -1177,6 +1177,2393 @@
         69
       ],
       "atlas": "elemental"
+    },
+    {
+      "name": "minion_skeleton",
+      "atlas": "minion_skeleton",
+      "sheet": "allies",
+      "row": 0,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "move": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "attack": [
+        14,
+        15,
+        16
+      ],
+      "defeated": [
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "minion_ghoul",
+      "atlas": "minion_ghoul",
+      "sheet": "allies",
+      "row": 1,
+      "frame": [
+        12,
+        14
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        8,
+        9
+      ],
+      "defeated": [
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "ghost",
+      "atlas": "ghost",
+      "sheet": "allies",
+      "row": 2,
+      "frame": [
+        14,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [],
+      "attack": [
+        2,
+        3
+      ],
+      "defeated": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "name": "guardian",
+      "atlas": "guardian",
+      "sheet": "allies",
+      "row": 3,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        8,
+        9,
+        10
+      ],
+      "defeated": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "name": "blacksmith",
+      "atlas": "blacksmith",
+      "sheet": "town",
+      "row": 0,
+      "frame": [
+        13,
+        16
+      ],
+      "idle": [
+        0
+      ],
+      "move": [],
+      "attack": [
+        1,
+        2,
+        3
+      ],
+      "defeated": []
+    },
+    {
+      "name": "wandmaker",
+      "atlas": "wandmaker",
+      "sheet": "town",
+      "row": 1,
+      "frame": [
+        12,
+        14
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "shopkeeper",
+      "atlas": "shopkeeper",
+      "sheet": "town",
+      "row": 2,
+      "frame": [
+        14,
+        14
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "imp",
+      "atlas": "imp",
+      "sheet": "town",
+      "row": 3,
+      "frame": [
+        12,
+        14
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "bee",
+      "atlas": "bee",
+      "sheet": "wildlife",
+      "row": 0,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        0,
+        1,
+        2
+      ],
+      "move": [],
+      "attack": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "defeated": [
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "swarm",
+      "atlas": "swarm",
+      "sheet": "wildlife",
+      "row": 1,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "move": [],
+      "attack": [
+        6,
+        7,
+        8,
+        9
+      ],
+      "defeated": [
+        10,
+        11,
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "name": "sheep",
+      "atlas": "sheep",
+      "sheet": "wildlife",
+      "row": 2,
+      "frame": [
+        16,
+        15
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "spirit_hawk",
+      "atlas": "spirit_hawk",
+      "sheet": "wildlife",
+      "row": 3,
+      "frame": [
+        15,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [],
+      "attack": [
+        2,
+        3
+      ],
+      "defeated": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "name": "rot_heart",
+      "atlas": "rot_heart",
+      "sheet": "fungal",
+      "row": 0,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        0
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "name": "rot_lasher",
+      "atlas": "rot_lasher",
+      "sheet": "fungal",
+      "row": 1,
+      "frame": [
+        12,
+        16
+      ],
+      "idle": [
+        0
+      ],
+      "move": [],
+      "attack": [
+        1,
+        2
+      ],
+      "defeated": [
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "name": "fungal_core",
+      "atlas": "fungal_core",
+      "sheet": "fungal",
+      "row": 2,
+      "frame": [
+        27,
+        27
+      ],
+      "idle": [
+        0
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "fungal_sentry",
+      "atlas": "fungal_sentry",
+      "sheet": "fungal",
+      "row": 3,
+      "frame": [
+        18,
+        18
+      ],
+      "idle": [
+        0
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "mimic",
+      "atlas": "mimic",
+      "sheet": "mimics",
+      "row": 0,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        3,
+        4
+      ],
+      "move": [
+        5,
+        6
+      ],
+      "attack": [
+        7,
+        8,
+        9
+      ],
+      "defeated": [
+        10,
+        11,
+        12
+      ],
+      "closed": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "mimic-golden",
+      "atlas": "mimic",
+      "sheet": "mimics",
+      "row": 1,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        19,
+        20
+      ],
+      "move": [
+        21,
+        22
+      ],
+      "attack": [
+        23,
+        24,
+        25
+      ],
+      "defeated": [
+        26,
+        27,
+        28
+      ],
+      "closed": [
+        16,
+        17,
+        18
+      ]
+    },
+    {
+      "name": "mimic-crystal",
+      "atlas": "mimic",
+      "sheet": "mimics",
+      "row": 2,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        35,
+        36
+      ],
+      "move": [
+        37,
+        38
+      ],
+      "attack": [
+        39,
+        40,
+        41
+      ],
+      "defeated": [
+        42,
+        43,
+        44
+      ],
+      "closed": [
+        32,
+        33,
+        34
+      ]
+    },
+    {
+      "name": "mimic-ebony",
+      "atlas": "mimic",
+      "sheet": "mimics",
+      "row": 3,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        51,
+        52
+      ],
+      "move": [
+        53,
+        54
+      ],
+      "attack": [
+        55,
+        56,
+        57
+      ],
+      "defeated": [
+        58,
+        59,
+        60
+      ],
+      "closed": [
+        48,
+        49,
+        50
+      ]
+    },
+    {
+      "name": "gnoll_guard",
+      "atlas": "gnoll_guard",
+      "sheet": "gnolls",
+      "row": 0,
+      "frame": [
+        12,
+        16
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        2,
+        3
+      ],
+      "defeated": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "gnoll_sapper",
+      "atlas": "gnoll_sapper",
+      "sheet": "gnolls",
+      "row": 1,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        2,
+        3
+      ],
+      "defeated": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "gnoll_geomancer",
+      "atlas": "gnoll_geomancer",
+      "sheet": "gnolls",
+      "row": 2,
+      "frame": [
+        12,
+        16
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        2,
+        3
+      ],
+      "defeated": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "geomancer-statue",
+      "atlas": "gnoll_geomancer",
+      "sheet": "gnolls",
+      "row": 3,
+      "frame": [
+        12,
+        16
+      ],
+      "idle": [
+        21,
+        22
+      ],
+      "move": [
+        25,
+        26,
+        27,
+        28
+      ],
+      "attack": [
+        23,
+        24
+      ],
+      "defeated": [
+        29,
+        30,
+        31
+      ]
+    },
+    {
+      "name": "chainwarden",
+      "atlas": "chainwarden",
+      "sheet": "prison-allies",
+      "row": 0,
+      "frame": [
+        14,
+        16
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "attack": [
+        6,
+        7
+      ],
+      "defeated": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "hexcaster",
+      "atlas": "hexcaster",
+      "sheet": "prison-allies",
+      "row": 1,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4
+      ],
+      "attack": [
+        5,
+        6
+      ],
+      "defeated": [
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "undead",
+      "atlas": "undead",
+      "sheet": "prison-allies",
+      "row": 2,
+      "frame": [
+        12,
+        16
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "move": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "attack": [
+        14,
+        15,
+        16
+      ],
+      "defeated": [
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "ratking",
+      "atlas": "ratking",
+      "sheet": "prison-allies",
+      "row": 3,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "crystal-guardian-0",
+      "atlas": "crystal_guardian",
+      "sheet": "crystal-guardians",
+      "row": 0,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        8,
+        9,
+        10
+      ],
+      "defeated": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "name": "crystal-guardian-1",
+      "atlas": "crystal_guardian",
+      "sheet": "crystal-guardians",
+      "row": 1,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        21,
+        22
+      ],
+      "move": [
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "attack": [
+        29,
+        30,
+        31
+      ],
+      "defeated": [
+        32,
+        33,
+        34,
+        35,
+        36
+      ]
+    },
+    {
+      "name": "crystal-guardian-2",
+      "atlas": "crystal_guardian",
+      "sheet": "crystal-guardians",
+      "row": 2,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        42,
+        43
+      ],
+      "move": [
+        44,
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "attack": [
+        50,
+        51,
+        52
+      ],
+      "defeated": [
+        53,
+        54,
+        55,
+        56,
+        57
+      ]
+    },
+    {
+      "name": "fungal_spinner",
+      "atlas": "fungal_spinner",
+      "sheet": "crystal-guardians",
+      "row": 3,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3
+      ],
+      "attack": [
+        4,
+        5
+      ],
+      "defeated": [
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "name": "crystal-spire-0",
+      "atlas": "crystal_spire",
+      "sheet": "crystal-spires",
+      "row": 0,
+      "frame": [
+        29,
+        40
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": [
+        4
+      ]
+    },
+    {
+      "name": "crystal-spire-1",
+      "atlas": "crystal_spire",
+      "sheet": "crystal-spires",
+      "row": 1,
+      "frame": [
+        29,
+        40
+      ],
+      "idle": [
+        8,
+        9,
+        10,
+        11
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": [
+        12
+      ]
+    },
+    {
+      "name": "crystal-spire-2",
+      "atlas": "crystal_spire",
+      "sheet": "crystal-spires",
+      "row": 2,
+      "frame": [
+        29,
+        40
+      ],
+      "idle": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": [
+        20
+      ]
+    },
+    {
+      "name": "lotus",
+      "atlas": "lotus",
+      "sheet": "crystal-spires",
+      "row": 3,
+      "frame": [
+        19,
+        16
+      ],
+      "idle": [
+        0
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "crystal-wisp-0",
+      "atlas": "crystal_wisp",
+      "sheet": "wisps-larva",
+      "row": 0,
+      "frame": [
+        12,
+        14
+      ],
+      "idle": [
+        0
+      ],
+      "move": [
+        1
+      ],
+      "attack": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "defeated": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "name": "crystal-wisp-1",
+      "atlas": "crystal_wisp",
+      "sheet": "wisps-larva",
+      "row": 1,
+      "frame": [
+        12,
+        14
+      ],
+      "idle": [
+        13
+      ],
+      "move": [
+        14
+      ],
+      "attack": [
+        15,
+        16,
+        17,
+        18
+      ],
+      "defeated": [
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "name": "crystal-wisp-2",
+      "atlas": "crystal_wisp",
+      "sheet": "wisps-larva",
+      "row": 2,
+      "frame": [
+        12,
+        14
+      ],
+      "idle": [
+        26
+      ],
+      "move": [
+        27
+      ],
+      "attack": [
+        28,
+        29,
+        30,
+        31
+      ],
+      "defeated": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38
+      ]
+    },
+    {
+      "name": "larva",
+      "atlas": "larva",
+      "sheet": "wisps-larva",
+      "row": 3,
+      "frame": [
+        12,
+        8
+      ],
+      "idle": [
+        4,
+        5
+      ],
+      "move": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "attack": [
+        6,
+        7
+      ],
+      "defeated": [
+        8
+      ]
+    },
+    {
+      "name": "sentry-0",
+      "atlas": "sentry",
+      "sheet": "sentries",
+      "row": 0,
+      "frame": [
+        8,
+        15
+      ],
+      "idle": [
+        0
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "sentry-1",
+      "atlas": "sentry",
+      "sheet": "sentries",
+      "row": 1,
+      "frame": [
+        8,
+        15
+      ],
+      "idle": [
+        1
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "sentry-2",
+      "atlas": "sentry",
+      "sheet": "sentries",
+      "row": 2,
+      "frame": [
+        8,
+        15
+      ],
+      "idle": [
+        2
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "pylon",
+      "atlas": "pylon",
+      "sheet": "pylon",
+      "row": 0,
+      "frame": [
+        10,
+        20
+      ],
+      "idle": [
+        0
+      ],
+      "move": [],
+      "attack": [
+        1
+      ],
+      "defeated": [
+        2
+      ]
+    },
+    {
+      "name": "ward-1",
+      "atlas": "wards",
+      "sheet": "ward-mirror",
+      "row": 0,
+      "frame": [
+        9,
+        10
+      ],
+      "idle": [
+        0
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": [],
+      "rects": {
+        "0": [
+          0,
+          0,
+          36,
+          40
+        ]
+      }
+    },
+    {
+      "name": "ward-2",
+      "atlas": "wards",
+      "sheet": "ward-mirror",
+      "row": 1,
+      "frame": [
+        11,
+        12
+      ],
+      "idle": [
+        1
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": [],
+      "rects": {
+        "1": [
+          40,
+          0,
+          84,
+          48
+        ]
+      }
+    },
+    {
+      "name": "ward-3",
+      "atlas": "wards",
+      "sheet": "ward-mirror",
+      "row": 2,
+      "frame": [
+        15,
+        16
+      ],
+      "idle": [
+        2
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": [],
+      "rects": {
+        "2": [
+          88,
+          0,
+          148,
+          64
+        ]
+      }
+    },
+    {
+      "name": "ward-4",
+      "atlas": "wards",
+      "sheet": "wards-log",
+      "row": 0,
+      "frame": [
+        6,
+        13
+      ],
+      "idle": [
+        3
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": [],
+      "rects": {
+        "3": [
+          152,
+          0,
+          176,
+          52
+        ]
+      }
+    },
+    {
+      "name": "ward-5",
+      "atlas": "wards",
+      "sheet": "wards-log",
+      "row": 1,
+      "frame": [
+        6,
+        15
+      ],
+      "idle": [
+        4
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": [],
+      "rects": {
+        "4": [
+          180,
+          0,
+          204,
+          60
+        ]
+      }
+    },
+    {
+      "name": "ward-6",
+      "atlas": "wards",
+      "sheet": "wards-log",
+      "row": 2,
+      "frame": [
+        8,
+        15
+      ],
+      "idle": [
+        5
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": [],
+      "rects": {
+        "5": [
+          208,
+          0,
+          240,
+          60
+        ]
+      }
+    },
+    {
+      "name": "vault_mirror",
+      "atlas": "vault_mirror",
+      "sheet": "ward-mirror",
+      "row": 3,
+      "frame": [
+        16,
+        23
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "albino",
+      "atlas": "rat",
+      "sheet": "sewer-variants",
+      "row": 0,
+      "frame": [
+        16,
+        15
+      ],
+      "idle": [
+        16,
+        17
+      ],
+      "move": [
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "attack": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "defeated": [
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "name": "fetid-rat",
+      "atlas": "rat",
+      "sheet": "sewer-variants",
+      "row": 1,
+      "frame": [
+        16,
+        15
+      ],
+      "idle": [
+        32,
+        33
+      ],
+      "move": [
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "attack": [
+        34,
+        35,
+        36,
+        37
+      ],
+      "defeated": [
+        43,
+        44,
+        45,
+        46
+      ]
+    },
+    {
+      "name": "caustic-slime",
+      "atlas": "slime",
+      "sheet": "sewer-variants",
+      "row": 2,
+      "frame": [
+        14,
+        12
+      ],
+      "idle": [
+        9,
+        10
+      ],
+      "move": [
+        11,
+        12
+      ],
+      "attack": [
+        13,
+        15,
+        14
+      ],
+      "defeated": [
+        16
+      ]
+    },
+    {
+      "name": "acidic-scorpio",
+      "atlas": "scorpio",
+      "sheet": "sewer-variants",
+      "row": 3,
+      "frame": [
+        17,
+        17
+      ],
+      "idle": [
+        15,
+        16,
+        17
+      ],
+      "move": [
+        20,
+        21
+      ],
+      "attack": [
+        18,
+        19
+      ],
+      "defeated": [
+        22,
+        23,
+        24,
+        25
+      ]
+    },
+    {
+      "name": "bandit",
+      "atlas": "thief",
+      "sheet": "elite-variants",
+      "row": 0,
+      "frame": [
+        12,
+        13
+      ],
+      "idle": [
+        21,
+        22
+      ],
+      "move": [
+        23,
+        24,
+        25
+      ],
+      "attack": [
+        31,
+        32,
+        33
+      ],
+      "defeated": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ]
+    },
+    {
+      "name": "senior-monk",
+      "atlas": "monk",
+      "sheet": "elite-variants",
+      "row": 1,
+      "frame": [
+        15,
+        14
+      ],
+      "idle": [
+        17,
+        18,
+        19
+      ],
+      "move": [
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "attack": [
+        20,
+        21,
+        22,
+        23
+      ],
+      "defeated": [
+        24,
+        25,
+        26,
+        27
+      ]
+    },
+    {
+      "name": "shielded-brute",
+      "atlas": "brute",
+      "sheet": "elite-variants",
+      "row": 2,
+      "frame": [
+        12,
+        16
+      ],
+      "idle": [
+        21,
+        22
+      ],
+      "move": [
+        25,
+        26,
+        27,
+        28
+      ],
+      "attack": [
+        23,
+        24
+      ],
+      "defeated": [
+        29,
+        30,
+        31
+      ]
+    },
+    {
+      "name": "spectral-necromancer",
+      "atlas": "necromancer",
+      "sheet": "elite-variants",
+      "row": 3,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        16,
+        17
+      ],
+      "move": [
+        18,
+        19,
+        20
+      ],
+      "attack": [
+        21,
+        22,
+        23,
+        24
+      ],
+      "defeated": [
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "name": "gnoll-trickster",
+      "atlas": "gnoll",
+      "sheet": "quest-beasts",
+      "row": 0,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        42,
+        43
+      ],
+      "move": [
+        46,
+        47,
+        48,
+        49
+      ],
+      "attack": [
+        44,
+        45
+      ],
+      "defeated": [
+        50,
+        51,
+        52
+      ]
+    },
+    {
+      "name": "gnoll-exile",
+      "atlas": "gnoll",
+      "sheet": "quest-beasts",
+      "row": 1,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        21,
+        22
+      ],
+      "move": [
+        25,
+        26,
+        27,
+        28
+      ],
+      "attack": [
+        23,
+        24
+      ],
+      "defeated": [
+        29,
+        30,
+        31
+      ]
+    },
+    {
+      "name": "great-crab",
+      "atlas": "crab",
+      "sheet": "quest-beasts",
+      "row": 2,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        32,
+        33,
+        34
+      ],
+      "move": [
+        35,
+        36,
+        37,
+        38
+      ],
+      "attack": [
+        39,
+        40,
+        41
+      ],
+      "defeated": [
+        42,
+        43,
+        44,
+        45
+      ]
+    },
+    {
+      "name": "hermit-crab",
+      "atlas": "crab",
+      "sheet": "quest-beasts",
+      "row": 3,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        16,
+        17,
+        18
+      ],
+      "move": [
+        19,
+        20,
+        21,
+        22
+      ],
+      "attack": [
+        23,
+        24,
+        25
+      ],
+      "defeated": [
+        26,
+        27,
+        28,
+        29
+      ]
+    },
+    {
+      "name": "phantom-piranha",
+      "atlas": "piranha",
+      "sheet": "vault-variants",
+      "row": 0,
+      "frame": [
+        12,
+        16
+      ],
+      "idle": [
+        21,
+        22,
+        23
+      ],
+      "move": [],
+      "attack": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "defeated": [
+        33,
+        34,
+        35
+      ]
+    },
+    {
+      "name": "tormented-spirit",
+      "atlas": "wraith",
+      "sheet": "vault-variants",
+      "row": 1,
+      "frame": [
+        14,
+        15
+      ],
+      "idle": [
+        9,
+        10
+      ],
+      "move": [],
+      "attack": [
+        11,
+        12
+      ],
+      "defeated": [
+        13,
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "name": "dm100-vault",
+      "atlas": "dm100",
+      "sheet": "vault-variants",
+      "row": 2,
+      "frame": [
+        16,
+        14
+      ],
+      "idle": [
+        16,
+        17
+      ],
+      "move": [
+        22,
+        23,
+        24,
+        25
+      ],
+      "attack": [
+        18,
+        19,
+        20,
+        21
+      ],
+      "defeated": [
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ]
+    },
+    {
+      "name": "dm201",
+      "atlas": "dm200",
+      "sheet": "vault-variants",
+      "row": 3,
+      "frame": [
+        21,
+        18
+      ],
+      "idle": [
+        12,
+        13
+      ],
+      "move": [
+        14,
+        15
+      ],
+      "attack": [
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "defeated": [
+        21,
+        22,
+        23
+      ]
+    },
+    {
+      "name": "statue-0",
+      "atlas": "statue",
+      "sheet": "statues-a",
+      "row": 0,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "attack": [
+        8,
+        9,
+        10
+      ],
+      "defeated": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "name": "statue-1",
+      "atlas": "statue",
+      "sheet": "statues-a",
+      "row": 1,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        21,
+        22
+      ],
+      "move": [
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "attack": [
+        29,
+        30,
+        31
+      ],
+      "defeated": []
+    },
+    {
+      "name": "statue-2",
+      "atlas": "statue",
+      "sheet": "statues-a",
+      "row": 2,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        32,
+        33
+      ],
+      "move": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39
+      ],
+      "attack": [
+        40,
+        41,
+        42
+      ],
+      "defeated": []
+    },
+    {
+      "name": "statue-3",
+      "atlas": "statue",
+      "sheet": "statues-a",
+      "row": 3,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        43,
+        44
+      ],
+      "move": [
+        45,
+        46,
+        47,
+        48,
+        49,
+        50
+      ],
+      "attack": [
+        51,
+        52,
+        53
+      ],
+      "defeated": []
+    },
+    {
+      "name": "statue-4",
+      "atlas": "statue",
+      "sheet": "statues-b",
+      "row": 0,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        54,
+        55
+      ],
+      "move": [
+        56,
+        57,
+        58,
+        59,
+        60,
+        61
+      ],
+      "attack": [
+        62,
+        63,
+        64
+      ],
+      "defeated": []
+    },
+    {
+      "name": "statue-5",
+      "atlas": "statue",
+      "sheet": "statues-b",
+      "row": 1,
+      "frame": [
+        12,
+        15
+      ],
+      "idle": [
+        65,
+        66
+      ],
+      "move": [
+        67,
+        68,
+        69,
+        70,
+        71,
+        72
+      ],
+      "attack": [
+        73,
+        74,
+        75
+      ],
+      "defeated": []
+    },
+    {
+      "name": "ratking-winter",
+      "atlas": "ratking",
+      "sheet": "statues-b",
+      "row": 2,
+      "frame": [
+        16,
+        17
+      ],
+      "idle": [
+        24,
+        25
+      ],
+      "move": [
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "ratking-jester",
+      "atlas": "ratking",
+      "sheet": "statues-b",
+      "row": 3,
+      "frame": [
+        16,
+        17
+      ],
+      "idle": [
+        16,
+        17
+      ],
+      "move": [
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "ninja_log",
+      "atlas": "ninja_log",
+      "sheet": "wards-log",
+      "row": 3,
+      "frame": [
+        11,
+        12
+      ],
+      "idle": [
+        0
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "name": "vault-boss-0",
+      "atlas": "vault_boss_elemental",
+      "sheet": "vault-bosses",
+      "row": 0,
+      "frame": [
+        31,
+        30
+      ],
+      "idle": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "move": [],
+      "attack": [
+        4,
+        5,
+        6
+      ],
+      "defeated": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ]
+    },
+    {
+      "name": "vault-boss-1",
+      "atlas": "vault_boss_elemental",
+      "sheet": "vault-bosses",
+      "row": 1,
+      "frame": [
+        31,
+        30
+      ],
+      "idle": [
+        16,
+        17,
+        18,
+        19
+      ],
+      "move": [],
+      "attack": [
+        20,
+        21,
+        22
+      ],
+      "defeated": [
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ]
+    },
+    {
+      "name": "vault-boss-2",
+      "atlas": "vault_boss_elemental",
+      "sheet": "vault-bosses",
+      "row": 2,
+      "frame": [
+        31,
+        30
+      ],
+      "idle": [
+        32,
+        33,
+        34,
+        35
+      ],
+      "move": [],
+      "attack": [
+        36,
+        37,
+        38
+      ],
+      "defeated": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45
+      ]
+    },
+    {
+      "name": "vault_tokens_door",
+      "atlas": "vault_tokens_door",
+      "sheet": "vault-bosses",
+      "row": 3,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        0
+      ],
+      "move": [],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "yog-fist-0",
+      "atlas": "yog_fists",
+      "sheet": "fists-a",
+      "row": 0,
+      "frame": [
+        24,
+        17
+      ],
+      "idle": [
+        0,
+        1
+      ],
+      "move": [],
+      "attack": [
+        5,
+        6
+      ],
+      "defeated": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "name": "yog-fist-1",
+      "atlas": "yog_fists",
+      "sheet": "fists-a",
+      "row": 1,
+      "frame": [
+        24,
+        17
+      ],
+      "idle": [
+        10,
+        11
+      ],
+      "move": [],
+      "attack": [
+        15,
+        16
+      ],
+      "defeated": [
+        12,
+        13,
+        14
+      ]
+    },
+    {
+      "name": "yog-fist-2",
+      "atlas": "yog_fists",
+      "sheet": "fists-a",
+      "row": 2,
+      "frame": [
+        24,
+        17
+      ],
+      "idle": [
+        20,
+        21
+      ],
+      "move": [],
+      "attack": [
+        25,
+        26
+      ],
+      "defeated": [
+        22,
+        23,
+        24
+      ]
+    },
+    {
+      "name": "yog-fist-3",
+      "atlas": "yog_fists",
+      "sheet": "fists-a",
+      "row": 3,
+      "frame": [
+        24,
+        17
+      ],
+      "idle": [
+        30,
+        31
+      ],
+      "move": [],
+      "attack": [
+        35,
+        36
+      ],
+      "defeated": [
+        32,
+        33,
+        34
+      ]
+    },
+    {
+      "name": "yog-fist-4",
+      "atlas": "yog_fists",
+      "sheet": "fists-vault",
+      "row": 0,
+      "frame": [
+        24,
+        17
+      ],
+      "idle": [
+        40,
+        41
+      ],
+      "move": [],
+      "attack": [
+        45,
+        46
+      ],
+      "defeated": [
+        42,
+        43,
+        44
+      ]
+    },
+    {
+      "name": "yog-fist-5",
+      "atlas": "yog_fists",
+      "sheet": "fists-vault",
+      "row": 1,
+      "frame": [
+        24,
+        17
+      ],
+      "idle": [
+        50,
+        51
+      ],
+      "move": [],
+      "attack": [
+        55,
+        56
+      ],
+      "defeated": [
+        52,
+        53,
+        54
+      ]
+    },
+    {
+      "name": "skeleton-vault",
+      "atlas": "skeleton",
+      "sheet": "fists-vault",
+      "row": 2,
+      "frame": [
+        12,
+        16
+      ],
+      "idle": [
+        21,
+        22,
+        23,
+        24
+      ],
+      "move": [
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "attack": [
+        35,
+        36,
+        37
+      ],
+      "defeated": [
+        31,
+        32,
+        33,
+        34
+      ]
+    },
+    {
+      "name": "ratking-champion",
+      "atlas": "ratking",
+      "sheet": "fists-vault",
+      "row": 3,
+      "frame": [
+        16,
+        16
+      ],
+      "idle": [
+        8,
+        9
+      ],
+      "move": [
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "attack": [],
+      "defeated": []
+    },
+    {
+      "name": "dm200-vault",
+      "sheet": "vault-automaton",
+      "row": 0,
+      "frame": [
+        21,
+        18
+      ],
+      "idle": [
+        24,
+        25
+      ],
+      "move": [
+        26,
+        27
+      ],
+      "attack": [
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "defeated": [
+        33,
+        34,
+        35
+      ],
+      "atlas": "dm200"
     }
   ]
 }

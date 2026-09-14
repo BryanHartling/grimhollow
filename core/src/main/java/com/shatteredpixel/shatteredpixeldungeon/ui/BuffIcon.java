@@ -54,12 +54,15 @@ public class BuffIcon extends Image {
 	}
 
 	public void refresh(int icon){
+		texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR,com.badlogic.gdx.graphics.GL20.GL_LINEAR);
 		if (large){
-			if (largeFilm == null) largeFilm = new TextureFilm(texture, LRG_SIZE, LRG_SIZE);
+			if (largeFilm == null) largeFilm = new TextureFilm(texture, LRG_SIZE*4, LRG_SIZE*4);
 			frame(largeFilm.get(icon));
+			logicalSize(LRG_SIZE,LRG_SIZE);
 		} else {
-			if (smallFilm == null ) smallFilm = new TextureFilm(texture, SML_SIZE, SML_SIZE);
+			if (smallFilm == null ) smallFilm = new TextureFilm(texture, SML_SIZE*4, SML_SIZE*4);
 			frame(smallFilm.get(icon));
+			logicalSize(SML_SIZE,SML_SIZE);
 		}
 	}
 

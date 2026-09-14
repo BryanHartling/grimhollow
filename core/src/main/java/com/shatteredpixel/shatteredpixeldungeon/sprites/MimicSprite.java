@@ -32,6 +32,15 @@ public class MimicSprite extends MobSprite {
 
 	protected Animation hiding;
 
+	@Override protected com.watabou.utils.RectF scaleReference() {
+		return advancedHiding.frames[0];
+	}
+
+	@Override public float visualFootprint() {
+		// Match the eight-world-unit visible height of the ordinary chest item.
+		return 8f/.90625f;
+	}
+
 	{
 		//adjust shadow slightly to account for 1 empty bottom pixel (used for border while hiding)
 		perspectiveRaise    = 5 / 16f; //5 pixels

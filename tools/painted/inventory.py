@@ -17,8 +17,8 @@ HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[1]
 BASE='v1.1.0-painted-world'
 SEMANTICS='desktop/src/test/resources/item-semantics.json'
-# Keep disguises and whole multi-state families together until their companion
-# creature/upgrade frames receive the same art pass. Source concepts are cached.
+# Chest concepts from the item-only sheet are replaced below with the matching
+# mimic source. Other multi-state families retain their complete existing art.
 RETAINED={'CHEST','LOCKED_CHEST','CRYSTAL_CHEST','EBONY_CHEST',
           'ARTIFACT_HORN1','ARTIFACT_CHALICE1','ARTIFACT_ROSE1','DART'}
 
@@ -87,6 +87,11 @@ def build():
     replacements['ARMOR_LEATHER_ASH']=icon(ImageEnhance.Color(gear[1]).enhance(.08))
     for name,source in {'ARTIFACT_TOOLKIT':'KIT','ARTIFACT_BEACON':'BEACON'}.items():
         replacements[name]=replacements[source]
+    # A disguised mimic and its ordinary chest share the exact same authored
+    # closed pose, avoiding a visual tell introduced by independent art passes.
+    from monsters import parts as monster_parts
+    for row,name in enumerate(('CHEST','LOCKED_CHEST','CRYSTAL_CHEST','EBONY_CHEST')):
+        replacements[name]=icon(monster_parts('mimics')[row*4])
     written={}
     for name,image in replacements.items():
         if name not in semantics['items']:raise ValueError('Unknown inventory ID '+name)

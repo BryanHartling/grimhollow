@@ -191,25 +191,25 @@
       "id": 36,
       "artIndex": 36,
       "kind": "chest",
-      "rgbaSha256": "2c75a884c5b5efbc086c0d6826dca11b338db102005708c5345d8c73e9962386"
+      "rgbaSha256": "9e8b0dd4b8484aef74ba0d69c25e44563638c568275e359a086dd074f5d4ac4d"
     },
     "LOCKED_CHEST": {
       "id": 37,
       "artIndex": 37,
       "kind": "chest",
-      "rgbaSha256": "ad4d4871745900455267f236e2bc1125d2581aa4e52fdcb32af83956fc708eb1"
+      "rgbaSha256": "80976555e22b72e0576ff9275a29f0261e120044f64fb9c9b2e61c431952bc0b"
     },
     "CRYSTAL_CHEST": {
       "id": 38,
       "artIndex": 38,
       "kind": "chest",
-      "rgbaSha256": "acaedc639259a680455386350424866cde74b396213d5976632db3c3c4092764"
+      "rgbaSha256": "5be6899cae9df45be8d540fc906e7ae3a2c31fb6543eb56e79839e32d3ed48b2"
     },
     "EBONY_CHEST": {
       "id": 39,
       "artIndex": 39,
       "kind": "chest",
-      "rgbaSha256": "24a294d99c325a6faf9e483ffc6d4b7ec11001974e98d1d0a58ad4ec1755966b"
+      "rgbaSha256": "7932767809a6a12777350d58123ce79fe70d52f13fadb6a011b90556ebc4ccae"
     },
     "ANKH": {
       "id": 48,

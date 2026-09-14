@@ -415,12 +415,13 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             int heroes=0,mobs=0,items=0,icons=0;
             com.badlogic.gdx.utils.JsonValue semantics=new com.badlogic.gdx.utils.JsonReader().parse(
                     Gdx.files.local("desktop/src/test/resources/item-semantics.json"));
+            com.badlogic.gdx.utils.JsonValue painted=new com.badlogic.gdx.utils.JsonReader().parse(Gdx.files.internal("painted-assets.json")).get("assets");
             HeroClass original=Dungeon.hero.heroClass;
             com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite originalSprite=Dungeon.hero.sprite;
             for(HeroClass hero:HeroClass.values()) {
                 Dungeon.hero.heroClass=hero;
                 com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
-                band(sprite,16,.85f,.95f,buffer,camera,zoom,failures,"24 "+hero);heroes++;sprite.destroy();
+                band(sprite,20,.85f,.95f,buffer,camera,zoom,failures,"24 "+hero);heroes++;sprite.destroy();
                 com.watabou.noosa.Image avatar=com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite.avatar(hero,6);
                 band(avatar,16,.85f,.95f,buffer,camera,zoom,failures,"24 avatar "+hero);avatar.destroy();
                 GamesInProgress.set(99);
@@ -436,18 +437,50 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 java.util.Enumeration<java.util.jar.JarEntry> entries=classes.entries();
                 while(entries.hasMoreElements()) {
                     String name=entries.nextElement().getName();
-                    if(!name.startsWith("com/shatteredpixel/shatteredpixeldungeon/sprites/")||!name.endsWith(".class"))continue;
+                    boolean outsideSprite=java.util.Arrays.stream(new String[]{"SpiritHawk$HawkSprite.class","SmokeBomb$NinjaLogSprite.class",
+                            "Necromancer$NecroSkeleton$NecroSkeletonSprite.class","GuardianTrap$GuardianSprite.class",
+                            "ShadowClone$ShadowSprite.class","PowerOfMany$LightAllySprite.class","Feint$AfterImage$AfterImageSprite.class",
+                            "SurfaceScene$Pet.class"}).anyMatch(name::endsWith);
+                    if((!name.startsWith("com/shatteredpixel/shatteredpixeldungeon/sprites/")&&!outsideSprite)||!name.endsWith(".class"))continue;
                     Class<?> type=Class.forName(name.substring(0,name.length()-6).replace('/','.'));
                     if(!com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite.class.isAssignableFrom(type)
                             || type==com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite.class
                             || java.lang.reflect.Modifier.isAbstract(type.getModifiers()))continue;
-                    com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite sprite=(com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite)type.getDeclaredConstructor().newInstance();
+                    java.lang.reflect.Constructor<?> constructor=type.getDeclaredConstructor();constructor.setAccessible(true);
+                    com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite sprite=(com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite)constructor.newInstance();
                     if(sprite.texture==null)continue; // Base sprite classes have no art or frame.
-                    float footprint=sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.DM300Sprite||sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.YogSprite||sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.VaultBossElementalSprite?32:16;
+                    float footprint=sprite.visualFootprint();
+                    paintedAnimations(sprite,painted,failures);
+                    if(sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.StatueSprite) {
+                        for(int tier=0;tier<=5;tier++) {
+                            ((com.shatteredpixel.shatteredpixeldungeon.sprites.StatueSprite)sprite).setArmor(tier);
+                            paintedAnimations(sprite,painted,failures);
+                        }
+                        ((com.shatteredpixel.shatteredpixeldungeon.sprites.StatueSprite)sprite).setArmor(0);
+                    }
+                    if(sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.MimicSprite) {
+                        // Test its concealed frame against ordinary chest height, separately
+                        // from the larger open-mouthed attack animation.
+                        java.lang.reflect.Field hidden=com.shatteredpixel.shatteredpixeldungeon.sprites.MimicSprite.class.getDeclaredField("advancedHiding");
+                        hidden.setAccessible(true);sprite.play((com.watabou.noosa.MovieClip.Animation)hidden.get(sprite));
+                    }
                     band(sprite,footprint,.85f,.95f,buffer,camera,zoom,failures,"24 "+type.getSimpleName());mobs++;sprite.destroy();
                 }
             }
             System.out.println("TEST 24: heroes="+heroes+" mob sprites="+mobs+" failures="+failures.size());
+            com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite heroScale=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
+            com.shatteredpixel.shatteredpixeldungeon.sprites.RatSprite ratScale=new com.shatteredpixel.shatteredpixeldungeon.sprites.RatSprite();
+            float ratio=heroScale.visibleBounds().height()/ratScale.visibleBounds().height();
+            if(ratio<2||ratio>2.5f)failures.add("Hero/rat visible size ratio outside 2..2.5: "+ratio);
+            heroScale.destroy();ratScale.destroy();
+            int statusCount=0;
+            for(int index=0;index<89;index++) for(boolean large:new boolean[]{false,true}) {
+                com.shatteredpixel.shatteredpixeldungeon.ui.BuffIcon status=new com.shatteredpixel.shatteredpixeldungeon.ui.BuffIcon(index,large);
+                if(status.width()!=(large?16:7)||status.height()!=(large?16:7)||GameGeometry.opaqueHeight(status.texture,status.frame())==0)
+                    failures.add("Empty/misscaled painted status "+index+" large="+large);
+                Pixmap pixels=renderSprite(status,buffer,camera);pixels.dispose();status.destroy();statusCount++;
+            }
+            System.out.println("PAINTED: complete animation coverage; hero/rat height ratio="+ratio+" status sizes rendered="+statusCount);
             int before=failures.size();
             for(java.lang.reflect.Field field:com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.class.getFields()) {
                 if(field.getType()!=int.class||field.getName().equals("SIZE"))continue;
@@ -507,6 +540,36 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             System.out.println("TESTS 24-26, 34, 36 PASS; test 35 retired by recovery");
         }catch(Exception e){throw new RuntimeException(e);}
     }
+    private void paintedAnimations(com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite sprite,
+                                   com.badlogic.gdx.utils.JsonValue painted,java.util.List<String> failures)throws Exception {
+        com.badlogic.gdx.utils.JsonValue asset=null;
+        for(com.badlogic.gdx.utils.JsonValue entry:painted) {
+            if(com.watabou.gltextures.TextureCache.contains(entry.name)
+                    &&com.watabou.gltextures.TextureCache.get(entry.name)==sprite.texture){asset=entry;break;}
+        }
+        String who=sprite.getClass().getName().replace("com.shatteredpixel.shatteredpixeldungeon.sprites.","");
+        if(asset==null){failures.add("Unpainted creature texture: "+who);return;}
+        if(sprite.texture.fModeMax!=com.badlogic.gdx.graphics.GL20.GL_LINEAR)failures.add("Unfiltered creature: "+who);
+        if(asset.name.startsWith("sprites/hero_"))return; // Reflections share the reviewed hero sheet.
+        java.util.Set<String> rectangles=new java.util.HashSet<>();
+        for(com.badlogic.gdx.utils.JsonValue box:asset.get("painted_rects"))rectangles.add(java.util.Arrays.toString(box.asIntArray()));
+        java.util.Set<com.watabou.noosa.MovieClip.Animation> animations=new java.util.HashSet<>();
+        for(Class<?> type=sprite.getClass();type!=null;type=type.getSuperclass())for(java.lang.reflect.Field field:type.getDeclaredFields()) {
+            if(java.lang.reflect.Modifier.isStatic(field.getModifiers()))continue;
+            if(field.getType()==com.watabou.noosa.MovieClip.Animation.class) {
+                field.setAccessible(true);animations.add((com.watabou.noosa.MovieClip.Animation)field.get(sprite));
+            }else if(field.getType()==com.watabou.noosa.MovieClip.Animation[].class) {
+                field.setAccessible(true);java.util.Collections.addAll(animations,(com.watabou.noosa.MovieClip.Animation[])field.get(sprite));
+            }
+        }
+        for(com.watabou.noosa.MovieClip.Animation animation:animations)if(animation!=null&&animation.frames!=null)
+            for(com.watabou.utils.RectF frame:animation.frames) {
+                int[] box={Math.round(frame.left*sprite.texture.width),Math.round(frame.top*sprite.texture.height),
+                        Math.round(frame.right*sprite.texture.width),Math.round(frame.bottom*sprite.texture.height)};
+                if(!rectangles.contains(java.util.Arrays.toString(box)))failures.add("Unpainted pose: "+who+" "+java.util.Arrays.toString(box));
+            }
+    }
+
     private void saveCompatibility(java.util.List<String> failures)throws Exception {
         int before=failures.size();
         Dungeon.saveAll();

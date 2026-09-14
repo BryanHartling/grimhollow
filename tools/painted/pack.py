@@ -12,7 +12,7 @@ import hashlib
 import json
 import subprocess
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageFilter
 
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
@@ -22,7 +22,7 @@ BASE = 'v1.0.2-fogfix'
 LAYOUT = 'v4.0.0'
 TILE = 64
 MANIFEST = ASSETS / 'painted-assets.json'
-APPROVED = [49,53,84,85,86,87,100,101,102,103,56,57,58,59,60,61,
+APPROVED = [56,57,58,59,60,61,
             112,113,114,115,116,224,225,226,227,228,229]
 
 
@@ -150,21 +150,28 @@ def region_atlas(region, features, raised):
     # Bookshelf keeps the same collision/occlusion and uses the same cap masks.
     shelf=prop(floor,props[6],60,62,True)[0]
     for i in [50,54,92,93,94,95,108,109,110,111]:put(atlas,i,shelf)
-    # Preserve approved door and torch pixels exactly in the first region.
+    # Preserve approved doors; torch foregrounds must not carry their old masonry.
     if region=='sewers':
         approved=historical(BASE,path)
         for i in APPROVED:put(atlas,i,cell(approved,i))
     from terrain_details import patch
     patch(region,atlas,old,floor,cap,features,raised)
+    approved=historical(BASE,'environment/tiles_sewers.png')
+    for i in [49,53,84,85,86,87,100,101,102,103]:
+        # Use the committed render's alpha only to separate the approved fixture
+        # (including its two-pixel outline) from the obsolete wall behind it.
+        source=Image.open(ROOT/f'tools/artgen/render_cache/tiles/wall_torch_{i%3}.png')
+        mask=source.crop((64,64,128,128)).getchannel('A').point(lambda a:255 if a>100 else 0)
+        mask=mask.filter(ImageFilter.MaxFilter(5))
+        fixture=cell(approved,i);fixture.putalpha(mask)
+        material=face.copy();material.paste(cap.crop((0,0,64,16)),(0,0))
+        material.alpha_composite(fixture);put(atlas,i,material)
     outputs={path:atlas}
     # 512 source pixels cover eight world cells. Scrolling still uses SkinnedBlock.
     water_path='environment/water'+str(['sewers','prison','caves','city','halls'].index(region))+'.png'
     outputs[water_path]=materials[7].resize((512,512),Image.Resampling.LANCZOS)
     if region=='sewers':
-        walls=atlas.copy()
-        approved=historical(BASE,'environment/walls_sewers.png')
-        for i in [49,53,84,85,86,87,100,101,102,103]:put(walls,i,cell(approved,i))
-        outputs['environment/walls_sewers.png']=walls
+        outputs['environment/walls_sewers.png']=atlas.copy()
     return outputs
 
 
@@ -184,6 +191,8 @@ def outputs():
     result.update(title())
     from monsters import outputs as monsters
     result.update(monsters())
+    from status import outputs as status
+    result.update(status())
     return result
 
 
@@ -198,12 +207,16 @@ def main():
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
     from monsters import sizes as monster_sizes
     fixed_monster_sizes=monster_sizes()
+    from monsters import coverage
+    painted_rects=coverage()
     for path,im in built.items():
         expected=(512,1088) if path=='sprites/items.png' else (1024,512) if path.startswith('sprites/hero_') else (512,512) if '/water' in path else (256,512) if '/raised_terrain' in path else (1024,1024)
         expected={'interfaces/title_grimhollow.png':(1920,1080),'interfaces/title_wordmark.png':(1024,144),'interfaces/title_mist.png':(1024,342)}.get(path,expected)
         expected=fixed_monster_sizes.get(path,expected)
+        expected={'interfaces/buffs.png':(448,224),'interfaces/large_buffs.png':(1024,512)}.get(path,expected)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
+        if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]
         target=ASSETS/path
         if args.check:
             if not target.exists() or digest(Image.open(target))!=digest(im):failures.append(path)

@@ -268,17 +268,23 @@ final class RecoveryChecks {
         }
         if(index%12!=0&&index!=route.size())return;
         FogOfWar fog=(FogOfWar)field(scene,"fog");
-        Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);scene.draw();Pixmap dim=screen();
-        ((Gizmo)fog).visible=false;Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);scene.draw();Pixmap raw=screen();((Gizmo)fog).visible=true;
+        // Sample the actual world before/after fog, as test 47 does. HUD text
+        // intentionally draws above fog and is not a terrain visibility leak.
+        Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);
+        for(Gizmo g:members(scene)) {if(g==fog)break;if(g!=null&&g.exists&&g.isVisible())g.draw();}
+        Pixmap raw=screen();fog.draw();Pixmap dim=screen();
         for(int c=0;c<l.length();c++)if(!l.heroFOV[c]&&!DungeonTileSheet.wallStitcheable(l.map[c])) {
             Point p=Camera.main.cameraToScreen(c%w*16+8,c/w*16+8);
             int x=p.x,y=dim.getHeight()-1-p.y;
-            if(x<20||x>=dim.getWidth()-20||y<40||y>=dim.getHeight()-100)continue;
+            if(x<0||x>=dim.getWidth()||y<0||y>=dim.getHeight())continue;
             int samples=GameGeometry.FOG_SAMPLES_PER_TILE;
             int mask=fog.texture.bitmap.getPixel(c%w*samples+samples/2,c/w*samples+samples/2),alpha=mask&255;
             int a=dim.getPixel(x,y),b=raw.getPixel(x,y);
             if(!l.visited[c]&&!l.mapped[c]&&alpha==255) {
-                if((a>>>8)!=0)throw new AssertionError("Never-seen cell not black at "+c);
+                if((a>>>8)!=0){
+                    throw new AssertionError("Never-seen cell not black at "+c+" screen="+x+","+y+" rgba="+Integer.toHexString(a)
+                            +" raw="+Integer.toHexString(b)+" hero="+Dungeon.hero.pos+" step="+index);
+                }
                 blackPixels++;
             } else if(l.visited[c]&&alpha>0&&alpha<255&&remembered.containsKey(kind(l.map[c]))) {
                 for(int shift:new int[]{24,16,8}) {

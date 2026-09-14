@@ -88,6 +88,7 @@ public class SmokeRun {
     private static void check(boolean condition,String message){if(!condition)throw new AssertionError(message);}
 
     private static void contentScenario() throws Exception {
+        contentMessages();
         // Required content is exercised inside the established real-game smoke harness.
         Dungeon.init();Dungeon.depth=1;Dungeon.branch=0;Dungeon.switchLevel(Dungeon.newLevel(),-1);clearArena();
         Hero h=Dungeon.hero;for(Buff b:h.buffs())b.detach();h.belongings.weapon=null;h.belongings.armor=null;
@@ -144,6 +145,15 @@ public class SmokeRun {
         gravity.onZap(new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(center,primary.pos,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.MAGIC_BOLT));check(primary.pos==center+2,"Gravity pull two cells");
         side=target(center+1);com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfGravity.pull(primary,center,2,gravity);
         check(primary.pos==center+2&&primary.buff(Vertigo.class)!=null&&side.buff(Vertigo.class)!=null,"Gravity collision stops at blocker and gives both Vertigo");
+        clearArena();primary=target(center+1);
+        com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBlastWave blast=new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBlastWave();
+        blast.identify();
+        com.watabou.noosa.Group blastVisuals=new com.watabou.noosa.Group();blastVisuals.add(h.sprite);
+        blast.onZap(new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(center,primary.pos,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.PROJECTILE));
+        blastVisuals.remove(h.sprite);blastVisuals.destroy();
+        check(primary.pos==center+4,"Actual Blast Wave pushes target three cells away");
+        check(NecroCurse.find(primary)==null&&primary.buff(Vertigo.class)==null&&!blast.cursed,"Uncursed Blast Wave does not apply Gravity dizziness or a Necromancer curse");
+        System.out.println("PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions");
         clearArena();Dungeon.depth=1;int wallCell=center+2;
         com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBone wandBone=new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBone();
         wandBone.onZap(new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(center,wallCell,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.STOP_TARGET));
@@ -251,6 +261,36 @@ public class SmokeRun {
         }
         System.out.println("PASS V4 "+Dungeon.hero.heroClass+" Vault generation/save/load, mirror="+mirrorReward.getSimpleName()+", equipment restore, quest completion/shop and six enchantment/curses serialized");
     }
+    private static void contentMessages() throws Exception {
+        String[][] items={
+            {"wands.WandOfGravity","wand of gravity"},{"wands.WandOfBlastWave","wand of blast wave"},
+            {"wands.WandOfNecrosis","wand of necrosis"},{"wands.WandOfBone","wand of bone"},
+            {"weapon.melee.BoneScythe","bone scythe"},{"weapon.melee.ReapersScythe","reaper's scythe"},
+            {"weapon.melee.GraveScythe","grave scythe"},{"armor.BoneArmor","bone armor"},
+            {"artifacts.HourglassOfAshes","hourglass of ashes"},{"spells.Soulfire","spell of soulfire"}};
+        for(String[] entry:items) {
+            Item item=(Item)Class.forName("com.shatteredpixel.shatteredpixeldungeon.items."+entry[0]).getDeclaredConstructor().newInstance();
+            item.identify();
+            check(item.trueName().equalsIgnoreCase(entry[1]),"Correct content identity: "+entry[0]+" got "+item.trueName());
+            String info=item.info();
+            check(!info.contains("!!!")&&!java.util.regex.Pattern.compile("%[0-9$]*[dsf]").matcher(info).find(),"Complete formatted description: "+entry[0]+" "+info);
+        }
+        String[] types={"items.weapon.curses.Leech","items.weapon.curses.Echo","items.weapon.curses.DarkBlessing",
+                "items.armor.curses.Withering","items.armor.curses.DarkBlessing","actors.mobs.Hexcaster",
+                "actors.mobs.Chainwarden","actors.buffs.CursedVariant","levels.traps.ChainTrap"};
+        for(String type:types) {
+            Class<?> cls=Class.forName("com.shatteredpixel.shatteredpixeldungeon."+type);
+            String key=type.toLowerCase(java.util.Locale.ROOT);
+            for(String suffix:new String[]{"name","desc"}) {
+                String text=com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(key+"."+suffix);
+                if(text.contains("%s")) text=com.shatteredpixel.shatteredpixeldungeon.messages.Messages.format(text,"weapon");
+                check(!text.contains("!!!")&&!java.util.regex.Pattern.compile("%[0-9$]*[dsf]").matcher(text).find(),
+                        "Own complete content message exists: "+cls.getSimpleName()+"."+suffix);
+            }
+        }
+        System.out.println("PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders");
+    }
+
     private static void clearArena(){
         if(com.watabou.noosa.Camera.main==null)com.watabou.noosa.Camera.main=new com.watabou.noosa.Camera(0,0,320,240,1);
         for(Mob m:Dungeon.level.mobs.toArray(new Mob[0])){Actor.remove(m);for(Buff buff:m.buffs())Actor.remove(buff);}

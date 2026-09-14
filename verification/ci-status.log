@@ -36,3 +36,5 @@ Stage 7 exact commit 04de625e0588be35ba4bb4aa01fee1493e8fb68e: run 34629728416 S
 Recovery v1.0.1 before push: local mandatory test 45 fails in all five regions. The CI workflow retains this gate and retires only superseded art checks; the exact remote run and delivered commit are reported in the delivery response after execution. No green CI result is claimed here.
 
 v1.0.2 source bcee035c2 pushed: https://github.com/BryanHartling/grimhollow/actions/runs/34758797422; Android success; Windows desktop build/44/JUnit/46 pass, test45 fails; Linux renderer in progress when evidence commit prepared. Exact delivered-head outcome is in the delivery response.
+
+v1.4.0-painted-bestiary publication: supplied project credential rejected by GitHub HTTP 401. Credential-helper stall terminated; no saved credential or local SSH configuration. Remote grimhollow remains e91123eb4ca41b20fb48a4e8985acfd368199b49. Current branch/tag local only; exact-head CI NOT RUN. Local builds and verification are recorded in ACCEPTANCE.md; test 45 remains enforced and fails 26/82 pairs.

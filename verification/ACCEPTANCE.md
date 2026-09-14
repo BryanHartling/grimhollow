@@ -1,3 +1,85 @@
+# Painted bestiary and text repair - v1.4.0
+
+Source commits: `9db9fe525` (wand/text correction) and `99a1f4371` (painted creatures, status icons, display scale, torch materials and verification). Delivery adds current evidence and documentation. Intended tag: `v1.4.0-painted-bestiary`.
+
+All 71 creature atlases now contain 129 authored forms, including friendly skeletons/ghouls, Sad Ghost, all NPCs, mimic families, sentries, ward tiers, statue armor tiers, rare/quest variants and Vault encounters. Shared hero reflections and ghoul-derived revenants also use painted sheets. Nine heroes remain painted and display 25% taller; smaller wildlife and larger monsters have species proportions. Movement, collision, combat timings, balance, content and saves are unchanged. Four chest items use their matching mimic closed art, including the ordinary mimic's occasional twitch. 86 buff emblems and three overhead symbols retain their logical HUD sizes and runtime tint. Approved torch fixture pixels now sit over each region's current masonry.
+
+The reported uncursed Blast Wave was an uncursed **WandOfGravity** in the copied player save. Its missing message namespace caused superclass name/description fallback and a mismatched format string. Correcting 49 message prefixes fixes added item, curse, mob, trap and settings text. The existing smoke suite now checks ten named item descriptions and nine curse/enemy/trap descriptions. Actual output: `PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions`. No wand mechanics were changed.
+
+Final local verification: Windows desktop and Android builds pass; six JUnit tests pass; all nine hero groups pass `Runs=90 failures=0`. This contains Necromancer 10/0, Enchanter 10/0 and Psychic 10/0; they are groups of the all-nine invocation, not additional local class-only commands. The unchanged CI also runs all three separately and the combined three-class gate; exact delivered-head results are reported with delivery.
+
+Native crash regression: the private copy of the player's Necromancer save completed 150 actions, 137 movement steps and 12 attack actions. Fresh seed 417 completed 150 actions, 122 movement steps and 27 attack actions. Both exercised actor-thread drops/pickup/summoning and 120 frames after forced death, failures=0. The opt-in fixture grants 1000 health for coverage. Original player saves were untouched. The real Vault renderer passed arena trigger, FIRE/FROST/SHOCK forms, scripted boss death and treasure-door unlock; this is not a played boss fight.
+
+The GPU audit first exposed an uncovered Vault DM-200 row and poor sentry/pylon source packing. A complete Vault source and isolated pylon poses now pack all referenced frames; stationary actors fit only the poses they use. Tiny foreign particles are excluded during source connectivity extraction. The final check draws 122 creature sprite types, including nested NPC/ability sprites, and checks their declared animation rectangles against the painted manifest. Initial failures remain in the logs.
+
+Test 43 then sampled green movement-help text over an unseen world cell at screen (144,135), RGBA 000400FF, after the enlarged hero shifted camera framing. The fog itself passed test 47. The corrected test draws the real world before/after fog separately from the HUD, as test 47 does; it retains exact-black/remembered-pixel assertions and now includes formerly excluded screen margins. The final five-region walking/fog run passes. No game fog code changed.
+
+**The existing numeric contrast gate 45 still fails 26/82 local comparisons and remains enforced in CI.** Source reconstruction passes for 99 images from 75 committed source sheets. CI needs no art generator or Blender. The full local evidence is appended to clean-build.log, art-validation.log, new-class-smoke.log, reproducibility.log, junit-summary.log and apk-identity.log. The incidental retired test-41 output from the review screenshot runner does not reactivate that gate.
+
+| Test | Status | Actual output or reason |
+|---|---|---|
+| 1 | PASS | Retained fresh desktop-only checkout result; current TitleScene and final runnable jar launch verified locally. |
+| 2 | PASS | desktop:dist core:test android:assembleDebug --no-daemon: BUILD SUCCESSFUL in 1m 46s. Final desktop fixture rebuild: BUILD SUCCESSFUL in 22s. JUnit 6 tests, zero failures/errors/skips. |
+| 3 | RETIRED | Old procedural-art rebuild no longer ships; committed painted sources reconstruct exactly under test 44. |
+| 4 | RETIRED | Old generated-style validator was superseded by source provenance/reconstruction 44 and room distinctness 45. |
+| 5 | PASS | Final core:smokeRun -PsmokeUpstream=true --no-daemon: Runs=90 failures=0; all nine hero kits. |
+| 6 | permanent known issue | Representative hooks pass; exhaustive talent selection/hook scenarios remain unrun. |
+| 7 | permanent known issue | Subclass hooks pass; actual Tengu reward selection flow remains unrun. |
+| 8 | permanent known issue | Nine armor abilities execute; actual crown selection flow remains unrun. |
+| 9 | PASS | TEST 9 PASS; temporary Bone/Force terrain persistence, expiry and floor-exit checks execute. |
+| 10 | PASS | Necromancer minion cap and Second Grave checks pass in the existing class suite. |
+| 11 | PASS | TESTS 11-13 PASS: Grasp heap/trap/empty-cell cases. |
+| 12 | PASS | TESTS 11-13 PASS: thrown damage at the required levels. |
+| 13 | PASS | TESTS 11-13 PASS: domination retargeting and duration. |
+| 14 | PASS | Final all-nine-class active-state persistence and floor-6 round trips: Runs=90 failures=0. |
+| 15 | PASS | Runs=90 failures=0; ten seeds per class. New-class groups each 10/0; this is scripted generation/descent, not a campaign. |
+| 16 | permanent known issue | All 122 concrete creature sprite draws, declared animation rectangles, statue tiers, items and talents checked; exhaustive every-gameplay-path coverage remains unrun. |
+| 17 | RETIRED | Superseded by recovery: generated style requirements do not apply to restored upstream character/world pixels. |
+| 18 | RETIRED | Superseded by recovery: generated-region brightness target replaced by within-room distinctness 45. |
+| 19 | permanent known issue | The floor-15 1,000-turn/20-mob timing scenario remains unrun. |
+| 20 | PASS | Retained v1.0.2 SDK-unset desktop-only build result; build configuration unchanged except version metadata. New CI uses desktopOnly=true. |
+| 21 | permanent known issue | Unchanged test 45 fails 26/82 locally. Desktop and Android packages build; exact delivered-head CI outcome is reported with delivery. |
+| 22 | PASS | aapt: com.grimhollow.dungeon; label Grimhollow; versionCode 943; versionName 1.4.0-INDEV. |
+| 23 | PASS | PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow. |
+| 24 | PASS | TEST 24: heroes=9 mob sprites=122 failures=0; all creature animation references painted. Hero/rat height ratio=2.2222223. Intentional species display heights; same 0.85-0.95 occupancy band. |
+| 25 | PASS | TEST 25: 381 named item IDs + 60 identification icons, Waterskin=480, MindVision=eye@98 (ID82), all eleven section-9 and ten class items; failures=0. Four chest cells now share their mimic source. |
+| 26 | PASS | TEST 26: three stains and floor/chasm/water/trap placement failures=0. |
+| 27 | PASS | TEST 27 PASS: 300 turns unchanged; 12 charges level=1; Wraith offered; hostile attacked within 2 turns. |
+| 28 | RETIRED | Superseded by recovery: rendered-cache rebuild no longer produces the restored shipping world/characters. |
+| 29 | RETIRED | Superseded by recovery: rerendering is prohibited; Blender/cache retained unused. |
+| 30 | RETIRED | Superseded by recovery: generated character hue-distance gate replaced by upstream pixel provenance 44. |
+| 31 | PASS | TEST 31: off pixel differences=0; 40 gas + 10 fire cells; 240 GPU-completed frames mean=0.6134ms p95=0.7963ms failures=0. |
+| 32 | PASS | TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0. |
+| 33 | PASS | TEST 33 PASS: scroll/stone offers, exclusions, cancel/apply, subclasses and history persistence. |
+| 34 | PASS | TEST 34: old/future version, portrait exception and deletion failures=0. |
+| 35 | RETIRED | Superseded by recovery: source-string grep replaced by compiled/runtime handler and network test 46. |
+| 36 | PASS | TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0; 178 large/small painted status draws preserve logical sizes. |
+| 37 | PASS | TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment. |
+| 38 | permanent known issue | 18 supplied images lack verified allowed redistribution licenses; excluded from Git; 70 licensed files eligible. |
+| 39 | RETIRED | Superseded by recovery: rejected regional iteration histories remain archival; their art no longer ships. |
+| 40 | RETIRED | Superseded by recovery: generated-room isolated metrics replaced by remembered-terrain 43 and distinctness 45. |
+| 41 | RETIRED | Superseded by recovery: generated animated liquid atlas replaced by historical scrolling water. |
+| 42 | RETIRED | Superseded by recovery: calibrated generated-region gates replaced by restored-region test 45. |
+| 43 | PASS | Five final regions: 788 steps, 255 turns, 75 door openings; exact remembered-terrain UV and world/fog pixel comparisons failures=0. |
+| 44 | PASS | PAINTED assets=99 source sheets=75 failures=0; upstream-derived sheets=7, restored assets=29, painted replacements=99; failures=0. All 484 packaged assets match JAR and APK bytes (968 comparisons, zero mismatches). |
+| 45 | permanent known issue | Thresholds unchanged: 26/82 pairs fail. Sewers 7/21, Prison 1/10, Caves 8/21, City 3/15, Halls 7/15. Fresh Sewers room includes a trap type, so not a controlled comparison with prior 25/76. |
+| 46 | PASS | Runtime title controls=5, credits handlers=4, external opens=0, scene fetches=0. Final compiled classes=2877, guarded browser sinks=1, HTTP/socket calls=0, failures=0. |
+| 47 | PASS | Final five-region run: 120 camera configurations, 212316160 hidden and 8888320 visible pixels, 1398 door-transition frames; fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0. |
+
+Current final Windows floor/wall measurements (delta luminance >= 0.12 OR circular mean hue >= 40 degrees):
+
+| Region | Delta luminance | Delta hue | Failing pairs |
+|---|---|---|---|
+| Sewers | 0.1842 | 4.90 degrees | 7/21 |
+| Prison | 0.2876 | 12.48 degrees | 1/10 |
+| Caves | 0.1656 | 2.42 degrees | 8/21 |
+| City | 0.1375 | 36.49 degrees | 3/15 |
+| Halls | 0.1177 | 23.48 degrees | 7/15 |
+
+Human art/readability review, a complete campaign and Android device testing remain outstanding. This completes the requested bestiary, proportion, wall-fixture, text and status presentation pass.
+
+---
+
 # Native crash repair - v1.3.2
 
 The reported shutdown was reproduced on a private copy of the player's Necromancer save (seed 5039256467331). The unfixed renderer aborted in `SHPD Actor Thread`: `No context is current`, through `Texture.bind -> SmartTexture.filter -> ItemSprite.frame -> Level.drop`. This is a native OpenGL abort, not a game-over or a Java gameplay exception. The user's original save files were left untouched.

@@ -7041,3 +7041,334 @@ PAINTED assets=23 source sheets=30 failures=0
 C:\Users\Hartl\Documents\grimhollow\tools\recovery_assets.py:47: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
   out.putdata([palette.get(pixel[:3], pixel[:3]) + (pixel[3],) for pixel in image.getdata()])
 TEST 44: upstream-derived character sheets=78; restored assets=100; verified painted replacements=23; failures=0
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+TEST 46 runtime: title controls=5 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0
+RECOVERY generated region=0 seed=417 room=[5, 8, 10, 15] fixed-path steps=100 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=0 phase=start zooms=3 pans=4 cameras=12 everyCell=1152 hiddenPixels=15869952 visiblePixels=645120 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+com.badlogic.gdx.utils.GdxRuntimeException: java.lang.AssertionError: Never-seen cell not black at 678
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:159)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:193)
+Caused by: java.lang.AssertionError: Never-seen cell not black at 678
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.RecoveryChecks.checkRemembered(RecoveryChecks.java:281)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.RecoveryChecks.tick(RecoveryChecks.java:191)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:70)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	... 1 more
+TEST 45: region=sewers types=6 pairs=15 failures=5
+decor/door: delta L=0.1128, delta hue=11.15 FAIL
+decor/floor: delta L=0.1409, delta hue=8.40 PASS
+decor/grass: delta L=0.1423, delta hue=12.61 PASS
+decor/wall: delta L=0.0554, delta hue=11.83 FAIL
+decor/water: delta L=0.0251, delta hue=60.17 PASS
+door/floor: delta L=0.0281, delta hue=2.75 FAIL
+door/grass: delta L=0.0295, delta hue=1.46 FAIL
+door/wall: delta L=0.1682, delta hue=0.68 PASS
+door/water: delta L=0.1378, delta hue=71.32 PASS
+floor/grass: delta L=0.0014, delta hue=4.21 FAIL
+floor/wall: delta L=0.1963, delta hue=3.43 PASS
+floor/water: delta L=0.1659, delta hue=68.57 PASS
+grass/wall: delta L=0.1977, delta hue=0.78 PASS
+grass/water: delta L=0.1673, delta hue=72.78 PASS
+wall/water: delta L=0.0303, delta hue=72.00 PASS
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=1 seed=417 room=[29, 25, 37, 32] fixed-path steps=202 terrainEdits=0
+[GAME] @@ You descend to floor 6 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=1 phase=start zooms=3 pans=4 cameras=12 everyCell=1681 hiddenPixels=23066624 visiblePixels=1032192 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+com.badlogic.gdx.utils.GdxRuntimeException: java.lang.AssertionError: Never-seen cell not black at 952
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:159)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:193)
+Caused by: java.lang.AssertionError: Never-seen cell not black at 952
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.RecoveryChecks.checkRemembered(RecoveryChecks.java:281)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.RecoveryChecks.tick(RecoveryChecks.java:191)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:70)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	... 1 more
+TEST 45: region=prison types=5 pairs=10 failures=1
+decor/door: delta L=0.0040, delta hue=26.37 FAIL
+decor/floor: delta L=0.1526, delta hue=45.78 PASS
+decor/wall: delta L=0.1341, delta hue=33.41 PASS
+decor/water: delta L=0.1176, delta hue=159.68 PASS
+door/floor: delta L=0.1565, delta hue=19.41 PASS
+door/wall: delta L=0.1301, delta hue=7.04 PASS
+door/water: delta L=0.1136, delta hue=173.95 PASS
+floor/wall: delta L=0.2867, delta hue=12.37 PASS
+floor/water: delta L=0.2702, delta hue=154.54 PASS
+wall/water: delta L=0.0165, delta hue=166.91 PASS
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=2 seed=417 room=[23, 5, 30, 14] fixed-path steps=200 terrainEdits=0
+[GAME] @@ You descend to floor 11 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=2 phase=start zooms=3 pans=4 cameras=12 everyCell=2067 hiddenPixels=28528640 visiblePixels=1103872 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+com.badlogic.gdx.utils.GdxRuntimeException: java.lang.AssertionError: Never-seen cell not black at 972
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:159)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:193)
+Caused by: java.lang.AssertionError: Never-seen cell not black at 972
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.RecoveryChecks.checkRemembered(RecoveryChecks.java:281)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.RecoveryChecks.tick(RecoveryChecks.java:191)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:70)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	... 1 more
+TEST 45: region=caves types=7 pairs=21 failures=8
+chasm/decor: delta L=0.2103, delta hue=3.00 PASS
+chasm/door: delta L=0.1432, delta hue=4.10 PASS
+chasm/floor: delta L=0.1924, delta hue=4.86 PASS
+chasm/grass: delta L=0.2000, delta hue=3.60 PASS
+chasm/wall: delta L=0.0268, delta hue=2.44 FAIL
+chasm/water: delta L=0.0438, delta hue=126.99 PASS
+decor/door: delta L=0.0671, delta hue=1.11 FAIL
+decor/floor: delta L=0.0179, delta hue=1.86 FAIL
+decor/grass: delta L=0.0103, delta hue=0.60 FAIL
+decor/wall: delta L=0.1834, delta hue=0.56 PASS
+decor/water: delta L=0.1665, delta hue=129.99 PASS
+door/floor: delta L=0.0492, delta hue=0.75 FAIL
+door/grass: delta L=0.0568, delta hue=0.50 FAIL
+door/wall: delta L=0.1164, delta hue=1.66 FAIL
+door/water: delta L=0.0994, delta hue=131.10 PASS
+floor/grass: delta L=0.0075, delta hue=1.25 FAIL
+floor/wall: delta L=0.1656, delta hue=2.42 PASS
+floor/water: delta L=0.1486, delta hue=131.85 PASS
+grass/wall: delta L=0.1731, delta hue=1.16 PASS
+grass/water: delta L=0.1562, delta hue=130.60 PASS
+wall/water: delta L=0.0170, delta hue=129.43 PASS
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=3 seed=417 room=[16, 23, 23, 30] fixed-path steps=172 terrainEdits=0
+[GAME] @@ You descend to floor 16 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=3 phase=start zooms=3 pans=4 cameras=12 everyCell=1722 hiddenPixels=23769088 visiblePixels=917504 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+com.badlogic.gdx.utils.GdxRuntimeException: java.lang.AssertionError: Never-seen cell not black at 1159
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:159)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:193)
+Caused by: java.lang.AssertionError: Never-seen cell not black at 1159
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.RecoveryChecks.checkRemembered(RecoveryChecks.java:281)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.RecoveryChecks.tick(RecoveryChecks.java:191)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:70)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	... 1 more
+TEST 45: region=city types=6 pairs=15 failures=3
+decor/door: delta L=0.0230, delta hue=151.71 PASS
+decor/floor: delta L=0.0058, delta hue=117.92 PASS
+decor/grass: delta L=0.0733, delta hue=155.67 PASS
+decor/wall: delta L=0.1317, delta hue=81.39 PASS
+decor/water: delta L=0.0600, delta hue=65.40 PASS
+door/floor: delta L=0.0172, delta hue=33.79 FAIL
+door/grass: delta L=0.0503, delta hue=3.97 FAIL
+door/wall: delta L=0.1547, delta hue=70.31 PASS
+door/water: delta L=0.0830, delta hue=142.90 PASS
+floor/grass: delta L=0.0675, delta hue=37.75 FAIL
+floor/wall: delta L=0.1375, delta hue=36.52 PASS
+floor/water: delta L=0.0658, delta hue=176.69 PASS
+grass/wall: delta L=0.2050, delta hue=74.28 PASS
+grass/water: delta L=0.1333, delta hue=138.93 PASS
+wall/water: delta L=0.0717, delta hue=146.79 PASS
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=4 seed=417 room=[24, 17, 32, 25] fixed-path steps=114 terrainEdits=0
+[GAME] @@ You descend to floor 21 of the dungeon.
+[GAME] -- You feel that there's a source of demonic energy above you...
+[GAME] ** Your steps echo across the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=4 phase=start zooms=3 pans=4 cameras=12 everyCell=1925 hiddenPixels=26851328 visiblePixels=745472 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+com.badlogic.gdx.utils.GdxRuntimeException: java.lang.AssertionError: Never-seen cell not black at 847
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:159)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:193)
+Caused by: java.lang.AssertionError: Never-seen cell not black at 847
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.RecoveryChecks.checkRemembered(RecoveryChecks.java:281)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.RecoveryChecks.tick(RecoveryChecks.java:191)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:70)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	... 1 more
+TEST 45: region=halls types=6 pairs=15 failures=7
+decor/door: delta L=0.0090, delta hue=49.28 PASS
+decor/floor: delta L=0.0002, delta hue=2.45 FAIL
+decor/grass: delta L=0.0005, delta hue=14.74 FAIL
+decor/wall: delta L=0.1175, delta hue=25.93 FAIL
+decor/water: delta L=0.0174, delta hue=54.03 PASS
+door/floor: delta L=0.0088, delta hue=46.83 PASS
+door/grass: delta L=0.0095, delta hue=64.02 PASS
+door/wall: delta L=0.1265, delta hue=23.35 PASS
+door/water: delta L=0.0264, delta hue=4.74 FAIL
+floor/grass: delta L=0.0007, delta hue=17.19 FAIL
+floor/wall: delta L=0.1177, delta hue=23.48 FAIL
+floor/water: delta L=0.0176, delta hue=51.58 PASS
+grass/wall: delta L=0.1170, delta hue=40.67 PASS
+grass/water: delta L=0.0169, delta hue=68.76 PASS
+wall/water: delta L=0.1001, delta hue=28.10 FAIL
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+TEST 46 runtime: title controls=5 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0
+RECOVERY generated region=0 seed=417 room=[5, 8, 10, 15] fixed-path steps=100 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=0 phase=start zooms=3 pans=4 cameras=12 everyCell=1152 hiddenPixels=15869952 visiblePixels=645120 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=0 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1152 hiddenPixels=12500992 visiblePixels=645120 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=0 doorTransitionFrames=153 failures=0
+TEST 43: region=0 steps=100 remembered={chasm=1263, door=349, floor=3077, grass=317, water=1571} fogPixels=630 unseenBlackPixels=898 turns=24 doors=8 failures=0
+TEST 24: heroes=9 mob sprites=122 failures=0
+PAINTED: complete animation coverage; hero/rat height ratio=2.2222223 status sizes rendered=178
+TEST 25 semantics: all 381 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10
+TEST 25: items=381 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+TESTS 24-26, 34, 36 PASS; test 35 retired by recovery
+TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0
+TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.6134ms p95=0.7963ms failures=0
+[Controllers] removed manager for application, 0 managers active
+TEST 45: region=sewers types=7 pairs=21 failures=7
+decor/door: delta L=0.1282, delta hue=11.34 PASS
+decor/floor: delta L=0.1443, delta hue=7.12 PASS
+decor/grass: delta L=0.1577, delta hue=12.80 PASS
+decor/trap: delta L=0.1563, delta hue=19.63 PASS
+decor/wall: delta L=0.0399, delta hue=12.02 FAIL
+decor/water: delta L=0.0097, delta hue=59.99 PASS
+door/floor: delta L=0.0161, delta hue=4.22 FAIL
+door/grass: delta L=0.0295, delta hue=1.46 FAIL
+door/trap: delta L=0.0280, delta hue=8.29 FAIL
+door/wall: delta L=0.1682, delta hue=0.68 PASS
+door/water: delta L=0.1380, delta hue=71.32 PASS
+floor/grass: delta L=0.0134, delta hue=5.68 FAIL
+floor/trap: delta L=0.0120, delta hue=12.51 FAIL
+floor/wall: delta L=0.1842, delta hue=4.90 PASS
+floor/water: delta L=0.1540, delta hue=67.11 PASS
+grass/trap: delta L=0.0015, delta hue=6.83 FAIL
+grass/wall: delta L=0.1977, delta hue=0.78 PASS
+grass/water: delta L=0.1675, delta hue=72.78 PASS
+trap/wall: delta L=0.1962, delta hue=7.61 PASS
+trap/water: delta L=0.1660, delta hue=79.61 PASS
+wall/water: delta L=0.0302, delta hue=72.01 PASS
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=1 seed=417 room=[29, 25, 37, 32] fixed-path steps=202 terrainEdits=0
+[GAME] @@ You descend to floor 6 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=1 phase=start zooms=3 pans=4 cameras=12 everyCell=1681 hiddenPixels=23066624 visiblePixels=1032192 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+[GAME] ** You catch fire!
+TEST 47: region=1 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1681 hiddenPixels=16228352 visiblePixels=1032192 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=1 doorTransitionFrames=298 failures=0
+TEST 43: region=1 steps=202 remembered={chasm=565, door=1415, floor=27380, grass=2473, water=8230} fogPixels=1727 unseenBlackPixels=1722 turns=56 doors=16 failures=0
+[Controllers] removed manager for application, 0 managers active
+TEST 45: region=prison types=5 pairs=10 failures=1
+decor/door: delta L=0.0065, delta hue=26.05 FAIL
+decor/floor: delta L=0.1554, delta hue=45.53 PASS
+decor/wall: delta L=0.1322, delta hue=33.05 PASS
+decor/water: delta L=0.1127, delta hue=159.88 PASS
+door/floor: delta L=0.1619, delta hue=19.48 PASS
+door/wall: delta L=0.1258, delta hue=7.00 PASS
+door/water: delta L=0.1063, delta hue=174.07 PASS
+floor/wall: delta L=0.2876, delta hue=12.48 PASS
+floor/water: delta L=0.2682, delta hue=154.59 PASS
+wall/water: delta L=0.0195, delta hue=167.07 PASS
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=2 seed=417 room=[23, 5, 30, 14] fixed-path steps=200 terrainEdits=0
+[GAME] @@ You descend to floor 11 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=2 phase=start zooms=3 pans=4 cameras=12 everyCell=2067 hiddenPixels=28528640 visiblePixels=1103872 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=2 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=2067 hiddenPixels=25145344 visiblePixels=1103872 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=2 doorTransitionFrames=429 failures=0
+TEST 43: region=2 steps=200 remembered={chasm=5742, door=694, floor=16771, grass=477, water=3379} fogPixels=1797 unseenBlackPixels=1874 turns=85 doors=23 failures=0
+[Controllers] removed manager for application, 0 managers active
+TEST 45: region=caves types=7 pairs=21 failures=8
+chasm/decor: delta L=0.2094, delta hue=3.00 PASS
+chasm/door: delta L=0.1425, delta hue=4.10 PASS
+chasm/floor: delta L=0.1917, delta hue=4.86 PASS
+chasm/grass: delta L=0.1992, delta hue=3.60 PASS
+chasm/wall: delta L=0.0261, delta hue=2.44 FAIL
+chasm/water: delta L=0.0430, delta hue=126.99 PASS
+decor/door: delta L=0.0669, delta hue=1.10 FAIL
+decor/floor: delta L=0.0177, delta hue=1.85 FAIL
+decor/grass: delta L=0.0101, delta hue=0.60 FAIL
+decor/wall: delta L=0.1833, delta hue=0.56 PASS
+decor/water: delta L=0.1664, delta hue=129.99 PASS
+door/floor: delta L=0.0492, delta hue=0.75 FAIL
+door/grass: delta L=0.0568, delta hue=0.50 FAIL
+door/wall: delta L=0.1164, delta hue=1.66 FAIL
+door/water: delta L=0.0994, delta hue=131.10 PASS
+floor/grass: delta L=0.0075, delta hue=1.25 FAIL
+floor/wall: delta L=0.1656, delta hue=2.42 PASS
+floor/water: delta L=0.1487, delta hue=131.85 PASS
+grass/wall: delta L=0.1731, delta hue=1.16 PASS
+grass/water: delta L=0.1562, delta hue=130.59 PASS
+wall/water: delta L=0.0169, delta hue=129.43 PASS
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=3 seed=417 room=[16, 23, 23, 30] fixed-path steps=172 terrainEdits=0
+[GAME] @@ You descend to floor 16 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=3 phase=start zooms=3 pans=4 cameras=12 everyCell=1722 hiddenPixels=23769088 visiblePixels=917504 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=3 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1722 hiddenPixels=18049024 visiblePixels=917504 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=3 doorTransitionFrames=335 failures=0
+TEST 43: region=3 steps=172 remembered={chasm=1929, door=1212, floor=12206, grass=715, water=5082} fogPixels=1500 unseenBlackPixels=2167 turns=54 doors=18 failures=0
+[Controllers] removed manager for application, 0 managers active
+TEST 45: region=city types=6 pairs=15 failures=3
+decor/door: delta L=0.0229, delta hue=151.74 PASS
+decor/floor: delta L=0.0057, delta hue=117.91 PASS
+decor/grass: delta L=0.0732, delta hue=155.70 PASS
+decor/wall: delta L=0.1317, delta hue=81.42 PASS
+decor/water: delta L=0.0602, delta hue=65.39 PASS
+door/floor: delta L=0.0172, delta hue=33.83 FAIL
+door/grass: delta L=0.0503, delta hue=3.97 FAIL
+door/wall: delta L=0.1547, delta hue=70.31 PASS
+door/water: delta L=0.0831, delta hue=142.87 PASS
+floor/grass: delta L=0.0675, delta hue=37.79 FAIL
+floor/wall: delta L=0.1375, delta hue=36.49 PASS
+floor/water: delta L=0.0659, delta hue=176.70 PASS
+grass/wall: delta L=0.2050, delta hue=74.28 PASS
+grass/water: delta L=0.1334, delta hue=138.90 PASS
+wall/water: delta L=0.0716, delta hue=146.82 PASS
+PREFERENCES_PATH=C:\Users\Hartl\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+RECOVERY generated region=4 seed=417 room=[24, 17, 32, 25] fixed-path steps=114 terrainEdits=0
+[GAME] @@ You descend to floor 21 of the dungeon.
+[GAME] -- You feel that there's a source of demonic energy above you...
+[GAME] ** Your steps echo across the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+TEST 47: region=4 phase=start zooms=3 pans=4 cameras=12 everyCell=1925 hiddenPixels=26851328 visiblePixels=745472 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=4 phase=after-walk-and-doors zooms=3 pans=4 cameras=12 everyCell=1925 hiddenPixels=22306816 visiblePixels=745472 fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0
+TEST 47: region=4 doorTransitionFrames=183 failures=0
+TEST 43: region=4 steps=114 remembered={chasm=7238, door=250, floor=4823, grass=1571, water=2529} fogPixels=1071 unseenBlackPixels=3582 turns=36 doors=10 failures=0
+[Controllers] removed manager for application, 0 managers active
+TEST 45: region=halls types=6 pairs=15 failures=7
+decor/door: delta L=0.0090, delta hue=49.28 PASS
+decor/floor: delta L=0.0002, delta hue=2.45 FAIL
+decor/grass: delta L=0.0005, delta hue=14.74 FAIL
+decor/wall: delta L=0.1175, delta hue=25.93 FAIL
+decor/water: delta L=0.0176, delta hue=54.29 PASS
+door/floor: delta L=0.0088, delta hue=46.83 PASS
+door/grass: delta L=0.0095, delta hue=64.02 PASS
+door/wall: delta L=0.1265, delta hue=23.35 PASS
+door/water: delta L=0.0266, delta hue=5.00 FAIL
+floor/grass: delta L=0.0007, delta hue=17.19 FAIL
+floor/wall: delta L=0.1177, delta hue=23.48 FAIL
+floor/water: delta L=0.0179, delta hue=51.83 PASS
+grass/wall: delta L=0.1170, delta hue=40.67 PASS
+grass/water: delta L=0.0171, delta hue=69.02 PASS
+wall/water: delta L=0.0999, delta hue=28.36 FAIL

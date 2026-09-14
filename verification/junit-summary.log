@@ -116,3 +116,7 @@ STAGE 8 FINAL: <testsuite name="com.shatteredpixel.shatteredpixeldungeon.tiles.L
 Recovery v1.0.1: 5 JUnit tests, 0 failures, 0 errors, 0 skipped (RecoveryTest: 1; LightMapTest: 4).
 
 v1.0.2 local: JUnit tests=5 failures=0 errors=0 skipped=0; desktop:dist core:test android:assembleDebug core:smokeRun -PsmokeUpstream=true --no-daemon: BUILD SUCCESSFUL in 1m34s; Runs=90 failures=0.
+desktop/build/libs/desktop-1.4.0.jar verified source assets= 484
+android/build/outputs/apk/debug/android-debug.apk verified source assets= 484
+PACKAGED bytes checks= 968 mismatches= 0
+JUNIT {'tests': 6, 'failures': 0, 'errors': 0, 'skipped': 0}

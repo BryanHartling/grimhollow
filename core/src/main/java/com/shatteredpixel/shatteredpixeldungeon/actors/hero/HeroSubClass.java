@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.ui.HeroIcon;
+import com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon;
 import com.watabou.noosa.Game;
 
 public enum HeroSubClass {
@@ -49,7 +50,7 @@ public enum HeroSubClass {
 
 	PRIEST(HeroIcon.PRIEST),
 	PALADIN(HeroIcon.PALADIN),
-    DEATHSPEAKER(HeroIcon.WARLOCK), HEXWEAVER(HeroIcon.DEATH_MARK), ARTIFICER(HeroIcon.BATTLEMAGE), SCRIVENER(HeroIcon.PRIEST), PUPPETEER(HeroIcon.WARLOCK), SEER(HeroIcon.SNIPER);
+    DEATHSPEAKER(SkillIcon.DEATHSPEAKER), HEXWEAVER(SkillIcon.HEXWEAVER), ARTIFICER(SkillIcon.ARTIFICER), SCRIVENER(SkillIcon.SCRIVENER), PUPPETEER(SkillIcon.PUPPETEER), SEER(SkillIcon.SEER);
 
 	int icon;
 

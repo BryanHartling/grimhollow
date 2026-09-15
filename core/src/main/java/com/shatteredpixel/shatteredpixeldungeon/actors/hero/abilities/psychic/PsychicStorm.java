@@ -15,5 +15,5 @@ public class PsychicStorm extends ArmorAbility {
         int p=hero.pointsInTalent(Talent.BACKLASH);FocusCrystal crystal=hero.belongings.getItem(FocusCrystal.class);if(p>0&&crystal!=null)crystal.gainCharge(affected/(4-p));armor.charge-=chargeUse(hero);com.shatteredpixel.shatteredpixeldungeon.items.Item.updateQuickslot();hero.spendAndNext(1);
     }
     @Override public Talent[] talents(){return new Talent[]{Talent.WIDER_STORM,Talent.DREAD,Talent.BACKLASH,Talent.HEROIC_ENERGY};}
-    @Override public int icon(){return com.shatteredpixel.shatteredpixeldungeon.ui.HeroIcon.ELEMENTAL_BLAST;}
+    @Override public int icon(){return com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.PSYCHIC_STORM;}
 }

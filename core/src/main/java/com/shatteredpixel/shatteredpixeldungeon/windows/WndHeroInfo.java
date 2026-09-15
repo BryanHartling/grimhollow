@@ -38,7 +38,7 @@ public class WndHeroInfo extends WndTabbed {
         growth.talents(talents.get(0),1);growth.talents(talents.get(1),2);addPage("growth",growth);
         Page paths=new Page();paths.text(Messages.get(this,"subclasses_msg"));
         for(HeroSubClass sub:hero.subClasses()){
-            paths.choice(Messages.titleCase(sub.title()),()->Game.scene().addToFront(new WndInfoSubclass(hero,sub)));
+            paths.choice(Messages.titleCase(sub.title()),new HeroIcon(sub),()->Game.scene().addToFront(new WndInfoSubclass(hero,sub)));
             paths.text(sub.shortDesc());
             ArrayList<LinkedHashMap<Talent,Integer>> list=new ArrayList<>();
             Talent.initClassTalents(hero,list);Talent.initSubclassTalents(sub,list);
@@ -47,7 +47,7 @@ public class WndHeroInfo extends WndTabbed {
         addPage("paths",paths);
         Page armor=new Page();armor.text(Messages.get(this,"abilities_msg"));
         for(ArmorAbility ability:hero.armorAbilities()){
-            armor.choice(Messages.titleCase(ability.name()),()->Game.scene().addToFront(new WndInfoArmorAbility(hero,ability)));
+            armor.choice(Messages.titleCase(ability.name()),new HeroIcon(ability),()->Game.scene().addToFront(new WndInfoArmorAbility(hero,ability)));
             armor.text(ability.shortDesc());
             ArrayList<LinkedHashMap<Talent,Integer>> list=new ArrayList<>();
             Talent.initArmorTalents(ability,list);armor.talents(list.get(3),4);
@@ -77,11 +77,11 @@ public class WndHeroInfo extends WndTabbed {
             RenderedTextBlock block=PixelScene.renderTextBlock(value,7);
             block.maxWidth(pageWidth-8);block.setPos(0,cursor);add(block);cursor=block.bottom()+9;
         }
-        void choice(String label,Runnable action){
+        void choice(String label,com.watabou.noosa.Image icon,Runnable action){
             RedButton button=new RedButton(label,7){
                 @Override protected void onClick(){action.run();}
             };
-            button.setRect(0,cursor,pageWidth-8,22);add(button);cursor=button.bottom()+5;
+            button.setRect(0,cursor,pageWidth-8,22);button.icon(icon);add(button);cursor=button.bottom()+5;
         }
         void talents(LinkedHashMap<Talent,Integer> values,int tier){
             if(values.isEmpty())return;

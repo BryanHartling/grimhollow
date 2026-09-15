@@ -14,7 +14,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.HeroIcon;
 import com.watabou.utils.*;
 public class BonePrison extends ArmorAbility {
     {baseChargeUse=60;}
-    @Override public int icon(){return HeroIcon.WALL_OF_LIGHT;}
+    @Override public int icon(){return com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.BONE_PRISON;}
     @Override public String targetingPrompt(){return Messages.get(this,"prompt");}
     @Override public int targetedPos(Char user,int dst){return dst;}
     @Override public void activate(ClassArmor armor,Hero hero,Integer cell){

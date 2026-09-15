@@ -37,6 +37,8 @@ public class TalentIcon extends Image {
 
 	public TalentIcon(int icon){
 		super( Assets.Interfaces.TALENT_ICONS );
+		int painted=SkillIcon.talentIndex(icon);
+		if(painted>=0){SkillIcon.apply(this,painted);return;}
 
 		if (film == null) film = new TextureFilm(texture, SIZE*2, SIZE*2);
 

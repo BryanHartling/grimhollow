@@ -281,8 +281,9 @@ abstract public class Weapon extends KindOfWeapon {
 			Catalog.setSeen(enchantment.getClass());
 			Statistics.itemTypesDiscovered.add(enchantment.getClass());
 		}
-		com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.learn(this);
-        return super.identify(byHero);
+		super.identify(byHero);
+		if(byHero)com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.learn(this);
+        return this;
 	}
 
 	public void setIDReady(){

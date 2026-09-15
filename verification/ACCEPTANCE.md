@@ -1,3 +1,19 @@
+# Sprouted plants and persistent inscriptions - v1.7.0
+
+Art checkpoint: `f08e2140c`; intended release tag: `v1.7.0-botany-and-sigils`. Exact final source hash, CI results and artifacts are reported at delivery. Test 45 remains enforced; no full-green CI claim is made.
+
+`gradlew.bat desktop:dist android:assembleDebug core:test core:smokeRun -PsmokeUpstream=true --no-daemon --console=plain` succeeded: **Runs=90 failures=0**, six JUnit tests with zero failures/errors/skips. Test 33 additionally executes starter armor inscription, glyph/weapon type rejection without spending, permanent-plus-temporary coexistence, identification order independent of the catalog, five stair transitions, old temporary-knowledge migration and save/load. The first run exposed an optional-field migration error, fixed; its failure is preserved in clean-build.log. The unusually long successful Gradle duration includes a host interruption.
+
+`python tools/recovery_assets.py --check`: **PAINTED assets=113 source sheets=100 failures=0; launcher resources=55; TEST 44 failures=0**. Packaged jar/APK images: **226 comparisons, mismatches=0**. Android package com.grimhollow.dungeon, versionCode 946, versionName 1.7.0-INDEV; device play not run.
+
+Native `grimhollow.presentationReview=true` passed landscape and portrait: each exercised nine selections, 36 handbook pages and Duelist Start, then **13 sprouted plants, two actual armor-inscription clicks, all 13 armor glyphs and a moved/scrolled library, failures=0**. Native `grimhollow.geometryTests=true` passed, including **113 unique skill icons and 13 plant visuals**, exact plant cell indices and 16-unit logical size. All 122 steady idle checks and 381 item identities still pass. The historical extra-2x occupancy failures remain documented.
+
+The complete 1-50 checkpoint table below retains its limitations and retired subjects. Tests 1/2/5/9-15/22/24-27/33/34/36/37/44/48-50 have the current local results above; test 24 still carries its historical extra-2x limitation. Other configured checks run on exact-head CI. Tests 6/7/8/16/19/21/38/45 remain known issues for the documented reasons.
+
+Starter armor glyphs: Obfuscation, Swiftness and Viscosity. Learned sigils persist; Deep Knowledge discovers new effects only on first visiting a floor. Rune Etching rerolls its active attached effect. No enemy-curse casting, plant mechanics or other combat balance changes were added. [Current visual review](painted-world.html); [source prompts](../tools/painted/botany-skills.json).
+
+---
+
 # Painted heroes, quiet enemies and traps - v1.6.0
 
 Art checkpoint: `c6248dbbf`; release tag: `v1.6.0-painted-heroes`. Exact delivered source hash, CI results and artifact links are reported with delivery. CI still enforces the outstanding terrain-contrast gate; this release makes no full-green claim.

@@ -225,8 +225,9 @@ public class Armor extends EquipableItem {
 			Catalog.setSeen(glyph.getClass());
 			Statistics.itemTypesDiscovered.add(glyph.getClass());
 		}
-		com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.learn(this);
-        return super.identify(byHero);
+		super.identify(byHero);
+		if(byHero)com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.learn(this);
+        return this;
 	}
 
 	public void setIDReady(){

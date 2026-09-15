@@ -11,5 +11,5 @@ public class ForceWall extends ArmorAbility {
     @Override public String targetingPrompt(){return Messages.get(this,"prompt");}
     @Override public void activate(ClassArmor armor,Hero hero,Integer cell){if(cell==null||!Dungeon.level.insideMap(cell)||!Dungeon.level.heroFOV[cell]||armor.charge<chargeUse(hero)||!ForceWalls.line(cell,8+3*hero.pointsInTalent(Talent.HELD_FIRM)))return;armor.charge-=chargeUse(hero);com.shatteredpixel.shatteredpixeldungeon.items.Item.updateQuickslot();hero.spendAndNext(1);}
     @Override public Talent[] talents(){return new Talent[]{Talent.HELD_FIRM,Talent.REPULSE,Talent.PERMEABLE,Talent.HEROIC_ENERGY};}
-    @Override public int icon(){return com.shatteredpixel.shatteredpixeldungeon.ui.HeroIcon.ENDURE;}
+    @Override public int icon(){return com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.FORCE_WALL;}
 }

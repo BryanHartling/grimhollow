@@ -14,7 +14,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.HeroIcon;
 import com.watabou.utils.*;
 public class DeathPact extends ArmorAbility {
     {baseChargeUse=50;}
-    @Override public int icon(){return HeroIcon.DEATH_MARK;}
+    @Override public int icon(){return com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.DEATH_PACT;}
     @Override public void activate(ClassArmor armor,Hero hero,Integer cell){
         if(armor.charge<chargeUse(hero))return;
         int health=0;for(NecroSkeleton m:NecroSkeleton.minions()){health+=m.HP;m.sacrificed=true;m.die(hero);}

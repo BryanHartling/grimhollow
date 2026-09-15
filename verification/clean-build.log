@@ -9054,3 +9054,1252 @@ ENCOUNTERS actions=150 steps=117 attacks=32 actorDrops=true actorPickup=true sum
 
 
 TEST 46 compiled handlers: classes=2876 guarded browser sinks=1 HTTP/socket calls=0 failures=0
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :services:jar
+> Task :SPD-classes:jar
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets
+> Task :android:compressDebugAssets
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :desktop:processResources
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest
+> Task :android:processDebugManifest
+> Task :android:copyAndroidNatives
+> Task :android:processDebugManifestForPackage
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:processDebugResources
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :core:compileTestJava
+> Task :core:processTestResources NO-SOURCE
+> Task :core:testClasses
+> Task :android:compileDebugJavaWithJavac
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource
+> Task :android:dexBuilderDebug
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :core:test
+
+> Task :core:smokeRun
+PASS V4 WARRIOR Vault generation/save/load, mirror=BrokenSeal, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT WARRIOR: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS WARRIOR seed=0 floor=6 save/load=ok
+PASS WARRIOR seed=1 floor=6 save/load=ok
+PASS WARRIOR seed=2 floor=6 save/load=ok
+PASS WARRIOR seed=3 floor=6 save/load=ok
+PASS WARRIOR seed=4 floor=6 save/load=ok
+PASS WARRIOR seed=5 floor=6 save/load=ok
+PASS WARRIOR seed=6 floor=6 save/load=ok
+PASS WARRIOR seed=7 floor=6 save/load=ok
+PASS WARRIOR seed=8 floor=6 save/load=ok
+PASS WARRIOR seed=9 floor=6 save/load=ok
+PASS V4 MAGE Vault generation/save/load, mirror=MagesStaff, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT MAGE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS MAGE seed=0 floor=6 save/load=ok
+PASS MAGE seed=1 floor=6 save/load=ok
+PASS MAGE seed=2 floor=6 save/load=ok
+PASS MAGE seed=3 floor=6 save/load=ok
+PASS MAGE seed=4 floor=6 save/load=ok
+PASS MAGE seed=5 floor=6 save/load=ok
+PASS MAGE seed=6 floor=6 save/load=ok
+PASS MAGE seed=7 floor=6 save/load=ok
+PASS MAGE seed=8 floor=6 save/load=ok
+PASS MAGE seed=9 floor=6 save/load=ok
+PASS V4 ROGUE Vault generation/save/load, mirror=CloakOfShadows, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ROGUE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS ROGUE seed=0 floor=6 save/load=ok
+PASS ROGUE seed=1 floor=6 save/load=ok
+PASS ROGUE seed=2 floor=6 save/load=ok
+PASS ROGUE seed=3 floor=6 save/load=ok
+PASS ROGUE seed=4 floor=6 save/load=ok
+PASS ROGUE seed=5 floor=6 save/load=ok
+PASS ROGUE seed=6 floor=6 save/load=ok
+PASS ROGUE seed=7 floor=6 save/load=ok
+PASS ROGUE seed=8 floor=6 save/load=ok
+PASS ROGUE seed=9 floor=6 save/load=ok
+PASS V4 HUNTRESS Vault generation/save/load, mirror=SpiritBow, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT HUNTRESS: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS HUNTRESS seed=0 floor=6 save/load=ok
+PASS HUNTRESS seed=1 floor=6 save/load=ok
+PASS HUNTRESS seed=2 floor=6 save/load=ok
+PASS HUNTRESS seed=3 floor=6 save/load=ok
+PASS HUNTRESS seed=4 floor=6 save/load=ok
+PASS HUNTRESS seed=5 floor=6 save/load=ok
+PASS HUNTRESS seed=6 floor=6 save/load=ok
+
+> Task :desktop:release
+> Task :desktop:dist
+
+> Task :core:smokeRun
+PASS HUNTRESS seed=7 floor=6 save/load=ok
+PASS HUNTRESS seed=8 floor=6 save/load=ok
+PASS HUNTRESS seed=9 floor=6 save/load=ok
+PASS V4 DUELIST Vault generation/save/load, mirror=MirrorSword, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT DUELIST: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS DUELIST seed=0 floor=6 save/load=ok
+PASS DUELIST seed=1 floor=6 save/load=ok
+PASS DUELIST seed=2 floor=6 save/load=ok
+PASS DUELIST seed=3 floor=6 save/load=ok
+PASS DUELIST seed=4 floor=6 save/load=ok
+PASS DUELIST seed=5 floor=6 save/load=ok
+PASS DUELIST seed=6 floor=6 save/load=ok
+PASS DUELIST seed=7 floor=6 save/load=ok
+PASS DUELIST seed=8 floor=6 save/load=ok
+PASS DUELIST seed=9 floor=6 save/load=ok
+[GAME] @@ Badge unlocked: Novice Researcher (Fill in 40 catalog entries in your journal).
+PASS V4 CLERIC Vault generation/save/load, mirror=HolyTome, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT CLERIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS CLERIC seed=0 floor=6 save/load=ok
+PASS CLERIC seed=1 floor=6 save/load=ok
+PASS CLERIC seed=2 floor=6 save/load=ok
+PASS CLERIC seed=3 floor=6 save/load=ok
+PASS CLERIC seed=4 floor=6 save/load=ok
+PASS CLERIC seed=5 floor=6 save/load=ok
+PASS CLERIC seed=6 floor=6 save/load=ok
+PASS CLERIC seed=7 floor=6 save/load=ok
+PASS CLERIC seed=8 floor=6 save/load=ok
+PASS CLERIC seed=9 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS NECROMANCER seed=0 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+[GAME] org.json.JSONException: JSONObject["inscription_names"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getStringArray(Bundle.java:240)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_counts"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getIntArray(Bundle.java:180)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+FAIL ENCHANTER seed=0: java.lang.NullPointerException: Cannot read the array length because "names" is null
+[GAME] org.json.JSONException: JSONObject["inscription_names"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+FAIL ENCHANTER seed=1: java.lang.NullPointerException: Cannot read the array length because "names" is null
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getStringArray(Bundle.java:240)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_counts"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getIntArray(Bundle.java:180)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_names"] not found.
+FAIL ENCHANTER seed=2: java.lang.NullPointerException: Cannot read the array length because "names" is null
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getStringArray(Bundle.java:240)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_counts"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getIntArray(Bundle.java:180)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_names"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getStringArray(Bundle.java:240)
+FAIL ENCHANTER seed=3: java.lang.NullPointerException: Cannot read the array length because "names" is null
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_counts"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getIntArray(Bundle.java:180)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_names"] not found.
+FAIL ENCHANTER seed=4: java.lang.NullPointerException: Cannot read the array length because "names" is null
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getStringArray(Bundle.java:240)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_counts"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getIntArray(Bundle.java:180)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_names"] not found.
+FAIL ENCHANTER seed=5: java.lang.NullPointerException: Cannot read the array length because "names" is null
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getStringArray(Bundle.java:240)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_counts"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getIntArray(Bundle.java:180)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_names"] not found.
+FAIL ENCHANTER seed=6: java.lang.NullPointerException: Cannot read the array length because "names" is null
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getStringArray(Bundle.java:240)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_counts"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getIntArray(Bundle.java:180)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_names"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getStringArray(Bundle.java:240)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+FAIL ENCHANTER seed=7: java.lang.NullPointerException: Cannot read the array length because "names" is null
+[GAME] org.json.JSONException: JSONObject["inscription_counts"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getIntArray(Bundle.java:180)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_names"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+FAIL ENCHANTER seed=8: java.lang.NullPointerException: Cannot read the array length because "names" is null
+	at com.watabou.utils.Bundle.getStringArray(Bundle.java:240)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_counts"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getIntArray(Bundle.java:180)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_names"] not found.
+FAIL ENCHANTER seed=9: java.lang.NullPointerException: Cannot read the array length because "names" is null
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getStringArray(Bundle.java:240)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+[GAME] org.json.JSONException: JSONObject["inscription_counts"] not found.
+	at org.json.JSONObject.get(JSONObject.java:472)
+	at org.json.JSONObject.getJSONArray(JSONObject.java:619)
+	at com.watabou.utils.Bundle.getIntArray(Bundle.java:180)
+	at com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.restoreFromBundle(EnchanterMagic.java:138)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.enchanterScenario(SmokeRun.java:673)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:63)
+
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge unlocked: Novice Monster Hunter (Defeat 10 enemies in one game).
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge unlocked: Safety Hazard (Defeat 10 enemies in one game with the help of terrain hazards (traps, plants, or chasms)).
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS V4 PSYCHIC Vault generation/save/load, mirror=FocusCrystal, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT PSYCHIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS PSYCHIC seed=0 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=1 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=2 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=3 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=4 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=5 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+
+> Task :android:mergeLibDexDebug
+
+> Task :core:smokeRun FAILED
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=6 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=7 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=8 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=9 floor=6 save/load=ok
+Runs=90 failures=10
+
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+48 actionable tasks: 24 executed, 24 up-to-date
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':core:smokeRun' (registered in build file 'core\build.gradle').
+> Process 'command 'C:\Users\Hartl\Documents\grimhollow\.toolchain\jdk-17\bin\java.exe'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1m 40s
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes UP-TO-DATE
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :core:compileTestJava UP-TO-DATE
+> Task :core:processTestResources NO-SOURCE
+> Task :core:testClasses UP-TO-DATE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :core:test
+
+> Task :core:smokeRun
+PASS V4 WARRIOR Vault generation/save/load, mirror=BrokenSeal, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT WARRIOR: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS WARRIOR seed=0 floor=6 save/load=ok
+PASS WARRIOR seed=1 floor=6 save/load=ok
+PASS WARRIOR seed=2 floor=6 save/load=ok
+PASS WARRIOR seed=3 floor=6 save/load=ok
+PASS WARRIOR seed=4 floor=6 save/load=ok
+PASS WARRIOR seed=5 floor=6 save/load=ok
+PASS WARRIOR seed=6 floor=6 save/load=ok
+PASS WARRIOR seed=7 floor=6 save/load=ok
+PASS WARRIOR seed=8 floor=6 save/load=ok
+PASS WARRIOR seed=9 floor=6 save/load=ok
+PASS V4 MAGE Vault generation/save/load, mirror=MagesStaff, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT MAGE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS MAGE seed=0 floor=6 save/load=ok
+PASS MAGE seed=1 floor=6 save/load=ok
+PASS MAGE seed=2 floor=6 save/load=ok
+PASS MAGE seed=3 floor=6 save/load=ok
+PASS MAGE seed=4 floor=6 save/load=ok
+PASS MAGE seed=5 floor=6 save/load=ok
+PASS MAGE seed=6 floor=6 save/load=ok
+PASS MAGE seed=7 floor=6 save/load=ok
+PASS MAGE seed=8 floor=6 save/load=ok
+PASS MAGE seed=9 floor=6 save/load=ok
+PASS V4 ROGUE Vault generation/save/load, mirror=CloakOfShadows, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ROGUE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS ROGUE seed=0 floor=6 save/load=ok
+PASS ROGUE seed=1 floor=6 save/load=ok
+PASS ROGUE seed=2 floor=6 save/load=ok
+PASS ROGUE seed=3 floor=6 save/load=ok
+PASS ROGUE seed=4 floor=6 save/load=ok
+
+> Task :desktop:release
+
+> Task :core:smokeRun
+PASS ROGUE seed=5 floor=6 save/load=ok
+PASS ROGUE seed=6 floor=6 save/load=ok
+PASS ROGUE seed=7 floor=6 save/load=ok
+PASS ROGUE seed=8 floor=6 save/load=ok
+PASS ROGUE seed=9 floor=6 save/load=ok
+
+> Task :desktop:dist
+
+> Task :core:smokeRun
+PASS V4 HUNTRESS Vault generation/save/load, mirror=SpiritBow, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT HUNTRESS: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS HUNTRESS seed=0 floor=6 save/load=ok
+PASS HUNTRESS seed=1 floor=6 save/load=ok
+PASS HUNTRESS seed=2 floor=6 save/load=ok
+PASS HUNTRESS seed=3 floor=6 save/load=ok
+PASS HUNTRESS seed=4 floor=6 save/load=ok
+PASS HUNTRESS seed=5 floor=6 save/load=ok
+PASS HUNTRESS seed=6 floor=6 save/load=ok
+PASS HUNTRESS seed=7 floor=6 save/load=ok
+PASS HUNTRESS seed=8 floor=6 save/load=ok
+PASS HUNTRESS seed=9 floor=6 save/load=ok
+PASS V4 DUELIST Vault generation/save/load, mirror=MirrorSword, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT DUELIST: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS DUELIST seed=0 floor=6 save/load=ok
+PASS DUELIST seed=1 floor=6 save/load=ok
+PASS DUELIST seed=2 floor=6 save/load=ok
+PASS DUELIST seed=3 floor=6 save/load=ok
+PASS DUELIST seed=4 floor=6 save/load=ok
+PASS DUELIST seed=5 floor=6 save/load=ok
+PASS DUELIST seed=6 floor=6 save/load=ok
+PASS DUELIST seed=7 floor=6 save/load=ok
+PASS DUELIST seed=8 floor=6 save/load=ok
+PASS DUELIST seed=9 floor=6 save/load=ok
+[GAME] @@ Badge unlocked: Novice Researcher (Fill in 40 catalog entries in your journal).
+PASS V4 CLERIC Vault generation/save/load, mirror=HolyTome, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT CLERIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS CLERIC seed=0 floor=6 save/load=ok
+PASS CLERIC seed=1 floor=6 save/load=ok
+PASS CLERIC seed=2 floor=6 save/load=ok
+PASS CLERIC seed=3 floor=6 save/load=ok
+PASS CLERIC seed=4 floor=6 save/load=ok
+PASS CLERIC seed=5 floor=6 save/load=ok
+PASS CLERIC seed=6 floor=6 save/load=ok
+PASS CLERIC seed=7 floor=6 save/load=ok
+PASS CLERIC seed=8 floor=6 save/load=ok
+PASS CLERIC seed=9 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS NECROMANCER seed=0 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS V4 ENCHANTER Vault generation/save/load, mirror=SigilBrush, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ENCHANTER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS ENCHANTER seed=0 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=1 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=2 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=3 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=4 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=5 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=6 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=7 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=8 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=9 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge unlocked: Novice Monster Hunter (Defeat 10 enemies in one game).
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge unlocked: Safety Hazard (Defeat 10 enemies in one game with the help of terrain hazards (traps, plants, or chasms)).
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS V4 PSYCHIC Vault generation/save/load, mirror=FocusCrystal, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT PSYCHIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS PSYCHIC seed=0 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=1 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=2 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=3 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=4 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=5 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=6 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=7 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+
+> Task :android:mergeLibDexDebug
+
+> Task :core:smokeRun
+PASS PSYCHIC seed=8 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=9 floor=6 save/load=ok
+Runs=90 failures=0
+
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 7h 10m 45s
+48 actionable tasks: 9 executed, 39 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PAINTED launcher resources=55
+PAINTED assets=113 source sheets=100 failures=0
+C:\Users\Hartl\Documents\grimhollow\tools\recovery_assets.py:47: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  out.putdata([palette.get(pixel[:3], pixel[:3]) + (pixel[3],) for pixel in image.getdata()])
+TEST 44: upstream-derived character sheets=7; restored assets=29; verified painted replacements=113; failures=0
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\presentation-landscape\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/interface/landscape/title.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-warrior.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-mage.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-rogue.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-huntress.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-duelist.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-cleric.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-necromancer.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-enchanter.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-psychic.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-profile.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-growth.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-paths.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-armor.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-armor-bottom.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/painted-traps-and-duelist-hud.png
+TEST 36 PRESENTATION: classes=9 matchingPortraits=9 firstSelections=9 secondSelections=9 infoButtons=9 handbookPages=36 orientation=landscape duelistStart=true trapShapes=7 failures=0
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/painted-sprouted-plants.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/enchanter-spell-icons.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/inscribe-starter-armor.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/inscribe-full-library.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/inscribe-full-library-bottom.png
+TEST 33/36 BOTANY UI: sprouted plants=13 actual armor selections=2 glyph library=13 scrolling/offset=PASS failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\presentation-portrait\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/interface/portrait/title.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-warrior.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-mage.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-rogue.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-huntress.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-duelist.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-cleric.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-necromancer.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-enchanter.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-psychic.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-profile.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-growth.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-paths.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-armor.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-armor-bottom.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/painted-traps-and-duelist-hud.png
+TEST 36 PRESENTATION: classes=9 matchingPortraits=9 firstSelections=9 secondSelections=9 infoButtons=9 handbookPages=36 orientation=portrait duelistStart=true trapShapes=7 failures=0
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/painted-sprouted-plants.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/enchanter-spell-icons.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/inscribe-starter-armor.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/inscribe-full-library.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/inscribe-full-library-bottom.png
+TEST 33/36 BOTANY UI: sprouted plants=13 actual armor selections=2 glyph library=13 scrolling/offset=PASS failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\presentation-geometry\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 24: heroes=9 mob sprites=122 steady idle checks=122 failures=0
+PAINTED: complete animation coverage; hero/rat height ratio=2.2222223 status sizes rendered=178
+TEST 25 semantics: all 381 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10
+PAINTED TRAPS: shapes=7 color/state combinations=63
+TEST 25: items=381 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+PAINTED SKILLS/PLANTS: unique skills=113 plants=13
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+TESTS 24-26, 34, 36 PASS; test 35 retired by recovery
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PACKAGED PAINTED ASSETS: comparisons=226 mismatches=0
+Android package=com.grimhollow.dungeon versionCode=946 versionName=1.7.0-INDEV

@@ -67,6 +67,9 @@ public class WndUseItem extends WndInfoItem {
 						}
 					}
 				};
+				if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush && action.equals(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.AC_ETCH)){
+					com.watabou.noosa.Image icon=com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.spell("etch");icon.logicalSize(12,12);btn.icon(icon);
+				}
 				btn.setSize(btn.reqWidth(), BUTTON_HEIGHT);
 				buttons.add(btn);
 				add(btn);

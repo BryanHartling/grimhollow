@@ -653,6 +653,25 @@ public class SmokeRun {
         for(Class<?> enchant:new Class<?>[]{com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing.class,com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Shocking.class,com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Chilling.class})
             check(EnchanterMagic.state().choices(false).contains(enchant),"33: level-one trade knowledge "+enchant.getSimpleName());
         check(Statistics.itemTypesDiscovered.isEmpty(),"33: trade knowledge leaves item catalog empty");
+        for(Class<?> glyph:new Class<?>[]{com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Obfuscation.class,com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Swiftness.class,com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Viscosity.class})
+            check(EnchanterMagic.state().choices(true).contains(glyph),"33: level-one armor trade knowledge "+glyph.getSimpleName());
+        check(Statistics.itemTypesDiscovered.isEmpty(),"33: armor trade knowledge does not identify found gear");
+        com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor startingArmor=h.belongings.armor;
+        startingArmor.inscribe(new com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Brimstone());
+        check(brush.cast(h,"inscribe",h.pos,startingArmor,com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Obfuscation.class)
+                &&brush.charges()==2&&startingArmor.inscriptionTurns==30&&startingArmor.inscribed instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Obfuscation
+                &&startingArmor.glyph instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Brimstone
+                &&startingArmor.hasGlyph(com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Obfuscation.class,h),"33: starting armor inscription costs one charge and coexists with permanent glyph");
+        int armorCharge=brush.charges();
+        check(!brush.cast(h,"inscribe",h.pos,startingArmor,com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing.class)&&brush.charges()==armorCharge,"33: wrong equipment type consumes no charge");
+        startingArmor.inscribed=null;startingArmor.inscriptionTurns=0;startingArmor.inscribe(null);brush.gainCharge(1);
+        ClothArmor discoveredArmor=new ClothArmor();discoveredArmor.inscribe(new com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Potential());discoveredArmor.cursedKnown=false;discoveredArmor.identify();
+        Statistics.itemTypesDiscovered.clear();
+        check(EnchanterMagic.state().choices(true).contains(com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Potential.class),"33: identification learns glyph after setting known flags, independent of catalog");
+        com.watabou.utils.Bundle legacyKnowledge=new com.watabou.utils.Bundle();
+        legacyKnowledge.put("floor_known",new String[]{com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.class.getName()});
+        EnchanterMagic migratedKnowledge=new EnchanterMagic();migratedKnowledge.restoreFromBundle(legacyKnowledge);
+        check(migratedKnowledge.choices(false).contains(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.class),"33: previous-save temporary knowledge migrates to permanent library");
         Statistics.itemTypesDiscovered.addAll(catalog);
         RuneEtching rune=starter.runeEtching;starter.upgrade();
         check(starter.actions(h).contains(Item.AC_DROP)&&starter.value()>0,"37: ordinary sellable starter");
@@ -671,6 +690,19 @@ public class SmokeRun {
         check(brush.cast(h,"hex",enemy.pos,null,null)&&brush.charges()==2&&enemy.buff(DegradedGear.class)!=null&&enemy.buff(Hex.class)!=null,"Hex Sigil");
         for(int i=0;i<37;i++)h.buff(ClassSpellItem.Charger.class).act();check(brush.charges()==2,"No early Brush charge");h.buff(ClassSpellItem.Charger.class).act();check(brush.charges()==3,"Brush level-one cadence");
         h.lvl=21;h.HT=h.HP=120;h.subClass=HeroSubClass.ARTIFICER;Talent.initSubclassTalents(h);maxTalents();
+        java.util.List<Class<?>> priorKnowledge=new java.util.ArrayList<>(EnchanterMagic.state().choices(false));
+        java.util.List<Class<?>> priorGlyphs=new java.util.ArrayList<>(EnchanterMagic.state().choices(true));
+        int knowledgeDepth=Dungeon.depth;
+        for(int depth:new int[]{3,4,5,4,3}){
+            Dungeon.depth=depth;EnchanterMagic.state().arrive();
+            check(EnchanterMagic.state().choices(false).containsAll(priorKnowledge)&&EnchanterMagic.state().choices(true).containsAll(priorGlyphs),"33: stairs retain every known weapon and armor inscription");
+            priorKnowledge=new java.util.ArrayList<>(EnchanterMagic.state().choices(false));
+        }
+        Dungeon.depth=knowledgeDepth;EnchanterMagic.state().arrive();
+        com.watabou.utils.Bundle savedKnowledge=new com.watabou.utils.Bundle();EnchanterMagic.state().storeInBundle(savedKnowledge);
+        EnchanterMagic restoredKnowledge=new EnchanterMagic();restoredKnowledge.restoreFromBundle(savedKnowledge);
+        check(restoredKnowledge.choices(false).containsAll(priorKnowledge)&&restoredKnowledge.choices(true).containsAll(priorGlyphs),"33: complete inscription library survives save/load");
+        System.out.println("TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload");
         com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon w=(com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)h.belongings.weapon;
         w.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic());w.identify();
         EnchanterMagic.learn(w);check(EnchanterMagic.state().choices(false).contains(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.class),"Identified-run inscription knowledge");

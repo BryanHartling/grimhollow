@@ -14,7 +14,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.HeroIcon;
 import com.watabou.utils.*;
 public class CorpseExplosion extends ArmorAbility {
     {baseChargeUse=35;}
-    @Override public int icon(){return HeroIcon.ELEMENTAL_BLAST;}
+    @Override public int icon(){return com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.CORPSE_EXPLOSION;}
     @Override public String targetingPrompt(){return Messages.get(this,"prompt");}
     @Override public int targetedPos(Char user,int dst){return dst;}
     @Override public void activate(ClassArmor armor,Hero hero,Integer cell){

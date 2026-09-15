@@ -79,7 +79,8 @@ public class Phylactery extends Artifact {
     }
     private class SpellMenu extends Window {
         SpellMenu(Hero hero){
-            resize(220,170);ArrayList<Spell> options=spells(hero);options.removeIf(s->s.name().startsWith("RAISE_")&&s!=Spell.RAISE_SKELETON);
+            int w=Math.min(228,(int)PixelScene.uiCamera.width-24),h=Math.min(180,(int)PixelScene.uiCamera.height-30);
+            resize(w,h);ArrayList<Spell> options=spells(hero);options.removeIf(s->s.name().startsWith("RAISE_")&&s!=Spell.RAISE_SKELETON);
             for(int i=0;i<options.size();i++){
                 final Spell spell=options.get(i);double angle=-Math.PI/2+2*Math.PI*i/options.size();
                 RedButton button=new RedButton(Messages.get(Phylactery.class,spell.name()),6){
@@ -87,14 +88,14 @@ public class Phylactery extends Artifact {
                         if(spell.name().startsWith("RAISE_")){
                             ArrayList<Spell> tiers=spells(hero);tiers.removeIf(s->!s.name().startsWith("RAISE_")||cost(s)>charges());
                             String[] labels=new String[tiers.size()];for(int j=0;j<labels.length;j++)labels[j]=Messages.get(Phylactery.class,tiers.get(j).name())+" ("+cost(tiers.get(j))+")";
-                            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions(Messages.get(Phylactery.class,"raise_dead"),Messages.get(Phylactery.class,"tiers"),labels){@Override protected void onSelect(int i){cast(hero,tiers.get(i),hero.pos);}});
+                            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions(Messages.get(Phylactery.class,"raise_dead"),Messages.get(Phylactery.class,"tiers"),labels){@Override protected void onSelect(int i){cast(hero,tiers.get(i),hero.pos);}@Override protected boolean hasIcon(int i){return true;}@Override protected com.watabou.noosa.Image getIcon(int i){return com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.spell(tiers.get(i).name());}});
                         }
                         else GameScene.selectCell(new CellSelector.Listener(){
                             public void onSelect(Integer cell){cast(hero,spell,cell);}
                             public String prompt(){return Messages.get(Phylactery.class,"prompt");}
                         });
                     }
-                };button.setRect(74+(float)Math.cos(angle)*72,71+(float)Math.sin(angle)*62,72,28);add(button);
+                };float bw=Math.min(82,(w-12)*.40f),bh=34;button.setRect((w-bw)/2+(float)Math.cos(angle)*((w-bw)/2-2),(h-bh)/2+(float)Math.sin(angle)*((h-bh)/2-2),bw,bh);button.multiline=true;button.icon(com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.spell(spell.name()));add(button);
             }
         }
     }

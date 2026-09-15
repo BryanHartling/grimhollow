@@ -193,11 +193,12 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             Camera.main.edgeScroll.set(0);
             Camera.main.snapTo(Dungeon.hero.sprite.center().x,Dungeon.hero.sprite.center().y);
             if(presentationGameFrames<90)return;
+            if(presentationGameFrames>90){botanyAndInscriptionReview(presentationGameFrames);return;}
             capture("painted-traps-and-duelist-hud");
             if(!HeroClass.DUELIST.isUnlocked())throw new AssertionError("Duelist cannot be selected");
             System.out.println("TEST 36 PRESENTATION: classes=9 matchingPortraits=9 firstSelections=9 secondSelections=9 infoButtons=9 handbookPages=36 orientation="
                     +(Boolean.getBoolean("grimhollow.interfacePortrait")?"portrait":"landscape")+" duelistStart=true trapShapes=7 failures=0");
-            Gdx.app.exit();return;
+            return;
         }
         HeroClass hero=HeroClass.values()[index];
         @SuppressWarnings("unchecked") java.util.List<com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton> buttons=
@@ -241,6 +242,78 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if(phase==105){interfaceBounds();if(hero==HeroClass.PSYCHIC)capture("handbook-armor-bottom");}
         if(phase==110){closeReviewWindows();clickReview(RecoveryChecks.field(Game.scene(),"infoButton"));}
         if(phase==115){reviewHandbook();interfaceBounds();closeReviewWindows();}
+    }
+    private void botanyAndInscriptionReview(int frame){
+        try{
+            if(frame==100){
+                for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs.toArray(new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob[0])){
+                    com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(mob);if(mob.sprite!=null)mob.sprite.killAndErase();
+                }
+                Dungeon.level.mobs.clear();
+                for(int i=0;i<PAINTED_PLANTS.length;i++){
+                    int pos=Dungeon.hero.pos+(i/4-2)*Dungeon.level.width()+i%4-4;
+                    Level.set(pos,Terrain.EMPTY);Dungeon.level.traps.remove(pos);
+                    com.shatteredpixel.shatteredpixeldungeon.plants.Plant.Seed seed=(com.shatteredpixel.shatteredpixeldungeon.plants.Plant.Seed)Class.forName("com.shatteredpixel.shatteredpixeldungeon.plants."+PAINTED_PLANTS[i]+"$Seed").getDeclaredConstructor().newInstance();
+                    if(Dungeon.level.plant(seed,pos)==null)throw new AssertionError("Plant did not sprout");
+                }
+                Dungeon.observe();GameScene.updateMap();
+            }
+            if(frame==170)capture("painted-sprouted-plants");
+            if(frame==180){
+                Dungeon.hero.heroClass=HeroClass.ENCHANTER;
+                com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.affect(Dungeon.hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.class);
+                com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush brush=new com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush();
+                Dungeon.hero.belongings.artifact=brush;brush.activate(Dungeon.hero);
+                brush.execute(Dungeon.hero,"CAST");
+            }
+            if(frame==200){interfaceBounds();capture("enchanter-spell-icons");}
+            if(frame==210)clickReviewLabel(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class,"inscribe"));
+            if(frame==220)clickReviewLabel(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class,"armor"));
+            if(frame==235){interfaceBounds();capture("inscribe-starter-armor");}
+            if(frame==245){
+                com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe wnd=inscriptionWindow();
+                com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(wnd,"pane");
+                clickReview(RecoveryChecks.members(pane.content()).get(0));
+                if(Dungeon.hero.belongings.armor.inscribed==null||Dungeon.hero.belongings.armor.inscriptionTurns<=0||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).charges()!=2)
+                    throw new AssertionError("Actual armor inscription click failed");
+            }
+            if(frame==265){
+                for(Class<?>[] tier:new Class<?>[][]{com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor.Glyph.common,com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor.Glyph.uncommon,com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor.Glyph.rare})
+                    java.util.Collections.addAll(Statistics.itemTypesDiscovered,tier);
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe(Dungeon.hero,Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class),Dungeon.hero.belongings.armor));
+            }
+            if(frame==285){
+                interfaceBounds();capture("inscribe-full-library");
+                com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe wnd=inscriptionWindow();
+                wnd.offset(4,-3);
+                com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(wnd,"pane");
+                if(pane.content().height()<=pane.height())throw new AssertionError("Full library did not exercise scrolling");
+                pane.scrollTo(0,pane.content().height());
+                com.watabou.utils.Point at=pane.camera().cameraToScreen(pane.left(),pane.top());
+                if(pane.content().camera.x!=at.x||pane.content().camera.y!=at.y)throw new AssertionError("Inscription library scroll camera detached");
+            }
+            if(frame==300){interfaceBounds();capture("inscribe-full-library-bottom");}
+            if(frame==310){
+                com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(inscriptionWindow(),"pane");
+                java.util.List<Class<?>> choices=new java.util.ArrayList<>(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.state().choices(true));
+                choices.sort(java.util.Comparator.comparing(com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe::name));
+                java.util.List<com.watabou.noosa.Gizmo> rows=RecoveryChecks.members(pane.content());
+                clickReview(rows.get(rows.size()-2));
+                if(Dungeon.hero.belongings.armor.inscribed.getClass()!=choices.get(choices.size()-1))throw new AssertionError("Bottom inscription chose wrong glyph");
+                System.out.println("TEST 33/36 BOTANY UI: sprouted plants=13 actual armor selections=2 glyph library="+choices.size()+" scrolling/offset=PASS failures=0");
+                Gdx.app.exit();
+            }
+        }catch(ReflectiveOperationException e){throw new AssertionError(e);}
+    }
+    private com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe inscriptionWindow(){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))
+            if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe)return (com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe)child;
+        throw new AssertionError("Inscription window missing");
+    }
+    private void clickReviewLabel(String label){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.Window)
+            for(com.watabou.noosa.Gizmo button:RecoveryChecks.members((Group)child))if(button instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton&&label.equals(((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button).text())){clickReview(button);return;}
+        throw new AssertionError("Missing button "+label);
     }
     private static void clickReview(Object button){
         try{
@@ -761,9 +834,11 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             before=failures.size();
             for(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent talent:com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.values()){
                 com.shatteredpixel.shatteredpixeldungeon.ui.TalentIcon icon=new com.shatteredpixel.shatteredpixeldungeon.ui.TalentIcon(talent);
-                if(Math.round(icon.frame().width()*icon.texture.width)!=32||GameGeometry.opaqueHeight(icon.texture,icon.frame())==0)failures.add("36 empty talent "+talent);
+                int expected=com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.talentIndex(talent.icon())>=0?64:32;
+                if(Math.round(icon.frame().width()*icon.texture.width)!=expected||icon.width()!=16||GameGeometry.opaqueHeight(icon.texture,icon.frame())==0)failures.add("36 empty or mis-scaled talent "+talent);
                 Pixmap drawn=renderSprite(icon,buffer,camera);drawn.dispose();icon.destroy();
             }
+            paintedSkillsAndPlants(buffer,camera,failures);
             System.out.println("TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures="+(failures.size()-before));
             saveCompatibility(failures);
             System.out.println("TEST 35 RETIRED — superseded by recovery test 46 handler/network checks");
@@ -772,6 +847,34 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             System.out.println("TESTS 24-26, 34, 36 PASS; test 35 retired by recovery");
         }catch(Exception e){throw new RuntimeException(e);}
     }
+    private void paintedSkillsAndPlants(com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,Camera camera,java.util.List<String> failures)throws Exception {
+        java.util.Set<Integer> ids=new java.util.TreeSet<>();
+        for(int id=224;id<=298;id++)ids.add(com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.talentIndex(id));
+        for(java.lang.reflect.Field f:com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.class.getFields())
+            if(f.getType()==int.class&&f.getInt(null)>=1000)ids.add(f.getInt(null)-1000);
+        java.util.Set<String> unique=new java.util.HashSet<>();
+        for(int id:ids){
+            Image icon=new com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon(id);
+            if(icon.width()!=16||icon.height()!=16||GameGeometry.opaqueHeight(icon.texture,icon.frame())==0)failures.add("36 empty/oversized skill "+id);
+            java.security.MessageDigest hash=java.security.MessageDigest.getInstance("SHA-256");
+            for(int yy=0;yy<64;yy++)for(int xx=0;xx<64;xx++){
+                int pixel=icon.texture.bitmap.getPixel(id%16*64+xx,id/16*64+yy);
+                for(int shift=0;shift<32;shift+=8)hash.update((byte)(pixel>>>shift));
+            }
+            unique.add(java.util.Arrays.toString(hash.digest()));
+            renderSprite(icon,buffer,camera).dispose();icon.destroy();
+        }
+        if(ids.size()!=113||unique.size()!=113)failures.add("36 missing/duplicate skill art "+ids.size()+"/"+unique.size());
+        for(int i=0;i<PAINTED_PLANTS.length;i++){
+            com.shatteredpixel.shatteredpixeldungeon.plants.Plant plant=(com.shatteredpixel.shatteredpixeldungeon.plants.Plant)Class.forName("com.shatteredpixel.shatteredpixeldungeon.plants."+PAINTED_PLANTS[i]).getDeclaredConstructor().newInstance();
+            Image icon=com.shatteredpixel.shatteredpixeldungeon.tiles.TerrainFeaturesTilemap.getPlantVisual(plant);
+            if(plant.image!=i||icon.width()!=16||icon.height()!=16||GameGeometry.opaqueHeight(icon.texture,icon.frame())==0)failures.add("25 plant "+PAINTED_PLANTS[i]);
+            if(Math.abs(icon.frame().left*icon.texture.width-(i*64+.5f))>.01f||Math.abs(icon.frame().top*icon.texture.height-(7*64+.5f))>.01f)failures.add("25 plant texel alignment "+PAINTED_PLANTS[i]);
+            renderSprite(icon,buffer,camera).dispose();icon.destroy();
+        }
+        System.out.println("PAINTED SKILLS/PLANTS: unique skills="+unique.size()+" plants="+PAINTED_PLANTS.length);
+    }
+    private static final String[] PAINTED_PLANTS={"Rotberry","Firebloom","Swiftthistle","Sungrass","Icecap","Stormvine","Sorrowmoss","Mageroyal","Earthroot","Starflower","Fadeleaf","Blindweed","BlandfruitBush"};
     private void steadyIdle(com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite sprite,java.util.List<String> failures)throws Exception {
         if(sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite)return;
         com.watabou.noosa.MovieClip.Animation idle=(com.watabou.noosa.MovieClip.Animation)RecoveryChecks.field(sprite,"idle");

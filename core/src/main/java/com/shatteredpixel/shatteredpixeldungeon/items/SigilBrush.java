@@ -25,8 +25,7 @@ public class SigilBrush extends ClassSpellItem {
             GameScene.show(new WndOptions(Messages.get(this,spell),Messages.get(this,"equipment"),Messages.get(this,"weapon"),Messages.get(this,"armor")){
                 @Override protected void onSelect(int index){Item item=index==0?h.belongings.weapon:h.belongings.armor;if(item==null)return;
                     if(spell.equals("transmute")){Runecraft.show(transmuteOffer(h,item),()->{});return;}if(!spell.equals("inscribe")){cast(h,spell,h.pos,item,null);return;}
-                    java.util.List<Class<?>> options=EnchanterMagic.state().choices(index==1);String[] labels=new String[options.size()];for(int i=0;i<labels.length;i++){Object o=Reflection.newInstance(options.get(i));labels[i]=o instanceof Weapon.Enchantment?((Weapon.Enchantment)o).name():((Armor.Glyph)o).name();}
-                    GameScene.show(new WndOptions(Messages.get(SigilBrush.class,"inscribe"),Messages.get(SigilBrush.class,"known"),labels){@Override protected void onSelect(int i){cast(h,spell,h.pos,item,options.get(i));}});
+                    GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe(h,SigilBrush.this,item));
                 }});
         }else if(spell.equals("sanctify"))cast(h,spell,h.pos,null,null);
         else GameScene.selectCell(new CellSelector.Listener(){public void onSelect(Integer cell){cast(h,spell,cell,null,null);}public String prompt(){return Messages.get(SigilBrush.class,"target");}});

@@ -114,35 +114,28 @@ public class HeroIcon extends Image {
 	public static final int MONK_ABILITIES  = 110;
 
 	public HeroIcon(HeroSubClass subCls){
-		super( Assets.Interfaces.HERO_ICONS );
-		if (film == null){
-			film = new TextureFilm(texture, SIZE, SIZE);
-		}
-		frame(film.get(subCls.icon()));
+		this(subCls.icon());
 	}
 
 	public HeroIcon(ArmorAbility abil){
-		super( Assets.Interfaces.HERO_ICONS );
-		if (film == null){
-			film = new TextureFilm(texture, SIZE, SIZE);
-		}
-		frame(film.get(abil.icon()));
+		this(abil.icon());
 	}
 
 	public HeroIcon(ActionIndicator.Action action){
-		super( Assets.Interfaces.HERO_ICONS );
-		if (film == null){
-			film = new TextureFilm(texture, SIZE, SIZE);
-		}
-		frame(film.get(action.actionIcon()));
+		this(action.actionIcon());
 	}
 
 	public HeroIcon(ClericSpell spell){
+		this(spell.icon());
+	}
+
+	public HeroIcon(int icon){
 		super( Assets.Interfaces.HERO_ICONS );
+		if(icon>=1000){SkillIcon.apply(this,icon-1000);return;}
 		if (film == null){
 			film = new TextureFilm(texture, SIZE, SIZE);
 		}
-		frame(film.get(spell.icon()));
+		frame(film.get(icon));
 	}
 
 }

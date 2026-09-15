@@ -1,3 +1,13 @@
+# Sprouted plants, skill icons and persistent inscriptions - v1.7.0
+
+- Thirteen sprouted plant species now use authored painted cutouts at the existing 64px texture / 16-unit world scale; growth and plant effects are unchanged.
+- All 72 added-class talents, three Heroic Energy variants, six subclasses, nine armor abilities, 22 spells and Etch now have 113 distinct painted icons. Upstream skill icons retain their own atlas.
+- Armor Inscribe starts with Obfuscation, Swiftness and Viscosity as trade knowledge, matching the existing three starter weapon enchantments; this repairs the empty opening without identifying found gear.
+- Weapon/armor identification records inscription knowledge after setting identification flags; learned choices, previous floor knowledge and observed Rune Etching effects persist for the entire run and across saves.
+- Deep Knowledge grants its 0/1/2 discoveries only on a floor's first visit and retains them; returning via stairs cannot farm extra Deep Knowledge rolls. Rune Etching still rerolls its active effect on each floor transition.
+- Inscribe uses a scrollable, alphabetized library with per-effect descriptions, validates the selected equipment on casting, and reports unavailable casts instead of silently failing. Identified equipment curses remain excluded from Inscribe.
+- Casting identified equipment curses on enemies is a design proposal only; Hex and other combat/balance behavior are unchanged in this pass.
+
 # Painted heroes, quiet enemies and traps - v1.6.0
 
 - Enemy idle animation holds its first pose; movement/attack/death animations and actor callbacks are unchanged. This is a display change, not a speed or combat change.

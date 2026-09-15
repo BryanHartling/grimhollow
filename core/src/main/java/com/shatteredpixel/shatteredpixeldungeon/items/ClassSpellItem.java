@@ -34,7 +34,7 @@ public abstract class ClassSpellItem extends Artifact {
     @Override public void execute(Hero hero,String action){super.execute(hero,action);if(action.equals("CAST")&&isEquipped(hero))GameScene.show(new Window(){
         {int w=Math.min(220,(int)com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.uiCamera.width-24);
             int h=Math.min(170,(int)com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.uiCamera.height-30);
-            resize(w,h);float buttonWidth=Math.min(72,(w-12)*.35f),buttonHeight=28;
+            resize(w,h);float buttonWidth=Math.min(72,(w-12)*.35f),buttonHeight=34;
             com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite icon=new com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite(ClassSpellItem.this);
             icon.scale.set(2);icon.x=(w-icon.width())/2;icon.y=h/2f-16;add(icon);
             RenderedTextBlock counter=com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.renderTextBlock(status(),6);
@@ -42,6 +42,6 @@ public abstract class ClassSpellItem extends Artifact {
             String[] choices=spells(hero);for(int i=0;i<choices.length;i++){final String spell=choices[i];double angle=-Math.PI/2+2*Math.PI*i/choices.length;
             RedButton button=new RedButton(Messages.get(ClassSpellItem.this,spell),6){@Override protected void onClick(){hide();select(hero,spell);}};
             button.setRect((w-buttonWidth)/2+(float)Math.cos(angle)*((w-buttonWidth)/2-2),
-                    (h-buttonHeight)/2+(float)Math.sin(angle)*((h-buttonHeight)/2-2),buttonWidth,buttonHeight);add(button);}}
+                    (h-buttonHeight)/2+(float)Math.sin(angle)*((h-buttonHeight)/2-2),buttonWidth,buttonHeight);button.multiline=true;button.icon(SkillIcon.spell(spell));add(button);}}
     });}
 }

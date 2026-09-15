@@ -21,7 +21,7 @@ public class EnchanterMagic extends Buff {
         for(Map.Entry<String,Integer> entry:inscriptions.entrySet())try{Class<?> type=Class.forName(entry.getKey());if(type!=excluded&&(armor?Armor.Glyph.class:Weapon.Enchantment.class).isAssignableFrom(type)&&entry.getValue()>=count){best=type;count=entry.getValue();}}catch(ClassNotFoundException ignored){}
         return best;
     }
-    private final Set<String> known=new TreeSet<>(),floorKnown=new TreeSet<>();
+    private final Set<String> known=new TreeSet<>();
     private final Set<Integer> floors=new HashSet<>();
     private int lastPos=-1,stationary,lastFloor=-1;
     private static final ThreadLocal<Float> strength=ThreadLocal.withInitial(()->1f);
@@ -32,19 +32,40 @@ public class EnchanterMagic extends Buff {
         if(item instanceof Weapon){Weapon.Enchantment e=((Weapon)item).enchantment;if(e!=null&&!e.curse()&&item.cursedKnown)state.known.add(e.getClass().getName());}
         if(item instanceof Armor){Armor.Glyph g=((Armor)item).glyph;if(g!=null&&!g.curse()&&item.cursedKnown)state.known.add(g.getClass().getName());}
     }
+    private void remember(Class<?> type){
+        if(Weapon.Enchantment.class.isAssignableFrom(type)){
+            Weapon.Enchantment enchant=(Weapon.Enchantment)Reflection.newInstance(type);
+            if(enchant!=null&&!enchant.curse())known.add(type.getName());
+        }else if(Armor.Glyph.class.isAssignableFrom(type)){
+            Armor.Glyph glyph=(Armor.Glyph)Reflection.newInstance(type);
+            if(glyph!=null&&!glyph.curse())known.add(type.getName());
+        }
+    }
+    private void rememberAvailable(){
+        for(Class<?> type:Statistics.itemTypesDiscovered)remember(type);
+        for(Item item:Dungeon.hero.belongings)learn(item);
+        RuneEtching etching=RuneEtching.find(Dungeon.hero);
+        if(etching!=null&&etching.floorEnchant!=null)remember(etching.floorEnchant.getClass());
+    }
     public java.util.List<Class<?>> choices(boolean armor){
-        Set<String> all=new TreeSet<>(known);all.addAll(floorKnown);
+        rememberAvailable();
+        Set<String> all=new TreeSet<>(known);
         // Trade knowledge is local to Inscribe, never the item-identification catalog.
         if(!armor&&Dungeon.hero.heroClass==HeroClass.ENCHANTER){
             all.add(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing.class.getName());
             all.add(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Shocking.class.getName());
             all.add(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Chilling.class.getName());
         }
-        for(Class<?> type:Statistics.itemTypesDiscovered)if(Weapon.Enchantment.class.isAssignableFrom(type)||Armor.Glyph.class.isAssignableFrom(type))all.add(type.getName());
-        Item weapon=Dungeon.hero.belongings.weapon;
-        RuneEtching etching=RuneEtching.find(Dungeon.hero);if(etching!=null)all.add(etching.floorEnchant.getClass().getName());
+        if(armor&&Dungeon.hero.heroClass==HeroClass.ENCHANTER){
+            all.add(com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Obfuscation.class.getName());
+            all.add(com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Swiftness.class.getName());
+            all.add(com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Viscosity.class.getName());
+        }
         java.util.List<Class<?>> list=new ArrayList<>();
-        for(String name:all)try{Class<?> type=Class.forName(name);if((armor?Armor.Glyph.class:Weapon.Enchantment.class).isAssignableFrom(type))list.add(type);}catch(ClassNotFoundException ignored){}
+        for(String name:all)try{Class<?> type=Class.forName(name);if((armor?Armor.Glyph.class:Weapon.Enchantment.class).isAssignableFrom(type)){
+            Object effect=Reflection.newInstance(type);
+            if(effect instanceof Weapon.Enchantment&&!((Weapon.Enchantment)effect).curse()||effect instanceof Armor.Glyph&&!((Armor.Glyph)effect).curse())list.add(type);
+        }}catch(ClassNotFoundException ignored){}
         return list;
     }
     public void arrive(){
@@ -52,9 +73,19 @@ public class EnchanterMagic extends Buff {
         boolean descending=lastFloor!=-1&&floor>lastFloor;lastFloor=floor;lastPos=Dungeon.hero.pos;stationary=0;
         Hero h=Dungeon.hero;SigilBrush brush=h.belongings.getItem(SigilBrush.class);
         if(descending&&brush!=null)brush.gainCharge(points(Talent.FIELD_REPAIR));
-        RuneEtching etching=RuneEtching.find(h);if(etching!=null)etching.roll();
-        floorKnown.clear();while(floorKnown.size()<Math.max(0,points(Talent.DEEP_KNOWLEDGE)-1))floorKnown.add(Weapon.Enchantment.random().getClass().getName());
-        if(floors.add(floor)&&descending&&h.subClass==HeroSubClass.ARTIFICER&&Random.Float()<.25f*points(Talent.LASTING_WORK)){
+        rememberAvailable();
+        RuneEtching etching=RuneEtching.find(h);if(etching!=null){etching.roll();remember(etching.floorEnchant.getClass());}
+        boolean firstVisit=floors.add(floor);
+        // Discoveries persist. Returning up/down the same stairs grants no extra knowledge.
+        if(firstVisit){
+            ArrayList<Class<?>> unseen=new ArrayList<>();
+            for(Class<?>[] tier:new Class<?>[][]{Weapon.Enchantment.common,Weapon.Enchantment.uncommon,Weapon.Enchantment.rare})
+                for(Class<?> type:tier)if(!choices(false).contains(type))unseen.add(type);
+            for(int i=0;i<Math.max(0,points(Talent.DEEP_KNOWLEDGE)-1)&&!unseen.isEmpty();i++){
+                Class<?> type=Random.element(unseen);unseen.remove(type);remember(type);
+            }
+        }
+        if(firstVisit&&descending&&h.subClass==HeroSubClass.ARTIFICER&&Random.Float()<.25f*points(Talent.LASTING_WORK)){
             for(Item item:new Item[]{h.belongings.weapon,h.belongings.armor})if(item!=null){
                 if(item instanceof Weapon&&((Weapon)item).inscribed!=null){((Weapon)item).enchant(((Weapon)item).inscribed);((Weapon)item).inscribed=null;item.inscriptionTurns=0;learn(item);break;}
                 if(item instanceof Armor&&((Armor)item).inscribed!=null){((Armor)item).inscribe(((Armor)item).inscribed);((Armor)item).inscribed=null;item.inscriptionTurns=0;learn(item);break;}
@@ -103,6 +134,17 @@ public class EnchanterMagic extends Buff {
         if(mob.buff(Unmade.class)!=null)brush.gainCharge(points(Talent.SALVAGE));
     }
     public static int strip(Char enemy){int count=0;for(Buff buff:enemy.buffs())if(!buff.revivePersists){buff.detach();count++;}return count;}
-    @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("inscription_names",inscriptions.keySet().toArray(new String[0]));b.put("inscription_counts",inscriptions.values().stream().mapToInt(Integer::intValue).toArray());b.put("known",known.toArray(new String[0]));b.put("floor_known",floorKnown.toArray(new String[0]));b.put("floors",floors.stream().mapToInt(Integer::intValue).toArray());b.put("last_floor",lastFloor);b.put("last_pos",lastPos);b.put("stationary",stationary);}
-    @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);String[] names=b.getStringArray("inscription_names");int[] counts=b.getIntArray("inscription_counts");for(int i=0;i<Math.min(names.length,counts.length);i++)inscriptions.put(names[i],counts[i]);Collections.addAll(known,b.getStringArray("known"));Collections.addAll(floorKnown,b.getStringArray("floor_known"));for(int n:b.getIntArray("floors"))floors.add(n);lastFloor=b.getInt("last_floor");lastPos=b.getInt("last_pos");stationary=b.getInt("stationary");}
+    @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("inscription_names",inscriptions.keySet().toArray(new String[0]));b.put("inscription_counts",inscriptions.values().stream().mapToInt(Integer::intValue).toArray());b.put("known",known.toArray(new String[0]));b.put("floors",floors.stream().mapToInt(Integer::intValue).toArray());b.put("last_floor",lastFloor);b.put("last_pos",lastPos);b.put("stationary",stationary);}
+    @Override public void restoreFromBundle(Bundle b){
+        super.restoreFromBundle(b);inscriptions.clear();known.clear();floors.clear();
+        String[] names=b.contains("inscription_names")?b.getStringArray("inscription_names"):new String[0];
+        int[] counts=b.contains("inscription_counts")?b.getIntArray("inscription_counts"):new int[0];
+        for(int i=0;i<Math.min(names.length,counts.length);i++)inscriptions.put(names[i],counts[i]);
+        if(b.contains("known"))Collections.addAll(known,b.getStringArray("known"));
+        // Older saves stored temporary floor discoveries separately; keep them forever now.
+        if(b.contains("floor_known"))Collections.addAll(known,b.getStringArray("floor_known"));
+        if(b.contains("floors"))for(int n:b.getIntArray("floors"))floors.add(n);
+        lastFloor=b.contains("last_floor")?b.getInt("last_floor"):-1;
+        lastPos=b.contains("last_pos")?b.getInt("last_pos"):-1;stationary=b.getInt("stationary");
+    }
 }

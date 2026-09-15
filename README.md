@@ -2,6 +2,12 @@
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), now incorporating **v4.0.0**, commit `2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`. The fork began at v3.3.8; upstream history and Java packages are preserved.
 
+**Painted heroes and traps v1.6.0:** nine distinct class paintings supply matching selection and in-game portraits. First selection shows the class theme and painting; a second selection or the info button opens Profile, Growth, Paths and Armor, with scrollable descriptions and inspectable talents. Duelist is selectable without the old badge lock. Other existing class unlock requirements still control Start, while every class can be previewed. Enemy idle poses are steady; movement, attacks and death animations retain their timing and callbacks.
+
+Seven painted trap mechanisms preserve all nine color/state indices. One original iron-and-amber emblem supplies the Windows icon and Android legacy, adaptive and themed icons. Run `powershell -NoProfile -ExecutionPolicy Bypass -File tools/install-shortcut.ps1` to install the desktop shortcut; it launches the latest built jar through `tools/play.bat`.
+
+Ninety-six committed source sheets reproduce 112 game images and 55 launcher resources. The exact built-in imagegen prompts are in [presentation-prompts.json](tools/painted/presentation-prompts.json). No generation service is needed to build or verify them. Class splashes now use these new paintings; older JPGs remain historical assets.
+
 **Psychic and interface v1.5.0:** painted bronze/leather panels, enamel buttons, equipped-slot borders, glass status bars and 32 navigation symbols replace the shared interface graphics. All 381 named item IDs now resolve to painted 64px art, including complete artifact states, scrolls, darts, seeds, stones, crafted spells and quest objects. Item descriptions scroll while action buttons remain visible, and the class spell wheel fits portrait and landscape.
 
 Psychic thrown weapons use a non-stacking effective upgrade floor of +1/+2/+3/+4/+5 at hero levels 1/6/12/18/24, reducing durability consumption. The Focus Crystal starts with three charges and gains levels only from charges spent; tiered Push, stronger Seer Hurl and floor-bound Puppeteer enthrallment provide its growth track. Enchanter starts with three Brush charges and Blazing/Shocking/Chilling inscription knowledge, without identifying found items. Curse-bound monster variants now explain their aura and permanent curse when inspected.
@@ -32,7 +38,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-1.5.0.jar
+java -jar desktop\build\libs\desktop-1.6.0.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.
@@ -69,9 +75,9 @@ The exact debug application ID is `com.grimhollow.dungeon` (no `.indev` suffix);
 . .\tools\env.ps1
 .\gradlew.bat core:test core:smokeRun -PsmokeUpstream=true -PdesktopOnly=true --no-daemon
 python tools/recovery_assets.py --check
-java "-Dgrimhollow.recovery=true" "-Dgrimhollow.fogTests=true" "-Dgrimhollow.region=0" "-Dgrimhollow.geometryTests=true" "-Dgrimhollow.effectsTests=true" -jar desktop/build/libs/desktop-1.5.0.jar --smoke-sewers
+java "-Dgrimhollow.recovery=true" "-Dgrimhollow.fogTests=true" "-Dgrimhollow.region=0" "-Dgrimhollow.geometryTests=true" "-Dgrimhollow.effectsTests=true" -jar desktop/build/libs/desktop-1.6.0.jar --smoke-sewers
 python tools/recovery_checks.py --all-regions
-python tools/recovery_checks.py --jar desktop/build/libs/desktop-1.5.0.jar
+python tools/recovery_checks.py --jar desktop/build/libs/desktop-1.6.0.jar
 ```
 
 Repeat the recovery renderer with region indices 1–4 for Prison, Caves, City and Halls. It walks normal adjacent moves on generated terrain in diagnostic slot 99, captures remembered terrain and verifies remembered-cell fog compositing. Test 47 checks all pixels of every visible and never-seen cell in five generated regions, before and after walking, at three zooms and four camera offsets, plus the shared wall-light shader during intermediate door frames. Test 25 pins every named item/identification index to existing atlas pixels and checks all section 9 items. Waterskin maps to its painted capped leather canteen at 480. Potion bottle colours retain their randomized identification mapping. Test 45 measures every pair of types in each lit room, including decor; failures remain active in CI. Test 44 reconstructs expected pixels in memory from Git objects and does not overwrite assets. Test 46 inspects compiled invocation sites and exercises actual menu handlers with a recording network adapter.
@@ -79,12 +85,12 @@ Repeat the recovery renderer with region indices 1–4 for Prison, Caves, City a
 
 The optional desktop probe renders actual OpenGL frames into `.local/acceptance/` and exits. The Sewer probe uses test save slot 99. The default headless gate targets the three new heroes. `-PsmokeUpstream=true` runs all nine classes, including the six retained classes: generate floors 1–6, save/load, ten seeds each. This diagnostic does not count as new-class acceptance or simulated combat.
 
-The same headless gate now checks City/Vault generation, mirror rewards, equipment and charge restoration, save/load, quest completion/shop state and serialization of the six new enchantments/curses. `java "-Dgrimhollow.vault=true" -jar desktop/build/libs/desktop-1.5.0.jar --smoke-sewers` exercises the real Vault arena trigger, its three rendered boss forms and scripted death/door unlocking. These checks do not constitute a player-driven quest or boss fight. Gradle 9.5.0 and Android Gradle Plugin 9.2.0 are inherited from v4 and run with the existing JDK 17/SDK 36 toolchain; use `--no-daemon` for every local Gradle invocation.
+The same headless gate now checks City/Vault generation, mirror rewards, equipment and charge restoration, save/load, quest completion/shop state and serialization of the six new enchantments/curses. `java "-Dgrimhollow.vault=true" -jar desktop/build/libs/desktop-1.6.0.jar --smoke-sewers` exercises the real Vault arena trigger, its three rendered boss forms and scripted death/door unlocking. These checks do not constitute a player-driven quest or boss fight. Gradle 9.5.0 and Android Gradle Plugin 9.2.0 are inherited from v4 and run with the existing JDK 17/SDK 36 toolchain; use `--no-daemon` for every local Gradle invocation.
 
 The native-crash regression uses the existing desktop fixture with an isolated, disposable save home:
 
 ```powershell
-java "-Duser.home=$PWD/.local/encounters" "-Dgrimhollow.encounterTests=true" "-Dgrimhollow.encounterFixture=true" -jar desktop/build/libs/desktop-1.5.0.jar --smoke-sewers
+java "-Duser.home=$PWD/.local/encounters" "-Dgrimhollow.encounterTests=true" "-Dgrimhollow.encounterFixture=true" -jar desktop/build/libs/desktop-1.6.0.jar --smoke-sewers
 ```
 
 It keeps hostile AI and normal movement/combat, grants 1000 health for coverage, exercises actor-thread drops/pickup/summoning, and renders a forced death after 150 actions. Normal play never enables this fixture. The JUnit regression separately rejects all OpenGL calls from the actor thread and checks texture reload.

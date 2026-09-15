@@ -65,6 +65,7 @@ public class ScrollPane extends Component {
 		KeyEvent.addKeyListener(keyListener = new Signal.Listener<KeyEvent>() {
 			@Override
 			public boolean onSignal(KeyEvent keyEvent) {
+				if (!active || !visible) { keyScroll = 0; return false; }
 				GameAction action = KeyBindings.getActionForKey(keyEvent);
 				if (action == SPDAction.ZOOM_IN){
 					if (keyEvent.pressed){

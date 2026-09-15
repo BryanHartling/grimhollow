@@ -1,3 +1,72 @@
+# Painted heroes, quiet enemies and traps - v1.6.0
+
+Art checkpoint: `c6248dbbf`; release tag: `v1.6.0-painted-heroes`. Exact delivered source hash, CI results and artifact links are reported with delivery. CI still enforces the outstanding terrain-contrast gate; this release makes no full-green claim.
+
+Eleven new built-in imagegen sources supply nine original class paintings with matching face crops, seven trap mechanisms and the desktop/Android launcher emblem. All outputs compile from committed inputs; no AI or Blender runs in CI. The class handbook shows Profile, Growth, Paths and Armor immediately. Duelist is selectable; the other existing class unlocks still control Start, while all nine classes can be previewed. Enemies hold a steady resting pose; movement, combat, status logic and death callbacks retain their behavior.
+
+Local commands: `gradlew.bat desktop:dist android:assembleDebug core:test --no-daemon --console=plain`; `gradlew.bat core:smokeRun -PsmokeUpstream=true --no-daemon --console=plain` returned **Runs=90 failures=0**. The three new-class groups each passed ten runs in that command; final CI runs each alone and combined. `python tools/recovery_assets.py --check` passed. Native `--smoke-sewers` with `grimhollow.presentationReview=true` ran both desktop and portrait layouts; `grimhollow.geometryTests=true` passed the exact new idle/portrait/trap contracts and the retained geometry gates. Failures found and corrected during implementation are preserved in the existing build log.
+
+Live encounter check: **150 actions, 117 steps, 32 attacks, actor drops/pickup and summon exercised, 120 death frames, failures=0**. This validates that steady idle poses do not stall action callbacks.
+
+Windows shortcut: `C:/Users/Hartl/OneDrive/Desktop/Grimhollow.lnk`, verified to target `tools/play.bat` in this checkout with the new Windows icon. Android builds include main/debug legacy, adaptive and monochrome launcher resources; actual Android-device play remains unrun.
+
+Rendered evidence: [class selection and handbook review](painted-world.html), [landscape](interface/landscape/), [portrait](interface/portrait/). Tests described as retained below were not independently repeated locally in this presentation pass; final CI repeats its configured checks. Class/content checks are scripted tests, not a completed player campaign.
+
+| Test | Status | Actual output or reason |
+|---|---|---|
+| 1 | PASS | Windows 1.6.0 jar launches; native title, nine class selections and a real Duelist Start/Continue reach the dungeon. |
+| 2 | PASS | desktop:dist + android:assembleDebug BUILD SUCCESSFUL; six existing JUnit tests, zero failures/errors/skips. |
+| 3 | RETIRED | Old procedural-art rebuild no longer ships; committed painted sources reconstruct exactly under test 44. |
+| 4 | RETIRED | Old generated-style validator was superseded by source provenance/reconstruction 44 and room distinctness 45. |
+| 5 | PASS | All nine hero kits: Runs=90 failures=0; ten seeds per class. |
+| 6 | permanent known issue | Both class talent tiers are browsable for all nine heroes; representative hooks pass. Exhaustive in-run talent selection/hook scenarios remain unrun. |
+| 7 | permanent known issue | All 18 subclass previews and their tier-three skills are available. Actual Tengu reward selection remains unrun. |
+| 8 | permanent known issue | All 27 armor-ability previews and tier-four skills are available. Actual crown reward flow remains unrun. |
+| 9 | PASS | TEST 9 PASS; temporary Bone/Force terrain persistence, expiry and floor-exit checks execute. |
+| 10 | PASS | Necromancer minion cap and Second Grave checks pass in the existing class suite. |
+| 11 | PASS | TESTS 11-13 PASS: Grasp heap/trap/empty-cell cases. |
+| 12 | PASS | Hero levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking. |
+| 13 | PASS | Old Amok behavior and new level-six/level-eight control paths; see test 50. |
+| 14 | PASS | Final all-nine-class active-state persistence and floor-6 round trips: Runs=90 failures=0. |
+| 15 | PASS | Runs=90 failures=0; ten seeds per class. New-class groups each 10/0; this is scripted generation/descent, not a campaign. |
+| 16 | permanent known issue | All 122 concrete creature sprite draws, declared animation rectangles, statue tiers, items and talents checked; exhaustive every-gameplay-path coverage remains unrun. |
+| 17 | RETIRED | Recovery and the later painted-source direction supersede the old procedural style gate; source reconstruction is test 44. |
+| 18 | RETIRED | Superseded by recovery: generated-region brightness target replaced by within-room distinctness 45. |
+| 19 | permanent known issue | The floor-15 1,000-turn/20-mob timing scenario remains unrun. |
+| 20 | PASS | Retained v1.0.2 SDK-unset desktop-only build result; build configuration unchanged except version metadata. New CI uses desktopOnly=true. |
+| 21 | permanent known issue | The unchanged test-45 contrast gate remains enforced. Exact release-head CI results and artifact links are reported with delivery. |
+| 22 | PASS | aapt: com.grimhollow.dungeon; label Grimhollow; versionCode 945; versionName 1.6.0-INDEV; adaptive launcher entry present. |
+| 23 | PASS | Native renderer uses the documented Grimhollow save location under isolated user.home folders; player saves are untouched. |
+| 24 | permanent known issue | Current standard 3x: heroes=9, mob sprites=122, steady idle checks=122, failures=0. Every tested enemy idle holds for 600 frames. Retained extra-2x issue: six creature sprites at 0.9545-1.0 exceed 0.95. |
+| 25 | PASS | Current GPU check: 381 named items, 60 identification icons and all 63 trap shape/color/inactive combinations, failures=0. Trap UVs assert the exact half-texel inset and 16-unit logical dimensions. |
+| 26 | PASS | TEST 26: three stains and floor/chasm/water/trap placement failures=0. |
+| 27 | PASS | TEST 27 PASS: 300 turns unchanged; 12 charges level=1; Wraith offered; hostile attacked within 2 turns. |
+| 28 | RETIRED | Superseded by recovery: rendered-cache rebuild no longer produces the restored shipping world/characters. |
+| 29 | RETIRED | Superseded by recovery: rerendering is prohibited; Blender/cache retained unused. |
+| 30 | RETIRED | Superseded by recovery: generated character hue-distance gate replaced by upstream pixel provenance 44. |
+| 31 | PASS | Retained effects on/off and GPU timing coverage; effect code unchanged. Final CI repeats the existing effects checks. |
+| 32 | PASS | Retained floor-fire expiration and scorch placement result; no effect code changed. CI reruns the unchanged checks. |
+| 33 | PASS | Level-one Inscribe offers Blazing/Shocking/Chilling with an empty discovery catalog, leaving it unchanged; no starting Enchantment scroll; existing Runecraft cases pass. |
+| 34 | PASS | TEST 34: old/future version, portrait exception and deletion failures=0. |
+| 35 | RETIRED | Superseded by recovery: source-string grep replaced by compiled/runtime handler and network test 46. |
+| 36 | PASS | In each orientation: classes=9, matchingPortraits=9, firstSelections=9, secondSelections=9, infoButtons=9, handbookPages=36, duelistStart=true, trapShapes=7, failures=0. All talent/ItemSlot checks also pass. |
+| 37 | PASS | TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment. |
+| 38 | permanent known issue | 18 supplied images lack verified allowed redistribution licenses; excluded from Git; 70 licensed files eligible. |
+| 39 | RETIRED | Superseded by recovery: rejected regional iteration histories remain archival; their art no longer ships. |
+| 40 | RETIRED | Superseded by recovery: generated-room isolated metrics replaced by remembered-terrain 43 and distinctness 45. |
+| 41 | RETIRED | Superseded by recovery: generated animated liquid atlas replaced by historical scrolling water. |
+| 42 | RETIRED | Superseded by recovery: calibrated generated-region gates replaced by restored-region test 45. |
+| 43 | PASS | Retained five-region remembered-terrain/walking checks; world and fog code unchanged. Final CI reruns the walking and door checks. |
+| 44 | PASS | PAINTED assets=112 source sheets=96 failures=0; launcher resources=55; recovery provenance failures=0. Packaged jar/APK painted images: 224 comparisons, zero mismatches. |
+| 45 | permanent known issue | Unchanged thresholds; retained Windows captures fail 26/82 pairs: Sewers 7/21, Prison 1/10, Caves 8/21, City 3/15, Halls 7/15. Final CI separately measures newly rendered rooms. |
+| 46 | PASS | Compiled audit: classes=2876, guarded browser sinks=1, HTTP/socket calls=0, failures=0. Runtime title/credits handler coverage is retained and rerun in CI. |
+| 47 | PASS | Retained all-five-region/120-camera alignment gate: fog texel/cell=1:1 at 16 world units. No fog or lighting-quad changes; CI reruns it. |
+| 48 | PASS | Push/Hurl exact movement and every collision/trap/chasm/boss rider at Crystal levels 0-10. |
+| 49 | PASS | 12 spent charges -> level 1 + 2 XP; 300 idle turns -> no growth; all ten thresholds, upgrade exclusions and persistence. |
+| 50 | PASS | Level-six direction/follow/attacks; level-eight 15-turn survival, permanent single-floor slot, replacement release, save/load, stairs, normal kill ownership and boss immunity. |
+
+---
+
 # Psychic and painted interface - v1.5.0
 
 Mechanics checkpoint: `1f7152c1cd7a795b721dfddd527fd7245503e4ff`, committed and pushed. Release tag: `v1.5.0-psychic-and-interface`. Exact delivered source hash and CI results are in the delivery response. The full workflow remains subject to the unchanged failing terrain-contrast gate.

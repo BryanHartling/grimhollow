@@ -219,7 +219,7 @@ final class RecoveryChecks {
         return false;
     }
 
-    private static Object field(Object object,String name) {
+    static Object field(Object object,String name) {
         try {
             for(Class<?> type=object.getClass();type!=null;type=type.getSuperclass()) {
                 try {java.lang.reflect.Field f=type.getDeclaredField(name);f.setAccessible(true);return f.get(object);}

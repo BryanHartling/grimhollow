@@ -1,3 +1,11 @@
+# Class paintings, trap plates and launchers - v1.6.0
+
+`presentation.py` compiles eleven new authored sources into nine 1600x900 selection paintings, one 384x384 portrait sheet, 63 existing trap cells, and 55 desktop/Android launcher resources. `presentation-prompts.json` records the exact built-in imagegen prompts. The face crop in each of the nine 128px portrait cells is taken directly from that class's painting. Trap shape and color indices, disabled states, and terrain below the seven trap rows are preserved. Android foreground artwork fits the 66dp adaptive safe zone; debug builds use the same recognizable emblem.
+
+Run `python tools/painted/pack.py` to package and `python tools/recovery_assets.py --check` to verify all source-derived assets. The packer reconstructs 112 game images from 96 source sheets plus 55 launcher resources. Source generation is an authored step; packing and CI use only committed inputs. These original source paintings and their derived assets are distributed under GPL-3.0-or-later with the project.
+
+World creature atlases retain their painted key poses. The runtime holds enemy idle frames steady while advancing action animations unchanged; no creature or balance regeneration occurs.
+
 # Inventory and interface continuation - v1.5.0
 
 `interface_art.py` packs three authored source sheets into shared bronze/leather and pewter nine-patches, enamel controls, glass status bars, equipped-slot borders and 32 navigation glyphs. `PaintedInterface` keeps four texture pixels per existing UI unit and preserves logical margins, hit areas and layout. `interface-prompts.json` records the exact prompts and glyph order. Native screenshots in `verification/interface/` exercise the real windows in landscape and portrait, including long scrollable item descriptions and the five-spell wheel.

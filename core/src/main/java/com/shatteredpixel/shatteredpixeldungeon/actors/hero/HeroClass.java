@@ -307,6 +307,10 @@ public enum HeroClass {
 		return Messages.get(HeroClass.class, name()+"_desc_short");
 	}
 
+	public String theme(){
+		return Messages.get(HeroClass.class, name()+"_theme");
+	}
+
 	public HeroSubClass[] subClasses() {
 		return subClasses;
 	}
@@ -352,9 +356,7 @@ public enum HeroClass {
 	}
 
     public String splashArt(){
-        String source = this == NECROMANCER || this == ENCHANTER ? "mage"
-                : this == PSYCHIC ? "cleric" : name().toLowerCase(java.util.Locale.ROOT);
-        return "splashes/"+source+".jpg";
+        return "splashes/painted_"+name().toLowerCase(java.util.Locale.ROOT)+".png";
     }
     
 	public boolean isUnlocked(){
@@ -371,7 +373,7 @@ public enum HeroClass {
 			case HUNTRESS:
 				return Badges.isUnlocked(Badges.Badge.UNLOCK_HUNTRESS);
 			case DUELIST:
-				return Badges.isUnlocked(Badges.Badge.UNLOCK_DUELIST);
+				return true;
 			case CLERIC:
 				return Badges.isUnlocked(Badges.Badge.UNLOCK_CLERIC);
 		}

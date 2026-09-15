@@ -25,6 +25,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean vault=Boolean.getBoolean("grimhollow.vault");
     private final boolean encounters=Boolean.getBoolean("grimhollow.encounterTests");
     private final boolean interfaceReview=Boolean.getBoolean("grimhollow.interfaceReview");
+    private final boolean presentationReview=Boolean.getBoolean("grimhollow.presentationReview");
+    private boolean presentationStarted;
+    private int presentationGameFrames;
     private int encounterActions, encounterSteps, encounterAttacks, encounterLastCell=-1;
     private int[] encounterVisits;
     private volatile boolean encounterDrops, encounterSummon, encounterDeath;
@@ -54,7 +57,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         originalZoom=SPDSettings.zoom();
         // A fresh isolated settings directory defaults to the sealed tutorial room.
         // Encounter coverage requires an ordinary generated dungeon, like the saved run.
-        if(encounters||interfaceReview)SPDSettings.intro(false);
+        if(encounters||interfaceReview||presentationReview)SPDSettings.intro(false);
     }
     private void capture(String name) {
         Pixmap screenshot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());
@@ -66,6 +69,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     @Override public void render() {
         super.render();
         frames++;
+        if(presentationReview && frames>180) { presentationTick(); return; }
         if(interfaceReview && frames>180) { interfaceTick(); return; }
         if(encounters && frames>180) { encounterTick(); return; }
         if(recovery!=null&&frames>180) {
@@ -82,6 +86,11 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if (frames==180) {
             if (!(Game.scene() instanceof TitleScene)) throw new AssertionError("Title scene did not launch");
             capture("title");
+            if(presentationReview) {
+                GamesInProgress.selectedClass=null;
+                switchNoFade(com.shatteredpixel.shatteredpixeldungeon.scenes.HeroSelectScene.class);
+                return;
+            }
             if(recovery!=null) {
                 RecoveryChecks.titleControls();
                 // Journal deliberately clears run item-identification state on entry;
@@ -144,6 +153,116 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if (Boolean.getBoolean("grimhollow.iteration")) liquidTests();
             System.out.println("PASS: "+(vault?"Vault":"Sewer")+" scene renders with dynamic lighting on and off.");
             Gdx.app.exit();
+        }
+    }
+
+    /** Exercise actual selection buttons and their read-only progression windows. */
+    private void presentationTick() {
+        int step=frames-220;
+        if(step<0)return;
+        int index=step/120, phase=step%120;
+        if(index>=HeroClass.values().length){
+            if(!presentationStarted){
+                closeReviewWindows();
+                @SuppressWarnings("unchecked") java.util.List<Object> choices=(java.util.List<Object>)RecoveryChecks.field(Game.scene(),"heroBtns");
+                clickReview(choices.get(HeroClass.DUELIST.ordinal()));
+                GamesInProgress.curSlot=99;
+                clickReview(RecoveryChecks.field(Game.scene(),"startBtn"));
+                presentationStarted=true;return;
+            }
+            if(!(Game.scene() instanceof GameScene)){
+                if(Game.scene() instanceof InterlevelScene){
+                    Object proceed=RecoveryChecks.field(Game.scene(),"btnContinue");
+                    if(proceed instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton
+                            && ((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)proceed).active)clickReview(proceed);
+                }
+                if(frames>4000)throw new AssertionError("Duelist start stalled");
+                return;
+            }
+            if(presentationGameFrames++==0){
+                if(Dungeon.hero.heroClass!=HeroClass.DUELIST)throw new AssertionError("Duelist Start loaded the wrong hero");
+                pocRoom();
+                for(int shape=0;shape<7;shape++){
+                    com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.BurningTrap();
+                    trap.shape=shape;trap.color=shape;trap.visible=true;
+                    int pos=Dungeon.hero.pos+(1+shape/4)*Dungeon.level.width()+shape%4-3;
+                    Level.set(pos,Terrain.TRAP);Dungeon.level.setTrap(trap,pos);
+                }
+                Dungeon.observe();switchNoFade(GameScene.class);return;
+            }
+            Camera.main.edgeScroll.set(0);
+            Camera.main.snapTo(Dungeon.hero.sprite.center().x,Dungeon.hero.sprite.center().y);
+            if(presentationGameFrames<90)return;
+            capture("painted-traps-and-duelist-hud");
+            if(!HeroClass.DUELIST.isUnlocked())throw new AssertionError("Duelist cannot be selected");
+            System.out.println("TEST 36 PRESENTATION: classes=9 matchingPortraits=9 firstSelections=9 secondSelections=9 infoButtons=9 handbookPages=36 orientation="
+                    +(Boolean.getBoolean("grimhollow.interfacePortrait")?"portrait":"landscape")+" duelistStart=true trapShapes=7 failures=0");
+            Gdx.app.exit();return;
+        }
+        HeroClass hero=HeroClass.values()[index];
+        @SuppressWarnings("unchecked") java.util.List<com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton> buttons=
+                (java.util.List<com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton>)RecoveryChecks.field(Game.scene(),"heroBtns");
+        if(phase==0){closeReviewWindows();clickReview(buttons.get(index));}
+        if(phase==15){
+            if(GamesInProgress.selectedClass!=hero)throw new AssertionError("Selection did not choose "+hero);
+            for(com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton b:buttons){
+                if(b.left()<0||b.top()<0||b.right()>Camera.main.width||b.bottom()>Camera.main.height||!b.active)
+                    throw new AssertionError("Class button clipped or inactive");
+            }
+            if(hero.theme().contains("!!!")||hero.theme().length()<20)throw new AssertionError("Missing class theme");
+            Image background=(Image)RecoveryChecks.field(Game.scene(),"background");
+            if(background.texture!=com.watabou.gltextures.TextureCache.get(hero.splashArt()))throw new AssertionError("Wrong painting");
+            Image portrait=buttons.get(index).icon();
+            int sx=Math.round(portrait.frame().left*portrait.texture.width),sy=Math.round(portrait.frame().top*portrait.texture.height);
+            if(sx!=index%3*128||sy!=index/3*128)throw new AssertionError("Wrong portrait crop");
+            capture("selection-"+hero.name().toLowerCase(java.util.Locale.ROOT));
+        }
+        if(phase==20)clickReview(buttons.get(index));
+        if(phase==35||phase==50||phase==70||phase==90){
+            interfaceBounds();
+            com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroInfo handbook=reviewHandbook();
+            @SuppressWarnings("unchecked") java.util.List<com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane> pages=
+                    (java.util.List<com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane>)RecoveryChecks.field(handbook,"pages");
+            if(pages.size()!=4)throw new AssertionError("Incomplete class handbook");
+            int visible=0;
+            for(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane page:pages)if(page.visible){
+                visible++;
+                com.watabou.utils.Point at=page.camera().cameraToScreen(page.left(),page.top());
+                if(page.content().camera.x!=at.x||page.content().camera.y!=at.y)throw new AssertionError("Detached handbook scrolling camera");
+                checkReviewText(page.content());
+            }
+            if(visible!=1)throw new AssertionError("Handbook page visibility");
+            if(hero==HeroClass.PSYCHIC)capture("handbook-"+(phase==35?"profile":phase==50?"growth":phase==70?"paths":"armor"));
+        }
+        if(phase==40)reviewHandbook().select(1);
+        if(phase==60)reviewHandbook().select(2);
+        if(phase==80)reviewHandbook().select(3);
+        if(phase==95)scrollReview(reviewHandbook());
+        if(phase==105){interfaceBounds();if(hero==HeroClass.PSYCHIC)capture("handbook-armor-bottom");}
+        if(phase==110){closeReviewWindows();clickReview(RecoveryChecks.field(Game.scene(),"infoButton"));}
+        if(phase==115){reviewHandbook();interfaceBounds();closeReviewWindows();}
+    }
+    private static void clickReview(Object button){
+        try{
+            for(Class<?> type=button.getClass();type!=null;type=type.getSuperclass())try{
+                java.lang.reflect.Method click=type.getDeclaredMethod("onClick");click.setAccessible(true);click.invoke(button);return;
+            }catch(NoSuchMethodException ignored){}
+            throw new AssertionError("Missing click handler");
+        }catch(ReflectiveOperationException e){throw new AssertionError(e);}
+    }
+    private com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroInfo reviewHandbook(){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))
+            if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroInfo)
+                return (com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroInfo)child;
+        throw new AssertionError("Class handbook did not open");
+    }
+    private static void checkReviewText(Group group){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(group)){
+            if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock){
+                String text=((com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock)child).text();
+                if(text.contains("!!!")||text.matches("(?s).*%[0-9]*[$]?[dsf].*"))throw new AssertionError("Unresolved handbook text: "+text);
+            }
+            if(child instanceof Group)checkReviewText((Group)child);
         }
     }
 
@@ -513,7 +632,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
                 band(sprite,20,.85f,.95f,buffer,camera,zoom,failures,"24 "+hero);heroes++;sprite.destroy();
                 com.watabou.noosa.Image avatar=com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite.avatar(hero,6);
-                band(avatar,16,.85f,.95f,buffer,camera,zoom,failures,"24 avatar "+hero);avatar.destroy();
+                band(avatar,28,.85f,.95f,buffer,camera,zoom,failures,"24 avatar "+hero);avatar.destroy();
                 GamesInProgress.set(99);
                 com.shatteredpixel.shatteredpixeldungeon.scenes.StartScene.SaveSlotButton slot=new com.shatteredpixel.shatteredpixeldungeon.scenes.StartScene.SaveSlotButton();slot.setRect(0,0,160,28);slot.set(99);
                 if(slot.portrait()==null)failures.add("24 missing save portrait "+hero);else band(slot.portrait(),16,.85f,.95f,buffer,camera,zoom,failures,"24 save "+hero);slot.destroy();
@@ -541,6 +660,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     if(sprite.texture==null)continue; // Base sprite classes have no art or frame.
                     float footprint=sprite.visualFootprint();
                     paintedAnimations(sprite,painted,failures);
+                    steadyIdle(sprite,failures);
                     if(sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.StatueSprite) {
                         for(int tier=0;tier<=5;tier++) {
                             ((com.shatteredpixel.shatteredpixeldungeon.sprites.StatueSprite)sprite).setArmor(tier);
@@ -557,7 +677,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     band(sprite,footprint,.85f,.95f,buffer,camera,zoom,failures,"24 "+type.getSimpleName());mobs++;sprite.destroy();
                 }
             }
-            System.out.println("TEST 24: heroes="+heroes+" mob sprites="+mobs+" failures="+failures.size());
+            System.out.println("TEST 24: heroes="+heroes+" mob sprites="+mobs+" steady idle checks="+mobs+" failures="+failures.size());
             com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite heroScale=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
             com.shatteredpixel.shatteredpixeldungeon.sprites.RatSprite ratScale=new com.shatteredpixel.shatteredpixeldungeon.sprites.RatSprite();
             float ratio=heroScale.visibleBounds().height()/ratScale.visibleBounds().height();
@@ -602,6 +722,28 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             }
             if(items!=semantics.get("items").size||icons!=semantics.get("icons").size)failures.add("25 incomplete named atlas inventory");
             namedItems(semantics,failures);
+            java.util.Set<String> trapPixels=new java.util.HashSet<>();
+            for(int shape=0;shape<7;shape++)for(int color=0;color<9;color++){
+                com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.BurningTrap();
+                trap.shape=shape;trap.color=color;trap.active=color!=8;trap.visible=true;
+                Image visual=com.shatteredpixel.shatteredpixeldungeon.tiles.TerrainFeaturesTilemap.getTrapVisual(trap);
+                com.watabou.utils.RectF uv=visual.frame();
+                int x=color*64,y=shape*64;
+                // DungeonTilemap samples texel centers, with a half-texel guard
+                // on all four edges. Assert that exact contract, not raw cell edges.
+                if(uv.left*visual.texture.width!=x+.5f||uv.top*visual.texture.height!=y+.5f
+                        ||uv.right*visual.texture.width!=x+63.5f||uv.bottom*visual.texture.height!=y+63.5f
+                        ||visual.width()!=16||visual.height()!=16||GameGeometry.opaqueHeight(visual.texture,uv)==0)
+                    failures.add("25 trap index "+shape+":"+color);
+                java.security.MessageDigest hash=java.security.MessageDigest.getInstance("SHA-256");
+                for(int yy=0;yy<64;yy++)for(int xx=0;xx<64;xx++){
+                    int pixel=visual.texture.bitmap.getPixel(x+xx,y+yy);
+                    for(int shift=0;shift<32;shift+=8)hash.update((byte)(pixel>>>shift));
+                }
+                trapPixels.add(java.util.Arrays.toString(hash.digest()));visual.destroy();
+            }
+            if(trapPixels.size()!=63)failures.add("25 duplicate or missing painted trap states");
+            System.out.println("PAINTED TRAPS: shapes=7 color/state combinations="+trapPixels.size());
             System.out.println("TEST 25: items="+items+" identification icons="+icons+" failures="+(failures.size()-before));before=failures.size();
             int cell=Dungeon.hero.pos,terrain=Dungeon.level.map[cell];
             com.shatteredpixel.shatteredpixeldungeon.levels.Level.set(cell,com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.EMPTY);
@@ -630,6 +772,22 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             System.out.println("TESTS 24-26, 34, 36 PASS; test 35 retired by recovery");
         }catch(Exception e){throw new RuntimeException(e);}
     }
+    private void steadyIdle(com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite sprite,java.util.List<String> failures)throws Exception {
+        if(sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite)return;
+        com.watabou.noosa.MovieClip.Animation idle=(com.watabou.noosa.MovieClip.Animation)RecoveryChecks.field(sprite,"idle");
+        if(idle==null||!idle.looped)return;
+        sprite.play(idle,true);
+        com.watabou.utils.RectF frame=new com.watabou.utils.RectF(sprite.frame());
+        java.lang.reflect.Method advance=com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite.class.getDeclaredMethod("updateAnimation");
+        advance.setAccessible(true);
+        float elapsed=Game.elapsed;
+        try {Game.elapsed=1f/60f;for(int i=0;i<600;i++)advance.invoke(sprite);}
+        finally{Game.elapsed=elapsed;}
+        com.watabou.utils.RectF after=sprite.frame();
+        if(frame.left!=after.left||frame.top!=after.top||frame.right!=after.right||frame.bottom!=after.bottom)
+            failures.add("Continuously animated idle "+sprite.getClass().getSimpleName());
+    }
+
     private void paintedAnimations(com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite sprite,
                                    com.badlogic.gdx.utils.JsonValue painted,java.util.List<String> failures)throws Exception {
         com.badlogic.gdx.utils.JsonValue asset=null;

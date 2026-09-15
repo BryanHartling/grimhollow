@@ -1,3 +1,13 @@
+# Painted heroes, quiet enemies and traps - v1.6.0
+
+- Enemy idle animation holds its first pose; movement/attack/death animations and actor callbacks are unchanged. This is a display change, not a speed or combat change.
+- Nine unique authored paintings share their exact face crops with selection and HUD portraits. New classes no longer reuse upstream Mage/Cleric splashes.
+- Class selection uses portrait cards, thematic prose and persistent touch controls. Duelist's badge lock is removed as requested; other class unlocks still govern Start while previews remain available.
+- The class handbook exposes Profile/Growth/Paths/Armor immediately, including both subclasses and all armor abilities with their existing skill/talent data; independent scrolling cameras follow window placement.
+- Seven painted trap plates retain all 63 shape/color/inactive index combinations; only cyan inset pixels are tinted, keeping metal neutral and spent mechanisms visibly dark.
+- One committed launcher source reproduces Windows ICO/PNG and all main/debug Android legacy/adaptive/themed resources. The desktop shortcut targets the existing version-independent launcher.
+- Test 24's HUD portrait now measures its intended 26-unit face inside a 28-unit frame; world-character and saved-sprite bounds remain unchanged. Test 36 also exercises nine first/second selections, nine info buttons, all 36 handbook pages and a real Duelist start in both orientations.
+
 # Changes from Shattered Pixel Dungeon v3.3.8
 
 Upstream history retained; branch `grimhollow`. Each changed path is listed below.

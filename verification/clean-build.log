@@ -7843,3 +7843,1214 @@ RENDERED=GameScene SCREENSHOT=verification/interface/portrait/hero-sheet.png
 RENDERED=GameScene SCREENSHOT=verification/interface/portrait/settings.png
 INTERFACE: inventory, item actions, scrollable Crystal details, five-spell wheel, hero sheet and settings fit 720x1061; failures=0
 [Controllers] removed manager for application, 0 managers active
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :android:generateDebugResources
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:jar
+> Task :SPD-classes:jar
+> Task :android:packageDebugResources
+> Task :android:processDebugNavigationResources
+> Task :android:parseDebugLocalResources
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets
+> Task :android:compressDebugAssets
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :desktop:processResources
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:mergeDebugResources
+> Task :android:processDebugMainManifest
+> Task :android:processDebugManifest
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:processDebugManifestForPackage
+> Task :android:processDebugResources
+> Task :core:compileJava
+C:\Users\Hartl\Documents\grimhollow\core\src\main\java\com\shatteredpixel\shatteredpixeldungeon\windows\WndHeroInfo.java:21: error: cannot find symbol
+        pageWidth=(int)Math.min(PixelScene.landscape()?210:180,Camera.ui.width-24);
+                                                                     ^
+  symbol:   variable ui
+  location: class Camera
+C:\Users\Hartl\Documents\grimhollow\core\src\main\java\com\shatteredpixel\shatteredpixeldungeon\windows\WndHeroInfo.java:22: error: cannot find symbol
+        int windowHeight=(int)Math.min(230,Camera.ui.height-48);
+                                                 ^
+  symbol:   variable ui
+  location: class Camera
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+2 errors
+
+> Task :core:compileJava FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':core:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  C:\Users\Hartl\Documents\grimhollow\core\src\main\java\com\shatteredpixel\shatteredpixeldungeon\windows\WndHeroInfo.java:21: error: cannot find symbol
+          pageWidth=(int)Math.min(PixelScene.landscape()?210:180,Camera.ui.width-24);
+                                                                       ^
+    symbol:   variable ui
+    location: class Camera
+  C:\Users\Hartl\Documents\grimhollow\core\src\main\java\com\shatteredpixel\shatteredpixeldungeon\windows\WndHeroInfo.java:22: error: cannot find symbol
+          int windowHeight=(int)Math.min(230,Camera.ui.height-48);
+                                                   ^
+    symbol:   variable ui
+    location: class Camera
+  Note: Recompile with -Xlint:unchecked for details.
+  Note: Some input files use unchecked or unsafe operations.
+  2 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+
+BUILD FAILED in 1m 16s
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+33 actionable tasks: 18 executed, 15 up-to-date
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+> Task :core:compileJava
+
+> Task :core:classes
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :core:compileTestJava
+> Task :core:processTestResources NO-SOURCE
+> Task :core:testClasses
+> Task :android:compileDebugJavaWithJavac
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource
+> Task :core:test
+> Task :android:dexBuilderDebug
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :desktop:release
+> Task :desktop:dist
+> Task :android:mergeLibDexDebug
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 38s
+47 actionable tasks: 13 executed, 34 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\presentation-landscape\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/interface/landscape/title.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-warrior.png
+com.badlogic.gdx.utils.GdxRuntimeException: java.lang.AssertionError: java.lang.reflect.InvocationTargetException
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:159)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:203)
+Caused by: java.lang.AssertionError: java.lang.reflect.InvocationTargetException
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.clickReview(DesktopSmokeProbe.java:246)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.presentationTick(DesktopSmokeProbe.java:215)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:72)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	... 1 more
+Caused by: java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.clickReview(DesktopSmokeProbe.java:243)
+	... 6 more
+Caused by: java.lang.NullPointerException: Cannot invoke "com.watabou.noosa.Camera.cameraToScreen(float, float)" because the return value of "com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane.camera()" is null
+	at com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane.layout(ScrollPane.java:143)
+	at com.watabou.noosa.ui.Component.setRect(Component.java:59)
+	at com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroInfo.addPage(WndHeroInfo.java:60)
+	at com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroInfo.<init>(WndHeroInfo.java:34)
+	at com.shatteredpixel.shatteredpixeldungeon.scenes.HeroSelectScene$HeroBtn.onClick(HeroSelectScene.java:489)
+	... 11 more
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :core:compileJava
+> Task :core:classes
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes UP-TO-DATE
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:mergeDebugJavaResource
+> Task :desktop:release
+> Task :desktop:dist
+> Task :android:mergeLibDexDebug
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 44s
+45 actionable tasks: 7 executed, 38 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\presentation-landscape\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/interface/landscape/title.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-warrior.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-mage.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-rogue.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-huntress.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-duelist.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-cleric.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-necromancer.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-enchanter.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-psychic.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-profile.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-growth.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-paths.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-armor.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-armor-bottom.png
+com.badlogic.gdx.utils.GdxRuntimeException: java.lang.AssertionError: Duelist start stalled
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:159)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:203)
+Caused by: java.lang.AssertionError: Duelist start stalled
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.presentationTick(DesktopSmokeProbe.java:174)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:72)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	... 1 more
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :core:compileJava
+> Task :core:classes
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes UP-TO-DATE
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:mergeDebugJavaResource
+> Task :desktop:release
+> Task :desktop:dist
+> Task :android:mergeLibDexDebug
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 42s
+45 actionable tasks: 7 executed, 38 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :desktop:release
+> Task :desktop:dist
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 18s
+9 actionable tasks: 2 executed, 7 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\presentation-landscape\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/interface/landscape/title.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-warrior.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-mage.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-rogue.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-huntress.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-duelist.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-cleric.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-necromancer.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-enchanter.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-psychic.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-profile.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-growth.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-paths.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-armor.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-armor-bottom.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/painted-traps-and-duelist-hud.png
+TEST 36 PRESENTATION: classes=9 matchingPortraits=9 firstSelections=9 secondSelections=9 infoButtons=9 handbookPages=36 orientation=landscape duelistStart=true trapShapes=7 failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\presentation-portrait\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/interface/portrait/title.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-warrior.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-mage.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-rogue.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-huntress.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-duelist.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-cleric.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-necromancer.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-enchanter.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-psychic.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-profile.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-growth.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-paths.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-armor.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-armor-bottom.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/painted-traps-and-duelist-hud.png
+TEST 36 PRESENTATION: classes=9 matchingPortraits=9 firstSelections=9 secondSelections=9 infoButtons=9 handbookPages=36 orientation=portrait duelistStart=true trapShapes=7 failures=0
+[Controllers] removed manager for application, 0 managers active
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :core:compileJava
+> Task :core:classes
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:mergeDebugJavaResource
+> Task :desktop:release
+> Task :desktop:dist
+> Task :android:mergeLibDexDebug
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 40s
+45 actionable tasks: 8 executed, 37 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\presentation-geometry\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 24: heroes=9 mob sprites=122 steady idle checks=122 failures=0
+PAINTED: complete animation coverage; hero/rat height ratio=2.2222223 status sizes rendered=178
+TEST 25 semantics: all 381 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10
+PAINTED TRAPS: shapes=7 color/state combinations=63
+TEST 25: items=381 identification icons=60 failures=63
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+FAIL 25 trap index 0:0
+FAIL 25 trap index 0:1
+FAIL 25 trap index 0:2
+FAIL 25 trap index 0:3
+FAIL 25 trap index 0:4
+FAIL 25 trap index 0:5
+FAIL 25 trap index 0:6
+FAIL 25 trap index 0:7
+FAIL 25 trap index 0:8
+FAIL 25 trap index 1:0
+FAIL 25 trap index 1:1
+FAIL 25 trap index 1:2
+FAIL 25 trap index 1:3
+FAIL 25 trap index 1:4
+FAIL 25 trap index 1:5
+FAIL 25 trap index 1:6
+FAIL 25 trap index 1:7
+FAIL 25 trap index 1:8
+FAIL 25 trap index 2:0
+FAIL 25 trap index 2:1
+FAIL 25 trap index 2:2
+FAIL 25 trap index 2:3
+FAIL 25 trap index 2:4
+FAIL 25 trap index 2:5
+FAIL 25 trap index 2:6
+FAIL 25 trap index 2:7
+FAIL 25 trap index 2:8
+FAIL 25 trap index 3:0
+FAIL 25 trap index 3:1
+FAIL 25 trap index 3:2
+FAIL 25 trap index 3:3
+FAIL 25 trap index 3:4
+FAIL 25 trap index 3:5
+FAIL 25 trap index 3:6
+FAIL 25 trap index 3:7
+FAIL 25 trap index 3:8
+FAIL 25 trap index 4:0
+FAIL 25 trap index 4:1
+FAIL 25 trap index 4:2
+FAIL 25 trap index 4:3
+FAIL 25 trap index 4:4
+FAIL 25 trap index 4:5
+FAIL 25 trap index 4:6
+FAIL 25 trap index 4:7
+FAIL 25 trap index 4:8
+FAIL 25 trap index 5:0
+FAIL 25 trap index 5:1
+FAIL 25 trap index 5:2
+FAIL 25 trap index 5:3
+FAIL 25 trap index 5:4
+FAIL 25 trap index 5:5
+FAIL 25 trap index 5:6
+FAIL 25 trap index 5:7
+FAIL 25 trap index 5:8
+FAIL 25 trap index 6:0
+FAIL 25 trap index 6:1
+FAIL 25 trap index 6:2
+FAIL 25 trap index 6:3
+FAIL 25 trap index 6:4
+FAIL 25 trap index 6:5
+FAIL 25 trap index 6:6
+FAIL 25 trap index 6:7
+FAIL 25 trap index 6:8
+com.badlogic.gdx.utils.GdxRuntimeException: java.lang.AssertionError: Rendering acceptance failures=63
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:159)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:203)
+Caused by: java.lang.AssertionError: Rendering acceptance failures=63
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.geometryTests(DesktopSmokeProbe.java:767)
+	at com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:151)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+	at com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+	... 1 more
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :desktop:processResources UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :desktop:release
+> Task :desktop:dist
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 22s
+9 actionable tasks: 2 executed, 7 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+
+PAINTED launcher resources=55
+PAINTED assets=112 source sheets=96 failures=0
+C:\Users\Hartl\Documents\grimhollow\tools\recovery_assets.py:47: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  out.putdata([palette.get(pixel[:3], pixel[:3]) + (pixel[3],) for pixel in image.getdata()])
+TEST 44: upstream-derived character sheets=7; restored assets=29; verified painted replacements=112; failures=0
+
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:compileTestJava UP-TO-DATE
+> Task :core:testClasses UP-TO-DATE
+
+> Task :core:smokeRun
+PASS V4 WARRIOR Vault generation/save/load, mirror=BrokenSeal, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT WARRIOR: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS WARRIOR seed=0 floor=6 save/load=ok
+PASS WARRIOR seed=1 floor=6 save/load=ok
+PASS WARRIOR seed=2 floor=6 save/load=ok
+PASS WARRIOR seed=3 floor=6 save/load=ok
+PASS WARRIOR seed=4 floor=6 save/load=ok
+PASS WARRIOR seed=5 floor=6 save/load=ok
+PASS WARRIOR seed=6 floor=6 save/load=ok
+PASS WARRIOR seed=7 floor=6 save/load=ok
+PASS WARRIOR seed=8 floor=6 save/load=ok
+PASS WARRIOR seed=9 floor=6 save/load=ok
+PASS V4 MAGE Vault generation/save/load, mirror=MagesStaff, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT MAGE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS MAGE seed=0 floor=6 save/load=ok
+PASS MAGE seed=1 floor=6 save/load=ok
+PASS MAGE seed=2 floor=6 save/load=ok
+PASS MAGE seed=3 floor=6 save/load=ok
+PASS MAGE seed=4 floor=6 save/load=ok
+PASS MAGE seed=5 floor=6 save/load=ok
+PASS MAGE seed=6 floor=6 save/load=ok
+PASS MAGE seed=7 floor=6 save/load=ok
+PASS MAGE seed=8 floor=6 save/load=ok
+PASS MAGE seed=9 floor=6 save/load=ok
+PASS V4 ROGUE Vault generation/save/load, mirror=CloakOfShadows, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ROGUE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS ROGUE seed=0 floor=6 save/load=ok
+PASS ROGUE seed=1 floor=6 save/load=ok
+PASS ROGUE seed=2 floor=6 save/load=ok
+PASS ROGUE seed=3 floor=6 save/load=ok
+PASS ROGUE seed=4 floor=6 save/load=ok
+PASS ROGUE seed=5 floor=6 save/load=ok
+PASS ROGUE seed=6 floor=6 save/load=ok
+PASS ROGUE seed=7 floor=6 save/load=ok
+PASS ROGUE seed=8 floor=6 save/load=ok
+PASS ROGUE seed=9 floor=6 save/load=ok
+PASS V4 HUNTRESS Vault generation/save/load, mirror=SpiritBow, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT HUNTRESS: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS HUNTRESS seed=0 floor=6 save/load=ok
+PASS HUNTRESS seed=1 floor=6 save/load=ok
+PASS HUNTRESS seed=2 floor=6 save/load=ok
+PASS HUNTRESS seed=3 floor=6 save/load=ok
+PASS HUNTRESS seed=4 floor=6 save/load=ok
+PASS HUNTRESS seed=5 floor=6 save/load=ok
+PASS HUNTRESS seed=6 floor=6 save/load=ok
+PASS HUNTRESS seed=7 floor=6 save/load=ok
+PASS HUNTRESS seed=8 floor=6 save/load=ok
+PASS HUNTRESS seed=9 floor=6 save/load=ok
+PASS V4 DUELIST Vault generation/save/load, mirror=MirrorSword, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT DUELIST: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS DUELIST seed=0 floor=6 save/load=ok
+PASS DUELIST seed=1 floor=6 save/load=ok
+PASS DUELIST seed=2 floor=6 save/load=ok
+PASS DUELIST seed=3 floor=6 save/load=ok
+PASS DUELIST seed=4 floor=6 save/load=ok
+PASS DUELIST seed=5 floor=6 save/load=ok
+PASS DUELIST seed=6 floor=6 save/load=ok
+PASS DUELIST seed=7 floor=6 save/load=ok
+PASS DUELIST seed=8 floor=6 save/load=ok
+PASS DUELIST seed=9 floor=6 save/load=ok
+[GAME] @@ Badge unlocked: Novice Researcher (Fill in 40 catalog entries in your journal).
+PASS V4 CLERIC Vault generation/save/load, mirror=HolyTome, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT CLERIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS CLERIC seed=0 floor=6 save/load=ok
+PASS CLERIC seed=1 floor=6 save/load=ok
+PASS CLERIC seed=2 floor=6 save/load=ok
+PASS CLERIC seed=3 floor=6 save/load=ok
+PASS CLERIC seed=4 floor=6 save/load=ok
+PASS CLERIC seed=5 floor=6 save/load=ok
+PASS CLERIC seed=6 floor=6 save/load=ok
+PASS CLERIC seed=7 floor=6 save/load=ok
+PASS CLERIC seed=8 floor=6 save/load=ok
+PASS CLERIC seed=9 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS NECROMANCER seed=0 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS V4 ENCHANTER Vault generation/save/load, mirror=SigilBrush, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ENCHANTER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS ENCHANTER seed=0 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=1 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=2 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=3 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=4 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=5 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=6 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=7 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=8 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=9 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge unlocked: Novice Monster Hunter (Defeat 10 enemies in one game).
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge unlocked: Safety Hazard (Defeat 10 enemies in one game with the help of terrain hazards (traps, plants, or chasms)).
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS V4 PSYCHIC Vault generation/save/load, mirror=FocusCrystal, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT PSYCHIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+PASS PSYCHIC seed=0 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=1 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=2 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=3 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=4 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=5 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=6 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=7 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=8 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=9 floor=6 save/load=ok
+Runs=90 failures=0
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 35s
+7 actionable tasks: 1 executed, 6 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\presentation-landscape\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/interface/landscape/title.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-warrior.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-mage.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-rogue.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-huntress.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-duelist.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-cleric.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-necromancer.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-enchanter.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-psychic.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-profile.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-growth.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-paths.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-armor.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-armor-bottom.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/painted-traps-and-duelist-hud.png
+TEST 36 PRESENTATION: classes=9 matchingPortraits=9 firstSelections=9 secondSelections=9 infoButtons=9 handbookPages=36 orientation=landscape duelistStart=true trapShapes=7 failures=0
+[Controllers] removed manager for application, 0 managers active
+
+
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\presentation-portrait\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/interface/portrait/title.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-warrior.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-mage.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-rogue.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-huntress.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-duelist.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-cleric.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-necromancer.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-enchanter.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-psychic.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-profile.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-growth.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-paths.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-armor.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-armor-bottom.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/painted-traps-and-duelist-hud.png
+TEST 36 PRESENTATION: classes=9 matchingPortraits=9 firstSelections=9 secondSelections=9 infoButtons=9 handbookPages=36 orientation=portrait duelistStart=true trapShapes=7 failures=0
+[Controllers] removed manager for application, 0 managers active
+
+
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\presentation-geometry\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 24: heroes=9 mob sprites=122 steady idle checks=122 failures=0
+PAINTED: complete animation coverage; hero/rat height ratio=2.2222223 status sizes rendered=178
+TEST 25 semantics: all 381 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10
+PAINTED TRAPS: shapes=7 color/state combinations=63
+TEST 25: items=381 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED ï¿½ superseded by recovery test 46 handler/network checks
+TESTS 24-26, 34, 36 PASS; test 35 retired by recovery
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+
+
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\presentation-encounters\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+ENCOUNTER START class=NECROMANCER seed=417 pos=756
+ENCOUNTER FIXTURE health=1000; terrain and hostile AI retained
+ENCOUNTER action=0 pos=756 to=723 hp=1000
+[GAME] You defeated marsupial rat.
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+ENCOUNTER action=25 pos=494 to=461 hp=993
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+[GAME] You defeated sewer snake.
+[GAME] You defeated marsupial rat.
+[GAME] You picked up: seed of blindweed.
+[GAME] You defeated marsupial rat.
+ENCOUNTER action=50 pos=267 to=235 hp=966
+ENCOUNTER action=75 pos=459 to=491 hp=969
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+[GAME] You defeated sewer snake.
+[GAME] You picked up: scroll of LAGUZ.
+ENCOUNTER action=100 pos=583 to=582 hp=963
+ENCOUNTER action=125 pos=680 to=649 hp=966
+[GAME] ++ Level up! +Accuracy, +Evasion, +5 HP!
+[GAME] ++ +1 Talent Point!
+[GAME] You defeated marsupial rat.
+ENCOUNTERS actions=150 steps=117 attacks=32 actorDrops=true actorPickup=true summon=true deathFrames=120 failures=0
+[Controllers] removed manager for application, 0 managers active
+
+
+TEST 46 compiled handlers: classes=2876 guarded browser sinks=1 HTTP/socket calls=0 failures=0

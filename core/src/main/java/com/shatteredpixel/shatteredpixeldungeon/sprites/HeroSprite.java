@@ -187,6 +187,6 @@ public class HeroSprite extends CharSprite {
 	
 	public static Image avatar( HeroClass cl, int armorTier ) {
 		
-        return com.shatteredpixel.shatteredpixeldungeon.GameGeometry.portrait(cl, armorTier);
+        return new com.shatteredpixel.shatteredpixeldungeon.ui.HeroPortrait(cl, 26);
 	}
 }

@@ -76,6 +76,15 @@ jobs:
       - name: Vault boss arena and elemental forms in the existing renderer
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         run: xvfb-run -a java -Dgrimhollow.vault=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
+      - name: Painted class selection and complete progression in both orientations
+        if: ${{ !cancelled() && runner.os == 'Linux' }}
+        shell: bash
+        run: |
+          for orientation in landscape portrait; do
+            portrait=false
+            if [ "$orientation" = portrait ]; then portrait=true; fi
+            xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-presentation-$orientation" -Dgrimhollow.presentationReview=true -Dgrimhollow.interfacePortrait=$portrait -Dgrimhollow.smokeDir="verification/interface/$orientation" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
+          done
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

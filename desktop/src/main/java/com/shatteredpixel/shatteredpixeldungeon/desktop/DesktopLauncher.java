@@ -169,7 +169,7 @@ public class DesktopLauncher {
 		if (smoke) System.out.println("PREFERENCES_PATH=" + new Lwjgl3FileHandle(basePath, baseFileType).file().getAbsolutePath());
 		SPDSettings.set( new Lwjgl3Preferences( new Lwjgl3FileHandle(basePath + SPDSettings.DEFAULT_PREFS_FILE, baseFileType) ));
 		FileUtils.setDefaultFileProperties( baseFileType, basePath );
-		if(smoke && Boolean.getBoolean("grimhollow.interfaceReview")) {
+		if(smoke && (Boolean.getBoolean("grimhollow.interfaceReview") || Boolean.getBoolean("grimhollow.presentationReview"))) {
 			SPDSettings.put(SPDSettings.KEY_FULLSCREEN,false);
 			SPDSettings.windowResolution(Boolean.getBoolean("grimhollow.interfacePortrait")?new Point(720,1080):new Point(1280,720));
 			SPDSettings.windowMaximized(false);

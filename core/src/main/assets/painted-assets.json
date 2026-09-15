@@ -73,6 +73,17 @@
     "monsters/wards-log.png": "d2c0151f763a35783f599eae55ce509da73d00df1a1f17b54a720f39a8b9a378",
     "monsters/wildlife.png": "26f263b014e2015b240613581ac520339eb397b23486c13a3aa7d6361e7d5bfe",
     "monsters/wisps-larva.png": "0d7221e0b6cd17f09351ccbf45ee164c4dde6ab9bf3fa3c12471e018e5bc4029",
+    "presentation/cleric.png": "dde202c11b91d98e4d989ea6fd33596bc09ea5c0ce9ff0071e0e335a7685b406",
+    "presentation/duelist.png": "872aa0cc9cbd179b94aa88b8e9a30288fec86777c465703f905c6b6789e49ec2",
+    "presentation/enchanter.png": "4b7f36fce29b03ff7349808e59ad04e792e06b0db495701ff925dad3fe413934",
+    "presentation/huntress.png": "c665a8cc103224e0016fcd85ff3df841873d733768a65c719571ef86512ed064",
+    "presentation/launcher.png": "02fba782cecb31b3864a4d745425c44a3deea261a518e80fe3ac9e6d48edcf93",
+    "presentation/mage.png": "145944e3a71970f051e31a1f4f156209ec3b35eadb2901efb24ed52d396a3e6d",
+    "presentation/necromancer.png": "7cd2ee5c7739c75350170d5740abbcfd85245497dc048f16b8e8154212f8782d",
+    "presentation/psychic.png": "6700e4ee0f6134d0518862ed32e4cf9c084d577a7c5bdf75be6825759a52d416",
+    "presentation/rogue.png": "c0c6321ab63aa6cb6934a4c57d65360c8a83f79c488bbdb2ec1a11e7d0516cc1",
+    "presentation/traps.png": "d5fa783108702a7cb5610ec18597e115fa6d9b4d5715fc09dfe1bbf923fa0679",
+    "presentation/warrior.png": "25c59cc4410c4467f55af1fe3fc88178d47eaaf8ac53a41ab5154e7df0344619",
     "prison-materials.png": "69e2f5f0680c84a175a8f2e0313f3e0119e1fafd0b0545dbfe8deb4fb961bab4",
     "props.png": "7bc14b1ce174949d144b92c45909858026bfb1c3832748c6f2f53f6fe629ab02",
     "region-props.png": "fcdfa9075ad79fe4e4755a242bbbe4cb29cd579c9d66ab6a6dfd004e3defecde",
@@ -171,7 +182,77 @@
         1024,
         1024
       ],
-      "rgba_sha256": "7038d58ecd9a6f7d211bcfb0f2c911602f873c4a08460af694a75006777e53da"
+      "rgba_sha256": "802dc78a434c1cda556228044a1850779cacfb1c751a887b754ae1980c01a754"
+    },
+    "splashes/painted_warrior.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "399d339872ff9a2dbfc1b7c1136971ec97babd011790c9f40ded87dcfb3037ec"
+    },
+    "splashes/painted_mage.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "e336b4bf1fa7944d8d1360b70632c8b67ecbf3ca85582b5a77e96666f850f825"
+    },
+    "splashes/painted_rogue.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "e9260de5c15aa8acba1c085635eed661d58a79bff60ad235ae802c019a64fbdb"
+    },
+    "splashes/painted_huntress.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "52070fee87b359bb74690a7cf82026310eebc7ec85190b700d8d9ba499f11c17"
+    },
+    "splashes/painted_duelist.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "3b38b7e5b47f0aeaf1735e61b0f6590f1d98430590a5ef60e4169fa277d12b85"
+    },
+    "splashes/painted_cleric.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "22f4fc750410f14f735ee8e18b24ca14a4fdf5c54ca82b14f4c5c6db6d511b15"
+    },
+    "splashes/painted_necromancer.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "6a95153e8e5688895daa5e6092ac09159d8f5d97c933e00c19aae6fa08446528"
+    },
+    "splashes/painted_enchanter.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "21db7b576f3ffa966d65e904fd070f2a06ad6c65d957601d9862e1bd70bb7b6e"
+    },
+    "splashes/painted_psychic.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "ed0a2d44bd9c51c7be53d4ef77b49de2f5bcc75ef69748ea1c070469faada93e"
+    },
+    "interfaces/painted_portraits.png": {
+      "size": [
+        384,
+        384
+      ],
+      "rgba_sha256": "36d5e452407a27fc871f7884f20ab2059c335ec2725550d2e5c86af962834f2a"
     },
     "environment/raised_terrain.png": {
       "size": [

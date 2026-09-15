@@ -182,6 +182,9 @@ def outputs():
     for region in ['sewers','prison','caves','city','halls']:
         result.update(region_atlas(region,features,raised))
     result['environment/terrain_features.png']=features
+    from presentation import traps, outputs as presentation
+    traps(features)
+    result.update(presentation())
     result['environment/raised_terrain.png']=raised
     from actors import outputs as actors
     result.update(actors())
@@ -216,13 +219,19 @@ def main():
         expected={'interfaces/title_grimhollow.png':(1920,1080),'interfaces/title_wordmark.png':(1024,144),'interfaces/title_mist.png':(1024,342)}.get(path,expected)
         expected=fixed_monster_sizes.get(path,expected)
         expected={'interfaces/buffs.png':(448,224),'interfaces/large_buffs.png':(1024,512),'interfaces/chrome.png':(512,384),'interfaces/status_pane.png':(1024,512),'interfaces/painted_glyphs.png':(512,256)}.get(path,expected)
+        if path.startswith('splashes/painted_'):expected=(1600,900)
+        if path=='interfaces/painted_portraits.png':expected=(384,384)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]
         target=ASSETS/path
         if args.check:
             if not target.exists() or digest(Image.open(target))!=digest(im):failures.append(path)
-        else:im.save(target,optimize=False)
+        else:
+            target.parent.mkdir(parents=True,exist_ok=True)
+            im.save(target,optimize=False)
+    from presentation import pack_launchers
+    pack_launchers(args.check,failures)
     from inventory import semantic_bytes, SEMANTICS
     expected_semantics=semantic_bytes()
     if args.check:

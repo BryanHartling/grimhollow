@@ -95,15 +95,15 @@ public class StatusPane extends Component {
 
 		this.large = large;
 
-		if (large)  bg = new NinePatch( asset, 0, 64, 41, 39, 33, 0, 4, 0 );
-		else        bg = new NinePatch( asset, 0,  0, 82, 38, 32, 0, 5, 0 );
+		if (large)  bg = PaintedInterface.patch( asset, 0, 64, 160, 39, 33, 0, 4, 0 );
+		else        bg = PaintedInterface.patch( asset, 0,  0, 82, 38, 32, 0, 5, 0 );
 		add( bg );
 
-		heroPaneCutout = new NinePatch(asset, 0, 0, 5, 36, 4, 0, 0, 0);
+		heroPaneCutout = PaintedInterface.patch(asset, 0, 0, 5, 36, 4, 0, 0, 0);
 		heroPaneCutout.visible = false;
 		add(heroPaneCutout);
 
-		hpCutout = new Image(asset, 90, 0, 12, 9);
+		hpCutout = PaintedInterface.image(asset, 90, 0, 12, 9);
 		hpCutout.visible = false;
 		add(hpCutout);
 
@@ -134,16 +134,16 @@ public class StatusPane extends Component {
 		compass = new Compass( Statistics.amuletObtained ? Dungeon.level.entrance() : Dungeon.level.exit() );
 		add( compass );
 
-		if (large)  shieldHP = new Image(asset, 0, 112, 128, 9);
-		else        shieldHP = new Image(asset, 0, 44, 50, 4);
+		if (large)  shieldHP = PaintedInterface.image(asset, 0, 112, 128, 9);
+		else        shieldHP = PaintedInterface.image(asset, 0, 44, 50, 4);
 		add(shieldHP);
 
-		if (large)  hp = new Image(asset, 0, 103, 128, 9);
-		else        hp = new Image(asset, 0, 40, 50, 4);
+		if (large)  hp = PaintedInterface.image(asset, 0, 103, 128, 9);
+		else        hp = PaintedInterface.image(asset, 0, 40, 50, 4);
 		add( hp );
 
-		if (large)  Dot = new Image(asset, 0, 103, 128, 9);
-		else        Dot = new Image(asset, 0, 40, 50, 4);
+		if (large)  Dot = PaintedInterface.image(asset, 0, 103, 128, 9);
+		else        Dot = PaintedInterface.image(asset, 0, 40, 50, 4);
 		Dot.hardlight(0, 0, 0);
 		Dot.alpha(0.25f);
 		add( Dot );
@@ -161,8 +161,8 @@ public class StatusPane extends Component {
 		};
 		add(heroInfoOnBar);
 
-		if (large)  exp = new Image(asset, 0, 121, 128, 7);
-		else        exp = new Image(asset, 0, 48, 17, 4);
+		if (large)  exp = PaintedInterface.image(asset, 0, 121, 128, 7);
+		else        exp = PaintedInterface.image(asset, 0, 48, 17, 4);
 		add( exp );
 
 		expText = new BitmapText(PixelScene.pixelFont);
@@ -251,8 +251,8 @@ public class StatusPane extends Component {
 					hpCutout.x = hpleft - 2;
 					hpCutout.y = y;
 				}
-				hp.frame(50-hpWidth, 40, 50, 4);
-				shieldHP.frame(50-hpWidth, 44, 50, 4);
+				PaintedInterface.frame(hp, 50-hpWidth, 40, 50, 4);
+				PaintedInterface.frame(shieldHP, 50-hpWidth, 44, 50, 4);
 			}
 
 			hp.x = shieldHP.x = Dot.x = hpleft;

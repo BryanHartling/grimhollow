@@ -395,7 +395,7 @@ public class ItemSprite extends MovieClip {
 		int rows = tx.width / com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM;
 		int row = index / rows;
 		int col = index % rows;
-		return tx.getPixel( col * com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM + x*2, row * com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM + y*2 );
+		return tx.getPixel( col * com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM + x*com.shatteredpixel.shatteredpixeldungeon.GameGeometry.ITEM_DENSITY, row * com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM + y*com.shatteredpixel.shatteredpixeldungeon.GameGeometry.ITEM_DENSITY );
 	}
 	
 	public static class Glowing {

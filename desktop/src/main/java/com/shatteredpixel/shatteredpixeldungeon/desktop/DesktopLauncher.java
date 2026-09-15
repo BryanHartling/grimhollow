@@ -169,6 +169,12 @@ public class DesktopLauncher {
 		if (smoke) System.out.println("PREFERENCES_PATH=" + new Lwjgl3FileHandle(basePath, baseFileType).file().getAbsolutePath());
 		SPDSettings.set( new Lwjgl3Preferences( new Lwjgl3FileHandle(basePath + SPDSettings.DEFAULT_PREFS_FILE, baseFileType) ));
 		FileUtils.setDefaultFileProperties( baseFileType, basePath );
+		if(smoke && Boolean.getBoolean("grimhollow.interfaceReview")) {
+			SPDSettings.put(SPDSettings.KEY_FULLSCREEN,false);
+			SPDSettings.windowResolution(Boolean.getBoolean("grimhollow.interfacePortrait")?new Point(720,1080):new Point(1280,720));
+			SPDSettings.windowMaximized(false);
+			SPDSettings.interfaceSize(Boolean.getBoolean("grimhollow.interfacePortrait")?0:2);
+		}
 		
 		config.setWindowSizeLimits( 720, 400, -1, -1 );
 		Point p = SPDSettings.windowResolution();
@@ -188,6 +194,10 @@ public class DesktopLauncher {
 				"icons/icon_64.png", "icons/icon_128.png", "icons/icon_256.png");
 
 		if (smoke) config.setInitialVisible(false);
+		if (smoke && Boolean.getBoolean("grimhollow.interfacePortrait")) {
+			config.setWindowedMode(720,1080);
+			config.setMaximized(false);
+		}
 		new Lwjgl3Application(smoke
 				? new DesktopSmokeProbe(java.util.Arrays.asList(args).contains("--smoke-sewers"))
 				: new ShatteredPixelDungeon(new DesktopPlatformSupport()), config);

@@ -1,3 +1,74 @@
+# Psychic and painted interface - v1.5.0
+
+Mechanics checkpoint: `1f7152c1cd7a795b721dfddd527fd7245503e4ff`, committed and pushed. Release tag: `v1.5.0-psychic-and-interface`. Exact delivered source hash and CI results are in the delivery response. The full workflow remains subject to the unchanged failing terrain-contrast gate.
+
+The requested Psychic upgrade floor, spending-based Crystal levels, Push/Hurl tiers and Puppeteer control now execute in the existing smoke harness. Enchanter starts with three inscription choices and three Brush charges. The reported glowing Rogue rat is consistent with an existing curse-bound variant; inspection now explains it, but the exact encounter was unavailable. Level-six chasm removal remains as requested; deterministic checks are not a full-campaign balance test.
+
+The presentation pass completes all 381 named item IDs (380 distinct cells) at 64px and adds painted shared frames, equipped-slot borders, status bars, 32 navigation symbols and painted bag tabs. Long item descriptions scroll with their action buttons visible; the class spell wheel adapts to the available screen. Sources and prompts are committed and packed offline. World, creature and title paintings retain their previous pixels. Original class splashes, identification overlays, talent/region/credit icons and special-room art remain.
+
+Local verification: all-nine-class smoke `Runs=90 failures=0`; final desktop/Android builds and six JUnit tests pass. New-class groups each passed 10/0 within the all-nine command; the separate Psychic-only mechanics command also passed 10/0. The earlier mechanics checkpoint's CI independently passed Necromancer, Enchanter and Psychic 10/0 and combined 30/0. Exact final-head class gates are reported with delivery.
+
+Native interface evidence lives in `verification/interface/landscape` and `portrait`, using isolated saves and the actual desktop and mobile layouts. During review, the tab icon reset and item-scroll camera alignment were corrected. The first portrait configuration inherited fullscreen; the fixture now requires a tall surface. An additional 2x sprite run exposed six retained creature occupancy failures; they remain explicitly recorded below and in KNOWN_ISSUES.md. The independent portrait UI gate passed at 720x1061, and the desktop UI gate passed at 1280x720, including tab scale and moved scroll-camera alignment. Those UI checks are separate from the sprite-size check. No acceptance threshold was lowered.
+
+The initial final build caught two fixture errors (protected Group traversal and an exotic scroll package path), corrected before delivery. Existing logs retain failed and successful outputs. An unrelated CI SDK setup failure requested the obsolete `tools` package; the workflow now requests `platform-tools` explicitly and retains the compile-SDK/build-tools installation and every acceptance step.
+
+Rows marked retained are checkpoint evidence, not claims of an additional local rerun. The existing CI repeats world/fog/effects/provenance/menu checks on the delivered source.
+
+| Test | Status | Actual output or reason |
+|---|---|---|
+| 1 | PASS | Current runnable jar and TitleScene launch on Windows; fresh-checkout result retained. |
+| 2 | PASS | Final desktop release + Android debug + six JUnit tests: BUILD SUCCESSFUL in 1m; zero JUnit failures/errors/skips. |
+| 3 | RETIRED | Old procedural-art rebuild no longer ships; committed painted sources reconstruct exactly under test 44. |
+| 4 | RETIRED | Old generated-style validator was superseded by source provenance/reconstruction 44 and room distinctness 45. |
+| 5 | PASS | All nine hero kits: Runs=90 failures=0; ten seeds per class. |
+| 6 | permanent known issue | Representative hooks pass; exhaustive talent selection/hook scenarios remain unrun. |
+| 7 | permanent known issue | Subclass hooks pass; actual Tengu reward selection flow remains unrun. |
+| 8 | permanent known issue | Nine armor abilities execute; actual crown selection flow remains unrun. |
+| 9 | PASS | TEST 9 PASS; temporary Bone/Force terrain persistence, expiry and floor-exit checks execute. |
+| 10 | PASS | Necromancer minion cap and Second Grave checks pass in the existing class suite. |
+| 11 | PASS | TESTS 11-13 PASS: Grasp heap/trap/empty-cell cases. |
+| 12 | PASS | Hero levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking. |
+| 13 | PASS | Old Amok behavior and new level-six/level-eight control paths; see test 50. |
+| 14 | PASS | Final all-nine-class active-state persistence and floor-6 round trips: Runs=90 failures=0. |
+| 15 | PASS | Runs=90 failures=0; ten seeds per class. New-class groups each 10/0; this is scripted generation/descent, not a campaign. |
+| 16 | permanent known issue | All 122 concrete creature sprite draws, declared animation rectangles, statue tiers, items and talents checked; exhaustive every-gameplay-path coverage remains unrun. |
+| 17 | RETIRED | Superseded by recovery: generated style requirements do not apply to restored upstream character/world pixels. |
+| 18 | RETIRED | Superseded by recovery: generated-region brightness target replaced by within-room distinctness 45. |
+| 19 | permanent known issue | The floor-15 1,000-turn/20-mob timing scenario remains unrun. |
+| 20 | PASS | Retained v1.0.2 SDK-unset desktop-only build result; build configuration unchanged except version metadata. New CI uses desktopOnly=true. |
+| 21 | permanent known issue | Test 45 remains enforced and fails 26/82 local pairs. Exact release-head CI is reported with delivery; no full-green claim. |
+| 22 | PASS | aapt: com.grimhollow.dungeon; label Grimhollow; versionCode 944; versionName 1.5.0-INDEV. |
+| 23 | PASS | Native renderer uses the documented Grimhollow save location under isolated user.home folders; player saves are untouched. |
+| 24 | permanent known issue | Standard 3x: nine heroes, 122 creature sprites, failures=0. Extra 2x render: six retained sprites exceed the 0.95 occupancy ceiling, measured 0.9545-1.0; threshold unchanged. |
+| 25 | PASS | All 381 named item IDs now use painted 64px cells; 60 identification overlays remain 32px. GPU identities, all section-9/class items and ItemSlot sizing: failures=0 at both 2x and 3x. |
+| 26 | PASS | TEST 26: three stains and floor/chasm/water/trap placement failures=0. |
+| 27 | PASS | TEST 27 PASS: 300 turns unchanged; 12 charges level=1; Wraith offered; hostile attacked within 2 turns. |
+| 28 | RETIRED | Superseded by recovery: rendered-cache rebuild no longer produces the restored shipping world/characters. |
+| 29 | RETIRED | Superseded by recovery: rerendering is prohibited; Blender/cache retained unused. |
+| 30 | RETIRED | Superseded by recovery: generated character hue-distance gate replaced by upstream pixel provenance 44. |
+| 31 | PASS | Retained v1.4.0 effects evidence: off differences=0; 240 GPU-completed frames mean=0.6134ms p95=0.7963ms; CI reruns the unchanged checks. |
+| 32 | PASS | Retained floor-fire expiration and scorch placement result; no effect code changed. CI reruns the unchanged checks. |
+| 33 | PASS | Level-one Inscribe offers Blazing/Shocking/Chilling with an empty discovery catalog, leaving it unchanged; no starting Enchantment scroll; existing Runecraft cases pass. |
+| 34 | PASS | TEST 34: old/future version, portrait exception and deletion failures=0. |
+| 35 | RETIRED | Superseded by recovery: source-string grep replaced by compiled/runtime handler and network test 46. |
+| 36 | PASS | Nine splashes/descriptions/portraits, all talents and ItemSlots, 178 status draws: failures=0. Native UI also checks visible windows, tab scale and moved scroll-camera alignment. |
+| 37 | PASS | TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment. |
+| 38 | permanent known issue | 18 supplied images lack verified allowed redistribution licenses; excluded from Git; 70 licensed files eligible. |
+| 39 | RETIRED | Superseded by recovery: rejected regional iteration histories remain archival; their art no longer ships. |
+| 40 | RETIRED | Superseded by recovery: generated-room isolated metrics replaced by remembered-terrain 43 and distinctness 45. |
+| 41 | RETIRED | Superseded by recovery: generated animated liquid atlas replaced by historical scrolling water. |
+| 42 | RETIRED | Superseded by recovery: calibrated generated-region gates replaced by restored-region test 45. |
+| 43 | PASS | Retained five-region walking evidence: 788 steps, 255 turns, 75 door openings, failures=0; world rendering unchanged, CI reruns it. |
+| 44 | PASS | 102 images from 85 committed source sheets pack successfully. Initial full reconstruction check passed; final HUD layout is packed by the same compiler and CI verifies exact reconstruction. JAR/APK assets: 970 comparisons, zero mismatches. |
+| 45 | permanent known issue | Thresholds unchanged: 26/82 pairs fail. Sewers 7/21, Prison 1/10, Caves 8/21, City 3/15, Halls 7/15. Fresh Sewers room includes a trap type, so not a controlled comparison with prior 25/76. |
+| 46 | PASS | Final compiled audit: classes=2885, guarded browser sinks=1, HTTP/socket calls=0, failures=0. Native title/settings screens render; runtime handler coverage is retained and rerun by CI. |
+| 47 | PASS | Retained five-region fog evidence: 120 camera configurations; fogTexel/cell=1:1, worldUnits=16, lightQuad aligned. No fog/camera shader code changed; CI reruns all five regions. |
+| 48 | PASS | Push/Hurl exact movement and every collision/trap/chasm/boss rider at Crystal levels 0-10. |
+| 49 | PASS | 12 spent charges -> level 1 + 2 XP; 300 idle turns -> no growth; all ten thresholds, upgrade exclusions and persistence. |
+| 50 | PASS | Level-six direction/follow/attacks; level-eight 15-turn survival, permanent single-floor slot, replacement release, save/load, stairs, normal kill ownership and boss immunity. |
+
+---
+
 # Psychic and Enchanter playtest balance checkpoint
 
 Windows gate: `gradlew.bat :core:test :core:smokeRun -PsmokeUpstream=true :desktop:release :android:assembleDebug --no-daemon --console=plain` -> `BUILD SUCCESSFUL`; `Runs=90 failures=0`. A separate Psychic-only rerun also passed `Runs=10 failures=0`. The earlier full run found a knockback boundary bug and a headless fixture that did not finish attack animation after movement; both were corrected before this passing run. All other acceptance results below are retained checkpoint evidence until the interface pass is verified.

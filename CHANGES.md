@@ -2,6 +2,11 @@
 
 Upstream history retained; branch `grimhollow`. Each changed path is listed below.
 
+- Painted interface: bronze/leather and pewter panels, red/blue enamel controls, 32 navigation glyphs, glass health/shield bars and gold-bordered equipped slots preserve logical hit areas. The latest UI-overhaul request supersedes the previous UI-art retention rule; talent and identification overlays remain unchanged.
+- Complete inventory: all 381 named item IDs (380 distinct cells) now use painted 64px cells with the same world footprint and semantic IDs; seven added source sheets cover artifact states, darts, scrolls, botanicals, stones, alchemy, crafted spells, food and quest objects. Standard/exotic scroll wax and potion glass remain distinct; aliases are explicit.
+- Item descriptions scroll within the screen while their action buttons stay visible; class spell wheels fit portrait and landscape and show the equipped item's charge counter. These layout changes do not change spell costs, targets or input handlers.
+- Android CI explicitly installs platform-tools through setup-android, avoiding its obsolete default tools package; platform 36, build tools and all build/acceptance checks remain required.
+
 - Psychic playtest balance: Telekinetic Force is a non-stacking effective upgrade floor (+1/+2/+3/+4/+5 at hero levels 1/6/12/18/24) for thrown damage, strength and durability, with item descriptions exposing the floor; physical upgrade levels are unchanged.
 - Focus Crystal grows only from charges spent (levels 0-10, 10 charges then +5 per level), starts with three charges, and grants tiered Push; Seer Hurl travels two cells farther with Paralysis and one-cell movement of movable bosses. Heavy Hand now raises collision damage 25/50/75% so it preserves the explicitly requested distance formula; rooted/immovable enemies retain upstream movement immunity.
 - Crystal level 6 Dominate reuses the summoned allies' direction/follow AI while retaining the enemy's own hunting attacks; level 8 survivors become a single permanent current-floor ally. Kill rewards use normal hero channels, and Crystal XP remains spending-only.

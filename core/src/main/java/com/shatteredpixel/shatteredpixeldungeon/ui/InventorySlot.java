@@ -28,16 +28,12 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Gold;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.bags.Bag;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
-import com.watabou.gltextures.TextureCache;
-import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.audio.Sample;
 
 public class InventorySlot extends ItemSlot {
 
-	private static final int NORMAL		= 0x9953564D;
-	private static final int EQUIPPED	= 0x9991938C;
 
-	private ColorBlock bg;
+	private PaintedInterface.Patch bg;
 
 	public InventorySlot( Item item ) {
 
@@ -46,7 +42,7 @@ public class InventorySlot extends ItemSlot {
 
 	@Override
 	protected void createChildren() {
-		bg = new ColorBlock( 1, 1, NORMAL );
+		bg = PaintedInterface.slot();
 		add( bg );
 
 		super.createChildren();
@@ -84,19 +80,19 @@ public class InventorySlot extends ItemSlot {
 					item == Dungeon.hero.belongings.ring ||
 					item == Dungeon.hero.belongings.secondWep;
 
-			bg.texture( TextureCache.createSolid( equipped ? EQUIPPED : NORMAL ) );
+			bg.source(equipped ? 28 : 0, 64);
 			bg.resetColor();
 			if (item.cursed && item.cursedKnown) {
-				bg.ra = +0.3f;
-				bg.ga = -0.15f;
-				bg.ba = -0.15f;
+				bg.ra = +0.20f;
+				bg.ga = -0.06f;
+				bg.ba = -0.06f;
 			} else if (!item.isIdentified()) {
 				if ((item instanceof EquipableItem || item instanceof Wand) && item.cursedKnown){
-					bg.ba = +0.3f;
-					bg.ra = -0.1f;
+					bg.ba = +0.16f;
+					bg.ra = -0.04f;
 				} else {
-					bg.ra = +0.35f;
-					bg.ba = +0.35f;
+					bg.ra = +0.14f;
+					bg.ba = +0.14f;
 				}
 			}
 
@@ -107,7 +103,7 @@ public class InventorySlot extends ItemSlot {
 				enable(false);
 			}
 		} else {
-			bg.texture( TextureCache.createSolid( NORMAL ) );
+			bg.source(0,64);
 			bg.resetColor();
 		}
 	}

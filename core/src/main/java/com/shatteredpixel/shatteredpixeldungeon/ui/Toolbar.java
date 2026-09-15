@@ -703,7 +703,7 @@ public class Toolbar extends Component {
 		
 		private static final int BGCOLOR = 0x7B8073;
 		
-		private Image base;
+		private com.watabou.noosa.NinePatch base;
 		private Image icon;
 		
 		public Tool( int x, int y, int width, int height ) {
@@ -714,24 +714,23 @@ public class Toolbar extends Component {
 		}
 
 		public void frame( int x, int y, int width, int height) {
-			base.frame( x, y, width, height );
+			base.size( width, height );
 
 			this.width = width;
 			this.height = height;
 		}
 
 		public void icon( int x, int y, int width, int height){
-			if (icon == null) icon = new Image( Assets.Interfaces.TOOLBAR );
+			if (icon != null) icon.killAndErase();
+			icon = PaintedInterface.glyph(x==160 ? "BACKPACK_LRG" : x==176 ? "WAIT" : "MAGNIFY", width, height);
 			add(icon);
-
-			icon.frame( x, y, width, height);
 		}
 		
 		@Override
 		protected void createChildren() {
 			super.createChildren();
 			
-			base = new Image( Assets.Interfaces.TOOLBAR );
+			base = com.shatteredpixel.shatteredpixeldungeon.Chrome.get(com.shatteredpixel.shatteredpixeldungeon.Chrome.Type.GREY_BUTTON);
 			add( base );
 		}
 		

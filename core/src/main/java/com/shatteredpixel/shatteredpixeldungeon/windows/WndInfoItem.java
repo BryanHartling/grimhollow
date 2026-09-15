@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.shatteredpixeldungeon.ui.ItemSlot;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock;
+import com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Window;
 
 public class WndInfoItem extends Window {
@@ -37,6 +38,8 @@ public class WndInfoItem extends Window {
 
 	//only one WndInfoItem can appear at a time
 	private static WndInfoItem INSTANCE;
+	private ScrollPane description;
+	private float descriptionTop, descriptionHeight;
 
 	public WndInfoItem( Heap heap ) {
 
@@ -123,9 +126,30 @@ public class WndInfoItem extends Window {
 		}
 		add( title );
 
-		info.setPos(title.left(), title.bottom() + GAP);
-		add( info );
+		descriptionTop=title.bottom()+GAP;
+		descriptionHeight=info.height();
+		description=new ScrollPane(info);
+		add(description);
+		resize(width,0);
+		reserveFooter(0);
+	}
 
-		resize( width, (int)(info.bottom() + 2) );
+	/** Keep long item descriptions scrollable while leaving actions on screen. */
+	protected void reserveFooter(int footerHeight) {
+		float available=PixelScene.uiCamera.height-24-descriptionTop-footerHeight;
+		description.setRect(0,descriptionTop,width,Math.min(descriptionHeight,Math.max(20,available)));
+		resize(width,(int)Math.ceil(description.bottom()+2));
+	}
+
+	@Override public void resize(int width,int height) {
+		super.resize(width,height);
+		alignDescription();
+	}
+	@Override public void offset(int x,int y) {
+		super.offset(x,y);
+		alignDescription();
+	}
+	private void alignDescription() {
+		if(description!=null)description.setRect(0,descriptionTop,width,description.height());
 	}
 }

@@ -53,7 +53,7 @@ def icon(image):
     box=image.getchannel('A').point(lambda a:255 if a>=16 else 0).getbbox()
     if not box:raise ValueError('Empty named inventory source')
     image=image.crop(box)
-    scale=min(28/image.width,28/image.height)
+    scale=min(56/image.width,56/image.height)
     image=image.resize((max(1,round(image.width*scale)),max(1,round(image.height*scale))),Image.Resampling.LANCZOS)
     # Lanczos can leave detached, nearly transparent ringing pixels. They are
     # invisible after GPU minification but would enlarge the runtime occupancy
@@ -62,15 +62,15 @@ def icon(image):
     pixels=np.array(image)
     pixels[pixels[:,:,3]<8]=0
     image=Image.fromarray(pixels)
-    out=Image.new('RGBA',(32,32))
-    out.alpha_composite(image,((32-image.width)//2,(32-image.height)//2))
+    out=Image.new('RGBA',(64,64))
+    out.alpha_composite(image,((64-image.width)//2,(64-image.height)//2))
     return out
 
 
 def build():
     config=json.loads((HERE/'items.json').read_text(encoding='utf-8'))
     semantics=json.loads(base_file(SEMANTICS))
-    atlas=Image.open(BytesIO(base_file('core/src/main/assets/sprites/items.png'))).convert('RGBA')
+    atlas=Image.open(BytesIO(base_file('core/src/main/assets/sprites/items.png'))).convert('RGBA').resize((1024,2176),Image.Resampling.NEAREST)
     replacements={}
     for sheet,names in config['sheets'].items():
         if len(names)!=16:raise ValueError(f'{sheet}: expected sixteen named cells')
@@ -92,17 +92,20 @@ def build():
     from monsters import parts as monster_parts
     for row,name in enumerate(('CHEST','LOCKED_CHEST','CRYSTAL_CHEST','EBONY_CHEST')):
         replacements[name]=icon(monster_parts('mimics')[row*4])
+    from inventory_families import extend
+    extend(replacements,semantics)
     written={}
     for name,image in replacements.items():
         if name not in semantics['items']:raise ValueError('Unknown inventory ID '+name)
         index=semantics['items'][name]['artIndex']
         digest=hashlib.sha256(image.tobytes()).hexdigest()
         if index in written and written[index]!=digest:raise ValueError('Conflicting art index '+str(index))
-        atlas.paste(image,(index%16*32,index//16*32));written[index]=digest
+        atlas.paste(image,(index%16*64,index//16*64));written[index]=digest
     # Aliases such as DARTS and DART keep the same ID and therefore pixels.
     for entry in semantics['items'].values():
-        if entry['artIndex'] in written:entry['rgbaSha256']=written[entry['artIndex']]
-    semantics['source']='v1.1.0-painted-world identities; declared painted source cells in tools/painted/items.json; unchanged names, IDs, icon remaps and non-replaced pixels'
+        if entry['artIndex'] in written:
+            entry['rgbaSha256']=written[entry['artIndex']];entry['cellSize']=64
+    semantics['source']='v1.5.0: every named item ID uses a 64px painted cell; source mappings in tools/painted/items.json and items-continuation.json; identification names, numeric IDs and small-icon remaps are unchanged'
     return atlas,semantics,len(written)
 
 

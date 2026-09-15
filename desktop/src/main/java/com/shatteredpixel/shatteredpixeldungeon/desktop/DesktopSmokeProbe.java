@@ -24,6 +24,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean sewers;
     private final boolean vault=Boolean.getBoolean("grimhollow.vault");
     private final boolean encounters=Boolean.getBoolean("grimhollow.encounterTests");
+    private final boolean interfaceReview=Boolean.getBoolean("grimhollow.interfaceReview");
     private int encounterActions, encounterSteps, encounterAttacks, encounterLastCell=-1;
     private int[] encounterVisits;
     private volatile boolean encounterDrops, encounterSummon, encounterDeath;
@@ -53,7 +54,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         originalZoom=SPDSettings.zoom();
         // A fresh isolated settings directory defaults to the sealed tutorial room.
         // Encounter coverage requires an ordinary generated dungeon, like the saved run.
-        if(encounters)SPDSettings.intro(false);
+        if(encounters||interfaceReview)SPDSettings.intro(false);
     }
     private void capture(String name) {
         Pixmap screenshot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());
@@ -65,6 +66,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     @Override public void render() {
         super.render();
         frames++;
+        if(interfaceReview && frames>180) { interfaceTick(); return; }
         if(encounters && frames>180) { encounterTick(); return; }
         if(recovery!=null&&frames>180) {
             if(recovery.tick()) {
@@ -88,6 +90,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             }
             if (!sewers) { Gdx.app.exit(); return; }
             GamesInProgress.selectedClass=(encounters||vault||Boolean.getBoolean("grimhollow.renderPoc"))?HeroClass.NECROMANCER:HeroClass.WARRIOR;
+            if(interfaceReview)GamesInProgress.selectedClass=HeroClass.PSYCHIC;
             GamesInProgress.curSlot=99;
             if(encounters && Integer.getInteger("grimhollow.saveSlot",0)>0) {
                 try {
@@ -141,6 +144,93 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if (Boolean.getBoolean("grimhollow.iteration")) liquidTests();
             System.out.println("PASS: "+(vault?"Vault":"Sewer")+" scene renders with dynamic lighting on and off.");
             Gdx.app.exit();
+        }
+    }
+
+    /** Review actual inventory, scrolling descriptions and class controls in both orientations. */
+    private void interfaceTick() {
+        if(!(Game.scene() instanceof GameScene))return;
+        Camera.main.edgeScroll.set(0);
+        com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal crystal=Dungeon.hero.belongings.getItem(
+                com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal.class);
+        if(frames==220)Camera.main.snapTo(Dungeon.hero.sprite.center().x,Dungeon.hero.sprite.center().y);
+        if(frames==230)capture("hud");
+        if(frames==240) {
+            String[] fixtures={"artifacts.HornOfPlenty","artifacts.DriedRose","potions.PotionOfMindVision",
+                    "scrolls.ScrollOfUpgrade","scrolls.exotic.ScrollOfEnchantment","stones.StoneOfAugmentation",
+                    "wands.WandOfBlastWave","weapon.missiles.darts.PoisonDart","food.Pasty","quest.Pickaxe",
+                    "spells.PhaseShift","spells.Alchemize"};
+            try {
+                for(String name:fixtures)Dungeon.hero.belongings.backpack.items.add(
+                        (com.shatteredpixel.shatteredpixeldungeon.items.Item)Class.forName(
+                                "com.shatteredpixel.shatteredpixeldungeon.items."+name).getDeclaredConstructor().newInstance());
+            }catch(Exception e){throw new RuntimeException(e);}
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBag(Dungeon.hero.belongings.backpack));
+        } else if(frames==300) { interfaceBounds();capture("inventory"); }
+        else if(frames==320) {
+            closeReviewWindows();GameScene.centerNextWndOnInvPane();
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,crystal));
+        } else if(frames==380) { interfaceBounds();capture("crystal-description");scrollReview(Game.scene()); }
+        else if(frames==420)capture("crystal-description-bottom");
+        else if(frames==440) {
+            closeReviewWindows();Dungeon.hero.subClass=com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass.PUPPETEER;
+            crystal.execute(Dungeon.hero,"CAST");
+        } else if(frames==500) { interfaceBounds();capture("psychic-spells"); }
+        else if(frames==520) { closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndHero()); }
+        else if(frames==580) { interfaceBounds();capture("hero-sheet"); }
+        else if(frames==600) { closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndSettings()); }
+        else if(frames==660) { interfaceBounds();capture("settings"); }
+        else if(frames==680) {
+            closeReviewWindows();
+            if(Boolean.getBoolean("grimhollow.geometryTests"))geometryTests();
+            System.out.println("INTERFACE: inventory, item actions, scrollable Crystal details, five-spell wheel, hero sheet and settings fit "
+                    +Gdx.graphics.getWidth()+"x"+Gdx.graphics.getHeight()+"; failures=0");
+            SPDSettings.dynamicLighting(originalLighting);SPDSettings.zoom(originalZoom);Gdx.app.exit();
+        }
+    }
+    private void closeReviewWindows() {
+        for(com.watabou.noosa.Gizmo child:new java.util.ArrayList<>(RecoveryChecks.members(Game.scene())))
+            if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.Window)
+                ((com.shatteredpixel.shatteredpixeldungeon.ui.Window)child).hide();
+    }
+    private void scrollReview(Group group) {
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(group)) {
+            if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)
+                ((com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)child).scrollTo(0,10000);
+            else if(child instanceof Group)scrollReview((Group)child);
+        }
+    }
+    private void interfaceBounds() {
+        if(Boolean.getBoolean("grimhollow.interfacePortrait") && Gdx.graphics.getWidth()>=Gdx.graphics.getHeight())
+            throw new AssertionError("Portrait review requires a tall render surface");
+        boolean found=false;
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.Window) {
+            found=true;Camera camera=((com.shatteredpixel.shatteredpixeldungeon.ui.Window)child).camera();
+            if(camera.x<0||camera.y<0||camera.x+camera.width*camera.zoom>Gdx.graphics.getWidth()+1
+                    ||camera.y+camera.height*camera.zoom>Gdx.graphics.getHeight()+1)
+                throw new AssertionError("Interface window clipped: "+child.getClass().getSimpleName());
+            if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem)
+                for(com.watabou.noosa.Gizmo part:RecoveryChecks.members((Group)child))
+                    if(part instanceof com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane) {
+                        com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)part;
+                        com.watabou.utils.Point at=pane.camera().cameraToScreen(pane.left(),pane.top());
+                        Camera content=pane.content().camera;
+                        if(content.x!=at.x||content.y!=at.y)throw new AssertionError("Item scroll camera detached from moved window");
+                    }
+        }
+        if(!found)throw new AssertionError("Interface review window missing");
+        interfaceTabs(Game.scene());
+    }
+    private void interfaceTabs(Group group) {
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(group))if(child instanceof Group) {
+            for(Class<?> type=child.getClass();type!=null;type=type.getSuperclass())if(type.getName().endsWith("WndTabbed$IconTab")) {
+                try {
+                    java.lang.reflect.Field field=type.getDeclaredField("icon");field.setAccessible(true);
+                    Image icon=(Image)field.get(child);
+                    if(icon.width()>24||icon.height()>24)throw new AssertionError("Tab icon reverted to texture dimensions");
+                }catch(ReflectiveOperationException e){throw new RuntimeException(e);}
+            }
+            interfaceTabs((Group)child);
         }
     }
 
@@ -490,7 +580,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 band(sprite,16,.45f,.55f,buffer,camera,zoom,failures,"25 "+field.getName());
                 com.badlogic.gdx.utils.JsonValue expected=semantics.get("items").get(field.getName());
                 semanticItem(sprite,index,expected,field.getName(),failures);
-                exactRectangle(sprite,expected.getInt("artIndex"),32,buffer,camera,zoom,failures,field.getName());items++;sprite.destroy();
+                exactRectangle(sprite,expected.getInt("artIndex"),com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.SIZE,buffer,camera,zoom,failures,field.getName());items++;sprite.destroy();
                 final int itemIndex=index;
                 com.shatteredpixel.shatteredpixeldungeon.ui.ItemSlot slot=new com.shatteredpixel.shatteredpixeldungeon.ui.ItemSlot(new com.shatteredpixel.shatteredpixeldungeon.items.Item(){@Override public int image(){return itemIndex;}});
                 slot.setRect(16,8,24,24);slot.camera=camera;
@@ -709,7 +799,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if(id!=expected.getInt("id"))failures.add("25 changed identity "+name);
         java.security.MessageDigest digest=java.security.MessageDigest.getInstance("SHA-256");
         com.watabou.utils.RectF uv=image.frame();int x=Math.round(uv.left*image.texture.width),y=Math.round(uv.top*image.texture.height);
-        for(int j=0;j<32;j++)for(int i=0;i<32;i++) {
+        int cellSize=expected.getInt("cellSize",32);
+        for(int j=0;j<cellSize;j++)for(int i=0;i<cellSize;i++) {
             int rgba=image.texture.bitmap.getPixel(x+i,y+j);
             digest.update(new byte[]{(byte)(rgba>>>24),(byte)(rgba>>>16),(byte)(rgba>>>8),(byte)rgba});
         }

@@ -88,6 +88,8 @@ public class IconTitle extends Component {
 	protected void layout() {
 
 		health.visible = !Float.isNaN( healthLvl );
+		if(imIcon instanceof ItemSprite)
+			com.shatteredpixel.shatteredpixeldungeon.GameGeometry.fitBox(imIcon,14,14);
 
 		imIcon.x = x + (Math.max(0, 8 - imIcon.width()/2));
 		imIcon.y = y + (Math.max(0, 8 - imIcon.height()/2));

@@ -41,3 +41,7 @@ application-label:'Grimhollow'
 package: name='com.grimhollow.dungeon' versionCode='943' versionName='1.4.0-INDEV' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
 application-label:'Grimhollow'
 
+
+package: name='com.grimhollow.dungeon' versionCode='944' versionName='1.5.0-INDEV' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+application-label:'Grimhollow'
+

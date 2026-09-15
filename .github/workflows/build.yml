@@ -64,6 +64,15 @@ jobs:
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         shell: bash
         run: xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-encounters" -Dgrimhollow.encounterTests=true -Dgrimhollow.encounterFixture=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
+      - name: Painted interface in landscape and portrait
+        if: ${{ !cancelled() && runner.os == 'Linux' }}
+        shell: bash
+        run: |
+          for orientation in landscape portrait; do
+            portrait=false
+            if [ "$orientation" = portrait ]; then portrait=true; fi
+            xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-ui-$orientation" -Dgrimhollow.interfaceReview=true -Dgrimhollow.interfacePortrait=$portrait -Dgrimhollow.smokeDir="verification/interface/$orientation" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
+          done
       - name: Vault boss arena and elemental forms in the existing renderer
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         run: xvfb-run -a java -Dgrimhollow.vault=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
@@ -71,7 +80,9 @@ jobs:
         if: ${{ !cancelled() }}
         with:
           name: grimhollow-recovery-evidence-${{ matrix.os }}
-          path: verification/recovery/
+          path: |
+            verification/recovery/
+            verification/interface/
           retention-days: 14
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
@@ -90,6 +101,8 @@ jobs:
           distribution: temurin
           java-version: '17'
       - uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
       - uses: gradle/actions/setup-gradle@v4
       - name: Install compile SDK and build tools
         run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0'

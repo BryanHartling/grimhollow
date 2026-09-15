@@ -17,12 +17,22 @@
     "details.png": "e00209673cb5d728a3fbc173f1ede610c474d37c8ab7f5f33eae0c56fda72631",
     "door-states.png": "83e3ee128b98dcd8cd669dc6112bee07175544ed4a9f70711581aebb50b9853f",
     "halls-materials.png": "ca23d09f9bcbcf2bcae30ffc4f906539c5d7a39889f521ce3f537a5661235d00",
+    "interface/frames.png": "0a38c310f9864bce7f352a26548fb2aa32161f8a6bac003614673373fc1d3550",
+    "interface/navigation-a.png": "e86bbb2e781d1ce1f8e69b993770fe554400cb24e12af159259824e482bb1c5e",
+    "interface/navigation-b.png": "2a315b774c1c6882b690a2950323ec755c1e81af0e4167b9ecc7f51d0a04c4bf",
+    "items/artifact-states.png": "5874f430a1f5c3431b1e49ac995f96710676699b0e51eb58ad6beb35101123d8",
     "items/artifacts.png": "f20c43dbe96e2dcfa06ea98a32178586097ebf9e3f1c91a2028f59c4e95eb544",
     "items/bombs.png": "3bcd12a395e105db08dec845531441f59ce1f8e51f47037efa6a26bdd188ddc6",
+    "items/botanicals-stones.png": "bd98baa6554495c48d5a451e22ae3116edcee9f99f4ba88f44d7043bd1feb9c6",
     "items/class-kit.png": "590b04ac662584c0106a97191921dec36b55d939d11cb785a26a6f3f8a87ff3b",
+    "items/crafted-spells.png": "4faf92adb8112089616d03b69ae16260eb34bfa8db06b6b381ad26cb6a8c4ffd",
+    "items/food-quest.png": "94c2e1c23acdc6b7ebdd98732bf30527e4f1f1aba9a9c6393f71513f707f0bef",
     "items/missiles.png": "fd0b7a31bf6a408fa29bf938cb3e1ffcc13f377d9f497f61eaeca12dc2630d23",
     "items/potions.png": "19f187ea92fab80e9571a8ba3dc0bd60d1e283bb38b5cc8074559bd924cac95b",
+    "items/quest-remnants.png": "a02a741c67dc969eb88ade80c0fa9679225cfded559dd2f3e93b682f92da626e",
     "items/rings.png": "0649a6030511d281c91c5b4ffdc9568028e30107354937e4793a5c7c0646d387",
+    "items/scrolls-runes.png": "04d98efce0e41555fac861cd99d97ce0e69d01932d9fb9ae0ecd9a2ffa4cf332",
+    "items/stones-alchemy.png": "80f415132a47c8479679d2e485de56fa77038ec48cdaff382146bdcdaec36cee",
     "items/supplies.png": "2927a01b4e7bb84ed85a4d08cb8080545aa5bd8d2f398501bb6657c2c4e05082",
     "items/treasures.png": "e456bc78a775e6cd5acb8ee785da6781f8d1c758d66962c6baefbbccf9e66e87",
     "items/trinkets.png": "46c2629c6b550eef134d4eadf277043a90b17a6befd87e42915777b283c39c10",
@@ -235,10 +245,10 @@
     },
     "sprites/items.png": {
       "size": [
-        512,
-        1088
+        1024,
+        2176
       ],
-      "rgba_sha256": "9723b3189ca017500c5f02c554335da25c802af6d7b582d87dbf8ef091099740"
+      "rgba_sha256": "e5d05422e246dfa7977a0afd44285f5f39f5a1ac9ce7487f9470125e21aeea36"
     },
     "interfaces/title_grimhollow.png": {
       "size": [
@@ -8851,6 +8861,27 @@
         512
       ],
       "rgba_sha256": "3f0cfd63c01160839a0213a2849f8f4986ba86bbd2356e9bf5177334d46ff5b4"
+    },
+    "interfaces/chrome.png": {
+      "size": [
+        512,
+        384
+      ],
+      "rgba_sha256": "5577aefe9d3ef7e8274bd726701ea62a1df48fe44cf0e211db2e06812a6e8254"
+    },
+    "interfaces/status_pane.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "35bf8207a863e37af5d9df12e04f503b13118312afd21d73fad7150e14149705"
+    },
+    "interfaces/painted_glyphs.png": {
+      "size": [
+        512,
+        256
+      ],
+      "rgba_sha256": "67f9ccbfba3e2f29f5cbb6b239e9a96434da71dc92b77d22efb36d6f6deba037"
     }
   }
 }

@@ -444,7 +444,7 @@ public enum Icons {
 				break;
 
 		}
-		return icon;
+		return PaintedInterface.replace(type, icon);
 	}
 
 	private static int runTypeOfsX(){

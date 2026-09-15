@@ -1,0 +1,159 @@
+{
+  "tool": "built-in imagegen",
+  "assets": [
+    {
+      "file": "sources/items/artifact-states.png",
+      "names": [
+        "ARTIFACT_HORN1",
+        "ARTIFACT_HORN2",
+        "ARTIFACT_HORN3",
+        "ARTIFACT_HORN4",
+        "ARTIFACT_CHALICE1",
+        "ARTIFACT_CHALICE2",
+        "ARTIFACT_CHALICE3",
+        "ARTIFACT_ROSE1",
+        "ARTIFACT_ROSE2",
+        "ARTIFACT_ROSE3",
+        "DART",
+        "ARCANE_RESIN",
+        "STYLUS",
+        "TRINKET_CATA",
+        "CANDLE",
+        "DUST"
+      ],
+      "prompt": "Original hand-painted realistic dark-fantasy RPG inventory atlas, exactly 4 columns and 4 rows of sixteen isolated objects, on genuine transparent alpha, square 1536x1536. No backdrop, no checkerboard, no ground shadows, no grid lines or labels. All objects fully contained and centered in equal cells with clear transparent gutters. Bold distinctive silhouettes, textured natural materials and soft upper-left light, ivory highlights, muted bronze and earthen colors. Crisp readable tiny game inventory objects, NOT pixel art, not cartoon, no franchise assets. Read row by row left to right: 1 empty brown cornucopia food horn with brass rim; 2 same horn holding a small bread roll; 3 same horn holding bread and red apple; 4 same horn abundantly overflowing with bread fruit grapes; 5 old silver ritual chalice empty; 6 same silver chalice half filled with deep red liquid; 7 same silver chalice full with a faint crimson glow; 8 dry wilted brown rose on crooked stem; 9 half-revived rose with dark red petals and a few green leaves; 10 lush deep crimson rose with green stem and leaves; 11 plain steel-tipped throwing dart with brown feather vanes; 12 violet translucent resin lump; 13 ivory engraving stylus with bronze handle; 14 small alchemical catalyst flask with amber crystal granules; 15 short ivory wax candle with tiny flame; 16 a small pale gray heap of ancient dust."
+    },
+    {
+      "file": "sources/items/scrolls-runes.png",
+      "names": [
+        "SCROLL_KAUNAN",
+        "SCROLL_SOWILO",
+        "SCROLL_LAGUZ",
+        "SCROLL_YNGVI",
+        "SCROLL_GYFU",
+        "SCROLL_RAIDO",
+        "SCROLL_ISAZ",
+        "SCROLL_MANNAZ",
+        "SCROLL_NAUDIZ",
+        "SCROLL_BERKANAN",
+        "SCROLL_ODAL",
+        "SCROLL_TIWAZ",
+        "GUIDE_PAGE",
+        "ALCH_PAGE",
+        "TORN_PAGE",
+        "ESCAPE"
+      ],
+      "prompt": "Original hand-painted realistic dark-fantasy RPG inventory atlas, exactly 4 columns and 4 rows of sixteen isolated objects, on genuine transparent alpha, square 1536x1536. No backdrop, no checkerboard, no ground shadows, no grid lines or labels. All objects fully contained and centered in equal cells with clear transparent gutters. Bold distinctive silhouettes, textured natural materials and soft upper-left light, ivory highlights, muted bronze and earthen colors. Crisp readable tiny game inventory objects, NOT pixel art, not cartoon, no franchise assets. Read row by row left to right: The first twelve are matching short partly unrolled ivory parchment scrolls, top and bottom curled ends and dark red wax seals, each with ONE large easily distinguished dark brown runic ink mark: 1 angular less-than sign; 2 lightning zigzag rune; 3 vertical staff with single down-sloping right branch; 4 diamond-shaped rune; 5 crossed X rune; 6 angular R rune; 7 plain vertical I stroke rune; 8 two staffs with crossing diagonal tops resembling angular M; 9 vertical staff crossed by one diagonal; 10 angular B rune; 11 diamond with two legs descending outward; 12 upward arrow rune. 13 loose ivory guidebook page with small quill sketch; 14 loose ivory page with small flask sketch; 15 ragged torn illuminated manuscript page fragment; 16 narrow carved pale stone escape talisman with an incised door glyph. No readable words."
+    },
+    {
+      "file": "sources/items/botanicals-stones.png",
+      "names": [
+        "SEED_ROTBERRY",
+        "SEED_FIREBLOOM",
+        "SEED_SWIFTTHISTLE",
+        "SEED_SUNGRASS",
+        "SEED_ICECAP",
+        "SEED_STORMVINE",
+        "SEED_SORROWMOSS",
+        "SEED_MAGEROYAL",
+        "SEED_EARTHROOT",
+        "SEED_STARFLOWER",
+        "SEED_FADELEAF",
+        "SEED_BLINDWEED",
+        "STONE_AGGRESSION",
+        "STONE_AUGMENTATION",
+        "STONE_FEAR",
+        "STONE_BLAST"
+      ],
+      "prompt": "Original hand-painted realistic dark-fantasy RPG inventory atlas, exactly 4 columns and 4 rows of sixteen isolated objects, on genuine transparent alpha, square 1536x1536. No backdrop, no checkerboard, no ground shadows, no grid lines or labels. All objects fully contained and centered in equal cells with clear transparent gutters. Bold distinctive silhouettes, textured natural materials and soft upper-left light, ivory highlights, muted bronze and earthen colors. Crisp readable tiny game inventory objects, NOT pixel art, not cartoon, no franchise assets. Read row by row left to right: 1 cluster of crimson rotberry seeds with red husk; 2 red-orange firebloom seed pod; 3 bronze-brown swiftthistle seed with wing tuft; 4 bright green sungrass seed with short leaf; 5 pale icy blue icecap seed; 6 violet stormvine seed curled like a tiny spiral; 7 deep green sorrowmoss seed with moss fringe; 8 pink mageroyal seed in a purple split husk; 9 ochre knobbly earthroot seed; 10 pale gold starflower seed with star-shaped husk; 11 turquoise fadeleaf seed with curled teal leaf; 12 charcoal blindweed seed with gray bristles; 13 irregular blood-red rune stone engraved with crossed blades; 14 warm ochre rune stone engraved with two linked triangles; 15 dark violet rune stone engraved with a staring eye; 16 charcoal rune stone with glowing orange radial explosion crack."
+    },
+    {
+      "file": "sources/items/stones-alchemy.png",
+      "names": [
+        "STONE_BLINK",
+        "STONE_CLAIRVOYANCE",
+        "STONE_SLEEP",
+        "STONE_DETECT",
+        "STONE_ENCHANT",
+        "STONE_FLOCK",
+        "STONE_INTUITION",
+        "STONE_SHOCK",
+        "BREW_INFERNAL",
+        "BREW_BLIZZARD",
+        "BREW_SHOCKING",
+        "BREW_CAUSTIC",
+        "BREW_AQUA",
+        "BREW_UNSTABLE",
+        "ELIXIR_DRAGON",
+        "ELIXIR_FEATHER"
+      ],
+      "prompt": "Original hand-painted realistic dark-fantasy RPG inventory atlas, exactly 4 columns and 4 rows of sixteen isolated objects, on genuine transparent alpha, square 1536x1536. No backdrop, no checkerboard, no ground shadows, no grid lines or labels. All objects fully contained and centered in equal cells with clear transparent gutters. Bold distinctive silhouettes, textured natural materials and soft upper-left light, ivory highlights, muted bronze and earthen colors. Crisp readable tiny game inventory objects, NOT pixel art, not cartoon, no franchise assets. Read row by row left to right: 1 irregular turquoise rune stone with double-arrow engraving; 2 blue rune stone engraved with wide open eye; 3 violet rune stone with crescent moon; 4 green rune stone with concentric rings; 5 rose quartz rune stone with star engraving; 6 ivory rune stone with a sheep engraving; 7 amber rune stone with a lightbulb-like teardrop rune; 8 slate-blue rune stone with a bright lightning engraving; 9 squat black alchemy jug holding fiery orange liquid; 10 frosted white ceramic jug with pale blue rim; 11 squat brass jug with electric blue liquid; 12 squat acid-green glass jug with dark iron collar; 13 wide teal glass jug filled with clear water; 14 cracked purple-glass jug with swirling iridescent liquid; 15 elegant ruby glass elixir flask wrapped by an original bronze dragon; 16 slender pale blue elixir flask tied to an ivory feather."
+    },
+    {
+      "file": "sources/items/crafted-spells.png",
+      "names": [
+        "WILD_ENERGY",
+        "PHASE_SHIFT",
+        "TELE_GRAB",
+        "UNSTABLE_SPELL",
+        "CURSE_INFUSE",
+        "MAGIC_INFUSE",
+        "ALCHEMIZE",
+        "RECYCLE",
+        "RECLAIM_TRAP",
+        "RETURN_BEACON",
+        "SUMMON_ELE",
+        "SUMMON_ELE_FIRE",
+        "SUMMON_ELE_FROST",
+        "SUMMON_ELE_SHOCK",
+        "SUMMON_ELE_CHAOS",
+        "ELIXIR_ARCANE"
+      ],
+      "prompt": "Original hand-painted realistic dark-fantasy RPG inventory atlas, exactly 4 columns and 4 rows of sixteen isolated objects, on genuine transparent alpha, square 1536x1536. No backdrop, no checkerboard, no ground shadows, no grid lines or labels. All objects fully contained and centered in equal cells with clear transparent gutters. Bold distinctive silhouettes, textured natural materials and soft upper-left light, ivory highlights, muted bronze and earthen colors. Crisp readable tiny game inventory objects, NOT pixel art, not cartoon, no franchise assets. Read row by row left to right: The first fifteen are small square ivory parchment spell cards, edges slightly worn, each bearing a single large colored painted magical emblem with no writing: 1 two wild forked violet lightning bolts; 2 turquoise swirling portal; 3 pale spectral hand; 4 cracked violet star; 5 crimson skull over dark crystal; 6 bright cyan star over pale crystal; 7 gold coin with small flask; 8 two green circular arrows; 9 iron jaw trap with teal lifting arrow; 10 bronze beacon with a returning gold arrow; 11 gray stone elemental head surrounded by four tiny elemental motes; 12 red-orange elemental flame face; 13 white-blue elemental frost face; 14 bright yellow-blue elemental lightning face; 15 violet-black elemental chaos face. 16 an ornate purple elixir bottle with a bronze crescent collar. Keep every card separate, ample alpha gutters."
+    },
+    {
+      "file": "sources/items/food-quest.png",
+      "names": [
+        "STEWED",
+        "CARPACCIO",
+        "BLAND_CHUNKS",
+        "PHANTOM_MEAT",
+        "SUPPLY_RATION",
+        "STEAMED_FISH",
+        "FISH_LEFTOVER",
+        "CHOC_AMULET",
+        "EASTER_EGG",
+        "SHATTERED_CAKE",
+        "PUMPKIN_PIE",
+        "VANILLA_CAKE",
+        "CANDY_CANE",
+        "PICKAXE",
+        "ORE",
+        "TOKEN"
+      ],
+      "prompt": "Original hand-painted realistic dark-fantasy RPG inventory atlas, exactly 4 columns and 4 rows of sixteen isolated objects, on genuine transparent alpha, square 1536x1536. No backdrop, no checkerboard, no ground shadows, no grid lines or labels. All objects fully contained and centered in equal cells with clear transparent gutters. Bold distinctive silhouettes, textured natural materials and soft upper-left light, ivory highlights, muted bronze and earthen colors. Crisp readable tiny game inventory objects, NOT pixel art, not cartoon, no franchise assets. Read row by row left to right: 1 small rustic clay bowl of vegetable stew; 2 raw thin red meat slices on a small wooden plate; 3 chopped tan fruit chunks; 4 spectral pale violet translucent cut of meat; 5 folded brown ration parcel tied with twine; 6 whole cooked fish on a green leaf; 7 fish skeleton and a little remaining flesh on a leaf; 8 dark chocolate ankh-shaped amulet; 9 decoratively painted pale spring egg with gold and green bands; 10 sliced dark chocolate celebration cake with a small red berry; 11 golden-orange pumpkin pie wedge; 12 ivory vanilla cake wedge; 13 red and ivory striped candy cane; 14 worn steel pickaxe with wooden handle; 15 irregular lump of gold ore in dark rock; 16 ancient round brass token with square hole."
+    },
+    {
+      "file": "sources/items/quest-remnants.png",
+      "names": [
+        "SANDBAG",
+        "SPIRIT_ARROW",
+        "TENGU_BOMB",
+        "TENGU_SHOCKER",
+        "GEO_BOULDER",
+        "SEAL_SHARD",
+        "BROKEN_STAFF",
+        "CLOAK_SCRAP",
+        "BOW_FRAGMENT",
+        "BROKEN_HILT",
+        "EMBER",
+        "BLOB",
+        "SHARD",
+        "STATUE",
+        "ELIXIR_ARCANE",
+        "RAINBOW_POTION"
+      ],
+      "prompt": "Original hand-painted realistic dark-fantasy RPG inventory atlas, exactly 4 columns and 4 rows of sixteen isolated objects, on genuine transparent alpha, square 1536x1536. No backdrop, no checkerboard, no ground shadows, no grid lines or labels. All objects fully contained and centered in equal cells with clear transparent gutters. Bold distinctive silhouettes, textured natural materials and soft upper-left light, ivory highlights, muted bronze and earthen colors. Crisp readable tiny game inventory objects, NOT pixel art, not cartoon, no franchise assets. Read row by row left to right: 1 small tied leather pouch spilling a little golden sand; 2 slender ghostly teal arrow with luminous pale fletching; 3 small iron spherical ninja bomb with short glowing fuse; 4 small square iron electric trap device with copper coils; 5 rough gray stone boulder; 6 broken red wax seal fragment on a scrap of leather; 7 snapped wooden mage staff fragment with tiny purple crystal; 8 ragged dark purple magical cloak scrap; 9 broken carved wooden bow limb with loose string; 10 snapped steel sword hilt with simple brass guard; 11 irregular glowing orange ember coal; 12 glossy lump of black-purple dungeon slime; 13 sharp jagged iron machine fragment; 14 small dark bronze imp statuette with pointed ears folded bat wings and a mischievous grin; 15 ornate purple glass elixir bottle with bronze crescent collar, isolated bottle NOT a card; 16 small clear round potion bottle with iridescent rainbow liquid."
+    }
+  ]
+}

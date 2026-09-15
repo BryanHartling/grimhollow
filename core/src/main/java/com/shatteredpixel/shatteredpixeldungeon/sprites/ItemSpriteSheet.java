@@ -30,8 +30,8 @@ public class ItemSpriteSheet {
 
 	public static final int SIZE = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM;
 
-	private static final int TX_WIDTH = 512;
-	private static final int TX_HEIGHT = 1088;
+	private static final int TX_WIDTH = 16 * SIZE;
+	private static final int TX_HEIGHT = 34 * SIZE;
 
 	private static final int WIDTH = TX_WIDTH / SIZE;
 

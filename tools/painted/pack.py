@@ -193,6 +193,8 @@ def outputs():
     result.update(monsters())
     from status import outputs as status
     result.update(status())
+    from interface_art import outputs as interface_art
+    result.update(interface_art())
     return result
 
 
@@ -210,10 +212,10 @@ def main():
     from monsters import coverage
     painted_rects=coverage()
     for path,im in built.items():
-        expected=(512,1088) if path=='sprites/items.png' else (1024,512) if path.startswith('sprites/hero_') else (512,512) if '/water' in path else (256,512) if '/raised_terrain' in path else (1024,1024)
+        expected=(1024,2176) if path=='sprites/items.png' else (1024,512) if path.startswith('sprites/hero_') else (512,512) if '/water' in path else (256,512) if '/raised_terrain' in path else (1024,1024)
         expected={'interfaces/title_grimhollow.png':(1920,1080),'interfaces/title_wordmark.png':(1024,144),'interfaces/title_mist.png':(1024,342)}.get(path,expected)
         expected=fixed_monster_sizes.get(path,expected)
-        expected={'interfaces/buffs.png':(448,224),'interfaces/large_buffs.png':(1024,512)}.get(path,expected)
+        expected={'interfaces/buffs.png':(448,224),'interfaces/large_buffs.png':(1024,512),'interfaces/chrome.png':(512,384),'interfaces/status_pane.png':(1024,512),'interfaces/painted_glyphs.png':(512,256)}.get(path,expected)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]

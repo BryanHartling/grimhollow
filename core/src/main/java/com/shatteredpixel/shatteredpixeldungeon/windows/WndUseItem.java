@@ -76,7 +76,9 @@ public class WndUseItem extends WndInfoItem {
 				}
 
 			}
-			y = layoutButtons(buttons, width, y);
+			float footerHeight=layoutButtons(new ArrayList<>(buttons),width,0);
+			reserveFooter((int)Math.ceil(footerHeight+GAP));
+			y = layoutButtons(buttons, width, height+GAP);
 
 			ItemJournalButton btn = new ItemJournalButton(item, this);
 			btn.setRect(width - 16, 0, 16, 16);

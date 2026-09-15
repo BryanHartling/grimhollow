@@ -236,7 +236,7 @@ final class RecoveryChecks {
     }
 
     @SuppressWarnings("unchecked")
-    private static List<Gizmo> members(Group group) {return (List<Gizmo>)field(group,"members");}
+    static List<Gizmo> members(Group group) {return (List<Gizmo>)field(group,"members");}
 
     private void checkRemembered() {
         GameScene scene=(GameScene)Game.scene();Level l=Dungeon.level;int w=l.width();

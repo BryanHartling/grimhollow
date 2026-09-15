@@ -1,2291 +1,2672 @@
 {
-  "source": "v1.1.0-painted-world identities; declared painted source cells in tools/painted/items.json; unchanged names, IDs, icon remaps and non-replaced pixels",
+  "source": "v1.5.0: every named item ID uses a 64px painted cell; source mappings in tools/painted/items.json and items-continuation.json; identification names, numeric IDs and small-icon remaps are unchanged",
   "items": {
     "SOMETHING": {
       "id": 0,
       "artIndex": 0,
       "kind": "chest",
-      "rgbaSha256": "94e2318d3857bb197295dd5b29890be3e96cb2931db942cd21b45595be8809c7"
+      "rgbaSha256": "0acd82f11a17480c601c184949b445b52da9e6d0c540fa6bf3a58a448bcc79a2",
+      "cellSize": 64
     },
     "WEAPON_HOLDER": {
       "id": 1,
       "artIndex": 1,
       "kind": "sword",
-      "rgbaSha256": "434db6c1555ba6cd552b3e13ac3fca3110f680526221754d0ae1e885302c509a"
+      "rgbaSha256": "ea8e7de26eb61532938c5f1ff7242a7f4934b023a22ebd80468d6e3eeb6accfd",
+      "cellSize": 64
     },
     "ARMOR_HOLDER": {
       "id": 2,
       "artIndex": 2,
       "kind": "armor",
-      "rgbaSha256": "fe14844bad958444cb920f17be0b856339c3a7a7ce4879d022fac555f11e259b"
+      "rgbaSha256": "fcd72587cdbab497006ad729a2529ff04e5f84fac7960afe0d5de1989d468302",
+      "cellSize": 64
     },
     "MISSILE_HOLDER": {
       "id": 3,
       "artIndex": 3,
       "kind": "arrow",
-      "rgbaSha256": "7645a4feac2d8bfdc5820affbeaa70e35ee627d355ffb1ff8f43c340a4d1f730"
+      "rgbaSha256": "df5be59084f048949994854783d4810333875b5d728db0bca63503aa4e161ab3",
+      "cellSize": 64
     },
     "WAND_HOLDER": {
       "id": 4,
       "artIndex": 4,
       "kind": "wand",
-      "rgbaSha256": "a202977fafe65a8e4c3269b41d7a5d0459ea3b2d801e8036669884a6360366eb"
+      "rgbaSha256": "60a3d410aef50475496d6bd8194bb017b09309349d263cefea1d7d21f5a9b6d5",
+      "cellSize": 64
     },
     "RING_HOLDER": {
       "id": 5,
       "artIndex": 5,
       "kind": "ring",
-      "rgbaSha256": "df410e877eea0add3a6ce6eab508ae4d3c537b4fe132ab6d300719a692058805"
+      "rgbaSha256": "0d27be640f654274c98e31a9ef3c1ac10d330b8096fbd0abb8efe6cc82d1a207",
+      "cellSize": 64
     },
     "ARTIFACT_HOLDER": {
       "id": 6,
       "artIndex": 6,
       "kind": "amulet",
-      "rgbaSha256": "5e91eae06b4fd9fde254cd30eb49e9e0db072152e53dc918f5286e64193f89bf"
+      "rgbaSha256": "c3e6d3ce424d7b7b594b8393dea46821c5602925910db0225f11fb1d4812176a",
+      "cellSize": 64
     },
     "TRINKET_HOLDER": {
       "id": 7,
       "artIndex": 7,
       "kind": "crystal",
-      "rgbaSha256": "5b4c1ea5bd000fb9f00e517362a29a93b7d076ecb579e0bfae3382b8ff88dad4"
+      "rgbaSha256": "6106f2e4683aad5bd3a2b7d57b9fffbba8e789ef3d45a9ac9870b522cc921a5c",
+      "cellSize": 64
     },
     "FOOD_HOLDER": {
       "id": 8,
       "artIndex": 8,
       "kind": "ration",
-      "rgbaSha256": "0ea18a457b90380b6f31425622cddb2d6a7a8bdc6df919f8ab1cb8e438882c44"
+      "rgbaSha256": "1cee82aebc17d23a8b578a1fe8c589421ba10254f9807659398a03cdb7cac53c",
+      "cellSize": 64
     },
     "BOMB_HOLDER": {
       "id": 9,
       "artIndex": 9,
       "kind": "bomb",
-      "rgbaSha256": "dd034820bc6954bad89b5532cce4633de03866b58fb630bf4b86d51153493aa4"
+      "rgbaSha256": "7e8c76cbcb59631a741fc2f996c67d084010ab6bb50875a9bb6d085fee589ef3",
+      "cellSize": 64
     },
     "POTION_HOLDER": {
       "id": 10,
       "artIndex": 10,
       "kind": "bottle",
-      "rgbaSha256": "e0b8d4ac6dafddae76343cc1470178ecf2781a2d6984a8ab957d939f901951a6"
+      "rgbaSha256": "a08aaee0182fa7bc5aaad2712dc995781e1d4bda1f42e9a1138a40ba26cc8a34",
+      "cellSize": 64
     },
     "SEED_HOLDER": {
       "id": 11,
       "artIndex": 11,
       "kind": "seed",
-      "rgbaSha256": "b6c806cf57a3861d6e77fe4f0d00709197cfaa83cbe5fb0cd293ff330a7c9d52"
+      "rgbaSha256": "d6db41e31b7cac413387888f7fa2fa4934a594753338f82f4abb9087c9eeaa33",
+      "cellSize": 64
     },
     "SCROLL_HOLDER": {
       "id": 12,
       "artIndex": 12,
       "kind": "scroll",
-      "rgbaSha256": "6c78220a39385070cedbfb67ba8bef524483827fa1ca26f5ac9dc526c89e8e33"
+      "rgbaSha256": "56291befa0715f63150f52a00140b0e14f9941653c6efa1cda21d300cb296173",
+      "cellSize": 64
     },
     "STONE_HOLDER": {
       "id": 13,
       "artIndex": 13,
       "kind": "stone",
-      "rgbaSha256": "a5d3e6cb99c4b532503d2ea63c493f65e8cb716fe75e7ed0b4fb0b730406c91a"
+      "rgbaSha256": "012bcae2978fa18390a439241b24813c43750a5532e55dab5f1f1e2edf0bdd79",
+      "cellSize": 64
     },
     "ELIXIR_HOLDER": {
       "id": 14,
       "artIndex": 14,
       "kind": "bottle",
-      "rgbaSha256": "5660811c6f8822d1cfc20bafaf7db347859db56d291b7d6baf8a304e7650f527"
+      "rgbaSha256": "e2a4525da2e5721a24cf201acfae520ba308b027de1b64427fe3dae6726f2ce6",
+      "cellSize": 64
     },
     "SPELL_HOLDER": {
       "id": 15,
       "artIndex": 15,
       "kind": "tablet",
-      "rgbaSha256": "4b5cc4988c056ac4d4894709c73ecceedbda1c0fb5e0db4883d7ea11a9b4a079"
+      "rgbaSha256": "dd0f8151187047320b49d4062edbfc921bf8d9bf15c970d933413ea1ee7e4629",
+      "cellSize": 64
     },
     "MOB_HOLDER": {
       "id": 16,
       "artIndex": 16,
       "kind": "skull",
-      "rgbaSha256": "164b90e0247e586f0a1e611d7a9ae624118d444db3ad4d1861a063bf3e97fc7a"
+      "rgbaSha256": "6106f2e4683aad5bd3a2b7d57b9fffbba8e789ef3d45a9ac9870b522cc921a5c",
+      "cellSize": 64
     },
     "DOCUMENT_HOLDER": {
       "id": 17,
       "artIndex": 17,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "183cb6db5329d82d3a7961bc557730409374da7aed8cf889938f44c469aea377",
+      "cellSize": 64
     },
     "GOLD": {
       "id": 18,
       "artIndex": 18,
       "kind": "coins",
-      "rgbaSha256": "c4215f7c0552d3ab9f0f86978f4b861b4a55c900da68c96abee6c95b41060eee"
+      "rgbaSha256": "016dee95a02419877136b7aa9c8f0891d58c029c0f1cad1d6d167521f970aa9f",
+      "cellSize": 64
     },
     "ENERGY": {
       "id": 19,
       "artIndex": 19,
       "kind": "crystal",
-      "rgbaSha256": "780f4174dad11507893124721a0566bd63600aede16222e6a19e2373df7b9f09"
+      "rgbaSha256": "d476ce09b98da3830aacef8a64bdf7914c59d3fc9ac3f63b3348fa7f61ee6cb9",
+      "cellSize": 64
     },
     "DEWDROP": {
       "id": 21,
       "artIndex": 21,
       "kind": "drop",
-      "rgbaSha256": "9be793f8ceb0da7b8df9de3a13274285eeeaf21d9e7a8948ad1b1e992d3e2e4f"
+      "rgbaSha256": "ffbc38d447e3b5d73a12da46f0bd0880ba34275bcc20fc9d2b1a46678b25844b",
+      "cellSize": 64
     },
     "PETAL": {
       "id": 22,
       "artIndex": 22,
       "kind": "leaf",
-      "rgbaSha256": "65625ea267f08600a5cdfb11e363f861bd4bebb376db7081878db5a5a132d1a3"
+      "rgbaSha256": "bf4fe35414fec6fe876d151bf502d257f839ce7dd7370ccdd3ab0cbb44471f4f",
+      "cellSize": 64
     },
     "SANDBAG": {
       "id": 23,
       "artIndex": 23,
       "kind": "bag",
-      "rgbaSha256": "f0f969ee0a0c09a0058ee685de57b2c2fb01809129dac08532d1ce6f2ea5cef8"
+      "rgbaSha256": "f75538fa9067960e3d7474c28ab3f6d89e243073674b18c3962792e1f663b947",
+      "cellSize": 64
     },
     "SPIRIT_ARROW": {
       "id": 24,
       "artIndex": 24,
       "kind": "arrow",
-      "rgbaSha256": "2e6ac549c728c1ca75f1df9a3bbe24cd61125efd2c1812bfc9ce544e9f9138fe"
+      "rgbaSha256": "b3fe295d03ecca38d5c0a5b2cf59110a4f20a07fc2c598230d372bcbc2cdae0f",
+      "cellSize": 64
     },
     "TENGU_BOMB": {
       "id": 26,
       "artIndex": 26,
       "kind": "bomb",
-      "rgbaSha256": "dd034820bc6954bad89b5532cce4633de03866b58fb630bf4b86d51153493aa4"
+      "rgbaSha256": "d0a4e30db2ca80e2a5a2e3c474133d92e4b7bef0a80ac384b6d494695b5a378c",
+      "cellSize": 64
     },
     "TENGU_SHOCKER": {
       "id": 27,
       "artIndex": 27,
       "kind": "bomb",
-      "rgbaSha256": "b95af6cf6678bcb1929e27c8b80fbd7f2d6cd7731e83a15fa8ee0c2e3115f35a"
+      "rgbaSha256": "7ee0bb54e81e17f6784d0e4692546a333235252341ff86215f435ed403e8544e",
+      "cellSize": 64
     },
     "GEO_BOULDER": {
       "id": 28,
       "artIndex": 28,
       "kind": "stone",
-      "rgbaSha256": "a5d3e6cb99c4b532503d2ea63c493f65e8cb716fe75e7ed0b4fb0b730406c91a"
+      "rgbaSha256": "765b0d688ada6b124fc7474022571d27136e9e60bb993770d24ab2d7ca59eca7",
+      "cellSize": 64
     },
     "BONES": {
       "id": 32,
       "artIndex": 32,
       "kind": "bones",
-      "rgbaSha256": "c8ce5d7a7ef9f6229317456e80bd7ce19be700e5e24bf4611acc8b4af7d70331"
+      "rgbaSha256": "38a12a1e65deab6c639c4110b3381b6f7fd36654fa6aa4fddc2e84f50d464970",
+      "cellSize": 64
     },
     "REMAINS": {
       "id": 33,
       "artIndex": 33,
       "kind": "bones",
-      "rgbaSha256": "6000d5c995e081324315417794db70e027a9b6a98571e3ed38d7f41c2b50ad4d"
+      "rgbaSha256": "a77952ebe740669ab8f746acf849b172bb3f6516ee65704ff821ff7b7150cb7a",
+      "cellSize": 64
     },
     "TOMB": {
       "id": 34,
       "artIndex": 34,
       "kind": "tomb",
-      "rgbaSha256": "36cb3749099759dbb6c392496904867917c278a62c3dfe5d3659f7ed21dcab88"
+      "rgbaSha256": "999d7852a30be81108869b07ece672195110c054fdd93349be13944994fe666d",
+      "cellSize": 64
     },
     "GRAVE": {
       "id": 35,
       "artIndex": 35,
       "kind": "tomb",
-      "rgbaSha256": "40a10d81afb95a6570792b059853055b9f7781e96daeea61e12a1b964806ee10"
+      "rgbaSha256": "eb57c623cb381b18358b8d5b5dcc103958d9cb0cccba5b859287cb0fd72f83f7",
+      "cellSize": 64
     },
     "CHEST": {
       "id": 36,
       "artIndex": 36,
       "kind": "chest",
-      "rgbaSha256": "9e8b0dd4b8484aef74ba0d69c25e44563638c568275e359a086dd074f5d4ac4d"
+      "rgbaSha256": "9efe8b6417f2403233526fbecef5fccb8a72dee87fc26392ebe9efc1b5da9ebf",
+      "cellSize": 64
     },
     "LOCKED_CHEST": {
       "id": 37,
       "artIndex": 37,
       "kind": "chest",
-      "rgbaSha256": "80976555e22b72e0576ff9275a29f0261e120044f64fb9c9b2e61c431952bc0b"
+      "rgbaSha256": "c878d705cfc49be932ab26de4c892dfb85576a1b18dc7276a25e89dfe3193a0f",
+      "cellSize": 64
     },
     "CRYSTAL_CHEST": {
       "id": 38,
       "artIndex": 38,
       "kind": "chest",
-      "rgbaSha256": "5be6899cae9df45be8d540fc906e7ae3a2c31fb6543eb56e79839e32d3ed48b2"
+      "rgbaSha256": "7b4a00af46ed7b701aebb60bb523b1fd313ea3db7202709faaa951cb882d3556",
+      "cellSize": 64
     },
     "EBONY_CHEST": {
       "id": 39,
       "artIndex": 39,
       "kind": "chest",
-      "rgbaSha256": "7932767809a6a12777350d58123ce79fe70d52f13fadb6a011b90556ebc4ccae"
+      "rgbaSha256": "3ddf4ce40ec07b04eff9708ba75b8d287ea8f3be330327cda7bd2c5761aa4884",
+      "cellSize": 64
     },
     "ANKH": {
       "id": 48,
       "artIndex": 48,
       "kind": "ankh",
-      "rgbaSha256": "5be2bac15d4129293fb49b405696e5f568bd2adb6893b1d01eb52683e97c7f94"
+      "rgbaSha256": "74d6d4d5197b259524edd37ae4905d858bf6818654fd974e7149cb079dc41df1",
+      "cellSize": 64
     },
     "STYLUS": {
       "id": 49,
       "artIndex": 49,
       "kind": "wand",
-      "rgbaSha256": "98a6952ac78a8f10c6133d6bc07ccfbddf353eaa09cc47c55c648850488fd918"
+      "rgbaSha256": "2224e9729af39d423f61a5cd478ef9f8ee159f8f11ae91546f5ed33d9980d5bb",
+      "cellSize": 64
     },
     "SEAL": {
       "id": 50,
       "artIndex": 50,
       "kind": "seal",
-      "rgbaSha256": "9d95e2c0540f808621029c1ab59f602695bf39882d011e76303f1c5ca9fa09fd"
+      "rgbaSha256": "1a5abc90731221086fa69682cf2de913f653f7108e804a6d40b7ed4e7399354f",
+      "cellSize": 64
     },
     "TORCH": {
       "id": 51,
       "artIndex": 51,
       "kind": "torch",
-      "rgbaSha256": "1ee82715ae0ebebc8c8cd6c309ad467c0fe506d87394833332820a78a18d3e54"
+      "rgbaSha256": "58893e80dc896e795161cda373589f10ce409b0fbdf7a0515e1c6d21f0e07ad3",
+      "cellSize": 64
     },
     "BEACON": {
       "id": 52,
       "artIndex": 52,
       "kind": "lantern",
-      "rgbaSha256": "6c352f1e084835c4e20b08b03ef252aee83d9eff3aba52daa84f168b46f8a088"
+      "rgbaSha256": "953e4a6073b6c468c9fbcae64f99de6e943bbfbe88871fbaece2ccb011c134b2",
+      "cellSize": 64
     },
     "HONEYPOT": {
       "id": 53,
       "artIndex": 53,
       "kind": "pot",
-      "rgbaSha256": "814733c5e37adecc1e07b03b9bec362c4cadb51d3908ab67735046750ebc70e2"
+      "rgbaSha256": "2afb55c0e33125359195cb4e22e58b894c14539d126d3219242b01a69bc3cb5f",
+      "cellSize": 64
     },
     "SHATTPOT": {
       "id": 54,
       "artIndex": 54,
       "kind": "pot",
-      "rgbaSha256": "1b21a303d175e3e9662c288c12d281c08a0d21d550bf119ef9e07e4df06c9938"
+      "rgbaSha256": "d30c08ac719b2186e36888e3c38c0ec5ab6287d988e081e2bf6516607911a4f9",
+      "cellSize": 64
     },
     "IRON_KEY": {
       "id": 55,
       "artIndex": 55,
       "kind": "key",
-      "rgbaSha256": "20d5cbdf851ce3b0655854167ef37992082eefcf5f04d8eedb19f726bfffd203"
+      "rgbaSha256": "e4866bd2214d884989c9a2cad1cae2bb12377c69e40732f90b64929fbde7c979",
+      "cellSize": 64
     },
     "GOLDEN_KEY": {
       "id": 56,
       "artIndex": 56,
       "kind": "key",
-      "rgbaSha256": "6188f22063f45abe10e7cb3275d98d39419e95c3401c49b598b5bcf1bc3a2b82"
+      "rgbaSha256": "aaf260736dfcff4fee03ec7a2bec6a42a756609901977c64e326fe71a6b1451f",
+      "cellSize": 64
     },
     "CRYSTAL_KEY": {
       "id": 57,
       "artIndex": 57,
       "kind": "key",
-      "rgbaSha256": "383be3e38fd2fad0a4157c9f61133b97a9e146395e875e82ea432bc605f8a897"
+      "rgbaSha256": "1062670fdd7e1141cbd2e273c561f7bd9ca8746975e697ce86a5dd53a61ce106",
+      "cellSize": 64
     },
     "WORN_KEY": {
       "id": 58,
       "artIndex": 58,
       "kind": "key",
-      "rgbaSha256": "b8e838c0da34550aefd83dd2fe6d70b8cef7cb11a2cd7c4a4edf90787796adfb"
+      "rgbaSha256": "bf8f97a845c313da149e5b6c7b54b2a7b817a83c69cafb67ba40faf4b8a17369",
+      "cellSize": 64
     },
     "MASK": {
       "id": 59,
       "artIndex": 59,
       "kind": "mask",
-      "rgbaSha256": "aadccd2bf777f8b2591f93174c0cdabd2ce33a0183ed768997835916d3f1b590"
+      "rgbaSha256": "bffdab0e5e5cffcdf2f307ecc34d81c3c88788a5806d2a7865a857cdb0af4271",
+      "cellSize": 64
     },
     "CROWN": {
       "id": 60,
       "artIndex": 60,
       "kind": "crown",
-      "rgbaSha256": "ade355a84e0a6c1c876bb628bca870e6827b30ce8c6377d8f917c81a069f7fd7"
+      "rgbaSha256": "20132e0b6c403950a76ffa69f13df264a48d22933dc8c7fa035a0aa8d8d6f191",
+      "cellSize": 64
     },
     "AMULET": {
       "id": 61,
       "artIndex": 61,
       "kind": "amulet",
-      "rgbaSha256": "ab8220e1261605cef9e60a68d8ce4fd4fabdc1da3b07e9a146fdbccfd1a9820e"
+      "rgbaSha256": "c259c6b88028b8a1a2986d484b946bd0339b0a02eaac4ca7d0d218c9f6b36a46",
+      "cellSize": 64
     },
     "MASTERY": {
       "id": 62,
       "artIndex": 62,
       "kind": "book",
-      "rgbaSha256": "f629d32daab3fc4d29d2227212424ccd30ede26ea537d03cd9ac58f6a28e9c9a"
+      "rgbaSha256": "3290c026440b17d0ee1d5598307bda2b7037492861bc7ca988e887be1c3ca7ae",
+      "cellSize": 64
     },
     "KIT": {
       "id": 63,
       "artIndex": 63,
       "kind": "toolkit",
-      "rgbaSha256": "34d00bac53651b23cb2bcc2bb8ab278236d380e7aabaea147419876da9db0b0b"
+      "rgbaSha256": "a9116bc8a60a1c74f1956aed789f9f2c697c39ad2303f0e85579b445fa889b50",
+      "cellSize": 64
     },
     "SEAL_SHARD": {
       "id": 64,
       "artIndex": 64,
       "kind": "shard",
-      "rgbaSha256": "3065371ee2b01799da0edd4fe15073148257aeffacbfa7ad65625057da59907b"
+      "rgbaSha256": "14e5687eac3c6ed76ca0adb71e986fc85d2f7de9c34fda1034ba08d135542aae",
+      "cellSize": 64
     },
     "BROKEN_STAFF": {
       "id": 65,
       "artIndex": 65,
       "kind": "wand",
-      "rgbaSha256": "ab6a7e33fcf8cd4ef4d9a951db3a46f0a66195eea3c2311f5d422bb53b42cb1e"
+      "rgbaSha256": "501703ddf94d54f0103f50cffa3e4b84bcd860c82e2fdd7a1433c54c8a8ce0a6",
+      "cellSize": 64
     },
     "CLOAK_SCRAP": {
       "id": 66,
       "artIndex": 66,
       "kind": "cloak",
-      "rgbaSha256": "f3a6d1755bb76eec1762c6385c5fed78c8a29b1125c90a692972aa0ff670a4a1"
+      "rgbaSha256": "0664f1ce4b40debdd3a1b90949fc378bcf571e7fe17d351bea6c93af88e765e6",
+      "cellSize": 64
     },
     "BOW_FRAGMENT": {
       "id": 67,
       "artIndex": 67,
       "kind": "bow",
-      "rgbaSha256": "8d956457487b2f70d213e14d7c53d0de1218651bbb111972532b2e92fef9671f"
+      "rgbaSha256": "c7097901d5119f6dd722ad9b83238dd931c9e57f9125d5890f868350395833e8",
+      "cellSize": 64
     },
     "BROKEN_HILT": {
       "id": 68,
       "artIndex": 68,
       "kind": "sword",
-      "rgbaSha256": "b8fd750a295909b334669ee85f0737384f171917c6d655c694e70789dd0779d5"
+      "rgbaSha256": "1901b1896eeab1238490d191423950ea958b51b23204650cfff296a580ad5a1d",
+      "cellSize": 64
     },
     "TORN_PAGE": {
       "id": 69,
       "artIndex": 69,
       "kind": "scroll",
-      "rgbaSha256": "6c78220a39385070cedbfb67ba8bef524483827fa1ca26f5ac9dc526c89e8e33"
+      "rgbaSha256": "bcc73314c6795c774da78f9fea9f8fe17fafed0907bcb8f16e10c2dbcfe816e4",
+      "cellSize": 64
     },
     "TRINKET_CATA": {
       "id": 70,
       "artIndex": 70,
       "kind": "crystal",
-      "rgbaSha256": "ebbf06b16e79fd8d96e869313cb2e74870254411df7269b5d08def4c892f9011"
+      "rgbaSha256": "ad753e401f769c6f8362f3d253f4f71aa3c3c7de73d71c7a4ae32fca6e2fddbe",
+      "cellSize": 64
     },
     "BOMB": {
       "id": 80,
       "artIndex": 80,
       "kind": "bomb",
-      "rgbaSha256": "84e7c56a54865edea7b9539fdfc8aa3813f19439f9cf015b5a7ac644bd274575"
+      "rgbaSha256": "8b2bfc0caae49eae82e6d1fa26229be62bd35556b95a11024f9b8303f8df2d6b",
+      "cellSize": 64
     },
     "DBL_BOMB": {
       "id": 81,
       "artIndex": 81,
       "kind": "bomb",
-      "rgbaSha256": "bce6edeb714880733e1be43cf34834f03f5a7a6e3040c3f1790e8174f6b2a5fc"
+      "rgbaSha256": "413caf9111c949a10e80d8eccea7b112964cdc08115583e2db8adc24ccf324d0",
+      "cellSize": 64
     },
     "FIRE_BOMB": {
       "id": 82,
       "artIndex": 82,
       "kind": "bomb",
-      "rgbaSha256": "f456d4a1c9ff31b7b948baf4a8861139e8dfabb147049147d2a476aecca5e11f"
+      "rgbaSha256": "3380deca9201d4b127da371d2815a121dab1a2eeabe4ed2c42a689bde3e47211",
+      "cellSize": 64
     },
     "FROST_BOMB": {
       "id": 83,
       "artIndex": 83,
       "kind": "bomb",
-      "rgbaSha256": "ca89f40265fd146992ea094024da6c3c0b06fac9ba8f38bd531c357950776b1b"
+      "rgbaSha256": "ee87098c4c60400927a8392537cf13f342ad61f01d01ac779d1fb9fb4b839142",
+      "cellSize": 64
     },
     "REGROWTH_BOMB": {
       "id": 84,
       "artIndex": 84,
       "kind": "bomb",
-      "rgbaSha256": "f32327f51a5545b9d1a8fd122cba304a5b5414dee1a50c3deb334c3f5e27cf74"
+      "rgbaSha256": "b76149beed273a06a4b4b034dc39c55f325a0af0cf583eb8949abb70abffeae6",
+      "cellSize": 64
     },
     "SMOKE_BOMB": {
       "id": 85,
       "artIndex": 85,
       "kind": "bomb",
-      "rgbaSha256": "6b0a13a47f507bd38bb864b7edf05a6338dbc590820411c9f69c4f2ab4036a55"
+      "rgbaSha256": "d9ed6f6cf1622e552133b7c0602fe7ca2839189accaa3d88853b31d33e4e259d",
+      "cellSize": 64
     },
     "FLASHBANG": {
       "id": 86,
       "artIndex": 86,
       "kind": "bomb",
-      "rgbaSha256": "670e1b8936dfd4ac0bdb7d70769700184fd89db7f5900512021bd30d232165f5"
+      "rgbaSha256": "b480186cc897f63302d26056644873073f0d6613cbe047fac497bb5bc86114e6",
+      "cellSize": 64
     },
     "HOLY_BOMB": {
       "id": 87,
       "artIndex": 87,
       "kind": "bomb",
-      "rgbaSha256": "ca1481779635f728bb731426b5c93317e44eade585bd8637e0d07290ac6dc6ba"
+      "rgbaSha256": "48a2636530d0913e8a938e9c006800c104b534e7480a3b3be175ae95b7931ddc",
+      "cellSize": 64
     },
     "WOOLY_BOMB": {
       "id": 88,
       "artIndex": 88,
       "kind": "bomb",
-      "rgbaSha256": "bf4eec235f1ce8756f854b8ba0008129f5618eccb2bd8cad1065ec382c3e9eb5"
+      "rgbaSha256": "1c59c2379edf516885a6828bbdb9c06abf898aba970a7305c0452dd39bcdc96c",
+      "cellSize": 64
     },
     "NOISEMAKER": {
       "id": 89,
       "artIndex": 89,
       "kind": "bomb",
-      "rgbaSha256": "d105f628847020d36b6fae39a7713bdc0cd377905608f3a694290696490c4409"
+      "rgbaSha256": "68b45d6c1c1efc3bf09bb3d3d859813eeb22da52c59345167044ae60bdccb3d4",
+      "cellSize": 64
     },
     "ARCANE_BOMB": {
       "id": 90,
       "artIndex": 90,
       "kind": "bomb",
-      "rgbaSha256": "cafa85ec909ea1574eb7456a9c484715996720acc5baddc7399ed61191502e32"
+      "rgbaSha256": "384ee375f8bd2c7d64cc9a729587f14086667c7250bf49ef5e6e3abedada8ac8",
+      "cellSize": 64
     },
     "SHRAPNEL_BOMB": {
       "id": 91,
       "artIndex": 91,
       "kind": "bomb",
-      "rgbaSha256": "838b133afd6be7a72ae4cd1e881ffda9560d9ea05064411d739eb770986ec254"
+      "rgbaSha256": "e3bdb28e0536b9e211fd5aa7e18d858c8e12049c42dce98b4f437fe2121828b9",
+      "cellSize": 64
     },
     "WORN_SHORTSWORD": {
       "id": 96,
       "artIndex": 96,
       "kind": "sword",
-      "rgbaSha256": "d378f724b8ef104aee959698908521cd519789f013bd0b0899fa3c2f4ba17a1f"
+      "rgbaSha256": "3cf10444189f72919b6f4b69e6af8fe3103f205ae87898053c317689e5a3dbb4",
+      "cellSize": 64
     },
     "CUDGEL": {
       "id": 97,
       "artIndex": 97,
       "kind": "club",
-      "rgbaSha256": "1d52db30f21f7ace6a73308f80a0376c7d459c878e8ab25bea15e8b05deef1bd"
+      "rgbaSha256": "9d5d15f486809b94f3fbf1141b62e71340142443df16248cb11cb6e827a39fd2",
+      "cellSize": 64
     },
     "GLOVES": {
       "id": 98,
       "artIndex": 98,
       "kind": "glove",
-      "rgbaSha256": "2551abe8737195ea0e3059a2a1d58fac1ab4fccf644433641250ab0ebab85002"
+      "rgbaSha256": "a14b5c3546e42ea28aab647f11bc0d01f4c0c438e5cfce9128024abb33d88a51",
+      "cellSize": 64
     },
     "RAPIER": {
       "id": 99,
       "artIndex": 99,
       "kind": "sword",
-      "rgbaSha256": "d0f3305dd51efbfd13f025456d6dc22bf0c820c4fd5681ff285ed373d9d17595"
+      "rgbaSha256": "3b0575eb2a346cc5fdcfc82af728d657187af4231fe679a9a8226909f8d58504",
+      "cellSize": 64
     },
     "DAGGER": {
       "id": 100,
       "artIndex": 100,
       "kind": "dagger",
-      "rgbaSha256": "8cd37dbaacb447c6f99d64c37957125a83a91aeba58d27c14d0df3437f1ed698"
+      "rgbaSha256": "8414ec82d7268c22c0cff42c2f495183808cd201b22737c5d54d19fa0789b245",
+      "cellSize": 64
     },
     "MAGES_STAFF": {
       "id": 101,
       "artIndex": 101,
       "kind": "staff",
-      "rgbaSha256": "5bee4d414d83fa8ebc083555d34d8940c6ac80f804744e3587c7e84059d782cb"
+      "rgbaSha256": "eaa051882a49ac1b0126a2638839ba4db8a7509593d6d98689577349d3e2d2f9",
+      "cellSize": 64
     },
     "SHORTSWORD": {
       "id": 104,
       "artIndex": 104,
       "kind": "sword",
-      "rgbaSha256": "0bcfd7652c91f1433db0e1621ca0be3b5bdfb0e57639863058c0f2c42b9dfdfa"
+      "rgbaSha256": "500e50f1ac2d0cc8577d0ef72c4cd7f901ece5c8f681e624ae0b36a390b8d293",
+      "cellSize": 64
     },
     "HAND_AXE": {
       "id": 105,
       "artIndex": 105,
       "kind": "axe",
-      "rgbaSha256": "898219a3e9b016fddc13197770550c16e87998573369cba3443f64cf684070ab"
+      "rgbaSha256": "afabfcbbd7cd5f1c60f63faeb46c4d83f92dd4b34c511d94e57cbeb1d40a1a6c",
+      "cellSize": 64
     },
     "SPEAR": {
       "id": 106,
       "artIndex": 106,
       "kind": "spear",
-      "rgbaSha256": "620f6072937ad7ef00d5055692d67bea5cf1268cbaeadc102f94df326fb7ad01"
+      "rgbaSha256": "f743bcf543cc5c2f27fccf5c34f83ddec46c9774f5f1c6ad9860f1f862fbdefa",
+      "cellSize": 64
     },
     "QUARTERSTAFF": {
       "id": 107,
       "artIndex": 107,
       "kind": "staff",
-      "rgbaSha256": "7fbcdb0a5b9abe92e311f1908c2fff94106bff39c0041d8d4d71e6be61cfdc47"
+      "rgbaSha256": "5faf147439b65706d5117d37f29efb93e66ca11d6cd88c5d5f3638855d7837e0",
+      "cellSize": 64
     },
     "DIRK": {
       "id": 108,
       "artIndex": 108,
       "kind": "dagger",
-      "rgbaSha256": "ca038773fc7385fcfd3ff5dcdf902089f8faa6850b65d39e2ee3f779c514256e"
+      "rgbaSha256": "fc1b67f36101b7a160a9d2d29fe71185493638d7c50cb872dcff0e576adb2a63",
+      "cellSize": 64
     },
     "SICKLE": {
       "id": 109,
       "artIndex": 109,
       "kind": "scythe",
-      "rgbaSha256": "f20b76f90f7d98fde56828b49543940c926b5d886e844c54b3ac9be73f4ebbbe"
+      "rgbaSha256": "b2242c115c2cafb2ddd82aee07bbd3328daa1af517a7d1a63840a658da2df278",
+      "cellSize": 64
     },
     "SWORD": {
       "id": 112,
       "artIndex": 112,
       "kind": "sword",
-      "rgbaSha256": "97db500ffd9672d4e23c2e544cc28af873e3d8c31b554176d054e4f8cbfdc5da"
+      "rgbaSha256": "37f48bd53716222ee802ba8473bac16982f344dc011709ad72b5e46201cf9f8f",
+      "cellSize": 64
     },
     "MACE": {
       "id": 113,
       "artIndex": 113,
       "kind": "mace",
-      "rgbaSha256": "36c84ac73e8f1cd23b9ebbc7348eb8f2782703a1e9f221bfcd70e2ecaa2f23c5"
+      "rgbaSha256": "1868169f4d1cba86675c3a4c7cf3a903dcdeaa1daf5ebff9fe180b840fdfca5f",
+      "cellSize": 64
     },
     "SCIMITAR": {
       "id": 114,
       "artIndex": 114,
       "kind": "sword",
-      "rgbaSha256": "339bb90e739ca17a0a5a32b6b2ebb29155b33208f5126db7dcaef72d7cfe64e0"
+      "rgbaSha256": "cb8973c61a1c476b058db7d7e7e035852948ac26fe6f3f6836d0d765fff23239",
+      "cellSize": 64
     },
     "ROUND_SHIELD": {
       "id": 115,
       "artIndex": 115,
       "kind": "shield",
-      "rgbaSha256": "451eae11ae36ad46c634c6355f3867fef6145bc614d82c2f3e24b0202b623997"
+      "rgbaSha256": "78539406ae7f463cd160496e70a8adfd9e16b53ac37bc912ab85c84a863eca6d",
+      "cellSize": 64
     },
     "SAI": {
       "id": 116,
       "artIndex": 116,
       "kind": "trident",
-      "rgbaSha256": "6ae391c62056aa8b19a70150d80575bfd23eb31bfe2d0e141313cc41e4a00dd6"
+      "rgbaSha256": "a06da24e7f3a34c4f7ad97238b8ab11a27bb5defd79068ba0f534ba9d04ac814",
+      "cellSize": 64
     },
     "WHIP": {
       "id": 117,
       "artIndex": 117,
       "kind": "whip",
-      "rgbaSha256": "e39f12a82bc5a0969d35c6df0df55095b7b17accaeb39450402f4c96ad853311"
+      "rgbaSha256": "94d052bde0c18a39a225aa1ce002190f915b482c98ecd3f4e609bb6e33dc769e",
+      "cellSize": 64
     },
     "LONGSWORD": {
       "id": 120,
       "artIndex": 120,
       "kind": "sword",
-      "rgbaSha256": "6624c0caaed0fedc92080d863573b65f6d4f4a5766754c98c4bd92d999e7f918"
+      "rgbaSha256": "217b87a238c6dea69cd74c097a78737b09125eebbe16953d21a6350d945ede2f",
+      "cellSize": 64
     },
     "BATTLE_AXE": {
       "id": 121,
       "artIndex": 121,
       "kind": "axe",
-      "rgbaSha256": "0c88c100965726b3bf1ec50f336e56afc254387fce2cd43dcf78d72adcb6a296"
+      "rgbaSha256": "0fe91ed51f58fdfa6efa9b256906d718a150401e8fbee9932676aaba79931a4b",
+      "cellSize": 64
     },
     "FLAIL": {
       "id": 122,
       "artIndex": 122,
       "kind": "flail",
-      "rgbaSha256": "8b824879cac2161757c5084c299d9782bdb847db6eda27fbbbb0c64a31b9462e"
+      "rgbaSha256": "a8737027475adef74ee0be591a1d9ecd0d47ce1f3e6348e00d080ee49ee766d9",
+      "cellSize": 64
     },
     "RUNIC_BLADE": {
       "id": 123,
       "artIndex": 123,
       "kind": "sword",
-      "rgbaSha256": "fc24553f8b5a695fd5fe0e155751eff5f41580e96562a1048196fcbe4c875970"
+      "rgbaSha256": "e672b2c2514f64752bbfef8fb847e301a635160ef18f6142369ecbc161bbb73c",
+      "cellSize": 64
     },
     "ASSASSINS_BLADE": {
       "id": 124,
       "artIndex": 124,
       "kind": "sword",
-      "rgbaSha256": "06deeefbc78e42174342931cd179772f536b97659628b9819e1f15eac32415f3"
+      "rgbaSha256": "eee41533857f1cecb87e39acc350b8efbbfc5fd6fc7a841382d741b1de254b41",
+      "cellSize": 64
     },
     "CROSSBOW": {
       "id": 125,
       "artIndex": 125,
       "kind": "crossbow",
-      "rgbaSha256": "91bd7752f53ef55800943ec265f9b65dc091fbbef024d6b0a6ebd3f0552f9bef"
+      "rgbaSha256": "5359ddfec3ca79222ce2f48c707996635e6f59255029b90bc269a5c2ffd72a13",
+      "cellSize": 64
     },
     "KATANA": {
       "id": 126,
       "artIndex": 126,
       "kind": "sword",
-      "rgbaSha256": "64dbd19631ee1a9c1d85507e33c7090799d0cc0ee0c0898dd28584c34e6624ea"
+      "rgbaSha256": "83f5f9a27b999f7d4a5c5bf515cc5e860ea0f6e1c8c5adb613e55721fe571f92",
+      "cellSize": 64
     },
     "GREATSWORD": {
       "id": 128,
       "artIndex": 128,
       "kind": "sword",
-      "rgbaSha256": "5bf4de2e6cef7293fc809ee50e4143d07baffcd9d9e4730262db6164b83de3d9"
+      "rgbaSha256": "4acad89d1beb30c2a04fcffb4acfb1cb797ffbd0ef1ac2783c07dffa9eff20ac",
+      "cellSize": 64
     },
     "WAR_HAMMER": {
       "id": 129,
       "artIndex": 129,
       "kind": "hammer",
-      "rgbaSha256": "cba0ff65cd3e78e6397b9fe52d1cc2506902bb541179047a83abd07a2d4bd691"
+      "rgbaSha256": "53a45a726e79f90f5e7125a8c335d8b6ca8f83c88ef91798c240dde44115af88",
+      "cellSize": 64
     },
     "GLAIVE": {
       "id": 130,
       "artIndex": 130,
       "kind": "spear",
-      "rgbaSha256": "b2e998926756e0ff0e83b2ccc15bafa4d4c9c4b9d7e04cbd6ad026839204a3aa"
+      "rgbaSha256": "0166bd95ffcc39500f308defc02699f883a591ebaa38d1f024fcb52d3979db5b",
+      "cellSize": 64
     },
     "GREATAXE": {
       "id": 131,
       "artIndex": 131,
       "kind": "axe",
-      "rgbaSha256": "f7837a029b25b1befe406d96aa26d42b6767521f833561ecec45ce4ecc467a3a"
+      "rgbaSha256": "84e76024b1f0d28a454c78569044d3a04e97601fe9729c1a799fca918c3a3362",
+      "cellSize": 64
     },
     "GREATSHIELD": {
       "id": 132,
       "artIndex": 132,
       "kind": "shield",
-      "rgbaSha256": "d7e9fde2f5ee7512cb15156ab05ad36fd42a1090c362ca1f5db1ddde546322b7"
+      "rgbaSha256": "a66e8899ceb64d8cd3c6a706c64c086db5092f45a871659cbcb3ff795e385e44",
+      "cellSize": 64
     },
     "GAUNTLETS": {
       "id": 133,
       "artIndex": 133,
       "kind": "glove",
-      "rgbaSha256": "07fcd43210befeb0defecb0521a8e44b1a9f2fcc14214d83973b820605d87792"
+      "rgbaSha256": "4168b3ef895178bd851e082ec34315cec38e3fe3b882122901165ad7d85d7812",
+      "cellSize": 64
     },
     "WAR_SCYTHE": {
       "id": 134,
       "artIndex": 134,
       "kind": "scythe",
-      "rgbaSha256": "5074b5e45fea970fa16744828043934db78bc47e58afa027523404609fc69636"
+      "rgbaSha256": "f54802dfd28fa5f94fd1ece605a530f91abdb213da41040c652a6519fa0f9ca9",
+      "cellSize": 64
     },
     "SPIRIT_BOW": {
       "id": 144,
       "artIndex": 144,
       "kind": "bow",
-      "rgbaSha256": "95619e99af21e8bc92a0cdba6ba457896d89b47e012b2e71d8fe3ab69b245322"
+      "rgbaSha256": "4cc0330c1187c18857cf82e062f510351b0c3c388aa8e222e9688d57aa2fc5b0",
+      "cellSize": 64
     },
     "THROWING_SPIKE": {
       "id": 145,
       "artIndex": 145,
       "kind": "arrow",
-      "rgbaSha256": "ebf939afe9e398d5699086ccc010d65ee6144a25895b42f52a61a0c07f0def81"
+      "rgbaSha256": "94e513b79d38c7fe8ca80b0586cb5cfe8c9d2a4409cd93f824eb2d5e09475731",
+      "cellSize": 64
     },
     "THROWING_KNIFE": {
       "id": 146,
       "artIndex": 146,
       "kind": "dagger",
-      "rgbaSha256": "b5c54c00c587cbaa3e34a3c67bfaa200e17a433f711c3a578d7eac08907e783d"
+      "rgbaSha256": "049cbb785e01fc0b3048259b8154b31eaa8c673b466dd045e6af9cdfa720e2d4",
+      "cellSize": 64
     },
     "THROWING_STONE": {
       "id": 147,
       "artIndex": 147,
       "kind": "stone",
-      "rgbaSha256": "57c4f0e2f0e0a551ee4fcf251cba67d499d8712ff03429be3ca00cfa69bc53aa"
+      "rgbaSha256": "585217443118f211b02cc8f441caabc5e962d80e765c4ec84ce8b6ff47eb470e",
+      "cellSize": 64
     },
     "FISHING_SPEAR": {
       "id": 148,
       "artIndex": 148,
       "kind": "spear",
-      "rgbaSha256": "6df2a24121013030c6aa46d43280751c1f0ebd1207056497f2888c14b5e81ab8"
+      "rgbaSha256": "1fcdfea330f5ed23a3db986e62ff2fbfda82eda1b4afabe75d759f93a7399bba",
+      "cellSize": 64
     },
     "SHURIKEN": {
       "id": 149,
       "artIndex": 149,
       "kind": "shuriken",
-      "rgbaSha256": "3343584cfa5a863310ba4ad1ed5cbf6088b8592c88d60768f8dee50b21c29ac9"
+      "rgbaSha256": "82b811bc450196f66febe63ce3199f8e7cb80992285aaf0ee659aa4dd44f0499",
+      "cellSize": 64
     },
     "THROWING_CLUB": {
       "id": 150,
       "artIndex": 150,
       "kind": "club",
-      "rgbaSha256": "5e8662634e3008d482d02e8accaff4f6f5ae0667ef1c6d02abc1955ffae01727"
+      "rgbaSha256": "9ec82e2db5008384281f40e7db7b677dd27e10682be5bc7293bbffd3a6be8da0",
+      "cellSize": 64
     },
     "THROWING_SPEAR": {
       "id": 151,
       "artIndex": 151,
       "kind": "spear",
-      "rgbaSha256": "46aff11747b0c1acab765670d1ed20f557dfcc3e9f614b1d26f714b2824edbea"
+      "rgbaSha256": "4843a0d31a7de3e866b54364cf70e11b6b65be2d2cbe312f76673241f36ac0f1",
+      "cellSize": 64
     },
     "BOLAS": {
       "id": 152,
       "artIndex": 152,
       "kind": "bolas",
-      "rgbaSha256": "889bc36361abc1ab99c758a47a75a2c11f99d192f00c966c9137893dbad2122e"
+      "rgbaSha256": "cb884eb8fe386e6bb6bfa1c855e47fb2ddd9ec86c3a328a8c0e05c149c3fafbb",
+      "cellSize": 64
     },
     "KUNAI": {
       "id": 153,
       "artIndex": 153,
       "kind": "dagger",
-      "rgbaSha256": "8c019c8441782abff9fcb1a5271b4834ced231346e03879cb5da43af78400cec"
+      "rgbaSha256": "9bcfd53be7f8aec053d84087bae04f03b6828e1f3e475c54cdc6fcc69480c3e6",
+      "cellSize": 64
     },
     "JAVELIN": {
       "id": 154,
       "artIndex": 154,
       "kind": "spear",
-      "rgbaSha256": "b72ab8f0c10d5515f6cc58725b5647f92294cf7048d00905826e9b11b826ef2c"
+      "rgbaSha256": "09731171aa2a5e25b1fe8418834778542fbc2001a6a735e332d7aa8ab1d29914",
+      "cellSize": 64
     },
     "TOMAHAWK": {
       "id": 155,
       "artIndex": 155,
       "kind": "axe",
-      "rgbaSha256": "e0e5b5e90f4be8e0c967a3ed5efba5c79617651ac52de7eb35b07013f23997da"
+      "rgbaSha256": "1c1da18da0f4915662990813255ac16c4993dc7001748ae5cf0d8ac73264fdcf",
+      "cellSize": 64
     },
     "BOOMERANG": {
       "id": 156,
       "artIndex": 156,
       "kind": "boomerang",
-      "rgbaSha256": "e7c7e4ba93e9173e6a5e870180fd7cbe5de6ce775b02b988032296e5d1295f7e"
+      "rgbaSha256": "66c7d118238e21a8b4c6c1c68554a8446522ee9da53dc3ec46be56563633c0a0",
+      "cellSize": 64
     },
     "TRIDENT": {
       "id": 157,
       "artIndex": 157,
       "kind": "trident",
-      "rgbaSha256": "bb0964d56b4b4dff1ab9b07e9e6b0647dc5473569337b63689c81672ce2c04c8"
+      "rgbaSha256": "cc040efb11bceb81e13d1bb66777d0293d047f40a8856c29d92b08698a4fc38b",
+      "cellSize": 64
     },
     "THROWING_HAMMER": {
       "id": 158,
       "artIndex": 158,
       "kind": "hammer",
-      "rgbaSha256": "0290eb9dc88b8d5952ae0a766757e62971002b7f3940bb2c1ed79867df5ea50c"
+      "rgbaSha256": "62b4fad121703ff4ed6abcdadd44e1ba085e9660f11e66a249008b331b0dde0d",
+      "cellSize": 64
     },
     "FORCE_CUBE": {
       "id": 159,
       "artIndex": 159,
       "kind": "cube",
-      "rgbaSha256": "a085bff3acba749a537d8fed512baa6300d3d912ee47ccfb1c05d657b0b781e4"
+      "rgbaSha256": "b8a65304457d008edaf3ba24520f186922e2e15810bf105b5902702d871ec46b",
+      "cellSize": 64
     },
     "DARTS": {
       "id": 160,
       "artIndex": 160,
       "kind": "arrow",
-      "rgbaSha256": "c30895009707694acf81bfaa99a0102cacf40280a010f771057501f8c5084c0f"
+      "rgbaSha256": "7bb199972c3b858c691a9e18b656595fb8175a549e1db4cd0ef20654c6f95b3d",
+      "cellSize": 64
     },
     "DART": {
       "id": 160,
       "artIndex": 160,
       "kind": "arrow",
-      "rgbaSha256": "c30895009707694acf81bfaa99a0102cacf40280a010f771057501f8c5084c0f"
+      "rgbaSha256": "7bb199972c3b858c691a9e18b656595fb8175a549e1db4cd0ef20654c6f95b3d",
+      "cellSize": 64
     },
     "ROT_DART": {
       "id": 161,
       "artIndex": 161,
       "kind": "arrow",
-      "rgbaSha256": "c30895009707694acf81bfaa99a0102cacf40280a010f771057501f8c5084c0f"
+      "rgbaSha256": "9a7d8374a33b0f351c29331286d8dcf7c1c5819c40d9ebd4a72d5c3590d3d197",
+      "cellSize": 64
     },
     "INCENDIARY_DART": {
       "id": 162,
       "artIndex": 162,
       "kind": "arrow",
-      "rgbaSha256": "8d2ab47161450c768437280a1e963915284f1f70543c99a558f96b41ab4732c6"
+      "rgbaSha256": "bb2ddf791db3b89c010596497afb6bc04c03a8235ac64708643446f543cdd351",
+      "cellSize": 64
     },
     "ADRENALINE_DART": {
       "id": 163,
       "artIndex": 163,
       "kind": "arrow",
-      "rgbaSha256": "efd68549045d308216abdd1a39a1c24b623024677d79012a66fa0d7108cc4576"
+      "rgbaSha256": "fe8a537fa18b247cdda87809436e5c1107eaa36afd67b99dc499a9c2cfd5d97a",
+      "cellSize": 64
     },
     "HEALING_DART": {
       "id": 164,
       "artIndex": 164,
       "kind": "arrow",
-      "rgbaSha256": "8d2ab47161450c768437280a1e963915284f1f70543c99a558f96b41ab4732c6"
+      "rgbaSha256": "ddb60b315220c1b7cb4d3069532c4238fde1ead468da1e25bfbe1d6ea28c7e60",
+      "cellSize": 64
     },
     "CHILLING_DART": {
       "id": 165,
       "artIndex": 165,
       "kind": "arrow",
-      "rgbaSha256": "179007a95feee8a15b7e11068cbbade1490dd0d0c8f5fb4ef7bda7a02d610bc9"
+      "rgbaSha256": "8566726e1a8f84684b4d4270be36abcaea736b85ee28a0159b16629fb29c29a2",
+      "cellSize": 64
     },
     "SHOCKING_DART": {
       "id": 166,
       "artIndex": 166,
       "kind": "arrow",
-      "rgbaSha256": "5b15af0f947d9bfc2b248203fa1cfe0153d6e03a67f873d0116af7d945daebde"
+      "rgbaSha256": "f7341cbd6fbf29f9ec5eb556618f33a0f289960de60c3414f2d2d96d01f7366d",
+      "cellSize": 64
     },
     "POISON_DART": {
       "id": 167,
       "artIndex": 167,
       "kind": "arrow",
-      "rgbaSha256": "c30895009707694acf81bfaa99a0102cacf40280a010f771057501f8c5084c0f"
+      "rgbaSha256": "4ecbf0660fa371d4b45e74f60aecfd0e00e726a9fdec215edfdd0f8d72a23daf",
+      "cellSize": 64
     },
     "CLEANSING_DART": {
       "id": 168,
       "artIndex": 168,
       "kind": "arrow",
-      "rgbaSha256": "2e6ac549c728c1ca75f1df9a3bbe24cd61125efd2c1812bfc9ce544e9f9138fe"
+      "rgbaSha256": "e566604d1d0f760a28b4e0fcc8ebdb6dcdb962764e28d599dba10e9944caa55a",
+      "cellSize": 64
     },
     "PARALYTIC_DART": {
       "id": 169,
       "artIndex": 169,
       "kind": "arrow",
-      "rgbaSha256": "8d2ab47161450c768437280a1e963915284f1f70543c99a558f96b41ab4732c6"
+      "rgbaSha256": "dd22e2b15e85a3829f58d7d988f19edca969f9bcda995095d0ff082a001e239e",
+      "cellSize": 64
     },
     "HOLY_DART": {
       "id": 170,
       "artIndex": 170,
       "kind": "arrow",
-      "rgbaSha256": "efd68549045d308216abdd1a39a1c24b623024677d79012a66fa0d7108cc4576"
+      "rgbaSha256": "ae94258b6c20ef98716830c534062e0365ba08a1199296fe48db378237ac8c74",
+      "cellSize": 64
     },
     "DISPLACING_DART": {
       "id": 171,
       "artIndex": 171,
       "kind": "arrow",
-      "rgbaSha256": "7645a4feac2d8bfdc5820affbeaa70e35ee627d355ffb1ff8f43c340a4d1f730"
+      "rgbaSha256": "aceaa39b59e91184edf7820f53c6f296f6da09b4593ea88fd4700b3f38f70eaf",
+      "cellSize": 64
     },
     "BLINDING_DART": {
       "id": 172,
       "artIndex": 172,
       "kind": "arrow",
-      "rgbaSha256": "5b15af0f947d9bfc2b248203fa1cfe0153d6e03a67f873d0116af7d945daebde"
+      "rgbaSha256": "691031b41111d828d1d397527300eefcb1d7c119888c548a698fefee6fb61907",
+      "cellSize": 64
     },
     "ARMOR_CLOTH": {
       "id": 176,
       "artIndex": 176,
       "kind": "armor",
-      "rgbaSha256": "9fcea1d731470eb0ec58fceb75ec598aace034d21e876f59caf63c000c06cb25"
+      "rgbaSha256": "f8a1602b257ffa047ca2ccee262a78864c737d21087808ae2ad7f3caac41efc0",
+      "cellSize": 64
     },
     "ARMOR_LEATHER": {
       "id": 177,
       "artIndex": 177,
       "kind": "armor",
-      "rgbaSha256": "528139cd101589eba6e85ac946fe1d638c00d1d092f9c5113d40ca79dc2911e0"
+      "rgbaSha256": "1fdc41e345e1ee96bfcfcdbf8befbfcf38ccf63a3a0eb87de49da6f28f044fea",
+      "cellSize": 64
     },
     "ARMOR_MAIL": {
       "id": 178,
       "artIndex": 178,
       "kind": "armor",
-      "rgbaSha256": "c0aa7958015012b3dd62ee9bea7f297052f6dcee36efecf1866cb7e33dc72a42"
+      "rgbaSha256": "d880fa36aa894db558c2bbdcb5343e6513797838884f44d2d24934d43e526d49",
+      "cellSize": 64
     },
     "ARMOR_SCALE": {
       "id": 179,
       "artIndex": 179,
       "kind": "armor",
-      "rgbaSha256": "b5ea569f38c6b08b4e531b62c6e04dbef254f4c12216af1c0bcef91bbc6f5888"
+      "rgbaSha256": "1fdf66f9f6ec1c38a5df836597fee363daea2e8ba7971b00d50ac6ea7914f512",
+      "cellSize": 64
     },
     "ARMOR_PLATE": {
       "id": 180,
       "artIndex": 180,
       "kind": "armor",
-      "rgbaSha256": "abf035daf3db0b266e50efae872868401b623bf227cc4219d57bdf149b47f7e6"
+      "rgbaSha256": "764a5ffbb294a02b0c6d91e0256ecb53da151af67b8579419d6440a7e9c392cb",
+      "cellSize": 64
     },
     "ARMOR_WARRIOR": {
       "id": 181,
       "artIndex": 181,
       "kind": "armor",
-      "rgbaSha256": "50cf8a49d9c157cca68ccf2f954de1d1b9bc4d49bf01339af56409c8d92bb646"
+      "rgbaSha256": "4f4003f35860bcc925ae24a939e8a75a0d14eefc4a355203000a01d2ae44db88",
+      "cellSize": 64
     },
     "ARMOR_MAGE": {
       "id": 182,
       "artIndex": 182,
       "kind": "armor",
-      "rgbaSha256": "22bed95d23a99c32db161c7c68e1d8e237171fd6b98c1d84be517f83d2b6fb7a"
+      "rgbaSha256": "8152198f0598153708d09728b39a641246e48d1df693f2dc8e77442ee2d2488a",
+      "cellSize": 64
     },
     "ARMOR_ROGUE": {
       "id": 183,
       "artIndex": 183,
       "kind": "armor",
-      "rgbaSha256": "61ac338a68991ac43a88f2b441bfd758820df3af72879da66d5be4eebedd2b27"
+      "rgbaSha256": "415841f737c9001bd0d8305371485b56e716f4413f43ba01b6173285b4069ddf",
+      "cellSize": 64
     },
     "ARMOR_HUNTRESS": {
       "id": 184,
       "artIndex": 184,
       "kind": "armor",
-      "rgbaSha256": "214ec2b04ef2d58fb1e60fedf59781c8d266733746b54d205ed1203bab866713"
+      "rgbaSha256": "124fcd811211bbd492c2dfc6124c4a30ebe76ef1dde4db4eaff2e4beb2ed99f8",
+      "cellSize": 64
     },
     "ARMOR_DUELIST": {
       "id": 185,
       "artIndex": 185,
       "kind": "armor",
-      "rgbaSha256": "10bdb14b014e632fcfb296e95fb602a5d038391d9aba6fdd7fb7614bb1f16a85"
+      "rgbaSha256": "bf14406887c86fd148204d86f15fcc6fa1d6ac974b05c8d64e6cbc8969ccc96b",
+      "cellSize": 64
     },
     "ARMOR_CLERIC": {
       "id": 186,
       "artIndex": 186,
       "kind": "armor",
-      "rgbaSha256": "55d323d835a61741050d871e6e778f8dc46719a01a92d43b8cf31250741ba6b7"
+      "rgbaSha256": "7dabf80aa21051243072eeba0d7c236bd72c118fcef408fbcbb02fa2d7814fcc",
+      "cellSize": 64
     },
     "WAND_MAGIC_MISSILE": {
       "id": 208,
       "artIndex": 208,
       "kind": "wand",
-      "rgbaSha256": "a83e092b332b049a6fffe81e8f1dcba974773b1a4e01188a182a9dbb1379bdcf"
+      "rgbaSha256": "c84132418d7d9eed8fac47caa6d95034b5c8a504373f6a1de80567c90e0bdca6",
+      "cellSize": 64
     },
     "WAND_FIREBOLT": {
       "id": 209,
       "artIndex": 209,
       "kind": "wand",
-      "rgbaSha256": "502168994e5bfec12e414c017f1c6b23eaaa67fa45785e3c6bf0aeab364a8cd9"
+      "rgbaSha256": "dc2aa19df50150c4fad547e8ed8def17f33613d46d8de144eb5a05b48abc2e4b",
+      "cellSize": 64
     },
     "WAND_FROST": {
       "id": 210,
       "artIndex": 210,
       "kind": "wand",
-      "rgbaSha256": "ba94930b8598276d31d618e63d057014d86d2dba50e3216cbe72986d5225e566"
+      "rgbaSha256": "22218ad14be5a5db90efe6f09cca8310b47e8c6d41ceed09b4aae1946037dd1c",
+      "cellSize": 64
     },
     "WAND_LIGHTNING": {
       "id": 211,
       "artIndex": 211,
       "kind": "wand",
-      "rgbaSha256": "67d1fe49b452ce11b52dff668beb31cb198732d15adbc379ac11b3d04ce7d0d1"
+      "rgbaSha256": "b0f2a6ac66e2ef8f1758d2cb68a05bffeb24687e5e4ade1b610e36d03354034c",
+      "cellSize": 64
     },
     "WAND_DISINTEGRATION": {
       "id": 212,
       "artIndex": 212,
       "kind": "wand",
-      "rgbaSha256": "ab75688c028cbf5d346eb634868c37bd0ab3a6d5a0d088f9ff02c08a25a5f376"
+      "rgbaSha256": "7c0f070eaf21dc92a9de8133b81df300e18b73afab6b8fe82853f6c210bdfcc7",
+      "cellSize": 64
     },
     "WAND_PRISMATIC_LIGHT": {
       "id": 213,
       "artIndex": 213,
       "kind": "wand",
-      "rgbaSha256": "80d25d8911c4e121a328cead4f63a7952628359dca055e8b29703cf174f56c01"
+      "rgbaSha256": "c560f9db621780f10b1ca32bc1feaeadd6860339039fc62e2df3140f66acff53",
+      "cellSize": 64
     },
     "WAND_CORROSION": {
       "id": 214,
       "artIndex": 214,
       "kind": "wand",
-      "rgbaSha256": "1e7454b79621135938974e59bba7012f8931d224ffb67d332c8176144048ce8e"
+      "rgbaSha256": "517c2cda4a8e93a9ff43d5e3597f49474c9137df23987e7b5a22ca63a6f0ae95",
+      "cellSize": 64
     },
     "WAND_LIVING_EARTH": {
       "id": 215,
       "artIndex": 215,
       "kind": "wand",
-      "rgbaSha256": "2986afaddf8097a72e4dced565d28816964a0289023f723435730a2303736c34"
+      "rgbaSha256": "96af96050ec2835fc75f528656083fcaefc765a729180b4379951302e876395f",
+      "cellSize": 64
     },
     "WAND_BLAST_WAVE": {
       "id": 216,
       "artIndex": 216,
       "kind": "wand",
-      "rgbaSha256": "a38569c9bbe6966bda0b6166923d863e04741cf38a5a9ef5f35477499274a745"
+      "rgbaSha256": "bbb23b4fd8eecf483d578f6de82d5277338a6a63783cdfedc423e37d4e6bf298",
+      "cellSize": 64
     },
     "WAND_CORRUPTION": {
       "id": 217,
       "artIndex": 217,
       "kind": "wand",
-      "rgbaSha256": "a3999ae9173613b0fcb55f95aacff9e1ce29dd5cb404a6b0a4639779e9a66e7c"
+      "rgbaSha256": "30716a694c65656c391b075f60dd24733df544e5135ec6fdfcf6c1dbd3ffc5d5",
+      "cellSize": 64
     },
     "WAND_WARDING": {
       "id": 218,
       "artIndex": 218,
       "kind": "wand",
-      "rgbaSha256": "bfa2fed07cfdb7894b021dd109342696803ad22e5ddaee7fb0ce6ef87334ca69"
+      "rgbaSha256": "2744ce9de668e7a5650086ad79a5cf1d356e9453f66c5ac36da1893baaaf9c98",
+      "cellSize": 64
     },
     "WAND_REGROWTH": {
       "id": 219,
       "artIndex": 219,
       "kind": "wand",
-      "rgbaSha256": "8cd519df1fba2865fd51b2d2cb89f11db323f201140d2f895f7433cdb7fbe84a"
+      "rgbaSha256": "e094c5ef73f8decd14e47b80c27b711557b2e29e7fe549a80cc802403f5901d5",
+      "cellSize": 64
     },
     "WAND_TRANSFUSION": {
       "id": 220,
       "artIndex": 220,
       "kind": "wand",
-      "rgbaSha256": "619419e64943207f3ddd101b331e17a1f1d6a6c3f47fc6da02080b7626a2ef45"
+      "rgbaSha256": "f5a195c21bdac757a9b6ad47e0204111a477c61e0112187a8b62a19abdd56949",
+      "cellSize": 64
     },
     "RING_GARNET": {
       "id": 224,
       "artIndex": 224,
       "kind": "ring",
-      "rgbaSha256": "33fd3c5a016eaac10315f02bd2a0e9a7489bffcd1a79ef84a138dbc6206b4f14"
+      "rgbaSha256": "a2477d7054d0a087968ce3c81862151639cd0b7ce244b1dfca77cf67dd9d54a3",
+      "cellSize": 64
     },
     "RING_RUBY": {
       "id": 225,
       "artIndex": 225,
       "kind": "ring",
-      "rgbaSha256": "bc508d339b2bf1b72b662a0f1ec8c97f3f30f4a7ce58b5e47bd5bbf4f89223da"
+      "rgbaSha256": "f91819fe31fe2a5f8fcd19deb393681d5a3aa9eea8fa46417c2cb46dfc45d3dc",
+      "cellSize": 64
     },
     "RING_TOPAZ": {
       "id": 226,
       "artIndex": 226,
       "kind": "ring",
-      "rgbaSha256": "3ce333c08052e0bad596874354ed91e958b5d2f64fe79482cc4eaebe41d507a8"
+      "rgbaSha256": "6d6308ef81d281060a13e722e45c22c5c727dc054e9e11c2dc550f40b67f7950",
+      "cellSize": 64
     },
     "RING_EMERALD": {
       "id": 227,
       "artIndex": 227,
       "kind": "ring",
-      "rgbaSha256": "457c5f0dffdac2652398afb439dd6c1fe5d38d31e3ef829cff1251d65c752512"
+      "rgbaSha256": "6fe9d16ab0b5bd10ed3e75b604671f43f56e1302a4fc422db7b992da663724e5",
+      "cellSize": 64
     },
     "RING_ONYX": {
       "id": 228,
       "artIndex": 228,
       "kind": "ring",
-      "rgbaSha256": "035ede094bffd34d9079d151fbb850e84ad784318cab9aa3102d1f08527d9198"
+      "rgbaSha256": "3627f4887cc64ec5608440ea1b73c9de9e1914b2518627d2ef646c3b11d1b970",
+      "cellSize": 64
     },
     "RING_OPAL": {
       "id": 229,
       "artIndex": 229,
       "kind": "ring",
-      "rgbaSha256": "64566a1cb145d459911027623b503859751e0d81e1cce51548175809283d41dc"
+      "rgbaSha256": "9e8564a9f67fe6e5a2f344cbd3d5037628cd4abded9ab385e6ea5eaf4b52453c",
+      "cellSize": 64
     },
     "RING_TOURMALINE": {
       "id": 230,
       "artIndex": 230,
       "kind": "ring",
-      "rgbaSha256": "48fb2c9cbfc16b63839fd793d2d52d8b2c8b69661c47a02b16c6edb8953b30a6"
+      "rgbaSha256": "8d202076790c436b20f224cf86d7d3c3b790f347c1f62af3408b23c22069a930",
+      "cellSize": 64
     },
     "RING_SAPPHIRE": {
       "id": 231,
       "artIndex": 231,
       "kind": "ring",
-      "rgbaSha256": "0e584cae25c42a17e673e2958aeaa6d3becbb28e7d64cd80a7d62937a68c8651"
+      "rgbaSha256": "a12d3ddfe665dc8141cec5eeb972845ec788b7ec418e4e8ac2b7a91290767c6d",
+      "cellSize": 64
     },
     "RING_AMETHYST": {
       "id": 232,
       "artIndex": 232,
       "kind": "ring",
-      "rgbaSha256": "c08242fe65aa49246e17e55f43ad4b020f73db824e220cb5b385781eb4f25baa"
+      "rgbaSha256": "422bf62a9f397ae5dd5b5d112c2a1a051e8c48842f77ece7ffbad4fdf11da755",
+      "cellSize": 64
     },
     "RING_QUARTZ": {
       "id": 233,
       "artIndex": 233,
       "kind": "ring",
-      "rgbaSha256": "ed803d4cd64f44925a385b8bd4e24fc6046dd49b6fb85ad38dc961bb85abbdec"
+      "rgbaSha256": "daa50c31895f76d53da1dc76b4867ef753c04a503441b5a8822f5b0b65c58b58",
+      "cellSize": 64
     },
     "RING_AGATE": {
       "id": 234,
       "artIndex": 234,
       "kind": "ring",
-      "rgbaSha256": "a9f787871299a9ede5dbc889eaf309a33cf828b7bf2fadd56b435398f52dd2fe"
+      "rgbaSha256": "18e67b464e85b193dc525f8f5596b2b6486be5e607c33d272c0e5c685490e934",
+      "cellSize": 64
     },
     "RING_DIAMOND": {
       "id": 235,
       "artIndex": 235,
       "kind": "ring",
-      "rgbaSha256": "9045678fb0af32a993d6c1bc9f1470839b239b1bc547380a94d87bd497cbd2eb"
+      "rgbaSha256": "23a0de2dc9cb6a999a1427b8d8a812b20b38c41a727b38f2fdb13a5ba61426ab",
+      "cellSize": 64
     },
     "ARTIFACT_CLOAK": {
       "id": 240,
       "artIndex": 240,
       "kind": "cloak",
-      "rgbaSha256": "786391c73b5d49752d3985b55810e6600e354bf2e88d2adad5c8d092023014f8"
+      "rgbaSha256": "7c66338319ac4c97d0b958b27c43ed6a38b977d7521e6027ed277985cf0e9b48",
+      "cellSize": 64
     },
     "ARTIFACT_ARMBAND": {
       "id": 241,
       "artIndex": 241,
       "kind": "bracelet",
-      "rgbaSha256": "91c2c044e089e9f89023ed83b9ffa4fefc627bb489f9f4e08da9fee973779500"
+      "rgbaSha256": "1f1082720f433b12f82616ac8ecb0325c0c49c7310079eabfd96ffe5d2a74250",
+      "cellSize": 64
     },
     "ARTIFACT_CAPE": {
       "id": 242,
       "artIndex": 242,
       "kind": "cloak",
-      "rgbaSha256": "05da68f89d1ead6364fad24e371fa1d4b4993d0da9d6153c6a867abfa77b7dec"
+      "rgbaSha256": "5e59836b0ec36878949d0da6cf4a4053a349cb31b7801713e27891a83051682a",
+      "cellSize": 64
     },
     "ARTIFACT_TALISMAN": {
       "id": 243,
       "artIndex": 243,
       "kind": "amulet",
-      "rgbaSha256": "5e75f342d59a6301280b268e8f61a516b7f9a06afed6997cbc50545d10187436"
+      "rgbaSha256": "99d92b65f707b72c30ffc6f30aa29a6ebb7aab61d07a8fb5556b960ab25e827f",
+      "cellSize": 64
     },
     "ARTIFACT_HOURGLASS": {
       "id": 244,
       "artIndex": 244,
       "kind": "hourglass",
-      "rgbaSha256": "690a47bbaad49d198e467c98e90a5ce8a57eb77bdf8362a8e18eb0a9fc29117b"
+      "rgbaSha256": "ac7f55f260087a7cbd7c7635670f0639a875f1da803b0fbf94c1359762c6a3d6",
+      "cellSize": 64
     },
     "ARTIFACT_TOOLKIT": {
       "id": 245,
       "artIndex": 245,
       "kind": "toolkit",
-      "rgbaSha256": "34d00bac53651b23cb2bcc2bb8ab278236d380e7aabaea147419876da9db0b0b"
+      "rgbaSha256": "a9116bc8a60a1c74f1956aed789f9f2c697c39ad2303f0e85579b445fa889b50",
+      "cellSize": 64
     },
     "ARTIFACT_SPELLBOOK": {
       "id": 246,
       "artIndex": 246,
       "kind": "book",
-      "rgbaSha256": "2a43235931a0e58e8f98b6568f71a0d67de94df8bc2877789e04cda91d6d8ed4"
+      "rgbaSha256": "9561d9ba0db2a54e4a50bc2f34c2c02f1d8235b7839079f29255aba56271dd5c",
+      "cellSize": 64
     },
     "ARTIFACT_BEACON": {
       "id": 247,
       "artIndex": 247,
       "kind": "lantern",
-      "rgbaSha256": "6c352f1e084835c4e20b08b03ef252aee83d9eff3aba52daa84f168b46f8a088"
+      "rgbaSha256": "953e4a6073b6c468c9fbcae64f99de6e943bbfbe88871fbaece2ccb011c134b2",
+      "cellSize": 64
     },
     "ARTIFACT_CHAINS": {
       "id": 248,
       "artIndex": 248,
       "kind": "chain",
-      "rgbaSha256": "387aa453a8789e617f70232b846c12c40536cbb6903598279688040aadcf681f"
+      "rgbaSha256": "a8db83e7cd7f0deff22ca6adcd6977340c66e5e432265ac39688599d04a16228",
+      "cellSize": 64
     },
     "ARTIFACT_HORN1": {
       "id": 249,
       "artIndex": 249,
       "kind": "horn",
-      "rgbaSha256": "3da4f7fba5b4694489e888462bdf2eca8ebc1f3209f8a4b542e767d92b8275b3"
+      "rgbaSha256": "d0c37b75d504b5fe061501404821185c4154e7545b1a35324115974c57dcaaed",
+      "cellSize": 64
     },
     "ARTIFACT_HORN2": {
       "id": 250,
       "artIndex": 250,
       "kind": "horn",
-      "rgbaSha256": "270d78747d2bb4f4f4bc9fac99853c59a10c04343d505d73fd528e8402d4f18f"
+      "rgbaSha256": "d511190a40509bf4ead3d51a3e9d68ca774b9254fa9db4953ab32c09d41f2992",
+      "cellSize": 64
     },
     "ARTIFACT_HORN3": {
       "id": 251,
       "artIndex": 251,
       "kind": "horn",
-      "rgbaSha256": "270d78747d2bb4f4f4bc9fac99853c59a10c04343d505d73fd528e8402d4f18f"
+      "rgbaSha256": "9965eab20bcd2c6b11dd175ab58fe88d84fffe9a6180fd0ada071bad4e9d5515",
+      "cellSize": 64
     },
     "ARTIFACT_HORN4": {
       "id": 252,
       "artIndex": 252,
       "kind": "horn",
-      "rgbaSha256": "270d78747d2bb4f4f4bc9fac99853c59a10c04343d505d73fd528e8402d4f18f"
+      "rgbaSha256": "00796a7e755b6f55d96e812d503e3353c302a4dd3428a1c9add8fef5b28e1885",
+      "cellSize": 64
     },
     "ARTIFACT_CHALICE1": {
       "id": 253,
       "artIndex": 253,
       "kind": "chalice",
-      "rgbaSha256": "99dfa7e2ccbfbcdaece8ef59df8c8ff517fa35cb61be5b8a2c5a7f9b46be3e5f"
+      "rgbaSha256": "c20cab55d83aa450bf152e52cd2523e7a91234d3d00393e9f9bd66a6c4f1a61f",
+      "cellSize": 64
     },
     "ARTIFACT_CHALICE2": {
       "id": 254,
       "artIndex": 254,
       "kind": "chalice",
-      "rgbaSha256": "542a5b63385f637829ceea9cd1a7b6bbf2f0aadcd9c2a6e01be9e8508fc5de44"
+      "rgbaSha256": "5de3ed3de89c5c6a624ddb1b76bbdf8659beb4a85cc5d8e858a01338c5159e43",
+      "cellSize": 64
     },
     "ARTIFACT_CHALICE3": {
       "id": 255,
       "artIndex": 255,
       "kind": "chalice",
-      "rgbaSha256": "f58096b7d0bf9f180a5339386d9a9fc7556deca776888684a53dc13d0e4b5c9a"
+      "rgbaSha256": "de078fbe88f020e5c2e1918151853d2bee1d3101d7a0cb68c796a3c72309234b",
+      "cellSize": 64
     },
     "ARTIFACT_SANDALS": {
       "id": 256,
       "artIndex": 256,
       "kind": "boot",
-      "rgbaSha256": "3daa5888e2bd48dabd5c6733dc7faeb13794c9f3a4bf8c1bc916f76cc961275b"
+      "rgbaSha256": "ff053a62f8c8b676b4510a5ba5eef1e5c9dd7cfc8e90db874412674592197b7a",
+      "cellSize": 64
     },
     "ARTIFACT_SHOES": {
       "id": 257,
       "artIndex": 257,
       "kind": "boot",
-      "rgbaSha256": "1ba4c9d1f436b21a656ddf29c0b0ad1e088bdc26e5e9372c2f35237107417941"
+      "rgbaSha256": "4baad97b218084345c52661cbc68840e8a3c77c4081635c148aa7e3a8c9cd9df",
+      "cellSize": 64
     },
     "ARTIFACT_BOOTS": {
       "id": 258,
       "artIndex": 258,
       "kind": "boot",
-      "rgbaSha256": "a50ed8311c9a5b14d585d1b17bcbe5b47d20cd5305cfacd2674795b011e149cf"
+      "rgbaSha256": "0d4706b04a8b93fa84e5cf04c8b047605eacccedcee43122ac722ebfb63bb00e",
+      "cellSize": 64
     },
     "ARTIFACT_GREAVES": {
       "id": 259,
       "artIndex": 259,
       "kind": "boot",
-      "rgbaSha256": "a8bbddc995628eca7748efe339d32f024fa677b71476df0aa574f128430b084c"
+      "rgbaSha256": "4b36746af42ccc50d16ffed1efe998531f6d01fed1583a0f9df7cbd7bf908a8a",
+      "cellSize": 64
     },
     "ARTIFACT_ROSE1": {
       "id": 260,
       "artIndex": 260,
       "kind": "rose",
-      "rgbaSha256": "144d3311da4ab3b82050de28557fa9a89aa25f2eda9e38fdccb8d2a1bb1aacb2"
+      "rgbaSha256": "fec6fa6b976e03628738c6ad0eb6b658dc4d7f328ee5c36acc0b9b56fac7b675",
+      "cellSize": 64
     },
     "ARTIFACT_ROSE2": {
       "id": 261,
       "artIndex": 261,
       "kind": "rose",
-      "rgbaSha256": "c363ba04b59e7f43d5e455658f67ffc51d8f7e8017055523b8752d27b9c26d5d"
+      "rgbaSha256": "ecef866f2992af488e06059dfcec55e594f32acc149aff19bb82748d3e7d33ae",
+      "cellSize": 64
     },
     "ARTIFACT_ROSE3": {
       "id": 262,
       "artIndex": 262,
       "kind": "rose",
-      "rgbaSha256": "dbe83625035604a81f5e93200b696b155bdfd5e54af9936d84f54dc8a2777a52"
+      "rgbaSha256": "c562148f1e8ac0ef27ac1489fa06c7b738bcdb87c5f8c2a534e1dedb5096887e",
+      "cellSize": 64
     },
     "ARTIFACT_TOME": {
       "id": 263,
       "artIndex": 263,
       "kind": "book",
-      "rgbaSha256": "c562f44883e0f697cb44ee80e20c33aa3a2bb3d71bb813a5a32eee81050d774b"
+      "rgbaSha256": "6699114701da28c3bca5234766eb342ce1e5698b95bdd6723e18c0447ed6e6c3",
+      "cellSize": 64
     },
     "ARTIFACT_KEY": {
       "id": 264,
       "artIndex": 264,
       "kind": "key",
-      "rgbaSha256": "965c096a78df8e35b26cda8357b0e3d3f82f02a4b8dea228ea3a420f26a34210"
+      "rgbaSha256": "0c6e960d7a0a4228060dc9a11243abeed97fff4cf532ae9cf067a1073a0f1674",
+      "cellSize": 64
     },
     "RAT_SKULL": {
       "id": 272,
       "artIndex": 272,
       "kind": "skull",
-      "rgbaSha256": "f47e6a2a0d4546ff5d9231df3ffdc089b752a8baa39034c4a83839eac1ba9c10"
+      "rgbaSha256": "9c33b67ad3a976a92a5ff9afb67cc23ebc55e066a4b44564302e14a9d2813f29",
+      "cellSize": 64
     },
     "PARCHMENT_SCRAP": {
       "id": 273,
       "artIndex": 273,
       "kind": "scroll",
-      "rgbaSha256": "9c3dcc6a578ad531c35867235bc7171e00b1c8d73024ad5e224bc0457af5f401"
+      "rgbaSha256": "50a4abce03d845369124dd549799e2f1edd586fae378c66ae98369888ce1abc7",
+      "cellSize": 64
     },
     "PETRIFIED_SEED": {
       "id": 274,
       "artIndex": 274,
       "kind": "seed",
-      "rgbaSha256": "e18b1073ff02ed2181b1b8365d9a9c8470c66b2f7ee433c2b401e3324d7b45c0"
+      "rgbaSha256": "ab46582531e8ef9ca202775a09b9750275bc7c3e8a34c017217bde1a41d29561",
+      "cellSize": 64
     },
     "EXOTIC_CRYSTALS": {
       "id": 275,
       "artIndex": 275,
       "kind": "crystal",
-      "rgbaSha256": "911c054fc1a9df32284fa503a390b4fcf7344e092bfc4106acc7c32e79b1d0fa"
+      "rgbaSha256": "e240e8e03fcee995855c11d6cbeb310f000764c220926ec0f59e2645bcef2a67",
+      "cellSize": 64
     },
     "MOSSY_CLUMP": {
       "id": 276,
       "artIndex": 276,
       "kind": "moss",
-      "rgbaSha256": "e182fa4344eef8023494e2cd9c99d27caea483ec442610b846a332c0961b0890"
+      "rgbaSha256": "f8d8c8641b5ce49539e92462401243b86bc0d216204f620d8f3feae4d30321e6",
+      "cellSize": 64
     },
     "SUNDIAL": {
       "id": 277,
       "artIndex": 277,
       "kind": "sundial",
-      "rgbaSha256": "c6ddd26c6f82a28386559117043f4924c09e8b2dee93acbd25e91f77673c25de"
+      "rgbaSha256": "e7519295def7afb0887395571baca8962342e7fc541e89683b8b6975b6781ab0",
+      "cellSize": 64
     },
     "CLOVER": {
       "id": 278,
       "artIndex": 278,
       "kind": "leaf",
-      "rgbaSha256": "4b1f5aa32d8f8aca22ad542a98045502b6811125e12691fb3cc81cf803fd95c0"
+      "rgbaSha256": "5a571a633e715baa7bd6f863de8899ab2f9aa1447c1380275faadf1a9b5b3df2",
+      "cellSize": 64
     },
     "TRAP_MECHANISM": {
       "id": 279,
       "artIndex": 279,
       "kind": "trap",
-      "rgbaSha256": "f35dee829e0291c517b3f7def8ff98abc94d3585cb05a78972624a84d0fcd3d2"
+      "rgbaSha256": "ecb4a4c77351c652aa3e2ef349cd329411ad14490e821dc3fcf1949d11a19d07",
+      "cellSize": 64
     },
     "MIMIC_TOOTH": {
       "id": 280,
       "artIndex": 280,
       "kind": "fang",
-      "rgbaSha256": "e9342883199a372356fcdddba8845a45e9a5d6d973814197ca3aeb371fe64bde"
+      "rgbaSha256": "d129b55b48e08eeb63c7bc7ede5183eaa905d422df51c0083e944dc5bcc8bcf1",
+      "cellSize": 64
     },
     "WONDROUS_RESIN": {
       "id": 281,
       "artIndex": 281,
       "kind": "resin",
-      "rgbaSha256": "f2d4b829db2ca5034fc30e853896d0d5eb46bf1af72c821ecce567b64917eedf"
+      "rgbaSha256": "5b88f9edfbd1f5f0b425cf8a50ded8ee80feb4e2c0279f85c4e7d4a91ec65870",
+      "cellSize": 64
     },
     "EYE_OF_NEWT": {
       "id": 282,
       "artIndex": 282,
       "kind": "eye",
-      "rgbaSha256": "b3838596e29758a041550330e3ad67175004115ab0c393353c130e5a071214b0"
+      "rgbaSha256": "65c53eed1e2cea20883a5c5ea08d27d52bb4149231b435b697913a8e6d481374",
+      "cellSize": 64
     },
     "SALT_CUBE": {
       "id": 283,
       "artIndex": 283,
       "kind": "cube",
-      "rgbaSha256": "d858fd78bb7261c1b5e859fda6fd5983e8c86715e5c5b3ccb52c181406685b28"
+      "rgbaSha256": "25b29f2007297d36b020c82d4c948bb9ad49df4cf1db71f950e16ccd292f9903",
+      "cellSize": 64
     },
     "BLOOD_VIAL": {
       "id": 284,
       "artIndex": 284,
       "kind": "bottle",
-      "rgbaSha256": "d54ca93ea733ac9b78310803943fe197a8726e198b2ba6d6f32566cb9170d31c"
+      "rgbaSha256": "8cd2f3ee03f17663dc18c9c89de5c1c2c8d8e69e3fd33bd00b16a59623ddfa08",
+      "cellSize": 64
     },
     "OBLIVION_SHARD": {
       "id": 285,
       "artIndex": 285,
       "kind": "shard",
-      "rgbaSha256": "50edac84a614007a36bb386de7336cb3a434238dc0e477feea0fc1dbcf6ae3d2"
+      "rgbaSha256": "b5c664b8e80a2d5b0ce6ea9642afae2e7c55afffcbae82e60948510b7cb8dad6",
+      "cellSize": 64
     },
     "CHAOTIC_CENSER": {
       "id": 286,
       "artIndex": 286,
       "kind": "censer",
-      "rgbaSha256": "20213bac2cf27954b760497555fd07647df7d2f873be406cad63bc1321246602"
+      "rgbaSha256": "c4a9e54ab54c9b5a9de9897b356ea76d2c63eaade2e775fae8c5cd9a8b90afe8",
+      "cellSize": 64
     },
     "FERRET_TUFT": {
       "id": 287,
       "artIndex": 287,
       "kind": "tuft",
-      "rgbaSha256": "5bf40ed89483e00dcab22be0f73c992975cb228226f52558fe65bf44b543cd2e"
+      "rgbaSha256": "f50834e5516e50c88aa9e73300e954d639da2741466a1833210f1322a81f0e45",
+      "cellSize": 64
     },
     "SPYGLASS": {
       "id": 288,
       "artIndex": 288,
       "kind": "spyglass",
-      "rgbaSha256": "a1019148d32565be9685baeeefbe26a10463a44888c6d9435cce02e5f6b7fbb0"
+      "rgbaSha256": "fe125e9e86feead8105f522fe9a45b3e6753c47a37da640f10af14e9700a81f4",
+      "cellSize": 64
     },
     "SCROLL_KAUNAN": {
       "id": 304,
       "artIndex": 304,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "f98f305d4b3e821a48951c3eb323117f10702b5a1a911f7c1e7a3f2b7f16507e",
+      "cellSize": 64
     },
     "SCROLL_SOWILO": {
       "id": 305,
       "artIndex": 305,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "f706ffefd0d509a5ab03ad35193b03c0af03630195f8f3ac05ca15f90df05218",
+      "cellSize": 64
     },
     "SCROLL_LAGUZ": {
       "id": 306,
       "artIndex": 306,
       "kind": "scroll",
-      "rgbaSha256": "598fb0ae3ec7e07585b3c6846da01f0014838b6f9cbdd7e7b239970113ab606c"
+      "rgbaSha256": "995f28cee154cea19eb1d82d32ca1c48305b4c9b9805efe0292a6936a1a927f6",
+      "cellSize": 64
     },
     "SCROLL_YNGVI": {
       "id": 307,
       "artIndex": 307,
       "kind": "scroll",
-      "rgbaSha256": "598fb0ae3ec7e07585b3c6846da01f0014838b6f9cbdd7e7b239970113ab606c"
+      "rgbaSha256": "be0b6e37392191c7e6642fc6e8ac24d4aeea68653064e1b1f1991f4d78145f3b",
+      "cellSize": 64
     },
     "SCROLL_GYFU": {
       "id": 308,
       "artIndex": 308,
       "kind": "scroll",
-      "rgbaSha256": "0d0ded162ed76ffb9ef835adfbb9d390d6278d4fd389df18b6be98e70e5c951b"
+      "rgbaSha256": "e3fe7b8562aec7af91d6370c78bb1c68ead9f637090b4ad9467c138f16460cfb",
+      "cellSize": 64
     },
     "SCROLL_RAIDO": {
       "id": 309,
       "artIndex": 309,
       "kind": "scroll",
-      "rgbaSha256": "0d0ded162ed76ffb9ef835adfbb9d390d6278d4fd389df18b6be98e70e5c951b"
+      "rgbaSha256": "ac4a9005af4fc8e758df73b4cabff7b1105f34d5fe6b120de3baa33940e91f77",
+      "cellSize": 64
     },
     "SCROLL_ISAZ": {
       "id": 310,
       "artIndex": 310,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "19b279622a3ff8db15de11142fe861a94ef8cf4d02619e38b106b9940968774b",
+      "cellSize": 64
     },
     "SCROLL_MANNAZ": {
       "id": 311,
       "artIndex": 311,
       "kind": "scroll",
-      "rgbaSha256": "6c78220a39385070cedbfb67ba8bef524483827fa1ca26f5ac9dc526c89e8e33"
+      "rgbaSha256": "b61fd0e08bcbbe912bfbb84a298dc4105b6c3e04bc40ca366bfa7c8756bea2c4",
+      "cellSize": 64
     },
     "SCROLL_NAUDIZ": {
       "id": 312,
       "artIndex": 312,
       "kind": "scroll",
-      "rgbaSha256": "0d0ded162ed76ffb9ef835adfbb9d390d6278d4fd389df18b6be98e70e5c951b"
+      "rgbaSha256": "d9252d73c749032901ee4c0e0e90648919bea3e4173742921c684ba0df5855a0",
+      "cellSize": 64
     },
     "SCROLL_BERKANAN": {
       "id": 313,
       "artIndex": 313,
       "kind": "scroll",
-      "rgbaSha256": "598fb0ae3ec7e07585b3c6846da01f0014838b6f9cbdd7e7b239970113ab606c"
+      "rgbaSha256": "d4c6c65d2397cf9bf72596919db76474937b522523b338a8157674d259ce52be",
+      "cellSize": 64
     },
     "SCROLL_ODAL": {
       "id": 314,
       "artIndex": 314,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "8ed73ec02568b7d3ae56a19e92305b582b05c5dc0bbd2a9012f2e5fa1145ade0",
+      "cellSize": 64
     },
     "SCROLL_TIWAZ": {
       "id": 315,
       "artIndex": 315,
       "kind": "scroll",
-      "rgbaSha256": "598fb0ae3ec7e07585b3c6846da01f0014838b6f9cbdd7e7b239970113ab606c"
+      "rgbaSha256": "5f3ea93947ddd511ebdcd5a26b869ec0cbf9600cefb10f9ec6dfeb44b0473242",
+      "cellSize": 64
     },
     "ARCANE_RESIN": {
       "id": 317,
       "artIndex": 317,
       "kind": "resin",
-      "rgbaSha256": "54fb4f55a13e0096d9b08f5c29d3818a71f600c90235eb0934e27387d01c52bc"
+      "rgbaSha256": "632623526b8b9600907b1c7096158c8be046e730ff9f0b1e0dffcc041997a4a1",
+      "cellSize": 64
     },
     "EXOTIC_KAUNAN": {
       "id": 320,
       "artIndex": 320,
       "kind": "scroll",
-      "rgbaSha256": "598fb0ae3ec7e07585b3c6846da01f0014838b6f9cbdd7e7b239970113ab606c"
+      "rgbaSha256": "b5835ae36afe4801b73384ede5ec850d3a0a9c9776835a6fca966e95d551c6c2",
+      "cellSize": 64
     },
     "EXOTIC_SOWILO": {
       "id": 321,
       "artIndex": 321,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "a918300559695cdfce93a74452437f6cbd52043e8796e0ea16e854dab0695cf9",
+      "cellSize": 64
     },
     "EXOTIC_LAGUZ": {
       "id": 322,
       "artIndex": 322,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "c11e9d953d7811874e131f5ef827a931e0637aad72df35db847e265e9ea374c5",
+      "cellSize": 64
     },
     "EXOTIC_YNGVI": {
       "id": 323,
       "artIndex": 323,
       "kind": "scroll",
-      "rgbaSha256": "6c78220a39385070cedbfb67ba8bef524483827fa1ca26f5ac9dc526c89e8e33"
+      "rgbaSha256": "e3e0492caaba1f54ce28a0d26fc9aa992a10f9bc38fe7fd02a8bad3d69f034d9",
+      "cellSize": 64
     },
     "EXOTIC_GYFU": {
       "id": 324,
       "artIndex": 324,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "fbe5c8076453a1ddeda0a3387b26539e1b6a94690a0e27322f3dba423869dc3f",
+      "cellSize": 64
     },
     "EXOTIC_RAIDO": {
       "id": 325,
       "artIndex": 325,
       "kind": "scroll",
-      "rgbaSha256": "6c78220a39385070cedbfb67ba8bef524483827fa1ca26f5ac9dc526c89e8e33"
+      "rgbaSha256": "5210d6ab2a84c609f93e6844081df3f0e2dc7103b3f0c96795c8222ed2bcd43d",
+      "cellSize": 64
     },
     "EXOTIC_ISAZ": {
       "id": 326,
       "artIndex": 326,
       "kind": "scroll",
-      "rgbaSha256": "598fb0ae3ec7e07585b3c6846da01f0014838b6f9cbdd7e7b239970113ab606c"
+      "rgbaSha256": "fffda82a158097d26d495bcc17ac12d6ffb476c37c3baf2c32deba595fc94825",
+      "cellSize": 64
     },
     "EXOTIC_MANNAZ": {
       "id": 327,
       "artIndex": 327,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "449880eeb346803afcf5a3544462f7fd9b9d321d3a84a7d82ce5af53eb20d3e2",
+      "cellSize": 64
     },
     "EXOTIC_NAUDIZ": {
       "id": 328,
       "artIndex": 328,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "04a84eb64090c90940ac5ada4fb2576671be03edb3ffc9f9c1d742d27bc0e943",
+      "cellSize": 64
     },
     "EXOTIC_BERKANAN": {
       "id": 329,
       "artIndex": 329,
       "kind": "scroll",
-      "rgbaSha256": "0d0ded162ed76ffb9ef835adfbb9d390d6278d4fd389df18b6be98e70e5c951b"
+      "rgbaSha256": "963a0eca912e4e6884a56c986dfc28d256e0ccc8a492e258b1ff236d26269209",
+      "cellSize": 64
     },
     "EXOTIC_ODAL": {
       "id": 330,
       "artIndex": 330,
       "kind": "scroll",
-      "rgbaSha256": "6c78220a39385070cedbfb67ba8bef524483827fa1ca26f5ac9dc526c89e8e33"
+      "rgbaSha256": "2becb4df350c4ad3240a8ac463e130d4e2f8e52d33591db7b5bb879abe0264c0",
+      "cellSize": 64
     },
     "EXOTIC_TIWAZ": {
       "id": 331,
       "artIndex": 331,
       "kind": "scroll",
-      "rgbaSha256": "6c78220a39385070cedbfb67ba8bef524483827fa1ca26f5ac9dc526c89e8e33"
+      "rgbaSha256": "279f7175b8f40d0d7ea1efdb08c87511586559879afca11ad99e0356d6b0d75e",
+      "cellSize": 64
     },
     "STONE_AGGRESSION": {
       "id": 336,
       "artIndex": 336,
       "kind": "runestone",
-      "rgbaSha256": "f074ee684fb69c618c21e253522453eeb34524e6c16dbea953bfd611035dfa30"
+      "rgbaSha256": "9fd7f881f1219cb8867c0f99b82785be0712ac77112b4e8cccbe255dad163b9b",
+      "cellSize": 64
     },
     "STONE_AUGMENTATION": {
       "id": 337,
       "artIndex": 337,
       "kind": "runestone",
-      "rgbaSha256": "1501d92027bdb469199f1d3682f655bf5625c93c9af167da3950058018555e78"
+      "rgbaSha256": "ede018e9be48628988d89cafdfc40ae92085056590783388e8392a4c5736ac6d",
+      "cellSize": 64
     },
     "STONE_FEAR": {
       "id": 338,
       "artIndex": 338,
       "kind": "runestone",
-      "rgbaSha256": "4ef950ead19573a8f56c3532ab928380267984c6d3f32c22bd79fbc3ae609ee0"
+      "rgbaSha256": "9d3021e14cdd0632c49d5ce2ac9a1e43dfea31e9439fed5098788156b39e8509",
+      "cellSize": 64
     },
     "STONE_BLAST": {
       "id": 339,
       "artIndex": 339,
       "kind": "runestone",
-      "rgbaSha256": "1501d92027bdb469199f1d3682f655bf5625c93c9af167da3950058018555e78"
+      "rgbaSha256": "45e0fc635dbc0935957224df804a4f2fbdf09f59b7fa13878c41164fe6451b30",
+      "cellSize": 64
     },
     "STONE_BLINK": {
       "id": 340,
       "artIndex": 340,
       "kind": "runestone",
-      "rgbaSha256": "1501d92027bdb469199f1d3682f655bf5625c93c9af167da3950058018555e78"
+      "rgbaSha256": "3e129d9852f0c5727f8a74ee5a1d6f3e4e921a5a6161122b4b8be8183c9530e1",
+      "cellSize": 64
     },
     "STONE_CLAIRVOYANCE": {
       "id": 341,
       "artIndex": 341,
       "kind": "runestone",
-      "rgbaSha256": "aaa98f4a7f7a95c2fee78acf0c1497e0c7d5277dec48d03082c65623d2d387d3"
+      "rgbaSha256": "bd3fa5ede9db7988f90560366e77684a99a963dd3ca4f06bbd5da11341a6288a",
+      "cellSize": 64
     },
     "STONE_SLEEP": {
       "id": 342,
       "artIndex": 342,
       "kind": "runestone",
-      "rgbaSha256": "4ceec6f44a25b97b1f2a3d7e9aace0f22a53d6aab10037eabfca355f7e71fda7"
+      "rgbaSha256": "7d2dc358fb0f1c361cbd8f00779c6ba2b40dd5d334f9ecd070b810fb325bddea",
+      "cellSize": 64
     },
     "STONE_DETECT": {
       "id": 343,
       "artIndex": 343,
       "kind": "runestone",
-      "rgbaSha256": "4a6ebc39b1e994996f1e395af88a0a8d4f9d1bdca4549220ab838fa92b8cbb19"
+      "rgbaSha256": "d06332f787853c08c887234c5e8d557f60b16745bc1ba12d6575573193de109f",
+      "cellSize": 64
     },
     "STONE_ENCHANT": {
       "id": 344,
       "artIndex": 344,
       "kind": "runestone",
-      "rgbaSha256": "aaa98f4a7f7a95c2fee78acf0c1497e0c7d5277dec48d03082c65623d2d387d3"
+      "rgbaSha256": "e593f15a48f1f366b5a93f46f57ae742e93bfe57dff460a8ec8313f674fcd595",
+      "cellSize": 64
     },
     "STONE_FLOCK": {
       "id": 345,
       "artIndex": 345,
       "kind": "runestone",
-      "rgbaSha256": "1501d92027bdb469199f1d3682f655bf5625c93c9af167da3950058018555e78"
+      "rgbaSha256": "345bad7d997434cbe6a7c565528fb23575bcfc35d5138fec21ff3c16d1a83599",
+      "cellSize": 64
     },
     "STONE_INTUITION": {
       "id": 346,
       "artIndex": 346,
       "kind": "runestone",
-      "rgbaSha256": "4ef950ead19573a8f56c3532ab928380267984c6d3f32c22bd79fbc3ae609ee0"
+      "rgbaSha256": "a7bc8281207b9cd71719071830f800d68210c2c9783254b007125316ec0d01de",
+      "cellSize": 64
     },
     "STONE_SHOCK": {
       "id": 347,
       "artIndex": 347,
       "kind": "runestone",
-      "rgbaSha256": "4a6ebc39b1e994996f1e395af88a0a8d4f9d1bdca4549220ab838fa92b8cbb19"
+      "rgbaSha256": "60966897c95f48f423cd8df819c33d31087ab309c64e5422c692558c741c81c4",
+      "cellSize": 64
     },
     "POTION_CRIMSON": {
       "id": 352,
       "artIndex": 352,
       "kind": "bottle",
-      "rgbaSha256": "cc39347b93720c970a70951d68d24f104e530349c4beacc8058edf8e4ec07d09"
+      "rgbaSha256": "b164772388e7ab5c0c3a61b07f73697a1f5ca8d3ad970fdf862bc4ae31065a85",
+      "cellSize": 64
     },
     "POTION_AMBER": {
       "id": 353,
       "artIndex": 353,
       "kind": "bottle",
-      "rgbaSha256": "963dbbfe64887aebcf1e020f7c4d2db791a22f436a42fcdf1e58e22733af11b4"
+      "rgbaSha256": "3c2aba48f0d5caa071685ea03250fa44f4cf1722c6cd64dd9feb14486c91897e",
+      "cellSize": 64
     },
     "POTION_GOLDEN": {
       "id": 354,
       "artIndex": 354,
       "kind": "bottle",
-      "rgbaSha256": "3d3b2aea11047a1cb70e57a2bc8d480951cbecdbe17f891f7405c3babcedc4ac"
+      "rgbaSha256": "735bcd9ac5ba55783c47f52da5bf569ab0bc6ccf2bbb61b15b43e5be2e009f6f",
+      "cellSize": 64
     },
     "POTION_JADE": {
       "id": 355,
       "artIndex": 355,
       "kind": "bottle",
-      "rgbaSha256": "4a3820cef7cd08a82d4fa0e91f48b1d682aa39e2d3469e18f6e701e00e8cf9b1"
+      "rgbaSha256": "6d716a43cd325b3acc734293456c938ecfed5be3472177f8290293ecdf45dd29",
+      "cellSize": 64
     },
     "POTION_TURQUOISE": {
       "id": 356,
       "artIndex": 356,
       "kind": "bottle",
-      "rgbaSha256": "0d0b12674da14665c79b1e1ec6f5e8fa8ae0b504e3404998ffd7afa01e85607c"
+      "rgbaSha256": "8baad5b261e3100fc9be5cdd0a7b0b1528f8994eff09887c511630bf76d548e9",
+      "cellSize": 64
     },
     "POTION_AZURE": {
       "id": 357,
       "artIndex": 357,
       "kind": "bottle",
-      "rgbaSha256": "9018cbc375555cdac43f1e03cf83bad9431cf9b56fa046a2c8df768615e1b645"
+      "rgbaSha256": "252c841f4508253d646283c74e09afb419a8e97583a595bf94016a5ea766026f",
+      "cellSize": 64
     },
     "POTION_INDIGO": {
       "id": 358,
       "artIndex": 358,
       "kind": "bottle",
-      "rgbaSha256": "b5ba3abac082b3103a4f6102737cb8071cc465e8a3491f56fdaa30ace9428af7"
+      "rgbaSha256": "3dc4512315ccc5a0e3b1219654e61b225d3600ef0370f5998c061a4037d05328",
+      "cellSize": 64
     },
     "POTION_MAGENTA": {
       "id": 359,
       "artIndex": 359,
       "kind": "bottle",
-      "rgbaSha256": "599d2cf179c899843d64057ff7e63928096ed135087e78f3e398e6ec97c492bb"
+      "rgbaSha256": "8c3ebfedec3fcf5d5016c02d872525c4ba626f08cdc5b615711b5bad7dca4110",
+      "cellSize": 64
     },
     "POTION_BISTRE": {
       "id": 360,
       "artIndex": 360,
       "kind": "bottle",
-      "rgbaSha256": "8e38a6b79d0e86b2fc50038fbfcbda1ceadfe45cc196bd8161ad4aea0c011f9e"
+      "rgbaSha256": "748c5aebe5db27df7541ecfeb28c6d77bf8c44fdb528b491e2ef0d7dd391f19a",
+      "cellSize": 64
     },
     "POTION_CHARCOAL": {
       "id": 361,
       "artIndex": 361,
       "kind": "bottle",
-      "rgbaSha256": "21fde459056f6d1098de4d9e383015e29dcf0216c5bf47871b30d0f3a380cf42"
+      "rgbaSha256": "0e92545546692140e5f836f89184760331cf647575774307298e1b77f52ce2f0",
+      "cellSize": 64
     },
     "POTION_SILVER": {
       "id": 362,
       "artIndex": 362,
       "kind": "bottle",
-      "rgbaSha256": "05f5821cd02652eb1a4aa45aa79d24901d708ad5a3ebdef76d038139d81643ce"
+      "rgbaSha256": "5a0d61a57904dd5f0247d3f5f763380b87ea670d621dc19a52b96bfa752ae1a5",
+      "cellSize": 64
     },
     "POTION_IVORY": {
       "id": 363,
       "artIndex": 363,
       "kind": "bottle",
-      "rgbaSha256": "8072c1d345460a0a3c4c93ed55154df31b2908f2761da4da7310b5ef27782a15"
+      "rgbaSha256": "165cbe1031e7e68bd715c7f27e192327efcdab6603c940d1961cda5bf0f88c42",
+      "cellSize": 64
     },
     "LIQUID_METAL": {
       "id": 365,
       "artIndex": 365,
       "kind": "pot",
-      "rgbaSha256": "753e24744caf127a456bd77593125340f341fb5c91bb84a8f0a0d7cca5d15359"
+      "rgbaSha256": "f01daf5c9cbf0c23caec1cc4a6e3ca6929fe3819f6748682c99e3b877ec606b2",
+      "cellSize": 64
     },
     "EXOTIC_CRIMSON": {
       "id": 368,
       "artIndex": 368,
       "kind": "bottle",
-      "rgbaSha256": "8076f1348ddc973083a6b9e814fe2903cbc8c8323cddb836e268da364a16b000"
+      "rgbaSha256": "7d133a00c9e69f75de3792e1bab285ea2c849abf087b1f7b312f9b2c6629813b",
+      "cellSize": 64
     },
     "EXOTIC_AMBER": {
       "id": 369,
       "artIndex": 369,
       "kind": "bottle",
-      "rgbaSha256": "66fac7c9932beb0954f32c0953233e027763e29ec3b713cbb9668e71ee704735"
+      "rgbaSha256": "e73c5f70f2919dc94631df4d7e1bd3d178db1f33538d4005091eee1aaff5f6b8",
+      "cellSize": 64
     },
     "EXOTIC_GOLDEN": {
       "id": 370,
       "artIndex": 370,
       "kind": "bottle",
-      "rgbaSha256": "7a4257583df3aa6b9cbc7903bbeb76c03e7f7a3f73b640bebe1a75561e964c74"
+      "rgbaSha256": "082d2dd46cfa0012e74bb721edd8157e606479badf2eecdce2318ad3133d14a3",
+      "cellSize": 64
     },
     "EXOTIC_JADE": {
       "id": 371,
       "artIndex": 371,
       "kind": "bottle",
-      "rgbaSha256": "45a93d5bc7cf3da52891e48674967dbfaa577c1e1b2f7924776b12f41970d8ed"
+      "rgbaSha256": "40149f0048b92abf2677477ea7e5406dbbfb64bebec6a4a68d345f7310521169",
+      "cellSize": 64
     },
     "EXOTIC_TURQUOISE": {
       "id": 372,
       "artIndex": 372,
       "kind": "bottle",
-      "rgbaSha256": "06ac92ef653da2a0fbbb15a915ca91ba04560e631501c35a0d4a31123c0479f4"
+      "rgbaSha256": "cd2724906574126ed21a53cde6ba1bb29d120af56405f9e52e26c0081a87cfeb",
+      "cellSize": 64
     },
     "EXOTIC_AZURE": {
       "id": 373,
       "artIndex": 373,
       "kind": "bottle",
-      "rgbaSha256": "234b00556a3c7c21cf310638a23dbca04d3ca7398788e6398195617ac18be231"
+      "rgbaSha256": "46cfda2677646f241b3a1dda45205e59df9a5f18bc21a4b26e0788a800d7747d",
+      "cellSize": 64
     },
     "EXOTIC_INDIGO": {
       "id": 374,
       "artIndex": 374,
       "kind": "bottle",
-      "rgbaSha256": "d6aadbd42b1a5f6ccef934277efa5a60464562f3c7d6f13328a9ddcc90e86ff3"
+      "rgbaSha256": "a1f07aa2d0ae8cf165809d295276fe115dc1dea127c09299bf4372467fdcdd1f",
+      "cellSize": 64
     },
     "EXOTIC_MAGENTA": {
       "id": 375,
       "artIndex": 375,
       "kind": "bottle",
-      "rgbaSha256": "0922fa4bed9849ac9e2762e68ec5d6e5a54508f7cb74c1947db0103ff76de44e"
+      "rgbaSha256": "4c93ef8bb2f47b142b1208f314f4d76820368c5457705b954b38aa23b4ee197c",
+      "cellSize": 64
     },
     "EXOTIC_BISTRE": {
       "id": 376,
       "artIndex": 376,
       "kind": "bottle",
-      "rgbaSha256": "7f172abe0bd58cf8b7efa846d34ae30922cf6e7591750a1054814cb6e2bcfd95"
+      "rgbaSha256": "e04f0978053ad0460cfb6676cfd0e074fe16c5e6ec1f3c09cd8de7c1f9fb6896",
+      "cellSize": 64
     },
     "EXOTIC_CHARCOAL": {
       "id": 377,
       "artIndex": 377,
       "kind": "bottle",
-      "rgbaSha256": "9faf8aef15feb0e3d4bd33b7088a473156e31d2e99c63e6b3718620005c5dcb0"
+      "rgbaSha256": "5b18a4887726e626d8b848efe52768bfd529729b9d0fdfe4e4590e5b0ae9b163",
+      "cellSize": 64
     },
     "EXOTIC_SILVER": {
       "id": 378,
       "artIndex": 378,
       "kind": "bottle",
-      "rgbaSha256": "f264cd73d63e1f9f3e88adac660eae03a62baf1d21b3c66b0ca0a1dfa24da475"
+      "rgbaSha256": "baf925a9064101188340315c8c4357fc119fcd64cce7df7273c47fa9cefa6cdc",
+      "cellSize": 64
     },
     "EXOTIC_IVORY": {
       "id": 379,
       "artIndex": 379,
       "kind": "bottle",
-      "rgbaSha256": "637dc896efd032aa5d6fb760279379c6082bd54178e20eaf5ddabd5ba780a050"
+      "rgbaSha256": "e307d33db63a58d608f25c93cd6f813ddd0378a89a1dfed7cff123d646a04be6",
+      "cellSize": 64
     },
     "SEED_ROTBERRY": {
       "id": 384,
       "artIndex": 384,
       "kind": "seed",
-      "rgbaSha256": "7c83b81830afe0659bb1ffcada8b69c864335359de4e3ec79f4795b8a79c4713"
+      "rgbaSha256": "21c3668d7c31e4681afe66cc11dddcce201c9f5825ac478137cf66167a731c06",
+      "cellSize": 64
     },
     "SEED_FIREBLOOM": {
       "id": 385,
       "artIndex": 385,
       "kind": "seed",
-      "rgbaSha256": "b6c806cf57a3861d6e77fe4f0d00709197cfaa83cbe5fb0cd293ff330a7c9d52"
+      "rgbaSha256": "a0452343434c8ae7fbd25c8fb54c98669fc421197c35d2f9633b7be91eace5cd",
+      "cellSize": 64
     },
     "SEED_SWIFTTHISTLE": {
       "id": 386,
       "artIndex": 386,
       "kind": "seed",
-      "rgbaSha256": "411d7ee947ad894ae0ba3e15b36796f18b258d7d797ac8a7d5363e637eb3bbae"
+      "rgbaSha256": "6b9a6b11a80939af44de390377d436899e19cdf438d97912a7c9d277d9a8685f",
+      "cellSize": 64
     },
     "SEED_SUNGRASS": {
       "id": 387,
       "artIndex": 387,
       "kind": "seed",
-      "rgbaSha256": "be19ae60802205334d589834c0329c83f7ebf56b54e57bd033459b7aa7ca2700"
+      "rgbaSha256": "e608409577cb9633a2fe51424feb66b051000c92c90f07e4ade8f168c357f709",
+      "cellSize": 64
     },
     "SEED_ICECAP": {
       "id": 388,
       "artIndex": 388,
       "kind": "seed",
-      "rgbaSha256": "51741dc4f55a9f68badc883977455a8654e3878a478fc829a09519161b1aae94"
+      "rgbaSha256": "99bd1a0190edd27db16d26f10cea81a3e05735a1e1ea6b9d3a4f9ab4c98f8096",
+      "cellSize": 64
     },
     "SEED_STORMVINE": {
       "id": 389,
       "artIndex": 389,
       "kind": "seed",
-      "rgbaSha256": "c027bfbc8393891d13e32975ece43ab44cf56166c874eb712a3e2f7de34c04ca"
+      "rgbaSha256": "694a95178fd78c740390f05d98774aa45efdd557c7dc825a509ca38ff9ca4d94",
+      "cellSize": 64
     },
     "SEED_SORROWMOSS": {
       "id": 390,
       "artIndex": 390,
       "kind": "seed",
-      "rgbaSha256": "c027bfbc8393891d13e32975ece43ab44cf56166c874eb712a3e2f7de34c04ca"
+      "rgbaSha256": "c531e1ae1826a968c8c217789dc96bf3c22a2c0c61fce84e8908291e431c7684",
+      "cellSize": 64
     },
     "SEED_MAGEROYAL": {
       "id": 391,
       "artIndex": 391,
       "kind": "seed",
-      "rgbaSha256": "5dea59b6dcdd88dcca3577552e4dd8352f1d41b36ad3a3c5fd2af2342288b6fb"
+      "rgbaSha256": "00bfb74158932ee66df60f1ec6775969303c62ab8488d8d2d112adb6af750719",
+      "cellSize": 64
     },
     "SEED_EARTHROOT": {
       "id": 392,
       "artIndex": 392,
       "kind": "seed",
-      "rgbaSha256": "be19ae60802205334d589834c0329c83f7ebf56b54e57bd033459b7aa7ca2700"
+      "rgbaSha256": "662601c9f1a8b200f7f06d93a1ae68294a11882557a4a54ccc6a040aae3dc3be",
+      "cellSize": 64
     },
     "SEED_STARFLOWER": {
       "id": 393,
       "artIndex": 393,
       "kind": "seed",
-      "rgbaSha256": "d1ea405c5662253020d7abdc754dacede9dac9cfb22f9fa538d541b2c78ade84"
+      "rgbaSha256": "a7743a8933f3dd920dd55f61b324a2fed06e6b49202a17aa1856c55986463f28",
+      "cellSize": 64
     },
     "SEED_FADELEAF": {
       "id": 394,
       "artIndex": 394,
       "kind": "seed",
-      "rgbaSha256": "fe6932528f9b4215036fe5ece523e511dc8a853f3d3edae2d3d9493c343dfc01"
+      "rgbaSha256": "e62ee4eb11d96c947cf7d7ffd9dc9cb10f52fa507f414d8670389ab0404157b8",
+      "cellSize": 64
     },
     "SEED_BLINDWEED": {
       "id": 395,
       "artIndex": 395,
       "kind": "seed",
-      "rgbaSha256": "d1ea405c5662253020d7abdc754dacede9dac9cfb22f9fa538d541b2c78ade84"
+      "rgbaSha256": "d6b4e4bae187b718cd613d657e8cc59509a7ef8d6fbaac3ca23f2e9b8784e7cd",
+      "cellSize": 64
     },
     "BREW_INFERNAL": {
       "id": 400,
       "artIndex": 400,
       "kind": "bottle",
-      "rgbaSha256": "d36451ea2bc295075bcc79d84a2664a71a6463b66f54fab548da0c075992ae81"
+      "rgbaSha256": "45750eba63d8ed417e691fc05c38d8d29aa243d6d071f0b96f178ca48383a067",
+      "cellSize": 64
     },
     "BREW_BLIZZARD": {
       "id": 401,
       "artIndex": 401,
       "kind": "bottle",
-      "rgbaSha256": "d36451ea2bc295075bcc79d84a2664a71a6463b66f54fab548da0c075992ae81"
+      "rgbaSha256": "6c2d7e1fc5e44a147307438cce6f6b808d5c7433616aac0b80a634589840f6a0",
+      "cellSize": 64
     },
     "BREW_SHOCKING": {
       "id": 402,
       "artIndex": 402,
       "kind": "bottle",
-      "rgbaSha256": "3b03a3df75156dd4ee98559cea0d85c9b41044fe26209aae73d6f9bee95f320b"
+      "rgbaSha256": "a6a6ec679dc14759e715a281803c996f5862128af6ac09b25dc6f5d706cb6bf5",
+      "cellSize": 64
     },
     "BREW_CAUSTIC": {
       "id": 403,
       "artIndex": 403,
       "kind": "bottle",
-      "rgbaSha256": "5660811c6f8822d1cfc20bafaf7db347859db56d291b7d6baf8a304e7650f527"
+      "rgbaSha256": "2a918fd7b8f427226165b14404de8e864f3e6a6145b08a97b31f4af7dc0626d6",
+      "cellSize": 64
     },
     "BREW_AQUA": {
       "id": 404,
       "artIndex": 404,
       "kind": "bottle",
-      "rgbaSha256": "7a4257583df3aa6b9cbc7903bbeb76c03e7f7a3f73b640bebe1a75561e964c74"
+      "rgbaSha256": "49d38b8eff5cd4b45672f6f2634925270e3a67836e2b41100c6a039a3a1510ac",
+      "cellSize": 64
     },
     "BREW_UNSTABLE": {
       "id": 405,
       "artIndex": 405,
       "kind": "bottle",
-      "rgbaSha256": "1798c09b302a3e8fab78e733ecf904b49faf35b5271a73ab86ed8f1305a911c5"
+      "rgbaSha256": "281f6c8a1522ae3d61d651401a6c2ac75d7331b693b090d3ba95d6156aaf7950",
+      "cellSize": 64
     },
     "ELIXIR_HONEY": {
       "id": 408,
       "artIndex": 408,
       "kind": "bottle",
-      "rgbaSha256": "b822b438434b7ee3d64d13264c769ea0344be73ee7f34a9dff8d31757de3013a"
+      "rgbaSha256": "6f9b9b53403777f2d7159c2858b6a5e4f8add6e2db7bffdb0cdb24d1afff4394",
+      "cellSize": 64
     },
     "ELIXIR_AQUA": {
       "id": 409,
       "artIndex": 409,
       "kind": "bottle",
-      "rgbaSha256": "e0b8d4ac6dafddae76343cc1470178ecf2781a2d6984a8ab957d939f901951a6"
+      "rgbaSha256": "b929f6fed1ba5e8255339c0f6e35f8ff5a5ec79148b82ded2da6d3bffabd6de3",
+      "cellSize": 64
     },
     "ELIXIR_MIGHT": {
       "id": 410,
       "artIndex": 410,
       "kind": "bottle",
-      "rgbaSha256": "326c033743ea5cc60c0776df41342a6d37b664d3e46b74cdbe0bdc74d98301d7"
+      "rgbaSha256": "e6d60d45d07dbce83bc25a98c85d72dac788d80a1b9a6b72f0e6dec9a4f95ba7",
+      "cellSize": 64
     },
     "ELIXIR_DRAGON": {
       "id": 411,
       "artIndex": 411,
       "kind": "bottle",
-      "rgbaSha256": "47cb3e0a8ba3dc92cd9325f7dbc8a8ceb7f2b95f58c00d570ece7f03c2401ea7"
+      "rgbaSha256": "1b928bc8306dc03292512cf6ee9de5ba8f4782bc66a01064f4bc36bea62e1583",
+      "cellSize": 64
     },
     "ELIXIR_TOXIC": {
       "id": 412,
       "artIndex": 412,
       "kind": "bottle",
-      "rgbaSha256": "47cb3e0a8ba3dc92cd9325f7dbc8a8ceb7f2b95f58c00d570ece7f03c2401ea7"
+      "rgbaSha256": "7035d7019e5bd4bc45b7d6de577528074409e160050472d94c1209fdd9e5f8ae",
+      "cellSize": 64
     },
     "ELIXIR_ICY": {
       "id": 413,
       "artIndex": 413,
       "kind": "bottle",
-      "rgbaSha256": "7a4257583df3aa6b9cbc7903bbeb76c03e7f7a3f73b640bebe1a75561e964c74"
+      "rgbaSha256": "87f394617d492818d5bf7712d2b114947929373f631cfb436cdf1aaa7da833c4",
+      "cellSize": 64
     },
     "ELIXIR_ARCANE": {
       "id": 414,
       "artIndex": 414,
       "kind": "bottle",
-      "rgbaSha256": "9faf8aef15feb0e3d4bd33b7088a473156e31d2e99c63e6b3718620005c5dcb0"
+      "rgbaSha256": "f35103aab27bd3f0a7845807a5f4eddec05eb57b934306ed09cf200ab3d6c6b8",
+      "cellSize": 64
     },
     "ELIXIR_FEATHER": {
       "id": 415,
       "artIndex": 415,
       "kind": "bottle",
-      "rgbaSha256": "5660811c6f8822d1cfc20bafaf7db347859db56d291b7d6baf8a304e7650f527"
+      "rgbaSha256": "2790ba7fdc1a1f92dd154f4b880cef714ebfd7f1920bd334150db8a3f1361e20",
+      "cellSize": 64
     },
     "WILD_ENERGY": {
       "id": 416,
       "artIndex": 416,
       "kind": "tablet",
-      "rgbaSha256": "badbd124ed66eec3dad69c48ad04d6d32bf2104f4584a3d30893eed254248536"
+      "rgbaSha256": "e603fb67220e56ba54e3e6549b936daf1d3c6d052ed62b04097d3c971fb92f88",
+      "cellSize": 64
     },
     "PHASE_SHIFT": {
       "id": 417,
       "artIndex": 417,
       "kind": "tablet",
-      "rgbaSha256": "1501d92027bdb469199f1d3682f655bf5625c93c9af167da3950058018555e78"
+      "rgbaSha256": "c20ecd39f9246ac897f2da2530512e385b1b8e45a283afc4637ae7aab1507748",
+      "cellSize": 64
     },
     "TELE_GRAB": {
       "id": 418,
       "artIndex": 418,
       "kind": "tablet",
-      "rgbaSha256": "4b5cc4988c056ac4d4894709c73ecceedbda1c0fb5e0db4883d7ea11a9b4a079"
+      "rgbaSha256": "1d66452bbd8162a4b570c67fb59fbca62ec2539604244b450bb450d2eae7bd43",
+      "cellSize": 64
     },
     "UNSTABLE_SPELL": {
       "id": 419,
       "artIndex": 419,
       "kind": "tablet",
-      "rgbaSha256": "aaa98f4a7f7a95c2fee78acf0c1497e0c7d5277dec48d03082c65623d2d387d3"
+      "rgbaSha256": "808a878fb9e2b61e31253779d238f527e30dfbcf8b61443ac2ca5defac41fb48",
+      "cellSize": 64
     },
     "CURSE_INFUSE": {
       "id": 421,
       "artIndex": 421,
       "kind": "tablet",
-      "rgbaSha256": "4ceec6f44a25b97b1f2a3d7e9aace0f22a53d6aab10037eabfca355f7e71fda7"
+      "rgbaSha256": "de27a4bea70f492b75aa880e1fa8cef686a7e41cb60628168e8abb2a6a8a810f",
+      "cellSize": 64
     },
     "MAGIC_INFUSE": {
       "id": 422,
       "artIndex": 422,
       "kind": "tablet",
-      "rgbaSha256": "4ceec6f44a25b97b1f2a3d7e9aace0f22a53d6aab10037eabfca355f7e71fda7"
+      "rgbaSha256": "3dfb812ebbfc420c0e1c2b79b3e92320294568963f8ec2cafd307ef90fcf7500",
+      "cellSize": 64
     },
     "ALCHEMIZE": {
       "id": 423,
       "artIndex": 423,
       "kind": "tablet",
-      "rgbaSha256": "4b5cc4988c056ac4d4894709c73ecceedbda1c0fb5e0db4883d7ea11a9b4a079"
+      "rgbaSha256": "32bd4d23980ebde2199761a35f95514ac53b15ae8ae9d1884676acbd28595c11",
+      "cellSize": 64
     },
     "RECYCLE": {
       "id": 424,
       "artIndex": 424,
       "kind": "tablet",
-      "rgbaSha256": "4a6ebc39b1e994996f1e395af88a0a8d4f9d1bdca4549220ab838fa92b8cbb19"
+      "rgbaSha256": "df2cef359beb70e0c5adc52751f865333d0c33eb3247f51f630b70e95b10e54f",
+      "cellSize": 64
     },
     "RECLAIM_TRAP": {
       "id": 426,
       "artIndex": 426,
       "kind": "tablet",
-      "rgbaSha256": "d7c2c077e3bfe1db7fd1a19f9ca460789d15db9c8d4d5e12dee9c5430a61541e"
+      "rgbaSha256": "d6641322b606820926e4250c21b4107f7fdaa21b975e9ae87f332800fffcc0e2",
+      "cellSize": 64
     },
     "RETURN_BEACON": {
       "id": 427,
       "artIndex": 427,
       "kind": "tablet",
-      "rgbaSha256": "aaa98f4a7f7a95c2fee78acf0c1497e0c7d5277dec48d03082c65623d2d387d3"
+      "rgbaSha256": "f8b8ca1e5ee0b82fe9f45a24581cbdb1ef52fb961067ee67bbabdac6c5bfa06c",
+      "cellSize": 64
     },
     "SUMMON_ELE": {
       "id": 428,
       "artIndex": 428,
       "kind": "tablet",
-      "rgbaSha256": "f074ee684fb69c618c21e253522453eeb34524e6c16dbea953bfd611035dfa30"
+      "rgbaSha256": "4f58093c1255d940b43fa8c4536c589fa2c10569e346d4dd320869d875db3695",
+      "cellSize": 64
     },
     "MEAT": {
       "id": 432,
       "artIndex": 432,
       "kind": "meat",
-      "rgbaSha256": "52ec9f1cac8735512fc6d2325a89869defb949ea1b72488aaade398533f4b9b9"
+      "rgbaSha256": "500383aa6e31e670d2a01ce0c3d1d4e8b9e29e3152435f37ecc2f9e65ab2e285",
+      "cellSize": 64
     },
     "STEAK": {
       "id": 433,
       "artIndex": 433,
       "kind": "meat",
-      "rgbaSha256": "043a74dd952c4cd8661a2e71521d0a67f9cbac65367655ce4be691feca8d0f96"
+      "rgbaSha256": "0382d5aeef446fc1dea7f4dec6ceac73d83ce3ba8252692c482e67c4ca1e140b",
+      "cellSize": 64
     },
     "STEWED": {
       "id": 434,
       "artIndex": 434,
       "kind": "pot",
-      "rgbaSha256": "ba0a8bab3d59a05e689fae57d0d7a0056eb35830e47e6097103aaab33220a6ec"
+      "rgbaSha256": "e4c750041be2055fbbd3421f7441ffe84961efce43e2a1a689309dae3d26aa02",
+      "cellSize": 64
     },
     "OVERPRICED": {
       "id": 435,
       "artIndex": 435,
       "kind": "ration",
-      "rgbaSha256": "0ea18a457b90380b6f31425622cddb2d6a7a8bdc6df919f8ab1cb8e438882c44"
+      "rgbaSha256": "c3790493a7fb9c6a784219bd4b21aeff06f6f930f0fe602cd2291da639f145f0",
+      "cellSize": 64
     },
     "CARPACCIO": {
       "id": 436,
       "artIndex": 436,
       "kind": "meat",
-      "rgbaSha256": "4e796bc80c2d59764222cc766b09a33424b9f5f8d3f84d820764ba42a42a4d7b"
+      "rgbaSha256": "129a5ddd516616afd1f9e970538feaae1a00abf5b3d86cc9273525b04132667e",
+      "cellSize": 64
     },
     "RATION": {
       "id": 437,
       "artIndex": 437,
       "kind": "ration",
-      "rgbaSha256": "03c4cad4e49c0ff9c140306c92b0286956f1b21dca8f4d5fe2c9797b895e1429"
+      "rgbaSha256": "248b6c0031a920b2171b0f2dc77644612d7f631771ca716f3f42d818cfecfc07",
+      "cellSize": 64
     },
     "PASTY": {
       "id": 438,
       "artIndex": 438,
       "kind": "pie",
-      "rgbaSha256": "2bad2db656fd942f1e309242e736bdc78354f37c156b1c91ad7dcb5d58cb8f96"
+      "rgbaSha256": "85e08ede2c793341016403d0a73c17358225d19a4c318d57bbc01360b1a0f32a",
+      "cellSize": 64
     },
     "MEAT_PIE": {
       "id": 439,
       "artIndex": 439,
       "kind": "pie",
-      "rgbaSha256": "9184831a48097ad7042bf8570a5de1bbbf39fc6bbf463529c92a128508760b7e"
+      "rgbaSha256": "56699fdd36c7fdf693279964014549dfd70731bb6e70613510cbef57d97c2222",
+      "cellSize": 64
     },
     "BLANDFRUIT": {
       "id": 440,
       "artIndex": 440,
       "kind": "fruit",
-      "rgbaSha256": "f297d4eb13441092a8262ed1caf75885ec1f1a95e1143e1e2b298d92590cca72"
+      "rgbaSha256": "f0d403598bd60c9e47403bc6d6c82f971043aca25591ece7115bd3224321640e",
+      "cellSize": 64
     },
     "BLAND_CHUNKS": {
       "id": 441,
       "artIndex": 441,
       "kind": "fruit",
-      "rgbaSha256": "904d0b333382ba57eb68ae8d9a0d7a5f3f4b443e8f7c22b5767fa27311f76e77"
+      "rgbaSha256": "c477f17394eaddab17cc8a0104e4d53cd50f6fbb17e1ceb41e1e149e0179e673",
+      "cellSize": 64
     },
     "BERRY": {
       "id": 442,
       "artIndex": 442,
       "kind": "fruit",
-      "rgbaSha256": "d3456a850249e21801df243e323a4e0f1714a146680c954a40fc9cab2f159146"
+      "rgbaSha256": "8057f8fd34c0ef0192a57033af10ba826ba60258f9598b4f535e6a339cf043e0",
+      "cellSize": 64
     },
     "PHANTOM_MEAT": {
       "id": 443,
       "artIndex": 443,
       "kind": "meat",
-      "rgbaSha256": "4e796bc80c2d59764222cc766b09a33424b9f5f8d3f84d820764ba42a42a4d7b"
+      "rgbaSha256": "7f9c574379283496fbe38d892c2670f01b9ce7936cd4df14ce6682ad1f8a6caa",
+      "cellSize": 64
     },
     "SUPPLY_RATION": {
       "id": 444,
       "artIndex": 444,
       "kind": "ration",
-      "rgbaSha256": "0ea18a457b90380b6f31425622cddb2d6a7a8bdc6df919f8ab1cb8e438882c44"
+      "rgbaSha256": "9b639964f0e7fb4edcb895d257cd2a6bd54876bc8ae0964932b535205135601e",
+      "cellSize": 64
     },
     "STEAMED_FISH": {
       "id": 448,
       "artIndex": 448,
       "kind": "fish",
-      "rgbaSha256": "ce66dea612b388bccffd95ce8118096b45ef46bb2df1cd026f532a8dd2892d07"
+      "rgbaSha256": "9999dda786fa08265b540e4a192a554cb9f87ac1c18a0330106d89aabc4dba92",
+      "cellSize": 64
     },
     "FISH_LEFTOVER": {
       "id": 449,
       "artIndex": 449,
       "kind": "fish",
-      "rgbaSha256": "ce66dea612b388bccffd95ce8118096b45ef46bb2df1cd026f532a8dd2892d07"
+      "rgbaSha256": "7d3e674d8e986fde6dc01a59c7afef061183659e0cd24eaece79d669c9d39bb4",
+      "cellSize": 64
     },
     "CHOC_AMULET": {
       "id": 450,
       "artIndex": 450,
       "kind": "amulet",
-      "rgbaSha256": "2d93ee450b69319d4182171e297d458cf130ece26c0bde4a2f580168f3403bf4"
+      "rgbaSha256": "084bd5e89117d325b80ce2153c05786246dd71f43a150cc80f1b28f3dd10e688",
+      "cellSize": 64
     },
     "EASTER_EGG": {
       "id": 451,
       "artIndex": 451,
       "kind": "egg",
-      "rgbaSha256": "b074da70e7be8645b571525b580c5dff525893f0c91eaf9d630357de92b41dee"
+      "rgbaSha256": "43615e352037aed273f4d4a1fc346d579ed486e6db4901a91c8b7d3e190ad611",
+      "cellSize": 64
     },
     "RAINBOW_POTION": {
       "id": 452,
       "artIndex": 452,
       "kind": "bottle",
-      "rgbaSha256": "47cb3e0a8ba3dc92cd9325f7dbc8a8ceb7f2b95f58c00d570ece7f03c2401ea7"
+      "rgbaSha256": "cf3e8cd51bc2441dbe476b8dbea13a4494fd6b8e50a4fc9b3c3eec32b17c6d75",
+      "cellSize": 64
     },
     "SHATTERED_CAKE": {
       "id": 453,
       "artIndex": 453,
       "kind": "cake",
-      "rgbaSha256": "d976f373b38fc58e9c07d1259afd728dffa0f9f1702f4ba79acb6422130449d3"
+      "rgbaSha256": "5870b60ca18eca2a0cd4b9716908cfaddfece2cb11ba17e9189bd03970192700",
+      "cellSize": 64
     },
     "PUMPKIN_PIE": {
       "id": 454,
       "artIndex": 454,
       "kind": "pie",
-      "rgbaSha256": "d976f373b38fc58e9c07d1259afd728dffa0f9f1702f4ba79acb6422130449d3"
+      "rgbaSha256": "9e4c406739122f2780f2d29b1e47ee5fb41497c6f1431778a47cb6a1e84ded52",
+      "cellSize": 64
     },
     "VANILLA_CAKE": {
       "id": 455,
       "artIndex": 455,
       "kind": "cake",
-      "rgbaSha256": "d976f373b38fc58e9c07d1259afd728dffa0f9f1702f4ba79acb6422130449d3"
+      "rgbaSha256": "395f7a16df0eba056df264e0eb443d5383ae29328ebd63d467331083e4fbb9e7",
+      "cellSize": 64
     },
     "CANDY_CANE": {
       "id": 456,
       "artIndex": 456,
       "kind": "cane",
-      "rgbaSha256": "fe43ec5e43c51bf94fe0c79fba7a521d532e48d50f432780c2346a5300efca7d"
+      "rgbaSha256": "0e761742100c38f35f2b23b967a18fd60319b6463b6af312e3690873b6d0ee34",
+      "cellSize": 64
     },
     "SPARKLING_POTION": {
       "id": 457,
       "artIndex": 457,
       "kind": "bottle",
-      "rgbaSha256": "4186904831942d251810756c9706ec090f9288f27973281c6fafc5a1a6aea8ae"
+      "rgbaSha256": "fcd5b2a5930cdefbb2ba2be125d50354594861074be06beacc229cd16dff55cd",
+      "cellSize": 64
     },
     "DUST": {
       "id": 465,
       "artIndex": 465,
       "kind": "dust",
-      "rgbaSha256": "bbfd78aad5c97ef6500717c91cebcf9af84ffaa39841548ca4b63b47d3aba524"
+      "rgbaSha256": "70c5eafb9f6d355737dd4c50936cfb9cbb6f3276fa88297883e774692bba99ba",
+      "cellSize": 64
     },
     "CANDLE": {
       "id": 466,
       "artIndex": 466,
       "kind": "candle",
-      "rgbaSha256": "8a84783fefc17b3b8c0723fb6de713a0b5d2ebcec672d005970416d322eaf6bf"
+      "rgbaSha256": "490c77cb60ce03487fb1a4f3011fb2fdd6f6c734b51848c524d6e428df6b3326",
+      "cellSize": 64
     },
     "EMBER": {
       "id": 467,
       "artIndex": 467,
       "kind": "ember",
-      "rgbaSha256": "2c57b58eb48bb8d9693d21a20e5e97c92b5c6e37f3b63a3b5c03c0820c98d13d"
+      "rgbaSha256": "5985a350c7a1f848651970b1b9cc266aff08997612d3dde4dc62283bddfedad8",
+      "cellSize": 64
     },
     "PICKAXE": {
       "id": 468,
       "artIndex": 468,
       "kind": "pickaxe",
-      "rgbaSha256": "56ce2e2160a078cdba6fcfb03b1e285a3414077ae84bdff52139e19317465212"
+      "rgbaSha256": "d6c97f5ac2839b91f7b184185918cf70c52824e528f14ed1d6a205d37d7b125c",
+      "cellSize": 64
     },
     "ORE": {
       "id": 469,
       "artIndex": 469,
       "kind": "ore",
-      "rgbaSha256": "69e3f6cb86f40d6b9eccc511a303013900498d25a4d2471577c3ce45c3239af9"
+      "rgbaSha256": "a14f634f2081b8e759a35ede1070c7b339abf910d9df11ac1a8590599b2f19fe",
+      "cellSize": 64
     },
     "TOKEN": {
       "id": 470,
       "artIndex": 470,
       "kind": "coins",
-      "rgbaSha256": "af4a9d635d23a040d5e0501fea889ef27c8c06a5a23caef4e8b666788d714760"
+      "rgbaSha256": "3db41a88428841e691733a82fd595815a03b44d9525a13602092115a31825c7a",
+      "cellSize": 64
     },
     "BLOB": {
       "id": 471,
       "artIndex": 471,
       "kind": "drop",
-      "rgbaSha256": "151ecf7c28583d9b6ba75a4484e5355f7769e231cf94c14cf92c936fa5d8f23b"
+      "rgbaSha256": "207729f7b598d556a1dd510c56f8ebffe57b421bec98d75b5b04cd08f42b2e84",
+      "cellSize": 64
     },
     "SHARD": {
       "id": 472,
       "artIndex": 472,
       "kind": "shard",
-      "rgbaSha256": "cad22d562e036dc8377e2020b17a6e9b2ed1d051f626761821ead669422f5e30"
+      "rgbaSha256": "24e92f9d16be3eed78f3589434569724df1b879e3f0dead4740cbffd6fff4cd9",
+      "cellSize": 64
     },
     "ESCAPE": {
       "id": 473,
       "artIndex": 473,
       "kind": "amulet",
-      "rgbaSha256": "7123293bb45a511c6042309039dfc1b21ab8ce88a71e2d5d75f46586bcf2063d"
+      "rgbaSha256": "e7ca3293a9c2f04288fa5fcbb8ee00e32804dc2e66321421f34f9e99a990af70",
+      "cellSize": 64
     },
     "STATUE": {
       "id": 474,
       "artIndex": 474,
       "kind": "statue",
-      "rgbaSha256": "e3d71c2b79b29f93075c5159b8b45ad92c430455e5e5b48045d3feabea9fdac1"
+      "rgbaSha256": "5df9d18d291c08a90542c46c89356714d0695f32229472dbc695c9ff8633992f",
+      "cellSize": 64
     },
     "WATERSKIN": {
       "id": 480,
       "artIndex": 480,
       "kind": "bag",
-      "rgbaSha256": "3963a1e0fec342527ccee851b637e009113c59c495a0ceee994873613b8a26a3"
+      "rgbaSha256": "2d9dfdbdc4bc5a76ce69280f9657c40f0d4f0f23a0b6651eba9aea6cb6b3073e",
+      "cellSize": 64
     },
     "BACKPACK": {
       "id": 481,
       "artIndex": 481,
       "kind": "bag",
-      "rgbaSha256": "60a08214882c10ee8d0751918d625e8ddc653ed08f2c77cbf82577b5377f905c"
+      "rgbaSha256": "684fb14ac1e38dd1e9314f8526d0f3209736fae9d03ef7223e206dcf76575e8a",
+      "cellSize": 64
     },
     "POUCH": {
       "id": 482,
       "artIndex": 482,
       "kind": "bag",
-      "rgbaSha256": "57fd58094160326f2aa6e313aa0a79fd3f92420d051aecacd8ae7d81d63e6657"
+      "rgbaSha256": "a3978bb13c584f3c6cb3789898fd9253398d5cf868bd56ed4dd12d20a9f78389",
+      "cellSize": 64
     },
     "HOLDER": {
       "id": 483,
       "artIndex": 483,
       "kind": "quiver",
-      "rgbaSha256": "0f395835b87acff741cc227d03a10005c351a378955c34bd378662ed1846cfee"
+      "rgbaSha256": "7950ba5d13f8cefd80e2e1fb7d00eb1893c028ece9d0e6520051d371a0807e6f",
+      "cellSize": 64
     },
     "BANDOLIER": {
       "id": 484,
       "artIndex": 484,
       "kind": "bandolier",
-      "rgbaSha256": "ecee661393970fbde16696d170ff12d496e36c59184fd8c0af21bf1a94f8a356"
+      "rgbaSha256": "bc405c4b078869df1cb2c89e1f3ca4eecab8f1ae604fc3a500e2b1525ce56cab",
+      "cellSize": 64
     },
     "HOLSTER": {
       "id": 485,
       "artIndex": 485,
       "kind": "quiver",
-      "rgbaSha256": "619fe838e9c7c8c92769d4e3c6b854ed489af5e2ca4e89e63d04d93905970cdd"
+      "rgbaSha256": "568ad4654a85c89daf9e7861abe49bcb3e3c9c8f03ab8572c90abad237d78cb2",
+      "cellSize": 64
     },
     "VIAL": {
       "id": 486,
       "artIndex": 486,
       "kind": "bottle",
-      "rgbaSha256": "bd7cb89d624c2b181dd0a02a065e5106cf2e7bfd3cae1a5034b3f297a4756c3b"
+      "rgbaSha256": "3064d0287901ab25baa596527e868569a6a0755b864898f7041b35a6a0c14980",
+      "cellSize": 64
     },
     "GUIDE_PAGE": {
       "id": 496,
       "artIndex": 496,
       "kind": "scroll",
-      "rgbaSha256": "0d0ded162ed76ffb9ef835adfbb9d390d6278d4fd389df18b6be98e70e5c951b"
+      "rgbaSha256": "6fe38edf80f35cfa6f5236075ef1afced0b73382c04927fc8e5743f6e01cbc45",
+      "cellSize": 64
     },
     "ALCH_PAGE": {
       "id": 497,
       "artIndex": 497,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "4d8418ff5bf77b0a38c3fbefd391c899d0c0733fc1bf382690e706247c588da2",
+      "cellSize": 64
     },
     "SEWER_PAGE": {
       "id": 498,
       "artIndex": 498,
       "kind": "scroll",
-      "rgbaSha256": "598fb0ae3ec7e07585b3c6846da01f0014838b6f9cbdd7e7b239970113ab606c"
+      "rgbaSha256": "4bd08620fa9d59d24aed3e587a1cbb3c7676e542c2acc5a57d807061a849c4d6",
+      "cellSize": 64
     },
     "PRISON_PAGE": {
       "id": 499,
       "artIndex": 499,
       "kind": "scroll",
-      "rgbaSha256": "598fb0ae3ec7e07585b3c6846da01f0014838b6f9cbdd7e7b239970113ab606c"
+      "rgbaSha256": "0d815fa35a1a5f66c7ecd5db132d004e67d083d9af99e4dfb197c36dd9ec1120",
+      "cellSize": 64
     },
     "CAVES_PAGE": {
       "id": 500,
       "artIndex": 500,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "f3ab566bf514a65e73619e242d854689bb72ea6cb1d1504f835c4a533b7d292c",
+      "cellSize": 64
     },
     "CITY_PAGE": {
       "id": 501,
       "artIndex": 501,
       "kind": "scroll",
-      "rgbaSha256": "c2196e0019290611a0773db93950982b367c40c0c38704e88b5bdd98c80c7059"
+      "rgbaSha256": "d69b96acdbe23ae02833c0e928a97d263be8b396d339bbb57e70bcb170e9ef44",
+      "cellSize": 64
     },
     "HALLS_PAGE": {
       "id": 502,
       "artIndex": 502,
       "kind": "scroll",
-      "rgbaSha256": "6c78220a39385070cedbfb67ba8bef524483827fa1ca26f5ac9dc526c89e8e33"
+      "rgbaSha256": "8d35ae44ebb57cb02bf1e629f48b5503643b2c7432c8f5b332b6ac3615a631a1",
+      "cellSize": 64
     },
     "BONE_ROD": {
       "id": 512,
       "artIndex": 512,
       "kind": "skull_staff",
-      "rgbaSha256": "d3fd3b2f76ae47c2738463444d495eb15734046a4ec54f77312b6cdda43415e7"
+      "rgbaSha256": "8a3411ee28c7b5ee9ea4eaed6a3838b2115aaa8d46ae219c2e3c1cf72fdcd833",
+      "cellSize": 64
     },
     "PHYLACTERY": {
       "id": 513,
       "artIndex": 513,
       "kind": "phylactery",
-      "rgbaSha256": "249463dd2baef2e7e04e73108bdfef56d8932cbe8bb1a8a191454a9f9f693336"
+      "rgbaSha256": "ac2c3202c25f8403a10ff6c63dabddcb6e80b6038519c759b7e764e919b4205a",
+      "cellSize": 64
     },
     "ARMOR_NECROMANCER": {
       "id": 514,
       "artIndex": 514,
       "kind": "armor",
-      "rgbaSha256": "a614a0ea16fd1fbba76a2b402462bda376178b47844c599335e7c1102542204e"
+      "rgbaSha256": "ef2ed4eb772b9591feb3712380631108abfad7cb0f0d0f4cd03d09bf7e69d412",
+      "cellSize": 64
     },
     "RUNED_BATON": {
       "id": 515,
       "artIndex": 515,
       "kind": "wand",
-      "rgbaSha256": "b2f3d1c4323cb66a16a935951cb87eb600aba7eef93cd565d35e97d9dcb0eff8"
+      "rgbaSha256": "943e70cc408b729e20c918be8295f472f8c4a8f49372762eef90bcfb4e85a6b1",
+      "cellSize": 64
     },
     "SIGIL_BRUSH": {
       "id": 516,
       "artIndex": 516,
       "kind": "brush",
-      "rgbaSha256": "6e473fc53268f76df4293f492e6d70ad015616ebd77991ec355863220c8f4c82"
+      "rgbaSha256": "fbf3ba08a6435f8738ea7821587297a5638a1dfc6dbf5ebb10a6d6f96759a6c4",
+      "cellSize": 64
     },
     "ARMOR_ENCHANTER": {
       "id": 517,
       "artIndex": 517,
       "kind": "armor",
-      "rgbaSha256": "39f24ed7b2594e39edff62fd77f7f9f9dc2a00c609c8d561efc3cc13cc86a7b9"
+      "rgbaSha256": "335f69b49d3b75c40e634ba6bea9412c8523fe76580588e5d96bb86ca71a3695",
+      "cellSize": 64
     },
     "FOCUS_RING": {
       "id": 518,
       "artIndex": 518,
       "kind": "ring",
-      "rgbaSha256": "b6bff9b668326888bf69d4f24562395cd0f6f3bb7ff06fcf0baeb918c91580bb"
+      "rgbaSha256": "b3b2c09fbd610273b54bb16370d0940921c09cc28578499144dc1d7dffa23c41",
+      "cellSize": 64
     },
     "FOCUS_CRYSTAL": {
       "id": 519,
       "artIndex": 519,
       "kind": "crystal",
-      "rgbaSha256": "498b78187b4d0236daed1397426b62f1293dfb500d39ca401e63e4041487ab3a"
+      "rgbaSha256": "4b5d891878cf6ed661bbbfd7e113d285c50c5073a999c0ce1565cd219cea29ea",
+      "cellSize": 64
     },
     "ARMOR_PSYCHIC": {
       "id": 520,
       "artIndex": 520,
       "kind": "armor",
-      "rgbaSha256": "47ce00c47ebedc3a707799fbed1741df4c821f88acc50b19c266167a259d6c5b"
+      "rgbaSha256": "52115afe77f975e10b56c3c16c8a7b6d56e697528488954c3531aa6712516076",
+      "cellSize": 64
     },
     "RUNE_ETCHING": {
       "id": 521,
       "artIndex": 521,
       "kind": "tablet",
-      "rgbaSha256": "3a48232af348bf103afcf301f45d8059c2317164edbab115f770337e6f26b20f"
+      "rgbaSha256": "588eca3f2b938f2f8c4ecbd7d444ba543da333eccbe4170b1320e6b97f9afea2",
+      "cellSize": 64
     },
     "SUMMON_ELE_FIRE": {
       "id": 522,
       "artIndex": 522,
       "kind": "tablet",
-      "rgbaSha256": "4ceec6f44a25b97b1f2a3d7e9aace0f22a53d6aab10037eabfca355f7e71fda7"
+      "rgbaSha256": "24d6e5b9619b38aac5bbcb68adbffce69417d15bde69e39c95812c6c1cc68d3c",
+      "cellSize": 64
     },
     "SUMMON_ELE_FROST": {
       "id": 523,
       "artIndex": 523,
       "kind": "tablet",
-      "rgbaSha256": "aaa98f4a7f7a95c2fee78acf0c1497e0c7d5277dec48d03082c65623d2d387d3"
+      "rgbaSha256": "14c7a2548822dca0d8ab0e141ef639f44e0f13b4fd176c4430eefeaae8b88fb0",
+      "cellSize": 64
     },
     "SUMMON_ELE_SHOCK": {
       "id": 524,
       "artIndex": 524,
       "kind": "tablet",
-      "rgbaSha256": "1501d92027bdb469199f1d3682f655bf5625c93c9af167da3950058018555e78"
+      "rgbaSha256": "7f968688aabdb6d8cc646eb8b58a20b2ebc243b387cb204529f2d70c53b23389",
+      "cellSize": 64
     },
     "SUMMON_ELE_CHAOS": {
       "id": 525,
       "artIndex": 525,
       "kind": "tablet",
-      "rgbaSha256": "1501d92027bdb469199f1d3682f655bf5625c93c9af167da3950058018555e78"
+      "rgbaSha256": "46add96dbf66ea7850d9cb97f8203cdde7e62496c008b5cfde9eed739470826c",
+      "cellSize": 64
     },
     "WAND_NECROSIS": {
       "id": 526,
       "artIndex": 526,
       "kind": "wand",
-      "rgbaSha256": "af3b69b46433ff5482e0ac746af7ca102f4f1a079af005656c98b9cef938e9b4"
+      "rgbaSha256": "b0074be003f9e405b4084c4d472d34539fa54cbb4623a155005a3ea289b207fb",
+      "cellSize": 64
     },
     "WAND_GRAVITY": {
       "id": 527,
       "artIndex": 527,
       "kind": "wand",
-      "rgbaSha256": "b88dcc5e4df94112621e61e8ecb6438a6d2d3857a6b488a1dfb723d7e876b4ea"
+      "rgbaSha256": "b3d7be0a82a88ca5cd2a3d6e3c2153c2d8f8368d8248b7e4bca266cc75de0c8e",
+      "cellSize": 64
     },
     "WAND_BONE": {
       "id": 528,
       "artIndex": 528,
       "kind": "wand",
-      "rgbaSha256": "40bd84a923c33dd0253c5284a7f73d1bda02bdffac8bc478a776e391f954844b"
+      "rgbaSha256": "d7a2dce8c9c1deccd652a86829c719754b29380632f4aa6c5f1e9fd482a98523",
+      "cellSize": 64
     },
     "SOULFIRE": {
       "id": 529,
       "artIndex": 529,
       "kind": "tablet",
-      "rgbaSha256": "c5ed64056803e3b82a7defc7edc93e2160a9f56374678bb8dab0f86b5efbf695"
+      "rgbaSha256": "0a5d08377ec3689643da0f7931cd4b4edd151a00e873e046cd257d05a99eb4fb",
+      "cellSize": 64
     },
     "BONE_SCYTHE": {
       "id": 530,
       "artIndex": 530,
       "kind": "scythe",
-      "rgbaSha256": "f43b632a2d0d5f8b64b13528d94fbc5d201ec0fdde1954e5758bc8e0d49df590"
+      "rgbaSha256": "0e8458e700c8e311aa5f5df627d08b2b39e06c1c5cc503b317404f4f750d990f",
+      "cellSize": 64
     },
     "REAPER_SCYTHE": {
       "id": 531,
       "artIndex": 531,
       "kind": "scythe",
-      "rgbaSha256": "6a5fe242eabd115f1115a71d8433f30860ad09f6239288104c4551e84888871c"
+      "rgbaSha256": "ffa52e86a89dbc4f6793c0ea0cfd425350c93b94aba39d79f5b9132b614a0550",
+      "cellSize": 64
     },
     "GRAVE_SCYTHE": {
       "id": 532,
       "artIndex": 532,
       "kind": "scythe",
-      "rgbaSha256": "f151d20dffad0e25df4f8307308c13e5378a20c7b2afef5d96dd0b3c473afd97"
+      "rgbaSha256": "c5bd25560201ea55f2581a2eadec2c59b7b9bca1e0b0d642e5528357a8607f58",
+      "cellSize": 64
     },
     "ARMOR_BONE": {
       "id": 533,
       "artIndex": 533,
       "kind": "armor",
-      "rgbaSha256": "c97b782b11e0ed074e74912bd3acdc21daa4805e980def42b6240f3780aa069a"
+      "rgbaSha256": "10a0c2751062ed51a27e7abff9677582fa762b9503f82f227d700cf3ccd5874d",
+      "cellSize": 64
     },
     "ARMOR_LEATHER_OCHRE": {
       "id": 534,
       "artIndex": 534,
       "kind": "armor",
-      "rgbaSha256": "5e7d0f5e1ce14fdc3ca56be343e7f6a04f3babaa846f5774ce5f69792440a3ed"
+      "rgbaSha256": "be52599efc61c2784ed88b349f328537f1784cbe28151a46caedf650eb711f8a",
+      "cellSize": 64
     },
     "ARMOR_LEATHER_ASH": {
       "id": 535,
       "artIndex": 535,
       "kind": "armor",
-      "rgbaSha256": "0cc48847bcabb393e5071aa13abdbb029deab1ed861186a57023cc137ff14244"
+      "rgbaSha256": "bb383a5bee459b75c1e90f9c17b5918723508130f9b8a1d3ea07864229a1822a",
+      "cellSize": 64
     },
     "HOURGLASS_ASHES": {
       "id": 536,
       "artIndex": 536,
       "kind": "hourglass",
-      "rgbaSha256": "a8cf72378f55d67bafd7103e60a09b17d62bb0a5fba4dddeb969ac7ce16c7457"
+      "rgbaSha256": "3d2775f3de68a1c3c957d4523f17cace4fa1bb8d3eb6b1c446904d68eee08106",
+      "cellSize": 64
     }
   },
   "icons": {

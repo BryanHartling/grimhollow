@@ -1,0 +1,47 @@
+{
+  "frames": "Create an original premium dark-fantasy RPG user-interface material atlas, painted realism rather than pixel art, no borrowed franchise imagery. Output a square 1536x1536 opaque image divided into an EXACT 3 by 3 grid of equal 512x512 square panels, no gutters, labels, words, numbers or symbols. Every panel is a straight-on perfectly square framed inset surface, its straight outer edges touching its cell edges. Frames must have straight parallel edges, right-angle corners, no perspective or protruding shapes. Border about 40 pixels thick on all four sides, leaving a large very quiet plain center for white game text. Hand-painted tactile materials, soft sculpted bevels, worn edges, restrained ornament only at corners, subtle directional light from upper left, crisp shape separation. Read rows left to right: 1) black-brown leather inset surrounded by aged warm bronze bevel with small engraved corner knots; 2) charcoal slate inset with worn cool pewter beveled rim; 3) deep burgundy leather inset and narrow old brass rim, an action button; 4) matte midnight blue-black leather inset and gunmetal rim, secondary button; 5) brown-black leather tray inset, narrow oxidized bronze rim with tiny corner studs, an empty inventory slot; 6) same inventory slot with a warmer luminous gold inner edge indicating equipped, center stays dark; 7) aged ivory parchment inset framed by curled parchment edges and narrow dark brown outer binding, no writing; 8) glossy deep blood-red glass inset, antique dark bronze rim, gentle horizontal red highlight across center, health meter source; 9) glossy petrol-teal glass inset, antique dark bronze rim, restrained cyan horizontal highlight across center, shielding meter source. All centers low contrast with broad value groups and very fine subtle texture. Frame ornaments original understated Gothic craft, no skulls, no spikes, no gemstones, no filigree crossing center. No drop shadow outside panels. This is production texture art, not a screenshot or mockup.",
+  "icons": {
+    "navigation-a": {
+      "names": [
+        "ENTER",
+        "EXIT",
+        "BACKPACK_LRG",
+        "JOURNAL",
+        "RANKINGS",
+        "BADGES",
+        "PREFS",
+        "MAGNIFY",
+        "WAIT",
+        "ALCHEMY",
+        "STATS",
+        "TALENT",
+        "CATALOG",
+        "BUFFS",
+        "COIN_SML",
+        "ENERGY_SML"
+      ],
+      "prompt": "Create an original painted dark-fantasy RPG icon atlas. Exactly 4 columns by 4 rows, sixteen separate evenly spaced icons in a square 1536x1536 image. Genuine transparent alpha background, no checkerboard, no solid backdrop, no ground shadow, no frames, no labels or words. Each icon fully contained in its equal square cell with generous transparent margins and no overlapping neighbor. Rich hand-painted realism, broad easily readable silhouettes, lightly worn ivory, muted old bronze, leather, steel and subtle jewel colors, soft upper-left illumination, clear edges and strong value separation at tiny game UI size; NOT pixel art, not a modern app style. Consistent three-quarter frontal object view, centered. No franchise imagery. Read row by row left to right: 1 stone arched doorway with warm interior; 2 open wooden door with an outward curved ivory arrow; 3 rugged brown leather backpack with two straps; 4 open medieval journal with blank ivory pages; 5 old bronze trophy cup; 6 bronze laurel victory medallion; 7 chunky antique bronze cogwheel; 8 brass magnifying glass with clear pale lens; 9 brass hourglass with pale sand; 10 round glass alchemy flask with teal liquid and cork; 11 three carved ivory vertical bars increasing in height; 12 brilliant small pale star inside a bronze circular sigil; 13 stack of three closed leather books; 14 three small floating magical orbs red teal and ivory; 15 three old gold coins; 16 faceted vivid cyan crystal."
+    },
+    "navigation-b": {
+      "names": [
+        "DISPLAY_LAND",
+        "DISPLAY_PORT",
+        "AUDIO",
+        "LANGS",
+        "CONTROLLER",
+        "KEYBOARD",
+        "DATA",
+        "INFO",
+        "WARNING",
+        "CLOSE",
+        "PLUS",
+        "CHECKED",
+        "UNCHECKED",
+        "LEFTARROW",
+        "RIGHTARROW",
+        "REPEAT"
+      ],
+      "prompt": "Create an original painted dark-fantasy RPG icon atlas. Exactly 4 columns by 4 rows, sixteen separate evenly spaced icons in a square 1536x1536 image. Genuine transparent alpha background, no checkerboard, no solid backdrop, no ground shadow, no frames, no labels or words. Each icon fully contained in its equal square cell with generous transparent margins and no overlapping neighbor. Rich hand-painted realism, broad easily readable silhouettes, lightly worn ivory, muted old bronze, leather, steel and subtle jewel colors, soft upper-left illumination, clear edges and strong value separation at tiny game UI size; NOT pixel art, not a modern app style. Consistent three-quarter frontal object view, centered. No franchise imagery. Read row by row left to right: 1 wide horizontal pewter display rectangle with dark inset; 2 tall vertical pewter display rectangle with dark inset; 3 small bronze bell with two sound waves; 4 two overlapping speech bubbles in ivory and bronze, no letters; 5 dark bronze gamepad with ivory buttons; 6 small antique ivory-key keyboard; 7 three bronze stacked horizontal plates suggesting stored data; 8 simple lowercase ivory i inside bronze circle, no other text; 9 ivory exclamation mark inside bronze warning triangle; 10 two crossed thick ivory bars forming X; 11 two ivory bars forming plus; 12 ivory check mark inside bronze square; 13 empty bronze square ring; 14 bold left-pointing ivory arrow with bronze edge; 15 matching right-pointing ivory arrow; 16 circular ivory arrow with bronze edge."
+    }
+  }
+}

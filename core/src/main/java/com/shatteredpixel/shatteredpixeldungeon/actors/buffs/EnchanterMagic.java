@@ -34,6 +34,12 @@ public class EnchanterMagic extends Buff {
     }
     public java.util.List<Class<?>> choices(boolean armor){
         Set<String> all=new TreeSet<>(known);all.addAll(floorKnown);
+        // Trade knowledge is local to Inscribe, never the item-identification catalog.
+        if(!armor&&Dungeon.hero.heroClass==HeroClass.ENCHANTER){
+            all.add(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing.class.getName());
+            all.add(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Shocking.class.getName());
+            all.add(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Chilling.class.getName());
+        }
         for(Class<?> type:Statistics.itemTypesDiscovered)if(Weapon.Enchantment.class.isAssignableFrom(type)||Armor.Glyph.class.isAssignableFrom(type))all.add(type.getName());
         Item weapon=Dungeon.hero.belongings.weapon;
         RuneEtching etching=RuneEtching.find(Dungeon.hero);if(etching!=null)all.add(etching.floorEnchant.getClass().getName());

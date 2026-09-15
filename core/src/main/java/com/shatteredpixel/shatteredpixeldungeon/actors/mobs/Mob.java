@@ -186,6 +186,10 @@ public abstract class Mob extends Char {
 		bundle.put( SEEN, enemySeen );
 		bundle.put( TARGET, target );
 		bundle.put( MAX_LVL, maxLvl );
+		if (directableAI) {
+			bundle.put("defend_pos", defendingPos);
+			bundle.put("moving_to_defend", movingToDefendPos);
+		}
 
 		if (enemy != null) {
 			bundle.put(ENEMY_ID, enemy.id() );
@@ -238,6 +242,8 @@ public abstract class Mob extends Char {
 		target = bundle.getInt( TARGET );
 
 		maxLvl = bundle.getInt(MAX_LVL);
+		if (bundle.contains("defend_pos")) defendingPos = bundle.getInt("defend_pos");
+		movingToDefendPos = bundle.getBoolean("moving_to_defend");
 
 		if (bundle.contains(ENEMY_ID)) {
 			enemyID = bundle.getInt(ENEMY_ID);
@@ -455,7 +461,7 @@ public abstract class Mob extends Char {
 						//do not target passive mobs
 						//intelligent allies also don't target mobs which are wandering or asleep
 						if (mob.state != mob.PASSIVE &&
-								(!intelligentAlly || (mob.state != mob.SLEEPING && mob.state != mob.WANDERING))) {
+								(!intelligentAlly || buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicDomination.class) != null || (mob.state != mob.SLEEPING && mob.state != mob.WANDERING))) {
 							enemies.add(mob);
 						}
 				
@@ -884,6 +890,141 @@ public abstract class Mob extends Char {
 				&& (!attacking || enemy.canSurpriseAttack());
 	}
 
+
+	private boolean directableAI;
+	private AiState ordinaryWandering, ordinaryHunting;
+	private boolean ordinaryIntelligentAlly;
+
+	public boolean isDirectableAlly() { return directableAI && alignment == Alignment.ALLY; }
+
+	/** Reuse the same commands and states for summoned NPCs and temporarily controlled enemies. */
+	public void enableDirectableAI() {
+		if (directableAI) return;
+		directableAI = true;
+		ordinaryWandering = WANDERING;
+		ordinaryHunting = HUNTING;
+		ordinaryIntelligentAlly = intelligentAlly;
+		intelligentAlly = true;
+		WANDERING = new DirectableWandering();
+		HUNTING = new DirectableHunting();
+		followHero();
+	}
+
+	public void disableDirectableAI() {
+		if (!directableAI) return;
+		WANDERING = ordinaryWandering;
+		HUNTING = ordinaryHunting;
+		intelligentAlly = ordinaryIntelligentAlly;
+		directableAI = false;
+		clearDefensingPos();
+		enemy = null;
+		state = WANDERING;
+	}
+	protected boolean attacksAutomatically = true;
+
+	protected int defendingPos = -1;
+	protected boolean movingToDefendPos = false;
+
+	public void defendPos( int cell ){
+		defendingPos = cell;
+		movingToDefendPos = true;
+		aggro(null);
+		state = WANDERING;
+	}
+
+	public void clearDefensingPos(){
+		defendingPos = -1;
+		movingToDefendPos = false;
+	}
+
+	public void followHero(){
+		defendingPos = -1;
+		movingToDefendPos = false;
+		aggro(null);
+		state = WANDERING;
+	}
+
+	public void targetChar( Char ch ){
+		defendingPos = -1;
+		movingToDefendPos = false;
+		aggro(ch);
+		target = ch.pos;
+	}
+
+	public void directTocell( int cell ){
+		if (!isDirectableAlly() || !Dungeon.level.insideMap(cell)) return;
+		if (!Dungeon.level.heroFOV[cell]
+				|| Actor.findChar(cell) == null
+				|| (Actor.findChar(cell) != Dungeon.hero && Actor.findChar(cell).alignment != Char.Alignment.ENEMY)){
+			defendPos( cell );
+			return;
+		}
+
+		if (Actor.findChar(cell) == Dungeon.hero){
+			followHero();
+
+		} else if (Actor.findChar(cell).alignment == Char.Alignment.ENEMY){
+			targetChar(Actor.findChar(cell));
+
+		}
+	}
+
+	protected class DirectableWandering extends Mob.Wandering {
+
+		@Override
+		public boolean act( boolean enemyInFOV, boolean justAlerted ) {
+			if ( enemyInFOV
+					&& attacksAutomatically
+					&& !movingToDefendPos
+					&& (defendingPos == -1 || !Dungeon.level.heroFOV[defendingPos] || canAttack(enemy))) {
+
+				enemySeen = true;
+
+				notice();
+				alerted = true;
+				state = HUNTING;
+				target = enemy.pos;
+
+			} else {
+
+				enemySeen = false;
+
+				int oldPos = pos;
+				target = defendingPos != -1 ? defendingPos : Dungeon.hero.pos;
+				//always move towards the hero when wandering
+				if (getCloser( target )) {
+					spend( 1 / speed() );
+					if (pos == defendingPos) movingToDefendPos = false;
+					return moveSprite( oldPos, pos );
+				} else {
+					//if it can't move closer to defending pos, then give up and defend current position
+					if (movingToDefendPos){
+						defendingPos = pos;
+						movingToDefendPos = false;
+					}
+					spend( TICK );
+				}
+
+			}
+			return true;
+		}
+
+	}
+
+	protected class DirectableHunting extends Mob.Hunting {
+
+		@Override
+		public boolean act(boolean enemyInFOV, boolean justAlerted) {
+			if (enemyInFOV && defendingPos != -1 && Dungeon.level.heroFOV[defendingPos] && !canAttack(enemy)){
+				target = defendingPos;
+				state = WANDERING;
+				return true;
+			}
+			return ordinaryHunting.act(enemyInFOV, justAlerted);
+		}
+
+	}
+
 	//whether the hero should interact with the mob (true) or attack it (false)
 	public boolean heroShouldInteract(){
 		return alignment != Alignment.ENEMY && buff(Amok.class) == null;
@@ -891,7 +1032,7 @@ public abstract class Mob extends Char {
 
 	public void aggro( Char ch ) {
 		enemy = ch;
-		if (state != PASSIVE){
+		if (state != PASSIVE && (!directableAI || !movingToDefendPos)){
 			state = HUNTING;
 		}
 	}
@@ -1165,6 +1306,8 @@ public abstract class Mob extends Char {
 
 	public String info(){
 		String desc = description();
+		com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant curse = buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant.class);
+		if (curse != null) desc += "\n\n_" + Messages.titleCase(curse.name()) + "_\n" + curse.desc();
 
 		for (Buff b : buffs(ChampionEnemy.class)){
 			desc += "\n\n_" + Messages.titleCase(b.name()) + "_\n" + b.desc();
@@ -1699,6 +1842,8 @@ public abstract class Mob extends Char {
 	public static void holdAllies( Level level, int holdFromPos ){
 		heldAllies.clear();
 		for (Mob mob : level.mobs.toArray( new Mob[0] )) {
+			// Psychic control is tied to this floor, even if another effect empowers the ally.
+			if (mob.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicDomination.class) != null) continue;
 			//preserve directable allies or empowered intelligent allies no matter where they are
 			if (mob instanceof DirectableAlly
 				|| (mob.intelligentAlly && PowerOfMany.getPoweredAlly() == mob)) {

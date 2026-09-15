@@ -10,6 +10,8 @@ import com.watabou.utils.Random;
 public class CursedVariant extends Buff {
     public NecroCurse.Kind kind;
     private boolean lootDropped;
+    @Override public int icon(){return com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator.CORRUPT;}
+    @Override public void tintIcon(com.watabou.noosa.Image icon){icon.hardlight(0x7BB33B);}
     public static boolean eligible(Mob mob){
         return mob instanceof Rat||mob instanceof Gnoll||mob instanceof Crab||mob instanceof Skeleton||mob instanceof Thief||mob instanceof Bat||mob instanceof Brute||mob instanceof Shaman||mob instanceof Monk||mob instanceof Warlock||mob instanceof Golem||mob instanceof Succubus||mob instanceof Eye||mob instanceof Scorpio;
     }

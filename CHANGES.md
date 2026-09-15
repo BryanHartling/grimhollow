@@ -2,6 +2,12 @@
 
 Upstream history retained; branch `grimhollow`. Each changed path is listed below.
 
+- Psychic playtest balance: Telekinetic Force is a non-stacking effective upgrade floor (+1/+2/+3/+4/+5 at hero levels 1/6/12/18/24) for thrown damage, strength and durability, with item descriptions exposing the floor; physical upgrade levels are unchanged.
+- Focus Crystal grows only from charges spent (levels 0-10, 10 charges then +5 per level), starts with three charges, and grants tiered Push; Seer Hurl travels two cells farther with Paralysis and one-cell movement of movable bosses. Heavy Hand now raises collision damage 25/50/75% so it preserves the explicitly requested distance formula; rooted/immovable enemies retain upstream movement immunity.
+- Crystal level 6 Dominate reuses the summoned allies' direction/follow AI while retaining the enemy's own hunting attacks; level 8 survivors become a single permanent current-floor ally. Kill rewards use normal hero channels, and Crystal XP remains spending-only.
+- Enchanter trade knowledge offers Blazing, Shocking and Chilling for Inscribe without changing item identification; Sigil Brush starts with three charges, with no starting Enchantment scroll.
+- The existing curse-bound monster variant now has a named inspection entry and status icon explaining its aura, permanent curse and transmission; its spawn chance and combat behavior are unchanged.
+
 - The main menu now uses an original painted crypt and ivory-metal wordmark with slow camera drift, layered mist, warm brazier flicker and rising embers. Animation uses scene-local elapsed time and no gameplay random calls; all five handlers and the fade control are retained.
 
 - Door/grass review: matching painted door states replace the mixed legacy door family in all five regions; sideways thresholds now contain floor rather than a duplicate closed leaf, and wall-cap masks retain their existing geometry. The new request supersedes the old approved-door lock, while wall torches stay unchanged.

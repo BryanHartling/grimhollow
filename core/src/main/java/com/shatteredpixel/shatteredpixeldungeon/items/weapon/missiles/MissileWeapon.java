@@ -140,7 +140,7 @@ abstract public class MissileWeapon extends Weapon {
 		if (parent != null) {
 			return parent.buffedLvl();
 		} else {
-			return super.buffedLvl();
+			return com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.effectiveUpgrade(Dungeon.hero, super.buffedLvl());
 		}
 	}
 
@@ -461,10 +461,16 @@ abstract public class MissileWeapon extends Weapon {
 		return durabilityPerUse(level());
 	}
 
+	@Override
+	public int STRReq(){
+		return STRReq(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.effectiveUpgrade(Dungeon.hero, level()));
+	}
+
 	//classes that add steps onto durabilityPerUse can turn rounding off, to do their own rounding after more logic
 	protected boolean useRoundingInDurabilityCalc = true;
 
 	public float durabilityPerUse( int level ){
+		level = com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.effectiveUpgrade(Dungeon.hero, level);
 		float usages = baseUses * (float)(Math.pow(1.5f, level));
 
 		//+50%/75% durability

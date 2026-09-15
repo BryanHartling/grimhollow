@@ -11,14 +11,15 @@ import com.watabou.utils.Bundle;
 import java.util.ArrayList;
 /** Shared charge cadence and radial UI for the Brush and Crystal specified by the class kits. */
 public abstract class ClassSpellItem extends Artifact {
-    {unique=true;bones=false;charge=chargeCap=2;defaultAction="CAST";levelCap=0;}
+    {unique=true;bones=false;charge=chargeCap=3;defaultAction="CAST";levelCap=0;}
     public int charges(){return charge;}
-    public int cap(){int n=Dungeon.hero.lvl;return 2+(n>=7?1:0)+(n>=13?1:0)+(n>=20?1:0);}
+    public int cap(){int n=Dungeon.hero==null?1:Dungeon.hero.lvl;return 3+(n>=7?1:0)+(n>=13?1:0)+(n>=20?1:0);}
     public void gainCharge(int n){chargeCap=cap();charge=Math.min(cap(),Math.max(0,charge+n));Item.updateQuickslot();}
     public void advance(float turns){chargeCap=cap();if(charge<cap()){partialCharge+=turns/Math.max(20,40-2*Dungeon.hero.lvl);while(partialCharge>=1&&charge<cap()){charge++;partialCharge--;}}else partialCharge=0;Item.updateQuickslot();}
     protected float regeneration(){return 1;}
     public boolean ready(Hero hero,int cost){return isEquipped(hero)&&hero.buff(MagicImmune.class)==null&&charge>=cost;}
-    protected void finish(Hero hero,int cost){charge-=cost;Item.updateQuickslot();hero.spendAndNext(1);}
+    protected void finish(Hero hero,int cost){charge-=cost;onChargesSpent(cost);Item.updateQuickslot();hero.spendAndNext(1);}
+    protected void onChargesSpent(int cost) {}
     @Override public boolean isIdentified(){return true;}
     @Override public int visiblyUpgraded(){return 0;}
     @Override public String status(){return charge+"/"+cap();}

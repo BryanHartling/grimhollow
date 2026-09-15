@@ -29,30 +29,17 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator;
 public class Amok extends FlavourBuff {
 
     public boolean dominated;
-    private boolean sharedBless, sharedHaste, sharedBarkskin;
+    private final SharedWill shared = new SharedWill();
 
-    /** Only remove buffs supplied by this domination; preserve the target's own buffs. */
     public void share(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero hero) {
-        if (!dominated || !hero.hasTalent(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.SHARED_WILL)) return;
-        if (hero.buff(Bless.class)!=null) {
-            sharedBless |= target.buff(Bless.class)==null;
-            if(sharedBless) Buff.prolong(target,Bless.class,2);
-        } else if(sharedBless) { Buff.detach(target,Bless.class);sharedBless=false; }
-        if (hero.buff(Haste.class)!=null) {
-            sharedHaste |= target.buff(Haste.class)==null;
-            if(sharedHaste) Buff.prolong(target,Haste.class,2);
-        } else if(sharedHaste) { Buff.detach(target,Haste.class);sharedHaste=false; }
-        if (Barkskin.currentLevel(hero)>0) {
-            sharedBarkskin |= target.buff(Barkskin.class)==null;
-            if(sharedBarkskin) Buff.affect(target,Barkskin.class).setForDuration(Barkskin.currentLevel(hero),2);
-        } else if(sharedBarkskin) { Buff.detach(target,Barkskin.class);sharedBarkskin=false; }
+        if (dominated) shared.update(target, hero);
     }
 
     @Override public void storeInBundle(com.watabou.utils.Bundle b) {
-        super.storeInBundle(b);b.put("dominated",dominated);b.put("shared_bless",sharedBless);b.put("shared_haste",sharedHaste);b.put("shared_barkskin",sharedBarkskin);
+        super.storeInBundle(b); b.put("dominated", dominated); shared.store(b);
     }
     @Override public void restoreFromBundle(com.watabou.utils.Bundle b) {
-        super.restoreFromBundle(b);dominated=b.getBoolean("dominated");sharedBless=b.getBoolean("shared_bless");sharedHaste=b.getBoolean("shared_haste");sharedBarkskin=b.getBoolean("shared_barkskin");
+        super.restoreFromBundle(b); dominated = b.getBoolean("dominated"); shared.restore(b);
     }
 
 	{
@@ -67,9 +54,7 @@ public class Amok extends FlavourBuff {
 
 	@Override
 	public void detach() {
-        if(sharedBless) Buff.detach(target,Bless.class);
-        if(sharedHaste) Buff.detach(target,Haste.class);
-        if(sharedBarkskin) Buff.detach(target,Barkskin.class);
+        shared.clear(target);
 		//if our target is an enemy, reset any enemy-to-enemy aggro involving it
 		if (target.isAlive()) {
 			if (target.alignment == Char.Alignment.ENEMY) {

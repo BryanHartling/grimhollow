@@ -1171,6 +1171,11 @@ public abstract class Level implements Bundlable {
 	}
 	
 	public void occupyCell( Char ch ){
+		occupyCell(ch, true, false);
+	}
+
+	/** Forced movement may spare traps, or press hidden traps, without skipping terrain effects. */
+	public void occupyCell( Char ch, boolean triggerTraps, boolean hardPress ){
 		if (!ch.isImmune(Web.class) && Blob.volumeAt(ch.pos, Web.class) > 0){
 			blobs.get(Web.class).clear(ch.pos);
 			Web.affectChar( ch );
@@ -1221,7 +1226,7 @@ public abstract class Level implements Bundlable {
 			}
 			
 			//characters which are not the hero or a sheep 'soft' press cells
-			pressCell( ch.pos, ch instanceof Hero || ch instanceof Sheep);
+			pressCell( ch.pos, hardPress || ch instanceof Hero || ch instanceof Sheep, triggerTraps);
 		} else {
 			if (map[ch.pos] == Terrain.DOOR){
 				Door.enter( ch.pos );
@@ -1241,6 +1246,10 @@ public abstract class Level implements Bundlable {
 	//a 'soft' press ignores hidden traps
 	//a 'hard' press triggers all things
 	private void pressCell( int cell, boolean hard ) {
+		pressCell(cell, hard, true);
+	}
+
+	private void pressCell( int cell, boolean hard, boolean triggerTraps ) {
 
 		Trap trap = null;
 		
@@ -1277,7 +1286,7 @@ public abstract class Level implements Bundlable {
 		Swiftthistle.TimeBubble bubble =
 				Dungeon.hero.buff(Swiftthistle.TimeBubble.class);
 
-		if (trap != null) {
+		if (trap != null && triggerTraps) {
 			if (bubble != null){
 				Sample.INSTANCE.play(Assets.Sounds.TRAP);
 				discover(cell);

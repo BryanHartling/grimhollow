@@ -36,6 +36,21 @@ public class WndInfoMob extends WndTitledMessage {
 	public WndInfoMob( Mob mob ) {
 
 		super( new MobTitle( mob ), mob.info() );
+
+		if (mob.isDirectableAlly() && mob.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicDomination.class) != null) {
+			com.shatteredpixel.shatteredpixeldungeon.ui.RedButton direct = new com.shatteredpixel.shatteredpixeldungeon.ui.RedButton(Messages.get(this, "direct")) {
+				@Override protected void onClick() {
+					hide();
+					com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.selectCell(new com.shatteredpixel.shatteredpixeldungeon.scenes.CellSelector.Listener() {
+						public void onSelect(Integer cell) { if (cell != null) mob.directTocell(cell); }
+						public String prompt() { return Messages.get(WndInfoMob.class, "direct_prompt"); }
+					});
+				}
+			};
+			direct.setRect(0, height + 3, width, 20);
+			add(direct);
+			resize(width, height + 23);
+		}
 		
 	}
 	

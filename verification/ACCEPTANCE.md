@@ -1,3 +1,17 @@
+# Psychic and Enchanter playtest balance checkpoint
+
+Windows gate: `gradlew.bat :core:test :core:smokeRun -PsmokeUpstream=true :desktop:release :android:assembleDebug --no-daemon --console=plain` -> `BUILD SUCCESSFUL`; `Runs=90 failures=0`. A separate Psychic-only rerun also passed `Runs=10 failures=0`. The earlier full run found a knockback boundary bug and a headless fixture that did not finish attack animation after movement; both were corrected before this passing run. All other acceptance results below are retained checkpoint evidence until the interface pass is verified.
+
+- Test 12: PASS, hero levels 1/7/8/16/24/30 yield effective upgrades +1/+2/+2/+3/+5/+5; missile and coated-dart damage, strength and durability match real upgrades without stacking, with descriptions checked.
+- Test 33: PASS, level-one Inscribe offers Blazing/Shocking/Chilling with an empty discovery catalog and leaves that catalog unchanged; no starting Enchantment scroll.
+- Test 48: PASS, Push and Hurl at every Crystal level 0-10: exact distances, no direct damage, walls, occupied cells, collision statuses, hidden traps, first chasm edge and boss rules.
+- Test 49: PASS, 12 charges spent produces level 1 + 2 XP; 300 idle turns produce no XP; cumulative thresholds 10/25/45/70/100/135/175/220/270/325; external upgrading rejected; saved XP/level restored.
+- Test 50: PASS, level-six direction/follow/attacks and 15-turn expiry; level-eight permanent single-floor control, replacement release, save/load, ascent/descent, normal kill ownership and no boss control.
+
+Crystal level-six chasm removal remains on its requested track; deterministic mechanic checks are not evidence of full-campaign encounter balance. The glowing Rogue rat could have been an existing curse-bound variant; the exact player encounter was unavailable. Its visible identity and inspection explanation now distinguish the trait from an unexplained debuff.
+
+---
+
 # Painted bestiary and text repair - v1.4.0
 
 Source commits: `9db9fe525` (wand/text correction) and `99a1f4371` (painted creatures, status icons, display scale, torch materials and verification). Delivery adds current evidence and documentation. Release tag: `v1.4.0-painted-bestiary`. The initial HTTP 401 and replacement-token HTTP 403 publication failures are resolved: after the user updated repository permissions, authenticated fetch and a GitHub push dry run both succeeded for the branch and tag. Credentials remain process-local. The previous attempts remain recorded in ci-status.log; publication and exact delivered-head CI results are reported with delivery.

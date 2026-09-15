@@ -119,17 +119,51 @@ public class WandOfBlastWave extends DamageWand {
 
 	public static void throwChar(final Char ch, final Ballistica trajectory, int power,
 	                             boolean closeDoors, boolean collideDmg, Object cause){
+		throwChar(ch, trajectory, power, closeDoors, collideDmg, cause, null);
+	}
+
+	/** Optional Psychic landing rules; ordinary blast-wave callers retain their original behavior. */
+	public static abstract class LandingRules {
+		public final boolean hazards;
+		public LandingRules(boolean hazards) { this.hazards = hazards; }
+		public abstract void collide(Char target, int moved);
+	}
+
+	public static void throwChar(final Char ch, final Ballistica trajectory, int power,
+	                             boolean closeDoors, boolean collideDmg, Object cause, LandingRules rules){
 		if (ch.properties().contains(Char.Property.BOSS)) {
 			power = (power+1)/2;
 		}
 
 		int dist = Math.min(trajectory.dist, power);
 
-		boolean collided = dist == trajectory.dist;
+		boolean collided = rules == null ? dist == trajectory.dist : trajectory.dist < power;
 
-		if (dist <= 0
-				|| ch.rooted
+		if (ch.rooted
 				|| ch.properties().contains(Char.Property.IMMOVABLE)) return;
+
+		if (rules != null) {
+			for (int i = 1; i <= dist; i++) {
+				int cell = trajectory.path.get(i);
+				if (Dungeon.level.solid[cell] || Actor.findChar(cell) != null) {
+					dist = i - 1;
+					collided = true;
+					break;
+				}
+				if (Dungeon.level.pit[cell]) {
+					if (!rules.hazards) dist = i - 1;
+					else if (!ch.flying) dist = i; // A shove falls at the first edge, rather than jumping it.
+					else continue;
+					collided = false;
+					break;
+				}
+			}
+		}
+
+		if (dist <= 0) {
+			if (rules != null && collided) rules.collide(ch, 0);
+			return;
+		}
 
 		//large characters cannot be moved into non-open space
 		if (Char.hasProp(ch, Char.Property.LARGE)) {
@@ -142,6 +176,11 @@ public class WandOfBlastWave extends DamageWand {
 			}
 		}
 
+		if (dist == 0 && rules != null) {
+			if (collided) rules.collide(ch, 0);
+			return;
+		}
+
 		if (Actor.findChar(trajectory.path.get(dist)) != null){
 			dist--;
 			collided = true;
@@ -151,10 +190,14 @@ public class WandOfBlastWave extends DamageWand {
 
 		final int newPos = trajectory.path.get(dist);
 
-		if (newPos == ch.pos) return;
+		if (newPos == ch.pos) {
+			if (rules != null && collided) rules.collide(ch, 0);
+			return;
+		}
 
 		final int finalDist = dist;
 		final boolean finalCollided = collided && collideDmg;
+		final boolean ruleCollision = collided;
 		final int initialpos = ch.pos;
 
 		Callback movement = new Callback() {
@@ -166,6 +209,7 @@ public class WandOfBlastWave extends DamageWand {
 				}
 				int oldPos = ch.pos;
 				ch.pos = newPos;
+				if (rules != null && ruleCollision && ch.isActive()) rules.collide(ch, finalDist);
 				if (finalCollided && ch.isActive()) {
 					ch.damage(Random.NormalIntRange(finalDist, 2*finalDist), new Knockback());
 					if (ch.isActive()) {
@@ -181,7 +225,8 @@ public class WandOfBlastWave extends DamageWand {
 				if (closeDoors && Dungeon.level.map[oldPos] == Terrain.OPEN_DOOR){
 					Door.leave(oldPos);
 				}
-				Dungeon.level.occupyCell(ch);
+				if (rules == null) Dungeon.level.occupyCell(ch);
+				else if (ch.isAlive()) Dungeon.level.occupyCell(ch, rules.hazards, rules.hazards);
 				if (ch == Dungeon.hero){
 					Dungeon.observe();
 					GameScene.updateFog();

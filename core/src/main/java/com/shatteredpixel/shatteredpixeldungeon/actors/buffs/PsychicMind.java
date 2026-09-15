@@ -14,8 +14,12 @@ public class PsychicMind extends Buff {
     private final HashSet<Integer> floors=new HashSet<>(),precognitionFloors=new HashSet<>();
     public static int points(Talent t){return Dungeon.hero==null?0:Dungeon.hero.pointsInTalent(t);}
     public static PsychicMind state(){return Dungeon.hero==null?null:Dungeon.hero.buff(PsychicMind.class);}
-    public static int force(Hero h){return h.heroClass==HeroClass.PSYCHIC&&h.belongings.getItem(FocusCrystal.class)!=null&&h.belongings.getItem(FocusCrystal.class).isEquipped(h)?h.lvl/5:0;}
-    public static int thrownDamage(Hero h,int damage){damage+=force(h);if(h.buff(MeldedMind.class)!=null&&h.hasTalent(Talent.KINETIC_SURGE))damage=Math.round(damage*(h.pointsInTalent(Talent.KINETIC_SURGE)==3?1.5f:1.25f));return damage;}
+    public static int force(Hero h){
+        if(h==null||h.heroClass!=HeroClass.PSYCHIC)return 0;
+        return 1+(h.lvl>=6?1:0)+(h.lvl>=12?1:0)+(h.lvl>=18?1:0)+(h.lvl>=24?1:0);
+    }
+    public static int effectiveUpgrade(Hero h,int actual){return force(h)>0?Math.max(actual,force(h)):actual;}
+    public static int thrownDamage(Hero h,int damage){if(h.buff(MeldedMind.class)!=null&&h.hasTalent(Talent.KINETIC_SURGE))damage=Math.round(damage*(h.pointsInTalent(Talent.KINETIC_SURGE)==3?1.5f:1.25f));return damage;}
     public static boolean calm(){if(Dungeon.level==null)return true;for(Mob mob:Dungeon.level.mobs)if(mob.alignment==Char.Alignment.ENEMY&&Dungeon.level.heroFOV[mob.pos]&&mob.invisible<=0)return false;return true;}
     public void arrive(){int floor=Dungeon.depth+100*Dungeon.branch;if(!floors.add(floor))return;FocusCrystal crystal=Dungeon.hero.belongings.getItem(FocusCrystal.class);if(crystal!=null)crystal.gainCharge(points(Talent.KINETIC_RESERVE));if(Dungeon.hero.subClass==HeroSubClass.SEER&&points(Talent.TREASURE_SENSE)>0)reveal(true,points(Talent.TREASURE_SENSE)>=3,false,false);}
     public boolean dodge(int damage,Object source){
@@ -27,7 +31,7 @@ public class PsychicMind extends Buff {
         if(h.subClass==HeroSubClass.SEER){Buff.affect(h,SeerSight.class);for(int cell=0;cell<Dungeon.level.length();cell++)if(Dungeon.level.distance(h.pos,cell)<=3&&(Dungeon.level.secret[cell]||Dungeon.level.traps.get(cell)!=null))Dungeon.level.discover(cell);}
         else Buff.detach(h,SeerSight.class);
         if(points(Talent.TRAP_SENSE)>0)for(Trap trap:Dungeon.level.traps.valueList())if(Dungeon.level.heroFOV[trap.pos]&&trap.canBeSearched)Dungeon.level.discover(trap.pos);
-        for(Mob mob:Dungeon.level.mobs){Amok amok=mob.buff(Amok.class);if(amok!=null&&amok.dominated)amok.share(h);}
+        for(Mob mob:Dungeon.level.mobs){Amok amok=mob.buff(Amok.class);if(amok!=null&&amok.dominated)amok.share(h);PsychicDomination control=mob.buff(PsychicDomination.class);if(control!=null)control.share(h);}
         spend(TICK);return true;
     }
     public static void reveal(boolean items,boolean traps,boolean secrets,boolean map){
@@ -42,7 +46,7 @@ public class PsychicMind extends Buff {
     public static void onDeath(Mob mob,Object cause){
         if(state()==null||mob.alignment!=Char.Alignment.ENEMY)return;
         Hero h=Dungeon.hero;FocusCrystal crystal=h.belongings.getItem(FocusCrystal.class);
-        if(cause instanceof Mob){Amok amok=((Mob)cause).buff(Amok.class);if(amok!=null&&amok.dominated&&crystal!=null&&Random.Float()<points(Talent.HARVEST_THOUGHT)/3f)crystal.gainCharge(1);}
+        if(cause instanceof Mob){Amok amok=((Mob)cause).buff(Amok.class);PsychicDomination control=((Mob)cause).buff(PsychicDomination.class);if(((amok!=null&&amok.dominated)||(control!=null&&control.ownedBy(h)))&&crystal!=null&&Random.Float()<points(Talent.HARVEST_THOUGHT)/3f)crystal.gainCharge(1);}
         if(cause==h||mob.buff(PsychicDamage.class)!=null){MindVision sight=h.buff(MindVision.class);if(sight!=null)Buff.affect(h,MindVision.class,points(Talent.LINGERING_SIGHT));}
     }
     @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("floors",floors.stream().mapToInt(Integer::intValue).toArray());b.put("precognition_floors",precognitionFloors.stream().mapToInt(Integer::intValue).toArray());}

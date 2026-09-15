@@ -185,6 +185,9 @@ def outputs():
     from presentation import traps, outputs as presentation
     traps(features)
     result.update(presentation())
+    from botany_skills import plants, outputs as botany_skills
+    plants(features)
+    result.update(botany_skills())
     result['environment/raised_terrain.png']=raised
     from actors import outputs as actors
     result.update(actors())
@@ -221,6 +224,7 @@ def main():
         expected={'interfaces/buffs.png':(448,224),'interfaces/large_buffs.png':(1024,512),'interfaces/chrome.png':(512,384),'interfaces/status_pane.png':(1024,512),'interfaces/painted_glyphs.png':(512,256)}.get(path,expected)
         if path.startswith('splashes/painted_'):expected=(1600,900)
         if path=='interfaces/painted_portraits.png':expected=(384,384)
+        if path=='interfaces/painted_skills.png':expected=(1024,512)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]

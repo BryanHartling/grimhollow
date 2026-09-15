@@ -12,6 +12,10 @@
     "actors/psychic.png": "85abffd17f66c3bf14ab959135eeef66e0b49488a5604a633b071eeee3cc3374",
     "actors/rogue.png": "1039b33005ba7cf2f49d3c0ec882a10d3f23a80eeaafda58a4095dc8f979f1b7",
     "actors/warrior.png": "cf1d042e9d648f1188621e218310a63010f16565d0b2f98bd3d10e789b0c7f40",
+    "botany-skills/enchanter.png": "d0593c8953a16619dbd5fb04fb94b9a624285b8899d7919a6629433ff4d0ce11",
+    "botany-skills/necromancer.png": "74d634012da94b72550a1794f3d2e15236198e48ab177f13a61a0ab3a40ceab6",
+    "botany-skills/plants.png": "d008d13ffeeccc547bd4a6acd7b9f37e8903ffa0ff3666ccc24726b3430c69e3",
+    "botany-skills/psychic.png": "294e1b922d553ed5b4ab3f0acf43a3bb5ba1dd3c4b1d02ed359096c23a6ddd93",
     "caves-materials.png": "55e4629826ed07495ec5a2ad8b6577ab69f9fb85609161d6c8ca875bf68f75fa",
     "city-materials.png": "f3316e1efa15a6b91712798d1bc54397fdc2563b9f589cdb89d85c275869cafc",
     "details.png": "e00209673cb5d728a3fbc173f1ede610c474d37c8ab7f5f33eae0c56fda72631",
@@ -182,7 +186,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "802dc78a434c1cda556228044a1850779cacfb1c751a887b754ae1980c01a754"
+      "rgba_sha256": "1c5300ea64ddd0ffa1d395a7f1ac29aedf18d0ca23645a116c979d7f9c82948f"
     },
     "splashes/painted_warrior.png": {
       "size": [
@@ -253,6 +257,13 @@
         384
       ],
       "rgba_sha256": "36d5e452407a27fc871f7884f20ab2059c335ec2725550d2e5c86af962834f2a"
+    },
+    "interfaces/painted_skills.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "3966edfbae154636d4ed4092b39cd740cdbc174245999c0df2280281bafef82f"
     },
     "environment/raised_terrain.png": {
       "size": [

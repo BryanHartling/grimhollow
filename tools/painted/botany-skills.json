@@ -1,0 +1,533 @@
+{
+  "generator": "Built-in image_gen; committed sources packed offline",
+  "layout": {
+    "plants": [
+      4,
+      4
+    ],
+    "skills": [
+      6,
+      7
+    ]
+  },
+  "plants": [
+    [
+      "rotberry",
+      "gnarled thorny green plant bearing three large blood-red berries"
+    ],
+    [
+      "firebloom",
+      "upright scarlet and orange flame-shaped blossom with charred dark leaves"
+    ],
+    [
+      "swiftthistle",
+      "golden thistle with curved swept-back leaves and yellow spines"
+    ],
+    [
+      "sungrass",
+      "lush fan of fresh lime-green grass with small warm golden flowers"
+    ],
+    [
+      "icecap",
+      "pale icy blue cluster of frosted bell flowers"
+    ],
+    [
+      "stormvine",
+      "twisting cobalt-blue vine with forked lightning-shaped leaves"
+    ],
+    [
+      "sorrowmoss",
+      "low mound of violet poisonous moss with lavender spore bulbs"
+    ],
+    [
+      "mageroyal",
+      "regal purple iris-like bloom above two broad dark leaves"
+    ],
+    [
+      "earthroot",
+      "tangled ochre roots beneath broad rust-orange leaves"
+    ],
+    [
+      "starflower",
+      "single luminous five-point amber star flower on a thin stalk"
+    ],
+    [
+      "fadeleaf",
+      "asymmetric deep emerald fern with translucent turquoise leaf tips"
+    ],
+    [
+      "blindweed",
+      "dense dark brush with brilliant white eye-shaped seed heads"
+    ],
+    [
+      "blandfruit",
+      "small olive shrub carrying two heavy pale cream pear-like fruits"
+    ]
+  ],
+  "skills": {
+    "necromancer": [
+      {
+        "key": "GRAVE_HARVEST",
+        "motif": "sickle harvesting green soul"
+      },
+      {
+        "key": "BONE_MEAL",
+        "motif": "bone bowl with marrow"
+      },
+      {
+        "key": "CORPSE_SENSE",
+        "motif": "skull beside an observing eye"
+      },
+      {
+        "key": "NECROTIC_TOUCH",
+        "motif": "blackened skeletal fingertip"
+      },
+      {
+        "key": "STURDY_BONES",
+        "motif": "thick unbroken femur"
+      },
+      {
+        "key": "DARK_PACT",
+        "motif": "two skeletal hands clasped"
+      },
+      {
+        "key": "SECOND_GRAVE",
+        "motif": "two separate gravestones"
+      },
+      {
+        "key": "WARD_OF_BONE",
+        "motif": "rib shield"
+      },
+      {
+        "key": "NECROTIC_SIPHON",
+        "motif": "soul flowing into a bone vial"
+      },
+      {
+        "key": "DEATHSPEAKERS_COMMAND",
+        "motif": "crowned skull issuing sound rings"
+      },
+      {
+        "key": "GRAVE_WISDOM",
+        "motif": "open grave with an old book"
+      },
+      {
+        "key": "BONE_LEGION",
+        "motif": "three skeleton silhouettes"
+      },
+      {
+        "key": "GRAVE_SPEECH",
+        "motif": "speaking skull jaw"
+      },
+      {
+        "key": "LINGERING_HEX",
+        "motif": "hourglass entwined with a curse ribbon"
+      },
+      {
+        "key": "CURSED_GROUND",
+        "motif": "hand rising from cursed soil"
+      },
+      {
+        "key": "WIDER_BLAST",
+        "motif": "wide green blast ring"
+      },
+      {
+        "key": "ROT",
+        "motif": "rotting leaf with dark pits"
+      },
+      {
+        "key": "SOUL_REFUND",
+        "motif": "soul circling back into a phylactery"
+      },
+      {
+        "key": "BLESSED_PACT",
+        "motif": "skeletal clasp beneath a small halo"
+      },
+      {
+        "key": "BONE_SHELL",
+        "motif": "turtle-like overlapping rib shell"
+      },
+      {
+        "key": "RECLAIMED",
+        "motif": "broken bones rejoining"
+      },
+      {
+        "key": "LASTING_CAGE",
+        "motif": "iron cage with sand timer"
+      },
+      {
+        "key": "JAGGED",
+        "motif": "jagged bone spike"
+      },
+      {
+        "key": "NECROMANCERS_KEY",
+        "motif": "skull-shaped key"
+      },
+      {
+        "key": "HEROIC_ENERGY_NECROMANCER",
+        "motif": "green energy overflowing a bone urn"
+      },
+      {
+        "key": "DEATHSPEAKER",
+        "motif": "commanding skull with legion behind"
+      },
+      {
+        "key": "HEXWEAVER",
+        "motif": "hooded mask weaving curse threads"
+      },
+      {
+        "key": "CORPSE_EXPLOSION",
+        "motif": "bursting corpse silhouette with bone shards"
+      },
+      {
+        "key": "DEATH_PACT",
+        "motif": "hero and skeleton joined by a living tether"
+      },
+      {
+        "key": "BONE_PRISON",
+        "motif": "tall cage of ribs"
+      },
+      {
+        "key": "RAISE_SKELETON",
+        "motif": "upright skeleton rising from a mound"
+      },
+      {
+        "key": "WITHER",
+        "motif": "wilted heart grasped by black fingers"
+      },
+      {
+        "key": "RAISE_WRAITH",
+        "motif": "floating pale hooded wraith"
+      },
+      {
+        "key": "RAISE_GHOUL",
+        "motif": "hunched ghoul with claws"
+      },
+      {
+        "key": "RAISE_REVENANT",
+        "motif": "armored revenant with giant cleaver"
+      },
+      {
+        "key": "AMPLIFY",
+        "motif": "blood-red wound and expanding slash"
+      },
+      {
+        "key": "DECREPIFY",
+        "motif": "withered bent leg"
+      },
+      {
+        "key": "IRON_MAIDEN",
+        "motif": "closed spiked iron sarcophagus"
+      },
+      {
+        "key": "LOWER_RESISTANCE",
+        "motif": "cracked shield leaking colored magical sparks"
+      }
+    ],
+    "enchanter": [
+      {
+        "key": "KEEN_STUDY",
+        "motif": "magnifier over open book"
+      },
+      {
+        "key": "STEADY_HAND",
+        "motif": "steady hand holding brush"
+      },
+      {
+        "key": "SHARPENED_SIGILS",
+        "motif": "sharp inked blade rune"
+      },
+      {
+        "key": "FIELD_REPAIR",
+        "motif": "hammer mending cracked breastplate"
+      },
+      {
+        "key": "DUAL_INSCRIPTION",
+        "motif": "crossed weapon and armor with two sigils"
+      },
+      {
+        "key": "RESONANCE",
+        "motif": "two concentric vibrating metal rings"
+      },
+      {
+        "key": "WARDING_SIGILS",
+        "motif": "protective circular rune around shield"
+      },
+      {
+        "key": "ATTUNEMENT",
+        "motif": "tuning fork and floating rune"
+      },
+      {
+        "key": "OVERLOAD",
+        "motif": "bursting overfilled glyph"
+      },
+      {
+        "key": "EFFICIENT_SIGILS",
+        "motif": "precise single ink drop forming rune"
+      },
+      {
+        "key": "DEEP_KNOWLEDGE",
+        "motif": "stack of three open books"
+      },
+      {
+        "key": "MASTER_CRAFT",
+        "motif": "ornate hammer and chisel"
+      },
+      {
+        "key": "LASTING_WORK",
+        "motif": "unbroken enchanted chain"
+      },
+      {
+        "key": "WIDE_FIELD",
+        "motif": "large four-corner ward"
+      },
+      {
+        "key": "COUNTERWEIGHT",
+        "motif": "balanced scales with rune and stone"
+      },
+      {
+        "key": "SUSTAINED",
+        "motif": "hourglass with continuous luminous thread"
+      },
+      {
+        "key": "AMPLIFIED",
+        "motif": "magnified blazing rune"
+      },
+      {
+        "key": "FEEDBACK",
+        "motif": "looping energy between brush and crystal"
+      },
+      {
+        "key": "WIDE_SANCTUARY",
+        "motif": "wide dome over three figures"
+      },
+      {
+        "key": "CONSECRATED",
+        "motif": "sanctified altar with beam"
+      },
+      {
+        "key": "MOBILE",
+        "motif": "ward on wheeled boot"
+      },
+      {
+        "key": "CASCADE",
+        "motif": "descending three rune sparks"
+      },
+      {
+        "key": "SALVAGE",
+        "motif": "hand collecting useful metal fragments"
+      },
+      {
+        "key": "RECLAMATION",
+        "motif": "life rising from broken runes"
+      },
+      {
+        "key": "HEROIC_ENERGY_ENCHANTER",
+        "motif": "gold-blue energy filling ink jar"
+      },
+      {
+        "key": "ARTIFICER",
+        "motif": "craftsman's articulated hand with gears"
+      },
+      {
+        "key": "SCRIVENER",
+        "motif": "writing quill and radiant scroll"
+      },
+      {
+        "key": "OVERCHARGE",
+        "motif": "weapon overflowing with gold electricity"
+      },
+      {
+        "key": "SANCTUARY",
+        "motif": "protective pale blue sanctuary dome"
+      },
+      {
+        "key": "UNMAKING",
+        "motif": "armor disintegrating into shards"
+      },
+      {
+        "key": "INSCRIBE",
+        "motif": "ink brush writing on breastplate"
+      },
+      {
+        "key": "HEX",
+        "motif": "hostile face branded with violet sigil"
+      },
+      {
+        "key": "TRANSMUTE",
+        "motif": "metal sword changing into different sword"
+      },
+      {
+        "key": "REINFORCE",
+        "motif": "reinforced shield bound by iron bands"
+      },
+      {
+        "key": "SANCTIFY",
+        "motif": "gold blessing on raised open hand"
+      },
+      {
+        "key": "NULLIFY",
+        "motif": "magic orb crossed out by dark slash"
+      },
+      {
+        "key": "FRACTURE",
+        "motif": "breastplate split by central crack"
+      },
+      {
+        "key": "ETCH",
+        "motif": "chisel moving a rune between two blades"
+      }
+    ],
+    "psychic": [
+      {
+        "key": "RECALL",
+        "motif": "boomerang arrow returning to hand"
+      },
+      {
+        "key": "WRENCH",
+        "motif": "invisible hand wrenching loose a dagger"
+      },
+      {
+        "key": "LINGERING_SIGHT",
+        "motif": "eye trail fading slowly"
+      },
+      {
+        "key": "TRAP_SENSE",
+        "motif": "eye above pressure plate"
+      },
+      {
+        "key": "GUIDED_THROW",
+        "motif": "dart guided around a curved path"
+      },
+      {
+        "key": "DEEP_FOCUS",
+        "motif": "still crystal within nested circles"
+      },
+      {
+        "key": "PRECOGNITION",
+        "motif": "eye glimpsing future hourglass"
+      },
+      {
+        "key": "KINETIC_RESERVE",
+        "motif": "violet energy stored in coiled spring"
+      },
+      {
+        "key": "FRACTURE_POINT",
+        "motif": "hammer striking tiny crack point"
+      },
+      {
+        "key": "FOCUSED_MIND",
+        "motif": "closed eyes with sharp central crystal"
+      },
+      {
+        "key": "FAR_REACH",
+        "motif": "outstretched translucent long arm"
+      },
+      {
+        "key": "SHARED_WILL",
+        "motif": "two heads sharing a glowing link"
+      },
+      {
+        "key": "HARVEST_THOUGHT",
+        "motif": "thought spark drawn from a defeated head"
+      },
+      {
+        "key": "HEAVY_HAND",
+        "motif": "massive floating stone fist"
+      },
+      {
+        "key": "TREASURE_SENSE",
+        "motif": "eye looking at hidden treasure chest"
+      },
+      {
+        "key": "WIDER_STORM",
+        "motif": "wide circular violet storm"
+      },
+      {
+        "key": "DREAD",
+        "motif": "terrified face inside a dark aura"
+      },
+      {
+        "key": "BACKLASH",
+        "motif": "shield reflecting projectile backwards"
+      },
+      {
+        "key": "LONG_MELD",
+        "motif": "two minds tied with long thread"
+      },
+      {
+        "key": "TOTAL_SIGHT",
+        "motif": "three open eyes around a head"
+      },
+      {
+        "key": "KINETIC_SURGE",
+        "motif": "violet surge through boot"
+      },
+      {
+        "key": "HELD_FIRM",
+        "motif": "restrained enemy inside firm force ring"
+      },
+      {
+        "key": "REPULSE",
+        "motif": "shockwave repelling three arrows"
+      },
+      {
+        "key": "PERMEABLE",
+        "motif": "figure stepping through a transparent wall"
+      },
+      {
+        "key": "HEROIC_ENERGY_PSYCHIC",
+        "motif": "purple energy filling a crystal"
+      },
+      {
+        "key": "PUPPETEER",
+        "motif": "hand pulling marionette strings"
+      },
+      {
+        "key": "SEER",
+        "motif": "hooded visionary with third eye"
+      },
+      {
+        "key": "PSYCHIC_STORM",
+        "motif": "spiraling storm of stones and violet energy"
+      },
+      {
+        "key": "MIND_MELD",
+        "motif": "two translucent heads overlapping"
+      },
+      {
+        "key": "FORCE_WALL",
+        "motif": "solid translucent violet wall"
+      },
+      {
+        "key": "GRASP",
+        "motif": "floating hand retrieving a coin"
+      },
+      {
+        "key": "GLIMPSE",
+        "motif": "single open clairvoyant eye"
+      },
+      {
+        "key": "PUSH",
+        "motif": "open palm pushing a silhouette away"
+      },
+      {
+        "key": "DOMINATE",
+        "motif": "crowned mind controlling a puppet"
+      },
+      {
+        "key": "SUGGESTION",
+        "motif": "whispering mouth beside another head"
+      },
+      {
+        "key": "HURL",
+        "motif": "foe flung in a long upward arc"
+      }
+    ]
+  },
+  "prompts": {
+    "plants": "Use case: stylized-concept. Asset: transparent game sprite atlas for Grimhollow, painterly dark-gothic dungeon, realistic botanical miniatures, not pixel art. Exactly 4 equal columns by 4 equal rows on a 1536x1536 transparent canvas. Each square slot contains one isolated sprouted plant, miniature three-quarter overhead camera looking down 35 degrees, visible roots near bottom, strong distinct silhouette and readable color at 64 pixels. Each plant fits within central 78 percent of its slot with empty transparent gutters. No ground tile, shadow puddle, pots, text, numbers, border, frame or grid lines. True alpha background; preserve soft painted edges. Natural leaf/berry/petal materials, crisp purposeful detail, no surrounding glow. Slots row-major from top left: 1: gnarled thorny green plant bearing three large blood-red berries; 2: upright scarlet and orange flame-shaped blossom with charred dark leaves; 3: golden thistle with curved swept-back leaves and yellow spines; 4: lush fan of fresh lime-green grass with small warm golden flowers; 5: pale icy blue cluster of frosted bell flowers; 6: twisting cobalt-blue vine with forked lightning-shaped leaves; 7: low mound of violet poisonous moss with lavender spore bulbs; 8: regal purple iris-like bloom above two broad dark leaves; 9: tangled ochre roots beneath broad rust-orange leaves; 10: single luminous five-point amber star flower on a thin stalk; 11: asymmetric deep emerald fern with translucent turquoise leaf tips; 12: dense dark brush with brilliant white eye-shaped seed heads; 13: small olive shrub carrying two heavy pale cream pear-like fruits. Slots 14 through 16 empty and transparent. Give every plant its own shape and hue, avoid generic bushes.",
+    "necromancer": "Use case: stylized-concept. Asset: custom necromancer skill icon atlas for Grimhollow. Exactly 6 equal columns by 7 equal rows on a 1536x1792 transparent canvas. All 42 cells equal square, read row-major. Painterly gothic fantasy ability pictograms, highly legible silhouettes at 16-pixel logical size, rendered fine-art miniatures with bold simple forms. Bone ivory, grave green, muted garnet, aged iron. Each icon is centered inside central 78 percent of its cell, isolated on true alpha, no background tile, text, letters, numbers, frames, grid lines or surrounding glow. At most 2-3 strong forms in each icon, clear light/dark edges, each must have a unique silhouette rather than recolors. Interpret the following ordered motifs literally, do not print their names. 1: sickle harvesting green soul; 2: bone bowl with marrow; 3: skull beside an observing eye; 4: blackened skeletal fingertip; 5: thick unbroken femur; 6: two skeletal hands clasped; 7: two separate gravestones; 8: rib shield; 9: soul flowing into a bone vial; 10: crowned skull issuing sound rings; 11: open grave with an old book; 12: three skeleton silhouettes; 13: speaking skull jaw; 14: hourglass entwined with a curse ribbon; 15: hand rising from cursed soil; 16: wide green blast ring; 17: rotting leaf with dark pits; 18: soul circling back into a phylactery; 19: skeletal clasp beneath a small halo; 20: turtle-like overlapping rib shell; 21: broken bones rejoining; 22: iron cage with sand timer; 23: jagged bone spike; 24: skull-shaped key; 25: green energy overflowing a bone urn; 26: commanding skull with legion behind; 27: hooded mask weaving curse threads; 28: bursting corpse silhouette with bone shards; 29: hero and skeleton joined by a living tether; 30: tall cage of ribs; 31: upright skeleton rising from a mound; 32: wilted heart grasped by black fingers; 33: floating pale hooded wraith; 34: hunched ghoul with claws; 35: armored revenant with giant cleaver; 36: blood-red wound and expanding slash; 37: withered bent leg; 38: closed spiked iron sarcophagus; 39: cracked shield leaking colored magical sparks. All remaining cells through 42 completely empty transparent.",
+    "enchanter": "Use case: stylized-concept. Asset: custom enchanter skill icon atlas for Grimhollow. Exactly 6 equal columns by 7 equal rows on a 1536x1792 transparent canvas. All 42 cells equal square, read row-major. Painterly gothic fantasy ability pictograms, highly legible silhouettes at 16-pixel logical size, rendered fine-art miniatures with bold simple forms. Antique gold, pale azure, ink purple, forged silver. Each icon is centered inside central 78 percent of its cell, isolated on true alpha, no background tile, text, letters, numbers, frames, grid lines or surrounding glow. At most 2-3 strong forms in each icon, clear light/dark edges, each must have a unique silhouette rather than recolors. Interpret the following ordered motifs literally, do not print their names. 1: magnifier over open book; 2: steady hand holding brush; 3: sharp inked blade rune; 4: hammer mending cracked breastplate; 5: crossed weapon and armor with two sigils; 6: two concentric vibrating metal rings; 7: protective circular rune around shield; 8: tuning fork and floating rune; 9: bursting overfilled glyph; 10: precise single ink drop forming rune; 11: stack of three open books; 12: ornate hammer and chisel; 13: unbroken enchanted chain; 14: large four-corner ward; 15: balanced scales with rune and stone; 16: hourglass with continuous luminous thread; 17: magnified blazing rune; 18: looping energy between brush and crystal; 19: wide dome over three figures; 20: sanctified altar with beam; 21: ward on wheeled boot; 22: descending three rune sparks; 23: hand collecting useful metal fragments; 24: life rising from broken runes; 25: gold-blue energy filling ink jar; 26: craftsman's articulated hand with gears; 27: writing quill and radiant scroll; 28: weapon overflowing with gold electricity; 29: protective pale blue sanctuary dome; 30: armor disintegrating into shards; 31: ink brush writing on breastplate; 32: hostile face branded with violet sigil; 33: metal sword changing into different sword; 34: reinforced shield bound by iron bands; 35: gold blessing on raised open hand; 36: magic orb crossed out by dark slash; 37: breastplate split by central crack; 38: chisel moving a rune between two blades. All remaining cells through 42 completely empty transparent.",
+    "psychic": "Use case: stylized-concept. Asset: custom psychic skill icon atlas for Grimhollow. Exactly 6 equal columns by 7 equal rows on a 1536x1792 transparent canvas. All 42 cells equal square, read row-major. Painterly gothic fantasy ability pictograms, highly legible silhouettes at 16-pixel logical size, rendered fine-art miniatures with bold simple forms. Amethyst, pearl silver, pale lavender, dark midnight blue. Each icon is centered inside central 78 percent of its cell, isolated on true alpha, no background tile, text, letters, numbers, frames, grid lines or surrounding glow. At most 2-3 strong forms in each icon, clear light/dark edges, each must have a unique silhouette rather than recolors. Interpret the following ordered motifs literally, do not print their names. 1: boomerang arrow returning to hand; 2: invisible hand wrenching loose a dagger; 3: eye trail fading slowly; 4: eye above pressure plate; 5: dart guided around a curved path; 6: still crystal within nested circles; 7: eye glimpsing future hourglass; 8: violet energy stored in coiled spring; 9: hammer striking tiny crack point; 10: closed eyes with sharp central crystal; 11: outstretched translucent long arm; 12: two heads sharing a glowing link; 13: thought spark drawn from a defeated head; 14: massive floating stone fist; 15: eye looking at hidden treasure chest; 16: wide circular violet storm; 17: terrified face inside a dark aura; 18: shield reflecting projectile backwards; 19: two minds tied with long thread; 20: three open eyes around a head; 21: violet surge through boot; 22: restrained enemy inside firm force ring; 23: shockwave repelling three arrows; 24: figure stepping through a transparent wall; 25: purple energy filling a crystal; 26: hand pulling marionette strings; 27: hooded visionary with third eye; 28: spiraling storm of stones and violet energy; 29: two translucent heads overlapping; 30: solid translucent violet wall; 31: floating hand retrieving a coin; 32: single open clairvoyant eye; 33: open palm pushing a silhouette away; 34: crowned mind controlling a puppet; 35: whispering mouth beside another head; 36: foe flung in a long upward arc. All remaining cells through 42 completely empty transparent."
+  }
+}

@@ -1,3 +1,9 @@
+# Botany and skill illustrations - v1.7.0
+
+`botany_skills.py` packs four built-in imagegen source sheets from `sources/botany-skills`: 13 sprouted plants into the existing terrain-feature cells, and 113 unique talent/subclass/armor/spell/Etch icons into `interfaces/painted_skills.png`. `botany-skills.json` records exact prompts and cell identities. All crop, alpha, scale and uniqueness checks run offline; no model or Blender is used in CI. These original images and their packed derivatives are GPL-3.0-or-later.
+
+The 100 source sheets reconstruct 113 game images and 55 launcher resources. Existing terrain outside the plant row and existing trap artwork are unchanged. Skills retain 16 logical units with 64px frames; upstream skill textures retain their original addressing.
+
 # Class paintings, trap plates and launchers - v1.6.0
 
 `presentation.py` compiles eleven new authored sources into nine 1600x900 selection paintings, one 384x384 portrait sheet, 63 existing trap cells, and 55 desktop/Android launcher resources. `presentation-prompts.json` records the exact built-in imagegen prompts. The face crop in each of the nine 128px portrait cells is taken directly from that class's painting. Trap shape and color indices, disabled states, and terrain below the seven trap rows are preserved. Android foreground artwork fits the 66dp adaptive safe zone; debug builds use the same recognizable emblem.

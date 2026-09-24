@@ -32,6 +32,9 @@ PROFILES={
     'enchanter':dict(torso=(16,20),head=(9.5,11.5),cape=(20,32),hips=(22,25),
                      shoulder=6,arm=5.2,leg=5,boot=(6,5),stance=3.4,stride=3,
                      lean=-.8,bob=.3,style='scribe',robe=2),
+    'psychic':dict(torso=(15,20),head=(9.5,11),cape=(17,43),hips=(20,24),
+                   shoulder=5.6,arm=4.4,leg=4.7,boot=(5.8,5),stance=3.2,stride=2.6,
+                   lean=0,bob=.1,style='focus',robe=3),
 }
 
 
@@ -89,6 +92,9 @@ def humanoid(hero,tier,index):
     if style=='scribe':
         elbows=[(cx-8,cy+4),(cx+8,cy+4)]
         wrists=[(cx-4,cy+8),(cx+8+stride*.25,cy+6)]
+    if style=='focus':
+        elbows=[(cx-8,cy+6),(cx+9,cy+6)]
+        wrists=[(cx-9-stride*.15,cy+1),(cx+12+stride*.15,cy+2)]
     hips=[(23-stance*.55,36+bob),(23+stance*.55,36+bob)]
     knees=[(23-stance+stride,45+bob),(23+stance-stride,45+bob)]
     ankles=[(23-stance+stride,53-max(0,stride)*.3),(23+stance-stride,53-max(0,-stride)*.3)]
@@ -129,6 +135,9 @@ def humanoid(hero,tier,index):
     if style=='scribe' and index in (13,14,15):
         elbows=[(16,29),(32,25)]
         wrists=[(21,30),(32,19)] if index==13 else [(22,30),(39,25)] if index==14 else [(21,30),(31,31)]
+    if style=='focus' and index in (13,14,15):
+        elbows=[(15,30),(32,25)]
+        wrists=[(15,25),(30,18)] if index==13 else [(15,25),(41,20)] if index==14 else [(15,26),(35,25)]
     cape=caster_cloth(cfg['robe'],True) if 'robe' in cfg else p[3]
     skirt=caster_cloth(cfg['robe']) if 'robe' in cfg else p[2]
     place(canvas,cape,(cx-3+sway*.3,33+bob),cfg['cape'],sway*1.3)
@@ -156,6 +165,8 @@ def humanoid(hero,tier,index):
     for side in (0,1):place(canvas,p[14+side],(wrists[side][0],wrists[side][1]+1),(3.8,4.5))
     if style=='scribe' and index not in (19,20):
         place(canvas,class_prop(3),(wrists[1][0]+1,wrists[1][1]-2),(3.2,10),-25 if index==14 else 12)
+    if style=='focus' and index not in (19,20):
+        place(canvas,class_prop(5),(wrists[0][0],wrists[0][1]-3.5),(4.8,6.5),sway*2)
     if index in (19,20):place(canvas,gear[7],(28,29-(index-19)),(14,9))
     return finish(canvas,index)
 

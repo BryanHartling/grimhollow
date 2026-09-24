@@ -1,3 +1,7 @@
+# Hero art, batch 9: Psychic
+
+- Give the Psychic a tall poised stance, silver hair, violet split panels, quiet footwork and a directed-palm gesture with the existing Focus Crystal held above the other hand. Feet remain grounded unless the existing flight animation is active; no new aura, buff or movement rule is added.
+
 # Hero art, batch 8: Enchanter
 
 - Give the Enchanter an ink-blue asymmetric wrap/half-cape, tailored proportions, brush-in-hand stance and a deliberate inscription stroke. The Brush is the existing class prop; no inscription, charge or knowledge rules change.

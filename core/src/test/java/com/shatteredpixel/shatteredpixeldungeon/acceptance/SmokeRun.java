@@ -102,7 +102,7 @@ public class SmokeRun {
         for(int y=1;y<l.height()-1;y++)for(int x=1;x<w-1;x++)Level.set(x+y*w,Terrain.EMPTY);
         AshlightLantern lamp=new AshlightLantern();lamp.identify();h.belongings.artifact=lamp;lamp.activate(h);
         check(!lamp.isUpgradable()&&!new com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicalInfusion().getSelector().itemSelectable(lamp),"51 no scroll/infusion upgrades");
-        lamp.upgrade();lamp.transferUpgrade(10);lamp.charge(h,100);check(lamp.level()==0&&lamp.charges()==0,"51 external growth/charge rejected");
+        lamp.upgrade();lamp.transferUpgrade(10);lamp.resetForTrinity(10);lamp.charge(h,100);check(lamp.level()==0&&lamp.charges()==0,"51 external growth/charge rejected");
         check(AshlightLantern.feedValue(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame())==1
                 &&AshlightLantern.feedValue(new com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfDragonsBreath())==2
                 &&AshlightLantern.feedValue(new com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire())==2,"51 exact feed values");

@@ -8,6 +8,7 @@
 - Flare costs one charge and one turn, blinds hostile enemies for four turns within three cells and line of sight, ignites flammable terrain/webs from level 2, and ignites enemies from level 8. Bone Prison and Force Wall are explicitly excluded; no oil terrain exists, so no new oil mechanic was invented. There is no holy/radiant damage or undead damage rider.
 - Open level 4 prevents hostile Wraith/Tormented Spirit movement into directly lit cells, without damaging or displacing existing occupants; allied/NPC ghosts are unaffected. Open level 6 reveals secrets only in direct light, not remote senses, and halves ordinary fire damage; level 10 gives ordinary fire immunity. Soulfire retains its existing immunity-piercing behavior.
 - New test 51 extends the existing class and native UI harnesses for these boundaries, actual artifact save/load, generation migration, menu actions and both icon states. Test 25 adds indices 537/538; the other 542 atlas cells are unchanged. The feeding curve's typical campaign level remains subject to playtesting.
+- Trinity's generic artifact discovery list excludes Ashlight: a temporary spirit copy cannot satisfy equipped, feed-only progression, and the lantern has no Spirit Form adapter. Its reset API cannot grant free levels or charges.
 
 # Gas rendering cost - v1.8.1
 

@@ -105,6 +105,7 @@ public class AshlightLantern extends Artifact {
     }
     @Override public Item upgrade(){ return this; } // Only the feed path may call the parent upgrade.
     @Override public void transferUpgrade(int amount){} // No transmutation/infusion growth.
+    @Override public void resetForTrinity(int visibleLevel){} // A spirit copy cannot feed this artifact.
 
     public static int feedValue(Item item){
         if(item instanceof PotionOfDragonsBreath || item instanceof Soulfire)return 2;

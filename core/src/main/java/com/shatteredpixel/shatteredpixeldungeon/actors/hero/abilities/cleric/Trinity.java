@@ -361,6 +361,9 @@ public class Trinity extends ArmorAbility {
 					}
 					//no tome specifically
 					discoveredClasses.remove(HolyTome.class);
+                    // Ashlight requires its equipped item and feed-only progression;
+                    // it has no Spirit Form adapter or free upgraded spirit copy.
+                    discoveredClasses.remove(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern.class);
 				}
 			}
 

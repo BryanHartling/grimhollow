@@ -6,6 +6,8 @@ Painted-source checkpoint: `370e78808`. Intended release tag: `v1.9.0-ashlight`.
 
 Verification caught and fixed a feed-only artifact restore-level issue and a six-button footer reflow issue. An initial barricade test was behind tall grass; its fixture was corrected without weakening line-of-sight requirements. The native feeding check handles both the landscape inventory pane and portrait bag window. The user's latest Cloak rule replaces the originally proposed partial visibility: invisibility remains absolute, with doubled charge-timer drain while the lantern is open.
 
+CI 35952182848 at `025f562d4` passes Android, all three individual class gates (10/0 each), combined (30/0), both Ashlight UI orientations, reconstruction and rendering (Linux mean 0.9918ms / p95 1.2581ms). Only the retained test-45 contrast gate fails: Windows 34/82, Linux 31/76. A final Trinity guard prevents a temporary spirit copy granting free artifact levels; its desktop/APK build and Psychic gate pass (10/0). The long recorded build duration includes a host interruption; the quota API timed out. Exact final-head CI is checked before tagging.
+
 The table distinguishes current coverage from retained checkpoint evidence. It does not claim a full campaign, physical Android play, or exhaustive talent/reward flows. CI repeats its configured checks on the delivered source. [Visual review](painted-world.html), [exact source prompt](../tools/painted/ashlight-prompts.json), [known issues](../KNOWN_ISSUES.md).
 
 | Test | Status | Actual output or reason |

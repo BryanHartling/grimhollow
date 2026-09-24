@@ -17,6 +17,9 @@ PROFILES={
     'mage':dict(torso=(17,20),head=(9.5,11.5),cape=(21,42),hips=(22,27),
                 shoulder=6.3,arm=5.5,leg=5,boot=(6,4.5),stance=3.2,stride=2.8,
                 lean=-.2,bob=.2,style='scholar',robe=0),
+    'rogue':dict(torso=(15,19),head=(11.5,13),cape=(22,33),hips=(12,9),
+                 shoulder=5.5,arm=4.5,leg=5,boot=(6,5),stance=5.5,stride=3.7,
+                 lean=2,bob=.15,style='knife',lower=2.5,head_y=13,head_x=2.5,tilt=-9),
 }
 
 
@@ -49,11 +52,14 @@ def humanoid(hero,tier,index):
         sway=math.sin(phase-math.pi/3)
     if index==1:bob=-.12
     bend=3 if index in (16,17) else 0
-    cx,cy=23+cfg['lean']+bend*.5,25+bob+bend
+    cx,cy=23+cfg['lean']+bend*.5,25+cfg.get('lower',0)+bob+bend
     half=cfg['shoulder'];stance=cfg['stance'];style=cfg['style']
     shoulders=[(cx-half,cy-7),(cx+half,cy-6)]
     elbows=[(cx-half-2-stride*.25,cy+2),(cx+half+2+stride*.25,cy+3)]
     wrists=[(cx-half-stride*.45,cy+10),(cx+half+stride*.45,cy+10)]
+    if style=='knife':
+        elbows=[(cx-half-1,cy+5),(cx+half+3,cy+3)]
+        wrists=[(cx-4-stride*.3,cy+9),(cx+3+stride*.3,cy+1)]
     hips=[(23-stance*.55,36+bob),(23+stance*.55,36+bob)]
     knees=[(23-stance+stride,45+bob),(23+stance-stride,45+bob)]
     ankles=[(23-stance+stride,53-max(0,stride)*.3),(23+stance-stride,53-max(0,-stride)*.3)]
@@ -75,6 +81,9 @@ def humanoid(hero,tier,index):
     if style=='scholar' and index in (13,14,15):
         elbows=[(17,25),(31,22)]
         wrists=[(21,25),(32,14)] if index==13 else [(22,24),(40,22)] if index==14 else [(20,30),(34,29)]
+    if style=='knife' and index in (13,14,15):
+        elbows=[(18,32),(33,31)]
+        wrists=[(22,31),(28,31)] if index==13 else [(22,31),(42,27)] if index==14 else [(21,34),(33,31)]
     cape=caster_cloth(cfg['robe'],True) if 'robe' in cfg else p[3]
     skirt=caster_cloth(cfg['robe']) if 'robe' in cfg else p[2]
     place(canvas,cape,(cx-3+sway*.3,33+bob),cfg['cape'],sway*1.3)
@@ -86,18 +95,19 @@ def humanoid(hero,tier,index):
     limb(canvas,joint_part(hero,5),elbows[0],wrists[0],cfg['arm']*.77)
     skirt_y=55-cfg['hips'][1]/2 if 'robe' in cfg else 36
     place(canvas,skirt,(23+sway*.2,skirt_y+bob),cfg['hips'],sway*.6 if 'robe' in cfg else 0)
-    place(canvas,p[1],(cx,cy),cfg['torso'])
+    tilt=cfg.get('tilt',0)
+    place(canvas,p[1],(cx,cy),cfg['torso'],tilt)
     if tier:
         chest=(cfg['torso'][0]*.77,cfg['torso'][1]*.79)
-        place(canvas,gear[tier-1],(cx,cy+.7),chest)
+        place(canvas,gear[tier-1],(cx,cy+.7),chest,tilt)
         collar=p[1].crop((0,0,p[1].width,round(p[1].height*.22)))
-        place(canvas,collar,(cx,cy-cfg['torso'][1]*.39),(cfg['torso'][0],cfg['torso'][1]*.22))
+        place(canvas,collar,(cx,cy-cfg['torso'][1]*.39),(cfg['torso'][0],cfg['torso'][1]*.22),tilt)
     # The torso source has an empty arm opening. Its far shoulder must sit
     # over that opening even though the far forearm remains behind the body.
     limb(canvas,joint_part(hero,4),shoulders[0],elbows[0],cfg['arm'])
     limb(canvas,joint_part(hero,6),shoulders[1],elbows[1],cfg['arm'])
     limb(canvas,joint_part(hero,7),elbows[1],wrists[1],cfg['arm']*.77)
-    place(canvas,p[0],(cx+1,10+bob+bend),cfg['head'],-bend)
+    place(canvas,p[0],(cx+cfg.get('head_x',1),cfg.get('head_y',10)+bob+bend),cfg['head'],tilt*.5-bend)
     for side in (0,1):place(canvas,p[14+side],(wrists[side][0],wrists[side][1]+1),(3.8,4.5))
     if index in (19,20):place(canvas,gear[7],(28,29-(index-19)),(14,9))
     return finish(canvas,index)

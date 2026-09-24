@@ -1,3 +1,7 @@
+# Hero art, batch 4: Rogue
+
+- Give the Rogue a forward crouch, low quiet footwork, close guard and short thrust, with a broad dark hood and swept cape. These replace the upright shared walk/overhead strike without changing their durations or attack behavior.
+
 # Hero art, batch 3: Mage
 
 - Give the Mage an upright narrow robe silhouette, measured short steps and a two-handed casting gesture, with plum/copper garments matching the existing face and portrait. New long garment cutouts replace the shared short skirt; chest overlays now use solid front panels rather than empty tunics with visible arm sockets.

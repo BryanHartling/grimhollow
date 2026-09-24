@@ -44,6 +44,8 @@ public class BadgeBanner extends Image {
 
 	public static final float DEFAULT_SCALE	= 3;
 	public static final int SIZE = 16;
+	public static final int TEXTURE_SIZE = 64;
+	public static final String PAINTED = "interfaces/painted_badges.png";
 	
 	private static final float FADE_IN_TIME		= 0.25f;
 	private static final float STATIC_TIME		= 1f;
@@ -58,10 +60,11 @@ public class BadgeBanner extends Image {
 	
 	private BadgeBanner( int index ) {
 		
-		super( Assets.Interfaces.BADGES );
+		super( PAINTED );
+		texture.filter(com.watabou.glwrap.Texture.LINEAR,com.watabou.glwrap.Texture.LINEAR);
 		
 		if (atlas == null) {
-			atlas = new TextureFilm( texture, SIZE, SIZE );
+			atlas = new TextureFilm( texture, TEXTURE_SIZE, TEXTURE_SIZE );
 		}
 		
 		setup(index);
@@ -71,6 +74,7 @@ public class BadgeBanner extends Image {
 		this.index = index;
 		
 		frame( atlas.get( index ) );
+		logicalSize(SIZE,SIZE);
 		origin.set( width / 2, height / 2 );
 		
 		alpha( 0 );
@@ -154,9 +158,9 @@ public class BadgeBanner extends Image {
 			p.y = highlightPositions.get(index).y * image.scale.y;
 		} else {
 
-			SmartTexture tx = TextureCache.get(Assets.Interfaces.BADGES);
+			SmartTexture tx = TextureCache.get(PAINTED);
 
-			int size = 16;
+			int size = TEXTURE_SIZE;
 
 			int cols = tx.width / size;
 			int row = index / cols;
@@ -164,18 +168,18 @@ public class BadgeBanner extends Image {
 
 			int x = 3;
 			int y = 4;
-			int bgColor = tx.getPixel(col * size + x, row * size + y);
+			int bgColor = tx.getPixel(col * size + x*4, row * size + y*4);
 			int curColor = 0;
 
 			for (x = 3; x <= 12; x++) {
-				curColor = tx.getPixel(col * size + x, row * size + y);
+				curColor = tx.getPixel(col * size + x*4, row * size + y*4);
 				if (curColor != bgColor) break;
 			}
 
 			if (curColor == bgColor) {
 				y++;
 				for (x = 3; x <= 12; x++) {
-					curColor = tx.getPixel(col * size + x, row * size + y);
+					curColor = tx.getPixel(col * size + x*4, row * size + y*4);
 					if (curColor != bgColor) break;
 				}
 			}
@@ -208,11 +212,13 @@ public class BadgeBanner extends Image {
 	}
 	
 	public static Image image( int index ) {
-		Image image = new Image( Assets.Interfaces.BADGES );
+		Image image = new Image( PAINTED );
+		image.texture.filter(com.watabou.glwrap.Texture.LINEAR,com.watabou.glwrap.Texture.LINEAR);
 		if (atlas == null) {
-			atlas = new TextureFilm( image.texture, 16, 16 );
+			atlas = new TextureFilm( image.texture, TEXTURE_SIZE, TEXTURE_SIZE );
 		}
 		image.frame( atlas.get( index ) );
+		image.logicalSize(SIZE,SIZE);
 		return image;
 	}
 }

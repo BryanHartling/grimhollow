@@ -574,6 +574,25 @@ public class SmokeRun {
             check(crystal.level()==expected,"49: exact cumulative cost at "+spent);
         }
         check(crystal.level()==10&&crystal.spentExperience()==0,"49: level ten cap");
+        h.talents.clear();Talent.initClassTalents(h);Talent.initSubclassTalents(h);
+        for(int tier=0;tier<=10;tier++){
+            psychicArena();crystal.level(tier);crystal.gainCharge(100);
+            int range=h.viewDistance+(tier>=7?2:tier>=3?1:0), duration=tier>=10?9:tier>=5?7:5;
+            check(crystal.graspRange(h)==range&&crystal.glimpseDuration()==duration,"49: utility breakpoints "+tier);
+            int inside=h.pos+range,outside=inside+1;
+            Level.set(inside,Terrain.EMPTY);Level.set(outside,Terrain.EMPTY);
+            Dungeon.level.heaps.remove(inside);Dungeon.level.heaps.remove(outside);
+            Dungeon.level.heroFOV[inside]=Dungeon.level.heroFOV[outside]=true;
+            Dungeon.level.drop(new Gold(1),outside);int charge=crystal.charges();
+            check(!crystal.cast(h,"grasp",outside,null)&&crystal.charges()==charge,"49: Grasp rejects beyond reach without charge");
+            Dungeon.level.drop(new Gold(1),inside);Dungeon.level.heroFOV[inside]=false;
+            check(!crystal.cast(h,"grasp",inside,null),"49: Grasp requires visibility");
+            Dungeon.level.heroFOV[inside]=true;
+            check(crystal.cast(h,"grasp",inside,null)&&Dungeon.level.heaps.get(inside)==null,"49: Grasp reaches exact boundary");
+            crystal.level(tier);crystal.gainCharge(100);Buff.detach(h,MindVision.class);
+            check(crystal.cast(h,"glimpse",h.pos,null)&&h.buff(MindVision.class).cooldown()==duration,"49: actual Glimpse duration "+tier);
+        }
+        System.out.println("TEST 49 UTILITY PASS: all levels 0-10; Grasp sight range +0/1/2 at 0/3/7, visibility and boundary enforcement; Glimpse 5/7/9 turns at 0/5/10");
         System.out.println("TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence");
         h.subClass=HeroSubClass.PUPPETEER;h.talents.clear();Talent.initClassTalents(h);Talent.initSubclassTalents(h);
         java.lang.reflect.Method act=Mob.class.getDeclaredMethod("act");act.setAccessible(true);

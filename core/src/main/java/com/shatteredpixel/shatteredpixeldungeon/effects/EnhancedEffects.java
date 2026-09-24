@@ -72,7 +72,7 @@ public final class EnhancedEffects {
         }
         @Override public void destroy(){if(floor==this)floor=null;super.destroy();}
     }
-    /** Four clipped sub-quads wrap within one atlas frame, never into a neighboring frame. */
+    /** Soft overlapping clouds retain cell-centered coverage without hard square edges. */
     public static class GasLayer extends Group {
         final Blob blob;final GasCell[] cells=new GasCell[Dungeon.level.length()];float time;
         private final java.util.ArrayList<GasCell>[] buckets=new java.util.ArrayList[101];
@@ -99,7 +99,7 @@ public final class EnhancedEffects {
             ((java.nio.Buffer)vertices).flip();if(buffer==null)buffer=new com.watabou.glwrap.Vertexbuffer(vertices);else buffer.updateVertices(vertices);
             NoosaScript script=NoosaScript.get();tint.texture.bind();script.camera(camera());script.uModel.valueM4(identity);
             int offset=0;for(int density=1;density<=100;density++)if(counts[density]>0){
-                float alpha=blob instanceof SanctuaryZone?.75f:.15f+.7f*density/100;
+                float alpha=blob instanceof SanctuaryZone?.75f:(.15f+.7f*density/100)*.65f;
                 script.lighting(tint.rm,tint.gm,tint.bm,alpha,0,0,0,0);script.drawQuadSet(buffer,counts[density],offset);offset+=counts[density];
             }
         }
@@ -113,18 +113,18 @@ public final class EnhancedEffects {
         void refresh(float time){
             if(blob instanceof SanctuaryZone){edge(time);return;}
             float p=phase(cell)%997/997f;
-            RectF base=uv(Style.SMOKE,(int)(time*8+p*16));
-            float sx=(time*.021f+p)%1,sy=(time*.013f+p*.67f)%1;
-            float size=blob.cur[cell]<20?8:16,alpha=.15f+.7f*Math.min(100,blob.cur[cell])/100f;
-            float x=(cell%Dungeon.level.width())*16+(16-size)/2,y=(cell/Dungeon.level.width())*16+(16-size)/2;
+            float size=12+8*Math.min(100,blob.cur[cell])/100f;
+            float x=(cell%Dungeon.level.width())*16+8,y=(cell/Dungeon.level.width())*16+8;
             int tint=blob instanceof ConfusionGas?0x68409C:blob instanceof SmokeScreen?0xC9BFA8
                     :blob instanceof ParalyticGas?0x8A8B88:0x7BB33B;
             for(int i=0;i<4;i++){
-                boolean right=(i&1)!=0,bottom=(i&2)!=0;
-                float u=right?0:sx,v=bottom?0:sy,w=right?sx:1-sx,h=bottom?sy:1-sy;
-                RectF r=rects[i];r.set(base.left+u*base.width(),base.top+v*base.height(),base.left+(u+w)*base.width(),base.top+(v+h)*base.height());
-                Image image=pieces[i];image.visible=w>0&&h>0;image.frame(r);image.logicalSize(w*size,h*size);
-                image.x=x+(right?(1-sx)*size:0);image.y=y+(bottom?(1-sy)*size:0);image.hardlight(tint);image.alpha(alpha);
+                Image image=pieces[i];image.visible=i<2;if(!image.visible)continue;
+                float phase=time*.45f+p*6.283f+i*3.14f;
+                float diameter=size+(float)Math.sin(phase)*1.2f;
+                ReadabilityEffects.frame(image,ReadabilityEffects.MIST,diameter,diameter);
+                image.x=x-diameter/2+(float)Math.cos(phase)*1.5f;
+                image.y=y-diameter/2+(float)Math.sin(phase*.81f)*1.3f;
+                image.hardlight(tint);
             }
         }
         void edge(float time){

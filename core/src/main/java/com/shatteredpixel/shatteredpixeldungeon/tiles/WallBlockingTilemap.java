@@ -66,6 +66,14 @@ public class WallBlockingTilemap extends Tilemap {
 	
 	@Override
 	public synchronized void updateMapCell(int cell) {
+		// Fog already masks the cell below independently. Never replace the face
+		// of a discovered wall with black merely because its far side is unknown.
+		if (wall(cell) && (Dungeon.level.heroFOV[cell]
+				|| Dungeon.level.visited[cell] || Dungeon.level.mapped[cell])) {
+			data[cell] = BLOCK_NONE;
+			super.updateMapCell(cell);
+			return;
+		}
 
 		//FIXME this is to address the wall blocking looking odd on the new yog floor.
 		// The true solution is to improve the fog of war so the blockers aren't necessary.

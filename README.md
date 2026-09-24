@@ -1,5 +1,7 @@
 # Grimhollow
 
+**Readability and inspection v1.8.0:** locked doors have painted lock markers, ground loot has contrasting edges, gas has soft cloud boundaries, and wall water/smoke, altar motes and all 98 awards use sharper painted detail. Known southern wall faces remain visible at the edge of unexplored terrain. Press Examine twice to keep inspecting tiles, shop goods and inventory; press again or Escape/Back from the dungeon to exit. Hold Examine to search. The Focus Crystal adds Grasp reach at levels 3/7 and longer Glimpse at levels 5/10. [Visual review](verification/painted-world.html), [verification and retained limitations](verification/ACCEPTANCE.md).
+
 **Plants and inscriptions v1.7.0:** thirteen painted sprouted plants and 113 unique new-class skill icons complete this pass. Enchanter armor inscription now has three starter glyphs; all learned inscriptions remain available across floors and saves. The full library scrolls and offers descriptions. Only the Rune Etching's active effect rerolls. See [the visual review](verification/painted-world.html), [acceptance results](verification/ACCEPTANCE.md), and [exact art prompts](tools/painted/botany-skills.json).
 
 GPL-3.0-or-later derivative of [Shattered Pixel Dungeon](https://github.com/00-Evan/shattered-pixel-dungeon), now incorporating **v4.0.0**, commit `2bb34a4e91d29c8785a9363cad6ddfe5122b1d4f`. The fork began at v3.3.8; upstream history and Java packages are preserved.

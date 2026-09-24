@@ -90,6 +90,8 @@
     "presentation/warrior.png": "25c59cc4410c4467f55af1fe3fc88178d47eaaf8ac53a41ab5154e7df0344619",
     "prison-materials.png": "69e2f5f0680c84a175a8f2e0313f3e0119e1fafd0b0545dbfe8deb4fb961bab4",
     "props.png": "7bc14b1ce174949d144b92c45909858026bfb1c3832748c6f2f53f6fe629ab02",
+    "readability/badges.png": "a18a5d4c9981333c6f3e52b047b7b71a3466166c88b02cb607aa5c55f817c43d",
+    "readability/details.png": "e1952de42e0da3695139107c8e5797e986aacf4324d14d3cc98a57727debd852",
     "region-props.png": "fcdfa9075ad79fe4e4755a242bbbe4cb29cd579c9d66ab6a6dfd004e3defecde",
     "sewers-materials.png": "0b951d4ce0bb5902c6a940c1bc56db1173580ca57c33d652c16754dd91c9ddc2",
     "status/status-0.png": "7bf546acdbc789262e8008fa82737af3c3389ee1c43fd58c8b27709d6fb225b7",
@@ -8974,6 +8976,20 @@
         256
       ],
       "rgba_sha256": "67f9ccbfba3e2f29f5cbb6b239e9a96434da71dc92b77d22efb36d6f6deba037"
+    },
+    "interfaces/painted_badges.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "19d65a6bffed6269dc659fc99578281879a94591e3528d2a0016ce978263aaea"
+    },
+    "effects/readability.png": {
+      "size": [
+        512,
+        64
+      ],
+      "rgba_sha256": "ed68c2df855028cc56b27876423c4321175f24815f6923ee18fb6e972a30b5b6"
     }
   }
 }

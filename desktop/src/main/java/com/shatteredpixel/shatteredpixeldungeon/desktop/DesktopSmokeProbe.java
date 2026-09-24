@@ -377,8 +377,108 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if(Boolean.getBoolean("grimhollow.geometryTests"))geometryTests();
             System.out.println("INTERFACE: inventory, item actions, scrollable Crystal details, five-spell wheel, hero sheet and settings fit "
                     +Gdx.graphics.getWidth()+"x"+Gdx.graphics.getHeight()+"; failures=0");
+        }
+        if(frames>=700)readabilityReview();
+    }
+    private int inspectPosition,inspectGold,inspectCharges;
+    private float inspectTime;
+    private com.shatteredpixel.shatteredpixeldungeon.items.Heap inspectLoot,inspectShop;
+    private void readabilityReview(){
+        com.shatteredpixel.shatteredpixeldungeon.ui.Toolbar toolbar=(com.shatteredpixel.shatteredpixeldungeon.ui.Toolbar)RecoveryChecks.field(Game.scene(),"toolbar");
+        Object search=RecoveryChecks.field(toolbar,"btnSearch");
+        if(frames==700){
+            closeReviewWindows();int w=Dungeon.level.width();
+            for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs.toArray(new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob[0])){
+                com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(mob);if(mob.sprite!=null)mob.sprite.killAndErase();
+            }
+            Dungeon.level.mobs.clear();
+            inspectPosition=Dungeon.hero.pos;
+            // Controlled visible fixture. The five generated-region fog checks remain separate.
+            for(int y=-3;y<=3;y++)for(int x=-4;x<=4;x++){
+                int cell=inspectPosition+y*w+x;if(!Dungeon.level.insideMap(cell))continue;
+                Level.set(cell,Math.abs(x)==4||Math.abs(y)==3?Terrain.WALL:Terrain.EMPTY);
+                Dungeon.level.heroFOV[cell]=Dungeon.level.visited[cell]=true;
+                Dungeon.level.traps.remove(cell);
+            }
+            Level.set(inspectPosition-2*w,Terrain.LOCKED_DOOR);
+            Level.set(inspectPosition-2*w+2,Terrain.DOOR);
+            Level.set(inspectPosition-w+1,Terrain.LOCKED_DOOR);
+            Level.set(inspectPosition-w-3,Terrain.CRYSTAL_DOOR);
+            inspectLoot=Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey(),inspectPosition-2);
+            inspectShop=Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing(),inspectPosition+2);
+            inspectShop.type=com.shatteredpixel.shatteredpixeldungeon.items.Heap.Type.FOR_SALE;
+            inspectLoot.seen=inspectShop.seen=true;
+            ToxicGas gas=new ToxicGas();
+            for(int i=0;i<4;i++)gas.seed(Dungeon.level,inspectPosition+w+(i-2),70);
+            GameScene.add(gas);
+            SacrificialFire altar=new SacrificialFire();altar.seed(Dungeon.level,inspectPosition-w-2,10);GameScene.add(altar);
+            ((Group)RecoveryChecks.field(Game.scene(),"levelVisuals")).add(new com.shatteredpixel.shatteredpixeldungeon.levels.PrisonLevel.Torch(inspectPosition-w+2));
+            GameScene.updateMap();
+            inspectGold=Dungeon.gold;inspectTime=Dungeon.hero.cooldown();
+            inspectCharges=Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal.class).charges();
+            clickReview(search);clickReview(search);
+            if(!com.shatteredpixel.shatteredpixeldungeon.ui.Toolbar.examineLocked())throw new AssertionError("Second Examine press did not latch");
+        }
+        if(frames==730){
+            com.shatteredpixel.shatteredpixeldungeon.ui.Toast prompt=(com.shatteredpixel.shatteredpixeldungeon.ui.Toast)RecoveryChecks.field(Game.scene(),"prompt");
+            if(prompt.left()<0||prompt.right()>prompt.camera().width||prompt.top()<0||prompt.bottom()>prompt.camera().height)
+                throw new AssertionError("Examine prompt outside screen");
+            capture("readability-room");GameScene.handleCell(inspectLoot.pos);
+        }
+        if(frames==750){assertInspection();capture("examine-loot");closeReviewWindows();}
+        if(frames==775)GameScene.handleCell(inspectShop.pos);
+        if(frames==795){assertInspection();capture("examine-shop");closeReviewWindows();}
+        if(frames==820)GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBag(Dungeon.hero.belongings.backpack));
+        if(frames==840)clickInventoryItem(Game.scene(),Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal.class));
+        if(frames==855){assertInspection();capture("examine-inventory");
+            for(com.watabou.noosa.Gizmo g:new java.util.ArrayList<>(RecoveryChecks.members(Game.scene())))
+                if(g instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem)((com.shatteredpixel.shatteredpixeldungeon.ui.Window)g).hide();
+        }
+        if(frames==875)clickInventoryItem(Game.scene(),Dungeon.hero.belongings.weapon());
+        if(frames==890){assertInspection();closeReviewWindows();
+            if(Dungeon.hero.pos!=inspectPosition||Dungeon.gold!=inspectGold||Dungeon.hero.cooldown()!=inspectTime
+                    ||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal.class).charges()!=inspectCharges)
+                throw new AssertionError("Repeated inspection changed gameplay state");
+            if(!inspectLoot.sprite.groundOutline()||!inspectShop.sprite.groundOutline())throw new AssertionError("Ground contrast missing");
+            inspectLoot.hidden=true;if(inspectLoot.sprite.groundOutline())throw new AssertionError("Hidden loot highlighted");inspectLoot.hidden=false;
+            clickReview(search);if(com.shatteredpixel.shatteredpixeldungeon.ui.Toolbar.examineLocked())throw new AssertionError("Third press did not unlatch");
+            clickReview(search);clickReview(search);GameScene.cancel();
+            if(com.shatteredpixel.shatteredpixeldungeon.ui.Toolbar.examineLocked())throw new AssertionError("Back/Escape did not unlatch");
+            Level.set(inspectPosition-2*Dungeon.level.width(),Terrain.OPEN_DOOR);GameScene.updateMap(inspectPosition-2*Dungeon.level.width());
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBadge(Badges.Badge.HIGH_SCORE_5,true));
+        }
+        if(frames==915){interfaceBounds();capture("painted-badge");closeReviewWindows();}
+        if(frames==940){
+            for(com.watabou.noosa.Gizmo g:RecoveryChecks.members(Game.scene()))if(g instanceof com.shatteredpixel.shatteredpixeldungeon.effects.ReadabilityEffects.Locks){
+                Image[] locks=(Image[])RecoveryChecks.field(g,"locks");
+                if(locks[inspectPosition-2*Dungeon.level.width()].visible)throw new AssertionError("Opened door retained lock");
+            }
+            int badges=0;
+            for(Badges.Badge badge:Badges.Badge.values())if(badge.image>=0){
+                Image art=com.shatteredpixel.shatteredpixeldungeon.effects.BadgeBanner.image(badge.image);
+                if(art.width()!=16||art.height()!=16||Math.round(art.frame().width()*art.texture.width)!=64)
+                    throw new AssertionError("Badge density/geometry "+badge);art.destroy();badges++;
+            }
+            System.out.println("TEST 36 READABILITY: locked Examine loot/shop/two inventory targets; toggle and Back exit; no turns, gold, charges or movement; hidden loot excluded; painted badges="+badges+" failures=0");
             SPDSettings.dynamicLighting(originalLighting);SPDSettings.zoom(originalZoom);Gdx.app.exit();
         }
+    }
+    private void assertInspection(){
+        if(!com.shatteredpixel.shatteredpixeldungeon.ui.Toolbar.examineLocked())throw new AssertionError("Inspection lost its latch");
+        boolean found=false;
+        for(com.watabou.noosa.Gizmo g:RecoveryChecks.members(Game.scene())){
+            if(g instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem)throw new AssertionError("Examine opened item actions");
+            if(g instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem)found=true;
+        }
+        if(!found)throw new AssertionError("Expected item information window");interfaceBounds();
+    }
+    private boolean clickInventoryItem(Group group,com.shatteredpixel.shatteredpixeldungeon.items.Item item){
+        for(com.watabou.noosa.Gizmo g:RecoveryChecks.members(group)){
+            if(g instanceof com.shatteredpixel.shatteredpixeldungeon.ui.InventorySlot
+                    &&((com.shatteredpixel.shatteredpixeldungeon.ui.InventorySlot)g).item()==item){clickReview(g);return true;}
+            if(g instanceof Group&&clickInventoryItem((Group)g,item))return true;
+        }
+        return false;
     }
     private void closeReviewWindows() {
         for(com.watabou.noosa.Gizmo child:new java.util.ArrayList<>(RecoveryChecks.members(Game.scene())))

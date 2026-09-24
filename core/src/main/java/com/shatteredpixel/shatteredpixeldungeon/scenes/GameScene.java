@@ -386,6 +386,7 @@ public class GameScene extends PixelScene {
 
 		wallBlocking = new WallBlockingTilemap();
 		add (wallBlocking);
+		add(new com.shatteredpixel.shatteredpixeldungeon.effects.ReadabilityEffects.Locks());
 
 		add( emitters );
 		add( effects );
@@ -1178,7 +1179,7 @@ public class GameScene extends PixelScene {
 				}
 			};
 			prompt.camera = uiCamera;
-			prompt.setPos( (uiCamera.width - prompt.width()) / 2, uiCamera.height - 60 );
+			prompt.setPos( (uiCamera.width - prompt.width()) / 2, uiCamera.height - 40 - prompt.height() );
 
 			if (inventory != null && inventory.visible && prompt.right() > inventory.left() - 10){
 				prompt.setPos(inventory.left() - prompt.width() - 10, prompt.top());
@@ -1465,7 +1466,11 @@ public class GameScene extends PixelScene {
 	
 	public static void show( Window wnd ) {
 		if (scene != null) {
-			cancel();
+			boolean inspection = wnd instanceof WndInfoItem || wnd instanceof WndInfoMob
+					|| wnd instanceof WndInfoCell || wnd instanceof WndInfoPlant
+					|| wnd instanceof WndInfoTrap || wnd instanceof WndBag
+					|| wnd instanceof WndOptions || wnd instanceof WndHero;
+			if (!Toolbar.examineLocked() || !inspection) cancel();
 
 			//If a window is already present (or was just present)
 			// then inherit the offset it had
@@ -1674,7 +1679,7 @@ public class GameScene extends PixelScene {
 	}
 	
 	public static void selectCell( CellSelector.Listener listener ) {
-		if (cellSelector.listener != null && cellSelector.listener != defaultCellListener){
+		if (cellSelector.listener != listener && cellSelector.listener != null && cellSelector.listener != defaultCellListener){
 			cellSelector.listener.onSelect(null);
 		}
 		cellSelector.listener = listener;
@@ -1786,7 +1791,7 @@ public class GameScene extends PixelScene {
 	public static void examineCell( Integer cell ) {
 		if (cell == null
 				|| cell < 0
-				|| cell > Dungeon.level.length()
+				|| cell >= Dungeon.level.length()
 				|| (!Dungeon.level.visited[cell] && !Dungeon.level.mapped[cell])) {
 			return;
 		}

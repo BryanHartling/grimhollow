@@ -40,8 +40,10 @@ public class SacrificialParticle extends PixelParticle.Shrinking {
 
 	public SacrificialParticle() {
 		super();
+		com.shatteredpixel.shatteredpixeldungeon.effects.ReadabilityEffects.frame(this,
+				com.shatteredpixel.shatteredpixeldungeon.effects.ReadabilityEffects.MIST,1,1);
 
-		color( 0x4488EE );
+		color( 0x87BBFF );
 		lifespan = 0.6f;
 
 		acc.set( 0, -100 );
@@ -55,7 +57,7 @@ public class SacrificialParticle extends PixelParticle.Shrinking {
 
 		left = lifespan;
 
-		size = 4;
+		size = 6;
 		speed.set( 0 );
 	}
 

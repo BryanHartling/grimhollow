@@ -300,13 +300,17 @@ public class WndBag extends WndTabbed {
 
 				} else {
 
-					Game.scene().addToFront(new WndUseItem( WndBag.this, item ) );
+					Game.scene().addToFront(com.shatteredpixel.shatteredpixeldungeon.ui.Toolbar.examineLocked()
+							? new WndInfoItem(item) : new WndUseItem(WndBag.this, item));
 
 				}
 			}
 
 			@Override
 			protected void onRightClick() {
+				if (selector == null && com.shatteredpixel.shatteredpixeldungeon.ui.Toolbar.examineLocked()) {
+					Game.scene().addToFront(new WndInfoItem(item));return;
+				}
 				if (lastBag != item && !lastBag.contains(item) && !item.isEquipped(Dungeon.hero)){
 
 					hide();
@@ -337,6 +341,9 @@ public class WndBag extends WndTabbed {
 
 			@Override
 			protected boolean onLongClick() {
+				if (selector == null && com.shatteredpixel.shatteredpixeldungeon.ui.Toolbar.examineLocked()) {
+					Game.scene().addToFront(new WndInfoItem(item));return true;
+				}
 				if (selector == null && item.defaultAction() != null) {
 					hide();
 					QuickSlotButton.set( item );

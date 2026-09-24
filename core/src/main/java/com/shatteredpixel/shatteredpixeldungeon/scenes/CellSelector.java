@@ -161,7 +161,7 @@ public class CellSelector extends ScrollArea {
 					listener.onRightClick( cell );
 					break;
 			}
-			GameScene.ready();
+			if (!listener.persistent()) GameScene.ready();
 			
 		} else {
 			
@@ -516,6 +516,7 @@ public class CellSelector extends ScrollArea {
 	}
 	
 	public static abstract class Listener {
+		public boolean persistent(){ return false; }
 		public abstract void onSelect( Integer cell );
 
 		public void onRightClick( Integer cell ){} //do nothing by default

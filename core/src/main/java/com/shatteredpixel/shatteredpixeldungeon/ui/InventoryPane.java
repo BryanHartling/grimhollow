@@ -526,12 +526,13 @@ public class InventoryPane extends Component {
 				updateInventory();
 			} else {
 				targetingSlot = this;
-				GameScene.show(new WndUseItem( null, item ));
+				GameScene.show(Toolbar.examineLocked()?new WndInfoItem(item):new WndUseItem(null,item));
 			}
 		}
 
 		@Override
 		protected boolean onLongClick() {
+			if (selector == null && Toolbar.examineLocked()) {onClick();return true;}
 			if (selector == null && item.defaultAction() != null) {
 				QuickSlotButton.set( item );
 				return true;
@@ -546,6 +547,7 @@ public class InventoryPane extends Component {
 
 		@Override
 		protected void onMiddleClick() {
+			if (selector == null && Toolbar.examineLocked()) {onClick();return;}
 			if (lastBag != item && !lastBag.contains(item) && !item.isEquipped(Dungeon.hero)){
 				updateInventory();
 				return;
@@ -576,6 +578,7 @@ public class InventoryPane extends Component {
 
 		@Override
 		protected void onRightClick() {
+			if (selector == null && Toolbar.examineLocked()) {onClick();return;}
 			if (lastBag != item && !lastBag.contains(item) && !item.isEquipped(Dungeon.hero)){
 				updateInventory();
 				return;

@@ -201,6 +201,8 @@ def outputs():
     result.update(status())
     from interface_art import outputs as interface_art
     result.update(interface_art())
+    from readability import outputs as readability
+    result.update(readability())
     return result
 
 
@@ -225,6 +227,8 @@ def main():
         if path.startswith('splashes/painted_'):expected=(1600,900)
         if path=='interfaces/painted_portraits.png':expected=(384,384)
         if path=='interfaces/painted_skills.png':expected=(1024,512)
+        if path=='interfaces/painted_badges.png':expected=(1024,512)
+        if path=='effects/readability.png':expected=(512,64)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]

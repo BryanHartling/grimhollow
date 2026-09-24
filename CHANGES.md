@@ -1,3 +1,13 @@
+# Readability and repeated inspection - v1.8.0
+
+- Known walls keep their faces when the cell to the south is unexplored; the fog texture remains one texel per 16 world units and unknown terrain remains black.
+- Locked wood, hero-locked and crystal doors carry a readable painted brass lock, removed when opened; known ground loot gains a steady silhouette rim, stronger on keys and never applied to hidden loot.
+- Gas uses soft overlapping, gently drifting clouds instead of wrapping inside square tile boundaries. Mechanical gas cells and damage are unchanged. Wall water/smoke and sacrificial motes use larger painted particles.
+- All 98 visible awards use distinct painted 64px medals with bronze/silver/gold/platinum/diamond rims and tier gems, retaining their 16-unit UI layout and unlock requirements.
+- Press Examine twice to lock inspection across tiles, shop goods and inventory; press again or Escape/Back from the dungeon to leave. Holding Examine still searches and spends its normal turn. Inspection cannot buy, use or pick up items and does not expose hidden traps.
+- Focus Crystal level 3/7 adds one/two cells to Grasp's existing sight-based reach; level 5/10 extends Glimpse from five to seven/nine turns. Far Reach still adds its own bonus and targets must be visible. Costs, charge growth and combat riders are unchanged.
+- Engineering correction: the initially suggested four-cell Grasp baseline would have reduced its existing reach, so the approved utility growth preserves the existing sight-based baseline instead.
+
 # Sprouted plants, skill icons and persistent inscriptions - v1.7.0
 
 - Thirteen sprouted plant species now use authored painted cutouts at the existing 64px texture / 16-unit world scale; growth and plant effects are unchanged.

@@ -278,6 +278,11 @@ public class ItemSprite extends MovieClip {
 	}
 
 	private float[] shadowMatrix = new float[16];
+	private final float[] outlineMatrix = new float[16];
+	public boolean groundOutline(){
+		return heap != null && heap.seen && !heap.hidden && !heap.isEmpty()
+				&& (heap.type == Heap.Type.HEAP || heap.type == Heap.Type.FOR_SALE);
+	}
 
 	@Override
 	protected void updateMatrix() {
@@ -321,6 +326,27 @@ public class ItemSprite extends MovieClip {
 			script.drawQuad(buffer);
 		}
 
+		if (groundOutline()) {
+			// Reuse the item's own alpha silhouette. A steady narrow rim gives
+			// small keys contrast without another floating icon or flashing glow.
+			if (dirty) {
+				((Buffer)verticesBuffer).position(0);verticesBuffer.put(vertices);
+				if (buffer == null) buffer = new Vertexbuffer(verticesBuffer);
+				else buffer.updateVertices(verticesBuffer);
+				dirty = false;
+			}
+			NoosaScript script=script();texture.bind();script.camera(camera());updateMatrix();
+			boolean key=heap.peek() instanceof com.shatteredpixel.shatteredpixeldungeon.items.keys.Key;
+			float radius=key?.6f:.35f;
+			for (int side=0;side<4;side++) {
+				Matrix.copy(matrix,outlineMatrix);
+				Matrix.translate(outlineMatrix,side==0?-radius:side==1?radius:0,
+						side==2?-radius:side==3?radius:0);
+				script.uModel.valueM4(outlineMatrix);
+				script.lighting(0,0,0,am*(key?.85f:.6f),.94f,key?.78f:.88f,key?.4f:.72f,0);
+				script.drawQuad(buffer);
+			}
+		}
 		super.draw();
 
 	}

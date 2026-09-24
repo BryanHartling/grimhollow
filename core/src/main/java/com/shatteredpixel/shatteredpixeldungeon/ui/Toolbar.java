@@ -288,12 +288,14 @@ public class Toolbar extends Component {
 			@Override
 			protected void onClick() {
 				if (Dungeon.hero != null && Dungeon.hero.ready) {
-					if (!examining && !GameScene.cancel()) {
+					if (examineLocked()) {
+						GameScene.cancelCellSelector();
+					} else if (!examining && !GameScene.cancel()) {
 						GameScene.selectCell(informer);
 						examining = true;
 					} else if (examining) {
-						informer.onSelect(null);
-						Dungeon.hero.search(true);
+						examineLocked = true;
+						GameScene.selectCell(informer);
 					}
 				}
 			}
@@ -305,12 +307,15 @@ public class Toolbar extends Component {
 
 			@Override
 			protected String hoverText() {
-				return Messages.titleCase(Messages.get(WndKeyBindings.class, "examine"));
+				return Messages.get(Toolbar.class, examineLocked()?"examine_locked":"examine_hint");
 			}
 			
 			@Override
 			protected boolean onLongClick() {
-				Dungeon.hero.search(true);
+				if (Dungeon.hero != null && Dungeon.hero.ready) {
+					GameScene.cancelCellSelector();
+					Dungeon.hero.search(true);
+				}
 				return true;
 			}
 		});
@@ -327,7 +332,7 @@ public class Toolbar extends Component {
 					if (SPDSettings.interfaceSize() == 2) {
 						GameScene.toggleInvPane();
 					} else {
-						if (!GameScene.cancel()) {
+						if (examineLocked() || !GameScene.cancel()) {
 							GameScene.show(new WndBag(Dungeon.hero.belongings.backpack));
 						}
 					}
@@ -652,6 +657,8 @@ public class Toolbar extends Component {
 	@Override
 	public void update() {
 		super.update();
+		if (examineLocked()) btnSearch.icon.hardlight(0xFFD878);
+		else btnSearch.icon.resetColor();
 		
 		if (lastEnabled != (Dungeon.hero.ready && Dungeon.hero.isAlive())) {
 			lastEnabled = (Dungeon.hero.ready && Dungeon.hero.isAlive());
@@ -685,18 +692,23 @@ public class Toolbar extends Component {
 			btnInventory.centerY());
 	}
 	
+	private boolean examineLocked;
+	public static boolean examineLocked(){return instance != null && instance.examining && instance.examineLocked;}
 	private static CellSelector.Listener informer = new CellSelector.Listener() {
+		@Override public boolean persistent(){return examineLocked();}
 		@Override
 		public void onSelect( Integer cell ) {
 			if (instance != null) {
-				instance.examining = false;
+				if (cell == null) {instance.examining=false;instance.examineLocked=false;}
+				else if (!examineLocked()) instance.examining = false;
 				GameScene.examineCell(cell);
 			}
 		}
 		@Override
 		public String prompt() {
-			return Messages.get(Toolbar.class, "examine_prompt");
+			return Messages.get(Toolbar.class, examineLocked()?"examine_locked":"examine_prompt");
 		}
+		@Override public void onRightClick(Integer cell){onSelect(cell);}
 	};
 	
 	private static class Tool extends Button {

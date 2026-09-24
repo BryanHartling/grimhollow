@@ -24,6 +24,18 @@ final class FogAlignmentChecks {
         int bw=(w+8)*16*3,bh=(h+8)*16*3;
         FrameBuffer buffer=new FrameBuffer(Pixmap.Format.RGBA8888,bw,bh,false);
         ArrayList<String> errors=new ArrayList<>();long hidden=0,visible=0;int cameras=0;
+        int knownWalls=0,southernEdges=0;
+        for(Gizmo g:world)if(g instanceof WallBlockingTilemap){
+            WallBlockingTilemap blockers=(WallBlockingTilemap)g;
+            for(int cell=0;cell<w*h;cell++)if(DungeonTileSheet.wallStitcheable(Dungeon.level.map[cell])
+                    &&(Dungeon.level.heroFOV[cell]||Dungeon.level.visited[cell]||Dungeon.level.mapped[cell])){
+                knownWalls++;
+                if(blockers.image(cell%w,cell/w)!=null)errors.add("known wall blacked out at "+cell);
+                int below=cell+w;
+                if(below<w*h&&!Dungeon.level.heroFOV[below]&&!Dungeon.level.visited[below]&&!Dungeon.level.mapped[below])southernEdges++;
+            }
+        }
+        System.out.println("TEST 47 WALL EDGES: known="+knownWalls+" unexplored-below="+southernEdges+" black blockers="+errors.size());
         try {
             c.fullScreen=true;
             for(int zoom:new int[]{1,2,3})for(int[] pan:new int[][]{{32,32},{16,48},{48,16},{61,53}}) {

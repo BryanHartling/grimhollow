@@ -345,8 +345,10 @@ public class CityLevel extends RegularLevel {
 		
 		public SmokeParticle() {
 			super();
+			com.shatteredpixel.shatteredpixeldungeon.effects.ReadabilityEffects.frame(this,
+					com.shatteredpixel.shatteredpixeldungeon.effects.ReadabilityEffects.MIST,1,1);
 			
-			color( 0x000000 );
+			color( 0x807B70 );
 			speed.set( Random.Float( -2, 4 ), -Random.Float( 3, 6 ) );
 		}
 		
@@ -364,7 +366,7 @@ public class CityLevel extends RegularLevel {
 			super.update();
 			float p = left / lifespan;
 			am = p > 0.8f ? 1 - p : p * 0.25f;
-			size( 6 - p * 3 );
+			size( 11 - p * 4 );
 		}
 	}
 }

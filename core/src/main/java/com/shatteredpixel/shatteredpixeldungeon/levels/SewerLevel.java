@@ -289,12 +289,14 @@ public class SewerLevel extends RegularLevel {
 		
 		public WaterParticle() {
 			super();
+			com.shatteredpixel.shatteredpixeldungeon.effects.ReadabilityEffects.frame(this,
+					com.shatteredpixel.shatteredpixeldungeon.effects.ReadabilityEffects.DROP,1,1.6f);
 			
 			acc.y = 50;
-			am = 0.5f;
+			am = 0.85f;
 			
 			color( ColorMath.random( 0xb6ccc2, 0x3b6653 ) );
-			size( 2 );
+			size( 3 );
 		}
 		
 		public void reset( float x, float y ) {

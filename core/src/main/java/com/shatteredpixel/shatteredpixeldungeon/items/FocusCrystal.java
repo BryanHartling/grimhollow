@@ -30,8 +30,12 @@ public class FocusCrystal extends ClassSpellItem {
     }
     public int spentExperience(){return spentExperience;}
     public int pushDistance(){return level()>=8?4:level()>=2?3:2;}
+    public int graspRange(Hero hero){return (hero==null?8:hero.viewDistance)+(level()>=7?2:level()>=3?1:0)
+            +2*Math.max(0,(hero==null?0:hero.pointsInTalent(Talent.FAR_REACH))-1);}
+    public int glimpseDuration(){return level()>=10?9:level()>=5?7:5;}
     @Override public String desc(){
         return super.desc()+"\n\n"+Messages.get(this,"progress",level(),spentExperience,level()<10?10+5*level():0)
+                +"\n\n"+Messages.get(this,"utility_stats",graspRange(Dungeon.hero),glimpseDuration())
                 +"\n\n"+Messages.get(this,"push_stats",pushDistance());
     }
     @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("spent_experience",spentExperience);}
@@ -44,11 +48,11 @@ public class FocusCrystal extends ClassSpellItem {
     }
     public boolean cast(Hero h,String spell,Integer cell,Integer direction){
         int cost=spell.equals("dominate")?2:1;if(!Arrays.asList(spells(h)).contains(spell)||!ready(h,cost))return false;
-        if(spell.equals("glimpse")){Buff.prolong(h,MindVision.class,5);Dungeon.observe();com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.burst(cell==null?h.pos:cell,com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Style.PSYCHIC,16,.6f);finish(h,cost);return true;}
+        if(spell.equals("glimpse")){Buff.prolong(h,MindVision.class,glimpseDuration());Dungeon.observe();com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.burst(cell==null?h.pos:cell,com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Style.PSYCHIC,16,.6f);finish(h,cost);return true;}
         if(cell==null||!Dungeon.level.insideMap(cell)||!Dungeon.level.heroFOV[cell])return false;
         Char enemy=Actor.findChar(cell);
         if(spell.equals("grasp")){
-            int range=h.viewDistance+2*Math.max(0,h.pointsInTalent(Talent.FAR_REACH)-1);
+            int range=graspRange(h);
             if(Dungeon.level.distance(h.pos,cell)>range)return false;
             Heap heap=Dungeon.level.heaps.get(cell);Trap trap=Dungeon.level.traps.get(cell);
             if(heap!=null&&heap.type==Heap.Type.HEAP&&!heap.isEmpty()){

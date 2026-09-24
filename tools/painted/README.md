@@ -1,3 +1,9 @@
+# Awards and readable effects - v1.8.0
+
+`readability.py` composes 98 distinct 64px award medals from 42 authored reliefs and five material rims. A second output contains the painted padlock, soft mist and droplet used by the live renderer. The two source sheets are in `sources/readability`; exact built-in imagegen prompts are in `readability-prompts.json`. The offline packer asserts complete named badge coverage and uniqueness. No generator runs during builds or CI. These original source images and derivatives are GPL-3.0-or-later.
+
+The full pipeline now reconstructs 115 game images from 102 source sheets, plus 55 launcher resources. Existing world art is preserved; readability comes from rendering changes and the two additional atlases.
+
 # Botany and skill illustrations - v1.7.0
 
 `botany_skills.py` packs four built-in imagegen source sheets from `sources/botany-skills`: 13 sprouted plants into the existing terrain-feature cells, and 113 unique talent/subclass/armor/spell/Etch icons into `interfaces/painted_skills.png`. `botany-skills.json` records exact prompts and cell identities. All crop, alpha, scale and uniqueness checks run offline; no model or Blender is used in CI. These original images and their packed derivatives are GPL-3.0-or-later.

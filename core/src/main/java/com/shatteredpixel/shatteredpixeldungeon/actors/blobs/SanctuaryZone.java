@@ -16,7 +16,7 @@ public class SanctuaryZone extends Blob {
         if(com.watabou.noosa.Game.scene() instanceof GameScene)GameScene.add(zone);return zone;}
     @Override protected void evolve(){
         int mobile=Dungeon.hero.pointsInTalent(Talent.MOBILE);
-        if(lastHero!=Dungeon.hero.pos){lastHero=Dungeon.hero.pos;if(Random.Float()<(mobile==3?1:mobile*.25f))center=lastHero;}
+        if(lastHero!=Dungeon.hero.pos){lastHero=Dungeon.hero.pos;if(Random.Float()<(mobile*.25f))center=lastHero;}
         java.util.Arrays.fill(off,0);area.setEmpty();turn++;remaining--;
         for(int cell=0;cell<cur.length;cell++)if(Dungeon.level.distance(center,cell)<=radius&&Dungeon.level.passable[cell]){
             off[cell]=Math.max(0,remaining);volume+=off[cell];area.union(cell%Dungeon.level.width(),cell/Dungeon.level.width());

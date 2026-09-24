@@ -42,6 +42,29 @@ public final class EnhancedEffects {
         if(enabled()&&Dungeon.level!=null&&Game.scene() instanceof GameScene&&Dungeon.level.heroFOV[cell])
             GameScene.effect(new Burst(cell,style,diameter,duration));
     }
+    public static void upgrade(int cell){
+        if(!enabled() || !(Game.scene() instanceof GameScene))return;
+        for(int layer=0;layer<2;layer++)GameScene.effect(new UpgradeGlow(cell,layer));
+    }
+    private static class UpgradeGlow extends Image {
+        final int cell,layer;float time;
+        UpgradeGlow(int cell,int layer){
+            super(ATLAS);this.cell=cell;this.layer=layer;hardlight(0xFFD58A);
+            float size=layer==0?22:12;
+            EnhancedEffects.frame(this,Style.INSCRIPTION,0,size,size);
+            point(DungeonTilemap.tileToWorld(cell));x+=(16-size)/2;y+=(16-size)/2;
+            origin.set(size/2,size/2);alpha(0);
+        }
+        @Override public void update(){
+            super.update();time+=Game.elapsed;float t=time/.9f;
+            if(t>=1){killAndErase();return;}
+            float size=layer==0?22+14*t:12+8*t;
+            EnhancedEffects.frame(this,Style.INSCRIPTION,(int)(t*Style.INSCRIPTION.count),size,size);
+            point(DungeonTilemap.tileToWorld(cell));x+=(16-size)/2;y+=(16-size)/2-layer*14*t;
+            angle=(layer==0?1:-1)*t*45;origin.set(size/2,size/2);
+            alpha((float)Math.sin(Math.PI*t)*(layer==0?.7f:1f));
+        }
+    }
     private static class Burst extends Image {
         final Style style;final float duration,diameter;float time;
         Burst(int cell,Style style,float diameter,float duration){super(ATLAS);this.style=style;

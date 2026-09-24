@@ -81,7 +81,7 @@ public class EnchanterMagic extends Buff {
             ArrayList<Class<?>> unseen=new ArrayList<>();
             for(Class<?>[] tier:new Class<?>[][]{Weapon.Enchantment.common,Weapon.Enchantment.uncommon,Weapon.Enchantment.rare})
                 for(Class<?> type:tier)if(!choices(false).contains(type))unseen.add(type);
-            for(int i=0;i<Math.max(0,points(Talent.DEEP_KNOWLEDGE)-1)&&!unseen.isEmpty();i++){
+            for(int i=0;i<points(Talent.DEEP_KNOWLEDGE)&&!unseen.isEmpty();i++){
                 Class<?> type=Random.element(unseen);unseen.remove(type);remember(type);
             }
         }
@@ -130,7 +130,7 @@ public class EnchanterMagic extends Buff {
     public static void onDeath(Mob mob,Object cause){
         if(state()==null||mob.alignment!=Char.Alignment.ENEMY||(cause!=Dungeon.hero&&mob.buff(EnchanterDamage.class)==null))return;
         SigilBrush brush=Dungeon.hero.belongings.getItem(SigilBrush.class);if(brush==null)return;
-        if(Dungeon.hero.buff(Overcharged.class)!=null&&Random.Float()<points(Talent.FEEDBACK)/3f)brush.gainCharge(1);
+        if(Dungeon.hero.buff(Overcharged.class)!=null&&Random.Float()<points(Talent.FEEDBACK)/4f)brush.gainCharge(1);
         if(mob.buff(Unmade.class)!=null)brush.gainCharge(points(Talent.SALVAGE));
     }
     public static int strip(Char enemy){int count=0;for(Buff buff:enemy.buffs())if(!buff.revivePersists){buff.detach();count++;}return count;}

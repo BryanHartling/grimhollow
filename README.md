@@ -1,5 +1,11 @@
 # Grimhollow
 
+**Tablet playtest fixes v1.11.1:** touch movement uses a longer visual step and smoother camera following; barricades span both corridor orientations and unknown neighboring walls no longer disclose their overhangs. Hurl retains its direction-selection step. The Focus Crystal and Sigil Brush can be unequipped; stored growth/charges remain, while casting and passive charging require equipping them.
+
+The class handbook now accepts actual taps on skills. Talent windows offer rank buttons and scrollable descriptions; long titled descriptions also scroll. Each of the three added classes keeps three armor paths, with four talents of four ranks per path. Focused Mind adds 1/2/3 capacity; Far Reach adds 1/2/4 Grasp range; Precognition prevents one/two qualifying hits per floor; Treasure Sense adds loot/hidden doors/hidden traps across its three ranks. Kinetic Surge grants 12.5/25/37.5/50 percent thrown damage during Mind Meld. All added-class rank descriptions state their effects explicitly.
+
+Infernal Brew feeds Ashlight **three units**, giving three early levels or the normal two-unit cost per level above +6. A level-8 Flare also reveals and burns disguised hostile mimics. Open light alone does not burn creatures. Upgrade scrolls now show a rising gold sigil effect. See [changes](CHANGES.md), [verification](verification/ACCEPTANCE.md), and [known limitations](KNOWN_ISSUES.md). Install the new APK over the existing app to preserve saves; physical tablet feel still needs player review.
+
 **In-game playtesting v1.11.0:** open the pause/game menu (Escape on desktop), choose **Playtest**, then **Enable Playtest for this save**. Controls use paged buttons in desktop and portrait layouts. Enabling permanently marks that save `PLAYTEST` and excludes it from rankings, badges, catalog credit and bones; other saves remain normal. God mode is optional and can be turned off for balance testing.
 
 - **Create items:** search 313 concrete item types or browse categories, including artifacts, class focuses, trinkets, crafted spells, weapons, armor, potions and quest items. Set stack size, upgrade level, identification and curse state. Keys use the current floor; inventory overflow drops at your feet.

@@ -33,7 +33,7 @@ public class Phylactery extends Artifact {
     public int cost(Spell spell){int n=spell==Spell.RAISE_REVENANT?4:spell==Spell.RAISE_GHOUL?3:spell==Spell.RAISE_WRAITH?2:1;return Math.max(1,n-(level()>=10&&spell.name().startsWith("RAISE_")?1:0));}
     private void spendCharges(int amount){
         charge-=amount;
-        spentExperience+=amount*(1+.25f*Math.max(0,Necromancy.points(Talent.GRAVE_WISDOM)-1));
+        spentExperience+=amount*(1+.25f*Necromancy.points(Talent.GRAVE_WISDOM));
         while(level()<10&&spentExperience>=10+5*level()){spentExperience-=10+5*level();super.upgrade();}
         chargeCap=cap();
         for(NecroSkeleton m:NecroSkeleton.minions())m.refreshStats();

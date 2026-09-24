@@ -218,6 +218,7 @@ abstract public class MissileWeapon extends Weapon {
 		accFactor *= adjacentAccFactor(owner, target);
 
 		if(owner instanceof Hero)accFactor*=1+.1f*((Hero)owner).pointsInTalent(Talent.GUIDED_THROW);
+		if(owner instanceof Hero)accFactor*=1+.1f*Math.max(0,((Hero)owner).pointsInTalent(Talent.PERMEABLE)-1);
         return accFactor;
 	}
 

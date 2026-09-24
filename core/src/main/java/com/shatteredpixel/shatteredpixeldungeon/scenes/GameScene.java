@@ -386,6 +386,8 @@ public class GameScene extends PixelScene {
 
 		wallBlocking = new WallBlockingTilemap();
 		add (wallBlocking);
+		// Passage boards must span their cell without the adjoining wall cap cutting them short.
+		add(new com.shatteredpixel.shatteredpixeldungeon.tiles.BarricadeLayer());
 		add(new com.shatteredpixel.shatteredpixeldungeon.effects.ReadabilityEffects.Locks());
 
 		add( emitters );

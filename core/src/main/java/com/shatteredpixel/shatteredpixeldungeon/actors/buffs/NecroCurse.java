@@ -26,7 +26,7 @@ public class NecroCurse extends Buff {
         }
         if(kind==Kind.WITHER) {
             curse.ownVulnerable=target.buff(Vulnerable.class)==null; Buff.prolong(target,Vulnerable.class,turns);
-            int cripple=2*Math.max(0,Necromancy.points(Talent.GRAVE_WISDOM)-1);
+            int cripple=2*Necromancy.points(Talent.GRAVE_WISDOM);
             if(cripple>0) {curse.ownCripple=target.buff(Cripple.class)==null;Buff.prolong(target,Cripple.class,cripple);}
         }
         if(kind==Kind.DECREPIFY) {

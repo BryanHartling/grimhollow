@@ -207,8 +207,11 @@ public class Camera extends Gizmo {
 				panY = 0;
 			}
 
-			panX *= Math.min(1f, Game.elapsed * panIntensity);
-			panY *= Math.min(1f, Game.elapsed * panIntensity);
+			// Exponential damping is stable across frame rates and cannot snap
+			// to the destination after a slow tablet frame.
+			float blend = followBlend(Game.elapsed, panIntensity);
+			panX *= blend;
+			panY *= blend;
 
 			scroll.offset(panX, panY);
 		}
@@ -267,6 +270,9 @@ public class Camera extends Gizmo {
 	public synchronized void panFollow(Visual target, float intensity ){
 		followTarget = target;
 		panIntensity = intensity;
+	}
+	public static float followBlend(float seconds,float intensity){
+		return (float)-Math.expm1(-Math.max(0,seconds)*Math.max(0,intensity));
 	}
 
 	public synchronized Visual followTarget(){

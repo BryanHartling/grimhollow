@@ -109,6 +109,7 @@ public class AshlightLantern extends Artifact {
     @Override public void resetForTrinity(int visibleLevel){} // A spirit copy cannot feed this artifact.
 
     public static int feedValue(Item item){
+        if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.potions.brews.InfernalBrew)return 3;
         if(item instanceof PotionOfDragonsBreath || item instanceof Soulfire)return 2;
         return item instanceof PotionOfLiquidFlame ? 1 : 0;
     }
@@ -145,7 +146,8 @@ public class AshlightLantern extends Artifact {
         boolean[] burst=new boolean[level.length()];
         ShadowCaster.castShadow(hero.pos%level.width(),hero.pos/level.width(),level.width(),burst,level.losBlocking,3);
         charge--;
-        for(Mob mob:level.mobs.toArray(new Mob[0]))if(mob.alignment==Char.Alignment.ENEMY && burst[mob.pos]){
+        for(Mob mob:level.mobs.toArray(new Mob[0]))if(burst[mob.pos] && (mob.alignment==Char.Alignment.ENEMY
+                || (level()>=8 && mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic && mob.alignment==Char.Alignment.NEUTRAL))){
             Buff.prolong(mob,Blindness.class,4f);
             if(level()>=8){ Burning burn=Buff.affect(mob,Burning.class); if(burn!=null)burn.reignite(mob); }
         }

@@ -53,13 +53,13 @@ public class SigilBrush extends ClassSpellItem {
                 if(item==null||!item.isEquipped(h)||!(item instanceof Weapon||item instanceof Armor))return false;
                 item.reinforceTurns=50;item.reinforceFlat=h.pointsInTalent(Talent.MASTER_CRAFT);break;
             case "sanctify":
-                int radius=1+Math.max(0,h.pointsInTalent(Talent.WIDE_FIELD)-1);
+                int radius=1+h.pointsInTalent(Talent.WIDE_FIELD);
                 for(Char ch:Actor.chars())if(ch.alignment==Char.Alignment.ALLY&&Dungeon.level.distance(h.pos,ch.pos)<=radius){Buff.prolong(ch,Bless.class,8);Buff.prolong(ch,Haste.class,8);}break;
             default:
                 if(cell==null||!Dungeon.level.insideMap(cell)||!Dungeon.level.heroFOV[cell])return false;
                 Char target=Actor.findChar(cell);
                 if(spell.equals("nullify")){
-                    for(Mob mob:Dungeon.level.mobs.toArray(new Mob[0]))if(mob.alignment==Char.Alignment.ENEMY&&Dungeon.level.distance(cell,mob.pos)<=2+Math.max(0,h.pointsInTalent(Talent.WIDE_FIELD)-1)){EnchanterMagic.strip(mob);Buff.prolong(mob,Silenced.class,5);EnchanterMagic.counterweight();}
+                    for(Mob mob:Dungeon.level.mobs.toArray(new Mob[0]))if(mob.alignment==Char.Alignment.ENEMY&&Dungeon.level.distance(cell,mob.pos)<=2+h.pointsInTalent(Talent.WIDE_FIELD)){EnchanterMagic.strip(mob);Buff.prolong(mob,Silenced.class,5);EnchanterMagic.counterweight();}
                 }else{
                     if(target==null||target.alignment!=Char.Alignment.ENEMY)return false;
                     if(spell.equals("hex")){Buff.prolong(target,Hex.class,10);Buff.prolong(target,DegradedGear.class,10);int p=h.pointsInTalent(Talent.SHARPENED_SIGILS);if(p>0)Buff.prolong(target,Vulnerable.class,1+2*p);}

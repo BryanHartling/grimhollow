@@ -72,7 +72,7 @@ public class SmokeRun {
                             if(Dungeon.depth!=6) throw new AssertionError("Save/load depth mismatch");
                         }
                     }
-                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();}
+                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();}
                     String line="PASS "+name+" seed="+seed+" floor=6 save/load=ok";
                     System.out.println(line); log.println(line);
                 } catch(Throwable error) {
@@ -182,6 +182,83 @@ public class SmokeRun {
 
     private static void lanternCharge(Artifact item,int charge)throws Exception{
         java.lang.reflect.Field field=Artifact.class.getDeclaredField("charge");field.setAccessible(true);field.setInt(item,charge);
+    }
+    private static void tabletScenario() throws Exception {
+        GamesInProgress.selectedClass=HeroClass.PSYCHIC;
+        Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);clearArena();
+        Hero h=Dungeon.hero;FocusCrystal crystal=h.belongings.getItem(FocusCrystal.class);
+        crystal.level(5);int charges=crystal.charges();
+        check(crystal.actions(h).contains("UNEQUIP")&&crystal.doUnequip(h,true,false),"53 Crystal can be unequipped");
+        check(h.buff(ClassSpellItem.Charger.class)==null&&!crystal.ready(h,1)&&h.belongings.contains(crystal),"53 Unequipped Crystal stops casting and charging, stays in bag");
+        AshlightLantern lamp=new AshlightLantern();lamp.identify();lamp.collect();
+        check(lamp.doEquip(h)&&lamp.isEquipped(h),"53 Ashlight replaces Crystal");
+        check(lamp.doUnequip(h,true,false)&&crystal.doEquip(h)&&crystal.level()==5&&crystal.charges()==charges,"53 Crystal re-equip retains growth and charge");
+        check(h.buff(ClassSpellItem.Charger.class)!=null,"53 Crystal charger restored");
+        for(int rank=0;rank<=3;rank++){
+            h.talents.get(2).put(Talent.FOCUSED_MIND,rank);
+            check(crystal.cap()==3+rank,"53 Focused Mind capacity rank "+rank);
+            h.talents.get(2).put(Talent.FAR_REACH,rank);
+            check(crystal.graspRange(h)==h.viewDistance+1+new int[]{0,1,2,4}[rank],"53 Far Reach rank "+rank);
+        }
+        for(int rank=1;rank<=2;rank++){
+            Buff.detach(h,PsychicMind.class);PsychicMind mind=Buff.affect(h,PsychicMind.class);
+            h.talents.get(1).put(Talent.PRECOGNITION,rank);h.HT=100;h.HP=30;
+            check(!mind.dodge(1,new Object())&&!mind.dodge(20,new Hunger()),"53 Precognition threshold/starvation exclusions");
+            for(int use=0;use<rank;use++)check(mind.dodge(10,new Object()),"53 Precognition allowed hit "+use);
+            check(!mind.dodge(10,new Object()),"53 Precognition exhausted rank "+rank);
+            Bundle saved=new Bundle();mind.storeInBundle(saved);mind.detach();mind=Buff.affect(h,PsychicMind.class);mind.restoreFromBundle(saved);
+            check(!mind.dodge(10,new Object()),"53 Precognition budget survives reload");
+        }
+        h.subClass=HeroSubClass.SEER;Talent.initSubclassTalents(h);
+        for(int rank=1;rank<=3;rank++){
+            clearArena();Buff.detach(h,PsychicMind.class);PsychicMind mind=Buff.affect(h,PsychicMind.class);
+            int cell=h.pos+3;Heap heap=Dungeon.level.drop(new Food(),cell);heap.seen=false;
+            Level.set(cell+Dungeon.level.width(),Terrain.SECRET_DOOR);
+            com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().hide();
+            Dungeon.level.setTrap(trap,cell-Dungeon.level.width());Level.set(trap.pos,Terrain.SECRET_TRAP);
+            h.talents.get(2).put(Talent.TREASURE_SENSE,rank);mind.arrive();
+            check(heap.seen,"53 Treasure Sense loot rank "+rank);
+            check((Dungeon.level.map[cell+Dungeon.level.width()]==Terrain.DOOR)==(rank>=2),"53 Treasure Sense door threshold");
+            check(trap.visible==(rank>=3)&&trap.active,"53 Treasure Sense trap threshold; never fires trap");
+        }
+        h.armorAbility=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.MindMeld();Talent.initArmorTalents(h);
+        Buff.prolong(h,MeldedMind.class,20);
+        for(int rank=0;rank<=4;rank++){
+            h.talents.get(3).put(Talent.KINETIC_SURGE,rank);
+            check(PsychicMind.thrownDamage(h,80)==80+10*rank,"53 Kinetic Surge incremental damage rank "+rank);
+        }
+        for(HeroClass cls:HeroClass.values())for(com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.ArmorAbility ability:cls.armorAbilities()){
+            check(ability.talents().length==4,"53 Four talents per armor path: "+ability.getClass().getSimpleName());
+            for(Talent talent:ability.talents())check(talent.maxPoints()==4,"53 Four ranks: "+talent);
+        }
+        int descriptions=0;
+        for(Talent talent:Talent.values())if(talent.icon()>=224&&talent.icon()<=295){
+            java.util.HashSet<String> distinct=new java.util.HashSet<>();
+            for(int rank=1;rank<=talent.maxPoints();rank++){
+                String text=com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(Talent.class,talent.name()+".rank"+rank);
+                check(!text.contains("!!!")&&text.length()>20,"53 Missing rank text "+talent+" "+rank);
+                check(distinct.add(text),"53 Identical rank descriptions: "+talent+" "+rank);descriptions++;
+            }
+        }
+        clearArena();crystal.doUnequip(h,true,false);lamp.doEquip(h);lamp.level(0);
+        Item brew=new com.shatteredpixel.shatteredpixeldungeon.items.potions.brews.InfernalBrew().identify();brew.collect();
+        check(AshlightLantern.feedValue(brew)==3&&lamp.feed(h,brew)&&lamp.level()==3&&lamp.feedProgress()==0,"53 Infernal Brew three feeding units/early levels");
+        lamp.level(6);brew=new com.shatteredpixel.shatteredpixeldungeon.items.potions.brews.InfernalBrew().identify();brew.collect();
+        check(lamp.feed(h,brew)&&lamp.level()==7&&lamp.feedProgress()==1,"53 Infernal Brew respects upper-level cost");
+        // Unregistered mobs avoid graphical discovery particles in this headless fixture.
+        Mimic mimic=new Mimic();mimic.pos=h.pos+1;Dungeon.level.mobs.add(mimic);
+        Mimic ally=new Mimic();ally.pos=h.pos-1;ally.alignment=Char.Alignment.ALLY;Dungeon.level.mobs.add(ally);
+        lanternCharge(lamp,3);lamp.level(7);check(lamp.flare(h)&&mimic.buff(Burning.class)==null&&mimic.alignment==Char.Alignment.NEUTRAL,"53 No burning disguised mimic below 8");
+        lamp.level(8);check(lamp.flare(h)&&mimic.buff(Burning.class)!=null&&mimic.alignment==Char.Alignment.ENEMY&&ally.buff(Burning.class)==null,"53 Flare reveals/burns disguised mimic, spares ally");
+        int cell=h.pos+2,w=Dungeon.level.width();Level.set(cell,Terrain.BARRICADE);Level.set(cell-w,Terrain.WALL);Level.set(cell+w,Terrain.WALL);
+        check(com.shatteredpixel.shatteredpixeldungeon.tiles.BarricadeLayer.vertical(Dungeon.level,cell),"53 East-west corridor has north-south barricade");
+        Level.set(cell-w,Terrain.EMPTY);Level.set(cell+w,Terrain.EMPTY);Level.set(cell-1,Terrain.WALL);Level.set(cell+1,Terrain.WALL);
+        check(!com.shatteredpixel.shatteredpixeldungeon.tiles.BarricadeLayer.vertical(Dungeon.level,cell),"53 North-south corridor has east-west barricade");
+        float at30=1-(float)Math.pow(1-com.watabou.noosa.Camera.followBlend(1/30f,8),30);
+        float at60=1-(float)Math.pow(1-com.watabou.noosa.Camera.followBlend(1/60f,8),60);
+        check(Math.abs(at30-at60)<.00001f&&com.watabou.noosa.Camera.followBlend(.2f,8)<1,"53 Frame-rate independent camera smoothing");
+        check(Math.abs(CharSprite.movementDuration(.1f,true)-.18f)<.00001f&&CharSprite.movementDuration(.1f,false)==.1f,"53 Mobile visual pace; desktop unchanged");
+        System.out.println("TEST 53 PASS: artifact swap/charger persistence, Infernal feeding, mimic Flare, talent rank effects and "+descriptions+" distinct descriptions, 27 armor paths/four talents/four ranks, barricade orientation and mobile camera pacing");
     }
     private static void ashlightScenario() throws Exception {
         Dungeon.init();Dungeon.depth=1;Dungeon.branch=0;Dungeon.switchLevel(Dungeon.newLevel(),-1);clearArena();
@@ -591,8 +668,9 @@ public class SmokeRun {
         h.armorAbility=new BonePrison();h.talents.get(3).clear();Talent.initArmorTalents(h);maxTalents();armor.charge=100;
         ((BonePrison)h.armorAbility).activate(armor,h,h.pos+2);check(Dungeon.level.boneOriginal.keyArray().length>0,"Bone Prison creates terrain");
         for(int cell:Dungeon.level.boneOriginal.keyArray())check(!Dungeon.level.passable[cell]&&Dungeon.level.losBlocking[cell],"Bone walls block movement and sight");
-        for(int i=0;i<19;i++){BoneWalls walls=h.buff(BoneWalls.class);if(walls!=null)walls.act();}
-        check(Dungeon.level.boneOriginal.keyArray().length==0,"Bone Prison timeout");
+        for(int i=0;i<21;i++){BoneWalls walls=h.buff(BoneWalls.class);if(walls!=null)walls.act();}
+        check(Dungeon.level.boneOriginal.keyArray().length>0,"Rank-four Bone Prison persists through turn 21");
+        h.buff(BoneWalls.class).act();check(Dungeon.level.boneOriginal.keyArray().length==0,"Rank-four Bone Prison expires at turn 22");
         clearArena();item.gainCharge(20);check(item.cast(h,Phylactery.Spell.RAISE_SKELETON,h.pos),"Saved minion");
         enemy=target(h.pos+2);NecroCurse.apply(enemy,NecroCurse.Kind.AMPLIFY,12);
         check(BoneWalls.prison(h.pos+3,10,1),"Saved prison");int[] walls=Dungeon.level.boneOriginal.keyArray();
@@ -634,7 +712,7 @@ public class SmokeRun {
         }
         System.out.println("TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking");
         h.lvl=21;h.HT=h.HP=120;h.subClass=HeroSubClass.PUPPETEER;Talent.initSubclassTalents(h);maxTalents();
-        check(crystal.cap()==7,"Focused Mind capacity");
+        check(crystal.cap()==9,"Focused Mind rank 3 adds three charge capacity");
         int heapCell=center+2;Dungeon.level.drop(new Food(),heapCell);Rat enemy=target(heapCell);
         com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().reveal();Dungeon.level.setTrap(trap,heapCell);Level.set(heapCell,Terrain.TRAP);
         int food=h.belongings.getItem(Food.class).quantity();crystal.gainCharge(10);
@@ -666,7 +744,7 @@ public class SmokeRun {
         com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon thrown=(com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon)knives.detach(h.belongings.backpack);
         float durability=knives.durabilityLeft();java.lang.reflect.Method land=com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon.class.getDeclaredMethod("rangedHit",Char.class,int.class);land.setAccessible(true);land.invoke(thrown,enemy,enemy.pos);
         check(h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife.class).quantity()==3&&h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife.class).durabilityLeft()<durability,"Recall returns the thrown knife and consumes durability");
-        Buff.detach(h,Barkskin.class);h.HP=35;h.damage(10,enemy);check(h.HP==35,"Precognition dodges threshold hit");h.damage(10,enemy);check(h.HP==25,"Precognition only once on this floor");h.HP=120;
+        Buff.detach(h,Barkskin.class);h.HP=35;h.damage(10,enemy);check(h.HP==35,"Precognition dodges threshold hit");h.damage(10,enemy);check(h.HP==35,"Precognition rank 2 dodges twice");h.damage(10,enemy);check(h.HP==25,"Precognition rank 2 is exhausted after two hits");h.HP=120;
         int dominatedCell=enemy.pos;Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);h=Dungeon.hero;h.sprite=new HeroSprite();crystal=h.belongings.getItem(FocusCrystal.class);
         enemy=(Rat)Dungeon.level.findMob(dominatedCell);check(enemy!=null&&enemy.buff(Amok.class)!=null&&enemy.buff(Amok.class).dominated,"14: domination survives save/load");check(!PsychicMind.state().dodge(110,enemy),"Precognition expenditure survives save/load");
         clearArena();Buff.detach(h,MindVision.class);Buff.detach(h,Bless.class);Buff.detach(h,Haste.class);
@@ -941,7 +1019,7 @@ public class SmokeRun {
         brush.gainCharge(10);check(brush.cast(h,"fracture",enemy.pos,null,null)&&EnchanterMagic.armorRoll(enemy)==0,"Fracture");
         ClassArmor armor=ClassArmor.upgrade(h,new ClothArmor());
         h.armorAbility=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Overcharge();Talent.initArmorTalents(h);maxTalents();armor.charge=100;((com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Overcharge)h.armorAbility).activate(armor,h,h.pos);
-        check(h.buff(Overcharged.class)!=null&&EnchanterMagic.procChance(h,.2f)==1.75f,"Overcharge forces procs with Amplified strength");
+        check(h.buff(Overcharged.class)!=null&&EnchanterMagic.procChance(h,.2f)==2f,"Overcharge forces procs with Amplified strength");
         h.armorAbility=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Sanctuary();h.talents.get(3).clear();Talent.initArmorTalents(h);maxTalents();armor.charge=100;h.HP=60;
         ((com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Sanctuary)h.armorAbility).activate(armor,h,h.pos);
         com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SanctuaryZone zone=(com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SanctuaryZone)Dungeon.level.blobs.get(com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SanctuaryZone.class);zone.act();zone.act();check(h.HP==61&&enemy.buff(Slow.class)!=null&&enemy.buff(Corrosion.class)!=null,"Sanctuary healing and enemy effects");

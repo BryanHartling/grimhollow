@@ -32,6 +32,8 @@ public class WndTitledMessage extends Window {
 	protected static final int WIDTH_MIN    = 120;
 	protected static final int WIDTH_MAX    = 220;
 	protected static final int GAP	= 2;
+	private com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane description;
+	private float descriptionTop,descriptionHeight;
 
 	public WndTitledMessage( Image icon, String title, String message ) {
 		
@@ -65,7 +67,26 @@ public class WndTitledMessage extends Window {
 
 		bringToFront(titlebar);
 
-		resize( width, (int)text.bottom() + 2 );
+		remove(text);
+		descriptionTop=titlebar.bottom()+2*GAP;
+		text.setPos(0,0);
+		Component content=new Component();content.add(text);content.setSize(width,text.height());
+		description=new com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane(content);
+		add(description);
+		descriptionHeight=Math.max(18,Math.min(text.height(),Math.min(targetHeight(),PixelScene.uiCamera.height-36)-descriptionTop));
+		description.setRect(0,descriptionTop,width,descriptionHeight);
+		resize( width, (int)(descriptionTop+descriptionHeight)+2 );
+	}
+	@Override public void resize(int width,int height){
+		super.resize(width,height);
+		alignDescription();
+	}
+	@Override public void offset(int x,int y){
+		super.offset(x,y);
+		alignDescription();
+	}
+	private void alignDescription(){
+		if(description!=null)description.setRect(0,descriptionTop,width,descriptionHeight);
 	}
 
 	protected boolean useHighlighting(){

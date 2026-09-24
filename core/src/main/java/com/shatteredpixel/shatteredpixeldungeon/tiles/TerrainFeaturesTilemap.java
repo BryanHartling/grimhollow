@@ -87,7 +87,7 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 				return 132 + 16*stage;
 			}
 		} else if (tile == Terrain.BARRICADE) {
-			return 134 + 16*stage;
+			return flat ? 134 + 16*stage : -1; // BarricadeLayer orients the world sprite.
 
 		} else if (tile == Terrain.ALCHEMY) {
 			return 135 + 16*stage;

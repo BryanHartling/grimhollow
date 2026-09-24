@@ -160,6 +160,21 @@ public class ScrollPane extends Component {
 	}
 
 	public void onClick( float x, float y ) {
+		clickChild(content, x, y);
+	}
+	// The scroll controller owns the gesture. Forward only completed clicks,
+	// in scrolled content coordinates; a drag must never purchase a talent.
+	private boolean clickChild(com.watabou.noosa.Group group,float x,float y){
+		for(int i=group.length-1;i>=0;i--){
+			com.watabou.noosa.Gizmo child=group.member(i);
+			if(child==null || !child.exists || !child.visible || !child.active)continue;
+			if(child instanceof Button && ((Button)child).inside(x,y)){
+				((Button)child).onClick();return true;
+			}
+			if(child instanceof com.watabou.noosa.Group && !(child instanceof ScrollPane)
+					&& clickChild((com.watabou.noosa.Group)child,x,y))return true;
+		}
+		return false;
 	}
 
 	public class PointerController extends ScrollArea {

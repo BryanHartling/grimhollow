@@ -78,7 +78,7 @@ public class HeroSprite extends CharSprite {
 		idle = new Animation( 1, true );
 		idle.frames( film, 0, 0, 0, 1, 0, 0, 1, 1 );
 		
-		run = new Animation( RUN_FRAMERATE, true );
+		run = new Animation( com.watabou.utils.DeviceCompat.isDesktop()?RUN_FRAMERATE:12, true );
 		run.frames( film, 2, 3, 4, 5, 6, 7 );
 		
 		die = new Animation( 20, false );
@@ -116,7 +116,7 @@ public class HeroSprite extends CharSprite {
 		if (ch != null && ch.flying) {
 			play( fly );
 		}
-		Camera.main.panFollow(this, 20f);
+		Camera.main.panFollow(this, com.watabou.utils.DeviceCompat.isDesktop()?20f:8f);
 	}
 
 	@Override
@@ -165,7 +165,7 @@ public class HeroSprite extends CharSprite {
 	}
 	
 	public void sprint( float speed ) {
-		run.delay = 1f / speed / RUN_FRAMERATE;
+		run.delay = 1f / speed / (com.watabou.utils.DeviceCompat.isDesktop()?RUN_FRAMERATE:12);
 	}
 	
 	public static TextureFilm tiers() {

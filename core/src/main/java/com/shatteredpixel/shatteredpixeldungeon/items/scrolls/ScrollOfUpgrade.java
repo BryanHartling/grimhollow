@@ -147,7 +147,9 @@ public class ScrollOfUpgrade extends InventoryScroll {
 	}
 	
 	public static void upgrade( Hero hero ) {
-		hero.sprite.emitter().start( Speck.factory( Speck.UP ), 0.2f, 3 );
+		if(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled())
+			com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.upgrade(hero.pos);
+		else if(hero.sprite!=null && hero.sprite.parent!=null)hero.sprite.emitter().start( Speck.factory( Speck.UP ), 0.2f, 3 );
 	}
 
 	public static void weakenCurse( Hero hero ){

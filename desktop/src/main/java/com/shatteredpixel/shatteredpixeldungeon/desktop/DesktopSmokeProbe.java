@@ -562,6 +562,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     }
     private int playtestStep,playtestWait;
     private void playtestTick(){
+        if(playtestStep>=32){tabletTick();return;}
         if(++playtestWait>12000)throw new AssertionError("Playtest menu scenario stalled at "+playtestStep);
         if(Game.scene() instanceof InterlevelScene){
             Object button=RecoveryChecks.field(Game.scene(),"btnContinue");
@@ -615,9 +616,137 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndGameInProgress(99));break;
             case 31:interfaceBounds();capture("playtest-save");
                 System.out.println("TEST 52 UI: real pointer enable/god/search/+10 artifact/hero level/subclass/armor/class switch/floor-21 travel and save marker; landscape or portrait bounds; failures=0");
-                Gdx.app.exit();return;
+                break;
         }
         playtestStep++;
+    }
+    private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat hurlTarget;
+    private int hurlStart,hurlHero,hurlCharge;
+    private String firstRankText;
+    private void tabletTick(){
+        if(!(Game.scene() instanceof GameScene)||frames%20!=0)return;
+        try {
+            switch(playtestStep){
+                case 32:
+                    closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroInfo(HeroClass.PSYCHIC));
+                    reviewHandbook().select(3);break;
+                case 33:{
+                    com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane page=handbookPage(3);
+                    com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton talent=rankButton(page.content(),com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.KINETIC_SURGE);
+                    page.scrollTo(0,Math.max(0,talent.bottom()-page.height()+4));
+                    pointerGestureReview(talent,com.watabou.input.PointerEvent.NONE,-20);
+                    if(talentWindow()!=null)throw new AssertionError("Talent drag opened or purchased a rank");
+                    page.scrollTo(0,Math.max(0,talent.bottom()-page.height()+4));
+                    pointerGestureReview(talent,com.watabou.input.PointerEvent.NONE,0);break;
+                }
+                case 34:
+                    if(talentWindow()==null)throw new AssertionError("Handbook talent pointer did not open details");
+                    interfaceBounds();firstRankText=allReviewText(talentWindow());
+                    if(!firstRankText.contains("12.5%"))throw new AssertionError("Rank-one numeric description missing");
+                    capture("tablet-talent-rank1");playtestClick("+4");break;
+                case 35:
+                    interfaceBounds();String fourth=allReviewText(talentWindow());
+                    if(fourth.equals(firstRankText)||!fourth.contains("50%"))throw new AssertionError("Rank-four pointer did not change description");
+                    capture("tablet-talent-rank4");closeReviewWindows();
+                    GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage(
+                            com.shatteredpixel.shatteredpixeldungeon.ui.Icons.get(com.shatteredpixel.shatteredpixeldungeon.ui.Icons.INFO),
+                            "Long description",String.join("\n\n",java.util.Collections.nCopies(24,"A long description must remain readable at the bottom of this window."))+"\n\nEND OF DESCRIPTION"));break;
+                case 36:{
+                    interfaceBounds();com.shatteredpixel.shatteredpixeldungeon.ui.Window window=null;
+                    for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage)window=(com.shatteredpixel.shatteredpixeldungeon.ui.Window)child;
+                    com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(window,"description");
+                    pointerGestureReview(pane,com.watabou.input.PointerEvent.NONE,-25);
+                    if(pane.content().camera.scroll.y<=0)throw new AssertionError("Long-description touch drag did not scroll");
+                    pane.scrollTo(0,100000);float bottom=pane.content().camera.scroll.y+pane.height();
+                    if(Math.abs(bottom-pane.content().height())>.1)throw new AssertionError("Description bottom inaccessible");
+                    capture("tablet-long-description");closeReviewWindows();break;
+                }
+                case 37:
+                    Playtest.heroClass(HeroClass.PSYCHIC);Playtest.subclass(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass.SEER);
+                    for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs.toArray(new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob[0])){
+                        com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(mob);if(mob.sprite!=null)mob.sprite.killAndErase();
+                    }
+                    Dungeon.level.mobs.clear();Dungeon.level.traps.clear();Dungeon.level.heaps.clear();
+                    int w=Dungeon.level.width();hurlHero=w*(Dungeon.level.height()/2)+w/2;
+                    for(int y=-3;y<=3;y++)for(int x=-4;x<=4;x++)Level.set(hurlHero+x+y*w,Terrain.EMPTY);
+                    Playtest.teleport(hurlHero);Dungeon.hero.viewDistance=8;
+                    hurlTarget=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();hurlTarget.pos=hurlStart=hurlHero-w-2;hurlTarget.HP=hurlTarget.HT=500;
+                    hurlTarget.state=hurlTarget.PASSIVE;Dungeon.level.mobs.add(hurlTarget);GameScene.add(hurlTarget);
+                    com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.prolong(hurlTarget,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Paralysis.class,100);
+                    Dungeon.observe();GameScene.updateMap();Camera.main.edgeScroll.set(0);Camera.main.snapTo(Dungeon.hero.sprite.center());
+                    com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal crystal=Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal.class);
+                    crystal.level(0);crystal.gainCharge(20);hurlCharge=crystal.charges();crystal.execute(Dungeon.hero,"CAST");break;
+                case 38:playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal.class,"hurl"));break;
+                case 39:pointerCell(hurlStart);break;
+                case 40:
+                    com.shatteredpixel.shatteredpixeldungeon.scenes.CellSelector selector=(com.shatteredpixel.shatteredpixeldungeon.scenes.CellSelector)RecoveryChecks.field(Game.scene(),"cellSelector");
+                    if(!selector.listener.prompt().equals(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal.class,"direction")))throw new AssertionError("Hurl direction selector was cleared after selecting enemy");
+                    pointerCell(hurlStart+1);break;
+                case 41:
+                    if(hurlTarget.pos!=hurlStart+4||Dungeon.hero.pos!=hurlHero)throw new AssertionError("Hurl input moved hero or failed to throw enemy four cells: "+hurlTarget.pos+" expected "+(hurlStart+4));
+                    if(Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal.class).charges()!=hurlCharge-1)throw new AssertionError("Hurl charge count");
+                    capture("tablet-hurl");tabletTerrainChecks();
+                    com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade.upgrade(Dungeon.hero);break;
+                case 42:capture("tablet-upgrade");
+                    System.out.println("TEST 53 UI PASS: real touch handbook talent/drag/rank 1 and 4, long-description scroll/bounds, Hurl enemy/direction/charge, unknown-source overhangs and barricade presentation; failures=0");
+                    Gdx.app.exit();return;
+            }
+            playtestStep++;
+        }catch(ReflectiveOperationException error){throw new AssertionError(error);}
+    }
+    @SuppressWarnings("unchecked") private com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane handbookPage(int index){
+        return ((java.util.List<com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane>)RecoveryChecks.field(reviewHandbook(),"pages")).get(index);
+    }
+    private com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton rankButton(Group group,com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent talent){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(group)){
+            if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton&&RecoveryChecks.field(child,"talent")==talent)return (com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton)child;
+            if(child instanceof Group){com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton found=rankButton((Group)child,talent);if(found!=null)return found;}
+        }return null;
+    }
+    private com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoTalent talentWindow(){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoTalent)return (com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoTalent)child;
+        return null;
+    }
+    private String allReviewText(Group group){
+        checkScrollCameras(group);
+        StringBuilder text=new StringBuilder();for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(group)){
+            if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock)text.append(((com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock)child).text());
+            if(child instanceof Group)text.append(allReviewText((Group)child));
+        }return text.toString();
+    }
+    private void checkScrollCameras(Group group){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(group))if(child!=null&&child.visible){
+            if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane){
+                com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)child;
+                com.watabou.utils.Point at=pane.camera().cameraToScreen(pane.left(),pane.top());
+                if(pane.content().camera.x!=at.x||pane.content().camera.y!=at.y)throw new AssertionError("Description camera did not follow resized window");
+            }
+            if(child instanceof Group)checkScrollCameras((Group)child);
+        }
+    }
+    private void pointerCell(int cell){
+        com.watabou.utils.Point point=Camera.main.cameraToScreen(cell%Dungeon.level.width()*16+8,cell/Dungeon.level.width()*16+8);
+        for(com.watabou.input.PointerEvent.Type type:new com.watabou.input.PointerEvent.Type[]{com.watabou.input.PointerEvent.Type.DOWN,com.watabou.input.PointerEvent.Type.UP}){
+            com.watabou.input.PointerEvent.addPointerEvent(new com.watabou.input.PointerEvent(point.x,point.y,902,type,com.watabou.input.PointerEvent.NONE));
+            com.watabou.input.PointerEvent.processPointerEvents();
+        }
+    }
+    private void tabletTerrainChecks()throws ReflectiveOperationException{
+        int w=Dungeon.level.width(),top=Dungeon.hero.pos+2*w,source=top+w;
+        com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonWallsTilemap walls=new com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonWallsTilemap();
+        java.lang.reflect.Method visual=walls.getClass().getDeclaredMethod("getTileVisual",int.class,int.class,boolean.class);visual.setAccessible(true);
+        Level.set(top,Terrain.EMPTY);Dungeon.level.heroFOV[top]=true;
+        for(int terrain:new int[]{Terrain.WALL,Terrain.DOOR,Terrain.LOCKED_DOOR,Terrain.STATUE,Terrain.BARRICADE}){
+            Level.set(source,terrain);Dungeon.level.heroFOV[source]=Dungeon.level.visited[source]=Dungeon.level.mapped[source]=false;
+            if((int)visual.invoke(walls,top,Terrain.EMPTY,false)!=-1)throw new AssertionError("Unexplored source leaked overhang "+terrain);
+            Dungeon.level.visited[source]=true;
+            if(terrain!=Terrain.BARRICADE&&(int)visual.invoke(walls,top,Terrain.EMPTY,false)<0)throw new AssertionError("Known source overhang lost "+terrain);
+        }
+        walls.destroy();Level.set(source,Terrain.EMPTY);
+        int vertical=Dungeon.hero.pos-2,horizontal=Dungeon.hero.pos+2;
+        Level.set(vertical,Terrain.BARRICADE);Level.set(vertical-w,Terrain.WALL);Level.set(vertical+w,Terrain.WALL);
+        Level.set(horizontal,Terrain.BARRICADE);Level.set(horizontal-1,Terrain.EMPTY);Level.set(horizontal+1,Terrain.WALL);
+        Dungeon.observe();GameScene.updateMap();
     }
     private com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton playtestButton(String label){
         for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.Window)

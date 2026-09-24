@@ -95,6 +95,11 @@ public class Group extends Gizmo {
 	public synchronized int indexOf( Gizmo g ) {
 		return members.indexOf( g );
 	}
+
+	/** Indexed traversal without exposing a mutable child collection. */
+	public synchronized Gizmo member(int index) {
+		return index >= 0 && index < length ? members.get(index) : null;
+	}
 	
 	public synchronized Gizmo add( Gizmo g ) {
 		

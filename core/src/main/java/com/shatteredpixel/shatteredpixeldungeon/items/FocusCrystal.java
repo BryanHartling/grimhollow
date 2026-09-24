@@ -17,7 +17,7 @@ public class FocusCrystal extends ClassSpellItem {
     {image=ItemSpriteSheet.FOCUS_CRYSTAL;levelCap=10;}
     private int spentExperience;
     @Override protected void onPlaytestLevelSet(){spentExperience=0;}
-    @Override public int cap(){return super.cap()+(PsychicMind.points(Talent.FOCUSED_MIND)>=2?1:0);}
+    @Override public int cap(){return super.cap()+PsychicMind.points(Talent.FOCUSED_MIND);}
     @Override public int visiblyUpgraded(){return level();}
     @Override public Item upgrade(){return this;}
     @Override public void transferUpgrade(int level) {}
@@ -32,7 +32,8 @@ public class FocusCrystal extends ClassSpellItem {
     public int spentExperience(){return spentExperience;}
     public int pushDistance(){return level()>=8?4:level()>=2?3:2;}
     public int graspRange(Hero hero){return (hero==null?8:hero.viewDistance)+(level()>=7?2:level()>=3?1:0)
-            +2*Math.max(0,(hero==null?0:hero.pointsInTalent(Talent.FAR_REACH))-1);}
+            +farReachBonus(hero==null?0:hero.pointsInTalent(Talent.FAR_REACH));}
+    public static int farReachBonus(int rank){return rank>=3?4:Math.max(0,rank);}
     public int glimpseDuration(){return level()>=10?9:level()>=5?7:5;}
     @Override public String desc(){
         return super.desc()+"\n\n"+Messages.get(this,"progress",level(),spentExperience,level()<10?10+5*level():0)

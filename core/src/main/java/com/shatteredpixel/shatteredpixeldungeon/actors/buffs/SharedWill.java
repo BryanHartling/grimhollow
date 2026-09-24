@@ -16,11 +16,11 @@ public class SharedWill {
             bless |= target.buff(Bless.class) == null;
             if (bless) Buff.prolong(target, Bless.class, 2);
         } else if (bless) { Buff.detach(target, Bless.class); bless = false; }
-        if (hero.buff(Haste.class) != null) {
+        if (hero.pointsInTalent(Talent.SHARED_WILL)>=2 && hero.buff(Haste.class) != null) {
             haste |= target.buff(Haste.class) == null;
             if (haste) Buff.prolong(target, Haste.class, 2);
         } else if (haste) { Buff.detach(target, Haste.class); haste = false; }
-        if (Barkskin.currentLevel(hero) > 0) {
+        if (hero.pointsInTalent(Talent.SHARED_WILL)>=3 && Barkskin.currentLevel(hero) > 0) {
             barkskin |= target.buff(Barkskin.class) == null;
             if (barkskin) Buff.affect(target, Barkskin.class).setForDuration(Barkskin.currentLevel(hero), 2);
         } else if (barkskin) { Buff.detach(target, Barkskin.class); barkskin = false; }

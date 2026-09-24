@@ -46,6 +46,10 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 
 		if (flat) return -1;
 
+		// An overhang must not disclose an unseen wall, prop or door below a
+		// visible tile. The fog quad masks the destination, not the source.
+		boolean belowKnown = pos + mapWidth < size && known(pos + mapWidth);
+
 		// An overhang belongs to a neighbouring wall, not this cell's terrain.
 		// Once a non-wall cell is remembered, leave its own terrain visible under
 		// upstream FogOfWar dimming instead of painting the neighbouring wall on it.
@@ -58,6 +62,7 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 		if (DungeonTileSheet.wallStitcheable(tile)) {
 			if (pos + mapWidth < size && !DungeonTileSheet.wallStitcheable(map[pos + mapWidth])){
 
+				if (!belowKnown) return -1;
 				if (map[pos + mapWidth] == Terrain.DOOR){
 					return DungeonTileSheet.DOOR_SIDEWAYS;
 				} else if (map[pos + mapWidth] == Terrain.LOCKED_DOOR) {
@@ -86,6 +91,7 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 		if (skipCells.contains(pos)){
 			return -1;
 		}
+		if (!belowKnown) return -1;
 
 		if (map[pos] == Terrain.LOCKED_EXIT || map[pos] == Terrain.UNLOCKED_EXIT){
 			return DungeonTileSheet.EXIT_UNDERHANG;
@@ -123,7 +129,7 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.ALCHEMY){
 			return DungeonTileSheet.ALCHEMY_POT_OVERHANG;
 		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.BARRICADE){
-			return DungeonTileSheet.BARRICADE_OVERHANG;
+			return -1; // BarricadeLayer draws the complete boards inside their own cell.
 		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.HIGH_GRASS){
 			return DungeonTileSheet.getVisualWithAlts(DungeonTileSheet.HIGH_GRASS_OVERHANG, pos + mapWidth);
 		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.FURROWED_GRASS){
@@ -136,6 +142,9 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 	@Override
 	public boolean overlapsPoint( float x, float y ) {
 		return true;
+	}
+	private boolean known(int cell){
+		return Dungeon.level.heroFOV[cell] || Dungeon.level.visited[cell] || Dungeon.level.mapped[cell];
 	}
 
 	@Override

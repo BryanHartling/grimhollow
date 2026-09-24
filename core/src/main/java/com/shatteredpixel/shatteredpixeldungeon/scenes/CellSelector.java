@@ -153,6 +153,7 @@ public class CellSelector extends ScrollArea {
 		if (enabled && Dungeon.hero.ready && !GameScene.interfaceBlockingHero()
 				&& listener != null && cell != -1) {
 
+			Listener selected = listener;
 			switch (button){
 				default:
 					listener.onSelect( cell );
@@ -161,7 +162,8 @@ public class CellSelector extends ScrollArea {
 					listener.onRightClick( cell );
 					break;
 			}
-			if (!listener.persistent()) GameScene.ready();
+			// A multi-step action may install its next selector inside onSelect.
+			if (listener == selected && !selected.persistent()) GameScene.ready();
 			
 		} else {
 			

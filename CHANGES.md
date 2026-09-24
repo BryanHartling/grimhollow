@@ -1,3 +1,7 @@
+# Hero art, batch 8: Enchanter
+
+- Give the Enchanter an ink-blue asymmetric wrap/half-cape, tailored proportions, brush-in-hand stance and a deliberate inscription stroke. The Brush is the existing class prop; no inscription, charge or knowledge rules change.
+
 # Hero art, batch 7: Cleric
 
 - Give the Cleric broad ivory/gold vestments, a squared mantle, short deliberate steps and an open-handed blessing gesture. Preserve his bald head and beard; class cloth remains visible around fitted armor panels.

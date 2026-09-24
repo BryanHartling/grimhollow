@@ -15761,3 +15761,1981 @@ CI 35996383670 at b9f7f1871: Android success; Windows/Linux only test 45 fail; c
 2026-09-24T12:06:14.7400630Z TEST 45: region=caves types=7 pairs=21 failures=8
 2026-09-24T12:06:14.7406505Z TEST 45: region=city types=6 pairs=15 failures=5
 2026-09-24T12:06:14.7410656Z TEST 45: region=halls types=6 pairs=15 failures=9
+
+PLAYTEST 1.11.0 — playtest-compile.log
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :core:compileJava
+C:\Users\Hartl\Documents\grimhollow\core\src\main\java\com\shatteredpixel\shatteredpixeldungeon\PlaytestCatalog.java:338: error: cannot find symbol
+            Crab.class,GreatCrab.class,Swarm.class,Spider.class,Piranha.class,Thief.class,Bandit.class,
+                                                   ^
+  symbol:   class Spider
+  location: class PlaytestCatalog
+C:\Users\Hartl\Documents\grimhollow\core\src\main\java\com\shatteredpixel\shatteredpixeldungeon\PlaytestCatalog.java:342: error: cannot find symbol
+            RipperDemon.class,EvilEye.class,Acidic.class,Wraith.class,Mimic.class,GoldenMimic.class,
+                              ^
+  symbol:   class EvilEye
+  location: class PlaytestCatalog
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+2 errors
+
+> Task :core:compileJava FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':core:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  C:\Users\Hartl\Documents\grimhollow\core\src\main\java\com\shatteredpixel\shatteredpixeldungeon\PlaytestCatalog.java:338: error: cannot find symbol
+              Crab.class,GreatCrab.class,Swarm.class,Spider.class,Piranha.class,Thief.class,Bandit.class,
+                                                     ^
+    symbol:   class Spider
+    location: class PlaytestCatalog
+  C:\Users\Hartl\Documents\grimhollow\core\src\main\java\com\shatteredpixel\shatteredpixeldungeon\PlaytestCatalog.java:342: error: cannot find symbol
+              RipperDemon.class,EvilEye.class,Acidic.class,Wraith.class,Mimic.class,GoldenMimic.class,
+                                ^
+    symbol:   class EvilEye
+    location: class PlaytestCatalog
+  Note: Recompile with -Xlint:unchecked for details.
+  Note: Some input files use unchecked or unsafe operations.
+  2 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 1m 35s
+3 actionable tasks: 1 executed, 2 up-to-date
+
+PLAYTEST 1.11.0 — playtest-smoke-initial.log
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :core:compileTestJava
+> Task :core:testClasses
+
+> Task :core:smokeRun
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] com.badlogic.gdx.utils.reflect.ReflectionException: Could not instantiate instance of class: com.shatteredpixel.shatteredpixeldungeon.items.KindOfWeapon
+	at com.badlogic.gdx.utils.reflect.ClassReflection.newInstance(ClassReflection.java:95)
+	at com.watabou.utils.Reflection.newInstance(Reflection.java:40)
+	at com.shatteredpixel.shatteredpixeldungeon.Playtest.create(Playtest.java:84)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.playtestScenario(SmokeRun.java:114)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:75)
+Caused by: java.lang.InstantiationException
+	at java.base/jdk.internal.reflect.InstantiationExceptionConstructorAccessorImpl.newInstance(InstantiationExceptionConstructorAccessorImpl.java:48)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.ReflectAccess.newInstance(ReflectAccess.java:128)
+	at java.base/jdk.internal.reflect.ReflectionFactory.newInstance(ReflectionFactory.java:347)
+	at java.base/java.lang.Class.newInstance(Class.java:647)
+	at com.badlogic.gdx.utils.reflect.ClassReflection.newInstance(ClassReflection.java:93)
+	... 4 more
+
+FAIL NECROMANCER seed=0: java.lang.IllegalArgumentException: Unable to create this item.
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+Runs=10 failures=1
+
+> Task :core:smokeRun FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':core:smokeRun' (registered in build file 'core\build.gradle').
+> Process 'command 'C:\Users\Hartl\Documents\grimhollow\.toolchain\jdk-17\bin\java.exe'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 1m 22s
+7 actionable tasks: 3 executed, 4 up-to-date
+
+PLAYTEST 1.11.0 — playtest-smoke-build.log
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+
+> Task :core:compileJava
+Note: C:\Users\Hartl\Documents\grimhollow\core\src\main\java\com\shatteredpixel\shatteredpixeldungeon\Rankings.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :core:compileTestJava
+> Task :core:testClasses
+
+> Task :core:smokeRun
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "itemCls" is null
+	at com.shatteredpixel.shatteredpixeldungeon.items.ItemStatusHandler.contains(ItemStatusHandler.java:164)
+	at com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.ExoticPotion.reset(ExoticPotion.java:107)
+	at com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion.<init>(Potion.java:186)
+	at com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.ExoticPotion.<init>(ExoticPotion.java:44)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500)
+	at java.base/java.lang.reflect.ReflectAccess.newInstance(ReflectAccess.java:128)
+	at java.base/jdk.internal.reflect.ReflectionFactory.newInstance(ReflectionFactory.java:347)
+	at java.base/java.lang.Class.newInstance(Class.java:647)
+	at com.badlogic.gdx.utils.reflect.ClassReflection.newInstance(ClassReflection.java:93)
+	at com.watabou.utils.Reflection.newInstance(Reflection.java:40)
+	at com.shatteredpixel.shatteredpixeldungeon.Playtest.create(Playtest.java:84)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.playtestScenario(SmokeRun.java:114)
+	at com.shatteredpixel.shatteredpixeldungeon.acceptance.SmokeRun.main(SmokeRun.java:75)
+
+FAIL NECROMANCER seed=0: java.lang.IllegalArgumentException: Unable to create this item.
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+
+> Task :desktop:compileJava
+> Task :desktop:classes
+
+> Task :core:smokeRun FAILED
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+Runs=10 failures=1
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':core:smokeRun' (registered in build file 'core\build.gradle').
+> Process 'command 'C:\Users\Hartl\Documents\grimhollow\.toolchain\jdk-17\bin\java.exe'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 20s
+9 actionable tasks: 4 executed, 5 up-to-date
+
+PLAYTEST 1.11.0 — playtest-smoke-build2.log
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :core:compileJava
+> Task :core:classes
+> Task :core:compileTestJava UP-TO-DATE
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes UP-TO-DATE
+> Task :core:testClasses UP-TO-DATE
+
+> Task :core:smokeRun
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+FAIL NECROMANCER seed=0: java.lang.NullPointerException: Cannot invoke "com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite.drop()" because "com.shatteredpixel.shatteredpixeldungeon.levels.Level.drop(com.shatteredpixel.shatteredpixeldungeon.items.Item, int).sprite" is null
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+Runs=10 failures=1
+
+> Task :core:smokeRun FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':core:smokeRun' (registered in build file 'core\build.gradle').
+> Process 'command 'C:\Users\Hartl\Documents\grimhollow\.toolchain\jdk-17\bin\java.exe'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 17s
+9 actionable tasks: 2 executed, 7 up-to-date
+
+PLAYTEST 1.11.0 — playtest-smoke-build3.log
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :services:jar
+> Task :SPD-classes:jar
+
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes UP-TO-DATE
+> Task :core:compileTestJava
+> Task :core:testClasses
+
+> Task :core:smokeRun
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+FAIL NECROMANCER seed=0: java.lang.NullPointerException: Cannot invoke "com.shatteredpixel.shatteredpixeldungeon.items.Heap.isEmpty()" because "this.heap" is null
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+Runs=10 failures=1
+
+> Task :core:smokeRun FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':core:smokeRun' (registered in build file 'core\build.gradle').
+> Process 'command 'C:\Users\Hartl\Documents\grimhollow\.toolchain\jdk-17\bin\java.exe'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+
+BUILD FAILED in 1m 7s
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+9 actionable tasks: 5 executed, 4 up-to-date
+
+PLAYTEST 1.11.0 — playtest-smoke-build4.log
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes UP-TO-DATE
+> Task :core:compileTestJava
+> Task :core:testClasses
+
+> Task :core:smokeRun
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+FAIL NECROMANCER seed=0: java.lang.NullPointerException: Cannot invoke "com.shatteredpixel.shatteredpixeldungeon.items.Heap.isEmpty()" because "this.heap" is null
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+Runs=10 failures=1
+
+> Task :core:smokeRun FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':core:smokeRun' (registered in build file 'core\build.gradle').
+> Process 'command 'C:\Users\Hartl\Documents\grimhollow\.toolchain\jdk-17\bin\java.exe'' finished with non-zero exit value 1
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 20s
+9 actionable tasks: 3 executed, 6 up-to-date
+
+PLAYTEST 1.11.0 — playtest-smoke-build5.log
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :core:compileTestJava
+> Task :core:testClasses
+> Task :desktop:compileJava
+> Task :desktop:classes
+
+> Task :core:smokeRun
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ** You are blinded!
+TEST 52 PASS: guarded persistent playtest; god mode; 313 item types, 20 artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation
+PASS NECROMANCER seed=0 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+Runs=10 failures=0
+
+> Task :core:jar
+> Task :desktop:release
+> Task :desktop:dist
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 34s
+11 actionable tasks: 6 executed, 5 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+PLAYTEST 1.11.0 — playtest-full-build.log
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest
+> Task :android:processDebugManifest
+> Task :android:copyAndroidNatives
+> Task :android:processDebugManifestForPackage
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:processDebugResources
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :core:compileTestJava
+> Task :core:processTestResources NO-SOURCE
+> Task :core:testClasses
+> Task :android:compileDebugJavaWithJavac
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :core:test
+> Task :android:mergeDebugJavaResource
+> Task :android:dexBuilderDebug
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+
+> Task :core:smokeRun
+PASS V4 WARRIOR Vault generation/save/load, mirror=BrokenSeal, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT WARRIOR: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ** You are blinded!
+TEST 52 PASS: guarded persistent playtest; god mode; 313 item types, 20 artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation
+PASS WARRIOR seed=0 floor=6 save/load=ok
+PASS WARRIOR seed=1 floor=6 save/load=ok
+PASS WARRIOR seed=2 floor=6 save/load=ok
+PASS WARRIOR seed=3 floor=6 save/load=ok
+PASS WARRIOR seed=4 floor=6 save/load=ok
+PASS WARRIOR seed=5 floor=6 save/load=ok
+PASS WARRIOR seed=6 floor=6 save/load=ok
+PASS WARRIOR seed=7 floor=6 save/load=ok
+PASS WARRIOR seed=8 floor=6 save/load=ok
+PASS WARRIOR seed=9 floor=6 save/load=ok
+PASS V4 MAGE Vault generation/save/load, mirror=MagesStaff, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT MAGE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ** You are blinded!
+TEST 52 PASS: guarded persistent playtest; god mode; 313 item types, 20 artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation
+PASS MAGE seed=0 floor=6 save/load=ok
+PASS MAGE seed=1 floor=6 save/load=ok
+PASS MAGE seed=2 floor=6 save/load=ok
+PASS MAGE seed=3 floor=6 save/load=ok
+PASS MAGE seed=4 floor=6 save/load=ok
+PASS MAGE seed=5 floor=6 save/load=ok
+PASS MAGE seed=6 floor=6 save/load=ok
+PASS MAGE seed=7 floor=6 save/load=ok
+PASS MAGE seed=8 floor=6 save/load=ok
+PASS MAGE seed=9 floor=6 save/load=ok
+PASS V4 ROGUE Vault generation/save/load, mirror=CloakOfShadows, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ROGUE: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+
+> Task :desktop:release
+> Task :desktop:dist
+
+> Task :core:smokeRun
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ** You are blinded!
+TEST 52 PASS: guarded persistent playtest; god mode; 313 item types, 20 artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation
+PASS ROGUE seed=0 floor=6 save/load=ok
+PASS ROGUE seed=1 floor=6 save/load=ok
+PASS ROGUE seed=2 floor=6 save/load=ok
+PASS ROGUE seed=3 floor=6 save/load=ok
+PASS ROGUE seed=4 floor=6 save/load=ok
+PASS ROGUE seed=5 floor=6 save/load=ok
+PASS ROGUE seed=6 floor=6 save/load=ok
+PASS ROGUE seed=7 floor=6 save/load=ok
+PASS ROGUE seed=8 floor=6 save/load=ok
+PASS ROGUE seed=9 floor=6 save/load=ok
+PASS V4 HUNTRESS Vault generation/save/load, mirror=SpiritBow, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT HUNTRESS: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ** You are blinded!
+TEST 52 PASS: guarded persistent playtest; god mode; 313 item types, 20 artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation
+PASS HUNTRESS seed=0 floor=6 save/load=ok
+PASS HUNTRESS seed=1 floor=6 save/load=ok
+PASS HUNTRESS seed=2 floor=6 save/load=ok
+PASS HUNTRESS seed=3 floor=6 save/load=ok
+PASS HUNTRESS seed=4 floor=6 save/load=ok
+PASS HUNTRESS seed=5 floor=6 save/load=ok
+PASS HUNTRESS seed=6 floor=6 save/load=ok
+PASS HUNTRESS seed=7 floor=6 save/load=ok
+PASS HUNTRESS seed=8 floor=6 save/load=ok
+PASS HUNTRESS seed=9 floor=6 save/load=ok
+PASS V4 DUELIST Vault generation/save/load, mirror=MirrorSword, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT DUELIST: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ** You are blinded!
+TEST 52 PASS: guarded persistent playtest; god mode; 313 item types, 20 artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation
+PASS DUELIST seed=0 floor=6 save/load=ok
+PASS DUELIST seed=1 floor=6 save/load=ok
+PASS DUELIST seed=2 floor=6 save/load=ok
+PASS DUELIST seed=3 floor=6 save/load=ok
+PASS DUELIST seed=4 floor=6 save/load=ok
+PASS DUELIST seed=5 floor=6 save/load=ok
+PASS DUELIST seed=6 floor=6 save/load=ok
+PASS DUELIST seed=7 floor=6 save/load=ok
+PASS DUELIST seed=8 floor=6 save/load=ok
+PASS DUELIST seed=9 floor=6 save/load=ok
+[GAME] @@ Badge unlocked: Novice Researcher (Fill in 40 catalog entries in your journal).
+PASS V4 CLERIC Vault generation/save/load, mirror=HolyTome, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT CLERIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ** You are blinded!
+TEST 52 PASS: guarded persistent playtest; god mode; 313 item types, 20 artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation
+PASS CLERIC seed=0 floor=6 save/load=ok
+PASS CLERIC seed=1 floor=6 save/load=ok
+
+> Task :android:mergeLibDexDebug
+
+> Task :core:smokeRun
+PASS CLERIC seed=2 floor=6 save/load=ok
+PASS CLERIC seed=3 floor=6 save/load=ok
+PASS CLERIC seed=4 floor=6 save/load=ok
+PASS CLERIC seed=5 floor=6 save/load=ok
+PASS CLERIC seed=6 floor=6 save/load=ok
+PASS CLERIC seed=7 floor=6 save/load=ok
+PASS CLERIC seed=8 floor=6 save/load=ok
+PASS CLERIC seed=9 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS V4 NECROMANCER Vault generation/save/load, mirror=Phylactery, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT NECROMANCER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ** You are blinded!
+TEST 52 PASS: guarded persistent playtest; god mode; 313 item types, 20 artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation
+PASS NECROMANCER seed=0 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=1 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=2 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=3 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=4 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=5 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=6 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=7 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=8 floor=6 save/load=ok
+[GAME] ** There is no room for another minion.
+TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns
+[GAME] ** There is no room for another minion.
+NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS
+PASS NECROMANCER seed=9 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS V4 ENCHANTER Vault generation/save/load, mirror=SigilBrush, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ENCHANTER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ** You are blinded!
+TEST 52 PASS: guarded persistent playtest; god mode; 313 item types, 20 artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation
+PASS ENCHANTER seed=0 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=1 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=2 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=3 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=4 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=5 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=6 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=7 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=8 floor=6 save/load=ok
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=9 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge unlocked: Novice Monster Hunter (Defeat 10 enemies in one game).
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge unlocked: Safety Hazard (Defeat 10 enemies in one game with the help of terrain hazards (traps, plants, or chasms)).
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 UTILITY PASS: all levels 0-10; Grasp sight range +0/1/2 at 0/3/7, visibility and boundary enforcement; Glimpse 5/7/9 turns at 0/5/10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect
+> Task :android:assembleDebug
+
+> Task :core:smokeRun
+PASS V4 PSYCHIC Vault generation/save/load, mirror=FocusCrystal, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT PSYCHIC: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ** You are blinded!
+TEST 52 PASS: guarded persistent playtest; god mode; 313 item types, 20 artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation
+PASS PSYCHIC seed=0 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 UTILITY PASS: all levels 0-10; Grasp sight range +0/1/2 at 0/3/7, visibility and boundary enforcement; Glimpse 5/7/9 turns at 0/5/10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=1 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 UTILITY PASS: all levels 0-10; Grasp sight range +0/1/2 at 0/3/7, visibility and boundary enforcement; Glimpse 5/7/9 turns at 0/5/10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=2 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 UTILITY PASS: all levels 0-10; Grasp sight range +0/1/2 at 0/3/7, visibility and boundary enforcement; Glimpse 5/7/9 turns at 0/5/10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=3 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 UTILITY PASS: all levels 0-10; Grasp sight range +0/1/2 at 0/3/7, visibility and boundary enforcement; Glimpse 5/7/9 turns at 0/5/10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=4 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 UTILITY PASS: all levels 0-10; Grasp sight range +0/1/2 at 0/3/7, visibility and boundary enforcement; Glimpse 5/7/9 turns at 0/5/10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=5 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 UTILITY PASS: all levels 0-10; Grasp sight range +0/1/2 at 0/3/7, visibility and boundary enforcement; Glimpse 5/7/9 turns at 0/5/10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=6 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 UTILITY PASS: all levels 0-10; Grasp sight range +0/1/2 at 0/3/7, visibility and boundary enforcement; Glimpse 5/7/9 turns at 0/5/10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=7 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 UTILITY PASS: all levels 0-10; Grasp sight range +0/1/2 at 0/3/7, visibility and boundary enforcement; Glimpse 5/7/9 turns at 0/5/10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=8 floor=6 save/load=ok
+TEST 12 PASS: levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Novice Monster Hunter.
+[GAME] A hidden toxic gas trap activates!
+[GAME] A hidden toxic gas trap activates!
+[GAME] @@ Badge endorsed: Safety Hazard.
+TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10
+TEST 49 UTILITY PASS: all levels 0-10; Grasp sight range +0/1/2 at 0/3/7, visibility and boundary enforcement; Glimpse 5/7/9 turns at 0/5/10
+TEST 49 PASS: 12 charges -> level 1 + 2 XP; 300 idle turns -> no growth; thresholds 10/25/45/70/100/135/175/220/270/325; external upgrades rejected; persistence
+TEST 50 PASS: level-six orders/follow/hostile attacks; 15-turn expiry; level-eight permanent single floor ally, replacement, save/load, ascent/descent, kill ownership, boss rejection
+PSYCHIC kit, talents, subclasses, Grasp, thrown damage, domination, armor and persistence: PASS; TESTS 11-13 PASS
+PASS PSYCHIC seed=9 floor=6 save/load=ok
+Runs=90 failures=0
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 5m 8s
+48 actionable tasks: 19 executed, 29 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+PLAYTEST 1.11.0 — playtest-package.log
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :android:mergeDebugAssets
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource UP-TO-DATE
+> Task :android:compressDebugAssets
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:mergeLibDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :android:assembleDebug
+> Task :desktop:processResources
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes
+> Task :desktop:release
+> Task :desktop:dist
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 30s
+45 actionable tasks: 6 executed, 39 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+PLAYTEST 1.11.0 — playtest-ui-landscape.log
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\playtest-ui-landscape\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/hud.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/inventory.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/crystal-description.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/crystal-description-bottom.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/psychic-spells.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/hero-sheet.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/settings.png
+INTERFACE: inventory, item actions, scrollable Crystal details, five-spell wheel, hero sheet and settings fit 1280x720; failures=0
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/readability-room.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/examine-loot.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/examine-shop.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/examine-inventory.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/painted-badge.png
+TEST 36 READABILITY: locked Examine loot/shop/two inventory targets; toggle and Back exit; no turns, gold, charges or movement; hidden loot excluded; painted badges=98 failures=0
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/ashlight-open.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/ashlight-riders.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/ashlight-shuttered.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/ashlight-feed.png
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/ashlight-flare.png
+TEST 51 UI: open/shuttered painted icons; scrollable lore/riders; free menu toggle; ingredient selection/feeding; Flare; failures=0
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-enable.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-menu.png
+[LWJGL] GLFW_PLATFORM_ERROR error
+	Description : Win32: Failed to open clipboard: Access is denied. 
+	Stacktrace  :
+		org.lwjgl.glfw.GLFW.nglfwGetClipboardString(GLFW.java:4763)
+		org.lwjgl.glfw.GLFW.glfwGetClipboardString(GLFW.java:4790)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard.getContents(Lwjgl3Clipboard.java:35)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard.hasContents(Lwjgl3Clipboard.java:29)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndTextInput.<init>(WndTextInput.java:165)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest$8.<init>(WndPlaytest.java:196)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.search(WndPlaytest.java:196)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.lambda$categories$27(WndPlaytest.java:189)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.run(WndPlaytest.java:77)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest$1.onClick(WndPlaytest.java:51)
+		com.shatteredpixel.shatteredpixeldungeon.ui.Button$1.onClick(Button.java:75)
+		com.watabou.noosa.PointerArea.onSignal(PointerArea.java:82)
+		com.watabou.noosa.PointerArea.onSignal(PointerArea.java:27)
+		com.watabou.utils.Signal.dispatch(Signal.java:75)
+		com.watabou.input.PointerEvent.processPointerEvents(PointerEvent.java:173)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.pointerGestureReview(DesktopSmokeProbe.java:382)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.playtestClick(DesktopSmokeProbe.java:631)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.playtestTick(DesktopSmokeProbe.java:578)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.interfaceTick(DesktopSmokeProbe.java:402)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:73)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:203)
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-search.png
+[LWJGL] GLFW_PLATFORM_ERROR error
+	Description : Win32: Failed to open clipboard: Access is denied. 
+	Stacktrace  :
+		org.lwjgl.glfw.GLFW.nglfwGetClipboardString(GLFW.java:4763)
+		org.lwjgl.glfw.GLFW.glfwGetClipboardString(GLFW.java:4790)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard.getContents(Lwjgl3Clipboard.java:35)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard.hasContents(Lwjgl3Clipboard.java:29)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndTextInput.<init>(WndTextInput.java:165)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest$7.<init>(WndPlaytest.java:109)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.number(WndPlaytest.java:109)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.lambda$spawnOptions$38(WndPlaytest.java:223)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.run(WndPlaytest.java:77)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest$1.onClick(WndPlaytest.java:51)
+		com.shatteredpixel.shatteredpixeldungeon.ui.Button$1.onClick(Button.java:75)
+		com.watabou.noosa.PointerArea.onSignal(PointerArea.java:82)
+		com.watabou.noosa.PointerArea.onSignal(PointerArea.java:27)
+		com.watabou.utils.Signal.dispatch(Signal.java:75)
+		com.watabou.input.PointerEvent.processPointerEvents(PointerEvent.java:173)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.pointerGestureReview(DesktopSmokeProbe.java:382)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.playtestClick(DesktopSmokeProbe.java:631)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.playtestTick(DesktopSmokeProbe.java:581)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.interfaceTick(DesktopSmokeProbe.java:402)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:73)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:203)
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-create.png
+[GAME] ++ Ashlight Lantern created.
+[LWJGL] GLFW_PLATFORM_ERROR error
+	Description : Win32: Failed to open clipboard: Access is denied. 
+	Stacktrace  :
+		org.lwjgl.glfw.GLFW.nglfwGetClipboardString(GLFW.java:4763)
+		org.lwjgl.glfw.GLFW.glfwGetClipboardString(GLFW.java:4790)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard.getContents(Lwjgl3Clipboard.java:35)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard.hasContents(Lwjgl3Clipboard.java:29)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndTextInput.<init>(WndTextInput.java:165)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest$7.<init>(WndPlaytest.java:109)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.number(WndPlaytest.java:109)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.lambda$hero$9(WndPlaytest.java:125)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.run(WndPlaytest.java:77)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest$1.onClick(WndPlaytest.java:51)
+		com.shatteredpixel.shatteredpixeldungeon.ui.Button$1.onClick(Button.java:75)
+		com.watabou.noosa.PointerArea.onSignal(PointerArea.java:82)
+		com.watabou.noosa.PointerArea.onSignal(PointerArea.java:27)
+		com.watabou.utils.Signal.dispatch(Signal.java:75)
+		com.watabou.input.PointerEvent.processPointerEvents(PointerEvent.java:173)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.pointerGestureReview(DesktopSmokeProbe.java:382)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.playtestClick(DesktopSmokeProbe.java:631)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.playtestTick(DesktopSmokeProbe.java:588)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.interfaceTick(DesktopSmokeProbe.java:402)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:73)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:203)
+[GAME] @@ You return to floor 1 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] @@ You return to floor 1 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] @@ You return to floor 21 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] ** Your steps echo across the dungeon.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-halls.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-classes.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-classes.png
+[GAME] @@ You return to floor 21 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] ** Your steps echo across the dungeon.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-enchanter-halls.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-save.png
+TEST 52 UI: real pointer enable/god/search/+10 artifact/hero level/subclass/armor/class switch/floor-21 travel and save marker; landscape or portrait bounds; failures=0
+[Controllers] removed manager for application, 0 managers active
+
+PLAYTEST 1.11.0 — playtest-ui-landscape-final.log
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\playtest-ui-landscape-final\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/hud.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/inventory.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/crystal-description.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/crystal-description-bottom.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/psychic-spells.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/hero-sheet.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/settings.png
+INTERFACE: inventory, item actions, scrollable Crystal details, five-spell wheel, hero sheet and settings fit 1280x720; failures=0
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/readability-room.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/examine-loot.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/examine-shop.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/examine-inventory.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/painted-badge.png
+TEST 36 READABILITY: locked Examine loot/shop/two inventory targets; toggle and Back exit; no turns, gold, charges or movement; hidden loot excluded; painted badges=98 failures=0
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/ashlight-open.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/ashlight-riders.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/ashlight-shuttered.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/ashlight-feed.png
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/ashlight-flare.png
+TEST 51 UI: open/shuttered painted icons; scrollable lore/riders; free menu toggle; ingredient selection/feeding; Flare; failures=0
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-enable.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-menu.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-search.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-create.png
+[GAME] ++ Ashlight Lantern created.
+[GAME] @@ You return to floor 1 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] @@ You return to floor 1 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] @@ You return to floor 21 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] ** Your steps echo across the dungeon.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-halls.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-classes.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-classes.png
+[GAME] @@ You return to floor 21 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] ** Your steps echo across the dungeon.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-enchanter-halls.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/landscape/playtest-save.png
+TEST 52 UI: real pointer enable/god/search/+10 artifact/hero level/subclass/armor/class switch/floor-21 travel and save marker; landscape or portrait bounds; failures=0
+[Controllers] removed manager for application, 0 managers active
+
+PLAYTEST 1.11.0 — playtest-ui-portrait.log
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\playtest-ui-portrait\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/hud.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/inventory.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/crystal-description.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/crystal-description-bottom.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/psychic-spells.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/hero-sheet.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/settings.png
+INTERFACE: inventory, item actions, scrollable Crystal details, five-spell wheel, hero sheet and settings fit 720x1061; failures=0
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/readability-room.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/examine-loot.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/examine-shop.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/examine-inventory.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/painted-badge.png
+TEST 36 READABILITY: locked Examine loot/shop/two inventory targets; toggle and Back exit; no turns, gold, charges or movement; hidden loot excluded; painted badges=98 failures=0
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/ashlight-open.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/ashlight-riders.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/ashlight-shuttered.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/ashlight-feed.png
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/ashlight-flare.png
+TEST 51 UI: open/shuttered painted icons; scrollable lore/riders; free menu toggle; ingredient selection/feeding; Flare; failures=0
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/playtest-enable.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/playtest-menu.png
+[LWJGL] GLFW_PLATFORM_ERROR error
+	Description : Win32: Failed to open clipboard: Access is denied. 
+	Stacktrace  :
+		org.lwjgl.glfw.GLFW.nglfwGetClipboardString(GLFW.java:4763)
+		org.lwjgl.glfw.GLFW.glfwGetClipboardString(GLFW.java:4790)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard.getContents(Lwjgl3Clipboard.java:35)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard.hasContents(Lwjgl3Clipboard.java:29)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndTextInput.<init>(WndTextInput.java:165)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest$8.<init>(WndPlaytest.java:199)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.search(WndPlaytest.java:199)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.lambda$categories$27(WndPlaytest.java:192)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.run(WndPlaytest.java:77)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest$1.onClick(WndPlaytest.java:51)
+		com.shatteredpixel.shatteredpixeldungeon.ui.Button$1.onClick(Button.java:75)
+		com.watabou.noosa.PointerArea.onSignal(PointerArea.java:82)
+		com.watabou.noosa.PointerArea.onSignal(PointerArea.java:27)
+		com.watabou.utils.Signal.dispatch(Signal.java:75)
+		com.watabou.input.PointerEvent.processPointerEvents(PointerEvent.java:173)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.pointerGestureReview(DesktopSmokeProbe.java:382)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.playtestClick(DesktopSmokeProbe.java:631)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.playtestTick(DesktopSmokeProbe.java:578)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.interfaceTick(DesktopSmokeProbe.java:402)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:73)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:203)
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/playtest-search.png
+[LWJGL] GLFW_PLATFORM_ERROR error
+	Description : Win32: Failed to open clipboard: Access is denied. 
+	Stacktrace  :
+		org.lwjgl.glfw.GLFW.nglfwGetClipboardString(GLFW.java:4763)
+		org.lwjgl.glfw.GLFW.glfwGetClipboardString(GLFW.java:4790)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard.getContents(Lwjgl3Clipboard.java:35)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard.hasContents(Lwjgl3Clipboard.java:29)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndTextInput.<init>(WndTextInput.java:165)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest$7.<init>(WndPlaytest.java:112)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.number(WndPlaytest.java:112)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.lambda$spawnOptions$40(WndPlaytest.java:226)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.run(WndPlaytest.java:77)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest$1.onClick(WndPlaytest.java:51)
+		com.shatteredpixel.shatteredpixeldungeon.ui.Button$1.onClick(Button.java:75)
+		com.watabou.noosa.PointerArea.onSignal(PointerArea.java:82)
+		com.watabou.noosa.PointerArea.onSignal(PointerArea.java:27)
+		com.watabou.utils.Signal.dispatch(Signal.java:75)
+		com.watabou.input.PointerEvent.processPointerEvents(PointerEvent.java:173)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.pointerGestureReview(DesktopSmokeProbe.java:382)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.playtestClick(DesktopSmokeProbe.java:631)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.playtestTick(DesktopSmokeProbe.java:581)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.interfaceTick(DesktopSmokeProbe.java:402)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:73)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:203)
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/playtest-create.png
+[GAME] ++ Ashlight Lantern created.
+[LWJGL] GLFW_PLATFORM_ERROR error
+	Description : Win32: Failed to open clipboard: Access is denied. 
+	Stacktrace  :
+		org.lwjgl.glfw.GLFW.nglfwGetClipboardString(GLFW.java:4763)
+		org.lwjgl.glfw.GLFW.glfwGetClipboardString(GLFW.java:4790)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard.getContents(Lwjgl3Clipboard.java:35)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Clipboard.hasContents(Lwjgl3Clipboard.java:29)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndTextInput.<init>(WndTextInput.java:165)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest$7.<init>(WndPlaytest.java:112)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.number(WndPlaytest.java:112)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.number(WndPlaytest.java:109)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.lambda$hero$9(WndPlaytest.java:128)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.run(WndPlaytest.java:77)
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest$1.onClick(WndPlaytest.java:51)
+		com.shatteredpixel.shatteredpixeldungeon.ui.Button$1.onClick(Button.java:75)
+		com.watabou.noosa.PointerArea.onSignal(PointerArea.java:82)
+		com.watabou.noosa.PointerArea.onSignal(PointerArea.java:27)
+		com.watabou.utils.Signal.dispatch(Signal.java:75)
+		com.watabou.input.PointerEvent.processPointerEvents(PointerEvent.java:173)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.pointerGestureReview(DesktopSmokeProbe.java:382)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.playtestClick(DesktopSmokeProbe.java:631)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.playtestTick(DesktopSmokeProbe.java:588)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.interfaceTick(DesktopSmokeProbe.java:402)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopSmokeProbe.render(DesktopSmokeProbe.java:73)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window.update(Lwjgl3Window.java:435)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.loop(Lwjgl3Application.java:181)
+		com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application.<init>(Lwjgl3Application.java:153)
+		com.shatteredpixel.shatteredpixeldungeon.desktop.DesktopLauncher.main(DesktopLauncher.java:203)
+[GAME] @@ You return to floor 1 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] @@ You return to floor 1 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] @@ You return to floor 21 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] ** Your steps echo across the dungeon.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/playtest-halls.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/playtest-classes.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/playtest-classes.png
+[GAME] @@ You return to floor 21 of the dungeon.
+[GAME] ** You have unspent talent points!
+[GAME] ** Your steps echo across the dungeon.
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/playtest-enchanter-halls.png
+RENDERED=GameScene SCREENSHOT=C:\Users\Hartl\Documents\grimhollow/verification/interface/portrait/playtest-save.png
+TEST 52 UI: real pointer enable/god/search/+10 artifact/hero level/subclass/armor/class switch/floor-21 travel and save marker; landscape or portrait bounds; failures=0
+[Controllers] removed manager for application, 0 managers active

@@ -1,3 +1,18 @@
+# In-game playtest controls - v1.11.0
+
+Source checkpoint: `7717265a9`. Intended tag: **v1.11.0-playtest**. This adds opt-in testing controls; it changes no art or ordinary-run balance. Open the pause menu -> Playtest -> Enable. Mode and optional god power persist in the save, which is visibly marked and excluded from rankings, badges, catalog credit and bones. Player saves were not used: native checks have isolated user homes and headless checks use diagnostic slot 99.
+
+`gradlew.bat desktop:dist android:assembleDebug core:test core:smokeRun -PsmokeUpstream=true --no-daemon --console=plain`: **BUILD SUCCESSFUL in 5m 8s; Runs=90 failures=0**. All nine heroes run ten seeds; test 52 runs once per class. Six JUnit tests pass with no failures/errors/skips. Final packaging after adding loading labels also succeeds in 30s. APK metadata: **com.grimhollow.dungeon, code 953, 1.11.0-INDEV**. No physical Android play is claimed.
+
+| Test | Status | Actual output and scope |
+|---|---|---|
+| 52 | PASS | `TEST 52 PASS`: guarded persistent mode; ordinary damage unchanged; god damage/death protection; all 313 catalog types instantiate; 20 artifacts respect native caps and save/load; all nine class kits/subclasses/armor/talents; main regions/boss/final floors, Vault/Mine and return; rebuilding, creature placement, map reveal, teleport, recovery; save marker and ranking/catalog isolation. |
+| 52 UI | PASS | `TEST 52 UI ... failures=0` in landscape 1280x720 and portrait 720x1061. Actual mouse/touch events enable mode/god, search Ashlight and create +10, set hero level 24, select Seer and armor, travel to floor 21, switch to Enchanter, disable god and inspect the marked save. Existing interface/readability/Ashlight native checks also pass. |
+
+Screenshots: [desktop menu](interface/landscape/playtest-menu.png), [item creation](interface/landscape/playtest-create.png), [portrait menu](interface/portrait/playtest-menu.png), [Enchanter in Halls](interface/landscape/playtest-enchanter-halls.png), [save marker](interface/portrait/playtest-save.png). Actual output, including intermediate failures, is preserved in `clean-build.log`.
+
+Tests 1-51 retain the individually dated evidence and permanent limitations below except that build/smoke/save/UI checks above were rerun on 1.11.0. Art, lighting, fog and the numerical terrain-distinctness threshold were not changed. Test 45 remains an enforced known failure, not a green full-workflow claim. CI runs its existing Windows/Linux/Android suite and the extended pointer/headless paths on the delivered head; exact run results are reported at delivery. Direct Vault travel preserves the testing loadout and does not replace normal quest-flow testing; floor rebuild does not reset global quest history.
+
 # Nine hero art batches - v1.10.1
 
 All nine heroes now have separately reviewed body proportions, silhouettes, cloth color identity, stances, strides and attack/cast gestures. The eight following batches have individual commits; the Necromancer's front armor panel was also corrected. This art pass changes no gameplay, world height, frame sequence, action duration or callbacks. The approved matching portraits are retained. [Lineup](heroes/lineup.png), [actual renderer crops](heroes/ingame-lineup.png), [individual before/after, animation and full screenshots](painted-world.html), [three exact built-in imagegen prompts/source references](../tools/painted/hero-rigs-prompts.json).

@@ -1,3 +1,7 @@
+# Hero art, batch 7: Cleric
+
+- Give the Cleric broad ivory/gold vestments, a squared mantle, short deliberate steps and an open-handed blessing gesture. Preserve his bald head and beard; class cloth remains visible around fitted armor panels.
+
 # Hero art, batch 6: Duelist
 
 - Give the Duelist a narrow teal silhouette, asymmetric fencing guard, staggered footwork and a forward lunge, preserving her face and tight curls. The arm and leg staging differs from the Warrior's broad overhead strike; timing and damage are unchanged.

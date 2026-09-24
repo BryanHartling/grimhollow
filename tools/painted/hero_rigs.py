@@ -26,6 +26,9 @@ PROFILES={
     'duelist':dict(torso=(15,20),head=(9,11.5),cape=(11,31),hips=(11,9),
                    shoulder=5.4,arm=4.2,leg=4.8,boot=(6,5),stance=4.5,stride=3.4,
                    lean=-.5,bob=.25,style='fencer',head_y=10.5),
+    'cleric':dict(torso=(21,21),head=(10,12),cape=(30,40),hips=(28,26),
+                  shoulder=8.2,arm=6.3,leg=6,boot=(7,5),stance=4,stride=2.1,
+                  lean=0,bob=.3,style='blessing',robe=1),
 }
 
 
@@ -69,6 +72,9 @@ def humanoid(hero,tier,index):
     if style=='fencer':
         elbows=[(cx-9,cy),(cx+8,cy+5)]
         wrists=[(cx-11-stride*.2,cy-1),(cx+14+stride*.2,cy+3)]
+    if style=='blessing':
+        elbows=[(cx-9,cy+5),(cx+9,cy+5)]
+        wrists=[(cx-4-stride*.2,cy+3),(cx+5+stride*.2,cy+3)]
     hips=[(23-stance*.55,36+bob),(23+stance*.55,36+bob)]
     knees=[(23-stance+stride,45+bob),(23+stance-stride,45+bob)]
     ankles=[(23-stance+stride,53-max(0,stride)*.3),(23+stance-stride,53-max(0,-stride)*.3)]
@@ -103,6 +109,9 @@ def humanoid(hero,tier,index):
         elbows=[(14,24),(33,28)]
         wrists=[(12,24),(31,27)] if index==13 else [(12,22),(42,26)] if index==14 else [(13,25),(36,28)]
         if index==14:knees[1]=(33,44);ankles[1]=(36,53)
+    if style=='blessing' and index in (13,14,15):
+        elbows=[(15,25),(34,25)]
+        wrists=[(19,20),(31,20)] if index==13 else [(10,24),(41,24)] if index==14 else [(20,30),(31,30)]
     cape=caster_cloth(cfg['robe'],True) if 'robe' in cfg else p[3]
     skirt=caster_cloth(cfg['robe']) if 'robe' in cfg else p[2]
     place(canvas,cape,(cx-3+sway*.3,33+bob),cfg['cape'],sway*1.3)

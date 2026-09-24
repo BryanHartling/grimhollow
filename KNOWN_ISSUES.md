@@ -1,5 +1,7 @@
 # Known issues
 
+- Enchanter v1.11.2 proc rates and talent purchasing pass deterministic and native mouse/touch regressions; early-campaign balance still needs player review. Chance bonuses do not strengthen always-active enchantments/glyphs or curses. No physical Android playtest is claimed.
+
 - Tablet fixes v1.11.1 have deterministic mechanics and native touch/renderer coverage; no Android device was attached (`adb devices -l` returned an empty list). Actual tablet smoothness, preferred pace and full-campaign balance of the new rank values require human playtesting.
 - Playtest floor rebuilding resets the current terrain, creatures and loot, not global quest history. Direct Vault travel preserves the testing loadout; use the Playtest menu to leave, and use normal quest entry to test equipment stripping/rewards. No physical Android session or exhaustive item-by-item combat campaign is claimed.
 - All nine hero redesign batches are implemented; human review of their new silhouettes, proportions and gestures remains pending. They preserve the existing single mirrored facing and action timing, rather than introducing a multi-direction animation system.

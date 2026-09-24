@@ -24,6 +24,7 @@ package com.shatteredpixel.shatteredpixeldungeon.levels;
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
@@ -1336,8 +1337,8 @@ public abstract class Level implements Bundlable {
 		int cx = c.pos % width();
 		int cy = c.pos / width();
 		
-		boolean sighted = c.buff( Blindness.class ) == null && c.buff( Shadows.class ) == null
-						&& c.isAlive();
+		AshlightLantern lantern = AshlightLantern.open(c);
+		boolean sighted = (lantern != null || (c.buff( Blindness.class ) == null && c.buff( Shadows.class ) == null)) && c.isAlive();
 		if (sighted) {
 			boolean[] blocking = null;
 
@@ -1381,13 +1382,20 @@ public abstract class Level implements Bundlable {
 				blocking = Dungeon.level.losBlocking;
 			}
 
-			float viewDist = c.viewDistance;
+			float viewDist = lantern == null ? c.viewDistance : Math.max(8, c.viewDistance);
 			if (c instanceof Hero){
 				viewDist *= 1f + 0.25f*((Hero) c).pointsInTalent(Talent.FARSIGHT);
 				viewDist *= EyeOfNewt.visionRangeMultiplier();
 			}
 			
-			ShadowCaster.castShadow( cx, cy, width(), fieldOfView, blocking, Math.round(viewDist) );
+			ShadowCaster.castShadow( cx, cy, width(), fieldOfView, blocking, AshlightLantern.sightRadius(c, viewDist) );
+            if (lantern != null) lantern.rememberLight(this, fieldOfView);
+            int announcement = AshlightLantern.awarenessBonus();
+            if (c != Dungeon.hero && c.alignment == Char.Alignment.ENEMY && announcement > 0) {
+                boolean[] announced = new boolean[length()];
+                ShadowCaster.castShadow(cx, cy, width(), announced, blocking, Math.min(ShadowCaster.MAX_DISTANCE, Math.round(viewDist)+announcement));
+                fieldOfView[Dungeon.hero.pos] |= announced[Dungeon.hero.pos];
+            }
 		} else {
 			BArray.setFalse(fieldOfView);
 		}

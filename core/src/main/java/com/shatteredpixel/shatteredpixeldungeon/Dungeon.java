@@ -918,6 +918,8 @@ public class Dungeon {
 		}
 		
 		level.updateFieldOfView(hero, level.heroFOV);
+        if (com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern.open(hero) != null)
+            dist = Math.max(dist, com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern.sightRadius(hero, Math.max(hero.viewDistance,8)*(1f+.25f*hero.pointsInTalent(Talent.FARSIGHT)))+1);
 
 		int x = hero.pos % level.width();
 		int y = hero.pos / level.width();

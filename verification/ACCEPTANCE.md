@@ -1,3 +1,69 @@
+# Ashlight Lantern - v1.9.0
+
+Painted-source checkpoint: `370e78808`. Intended release tag: `v1.9.0-ashlight`. Exact delivered commit and CI results are reported with delivery; the unchanged terrain-distinctness failure prevents a full-green claim.
+
+`gradlew.bat desktop:dist android:assembleDebug core:test core:smokeRun -PsmokeUpstream=true --no-daemon --console=plain`: **BUILD SUCCESSFUL; Runs=90 failures=0**. Six JUnit tests pass. Test 51 executes real feeding, passive charging, movement denial, Flare, immunity, equipment and save/load paths. Native landscape/portrait checks use the existing interface harness. The unchanged geometry/effects suite, source reconstruction and compiled network audit also pass. Actual outputs and earlier failures are retained in `clean-build.log`.
+
+Verification caught and fixed a feed-only artifact restore-level issue and a six-button footer reflow issue. An initial barricade test was behind tall grass; its fixture was corrected without weakening line-of-sight requirements. The native feeding check handles both the landscape inventory pane and portrait bag window. The user's latest Cloak rule replaces the originally proposed partial visibility: invisibility remains absolute, with doubled charge-timer drain while the lantern is open.
+
+The table distinguishes current coverage from retained checkpoint evidence. It does not claim a full campaign, physical Android play, or exhaustive talent/reward flows. CI repeats its configured checks on the delivered source. [Visual review](painted-world.html), [exact source prompt](../tools/painted/ashlight-prompts.json), [known issues](../KNOWN_ISSUES.md).
+
+| Test | Status | Actual output or reason |
+|---|---|---|
+| 1 | PASS | Windows 1.9.0 jar launches; actual Ashlight menu, scrolling lore, free shutter, ingredient selection/feeding and Flare render in landscape and portrait. |
+| 2 | PASS | desktop:dist + android:assembleDebug + core:test + all-class smoke BUILD SUCCESSFUL; six JUnit tests, zero failures/errors/skips; physical Android play not run. |
+| 3 | RETIRED | Old procedural-art rebuild no longer ships; committed painted sources reconstruct exactly under test 44. |
+| 4 | RETIRED | Old generated-style validator was superseded by source provenance/reconstruction 44 and room distinctness 45. |
+| 5 | PASS | Current Runs=90 failures=0 across nine heroes. Ashlight scenario executes once per class. |
+| 6 | permanent known issue | Both class talent tiers are browsable for all nine heroes; representative hooks pass. Exhaustive in-run talent selection/hook scenarios remain unrun. |
+| 7 | permanent known issue | All 18 subclass previews and their tier-three skills are available. Actual Tengu reward selection remains unrun. |
+| 8 | permanent known issue | All 27 armor-ability previews and tier-four skills are available. Actual crown reward flow remains unrun. |
+| 9 | PASS | TEST 9 PASS; temporary Bone/Force terrain persistence, expiry and floor-exit checks execute. |
+| 10 | PASS | Necromancer minion cap and Second Grave checks pass in the existing class suite. |
+| 11 | PASS | Grasp still collects heaps and activates/removes visible traps; all level 0-10 utility boundaries and unseen-target rejection pass. |
+| 12 | PASS | Hero levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking. |
+| 13 | PASS | Old Amok behavior and new level-six/level-eight control paths; see test 50. |
+| 14 | PASS | Current all-nine-class floor-6 save/load and Ashlight level/partial feeding progress/capacity/charge/shutter round trips pass. |
+| 15 | PASS | Runs=90 failures=0; ten seeds per class. Necromancer, Enchanter and Psychic each 10/0 in this run; scripted descent, not a campaign. |
+| 16 | permanent known issue | All 122 concrete creature sprite draws, declared animation rectangles, statue tiers, items and talents checked; exhaustive every-gameplay-path coverage remains unrun. |
+| 17 | RETIRED | Recovery and the later painted-source direction supersede the old procedural style gate; source reconstruction is test 44. |
+| 18 | RETIRED | Superseded by recovery: generated-region brightness target replaced by within-room distinctness 45. |
+| 19 | permanent known issue | The floor-15 1,000-turn/20-mob timing scenario remains unrun. |
+| 20 | PASS | Retained v1.0.2 SDK-unset desktop-only build result; build configuration unchanged except version metadata. New CI uses desktopOnly=true. |
+| 21 | permanent known issue | Test 45 remains enforced. Exact-head CI results are reported with delivery. Prior readability CI 35949405176 has only the terrain-contrast failure. |
+| 22 | PASS | aapt: com.grimhollow.dungeon versionCode=949 versionName=1.9.0-INDEV; launcher/package conventions unchanged. |
+| 23 | PASS | Native renderer uses the documented Grimhollow save location under isolated user.home folders; player saves are untouched. |
+| 24 | permanent known issue | Current standard 3x: heroes=9, mob sprites=122, steady idle checks=122, failures=0. Every tested enemy idle holds for 600 frames. Retained extra-2x issue: six creature sprites at 0.9545-1.0 exceed 0.95. |
+| 25 | PASS | TEST 25: items=383 identification icons=60 failures=0. Two new painted Ashlight states occupy 537/538; all other 542 atlas cells are byte-identical to the prior atlas. |
+| 26 | PASS | TEST 26: three stains and floor/chasm/water/trap placement failures=0. |
+| 27 | PASS | TEST 27 PASS: 300 turns unchanged; 12 charges level=1; Wraith offered; hostile attacked within 2 turns. |
+| 28 | RETIRED | Superseded by recovery: rendered-cache rebuild no longer produces the restored shipping world/characters. |
+| 29 | RETIRED | Superseded by recovery: rerendering is prohibited; Blender/cache retained unused. |
+| 30 | RETIRED | Superseded by recovery: generated character hue-distance gate replaced by upstream pixel provenance 44. |
+| 31 | PASS locally | TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.6578ms p95=0.8313ms failures=0; individual fire reference max channel difference=0. CI repeats the unchanged 2ms gate. |
+| 32 | PASS | Three scorch sizes, actual floor fire expiration and water/chasm rejection: failures=0. |
+| 33 | PASS | Existing Enchanter trade knowledge, armor inscriptions and persistent library scenarios pass in the nine-class run. Native library coverage is retained and repeated by CI. |
+| 34 | PASS | Old/future version rejection, portrait exception and deletion: failures=0. |
+| 35 | RETIRED | Superseded by recovery: source-string grep replaced by compiled/runtime handler and network test 46. |
+| 36 | PASS | Landscape 1280x720 and portrait 720x1061: readability checks remain green; Ashlight six-action menu, lore/rider scrolling, ingredient selection and open/closed icons fit. The artifact exposed and fixed a repeated button-layout rounding error. |
+| 37 | PASS | TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment. |
+| 38 | permanent known issue | 18 supplied images lack verified allowed redistribution licenses; excluded from Git; 70 licensed files eligible. |
+| 39 | RETIRED | Superseded by recovery: rejected regional iteration histories remain archival; their art no longer ships. |
+| 40 | RETIRED | Superseded by recovery: generated-room isolated metrics replaced by remembered-terrain 43 and distinctness 45. |
+| 41 | RETIRED | Superseded by recovery: generated animated liquid atlas replaced by historical scrolling water. |
+| 42 | RETIRED | Superseded by recovery: calibrated generated-region gates replaced by restored-region test 45. |
+| 43 | PASS, retained checkpoint | Five generated regions: 788 walking steps, 255 turns, 75 door openings; remembered terrain checks pass at readability checkpoint. CI repeats on the artifact commit. |
+| 44 | PASS | PAINTED assets=115 source sheets=103 failures=0; launcher resources=55. TEST 44 failures=0. Offline reconstruction needs no generation service. |
+| 45 | permanent known issue | Fresh Windows samples fail 34/82 pairs: Sewers 11/21, Prison 1/10, Caves 8/21, City 5/15, Halls 9/15. Thresholds remain 0.12 luminance / 40 degrees hue; no palette retuning. |
+| 46 | PASS | TEST 46 compiled handlers: classes=2886 guarded browser sinks=1 HTTP/socket calls=0 failures=0. Runtime handler coverage retained and repeated by CI. |
+| 47 | PASS, retained checkpoint | Five regions, 120 cameras, 1393 door-transition frames; 797 known-wall observations, 177 with unknown cells below, zero black blockers. CI repeats the same gate; Ashlight separately checks extended FOV/LOS in test 51. |
+| 48 | PASS | Push/Hurl exact movement and every collision/trap/chasm/boss rider at Crystal levels 0-10. |
+| 49 | PASS | All levels 0-10: Grasp preserves sight range and adds 1/2 cells at Crystal levels 3/7, requires visibility and rejects out-of-range targets without cost; Glimpse lasts 5/7/9 turns at 0/5/10. Existing XP thresholds, upgrade exclusions and persistence pass. |
+| 50 | PASS | Level-six direction/follow/attacks; level-eight 15-turn survival, permanent single-floor slot, replacement release, save/load, stairs, normal kill ownership and boss immunity. |
+| 51 | PASS | Fourteen feed units to level 10; feed-only XP; dark-only charging; free persistent shutter; +2/3/4 sight and awareness; absolute potion/Cloak invisibility with 2x Cloak drain; every Flare tier 0–10, walls, special terrain, ally safety, actual fire damage; hostile wraith pathing; secrets exclude Mind Vision; real save/load and unchanged existing artifact weights. Native actions pass in both orientations. |
+
+---
+
 # Readability and repeated inspection - v1.8.1
 
 Art-source checkpoint: `df8104413`. Corrected release tag: `v1.8.1-readability`. Exact delivered commit and CI results are reported with delivery; the enforced test-45 failure prevents a full-green claim.

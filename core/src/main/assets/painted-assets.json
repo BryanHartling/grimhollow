@@ -26,6 +26,7 @@
     "interface/navigation-b.png": "2a315b774c1c6882b690a2950323ec755c1e81af0e4167b9ecc7f51d0a04c4bf",
     "items/artifact-states.png": "5874f430a1f5c3431b1e49ac995f96710676699b0e51eb58ad6beb35101123d8",
     "items/artifacts.png": "f20c43dbe96e2dcfa06ea98a32178586097ebf9e3f1c91a2028f59c4e95eb544",
+    "items/ashlight-lantern.png": "c440d40b47445c4cc06fdf777649b4649a161c6f39b17a68b841e628db1de76a",
     "items/bombs.png": "3bcd12a395e105db08dec845531441f59ce1f8e51f47037efa6a26bdd188ddc6",
     "items/botanicals-stones.png": "bd98baa6554495c48d5a451e22ae3116edcee9f99f4ba88f44d7043bd1feb9c6",
     "items/class-kit.png": "590b04ac662584c0106a97191921dec36b55d939d11cb785a26a6f3f8a87ff3b",
@@ -342,7 +343,7 @@
         1024,
         2176
       ],
-      "rgba_sha256": "e5d05422e246dfa7977a0afd44285f5f39f5a1ac9ce7487f9470125e21aeea36"
+      "rgba_sha256": "aa1075a7cb2be5fd00f0fa1d894fbce34ae8bf9f47f9de341e3ceb98c4495d21"
     },
     "interfaces/title_grimhollow.png": {
       "size": [

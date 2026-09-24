@@ -4,6 +4,7 @@ package com.shatteredpixel.shatteredpixeldungeon.tiles;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern;
 import com.shatteredpixel.shatteredpixeldungeon.GameGeometry;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob;
@@ -33,8 +34,16 @@ public class LightingOverlay extends Image {
     }
     @Override protected NoosaScript script() { return NoosaScriptNoLighting.get(); }
 
+    private int heroLightRadius() {
+        if (AshlightLantern.open(Dungeon.hero) == null) return Dungeon.hero.viewDistance;
+        float radius = Math.max(8, Dungeon.hero.viewDistance)
+                * (1f + .25f*Dungeon.hero.pointsInTalent(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.FARSIGHT))
+                * com.shatteredpixel.shatteredpixeldungeon.items.trinkets.EyeOfNewt.visionRangeMultiplier();
+        return AshlightLantern.sightRadius(Dungeon.hero, radius);
+    }
+
     private int stateHash() {
-        int hash = 31*Dungeon.hero.pos + Dungeon.hero.viewDistance;
+        int hash = 31*Dungeon.hero.pos + heroLightRadius();
         hash = 31*hash + Dungeon.depth;
         hash = 31*hash + Arrays.hashCode(Dungeon.level.map);
         hash = 31*hash + Arrays.hashCode(Dungeon.level.heroFOV);
@@ -49,7 +58,7 @@ public class LightingOverlay extends Image {
     }
     private void rebuild() {
         map.clear((Dungeon.depth-1)/5);
-        source(Dungeon.hero.pos, Dungeon.hero.viewDistance, .45f, .31f, .12f);
+        source(Dungeon.hero.pos, heroLightRadius(), .45f, .31f, .12f);
         boolean lavaSurface = Dungeon.level.waterTex().equals(com.shatteredpixel.shatteredpixeldungeon.Assets.Environment.WATER_HALLS);
         if (lavaSurface) {
             for (int cell=0;cell<Dungeon.level.length();cell++)

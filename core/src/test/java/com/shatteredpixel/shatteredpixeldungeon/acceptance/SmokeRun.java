@@ -12,6 +12,9 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.*;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.*;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.necromancer.*;
 import com.shatteredpixel.shatteredpixeldungeon.items.*;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.*;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneRod;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.Food;
@@ -69,7 +72,7 @@ public class SmokeRun {
                             if(Dungeon.depth!=6) throw new AssertionError("Save/load depth mismatch");
                         }
                     }
-                    if(seed==0){v4Scenario();contentScenario();}
+                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();}
                     String line="PASS "+name+" seed="+seed+" floor=6 save/load=ok";
                     System.out.println(line); log.println(line);
                 } catch(Throwable error) {
@@ -86,6 +89,111 @@ public class SmokeRun {
         if(failures>0) System.exit(1);
     }
     private static void check(boolean condition,String message){if(!condition)throw new AssertionError(message);}
+
+    private static void lanternCharge(Artifact item,int charge)throws Exception{
+        java.lang.reflect.Field field=Artifact.class.getDeclaredField("charge");field.setAccessible(true);field.setInt(item,charge);
+    }
+    private static void ashlightScenario() throws Exception {
+        Dungeon.init();Dungeon.depth=1;Dungeon.branch=0;Dungeon.switchLevel(Dungeon.newLevel(),-1);clearArena();
+        Hero h=Dungeon.hero;for(Buff b:h.buffs())b.detach();h.belongings.weapon=null;h.belongings.armor=null;h.belongings.ring=null;
+        h.belongings.artifact=null;h.belongings.misc=null;h.belongings.backpack.items.clear();h.HT=h.HP=1000;h.viewDistance=8;
+        Level l=Dungeon.level;int w=l.width(),center=h.pos;
+        l.blobs.clear();
+        for(int y=1;y<l.height()-1;y++)for(int x=1;x<w-1;x++)Level.set(x+y*w,Terrain.EMPTY);
+        AshlightLantern lamp=new AshlightLantern();lamp.identify();h.belongings.artifact=lamp;lamp.activate(h);
+        check(!lamp.isUpgradable()&&!new com.shatteredpixel.shatteredpixeldungeon.items.spells.MagicalInfusion().getSelector().itemSelectable(lamp),"51 no scroll/infusion upgrades");
+        lamp.upgrade();lamp.transferUpgrade(10);lamp.charge(h,100);check(lamp.level()==0&&lamp.charges()==0,"51 external growth/charge rejected");
+        check(AshlightLantern.feedValue(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame())==1
+                &&AshlightLantern.feedValue(new com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfDragonsBreath())==2
+                &&AshlightLantern.feedValue(new com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire())==2,"51 exact feed values");
+        float before=h.cooldown();check(!lamp.feed(h,new Food())&&h.cooldown()==before,"51 invalid food costs nothing");
+        for(int units=1;units<=14;units++){
+            Item potion=new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame().identify();potion.collect();
+            before=h.cooldown();check(lamp.feed(h,potion)&&h.cooldown()==before+1,"51 feeding consumes one turn");
+            check(lamp.level()==(units<=6?units:6+(units-6)/2)&&lamp.charges()==0,"51 fourteen-unit feeding curve "+units);
+            if(units==13){Bundle progress=new Bundle();lamp.storeInBundle(progress);AshlightLantern copy=new AshlightLantern();copy.restoreFromBundle(progress);check(copy.level()==9&&copy.feedProgress()==1,"51 partial feeding progress survives save");}
+        }
+        check(lamp.level()==10&&!lamp.canFeed(new com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire()),"51 feed cap");
+        AshlightLantern.EmberKeeper keeper=h.buff(AshlightLantern.EmberKeeper.class);
+        lamp.level(0);for(int i=0;i<300;i++)keeper.act();check(lamp.level()==0&&lamp.charges()==3,"51 idle gains charges only");
+        lanternCharge(lamp,0);Level.set(center+1,Terrain.WALL_DECO);
+        for(int i=0;i<80;i++)keeper.act();check(lamp.charges()==0&&!AshlightLantern.lowAmbient(l,center),"51 torch-lit cells do not charge");
+        Level.set(center+1,Terrain.EMPTY);check(AshlightLantern.lowAmbient(l,center),"51 own light does not prevent charging");
+        for(int i=0;i<39;i++)keeper.act();check(lamp.charges()==0,"51 open charge interval");keeper.act();check(lamp.charges()==1,"51 open charges at forty");
+        before=h.cooldown();int fuel=lamp.charges();lamp.toggle(h);check(h.cooldown()==before&&lamp.charges()==fuel,"51 shutter is free");
+        for(int i=0;i<20;i++)keeper.act();check(lamp.charges()==2,"51 shutter charges twice as fast");
+        lamp.toggle(h);
+        for(int tier:new int[]{0,5,10}){
+            lamp.level(tier);Dungeon.observe();check(AshlightLantern.sightRadius(h,8)==10+tier/5,"51 vision tier "+tier);
+            check(h.isImmune(Blindness.class),"51 blindness immunity");
+            h.viewDistance=2;Dungeon.observe();check(l.heroFOV[center+10+tier/5],"51 darkened vision restored "+tier);h.viewDistance=8;
+        }
+        // A hostile's widened sight is hero-only; neither ordinary nor Cloak invisibility leaks.
+        lamp.level(0);Rat watcher=target(center+4);watcher.viewDistance=2;watcher.fieldOfView=new boolean[l.length()];
+        l.updateFieldOfView(watcher,watcher.fieldOfView);check(watcher.fieldOfView[h.pos],"51 open lantern announces hero");
+        Buff.affect(h,Invisibility.class);l.updateFieldOfView(watcher,watcher.fieldOfView);
+        check(!watcher.fieldOfView[h.pos]&&AshlightLantern.awarenessBonus()==0&&AshlightLantern.open(h)==lamp,"51 potion invisibility wins without losing light");
+        Buff.detach(h,Invisibility.class);
+        CloakOfShadows cloak=new CloakOfShadows();h.belongings.misc=cloak;cloak.activate(h);lanternCharge(cloak,10);
+        CloakOfShadows.cloakStealth stealth=cloak.new cloakStealth();stealth.attachTo(h);stealth.act();
+        java.lang.reflect.Field timer=stealth.getClass().getDeclaredField("turnsToCost");timer.setAccessible(true);
+        check(timer.getInt(stealth)==4,"51 cloak paid cycle begins at four");stealth.act();check(timer.getInt(stealth)==2,"51 open cloak drain doubles");
+        l.updateFieldOfView(watcher,watcher.fieldOfView);check(!watcher.fieldOfView[h.pos]&&h.invisible>0,"51 cloak absolute invisibility");
+        before=h.cooldown();lamp.toggle(h);check(timer.getInt(stealth)==2&&h.cooldown()==before,"51 shutter does not reset cloak timer");
+        stealth.act();check(timer.getInt(stealth)==1&&h.invisible>0,"51 closed cloak drain normal");
+        lamp.toggle(h);stealth.act();check(timer.getInt(stealth)==4&&h.invisible>0,"51 open cloak completes prior cycle");
+        stealth.detach();for(Buff b:h.buffs())if(b instanceof CloakOfShadows.ArtifactBuff && !(b instanceof AshlightLantern.EmberKeeper))b.detach();h.belongings.misc=null;
+        java.lang.reflect.Field pursuit=Mob.class.getDeclaredField("target");pursuit.setAccessible(true);
+        watcher.state=watcher.HUNTING;pursuit.setInt(watcher,h.pos);lamp.toggle(h);check(watcher.state==watcher.HUNTING&&pursuit.getInt(watcher)==h.pos,"51 shutter never erases pursuit");lamp.toggle(h);
+        l.mobs.remove(watcher);Actor.remove(watcher);
+        java.lang.reflect.Method closer=Mob.class.getDeclaredMethod("getCloser",int.class);closer.setAccessible(true);
+        Wraith ghost=new Wraith();ghost.pos=center+11;ghost.sprite=new WraithSprite();ghost.sprite.link(ghost);l.mobs.add(ghost);Actor.add(ghost);
+        lamp.level(3);Dungeon.observe();check(!AshlightLantern.deniesEntry(ghost,center+10),"51 no early repulsion");
+        lamp.level(4);Dungeon.observe();int hp=ghost.HP;check(!(boolean)closer.invoke(ghost,center+10)&&ghost.pos==center+11&&ghost.HP==hp,"51 actual wraith movement denied without damage");
+        boolean[] path=l.passable.clone();ghost.modifyPassable(path);check(!path[center+10],"51 pathfinding avoids lit cells");
+        ghost.alignment=Char.Alignment.ALLY;check(!AshlightLantern.deniesEntry(ghost,center+10),"51 allied ghosts unaffected");
+        l.mobs.remove(ghost);Actor.remove(ghost);
+        for(int tier=0;tier<=10;tier++){
+            lamp.level(tier);lanternCharge(lamp,2);l.blobs.clear();
+            Rat near=target(center+2),far=target(center+4),ally=target(center-w);ally.alignment=Char.Alignment.ALLY;
+            int grass=center+w,bone=center+w+1,force=center+w-1,web=center-2*w,barricade=center-w+2;
+            Level.set(grass,Terrain.HIGH_GRASS);Level.set(bone,Terrain.BONE_WALL);Level.set(force,Terrain.FORCE_WALL);Level.set(barricade,Terrain.BARRICADE);
+            com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob.seed(web,10,com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Web.class);
+            int damage=near.HP;before=h.cooldown();check(lamp.flare(h)&&lamp.charges()==1&&h.cooldown()==before+1,"51 flare charge/turn "+tier);
+            check(near.buff(Blindness.class)!=null&&near.buff(Blindness.class).cooldown()==4&&far.buff(Blindness.class)==null&&ally.buff(Blindness.class)==null,"51 flare radius/enemy-only "+tier);
+            check(near.HP==damage&&(near.buff(Burning.class)!=null)==(tier>=8),"51 ignition threshold/no direct damage "+tier);
+            for(int cell:new int[]{grass,web,barricade})check((com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob.volumeAt(cell,com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Fire.class)>0)==(tier>=2),"51 terrain tier "+tier+" cell "+cell);
+            check(l.map[bone]==Terrain.BONE_WALL&&l.map[force]==Terrain.FORCE_WALL
+                    &&com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob.volumeAt(bone,com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Fire.class)==0
+                    &&com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob.volumeAt(force,com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Fire.class)==0,"51 special terrain nonflammable");
+            check(h.resist(Burning.class)==(tier>=6?.5f:1f)&&h.isImmune(Burning.class)==(tier>=10),"51 fire resistance threshold "+tier);
+            int health=h.HP;h.damage(20,new Burning());check(health-h.HP==(tier>=10?0:tier>=6?10:20),"51 actual fire damage "+tier);
+            for(Rat mob:new Rat[]{near,far,ally}){for(Buff b:mob.buffs())b.detach();l.mobs.remove(mob);Actor.remove(mob);}
+            for(int cell:new int[]{grass,bone,force,barricade})Level.set(cell,Terrain.EMPTY);
+        }
+        l.blobs.clear();lamp.level(6);
+        int secret=center+3,remote=center+12,behind=center-3*w;
+        com.shatteredpixel.shatteredpixeldungeon.levels.traps.BurningTrap hidden=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.BurningTrap();l.setTrap(hidden,secret);
+        Level.set(secret,Terrain.SECRET_TRAP);Level.set(remote,Terrain.SECRET_DOOR);Level.set(center+2*w,Terrain.SECRET_DOOR);
+        for(int dx=-4;dx<=4;dx++)Level.set(center-2*w+dx,Terrain.WALL);
+        Level.set(behind,Terrain.SECRET_DOOR);Rat obscured=target(behind);Buff.affect(h,MindVision.class);Dungeon.observe();
+        check(l.map[secret]==Terrain.TRAP&&hidden.visible&&l.map[center+2*w]==Terrain.DOOR&&l.map[remote]==Terrain.SECRET_DOOR&&l.map[behind]==Terrain.SECRET_DOOR&&l.heroFOV[behind],"51 secrets use actual light, never remote senses");
+        check(!lamp.lights(behind)&&!lamp.lights(remote),"51 lit mask excludes occluded and out-of-range cells");
+        lanternCharge(lamp,1);lamp.flare(h);check(obscured.buff(Blindness.class)==null,"51 flare respects walls");
+        before=h.cooldown();check(!lamp.flare(h)&&h.cooldown()==before,"51 empty Flare costs nothing");
+        lamp.level(10);lanternCharge(lamp,6);lamp.toggle(h);before=h.cooldown();check(!lamp.flare(h)&&h.cooldown()==before&&lamp.charges()==6,"51 shutter rejects flare without costs");
+        check(!h.isImmune(Blindness.class)&&!h.isImmune(Burning.class)&&h.resist(Burning.class)==1,"51 shutter suppresses all passive protection");
+        Bundle saved=new Bundle();lamp.storeInBundle(saved);AshlightLantern restored=new AshlightLantern();restored.restoreFromBundle(saved);
+        check(restored.shuttered()&&restored.level()==10&&restored.charges()==6&&restored.image()==ItemSpriteSheet.ASHLIGHT_CLOSED,"51 level/cap/fuel/shutter sprite persist");
+        lamp.doUnequip(h,true,true);check(lamp.shuttered()&&AshlightLantern.open(h)==null,"51 unequip preserves shutter");lamp.doEquip(h);check(lamp.shuttered(),"51 re-equip preserves shutter");
+        Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);
+        lamp=AshlightLantern.equipped(Dungeon.hero);check(lamp!=null&&lamp.shuttered()&&lamp.level()==10&&lamp.charges()==6,"51 actual save/load and artifact slot");
+        check(Generator.Category.ARTIFACT.classes.length==15&&Generator.Category.ARTIFACT.classes[14]==AshlightLantern.class
+                &&Arrays.equals(Generator.Category.ARTIFACT.defaultProbs,new float[]{1,1,0,1,1,0,1,1,1,1,1,1,1,1,1}),"51 existing generation weights preserved");
+        float[] prior={0,1,0,0,1,0,1,0,1,0,1,0,1,0};saved=new Bundle();saved.put("artifact_probs",prior);Generator.restoreFromBundle(saved);
+        check(Arrays.equals(Arrays.copyOf(Generator.Category.ARTIFACT.probs,14),prior)&&Generator.Category.ARTIFACT.probs[14]==1,"51 existing save artifact uniqueness migrated");
+        System.out.println("TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights");
+    }
 
     private static void contentScenario() throws Exception {
         contentMessages();

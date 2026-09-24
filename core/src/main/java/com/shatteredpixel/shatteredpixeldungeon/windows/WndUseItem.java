@@ -81,7 +81,11 @@ public class WndUseItem extends WndInfoItem {
 			}
 			float footerHeight=layoutButtons(new ArrayList<>(buttons),width,0);
 			reserveFooter((int)Math.ceil(footerHeight+GAP));
-			y = layoutButtons(buttons, width, height+GAP);
+			// The first layout has already expanded the buttons to fill their rows.
+            // Reflowing those expanded widths can add a row through float rounding,
+            // invalidating the footer we just reserved for a long description.
+            for (RedButton button : buttons) button.setPos(button.left(), button.top()+height+GAP);
+            y = height+GAP+footerHeight;
 
 			ItemJournalButton btn = new ItemJournalButton(item, this);
 			btn.setRect(width - 16, 0, 16, 16);

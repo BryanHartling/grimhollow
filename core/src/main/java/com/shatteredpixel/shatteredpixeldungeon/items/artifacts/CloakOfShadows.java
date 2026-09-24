@@ -318,7 +318,7 @@ public class CloakOfShadows extends Artifact {
 
 		@Override
 		public boolean act(){
-			turnsToCost--;
+			turnsToCost -= AshlightLantern.open(target) != null ? 2 : 1;
 			
 			if (turnsToCost <= 0){
 				charge--;

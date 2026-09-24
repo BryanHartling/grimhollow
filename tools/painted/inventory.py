@@ -94,6 +94,12 @@ def build():
         replacements[name]=icon(monster_parts('mimics')[row*4])
     from inventory_families import extend
     extend(replacements,semantics)
+    lantern=Image.open(HERE/'sources/items/ashlight-lantern.png').convert('RGBA')
+    if lantern.getchannel('A').getextrema()[0]!=0:raise ValueError('Lantern source lacks alpha')
+    for panel,name in enumerate(('ASHLIGHT_OPEN','ASHLIGHT_CLOSED')):
+        index=537+panel
+        semantics['items'][name]={'id':index,'artIndex':index,'cellSize':64}
+        replacements[name]=icon(lantern.crop((panel*lantern.width//2,0,(panel+1)*lantern.width//2,lantern.height)))
     written={}
     for name,image in replacements.items():
         if name not in semantics['items']:raise ValueError('Unknown inventory ID '+name)

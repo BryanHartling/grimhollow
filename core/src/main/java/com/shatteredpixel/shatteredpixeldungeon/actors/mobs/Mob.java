@@ -25,6 +25,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -580,7 +581,15 @@ public abstract class Mob extends Char {
 		return false;
 	}
 
+	@Override public boolean[] modifyPassable(boolean[] passable) {
+        passable = super.modifyPassable(passable);
+        if (AshlightLantern.open(Dungeon.hero) != null && this instanceof Wraith && alignment == Alignment.ENEMY)
+            for (int cell=0; cell<passable.length; cell++) if (AshlightLantern.deniesEntry(this,cell)) passable[cell]=false;
+        return passable;
+    }
+
 	private boolean cellIsPathable( int cell ){
+        if (AshlightLantern.deniesEntry(this,cell)) return false;
 		if (!Dungeon.level.passable[cell]){
 			if (flying || buff(Amok.class) != null){
 				if (!Dungeon.level.avoid[cell]){

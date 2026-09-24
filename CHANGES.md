@@ -1,3 +1,14 @@
+# Ashlight Lantern - v1.9.0
+
+- Add a brass fire-and-light artifact with separate painted open/shuttered icons, an artifact slot, Flare/Feed/Shutter actions, and weight 1 appended to the artifact pool; every previous weight and existing-save uniqueness flag is preserved.
+- Feeding identified Liquid Flame gives 1 unit; Dragon's Breath and Soulfire give 2. Levels 1–6 cost one each, 7–10 cost two each: 14 total. Feeding consumes one item and one turn, never refills charges, and competes intentionally with alchemy. Scrolls, infusion, transmutation and toolkit energy cannot upgrade it.
+- Capacity grows from 3 to 6. Environmental light less than 0.06 luminance above regional ambient permits charging: one charge per 40 minus twice the level turns while open, half that time while shuttered. Environmental light uses the renderer's falloff/source families, independent of graphics settings and excluding personal light. No charge spending or idle time gives experience.
+- The free shutter preserves its state across unequip, stairs and saves. Open light grants +2/3/4 vision and enemy sight of the hero at levels 0/5/10, with blindness immunity. Darkness is represented by reduced sight in this codebase, so open light restores an eight-cell minimum before its bonus; it never removes an invisibility buff or an enemy's existing pursuit.
+- User correction: all invisibility, including the Cloak, remains absolute. An open equipped lantern advances the active Cloak's existing charge timer by two per turn; shuttering resumes one without resetting that timer. This replaces the proposed partial stealth penalty.
+- Flare costs one charge and one turn, blinds hostile enemies for four turns within three cells and line of sight, ignites flammable terrain/webs from level 2, and ignites enemies from level 8. Bone Prison and Force Wall are explicitly excluded; no oil terrain exists, so no new oil mechanic was invented. There is no holy/radiant damage or undead damage rider.
+- Open level 4 prevents hostile Wraith/Tormented Spirit movement into directly lit cells, without damaging or displacing existing occupants; allied/NPC ghosts are unaffected. Open level 6 reveals secrets only in direct light, not remote senses, and halves ordinary fire damage; level 10 gives ordinary fire immunity. Soulfire retains its existing immunity-piercing behavior.
+- New test 51 extends the existing class and native UI harnesses for these boundaries, actual artifact save/load, generation migration, menu actions and both icon states. Test 25 adds indices 537/538; the other 542 atlas cells are unchanged. The feeding curve's typical campaign level remains subject to playtesting.
+
 # Gas rendering cost - v1.8.1
 
 - Use one soft cloud per gas cell, overlapping its neighbors, instead of two overlapping clouds at each cell. This halves cloud overdraw while keeping the rounded edges, slow drift, color and mechanical coverage.

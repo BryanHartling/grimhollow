@@ -573,9 +573,10 @@ public class Generator {
 					SkeletonKey.class,
 					TalismanOfForesight.class,
 					TimekeepersHourglass.class, com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HourglassOfAshes.class,
-					UnstableSpellbook.class
+					UnstableSpellbook.class,
+                    com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern.class
 			};
-			ARTIFACT.defaultProbs = new float[]{ 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 };
+			ARTIFACT.defaultProbs = new float[]{ 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 			ARTIFACT.probs = ARTIFACT.defaultProbs.clone();
 
 			//Trinkets are unique like artifacts, but unlike them you can only have one at once
@@ -958,7 +959,9 @@ public class Generator {
 				}
 
 				//pre-v3.3.0 conversion for artifacts (addition of tome and key)
-				if (cat == Category.ARTIFACT && probs.length != cat.defaultProbs.length){
+				if (cat == Category.ARTIFACT && probs.length == 14) {
+                    System.arraycopy(probs, 0, cat.probs, 0, probs.length);
+                } else if (cat == Category.ARTIFACT && probs.length != cat.defaultProbs.length){
 					int keyIDX = 9;
 					int j = 0;
 					for (int i = 0; i < probs.length; i++){

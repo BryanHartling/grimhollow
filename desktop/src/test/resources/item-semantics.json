@@ -2667,6 +2667,18 @@
       "kind": "hourglass",
       "rgbaSha256": "3d2775f3de68a1c3c957d4523f17cace4fa1bb8d3eb6b1c446904d68eee08106",
       "cellSize": 64
+    },
+    "ASHLIGHT_OPEN": {
+      "id": 537,
+      "artIndex": 537,
+      "cellSize": 64,
+      "rgbaSha256": "7acbe3496126a6cbdac31688bf3a233ebf12ee46322362eb5b21387e5c3e92c4"
+    },
+    "ASHLIGHT_CLOSED": {
+      "id": 538,
+      "artIndex": 538,
+      "cellSize": 64,
+      "rgbaSha256": "8abe6e79b38e19d057d002304c7b527267379bcf7b0c48bcad6fe61136e5030a"
     }
   },
   "icons": {

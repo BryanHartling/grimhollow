@@ -383,6 +383,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private int inspectPosition,inspectGold,inspectCharges;
     private float inspectTime;
     private com.shatteredpixel.shatteredpixeldungeon.items.Heap inspectLoot,inspectShop;
+    private com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern reviewLantern;
+    private com.shatteredpixel.shatteredpixeldungeon.items.Item reviewFuel;
     private void readabilityReview(){
         com.shatteredpixel.shatteredpixeldungeon.ui.Toolbar toolbar=(com.shatteredpixel.shatteredpixeldungeon.ui.Toolbar)RecoveryChecks.field(Game.scene(),"toolbar");
         Object search=RecoveryChecks.field(toolbar,"btnSearch");
@@ -460,6 +462,42 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     throw new AssertionError("Badge density/geometry "+badge);art.destroy();badges++;
             }
             System.out.println("TEST 36 READABILITY: locked Examine loot/shop/two inventory targets; toggle and Back exit; no turns, gold, charges or movement; hidden loot excluded; painted badges="+badges+" failures=0");
+        }
+        if(frames==960){
+            reviewLantern=new com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern();
+            reviewLantern.identify();Dungeon.hero.belongings.artifact=reviewLantern;reviewLantern.activate(Dungeon.hero);
+            com.watabou.utils.Bundle state=new com.watabou.utils.Bundle();reviewLantern.storeInBundle(state);state.put("charge",2);reviewLantern.restoreFromBundle(state);
+            reviewFuel=new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame().identify();
+            Dungeon.hero.belongings.backpack.items.add(reviewFuel);
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,reviewLantern));
+        }
+        if(frames==985){capture("ashlight-open");interfaceBounds();checkReviewText(Game.scene());scrollReview(Game.scene());}
+        if(frames==1010){capture("ashlight-riders");inspectTime=Dungeon.hero.cooldown();inspectCharges=reviewLantern.charges();clickReviewLabel("SHUTTER");}
+        if(frames==1030){
+            if(!reviewLantern.shuttered()||Dungeon.hero.cooldown()!=inspectTime||reviewLantern.charges()!=inspectCharges)
+                throw new AssertionError("51 native shutter consumed time or charge");
+            if(reviewLantern.image()!=com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.ASHLIGHT_CLOSED)
+                throw new AssertionError("25 wrong shuttered lantern icon");
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,reviewLantern));
+        }
+        if(frames==1050){interfaceBounds();capture("ashlight-shuttered");clickReviewLabel("UNSHUTTER");}
+        if(frames==1070)GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,reviewLantern));
+        if(frames==1090)clickReviewLabel("FEED");
+        if(frames==1110){
+            if(GameScene.showingWindow())interfaceBounds();
+            else if(!((com.shatteredpixel.shatteredpixeldungeon.ui.InventoryPane)RecoveryChecks.field(Game.scene(),"inventory")).isSelecting())
+                throw new AssertionError("51 ingredient selector missing");
+            capture("ashlight-feed");
+            if(!clickInventoryItem(Game.scene(),reviewFuel))throw new AssertionError("51 fire ingredient not selectable");}
+        if(frames==1140){
+            if(reviewLantern.level()!=1)throw new AssertionError("51 native feeding did not level artifact");
+            closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,reviewLantern));
+        }
+        if(frames==1160){inspectCharges=reviewLantern.charges();clickReviewLabel("FLARE");}
+        if(frames==1170)capture("ashlight-flare");
+        if(frames==1190){
+            if(reviewLantern.charges()!=inspectCharges-1)throw new AssertionError("51 native Flare did not spend one charge");
+            System.out.println("TEST 51 UI: open/shuttered painted icons; scrollable lore/riders; free menu toggle; ingredient selection/feeding; Flare; failures=0");
             SPDSettings.dynamicLighting(originalLighting);SPDSettings.zoom(originalZoom);Gdx.app.exit();
         }
     }
@@ -500,7 +538,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             found=true;Camera camera=((com.shatteredpixel.shatteredpixeldungeon.ui.Window)child).camera();
             if(camera.x<0||camera.y<0||camera.x+camera.width*camera.zoom>Gdx.graphics.getWidth()+1
                     ||camera.y+camera.height*camera.zoom>Gdx.graphics.getHeight()+1)
-                throw new AssertionError("Interface window clipped: "+child.getClass().getSimpleName());
+                throw new AssertionError("Interface window clipped: "+child.getClass().getSimpleName()+" x="+camera.x+" y="+camera.y+" size="+camera.width+"x"+camera.height+" zoom="+camera.zoom);
             if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem)
                 for(com.watabou.noosa.Gizmo part:RecoveryChecks.members((Group)child))
                     if(part instanceof com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane) {
@@ -1198,7 +1236,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             {"Waterskin","WATERSKIN"},{"wands.WandOfNecrosis","WAND_NECROSIS"},{"wands.WandOfGravity","WAND_GRAVITY"},
             {"wands.WandOfBone","WAND_BONE"},{"spells.Soulfire","SOULFIRE"},{"weapon.melee.BoneScythe","BONE_SCYTHE"},
             {"weapon.melee.ReapersScythe","REAPER_SCYTHE"},{"weapon.melee.GraveScythe","GRAVE_SCYTHE"},
-            {"armor.BoneArmor","ARMOR_BONE"},{"artifacts.HourglassOfAshes","HOURGLASS_ASHES"},
+            {"armor.BoneArmor","ARMOR_BONE"},{"artifacts.HourglassOfAshes","HOURGLASS_ASHES"},{"artifacts.AshlightLantern","ASHLIGHT_OPEN"},
             {"weapon.melee.BoneRod","BONE_ROD"},{"Phylactery","PHYLACTERY"},{"armor.NecromancerArmor","ARMOR_NECROMANCER"},
             {"weapon.melee.RunedBaton","RUNED_BATON"},{"SigilBrush","SIGIL_BRUSH"},{"armor.EnchanterArmor","ARMOR_ENCHANTER"},
             {"weapon.melee.FocusRing","FOCUS_RING"},{"FocusCrystal","FOCUS_CRYSTAL"},{"armor.PsychicArmor","ARMOR_PSYCHIC"},{"RuneEtching","RUNE_ETCHING"}
@@ -1219,6 +1257,6 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if(mind.image()<352||mind.image()>363||mind.icon!=82)failures.add("25 Mind Vision bottle/identity");
         Image eye=new Image(Assets.Sprites.ITEM_ICONS);eye.frame(com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.Icons.film.get(mind.icon));
         semanticItem(eye,mind.icon,semantics.get("icons").get("POTION_MINDVIS"),"Potion of Mind Vision eye",failures);eye.destroy();
-        System.out.println("TEST 25 semantics: all 381 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10");
+        System.out.println("TEST 25 semantics: all 383 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10, Ashlight open/closed=537/538");
     }
 }

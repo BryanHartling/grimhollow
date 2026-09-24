@@ -89,7 +89,7 @@ public final class EnhancedEffects {
             }
         }
         @Override public void draw(){
-            // Same-density cells share tint and alpha, so all their wrapped quads draw together.
+            // Same-density cells share tint and alpha, so their cloud quads draw together.
             ((java.nio.Buffer)vertices).clear();java.util.Arrays.fill(counts,0);Image tint=null;
             for(int density=1;density<=100;density++)for(GasCell cell:buckets[density])for(Image image:cell.pieces)if(image.isVisible()){
                 RectF uv=image.frame();com.watabou.glwrap.Quad.fill(quad,image.x,image.x+image.width,image.y,image.y+image.height,uv.left,uv.right,uv.top,uv.bottom);
@@ -99,7 +99,7 @@ public final class EnhancedEffects {
             ((java.nio.Buffer)vertices).flip();if(buffer==null)buffer=new com.watabou.glwrap.Vertexbuffer(vertices);else buffer.updateVertices(vertices);
             NoosaScript script=NoosaScript.get();tint.texture.bind();script.camera(camera());script.uModel.valueM4(identity);
             int offset=0;for(int density=1;density<=100;density++)if(counts[density]>0){
-                float alpha=blob instanceof SanctuaryZone?.75f:(.15f+.7f*density/100)*.65f;
+                float alpha=blob instanceof SanctuaryZone?.75f:.15f+.7f*density/100;
                 script.lighting(tint.rm,tint.gm,tint.bm,alpha,0,0,0,0);script.drawQuadSet(buffer,counts[density],offset);offset+=counts[density];
             }
         }
@@ -118,7 +118,9 @@ public final class EnhancedEffects {
             int tint=blob instanceof ConfusionGas?0x68409C:blob instanceof SmokeScreen?0xC9BFA8
                     :blob instanceof ParalyticGas?0x8A8B88:0x7BB33B;
             for(int i=0;i<4;i++){
-                Image image=pieces[i];image.visible=i<2;if(!image.visible)continue;
+                // Neighboring clouds already overlap. A second cloud per cell
+                // doubles translucent overdraw on Android/software GL renderers.
+                Image image=pieces[i];image.visible=i==0;if(!image.visible)continue;
                 float phase=time*.45f+p*6.283f+i*3.14f;
                 float diameter=size+(float)Math.sin(phase)*1.2f;
                 ReadabilityEffects.frame(image,ReadabilityEffects.MIST,diameter,diameter);

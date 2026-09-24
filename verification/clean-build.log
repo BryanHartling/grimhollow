@@ -11682,3 +11682,141 @@ PASS: Sewer scene renders with dynamic lighting on and off.
 TEST 46 compiled handlers: classes=2881 guarded browser sinks=1 HTTP/socket calls=0 failures=0
 
 PACKAGED PAINTED ASSETS: comparisons=230 mismatches=0
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :services:jar
+> Task :SPD-classes:jar
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest
+> Task :android:processDebugManifest
+> Task :android:processDebugManifestForPackage
+> Task :android:processDebugResources
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+
+> Task :core:compileJava
+Note: C:\Users\Hartl\Documents\grimhollow\core\src\main\java\com\shatteredpixel\shatteredpixeldungeon\effects\EnhancedEffects.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes UP-TO-DATE
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:mergeDebugJavaResource
+> Task :desktop:release
+> Task :desktop:dist
+> Task :android:mergeLibDexDebug
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 42s
+45 actionable tasks: 15 executed, 30 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\readability-patch-geometry\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/acceptance/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-on.png
+RENDERED=GameScene SCREENSHOT=.local/acceptance/sewers-lighting-off.png
+TEST 24: heroes=9 mob sprites=122 steady idle checks=122 failures=0
+PAINTED: complete animation coverage; hero/rat height ratio=2.2222223 status sizes rendered=178
+TEST 25 semantics: all 381 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10
+PAINTED TRAPS: shapes=7 color/state combinations=63
+TEST 25: items=381 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+PAINTED SKILLS/PLANTS: unique skills=113 plants=13
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+TESTS 24-26, 34, 36 PASS; test 35 retired by recovery
+TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0
+TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.6198ms p95=0.8017ms failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\readability-patch-landscape\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/interface/landscape/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/hud.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/inventory.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/crystal-description.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/crystal-description-bottom.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/psychic-spells.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/hero-sheet.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/settings.png
+INTERFACE: inventory, item actions, scrollable Crystal details, five-spell wheel, hero sheet and settings fit 1280x720; failures=0
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/readability-room.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/examine-loot.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/examine-shop.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/examine-inventory.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/painted-badge.png
+TEST 36 READABILITY: locked Examine loot/shop/two inventory targets; toggle and Back exit; no turns, gold, charges or movement; hidden loot excluded; painted badges=98 failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\readability-patch-portrait\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/interface/portrait/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/hud.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/inventory.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/crystal-description.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/crystal-description-bottom.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/psychic-spells.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/hero-sheet.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/settings.png
+INTERFACE: inventory, item actions, scrollable Crystal details, five-spell wheel, hero sheet and settings fit 720x1061; failures=0
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/readability-room.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/examine-loot.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/examine-shop.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/examine-inventory.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/painted-badge.png
+TEST 36 READABILITY: locked Examine loot/shop/two inventory targets; toggle and Back exit; no turns, gold, charges or movement; hidden loot excluded; painted badges=98 failures=0
+[Controllers] removed manager for application, 0 managers active

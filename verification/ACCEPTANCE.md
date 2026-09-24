@@ -1,17 +1,19 @@
-# Readability and repeated inspection - v1.8.0
+# Readability and repeated inspection - v1.8.1
 
-Art-source checkpoint: `df8104413`. Release tag: `v1.8.0-readability`. Exact delivered commit and CI results are reported with delivery; the enforced test-45 failure prevents a full-green claim.
+Art-source checkpoint: `df8104413`. Corrected release tag: `v1.8.1-readability`. Exact delivered commit and CI results are reported with delivery; the enforced test-45 failure prevents a full-green claim.
+
+The prematurely published `v1.8.0-readability` tag and [its failing CI run](https://github.com/BryanHartling/grimhollow/actions/runs/35945765921) remain available. Linux test 31 failed (mean 2.2395ms / p95 3.0285ms), in addition to test 45, although local timing passed. The 1.8.1 patch halves translucent gas-cloud overdraw without changing the 2ms gate. Patch local output: `TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.6198ms p95=0.8017ms failures=0`.
 
 Local commands: `gradlew.bat core:test core:smokeRun -PsmokeUpstream=true --no-daemon --console=plain`; `gradlew.bat desktop:dist android:assembleDebug core:smokeRun -PsmokeClass=PSYCHIC --no-daemon --console=plain`; native `--smoke-sewers` with `grimhollow.interfaceReview=true` in both orientations, `geometryTests=true`, `effectsTests=true`, and `recovery=true` plus `fogTests=true` across regions 0-4; `python tools/recovery_assets.py --check`; `python tools/recovery_checks.py --jar desktop/build/libs/desktop-1.8.0.jar`; `python tools/recovery_checks.py --all-regions`. Actual outputs, including intermediate failures, remain in `clean-build.log`.
 
-The final UI screenshots correct the initial long prompt and sideways-door marker placement. The Crystal utility growth preserves the pre-existing sight-based reach rather than reducing it to the initially suggested four cells. No other balance/content rules changed. Two built-in imagegen sources, exact prompts and the offline packer provide 98 distinct awards plus lock/mist/drop sprites. [Visual review](painted-world.html), [source prompts](../tools/painted/readability-prompts.json), [known issues](../KNOWN_ISSUES.md).
+Patch commands: `gradlew.bat desktop:dist android:assembleDebug --no-daemon --console=plain`, followed by the existing native geometry/effects and landscape/portrait interface checks against `desktop-1.8.1.jar`. The final UI screenshots correct the initial long prompt and sideways-door marker placement. The Crystal utility growth preserves the pre-existing sight-based reach rather than reducing it to the initially suggested four cells. No other balance/content rules changed. Two built-in imagegen sources, exact prompts and the offline packer provide 98 distinct awards plus lock/mist/drop sprites. [Visual review](painted-world.html), [source prompts](../tools/painted/readability-prompts.json), [known issues](../KNOWN_ISSUES.md).
 
 This table combines current results above with explicitly retained checkpoint coverage for unchanged subjects. It does not claim a full campaign, exhaustive talent/reward flows or physical Android-device testing. CI repeats its configured checks on the release commit.
 
 | Test | Status | Actual output or reason |
 |---|---|---|
-| 1 | PASS | Windows 1.8.0 jar launches; actual game/inventory/Examine/badge windows render in landscape and portrait. |
-| 2 | PASS | desktop:dist + android:assembleDebug BUILD SUCCESSFUL; existing six JUnit tests passed. Android versionCode 947, 1.8.0-INDEV; device play not run. |
+| 1 | PASS | Windows 1.8.1 jar launches; actual game/inventory/Examine/badge windows render in landscape and portrait. |
+| 2 | PASS | desktop:dist + android:assembleDebug BUILD SUCCESSFUL; existing six JUnit tests passed before the gas-only patch. Android versionCode 948, 1.8.1-INDEV; device play not run. |
 | 3 | RETIRED | Old procedural-art rebuild no longer ships; committed painted sources reconstruct exactly under test 44. |
 | 4 | RETIRED | Old generated-style validator was superseded by source provenance/reconstruction 44 and room distinctness 45. |
 | 5 | PASS | Runs=90 failures=0 across nine classes, plus the final corrected Psychic utility progression rerun: Runs=10 failures=0. |
@@ -30,8 +32,8 @@ This table combines current results above with explicitly retained checkpoint co
 | 18 | RETIRED | Superseded by recovery: generated-region brightness target replaced by within-room distinctness 45. |
 | 19 | permanent known issue | The floor-15 1,000-turn/20-mob timing scenario remains unrun. |
 | 20 | PASS | Retained v1.0.2 SDK-unset desktop-only build result; build configuration unchanged except version metadata. New CI uses desktopOnly=true. |
-| 21 | permanent known issue | The unchanged test-45 contrast gate remains enforced. Exact release-head CI results and artifact links are reported with delivery. |
-| 22 | PASS | aapt: com.grimhollow.dungeon; label Grimhollow; versionCode 945; versionName 1.6.0-INDEV; adaptive launcher entry present. |
+| 21 | permanent known issue | Test 45 remains enforced. v1.8.0 additionally failed Linux test 31; corrected exact patch-head CI results and artifact links are reported with delivery. |
+| 22 | PASS | Package com.grimhollow.dungeon; label Grimhollow; versionCode 948; versionName 1.8.1-INDEV; adaptive launcher entry present. |
 | 23 | PASS | Native renderer uses the documented Grimhollow save location under isolated user.home folders; player saves are untouched. |
 | 24 | permanent known issue | Current standard 3x: heroes=9, mob sprites=122, steady idle checks=122, failures=0. Every tested enemy idle holds for 600 frames. Retained extra-2x issue: six creature sprites at 0.9545-1.0 exceed 0.95. |
 | 25 | PASS | 381 named item IDs and 60 identification overlays pass semantic/geometry checks. Ground-loot rims tested for ordinary/shop heaps and excluded for hidden loot. |
@@ -40,7 +42,7 @@ This table combines current results above with explicitly retained checkpoint co
 | 28 | RETIRED | Superseded by recovery: rendered-cache rebuild no longer produces the restored shipping world/characters. |
 | 29 | RETIRED | Superseded by recovery: rerendering is prohibited; Blender/cache retained unused. |
 | 30 | RETIRED | Superseded by recovery: generated character hue-distance gate replaced by upstream pixel provenance 44. |
-| 31 | PASS | Off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames: mean=0.9422ms p95=1.5012ms, failures=0. |
+| 31 | PASS locally; CI pending | v1.8.1: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames: mean=0.6198ms p95=0.8017ms, failures=0. v1.8.0 Linux failed; final patch CI results are reported with delivery. |
 | 32 | PASS | Three scorch sizes, actual floor fire expiration and water/chasm rejection: failures=0. |
 | 33 | PASS | Existing Enchanter trade knowledge, armor inscriptions and persistent library scenarios pass in the nine-class run. Native library coverage is retained and repeated by CI. |
 | 34 | PASS | Old/future version rejection, portrait exception and deletion: failures=0. |

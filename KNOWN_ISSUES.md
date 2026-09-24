@@ -1,5 +1,6 @@
 # Known issues
 
+- The prematurely published v1.8.0-readability tag is preserved: Linux test 31 failed at mean 2.2395ms / p95 3.0285ms despite passing locally. The v1.8.1 patch halves gas-cloud overdraw; local test 31 passes at mean 0.6198ms / p95 0.8017ms. Exact patch-head CI results are reported with delivery; the 2ms gate is unchanged.
 - Inscription migration preserves knowledge stored in an older save; it cannot reconstruct random sigils discarded by earlier versions before that save. Identified enemy-curse casting remains an unimplemented design proposal.
 
 - Test 45 retains its 0.12 luminance / 40-degree hue thresholds. Fresh Windows captures after the wall fix fail 34/82 comparisons: Sewers 11/21, Prison 1/10, Caves 8/21, City 5/15, Halls 9/15. Restoring known wall faces changes the sampled pixels; no terrain palette or threshold was changed to chase this metric. The gate remains enforced in CI and human readability review is still required.

@@ -1,0 +1,12 @@
+{
+  "tool": "image_gen built-in",
+  "sources": {
+    "actors/necromancer-v2.png": {
+      "prompt": "Use case: identity-preserve / stylized-concept. Edit target: the first reference, a 4-by-4 transparent character-part atlas. Supporting identity/style reference: the second image, the Necromancer class painting. Create one revised production atlas, exactly FOUR columns and FOUR rows of sixteen isolated painted components on genuine transparent RGBA, not a whole assembled person. Preserve the elderly silver-haired necromancer's face and the painterly material quality. All cells have generous empty gutters; no labels, text, backdrop, cast shadow, grid or extra objects. The change is to make a recognizable hunched, broad-hooded, long-robed silhouette instead of a generic trousered adventurer. Colors: charcoal green-black cloth, slate-green highlights, strong aged ivory bone trim, restrained verdigris details, brown leather; make broad readable light/dark planes for 48x60 game frames, not miniature noise. Exact row-major cells: row 1 [head and short neck with deep angular hood and the SAME silver-haired elderly face, sleeveless torso from neck to belt with a broad asymmetric ivory bone collar and diagonal bone beads over dark cloth, LONG belted robe skirt from hips all the way to ankles with broad folds and a split ragged hem (not a short pelvis piece), broad long back mantle/cape with asymmetric angular shoulders and ragged hem]; row 2 [far upper arm sleeve pointing down with rounded joint ends, far forearm cloth cuff pointing down with rounded joint ends, near upper arm matching sleeve, near forearm matching cuff]; row 3 [far upper thigh dark cloth hip-to-knee, far lower shin wrap knee-to-ankle, near upper thigh matching, near lower shin matching]; row 4 [far worn leather boot, near matching boot, far relaxed pale/gloved hand with wrist at top, near matching hand]. Three-quarter front view facing slightly screen right, same camera and warm upper-left light throughout. Retain the existing part roles and directions except the explicitly lengthened robe and widened mantle. Arms have no hands, legs no feet, torso no head or limbs. No skeleton face, horns, armor spikes, modern elements or borrowed franchise costume. Do not include a lantern or staff in this atlas; those are separate existing game props.",
+      "references": [
+        "actors/necromancer.png",
+        "presentation/necromancer.png"
+      ]
+    }
+  }
+}

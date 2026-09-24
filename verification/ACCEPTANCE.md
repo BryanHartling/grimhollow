@@ -1,3 +1,11 @@
+# Inscription input - v1.9.1
+
+The reported Enchanter failure was reproduced with real pointer dispatch: `AssertionError: Actual armor inscription click failed`. Earlier native checks invoked callbacks directly and did not cover this route. The ScrollPane now forwards completed clicks in scrolled content coordinates. Drag gestures remain owned by the controller and cannot cast.
+
+`gradlew.bat desktop:dist android:assembleDebug core:smokeRun -PsmokeClass=ENCHANTER --no-daemon --console=plain`: **BUILD SUCCESSFUL; Runs=10 failures=0**. The existing native presentation harness now checks mouse armor selection, touch weapon selection and info, a scrolled/offset bottom glyph, drag suppression and zero-charge rejection. Landscape and portrait both report `TEST 33 POINTER ... failures=0`. Its nine-class selection/handbook and plant checks also pass. No gameplay, knowledge, charge or duration rules changed. Earlier failure output is preserved in `clean-build.log`.
+
+The full numbered table below remains the artifact checkpoint except that test 33 now includes these stronger passing input checks and desktop/Android builds use version 1.9.1/code 950. Final commits, tags and exact-head CI results are reported at delivery.
+
 # Ashlight Lantern - v1.9.0
 
 Painted-source checkpoint: `370e78808`. Intended release tag: `v1.9.0-ashlight`. Exact delivered commit and CI results are reported with delivery; the unchanged terrain-distinctness failure prevents a full-green claim.

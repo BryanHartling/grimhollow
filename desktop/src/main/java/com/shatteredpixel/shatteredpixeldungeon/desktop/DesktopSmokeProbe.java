@@ -270,10 +270,18 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if(frame==210)clickReviewLabel(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class,"inscribe"));
             if(frame==220)clickReviewLabel(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class,"armor"));
             if(frame==235){interfaceBounds();capture("inscribe-starter-armor");}
+            if(frame==240){
+                com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(inscriptionWindow(),"pane");
+                pointerGestureReview(RecoveryChecks.members(pane.content()).get(1),com.watabou.input.PointerEvent.NONE,0);
+                boolean description=false;
+                for(com.watabou.noosa.Gizmo g:new java.util.ArrayList<>(RecoveryChecks.members(Game.scene())))if(g instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage){description=true;((com.shatteredpixel.shatteredpixeldungeon.ui.Window)g).hide();}
+                if(!description||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).charges()!=3)
+                    throw new AssertionError("Touching inscription info did not open a free description");
+            }
             if(frame==245){
                 com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe wnd=inscriptionWindow();
                 com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(wnd,"pane");
-                clickReview(RecoveryChecks.members(pane.content()).get(0));
+                pointerClickReview(RecoveryChecks.members(pane.content()).get(0));
                 if(Dungeon.hero.belongings.armor.inscribed==null||Dungeon.hero.belongings.armor.inscriptionTurns<=0||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).charges()!=2)
                     throw new AssertionError("Actual armor inscription click failed");
             }
@@ -298,10 +306,43 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 java.util.List<Class<?>> choices=new java.util.ArrayList<>(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.state().choices(true));
                 choices.sort(java.util.Comparator.comparing(com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe::name));
                 java.util.List<com.watabou.noosa.Gizmo> rows=RecoveryChecks.members(pane.content());
-                clickReview(rows.get(rows.size()-2));
+                pointerClickReview(rows.get(rows.size()-2));
                 if(Dungeon.hero.belongings.armor.inscribed.getClass()!=choices.get(choices.size()-1))throw new AssertionError("Bottom inscription chose wrong glyph");
-                System.out.println("TEST 33/36 BOTANY UI: sprouted plants=13 actual armor selections=2 glyph library="+choices.size()+" scrolling/offset=PASS failures=0");
-                Gdx.app.exit();
+                if(Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).charges()!=1)
+                    throw new AssertionError("Scrolled inscription did not spend exactly one charge");
+                System.out.println("TEST 33/36 BOTANY UI: sprouted plants=13 pointer armor selections=2 glyph library="+choices.size()+" scrolling/offset=PASS failures=0");
+            }
+            if(frame==335){
+                com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush brush=Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class);brush.gainCharge(3);
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe(Dungeon.hero,brush,Dungeon.hero.belongings.weapon));
+            }
+            if(frame==345){
+                com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(inscriptionWindow(),"pane");
+                pointerGestureReview(RecoveryChecks.members(pane.content()).get(0),com.watabou.input.PointerEvent.NONE,40);
+                if(Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).charges()!=3
+                        ||((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)Dungeon.hero.belongings.weapon).inscribed!=null)
+                    throw new AssertionError("Dragging the inscription list cast a spell");
+                pane.scrollTo(0,0);
+            }
+            if(frame==350){
+                interfaceBounds();capture("inscribe-starter-weapon");
+                com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(inscriptionWindow(),"pane");
+                pointerGestureReview(RecoveryChecks.members(pane.content()).get(0),com.watabou.input.PointerEvent.NONE,0);
+                if(((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)Dungeon.hero.belongings.weapon).inscribed==null
+                        ||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).charges()!=2)
+                    throw new AssertionError("Touch weapon inscription failed");
+            }
+            if(frame==370){
+                com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush brush=Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class);brush.gainCharge(-brush.charges());
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe(Dungeon.hero,brush,Dungeon.hero.belongings.armor));
+            }
+            if(frame==390){
+                float time=Dungeon.hero.cooldown();Object prior=Dungeon.hero.belongings.armor.inscribed;
+                com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(inscriptionWindow(),"pane");
+                pointerClickReview(RecoveryChecks.members(pane.content()).get(0));
+                if(Dungeon.hero.cooldown()!=time||Dungeon.hero.belongings.armor.inscribed!=prior)throw new AssertionError("Empty Brush cast or spent a turn");
+                inscriptionWindow();capture("inscribe-no-charge");
+                System.out.println("TEST 33 POINTER: mouse armor, scrolled bottom glyph, touch weapon/info, drag suppression, zero-charge rejection; failures=0");Gdx.app.exit();
             }
         }catch(ReflectiveOperationException e){throw new AssertionError(e);}
     }
@@ -322,6 +363,21 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             }catch(NoSuchMethodException ignored){}
             throw new AssertionError("Missing click handler");
         }catch(ReflectiveOperationException e){throw new AssertionError(e);}
+    }
+    private static void pointerClickReview(Object button){
+        pointerGestureReview(button,com.watabou.input.PointerEvent.LEFT,0);
+    }
+    private static void pointerGestureReview(Object button,int pointerButton,int dragPixels){
+        com.watabou.noosa.ui.Component target=(com.watabou.noosa.ui.Component)button;
+        com.watabou.utils.Point at=target.camera().cameraToScreen(target.centerX(),target.centerY());
+        com.watabou.input.PointerEvent.addPointerEvent(new com.watabou.input.PointerEvent(at.x,at.y,901,com.watabou.input.PointerEvent.Type.DOWN,pointerButton));
+        com.watabou.input.PointerEvent.processPointerEvents();
+        if(dragPixels!=0)for(int step=1;step<=2;step++){
+            com.watabou.input.PointerEvent.addPointerEvent(new com.watabou.input.PointerEvent(at.x,at.y+dragPixels*step,901,com.watabou.input.PointerEvent.Type.DOWN,pointerButton));
+            com.watabou.input.PointerEvent.processPointerEvents();
+        }
+        com.watabou.input.PointerEvent.addPointerEvent(new com.watabou.input.PointerEvent(at.x,at.y+dragPixels*2,901,com.watabou.input.PointerEvent.Type.UP,pointerButton));
+        com.watabou.input.PointerEvent.processPointerEvents();
     }
     private com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroInfo reviewHandbook(){
         for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))

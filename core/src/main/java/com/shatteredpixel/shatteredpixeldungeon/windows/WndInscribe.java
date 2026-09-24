@@ -33,13 +33,12 @@ public class WndInscribe extends Window {
         for(Class<?> choice:choices){
             RedButton button=new RedButton(name(choice),7){
                 @Override protected void onClick(){
-                    if(brush.cast(hero,"inscribe",hero.pos,item,choice))hide();
-                    else GLog.w(Messages.get(SigilBrush.class,"inscribe_unavailable"));
+                    apply(hero,brush,item,choice);
                 }
             };
             button.multiline=true;button.setRect(0,y,width-26,24);content.add(button);
             IconButton info=new IconButton(Icons.get(Icons.INFO)){
-                @Override protected void onClick(){GameScene.show(new WndTitledMessage(new ItemSprite(item),name(choice),description(choice)));}
+                @Override protected void onClick(){showDescription(item,choice);}
             };
             info.setRect(width-26,y,22,24);content.add(info);y+=26;
         }
@@ -49,7 +48,25 @@ public class WndInscribe extends Window {
         }
         listWidth=width-4;listTop=(int)hint.bottom()+5;listHeight=height-listTop;
         content.setSize(listWidth,Math.max(listHeight,y));
-        pane=new ScrollPane(content);add(pane);pane.setRect(2,listTop,listWidth,listHeight);
+        // ScrollPane owns the pointer gesture so drags cannot activate a row.
+        // Its completed click arrives in content coordinates, including scroll.
+        pane=new ScrollPane(content){
+            @Override public void onClick(float x,float y){
+                int row=(int)(y/26);
+                if(x<0 || x>=listWidth || y<0 || y%26>=24 || row>=choices.size())return;
+                Class<?> choice=choices.get(row);
+                if(x<listWidth-22)apply(hero,brush,item,choice);
+                else showDescription(item,choice);
+            }
+        };
+        add(pane);pane.setRect(2,listTop,listWidth,listHeight);
+    }
+    private void apply(Hero hero,SigilBrush brush,Item item,Class<?> choice){
+        if(brush.cast(hero,"inscribe",hero.pos,item,choice))hide();
+        else GLog.w(Messages.get(SigilBrush.class,"inscribe_unavailable"));
+    }
+    private void showDescription(Item item,Class<?> choice){
+        GameScene.show(new WndTitledMessage(new ItemSprite(item),name(choice),description(choice)));
     }
     public static String name(Class<?> type){Object e=Reflection.newInstance(type);return e instanceof Weapon.Enchantment?((Weapon.Enchantment)e).name():((Armor.Glyph)e).name();}
     public static String description(Class<?> type){Object e=Reflection.newInstance(type);return e instanceof Weapon.Enchantment?((Weapon.Enchantment)e).desc():((Armor.Glyph)e).desc();}

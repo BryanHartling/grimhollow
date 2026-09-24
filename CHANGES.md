@@ -1,3 +1,8 @@
+# Inscription input - v1.9.1
+
+- Forward completed ScrollPane clicks to the Enchanter's inscription rows and description buttons. The scroll controller previously swallowed real mouse/touch events; direct button-callback tests missed the defect.
+- Test 33 now dispatches actual pointer down/up events for armor, weapons, info and an offset/scrolled bottom row, and verifies that dragging or an empty Brush cannot cast or spend a turn. Both landscape and portrait pass. Knowledge, charges, durations and balance are unchanged.
+
 # Ashlight Lantern - v1.9.0
 
 - Add a brass fire-and-light artifact with separate painted open/shuttered icons, an artifact slot, Flare/Feed/Shutter actions, and weight 1 appended to the artifact pool; every previous weight and existing-save uniqueness flag is preserved.

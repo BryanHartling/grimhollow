@@ -61,6 +61,39 @@ public class Artifact extends KindofMisc {
 	//used by some artifacts to keep track of duration of effects or cooldowns to use.
 	protected int cooldown = 0;
 
+	public final int playtestLevelCap() { return levelCap; }
+	/** Keeps normal artifact upgrade/feeding rules untouched; this path is save-mode guarded. */
+	public final void playtestLevel(int visibleLevel) {
+		com.shatteredpixel.shatteredpixeldungeon.Playtest.require();
+		if(visibleLevel<0 || visibleLevel>10)throw new IllegalArgumentException("Artifact level must be 0-10.");
+		Artifact template=com.watabou.utils.Reflection.newInstance(getClass());
+		int raw=Math.round(visibleLevel*levelCap/10f);
+		for(int i=0;i<raw;i++){
+			int previous=template.trueLevel();template.upgrade();
+			if(template.trueLevel()==previous)template.level(previous+1);
+		}
+		while(trueLevel()<raw){
+			int previous=trueLevel();upgrade();
+			if(trueLevel()==previous)level(previous+1);
+		}
+		level(raw);chargeCap=template.chargeCap;exp=0;
+		if(this instanceof DriedRose || this instanceof ChaliceOfBlood || this instanceof SandalsOfNature)image=template.image;
+		playtestRecharge();
+		onPlaytestLevelSet();
+	}
+	/** Refresh subclass state after a guarded editor change, including a downgrade. */
+	protected void onPlaytestLevelSet() {}
+	public final void playtestRecharge() {
+		com.shatteredpixel.shatteredpixeldungeon.Playtest.require();
+		if(this instanceof com.shatteredpixel.shatteredpixeldungeon.items.ClassSpellItem)
+			chargeCap=((com.shatteredpixel.shatteredpixeldungeon.items.ClassSpellItem)this).cap();
+		if(this instanceof com.shatteredpixel.shatteredpixeldungeon.items.Phylactery)
+			chargeCap=((com.shatteredpixel.shatteredpixeldungeon.items.Phylactery)this).cap();
+		if(this instanceof AshlightLantern)chargeCap=((AshlightLantern)this).capacity();
+		charge=chargeCap>0?chargeCap:10;partialCharge=0;cooldown=0;
+		Item.updateQuickslot();
+	}
+
 	@Override
 	public boolean doEquip( final Hero hero ) {
 

@@ -399,6 +399,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
 
     /** Review actual inventory, scrolling descriptions and class controls in both orientations. */
     private void interfaceTick() {
+        if(frames>=1200){playtestTick();return;}
         if(!(Game.scene() instanceof GameScene))return;
         Camera.main.edgeScroll.set(0);
         com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal crystal=Dungeon.hero.belongings.getItem(
@@ -556,8 +557,89 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if(frames==1190){
             if(reviewLantern.charges()!=inspectCharges-1)throw new AssertionError("51 native Flare did not spend one charge");
             System.out.println("TEST 51 UI: open/shuttered painted icons; scrollable lore/riders; free menu toggle; ingredient selection/feeding; Flare; failures=0");
-            SPDSettings.dynamicLighting(originalLighting);SPDSettings.zoom(originalZoom);Gdx.app.exit();
+            SPDSettings.dynamicLighting(originalLighting);SPDSettings.zoom(originalZoom);
         }
+    }
+    private int playtestStep,playtestWait;
+    private void playtestTick(){
+        if(++playtestWait>12000)throw new AssertionError("Playtest menu scenario stalled at "+playtestStep);
+        if(Game.scene() instanceof InterlevelScene){
+            Object button=RecoveryChecks.field(Game.scene(),"btnContinue");
+            if(button instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton && ((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button).active)pointerClickReview(button);
+            return;
+        }
+        if(!(Game.scene() instanceof GameScene)||frames%20!=0)return;
+        switch(playtestStep){
+            case 0:closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndGame());break;
+            case 1:playtestClick("Playtest");break;
+            case 2:interfaceBounds();capture("playtest-enable");playtestClick("Enable Playtest for this save");break;
+            case 3:if(!Playtest.enabled())throw new AssertionError("Playtest enable pointer failed");playtestClick("God mode: OFF");break;
+            case 4:if(!Playtest.god())throw new AssertionError("God toggle failed");interfaceBounds();capture("playtest-menu");playtestClick("Create items");break;
+            case 5:interfaceBounds();playtestClick("Search all items");break;
+            case 6:playtestInput("Ashlight","Search");break;
+            case 7:interfaceBounds();capture("playtest-search");playtestClick("Ashlight Lantern");break;
+            case 8:playtestClick("Upgrade level: 0");break;
+            case 9:playtestInput("10","Apply");break;
+            case 10:interfaceBounds();capture("playtest-create");playtestClick("Create 1 (single item)");break;
+            case 11:
+                if(Dungeon.hero.belongings.getAllItems(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern.class).stream().noneMatch(i->i.level()==10))throw new AssertionError("Native +10 lantern creation failed");
+                closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());break;
+            case 12:playtestClick("Hero, class and progression");break;
+            case 13:playtestClick("Set hero level");break;
+            case 14:playtestInput("24","Apply");break;
+            case 15:if(Dungeon.hero.lvl!=24)throw new AssertionError("Native level input failed");playtestClick("Choose subclass");break;
+            case 16:playtestClick("Seer");break;
+            case 17:
+                if(Dungeon.hero.subClass!=com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass.SEER)throw new AssertionError("Native subclass/load failed");
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());break;
+            case 18:playtestClick("Hero, class and progression");break;
+            case 19:if(!playtestClickPage("Choose armor ability / grant class armor"))return;break;
+            case 20:playtestClick(Dungeon.hero.heroClass.armorAbilities()[0].name());break;
+            case 21:
+                if(!(Dungeon.hero.belongings.armor instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.ClassArmor))throw new AssertionError("Native class armor failed");
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());break;
+            case 22:if(!playtestClickPage("Travel to any floor / quest branch"))return;break;
+            case 23:interfaceBounds();if(!playtestClickPage("Floor 21 - Halls"))return;break;
+            case 24:
+                if(Dungeon.depth!=21||Dungeon.hero.lvl!=24||!Playtest.god())throw new AssertionError("Native travel/load lost hero or flags");
+                capture("playtest-halls");GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());break;
+            case 25:playtestClick("Hero, class and progression");break;
+            case 26:playtestClick("Change class and starter kit");break;
+            case 27:interfaceBounds();capture("playtest-classes");if(!playtestClickPage("Enchanter"))return;break;
+            case 28:
+                if(Dungeon.hero.heroClass!=HeroClass.ENCHANTER||Dungeon.hero.lvl!=24||Dungeon.depth!=21||!(Dungeon.hero.belongings.artifact instanceof com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush))throw new AssertionError("Native class switch/kit failed");
+                capture("playtest-enchanter-halls");GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());break;
+            case 29:playtestClick("God mode: ON");break;
+            case 30:
+                if(!Playtest.enabled()||Playtest.god())throw new AssertionError("Native toggle did not preserve save marker");
+                closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndGameInProgress(99));break;
+            case 31:interfaceBounds();capture("playtest-save");
+                System.out.println("TEST 52 UI: real pointer enable/god/search/+10 artifact/hero level/subclass/armor/class switch/floor-21 travel and save marker; landscape or portrait bounds; failures=0");
+                Gdx.app.exit();return;
+        }
+        playtestStep++;
+    }
+    private com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton playtestButton(String label){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.Window)
+            for(com.watabou.noosa.Gizmo button:RecoveryChecks.members((Group)child))
+                if(button instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton && label.equals(((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button).text()))
+                    return (com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button;
+        return null;
+    }
+    private void playtestClick(String label){
+        Object button=playtestButton(label);if(button==null)throw new AssertionError("Playtest missing button: "+label+" at step "+playtestStep);
+        pointerGestureReview(button,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
+    }
+    private boolean playtestClickPage(String label){
+        if(playtestButton(label)!=null){playtestClick(label);return true;}
+        if(playtestButton(">")!=null && playtestButton(">").active){playtestClick(">");return false;}
+        throw new AssertionError("Playtest entry missing from paged menu: "+label);
+    }
+    private void playtestInput(String text,String action){
+        for(com.watabou.noosa.Gizmo window:RecoveryChecks.members(Game.scene()))if(window instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndTextInput){
+            ((com.watabou.noosa.TextInput)RecoveryChecks.field(window,"textBox")).setText(text);playtestClick(action);return;
+        }
+        throw new AssertionError("Playtest text field missing");
     }
     private void assertInspection(){
         if(!com.shatteredpixel.shatteredpixeldungeon.ui.Toolbar.examineLocked())throw new AssertionError("Inspection lost its latch");

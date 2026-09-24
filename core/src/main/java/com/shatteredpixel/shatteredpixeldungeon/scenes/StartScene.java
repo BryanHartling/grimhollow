@@ -265,6 +265,7 @@ public class StartScene extends PixelScene {
 					lastPlayed.text(Messages.get(StartScene.class, "months_ago", diff / (30L * 24 * 60 * 60_000)));
 				}
 				
+				if(info.playtest)lastPlayed.text("PLAYTEST");
 				depth.text(Integer.toString(info.depth));
 				depth.measure();
 				

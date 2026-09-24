@@ -140,6 +140,7 @@ public class GamesInProgress {
 		info.dailyReplay = Dungeon.dailyReplay;
 		
 		info.level = Dungeon.hero.lvl;
+		info.playtest = Playtest.enabled();
 		info.str = Dungeon.hero.STR;
 		info.strBonus = Dungeon.hero.STR() - Dungeon.hero.STR;
 		info.exp = Dungeon.hero.exp;
@@ -165,6 +166,7 @@ public class GamesInProgress {
 	}
 	
 	public static class Info {
+		public boolean playtest;
 		public int slot;
         public boolean incompatible;
 

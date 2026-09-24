@@ -275,6 +275,15 @@ public class Hero extends Char {
 		HP = Math.min(HP, HT);
 	}
 
+	/** Direct level setup only for an explicitly marked playtest save. */
+	public void playtestLevel(int value) {
+		com.shatteredpixel.shatteredpixeldungeon.Playtest.require();
+		if(value<1 || value>MAX_LEVEL)throw new IllegalArgumentException("Hero level must be 1-30.");
+		attackSkill+=value-lvl;defenseSkill+=value-lvl;
+		lvl=value;exp=0;updateHT(false);HP=HT;
+		com.shatteredpixel.shatteredpixeldungeon.Playtest.resetTalents();
+	}
+
 	public int STR() {
 		int strBonus = 0;
 
@@ -1643,6 +1652,7 @@ public class Hero extends Char {
 
 	@Override
 	public void damage( int dmg, Object src ) {
+		if (com.shatteredpixel.shatteredpixeldungeon.Playtest.god()) return;
 		if (buff(TimekeepersHourglass.timeStasis.class) != null
 				|| buff(TimeStasis.class) != null) {
 			return;
@@ -2192,6 +2202,7 @@ public class Hero extends Char {
 
 	@Override
 	public void die( Object cause ) {
+		if (com.shatteredpixel.shatteredpixeldungeon.Playtest.god()) { HP=HT; return; }
 		
 		curAction = null;
 

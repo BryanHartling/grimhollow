@@ -54,6 +54,7 @@ public class Bones {
 	private static HeroClass heroClass;
 
 	public static void leave() {
+		if (Playtest.enabled()) return;
 
 		//remains will usually drop on the floor the hero died on
 		// but are capped at 5 floors above the lowest depth reached (even when ascending)
@@ -152,6 +153,7 @@ public class Bones {
 	}
 
 	public static ArrayList<Item> get() {
+		if (Playtest.enabled()) return null;
 		//daily runs do not interact with remains
 		if (Dungeon.daily){
 			return null;

@@ -19,6 +19,10 @@ public class Phylactery extends Artifact {
     public enum Spell { RAISE_SKELETON, WITHER, RAISE_WRAITH, RAISE_GHOUL, RAISE_REVENANT, AMPLIFY, DECREPIFY, IRON_MAIDEN, LOWER_RESISTANCE }
     {image=ItemSpriteSheet.PHYLACTERY;unique=true;bones=false;charge=1;chargeCap=3;levelCap=10;defaultAction=AC_CAST;}
     private float spentExperience;
+    @Override protected void onPlaytestLevelSet(){
+        spentExperience=0;
+        if(isEquipped(Dungeon.hero))for(NecroSkeleton minion:NecroSkeleton.minions())minion.refreshStats();
+    }
     private final java.util.HashSet<Integer> visitedFloors=new java.util.HashSet<>();
     public int cap(){return 3+(level()>=2?1:0)+(level()>=5?1:0)+(level()>=8?1:0)+(Dungeon.hero!=null&&Dungeon.hero.subClass==HeroSubClass.DEATHSPEAKER?1:0);}
     public float minionBonus(){return 1+.05f*level();}

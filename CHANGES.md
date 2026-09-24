@@ -1,3 +1,11 @@
+# In-game playtest controls - v1.11.0
+
+- Add an optional, persistent Playtest mode to the in-run pause menu: god mode, healing/food/charge recovery, map reveal, cell teleport, creatures and gold/energy controls. Enabled saves are visibly labeled and excluded from badges, rankings, catalog credit and bones; ordinary runs retain their rules.
+- Add searchable creation of 313 item types with quantity, upgrade, identification and curse choices; existing equipment can be edited or enchanted, and Enchanters can learn all inscriptions. Artifact level editing respects native caps and refreshes class-focus progress, minions and lantern sight; normal feeding/upgrade rules remain unchanged.
+- Allow nine-class kit switches, hero level/strength, subclass and armor-path selection and talent setup. Preserve backpack/progression across class changes; preserve visited levels across travel. Generate skipped floors in order before entering any main floor, boss arena, Mine or Vault. Rebuild the current floor for repeat encounters without resetting campaign quest history.
+- Direct Vault travel deliberately retains equipment for controlled sandbox tests; normal quest entry still owns equipment stripping and rewards. Use playtest travel to return from a directly entered branch.
+- Extend the existing headless and actual-pointer interface checks as test 52; no art or ordinary gameplay changes.
+
 # All nine hero batches - v1.10.1
 
 - Complete the eight remaining character rigs in separate commits after the Necromancer checkpoint; every class has individual proportions, cloth silhouette, stance, stride and attack/cast gesture. All retain existing faces/palettes, armor material progression and unchanged game animation timing. Reuse the new solid armor fronts for the Necromancer as well, removing empty shoulder openings without changing his reviewed body shape.

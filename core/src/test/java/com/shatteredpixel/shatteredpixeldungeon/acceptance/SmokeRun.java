@@ -72,7 +72,7 @@ public class SmokeRun {
                             if(Dungeon.depth!=6) throw new AssertionError("Save/load depth mismatch");
                         }
                     }
-                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();}
+                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();}
                     String line="PASS "+name+" seed="+seed+" floor=6 save/load=ok";
                     System.out.println(line); log.println(line);
                 } catch(Throwable error) {
@@ -89,6 +89,96 @@ public class SmokeRun {
         if(failures>0) System.exit(1);
     }
     private static void check(boolean condition,String message){if(!condition)throw new AssertionError(message);}
+
+    private static void playtestScenario() throws Exception {
+        Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);clearArena();
+        check(!Playtest.enabled()&&!Playtest.god(),"Playtest leaked into ordinary new run");
+        boolean rejected=false;
+        try{Playtest.heroLevel(30);}catch(IllegalStateException expected){rejected=true;}
+        check(rejected&&Dungeon.hero.lvl==1,"Playtest actions must reject ordinary saves");
+        int hp=Dungeon.hero.HP;Dungeon.hero.damage(3,SmokeRun.class);
+        check(Dungeon.hero.HP<hp,"Ordinary damage was changed");
+        Playtest.enable();Playtest.god(true);
+        hp=Dungeon.hero.HP;Dungeon.hero.damage(9999,SmokeRun.class);Dungeon.hero.die(SmokeRun.class);
+        check(Dungeon.hero.HP==hp&&Dungeon.hero.isAlive(),"God mode damage/death protection");
+        Bundle marker=new Bundle();Playtest.store(marker);Playtest.reset();Playtest.restore(marker);
+        check(Playtest.enabled()&&Playtest.god(),"Playtest flags round trip");
+        java.util.Set<Badges.Badge> badges=Badges.allUnlocked();
+        int rankings=Rankings.INSTANCE.totalNumber;
+        Badges.unlock(Badges.Badge.VICTORY);Rankings.INSTANCE.submit(true,SmokeRun.class);
+        check(badges.equals(Badges.allUnlocked())&&rankings==Rankings.INSTANCE.totalNumber,"Test run polluted badges/rankings");
+        java.util.Map<Class<?>,Boolean> seen=new java.util.HashMap<>();
+        for(Class<? extends Item> type:PlaytestCatalog.items())seen.put(type,com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.isSeen(type));
+        int catalog=0,artifacts=0;
+        for(Class<? extends Item> type:PlaytestCatalog.items()){
+            Item item=Playtest.create(type,3,0,true,false);
+            check(item!=null&&item.getClass()==type,"Catalog creation: "+type);
+            int maximum=Playtest.maxItemLevel(item);
+            Playtest.itemLevel(item,maximum);
+            if(item instanceof Artifact){
+                Artifact artifact=(Artifact)item;
+                int cap=artifact.playtestLevelCap();
+                check(item.trueLevel()==cap,"Artifact maximum: "+type);
+                Bundle bundle=new Bundle();bundle.put("item",item);Item copy=(Item)bundle.get("item");
+                check(copy.trueLevel()==cap,"Artifact max restore: "+type);
+                Playtest.itemLevel(item,0);check(item.trueLevel()==0,"Artifact downgrade: "+type);artifacts++;
+            }
+            if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.keys.Key)
+                check(((com.shatteredpixel.shatteredpixeldungeon.items.keys.Key)item).depth==Dungeon.depth,"Spawned key depth");
+            catalog++;
+        }
+        for(Class<?> type:seen.keySet())check(seen.get(type)==com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.isSeen(type),"Test item polluted catalog: "+type);
+        for(Class<? extends Mob> type:PlaytestCatalog.mobs())check(com.watabou.utils.Reflection.newInstance(type)!=null,"Mob catalog constructor: "+type);
+        Item markerItem=Playtest.create(com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire.class,7,0,true,false);
+        check(Playtest.give(markerItem),"Spawned spell not collected");
+        Playtest.heroLevel(24);check(Dungeon.hero.lvl==24&&Dungeon.hero.exp==0,"Set hero level");
+        Playtest.strength(24);
+        for(HeroClass cls:HeroClass.values()){
+            Playtest.heroClass(cls);
+            check(Dungeon.hero.heroClass==cls&&Dungeon.hero.lvl==24&&Dungeon.hero.STR==24,"Class switch discarded progression");
+            check(Dungeon.hero.belongings.contains(markerItem),"Class switch discarded backpack");
+            Playtest.subclass(cls.subClasses()[1]);Playtest.armorAbility(cls.armorAbilities()[2]);
+            // Upstream's Monk talent drops its starter gear with a sprite animation when the pack is full.
+            // Supply that renderer object in the headless fixture while still exercising the real drop.
+            Heap talentHeap=Dungeon.level.drop(new Food(),Dungeon.hero.pos);talentHeap.sprite=new ItemSprite(talentHeap);talentHeap.sprite.link(talentHeap);
+            Playtest.maximizeTalents();
+            check(Dungeon.hero.subClass==cls.subClasses()[1]&&Dungeon.hero.belongings.armor instanceof ClassArmor,"Subclass/armor setup");
+            for(java.util.Map<Talent,Integer> tier:Dungeon.hero.talents)for(Talent talent:tier.keySet())
+                check(tier.get(talent)==talent.maxPoints(),"Max talent setup");
+            Playtest.recharge();
+            if(cls==HeroClass.ENCHANTER){Playtest.learnInscriptions();check(EnchanterMagic.state().choices(false).size()>=12&&EnchanterMagic.state().choices(true).size()>=10,"Learn all inscriptions");}
+            Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);
+            markerItem=Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire.class);
+            check(markerItem!=null&&markerItem.quantity()==7&&Playtest.god(),"Class/save round trip");
+        }
+        Playtest.heroLevel(1);check(Dungeon.hero.lvl==1&&Dungeon.hero.exp==0,"Lower hero level");
+        Playtest.heroLevel(30);Playtest.strength(30);
+        // Real generation/save/load travel across every region, bosses, final floor and back.
+        for(int depth:new int[]{5,10,15,20,25,26,1}){
+            Playtest.travel(depth,0);
+            check(Dungeon.depth==depth&&Dungeon.branch==0&&Dungeon.level.insideMap(Dungeon.hero.pos),"Floor travel "+depth);
+            check(Dungeon.hero.lvl==30&&Playtest.god()&&Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire.class)!=null,"Travel discarded hero/items");
+        }
+        Playtest.travel(19,1);check(Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel,"Vault travel");
+        Playtest.travel(12,1);check(Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.MiningLevel,"Mine travel");
+        Playtest.travel(1,0);
+        Level oldFloor=Dungeon.level;Playtest.rebuildFloor();
+        check(Dungeon.level!=oldFloor && Dungeon.depth==1 && Dungeon.hero.lvl==30 && Playtest.god(),"Rebuild discarded hero or reused old floor");
+        clearArena();
+        int cell=Dungeon.hero.pos+1;Playtest.spawnMob(Rat.class,cell);
+        check(Actor.findChar(cell) instanceof Rat,"Spawned creature must be registered");
+        rejected=false;try{Playtest.teleport(cell);}catch(IllegalArgumentException expected){rejected=true;}
+        check(rejected,"Teleport into occupied cell");
+        Playtest.teleport(Dungeon.hero.pos+2);Playtest.reveal();
+        for(boolean mapped:Dungeon.level.mapped)check(mapped,"Reveal map incomplete");
+        Buff.prolong(Dungeon.hero,Blindness.class,10);Playtest.restoreHero();
+        check(Dungeon.hero.buff(Blindness.class)==null&&Dungeon.hero.HP==Dungeon.hero.HT,"Recovery action");
+        Dungeon.saveAll();GamesInProgress.setUnknown(99);
+        check(GamesInProgress.check(99).playtest,"Saved slot lacks playtest marker");
+        Playtest.god(false);check(Playtest.enabled()&&!Playtest.god(),"Disabling power erased permanent test marker");
+        Playtest.restore(new Bundle());check(!Playtest.enabled()&&!Playtest.god(),"Old save default is not normal");
+        System.out.println("TEST 52 PASS: guarded persistent playtest; god mode; "+catalog+" item types, "+artifacts+" artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation");
+    }
 
     private static void lanternCharge(Artifact item,int charge)throws Exception{
         java.lang.reflect.Field field=Artifact.class.getDeclaredField("charge");field.setAccessible(true);field.setInt(item,charge);

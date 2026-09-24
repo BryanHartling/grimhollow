@@ -90,6 +90,7 @@ public class AshlightLantern extends Artifact {
         return true;
     }
     private void updateImage(){ image=shuttered ? ItemSpriteSheet.ASHLIGHT_CLOSED : ItemSpriteSheet.ASHLIGHT_OPEN; updateQuickslot(); }
+    @Override protected void onPlaytestLevelSet(){if(isEquipped(Dungeon.hero))refresh(Dungeon.hero);}
     private void refresh(Char ch){
         litLevel=null;
         if(open(ch)==this){

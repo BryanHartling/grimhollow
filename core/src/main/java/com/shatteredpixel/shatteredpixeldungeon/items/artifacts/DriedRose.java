@@ -353,6 +353,11 @@ public class DriedRose extends Artifact {
 		return super.upgrade();
 	}
 	
+	@Override protected void onPlaytestLevelSet(){
+		if(ghost==null && ghostID!=0)findGhost();
+		if(ghost!=null){ghost.updateRose();ghost.HP=Math.min(ghost.HP,ghost.HT);}
+	}
+
 	public Weapon ghostWeapon(){
 		return weapon;
 	}

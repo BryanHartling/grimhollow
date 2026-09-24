@@ -1,5 +1,15 @@
 # Grimhollow
 
+**In-game playtesting v1.11.0:** open the pause/game menu (Escape on desktop), choose **Playtest**, then **Enable Playtest for this save**. Controls use paged buttons in desktop and portrait layouts. Enabling permanently marks that save `PLAYTEST` and excludes it from rankings, badges, catalog credit and bones; other saves remain normal. God mode is optional and can be turned off for balance testing.
+
+- **Create items:** search 313 concrete item types or browse categories, including artifacts, class focuses, trinkets, crafted spells, weapons, armor, potions and quest items. Set stack size, upgrade level, identification and curse state. Keys use the current floor; inventory overflow drops at your feet.
+- **Edit equipment:** upgrade/downgrade, identify, recharge, bind/unbind curses or choose weapon enchantments and armor glyphs. Artifact levels map to each artifact's native cap; trinkets stop at +3.
+- **Hero setup:** change among nine classes with their starter kits, set level 1–30 and strength 1–50, select subclasses and armor abilities, and maximize/reset talents. Enchanters can learn the full inscription library. Class changes keep your floor, level, strength and backpack; old equipment is collected or dropped, and temporary effects/allies are cleared.
+- **Floor travel:** jump to floors 1–26, mines or Vault branches, return to visited floors, or rebuild the current floor to repeat encounters. Bosses use their proper generated arenas. Reveal the map/secrets, teleport to an empty walkable cell, or place regular and rare creatures.
+- **Recovery/resources:** restore health/food, clear harmful effects, refill charges, identify carried items, or set gold and alchemy energy.
+
+For a quick late-game test: enable Playtest, turn on God mode, set level and strength, select a subclass/armor ability, create or upgrade equipment, then travel to floor 21. Turn God mode off when ready to test balance. Set talents after changing level, subclass or armor ability, because those actions reset allocations. Direct Vault travel keeps your loadout for sandbox testing; use this menu to return. Use the normal quest entrance when testing the Vault's equipment-stripping/reward flow. Rebuilding a floor replaces that floor's terrain, creatures and loot; it does not reset completed quests.
+
 **Nine hero art batches v1.10.1:** each hero now has individual proportions, silhouette, posture, stride and attack/cast gestures. Broad Warrior shoulders, the Rogue's forward guard, the Duelist's lunge and four distinct caster garments retain each face and cloth palette through armor upgrades. Painted 96x120 frames preserve more source detail at the same world height and unchanged action timing. [All-nine comparison](verification/heroes/lineup.png), [individual animation and pose reviews](verification/painted-world.html), [source prompts](tools/painted/hero-rigs-prompts.json).
 
 **Inscription input v1.9.1:** real mouse/touch events now reach the Enchanter's scrollable weapon and armor inscription rows. Info buttons, scrolling and drag cancellation work; no knowledge or balance rules changed.
@@ -48,7 +58,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-1.10.1.jar
+java -jar desktop\build\libs\desktop-1.11.0.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.

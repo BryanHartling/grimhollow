@@ -231,6 +231,7 @@ public class Dungeon {
 	}
 	
 	public static void init() {
+		Playtest.reset();
 
 		initialVersion = version = Game.versionCode;
 		challenges = SPDSettings.challenges();
@@ -630,6 +631,7 @@ public class Dungeon {
 	public static void saveGame( int save ) {
 		try {
 			Bundle bundle = new Bundle();
+			Playtest.store(bundle);
 
 			bundle.put( INIT_VER, initialVersion );
 			bundle.put( VERSION, version = Game.versionCode );
@@ -729,6 +731,7 @@ public class Dungeon {
 	public static void loadGame( int save, boolean fullLoad ) throws IOException {
 		
 		Bundle bundle = FileUtils.bundleFromFile( GamesInProgress.gameFile( save ) );
+		Playtest.restore(bundle);
 
 		initialVersion = bundle.getInt( INIT_VER );
 		version = bundle.getInt( VERSION );
@@ -862,6 +865,7 @@ public class Dungeon {
 	}
 	
 	public static void preview( GamesInProgress.Info info, Bundle bundle ) {
+		info.playtest = bundle.getBoolean("playtest");
 		info.depth = bundle.getInt( DEPTH );
 		info.version = bundle.getInt( VERSION );
 		info.challenges = bundle.getInt( CHALLENGES );

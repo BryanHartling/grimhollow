@@ -1,5 +1,6 @@
 # Known issues
 
+- Playtest floor rebuilding resets the current terrain, creatures and loot, not global quest history. Direct Vault travel preserves the testing loadout; use the Playtest menu to leave, and use normal quest entry to test equipment stripping/rewards. No physical Android session or exhaustive item-by-item combat campaign is claimed.
 - All nine hero redesign batches are implemented; human review of their new silhouettes, proportions and gestures remains pending. They preserve the existing single mirrored facing and action timing, rather than introducing a multi-direction animation system.
 - The prematurely published v1.8.0-readability tag is preserved: Linux test 31 failed at mean 2.2395ms / p95 3.0285ms despite passing locally. Halving gas alone still failed Linux p95 at 2.5816ms in run 35947743192. The final v1.8.1 patch batches unchanged flame/ember particles: exact-head CI 35949405176 passes test 31 at mean 0.9583ms / p95 1.2911ms, with zero channel difference from individual draws. Only test 45 fails that run; its Linux sample is 31/76, versus Windows 34/82. The 2ms gate is unchanged.
 - Ashlight's fourteen-unit feeding curve and typical campaign level need human playtesting; no full campaign or physical Android device session is claimed. Ordinary fire protection intentionally does not change Soulfire's existing immunity-piercing rule.

@@ -61,6 +61,13 @@ public class WndGame extends Window {
 		});
 		curBtn.icon(Icons.get(Icons.PREFS));
 
+		if (Dungeon.hero != null && Dungeon.hero.isAlive()) {
+			addButton(curBtn=new RedButton(com.shatteredpixel.shatteredpixeldungeon.Playtest.enabled()?"Playtest (active)":"Playtest") {
+				@Override protected void onClick() { hide(); GameScene.show(new WndPlaytest()); }
+			});
+			curBtn.icon(Icons.get(Icons.INFO));
+		}
+
 		// Challenges window
 		if (Dungeon.challenges > 0) {
 			addButton( curBtn = new RedButton( Messages.get(this, "challenges") ) {

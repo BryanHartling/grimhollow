@@ -16,6 +16,7 @@ import java.util.Arrays;
 public class FocusCrystal extends ClassSpellItem {
     {image=ItemSpriteSheet.FOCUS_CRYSTAL;levelCap=10;}
     private int spentExperience;
+    @Override protected void onPlaytestLevelSet(){spentExperience=0;}
     @Override public int cap(){return super.cap()+(PsychicMind.points(Talent.FOCUSED_MIND)>=2?1:0);}
     @Override public int visiblyUpgraded(){return level();}
     @Override public Item upgrade(){return this;}

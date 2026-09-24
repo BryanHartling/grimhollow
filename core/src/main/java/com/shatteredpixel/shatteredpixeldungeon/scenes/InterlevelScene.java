@@ -79,7 +79,7 @@ public class InterlevelScene extends PixelScene {
 	private static float fadeTime;
 	
 	public enum Mode {
-		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, NONE
+		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, RESET, PLAYTEST, PLAYTEST_RESET, NONE
 	}
 	public static Mode mode;
 
@@ -159,6 +159,7 @@ public class InterlevelScene extends PixelScene {
 				else                        loadingDepth = Dungeon.depth;
 				break;
 			case RETURN:
+			case PLAYTEST:
 				loadingDepth = returnDepth;
 				break;
 		}
@@ -420,6 +421,12 @@ public class InterlevelScene extends PixelScene {
 						Actor.fixTime();
 
 						switch (mode) {
+							case PLAYTEST:
+								com.shatteredpixel.shatteredpixeldungeon.Playtest.travel(returnDepth,returnBranch);
+								break;
+							case PLAYTEST_RESET:
+								com.shatteredpixel.shatteredpixeldungeon.Playtest.rebuildFloor();
+								break;
 							case DESCEND:
 								descend();
 								break;

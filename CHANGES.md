@@ -1,3 +1,9 @@
+# Hero art, batch 1: Necromancer - v1.10.0
+
+- Replace the shared adventurer rig for the Necromancer with a stooped mantle, full-length ragged robe, restrained shuffle, Phylactery casting gesture and smaller hands/face proportions. Preserve the approved portrait's elderly face, bone trim and charcoal-green cloth. Armor stays visible on the chest while retaining the class collar, robe and silhouette.
+- Bake all hero sheets at 96x120 per pose instead of 48x60 so painted faces and cloth survive zooming. The other eight heroes retain their prior source parts and poses pending individual art batches; this resolution change is not their redesign. Hero world height, sixteen-unit cells, collision, frame sequence, action duration and callbacks remain unchanged. Creature texture density remains four independently of hero density eight.
+- The original source painting, exact built-in imagegen prompt and fixed crop gutters are committed. The offline packer reconstructs every atlas; the existing geometry check now includes all 1,512 hero pose/armor rectangles. No generator runs in the build or CI.
+
 # Inscription input - v1.9.1
 
 - Forward completed ScrollPane clicks to the Enchanter's inscription rows and description buttons. The scroll controller previously swallowed real mouse/touch events; direct button-callback tests missed the defect.

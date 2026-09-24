@@ -100,6 +100,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if (!sewers) { Gdx.app.exit(); return; }
             GamesInProgress.selectedClass=(encounters||vault||Boolean.getBoolean("grimhollow.renderPoc"))?HeroClass.NECROMANCER:HeroClass.WARRIOR;
             if(interfaceReview)GamesInProgress.selectedClass=HeroClass.PSYCHIC;
+            if(System.getProperty("grimhollow.heroClass")!=null)
+                GamesInProgress.selectedClass=HeroClass.valueOf(System.getProperty("grimhollow.heroClass"));
             GamesInProgress.curSlot=99;
             if(encounters && Integer.getInteger("grimhollow.saveSlot",0)>0) {
                 try {
@@ -898,6 +900,14 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 Dungeon.hero.heroClass=hero;
                 com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
                 band(sprite,20,.85f,.95f,buffer,camera,zoom,failures,"24 "+hero);heroes++;sprite.destroy();
+                // All armor rows and action frames must survive the higher
+                // resolution hero atlas, including save portraits/reflections.
+                for(int tier=0;tier<8;tier++)for(int pose=0;pose<21;pose++) {
+                    Image part=GameGeometry.heroImage(hero.spritesheet(),pose*12,tier*15,12,15);
+                    if(part.width()!=12||part.height()!=15||GameGeometry.opaqueHeight(part.texture,part.frame())==0)
+                        failures.add("24 hero atlas "+hero+" tier="+tier+" pose="+pose);
+                    part.destroy();
+                }
                 com.watabou.noosa.Image avatar=com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite.avatar(hero,6);
                 band(avatar,28,.85f,.95f,buffer,camera,zoom,failures,"24 avatar "+hero);avatar.destroy();
                 GamesInProgress.set(99);

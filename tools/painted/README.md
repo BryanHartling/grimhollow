@@ -1,3 +1,11 @@
+# Hero rigs, batch 1 - v1.10.0
+
+`hero_rigs.py` supplies the Necromancer's reviewed hunched posture, broad mantle, ankle-length robe and Phylactery gestures, preserving the elderly face in the existing portrait. `sources/actors/necromancer-v2.png` and `hero-rigs-prompts.json` record the original built-in imagegen edit and its references. The source has unequal row heights; `actors.parts` records reviewed transparent gutters. The other eight heroes keep their earlier rig until their individual batches.
+
+All hero outputs now contain 96x120-pixel frames in 2048x1024 sheets, below the 4096 atlas ceiling. Composition uses original source cutouts at 192x240 and downsamples once; this is not enlargement of the old low-resolution PNG. Runtime world height, pose indices, eight armor rows and frame timing are unchanged. Creature density is independent. The full pack reconstructs 115 images from 104 sources and 55 launcher resources.
+
+`python tools/painted/actors.py --review necromancer` reproduces the before/after, pose sheet and animation under `verification/heroes/necromancer`; the GIF uses the existing action timing and a shared palette. New source art and derivatives are GPL-3.0-or-later. No AI or Blender is required for packing or CI.
+
 # Awards and readable effects - v1.8.0
 
 `readability.py` composes 98 distinct 64px award medals from 42 authored reliefs and five material rims. A second output contains the painted padlock, soft mist and droplet used by the live renderer. The two source sheets are in `sources/readability`; exact built-in imagegen prompts are in `readability-prompts.json`. The offline packer asserts complete named badge coverage and uniqueness. No generator runs during builds or CI. These original source images and derivatives are GPL-3.0-or-later.

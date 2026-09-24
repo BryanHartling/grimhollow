@@ -15289,3 +15289,227 @@ RENDERED=GameScene SCREENSHOT=verification/interface/portrait/inscribe-starter-w
 RENDERED=GameScene SCREENSHOT=verification/interface/portrait/inscribe-no-charge.png
 TEST 33 POINTER: mouse armor, scrolled bottom glyph, touch weapon/info, drag suppression, zero-charge rejection; failures=0
 [Controllers] removed manager for application, 0 managers active
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :desktop:processResources UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets UP-TO-DATE
+> Task :android:compressDebugAssets UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :services:jar
+> Task :SPD-classes:jar
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest
+> Task :android:processDebugManifest
+> Task :android:processDebugManifestForPackage
+> Task :android:processDebugResources
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :core:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :core:classes
+> Task :core:jar
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:dexBuilderDebug
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:mergeDebugJavaResource
+> Task :desktop:release
+> Task :desktop:dist
+> Task :android:mergeLibDexDebug
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1m 45s
+45 actionable tasks: 17 executed, 28 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :android:mergeDebugAssets
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource UP-TO-DATE
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:compressDebugAssets
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:mergeLibDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :android:assembleDebug
+> Task :desktop:processResources
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes
+> Task :desktop:release
+> Task :desktop:dist
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 29s
+45 actionable tasks: 6 executed, 39 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\necro-art-native\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/heroes/necromancer/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=verification/heroes/necromancer/sewers-lighting-on.png
+RENDERED=GameScene SCREENSHOT=verification/heroes/necromancer/sewers-lighting-off.png
+TEST 24: heroes=9 mob sprites=122 steady idle checks=122 failures=0
+PAINTED: complete animation coverage; hero/rat height ratio=2.2222223 status sizes rendered=178
+TEST 25 semantics: all 383 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10, Ashlight open/closed=537/538
+PAINTED TRAPS: shapes=7 color/state combinations=63
+TEST 25: items=383 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+PAINTED SKILLS/PLANTS: unique skills=113 plants=13
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+TESTS 24-26, 34, 36 PASS; test 35 retired by recovery
+TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0
+TEST 31 FIRE BATCH: individual-render max channel difference=0
+TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.5244ms p95=0.6811ms failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\necro-art-room\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/heroes/necromancer/title.png
+ITERATION ROOM: seed=418 bounds=14,29,22,37 water=18 doors=2 rubble=2 wallTorch=1 torchCell=1031 bridgeCell=1208 heroCell=1174 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=verification/heroes/necromancer/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=verification/heroes/necromancer/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PAINTED launcher resources=55
+PAINTED assets=115 source sheets=104 failures=0
+C:\Users\Hartl\Documents\grimhollow\tools\recovery_assets.py:47: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  out.putdata([palette.get(pixel[:3], pixel[:3]) + (pixel[3],) for pixel in image.getdata()])
+TEST 44: upstream-derived character sheets=7; restored assets=29; verified painted replacements=115; failures=0
+CI 35993938726 at d8c636e43: Android success; Windows/Linux only test 45 fail; class gates below.
+2026-09-24T11:49:32.5941725Z Runs=30 failures=0
+2026-09-24T11:49:23.6536364Z Runs=10 failures=0
+2026-09-24T11:40:53.3811192Z TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=1.1033ms p95=1.7073ms failures=0
+2026-09-24T11:40:54.0884065Z TEST 45: region=sewers types=7 pairs=21 failures=11
+2026-09-24T11:42:14.8223419Z TEST 45: region=prison types=5 pairs=10 failures=2
+2026-09-24T11:43:32.4294854Z TEST 45: region=caves types=7 pairs=21 failures=8
+2026-09-24T11:44:47.0811088Z TEST 45: region=city types=6 pairs=15 failures=5
+2026-09-24T11:45:34.7984723Z TEST 45: region=halls types=6 pairs=15 failures=9
+2026-09-24T11:46:48.7402834Z TEST 51 UI: open/shuttered painted icons; scrollable lore/riders; free menu toggle; ingredient selection/feeding; Flare; failures=0
+2026-09-24T11:47:06.3192788Z TEST 51 UI: open/shuttered painted icons; scrollable lore/riders; free menu toggle; ingredient selection/feeding; Flare; failures=0
+2026-09-24T11:49:11.7094916Z Runs=10 failures=0
+2026-09-24T11:49:10.3064057Z Runs=10 failures=0
+2026-09-24T11:42:34.0498432Z TEST 45: region=sewers types=7 pairs=21 failures=11
+2026-09-24T11:42:34.0511109Z TEST 45: region=prison types=5 pairs=10 failures=1
+2026-09-24T11:42:34.0519390Z TEST 45: region=caves types=7 pairs=21 failures=8
+2026-09-24T11:42:34.0531555Z TEST 45: region=city types=6 pairs=15 failures=5
+2026-09-24T11:42:34.0540400Z TEST 45: region=halls types=6 pairs=15 failures=9
+CI 35994724771 at 2c0cb62dc: Android success; Windows/Linux only test 45 fail; actual pointer checks and class gates below.
+2026-09-24T11:57:50.9900688Z Runs=30 failures=0
+2026-09-24T11:57:40.6428669Z Runs=10 failures=0
+2026-09-24T11:49:14.5750683Z TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=1.0167ms p95=1.1152ms failures=0
+2026-09-24T11:49:15.4178013Z TEST 45: region=sewers types=7 pairs=21 failures=11
+2026-09-24T11:50:28.0902006Z TEST 45: region=prison types=5 pairs=10 failures=1
+2026-09-24T11:51:37.9730717Z TEST 45: region=caves types=7 pairs=21 failures=8
+2026-09-24T11:52:44.6175888Z TEST 45: region=city types=6 pairs=15 failures=5
+2026-09-24T11:53:29.2039455Z TEST 45: region=halls types=6 pairs=15 failures=9
+2026-09-24T11:54:35.4195252Z TEST 51 UI: open/shuttered painted icons; scrollable lore/riders; free menu toggle; ingredient selection/feeding; Flare; failures=0
+2026-09-24T11:54:50.5973272Z TEST 51 UI: open/shuttered painted icons; scrollable lore/riders; free menu toggle; ingredient selection/feeding; Flare; failures=0
+2026-09-24T11:55:19.7414502Z TEST 33 POINTER: mouse armor, scrolled bottom glyph, touch weapon/info, drag suppression, zero-charge rejection; failures=0
+2026-09-24T11:55:38.8731267Z TEST 33 POINTER: mouse armor, scrolled bottom glyph, touch weapon/info, drag suppression, zero-charge rejection; failures=0
+2026-09-24T11:57:39.8486165Z Runs=10 failures=0
+2026-09-24T11:57:39.3971538Z Runs=10 failures=0

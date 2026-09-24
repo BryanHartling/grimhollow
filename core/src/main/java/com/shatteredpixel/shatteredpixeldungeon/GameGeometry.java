@@ -5,7 +5,7 @@ package com.shatteredpixel.shatteredpixeldungeon;
 public final class GameGeometry {
     private GameGeometry() {}
     public static final int TILE_SIZE = 64;
-    public static final int HERO_FRAME_W = 48, HERO_FRAME_H = 60;
+    public static final int HERO_FRAME_W = 96, HERO_FRAME_H = 120;
     public static final int ITEM_ICON = 64;
     public static final int WORLD_TILE_SIZE = 16;
     public static final int LEGACY_HERO_FRAME_W = 12, LEGACY_HERO_FRAME_H = 15;
@@ -54,7 +54,9 @@ public final class GameGeometry {
         return null;
     }
     public static int characterDensity(Object texture) {
-        return characterLayout(texture)==null?1:HERO_DENSITY;
+        // Creature sheets retain their fourfold upstream layout. Hero sheets
+        // have separate 96x120 frames, fitted to the same world-space height.
+        return characterLayout(texture)==null?1:4;
     }
     // Alpha occupancy is measured once per atlas rectangle, not on every rendered frame.
     private static final java.util.WeakHashMap<com.watabou.gltextures.SmartTexture,java.util.Map<String,com.watabou.utils.RectF>> bounds = new java.util.WeakHashMap<>();

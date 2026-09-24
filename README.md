@@ -1,5 +1,7 @@
 # Grimhollow
 
+**Hero art batch 1 v1.10.0:** the Necromancer has a distinct stooped robe silhouette, clearer painted proportions and Phylactery gestures. All hero textures now retain twice the detail at the same world size; the other eight classes still await their individual shape/animation redesigns. [Before and after](verification/heroes/necromancer/comparison.png), [animation](verification/heroes/necromancer/animation.gif), [pose and armor sheet](verification/heroes/necromancer/poses.png).
+
 **Inscription input v1.9.1:** real mouse/touch events now reach the Enchanter's scrollable weapon and armor inscription rows. Info buttons, scrolling and drag cancellation work; no knowledge or balance rules changed.
 
 **Ashlight Lantern v1.9.0:** a new fire-fed artifact with painted open and shuttered states. Feed identified Liquid Flame (1 unit), Dragon's Breath or Soulfire (2) to reach levels 0–10; fourteen units reach the cap. Charges refill only away from environmental light, twice as fast when shuttered. Open light expands sight and enemy awareness; Flare blinds nearby enemies, gaining terrain/enemy ignition with level. Later levels repel hostile wraiths, reveal directly lit secrets and resist fire. Shuttering is free and persists across equipment changes and saves. Invisibility always wins: the Cloak stays fully invisible, with twice the charge drain while the lantern is open. [Rules and interactions](CHANGES.md), [exact painted-source prompt](tools/painted/ashlight-prompts.json).

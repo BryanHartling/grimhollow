@@ -742,7 +742,10 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             Dungeon.level.visited[source]=true;
             if(terrain!=Terrain.BARRICADE&&(int)visual.invoke(walls,top,Terrain.EMPTY,false)<0)throw new AssertionError("Known source overhang lost "+terrain);
         }
-        walls.destroy();Level.set(source,Terrain.EMPTY);
+        Level.set(top,Terrain.LOCKED_EXIT);
+        Dungeon.level.heroFOV[source]=Dungeon.level.visited[source]=Dungeon.level.mapped[source]=false;
+        if((int)visual.invoke(walls,top,Terrain.LOCKED_EXIT,false)!=com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet.EXIT_UNDERHANG)throw new AssertionError("Visible exit artwork depends on unknown neighbor");
+        walls.destroy();Level.set(top,Terrain.EMPTY);Level.set(source,Terrain.EMPTY);
         int vertical=Dungeon.hero.pos-2,horizontal=Dungeon.hero.pos+2;
         Level.set(vertical,Terrain.BARRICADE);Level.set(vertical-w,Terrain.WALL);Level.set(vertical+w,Terrain.WALL);
         Level.set(horizontal,Terrain.BARRICADE);Level.set(horizontal-1,Terrain.EMPTY);Level.set(horizontal+1,Terrain.WALL);

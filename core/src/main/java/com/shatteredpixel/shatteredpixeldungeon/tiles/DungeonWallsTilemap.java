@@ -62,7 +62,11 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 		if (DungeonTileSheet.wallStitcheable(tile)) {
 			if (pos + mapWidth < size && !DungeonTileSheet.wallStitcheable(map[pos + mapWidth])){
 
-				if (!belowKnown) return -1;
+				if (!belowKnown) {
+					// The exit underhang belongs to this cell, not its unknown neighbor.
+					return (tile == Terrain.LOCKED_EXIT || tile == Terrain.UNLOCKED_EXIT)
+							&& !skipCells.contains(pos) ? DungeonTileSheet.EXIT_UNDERHANG : -1;
+				}
 				if (map[pos + mapWidth] == Terrain.DOOR){
 					return DungeonTileSheet.DOOR_SIDEWAYS;
 				} else if (map[pos + mapWidth] == Terrain.LOCKED_DOOR) {
@@ -91,10 +95,10 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 		if (skipCells.contains(pos)){
 			return -1;
 		}
-		if (!belowKnown) return -1;
-
 		if (map[pos] == Terrain.LOCKED_EXIT || map[pos] == Terrain.UNLOCKED_EXIT){
 			return DungeonTileSheet.EXIT_UNDERHANG;
+		} else if (!belowKnown) {
+			return -1;
 		} else if (pos + mapWidth < size && DungeonTileSheet.wallStitcheable(map[pos+mapWidth])) {
 
 			return DungeonTileSheet.stitchWallOverhangTile(

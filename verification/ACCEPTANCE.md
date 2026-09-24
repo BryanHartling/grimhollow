@@ -2,7 +2,7 @@
 
 Art-source checkpoint: `df8104413`. Corrected release tag: `v1.8.1-readability`. Exact delivered commit and CI results are reported with delivery; the enforced test-45 failure prevents a full-green claim.
 
-The prematurely published `v1.8.0-readability` tag and [its failing CI run](https://github.com/BryanHartling/grimhollow/actions/runs/35945765921) remain available. Linux test 31 failed (mean 2.2395ms / p95 3.0285ms), in addition to test 45, although local timing passed. The 1.8.1 patch halves translucent gas-cloud overdraw without changing the 2ms gate. Patch local output: `TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.6198ms p95=0.8017ms failures=0`.
+The prematurely published `v1.8.0-readability` tag and [its failing CI run](https://github.com/BryanHartling/grimhollow/actions/runs/35945765921) remain available. Linux test 31 failed (mean 2.2395ms / p95 3.0285ms), in addition to test 45, although local timing passed. Halving gas alone still failed Linux p95 at 2.5816ms in run 35947743192. The final 1.8.1 patch also batches equal-alpha flame/ember particles without changing their number or simulation, or the 2ms gate. The individual-draw pixel reference differs by zero in the local run. Patch local output: `TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.4672ms p95=0.6894ms failures=0`.
 
 Local commands: `gradlew.bat core:test core:smokeRun -PsmokeUpstream=true --no-daemon --console=plain`; `gradlew.bat desktop:dist android:assembleDebug core:smokeRun -PsmokeClass=PSYCHIC --no-daemon --console=plain`; native `--smoke-sewers` with `grimhollow.interfaceReview=true` in both orientations, `geometryTests=true`, `effectsTests=true`, and `recovery=true` plus `fogTests=true` across regions 0-4; `python tools/recovery_assets.py --check`; `python tools/recovery_checks.py --jar desktop/build/libs/desktop-1.8.0.jar`; `python tools/recovery_checks.py --all-regions`. Actual outputs, including intermediate failures, remain in `clean-build.log`.
 
@@ -42,7 +42,7 @@ This table combines current results above with explicitly retained checkpoint co
 | 28 | RETIRED | Superseded by recovery: rendered-cache rebuild no longer produces the restored shipping world/characters. |
 | 29 | RETIRED | Superseded by recovery: rerendering is prohibited; Blender/cache retained unused. |
 | 30 | RETIRED | Superseded by recovery: generated character hue-distance gate replaced by upstream pixel provenance 44. |
-| 31 | PASS locally; CI pending | v1.8.1: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames: mean=0.6198ms p95=0.8017ms, failures=0. v1.8.0 Linux failed; final patch CI results are reported with delivery. |
+| 31 | PASS locally; CI pending | v1.8.1: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames: mean=0.4672ms p95=0.6894ms, failures=0. v1.8.0 Linux failed; final patch CI results are reported with delivery. |
 | 32 | PASS | Three scorch sizes, actual floor fire expiration and water/chasm rejection: failures=0. |
 | 33 | PASS | Existing Enchanter trade knowledge, armor inscriptions and persistent library scenarios pass in the nine-class run. Native library coverage is retained and repeated by CI. |
 | 34 | PASS | Old/future version rejection, portrait exception and deletion: failures=0. |

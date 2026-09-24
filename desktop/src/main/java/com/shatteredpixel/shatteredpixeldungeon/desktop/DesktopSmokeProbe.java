@@ -1114,6 +1114,30 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(i>=0)millis[i]=ms;if(i==120){Pixmap image=Pixmap.createFromFrameBuffer(0,0,768,768);PixmapIO.writePNG(Gdx.files.absolute("verification/effects-on.png"),image);image.dispose();}buffer.end();
             }
             double average=java.util.Arrays.stream(millis).average().getAsDouble();java.util.Arrays.sort(millis);double p95=millis[227];
+            java.lang.reflect.Field batchField=BlobEmitter.class.getDeclaredField("fireBatch");batchField.setAccessible(true);
+            Object fireBatch=batchField.get(RecoveryChecks.members(fx).get(1));
+            if(fireBatch==null)throw new AssertionError("31 fire batching did not execute");
+            java.lang.reflect.Field batchBuffer=fireBatch.getClass().getDeclaredField("buffer");batchBuffer.setAccessible(true);
+            if(batchBuffer.get(fireBatch)==null)throw new AssertionError("31 fire batching fell back to individual draws");
+            // Compare the unchanged particles with individual draws outside the timing sample.
+            buffer.begin();Pixmap batched=Pixmap.createFromFrameBuffer(0,0,768,768);
+            Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);com.watabou.glwrap.Texture.clear();
+            com.watabou.noosa.NoosaScript.get().resetCamera();
+            RecoveryChecks.members(fx).get(0).draw();com.watabou.glwrap.Blending.setLightMode();
+            for(com.watabou.noosa.Gizmo particle:RecoveryChecks.members((Group)RecoveryChecks.members(fx).get(1)))
+                if(particle!=null&&particle.isVisible())particle.draw();
+            com.watabou.glwrap.Blending.setNormalMode();
+            Pixmap individual=Pixmap.createFromFrameBuffer(0,0,768,768);buffer.end();
+            int maxChannelDifference=0;
+            for(int y=0;y<768;y++)for(int x=0;x<768;x++) {
+                int a=batched.getPixel(x,y),b=individual.getPixel(x,y);
+                for(int shift=0;shift<32;shift+=8)maxChannelDifference=Math.max(maxChannelDifference,
+                        Math.abs(((a>>>shift)&255)-((b>>>shift)&255)));
+            }
+            batched.dispose();individual.dispose();
+            // CPU/GPU transform rounding and additive accumulation can differ by one byte.
+            if(maxChannelDifference>2)failures.add("31 batched fire differs from individual draws: "+maxChannelDifference);
+            System.out.println("TEST 31 FIRE BATCH: individual-render max channel difference="+maxChannelDifference);
             if(average>=2||p95>=2)failures.add("31 enhanced mean="+average+"ms p95="+p95+"ms must both be < 2ms");
             System.out.printf(java.util.Locale.ROOT,"TEST 31: off pixel differences=%d; 40 gas + 10 fire cells, 240 GPU-completed frames mean=%.4fms p95=%.4fms failures=%d%n",changed,average,p95,failures.size());
             fx.destroy();System.arraycopy(fov,0,Dungeon.level.heroFOV,0,fov.length);buffer.dispose();

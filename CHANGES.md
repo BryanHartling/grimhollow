@@ -1,6 +1,7 @@
 # Gas rendering cost - v1.8.1
 
 - Use one soft cloud per gas cell, overlapping its neighbors, instead of two overlapping clouds at each cell. This halves cloud overdraw while keeping the rounded edges, slow drift, color and mechanical coverage.
+- Batch equal-alpha additive flame/ember sprites while retaining every particle and its motion; an in-renderer comparison checks the individual-draw reference. Halving gas alone still missed Linux p95 (2.5816ms); the unchanged effects gate covers both gas and fire.
 - The v1.8.0 Linux CI run exceeded the unchanged 2ms effect budget (mean 2.2395ms, p95 3.0285ms); its tag and failing run remain available. The patch release supersedes that prematurely tagged state.
 
 # Readability and repeated inspection - v1.8.0

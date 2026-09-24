@@ -31,6 +31,7 @@ import com.watabou.utils.RectF;
 public class BlobEmitter extends Emitter {
 	
 	private Blob blob;
+	private FireParticleBatch fireBatch;
 	
 	public BlobEmitter( Blob blob ) {
 		
@@ -47,6 +48,20 @@ public class BlobEmitter extends Emitter {
             if(child!=null&&!(child instanceof EnhancedEffects.GasLayer))child.visible=!EnhancedEffects.enabled();
     }
     public RectF bound = new RectF(0, 0, 1, 1);
+
+    @Override public void draw() {
+        if (EnhancedEffects.enabled() && lightMode
+                && factory == com.shatteredpixel.shatteredpixeldungeon.effects.particles.FlameParticle.FACTORY) {
+            if (fireBatch == null) fireBatch = new FireParticleBatch();
+            if (fireBatch.draw(this, members)) return;
+        }
+        super.draw();
+    }
+
+    @Override public void destroy() {
+        if (fireBatch != null) fireBatch.destroy();
+        super.destroy();
+    }
 	
 	@Override
 	protected void emit( int index ) {

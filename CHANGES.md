@@ -1,3 +1,7 @@
+# Hero art, batch 5: Huntress
+
+- Give the Huntress an athletic long-legged stance, short green mantle, longer stride and draw/release arm gesture, retaining her auburn hair and leather trim across armor tiers. No bow, movement or combat rules change.
+
 # Hero art, batch 4: Rogue
 
 - Give the Rogue a forward crouch, low quiet footwork, close guard and short thrust, with a broad dark hood and swept cape. These replace the upright shared walk/overhead strike without changing their durations or attack behavior.

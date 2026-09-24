@@ -20,6 +20,9 @@ PROFILES={
     'rogue':dict(torso=(15,19),head=(11.5,13),cape=(22,33),hips=(12,9),
                  shoulder=5.5,arm=4.5,leg=5,boot=(6,5),stance=5.5,stride=3.7,
                  lean=2,bob=.15,style='knife',lower=2.5,head_y=13,head_x=2.5,tilt=-9),
+    'huntress':dict(torso=(16,19),head=(9.5,11.5),cape=(18,27),hips=(13,9),
+                    shoulder=6,arm=4.8,leg=5.8,boot=(7,5.4),stance=5.8,stride=4.8,
+                    lean=.5,bob=.45,style='ranger',head_y=10.5),
 }
 
 
@@ -84,6 +87,9 @@ def humanoid(hero,tier,index):
     if style=='knife' and index in (13,14,15):
         elbows=[(18,32),(33,31)]
         wrists=[(22,31),(28,31)] if index==13 else [(22,31),(42,27)] if index==14 else [(21,34),(33,31)]
+    if style=='ranger' and index in (13,14,15):
+        elbows=[(31,24),(32,24)]
+        wrists=[(39,25),(27,21)] if index==13 else [(42,22),(29,23)] if index==14 else [(36,29),(29,30)]
     cape=caster_cloth(cfg['robe'],True) if 'robe' in cfg else p[3]
     skirt=caster_cloth(cfg['robe']) if 'robe' in cfg else p[2]
     place(canvas,cape,(cx-3+sway*.3,33+bob),cfg['cape'],sway*1.3)

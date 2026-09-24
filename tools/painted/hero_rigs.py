@@ -6,7 +6,7 @@ Keep an unfinished class on its previous rig until its own visual review.
 import math
 from functools import lru_cache
 from PIL import Image
-from actors import SCALE, FRAME_WIDTH, FRAME_HEIGHT, parts, place, limb
+from actors import HERE, SCALE, FRAME_WIDTH, FRAME_HEIGHT, parts, place, limb
 
 # Dimensions use composition coordinates, independently of texture density.
 # Each completed profile preserves its source's face, cloth palette and costume.
@@ -14,8 +14,20 @@ PROFILES={
     'warrior':dict(torso=(23,22),head=(10,12),cape=(17,34),hips=(17,10),
                    shoulder=9,arm=7,leg=7,boot=(8,6),stance=6,stride=4,
                    lean=-.7,bob=.8,style='heavy'),
+    'mage':dict(torso=(17,20),head=(9.5,11.5),cape=(21,42),hips=(22,27),
+                shoulder=6.3,arm=5.5,leg=5,boot=(6,4.5),stance=3.2,stride=2.8,
+                lean=-.2,bob=.2,style='scholar',robe=0),
 }
 
+
+@lru_cache(None)
+def caster_cloth(column,back=False):
+    im=Image.open(HERE/'sources/actors/caster-robes.png').convert('RGBA')
+    split=[512,512,526,526][column]
+    im=im.crop((column*384,split if back else 0,(column+1)*384,1024 if back else split))
+    box=im.getchannel('A').point(lambda a:255 if a>=16 else 0).getbbox()
+    if not box:raise ValueError('Empty caster garment')
+    return im.crop(box)
 
 @lru_cache(None)
 def joint_part(hero,index):
@@ -27,7 +39,7 @@ def joint_part(hero,index):
 
 
 def humanoid(hero,tier,index):
-    cfg=PROFILES[hero];p=parts(hero);gear=parts('armor',2)
+    cfg=PROFILES[hero];p=parts(hero);gear=parts('armor-front',2)
     canvas=Image.new('RGBA',(48*SCALE,60*SCALE))
     stride=bob=sway=0
     if 2<=index<=7:
@@ -60,20 +72,29 @@ def humanoid(hero,tier,index):
         elbows=[(12,24),(36,24)];wrists=[(9,20),(40,20)]
     elif index in (19,20):
         elbows=[(17,30),(34,30)];wrists=[(23,28-(index-19)),(32,28-(index-19))]
-    place(canvas,p[3],(cx-3+sway*.3,32+bob),cfg['cape'],sway*1.3)
+    if style=='scholar' and index in (13,14,15):
+        elbows=[(17,25),(31,22)]
+        wrists=[(21,25),(32,14)] if index==13 else [(22,24),(40,22)] if index==14 else [(20,30),(34,29)]
+    cape=caster_cloth(cfg['robe'],True) if 'robe' in cfg else p[3]
+    skirt=caster_cloth(cfg['robe']) if 'robe' in cfg else p[2]
+    place(canvas,cape,(cx-3+sway*.3,33+bob),cfg['cape'],sway*1.3)
     for side in (0,1):
         limb(canvas,p[8+side*2],hips[side],knees[side],cfg['leg'])
         limb(canvas,p[9+side*2],knees[side],ankles[side],cfg['leg']*.85)
         place(canvas,p[12+side],(ankles[side][0]+1,ankles[side][1]+1.5),cfg['boot'])
     limb(canvas,joint_part(hero,4),shoulders[0],elbows[0],cfg['arm'])
     limb(canvas,joint_part(hero,5),elbows[0],wrists[0],cfg['arm']*.77)
-    place(canvas,p[2],(23,36+bob),cfg['hips'])
+    skirt_y=55-cfg['hips'][1]/2 if 'robe' in cfg else 36
+    place(canvas,skirt,(23+sway*.2,skirt_y+bob),cfg['hips'],sway*.6 if 'robe' in cfg else 0)
     place(canvas,p[1],(cx,cy),cfg['torso'])
     if tier:
         chest=(cfg['torso'][0]*.77,cfg['torso'][1]*.79)
         place(canvas,gear[tier-1],(cx,cy+.7),chest)
         collar=p[1].crop((0,0,p[1].width,round(p[1].height*.22)))
         place(canvas,collar,(cx,cy-cfg['torso'][1]*.39),(cfg['torso'][0],cfg['torso'][1]*.22))
+    # The torso source has an empty arm opening. Its far shoulder must sit
+    # over that opening even though the far forearm remains behind the body.
+    limb(canvas,joint_part(hero,4),shoulders[0],elbows[0],cfg['arm'])
     limb(canvas,joint_part(hero,6),shoulders[1],elbows[1],cfg['arm'])
     limb(canvas,joint_part(hero,7),elbows[1],wrists[1],cfg['arm']*.77)
     place(canvas,p[0],(cx+1,10+bob+bend),cfg['head'],-bend)

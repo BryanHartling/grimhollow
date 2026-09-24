@@ -1,3 +1,7 @@
+# Hero art, batch 3: Mage
+
+- Give the Mage an upright narrow robe silhouette, measured short steps and a two-handed casting gesture, with plum/copper garments matching the existing face and portrait. New long garment cutouts replace the shared short skirt; chest overlays now use solid front panels rather than empty tunics with visible arm sockets.
+
 # Hero art, batch 2: Warrior
 
 - Give the Warrior broad shoulders/chest, a planted stance, heavier steps and a compact mantle, retaining burgundy cloth and copper hair around every armor tier. Crop sleeve attachment surfaces so the finished shoulders do not show the source cutouts' open sockets. Shared animation timing and gameplay remain unchanged.

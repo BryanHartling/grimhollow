@@ -2,7 +2,9 @@
   "base": "v1.0.2-fogfix",
   "layout": "v4.0.0",
   "source_sha256": {
+    "actors/armor-front.png": "528f4d3b305afdd4a9ab928d3a66343bfccb2e8452b62ddb723e7dba81bc428f",
     "actors/armor.png": "1ef17b23b2361f911f04056003ef998afe9869574a5a47988c8a2079cc520d27",
+    "actors/caster-robes.png": "3a54812307eab63c4c2ec45530811ec67545a59865d6f5a9a730afe69368a77a",
     "actors/cleric.png": "ca396ccdc3f7c29e0d432f755dd77cf7151a06aac030dc66bf2634106409f794",
     "actors/duelist.png": "4fc5021fe2078aafffd69013e0aa3c78d1b7e7c62efc42063314edfc0caf98e8",
     "actors/enchanter.png": "c0e2d1474d6dbc9d427aeb48911ed37d196218ba6cb2446337631fa57813c1ec",
@@ -281,14 +283,14 @@
         2048,
         1024
       ],
-      "rgba_sha256": "60aa8ffbddde1dc0d106c1d6fb26114c95d88ad22994870bc40ab419a6ceeb2d"
+      "rgba_sha256": "505f1497881b932f204606f4c94191517e5359a3dd35c952ac06c88d793a9f92"
     },
     "sprites/hero_mage.png": {
       "size": [
         2048,
         1024
       ],
-      "rgba_sha256": "bee6507c8756fd2f0a82368ee2a2307f1c65dd4d34273ea8dc153f52a42b82d4"
+      "rgba_sha256": "aa425e1955166c053d1eac0c6af28fd479dbd881d64a30b81d7d9548f2c47d22"
     },
     "sprites/hero_rogue.png": {
       "size": [

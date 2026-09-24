@@ -7,6 +7,21 @@
         "actors/necromancer.png",
         "presentation/necromancer.png"
       ]
+    },
+    "actors/caster-robes.png": {
+      "prompt": "Use case: identity-preserve / stylized-concept. Use the four reference character-component sheets to match their existing costumes exactly in painterly material and palette. Create one transparent production cutout sheet with EXACTLY FOUR columns and TWO rows (eight separate components), generous transparent gutters, true RGBA, no text, background, grid, shadows or assembled people. The columns are Mage, Cleric, Enchanter, Psychic, in that order. TOP ROW: four different long lower-body garments, from belt at top to ankles at bottom, no legs or boots: (1) Mage: full plum-purple wool robe skirt, long narrow broad folds, tarnished copper geometric embroidery and leather belt with small book pouch; (2) Cleric: ivory linen split vestments, broad rectangular gold embroidered central stole down to ankle level, brown leather belt, heavier squared silhouette; (3) Enchanter: ink-blue asymmetric long wrap skirt, one diagonal silver embroidered panel ending near ankle, other side ending mid-calf, small belt scroll pouch, slim tailored silhouette; (4) Psychic: muted violet two long separated tapering fabric panels with silver trim, an open center designed to reveal the separate existing clothed legs, light airy silhouette, no legs or skin in this cutout. BOTTOM ROW: the corresponding four distinct back capes from shoulders to below knees, no heads or limbs: (1) Mage long narrow plum scholar's mantle with copper fastening; (2) Cleric broad ivory shoulder mantle with gold border, squared low hem; (3) Enchanter ink-blue half-cape sweeping to one side, silver embroidered edge; (4) Psychic two split violet cape tails hanging below a silver-trimmed collar, narrow flowing cloth. Components face three-quarter-front slightly screen right, same camera and upper-left warm studio lighting as the references. These are anatomy-compatible game-sprite costume parts, broad readable folds, realistic weathered painted cloth, no noisy tiny texture. Keep all eight objects separate within their cells, complete and uncropped. Do not include hands, weapons, wands, symbols from other franchises, skin, torsos, mannequins or extra objects.",
+      "references": [
+        "actors/mage.png",
+        "actors/cleric.png",
+        "actors/enchanter.png",
+        "actors/psychic.png"
+      ]
+    },
+    "actors/armor-front.png": {
+      "prompt": "Use case: identity-preserve / stylized-concept. The reference contains armor tunics painted as empty clothing, with black open shoulder sockets. Make a replacement production overlay sheet in exactly FOUR columns and TWO rows, transparent RGBA background, generous empty gutters, no text/grid/backdrop/shadows. Keep the same hand-painted weathered materials. These are FLAT FRONT CHEST PANELS to layer over a fully clothed game character, NOT hollow tunics, mannequins or whole bodies. Every panel is a SOLID softly curved shield-like chest surface from clavicle to waist, a straight or shallow concave neckline, small rounded upper corners tapering gently toward the waist. No shoulders sticking out, no armholes, no neck holes, no backs, no sleeves, no belts, no protruding parts, no sockets, no deep side perspective. Near frontal view turned only five degrees toward screen right, warm upper-left light. Exact row-major cells: 1 ivory padded linen panel with dark brown lacing down the center; 2 worn chestnut leather front panel with two crossed seams; 3 tarnished silver chainmail chest panel with a narrow leather edge; 4 dark overlapping iron scale chest panel; 5 weathered silver plate breastplate front with a central ridge; 6 darkened steel chest plate with restrained gold filigree; 7 bronze-edged dark iron chest plate; 8 a small open leather-bound spellbook matching the reference. Keep each complete object strictly inside its own cell. Broad readable material planes suited to a 30-pixel game chest, not excessive miniature pattern noise. Seven solid front panels and one book only, genuinely transparent alpha around them.",
+      "references": [
+        "actors/armor.png"
+      ]
     }
   }
 }

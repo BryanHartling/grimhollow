@@ -59,9 +59,11 @@ def limb(canvas, part, start, end, width):
 
 
 def frame(hero, tier, index):
+    from hero_rigs import PROFILES, humanoid
     if hero=='necromancer':
         from hero_rigs import necromancer
         return necromancer(tier,index)
+    if hero in PROFILES:return humanoid(hero,tier,index)
     p = parts(hero); gear = parts('armor',2)
     canvas = Image.new('RGBA',(48*SCALE,60*SCALE))
     bob = -.35 if index==1 else 0
@@ -120,17 +122,17 @@ def frame(hero, tier, index):
     return canvas.resize((FRAME_WIDTH,FRAME_HEIGHT),Image.Resampling.LANCZOS)
 
 
+def atlas(hero):
+    image=Image.new('RGBA',ATLAS_SIZE)
+    for tier in range(8):
+        for pose in range(21):
+            image.alpha_composite(frame(hero,tier,pose),(pose*FRAME_WIDTH,tier*FRAME_HEIGHT))
+    return image
+
+
 def outputs():
-    result={}
-    for hero in HEROES:
-        if not (HERE/'sources/actors'/f'{hero}.png').exists():
-            continue
-        atlas=Image.new('RGBA',ATLAS_SIZE)
-        for tier in range(8):
-            for pose in range(21):
-                atlas.alpha_composite(frame(hero,tier,pose),(pose*FRAME_WIDTH,tier*FRAME_HEIGHT))
-        result[f'sprites/hero_{hero}.png']=atlas
-    return result
+    return {f'sprites/hero_{hero}.png':atlas(hero) for hero in HEROES
+            if (HERE/'sources/actors'/f'{hero}.png').exists()}
 
 
 def review(hero):

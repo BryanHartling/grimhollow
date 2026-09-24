@@ -1,3 +1,8 @@
+# Hero art, batch 2: Warrior
+
+- Give the Warrior broad shoulders/chest, a planted stance, heavier steps and a compact mantle, retaining burgundy cloth and copper hair around every armor tier. Crop sleeve attachment surfaces so the finished shoulders do not show the source cutouts' open sockets. Shared animation timing and gameplay remain unchanged.
+- Add `pack.py --hero NAME` for isolated character packaging; CI still invokes the unchanged full reconstruction gate without this option.
+
 # Hero art, batch 1: Necromancer - v1.10.0
 
 - Replace the shared adventurer rig for the Necromancer with a stooped mantle, full-length ragged robe, restrained shuffle, Phylactery casting gesture and smaller hands/face proportions. Preserve the approved portrait's elderly face, bone trim and charcoal-green cloth. Armor stays visible on the chest while retaining the class collar, robe and silhouette.

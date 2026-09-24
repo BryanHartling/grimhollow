@@ -212,9 +212,15 @@ def digest(im):
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true')
-    args=parser.parse_args();built=outputs();failures=[]
+    from actors import HEROES, atlas as hero_atlas
+    parser.add_argument('--hero',choices=HEROES,help='Package one character batch; full --check remains the CI gate')
+    args=parser.parse_args()
+    built={f'sprites/hero_{args.hero}.png':hero_atlas(args.hero)} if args.hero else outputs()
+    failures=[]
     sources={p.relative_to(HERE/'sources').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'sources').rglob('*.png'))}
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
+    if args.hero:
+        manifest['assets']=json.loads(MANIFEST.read_text(encoding='utf-8'))['assets']
     from monsters import sizes as monster_sizes
     fixed_monster_sizes=monster_sizes()
     from monsters import coverage
@@ -238,15 +244,16 @@ def main():
         else:
             target.parent.mkdir(parents=True,exist_ok=True)
             im.save(target,optimize=False)
-    from presentation import pack_launchers
-    pack_launchers(args.check,failures)
-    from inventory import semantic_bytes, SEMANTICS
-    expected_semantics=semantic_bytes()
+    if not args.hero:
+        from presentation import pack_launchers
+        pack_launchers(args.check,failures)
+        from inventory import semantic_bytes, SEMANTICS
+        expected_semantics=semantic_bytes()
     if args.check:
-        if (ROOT/SEMANTICS).read_bytes().replace(b'\r\n',b'\n')!=expected_semantics:failures.append(SEMANTICS)
+        if not args.hero and (ROOT/SEMANTICS).read_bytes().replace(b'\r\n',b'\n')!=expected_semantics:failures.append(SEMANTICS)
         if not MANIFEST.exists() or json.loads(MANIFEST.read_text(encoding='utf-8'))!=manifest:failures.append('painted-assets.json')
     else:
-        (ROOT/SEMANTICS).write_bytes(expected_semantics)
+        if not args.hero:(ROOT/SEMANTICS).write_bytes(expected_semantics)
         MANIFEST.write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
     print(f'PAINTED assets={len(built)} source sheets={len(sources)} failures={len(failures)}')
     for failure in failures:print('FAIL:',failure)

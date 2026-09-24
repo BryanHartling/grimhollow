@@ -1,3 +1,8 @@
+# All nine hero batches - v1.10.1
+
+- Complete the eight remaining character rigs in separate commits after the Necromancer checkpoint; every class has individual proportions, cloth silhouette, stance, stride and attack/cast gesture. All retain existing faces/palettes, armor material progression and unchanged game animation timing. Reuse the new solid armor fronts for the Necromancer as well, removing empty shoulder openings without changing his reviewed body shape.
+- Three built-in imagegen source sheets (Necromancer parts, caster garments, armor fronts) plus existing painted faces/limbs reproduce all outputs offline. Per-character comparison/pose/animation reviews are in verification/heroes/. No movement, collision, balance or content changes accompany the art batches.
+
 # Hero art, batch 9: Psychic
 
 - Give the Psychic a tall poised stance, silver hair, violet split panels, quiet footwork and a directed-palm gesture with the existing Focus Crystal held above the other hand. Feet remain grounded unless the existing flight animation is active; no new aura, buff or movement rule is added.

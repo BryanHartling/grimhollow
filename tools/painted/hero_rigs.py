@@ -1,7 +1,7 @@
 """Class-specific painted cutout rigs, baked into HeroSprite's existing frames.
 
 Animation indices, runtime timing, world geometry and collision are unchanged.
-Keep an unfinished class on its previous rig until its own visual review.
+Each class was reviewed and committed as a separate visual batch.
 """
 import math
 from functools import lru_cache
@@ -194,7 +194,7 @@ def finish(canvas,index):
 
 
 def necromancer(tier,index):
-    p=parts('necromancer-v2');gear=parts('armor',2)
+    p=parts('necromancer-v2');gear=parts('armor-front',2)
     canvas=Image.new('RGBA',(48*SCALE,60*SCALE))
     stride=bob=sway=0
     if 2<=index<=7:
@@ -244,6 +244,7 @@ def necromancer(tier,index):
         place(canvas,gear[tier-1],(cx+.5,cy+1),(14,17),-4)
         collar=p[1].crop((0,0,p[1].width,round(p[1].height*.34)))
         place(canvas,collar,(cx-.4,cy-6.9),(18,7.1),-4)
+    limb(canvas,joint_part('necromancer-v2',4),shoulders[0],elbows[0],6)
     limb(canvas,p[6],shoulders[1],elbows[1],6)
     limb(canvas,p[7],elbows[1],wrists[1],4.5)
     # Hood is broad, the face inside it remains small: a full-height human

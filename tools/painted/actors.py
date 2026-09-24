@@ -59,67 +59,8 @@ def limb(canvas, part, start, end, width):
 
 
 def frame(hero, tier, index):
-    from hero_rigs import PROFILES, humanoid
-    if hero=='necromancer':
-        from hero_rigs import necromancer
-        return necromancer(tier,index)
-    if hero in PROFILES:return humanoid(hero,tier,index)
-    p = parts(hero); gear = parts('armor',2)
-    canvas = Image.new('RGBA',(48*SCALE,60*SCALE))
-    bob = -.35 if index==1 else 0
-    stride = 0
-    if 2 <= index <= 7:
-        phase = (index-2)*math.tau/6
-        stride = math.sin(phase)*5
-        bob = -abs(math.cos(phase))*.9
-    bend = 4 if index in (16,17) else 0
-    cx,cy = 23+bend*.5,25+bob+bend
-    shoulder1=(cx-6,cy-7);shoulder2=(cx+6,cy-6)
-    elbow1=(cx-9-stride*.4,cy+2);wrist1=(cx-7-stride*.75,cy+9)
-    elbow2=(cx+9+stride*.4,cy+3);wrist2=(cx+7+stride*.75,cy+10)
-    hip1=(22,36+bob);hip2=(26,36+bob)
-    knee1=(20+stride,44+bob);ankle1=(19+stride*1.1,52-abs(stride)*.25)
-    knee2=(27-stride,44+bob);ankle2=(28-stride*1.1,52-abs(stride)*.25)
-    if index==13:elbow2=(32,16);wrist2=(28,9)
-    if index==14:elbow2=(36,21);wrist2=(42,19)
-    if index==15:elbow2=(35,30);wrist2=(38,35)
-    if index in (16,17):
-        elbow1=(20,35);wrist1=(25,40+(index-16)*3)
-        elbow2=(33,34);wrist2=(36,41+(index-16)*3)
-    if index==18:
-        knee1=(16,42);ankle1=(20,46);knee2=(32,42);ankle2=(28,46)
-        elbow1=(12,24);wrist1=(9,20);elbow2=(36,24);wrist2=(40,20)
-    if index in (19,20):
-        elbow1=(18,30);wrist1=(25,28-(index-19)*2)
-        elbow2=(34,30);wrist2=(31,28-(index-19)*2)
-    # The back cape and far limbs precede the torso; hands stay visible in front.
-    place(canvas,p[3],(cx-1,32+bob),(21,35),stride*.7)
-    limb(canvas,p[8],hip1,knee1,6);limb(canvas,p[9],knee1,ankle1,5)
-    place(canvas,p[12],(ankle1[0]+1,ankle1[1]+2),(8,6))
-    limb(canvas,p[10],hip2,knee2,6);limb(canvas,p[11],knee2,ankle2,5)
-    place(canvas,p[13],(ankle2[0]+1,ankle2[1]+2),(8,6))
-    limb(canvas,p[4],shoulder1,elbow1,6);limb(canvas,p[5],elbow1,wrist1,5)
-    place(canvas,p[14],(wrist1[0],wrist1[1]+1.5),(4,5))
-    robed = hero in ('mage','cleric','necromancer','enchanter','psychic')
-    place(canvas,p[2],(24,38+bob if robed else 35+bob),(15,16) if robed else (14,9))
-    place(canvas,p[1],(cx,cy),(17,21))
-    if tier:
-        # Distinct cloth/leather/mail/scale/plate/class silhouettes are authored,
-        # not palette substitutions of one cuirass. Cape/head preserve class ID.
-        place(canvas,gear[tier-1],(cx,cy),(16,20))
-    limb(canvas,p[6],shoulder2,elbow2,6);limb(canvas,p[7],elbow2,wrist2,5)
-    place(canvas,p[15],(wrist2[0],wrist2[1]+1.5),(4,5))
-    place(canvas,p[0],(cx+1,10+bob+bend),(13,15),-bend)
-    if index in (19,20):
-        place(canvas,gear[7],(28,29-(index-19)*2),(15,10))
-    if 8 <= index <= 12:
-        angle=[-12,-35,-62,-82,-90][index-8]
-        whole=canvas.crop(canvas.getbbox()).rotate(angle,Image.Resampling.BICUBIC,expand=True)
-        scale=min(44*SCALE/whole.width,52*SCALE/whole.height,1)
-        whole=whole.resize((round(whole.width*scale),round(whole.height*scale)),Image.Resampling.LANCZOS)
-        canvas=Image.new('RGBA',canvas.size)
-        canvas.alpha_composite(whole,((canvas.width-whole.width)//2,56*SCALE-whole.height))
-    return canvas.resize((FRAME_WIDTH,FRAME_HEIGHT),Image.Resampling.LANCZOS)
+    from hero_rigs import necromancer, humanoid
+    return necromancer(tier,index) if hero=='necromancer' else humanoid(hero,tier,index)
 
 
 def atlas(hero):
@@ -178,7 +119,39 @@ def review(hero):
     images[0].save(target/'animation.gif',save_all=True,append_images=images[1:],duration=durations,loop=0,optimize=False,disposal=2)
 
 
+def lineup():
+    """Compare every class at equal visible height, as the renderer fits them."""
+    from PIL import ImageDraw, ImageFont
+    target=HERE.parents[1]/'verification/heroes'
+    target.mkdir(parents=True,exist_ok=True)
+    sheet=Image.new('RGB',(1440,610),(30,34,34));d=ImageDraw.Draw(sheet)
+    font=ImageFont.load_default(size=18);small=ImageFont.load_default(size=13)
+    for col,hero in enumerate(HEROES):
+        d.text((100+col*148,16),hero.title(),font=font,fill='#e2d4b9')
+        for row,tier in enumerate((0,1,5)):
+            im=frame(hero,tier,0);box=im.getchannel('A').point(lambda a:255 if a>=8 else 0).getbbox();im=im.crop(box)
+            scale=150/im.height;im=im.resize((round(im.width*scale),150),Image.Resampling.LANCZOS)
+            sheet.paste(im,(100+col*148+(110-im.width)//2,50+row*185),im)
+    for row,label in enumerate(('Base','Cloth','Plate')):d.text((18,112+row*185),label,font=font,fill='#b1b9bb')
+    d.text((100,590),'Painted class silhouettes | same world height, armor progression and gameplay',font=small,fill='#b1b9bb')
+    sheet.save(target/'lineup.png')
+    if all((target/hero/'sewers-lighting-on.png').exists() for hero in HEROES):
+        # A labelled crop of each actual renderer capture, never a composed
+        # character pasted into a room. Full screenshots sit beside this image.
+        native=Image.new('RGB',(1152,966),(30,34,34));nd=ImageDraw.Draw(native)
+        for index,hero in enumerate(HEROES):
+            x=index%3*384;y=index//3*322
+            im=Image.open(target/hero/'sewers-lighting-on.png').convert('RGB')
+            im=im.crop((864,464,1056,608)).resize((384,288),Image.Resampling.NEAREST)
+            native.paste(im,(x,y+32));nd.text((x+12,y+6),hero.title()+' | native capture, 2x crop',font=small,fill='#e2d4b9')
+        native.save(target/'ingame-lineup.png')
+
+
 if __name__=='__main__':
     import argparse
-    parser=argparse.ArgumentParser();parser.add_argument('--review',choices=HEROES,required=True)
-    review(parser.parse_args().review)
+    parser=argparse.ArgumentParser();parser.add_argument('--review',choices=HEROES+('all',),required=True)
+    selected=parser.parse_args().review
+    if selected=='all':
+        for hero in HEROES:review(hero)
+        lineup()
+    else:review(selected)

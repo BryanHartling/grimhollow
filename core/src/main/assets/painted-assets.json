@@ -283,7 +283,7 @@
         2048,
         1024
       ],
-      "rgba_sha256": "505f1497881b932f204606f4c94191517e5359a3dd35c952ac06c88d793a9f92"
+      "rgba_sha256": "fad0dcac15f90ca5a4fdba3d360088d2dc4a9eb4f50070f031c5f0c7465d63db"
     },
     "sprites/hero_mage.png": {
       "size": [
@@ -325,7 +325,7 @@
         2048,
         1024
       ],
-      "rgba_sha256": "363cdc69fc0c0dc2a4d6253bfca8e01e07a12756b62febc65a60c102d7914881"
+      "rgba_sha256": "68087c41c98319ee2ecc396dbe7356883a17593a228721dea198f2cbb7c60f86"
     },
     "sprites/hero_enchanter.png": {
       "size": [

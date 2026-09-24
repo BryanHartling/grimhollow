@@ -1,3 +1,9 @@
+# All nine hero rigs - v1.10.1
+
+`hero_rigs.py` now contains eight individual profiles and the Necromancer rig, with class-specific body proportions, silhouettes, guards, footwork and action gestures. `caster-robes.png` supplies separate Mage/Cleric/Enchanter/Psychic garments; its right two columns split at y=526 rather than 512. `armor-front.png` provides solid chest panels without the old empty arm sockets. Existing heads, class colors, limb paintings and matching portraits are retained. Exact built-in imagegen prompts/references for all three new sources are in `hero-rigs-prompts.json`.
+
+`python tools/painted/actors.py --review all` reproduces nine comparisons, pose sheets, GIFs and the lineup. `python tools/painted/pack.py --hero NAME` packages one isolated character batch; the CI command remains the full `python tools/recovery_assets.py --check`, reconstructing 115 shipping images from 106 source sheets and 55 launcher resources. Inventory armor icons continue using their previous sources. Every game animation retains its frame indices, timing and callbacks; no new facing or runtime rig system is introduced.
+
 # Hero rigs, batch 1 - v1.10.0
 
 `hero_rigs.py` supplies the Necromancer's reviewed hunched posture, broad mantle, ankle-length robe and Phylactery gestures, preserving the elderly face in the existing portrait. `sources/actors/necromancer-v2.png` and `hero-rigs-prompts.json` record the original built-in imagegen edit and its references. The source has unequal row heights; `actors.parts` records reviewed transparent gutters. The other eight heroes keep their earlier rig until their individual batches.

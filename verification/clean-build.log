@@ -15513,3 +15513,251 @@ CI 35994724771 at 2c0cb62dc: Android success; Windows/Linux only test 45 fail; a
 2026-09-24T11:55:38.8731267Z TEST 33 POINTER: mouse armor, scrolled bottom glyph, touch weapon/info, drag suppression, zero-charge rejection; failures=0
 2026-09-24T11:57:39.8486165Z Runs=10 failures=0
 2026-09-24T11:57:39.3971538Z Runs=10 failures=0
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :services:jar
+> Task :SPD-classes:jar
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :android:mergeDebugAssets
+> Task :android:compressDebugAssets
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :core:jar
+> Task :desktop:processResources
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest
+> Task :android:processDebugManifest
+> Task :android:processDebugManifestForPackage
+> Task :android:processDebugResources
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :desktop:release
+> Task :desktop:dist
+> Task :android:mergeLibDexDebug UP-TO-DATE
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect
+> Task :android:assembleDebug
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 34s
+45 actionable tasks: 15 executed, 30 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\hero-final-warrior\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/heroes/warrior/title.png
+ITERATION ROOM: seed=419 bounds=13,14,20,22 water=18 doors=1 rubble=4 wallTorch=1 torchCell=761 bridgeCell=594 heroCell=593 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=verification/heroes/warrior/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=verification/heroes/warrior/sewers-lighting-off.png
+TEST 24: heroes=9 mob sprites=122 steady idle checks=122 failures=0
+PAINTED: complete animation coverage; hero/rat height ratio=2.2222223 status sizes rendered=178
+TEST 25 semantics: all 383 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10, Ashlight open/closed=537/538
+PAINTED TRAPS: shapes=7 color/state combinations=63
+TEST 25: items=383 identification icons=60 failures=0
+TEST 26: three stains and floor/chasm/water/trap placement failures=0
+PAINTED SKILLS/PLANTS: unique skills=113 plants=13
+TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures=0
+TEST 34: old/future version, portrait exception and deletion failures=0
+TEST 35 RETIRED � superseded by recovery test 46 handler/network checks
+TESTS 24-26, 34, 36 PASS; test 35 retired by recovery
+TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0
+TEST 31 FIRE BATCH: individual-render max channel difference=0
+TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.4271ms p95=0.6815ms failures=0
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\hero-final-mage\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/heroes/mage/title.png
+ITERATION ROOM: seed=418 bounds=14,29,22,37 water=18 doors=2 rubble=2 wallTorch=1 torchCell=1031 bridgeCell=1208 heroCell=1174 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=verification/heroes/mage/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=verification/heroes/mage/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\hero-final-rogue\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/heroes/rogue/title.png
+ITERATION ROOM: seed=419 bounds=13,14,20,22 water=18 doors=1 rubble=4 wallTorch=1 torchCell=761 bridgeCell=594 heroCell=593 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=verification/heroes/rogue/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=verification/heroes/rogue/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\hero-final-huntress\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/heroes/huntress/title.png
+ITERATION ROOM: seed=419 bounds=13,14,20,22 water=18 doors=1 rubble=4 wallTorch=1 torchCell=761 bridgeCell=594 heroCell=593 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=verification/heroes/huntress/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=verification/heroes/huntress/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\hero-final-duelist\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/heroes/duelist/title.png
+ITERATION ROOM: seed=418 bounds=14,29,22,37 water=18 doors=2 rubble=2 wallTorch=1 torchCell=1031 bridgeCell=1208 heroCell=1174 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=verification/heroes/duelist/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=verification/heroes/duelist/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\hero-final-cleric\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/heroes/cleric/title.png
+ITERATION ROOM: seed=419 bounds=13,14,20,22 water=18 doors=1 rubble=4 wallTorch=1 torchCell=761 bridgeCell=594 heroCell=593 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=verification/heroes/cleric/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=verification/heroes/cleric/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\hero-final-necromancer\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/heroes/necromancer/title.png
+ITERATION ROOM: seed=418 bounds=14,29,22,37 water=18 doors=2 rubble=2 wallTorch=1 torchCell=1031 bridgeCell=1208 heroCell=1174 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=verification/heroes/necromancer/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=verification/heroes/necromancer/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\hero-final-enchanter\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/heroes/enchanter/title.png
+ITERATION ROOM: seed=419 bounds=13,14,20,22 water=18 doors=1 rubble=4 wallTorch=1 torchCell=761 bridgeCell=594 heroCell=593 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=verification/heroes/enchanter/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=verification/heroes/enchanter/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\hero-final-psychic\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/heroes/psychic/title.png
+ITERATION ROOM: seed=418 bounds=14,29,22,37 water=18 doors=2 rubble=2 wallTorch=1 torchCell=1031 bridgeCell=1208 heroCell=1174 terrainEdits=0
+[GAME] @@ You descend to floor 1 of the dungeon.
+[GAME] ++ Use the mouse, WASD, or arrow keys to move and interact.
+RENDERED=GameScene SCREENSHOT=verification/heroes/psychic/sewers-lighting-on.png
+ITERATION SCREENSHOT: lighting=true defaultZoom=3.0
+RENDERED=GameScene SCREENSHOT=verification/heroes/psychic/sewers-lighting-off.png
+TEST 41 runtime: phase/frame checks=8192 adjacent synchronization failures=0
+PASS: Sewer scene renders with dynamic lighting on and off.
+[Controllers] removed manager for application, 0 managers active
+PAINTED launcher resources=55
+PAINTED assets=115 source sheets=106 failures=0
+C:\Users\Hartl\Documents\grimhollow\tools\recovery_assets.py:47: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  out.putdata([palette.get(pixel[:3], pixel[:3]) + (pixel[3],) for pixel in image.getdata()])
+TEST 44: upstream-derived character sheets=7; restored assets=29; verified painted replacements=115; failures=0
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\necro-art-encounter\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=.local/necro-art-encounter/title.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+ENCOUNTER START class=NECROMANCER seed=417 pos=756
+ENCOUNTER FIXTURE health=1000; terrain and hostile AI retained
+ENCOUNTER action=0 pos=756 to=723 hp=1000
+[GAME] You defeated marsupial rat.
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+ENCOUNTER action=25 pos=461 to=428 hp=995
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+[GAME] You defeated sewer snake.
+[GAME] You defeated marsupial rat.
+[GAME] You defeated marsupial rat.
+ENCOUNTER action=50 pos=205 to=237 hp=992
+[GAME] ++ Your guidebook has advice for you! Select the flashing journal button (J) on the top-right to read it.
+ENCOUNTER action=75 pos=520 to=551 hp=995
+[GAME] You defeated sewer snake.
+[GAME] You picked up: seed of mageroyal.
+ENCOUNTER action=100 pos=616 to=585 hp=997
+ENCOUNTER action=125 pos=838 to=870 hp=1000
+[GAME] ++ Level up! +Accuracy, +Evasion, +5 HP!
+[GAME] ++ +1 Talent Point!
+[GAME] You defeated marsupial rat.
+ENCOUNTERS actions=150 steps=129 attacks=20 actorDrops=true actorPickup=true summon=true deathFrames=120 failures=0
+[Controllers] removed manager for application, 0 managers active
+CI 35996383670 at b9f7f1871: Android success; Windows/Linux only test 45 fail; class gates and actual pointer checks below.
+2026-09-24T12:17:29.7110477Z Runs=30 failures=0
+2026-09-24T12:17:38.8277417Z Runs=10 failures=0
+2026-09-24T12:07:13.5140190Z TEST 24: heroes=9 mob sprites=122 steady idle checks=122 failures=0
+2026-09-24T12:07:16.5274900Z TEST 31: off pixel differences=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=1.3183ms p95=1.5859ms failures=0
+2026-09-24T12:07:17.3581428Z TEST 45: region=sewers types=6 pairs=15 failures=8
+2026-09-24T12:08:55.5153889Z TEST 45: region=prison types=5 pairs=10 failures=1
+2026-09-24T12:10:31.0068489Z TEST 45: region=caves types=7 pairs=21 failures=8
+2026-09-24T12:12:01.9873621Z TEST 45: region=city types=6 pairs=15 failures=5
+2026-09-24T12:12:59.8180801Z TEST 45: region=halls types=6 pairs=15 failures=9
+2026-09-24T12:14:15.6223130Z TEST 51 UI: open/shuttered painted icons; scrollable lore/riders; free menu toggle; ingredient selection/feeding; Flare; failures=0
+2026-09-24T12:14:37.7298774Z TEST 51 UI: open/shuttered painted icons; scrollable lore/riders; free menu toggle; ingredient selection/feeding; Flare; failures=0
+2026-09-24T12:15:19.8280618Z TEST 33 POINTER: mouse armor, scrolled bottom glyph, touch weapon/info, drag suppression, zero-charge rejection; failures=0
+2026-09-24T12:15:46.7885793Z TEST 33 POINTER: mouse armor, scrolled bottom glyph, touch weapon/info, drag suppression, zero-charge rejection; failures=0
+2026-09-24T12:17:42.4256645Z Runs=10 failures=0
+2026-09-24T12:17:22.2998702Z Runs=10 failures=0
+2026-09-24T12:06:14.7388712Z TEST 45: region=sewers types=7 pairs=21 failures=11
+2026-09-24T12:06:14.7395620Z TEST 45: region=prison types=5 pairs=10 failures=1
+2026-09-24T12:06:14.7400630Z TEST 45: region=caves types=7 pairs=21 failures=8
+2026-09-24T12:06:14.7406505Z TEST 45: region=city types=6 pairs=15 failures=5
+2026-09-24T12:06:14.7410656Z TEST 45: region=halls types=6 pairs=15 failures=9

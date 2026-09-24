@@ -1,6 +1,6 @@
 # Grimhollow
 
-**Hero art batch 1 v1.10.0:** the Necromancer has a distinct stooped robe silhouette, clearer painted proportions and Phylactery gestures. All hero textures now retain twice the detail at the same world size; the other eight classes still await their individual shape/animation redesigns. [Before and after](verification/heroes/necromancer/comparison.png), [animation](verification/heroes/necromancer/animation.gif), [pose and armor sheet](verification/heroes/necromancer/poses.png).
+**Nine hero art batches v1.10.1:** each hero now has individual proportions, silhouette, posture, stride and attack/cast gestures. Broad Warrior shoulders, the Rogue's forward guard, the Duelist's lunge and four distinct caster garments retain each face and cloth palette through armor upgrades. Painted 96x120 frames preserve more source detail at the same world height and unchanged action timing. [All-nine comparison](verification/heroes/lineup.png), [individual animation and pose reviews](verification/painted-world.html), [source prompts](tools/painted/hero-rigs-prompts.json).
 
 **Inscription input v1.9.1:** real mouse/touch events now reach the Enchanter's scrollable weapon and armor inscription rows. Info buttons, scrolling and drag cancellation work; no knowledge or balance rules changed.
 
@@ -48,7 +48,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-1.7.0.jar
+java -jar desktop\build\libs\desktop-1.10.1.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.

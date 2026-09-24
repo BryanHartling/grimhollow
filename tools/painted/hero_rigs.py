@@ -23,6 +23,9 @@ PROFILES={
     'huntress':dict(torso=(16,19),head=(9.5,11.5),cape=(18,27),hips=(13,9),
                     shoulder=6,arm=4.8,leg=5.8,boot=(7,5.4),stance=5.8,stride=4.8,
                     lean=.5,bob=.45,style='ranger',head_y=10.5),
+    'duelist':dict(torso=(15,20),head=(9,11.5),cape=(11,31),hips=(11,9),
+                   shoulder=5.4,arm=4.2,leg=4.8,boot=(6,5),stance=4.5,stride=3.4,
+                   lean=-.5,bob=.25,style='fencer',head_y=10.5),
 }
 
 
@@ -63,9 +66,15 @@ def humanoid(hero,tier,index):
     if style=='knife':
         elbows=[(cx-half-1,cy+5),(cx+half+3,cy+3)]
         wrists=[(cx-4-stride*.3,cy+9),(cx+3+stride*.3,cy+1)]
+    if style=='fencer':
+        elbows=[(cx-9,cy),(cx+8,cy+5)]
+        wrists=[(cx-11-stride*.2,cy-1),(cx+14+stride*.2,cy+3)]
     hips=[(23-stance*.55,36+bob),(23+stance*.55,36+bob)]
     knees=[(23-stance+stride,45+bob),(23+stance-stride,45+bob)]
     ankles=[(23-stance+stride,53-max(0,stride)*.3),(23+stance-stride,53-max(0,-stride)*.3)]
+    if style=='fencer':
+        knees=[(20+stride*.6,45+bob),(29-stride,44+bob)]
+        ankles=[(18+stride*.6,53-max(0,stride)*.25),(32-stride,53-max(0,-stride)*.25)]
     if index==13:
         elbows[1]=(33,16);wrists[1]=(30,9)
         wrists[0]=(16,30)
@@ -90,6 +99,10 @@ def humanoid(hero,tier,index):
     if style=='ranger' and index in (13,14,15):
         elbows=[(31,24),(32,24)]
         wrists=[(39,25),(27,21)] if index==13 else [(42,22),(29,23)] if index==14 else [(36,29),(29,30)]
+    if style=='fencer' and index in (13,14,15):
+        elbows=[(14,24),(33,28)]
+        wrists=[(12,24),(31,27)] if index==13 else [(12,22),(42,26)] if index==14 else [(13,25),(36,28)]
+        if index==14:knees[1]=(33,44);ankles[1]=(36,53)
     cape=caster_cloth(cfg['robe'],True) if 'robe' in cfg else p[3]
     skirt=caster_cloth(cfg['robe']) if 'robe' in cfg else p[2]
     place(canvas,cape,(cx-3+sway*.3,33+bob),cfg['cape'],sway*1.3)

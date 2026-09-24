@@ -1,3 +1,7 @@
+# Hero art, batch 6: Duelist
+
+- Give the Duelist a narrow teal silhouette, asymmetric fencing guard, staggered footwork and a forward lunge, preserving her face and tight curls. The arm and leg staging differs from the Warrior's broad overhead strike; timing and damage are unchanged.
+
 # Hero art, batch 5: Huntress
 
 - Give the Huntress an athletic long-legged stance, short green mantle, longer stride and draw/release arm gesture, retaining her auburn hair and leather trim across armor tiers. No bow, movement or combat rules change.

@@ -45,6 +45,8 @@ public class Grim extends Weapon.Enchantment {
 		//scales from 0 - 50% based on how low hp the enemy is, plus 0-5% per level
 		float maxChance = 0.5f + .05f*level;
 		maxChance *= procChanceMultiplier(attacker);
+		// Grim defers its HP-dependent probability; carry the rate bonus into that roll.
+		maxChance *= com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.procRate(attacker);
 
 		//we defer logic using a buff here so we can know the true final damage
 		//see Char.damage

@@ -385,13 +385,16 @@ public class Hero extends Char {
 		return 0;
 	}
 
-	public void upgradeTalent( Talent talent ){
+	public boolean upgradeTalent( Talent talent ){
 		for (LinkedHashMap<Talent, Integer> tier : talents){
-			for (Talent f : tier.keySet()){
-				if (f == talent) tier.put(talent, tier.get(talent)+1);
+			if (tier.containsKey(talent)){
+				if (tier.get(talent) >= talent.maxPoints()) return false;
+				tier.put(talent, tier.get(talent)+1);
+				Talent.onTalentUpgraded(this, talent);
+				return true;
 			}
 		}
-		Talent.onTalentUpgraded(this, talent);
+		return false;
 	}
 
 	public int talentPointsSpent(int tier){

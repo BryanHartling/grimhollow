@@ -25,6 +25,9 @@ public class EnchanterMagic extends Buff {
     private final Set<Integer> floors=new HashSet<>();
     private int lastPos=-1,stationary,lastFloor=-1;
     private static final ThreadLocal<Float> strength=ThreadLocal.withInitial(()->1f);
+    private static final ThreadLocal<Float> rate=ThreadLocal.withInitial(()->1f);
+    // Separate chance from Arcana/Resonance power: this passive adds no damage or duration.
+    public static float procRate(Char owner){return owner==Dungeon.hero&&Dungeon.hero.heroClass==HeroClass.ENCHANTER?rate.get():1f;}
     public static int points(Talent t){return Dungeon.hero==null?0:Dungeon.hero.pointsInTalent(t);}
     public static EnchanterMagic state(){return Dungeon.hero==null?null:Dungeon.hero.buff(EnchanterMagic.class);}
     public static void learn(Item item){
@@ -117,15 +120,24 @@ public class EnchanterMagic extends Buff {
     public static void collect(Item item){if(state()==null)return;if(Random.Float()<.5f*points(Talent.ATTUNEMENT))item.cursedKnown=true;learn(item);}
     public static int armorRoll(Char ch){if(ch.buff(FracturedArmor.class)!=null||ch.buff(Unmade.class)!=null)return 0;int dr=ch.drRoll();return ch.buff(DegradedGear.class)!=null?Math.round(dr*.7f):dr;}
     public static void counterweight(){if(Dungeon.hero.subClass==HeroSubClass.SCRIVENER&&points(Talent.COUNTERWEIGHT)>0)Buff.affect(Dungeon.hero,Barkskin.class).setForDuration(Dungeon.hero.lvl/2,points(Talent.COUNTERWEIGHT));}
-    public static float procChance(Char ch,float chance){float boost=1+.25f*points(Talent.AMPLIFIED);return ch.buff(Overcharged.class)!=null?Math.max(1f,chance/boost)*boost:chance;}
+    public static float procChance(Char ch,float chance){
+        chance=Math.min(Math.max(1f,chance),chance*procRate(ch));
+        float boost=1+.25f*points(Talent.AMPLIFIED);
+        return ch.buff(Overcharged.class)!=null?Math.max(1f,chance/boost)*boost:chance;
+    }
     public static float procStrength(Char ch){return strength.get()*(ch.buff(Overcharged.class)!=null?1+.25f*points(Talent.AMPLIFIED):1);}
     public static float permanent(Item item){return item.inscriptionTurns>0?1+.1f*points(Talent.RESONANCE):1;}
     public static int weaponProc(Weapon.Enchantment enchant,Weapon w,Char a,Char d,int damage,float power){
         if(a.buff(Unmade.class)!=null)return damage;
-        float previous=strength.get();strength.set(previous*power);
-        try{if(a==Dungeon.hero&&state()!=null)Buff.prolong(d,EnchanterDamage.class,20);return enchant.proc(w,a,d,damage);}finally{strength.set(previous);}
+        float previous=strength.get(),previousRate=rate.get();strength.set(previous*power);
+        rate.set(enchant.curse()?1f:enchant==w.enchantment?1.25f:2f);
+        try{if(a==Dungeon.hero&&state()!=null)Buff.prolong(d,EnchanterDamage.class,20);return enchant.proc(w,a,d,damage);}finally{strength.set(previous);rate.set(previousRate);}
     }
-    public static int glyphProc(Armor.Glyph glyph,Armor armor,Char a,Char d,int damage,float power){float previous=strength.get();strength.set(previous*power);try{return glyph.proc(armor,a,d,damage);}finally{strength.set(previous);}}
+    public static int glyphProc(Armor.Glyph glyph,Armor armor,Char a,Char d,int damage,float power){
+        float previous=strength.get(),previousRate=rate.get();strength.set(previous*power);
+        rate.set(glyph.curse()?1f:glyph==armor.glyph?1.25f:2f);
+        try{return glyph.proc(armor,a,d,damage);}finally{strength.set(previous);rate.set(previousRate);}
+    }
     public static class EnchanterDamage extends FlavourBuff {}
     public static void onDeath(Mob mob,Object cause){
         if(state()==null||mob.alignment!=Char.Alignment.ENEMY||(cause!=Dungeon.hero&&mob.buff(EnchanterDamage.class)==null))return;

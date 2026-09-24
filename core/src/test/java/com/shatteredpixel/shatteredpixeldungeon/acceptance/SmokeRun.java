@@ -937,7 +937,53 @@ public class SmokeRun {
         scroll.detachAll(h.belongings.backpack);stone.detachAll(h.belongings.backpack);w.enchant(null);w.inscribed=null;w.inscriptionTurns=0;h.subClass=HeroSubClass.NONE;brush.gainCharge(10);
         System.out.println("TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence");
     }
+    private static class RateEnchantment extends Weapon.Enchantment {
+        float chance, power; boolean cursed;
+        @Override public int proc(Weapon weapon,Char attacker,Char defender,int damage){
+            chance=EnchanterMagic.procChance(attacker,.2f*procChanceMultiplier(attacker));
+            power=EnchanterMagic.procStrength(attacker);
+            check(EnchanterMagic.procChance(attacker,.8f)<=1f,"54: rate bonus cannot overflow into extra power");
+            return damage;
+        }
+        @Override public boolean curse(){return cursed;}
+        @Override public ItemSprite.Glowing glowing(){return null;}
+    }
+    private static class RateGlyph extends Armor.Glyph {
+        float chance;
+        @Override public int proc(Armor armor,Char attacker,Char defender,int damage){chance=EnchanterMagic.procChance(defender,.2f*procChanceMultiplier(defender));return damage;}
+        @Override public ItemSprite.Glowing glowing(){return null;}
+    }
+    private static void enchanterRateAndCapScenario(){
+        Hero h=Dungeon.hero;Rat enemy=new Rat();
+        Weapon w=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword();
+        RateEnchantment permanent=new RateEnchantment(),temporary=new RateEnchantment(),floor=new RateEnchantment();
+        w.enchantment=permanent;w.inscribed=temporary;w.inscriptionTurns=30;w.runeEtching=new RuneEtching();w.runeEtching.floorEnchant=floor;
+        check(w.proc(h,enemy,10)==10,"54: bonus changes no base damage");
+        check(Math.abs(permanent.chance-.25f)<.0001f&&Math.abs(temporary.chance-.4f)<.0001f&&Math.abs(floor.chance-.2f)<.0001f,"54: permanent 1.25x, inscription 2x, half-strength floor rune 2x");
+        check(permanent.power==1&&temporary.power==1&&floor.power==.5f,"54: proc power unchanged");
+        permanent.cursed=true;w.proc(h,enemy,10);check(Math.abs(permanent.chance-.2f)<.0001f,"54: curses not amplified");permanent.cursed=false;
+        HeroClass old=h.heroClass;h.heroClass=HeroClass.ROGUE;w.proc(h,enemy,10);h.heroClass=old;
+        check(Math.abs(permanent.chance-.2f)<.0001f&&Math.abs(temporary.chance-.2f)<.0001f,"54: other classes unchanged");
+        w.proc(enemy,h,10);check(Math.abs(permanent.chance-.2f)<.0001f,"54: enemy procs unchanged");
+        ClothArmor armor=new ClothArmor();RateGlyph glyph=new RateGlyph(),sigil=new RateGlyph();armor.glyph=glyph;armor.inscribed=sigil;armor.inscriptionTurns=30;
+        armor.proc(enemy,h,10);check(Math.abs(glyph.chance-.25f)<.0001f&&Math.abs(sigil.chance-.4f)<.0001f,"54: permanent and inscribed armor rates");
+        check(EnchanterMagic.procRate(h)==1&&EnchanterMagic.procStrength(h)==1,"54: scoped rates restored");
+        Hero test=new Hero();test.heroClass=HeroClass.ENCHANTER;test.subClass=HeroSubClass.ARTIFICER;test.lvl=30;
+        Talent.initClassTalents(test);Talent.initSubclassTalents(test);
+        for(int i=0;i<3;i++)check(test.upgradeTalent(Talent.MASTER_CRAFT),"54: legitimate tier-three rank");
+        int available=test.talentPointsAvailable(3);
+        check(!test.upgradeTalent(Talent.MASTER_CRAFT)&&test.pointsInTalent(Talent.MASTER_CRAFT)==3&&test.talentPointsAvailable(3)==available,"54: fourth tier-three rank rejected without spending");
+        test.talents.get(2).put(Talent.MASTER_CRAFT,4);Bundle saved=new Bundle();Talent.storeTalentsInBundle(saved,test);Talent.restoreTalentsFromBundle(saved,test);
+        check(test.pointsInTalent(Talent.MASTER_CRAFT)==3&&test.talentPointsAvailable(3)==available,"54: invalid saved rank repaired and excess point refunded");
+        test.armorAbility=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.enchanter.Overcharge();Talent.initArmorTalents(test);
+        for(Talent talent:test.talents.get(3).keySet()){
+            for(int i=0;i<4;i++)check(test.upgradeTalent(talent),"54: legitimate tier-four rank");
+            check(!test.upgradeTalent(talent)&&test.pointsInTalent(talent)==4,"54: fifth tier-four rank rejected");
+        }
+        System.out.println("TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund");
+    }
     private static void enchanterScenario() throws Exception {
+        enchanterRateAndCapScenario();
         Hero h=Dungeon.hero;SigilBrush brush=h.belongings.getItem(SigilBrush.class);
         check(h.HT==20&&h.STR==10&&brush!=null&&brush.charges()==3&&brush.cap()==3,"Enchanter base kit");
         check(h.belongings.weapon instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RunedBaton&&h.belongings.getItem(Food.class).quantity()==2,"Baton and rations");

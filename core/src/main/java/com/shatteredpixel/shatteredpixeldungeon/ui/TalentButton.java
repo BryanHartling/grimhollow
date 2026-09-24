@@ -97,7 +97,7 @@ public class TalentButton extends Button {
 
 		fill.x = x+2;
 		fill.y = y + WIDTH - 1;
-		fill.size( pointsInTalent/(float)talent.maxPoints() * (WIDTH-4), 5);
+		fill.size( Math.min(pointsInTalent, talent.maxPoints())/(float)talent.maxPoints() * (WIDTH-4), 5);
 
 		bg.x = x;
 		bg.y = y;
@@ -117,7 +117,10 @@ public class TalentButton extends Button {
 				&& Dungeon.hero.isAlive()
 				&& Dungeon.hero.talentPointsAvailable(tier) > 0
 				&& Dungeon.hero.pointsInTalent(talent) < talent.maxPoints()){
-			toAdd = new WndInfoTalent(talent, pointsInTalent, new WndInfoTalent.TalentButtonCallback() {
+			final com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero owner = Dungeon.hero;
+			final int offeredRank = owner.pointsInTalent(talent);
+			toAdd = new WndInfoTalent(talent, offeredRank, new WndInfoTalent.TalentButtonCallback() {
+				private boolean used;
 
 				@Override
 				public String prompt() {
@@ -126,6 +129,8 @@ public class TalentButton extends Button {
 
 				@Override
 				public void call() {
+					if (used || Dungeon.hero != owner || owner.pointsInTalent(talent) != offeredRank) return;
+					used = true;
 					upgradeTalent();
 					Statistics.qualifiedForRandomVictoryBadge = false;
 				}
@@ -247,10 +252,10 @@ public class TalentButton extends Button {
 	}
 
 	public void upgradeTalent(){
-		if (Dungeon.hero.talentPointsAvailable(tier) > 0 && parent != null) {
-			Dungeon.hero.upgradeTalent(talent);
+		if (Dungeon.hero != null && Dungeon.hero.isAlive() && parent != null
+				&& Dungeon.hero.talentPointsAvailable(tier) > 0 && Dungeon.hero.upgradeTalent(talent)) {
 			float oldWidth = fill.width();
-			pointsInTalent++;
+			pointsInTalent = Dungeon.hero.pointsInTalent(talent);
 			layout();
 			Sample.INSTANCE.play(Assets.Sounds.LEVELUP, 0.7f, 1.2f);
 			Emitter emitter = (Emitter) parent.recycle(Emitter.class);

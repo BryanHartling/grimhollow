@@ -159,6 +159,7 @@ public class ScrollPane extends Component {
 		return content;
 	}
 
+	private PointerEvent forwardedClick;
 	public void onClick( float x, float y ) {
 		clickChild(content, x, y);
 	}
@@ -169,7 +170,8 @@ public class ScrollPane extends Component {
 			com.watabou.noosa.Gizmo child=group.member(i);
 			if(child==null || !child.exists || !child.visible || !child.active)continue;
 			if(child instanceof Button && ((Button)child).inside(x,y)){
-				((Button)child).onClick();return true;
+				// A non-blocking button may already have received this event directly.
+				((Button)child).clickFromScroll(forwardedClick);return true;
 			}
 			if(child instanceof com.watabou.noosa.Group && !(child instanceof ScrollPane)
 					&& clickChild((com.watabou.noosa.Group)child,x,y))return true;
@@ -206,7 +208,9 @@ public class ScrollPane extends Component {
 		@Override
 		protected void onClick(PointerEvent event) {
 			PointF p = content.camera.screenToCamera((int) event.current.x, (int) event.current.y);
-			ScrollPane.this.onClick(p.x, p.y);
+			forwardedClick = event;
+			try { ScrollPane.this.onClick(p.x, p.y); }
+			finally { forwardedClick = null; }
 		}
 
 		private boolean dragging = false;

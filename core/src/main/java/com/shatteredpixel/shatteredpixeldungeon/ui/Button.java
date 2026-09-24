@@ -45,6 +45,12 @@ public class Button extends Component {
 	protected static Button pressedButton;
 	protected float pressTime;
 	protected boolean clickReady;
+	private PointerEvent lastClickEvent;
+	void clickFromScroll(PointerEvent event) {
+		if (event != null && event == lastClickEvent) return;
+		lastClickEvent = event;
+		onClick();
+	}
 
 	@Override
 	protected void createChildren() {
@@ -68,7 +74,8 @@ public class Button extends Component {
 			}
 			@Override
 			protected void onClick( PointerEvent event ) {
-				if (clickReady) {
+				if (clickReady && event != lastClickEvent) {
+					lastClickEvent = event;
 					killTooltip();
 					switch (event.button){
 						case PointerEvent.LEFT: default:

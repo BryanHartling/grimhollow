@@ -1,3 +1,9 @@
+# Enchanter proc rates and talent purchasing - v1.11.2
+
+- Enchanter gains 1.25x permanent enchantment/glyph activation chance and 2x temporary inscriptions/sigils, including the half-strength Rune Etching. Relative bonuses cap at certainty without adding overflow damage, duration or always-active strength; curses and other classes are unchanged. Class and Brush descriptions give the exact rates.
+- Prevent duplicate talent popups from non-blocking buttons inside scrolling panes. Validate single-use purchase offers against the current hero/rank, recheck available points at purchase, enforce rank caps in Hero, and draw pips from actual ranks. Existing save migration clamps over-cap ranks and returns the excess to available points. Legitimate four-rank armor talents remain four ranks.
+- Test 54 covers combat dispatch/rate isolation, legacy saves and talent caps; native landscape mouse and portrait touch cover the actual upgrade popup.
+
 # Tablet playtest fixes - v1.11.1
 
 - Preserve a newly installed cell selector after the previous callback. This fixes Hurl's enemy-then-direction input and other chained targeting without charging or moving on cancellation.

@@ -689,6 +689,24 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade.upgrade(Dungeon.hero);break;
                 case 42:capture("tablet-upgrade");
                     System.out.println("TEST 53 UI PASS: real touch handbook talent/drag/rank 1 and 4, long-description scroll/bounds, Hurl enemy/direction/charge, unknown-source overhangs and barricade presentation; failures=0");
+                    Playtest.heroClass(HeroClass.ENCHANTER);Playtest.subclass(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass.ARTIFICER);
+                    Dungeon.hero.lvl=24;Dungeon.hero.talents.get(2).put(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.MASTER_CRAFT,2);
+                    com.shatteredpixel.shatteredpixeldungeon.windows.WndHero.lastIdx=1;
+                    GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndHero());break;
+                case 43:
+                    pointerGestureReview(rankButton(Game.scene(),com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.MASTER_CRAFT),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);break;
+                case 44:
+                    int dialogs=0;for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoTalent)dialogs++;
+                    if(dialogs!=1)throw new AssertionError("One talent tap opened "+dialogs+" upgrade windows");
+                    capture("enchanter-upgrade-offer");
+                    playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.titleCase(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoTalent.class,"upgrade")));break;
+                case 45:
+                    com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent capped=com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.MASTER_CRAFT;
+                    if(Dungeon.hero.pointsInTalent(capped)!=3||talentWindow()!=null)throw new AssertionError("Upgrade failed or duplicate popup remains: rank="+Dungeon.hero.pointsInTalent(capped)+", popup="+(talentWindow()!=null)+", available="+Dungeon.hero.talentPointsAvailable(3));
+                    int unspent=Dungeon.hero.talentPointsAvailable(3);
+                    com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton button=rankButton(Game.scene(),capped);button.upgradeTalent();button.upgradeTalent();
+                    if(Dungeon.hero.pointsInTalent(capped)!=3||Dungeon.hero.talentPointsAvailable(3)!=unspent)throw new AssertionError("Repeated upgrade exceeded rank cap");
+                    capture("enchanter-rank-cap");System.out.println("TEST 54 UI PASS: one pointer tap opens one offer; rank 2 to 3 spends one point; repeated upgrades cannot exceed cap; failures=0");
                     Gdx.app.exit();return;
             }
             playtestStep++;

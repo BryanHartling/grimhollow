@@ -1,5 +1,7 @@
 # Grimhollow
 
+**Enchanter and talent fix v1.11.2:** permanent enchantments/glyphs trigger 25% more often; temporary inscriptions and Rune Etching trigger twice as often. Chance-only bonuses start at level one. Talent purchases enforce rank caps and reject duplicate/stale offers; valid tier-four talents still have four ranks.
+
 **Tablet playtest fixes v1.11.1:** touch movement uses a longer visual step and smoother camera following; barricades span both corridor orientations and unknown neighboring walls no longer disclose their overhangs. Hurl retains its direction-selection step. The Focus Crystal and Sigil Brush can be unequipped; stored growth/charges remain, while casting and passive charging require equipping them.
 
 The class handbook now accepts actual taps on skills. Talent windows offer rank buttons and scrollable descriptions; long titled descriptions also scroll. Each of the three added classes keeps three armor paths, with four talents of four ranks per path. Focused Mind adds 1/2/3 capacity; Far Reach adds 1/2/4 Grasp range; Precognition prevents one/two qualifying hits per floor; Treasure Sense adds loot/hidden doors/hidden traps across its three ranks. Kinetic Surge grants 12.5/25/37.5/50 percent thrown damage during Mind Meld. All added-class rank descriptions state their effects explicitly.

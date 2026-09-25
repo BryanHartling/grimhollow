@@ -55,8 +55,16 @@ public class ShatteredPixelDungeon extends Game {
 
 	}
 	
-	@Override
-	public void create() {
+    private static volatile String lastIssue;
+    public static String lastIssue(){return lastIssue;}
+    @Override protected void logException(Throwable error){
+        java.io.StringWriter text=new java.io.StringWriter();
+        error.printStackTrace(new java.io.PrintWriter(text));lastIssue=text.toString();
+        super.logException(error);
+    }
+
+    @Override
+    public void create() {
 		super.create();
 
 		updateSystemUI();

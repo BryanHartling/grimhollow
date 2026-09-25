@@ -34,32 +34,25 @@ import com.watabou.utils.Callback;
 
 public class WndInfoTalent extends WndTitledMessage {
     public WndInfoTalent(Talent talent,int points,TalentButtonCallback callback){
-        this(talent,points,callback,Math.max(1,Math.min(talent.maxPoints(),points==0?1:points)));
-    }
-    private WndInfoTalent(Talent talent,int points,TalentButtonCallback callback,int rank){
-        super(new TalentIcon(talent),Messages.titleCase(talent.title())+" +"+rank,
-                description(talent,points,callback,rank));
-        float top=height+3,cell=width/(float)talent.maxPoints();
-        for(int i=1;i<=talent.maxPoints();i++){
-            final int selected=i;
-            RedButton tab=new RedButton("+"+i,7){@Override protected void onClick(){
-                hide();com.watabou.noosa.Game.scene().addToFront(new WndInfoTalent(talent,points,callback,selected));
-            }};
-            tab.enable(i!=rank);add(tab);tab.setRect((i-1)*cell,top,cell-2,18);
-        }
-        resize(width,(int)top+19);
+        super(new TalentIcon(talent),Messages.titleCase(talent.title()),description(talent,points,callback));
         if(callback!=null){
             RedButton upgrade=new RedButton(callback.prompt(),7){@Override protected void onClick(){hide();callback.call();}};
             upgrade.icon(Icons.get(Icons.TALENT));add(upgrade);upgrade.setRect(0,height+3,width,20);resize(width,height+24);
         }
     }
-    private static String description(Talent talent,int points,TalentButtonCallback callback,int rank){
+    public static String description(Talent talent,int points,TalentButtonCallback callback){
         boolean meta=(callback!=null&&callback.metamorphDesc()) || (Dungeon.hero!=null&&Dungeon.hero.metamorphedTalents.containsValue(talent));
-        String rankText=Messages.get(Talent.class,talent.name()+".rank"+rank);
-        if(meta || Messages.NO_TEXT_FOUND.equals(rankText))rankText=talent.desc(meta);
-        return Messages.get(WndInfoTalent.class,"rank_preview",rank,talent.maxPoints(),points)+"\n\n"+rankText;
+        StringBuilder text=new StringBuilder(Messages.get(WndInfoTalent.class,"progression",Math.min(points,talent.maxPoints()),talent.maxPoints()));
+        if(meta || Messages.NO_TEXT_FOUND.equals(Messages.get(Talent.class,talent.name()+".rank1")))
+            return text+"\n\n"+talent.desc(meta);
+        for(int rank=1;rank<=talent.maxPoints();rank++){
+            String rankText=Messages.get(Talent.class,talent.name()+".rank"+rank);
+            if(Messages.NO_TEXT_FOUND.equals(rankText))return text+"\n\n"+talent.desc(meta);
+            text.append("\n\n").append(Messages.get(WndInfoTalent.class,"rank",rank)).append("\n").append(rankText);
+        }
+        return text.toString();
     }
-    @Override protected float targetHeight(){return Math.min(220,PixelScene.uiCamera.height-40)-48;}
+    @Override protected float targetHeight(){return Math.min(220,PixelScene.uiCamera.height-40)-26;}
     public static abstract class TalentButtonCallback implements Callback {
         public abstract String prompt();
         public boolean metamorphDesc(){return false;}

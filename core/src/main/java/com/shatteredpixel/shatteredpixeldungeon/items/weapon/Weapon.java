@@ -26,6 +26,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Berserk;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass;
@@ -138,6 +139,9 @@ abstract public class Weapon extends KindOfWeapon {
 	
 	@Override
 	public int proc( Char attacker, Char defender, int damage ) {
+        // A new hit replaces the previous hit's Lucky result. Multiple enchantment
+        // slots on THIS hit must not cancel each other's successful rolls.
+        if (!Lucky.inAttack()) Buff.detach(defender, Lucky.LuckProc.class);
         if(runeEtching!=null&&attacker.buff(MagicImmune.class)==null&&defender.isAlive())damage=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.weaponProc(runeEtching.floorEnchant,this,attacker,defender,damage,.5f);
 
 		if(inscribed!=null&&attacker.buff(MagicImmune.class)==null)damage=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.weaponProc(inscribed,this,attacker,defender,damage,1);
@@ -525,6 +529,9 @@ abstract public class Weapon extends KindOfWeapon {
 	}
 
 	public static abstract class Enchantment implements Bundlable {
+
+        /** Effects requiring melee contact override this shared inscription-compatibility tag. */
+        public boolean meleeContactOnly() { return false; }
 
 		public static final Class<?>[] common = new Class<?>[]{
 				Blazing.class, Chilling.class, Kinetic.class, Shocking.class, Venomous.class

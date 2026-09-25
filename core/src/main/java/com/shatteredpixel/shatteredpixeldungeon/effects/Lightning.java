@@ -47,7 +47,11 @@ public class Lightning extends Group {
 		this(Arrays.asList(new Arc(from, to)), callback);
 	}
 
-	public Lightning(PointF from, int to, Callback callback){
+    public Lightning(int from,int to,Callback callback,boolean painted){
+        this(Arrays.asList(new Arc(DungeonTilemap.tileCenterToWorld(from),DungeonTilemap.tileCenterToWorld(to),painted)),callback);
+    }
+
+    public Lightning(PointF from, int to, Callback callback){
 		this(Arrays.asList(new Arc(from, to)), callback);
 	}
 
@@ -107,6 +111,7 @@ public class Lightning extends Group {
 	public static class Arc extends Group {
 
 		private Image arc1, arc2;
+        private Image glow1,glow2;private boolean painted;private float time;
 
 		//starting and ending x/y values
 		private PointF start, end;
@@ -124,8 +129,17 @@ public class Lightning extends Group {
 			this( DungeonTilemap.tileCenterToWorld(from), to);
 		}
 
-		public Arc(PointF from, PointF to){
-			start = from;
+        public Arc(PointF from,PointF to){this(from,to,false);}
+        public Arc(PointF from, PointF to,boolean painted){
+            painted=painted&&EnhancedEffects.enabled();this.painted=painted;
+            if(painted){
+                glow1=new Image();glow2=new Image();
+                for(Image glow:new Image[]{glow1,glow2}){
+                    ReadabilityEffects.frame(glow,ReadabilityEffects.MIST,16,5);
+                    glow.origin.set(0,2.5f);glow.hardlight(0x3B96EE);add(glow);
+                }
+            }
+            start = from;
 			end = to;
 
 			arc1 = new Image(Effects.get(Effects.Type.LIGHTNING));
@@ -138,17 +152,20 @@ public class Lightning extends Group {
 			arc2.origin.set( 0, arc2.height()/2 );
 			add( arc2 );
 
-			update();
+			if(painted){arc1.y=start.y-arc1.origin.y;arc1.hardlight(0xC2EDFF);arc2.hardlight(0xC2EDFF);}
+            update();
 		}
 
 		public void alpha(float alpha) {
 			arc1.am = arc2.am = alpha;
+            if(painted)glow1.am=glow2.am=alpha*.65f;
 		}
 
 		@Override
 		public void update() {
-			float x2 = (start.x + end.x) / 2 + Random.Float( -4, +4 );
-			float y2 = (start.y + end.y) / 2 + Random.Float( -4, +4 );
+			time+=Game.elapsed;
+            float x2 = (start.x + end.x) / 2 + (painted?1.4f*(float)Math.sin(time*18):Random.Float( -4, +4 ));
+			float y2 = (start.y + end.y) / 2 + (painted?1.4f*(float)Math.cos(time*18):Random.Float( -4, +4 ));
 
 			float dx = x2 - start.x;
 			float dy = y2 - start.y;
@@ -160,7 +177,14 @@ public class Lightning extends Group {
 			arc2.angle = (float)(Math.atan2( dy, dx ) * A);
 			arc2.scale.x = (float)Math.sqrt( dx * dx + dy * dy ) / arc2.width;
 			arc2.x = x2 - arc2.origin.x;
-			arc2.y = y2 - arc2.origin.x;
+			arc2.y = y2 - arc2.origin.y;
+            if(painted){
+                Image[] lines={arc1,arc2},glows={glow1,glow2};
+                for(int i=0;i<2;i++){
+                    Image glow=glows[i],line=lines[i];glow.x=line.x;glow.y=line.y+line.origin.y-glow.origin.y;
+                    glow.angle=line.angle;glow.scale.x=line.width()/glow.width;
+                }
+            }
 		}
 	}
 }

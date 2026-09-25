@@ -193,6 +193,8 @@ def outputs():
     result.update(actors())
     from inventory import outputs as inventory
     result.update(inventory())
+    from identification import outputs as identification
+    result.update(identification())
     from title import outputs as title
     result.update(title())
     from monsters import outputs as monsters
@@ -235,6 +237,7 @@ def main():
         if path=='interfaces/painted_skills.png':expected=(1024,512)
         if path=='interfaces/painted_badges.png':expected=(1024,512)
         if path=='effects/readability.png':expected=(512,64)
+        if path=='sprites/item_icons.png':expected=(512,256)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]

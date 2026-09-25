@@ -2685,303 +2685,363 @@
     "RING_ACCURACY": {
       "id": 0,
       "artIndex": 0,
-      "rgbaSha256": "20b8ca8245c1fc16b84fb77a193d818c54217c7bfab52e12d632826141f7de54"
+      "rgbaSha256": "02480026b1ca43d64fbda4f7994b1a7b92fa58cc9dad1ea48dd1435d0aeeb09f",
+      "sourceStatus": 27
     },
     "RING_ARCANA": {
       "id": 1,
       "artIndex": 1,
-      "rgbaSha256": "657a2183e9a561bae46fa90c0c641655c0b54e3bf98824de0e0355a8f836931e"
+      "rgbaSha256": "9fcf3534c7af0c9e14ea433fe29517eedc61362d05af1b04582e0596faf4ee81",
+      "sourceStatus": 83
     },
     "RING_ELEMENTS": {
       "id": 2,
       "artIndex": 2,
-      "rgbaSha256": "657a2183e9a561bae46fa90c0c641655c0b54e3bf98824de0e0355a8f836931e"
+      "rgbaSha256": "aa6f19f5de02e6c5d03f0e46360b566962edae2207ca45b8a1b8943d8878c6ac",
+      "sourceStatus": 82
     },
     "RING_ENERGY": {
       "id": 3,
       "artIndex": 3,
-      "rgbaSha256": "657a2183e9a561bae46fa90c0c641655c0b54e3bf98824de0e0355a8f836931e"
+      "rgbaSha256": "67bb049536d63a1975e5d46e19d398a4204dd4788103c6be5e324f64982564d9",
+      "sourceStatus": 34
     },
     "RING_EVASION": {
       "id": 4,
       "artIndex": 4,
-      "rgbaSha256": "5f5719bd035d95d2c976365723421472030882c5aa4a99439f21ad8da7c7c879"
+      "rgbaSha256": "fb61ef9ce5dd21e86ddaf2dbb454480adebb1690cae09920b02afdcee16dc277",
+      "sourceStatus": 63
     },
     "RING_FORCE": {
       "id": 5,
       "artIndex": 5,
-      "rgbaSha256": "7b01189a1b0d65ac7d533ea162c7dd8b34dc37dbe3edc955b187ac9919ce7f96"
+      "rgbaSha256": "09d48a1b8f3377b7d71e5f6bf681ed4c864c5a77a44bf3c2c7035088bca3cd6b",
+      "sourceStatus": 65
     },
     "RING_FUROR": {
       "id": 6,
       "artIndex": 6,
-      "rgbaSha256": "5f5719bd035d95d2c976365723421472030882c5aa4a99439f21ad8da7c7c879"
+      "rgbaSha256": "fe8b06abc6b9def1bb4fd7684b6570aa969b0604a301cc2a15ea45abe3313c88",
+      "sourceStatus": 17
     },
     "RING_HASTE": {
       "id": 7,
       "artIndex": 7,
-      "rgbaSha256": "7ee48dd623b97f1d9d25f75d8f37f5eb9883540ba22b2f1c5e34056c1f6fcdaf"
+      "rgbaSha256": "9aa1216a771050716075c302f8447512b3390fc84ac68f1fa9419d1102f0fd29",
+      "sourceStatus": 51
     },
     "RING_MIGHT": {
       "id": 8,
       "artIndex": 8,
-      "rgbaSha256": "5f5719bd035d95d2c976365723421472030882c5aa4a99439f21ad8da7c7c879"
+      "rgbaSha256": "9f94688882fcf28843e6da9d43b7b27033ed30784e4a06f9a10ae8d13e3f81bf",
+      "sourceStatus": 56
     },
     "RING_SHARPSHOOT": {
       "id": 9,
       "artIndex": 9,
-      "rgbaSha256": "5f5719bd035d95d2c976365723421472030882c5aa4a99439f21ad8da7c7c879"
+      "rgbaSha256": "90831161c88283bf389cb839982d6c4d529daf66fc6d2219d526af415a65fbe6",
+      "sourceStatus": 66
     },
     "RING_TENACITY": {
       "id": 10,
       "artIndex": 10,
-      "rgbaSha256": "5f5719bd035d95d2c976365723421472030882c5aa4a99439f21ad8da7c7c879"
+      "rgbaSha256": "7ad8b1dda9eee86a911fdea09da529316e22e7572d76d3fdd97b4ffab9b95659",
+      "sourceStatus": 24
     },
     "RING_WEALTH": {
       "id": 11,
       "artIndex": 11,
-      "rgbaSha256": "5f5719bd035d95d2c976365723421472030882c5aa4a99439f21ad8da7c7c879"
+      "rgbaSha256": "bf81d28367b208fa7626386dea328327101671072264689e9484bb03a790de9d",
+      "sourceStatus": 53
     },
     "SCROLL_UPGRADE": {
       "id": 32,
       "artIndex": 32,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "3b6f7664ed943e13a545422746b2eff8bac2cea74f2e2453ae1b8303ebbadc50",
+      "sourceStatus": 50
     },
     "SCROLL_IDENTIFY": {
       "id": 33,
       "artIndex": 33,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "cae7b7b5645bc9ac49af0b6b03fd57230549906a28898936c81637dc11c1d560",
+      "sourceStatus": 0
     },
     "SCROLL_REMCURSE": {
       "id": 34,
       "artIndex": 34,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "06c63b210c40aca42a00909002cb3eaa474c4c1a42c0c9304419b8f75ef55aef",
+      "sourceStatus": 37
     },
     "SCROLL_MIRRORIMG": {
       "id": 35,
       "artIndex": 35,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "45bb4801e4fd69ef01465d0facaee87b5fcd5ccb449d062706653b3d6140fb32",
+      "sourceStatus": 71
     },
     "SCROLL_RECHARGE": {
       "id": 36,
       "artIndex": 36,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "83e00b725d08bf747836c0cfcaad8df59456f53ce79fb56442dde5ab8948375c",
+      "sourceStatus": 34
     },
     "SCROLL_TELEPORT": {
       "id": 37,
       "artIndex": 37,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "453c475323843a7c8ee66b91889cbcb26fa86a057c67ce37a3915e68c71160b9",
+      "sourceStatus": 51
     },
     "SCROLL_LULLABY": {
       "id": 38,
       "artIndex": 38,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "59f1f980d273ce4a8f3bfd251bcad8a9e65ea8c8b140276e35ef8df88b8aed38",
+      "sourceStatus": 30
     },
     "SCROLL_MAGICMAP": {
       "id": 39,
       "artIndex": 39,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "89fe90adbeb3acff29f17324e1f201485680a691f6bc9f207c73aa05d3b52faa",
+      "sourceStatus": 32
     },
     "SCROLL_RAGE": {
       "id": 40,
       "artIndex": 40,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "8accb535831bb71092ac9e8e42d676fefe63b4dfa8e849137bf15197351f6c22",
+      "sourceStatus": 9
     },
     "SCROLL_RETRIB": {
       "id": 41,
       "artIndex": 41,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "7171b3d8c2dfbb9469e343fa8c554111f2a56ba0fd9e0bac156d6782f6008eb9",
+      "sourceStatus": 22
     },
     "SCROLL_TERROR": {
       "id": 42,
       "artIndex": 42,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "3ac78e5ce31432f4fff79f4be9540fa812f934d5bce753ec8b5c73f2cfced49b",
+      "sourceStatus": 10
     },
     "SCROLL_TRANSMUTE": {
       "id": 43,
       "artIndex": 43,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "09eb44451c2a73d5f14e2b0748513d6b4218762b5b032c37bc311eee08a7e3cf",
+      "sourceStatus": 78
     },
     "SCROLL_ENCHANT": {
       "id": 48,
       "artIndex": 48,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "048c1b674976eaa0f5f68e9feff2d7c0b2ab1a86618ef8d1c3fa4e70a42f8056",
+      "sourceStatus": 72
     },
     "SCROLL_DIVINATE": {
       "id": 49,
       "artIndex": 49,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "1bff3968a3b423221bc35d28489e5e88c4035be182773550c094becce8acb45e",
+      "sourceStatus": 77
     },
     "SCROLL_ANTIMAGIC": {
       "id": 50,
       "artIndex": 50,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "094ce8f8c8554e62191eef0f9737b395a553c4d62ada8e9529768e5c55559251",
+      "sourceStatus": 25
     },
     "SCROLL_PRISIMG": {
       "id": 51,
       "artIndex": 51,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "14150f115a6403cf395265974ac8bb43f2813cba9e0c5a22b9b64ff923489f87",
+      "sourceStatus": 80
     },
     "SCROLL_MYSTENRG": {
       "id": 52,
       "artIndex": 52,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "2b3795cd6a61c7dda1415d38c5de59a9b353f275596ae6c437c8a8046be6719e",
+      "sourceStatus": 68
     },
     "SCROLL_PASSAGE": {
       "id": 53,
       "artIndex": 53,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "c77b553c4981fc5ed6632f559f49377ed90e13309673031d636c86b4b01a0c71",
+      "sourceStatus": 35
     },
     "SCROLL_SIREN": {
       "id": 54,
       "artIndex": 54,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "8d8899e81eb8150a9cbed4c91e9e8a87f6370e4a821a4e12ccbf8209241c690f",
+      "sourceStatus": 44
     },
     "SCROLL_FORESIGHT": {
       "id": 55,
       "artIndex": 55,
-      "rgbaSha256": "dddf5583b4d5dd3f96e4742b4949305aabc32b89a6ce443103cb4778c7169842"
+      "rgbaSha256": "e5a50fa3fe4b133b9c874bd063ffd4eb2f0008a1f1a0e3436d0fe0b5ed0f8a36",
+      "sourceStatus": 54
     },
     "SCROLL_CHALLENGE": {
       "id": 56,
       "artIndex": 56,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "5dfd2d1062f2d8a9ddbd8843e80195bc785c4f1da913a7f4d80bac9436c25922",
+      "sourceStatus": 45
     },
     "SCROLL_PSIBLAST": {
       "id": 57,
       "artIndex": 57,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "24a1eecb51ab455623fbeb4d5df2b793ca5bdc444d40122b444377ffaa33d6b1",
+      "sourceStatus": 70
     },
     "SCROLL_DREAD": {
       "id": 58,
       "artIndex": 58,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "cfde6b47bc849e6fec08ce461d56c7f7cd4380361add01f6b6c6106d5068e25d",
+      "sourceStatus": 18
     },
     "SCROLL_METAMORPH": {
       "id": 59,
       "artIndex": 59,
-      "rgbaSha256": "30d74dc63160fa0cacb1ed6aaf5c174aef558810e92a6df298d191146287a926"
+      "rgbaSha256": "0017913af8240b0a07a80036159b0650c4f2e24db0ccc8cba29a3af2c0b5c482",
+      "sourceStatus": 36
     },
     "POTION_STRENGTH": {
       "id": 80,
       "artIndex": 80,
-      "rgbaSha256": "1cff3839dc6bfc12a3cdb6acde7253aa41c248d32940009957199b9c82e2cb94"
+      "rgbaSha256": "14d40058bb92c2066add4fa25ab2a2033ec7745d5fbe3073efafb3661e40492c",
+      "sourceStatus": 65
     },
     "POTION_HEALING": {
       "id": 81,
       "artIndex": 81,
-      "rgbaSha256": "faaf77839cc5f08f5eb80a55e45a04339fff5197f630abbd7a760d4735265174"
+      "rgbaSha256": "2586c06149ee459705bd1344a277b0a646976c83361384f0828bfcb4d9aeeb59",
+      "sourceStatus": 19
     },
     "POTION_MINDVIS": {
       "id": 82,
       "artIndex": 98,
-      "rgbaSha256": "015c3338ef1de1e4867fddcaa3b01263537aa7adad7f96d7bd5382ecc9439d36",
-      "reason": "Use the existing eye at POTION_MAGISIGHT; old MIND substring classifier chose a ring instead of an eye."
+      "rgbaSha256": "7bf90cc431d51122e008e596232f644149ff6101c3495eaa691e7c750009bd6a",
+      "reason": "Use the existing eye at POTION_MAGISIGHT; old MIND substring classifier chose a ring instead of an eye.",
+      "sourceStatus": 0
     },
     "POTION_FROST": {
       "id": 83,
       "artIndex": 83,
-      "rgbaSha256": "ab1f48f798a86d63ebf62de1a2d8cccb7b1299f7b94c6131ad2da8792a450183"
+      "rgbaSha256": "a527f00c25fded96387088036e15af5d55a5eb17018aae7fc7118f0e3be42276",
+      "sourceStatus": 15
     },
     "POTION_LIQFLAME": {
       "id": 84,
       "artIndex": 84,
-      "rgbaSha256": "1100f85a13ca2826f230b6a676d83b43055d591e01d0025eb44c50859ab1741b"
+      "rgbaSha256": "8620db7bb44a85bbfd6bfe34f47220f5db65864baf46bd4952e8b8f62aaf9eaa",
+      "sourceStatus": 2
     },
     "POTION_TOXICGAS": {
       "id": 85,
       "artIndex": 85,
-      "rgbaSha256": "77b233177d51770535df18502850fc5ab304248354e5c99563d97d5731a69ae8"
+      "rgbaSha256": "e1c6384622fe8ef64af3801ff8e3ca8585bd10ab8024be39fb5c558b58221cf1",
+      "sourceStatus": 3
     },
     "POTION_HASTE": {
       "id": 86,
       "artIndex": 86,
-      "rgbaSha256": "72014800d2ad33295facb0e9910ff441572bc44bceaee1af345840b3c0137d7d"
+      "rgbaSha256": "deb183c9926e727624a75792a1ff1614ed78f9a5930605d92c93e6ae91e286a4",
+      "sourceStatus": 41
     },
     "POTION_INVIS": {
       "id": 87,
       "artIndex": 87,
-      "rgbaSha256": "64fcad880967e8b018e0d772c895277be8c44bc3bf2e99a076d4dae9183b9f3e"
+      "rgbaSha256": "68613df003fe4bca4a3c19ce894ef43643ba4a01d9681c9cb3077fd2541daedc",
+      "sourceStatus": 12
     },
     "POTION_LEVITATE": {
       "id": 88,
       "artIndex": 88,
-      "rgbaSha256": "77b233177d51770535df18502850fc5ab304248354e5c99563d97d5731a69ae8"
+      "rgbaSha256": "646ec858bd11addc8ca29bc4bd28903a358f65d6787edd3cd9dd76b9000da0b5",
+      "sourceStatus": 1
     },
     "POTION_PARAGAS": {
       "id": 89,
       "artIndex": 89,
-      "rgbaSha256": "77b233177d51770535df18502850fc5ab304248354e5c99563d97d5731a69ae8"
+      "rgbaSha256": "791530f3616c97d9f554e05a8daef6f9871a9902e2ec54583a3add5863d24ee8",
+      "sourceStatus": 4
     },
     "POTION_PURITY": {
       "id": 90,
       "artIndex": 90,
-      "rgbaSha256": "77b233177d51770535df18502850fc5ab304248354e5c99563d97d5731a69ae8"
+      "rgbaSha256": "10a9bda325119e4ff0cce0430ae1cd3fe9ab098b3764adfd19fc28ce876887b4",
+      "sourceStatus": 37
     },
     "POTION_EXP": {
       "id": 91,
       "artIndex": 91,
-      "rgbaSha256": "77b233177d51770535df18502850fc5ab304248354e5c99563d97d5731a69ae8"
+      "rgbaSha256": "846b3b244dc546382de1767542df265750cd594eb007d40c66e6284bd3bd8228",
+      "sourceStatus": 50
     },
     "POTION_MASTERY": {
       "id": 96,
       "artIndex": 96,
-      "rgbaSha256": "c3fa71742ec94c6ad799201d60f1e0d4fd973558014c03663c453a554eb03ba7"
+      "rgbaSha256": "2aa23751dd48616b40044e36e5372a1f0d51746280ca2308bf4bd2dfac73eb5b",
+      "sourceStatus": 61
     },
     "POTION_SHIELDING": {
       "id": 97,
       "artIndex": 97,
-      "rgbaSha256": "d5a4f55a713f75a8a17a225a405da921c28d87701ec882fe4fe0c28e90a3ba3e"
+      "rgbaSha256": "19076ea684f8c6c44a24b256c9b17e434d8bb20909a62f9d9064e75ea20f1936",
+      "sourceStatus": 25
     },
     "POTION_MAGISIGHT": {
       "id": 98,
       "artIndex": 98,
-      "rgbaSha256": "015c3338ef1de1e4867fddcaa3b01263537aa7adad7f96d7bd5382ecc9439d36"
+      "rgbaSha256": "7bf90cc431d51122e008e596232f644149ff6101c3495eaa691e7c750009bd6a",
+      "sourceStatus": 0
     },
     "POTION_SNAPFREEZ": {
       "id": 99,
       "artIndex": 99,
-      "rgbaSha256": "ca1eb039e6cb65f0b700074dac12dc90dae77b9d91e288f1d7aea5615978851b"
+      "rgbaSha256": "a527f00c25fded96387088036e15af5d55a5eb17018aae7fc7118f0e3be42276",
+      "sourceStatus": 15
     },
     "POTION_DRGBREATH": {
       "id": 100,
       "artIndex": 100,
-      "rgbaSha256": "c3fa71742ec94c6ad799201d60f1e0d4fd973558014c03663c453a554eb03ba7"
+      "rgbaSha256": "cadc2a1dd5c110ea27d00a018073744b3d0d3fbc855683494ad0667e35ccb59d",
+      "sourceStatus": 55
     },
     "POTION_CORROGAS": {
       "id": 101,
       "artIndex": 101,
-      "rgbaSha256": "c3fa71742ec94c6ad799201d60f1e0d4fd973558014c03663c453a554eb03ba7"
+      "rgbaSha256": "8ebb1fb595564ed80dc6c08dca311c3563677879f1571bbb04cfd4619be1e9f2",
+      "sourceStatus": 8
     },
     "POTION_STAMINA": {
       "id": 102,
       "artIndex": 102,
-      "rgbaSha256": "caa2e969e462213fce8cad046da58440df823981962dbc5441dc34851f1dcc17"
+      "rgbaSha256": "1b3194ad6d00acad50edf606fac56c7dbf4da35d7af9563b336b6c0b08ab10e2",
+      "sourceStatus": 21
     },
     "POTION_SHROUDFOG": {
       "id": 103,
       "artIndex": 103,
-      "rgbaSha256": "b5899e0919a5ca6243dd3fe96965c527e42cb8874c44776f106db816792be6a1"
+      "rgbaSha256": "72cd01be6aa12f14ac2aad98fbaab795e73e3455e31ab4941d2dd28265711dc0",
+      "sourceStatus": 13
     },
     "POTION_STRMCLOUD": {
       "id": 104,
       "artIndex": 104,
-      "rgbaSha256": "c3fa71742ec94c6ad799201d60f1e0d4fd973558014c03663c453a554eb03ba7"
+      "rgbaSha256": "41fbf01f8396157c15ea4fcbfd430afc57687c53cc7ed0734c8273fd118fbbd5",
+      "sourceStatus": 58
     },
     "POTION_EARTHARMR": {
       "id": 105,
       "artIndex": 105,
-      "rgbaSha256": "c3fa71742ec94c6ad799201d60f1e0d4fd973558014c03663c453a554eb03ba7"
+      "rgbaSha256": "3f05e562b18e4bbb92244e349e0563dd5c7aad42ec8fcac0c2004e8be9ebc665",
+      "sourceStatus": 24
     },
     "POTION_CLEANSE": {
       "id": 106,
       "artIndex": 106,
-      "rgbaSha256": "c3fa71742ec94c6ad799201d60f1e0d4fd973558014c03663c453a554eb03ba7"
+      "rgbaSha256": "10a9bda325119e4ff0cce0430ae1cd3fe9ab098b3764adfd19fc28ce876887b4",
+      "sourceStatus": 37
     },
     "POTION_DIVINE": {
       "id": 107,
       "artIndex": 107,
-      "rgbaSha256": "c8eb00e017c3c6965dc1d836cb5d860a35d3a57732d7a595d90128eec48849cc"
+      "rgbaSha256": "169880d3fd5032e664b214d618c43406df2aab5e244e92b4991aba77ebc469bf",
+      "sourceStatus": 79
     }
   }
 }

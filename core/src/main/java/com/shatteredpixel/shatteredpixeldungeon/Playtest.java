@@ -186,6 +186,7 @@ public final class Playtest {
         h.subClass=HeroSubClass.NONE;h.armorAbility=null;
         h.talents.clear();h.metamorphedTalents.clear();
         Dungeon.quickslot.reset();
+        h.belongings.consolidateBags();
         h.live();value.initHero(h);
         for(Item item:gear)if(item!=null)give(item);
         h.updateHT(false);h.HP=h.HT;

@@ -71,6 +71,11 @@ public class EnchanterMagic extends Buff {
         }}catch(ClassNotFoundException ignored){}
         return list;
     }
+    public java.util.List<Class<?>> choices(Item item){
+        java.util.List<Class<?>> result=choices(item instanceof Armor);
+        if(SigilBrush.ranged(item))result.removeIf(type->((Weapon.Enchantment)Reflection.newInstance(type)).meleeContactOnly());
+        return result;
+    }
     public void arrive(){
         int floor=Dungeon.depth+100*Dungeon.branch;if(lastFloor==floor)return;
         boolean descending=lastFloor!=-1&&floor>lastFloor;lastFloor=floor;lastPos=Dungeon.hero.pos;stationary=0;

@@ -10,7 +10,7 @@ public final class GameGeometry {
     public static final int WORLD_TILE_SIZE = 16;
     public static final int LEGACY_HERO_FRAME_W = 12, LEGACY_HERO_FRAME_H = 15;
     public static final int LEGACY_ITEM_ICON = 16;
-    public static final int LIGHT_SAMPLES_PER_TILE = WORLD_TILE_SIZE;
+    public static final int LIGHT_SAMPLES_PER_TILE = 4;
     // Visibility is a cell mask, independent of the resolution of the artwork.
     public static final int FOG_SAMPLES_PER_TILE = 1;
     public static final int MAX_ATLAS_SIZE = 4096;
@@ -56,6 +56,9 @@ public final class GameGeometry {
     public static int characterDensity(Object texture) {
         // Creature sheets retain their fourfold upstream layout. Hero sheets
         // have separate 96x120 frames, fitted to the same world-space height.
+        for(String sharper:new String[]{Assets.Sprites.BRUTE,Assets.Sprites.SHAMAN})
+            if(sharper.equals(texture) || com.watabou.gltextures.TextureCache.contains(sharper)
+                    && com.watabou.gltextures.TextureCache.get(sharper)==texture)return 8;
         return characterLayout(texture)==null?1:4;
     }
     // Alpha occupancy is measured once per atlas rectangle, not on every rendered frame.

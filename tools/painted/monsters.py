@@ -4,6 +4,7 @@ No animation definitions, callbacks, combat rules or random numbers are changed.
 Components are extracted by alpha connectivity because authored limbs can cross
 the nominal source grid. Explicit rectangles cover irregular ward tiers too.
 """
+from pathlib import Path
 from collections import deque
 from functools import lru_cache
 import json
@@ -11,6 +12,15 @@ import math
 import numpy as np
 from PIL import Image, ImageFilter
 from pack import HERE, historical
+
+HIGH_DENSITY={'brute','shaman'}
+
+def density(name):return 8 if name in HIGH_DENSITY else 4
+
+def blank_atlas(name):
+    path=f'sprites/{name}.png';im=historical(CONTRACT['base'],path).copy()
+    if name in HIGH_DENSITY:im=im.resize((im.width*2,im.height*2),Image.Resampling.NEAREST)
+    return im
 
 CONTRACT = json.loads((HERE/'monsters.json').read_text(encoding='utf-8'))
 
@@ -68,8 +78,8 @@ def parts(name):
     return result
 
 
-def rectangle(atlas, frame, index):
-    w, h = (n*4 for n in frame)
+def rectangle(atlas, frame, index, density=4):
+    w, h = (n*density for n in frame)
     cols = atlas.width//w
     x, y = index%cols*w, index//cols*h
     assert y+h <= atlas.height, (frame, index, atlas.size)
@@ -88,7 +98,7 @@ def pose_choice(mode, step, name):
     return 2 if mode == 'attack' else 3
 
 
-def pose(art, size, scale, mode, step, count, name):
+def pose(art, size, scale, mode, step, count, name, density=4):
     phase = step/max(1,count-1)
     choice, angle, bob = pose_choice(mode, step, name), 0, 0
     if mode == 'closed':
@@ -109,7 +119,7 @@ def pose(art, size, scale, mode, step, count, name):
     im = original.resize((max(1,round(original.width*scale)),max(1,round(original.height*scale))),Image.Resampling.LANCZOS)
     if angle: im = im.rotate(angle,Image.Resampling.BICUBIC,expand=True)
     canvas = Image.new('RGBA',size)
-    canvas.alpha_composite(im, (round((size[0]-im.width)/2), round(size[1]-3-im.height+bob)))
+    canvas.alpha_composite(im, (round((size[0]-im.width)/2), round(size[1]-3*density/4-im.height+bob*density/4)))
     pixels = np.array(canvas); pixels[pixels[:,:,3] < 8] = 0
     return Image.fromarray(pixels)
 
@@ -119,41 +129,42 @@ def outputs():
     for spec in CONTRACT['monsters']:
         name = spec['name']; path = f"sprites/{spec.get('atlas',name)}.png"
         atlas = result.get(path)
-        if atlas is None: atlas = historical(CONTRACT['base'],path).copy()
+        den=density(spec.get('atlas',name))
+        if atlas is None: atlas = blank_atlas(spec.get('atlas',name))
         art = parts(spec['sheet'])[spec['row']*4:spec['row']*4+4]
-        size = tuple(v*4 for v in spec['frame'])
+        size = tuple(v*den for v in spec['frame'])
         # A stationary sentry/ward uses no attack or death pose. Fitting an
         # unused beam would unnecessarily discard its idle body's resolution.
         used = {pose_choice(mode, step, name)
                 for mode in ('closed','idle','move','attack','defeated')
                 for step, _ in enumerate(spec.get(mode, []))}
-        scale = min((size[0]-8)/max(art[i].width for i in used),
-                    (size[1]-8)/max(art[i].height for i in used))
+        scale = min((size[0]-2*den)/max(art[i].width for i in used),
+                    (size[1]-2*den)/max(art[i].height for i in used))
         occupied = set()
         for mode in ('closed','idle','move','attack','defeated'):
             indices = spec.get(mode,[])
             for step, index in enumerate(indices):
                 assert index not in occupied, (name,index)
                 occupied.add(index)
-                box = tuple(spec['rects'][str(index)]) if 'rects' in spec else rectangle(atlas,spec['frame'],index)
-                atlas.paste(pose(art,size,scale,mode,step,len(indices),name),box)
+                box = tuple(spec['rects'][str(index)]) if 'rects' in spec else rectangle(atlas,spec['frame'],index,den)
+                atlas.paste(pose(art,size,scale,mode,step,len(indices),name,den),box)
         result[path] = atlas
     return result
 
 
 def sizes():
     paths = {f"sprites/{m.get('atlas',m['name'])}.png" for m in CONTRACT['monsters']}
-    return {p: historical(CONTRACT['base'],p).size for p in paths}
+    return {p: blank_atlas(Path(p).stem).size for p in paths}
 
 
 def coverage():
     result={}
     for spec in CONTRACT['monsters']:
         path=f"sprites/{spec.get('atlas',spec['name'])}.png"
-        atlas=historical(CONTRACT['base'],path)
+        den=density(spec.get('atlas',spec['name']));atlas=blank_atlas(spec.get('atlas',spec['name']))
         boxes=result.setdefault(path,set())
         for mode in ('closed','idle','move','attack','defeated'):
             for index in spec.get(mode,[]):
-                box=tuple(spec['rects'][str(index)]) if 'rects' in spec else rectangle(atlas,spec['frame'],index)
+                box=tuple(spec['rects'][str(index)]) if 'rects' in spec else rectangle(atlas,spec['frame'],index,den)
                 boxes.add(box)
     return {path:[list(box) for box in sorted(boxes)] for path,boxes in result.items()}

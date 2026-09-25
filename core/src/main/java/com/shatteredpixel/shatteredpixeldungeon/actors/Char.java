@@ -381,7 +381,12 @@ public abstract class Char extends Actor {
 		return attack(enemy, 1f, 0f, 1f);
 	}
 	
-	public boolean attack( Char enemy, float dmgMulti, float dmgBonus, float accMulti ) {
+    public boolean attack(Char enemy,float dmgMulti,float dmgBonus,float accMulti){
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky.beginAttack(enemy);
+        try{return attackWithEnchantments(enemy,dmgMulti,dmgBonus,accMulti);}
+        finally{com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky.endAttack();}
+    }
+    private boolean attackWithEnchantments(Char enemy,float dmgMulti,float dmgBonus,float accMulti) {
 
 		if (enemy == null) return false;
 		

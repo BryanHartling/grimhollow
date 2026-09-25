@@ -112,6 +112,8 @@ def build():
         if entry['artIndex'] in written:
             entry['rgbaSha256']=written[entry['artIndex']];entry['cellSize']=64
     semantics['source']='v1.5.0: every named item ID uses a 64px painted cell; source mappings in tools/painted/items.json and items-continuation.json; identification names, numeric IDs and small-icon remaps are unchanged'
+    from identification import build as identification
+    semantics["icons"]=identification()[1]
     return atlas,semantics,len(written)
 
 

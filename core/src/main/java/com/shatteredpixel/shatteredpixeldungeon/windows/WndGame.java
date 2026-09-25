@@ -104,7 +104,12 @@ public class WndGame extends Window {
 			curBtn.icon(Icons.get(Icons.RANKINGS));
 		}
 
-		// Main menu
+        addButton(curBtn = new RedButton("Report an issue") {
+            @Override protected void onClick(){hide();GameScene.show(new WndSupportPrompt());}
+        });
+        curBtn.icon(Icons.get(Icons.INFO));
+
+        // Main menu
 		addButton(curBtn = new RedButton(Messages.get(this, "menu")) {
 			@Override
 			protected void onClick() {

@@ -209,7 +209,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 	protected synchronized void updateAnimation() {
 		// Painted enemies hold their resting pose. Advance every action animation
 		// normally: attack, movement and death callbacks still drive the actors.
-		if (!(this instanceof HeroSprite) && curAnim != null && curAnim == idle
+		if (!(this instanceof HeroSprite) && curAnim != null && (curAnim == idle || curAnim == run)
 				&& curAnim.looped && animCallback == null) return;
 		super.updateAnimation();
 	}
@@ -219,6 +219,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 		//Shouldn't interrupt the dieing animation
 		if (curAnim == null || curAnim != die) {
 			super.play(anim);
+            if (!(this instanceof HeroSprite) && anim == run && run.looped && idle != null) frame(idle.frames[0]);
 		}
 	}
 	

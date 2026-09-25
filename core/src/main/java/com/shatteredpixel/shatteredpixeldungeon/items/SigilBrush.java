@@ -20,7 +20,20 @@ public class SigilBrush extends ClassSpellItem {
     @Override public ArrayList<String> actions(Hero h){ArrayList<String> a=super.actions(h);a.add(AC_ETCH);return a;}
     @Override public void execute(Hero h,String action){if(action.equals(AC_ETCH)){if(RuneEtching.etch(h))h.spendAndNext(1);else com.shatteredpixel.shatteredpixeldungeon.utils.GLog.w(Messages.get(this,"etch_invalid"));}else super.execute(h,action);}
     @Override public String[] spells(Hero h){return h.subClass==HeroSubClass.ARTIFICER?new String[]{"inscribe","hex","transmute","reinforce"}:h.subClass==HeroSubClass.SCRIVENER?new String[]{"inscribe","hex","sanctify","nullify","fracture"}:new String[]{"inscribe","hex"};}
+    public static boolean ranged(Item item){return item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;}
+    public static boolean inscriptionTarget(Hero h,Item item){
+        return item!=null && (item instanceof Weapon || item instanceof Armor)
+                && (item.isEquipped(h) || ranged(item) && h.belongings.contains(item));
+    }
     @Override protected void select(Hero h,String spell){
+        if(spell.equals("inscribe")){
+            GameScene.selectItem(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBag.ItemSelector(){
+                public String textPrompt(){return Messages.get(SigilBrush.class,"inscribe_equipment");}
+                public boolean itemSelectable(Item item){return inscriptionTarget(h,item);}
+                public void onSelect(Item item){if(item!=null)GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe(h,SigilBrush.this,item));}
+            });
+            return;
+        }
         if(spell.equals("inscribe")||spell.equals("transmute")||spell.equals("reinforce")){
             GameScene.show(new WndOptions(Messages.get(this,spell),Messages.get(this,"equipment"),Messages.get(this,"weapon"),Messages.get(this,"armor")){
                 @Override protected void onSelect(int index){Item item=index==0?h.belongings.weapon:h.belongings.armor;if(item==null)return;
@@ -36,7 +49,7 @@ public class SigilBrush extends ClassSpellItem {
         EnchanterMagic magic=EnchanterMagic.state();
         switch(spell){
             case "inscribe":
-                if(item==null||!item.isEquipped(h)||!(item instanceof Weapon||item instanceof Armor)||!magic.choices(item instanceof Armor).contains(choice))return false;
+                if(!inscriptionTarget(h,item)||magic==null||!magic.choices(item).contains(choice))return false;
                 inscribe(item,choice,30+10*h.pointsInTalent(Talent.STEADY_HAND));
                 if(Random.Float()<.25f*h.pointsInTalent(Talent.DUAL_INSCRIPTION)){
                     Item other=item instanceof Weapon?h.belongings.armor:h.belongings.weapon;

@@ -245,8 +245,19 @@ final class RecoveryChecks {
         WallBlockingTilemap blocking=(WallBlockingTilemap)field(scene,"wallBlocking");
         for(int c=0;c<l.length();c++)if(l.visited[c]&&!l.heroFOV[c]&&remembered.containsKey(kind(l.map[c]))) {
             String type=kind(l.map[c]);Image actual=terrain.image(c%w,c/w);
-            if(walls.image(c%w,c/w)!=null||blocking.image(c%w,c/w)!=null)
-                throw new AssertionError("Remembered "+type+" repainted by a wall at "+c);
+            boolean boundary=c+w<l.length()&&DungeonTileSheet.wallStitcheable(l.map[c+w])
+                    &&(l.heroFOV[c+w]||l.visited[c+w]||l.mapped[c+w]);
+            Image cap=walls.image(c%w,c/w);
+            if(blocking.image(c%w,c/w)!=null || (cap!=null&&!boundary))
+                throw new AssertionError("Remembered "+type+" repainted by an unrelated wall at "+c);
+            if(boundary){
+                if(cap==null)throw new AssertionError("Remembered southern wall cap disappeared at "+c);
+                int id=DungeonTileSheet.stitchWallOverhangTile(l.map[c],(c+1)%w!=0?l.map[c+w+1]:-1,l.map[c+w],c%w!=0?l.map[c+w-1]:-1);
+                com.watabou.utils.RectF uv=new com.watabou.noosa.TextureFilm(cap.texture,64,64).get(id);
+                com.watabou.utils.RectF capFrame=cap.frame();
+                if(Math.abs(capFrame.left-(uv.left+.5f/cap.texture.width))>.000001f||Math.abs(capFrame.top-(uv.top+.5f/cap.texture.height))>.000001f)
+                    throw new AssertionError("Wrong remembered boundary cap at "+c);
+            }
             int expected=-1,t=l.map[c];
             if(type.equals("floor"))expected=DungeonTileSheet.getVisualWithAlts(DungeonTileSheet.directVisuals.get(t),c);
             else if(type.equals("water"))expected=DungeonTileSheet.stitchWaterTile(l.map[c-w],l.map[c+1],l.map[c+w],l.map[c-1]);

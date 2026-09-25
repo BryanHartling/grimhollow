@@ -131,12 +131,18 @@ public class SmokeRun {
         for(Class<? extends Mob> type:PlaytestCatalog.mobs())check(com.watabou.utils.Reflection.newInstance(type)!=null,"Mob catalog constructor: "+type);
         Item markerItem=Playtest.create(com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire.class,7,0,true,false);
         check(Playtest.give(markerItem),"Spawned spell not collected");
+        com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch duplicate=new com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch();
+        Item seed=new com.shatteredpixel.shatteredpixeldungeon.plants.Sungrass.Seed().quantity(9);duplicate.items.add(seed);Dungeon.hero.belongings.backpack.items.add(duplicate);
+        Dungeon.hero.belongings.consolidateBags();
+        check(Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.plants.Sungrass.Seed.class).quantity()==9&&!Dungeon.hero.belongings.contains(duplicate),"52: repair duplicate bags preserves their contents");
         Playtest.heroLevel(24);check(Dungeon.hero.lvl==24&&Dungeon.hero.exp==0,"Set hero level");
         Playtest.strength(24);
         for(HeroClass cls:HeroClass.values()){
             Playtest.heroClass(cls);
             check(Dungeon.hero.heroClass==cls&&Dungeon.hero.lvl==24&&Dungeon.hero.STR==24,"Class switch discarded progression");
             check(Dungeon.hero.belongings.contains(markerItem),"Class switch discarded backpack");
+            long pouches=0;for(Item bag:Dungeon.hero.belongings)if(bag instanceof com.shatteredpixel.shatteredpixeldungeon.items.bags.VelvetPouch)pouches++;
+            check(pouches==1,"52: class switching duplicates seed pouches");
             Playtest.subclass(cls.subClasses()[1]);Playtest.armorAbility(cls.armorAbilities()[2]);
             // Upstream's Monk talent drops its starter gear with a sprite animation when the pack is full.
             // Supply that renderer object in the headless fixture while still exercising the real drop.
@@ -158,6 +164,15 @@ public class SmokeRun {
             Playtest.travel(depth,0);
             check(Dungeon.depth==depth&&Dungeon.branch==0&&Dungeon.level.insideMap(Dungeon.hero.pos),"Floor travel "+depth);
             check(Dungeon.hero.lvl==30&&Playtest.god()&&Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire.class)!=null,"Travel discarded hero/items");
+        }
+        // Ascend normally into each previously unvisited boss exit, not another direct teleport.
+        for(int lower:new int[]{6,11,16,21,26}){
+            Playtest.travel(lower,0);
+            com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene.curTransition=Dungeon.level.getTransition(com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition.Type.REGULAR_ENTRANCE);
+            Object scene=new com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene();
+            java.lang.reflect.Method ascend=scene.getClass().getDeclaredMethod("ascend");ascend.setAccessible(true);ascend.invoke(scene);
+            check(Dungeon.depth==lower-1&&Dungeon.level.insideMap(Dungeon.hero.pos)&&!Dungeon.level.invalidHeroPos(Dungeon.hero.pos),"52: actual ascent placed hero outside playable boss floor "+(lower-1));
+            check(Dungeon.level.arrivalCell(-100)>=0&&Dungeon.level.arrivalCell(Dungeon.level.length()+100)>=0,"52: corrupt arrival bounds recover");
         }
         Playtest.travel(19,1);check(Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel,"Vault travel");
         Playtest.travel(12,1);check(Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.MiningLevel,"Mine travel");
@@ -937,6 +952,11 @@ public class SmokeRun {
         scroll.detachAll(h.belongings.backpack);stone.detachAll(h.belongings.backpack);w.enchant(null);w.inscribed=null;w.inscriptionTurns=0;h.subClass=HeroSubClass.NONE;brush.gainCharge(10);
         System.out.println("TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence");
     }
+    public static class MeleeContactEnchantment extends Weapon.Enchantment {
+        public boolean meleeContactOnly(){return true;}
+        public int proc(Weapon w,Char a,Char d,int damage){return damage;}
+        public ItemSprite.Glowing glowing(){return null;}
+    }
     private static class RateEnchantment extends Weapon.Enchantment {
         float chance, power; boolean cursed;
         @Override public int proc(Weapon weapon,Char attacker,Char defender,int damage){
@@ -980,6 +1000,27 @@ public class SmokeRun {
             for(int i=0;i<4;i++)check(test.upgradeTalent(talent),"54: legitimate tier-four rank");
             check(!test.upgradeTalent(talent)&&test.pointsInTalent(talent)==4,"54: fifth tier-four rank rejected");
         }
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky guaranteed=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky(){@Override protected float procChanceMultiplier(Char a){return 100;}};
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky never=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky(){@Override protected float procChanceMultiplier(Char a){return 0;}};
+        w.runeEtching=null;w.inscribed=guaranteed;w.enchantment=never;w.proc(h,enemy,10);
+        check(enemy.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky.LuckProc.class)!=null,"54: failed permanent Lucky erased successful inscription on same hit");
+        w.inscribed=never;w.proc(h,enemy,10);
+        check(enemy.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky.LuckProc.class)==null,"54: next hit must clear stale Lucky proc");
+        w.enchantment=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky();w.inscribed=null;
+        Buff.prolong(h,Overcharged.class,5);w.proc(h,enemy,10);
+        check(enemy.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky.LuckProc.class).genLoot()!=null,"54: Overcharged permanent Lucky produces a consumable");
+        w.inscribed=w.enchantment;w.enchantment=null;w.proc(h,enemy,10);
+        check(enemy.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky.LuckProc.class).genLoot()!=null,"54: Overcharged Lucky inscription produces a consumable");Buff.detach(h,Overcharged.class);
+        enemy.pos=h.pos+1;enemy.sprite=new RatSprite();enemy.sprite.visible=false;new com.watabou.noosa.Group().add(enemy.sprite);
+        Heap luckyHeap=Dungeon.level.drop(new Food(),enemy.pos);luckyHeap.seen=false;/* No particle scene in headless loot fixture. */luckyHeap.sprite=new ItemSprite(luckyHeap);luckyHeap.sprite.link(luckyHeap);
+        w.inscribed=guaranteed;w.proc(h,enemy,10);int loot=luckyHeap.items.stream().mapToInt(Item::quantity).sum();enemy.rollToDropLoot();
+        check(luckyHeap.items.stream().mapToInt(Item::quantity).sum()>loot,"54: eligible Lucky killing blow creates actual floor loot");
+        int oldLevel=h.lvl;h.lvl=30;w.proc(h,enemy,10);loot=luckyHeap.items.stream().mapToInt(Item::quantity).sum();enemy.rollToDropLoot();h.lvl=oldLevel;
+        check(luckyHeap.items.stream().mapToInt(Item::quantity).sum()==loot,"54: over-level enemies retain upstream loot cap");
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky.beginAttack(enemy);
+        try{guaranteed.proc(w,h,enemy,10);w.inscribed=never;w.enchantment=never;w.proc(h,enemy,10);
+            check(enemy.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky.LuckProc.class)!=null,"54: shared bow Lucky survives later weapon rolls in same attack");
+        }finally{com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky.endAttack();}
         System.out.println("TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund");
     }
     private static void enchanterScenario() throws Exception {
@@ -1014,6 +1055,22 @@ public class SmokeRun {
         EnchanterMagic migratedKnowledge=new EnchanterMagic();migratedKnowledge.restoreFromBundle(legacyKnowledge);
         check(migratedKnowledge.choices(false).contains(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.class),"33: previous-save temporary knowledge migrates to permanent library");
         Statistics.itemTypesDiscovered.addAll(catalog);
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife knives=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife();knives.quantity(3);knives.collect();
+        Weapon discovery=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword();discovery.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic());discovery.cursedKnown=true;EnchanterMagic.learn(discovery);
+        check(brush.cast(h,"inscribe",h.pos,knives,com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.class),"33: carried ranged weapon inscription");
+        Weapon single=(Weapon)knives.split(1);check(single.inscribed instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic&&single.inscriptionTurns==30,"33: thrown member retains inscription");
+        knives.inscribed=null;knives.inscriptionTurns=0;knives.merge(single);check(knives.inscribed!=null&&knives.inscriptionTurns==30,"33: recovered missile inscription survives merging");
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow bow=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow();bow.collect();brush.gainCharge(3);
+        check(brush.cast(h,"inscribe",h.pos,bow,com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.class),"33: bow is inscribable without melee equip");
+        bow.knockArrow().proc(h,new Rat(),10);check(h.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.KineticTracker.class)!=null,"33: actual arrow delegates to bow inscription");Buff.detach(h,com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic.KineticTracker.class);
+        check(!SigilBrush.inscriptionTarget(h,new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife()),"33: unowned missiles rejected");
+        Statistics.itemTypesDiscovered.add(MeleeContactEnchantment.class);
+        check(EnchanterMagic.state().choices(starter).contains(MeleeContactEnchantment.class)&&!EnchanterMagic.state().choices(bow).contains(MeleeContactEnchantment.class)&&!EnchanterMagic.state().choices(knives).contains(MeleeContactEnchantment.class),"33: picker excludes tagged melee-contact-only effects only for ranged targets");
+        int beforeRejected=brush.charges();check(!brush.cast(h,"inscribe",h.pos,bow,MeleeContactEnchantment.class)&&brush.charges()==beforeRejected,"33: ranged compatibility also enforced on cast");
+        Statistics.itemTypesDiscovered.remove(MeleeContactEnchantment.class);
+        bow.inscriptionTurns=knives.inscriptionTurns=1;EnchanterMagic.state().act();check(bow.inscribed==null&&knives.inscribed==null,"33: ranged inscriptions expire normally");
+        bow.detachAll(h.belongings.backpack);knives.detachAll(h.belongings.backpack);brush.gainCharge(3);
+        System.out.println("TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc");
         RuneEtching rune=starter.runeEtching;starter.upgrade();
         check(starter.actions(h).contains(Item.AC_DROP)&&starter.value()>0,"37: ordinary sellable starter");
         com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword replacement=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword();

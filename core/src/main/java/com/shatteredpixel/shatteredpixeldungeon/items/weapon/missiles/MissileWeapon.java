@@ -620,7 +620,12 @@ abstract public class MissileWeapon extends Weapon {
 			}
 			//cursed (no copy as other cannot have a higher priority status)
 
-			//special case for explosive, as it tracks a variable
+            // A thrown member keeps its inscription on return to the same stack.
+            if (other.inscriptionTurns > inscriptionTurns) {
+                inscribed = ((MissileWeapon)other).inscribed;
+                inscriptionTurns = other.inscriptionTurns;
+            }
+            //special case for explosive, as it tracks a variable
 			if (((MissileWeapon) other).enchantment instanceof Explosive
 				&& enchantment instanceof Explosive){
 				((Explosive) enchantment).merge((Explosive) ((MissileWeapon) other).enchantment);

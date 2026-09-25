@@ -24,10 +24,12 @@ public class LightingOverlay extends Image {
     private int previousHash;
     private boolean initialized;
     public int rebuilds;
+    private final int[] pixels;
 
     public LightingOverlay() {
         active = this;
         map = new LightMap(Dungeon.level.width(), Dungeon.level.height(), GameGeometry.LIGHT_SAMPLES_PER_TILE);
+        pixels=new int[map.width*map.height];
         cacheKey = "Grimhollow-lightmap-" + map.width + "x" + map.height;
         texture(TextureCache.create(cacheKey, map.width, map.height));
         scale.set((float)GameGeometry.WORLD_TILE_SIZE / map.samples);
@@ -87,9 +89,13 @@ public class LightingOverlay extends Image {
             int cell = x/map.samples + (y/map.samples)*Dungeon.level.width();
             // The rendered lava already carries its emission. Its light spills
             // onto neighbours, while the emitting surface keeps that radiance.
-            bitmap.drawPixel(x, y, lavaSurface && Dungeon.level.water[cell] ? 0xFFFFFFFF : map.rgba(x,y));
+            pixels[x+y*map.width]=lavaSurface && Dungeon.level.water[cell] ? 0xFFFFFFFF : map.rgba(x,y);
         }
-        texture.bitmap(bitmap);
+        java.nio.ByteBuffer buffer=bitmap.getPixels().duplicate().order(java.nio.ByteOrder.BIG_ENDIAN);
+        buffer.clear();buffer.asIntBuffer().put(pixels);
+        texture.bind();
+        Gdx.gl.glTexSubImage2D(Gdx.gl.GL_TEXTURE_2D,0,0,0,map.width,map.height,
+                bitmap.getGLFormat(),bitmap.getGLType(),bitmap.getPixels());
         rebuilds++;
     }
     @Override public void draw() {

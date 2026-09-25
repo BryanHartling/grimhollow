@@ -32,6 +32,14 @@ import com.watabou.noosa.Visual;
 import com.watabou.utils.Random;
 
 public class Lucky extends Weapon.Enchantment {
+    private static final ThreadLocal<Integer> attackDepth=ThreadLocal.withInitial(()->0);
+    public static void beginAttack(Char enemy){
+        if(enemy!=null)Buff.detach(enemy,LuckProc.class);
+        attackDepth.set(attackDepth.get()+1);
+    }
+    public static void endAttack(){attackDepth.set(attackDepth.get()-1);}
+    public static boolean inAttack(){return attackDepth.get()>0;}
+
 
 	private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing( 0x00FF00 );
 	
@@ -50,13 +58,8 @@ public class Lucky extends Weapon.Enchantment {
 
 			//default is -5: 80% common, 20% uncommon, 0% rare
 			//ring level increases by 1 for each 20% above 100% proc rate
-			Buff.affect(defender, LuckProc.class).ringLevel = -10 + Math.round(5*powerMulti);
-		} else {
-			//in rare cases where we attack many times at once (e.g. gladiator fury)
-			// make sure that failed luck procs override prior succeeded ones
-			if (defender.buff(LuckProc.class) != null){
-				defender.buff(LuckProc.class).detach();
-			}
+			LuckProc luck = Buff.affect(defender, LuckProc.class);
+			luck.ringLevel = Math.max(luck.ringLevel, -10 + Math.round(5*powerMulti));
 		}
 		
 		return damage;

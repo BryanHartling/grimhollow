@@ -474,9 +474,7 @@ public class Dungeon {
 
 		//Place hero at the entrance if they are out of the map (often used for pos = -1)
 		// or if they are in invalid terrain terrain (except in the mining level, where that happens normally)
-		if (pos < 0 || pos >= level.length() || level.invalidHeroPos(pos)){
-			pos = level.getTransition(null).cell();
-		}
+		pos = level.arrivalCell(pos);
 		
 		PathFinder.setMapSize(level.width(), level.height());
 		

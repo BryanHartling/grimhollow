@@ -677,7 +677,7 @@ public class Tengu extends Mob {
 				for (int i = 0; i < PathFinder.distance.length; i++) {
 					if (PathFinder.distance[i] < Integer.MAX_VALUE) {
 						Emitter e = CellEmitter.get(i);
-						e.pour( SmokeParticle.FACTORY, 0.25f );
+						e.pour( com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.TENGU_SMOKE, 0.25f );
 						smokeEmitters.add(e);
 					}
 				}
@@ -736,7 +736,7 @@ public class Tengu extends Mob {
 				Emitter emitter = new Emitter();
 				emitter.pos(7.5f, 3.5f);
 				emitter.fillTarget = false;
-				emitter.pour(SmokeParticle.SPEW, 0.05f);
+				emitter.pour(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.TENGU_FUSE, 0.05f);
 				return emitter;
 			}
 		}
@@ -986,8 +986,8 @@ public class Tengu extends Mob {
 				spreadblob();
 			} else if (shockingOrdinals){
 				
-				target.sprite.parent.add(new Lightning(shockerPos - 1 - Dungeon.level.width(), shockerPos + 1 + Dungeon.level.width(), null));
-				target.sprite.parent.add(new Lightning(shockerPos - 1 + Dungeon.level.width(), shockerPos + 1 - Dungeon.level.width(), null));
+				target.sprite.parent.add(new Lightning(shockerPos - 1 - Dungeon.level.width(), shockerPos + 1 + Dungeon.level.width(), null, true));
+				target.sprite.parent.add(new Lightning(shockerPos - 1 + Dungeon.level.width(), shockerPos + 1 - Dungeon.level.width(), null, true));
 				
 				if (Dungeon.level.distance(Dungeon.hero.pos, shockerPos) <= 1){
 					Sample.INSTANCE.play( Assets.Sounds.LIGHTNING );
@@ -997,8 +997,8 @@ public class Tengu extends Mob {
 				spreadblob();
 			} else {
 				
-				target.sprite.parent.add(new Lightning(shockerPos - Dungeon.level.width(), shockerPos + Dungeon.level.width(), null));
-				target.sprite.parent.add(new Lightning(shockerPos - 1, shockerPos + 1, null));
+				target.sprite.parent.add(new Lightning(shockerPos - Dungeon.level.width(), shockerPos + Dungeon.level.width(), null, true));
+				target.sprite.parent.add(new Lightning(shockerPos - 1, shockerPos + 1, null, true));
 				
 				if (Dungeon.level.distance(Dungeon.hero.pos, shockerPos) <= 1){
 					Sample.INSTANCE.play( Assets.Sounds.LIGHTNING );
@@ -1090,7 +1090,7 @@ public class Tengu extends Mob {
 			public void use(BlobEmitter emitter) {
 				super.use(emitter);
 				
-				emitter.pour( SparkParticle.STATIC, 0.10f );
+				emitter.pour( com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.TENGU_SPARK, 0.10f );
 			}
 			
 			@Override
@@ -1133,7 +1133,7 @@ public class Tengu extends Mob {
 				Emitter emitter = new Emitter();
 				emitter.pos(5, 5);
 				emitter.fillTarget = false;
-				emitter.pour(SparkParticle.FACTORY, 0.1f);
+				emitter.pour(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.TENGU_SPARK, 0.1f);
 				return emitter;
 			}
 		}

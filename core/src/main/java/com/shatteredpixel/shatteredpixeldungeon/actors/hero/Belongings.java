@@ -211,6 +211,25 @@ public class Belongings implements Iterable<Item> {
 		if (secondWep() != null)    secondWep().activate(owner);
 
 		bundleRestoring = false;
+		consolidateBags();
+	}
+
+	/** Repair duplicate starter bags from older Playtest class switches without losing contents. */
+	public void consolidateBags() {
+		java.util.HashMap<Class<?>, Bag> first = new java.util.HashMap<>();
+		for (Item item : new ArrayList<>(backpack.items)) if (item instanceof Bag) {
+			Bag bag = (Bag)item, keep = first.putIfAbsent(item.getClass(), (Bag)item);
+			if (keep == null) continue;
+			for (Item content : new ArrayList<>(bag.items)) {
+				bag.items.remove(content);
+				// Preserve overflow in the surviving bag; normal capacity applies to future pickups.
+				if (!content.collect(keep)) keep.items.add(content);
+			}
+			int slot = Dungeon.quickslot.getSlot(bag);
+			backpack.items.remove(bag);bag.owner = null;
+			Dungeon.quickslot.clearItem(bag);
+			if (slot >= 0) Dungeon.quickslot.setSlot(slot, keep);
+		}
 	}
 
 	public void clear(){

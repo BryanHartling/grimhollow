@@ -643,10 +643,15 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     if(talentWindow()==null)throw new AssertionError("Handbook talent pointer did not open details");
                     interfaceBounds();firstRankText=allReviewText(talentWindow());
                     if(!firstRankText.contains("12.5%"))throw new AssertionError("Rank-one numeric description missing");
-                    capture("tablet-talent-rank1");playtestClick("+4");break;
+                    if(!firstRankText.contains("50%")||!firstRankText.contains("Rank 4"))throw new AssertionError("Full progression missing from description");
+                    com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane progression=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(talentWindow(),"description");
+                    pointerGestureReview(progression,com.watabou.input.PointerEvent.NONE,-25);
+                    if(progression.content().height()>progression.height() && progression.content().camera.scroll.y<=0)throw new AssertionError("Overflowing progression does not scroll");
+                    if(playtestButton("+1")!=null||playtestButton("+4")!=null)throw new AssertionError("Rank toggle buttons still present");
+                    capture("tablet-talent-rank1");break;
                 case 35:
                     interfaceBounds();String fourth=allReviewText(talentWindow());
-                    if(fourth.equals(firstRankText)||!fourth.contains("50%"))throw new AssertionError("Rank-four pointer did not change description");
+                    if(!fourth.equals(firstRankText)||!fourth.contains("50%"))throw new AssertionError("Scrolling changed progression content");
                     capture("tablet-talent-rank4");closeReviewWindows();
                     GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage(
                             com.shatteredpixel.shatteredpixeldungeon.ui.Icons.get(com.shatteredpixel.shatteredpixeldungeon.ui.Icons.INFO),
@@ -688,7 +693,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     capture("tablet-hurl");tabletTerrainChecks();
                     com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade.upgrade(Dungeon.hero);break;
                 case 42:capture("tablet-upgrade");
-                    System.out.println("TEST 53 UI PASS: real touch handbook talent/drag/rank 1 and 4, long-description scroll/bounds, Hurl enemy/direction/charge, unknown-source overhangs and barricade presentation; failures=0");
+                    System.out.println("TEST 53 UI PASS: real touch handbook talent/drag/all ranks in one scrolling description, long-description scroll/bounds, Hurl enemy/direction/charge, unknown-source overhangs and barricade presentation; failures=0");
                     Playtest.heroClass(HeroClass.ENCHANTER);Playtest.subclass(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass.ARTIFICER);
                     Dungeon.hero.lvl=24;Dungeon.hero.talents.get(2).put(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.MASTER_CRAFT,2);
                     com.shatteredpixel.shatteredpixeldungeon.windows.WndHero.lastIdx=1;
@@ -707,6 +712,23 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton button=rankButton(Game.scene(),capped);button.upgradeTalent();button.upgradeTalent();
                     if(Dungeon.hero.pointsInTalent(capped)!=3||Dungeon.hero.talentPointsAvailable(3)!=unspent)throw new AssertionError("Repeated upgrade exceeded rank cap");
                     capture("enchanter-rank-cap");System.out.println("TEST 54 UI PASS: one pointer tap opens one offer; rank 2 to 3 spends one point; repeated upgrades cannot exceed cap; failures=0");
+                    closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndSupportPrompt("Test diagnostic: reproducible issue text"));break;
+                case 46:
+                    interfaceBounds();capture("copyable-issue-report");playtestClick("Copy report");break;
+                case 47:
+                    if(!Gdx.app.getClipboard().getContents().contains("Test diagnostic: reproducible issue text"))throw new AssertionError("Issue report clipboard lost diagnostic text");
+                    System.out.println("ISSUE REPORT PASS: visible diagnostic, viewport bounds and real clipboard copy");
+                    closeReviewWindows();
+                    for(int dy=-3;dy<=3;dy++)for(int dx=-4;dx<=4;dx++)Level.set(Dungeon.hero.pos+dx+dy*Dungeon.level.width(),Terrain.EMPTY);
+                    for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs.toArray(new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob[0])){mob.destroy();if(mob.sprite!=null)mob.sprite.killAndErase();}
+                    Playtest.spawnMob(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Brute.class,Dungeon.hero.pos-2);
+                    Playtest.spawnMob(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.RedShaman.class,Dungeon.hero.pos+2);
+                    com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter.get(Dungeon.hero.pos-Dungeon.level.width()).pour(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.TENGU_SMOKE,.15f);
+                    com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter.get(Dungeon.hero.pos+Dungeon.level.width()).pour(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.TENGU_SPARK,.15f);
+                    Dungeon.observe();GameScene.updateMap();Camera.main.snapTo(Dungeon.hero.sprite.center());break;
+                case 48:
+                    Dungeon.hero.sprite.parent.add(new com.shatteredpixel.shatteredpixeldungeon.effects.Lightning(Dungeon.hero.pos-1+Dungeon.level.width(),Dungeon.hero.pos+1+Dungeon.level.width(),null,true));
+                    Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);Game.scene().draw();capture("creatures-and-tengu-effects");
                     Gdx.app.exit();return;
             }
             playtestStep++;
@@ -760,7 +782,14 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             Dungeon.level.visited[source]=true;
             if(terrain!=Terrain.BARRICADE&&(int)visual.invoke(walls,top,Terrain.EMPTY,false)<0)throw new AssertionError("Known source overhang lost "+terrain);
         }
-        Level.set(top,Terrain.LOCKED_EXIT);
+        Level.set(source,Terrain.WALL);Dungeon.level.visited[source]=Dungeon.level.visited[top]=true;
+        Dungeon.level.heroFOV[top]=true;int visibleCap=(int)visual.invoke(walls,top,Terrain.EMPTY,false);
+        Dungeon.level.heroFOV[top]=false;
+        if(visibleCap<0 || (int)visual.invoke(walls,top,Terrain.EMPTY,false)!=visibleCap)throw new AssertionError("Remembered bottom wall lost its visible cap");
+        Dungeon.level.visited[source]=Dungeon.level.mapped[source]=false;
+        if((int)visual.invoke(walls,top,Terrain.EMPTY,false)!=-1)throw new AssertionError("Remembered room leaks unseen wall cap");
+        Dungeon.level.heroFOV[top]=true;
+        Level.set(top,Terrain.LOCKED_EXIT);Level.set(source,Terrain.EMPTY);
         Dungeon.level.heroFOV[source]=Dungeon.level.visited[source]=Dungeon.level.mapped[source]=false;
         if((int)visual.invoke(walls,top,Terrain.LOCKED_EXIT,false)!=com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet.EXIT_UNDERHANG)throw new AssertionError("Visible exit artwork depends on unknown neighbor");
         walls.destroy();Level.set(top,Terrain.EMPTY);Level.set(source,Terrain.EMPTY);
@@ -1325,6 +1354,14 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         com.watabou.utils.RectF after=sprite.frame();
         if(frame.left!=after.left||frame.top!=after.top||frame.right!=after.right||frame.bottom!=after.bottom)
             failures.add("Continuously animated idle "+sprite.getClass().getSimpleName());
+        com.watabou.noosa.MovieClip.Animation run=(com.watabou.noosa.MovieClip.Animation)RecoveryChecks.field(sprite,"run");
+        if(run!=null&&run.looped){
+            sprite.play(run);com.watabou.utils.RectF pose=new com.watabou.utils.RectF(sprite.frame());
+            try{Game.elapsed=1f/60f;for(int i=0;i<120;i++)advance.invoke(sprite);}finally{Game.elapsed=elapsed;}
+            after=sprite.frame();
+            if(pose.left!=after.left||pose.top!=after.top||pose.right!=after.right||pose.bottom!=after.bottom)failures.add("Twitching travel pose "+sprite.getClass().getSimpleName());
+            sprite.idle();
+        }
     }
 
     private void paintedAnimations(com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite sprite,

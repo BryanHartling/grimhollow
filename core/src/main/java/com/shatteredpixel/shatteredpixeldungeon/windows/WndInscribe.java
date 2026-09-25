@@ -27,7 +27,7 @@ public class WndInscribe extends Window {
         title.setRect(0,0,width,0);add(title);
         RenderedTextBlock hint=PixelScene.renderTextBlock(Messages.get(SigilBrush.class,"known"),6);
         hint.maxWidth(width-4);hint.setPos(2,title.bottom()+4);add(hint);
-        List<Class<?>> choices=new ArrayList<>(EnchanterMagic.state().choices(item instanceof Armor));
+        List<Class<?>> choices=new ArrayList<>(EnchanterMagic.state().choices(item));
         choices.sort(Comparator.comparing(WndInscribe::name));
         Component content=new Component();float y=0;
         for(Class<?> choice:choices){

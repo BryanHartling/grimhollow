@@ -1585,8 +1585,21 @@ public abstract class Level implements Bundlable {
 	//usually just if the base terrain of a cell is solid, but other cases exist too
 	//only check on base terrain, we want to ignore temporary changes from blobs (e.g. light wall)
 	public boolean invalidHeroPos( int tile ){
+		if (!insideMap(tile)) return true;
 		int flags = Terrain.flags[map[tile]];
-		return (flags & Terrain.PASSABLE) != 0 && (flags & Terrain.AVOID) != 0;
+		return (flags & (Terrain.PASSABLE | Terrain.AVOID)) == 0 || (flags & Terrain.PIT) != 0;
+	}
+
+	/** Boss exits can be placeholders until the arena changes. Never arrive in solid terrain. */
+	public int arrivalCell(int requested) {
+		if (insideMap(requested) && !invalidHeroPos(requested)) return requested;
+		LevelTransition entrance = getTransition(null);
+		if (entrance != null && insideMap(entrance.cell()) && !invalidHeroPos(entrance.cell())) return entrance.cell();
+		for (LevelTransition transition : transitions)
+			if (insideMap(transition.cell()) && !invalidHeroPos(transition.cell())) return transition.cell();
+		for (int cell = width; cell < length - width; cell++)
+			if (!invalidHeroPos(cell) && passable[cell]) return cell;
+		throw new IllegalStateException("Level has no safe arrival cell: " + getClass().getSimpleName());
 	}
 
 	//returns true if the input is a valid tile within the level

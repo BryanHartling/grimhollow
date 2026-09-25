@@ -55,11 +55,22 @@ public class ItemSlot extends Button {
 
 	protected ItemSprite sprite;
 	protected Item       item;
-	protected BitmapText status;
-	protected BitmapText extra;
+	protected SlotText status;
+	protected SlotText extra;
 	protected Image      itemIcon;
-	protected BitmapText level;
+	protected SlotText level;
 	
+    protected static class SlotText extends com.watabou.noosa.RenderedText {
+        final float baseScale;
+        SlotText(){
+            super(8*Math.max(1,PixelScene.defaultZoom));
+            baseScale=1f/Math.max(1,PixelScene.defaultZoom);scale.set(baseScale);
+        }
+        public void measure(){} // RenderedText measures on text changes.
+        public float baseLine(){return height();}
+        @Override public void text(String value){if(!java.util.Objects.equals(text(),value))super.text(value);}
+    }
+
 	private static final String TXT_STRENGTH	= ":%d";
 	private static final String TXT_TYPICAL_STR	= "%d?";
 
@@ -110,13 +121,13 @@ public class ItemSlot extends Button {
 		sprite = new ItemSprite();
 		add(sprite);
 		
-		status = new BitmapText( PixelScene.pixelFont);
+		status = new SlotText();
 		add(status);
 		
-		extra = new BitmapText( PixelScene.pixelFont);
+		extra = new SlotText();
 		add(extra);
 		
-		level = new BitmapText( PixelScene.pixelFont);
+		level = new SlotText();
 		add(level);
 	}
 	
@@ -131,10 +142,11 @@ public class ItemSlot extends Button {
 		
 		if (status != null) {
 			status.measure();
-			if (status.width > width - (margin.left + margin.right)){
-				status.scale.set(PixelScene.align(0.8f));
+			status.scale.set(status.baseScale);
+            if (status.width() > width - (margin.left + margin.right)){
+				status.scale.set(status.baseScale*.8f);
 			} else {
-				status.scale.set(1f);
+				status.scale.set(status.baseScale);
 			}
 			status.x = x + margin.left;
 			status.y = y + margin.top;
@@ -247,6 +259,7 @@ public class ItemSlot extends Button {
 			extra.text( null );
 
 			itemIcon = new Image(Assets.Sprites.ITEM_ICONS);
+            itemIcon.texture.filter(com.watabou.glwrap.Texture.LINEAR,com.watabou.glwrap.Texture.LINEAR);
 			itemIcon.frame(ItemSpriteSheet.Icons.film.get(item.icon));
 			itemIcon.logicalSize(ItemSpriteSheet.Icons.SIZE, ItemSpriteSheet.Icons.SIZE);
 			add(itemIcon);

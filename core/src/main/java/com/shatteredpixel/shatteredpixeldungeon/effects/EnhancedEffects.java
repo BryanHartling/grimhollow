@@ -164,6 +164,40 @@ public final class EnhancedEffects {
             }
         }
     }
+    /** Tengu's existing emitters retain their danger cells/timing, with soft painted particles. */
+    public static final Emitter.Factory TENGU_SMOKE=tenguFactory(false,false);
+    public static final Emitter.Factory TENGU_FUSE=tenguFactory(false,true);
+    public static final Emitter.Factory TENGU_SPARK=tenguFactory(true,false);
+    private static Emitter.Factory tenguFactory(final boolean spark,final boolean fuse){
+        return new Emitter.Factory(){
+            @Override public void emit(Emitter emitter,int index,float x,float y){
+                if(!enabled()){
+                    (spark?com.shatteredpixel.shatteredpixeldungeon.effects.particles.SparkParticle.STATIC:
+                        fuse?com.shatteredpixel.shatteredpixeldungeon.effects.particles.SmokeParticle.SPEW:
+                        com.shatteredpixel.shatteredpixeldungeon.effects.particles.SmokeParticle.FACTORY).emit(emitter,index,x,y);
+                    return;
+                }
+                ((TenguParticle)emitter.recycle(TenguParticle.class)).reset(x,y,index,spark,fuse);
+            }
+            @Override public boolean lightMode(){return spark;}
+        };
+    }
+    public static class TenguParticle extends PixelParticle {
+        private boolean spark;private float phase;
+        public void reset(float x,float y,int index,boolean spark,boolean fuse){
+            revive();this.spark=spark;phase=index*2.39996f;this.x=x;this.y=y;
+            left=lifespan=spark?.45f:.95f;
+            speed.set((float)Math.cos(phase)*(spark?8:3),spark?-8:fuse?-17:-7);acc.set(0,0);
+            if(spark){texture(ATLAS);EnhancedEffects.frame(this,Style.EMBER,index%3,4,4);hardlight(0x9CDDFF);}
+            else {ReadabilityEffects.frame(this,ReadabilityEffects.MIST,9,9);hardlight(0xB2A89E);}
+            origin.set(width/2,height/2);alpha(0);
+        }
+        @Override public void update(){
+            super.update();visible=enabled();float t=1-Math.max(0,left/lifespan);
+            float size=spark?4-2*t:9+9*t;logicalSize(size,size);origin.set(size/2,size/2);
+            angle=(float)Math.sin(phase)*t*15;alpha((float)Math.sin(Math.PI*t)*(spark?.95f:.55f));
+        }
+    }
     public static class Torch extends Image {
         final int cell;float time;
         public Torch(int cell){super(ATLAS);this.cell=cell;point(DungeonTilemap.tileToWorld(cell));x+=4;y+=1;}

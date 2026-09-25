@@ -24254,3 +24254,286 @@ Native interface failures=0
 
 TEST 46 compiled handlers: classes=2911 guarded browser sinks=1 HTTP/socket calls=0 failures=0
 APK badging: com.grimhollow.dungeon versionCode=956 versionName=1.12.0-INDEV minimum SDK=21 target SDK=36; adb devices -l: empty list.
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :desktop:processResources UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :core:jar UP-TO-DATE
+> Task :desktop:compileJava
+> Task :desktop:classes
+> Task :desktop:release
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 39s
+9 actionable tasks: 2 executed, 7 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\playtest-v112-presentation-landscape\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/interface/landscape/title.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-warrior.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-mage.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-rogue.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-huntress.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-duelist.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-cleric.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-necromancer.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-enchanter.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/selection-psychic.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-profile.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-growth.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-paths.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-armor.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/landscape/handbook-armor-bottom.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/painted-traps-and-duelist-hud.png
+TEST 36 PRESENTATION: classes=9 matchingPortraits=9 firstSelections=9 secondSelections=9 infoButtons=9 handbookPages=36 orientation=landscape duelistStart=true trapShapes=7 failures=0
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/painted-sprouted-plants.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/enchanter-spell-icons.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/inscribe-starter-armor.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/inscribe-full-library.png
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/inscribe-full-library-bottom.png
+TEST 33/36 BOTANY UI: sprouted plants=13 pointer armor selections=2 glyph library=13 scrolling/offset=PASS failures=0
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/inscribe-starter-weapon.png
+[GAME] ** Inscribe requires the selected gear to remain equipped, one Brush charge, and no magic immunity.
+RENDERED=GameScene SCREENSHOT=verification/interface/landscape/inscribe-no-charge.png
+TEST 33 POINTER: mouse armor, scrolled bottom glyph, touch weapon/info, drag suppression, zero-charge rejection; failures=0
+[Controllers] removed manager for application, 0 managers active
+PREFERENCES_PATH=C:\Users\Hartl\Documents\grimhollow\.local\playtest-v112-presentation-portrait\AppData\Roaming\.grimhollow\Grimhollow
+[Controllers] added manager for application, 1 managers active
+RENDERED=TitleScene SCREENSHOT=verification/interface/portrait/title.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-warrior.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-mage.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-rogue.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-huntress.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-duelist.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-cleric.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-necromancer.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-enchanter.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/selection-psychic.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-profile.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-growth.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-paths.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-armor.png
+RENDERED=HeroSelectScene SCREENSHOT=verification/interface/portrait/handbook-armor-bottom.png
+[GAME] @@ You descend to floor 1 of the dungeon.
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/painted-traps-and-duelist-hud.png
+TEST 36 PRESENTATION: classes=9 matchingPortraits=9 firstSelections=9 secondSelections=9 infoButtons=9 handbookPages=36 orientation=portrait duelistStart=true trapShapes=7 failures=0
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/painted-sprouted-plants.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/enchanter-spell-icons.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/inscribe-starter-armor.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/inscribe-full-library.png
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/inscribe-full-library-bottom.png
+TEST 33/36 BOTANY UI: sprouted plants=13 pointer armor selections=2 glyph library=13 scrolling/offset=PASS failures=0
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/inscribe-starter-weapon.png
+[GAME] ** Inscribe requires the selected gear to remain equipped, one Brush charge, and no magic immunity.
+RENDERED=GameScene SCREENSHOT=verification/interface/portrait/inscribe-no-charge.png
+TEST 33 POINTER: mouse armor, scrolled bottom glyph, touch weapon/info, drag suppression, zero-charge rejection; failures=0
+[Controllers] removed manager for application, 0 managers active
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :core:processResources NO-SOURCE
+> Task :core:processTestResources NO-SOURCE
+> Task :android:preBuild UP-TO-DATE
+> Task :android:preDebugBuild UP-TO-DATE
+> Task :android:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :android:generateDebugResources UP-TO-DATE
+> Task :SPD-classes:compileJava UP-TO-DATE
+> Task :services:compileJava UP-TO-DATE
+> Task :services:processResources NO-SOURCE
+> Task :services:classes UP-TO-DATE
+> Task :SPD-classes:processResources NO-SOURCE
+> Task :SPD-classes:classes UP-TO-DATE
+> Task :SPD-classes:jar UP-TO-DATE
+> Task :services:jar UP-TO-DATE
+> Task :android:packageDebugResources UP-TO-DATE
+> Task :android:processDebugNavigationResources UP-TO-DATE
+> Task :android:parseDebugLocalResources UP-TO-DATE
+> Task :android:generateDebugRFile UP-TO-DATE
+> Task :android:javaPreCompileDebug UP-TO-DATE
+> Task :android:generateDebugAssets UP-TO-DATE
+> Task :core:compileJava UP-TO-DATE
+> Task :core:classes UP-TO-DATE
+> Task :android:mergeDebugAssets
+> Task :android:generateDebugGlobalSynthetics UP-TO-DATE
+> Task :android:compressDebugAssets
+> Task :android:checkDebugDuplicateClasses UP-TO-DATE
+> Task :android:desugarDebugFileDependencies UP-TO-DATE
+> Task :android:mergeExtDexDebug UP-TO-DATE
+> Task :android:checkDebugAarMetadata UP-TO-DATE
+> Task :android:mapDebugSourceSetPaths UP-TO-DATE
+> Task :android:compileDebugNavigationResources UP-TO-DATE
+> Task :android:mergeDebugResources UP-TO-DATE
+> Task :android:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :android:extractDeepLinksDebug UP-TO-DATE
+> Task :android:processDebugMainManifest UP-TO-DATE
+> Task :android:processDebugManifest UP-TO-DATE
+> Task :android:processDebugManifestForPackage UP-TO-DATE
+> Task :android:processDebugResources UP-TO-DATE
+> Task :android:copyAndroidNatives
+> Task :android:mergeDebugJniLibFolders UP-TO-DATE
+> Task :android:validateSigningDebug UP-TO-DATE
+> Task :android:writeDebugAppMetadata UP-TO-DATE
+> Task :android:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :core:compileTestJava
+> Task :core:testClasses
+> Task :desktop:processResources
+> Task :desktop:compileJava UP-TO-DATE
+> Task :desktop:classes
+
+> Task :core:smokeRun
+TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund
+TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS V4 ENCHANTER Vault generation/save/load, mirror=SigilBrush, equipment restore, quest completion/shop and six enchantment/curses serialized
+PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders
+PASS WANDS: Gravity pulls 2; collision gives Vertigo; Blast Wave pushes 3 without curse; distinct names and formatted descriptions
+TEST 9 PASS: Wand of Bone and Bone Prison terrain blocks movement/bolts, expires and clears on level exit/save/load
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You feel weakened!
+[GAME] ** You are crippled!
+[GAME] ** You can't move!
+PASS CONTENT ENCHANTER: curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 1.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 2.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 4.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 5.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 6.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 8.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 9.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 10.
+TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ++ Your beacon grows stronger!
+[GAME] ** You are blinded!
+TEST 52 PASS: guarded persistent playtest; god mode; 313 item types, 20 artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 3.
+[GAME] ++ The ember steadies. Your Ashlight Lantern reaches level 7.
+TEST 53 PASS: artifact swap/charger persistence, Infernal feeding, mimic Flare, talent rank effects and 214 distinct descriptions, 27 armor paths/four talents/four ranks, barricade orientation and mobile camera pacing
+PASS ENCHANTER seed=0 floor=6 save/load=ok
+TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund
+TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=1 floor=6 save/load=ok
+TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund
+TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=2 floor=6 save/load=ok
+TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund
+TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+[GAME] @@ Badge unlocked: Novice Researcher (Fill in 40 catalog entries in your journal).
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=3 floor=6 save/load=ok
+TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund
+TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=4 floor=6 save/load=ok
+TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund
+TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=5 floor=6 save/load=ok
+TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund
+TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=6 floor=6 save/load=ok
+TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund
+TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=7 floor=6 save/load=ok
+TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund
+TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=8 floor=6 save/load=ok
+TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund
+TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc
+TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment
+TEST 33 PASS: scroll and stone offers, distinct exclusions, cancel/apply, Artificer, Scrivener and history persistence
+TEST 33 ARMOR/KNOWLEDGE PASS: starter glyphs, real armor cast, correct identification order, persistent stairs, save migration and reload
+ENCHANTER kit, talents, subclasses, inscriptions, armor, and persistence: PASS
+PASS ENCHANTER seed=9 floor=6 save/load=ok
+Runs=10 failures=0
+
+> Task :core:jar UP-TO-DATE
+> Task :android:compileDebugKotlin NO-SOURCE
+> Task :android:compileDebugJavaWithJavac UP-TO-DATE
+> Task :android:processDebugJavaRes NO-SOURCE
+> Task :android:mergeDebugJavaResource UP-TO-DATE
+> Task :android:mergeLibDexDebug UP-TO-DATE
+> Task :android:dexBuilderDebug UP-TO-DATE
+> Task :android:mergeProjectDexDebug UP-TO-DATE
+> Task :android:mergeDebugNativeLibs UP-TO-DATE
+> Task :android:stripDebugDebugSymbols UP-TO-DATE
+> Task :android:packageDebug
+> Task :android:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :android:assembleDebug
+> Task :desktop:release
+
+[Incubating] Problems report is available at: file:///C:/Users/Hartl/Documents/grimhollow/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.5.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 51s
+47 actionable tasks: 8 executed, 39 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.0/userguide/configuration_cache_enabling.html
+
+CI 36180856282 additional fixture failures (corrected after this run):
+Linux presentation: java.lang.AssertionError: Missing button Armor
+Enchanter-only: FAIL ENCHANTER seed=0 through seed=9: java.lang.NullPointerException: Cannot read field "zoom" because "camera" is null; Runs=10 failures=10
+Linux rendering: TEST 31 mean=1.2897ms p95=1.5886ms failures=0; TEST 45 failures=31/76 (8/15, 1/10, 8/21, 5/15, 9/15).

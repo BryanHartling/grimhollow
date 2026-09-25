@@ -270,7 +270,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             }
             if(frame==200){interfaceBounds();capture("enchanter-spell-icons");}
             if(frame==210)clickReviewLabel(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class,"inscribe"));
-            if(frame==220)clickReviewLabel(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class,"armor"));
+            if(frame==220 && !clickInventoryItem(Game.scene(),Dungeon.hero.belongings.armor))throw new AssertionError("Armor missing from Inscribe equipment picker");
             if(frame==235){interfaceBounds();capture("inscribe-starter-armor");}
             if(frame==240){
                 com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(inscriptionWindow(),"pane");

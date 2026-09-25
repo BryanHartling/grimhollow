@@ -1011,6 +1011,7 @@ public class SmokeRun {
         check(enemy.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky.LuckProc.class).genLoot()!=null,"54: Overcharged permanent Lucky produces a consumable");
         w.inscribed=w.enchantment;w.enchantment=null;w.proc(h,enemy,10);
         check(enemy.buff(com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky.LuckProc.class).genLoot()!=null,"54: Overcharged Lucky inscription produces a consumable");Buff.detach(h,Overcharged.class);
+        if(com.watabou.noosa.Camera.main==null)com.watabou.noosa.Camera.main=new com.watabou.noosa.Camera(0,0,320,240,1);
         enemy.pos=h.pos+1;enemy.sprite=new RatSprite();enemy.sprite.visible=false;new com.watabou.noosa.Group().add(enemy.sprite);
         Heap luckyHeap=Dungeon.level.drop(new Food(),enemy.pos);luckyHeap.seen=false;/* No particle scene in headless loot fixture. */luckyHeap.sprite=new ItemSprite(luckyHeap);luckyHeap.sprite.link(luckyHeap);
         w.inscribed=guaranteed;w.proc(h,enemy,10);int loot=luckyHeap.items.stream().mapToInt(Item::quantity).sum();enemy.rollToDropLoot();

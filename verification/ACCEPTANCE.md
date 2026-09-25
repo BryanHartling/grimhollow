@@ -1,3 +1,70 @@
+# Playtest fixes and tablet movement - v1.12.0
+
+Source implementation: `80cbc0eb270e629f948ab9b5e9b7ef6f84301dba`. Intended tag: **v1.12.0-playtest-fixes**. All eleven playtest categories are addressed; see CHANGES.md for scope and compatibility details. No on-device Samsung SM-T830 performance claim is made: adb listed no attached devices.
+
+Fresh results: **Runs=90 failures=0**, seven JUnit tests, Windows desktop and Android APK builds, both native interface orientations, all five generated-region fog/walking suites, exact offline asset reconstruction and compiled network-handler audit. Necromancer **10/0**, Enchanter **10/0**, Psychic **10/0**, combined new classes **30/0** (within the 90-run gate). Test 45 remains a known enforced contrast failure, **34/82** Windows comparisons. No thresholds or CI checks were disabled.
+
+[Portrait creatures/effects](interface/portrait/creatures-and-tengu-effects.png), [landscape creatures/effects](interface/landscape/creatures-and-tengu-effects.png), [copyable report](interface/portrait/copyable-issue-report.png), [inventory](interface/portrait/inventory.png), [all-rank skill description](interface/landscape/tablet-talent-rank1.png). These are native desktop captures, including a controlled smoke/spark/arc presentation, not a physical tablet or complete Tengu fight.
+
+Intermediate failures remain in clean-build.log: the new Lucky loot fixture initially tried to emit gold particles without a scene; native fixture additions needed compile corrections, an overflowing-only scroll assertion, and restoration of an independent exit fixture's terrain. The final scenarios pass. A simultaneous append to the existing log was denied by Windows file sharing; interface output was retained in memory and appended after the region run closed the file. No extra log files were introduced.
+
+| Test | Status | Actual evidence and scope |
+|---|---|---|
+| 1 | PASS | Windows 1.12.0 launches. Native landscape mouse and portrait touch cover inventory, scrolling progression, talent purchases, copyable reports and Playtest controls. |
+| 2 | PASS | core:test core:smokeRun desktop:release android:assembleDebug -PsmokeUpstream=true --no-daemon: BUILD SUCCESSFUL in 56s. Seven JUnit tests, zero failures/errors. Final desktop-only fixture rebuild: BUILD SUCCESSFUL in 37s. |
+| 3 | RETIRED | Old procedural-art rebuild no longer ships; committed painted sources reconstruct exactly under test 44. |
+| 4 | RETIRED | Old generated-style validator was superseded by source provenance/reconstruction 44 and room distinctness 45. |
+| 5 | PASS | Runs=90 failures=0: nine hero classes, ten seeds each, including starter kits and added-class scenarios. |
+| 6 | permanent known issue | Representative hooks pass; new test 54 covers the reported Master Craft purchase, all four Overcharge talent caps and legacy refund. Exhaustive in-run talent selection/hook scenarios remain unrun. |
+| 7 | permanent known issue | All 18 subclass previews and their tier-three skills are available. Actual Tengu reward selection remains unrun. |
+| 8 | permanent known issue | All 27 armor-ability previews and tier-four skills are available. Actual crown reward flow remains unrun. |
+| 9 | PASS | TEST 9 PASS; temporary Bone/Force terrain persistence, expiry and floor-exit checks execute. |
+| 10 | PASS | Necromancer minion cap and Second Grave checks pass in the existing class suite. |
+| 11 | PASS | Grasp still collects heaps and activates/removes visible traps; all level 0-10 utility boundaries and unseen-target rejection pass. |
+| 12 | PASS | Hero levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking. |
+| 13 | PASS | Old Amok behavior and new level-six/level-eight control paths; see test 50. |
+| 14 | PASS | All nine classes save/load through floor 6. Crystal swap/re-equip retains level/charges; Precognition expenditure survives serialization. |
+| 15 | PASS | Runs=90 failures=0. Necromancer 10/0, Enchanter 10/0, Psychic 10/0; combined new classes 30/0 as part of the all-nine gate. |
+| 16 | permanent known issue | Fresh native checks cover all 122 concrete creature sprites, animation rectangles, steady idle/travel poses, reflected/NPC forms and item/talent contracts. Exhaustive every-gameplay-path coverage remains unrun. |
+| 17 | RETIRED | Recovery and the later painted-source direction supersede the old procedural style gate; source reconstruction is test 44. |
+| 18 | RETIRED | Superseded by recovery: generated-region brightness target replaced by within-room distinctness 45. |
+| 19 | permanent known issue | The floor-15 1,000-turn/20-mob timing scenario remains unrun. |
+| 20 | PASS | Retained v1.0.2 SDK-unset desktop-only build result; build configuration unchanged except version metadata. New CI uses desktopOnly=true. |
+| 21 | permanent known issue | Source CI run 36180856282: Android passed; remaining jobs were running at this documentation commit. Test 45 still fails locally and remains enforced. Final exact-head CI results are recorded in the annotated release tag and delivery. |
+| 22 | PASS | aapt: com.grimhollow.dungeon, versionCode=956, versionName=1.12.0-INDEV, label Grimhollow, minimum SDK 21, target 36. |
+| 23 | PASS | Native runs use isolated .local/playtest-v112-* homes; headless saves use diagnostic slot 99. Existing player saves were not used. |
+| 24 | permanent known issue | Fresh standard geometry: heroes=9, mob sprites=122, steady idle/travel checks=122, failures=0. Previously documented six retained 2x occupancy exceptions remain unresolved. |
+| 25 | PASS | TEST 25: items=383 identification icons=60 failures=0; all per-index hashes and named semantics checked. Repainted Strength overlay uses a fist; Mind Vision uses eye art at index 98. |
+| 26 | PASS | TEST 26: three stains and floor/chasm/water/trap placement failures=0. |
+| 27 | PASS | TEST 27 PASS: 300 turns unchanged; 12 charges level=1; Wraith offered; hostile attacked within 2 turns. |
+| 28 | RETIRED | Superseded by recovery: rendered-cache rebuild no longer produces the restored shipping world/characters. |
+| 29 | RETIRED | Superseded by recovery: rerendering is prohibited; Blender/cache retained unused. |
+| 30 | RETIRED | Superseded by recovery: generated character hue-distance gate replaced by upstream pixel provenance 44. |
+| 31 | PASS | TEST 31: off pixel differences=0; individual fire reference maximum channel difference=0; 40 gas + 10 fire cells, 240 GPU-completed frames mean=0.8130ms p95=1.2621ms failures=0. The 2ms gate is unchanged. LightMapTest separately bounds the reduced light-grid interpolation error to 10/255. |
+| 32 | PASS | TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0. |
+| 33 | PASS | TEST 33 RANGED PASS: actual carried thrown-weapon and Spirit Bow inscriptions, thrown stack split/merge, arrow proc dispatch, ownership and melee-only filtering, unchanged duration. Trade knowledge, armor inscriptions and persistent-library checks also pass. |
+| 34 | PASS | TEST 34: old/future version, portrait exception and deletion failures=0. |
+| 35 | RETIRED | Superseded by recovery: source-string grep replaced by compiled/runtime handler and network test 46. |
+| 36 | PASS | Fresh native landscape/portrait inventory, all rank descriptions without toggles, scroll bounds, Hurl, capped talent purchases and actual clipboard copy pass. Geometry checks cover nine splashes/portraits, all talents and ItemSlots. Complete nine-class selection/reward previews are retained and repeated by CI. |
+| 37 | PASS | TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment. |
+| 38 | permanent known issue | 18 supplied images lack verified allowed redistribution licenses; excluded from Git; 70 licensed files eligible. |
+| 39 | RETIRED | Superseded by recovery: rejected regional iteration histories remain archival; their art no longer ships. |
+| 40 | RETIRED | Superseded by recovery: generated-room isolated metrics replaced by remembered-terrain 43 and distinctness 45. |
+| 41 | RETIRED | Superseded by recovery: generated animated liquid atlas replaced by historical scrolling water. |
+| 42 | RETIRED | Superseded by recovery: calibrated generated-region gates replaced by restored-region test 45. |
+| 43 | PASS | Five generated regions: 788 walking steps, 255 turns, 75 door openings; remembered floor/water/grass/door/chasm and retained known wall-cap checks all have failures=0. |
+| 44 | PASS | PAINTED launcher resources=55; PAINTED assets=116 source sheets=106 failures=0; TEST 44: upstream-derived character sheets=7; restored assets=29; verified painted replacements=116; failures=0. |
+| 45 | permanent known issue | Fresh Windows measurements fail 34/82 comparisons: Sewers 11/21, Prison 1/10, Caves 8/21, City 5/15, Halls 9/15. Full delta-L/hue values are in verification/recovery/*/distinctness.json and clean-build.log. Thresholds 0.12 luminance / 40 degrees hue remain enforced; no terrain palette retuning. |
+| 46 | PASS | Compiled handlers: classes=2911 guarded browser sinks=1 HTTP/socket calls=0 failures=0. Runtime title controls=5 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0. |
+| 47 | PASS | Five regions, 120 zoom/pan camera cases, 1369 door-transition frames; every-cell black/visible tests, exact 1:1 world fog ratio and aligned lighting quad pass. Known-wall edge checks have zero black blockers. Native UI also checks cap retention and unknown-source exclusion. |
+| 48 | PASS | Push/Hurl exact movement and every collision/trap/chasm/boss rider at Crystal levels 0-10. |
+| 49 | PASS | All levels 0-10: Grasp preserves sight range and adds 1/2 cells at Crystal levels 3/7, requires visibility and rejects out-of-range targets without cost; Glimpse lasts 5/7/9 turns at 0/5/10. Existing XP thresholds, upgrade exclusions and persistence pass. |
+| 50 | PASS | Level-six direction/follow/attacks; level-eight 15-turn survival, permanent single-floor slot, replacement release, save/load, stairs, normal kill ownership and boss immunity. |
+| 51 | PASS | Existing Ashlight feed/charge/shutter/invisibility/resistance/Flare/persistence suite passes. New Infernal Brew feeding and level-8 disguised-mimic burning thresholds pass. Real native artifact menus pass in both orientations. |
+| 52 | PASS | Guarded Playtest, 313 item types/20 artifact caps, nine kits/progression, branch travel/save isolation pass. New checks consolidate populated duplicate pouches, preserve seeds across class changes/reload, and invoke real ascent into unvisited floors 5/10/15/20/25 after travel. |
+| 53 | PASS | Existing artifact/feeding/mimic/rank/armor/barricade/mobile timing checks pass. Both native orientations pass real pointer handbook, all ranks in one description, long-scroll bounds, Hurl and unknown-source/remembered-wall-cap checks. |
+| 54 | PASS | Ten Enchanter seeds cover proc rates, power/curses/other-class isolation, caps/refunds and Lucky stacking: later failed rolls preserve same-hit success, next attacks clear stale success, shared bow results survive, both Overcharge slots generate loot, eligible loot actually enters a heap, and overleveled enemies retain upstream loot exclusion. Both native orientations pass actual third-rank purchase and repeated cap rejection. |
+
 # Enchanter and talent purchasing - v1.11.2
 
 Source implementation: `c8dcfca54`. Intended tag: **v1.11.2-enchanter-talents**. Permanent enchantments/glyphs proc 25% more often, and temporary inscriptions/sigils (including Rune Etching) twice as often, from level one. Bonuses affect activation chance only. Talent purchases now reject duplicate/stale offers and enforce maximum ranks in both the UI and hero model.

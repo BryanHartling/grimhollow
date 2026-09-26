@@ -72,9 +72,10 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     @Override public void render() {
         super.render();
         frames++;
-        if(interfaceReview && Game.scene() instanceof InterlevelScene && Dungeon.level!=null
-                && !loadingCaptures.contains(Dungeon.depth)){
-            capture("loading-floor-"+Dungeon.depth);loadingCaptures.add(Dungeon.depth);
+        if(interfaceReview && Game.scene() instanceof InterlevelScene && InterlevelScene.lastRegion>0
+                && !loadingCaptures.contains(InterlevelScene.lastRegion)){
+            capture("loading-"+new String[]{"sewers","prison","caves","city","halls"}[Math.min(4,InterlevelScene.lastRegion-1)]);
+            loadingCaptures.add(InterlevelScene.lastRegion);
         }
         if(presentationReview && frames>180) { presentationTick(); return; }
         if(interfaceReview && frames>180) { interfaceTick(); return; }
@@ -781,9 +782,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }catch(ReflectiveOperationException | java.io.IOException error){throw new AssertionError(error);}
     }
     private void reviewRegionTransition(int floor) throws java.io.IOException {
-        Playtest.travel(floor,0);
-        InterlevelScene.curTransition=Dungeon.level.getTransition(com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition.Type.REGULAR_EXIT);
-        InterlevelScene.mode=InterlevelScene.Mode.DESCEND;
+        InterlevelScene.returnDepth=floor+1;InterlevelScene.returnBranch=0;
+        InterlevelScene.mode=InterlevelScene.Mode.PLAYTEST;
         ShatteredPixelDungeon.switchScene(InterlevelScene.class);
     }
     @SuppressWarnings("unchecked") private com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane handbookPage(int index){

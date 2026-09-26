@@ -131,6 +131,7 @@ final class HatchlingScenario {
         for(int level=1;level<4;level++)for(Tier tier:new Tier[]{Tier.MAJOR,Tier.EXCEPTIONAL}){
             int curses=0,rare=0;
             hatchling=fresh();hatchling.level(level);
+            Random.pushGenerator(5500+4*level+tier.ordinal());
             for(int trial=0;trial<160;trial++){
                 Greatsword sword=new Greatsword();sword.identify();carry(sword);
                 hatchling.benefit(hero(),tier);
@@ -139,6 +140,7 @@ final class HatchlingScenario {
                 if(Arrays.asList(Weapon.Enchantment.rare).contains(sword.enchantment.getClass()))rare++;
                 sword.detachAll(hero().belongings.backpack);
             }
+            Random.popGenerator();
             check(curses>0&&curses<65,"curse outcomes present without dominating");
             if(tier==Tier.EXCEPTIONAL)check(rare>30,"elevated rare enchantment chance");
         }

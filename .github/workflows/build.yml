@@ -28,6 +28,10 @@ jobs:
       - name: Build desktop distribution
         shell: bash
         run: ./gradlew desktop:dist -PdesktopOnly=true --no-daemon --console=plain
+      - name: Package native Windows launcher with painted icon and bundled runtime
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./tools/package-windows.ps1
       # Recovery supersedes generated-art tests 3/4/17/18/28-30/35/39-42.
       # Their implementations and historical evidence remain in the repository.
       # Painted world sources are committed; CI verifies the offline packer too.
@@ -98,6 +102,13 @@ jobs:
         with:
           name: grimhollow-desktop-${{ matrix.os }}
           path: desktop/build/libs/*.jar
+          if-no-files-found: error
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() && runner.os == 'Windows' }}
+        with:
+          name: grimhollow-windows-app
+          path: desktop/build/windows/*/Grimhollow/
           if-no-files-found: error
           retention-days: 14
   android:

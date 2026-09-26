@@ -65,12 +65,14 @@ public class HatchlingMimic extends Trinket {
         if (result && Dungeon.hero != null) Buff.affect(Dungeon.hero, Feeding.class);
         return result;
     }
-    @Override public String statsDesc() {
+    @Override public String info() {
         float fraction = remaining / (float)interval();
         String hunger = warned ? "hunger_now" : fraction > .5f ? "hunger_full"
                 : fraction > .25f ? "hunger_restless" : fraction > .1f ? "hunger_hungry" : "hunger_soon";
-        return Messages.get(this, "stats", interval(), goldDemand)
-                + "\n\n" + Messages.get(this, hunger) + "\n\n" + Messages.get(this, "benefits_" + level());
+        return Messages.get(this,hunger)+"\n\n"+super.info();
+    }
+    @Override public String statsDesc() {
+        return Messages.get(this, "stats", interval(), goldDemand)+"\n\n"+Messages.get(this, "benefits_" + level());
     }
     @Override public void storeInBundle(Bundle b) {
         super.storeInBundle(b);

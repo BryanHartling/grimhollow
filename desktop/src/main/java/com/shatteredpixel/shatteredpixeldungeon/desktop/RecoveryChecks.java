@@ -252,7 +252,11 @@ final class RecoveryChecks {
                 throw new AssertionError("Remembered "+type+" repainted by an unrelated wall at "+c);
             if(boundary){
                 if(cap==null)throw new AssertionError("Remembered southern wall cap disappeared at "+c);
-                int id=DungeonTileSheet.stitchWallOverhangTile(l.map[c],(c+1)%w!=0?l.map[c+w+1]:-1,l.map[c+w],c%w!=0?l.map[c+w-1]:-1);
+                // Unknown neighbors must not disclose the room behind this known wall.
+                int right=c+w+1,left=c+w-1;
+                int knownRight=right<l.length()&&(l.heroFOV[right]||l.visited[right]||l.mapped[right])?l.map[right]:Terrain.WALL;
+                int knownLeft=left>=0&&(l.heroFOV[left]||l.visited[left]||l.mapped[left])?l.map[left]:Terrain.WALL;
+                int id=DungeonTileSheet.stitchWallOverhangTile(l.map[c],(c+1)%w!=0?knownRight:-1,l.map[c+w],c%w!=0?knownLeft:-1);
                 com.watabou.utils.RectF uv=new com.watabou.noosa.TextureFilm(cap.texture,64,64).get(id);
                 com.watabou.utils.RectF capFrame=cap.frame();
                 if(Math.abs(capFrame.left-(uv.left+.5f/cap.texture.width))>.000001f||Math.abs(capFrame.top-(uv.top+.5f/cap.texture.height))>.000001f)

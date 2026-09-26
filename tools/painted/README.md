@@ -1,3 +1,9 @@
+# Regional paintings and Hatchling - v1.13.0
+
+Five original paintings in `sources/regions` provide the Sewers, Prison, Caves, City and Halls transitions. `regions.py` crops them reproducibly to 1600x900; the runtime fills both landscape and portrait viewports around the central focal point. `sources/items/hatchling.png` supplies inventory cell 539. Exact built-in imagegen prompts are in `hatchling-region-prompts.json`; all six source images and their derivatives are GPL-3.0-or-later.
+
+The raised skeleton atlas is packed at density 8 directly from the existing original monster painting, preserving its world size and action timing. The full offline check now reconstructs **121 game images from 112 sources**, plus **55 launcher resources**. Run `python tools/recovery_assets.py --check`; no image-generation service or Blender is needed in CI.
+
 # All nine hero rigs - v1.10.1
 
 `hero_rigs.py` now contains eight individual profiles and the Necromancer rig, with class-specific body proportions, silhouettes, guards, footwork and action gestures. `caster-robes.png` supplies separate Mage/Cleric/Enchanter/Psychic garments; its right two columns split at y=526 rather than 512. `armor-front.png` provides solid chest panels without the old empty arm sockets. Existing heads, class colors, limb paintings and matching portraits are retained. Exact built-in imagegen prompts/references for all three new sources are in `hero-rigs-prompts.json`.

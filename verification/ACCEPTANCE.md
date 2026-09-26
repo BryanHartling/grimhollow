@@ -1,3 +1,71 @@
+# Hatchling Mimic and playtest presentation - v1.13.0
+
+Release: **v1.13.0-hatchling**. Implementation commits begin at `df061db26` and `23542341`; the release tag identifies the final report and fixture corrections. The requested extra reward uses the real `RingOfWealth.genEquipmentDrop(10)`, not a separate legendary pool.
+
+Fresh local gates: all nine classes **Runs=90 failures=0**; Necromancer **10/0**, Enchanter **10/0**, Psychic **10/0**, combined added classes **30/0**. Seven JUnit tests, desktop/APK builds, both native interface orientations, all five fog/walking suites, full offline art reconstruction and compiled network audit were executed. No physical Samsung tablet was connected, and no complete campaign balance claim is made.
+
+[Hatchling hunger and description](interface/portrait/hatchling-description.png), [description bottom](interface/portrait/hatchling-description-bottom.png), [object-only sensing and gas loot](interface/landscape/hatchling-sense-and-gas-loot.png), [Prison loading painting](interface/landscape/loading-prison.png), [Caves loading painting](interface/landscape/loading-caves.png), [City loading painting](interface/portrait/loading-city.png). All five regional paintings are packed and verified; fresh native transition captures are provided for these three regions.
+
+Intermediate failures were fixed rather than suppressed: a headless loot fixture required its scene/sprite setup; newly spawned mimics now set intent before sprite creation; regional transitions use the normal interlevel scene; transition capture draws that scene rather than the previous framebuffer; the remembered-cap test now expects concealed unknown neighbors; and the final catalyst test corrected an API-name typo. Detailed local diagnostics are preserved in ignored `.local/hatchling-*.txt` and `.local/hatchling-native-verification.log`. CI retains its failing runs. Test 45 remains an enforced known failure, **22/76** local comparisons.
+
+| Test | Status | Actual evidence and scope |
+|---|---|---|
+| 1 | PASS | Windows 1.13.0 desktop launches. Native landscape mouse and portrait touch exercise actual item menus, progression, reports, Hatchling description/scrolling and item-only detection. Packaged Grimhollow.exe launched with its bundled runtime and rendered TitleScene (exit 0); capture: interface/native-launcher/title.png. |
+| 2 | PASS | core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeUpstream=true --no-daemon: BUILD SUCCESSFUL in 1m 34s; seven JUnit tests, zero failures/errors; Runs=90 failures=0. jpackage succeeds and the native executable renders TitleScene. |
+| 3 | RETIRED | Old procedural-art rebuild no longer ships; committed painted sources reconstruct exactly under test 44. |
+| 4 | RETIRED | Old generated-style validator was superseded by source provenance/reconstruction 44 and room distinctness 45. |
+| 5 | PASS | Runs=90 failures=0: nine hero classes, ten seeds each, including starter kits and added-class scenarios. |
+| 6 | permanent known issue | Representative hooks pass; new test 54 covers the reported Master Craft purchase, all four Overcharge talent caps and legacy refund. Exhaustive in-run talent selection/hook scenarios remain unrun. |
+| 7 | permanent known issue | All 18 subclass previews and their tier-three skills are available. Actual Tengu reward selection remains unrun. |
+| 8 | permanent known issue | All 27 armor-ability previews and tier-four skills are available. Actual crown reward flow remains unrun. |
+| 9 | PASS | TEST 9 PASS; temporary Bone/Force terrain persistence, expiry and floor-exit checks execute. |
+| 10 | PASS | Necromancer minion cap and Second Grave checks pass in the existing class suite. |
+| 11 | PASS | Existing Grasp heaps/traps/range tests pass; Hatchling scenario additionally checks bones at Crystal 3, unlocked chests at 7, and locked-container rejection. |
+| 12 | PASS | Hero levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking. |
+| 13 | PASS | Old Amok behavior and new level-six/level-eight control paths; see test 50. |
+| 14 | PASS | All nine classes save/load through floor 6. Crystal swap/re-equip retains level/charges; Precognition expenditure survives serialization. |
+| 15 | PASS | Runs=90 failures=0. Necromancer 10/0, Enchanter 10/0, Psychic 10/0; combined new classes 30/0 as part of the all-nine gate. |
+| 16 | permanent known issue | Fresh geometry checks cover all 122 concrete creature sprites, steady idle/travel, NPC/reflected forms and item/talent contracts. Exhaustive every-gameplay-path coverage remains unrun. |
+| 17 | RETIRED | Recovery and the later painted-source direction supersede the old procedural style gate; source reconstruction is test 44. |
+| 18 | RETIRED | Superseded by recovery: generated-region brightness target replaced by within-room distinctness 45. |
+| 19 | permanent known issue | The floor-15 1,000-turn/20-mob timing scenario remains unrun. |
+| 20 | PASS | Retained v1.0.2 SDK-unset desktop-only build result; not rerun locally. CI independently builds with desktopOnly=true. |
+| 21 | permanent known issue | Test 45 remains enforced. Final exact-head CI and all failing steps are recorded in the annotated release tag and delivery; no checks disabled or weakened. |
+| 22 | PASS | aapt: com.grimhollow.dungeon, versionCode=957, versionName=1.13.0-INDEV, label Grimhollow, minimum SDK 21, target 36. |
+| 23 | PASS | Native checks and packaged launcher use isolated .local/hatchling-* profiles; headless saves use diagnostic slot 99. Existing player saves were not used. |
+| 24 | permanent known issue | Fresh standard geometry: heroes=9, mob sprites=122, steady idle/travel checks=122, failures=0. Previously documented six retained 2x occupancy exceptions remain unresolved. |
+| 25 | PASS | TEST 25: items=384 identification icons=60 failures=0; named semantics and per-index hashes pass. New Hatchling occupies index 539. |
+| 26 | PASS | TEST 26: three stains and floor/chasm/water/trap placement failures=0. |
+| 27 | PASS | TEST 27 PASS: 300 turns unchanged; 12 charges level=1; Wraith offered; hostile attacked within 2 turns. |
+| 28 | RETIRED | Superseded by recovery: rendered-cache rebuild no longer produces the restored shipping world/characters. |
+| 29 | RETIRED | Superseded by recovery: rerendering is prohibited; Blender/cache retained unused. |
+| 30 | RETIRED | Superseded by recovery: generated character hue-distance gate replaced by upstream pixel provenance 44. |
+| 31 | PASS | 240 GPU-completed frames with 40 gas and 10 fire cells: mean=0.5172ms p95=0.6869ms; Effects-off pixel differences=0 and batched-fire maximum channel difference=0. Unchanged 2ms gate; light-map interpolation JUnit tests pass. |
+| 32 | PASS | TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0. |
+| 33 | PASS | TEST 33 RANGED PASS: actual carried thrown-weapon and Spirit Bow inscriptions, thrown stack split/merge, arrow proc dispatch, ownership and melee-only filtering, unchanged duration. Trade knowledge, armor inscriptions and persistent-library checks also pass. Both orientations additionally pass actual equipment-picker armor selection, scrolled glyph selection, touch weapon/info, drag suppression and zero-charge rejection. |
+| 34 | PASS | TEST 34: old/future version, portrait exception and deletion failures=0. |
+| 35 | RETIRED | Superseded by recovery: source-string grep replaced by compiled/runtime handler and network test 46. |
+| 36 | PASS | Fresh landscape/portrait native inventory, scroll bounds, all-rank descriptions, pointer purchases, Hurl, clipboard, Hatchling inspect/sense and gas-loot presentation pass. Geometry covers nine splashes/portraits and talent/ItemSlot contracts. Nine-class selection and 36 handbook-page pointer suites passed CI at 2354234; final CI repeats them. |
+| 37 | PASS | TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment. |
+| 38 | permanent known issue | 18 supplied images lack verified allowed redistribution licenses; excluded from Git; 70 licensed files eligible. |
+| 39 | RETIRED | Superseded by recovery: rejected regional iteration histories remain archival; their art no longer ships. |
+| 40 | RETIRED | Superseded by recovery: generated-room isolated metrics replaced by remembered-terrain 43 and distinctness 45. |
+| 41 | RETIRED | Superseded by recovery: generated animated liquid atlas replaced by historical scrolling water. |
+| 42 | RETIRED | Superseded by recovery: calibrated generated-region gates replaced by restored-region test 45. |
+| 43 | PASS | Five generated regions: 788 walking steps, 254 turns, 75 door openings; remembered terrain and known wall-cap failures=0. Expected cap stitching conceals unknown neighbors; independent native assertions verify unknown terrain cannot alter visible geometry. |
+| 44 | PASS | PAINTED assets=121 source sheets=112 launcher resources=55 failures=0; TEST 44 upstream-derived character sheets=7 restored assets=29 verified painted replacements=121 failures=0. Full offline reconstruction was run. |
+| 45 | permanent known issue | Fresh Windows measurements fail 22/76 comparisons: Sewers 5/15, Prison 1/10, Caves 8/21, City 3/15, Halls 5/15. Values and captures are in verification/recovery/*/distinctness.json. Thresholds 0.12 luminance / 40 degrees hue remain enforced; no palette retuning. |
+| 46 | PASS | Compiled handlers: classes=2920 guarded browser sinks=1 HTTP/socket calls=0 failures=0. Runtime title controls=5 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0. |
+| 47 | PASS | Five regions, 120 zoom/pan camera cases, 1378 door-transition frames; every-cell black/visible checks, exact 1:1 world fog ratio and aligned light quad pass. Known-wall black blockers=0; unknown-neighbor wall changes leave known geometry invariant. |
+| 48 | PASS | Push/Hurl exact movement and every collision/trap/chasm/boss rider at Crystal levels 0-10. |
+| 49 | PASS | All levels 0-10: Grasp preserves sight range and adds 1/2 cells at Crystal levels 3/7, requires visibility and rejects out-of-range targets without cost; Glimpse lasts 5/7/9 turns at 0/5/10. Existing XP thresholds, upgrade exclusions and persistence pass. |
+| 50 | PASS | Level-six direction/follow/attacks; level-eight 15-turn survival, permanent single-floor slot, replacement release, save/load, stairs, normal kill ownership and boss immunity. |
+| 51 | PASS | Existing Ashlight feed/charge/shutter/invisibility/resistance/Flare/persistence suite passes. New Infernal Brew feeding and level-8 disguised-mimic burning thresholds pass. Real native artifact menus pass in both orientations. |
+| 52 | PASS | Guarded Playtest, 313 item types/20 artifact caps, nine kits/progression, branch travel/save isolation pass. New checks consolidate populated duplicate pouches, preserve seeds across class changes/reload, and invoke real ascent into unvisited floors 5/10/15/20/25 after travel. |
+| 53 | PASS | Existing artifact/feeding/mimic/rank/armor/barricade/mobile timing checks pass. Both native orientations pass real pointer handbook, all ranks in one description, long-scroll bounds, Hurl and unknown-source/remembered-wall-cap checks. |
+| 54 | PASS | Ten Enchanter seeds cover proc rates, power/curses/other-class isolation, caps/refunds and Lucky stacking: later failed rolls preserve same-hit success, next attacks clear stale success, shared bow results survive, both Overcharge slots generate loot, eligible loot actually enters a heap, and overleveled enemies retain upstream loot exclusion. Both native orientations pass actual third-rank purchase and repeated cap rejection. |
+| 55 | PASS | Hatchling scenarios execute for all nine classes: food/protection/stack hierarchy, warning interruption, cauldron 10/15/20 costs and persistence, once-per-run catalyst, all benefit/Item Sense tables, curse/rare probability trials, permanent upgrades, debt/partial gold, transformation/Crystal chance, actual +10 Wealth reward, standard/Golden/Ebony/Crystal AI, theft/recovery/escape and save/load. Native inspect scrolling, item-only detection and gas-loot visibility pass in both orientations. Full-campaign balance remains untested. |
+
 # Playtest fixes and tablet movement - v1.12.0
 
 Source implementation: `80cbc0eb270e629f948ab9b5e9b7ef6f84301dba`. Intended tag: **v1.12.0-playtest-fixes**. All eleven playtest categories are addressed; see CHANGES.md for scope and compatibility details. No on-device Samsung SM-T830 performance claim is made: adb listed no attached devices.

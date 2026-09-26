@@ -91,6 +91,13 @@ final class HatchlingScenario {
         int beforeUpgrade=hatchling.remaining();hatchling.upgrade();
         check(hatchling.goldDemand()==demand&&hatchling.remaining()<beforeUpgrade,"upgrading preserves elapsed fraction and debt");
         for(int level=0;level<3;level++){hatchling.level(level);check(hatchling.upgradeEnergyCost()==10+5*level,"large upgrade cost");}
+        hatchling.level(0);due(hatchling);
+        ArrayList<Item> ingredients=new ArrayList<>();ingredients.add(hatchling);
+        Trinket.UpgradeTrinket recipe=new Trinket.UpgradeTrinket();
+        check(recipe.testIngredients(ingredients)&&recipe.cost(ingredients)==10,"ordinary cauldron recipe");
+        HatchlingMimic brewed=(HatchlingMimic)recipe.brew(ingredients);
+        check(brewed.level()==1&&brewed.warned()&&brewed.remaining()==1&&brewed.goldDemand()==demand,"cauldron cannot erase pending hunger or gold debt");
+        brewed.level(3);ingredients.clear();ingredients.add(brewed);check(!recipe.testIngredients(ingredients),"cauldron caps at +3");
 
         hatchling=fresh();Dungeon.gold=17;due(hatchling);hatchling.tick(hero());
         check(Dungeon.gold==0&&HatchlingMimic.carried()==null&&hero().buff(Escape.class)!=null,"partial gold payment escapes immediately");
@@ -202,6 +209,11 @@ final class HatchlingScenario {
         focus.level(7);check(focus.canOpenWithGrasp(Heap.Type.CHEST)&&!focus.canOpenWithGrasp(Heap.Type.LOCKED_CHEST),"Grasp chest tier and locked exclusion");
         Catalog.setSeen(HatchlingMimic.class);Journal.saveGlobal();Dungeon.init();
         check(Catalog.isSeen(HatchlingMimic.class),"new game retains reference knowledge");
+        check(Arrays.asList(Generator.Category.TRINKET.classes).contains(HatchlingMimic.class),"natural trinket pool includes Hatchling");
+        for(float weight:Generator.Category.TRINKET.probs)check(weight==1,"existing trinket generation weights preserved");
+        Dungeon.LimitedDrops.TRINKET_CATA.count=0;Dungeon.depth=3;check(Dungeon.trinketCataNeeded(),"one catalyst guaranteed by floor three");
+        Dungeon.LimitedDrops.TRINKET_CATA.drop();
+        for(int depth=1;depth<=26;depth++){Dungeon.depth=depth;check(!Dungeon.trinketCataNeeded(),"no second natural catalyst at depth "+depth);}
         System.out.println("TEST 55 PASS: Hatchling hierarchy, hunger, gold, benefits, detection, transformation, Wealth rewards, kinship, theft and persistence; Grasp and journal PASS");
     }
 }

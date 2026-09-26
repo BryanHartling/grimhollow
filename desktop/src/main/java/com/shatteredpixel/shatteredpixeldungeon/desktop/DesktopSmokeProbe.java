@@ -74,6 +74,11 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         frames++;
         if(interfaceReview && Game.scene() instanceof InterlevelScene && InterlevelScene.lastRegion>0
                 && !loadingCaptures.contains(InterlevelScene.lastRegion)){
+            Image painting=(Image)RecoveryChecks.field(Game.scene(),"background");
+            if(painting.texture.width!=1600||painting.width()+.01f<Camera.main.width
+                    ||painting.height()+.01f<Camera.main.height)throw new AssertionError("Region painting does not fill the viewport");
+            // The scene switch occurs after the previous scene's draw on this frame.
+            Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);Game.scene().draw();
             capture("loading-"+new String[]{"sewers","prison","caves","city","halls"}[Math.min(4,InterlevelScene.lastRegion-1)]);
             loadingCaptures.add(InterlevelScene.lastRegion);
         }

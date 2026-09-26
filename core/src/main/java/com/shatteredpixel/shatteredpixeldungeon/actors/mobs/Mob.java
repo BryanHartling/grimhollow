@@ -1851,6 +1851,10 @@ public abstract class Mob extends Char {
 	public static void holdAllies( Level level, int holdFromPos ){
 		heldAllies.clear();
 		for (Mob mob : level.mobs.toArray( new Mob[0] )) {
+			if (mob.buff(com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.Kinship.class) != null) {
+				Buff.detach(mob,com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.Kinship.class);
+				continue;
+			}
 			// Psychic control is tied to this floor, even if another effect empowers the ally.
 			if (mob.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicDomination.class) != null) continue;
 			//preserve directable allies or empowered intelligent allies no matter where they are

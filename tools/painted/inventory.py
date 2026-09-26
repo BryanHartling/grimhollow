@@ -100,6 +100,8 @@ def build():
         index=537+panel
         semantics['items'][name]={'id':index,'artIndex':index,'cellSize':64}
         replacements[name]=icon(lantern.crop((panel*lantern.width//2,0,(panel+1)*lantern.width//2,lantern.height)))
+    semantics['items']['HATCHLING_MIMIC']={'id':539,'artIndex':539,'cellSize':64}
+    replacements['HATCHLING_MIMIC']=icon(Image.open(HERE/'sources/items/hatchling.png').convert('RGBA'))
     written={}
     for name,image in replacements.items():
         if name not in semantics['items']:raise ValueError('Unknown inventory ID '+name)

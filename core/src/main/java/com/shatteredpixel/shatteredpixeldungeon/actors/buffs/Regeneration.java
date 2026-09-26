@@ -46,6 +46,8 @@ public class Regeneration extends Buff {
 	@Override
 	public boolean act() {
 		if (target.isAlive()) {
+            if (com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.carried() != null)
+                Buff.affect(target, com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.Feeding.class);
 
 			//if other trinkets ever get buffs like this should probably make the buff attaching
 			// behaviour more like wands/rings/artifacts

@@ -306,7 +306,8 @@ public enum Catalog {
 	}
 	
 	public static void setSeen(Class<?> cls){
-		if (com.shatteredpixel.shatteredpixeldungeon.Playtest.enabled()) return;
+		// Reference knowledge belongs to the player, including discoveries in a
+		// testing save. Usage credit and achievements retain their own exclusions.
 		for (Catalog cat : values()) {
 			if (cat.seen.containsKey(cls) && !cat.seen.get(cls)) {
 				cat.seen.put(cls, true);

@@ -44,11 +44,15 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
 public class Mimic extends Mob {
+    public boolean hatchlingBorn;
+    private boolean pursuingHatchling;
+    public HatchlingMimic stolenHatchling;
 	
 	private int level;
 	
@@ -78,6 +82,9 @@ public class Mimic extends Mob {
 		if (items != null) bundle.put( ITEMS, items );
 		bundle.put( LEVEL, level );
 		bundle.put( STEALTHY, stealthy );
+        bundle.put("hatchling_born", hatchlingBorn);
+        bundle.put("pursuing_hatchling", pursuingHatchling);
+        if (stolenHatchling != null) bundle.put("stolen_hatchling", stolenHatchling);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -89,6 +96,9 @@ public class Mimic extends Mob {
 		level = bundle.getInt( LEVEL );
 		adjustStats(level);
 		stealthy = bundle.getBoolean(STEALTHY);
+        hatchlingBorn=bundle.getBoolean("hatchling_born");
+        pursuingHatchling=bundle.getBoolean("pursuing_hatchling");
+        if(bundle.contains("stolen_hatchling")) stolenHatchling=(HatchlingMimic)bundle.get("stolen_hatchling");
 		super.restoreFromBundle(bundle);
 		if (state != PASSIVE && alignment == Alignment.NEUTRAL){
 			alignment = Alignment.ENEMY;
@@ -132,6 +142,7 @@ public class Mimic extends Mob {
 
 	@Override
 	protected boolean act() {
+        if (actForHatchling()) return true;
 		if (alignment == Alignment.NEUTRAL && state != PASSIVE){
 			alignment = Alignment.ENEMY;
 			if (sprite != null) sprite.idle();
@@ -151,8 +162,114 @@ public class Mimic extends Mob {
 		return sprite;
 	}
 
+    public void kinship(boolean friendly) {
+        intelligentAlly = friendly;
+        state = friendly ? WANDERING : HUNTING;
+    }
+    /** Set combat intent before GameScene creates the new creature's sprite. */
+    public void wakeHatchling() {
+        hatchlingBorn = true; alignment = Alignment.ENEMY; state = HUNTING;
+        enemy = Dungeon.hero; target = Dungeon.hero.pos; enemySeen = true;
+    }
+
+    private boolean sharesRoomWithHero() {
+        if (Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel) {
+            com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel level =
+                    (com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel)Dungeon.level;
+            return level.room(pos) != null && level.room(pos) == level.room(Dungeon.hero.pos);
+        }
+        return Dungeon.level.heroFOV[pos];
+    }
+
+    private boolean hatchlingStep(int destination, boolean away) {
+        if (fieldOfView == null || fieldOfView.length != Dungeon.level.length()) fieldOfView=new boolean[Dungeon.level.length()];
+        Dungeon.level.updateFieldOfView(this, fieldOfView);
+        int old=pos;
+        boolean moved=away ? getFurther(destination) : getCloser(destination);
+        if (moved && sprite != null) sprite.move(old,pos);
+        return moved;
+    }
+
+    /** Returns true when kin recognition, theft or flight consumed this creature's turn. */
+    public boolean actForHatchling() {
+        if (paralysed > 0 || !isAlive()) return false;
+        if (stolenHatchling != null) {
+            int exit= Dungeon.level.exit();
+            if (pos == exit && !Dungeon.level.heroFOV[pos] && Dungeon.level.distance(pos,Dungeon.hero.pos)>=6) {
+                escapeWithHatchling();
+            } else {
+                if (exit >= 0) hatchlingStep(exit,false);
+                spend(1/speed());
+            }
+            return true;
+        }
+        HatchlingMimic hatchling=HatchlingMimic.carried();
+        if (hatchling == null || hatchlingBorn || alignment == Alignment.ALLY) return false;
+        if (this instanceof EbonyMimic) {
+            if (alignment == Alignment.NEUTRAL && sharesRoomWithHero()) {
+                stopHiding(); alignment=Alignment.ENEMY;
+                // Wake on room entry; normal turn scheduling and attack speed still apply.
+            }
+            return false;
+        }
+        if (this instanceof CrystalMimic) {
+            if (!pursuingHatchling && sharesRoomWithHero()) {
+                pursuingHatchling=true; alignment=Alignment.ENEMY; state=HUNTING;
+                if (sprite!=null) sprite.idle();
+                GLog.w(Messages.get(HatchlingMimic.class,"theft_notice"));
+            }
+            if (pursuingHatchling) {
+                if (Dungeon.hero.invisible<=0 && Dungeon.level.adjacent(pos,Dungeon.hero.pos)) {
+                    GLog.w(Messages.get(HatchlingMimic.class,"theft_attempt"));
+                    // Thief accuracy is 12; reuse the actual hit/evasion contest and its modifiers.
+                    if (Char.hit(this,Dungeon.hero,12f/Math.max(1,attackSkill(Dungeon.hero)),false)) takeHatchling();
+                } else if (Dungeon.hero.invisible<=0) hatchlingStep(Dungeon.hero.pos,false);
+                spend(TICK);
+                return true;
+            }
+            return false;
+        }
+        if (alignment == Alignment.NEUTRAL && Dungeon.level.adjacent(pos,Dungeon.hero.pos)) {
+            hatchlingStep(Dungeon.hero.pos,true); spend(TICK); return true;
+        }
+        return false;
+    }
+
+    public void takeHatchling() {
+        HatchlingMimic hatchling=HatchlingMimic.carried();
+        if (!(this instanceof CrystalMimic) || hatchling == null || stolenHatchling != null) return;
+        stolenHatchling=(HatchlingMimic)hatchling.detachAll(Dungeon.hero.belongings.backpack);
+        pursuingHatchling=false; alignment=Alignment.ENEMY; state=FLEEING;
+        Dungeon.hero.interrupt();
+        Item.updateQuickslot();
+        GLog.w(Messages.get(HatchlingMimic.class,"stolen"));
+    }
+
+    public void escapeWithHatchling() {
+        if (stolenHatchling == null) return;
+        stolenHatchling=null;
+        HatchlingMimic.scheduleEscape(this);
+        destroy();
+        if (sprite!=null) sprite.killAndErase();
+    }
+
 	@Override
 	public boolean interact(Char c) {
+        HatchlingMimic hatchling = HatchlingMimic.carried();
+        if (c == Dungeon.hero && hatchling != null && !hatchlingBorn && alignment == Alignment.NEUTRAL
+                && this instanceof CrystalMimic) {
+            pursuingHatchling = true;
+            stopHiding(); alignment = Alignment.ENEMY; state = HUNTING;
+            GLog.w(Messages.get(HatchlingMimic.class, "theft_notice"));
+            Dungeon.hero.spendAndNext(1f);
+            return true;
+        }
+        if (c == Dungeon.hero && hatchling != null && !hatchlingBorn && alignment == Alignment.NEUTRAL
+                && !(this instanceof CrystalMimic) && !(this instanceof EbonyMimic)) {
+            if (!hatchling.charm(this)) hatchlingStep(Dungeon.hero.pos, true);
+            Dungeon.hero.spendAndNext(1f);
+            return true;
+        }
 		if (alignment != Alignment.NEUTRAL || c != Dungeon.hero){
 			return super.interact(c);
 		}
@@ -193,6 +310,7 @@ public class Mimic extends Mob {
 
 	@Override
 	public void damage(int dmg, Object src) {
+        if (dmg > 0) Buff.detach(this, HatchlingMimic.Kinship.class);
 		if (state == PASSIVE){
 			alignment = Alignment.ENEMY;
 			stopHiding();
@@ -270,6 +388,12 @@ public class Mimic extends Mob {
 	
 	@Override
 	public void rollToDropLoot(){
+        if (stolenHatchling != null) {
+            if (items == null) items = new ArrayList<>();
+            items.add(stolenHatchling);
+            GLog.w(Messages.get(HatchlingMimic.class,"recovered"));
+            stolenHatchling=null;
+        }
 		
 		if (items != null) {
 			for (Item item : items) {

@@ -2679,6 +2679,12 @@
       "artIndex": 538,
       "cellSize": 64,
       "rgbaSha256": "8abe6e79b38e19d057d002304c7b527267379bcf7b0c48bcad6fe61136e5030a"
+    },
+    "HATCHLING_MIMIC": {
+      "id": 539,
+      "artIndex": 539,
+      "cellSize": 64,
+      "rgbaSha256": "93f188d8abf3cef53610fc04cc834a175931cc302fea7e1c013a6f229c5e4e9d"
     }
   },
   "icons": {

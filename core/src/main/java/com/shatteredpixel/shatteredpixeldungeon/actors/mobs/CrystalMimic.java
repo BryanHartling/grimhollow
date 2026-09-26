@@ -125,6 +125,7 @@ public class CrystalMimic extends Mimic {
 
 	@Override
 	public int attackProc(Char enemy, int damage) {
+        if (stolenHatchling != null) return damage;
 		if (alignment == Alignment.NEUTRAL && enemy == Dungeon.hero){
 			steal( Dungeon.hero );
 
@@ -185,6 +186,7 @@ public class CrystalMimic extends Mimic {
 	private class Fleeing extends Mob.Fleeing {
 		@Override
 		protected void escaped() {
+            if (stolenHatchling != null) return; // Flight with a Hatchling must reach the deeper exit.
 			if (!Dungeon.level.heroFOV[pos] && Dungeon.level.distance(Dungeon.hero.pos, pos) >= 6) {
 				GLog.n(Messages.get(CrystalMimic.class, "escaped"));
 				destroy();

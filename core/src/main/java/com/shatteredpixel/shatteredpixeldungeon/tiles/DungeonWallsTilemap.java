@@ -49,39 +49,41 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 		// An overhang must not disclose an unseen wall, prop or door below a
 		// visible tile. The fog quad masks the destination, not the source.
         boolean belowKnown = pos + mapWidth < size && known(pos + mapWidth);
+        if (!belowKnown && (tile == Terrain.LOCKED_EXIT || tile == Terrain.UNLOCKED_EXIT)
+                && !skipCells.contains(pos)) return DungeonTileSheet.EXIT_UNDERHANG;
         if (!DungeonTileSheet.wallStitcheable(tile) && !Dungeon.level.heroFOV[pos]
                 && (Dungeon.level.visited[pos] || Dungeon.level.mapped[pos])
-                && !(belowKnown && DungeonTileSheet.wallStitcheable(map[pos+mapWidth]))) return -1;
+                && !(belowKnown && DungeonTileSheet.wallStitcheable(knownTerrain(pos+mapWidth)))) return -1;
 
 
 		if (DungeonTileSheet.wallStitcheable(tile)) {
-			if (pos + mapWidth < size && !DungeonTileSheet.wallStitcheable(map[pos + mapWidth])){
+			if (pos + mapWidth < size && !DungeonTileSheet.wallStitcheable(knownTerrain(pos + mapWidth))){
 
 				if (!belowKnown) {
 					// The exit underhang belongs to this cell, not its unknown neighbor.
 					return (tile == Terrain.LOCKED_EXIT || tile == Terrain.UNLOCKED_EXIT)
 							&& !skipCells.contains(pos) ? DungeonTileSheet.EXIT_UNDERHANG : -1;
 				}
-				if (map[pos + mapWidth] == Terrain.DOOR){
+				if (knownTerrain(pos + mapWidth) == Terrain.DOOR){
 					return DungeonTileSheet.DOOR_SIDEWAYS;
-				} else if (map[pos + mapWidth] == Terrain.LOCKED_DOOR) {
+				} else if (knownTerrain(pos + mapWidth) == Terrain.LOCKED_DOOR) {
 					return DungeonTileSheet.DOOR_SIDEWAYS_LOCKED;
-				} else if (map[pos + mapWidth] == Terrain.HERO_LKD_DR){
+				} else if (knownTerrain(pos + mapWidth) == Terrain.HERO_LKD_DR){
 					return DungeonTileSheet.DOOR_SIDEWAYS_LOCKED;
-				} else if (map[pos + mapWidth] == Terrain.CRYSTAL_DOOR){
+				} else if (knownTerrain(pos + mapWidth) == Terrain.CRYSTAL_DOOR){
 					return DungeonTileSheet.DOOR_SIDEWAYS_CRYSTAL;
-				} else if (map[pos + mapWidth] == Terrain.OPEN_DOOR){
+				} else if (knownTerrain(pos + mapWidth) == Terrain.OPEN_DOOR){
 					return DungeonTileSheet.NULL_TILE;
 				}
 
 			} else {
 				return DungeonTileSheet.stitchInternalWallTile(
 						tile,
-						(pos+1) % mapWidth != 0 ?                           map[pos + 1] : -1,
-						(pos+1) % mapWidth != 0 && pos + mapWidth < size ?  map[pos + 1 + mapWidth] : -1,
-						pos + mapWidth < size ?                             map[pos + mapWidth] : -1,
-						pos % mapWidth != 0 && pos + mapWidth < size ?      map[pos - 1 + mapWidth] : -1,
-						pos % mapWidth != 0 ?                               map[pos - 1] : -1
+						(pos+1) % mapWidth != 0 ?                           knownTerrain(pos + 1) : -1,
+						(pos+1) % mapWidth != 0 && pos + mapWidth < size ?  knownTerrain(pos + 1 + mapWidth) : -1,
+						pos + mapWidth < size ?                             knownTerrain(pos + mapWidth) : -1,
+						pos % mapWidth != 0 && pos + mapWidth < size ?      knownTerrain(pos - 1 + mapWidth) : -1,
+						pos % mapWidth != 0 ?                               knownTerrain(pos - 1) : -1
 				);
 			}
 
@@ -90,48 +92,48 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 		if (skipCells.contains(pos)){
 			return -1;
 		}
-		if (map[pos] == Terrain.LOCKED_EXIT || map[pos] == Terrain.UNLOCKED_EXIT){
+		if (knownTerrain(pos) == Terrain.LOCKED_EXIT || knownTerrain(pos) == Terrain.UNLOCKED_EXIT){
 			return DungeonTileSheet.EXIT_UNDERHANG;
 		} else if (!belowKnown) {
 			return -1;
-		} else if (pos + mapWidth < size && DungeonTileSheet.wallStitcheable(map[pos+mapWidth])) {
+		} else if (pos + mapWidth < size && DungeonTileSheet.wallStitcheable(knownTerrain(pos+mapWidth))) {
 
 			return DungeonTileSheet.stitchWallOverhangTile(
 					tile,
-					(pos+1) % mapWidth != 0 ?   map[pos + 1 + mapWidth] : -1,
-												map[pos + mapWidth],
-					pos % mapWidth != 0 ?       map[pos - 1 + mapWidth] : -1
+					(pos+1) % mapWidth != 0 ?   knownTerrain(pos + 1 + mapWidth) : -1,
+												knownTerrain(pos + mapWidth),
+					pos % mapWidth != 0 ?       knownTerrain(pos - 1 + mapWidth) : -1
 			);
 
-		} else if (Dungeon.level.insideMap(pos) && map[pos+mapWidth] == Terrain.DOOR ) {
+		} else if (Dungeon.level.insideMap(pos) && knownTerrain(pos+mapWidth) == Terrain.DOOR ) {
 			return DungeonTileSheet.DOOR_OVERHANG;
-		} else if (Dungeon.level.insideMap(pos) && map[pos+mapWidth] == Terrain.LOCKED_DOOR ) {
+		} else if (Dungeon.level.insideMap(pos) && knownTerrain(pos+mapWidth) == Terrain.LOCKED_DOOR ) {
 			return DungeonTileSheet.DOOR_OVERHANG;
-		} else if (Dungeon.level.insideMap(pos) && map[pos+mapWidth] == Terrain.HERO_LKD_DR ) {
+		} else if (Dungeon.level.insideMap(pos) && knownTerrain(pos+mapWidth) == Terrain.HERO_LKD_DR ) {
 			return DungeonTileSheet.DOOR_OVERHANG;
-		} else if (Dungeon.level.insideMap(pos) && map[pos+mapWidth] == Terrain.OPEN_DOOR ) {
+		} else if (Dungeon.level.insideMap(pos) && knownTerrain(pos+mapWidth) == Terrain.OPEN_DOOR ) {
 			return DungeonTileSheet.DOOR_OVERHANG_OPEN;
-		} else if (Dungeon.level.insideMap(pos) && map[pos+mapWidth] == Terrain.CRYSTAL_DOOR ) {
+		} else if (Dungeon.level.insideMap(pos) && knownTerrain(pos+mapWidth) == Terrain.CRYSTAL_DOOR ) {
 			return DungeonTileSheet.DOOR_OVERHANG_CRYSTAL;
-		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.STATUE){
+		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.STATUE){
 			return DungeonTileSheet.STATUE_OVERHANG;
-		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.STATUE_SP){
+		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.STATUE_SP){
 			return DungeonTileSheet.STATUE_SP_OVERHANG;
-		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.REGION_DECO){
+		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.REGION_DECO){
 			return DungeonTileSheet.REGION_DECO_OVERHANG;
-		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.REGION_DECO_ALT){
+		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.REGION_DECO_ALT){
 			return DungeonTileSheet.REGION_DECO_ALT_OVERHANG;
-		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.MINE_CRYSTAL){
+		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.MINE_CRYSTAL){
 			return DungeonTileSheet.getVisualWithAlts(DungeonTileSheet.MINE_CRYSTAL_OVERHANG_BLUE, pos + mapWidth);
-		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.MINE_BOULDER){
+		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.MINE_BOULDER){
 			return DungeonTileSheet.getVisualWithAlts(DungeonTileSheet.MINE_BOULDER_OVERHANG, pos + mapWidth);
-		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.ALCHEMY){
+		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.ALCHEMY){
 			return DungeonTileSheet.ALCHEMY_POT_OVERHANG;
-		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.BARRICADE){
+		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.BARRICADE){
 			return -1; // BarricadeLayer draws the complete boards inside their own cell.
-		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.HIGH_GRASS){
+		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.HIGH_GRASS){
 			return DungeonTileSheet.getVisualWithAlts(DungeonTileSheet.HIGH_GRASS_OVERHANG, pos + mapWidth);
-		} else if (pos + mapWidth < size && map[pos+mapWidth] == Terrain.FURROWED_GRASS){
+		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.FURROWED_GRASS){
 			return DungeonTileSheet.getVisualWithAlts(DungeonTileSheet.FURROWED_OVERHANG, pos + mapWidth);
 		}
 
@@ -142,6 +144,9 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 	public boolean overlapsPoint( float x, float y ) {
 		return true;
 	}
+    private int knownTerrain(int cell){
+        return cell>=0&&cell<size&&known(cell)?map[cell]:Terrain.WALL;
+    }
 	private boolean known(int cell){
 		return Dungeon.level.heroFOV[cell] || Dungeon.level.visited[cell] || Dungeon.level.mapped[cell];
 	}

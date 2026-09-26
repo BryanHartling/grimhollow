@@ -1,5 +1,8 @@
 # Known issues
 
+- Hatchling feeding and permanent-upgrade balance still require campaign playtesting; the 10/15/20 energy curve, permanently escalating gold demand and actual +10 Wealth equipment reward follow the approved design. No physical Samsung tablet run is claimed.
+- The new regional story and Hatchling text currently use English fallback in other locales; existing translated mechanical descriptions remain.
+
 - Enchanter v1.11.2 proc rates and talent purchasing pass deterministic and native mouse/touch regressions; early-campaign balance still needs player review. Chance bonuses do not strengthen always-active enchantments/glyphs or curses. No physical Android playtest is claimed.
 
 - Samsung SM-T830 movement smoothness remains unverified on hardware: this run's adb devices -l returned an empty list. Version 1.12.0 reduces light-map work per movement step sixteenfold and steadies creature travel poses; native desktop/touch coverage is not a physical tablet performance measurement.

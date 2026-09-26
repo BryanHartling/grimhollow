@@ -251,11 +251,11 @@ public class Assets {
 		public static final String DUELIST  = "splashes/duelist.jpg";
 		public static final String CLERIC   = "splashes/cleric.jpg";
 
-		public static final String SEWERS   = "splashes/sewers.jpg";
-		public static final String PRISON   = "splashes/prison.jpg";
-		public static final String CAVES    = "splashes/caves.jpg";
-		public static final String CITY     = "splashes/city.jpg";
-		public static final String HALLS    = "splashes/halls.jpg";
+		public static final String SEWERS   = "splashes/painted_region_sewers.png";
+		public static final String PRISON   = "splashes/painted_region_prison.png";
+		public static final String CAVES    = "splashes/painted_region_caves.png";
+		public static final String CITY     = "splashes/painted_region_city.png";
+		public static final String HALLS    = "splashes/painted_region_halls.png";
 
 		public static class Title {
 			public static final String ARCHS         = "splashes/title/archs.png";

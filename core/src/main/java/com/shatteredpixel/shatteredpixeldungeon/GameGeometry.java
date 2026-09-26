@@ -56,7 +56,7 @@ public final class GameGeometry {
     public static int characterDensity(Object texture) {
         // Creature sheets retain their fourfold upstream layout. Hero sheets
         // have separate 96x120 frames, fitted to the same world-space height.
-        for(String sharper:new String[]{Assets.Sprites.BRUTE,Assets.Sprites.SHAMAN})
+        for(String sharper:new String[]{Assets.Sprites.BRUTE,Assets.Sprites.SHAMAN,"sprites/minion_skeleton.png"})
             if(sharper.equals(texture) || com.watabou.gltextures.TextureCache.contains(sharper)
                     && com.watabou.gltextures.TextureCache.get(sharper)==texture)return 8;
         return characterLayout(texture)==null?1:4;

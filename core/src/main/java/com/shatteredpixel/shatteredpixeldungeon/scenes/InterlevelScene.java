@@ -172,49 +172,16 @@ public class InterlevelScene extends PixelScene {
 			lastRegion = region;
 		}
 
-		int loadingCenter = 400;
+        // The new paintings share a central focal point for portrait and landscape.
+        int loadingCenter = 800;
+        switch (lastRegion) {
+            case 1: loadingAsset=Assets.Splashes.SEWERS; break;
+            case 2: loadingAsset=Assets.Splashes.PRISON; break;
+            case 3: loadingAsset=Assets.Splashes.CAVES; break;
+            case 4: loadingAsset=Assets.Splashes.CITY; break;
+            default: loadingAsset=Assets.Splashes.HALLS;
+        }
 
-		//for portrait users, each run the splashes change what details they focus on
-		Random.pushGenerator(seed+lastRegion);
-			switch (lastRegion){
-				case 1:
-					loadingAsset = Assets.Splashes.SEWERS;
-					switch (Random.Int(2)){
-						case 0: loadingCenter = 180; break; //focus on rats and left side
-						case 1: loadingCenter = 485; break; //focus on center pipe and door
-					}
-					break;
-				case 2:
-					loadingAsset = Assets.Splashes.PRISON;
-					switch (Random.Int(3)){
-						case 0: loadingCenter = 190; break; //focus on left skeleton
-						case 1: loadingCenter = 402; break; //focus on center arch
-					}
-					break;
-				case 3:
-					loadingAsset = Assets.Splashes.CAVES;
-					switch (Random.Int(3)){
-						case 0: loadingCenter = 340; break; //focus on center gnoll groups
-						case 1: loadingCenter = 625; break; //focus on right gnoll
-					}
-					break;
-				case 4:
-					loadingAsset = Assets.Splashes.CITY;
-					switch (Random.Int(3)){
-						case 0: loadingCenter = 275; break; //focus on left bookcases
-						case 1: loadingCenter = 485; break; //focus on center pathway
-					}
-					break;
-				case 5: default:
-					loadingAsset = Assets.Splashes.HALLS;
-					switch (Random.Int(3)){
-						case 0: loadingCenter = 145; break; //focus on left arches
-						case 1: loadingCenter = 400; break; //focus on ripper demon
-					}
-					break;
-			}
-		Random.popGenerator();
-		
 		if (DeviceCompat.isDebug()){
 			fadeTime = 0f;
 		}
@@ -225,7 +192,8 @@ public class InterlevelScene extends PixelScene {
 		int h = (int)(Camera.main.height - insets.top - insets.bottom);
 
 		background = new Image(loadingAsset);
-		background.scale.set(Camera.main.height/background.height);
+		background.texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR,com.badlogic.gdx.graphics.GL20.GL_LINEAR);
+        background.scale.set(Math.max(Camera.main.height/background.height,Camera.main.width/background.width));
 
 		if (Camera.main.width >= background.width()){
 			background.x = (Camera.main.width - background.width())/2f;

@@ -13,7 +13,7 @@ import numpy as np
 from PIL import Image, ImageFilter
 from pack import HERE, historical
 
-HIGH_DENSITY={'brute','shaman'}
+HIGH_DENSITY={'brute','shaman','minion_skeleton'}
 
 def density(name):return 8 if name in HIGH_DENSITY else 4
 

@@ -35,6 +35,7 @@
     "items/class-kit.png": "590b04ac662584c0106a97191921dec36b55d939d11cb785a26a6f3f8a87ff3b",
     "items/crafted-spells.png": "4faf92adb8112089616d03b69ae16260eb34bfa8db06b6b381ad26cb6a8c4ffd",
     "items/food-quest.png": "94c2e1c23acdc6b7ebdd98732bf30527e4f1f1aba9a9c6393f71513f707f0bef",
+    "items/hatchling.png": "68c7c99bd2e3d642e9b054e6a15b40cbdd1a98439f9d0dbcd1f0807bb8bbe1c2",
     "items/missiles.png": "fd0b7a31bf6a408fa29bf938cb3e1ffcc13f377d9f497f61eaeca12dc2630d23",
     "items/potions.png": "19f187ea92fab80e9571a8ba3dc0bd60d1e283bb38b5cc8074559bd924cac95b",
     "items/quest-remnants.png": "a02a741c67dc969eb88ade80c0fa9679225cfded559dd2f3e93b682f92da626e",
@@ -97,6 +98,11 @@
     "readability/badges.png": "a18a5d4c9981333c6f3e52b047b7b71a3466166c88b02cb607aa5c55f817c43d",
     "readability/details.png": "e1952de42e0da3695139107c8e5797e986aacf4324d14d3cc98a57727debd852",
     "region-props.png": "fcdfa9075ad79fe4e4755a242bbbe4cb29cd579c9d66ab6a6dfd004e3defecde",
+    "regions/caves.png": "1461a60e3db9dbecdacf1cddfcda04d621ad2204f30344ff2a9e6780c51f2975",
+    "regions/city.png": "7efcc49144076b848fb53f10c559588380810f3a5473861828abe0a3683f4222",
+    "regions/halls.png": "ebcba7baef3c9b2e73517d057b0e88eefe2fd2421dee679e65c95109941f9bce",
+    "regions/prison.png": "b0053c1b3e1c80a1e5c963a3e458277c966a188ef02514ad3e708f4b0fe8b67e",
+    "regions/sewers.png": "47889d8797ab3dd9a53cf8a6a8d991febd3b4c5f5dd25ddd22577fc51d95beb7",
     "sewers-materials.png": "0b951d4ce0bb5902c6a940c1bc56db1173580ca57c33d652c16754dd91c9ddc2",
     "status/status-0.png": "7bf546acdbc789262e8008fa82737af3c3389ee1c43fd58c8b27709d6fb225b7",
     "status/status-1.png": "6cc7256d450879b5aa756c47587373fc653d4cb2b54132d1efad809329dca5db",
@@ -346,7 +352,7 @@
         1024,
         2176
       ],
-      "rgba_sha256": "aa1075a7cb2be5fd00f0fa1d894fbce34ae8bf9f47f9de341e3ceb98c4495d21"
+      "rgba_sha256": "bf0d9dc1c46e56641c7d8ade5cafbdaf4f369c6f162b24fdef1c7cd61b2a1b66"
     },
     "sprites/item_icons.png": {
       "size": [
@@ -5052,112 +5058,112 @@
     },
     "sprites/minion_skeleton.png": {
       "size": [
-        1024,
-        128
+        2048,
+        256
       ],
-      "rgba_sha256": "08983d34c04cea289648904e9d38aa88df166792944a978d76cd05c54dca47a0",
+      "rgba_sha256": "31a4442e00be3d617a59f58cf667dd503a3918bfeb4952d35edaa28f6790b502",
       "painted_rects": [
         [
           0,
           0,
-          48,
-          60
-        ],
-        [
-          48,
-          0,
           96,
-          60
+          120
         ],
         [
           96,
           0,
-          144,
-          60
-        ],
-        [
-          144,
-          0,
           192,
-          60
+          120
         ],
         [
           192,
           0,
-          240,
-          60
-        ],
-        [
-          240,
-          0,
           288,
-          60
+          120
         ],
         [
           288,
           0,
-          336,
-          60
-        ],
-        [
-          336,
-          0,
           384,
-          60
+          120
         ],
         [
           384,
           0,
-          432,
-          60
-        ],
-        [
-          432,
-          0,
           480,
-          60
+          120
         ],
         [
           480,
           0,
-          528,
-          60
-        ],
-        [
-          528,
-          0,
           576,
-          60
+          120
         ],
         [
           576,
           0,
-          624,
-          60
-        ],
-        [
-          624,
-          0,
           672,
-          60
+          120
         ],
         [
           672,
           0,
-          720,
-          60
-        ],
-        [
-          720,
-          0,
           768,
-          60
+          120
         ],
         [
           768,
           0,
-          816,
-          60
+          864,
+          120
+        ],
+        [
+          864,
+          0,
+          960,
+          120
+        ],
+        [
+          960,
+          0,
+          1056,
+          120
+        ],
+        [
+          1056,
+          0,
+          1152,
+          120
+        ],
+        [
+          1152,
+          0,
+          1248,
+          120
+        ],
+        [
+          1248,
+          0,
+          1344,
+          120
+        ],
+        [
+          1344,
+          0,
+          1440,
+          120
+        ],
+        [
+          1440,
+          0,
+          1536,
+          120
+        ],
+        [
+          1536,
+          0,
+          1632,
+          120
         ]
       ]
     },
@@ -9001,6 +9007,41 @@
         64
       ],
       "rgba_sha256": "ed68c2df855028cc56b27876423c4321175f24815f6923ee18fb6e972a30b5b6"
+    },
+    "splashes/painted_region_sewers.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "db58d6b8ef3d99f46fd9b819bec8820310c43d27b1e42d70f13bf7634bec7096"
+    },
+    "splashes/painted_region_prison.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "21981d42399ae8e3aa8ea8b0c89afa0261c2699ed48de2c82e52c4fbc80f1159"
+    },
+    "splashes/painted_region_caves.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "de8df403bf9fea3d7b718d5b0f0872da098af7ce33766c4226e1456805ff2f96"
+    },
+    "splashes/painted_region_city.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "4b27d51420e0cc68a93e04cb042c6394baf78f69eceea60368b51900b014cc85"
+    },
+    "splashes/painted_region_halls.png": {
+      "size": [
+        1600,
+        900
+      ],
+      "rgba_sha256": "bc5ba442eb67fe8040ba652e50e8254ed6fb2d9a1c2ce25bab17a3be8b6953c8"
     }
   }
 }

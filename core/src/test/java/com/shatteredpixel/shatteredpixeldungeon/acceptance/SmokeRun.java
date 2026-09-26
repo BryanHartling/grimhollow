@@ -72,7 +72,7 @@ public class SmokeRun {
                             if(Dungeon.depth!=6) throw new AssertionError("Save/load depth mismatch");
                         }
                     }
-                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();}
+                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();HatchlingScenario.run();}
                     String line="PASS "+name+" seed="+seed+" floor=6 save/load=ok";
                     System.out.println(line); log.println(line);
                 } catch(Throwable error) {
@@ -127,7 +127,8 @@ public class SmokeRun {
                 check(((com.shatteredpixel.shatteredpixeldungeon.items.keys.Key)item).depth==Dungeon.depth,"Spawned key depth");
             catalog++;
         }
-        for(Class<?> type:seen.keySet())check(seen.get(type)==com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.isSeen(type),"Test item polluted catalog: "+type);
+        for(Class<?> type:seen.keySet())if(seen.get(type))check(com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.isSeen(type),"Discovery was forgotten: "+type);
+        check(com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.isSeen(ScrollOfIdentify.class),"Test discoveries should enter the reference journal");
         for(Class<? extends Mob> type:PlaytestCatalog.mobs())check(com.watabou.utils.Reflection.newInstance(type)!=null,"Mob catalog constructor: "+type);
         Item markerItem=Playtest.create(com.shatteredpixel.shatteredpixeldungeon.items.spells.Soulfire.class,7,0,true,false);
         check(Playtest.give(markerItem),"Spawned spell not collected");
@@ -581,7 +582,7 @@ public class SmokeRun {
         System.out.println("PASS TEXT: 10 named items and nine curse/enemy/trap descriptions resolve without superclass mislabeling or raw format placeholders");
     }
 
-    private static void clearArena(){
+    static void clearArena(){
         if(com.watabou.noosa.Camera.main==null)com.watabou.noosa.Camera.main=new com.watabou.noosa.Camera(0,0,320,240,1);
         for(Mob m:Dungeon.level.mobs.toArray(new Mob[0])){Actor.remove(m);for(Buff buff:m.buffs())Actor.remove(buff);}
         Dungeon.level.mobs.clear();BoneWalls.clear(Dungeon.level);com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.clear(Dungeon.level);

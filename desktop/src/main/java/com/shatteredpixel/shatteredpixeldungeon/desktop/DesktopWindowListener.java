@@ -29,7 +29,11 @@ import com.watabou.noosa.audio.Music;
 public class DesktopWindowListener implements Lwjgl3WindowListener {
 	
 	@Override
-	public void created ( Lwjgl3Window lwjgl3Window ) { }
+	public void created ( Lwjgl3Window lwjgl3Window ) {
+		// Fullscreen must not minimize merely because another application gains focus.
+		org.lwjgl.glfw.GLFW.glfwSetWindowAttrib(lwjgl3Window.getWindowHandle(),
+				org.lwjgl.glfw.GLFW.GLFW_AUTO_ICONIFY, org.lwjgl.glfw.GLFW.GLFW_FALSE);
+	}
 	
 	@Override
 	public void maximized ( boolean b ) {

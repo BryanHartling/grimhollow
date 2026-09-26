@@ -205,6 +205,8 @@ def outputs():
     result.update(interface_art())
     from readability import outputs as readability
     result.update(readability())
+    from regions import outputs as regions
+    result.update(regions())
     return result
 
 

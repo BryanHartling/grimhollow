@@ -231,6 +231,7 @@ public class Dungeon {
 	}
 	
 	public static void init() {
+        com.shatteredpixel.shatteredpixeldungeon.journal.Journal.loadGlobal();
 		Playtest.reset();
 
 		initialVersion = version = Game.versionCode;

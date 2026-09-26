@@ -34,11 +34,15 @@ public class FocusCrystal extends ClassSpellItem {
     public int graspRange(Hero hero){return (hero==null?8:hero.viewDistance)+(level()>=7?2:level()>=3?1:0)
             +farReachBonus(hero==null?0:hero.pointsInTalent(Talent.FAR_REACH));}
     public static int farReachBonus(int rank){return rank>=3?4:Math.max(0,rank);}
+    public boolean canOpenWithGrasp(Heap.Type type){
+        return level()>=3&&(type==Heap.Type.SKELETON||type==Heap.Type.REMAINS)
+                ||level()>=7&&type==Heap.Type.CHEST;
+    }
     public int glimpseDuration(){return level()>=10?9:level()>=5?7:5;}
     @Override public String desc(){
         return super.desc()+"\n\n"+Messages.get(this,"progress",level(),spentExperience,level()<10?10+5*level():0)
                 +"\n\n"+Messages.get(this,"utility_stats",graspRange(Dungeon.hero),glimpseDuration())
-                +"\n\n"+Messages.get(this,"push_stats",pushDistance());
+                +"\n\n"+Messages.get(this,"push_stats",pushDistance())+"\n\n"+Messages.get(this,"grasp_opening");
     }
     @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("spent_experience",spentExperience);}
     @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);level(Math.max(0,Math.min(10,b.getInt("level"))));spentExperience=b.getInt("spent_experience");chargeCap=cap();}
@@ -61,6 +65,12 @@ public class FocusCrystal extends ClassSpellItem {
                 if(enemy!=null&&enemy.alignment==Char.Alignment.ENEMY&&h.hasTalent(Talent.WRENCH))Buff.prolong(enemy,Vertigo.class,2*h.pointsInTalent(Talent.WRENCH));
                 float time=0;while(!heap.isEmpty()){Item item=heap.pickUp();if(item.doPickUp(h,h.pos))time+=item.pickupDelay();else Dungeon.level.drop(item,h.pos);}
                 h.spend(-time);
+            }else if(heap!=null&&canOpenWithGrasp(heap.type)){
+                heap.open(h); // Preserve haunted remains and normal opening consequences.
+            }else if(level()>=7&&enemy instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic
+                    && enemy.alignment==Char.Alignment.NEUTRAL){
+                ((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic)enemy).stopHiding();
+                enemy.alignment=Char.Alignment.ENEMY;
             }else if(trap!=null&&trap.visible&&trap.active){trap.psychicPower=1+.25f*h.pointsInTalent(Talent.TRAP_SENSE);trap.trigger();Dungeon.level.traps.remove(cell);if(Dungeon.level.map[cell]==Terrain.TRAP||Dungeon.level.map[cell]==Terrain.INACTIVE_TRAP||Dungeon.level.map[cell]==Terrain.SECRET_TRAP)Level.set(cell,Terrain.EMPTY);GameScene.updateMap(cell);}
             else return false;
         }else{

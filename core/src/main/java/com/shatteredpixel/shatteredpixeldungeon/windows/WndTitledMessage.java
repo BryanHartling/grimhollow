@@ -45,7 +45,8 @@ public class WndTitledMessage extends Window {
 
 		super();
 
-		int width = WIDTH_MIN;
+		int maxWidth = Math.max(80, Math.min(WIDTH_MAX, (int)PixelScene.uiCamera.width - 32));
+		int width = Math.min(WIDTH_MIN, maxWidth);
 
 		titlebar.setRect( 0, 0, width, 0 );
 		add(titlebar);
@@ -56,10 +57,8 @@ public class WndTitledMessage extends Window {
 		text.setPos( titlebar.left(), titlebar.bottom() + 2*GAP );
 		add( text );
 
-		while (PixelScene.landscape()
-				&& text.bottom() > targetHeight()
-				&& width < WIDTH_MAX){
-			width += 20;
+		while (text.bottom() > targetHeight() && width < maxWidth){
+			width = Math.min(width + 20, maxWidth);
 			titlebar.setRect(0, 0, width, 0);
 			text.setPos( titlebar.left(), titlebar.bottom() + 2*GAP );
 			text.maxWidth(width);
@@ -70,10 +69,12 @@ public class WndTitledMessage extends Window {
 		remove(text);
 		descriptionTop=titlebar.bottom()+2*GAP;
 		text.setPos(0,0);
-		Component content=new Component();content.add(text);content.setSize(width,text.height());
+		Component content=new Component();content.add(text);
+		// Include the last baseline and rounding margin in the scrollable bounds.
+		content.setSize(width,(float)Math.ceil(text.bottom())+4);
 		description=new com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane(content);
 		add(description);
-		descriptionHeight=Math.max(18,Math.min(text.height(),Math.min(targetHeight(),PixelScene.uiCamera.height-36)-descriptionTop));
+		descriptionHeight=Math.max(18,Math.min(content.height(),Math.min(targetHeight(),PixelScene.uiCamera.height-36)-descriptionTop));
 		description.setRect(0,descriptionTop,width,descriptionHeight);
 		resize( width, (int)(descriptionTop+descriptionHeight)+2 );
 	}

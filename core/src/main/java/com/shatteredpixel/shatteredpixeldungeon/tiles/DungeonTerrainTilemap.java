@@ -39,6 +39,19 @@ public class DungeonTerrainTilemap extends DungeonTilemap {
 		instance = this;
 	}
 
+    private boolean[] lastKnown;
+    /** Restitch only newly discovered neighborhoods, not the entire atlas on every step. */
+    public void updateKnowledge(){
+        if(lastKnown==null||lastKnown.length!=size)lastKnown=new boolean[size];
+        for(int cell=0;cell<size;cell++){
+            boolean known=Dungeon.level.heroFOV[cell]||Dungeon.level.visited[cell]||Dungeon.level.mapped[cell];
+            if(lastKnown[cell]!=known){lastKnown[cell]=known;updateMapCell(cell);}
+        }
+    }
+    private int knownTerrain(int cell){
+        return Dungeon.level.heroFOV[cell]||Dungeon.level.visited[cell]||Dungeon.level.mapped[cell]
+                ?map[cell]:Terrain.WALL;
+    }
 	@Override
 	protected int getTileVisual(int pos, int tile, boolean flat) {
         if(tile==Terrain.BONE_WALL)tile=com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled()?Terrain.EMPTY:Terrain.BARRICADE;
@@ -75,9 +88,9 @@ public class DungeonTerrainTilemap extends DungeonTilemap {
 				return DungeonTileSheet.getRaisedWallTile(
 						tile,
 						pos,
-						(pos+1) % mapWidth != 0 ?   map[pos + 1] : -1,
-						pos + mapWidth < size ?     map[pos + mapWidth] : -1,
-						pos % mapWidth != 0 ?       map[pos - 1] : -1
+						(pos+1) % mapWidth != 0 ?   knownTerrain(pos + 1) : -1,
+						pos + mapWidth < size ?     knownTerrain(pos + mapWidth) : -1,
+						pos % mapWidth != 0 ?       knownTerrain(pos - 1) : -1
 						);
 			} else if (tile == Terrain.STATUE) {
 				return DungeonTileSheet.RAISED_STATUE;

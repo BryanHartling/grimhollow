@@ -27,6 +27,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean interfaceReview=Boolean.getBoolean("grimhollow.interfaceReview");
     private final boolean presentationReview=Boolean.getBoolean("grimhollow.presentationReview");
     private boolean presentationStarted;
+    private final java.util.HashSet<Integer> loadingCaptures=new java.util.HashSet<>();
+    private boolean[] hatchlingFov,hatchlingVisited,hatchlingMapped;
+    private int hatchlingHiddenCell;
     private int presentationGameFrames;
     private int encounterActions, encounterSteps, encounterAttacks, encounterLastCell=-1;
     private int[] encounterVisits;
@@ -69,6 +72,10 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     @Override public void render() {
         super.render();
         frames++;
+        if(interfaceReview && Game.scene() instanceof InterlevelScene && Dungeon.level!=null
+                && !loadingCaptures.contains(Dungeon.depth)){
+            capture("loading-floor-"+Dungeon.depth);loadingCaptures.add(Dungeon.depth);
+        }
         if(presentationReview && frames>180) { presentationTick(); return; }
         if(interfaceReview && frames>180) { interfaceTick(); return; }
         if(encounters && frames>180) { encounterTick(); return; }
@@ -729,10 +736,55 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 case 48:
                     Dungeon.hero.sprite.parent.add(new com.shatteredpixel.shatteredpixeldungeon.effects.Lightning(Dungeon.hero.pos-1+Dungeon.level.width(),Dungeon.hero.pos+1+Dungeon.level.width(),null,true));
                     Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);Game.scene().draw();capture("creatures-and-tengu-effects");
-                    Gdx.app.exit();return;
+                    break;
+                case 49:
+                    com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic hatchling=
+                            new com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic();
+                    hatchling.level(3);hatchling.collect();
+                    GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(hatchling));break;
+                case 50:
+                    interfaceBounds();checkReviewText(Game.scene());capture("hatchling-description");
+                    scrollReview(Game.scene());break;
+                case 51:
+                    interfaceBounds();capture("hatchling-description-bottom");closeReviewWindows();
+                    int center=Dungeon.hero.pos,width=Dungeon.level.width();
+                    for(int i=0;i<3;i++){
+                        int cell=center-1+i+width;
+                        com.shatteredpixel.shatteredpixeldungeon.items.Heap heap=Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.Gold(20),cell);
+                        heap.type=i==0?com.shatteredpixel.shatteredpixeldungeon.items.Heap.Type.CHEST:i==1?com.shatteredpixel.shatteredpixeldungeon.items.Heap.Type.SKELETON:com.shatteredpixel.shatteredpixeldungeon.items.Heap.Type.HEAP;
+                        heap.sprite.link();GameScene.add(Blob.seed(cell,80,ToxicGas.class));
+                    }
+                    Dungeon.observe();GameScene.updateMap();
+                    hatchlingHiddenCell=center+3+2*width;
+                    Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey(Dungeon.depth),hatchlingHiddenCell);
+                    Dungeon.level.heroFOV[hatchlingHiddenCell]=Dungeon.level.visited[hatchlingHiddenCell]=Dungeon.level.mapped[hatchlingHiddenCell]=false;
+                    GameScene.updateFog();
+                    hatchlingFov=Dungeon.level.heroFOV.clone();hatchlingVisited=Dungeon.level.visited.clone();hatchlingMapped=Dungeon.level.mapped.clone();
+                    com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.affect(Dungeon.hero,
+                            com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.ItemSense.class).refresh(3,
+                            com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.Tier.EXCEPTIONAL);break;
+                case 52:
+                    if(!java.util.Arrays.equals(hatchlingFov,Dungeon.level.heroFOV)||!java.util.Arrays.equals(hatchlingVisited,Dungeon.level.visited)||!java.util.Arrays.equals(hatchlingMapped,Dungeon.level.mapped))throw new AssertionError("Hatchling sensing revealed terrain");
+                    boolean marker=false;
+                    for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.effects.HatchlingSenseLayer)
+                        marker=((java.util.Map<?,?>)RecoveryChecks.field(child,"markers")).containsKey(hatchlingHiddenCell);
+                    if(!marker)throw new AssertionError("Unseen sensed item has no marker");
+                    capture("hatchling-sense-and-gas-loot");
+                    System.out.println("TEST 55 UI PASS: painted Hatchling, scrolling hunger/benefits, object-only fog markers, gas loot overlay; failures=0");
+                    reviewRegionTransition(5);break;
+                case 53:reviewRegionTransition(10);break;
+                case 54:reviewRegionTransition(15);break;
+                case 55:reviewRegionTransition(20);break;
+                case 56:Gdx.app.exit();return;
             }
             playtestStep++;
-        }catch(ReflectiveOperationException error){throw new AssertionError(error);}
+        }catch(ReflectiveOperationException | java.io.IOException error){throw new AssertionError(error);}
+    }
+    private void reviewRegionTransition(int floor) throws java.io.IOException {
+        Playtest.travel(floor,0);
+        InterlevelScene.curTransition=Dungeon.level.getTransition(com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition.Type.REGULAR_EXIT);
+        InterlevelScene.mode=InterlevelScene.Mode.DESCEND;
+        ShatteredPixelDungeon.switchScene(InterlevelScene.class);
     }
     @SuppressWarnings("unchecked") private com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane handbookPage(int index){
         return ((java.util.List<com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane>)RecoveryChecks.field(reviewHandbook(),"pages")).get(index);
@@ -792,6 +844,20 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         Level.set(top,Terrain.LOCKED_EXIT);Level.set(source,Terrain.EMPTY);
         Dungeon.level.heroFOV[source]=Dungeon.level.visited[source]=Dungeon.level.mapped[source]=false;
         if((int)visual.invoke(walls,top,Terrain.LOCKED_EXIT,false)!=com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet.EXIT_UNDERHANG)throw new AssertionError("Visible exit artwork depends on unknown neighbor");
+        Level.set(top,Terrain.WALL);Level.set(source,Terrain.EMPTY);
+        Dungeon.level.heroFOV[source]=true;
+        int neighbor=top-1;
+        Dungeon.level.heroFOV[neighbor]=Dungeon.level.visited[neighbor]=Dungeon.level.mapped[neighbor]=false;
+        com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTerrainTilemap terrainTiles=
+                (com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTerrainTilemap)RecoveryChecks.field(Game.scene(),"tiles");
+        java.lang.reflect.Method face=terrainTiles.getClass().getDeclaredMethod("getTileVisual",int.class,int.class,boolean.class);face.setAccessible(true);
+        Integer wallExpected=null,faceExpected=null;
+        for(int hidden:new int[]{Terrain.WALL,Terrain.EMPTY,Terrain.WATER,Terrain.DOOR,Terrain.HIGH_GRASS}){
+            Level.set(neighbor,hidden);
+            int cap=(int)visual.invoke(walls,top,Terrain.WALL,false),front=(int)face.invoke(terrainTiles,top,Terrain.WALL,false);
+            if(wallExpected==null){wallExpected=cap;faceExpected=front;}
+            else if(cap!=wallExpected||front!=faceExpected)throw new AssertionError("Unknown neighbor leaks wall geometry: "+hidden);
+        }
         walls.destroy();Level.set(top,Terrain.EMPTY);Level.set(source,Terrain.EMPTY);
         int vertical=Dungeon.hero.pos-2,horizontal=Dungeon.hero.pos+2;
         Level.set(vertical,Terrain.BARRICADE);Level.set(vertical-w,Terrain.WALL);Level.set(vertical+w,Terrain.WALL);

@@ -1,6 +1,6 @@
 # Grimhollow
 
-**Hatchling Mimic and presentation v1.13.0:** a hungry carried trinket with permanent item benefits, escalating gold demands, mimic kinship and theft. Its transformation/escape reward uses the actual **+10 Ring of Wealth equipment pool**. Upgrade at the cauldron for **10 / 15 / 20 energy**. Inspect it for hunger clues and its next gold demand.
+**Hatchling Mimic and presentation v1.13.0:** a hungry carried trinket with permanent item benefits, escalating gold demands, mimic kinship and theft. Its transformation/escape reward uses the actual **+10 Ring of Wealth equipment pool**. Upgrade at the cauldron for **10 / 15 / 20 energy**. Inspect it for hunger clues and its next gold demand. The Playtest item picker now includes 314 item types, including the Hatchling.
 
 Five original painted loading screens and a new regional story accompany fixes for unknown-wall leakage, loot visibility beneath gas, scrolling skill descriptions, sharpened skeletons and persistent journal discoveries. Grasp opens bones at Crystal level 3 and ordinary unlocked chests at level 7.
 

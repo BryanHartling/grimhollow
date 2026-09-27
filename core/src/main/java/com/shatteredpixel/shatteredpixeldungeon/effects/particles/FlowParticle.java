@@ -25,11 +25,11 @@ import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTilemap;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.particles.Emitter.Factory;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 
-public class FlowParticle extends PixelParticle {
+public class FlowParticle extends PaintedParticle {
 
 	public static final Emitter.Factory FACTORY = new Factory() {
 		@Override

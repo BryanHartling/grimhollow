@@ -1,5 +1,8 @@
 # Known issues
 
+- Version 1.14.0 Defensive Sigil and Ghoul tuning require campaign playtesting. Psychic strength has not been changed without a specific ability/encounter diagnosis; the rare floor-six tier-five weapon roll remains an intentional upstream loot possibility.
+- The new particles, denser gas and universally sharper creature exports require human visual review and Samsung SM-T830 performance testing; desktop rendering is not a physical tablet test. New Defensive Sigil text falls back to English in other locales.
+
 - Hatchling feeding and permanent-upgrade balance still require campaign playtesting; the 10/15/20 energy curve, permanently escalating gold demand and actual +10 Wealth equipment reward follow the approved design. No physical Samsung tablet run is claimed.
 - The new regional story and Hatchling text currently use English fallback in other locales; existing translated mechanical descriptions remain.
 

@@ -23,12 +23,12 @@ package com.shatteredpixel.shatteredpixeldungeon.effects.particles;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.ColorMath;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.Random;
 
-public class SpectralWallParticle extends PixelParticle {
+public class SpectralWallParticle extends PaintedParticle {
 
 	public static final Emitter.Factory FACTORY = new Emitter.Factory() {
 		@Override

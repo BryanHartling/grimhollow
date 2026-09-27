@@ -23,11 +23,11 @@ package com.shatteredpixel.shatteredpixeldungeon.effects.particles;
 
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.particles.Emitter.Factory;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 
-public class EnergyParticle extends PixelParticle {
+public class EnergyParticle extends PaintedParticle {
 	
 	public static final Emitter.Factory FACTORY = new Factory() {
 		@Override
@@ -64,6 +64,7 @@ public class EnergyParticle extends PixelParticle {
 		
 		float p = left / lifespan;
 		am = p < 0.5f ? p * p * 4 : (1 - p) * 2;
-		size( Random.Float( 5 * left / lifespan ) );
+		float legacy=Random.Float(5*left/lifespan);
+		size(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled()?3.5f*Math.max(0,p):legacy);
 	}
 }

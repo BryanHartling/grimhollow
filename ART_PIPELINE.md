@@ -1,10 +1,12 @@
 # Current painted presentation
 
-The September 2026 visual-overhaul requests authorize original painted art and supersede the historical recovery-only restrictions below. `tools/painted/README.md` documents the workflow. Forty-five original source sheets and exact imagegen prompts reconstruct 58 shipping images with Pillow/numpy and pinned Git templates. CI needs neither a generator nor Blender; rejected procedural loops remain archived.
+The September 2026 visual-overhaul requests authorize original painted art and supersede the historical recovery-only restrictions below. `tools/painted/README.md` documents the workflow. The v1.14.0 manifest contains 114 committed source PNGs and 123 shipping images, plus 55 launcher resources. CI reconstructs them with Pillow/numpy and pinned Git templates; it needs neither an image generator nor Blender.
 
-This pass adds matching door transitions and three distinct vegetation silhouettes, an animated painted crypt menu, and 40 monster forms/states across 32 atlas families. The character packer places authored key poses into explicit native rectangles, retaining every existing animation rate and callback. It preserves all other variant/quest pixels from v1.2.0. DM-300's charged state, all shaman colors and all elemental materials have separate authored sources. Linear sampling applies to declared painted sheets; world coordinates, fog and game rules remain unchanged.
+All 71 creature atlases (129 authored forms) now export directly from their original paintings at eight texture pixels per logical world unit. `character-layouts.json` supplies the original frame layout; runtime density is derived from the actual sheet dimensions, including irregular wards and sentries. Logical sprite footprints are preserved, with a shared half-texel allowance for bilinear silhouette fringes.
 
-The previous nine hero sheets, 202 inventory cells and five regions remain included. NPCs, other rare/quest creature frames, class splashes, remaining inventory families, UI/talent icons and approved wall torches retain their previous artwork. Test 44 reconstructs painted outputs and verifies unaffected restoration assets; test 25 retains named item semantics; test 45 keeps its existing room thresholds.
+The new particle motifs and Defensive Sigil were authored with the built-in image generator. Exact prompts are in `tools/painted/particles-prompts.json` and `tools/painted/defensive-sigil-prompt.json`; immutable source PNGs are in `tools/painted/sources/particles/`. `particles.py` packs two 256px atlases, also reusing established status/UI symbols for the legacy Speck meanings. `botany_skills.py` replaces the old Field Repair cell with the new Defensive Sigil painting. No generation occurs during packing or CI.
+
+The existing nine hero/splash designs, five painted regions, items, plants, traps, interface, status/talent art and launcher emblem remain included. Test 44 reconstructs every painted output and verifies unaffected restoration assets; test 25 retains named item semantics; test 45 keeps its existing room thresholds. Archived evidence and earlier workflows below are historical.
 
 ---
 

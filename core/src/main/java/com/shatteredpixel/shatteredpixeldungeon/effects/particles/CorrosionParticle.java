@@ -22,11 +22,11 @@
 package com.shatteredpixel.shatteredpixeldungeon.effects.particles;
 
 import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.ColorMath;
 import com.watabou.utils.Random;
 
-public class CorrosionParticle extends PixelParticle {
+public class CorrosionParticle extends PaintedParticle {
 	
 	public static final Emitter.Factory MISSILE = new Emitter.Factory() {
 		@Override

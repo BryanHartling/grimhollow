@@ -25,10 +25,10 @@ import com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTilemap;
 import com.watabou.noosa.Visual;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.particles.Emitter.Factory;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.Random;
 
-public class SparkParticle extends PixelParticle {
+public class SparkParticle extends PaintedParticle {
 
 	public static final Emitter.Factory FACTORY = new Factory() {
 		@Override
@@ -103,6 +103,8 @@ public class SparkParticle extends PixelParticle {
 	@Override
 	public void update() {
 		super.update();
-		size( Random.Float( size * left / lifespan ) );
+		float legacy=Random.Float(size*left/lifespan);
+		size(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled()
+			? size*Math.max(0,left/lifespan)*(.75f+.25f*(float)Math.sin((lifespan-left)*12)) : legacy);
 	}
 }

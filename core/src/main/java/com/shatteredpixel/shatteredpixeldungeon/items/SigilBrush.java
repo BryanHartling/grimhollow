@@ -19,7 +19,13 @@ public class SigilBrush extends ClassSpellItem {
     public static final String AC_ETCH="ETCH";
     @Override public ArrayList<String> actions(Hero h){ArrayList<String> a=super.actions(h);a.add(AC_ETCH);return a;}
     @Override public void execute(Hero h,String action){if(action.equals(AC_ETCH)){if(RuneEtching.etch(h))h.spendAndNext(1);else com.shatteredpixel.shatteredpixeldungeon.utils.GLog.w(Messages.get(this,"etch_invalid"));}else super.execute(h,action);}
-    @Override public String[] spells(Hero h){return h.subClass==HeroSubClass.ARTIFICER?new String[]{"inscribe","hex","transmute","reinforce"}:h.subClass==HeroSubClass.SCRIVENER?new String[]{"inscribe","hex","sanctify","nullify","fracture"}:new String[]{"inscribe","hex"};}
+    @Override public String[] spells(Hero h){
+        ArrayList<String> spells=new ArrayList<>(Arrays.asList("inscribe","hex"));
+        if(h.hasTalent(Talent.FIELD_REPAIR))spells.add("defensive_sigil");
+        if(h.subClass==HeroSubClass.ARTIFICER)Collections.addAll(spells,"transmute","reinforce");
+        if(h.subClass==HeroSubClass.SCRIVENER)Collections.addAll(spells,"sanctify","nullify","fracture");
+        return spells.toArray(new String[0]);
+    }
     public static boolean ranged(Item item){return item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow;}
     public static boolean inscriptionTarget(Hero h,Item item){
         return item!=null && (item instanceof Weapon || item instanceof Armor)
@@ -40,7 +46,7 @@ public class SigilBrush extends ClassSpellItem {
                     if(spell.equals("transmute")){Runecraft.show(transmuteOffer(h,item),()->{});return;}if(!spell.equals("inscribe")){cast(h,spell,h.pos,item,null);return;}
                     GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInscribe(h,SigilBrush.this,item));
                 }});
-        }else if(spell.equals("sanctify"))cast(h,spell,h.pos,null,null);
+        }else if(spell.equals("sanctify")||spell.equals("defensive_sigil"))cast(h,spell,h.pos,null,null);
         else GameScene.selectCell(new CellSelector.Listener(){public void onSelect(Integer cell){cast(h,spell,cell,null,null);}public String prompt(){return Messages.get(SigilBrush.class,"target");}});
     }
     public boolean cast(Hero h,String spell,Integer cell,Item item,Class<?> choice){
@@ -48,6 +54,9 @@ public class SigilBrush extends ClassSpellItem {
         if(!Arrays.asList(spells(h)).contains(spell)||!ready(h,cost))return false;
         EnchanterMagic magic=EnchanterMagic.state();
         switch(spell){
+            case "defensive_sigil":
+                Buff.affect(h,DefensiveSigil.class).refresh(h.pointsInTalent(Talent.FIELD_REPAIR));
+                break;
             case "inscribe":
                 if(!inscriptionTarget(h,item)||magic==null||!magic.choices(item).contains(choice))return false;
                 inscribe(item,choice,30+10*h.pointsInTalent(Talent.STEADY_HAND));

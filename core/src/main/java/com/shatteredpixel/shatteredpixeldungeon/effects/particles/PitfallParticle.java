@@ -22,10 +22,10 @@
 package com.shatteredpixel.shatteredpixeldungeon.effects.particles;
 
 import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.Random;
 
-public class PitfallParticle extends PixelParticle.Shrinking {
+public class PitfallParticle extends PaintedParticle.Shrinking {
 
 	public static final Emitter.Factory FACTORY4 = new Emitter.Factory() {
 		@Override

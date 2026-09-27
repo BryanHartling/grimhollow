@@ -207,6 +207,8 @@ def outputs():
     result.update(readability())
     from regions import outputs as regions
     result.update(regions())
+    from particles import outputs as particles
+    result.update(particles())
     return result
 
 
@@ -239,6 +241,7 @@ def main():
         if path=='interfaces/painted_skills.png':expected=(1024,512)
         if path=='interfaces/painted_badges.png':expected=(1024,512)
         if path=='effects/readability.png':expected=(512,64)
+        if path in ('effects/painted_particles.png','effects/painted_specks.png'):expected=(256,256)
         if path=='sprites/item_icons.png':expected=(512,256)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}

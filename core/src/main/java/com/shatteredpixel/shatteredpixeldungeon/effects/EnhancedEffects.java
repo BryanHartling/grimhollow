@@ -8,7 +8,7 @@ import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTilemap;
 import com.watabou.noosa.*;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.TextureFilm;
 import com.watabou.utils.RectF;
@@ -25,6 +25,7 @@ public final class EnhancedEffects {
     private static TextureFilm film;
     private static FloorLayer floor;
     public static boolean enabled(){return SPDSettings.enhancedEffects();}
+    public static float gasOpacity(int density){return .32f+.6f*(float)Math.sqrt(Math.min(100,Math.max(0,density))/100f);}
     public static RectF uv(Style style,int frame){
         if(film==null)film=new TextureFilm(ATLAS,64,64);
         return film.get(style.ordinal()*16+Math.floorMod(frame,style.count));
@@ -122,7 +123,7 @@ public final class EnhancedEffects {
             ((java.nio.Buffer)vertices).flip();if(buffer==null)buffer=new com.watabou.glwrap.Vertexbuffer(vertices);else buffer.updateVertices(vertices);
             NoosaScript script=NoosaScript.get();tint.texture.bind();script.camera(camera());script.uModel.valueM4(identity);
             int offset=0;for(int density=1;density<=100;density++)if(counts[density]>0){
-                float alpha=blob instanceof SanctuaryZone?.75f:.15f+.7f*density/100;
+                float alpha=blob instanceof SanctuaryZone?.75f:gasOpacity(density);
                 script.lighting(tint.rm,tint.gm,tint.bm,alpha,0,0,0,0);script.drawQuadSet(buffer,counts[density],offset);offset+=counts[density];
             }
         }
@@ -136,7 +137,7 @@ public final class EnhancedEffects {
         void refresh(float time){
             if(blob instanceof SanctuaryZone){edge(time);return;}
             float p=phase(cell)%997/997f;
-            float size=12+8*Math.min(100,blob.cur[cell])/100f;
+            float size=18+4*(float)Math.sqrt(Math.min(100,blob.cur[cell])/100f);
             float x=(cell%Dungeon.level.width())*16+8,y=(cell/Dungeon.level.width())*16+8;
             int tint=blob instanceof ConfusionGas?0x68409C:blob instanceof SmokeScreen?0xC9BFA8
                     :blob instanceof ParalyticGas?0x8A8B88:0x7BB33B;
@@ -146,7 +147,7 @@ public final class EnhancedEffects {
                 Image image=pieces[i];image.visible=i==0;if(!image.visible)continue;
                 float phase=time*.45f+p*6.283f+i*3.14f;
                 float diameter=size+(float)Math.sin(phase)*1.2f;
-                ReadabilityEffects.frame(image,ReadabilityEffects.MIST,diameter,diameter);
+                ParticleArt.frame(image,ParticleArt.MIST,diameter,diameter);
                 image.x=x-diameter/2+(float)Math.cos(phase)*1.5f;
                 image.y=y-diameter/2+(float)Math.sin(phase*.81f)*1.3f;
                 image.hardlight(tint);
@@ -182,7 +183,7 @@ public final class EnhancedEffects {
             @Override public boolean lightMode(){return spark;}
         };
     }
-    public static class TenguParticle extends PixelParticle {
+    public static class TenguParticle extends PaintedParticle {
         private boolean spark;private float phase;
         public void reset(float x,float y,int index,boolean spark,boolean fuse){
             revive();this.spark=spark;phase=index*2.39996f;this.x=x;this.y=y;
@@ -204,7 +205,7 @@ public final class EnhancedEffects {
         @Override public void update(){time+=Game.elapsed;visible=enabled()&&Dungeon.level.heroFOV[cell];
             EnhancedEffects.frame(this,Style.FLAME,((int)(time*8+phase(cell)%4)%4)*5/3,8,8);}
     }
-    public static class Ember extends PixelParticle {
+    public static class Ember extends PaintedParticle {
         int variant;
         public Ember(){texture(ATLAS);}
         public static void emit(Emitter emitter,int index,float x,float y){

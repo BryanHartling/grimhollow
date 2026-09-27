@@ -24,11 +24,11 @@ package com.shatteredpixel.shatteredpixeldungeon.effects.particles;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.particles.Emitter.Factory;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.ColorMath;
 import com.watabou.utils.Random;
 
-public class LeafParticle extends PixelParticle.Shrinking {
+public class LeafParticle extends PaintedParticle.Shrinking {
 	
 	public static int color1;
 	public static int color2;

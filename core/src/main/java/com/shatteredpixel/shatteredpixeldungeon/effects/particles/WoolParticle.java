@@ -23,11 +23,11 @@ package com.shatteredpixel.shatteredpixeldungeon.effects.particles;
 
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.particles.Emitter.Factory;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.ColorMath;
 import com.watabou.utils.Random;
 
-public class WoolParticle extends PixelParticle.Shrinking {
+public class WoolParticle extends PaintedParticle.Shrinking {
 	
 	public static final Emitter.Factory FACTORY = new Factory() {
 		@Override

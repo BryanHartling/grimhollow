@@ -72,7 +72,7 @@ public class SmokeRun {
                             if(Dungeon.depth!=6) throw new AssertionError("Save/load depth mismatch");
                         }
                     }
-                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();HatchlingScenario.run();}
+                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();HatchlingScenario.run();keepsakeScenario();}
                     String line="PASS "+name+" seed="+seed+" floor=6 save/load=ok";
                     System.out.println(line); log.println(line);
                 } catch(Throwable error) {
@@ -608,7 +608,7 @@ public class SmokeRun {
         NecroSkeleton skeleton=NecroSkeleton.minions().get(0);check(skeleton.HT==19&&skeleton.remaining==30,"Skeleton starting stats/lifetime");
         skeleton.sprite=new NecroSkeletonSprite();skeleton.sprite.link(skeleton);
         for(int i=0;i<29;i++)skeleton.buff(NecroSkeleton.Lifetime.class).act();
-        check(skeleton.isAlive(),"Minion lives through turn 29");skeleton.buff(NecroSkeleton.Lifetime.class).act();
+        check(skeleton.isAlive(),"Minion lives through turn 29");check(skeleton.description().contains("_1 more turns_"),"56: inspection counts down remaining binding");skeleton.buff(NecroSkeleton.Lifetime.class).act();
         check(!NecroSkeleton.minions().contains(skeleton)&&h.HP==20,"Minion expires at turn 30 without explosion");
         clearArena();Rat enemy=target(h.pos+1);enemy.HP=1;enemy.damage(1,h);
         check(item.charges()==3&&Dungeon.level.corpses.get(enemy.pos)==200,"Hero kill charge and corpse tracking");
@@ -631,15 +631,21 @@ public class SmokeRun {
         hunter.defendPos(h.pos+1);hunter.act();check(hunter.pos==h.pos+1,"Hold command preserved");
         System.out.println("TEST 27 PASS: 300 turns unchanged; 12 charges level=1 Wraith offered; hostile attacked within 2 turns");
         clearArena();enemy=target(h.pos+1);
-        while(item.level()<3){item.gainCharge(1);check(item.cast(h,Phylactery.Spell.WITHER,enemy.pos),"Growth to Ghoul");}
+        while(item.level()<5){
+            check(!item.spells(h).contains(Phylactery.Spell.RAISE_GHOUL),"56: Ghoul locked through +4");
+            int before=item.charges();check(!item.cast(h,Phylactery.Spell.RAISE_GHOUL,h.pos)&&item.charges()==before,"56: locked Ghoul spends no charge");
+            item.gainCharge(1);check(item.cast(h,Phylactery.Spell.WITHER,enemy.pos),"Growth to Ghoul");
+        }
+        check(item.spells(h).contains(Phylactery.Spell.RAISE_GHOUL),"56: Ghoul unlocks at +5");
         // Exercise the two subclass sets, all new talent hooks and all class spells.
         h.lvl=21;h.HT=h.HP=120;h.subClass=HeroSubClass.DEATHSPEAKER;Talent.initSubclassTalents(h);maxTalents();
-        check(item.cap()==5&&h.heroClass.subClasses().length==2,"Deathspeaker subclass and Grave Wisdom");
+        check(item.cap()==6&&h.heroClass.subClasses().length==2,"Deathspeaker subclass and Grave Wisdom");
         item.gainCharge(20);check(item.cast(h,Phylactery.Spell.RAISE_GHOUL,h.pos),"Raise Ghoul");
-        NecroSkeleton ghoul=NecroSkeleton.minions().get(0);check(ghoul instanceof NecroGhoul&&ghoul.HT==Math.round(156*1.15f*1.2f),"Ghoul and Sturdy Bones");
+        NecroSkeleton ghoul=NecroSkeleton.minions().get(0);check(ghoul instanceof NecroGhoul&&ghoul.HT==Math.round(156*1.25f*1.2f),"Ghoul and Sturdy Bones");
         ghoul.sprite=new GhoulSprite();ghoul.sprite.link(ghoul);
         ghoul.HP=1;Talent.onFoodEaten(h,100,new Food());check(ghoul.HP>1,"Bone Meal");
-        enemy=target(h.pos+2);h.HP=50;ghoul.attackProc(enemy,10);check(h.HP==53,"Ghoul lifesteal");
+        enemy=target(h.pos+2);h.HP=50;ghoul.attackProc(enemy,20);check(h.HP==53,"56: Ghoul heals 15% of actual damage");
+        enemy.HP=10;ghoul.attackProc(enemy,100);check(h.HP==55,"56: Ghoul overkill capped at remaining health");enemy.HP=200;
         Talent.onAttackProc(h,enemy,5);check(enemy.buff(Corrosion.class)!=null,"Necrotic Touch");
         Buff.detach(enemy,Corrosion.class);h.belongings.thrownWeapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife();
         Talent.onAttackProc(h,enemy,5);check(enemy.buff(Corrosion.class)==null,"Necrotic Touch excludes thrown weapons");h.belongings.thrownWeapon=null;
@@ -694,7 +700,7 @@ public class SmokeRun {
         h=Dungeon.hero;h.sprite=new HeroSprite();item=h.belongings.getItem(Phylactery.class);
         check(item.charges()==charges&&NecroSkeleton.minions().size()==1,"Minion and Phylactery save/load");
         check(item.level()==artifactLevel,"Usage-grown artifact level survives save/load");
-        check(NecroSkeleton.minions().get(0).remaining==30,"Minion lifetime save/load");
+        check(NecroSkeleton.minions().get(0).remaining==30&&NecroSkeleton.minions().get(0).description().contains("_30 more turns_"),"56: Minion lifetime and inspection save/load");
         check(Dungeon.level.mobs.stream().anyMatch(m->NecroCurse.find(m)!=null),"Curse save/load");
         for(int cell:walls)check(Dungeon.level.map[cell]!=Terrain.BONE_WALL,"Bone Prison reverts on load");
         check(BoneWalls.prison(h.pos+3,10,1),"Exit prison");Level previous=Dungeon.level;Dungeon.newLevel();check(previous.boneOriginal.keyArray().length==0,"Bone Prison reverts on level exit");Dungeon.switchLevel(previous,h.pos);
@@ -1025,10 +1031,63 @@ public class SmokeRun {
         }finally{com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Lucky.endAttack();}
         System.out.println("TEST 54 PASS: permanent/inscribed/rune/armor proc rates, unchanged power/curses/other classes, rank caps, four-rank armor and legacy refund");
     }
+    private static void defensiveSigilScenario(Hero h,SigilBrush brush) throws Exception {
+        check(!Arrays.asList(brush.spells(h)).contains("defensive_sigil")&&!brush.cast(h,"defensive_sigil",h.pos,null,null),"56: ward requires talent");
+        h.talents.get(0).put(Talent.FIELD_REPAIR,1);
+        int charges=brush.charges();float time=h.cooldown();
+        check(brush.cast(h,"defensive_sigil",h.pos,null,null)&&brush.charges()==charges-1&&h.cooldown()==time+1,"56: ward spends one charge and one turn");
+        DefensiveSigil ward=h.buff(DefensiveSigil.class);
+        check(ward.shielding()==6&&ward.cooldown()==6,"56: rank one six shielding, six turns");
+        check(ward.absorbDamage(2)==0&&ward.shielding()==4,"56: ward absorbs incoming damage");
+        check(brush.cast(h,"defensive_sigil",h.pos,null,null)&&ward.shielding()==6&&h.buffs(DefensiveSigil.class).size()==1,"56: refresh restores without stacking");
+        Bundle b=new Bundle();ward.storeInBundle(b);ward.detach();
+        DefensiveSigil restored=new DefensiveSigil();restored.restoreFromBundle(b);restored.attachTo(h);
+        check(restored.shielding()==6&&restored.cooldown()==6,"56: ward shield and scheduled expiry persist");
+        java.lang.reflect.Field now=Actor.class.getDeclaredField("now");now.setAccessible(true);float before=now.getFloat(null);
+        try{
+            now.setFloat(null,before+5);check(restored.cooldown()==1&&h.buff(DefensiveSigil.class)==restored,"56: shield still scheduled after five turns");
+            now.setFloat(null,before+6);check(restored.cooldown()==0,"56: shield due at exactly six turns");restored.act();
+            check(h.buff(DefensiveSigil.class)==null,"56: expired shield removed");
+        }finally{now.setFloat(null,before);}
+        h.talents.get(0).put(Talent.FIELD_REPAIR,2);brush.gainCharge(10);
+        check(brush.cast(h,"defensive_sigil",h.pos,null,null)&&h.buff(DefensiveSigil.class).shielding()==10,"56: rank two ten shielding");
+        ward=h.buff(DefensiveSigil.class);check(ward.absorbDamage(13)==3&&h.buff(DefensiveSigil.class)==null,"56: depletion detaches and excess damage passes through");
+        Buff.affect(h,MagicImmune.class);charges=brush.charges();time=h.cooldown();
+        check(!brush.cast(h,"defensive_sigil",h.pos,null,null)&&brush.charges()==charges&&h.cooldown()==time,"56: magic immunity costs nothing");Buff.detach(h,MagicImmune.class);
+        brush.gainCharge(-100);check(!brush.cast(h,"defensive_sigil",h.pos,null,null)&&h.cooldown()==time,"56: empty Brush cannot shield");
+        brush.gainCharge(10);h.belongings.artifact=null;
+        check(!brush.cast(h,"defensive_sigil",h.pos,null,null),"56: unequipped Brush cannot shield");h.belongings.artifact=brush;
+        Bundle savedHero=new Bundle();Talent.storeTalentsInBundle(savedHero,h);Hero restoredHero=new Hero();restoredHero.heroClass=h.heroClass;Talent.restoreTalentsFromBundle(savedHero,restoredHero);
+        check(restoredHero.pointsInTalent(Talent.FIELD_REPAIR)==2&&Arrays.asList(brush.spells(restoredHero)).contains("defensive_sigil"),"56: legacy FIELD_REPAIR saved ranks unlock renamed talent");
+        int depth=Dungeon.depth;brush.gainCharge(-100);Dungeon.depth=depth+1;EnchanterMagic.state().arrive();check(brush.charges()==0,"56: old floor-entry recharge removed");Dungeon.depth=depth;EnchanterMagic.state().arrive();
+        h.talents.get(0).put(Talent.FIELD_REPAIR,0);brush.gainCharge(10);
+        System.out.println("TEST 56 SIGIL PASS: rank 1/2 = 6/10 shield, one charge/turn, six-turn expiry, refresh, damage, failure gates, save/load and legacy talent migration");
+    }
+
+    private static void keepsakeScenario() throws Exception {
+        Playtest.reset();Dungeon.daily=false;Dungeon.customSeedText="";Dungeon.challenges=0;
+        java.lang.reflect.Field depth=Bones.class.getDeclaredField("depth"),branch=Bones.class.getDeclaredField("branch"),previous=Bones.class.getDeclaredField("heroClass"),loot=Bones.class.getDeclaredField("item");
+        for(java.lang.reflect.Field f:new java.lang.reflect.Field[]{depth,branch,previous,loot})f.setAccessible(true);
+        HeroClass current=Dungeon.hero.heroClass;
+        for(HeroClass hero:HeroClass.values())for(HeroClass fallen:HeroClass.values()){
+            Dungeon.hero.heroClass=hero;depth.setInt(null,Dungeon.depth);branch.setInt(null,Dungeon.branch);previous.set(null,fallen);loot.set(null,new Gold(5));
+            java.util.List<Item> items=Bones.get();com.shatteredpixel.shatteredpixeldungeon.items.remains.RemainsItem expected=com.shatteredpixel.shatteredpixeldungeon.items.remains.RemainsItem.get(hero);
+            check(items!=null&&items.stream().anyMatch(i->i instanceof Gold),"56: ordinary remains loot preserved");
+            long count=items.stream().filter(i->i instanceof com.shatteredpixel.shatteredpixeldungeon.items.remains.RemainsItem).count();
+            check(count==(expected==null?0:1)&&items.stream().allMatch(i->!(i instanceof com.shatteredpixel.shatteredpixeldungeon.items.remains.RemainsItem)||i.getClass()==expected.getClass()),"56: current-class remains "+hero+" after "+fallen);
+        }
+        Dungeon.hero.heroClass=current;
+        for(NecroSkeleton minion:new NecroSkeleton[]{new NecroSkeleton(),new NecroWraith(),new NecroGhoul(),new NecroRevenant()}){
+            minion.remaining=7;minion.grace=2;check(minion.description().contains("_7 more turns_")&&minion.description().contains("_2 more turns_"),"56: every raised-undead description gives remaining lifetime/grace");
+        }
+        System.out.println("TEST 56 KEEPSAKES PASS: 81 current/fallen class pairs, ordinary loot preserved; all four raised-undead lifetime descriptions");
+    }
+
     private static void enchanterScenario() throws Exception {
         enchanterRateAndCapScenario();
         Hero h=Dungeon.hero;SigilBrush brush=h.belongings.getItem(SigilBrush.class);
         check(h.HT==20&&h.STR==10&&brush!=null&&brush.charges()==3&&brush.cap()==3,"Enchanter base kit");
+        defensiveSigilScenario(h,brush);
         check(h.belongings.weapon instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RunedBaton&&h.belongings.getItem(Food.class).quantity()==2,"Baton and rations");
         check(h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment.class)==null&&new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment().isKnown()&&h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify.class)!=null&&h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing.class)!=null,"Enchanter consumables");
         com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon starter=(com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)h.belongings.weapon;

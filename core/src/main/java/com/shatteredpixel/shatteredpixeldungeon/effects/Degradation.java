@@ -23,7 +23,7 @@ package com.shatteredpixel.shatteredpixeldungeon.effects;
 
 import com.watabou.glwrap.Blending;
 import com.watabou.noosa.Group;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 
@@ -117,7 +117,7 @@ public class Degradation extends Group {
 		Blending.setNormalMode();
 	}
 	
-	public static class Speck extends PixelParticle {
+	public static class Speck extends PaintedParticle {
 		
 		private static final int COLOR = 0xFF4422;
 		private static final int SIZE = 3;

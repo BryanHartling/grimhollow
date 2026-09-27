@@ -54,12 +54,15 @@ public final class GameGeometry {
         return null;
     }
     public static int characterDensity(Object texture) {
-        // Creature sheets retain their fourfold upstream layout. Hero sheets
-        // have separate 96x120 frames, fitted to the same world-space height.
-        for(String sharper:new String[]{Assets.Sprites.BRUTE,Assets.Sprites.SHAMAN,"sprites/minion_skeleton.png"})
-            if(sharper.equals(texture) || com.watabou.gltextures.TextureCache.contains(sharper)
-                    && com.watabou.gltextures.TextureCache.get(sharper)==texture)return 8;
-        return characterLayout(texture)==null?1:4;
+        // Derive every creature's density from the original layout, including
+        // NPCs, summons and irregular ward frames; never use per-species exceptions.
+        int[] layout=characterLayout(texture);
+        if(layout==null)return 1;
+        return com.watabou.gltextures.TextureCache.get(texture).width/layout[0];
+    }
+    public static com.watabou.utils.RectF characterRect(Object texture,int left,int top,int right,int bottom){
+        float scale=characterDensity(texture)/4f;
+        return com.watabou.gltextures.TextureCache.get(texture).uvRect(left*scale,top*scale,right*scale,bottom*scale);
     }
     // Alpha occupancy is measured once per atlas rectangle, not on every rendered frame.
     private static final java.util.WeakHashMap<com.watabou.gltextures.SmartTexture,java.util.Map<String,com.watabou.utils.RectF>> bounds = new java.util.WeakHashMap<>();
@@ -81,7 +84,10 @@ public final class GameGeometry {
     }
     public static void fit(com.watabou.noosa.Image image, com.watabou.utils.RectF reference, float visibleHeight) {
         int opaque=opaqueHeight(image.texture,reference);
-        float factor=opaque==0?1:visibleHeight/opaque;
+        // Linear filtering extends the alpha silhouette by half a texel on
+        // either edge. Include that footprint, especially for short creatures.
+        int fringe=image.texture.fModeMax==com.badlogic.gdx.graphics.GL20.GL_LINEAR?1:0;
+        float factor=opaque==0?1:visibleHeight/(opaque+fringe);
         image.logicalSize(image.frame().width()*image.texture.width*factor,image.frame().height()*image.texture.height*factor);
     }
     public static void fitBox(com.watabou.noosa.Image image, float w, float h) {

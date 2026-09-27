@@ -1,5 +1,7 @@
 # Grimhollow
 
+**Painted effects and balance v1.14.0:** soft grass, curse, electricity and related particle effects; clearer gas; sharper exports across the creature roster. Enchanter Field Repair becomes **Defensive Sigil** in the Brush menu: one charge and one turn for **6/10 shielding**, lasting up to six turns and refreshing without stacking. Ghoul unlock moves to **Phylactery +5**, with **15%** hero healing. Raised-undead inspection shows time remaining; the summoning menu now says **Raise Dead**. Remains give only the current class's keepsake. [Changes and balance decisions](CHANGES.md).
+
 **Hatchling Mimic and presentation v1.13.0:** a hungry carried trinket with permanent item benefits, escalating gold demands, mimic kinship and theft. Its transformation/escape reward uses the actual **+10 Ring of Wealth equipment pool**. Upgrade at the cauldron for **10 / 15 / 20 energy**. Inspect it for hunger clues and its next gold demand. The Playtest item picker now includes 314 item types, including the Hatchling.
 
 Five original painted loading screens and a new regional story accompany fixes for unknown-wall leakage, loot visibility beneath gas, scrolling skill descriptions, sharpened skeletons and persistent journal discoveries. Grasp opens bones at Crystal level 3 and ordinary unlocked chests at level 7.
@@ -72,7 +74,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-1.13.0.jar
+java -jar desktop\build\libs\desktop-1.14.0.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.
@@ -145,7 +147,7 @@ Choose Necromancer in hero selection. Kills charge the equipped Phylactery; clic
 
 Run the class-specific gate with `gradlew.bat core:smokeRun -PsmokeClass=NECROMANCER -PdesktopOnly=true --no-daemon`. It exercises class features and generator/debug descent to floor 6 for ten seeds. The default `core:smokeRun` covers all three new classes and reports `Runs=30 failures=0`. CI preserves that gate and the recovery checks, with separate class gates for Necromancer, Enchanter and Psychic. Both platform builds upload their artifacts even when later-stage gates fail.
 
-Phylactery starts with one charge and restores a minimum of one on first arrival at each floor. Only spending spell charges levels it; kills replenish charges. Raise Dead offers Skeleton, Wraith (artifact level 1), Ghoul (3), and Deathspeaker Revenant (6).
+Phylactery starts with one charge and restores a minimum of one on first arrival at each floor. Only spending spell charges levels it; kills replenish charges. Raise Dead offers Skeleton, Wraith (artifact level 1), Ghoul (5), and Deathspeaker Revenant (6).
 
 Rendering tests 24–26: run the desktop jar with Java option -Dgrimhollow.geometryTests=true and argument --smoke-sewers. The existing hidden OpenGL runner checks all sprite types and both item atlases using an offscreen framebuffer.
 

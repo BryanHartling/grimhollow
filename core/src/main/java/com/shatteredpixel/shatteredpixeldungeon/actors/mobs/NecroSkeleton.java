@@ -48,6 +48,11 @@ public class NecroSkeleton extends DirectableAlly {
         viewDistance=8+2*Necromancy.points(Talent.CORPSE_SENSE);
     }
     private int directedTarget=-1;
+    @Override public String description(){
+        String text=super.description()+"\n\n"+com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(NecroSkeleton.class,"lifetime",Math.max(0,remaining));
+        if(grace>0)text+="\n"+com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(NecroSkeleton.class,"grace",grace);
+        return text;
+    }
     @Override public void targetChar(Char ch){super.targetChar(ch);directedTarget=ch.id();}
     @Override public void followHero(){super.followHero();directedTarget=-1;}
     @Override public void defendPos(int cell){super.defendPos(cell);directedTarget=-1;}

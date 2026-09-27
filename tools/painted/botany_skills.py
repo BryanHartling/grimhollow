@@ -29,6 +29,10 @@ def outputs():
     atlas=Image.new('RGBA',(1024,512));hashes=set();count=0
     for group,(name,skills) in enumerate(DATA['skills'].items()):
         for i,part in enumerate(cutouts(name,6,7,len(skills),(58,58))):
+            if skills[i]['key']=='FIELD_REPAIR':
+                source=Image.open(HERE/'sources/particles/defensive-sigil.png').convert('RGBA')
+                box=source.getchannel('A').point(lambda a:255 if a>=16 else 0).getbbox()
+                part=ImageOps.contain(source.crop(box),(58,58),Image.Resampling.LANCZOS)
             tile=Image.new('RGBA',(64,64))
             tile.alpha_composite(part,((64-part.width)//2,(64-part.height)//2))
             digest=hashlib.sha256(tile.tobytes()).hexdigest()

@@ -1,0 +1,6 @@
+{
+  "tool": "built-in image_gen",
+  "license": "GPL-3.0-or-later",
+  "source": "sources/particles/defensive-sigil.png",
+  "prompt": "Use case: game-ui-icon. Create one original painted icon for Grimhollow's Defensive Sigil, a dark fantasy Enchanter talent. A single legible upright shield-shaped translucent smoky blue ward, surrounded by a thin glowing amber hand-drawn arcane sigil and three small angular rune strokes. Dark steel-blue center, luminous warm gold edges, carved and brushed paint detail. Clear bold shield silhouette readable at 16 pixels. Looks like a protective rune conjured by an ink brush, not a physical metal shield. No person, no hand, no lettering, no background scene, no border or square badge. Centered symmetrical composition with generous transparent margin on all sides, true transparent alpha. High quality painterly rendering with crisp contours, subtle glow close to edges, not pixel art. Unique original design, no copied franchise imagery."
+}

@@ -80,7 +80,7 @@ public abstract class RemainsItem extends Item {
 
 	public static RemainsItem get(HeroClass cls){
 		switch (cls){
-			case WARRIOR: default:
+			case WARRIOR:
 				return new SealShard();
 			case MAGE:
 				return new BrokenStaff();
@@ -92,6 +92,8 @@ public abstract class RemainsItem extends Item {
 				return new BrokenHilt();
 			case CLERIC:
 				return new TornPage();
+			default:
+				return null; // Added classes have no inherited upstream keepsake.
 		}
 	}
 

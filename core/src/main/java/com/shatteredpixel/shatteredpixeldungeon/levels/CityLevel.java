@@ -61,7 +61,7 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
@@ -341,7 +341,7 @@ public class CityLevel extends RegularLevel {
 		}
 	}
 	
-	public static final class SmokeParticle extends PixelParticle {
+	public static final class SmokeParticle extends PaintedParticle {
 		
 		public SmokeParticle() {
 			super();

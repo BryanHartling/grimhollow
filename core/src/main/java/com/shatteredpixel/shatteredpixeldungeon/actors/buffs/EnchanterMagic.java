@@ -79,8 +79,7 @@ public class EnchanterMagic extends Buff {
     public void arrive(){
         int floor=Dungeon.depth+100*Dungeon.branch;if(lastFloor==floor)return;
         boolean descending=lastFloor!=-1&&floor>lastFloor;lastFloor=floor;lastPos=Dungeon.hero.pos;stationary=0;
-        Hero h=Dungeon.hero;SigilBrush brush=h.belongings.getItem(SigilBrush.class);
-        if(descending&&brush!=null)brush.gainCharge(points(Talent.FIELD_REPAIR));
+        Hero h=Dungeon.hero;
         rememberAvailable();
         RuneEtching etching=RuneEtching.find(h);if(etching!=null){etching.roll();remember(etching.floorEnchant.getClass());}
         boolean firstVisit=floors.add(floor);

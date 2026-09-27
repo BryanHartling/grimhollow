@@ -69,6 +69,7 @@ public class SkillIcon extends Image {
             case "lower_resistance":return new SkillIcon(38);
             case "inscribe":return new SkillIcon(72);
             case "hex":return new SkillIcon(73);
+            case "defensive_sigil":return new SkillIcon(45);
             case "transmute":return new SkillIcon(74);
             case "reinforce":return new SkillIcon(75);
             case "sanctify":return new SkillIcon(76);

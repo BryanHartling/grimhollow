@@ -55,7 +55,7 @@ public class Phylactery extends Artifact {
     public ArrayList<Spell> spells(Hero hero){
         ArrayList<Spell> spells=new ArrayList<>();spells.add(Spell.RAISE_SKELETON);spells.add(Spell.WITHER);
         if(level()>=1)spells.add(Spell.RAISE_WRAITH);
-        if(level()>=3)spells.add(Spell.RAISE_GHOUL);
+        if(level()>=5)spells.add(Spell.RAISE_GHOUL);
         if(level()>=6&&hero.subClass==HeroSubClass.DEATHSPEAKER)spells.add(Spell.RAISE_REVENANT);
         if(hero.subClass==HeroSubClass.HEXWEAVER){spells.add(Spell.AMPLIFY);spells.add(Spell.DECREPIFY);spells.add(Spell.IRON_MAIDEN);spells.add(Spell.LOWER_RESISTANCE);}
         return spells;
@@ -87,7 +87,7 @@ public class Phylactery extends Artifact {
             resize(w,h);ArrayList<Spell> options=spells(hero);options.removeIf(s->s.name().startsWith("RAISE_")&&s!=Spell.RAISE_SKELETON);
             for(int i=0;i<options.size();i++){
                 final Spell spell=options.get(i);double angle=-Math.PI/2+2*Math.PI*i/options.size();
-                RedButton button=new RedButton(Messages.get(Phylactery.class,spell.name()),6){
+                RedButton button=new RedButton(Messages.get(Phylactery.class,spell==Spell.RAISE_SKELETON?"raise_dead":spell.name()),6){
                     @Override protected void onClick(){hide();
                         if(spell.name().startsWith("RAISE_")){
                             ArrayList<Spell> tiers=spells(hero);tiers.removeIf(s->!s.name().startsWith("RAISE_")||cost(s)>charges());

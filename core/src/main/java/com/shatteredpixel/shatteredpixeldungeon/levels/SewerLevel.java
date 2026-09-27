@@ -54,7 +54,7 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.ColorMath;
 import com.watabou.utils.PointF;
@@ -285,7 +285,7 @@ public class SewerLevel extends RegularLevel {
 		}
 	}
 	
-	public static final class WaterParticle extends PixelParticle {
+	public static final class WaterParticle extends PaintedParticle {
 		
 		public WaterParticle() {
 			super();

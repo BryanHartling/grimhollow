@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 package com.shatteredpixel.shatteredpixeldungeon.effects.particles;
 import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 
 /** Shared palette-constrained emissive effect for necrotic status effects. */
 import com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects;
-public final class NecroticParticle extends PixelParticle {
+public final class NecroticParticle extends PaintedParticle {
     public static final Emitter.Factory FACTORY=new Emitter.Factory() {
         @Override public void emit(Emitter emitter,int index,float x,float y) {
             NecroticParticle p=(NecroticParticle)emitter.recycle(NecroticParticle.class);

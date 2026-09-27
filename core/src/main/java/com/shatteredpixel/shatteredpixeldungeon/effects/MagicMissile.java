@@ -37,7 +37,7 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.Visual;
 import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.ColorMath;
 import com.watabou.utils.PointF;
@@ -314,7 +314,7 @@ public class MagicMissile extends Emitter {
 		}
 	}
 	
-	public static class MagicParticle extends PixelParticle {
+	public static class MagicParticle extends PaintedParticle {
 		
 		public static final Emitter.Factory FACTORY = new Factory() {
 			@Override
@@ -375,7 +375,7 @@ public class MagicMissile extends Emitter {
 		}
 	}
 	
-	public static class EarthParticle extends PixelParticle.Shrinking {
+	public static class EarthParticle extends PaintedParticle.Shrinking {
 		
 		public static final Emitter.Factory FACTORY = new Factory() {
 			@Override
@@ -508,7 +508,7 @@ public class MagicMissile extends Emitter {
 		}
 	}
 	
-	public static class WhiteParticle extends PixelParticle {
+	public static class WhiteParticle extends PaintedParticle {
 		
 		public static final Emitter.Factory FACTORY = new Factory() {
 			@Override
@@ -584,7 +584,7 @@ public class MagicMissile extends Emitter {
 		}
 	}
 
-	public static class SlowParticle extends PixelParticle {
+	public static class SlowParticle extends PaintedParticle {
 		
 		private Emitter emitter;
 		
@@ -630,7 +630,7 @@ public class MagicMissile extends Emitter {
 		}
 	}
 
-	public static class ForceParticle extends PixelParticle.Shrinking {
+	public static class ForceParticle extends PaintedParticle.Shrinking {
 
 		public static final Emitter.Factory FACTORY = new Factory() {
 			@Override
@@ -660,7 +660,7 @@ public class MagicMissile extends Emitter {
 		}
 	}
 
-	public static class WardParticle extends PixelParticle.Shrinking {
+	public static class WardParticle extends PaintedParticle.Shrinking {
 		
 		public static final Emitter.Factory FACTORY = new Factory() {
 			@Override

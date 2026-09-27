@@ -15,6 +15,7 @@ import com.watabou.noosa.Group;
 import com.watabou.noosa.Camera;
 import com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects;
 import com.shatteredpixel.shatteredpixeldungeon.effects.BlobEmitter;
+import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.*;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
@@ -735,6 +736,12 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     for(int dy=-3;dy<=3;dy++)for(int dx=-4;dx<=4;dx++)Level.set(Dungeon.hero.pos+dx+dy*Dungeon.level.width(),Terrain.EMPTY);
                     for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs.toArray(new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob[0])){mob.destroy();if(mob.sprite!=null)mob.sprite.killAndErase();}
                     Playtest.spawnMob(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Brute.class,Dungeon.hero.pos-2);
+                    com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Shopkeeper merchant=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Shopkeeper();
+                    merchant.pos=Dungeon.hero.pos-3-Dungeon.level.width();GameScene.add(merchant);
+                    com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroSkeleton.raise(Dungeon.hero.pos+3-Dungeon.level.width(),false,false);
+                    com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter.get(Dungeon.hero.pos-Dungeon.level.width()-1).pour(com.shatteredpixel.shatteredpixeldungeon.effects.particles.LeafParticle.GENERAL,.10f);
+                    com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter.get(Dungeon.hero.pos-2*Dungeon.level.width()).pour(com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShadowParticle.CURSE,.1f);
+                    GameScene.add(Blob.seed(Dungeon.hero.pos+1+Dungeon.level.width(),80,com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Electricity.class));
                     Playtest.spawnMob(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.RedShaman.class,Dungeon.hero.pos+2);
                     com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter.get(Dungeon.hero.pos-Dungeon.level.width()).pour(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.TENGU_SMOKE,.15f);
                     com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter.get(Dungeon.hero.pos+Dungeon.level.width()).pour(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.TENGU_SPARK,.15f);
@@ -777,11 +784,34 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     if(!marker)throw new AssertionError("Unseen sensed item has no marker");
                     capture("hatchling-sense-and-gas-loot");
                     System.out.println("TEST 55 UI PASS: painted Hatchling, scrolling hunger/benefits, object-only fog markers, gas loot overlay; failures=0");
+                    Playtest.heroClass(HeroClass.ENCHANTER);Playtest.subclass(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass.SCRIVENER);
+                    Dungeon.hero.talents.get(0).put(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.FIELD_REPAIR,2);
+                    Playtest.recharge();Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).execute(Dungeon.hero,"CAST");break;
+                case 53:
+                    interfaceBounds();checkReviewText(Game.scene());
+                    if(playtestButton("Defensive Sigil (1)")==null)throw new AssertionError("56: missing Defensive Sigil action");
+                    capture("defensive-sigil-menu");playtestClick("Defensive Sigil (1)");break;
+                case 54:
+                    com.shatteredpixel.shatteredpixeldungeon.actors.buffs.DefensiveSigil sigil=Dungeon.hero.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.DefensiveSigil.class);
+                    if(sigil==null||sigil.shielding()!=10)throw new AssertionError("56: menu did not cast rank-two shield");
+                    GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoBuff(sigil));break;
+                case 55:
+                    interfaceBounds();checkReviewText(Game.scene());capture("defensive-sigil-active");closeReviewWindows();
+                    Playtest.heroClass(HeroClass.NECROMANCER);Playtest.recharge();
+                    Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.class).execute(Dungeon.hero,"CAST");break;
+                case 56:
+                    interfaceBounds();if(playtestButton("Raise Dead")==null||playtestButton("Skeleton")!=null)throw new AssertionError("56: Phylactery root label");
+                    capture("raise-dead-menu");closeReviewWindows();
+                    com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroSkeleton inspected=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroSkeleton();inspected.remaining=17;
+                    GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoMob(inspected));break;
+                case 57:
+                    interfaceBounds();checkReviewText(Game.scene());if(!allReviewText(Game.scene()).contains("17 more turns"))throw new AssertionError("56: minion lifetime hidden");
+                    capture("raised-undead-lifetime");closeReviewWindows();System.out.println("TEST 56 UI PASS: six-spell Brush menu, real shield cast/inspection, Raise Dead root, minion remaining turns");
                     reviewRegionTransition(5);break;
-                case 53:reviewRegionTransition(10);break;
-                case 54:reviewRegionTransition(15);break;
-                case 55:reviewRegionTransition(20);break;
-                case 56:Gdx.app.exit();return;
+                case 58:reviewRegionTransition(10);break;
+                case 59:reviewRegionTransition(15);break;
+                case 60:reviewRegionTransition(20);break;
+                case 61:Gdx.app.exit();return;
             }
             playtestStep++;
         }catch(ReflectiveOperationException | java.io.IOException error){throw new AssertionError(error);}
@@ -1226,6 +1256,16 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             com.badlogic.gdx.utils.JsonValue semantics=new com.badlogic.gdx.utils.JsonReader().parse(
                     Gdx.files.local("desktop/src/test/resources/item-semantics.json"));
             com.badlogic.gdx.utils.JsonValue painted=new com.badlogic.gdx.utils.JsonReader().parse(Gdx.files.internal("painted-assets.json")).get("assets");
+            int sharpAtlases=0;
+            for(com.badlogic.gdx.utils.JsonValue asset:painted){
+                if(!asset.has("painted_rects"))continue;
+                com.watabou.gltextures.SmartTexture texture=com.watabou.gltextures.TextureCache.get(asset.name);
+                if(GameGeometry.characterDensity(asset.name)!=8||GameGeometry.characterDensity(texture)!=8)
+                    failures.add("56 inconsistent creature density "+asset.name);
+                if(texture.width>4096||texture.height>4096)failures.add("56 atlas exceeds mobile texture budget "+asset.name);
+                sharpAtlases++;
+            }
+            System.out.println("TEST 56 CREATURES: eightfold source density atlases="+sharpAtlases+" maximum texture dimension=4096 failures="+failures.size());
             HeroClass original=Dungeon.hero.heroClass;
             com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite originalSprite=Dungeon.hero.sprite;
             for(HeroClass hero:HeroClass.values()) {
@@ -1530,6 +1570,31 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             actual.destroy();legacy.destroy();grass.destroy();
             if(changed!=0)failures.add("31 upstream-style burning grass pixel differences="+changed);
             SPDSettings.enhancedEffects(true);GameScene.updateMap();
+            int paintedFamilies=0;
+            for(com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle particle:new com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle[]{
+                    new com.shatteredpixel.shatteredpixeldungeon.effects.particles.LeafParticle(),
+                    new com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShadowParticle(),
+                    new com.shatteredpixel.shatteredpixeldungeon.effects.particles.SparkParticle(),
+                    new com.shatteredpixel.shatteredpixeldungeon.effects.particles.EarthParticle(),
+                    new com.shatteredpixel.shatteredpixeldungeon.effects.particles.BloodParticle()}){
+                particle.reset(0,0,0xFFFFFF,8,1);
+                SPDSettings.enhancedEffects(false);Pixmap oldPixels=renderSprite(particle,buffer,camera);
+                SPDSettings.enhancedEffects(true);Pixmap newPixels=renderSprite(particle,buffer,camera);
+                int difference=0,soft=0,opaque=0;
+                for(int y=0;y<256;y++)for(int x=0;x<256;x++){
+                    int a=newPixels.getPixel(x,y)&255;if(a>8&&a<247)soft++;if(a>=247)opaque++;
+                    if(oldPixels.getPixel(x,y)!=newPixels.getPixel(x,y))difference++;
+                }
+                if(difference==0||soft<10||soft+opaque<20)failures.add("56 empty, square or unchanged particle "+particle.getClass().getSimpleName());
+                oldPixels.dispose();newPixels.dispose();particle.destroy();paintedFamilies++;
+            }
+            int speckKinds=0;
+            for(int kind:new int[]{Speck.HEALING,Speck.STAR,Speck.QUESTION,Speck.BONE,Speck.WOOL,Speck.ROCK,Speck.NOTE,Speck.CHANGE,Speck.HEART,Speck.BUBBLE,Speck.STEAM,Speck.COIN,Speck.STORM,Speck.BLIZZARD,Speck.INFERNO}){
+                Speck speck=new Speck();speck.reset(0,0,0,kind);speck.alpha(1);speck.scale.set(2);Pixmap pixels=renderSprite(speck,buffer,camera);
+                int visible=0;for(int y=0;y<256;y++)for(int x=0;x<256;x++)if((pixels.getPixel(x,y)&255)>8)visible++;
+                if(visible==0)failures.add("56 invisible Speck "+kind);pixels.dispose();speck.destroy();speckKinds++;
+            }
+            System.out.println("TEST 56 EFFECTS: painted solid-particle families="+paintedFamilies+" soft alpha edges, visible Speck kinds="+speckKinds+" failures="+failures.size());
             // Test actual fire expiration through the decal owner, including forbidden terrain.
             int cell=-1;for(int c=0;c<Dungeon.level.length();c++)if(Dungeon.level.insideMap(c)&&Dungeon.level.map[c]==Terrain.EMPTY
                     &&com.shatteredpixel.shatteredpixeldungeon.actors.Actor.findChar(c)==null&&Dungeon.level.heaps.get(c)==null&&Dungeon.level.traps.get(c)==null){cell=c;break;}

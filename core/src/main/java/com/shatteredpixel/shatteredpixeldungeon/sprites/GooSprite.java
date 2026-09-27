@@ -31,7 +31,7 @@ import com.watabou.noosa.TextureFilm;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.particles.Emitter.Factory;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
 
@@ -168,7 +168,7 @@ public class GooSprite extends MobSprite {
 		}
 	}
 
-	public static class GooParticle extends PixelParticle.Shrinking {
+	public static class GooParticle extends PaintedParticle.Shrinking {
 
 		public static final Emitter.Factory FACTORY = new Factory() {
 			@Override

@@ -23,11 +23,11 @@ package com.shatteredpixel.shatteredpixeldungeon.sprites;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.watabou.noosa.TextureFilm;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 
 public class ShopkeeperSprite extends MobSprite {
 	
-	private PixelParticle coin;
+	private PaintedParticle coin;
 	
 	public ShopkeeperSprite() {
 		super();
@@ -54,7 +54,7 @@ public class ShopkeeperSprite extends MobSprite {
 		
 		if (visible && anim == idle) {
 			if (coin == null) {
-				coin = new PixelParticle();
+				coin = new PaintedParticle();
 				parent.add( coin );
 			}
 			coin.reset( x + (flipHorizontal ? 0 : 13), y + 7, 0xFFFF00, 1, 0.5f );

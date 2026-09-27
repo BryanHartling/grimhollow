@@ -13,13 +13,11 @@ import numpy as np
 from PIL import Image, ImageFilter
 from pack import HERE, historical
 
-HIGH_DENSITY={'brute','shaman','minion_skeleton'}
-
-def density(name):return 8 if name in HIGH_DENSITY else 4
+def density(name):return 8
 
 def blank_atlas(name):
     path=f'sprites/{name}.png';im=historical(CONTRACT['base'],path).copy()
-    if name in HIGH_DENSITY:im=im.resize((im.width*2,im.height*2),Image.Resampling.NEAREST)
+    im=im.resize((im.width*2,im.height*2),Image.Resampling.NEAREST)
     return im
 
 CONTRACT = json.loads((HERE/'monsters.json').read_text(encoding='utf-8'))
@@ -146,7 +144,7 @@ def outputs():
             for step, index in enumerate(indices):
                 assert index not in occupied, (name,index)
                 occupied.add(index)
-                box = tuple(spec['rects'][str(index)]) if 'rects' in spec else rectangle(atlas,spec['frame'],index,den)
+                box = tuple(n*den//4 for n in spec['rects'][str(index)]) if 'rects' in spec else rectangle(atlas,spec['frame'],index,den)
                 atlas.paste(pose(art,size,scale,mode,step,len(indices),name,den),box)
         result[path] = atlas
     return result
@@ -165,6 +163,6 @@ def coverage():
         boxes=result.setdefault(path,set())
         for mode in ('closed','idle','move','attack','defeated'):
             for index in spec.get(mode,[]):
-                box=tuple(spec['rects'][str(index)]) if 'rects' in spec else rectangle(atlas,spec['frame'],index,den)
+                box=tuple(n*den//4 for n in spec['rects'][str(index)]) if 'rects' in spec else rectangle(atlas,spec['frame'],index,den)
                 boxes.add(box)
     return {path:[list(box) for box in sorted(boxes)] for path,boxes in result.items()}

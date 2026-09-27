@@ -23,11 +23,11 @@ package com.shatteredpixel.shatteredpixeldungeon.effects.particles;
 
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.particles.Emitter.Factory;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 
 import com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects;
 
-public class ElmoParticle extends PixelParticle.Shrinking {
+public class ElmoParticle extends PaintedParticle.Shrinking {
 	
 	public static final Emitter.Factory FACTORY = new Factory() {
 		@Override

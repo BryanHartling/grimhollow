@@ -76,6 +76,8 @@ public class Speck extends Image {
 	private static final int SIZE = 7;
 	
 	private int type;
+	private int paintedFrame;
+	private Image painted;
 	private float lifespan;
 	private float left;
 	
@@ -150,6 +152,7 @@ public class Speck extends Image {
 			frame( film.get( type ) );
 		}
 		
+		paintedFrame=Math.round(frame().left*texture.width)/SIZE+Math.round(frame().top*texture.height)/SIZE*(texture.width/SIZE);
 		this.x = x - origin.x;
 		this.y = y - origin.y;
 		
@@ -410,6 +413,16 @@ public class Speck extends Image {
 		left = lifespan;
 	}
 	
+	@Override public void draw(){
+		if(!EnhancedEffects.enabled()){super.draw();return;}
+		if(painted==null)painted=new Image();
+		if(type==STORM)ParticleArt.frame(painted,ParticleArt.SPARK,SIZE,SIZE);
+		else if(type==BLIZZARD)ParticleArt.frame(painted,ParticleArt.FROST,SIZE,SIZE);
+		else if(type==INFERNO)ParticleArt.frame(painted,ParticleArt.FLAME,SIZE,SIZE);
+		else ParticleArt.speck(painted,paintedFrame,SIZE,SIZE);
+		ParticleArt.appearance(this,painted);painted.draw();
+	}
+	@Override public void destroy(){if(painted!=null)painted.destroy();super.destroy();}
 	@Override
 	public void update() {
 		super.update();

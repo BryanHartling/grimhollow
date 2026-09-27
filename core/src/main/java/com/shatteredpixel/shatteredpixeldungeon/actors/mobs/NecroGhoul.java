@@ -16,5 +16,5 @@ public class NecroGhoul extends NecroSkeleton {
     }
     @Override public void storeInBundle(com.watabou.utils.Bundle b){super.storeInBundle(b);b.put("risen",risen);}
     @Override public void restoreFromBundle(com.watabou.utils.Bundle b){super.restoreFromBundle(b);risen=b.getBoolean("risen");}
-    @Override public int attackProc(Char enemy,int damage){Necromancy.heal(Math.round(Math.min(enemy.HP,Math.max(0,damage))*.3f));return super.attackProc(enemy,damage);}
+    @Override public int attackProc(Char enemy,int damage){Necromancy.heal(Math.round(Math.min(enemy.HP,Math.max(0,damage))*.15f));return super.attackProc(enemy,damage);}
 }

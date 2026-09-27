@@ -58,7 +58,7 @@ import com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.audio.Music;
-import com.watabou.noosa.particles.PixelParticle;
+import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
 import com.watabou.utils.Callback;
 import com.watabou.utils.PointF;
 import com.watabou.utils.Random;
@@ -304,7 +304,7 @@ public class CavesLevel extends RegularLevel {
 		}
 	}
 	
-	public static final class Sparkle extends PixelParticle {
+	public static final class Sparkle extends PaintedParticle {
 		
 		public void reset( float x, float y ) {
 			revive();

@@ -245,6 +245,16 @@ public class BuffIndicator extends Component {
 			}
 			icon.visible = true;
 
+			// Test the complete next button before placing it, including its one-pixel inset.
+			float rowLimit = rowWidthLimits[row] == 0 ? width : Math.min(width, rowWidthLimits[row]);
+			if (pos > 0 && (pos + 1) * (size + 1) > rowLimit
+					&& row + 1 < rowWidthLimits.length
+					&& (rowTop + 2*size + 2 <= height || rowWidthLimits[row] != 0)) {
+				row++;
+				rowTop += size + 1 + rowHeightAdjusts[row];
+				pos = 0;
+			}
+
 			//offset is needed to handle adjusting oversized click boxes on multiple rows
 			icon.topOffset = (row > 1 && !large) ? -1 : 0;
 			icon.updateIcon();
@@ -255,17 +265,10 @@ public class BuffIndicator extends Component {
 
 			lastIconRight = icon.right()-1;
 
-			//if we're out of overall width but have more height, or this row has hits its limit
-			if ((rowTop+2*size+2 <= height && (pos * (size + 1) + size > width))
-					|| (rowWidthLimits[row] != 0 && pos * (size + 1) + size > rowWidthLimits[row])){
-				row++;
-				rowTop += size+1 + rowHeightAdjusts[row];
-				pos = 0;
-			}
 			total++;
 		}
 
-		buffsHidden = false;
+		buffsHidden = buffButtons.size() > maxBuffs;
 		//squish buff icons together if there isn't enough room
 		float excessWidth = lastIconRight - right();
 

@@ -107,6 +107,9 @@ public class Pushing extends Actor {
 		
 		public Effect() {
 			super( 0, 0, 0, 0 );
+			// Knockback owns the position until it finishes, even if a slower mobile
+			// walking animation is still in flight.
+			sprite.interruptMotion();
 			
 			point( sprite.worldToCamera( from ) );
 			end = sprite.worldToCamera( to );

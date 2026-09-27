@@ -42,6 +42,7 @@ public class HatchlingMimic extends Trinket {
     public enum Tier { MINOR, STANDARD, MAJOR, EXCEPTIONAL }
     private int remaining = 300;
     private boolean warned;
+    private boolean awaitingChoice;
     private long goldDemand = 50;
     private final HashSet<Integer> charmedFloors = new HashSet<>();
     { image = ItemSpriteSheet.HATCHLING_MIMIC; bones = false; }
@@ -53,6 +54,8 @@ public class HatchlingMimic extends Trinket {
     public int remaining() { return remaining; }
     public long goldDemand() { return goldDemand; }
     public boolean warned() { return warned; }
+    /** Called only when the hero is ready for a fresh player command. */
+    public void onHeroReady() { awaitingChoice = false; }
     @Override public int upgradeEnergyCost() { return 10 + 5 * level(); }
     @Override public Item upgrade() {
         int oldInterval = interval();
@@ -77,12 +80,14 @@ public class HatchlingMimic extends Trinket {
     @Override public void storeInBundle(Bundle b) {
         super.storeInBundle(b);
         b.put("hunger_left", remaining); b.put("hunger_warned", warned); b.put("gold_demand", goldDemand);
+        b.put("hunger_awaiting_choice", awaitingChoice);
         b.put("charmed_floors", charmedFloors.stream().mapToInt(Integer::intValue).toArray());
     }
     @Override public void restoreFromBundle(Bundle b) {
         super.restoreFromBundle(b);
         remaining = b.contains("hunger_left") ? Math.max(0, b.getInt("hunger_left")) : interval();
         warned = b.getBoolean("hunger_warned");
+        awaitingChoice = warned && (!b.contains("hunger_awaiting_choice") || b.getBoolean("hunger_awaiting_choice"));
         goldDemand = b.contains("gold_demand") ? Math.max(50, b.getLong("gold_demand")) : 50;
         charmedFloors.clear(); for (int floor : b.getIntArray("charmed_floors")) charmedFloors.add(floor);
     }
@@ -151,9 +156,10 @@ public class HatchlingMimic extends Trinket {
         if (remaining > 1) remaining--;
         if (remaining == 1 && !warned) {
             warned = true;
+            awaitingChoice = true;
             hero.interrupt(); hero.resting = false;
             GLog.w(Messages.get(this, "warning"));
-        } else if (warned) {
+        } else if (warned && !awaitingChoice) {
             if (feed(hero)) { remaining = interval(); warned = false; }
         }
     }
@@ -179,7 +185,7 @@ public class HatchlingMimic extends Trinket {
             Tier tier = foodTier(meal);
             Item eaten = meal instanceof MissileWeapon ? meal.detachAll(hero.belongings.backpack) : meal.detach(hero.belongings.backpack);
             String effects = benefit(hero, tier);
-            GLog.w(Messages.get(this, "ate", eaten.toString(), effects));
+            GLog.w(Messages.get(this, "ate", eaten.title(), effects));
         } else {
             long demand = goldDemand;
             if (Dungeon.gold < demand) {
@@ -239,7 +245,7 @@ public class HatchlingMimic extends Trinket {
             if (Random.Float() < chance) {
                 int amount = tier == Tier.EXCEPTIONAL ? 2 : 1;
                 upgrade.upgrade(amount);
-                descriptions.add(Messages.get(this, "upgraded", upgrade.toString(), amount));
+                descriptions.add(Messages.get(this, "upgraded", upgrade.title(), amount));
             }
         }
         if (level() >= 1 && tier.ordinal() >= Tier.MAJOR.ordinal()) {
@@ -262,7 +268,7 @@ public class HatchlingMimic extends Trinket {
                 }
                 if(curse)enchanted.cursed=true;
                 enchanted.cursedKnown = true;
-                descriptions.add(Messages.get(this, "enchanted", enchanted.toString(), name));
+                descriptions.add(Messages.get(this, "enchanted", enchanted.title(), name));
             }
         }
         if (level() >= 2 || !eligibleEffect) {

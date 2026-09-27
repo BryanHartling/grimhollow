@@ -269,6 +269,7 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 	}
 	
 	public void place( int cell ) {
+		interruptMotion();
 		point( worldToCamera( cell ) );
 	}
 	
@@ -297,6 +298,13 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 	}
 	
 	public void move( int from, int to ) {
+        // Vertigo can animate inside Char.move before the AI animates the same step.
+        // A superseded tween must not survive and later overwrite a teleport or push.
+        if (motion != null) {
+            motion.listener = null;
+            motion.killAndErase();
+            motion = null;
+        }
         com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.step(to);
 		turnTo( from , to );
 

@@ -353,6 +353,7 @@ public class CellSelector extends ScrollArea {
 	};
 
 	private GameAction leftStickAction = SPDAction.NONE;
+	private boolean waitForStickRelease;
 
 	@Override
 	public void update() {
@@ -360,6 +361,11 @@ public class CellSelector extends ScrollArea {
 
 		GameAction newLeftStick = actionFromStick(ControllerHandler.leftStickPosition.x,
 				ControllerHandler.leftStickPosition.y);
+		if (waitForStickRelease) {
+			if (newLeftStick != SPDAction.NONE) return;
+			waitForStickRelease = false;
+			leftStickAction = SPDAction.NONE;
+		}
 
 		//skip logic here if there's no input, or if input is blocked
 		if ((newLeftStick == leftStickAction
@@ -483,6 +489,10 @@ public class CellSelector extends ScrollArea {
 	
 	public void resetKeyHold(){
 		heldAction1 = heldAction2 = heldAction3 = SPDAction.NONE;
+		heldDelay = 0f;
+		delayingForRelease = false;
+		waitForStickRelease = actionFromStick(ControllerHandler.leftStickPosition.x,
+				ControllerHandler.leftStickPosition.y) != SPDAction.NONE;
 	}
 	
 	public void cancel() {

@@ -224,8 +224,7 @@ public class StatusPane extends Component {
 
 			heroInfoOnBar.setRect(heroInfo.right(), y + 19, 130, 20);
 
-			//little extra for 14th buff
-			buffs.setRect(x + 31, y, 142, 16);
+			buffs.setRect(x + 31, y, bg.width() - 33, 16);
 
 			busy.x = x + bg.width + 1;
 			busy.y = y + bg.height - 9;
@@ -278,7 +277,8 @@ public class StatusPane extends Component {
 			if (buffBarRowAdjusts != null){
 				buffs.rowHeightAdjusts = buffBarRowAdjusts;
 			}
-			buffs.setRect( x + heroPaneWidth + 1, y + 8, 55, 16 );
+			float buffLeft = x + heroPaneWidth + 1;
+			buffs.setRect(buffLeft, y + 8, Math.max(8, bg.x + bg.width() - 2 - buffLeft), 16);
 
 			busy.x = x + 1;
 			busy.y = y + 37;

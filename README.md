@@ -1,5 +1,7 @@
 # Grimhollow
 
+**Hatchling and HUD fixes v1.14.1:** readable item names in feeding messages, a warning that stops queued actions and waits for player control, contained status icons, and painted resume/enemy indicators. This update includes the v1.14.0 particle and creature improvements below. [Full changes](CHANGES.md).
+
 **Painted effects and balance v1.14.0:** soft grass, curse, electricity and related particle effects; clearer gas; sharper exports across the creature roster. Enchanter Field Repair becomes **Defensive Sigil** in the Brush menu: one charge and one turn for **6/10 shielding**, lasting up to six turns and refreshing without stacking. Ghoul unlock moves to **Phylactery +5**, with **15%** hero healing. Raised-undead inspection shows time remaining; the summoning menu now says **Raise Dead**. Remains give only the current class's keepsake. [Changes and balance decisions](CHANGES.md).
 
 **Hatchling Mimic and presentation v1.13.0:** a hungry carried trinket with permanent item benefits, escalating gold demands, mimic kinship and theft. Its transformation/escape reward uses the actual **+10 Ring of Wealth equipment pool**. Upgrade at the cauldron for **10 / 15 / 20 energy**. Inspect it for hunger clues and its next gold demand. The Playtest item picker now includes 314 item types, including the Hatchling.
@@ -74,7 +76,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-1.14.0.jar
+java -jar desktop\build\libs\desktop-1.14.1.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.

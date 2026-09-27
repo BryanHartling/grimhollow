@@ -19,6 +19,12 @@ import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.*;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
+import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
+import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic;
+import com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator;
+import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
 
 /** Opt-in launch diagnostic: renders real OpenGL frames, writes evidence, exits. */
 final class DesktopSmokeProbe extends ShatteredPixelDungeon {
@@ -31,6 +37,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final java.util.HashSet<Integer> loadingCaptures=new java.util.HashSet<>();
     private boolean[] hatchlingFov,hatchlingVisited,hatchlingMapped;
     private int hatchlingHiddenCell;
+    private com.shatteredpixel.shatteredpixeldungeon.items.Item warningMeal;
     private int presentationGameFrames;
     private int encounterActions, encounterSteps, encounterAttacks, encounterLastCell=-1;
     private int[] encounterVisits;
@@ -807,11 +814,22 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 case 57:
                     interfaceBounds();checkReviewText(Game.scene());if(!allReviewText(Game.scene()).contains("17 more turns"))throw new AssertionError("56: minion lifetime hidden");
                     capture("raised-undead-lifetime");closeReviewWindows();System.out.println("TEST 56 UI PASS: six-spell Brush menu, real shield cast/inspection, Raise Dead root, minion remaining turns");
+                    displacedShamanChecks();
+                    hatchlingPresentationChecks();
+                    break;
+                case 58:
+                    if(!Dungeon.hero.belongings.contains(warningMeal))throw new AssertionError("55: meal eaten before player response");
+                    capture("hatchling-warning-and-hud");
+                    Dungeon.hero.rest(false);break;
+                case 59:
+                    if(Dungeon.hero.belongings.contains(warningMeal))throw new AssertionError("55: feeding did not resume after player's next turn");
+                    if(allReviewText(Game.scene()).contains("com.shatteredpixel"))throw new AssertionError("55: object identity in meal log");
+                    capture("hatchling-meal-name");
                     reviewRegionTransition(5);break;
-                case 58:reviewRegionTransition(10);break;
-                case 59:reviewRegionTransition(15);break;
-                case 60:reviewRegionTransition(20);break;
-                case 61:Gdx.app.exit();return;
+                case 60:reviewRegionTransition(10);break;
+                case 61:reviewRegionTransition(15);break;
+                case 62:reviewRegionTransition(20);break;
+                case 63:Gdx.app.exit();return;
             }
             playtestStep++;
         }catch(ReflectiveOperationException | java.io.IOException error){throw new AssertionError(error);}
@@ -820,6 +838,105 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         InterlevelScene.returnDepth=floor+1;InterlevelScene.returnBranch=0;
         InterlevelScene.mode=InterlevelScene.Mode.PLAYTEST;
         ShatteredPixelDungeon.switchScene(InterlevelScene.class);
+    }
+
+    private void hatchlingPresentationChecks() throws ReflectiveOperationException {
+        for(Buff buff:Dungeon.hero.buffs()) if(buff.icon()!=BuffIndicator.NONE)buff.detach();
+        for(int i=0;i<8;i++) {
+            final int symbol=i;
+            new Buff(){@Override public int icon(){return symbol;}}.attachTo(Dungeon.hero);
+        }
+        com.shatteredpixel.shatteredpixeldungeon.ui.StatusPane status=
+                (com.shatteredpixel.shatteredpixeldungeon.ui.StatusPane)RecoveryChecks.field(Game.scene(),"status");
+        BuffIndicator bar=(BuffIndicator)RecoveryChecks.field(status,"buffs");
+        bar.setRect(bar.left(),bar.top(),bar.width(),bar.height());
+        com.watabou.noosa.Visual panel=(com.watabou.noosa.Visual)RecoveryChecks.field(status,"bg");
+        int count=0;float firstTop=-1;
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(bar)) if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.IconButton && child.visible){
+            Image icon=(Image)RecoveryChecks.field(child,"icon");
+            if(icon.x+icon.width()>panel.x+panel.width()-.5f)throw new AssertionError("HUD effect outside its panel: "+count);
+            if(count==0)firstTop=icon.y;
+            if(count==6 && !((Boolean)RecoveryChecks.field(status,"large")) && icon.y<=firstTop)throw new AssertionError("Seventh effect failed to wrap");
+            count++;
+        }
+        if(count!=8)throw new AssertionError("HUD lost effect icons: "+count);
+        for(Icons kind:new Icons[]{Icons.ARROW,Icons.SKULL}){
+            Image icon=kind.get();
+            if(icon.frame().width()*icon.texture.width<28)throw new AssertionError("Legacy HUD glyph: "+kind);
+            icon.destroy();
+        }
+        // A real long-move command must be cancelled, even while a slow action has more ticks due.
+        HatchlingMimic item=HatchlingMimic.carried();
+        if(item==null){item=new HatchlingMimic();item.collect();}
+        for(com.shatteredpixel.shatteredpixeldungeon.items.Item candidate:new java.util.ArrayList<>(Dungeon.hero.belongings.backpack.items))
+            if(HatchlingMimic.foodPriority(candidate,Dungeon.hero)>=0)candidate.detachAll(Dungeon.hero.belongings.backpack);
+        warningMeal=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword().identify();warningMeal.collect();
+        com.watabou.utils.Bundle state=new com.watabou.utils.Bundle();item.storeInBundle(state);state.put("hunger_left",2);state.put("hunger_warned",false);item.restoreFromBundle(state);
+        Dungeon.hero.curAction=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroAction.Move(Dungeon.hero.pos+5);
+        Dungeon.hero.resting=true;
+        item.tick(Dungeon.hero);
+        for(int i=0;i<5;i++)item.tick(Dungeon.hero);
+        if(Dungeon.hero.curAction!=null || Dungeon.hero.resting || !Dungeon.hero.belongings.contains(warningMeal))throw new AssertionError("55: warning failed to stop travel/rest before consumption");
+        Dungeon.hero.act(); // The real readiness path releases the barrier, without spending a turn.
+        // Exercise the NPC's real summoning emitter using its already-painted RATTLE path.
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Necromancer necro=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Necromancer();
+        necro.pos=Dungeon.hero.pos-3;necro.summoning=true;necro.summoningPos=Dungeon.hero.pos-2;
+        Level.set(necro.pos,Terrain.EMPTY);Level.set(necro.summoningPos,Terrain.EMPTY);
+        Dungeon.level.heroFOV[necro.pos]=Dungeon.level.heroFOV[necro.summoningPos]=true;
+        com.shatteredpixel.shatteredpixeldungeon.sprites.NecromancerSprite sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.NecromancerSprite();
+        Dungeon.hero.sprite.parent.add(sprite);sprite.link(necro);sprite.visible=true;
+        com.watabou.noosa.particles.Emitter emitter=(com.watabou.noosa.particles.Emitter)RecoveryChecks.field(sprite,"summoningBones");
+        if(emitter==null)throw new AssertionError("NPC summoning emitter missing");
+        System.out.println("TEST 55 UI WARNING PASS: real Hero readiness, slow-turn barrier, title log, painted HUD glyphs and eight contained effects; NPC RATTLE emitter active");
+    }
+
+    private void displacedShamanChecks() throws ReflectiveOperationException {
+        float elapsed=Game.elapsed;
+        try {
+            Game.elapsed=.02f;
+            for(Class<? extends com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman> type:new Class[]{
+                    com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.RedShaman.class,
+                    com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.BlueShaman.class,
+                    com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.PurpleShaman.class}) {
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman shaman=type.getDeclaredConstructor().newInstance();
+                int origin=Dungeon.hero.pos-2,destination=Dungeon.hero.pos+1,w=Dungeon.level.width();
+                for(int dy=-2;dy<=2;dy++)for(int dx=-4;dx<=3;dx++)Level.set(Dungeon.hero.pos+dx+dy*w,Terrain.EMPTY);
+                if(Actor.findChar(destination)!=null)throw new AssertionError("Shaman fixture destination occupied");
+                shaman.pos=origin;Group sprites=new Group();
+                shaman.sprite=shaman.sprite();sprites.add(shaman.sprite);shaman.sprite.link(shaman);
+                Actor.add(shaman);Dungeon.level.mobs.add(shaman);
+                Dungeon.level.heroFOV[origin]=true;shaman.sprite.visible=true;
+                Buff.affect(shaman,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Vertigo.class,10);
+                for(int attempt=0;attempt<30 && shaman.pos==origin;attempt++)shaman.move(origin+1);
+                if(shaman.pos==origin)throw new AssertionError("Vertigo movement fixture did not move");
+                Dungeon.level.heroFOV[shaman.pos]=true;shaman.sprite.visible=true;
+                shaman.sprite.move(origin,shaman.pos); // Visible Mob AI animates after Char.move's Vertigo animation.
+                sprites.update();
+                com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTeleportation.appear(shaman,destination);
+                for(int frame=0;frame<30;frame++)sprites.update();
+                com.watabou.utils.PointF expected=shaman.sprite.worldToCamera(shaman.pos);
+                if(Math.abs(shaman.sprite.x-expected.x)>.01f || Math.abs(shaman.sprite.y-expected.y)>.01f)
+                    throw new AssertionError("Displaced shaman: stale movement overwrote teleport position for "+type.getSimpleName());
+                if(Actor.findChar(destination)!=shaman || !Dungeon.hero.canAttack(shaman))throw new AssertionError("Shaman occupancy/melee target mismatch");
+                java.lang.reflect.Method objects=GameScene.class.getDeclaredMethod("getObjectsAtCell",int.class);objects.setAccessible(true);
+                Dungeon.level.heroFOV[destination]=true;
+                if(!((java.util.List<?>)objects.invoke(null,destination)).contains(shaman))throw new AssertionError("Examine cannot find displaced shaman");
+                // On tablets a movement tween can outlast a knockback (0.18s versus 0.15s).
+                Buff.detach(shaman,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Vertigo.class);
+                com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite.setMoveInterval(.3f);
+                shaman.pos=origin;shaman.sprite.place(origin);
+                shaman.sprite.move(origin,origin+1);shaman.pos=origin+1;
+                com.shatteredpixel.shatteredpixeldungeon.effects.Pushing push=
+                        new com.shatteredpixel.shatteredpixeldungeon.effects.Pushing(shaman,shaman.pos,destination,()->shaman.pos=destination);
+                push.new Effect();
+                for(int frame=0;frame<30;frame++)sprites.update();
+                expected=shaman.sprite.worldToCamera(shaman.pos);
+                if(Math.abs(shaman.sprite.x-expected.x)>.01f || Math.abs(shaman.sprite.y-expected.y)>.01f)
+                    throw new AssertionError("Displaced shaman: movement outlasted knockback for "+type.getSimpleName());
+                shaman.HP=0;Actor.remove(shaman);Dungeon.level.mobs.remove(shaman);sprites.destroy();
+            }
+        } finally {Game.elapsed=elapsed;com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite.setMoveInterval(com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite.DEFAULT_MOVE_INTERVAL);}
+        System.out.println("SHAMAN POSITION PASS: all three variants, overlapping movement/teleport/knockback, sprite cell equals occupancy, melee and examine targets");
     }
     @SuppressWarnings("unchecked") private com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane handbookPage(int index){
         return ((java.util.List<com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane>)RecoveryChecks.field(reviewHandbook(),"pages")).get(index);
@@ -1589,7 +1706,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 oldPixels.dispose();newPixels.dispose();particle.destroy();paintedFamilies++;
             }
             int speckKinds=0;
-            for(int kind:new int[]{Speck.HEALING,Speck.STAR,Speck.QUESTION,Speck.BONE,Speck.WOOL,Speck.ROCK,Speck.NOTE,Speck.CHANGE,Speck.HEART,Speck.BUBBLE,Speck.STEAM,Speck.COIN,Speck.STORM,Speck.BLIZZARD,Speck.INFERNO}){
+            for(int kind:new int[]{Speck.HEALING,Speck.STAR,Speck.QUESTION,Speck.BONE,Speck.RATTLE,Speck.WOOL,Speck.ROCK,Speck.NOTE,Speck.CHANGE,Speck.HEART,Speck.BUBBLE,Speck.STEAM,Speck.COIN,Speck.STORM,Speck.BLIZZARD,Speck.INFERNO}){
                 Speck speck=new Speck();speck.reset(0,0,0,kind);speck.alpha(1);speck.scale.set(2);Pixmap pixels=renderSprite(speck,buffer,camera);
                 int visible=0;for(int y=0;y<256;y++)for(int x=0;x<256;x++)if((pixels.getPixel(x,y)&255)>8)visible++;
                 if(visible==0)failures.add("56 invisible Speck "+kind);pixels.dispose();speck.destroy();speckKinds++;

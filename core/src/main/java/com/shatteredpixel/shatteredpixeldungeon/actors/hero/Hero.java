@@ -970,6 +970,9 @@ public class Hero extends Char {
 		waitOrPickup = false;
 		ready = true;
 		canSelfTrample = true;
+		com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic hatchling =
+				com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.carried();
+		if (hatchling != null) hatchling.onHeroReady();
 
 		AttackIndicator.updateState();
 		

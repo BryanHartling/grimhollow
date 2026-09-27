@@ -1,3 +1,12 @@
+# Hatchling warning and HUD fixes - v1.14.1
+
+- Use localized item titles (including known upgrades and stack counts) in Hatchling meal, upgrade and enchantment messages. The v4 Item API uses title(), so Object.toString() leaked Java class names and identity hashes into the log.
+- A feeding warning interrupts travel and resting immediately. Consumption waits until Hero's real ready-for-input path has returned control to the player, then proceeds on the following feeding tick after a fresh command. This also covers slow/paralysed turns and saves made during a warning. Preserve hunger, food priority, gold debt and benefits.
+- Clear interrupted key-release delays and require a held controller stick to return to neutral, preventing old held movement from restarting after a warning.
+- Fit compact and expanded status strips inside their actual painted panel. Wrap before placing the next icon, counting its inset, rather than allowing the seventh compact icon to spill outside.
+- Use existing painted arrow and skull artwork for the resume and visible-enemy HUD controls, preserving their logical size and hit areas. No new generated assets. Exercise the NPC Necromancer's actual summoning emitter and RATTLE particles, which already use the painted bone artwork introduced in v1.14.0.
+- Reproduce a displaced Shaman sprite after Vertigo/AI overlap and teleportation. Retire the superseded walking tween, and interrupt walking when instant placement or knockback takes over. Sprite position now follows the actual occupied cell; collision, targeting, loot and curse rules are unchanged. Regression coverage includes all three Shaman variants and walking animations longer than the knockback duration.
+
 # Painted effects and class balance - v1.14.0
 
 - Replace shared solid-pixel emitters with authored, soft-edged grass blades, curse wisps, electrical sparks, debris, droplets and motes. Painted Speck variants also cover status bursts, dust, vapor, coins, frost and fire. Original timing, collision and random-number consumption remain; disabling enhanced effects retains the legacy rendering path. Existing batched flame/Tengu effects keep their specialized drawing paths.

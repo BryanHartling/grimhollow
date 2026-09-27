@@ -36,11 +36,15 @@ public final class PaintedInterface {
         if (type==Icons.DISPLAY) name=PixelScene.landscape()?"DISPLAY_LAND":"DISPLAY_PORT";
         if (type==Icons.BACKPACK) name="BACKPACK_LRG";
         if (type==Icons.GOLD) name="COIN_SML";
+        if (type==Icons.ARROW) name="RIGHTARROW";
         if (type==Icons.NEWS || type==Icons.CHANGES) name="JOURNAL";
         Image replacement;
         int bag=type==Icons.SEED_POUCH?ItemSpriteSheet.POUCH:type==Icons.SCROLL_HOLDER?ItemSpriteSheet.HOLDER:
                 type==Icons.WAND_HOLSTER?ItemSpriteSheet.HOLSTER:type==Icons.POTION_BANDOLIER?ItemSpriteSheet.BANDOLIER:-1;
-        if(bag>=0) {
+        if(type==Icons.SKULL) {
+            replacement=new BuffIcon(BuffIndicator.CORRUPT, true);
+            replacement.logicalSize(original.width,original.height);
+        } else if(bag>=0) {
             replacement=new Image(Assets.Sprites.ITEMS);
             replacement.texture.filter(GL20.GL_LINEAR,GL20.GL_LINEAR);
             replacement.frame(ItemSpriteSheet.film.get(bag));

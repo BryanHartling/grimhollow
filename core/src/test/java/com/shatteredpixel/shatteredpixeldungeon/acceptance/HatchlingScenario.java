@@ -40,7 +40,7 @@ final class HatchlingScenario {
         HatchlingMimic hatchling=new HatchlingMimic();hatchling.collect();return hatchling;
     }
     private static void carry(Item...items){hero().belongings.backpack.items.addAll(Arrays.asList(items));}
-    private static void due(HatchlingMimic item){while(!item.warned())item.tick(hero());}
+    private static void due(HatchlingMimic item){while(!item.warned())item.tick(hero());item.onHeroReady();}
     private static Mimic mimic(Class<? extends Mimic> type,int cell){
         Mimic mimic=Mimic.spawnAt(cell,type);mimic.sprite=mimic.sprite();mimic.sprite.link(mimic);
         new com.watabou.noosa.Group().add(mimic.sprite);
@@ -71,14 +71,27 @@ final class HatchlingScenario {
         ArrayList<String> events=new ArrayList<>();Signal.Listener<String> listener=s->{events.add(s);return false;};GLog.update.add(listener);
         try {
             hero().resting=true;
+            hero().curAction=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroAction.Move(hero().pos+3);
             for(int t=0;t<298;t++)hatchling.tick(hero());
             check(events.isEmpty()&&hero().belongings.contains(knives),"no early warning or consumption");
             hatchling.tick(hero());
             check(events.size()==1&&events.get(0).startsWith(GLog.WARNING)&&!hero().resting&&hatchling.warned(),"warning interrupts exactly one turn before meal");
+            check(hero().curAction==null,"warning cancels queued travel");
             HatchlingMimic copy=(HatchlingMimic)hatchling.duplicate();check(copy.warned()&&copy.remaining()==1,"pending warning survives item serialization");
+            for(int t=0;t<6;t++)hatchling.tick(hero());
+            copy.tick(hero());
+            check(hero().belongings.contains(knives)&&events.size()==1,"slow or paralysed turns and reload cannot consume before player control returns");
+            hatchling.onHeroReady();
             hatchling.tick(hero());check(!hero().belongings.contains(knives)&&events.size()==2,"whole throwing stack consumed, single confirmation");
+            check(events.get(1).contains(knives.title())&&!events.get(1).contains("com.shatteredpixel")&&!events.get(1).contains("@"),"meal reports localized title and stack count, not Java object identity");
             check(hero().buff(ItemSense.class)!=null,"no eligible target falls back to Sense");
         } finally {GLog.update.remove(listener);}
+
+        hatchling=fresh();hatchling.level(3);
+        carry(new Shortsword().identify());
+        String benefit=hatchling.benefit(hero(),Tier.EXCEPTIONAL);
+        check(!benefit.contains("com.shatteredpixel")&&!benefit.contains("@")&&benefit.contains("shortsword"),"upgrade and enchantment messages use item titles");
+        System.out.println("TEST 55 WARNING PASS: queued travel/rest interrupted; slow-turn and reload barrier; localized meal/upgrade/enchantment titles");
 
         hatchling=fresh();Dungeon.gold=100000;
         for(long amount:new long[]{50,100,200,400,800,1600,3200}){

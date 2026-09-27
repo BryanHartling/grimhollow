@@ -152,7 +152,8 @@ public class Lightning extends Group {
 			arc2.origin.set( 0, arc2.height()/2 );
 			add( arc2 );
 
-			if(painted){arc1.y=start.y-arc1.origin.y;arc1.hardlight(0xC2EDFF);arc2.hardlight(0xC2EDFF);}
+            if(EnhancedEffects.enabled())arc1.y=start.y-arc1.origin.y;
+            if(painted){arc1.hardlight(0xC2EDFF);arc2.hardlight(0xC2EDFF);}
             update();
 		}
 

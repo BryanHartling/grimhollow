@@ -241,7 +241,7 @@ def main():
         if path=='interfaces/painted_skills.png':expected=(1024,512)
         if path=='interfaces/painted_badges.png':expected=(1024,512)
         if path=='effects/readability.png':expected=(512,64)
-        if path in ('effects/painted_particles.png','effects/painted_specks.png'):expected=(256,256)
+        if path in ('effects/painted_particles.png','effects/painted_specks.png','effects/painted_rays.png'):expected=(256,256)
         if path=='sprites/item_icons.png':expected=(512,256)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}

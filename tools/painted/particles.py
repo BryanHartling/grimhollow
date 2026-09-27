@@ -1,5 +1,6 @@
 """Pack the committed authored particle motifs; no image generation at build time."""
 from PIL import Image, ImageOps
+import numpy as np
 from pack import HERE
 
 def outputs():
@@ -26,4 +27,14 @@ def outputs():
     for i,part in enumerate(art):
         part=ImageOps.contain(part,(58,58),Image.Resampling.LANCZOS)
         specks.alpha_composite(part,(i%4*64+(64-part.width)//2,i//4*64+(64-part.height)//2))
-    return {'effects/painted_particles.png':atlas,'effects/painted_specks.png':specks}
+    source=Image.open(HERE/'sources/particles/rays.png').convert('RGBA')
+    from inventory import gutters
+    rows=gutters(np.asarray(source.getchannel('A')),1)
+    rays=Image.new('RGBA',(256,256))
+    for i in range(4):
+        part=source.crop((0,rows[i],source.width,rows[i+1]))
+        box=part.getchannel('A').point(lambda a:255 if a>=8 else 0).getbbox()
+        assert box, ('empty ray',i)
+        part=ImageOps.contain(part.crop(box),(252,58),Image.Resampling.LANCZOS)
+        rays.alpha_composite(part,((256-part.width)//2,i*64+(64-part.height)//2))
+    return {'effects/painted_particles.png':atlas,'effects/painted_specks.png':specks,'effects/painted_rays.png':rays}

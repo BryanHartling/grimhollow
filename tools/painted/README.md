@@ -1,3 +1,9 @@
+# Painted effects and universal creature export - v1.14.0
+
+`particles.py` packs committed neutral particle motifs, four colored beam ribbons and existing status/UI symbols into three 256px effect atlases. The shared PixelParticle/Speck paths use these textures only with enhanced effects enabled; lightning/rays retain their timing and logical geometry. `botany_skills.py` replaces Field Repair with the original Defensive Sigil icon. Exact built-in image-generation prompts: `particles-prompts.json`, `rays-prompt.json`, `defensive-sigil-prompt.json`. New source PNGs are in `sources/particles/`, licensed GPL-3.0-or-later.
+
+All 71 creature atlases now use density 8 directly from existing original paintings, including NPCs, bosses, summons, sentries and wards. No animation callback or game rule changes in the packer. Runtime sizing includes the bilinear alpha fringe, while frame layouts are derived from the original source dimensions. The complete offline check reproduces **124 game images from 115 source PNGs**, plus **55 launcher resources**: `python tools/recovery_assets.py --check`.
+
 # Regional paintings and Hatchling - v1.13.0
 
 Five original paintings in `sources/regions` provide the Sewers, Prison, Caves, City and Halls transitions. `regions.py` crops them reproducibly to 1600x900; the runtime fills both landscape and portrait viewports around the central focal point. `sources/items/hatchling.png` supplies inventory cell 539. Exact built-in imagegen prompts are in `hatchling-region-prompts.json`; all six source images and their derivatives are GPL-3.0-or-later.

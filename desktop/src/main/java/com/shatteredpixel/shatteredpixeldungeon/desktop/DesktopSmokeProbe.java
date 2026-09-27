@@ -1595,6 +1595,16 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(visible==0)failures.add("56 invisible Speck "+kind);pixels.dispose();speck.destroy();speckKinds++;
             }
             System.out.println("TEST 56 EFFECTS: painted solid-particle families="+paintedFamilies+" soft alpha edges, visible Speck kinds="+speckKinds+" failures="+failures.size());
+            for(com.shatteredpixel.shatteredpixeldungeon.effects.Effects.Type kind:new com.shatteredpixel.shatteredpixeldungeon.effects.Effects.Type[]{
+                    com.shatteredpixel.shatteredpixeldungeon.effects.Effects.Type.LIGHTNING,com.shatteredpixel.shatteredpixeldungeon.effects.Effects.Type.DEATH_RAY,
+                    com.shatteredpixel.shatteredpixeldungeon.effects.Effects.Type.LIGHT_RAY,com.shatteredpixel.shatteredpixeldungeon.effects.Effects.Type.HEALTH_RAY,
+                    com.shatteredpixel.shatteredpixeldungeon.effects.Effects.Type.RIPPLE,com.shatteredpixel.shatteredpixeldungeon.effects.Effects.Type.WOUND}){
+                Image ray=com.shatteredpixel.shatteredpixeldungeon.effects.Effects.get(kind);int visible=0,soft=0;
+                if(ray.width!=16||ray.height!=(kind==com.shatteredpixel.shatteredpixeldungeon.effects.Effects.Type.RIPPLE?16:8))failures.add("56 ray logical dimensions "+kind);
+                Pixmap pixels=renderSprite(ray,buffer,camera);for(int y=0;y<256;y++)for(int x=0;x<256;x++){int alpha=pixels.getPixel(x,y)&255;if(alpha>8)visible++;if(alpha>8&&alpha<247)soft++;}
+                if(visible<20||soft<10)failures.add("56 empty or unfiltered ray "+kind);pixels.dispose();ray.destroy();
+            }
+            System.out.println("TEST 56 RAYS: lightning/death/light/healing, wound and ripple preserve logical size with painted soft-alpha output; failures="+failures.size());
             // Test actual fire expiration through the decal owner, including forbidden terrain.
             int cell=-1;for(int c=0;c<Dungeon.level.length();c++)if(Dungeon.level.insideMap(c)&&Dungeon.level.map[c]==Terrain.EMPTY
                     &&com.shatteredpixel.shatteredpixeldungeon.actors.Actor.findChar(c)==null&&Dungeon.level.heaps.get(c)==null&&Dungeon.level.traps.get(c)==null){cell=c;break;}

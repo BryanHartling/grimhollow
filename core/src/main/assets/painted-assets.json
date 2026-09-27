@@ -84,6 +84,7 @@
     "monsters/wisps-larva.png": "0d7221e0b6cd17f09351ccbf45ee164c4dde6ab9bf3fa3c12471e018e5bc4029",
     "particles/defensive-sigil.png": "92e9c8ca0ccde3a87936b244fdeec4d2ff24bdcff43e95f9286620049a7d3709",
     "particles/motifs.png": "1d756eac0e9922a4da959a902f8af78464593fac48ec18248ac8829398ae9465",
+    "particles/rays.png": "701f1bce3b4b0b5cc4eefcc210d745bdac7ed87153dde2b9fd25e861fc0e6ea4",
     "presentation/cleric.png": "dde202c11b91d98e4d989ea6fd33596bc09ea5c0ce9ff0071e0e335a7685b406",
     "presentation/duelist.png": "872aa0cc9cbd179b94aa88b8e9a30288fec86777c465703f905c6b6789e49ec2",
     "presentation/enchanter.png": "4b7f36fce29b03ff7349808e59ad04e792e06b0db495701ff925dad3fe413934",
@@ -9058,6 +9059,13 @@
         256
       ],
       "rgba_sha256": "2bacfd271103267ba565ce13b43c79bd21f7af9a1a80fffad75cb359b82052b1"
+    },
+    "effects/painted_rays.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "94fcfb9419477674359bf7699d64c1b6848cfacb2e46bc0da364abd0f5ddba9c"
     }
   }
 }

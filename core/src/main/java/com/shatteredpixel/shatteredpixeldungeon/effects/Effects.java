@@ -38,8 +38,19 @@ public class Effects {
 		HEALTH_RAY
 	}
 	
-	public static Image get( Type type ) {
-		Image icon = new Image( Assets.Effects.EFFECTS );
+    public static Image get( Type type ) {
+        Image icon = new Image( Assets.Effects.EFFECTS );
+        if(EnhancedEffects.enabled()){
+            switch(type){
+                case LIGHTNING:ParticleArt.ray(icon,0);return icon;
+                case DEATH_RAY:ParticleArt.ray(icon,1);return icon;
+                case LIGHT_RAY:ParticleArt.ray(icon,2);return icon;
+                case HEALTH_RAY:ParticleArt.ray(icon,3);return icon;
+                case RIPPLE:ParticleArt.frame(icon,ParticleArt.RIPPLE,16,16);return icon;
+                case WOUND:ParticleArt.frame(icon,ParticleArt.SPLINTER,16,8);return icon;
+                default:break;
+            }
+        }
 		switch (type) {
 			case RIPPLE:
 				icon.frame(icon.texture.uvRect(0, 0, 16, 16));

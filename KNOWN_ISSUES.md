@@ -1,5 +1,8 @@
 # Known issues
 
+- Version 1.14.1 reproduces and fixes Shaman sprite displacement from overlapping walk/teleport animations and covers knockback overlap; the original floor-11 save and exact cursed-wand roll were unavailable, so the complete reported encounter is not claimed reproduced.
+- Version 1.14.1 HUD and feeding regressions run in the native renderer with portrait touch and landscape mouse input; no physical Samsung tablet was connected. NPC bone particles require Enhanced Effects, as in v1.14.0; the legacy effects-off option remains available.
+
 - Version 1.14.0 Defensive Sigil and Ghoul tuning require campaign playtesting. Psychic strength has not been changed without a specific ability/encounter diagnosis; the rare floor-six tier-five weapon roll remains an intentional upstream loot possibility.
 - The new particles, denser gas and universally sharper creature exports require human visual review and Samsung SM-T830 performance testing; desktop rendering is not a physical tablet test. New Defensive Sigil text falls back to English in other locales.
 

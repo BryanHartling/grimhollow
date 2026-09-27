@@ -1,3 +1,72 @@
+# Feeding, HUD and creature-position fixes - v1.14.1
+
+Release: **v1.14.1-playtest-fixes**. Runtime implementation: `c083db422`; the annotated release tag identifies the final source/evidence commit and exact-head CI result. No art generation or gameplay balance changes were made.
+
+Fresh local results: **Runs=90 failures=0**, seven JUnit tests, Windows desktop/native launcher and Android packaging pass. Necromancer **10/0**, Enchanter **10/0**, Psychic **10/0**, combined new classes **30/0** are included in the all-nine gate. Native portrait and landscape suites and the geometry/effects suite pass. Physical Samsung tablet testing and the player's exact floor-11 cursed-wand encounter remain unavailable.
+
+[Warning pauses movement and wraps eight effects](interface/portrait/hatchling-warning-and-hud.png), [readable meal text and painted HUD](interface/portrait/hatchling-meal-name.png), [landscape evidence](interface/landscape/hatchling-warning-and-hud.png). These captures also show the NPC bone-summoning particles already supplied by v1.14.0 when Enhanced Effects is enabled; the user screenshot was v1.13.0.
+
+The native shaman regression first failed on stale animation overwriting a teleported Red Shaman's sprite position, then passed for all three variants after the shared tween cancellation fix. Fixture corrections restored a real Feeding actor after test class changes and ensured the test backpack had room; production Playtest behavior was not changed. Intermediate failures remain in ignored `.local/hatchling-fix-*` diagnostics. Tests 20, 38, 43-45 and 47 explicitly retain prior evidence locally; CI repeats the rendering/provenance gates. Test 45 remains an enforced known failure, not a passing result.
+
+| Test | Status | Actual evidence and scope |
+|---|---|---|
+| 1 | PASS | Windows 1.14.1 desktop and bundled-runtime Grimhollow.exe launch (TitleScene exit=0). Native portrait touch and landscape mouse suites pass; screenshots include the actual feeding warning, next-action meal, painted resume/skull and eight contained status icons. |
+| 2 | PASS | core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeUpstream=true --no-daemon: BUILD SUCCESSFUL in 2m 47s; Runs=90 failures=0; seven JUnit tests with zero failures/errors. Subsequent fixture-only desktop rebuild and native packaging also pass. |
+| 3 | RETIRED | Old procedural-art rebuild no longer ships; committed painted sources reconstruct exactly under test 44. |
+| 4 | RETIRED | Old generated-style validator was superseded by source provenance/reconstruction 44 and room distinctness 45. |
+| 5 | PASS | Runs=90 failures=0: nine hero classes, ten seeds each, including starter kits and added-class scenarios. |
+| 6 | permanent known issue | Representative hooks and native purchasing pass; Defensive Sigil ranks/cost/refresh/expiry/save compatibility are covered by test 56. Exhaustive every-talent combat coverage remains unrun. |
+| 7 | permanent known issue | All 18 subclass previews and their tier-three skills are available. Actual Tengu reward selection remains unrun. |
+| 8 | permanent known issue | All 27 armor-ability previews and tier-four skills are available. Actual crown reward flow remains unrun. |
+| 9 | PASS | TEST 9 PASS; temporary Bone/Force terrain persistence, expiry and floor-exit checks execute. |
+| 10 | PASS | Necromancer minion cap and Second Grave checks pass in the existing class suite. |
+| 11 | PASS | Existing Grasp heaps/traps/range tests pass; Hatchling scenario additionally checks bones at Crystal 3, unlocked chests at 7, and locked-container rejection. |
+| 12 | PASS | Hero levels 1/7/8/16/24/30 -> +1/+2/+2/+3/+5/+5; damage, durability, strength, descriptions and no stacking. |
+| 13 | PASS | Old Amok behavior and new level-six/level-eight control paths; see test 50. |
+| 14 | PASS | All nine classes save/load through floor 6. Crystal swap/re-equip retains level/charges; Precognition expenditure survives serialization. |
+| 15 | PASS | Runs=90 failures=0. Necromancer 10/0, Enchanter 10/0, Psychic 10/0; combined new classes 30/0 as part of the all-nine gate. |
+| 16 | permanent known issue | Fresh geometry covers 122 creature sprites and all 71 density-8 atlases; no dimension exceeds 4096. Red/Blue/Purple Shaman overlapping movement, teleport and knockback cases additionally pass. Exhaustive gameplay-path coverage remains unrun. |
+| 17 | RETIRED | Recovery and the later painted-source direction supersede the old procedural style gate; source reconstruction is test 44. |
+| 18 | RETIRED | Superseded by recovery: generated-region brightness target replaced by within-room distinctness 45. |
+| 19 | permanent known issue | The floor-15 1,000-turn/20-mob timing scenario remains unrun. |
+| 20 | PASS | Retained v1.0.2 SDK-unset desktop-only build result; not rerun locally. CI independently builds with desktopOnly=true. |
+| 21 | permanent known issue | Test 45 remains enforced. Exact-head CI status and failing steps are recorded in the annotated v1.14.1-playtest-fixes tag and delivery; no checks disabled or weakened. |
+| 22 | PASS | aapt: com.grimhollow.dungeon, versionCode=959, versionName=1.14.1-INDEV, label Grimhollow, minimum SDK 21, target 36. adb devices -l returned no devices; APK packaging is not a physical tablet playtest. |
+| 23 | PASS | Native checks and packaged launcher use isolated .local/hatchling-fix-* profiles; headless saves use diagnostic slot 99. Existing player saves were not used. |
+| 24 | permanent known issue | Fresh standard geometry: heroes=9, mob sprites=122, steady idle/travel checks=122, failures=0. Bilinear fringe sizing corrected two newly exposed short-creature failures without changing the acceptance band. Historical six 2x occupancy exceptions have not been remeasured locally. |
+| 25 | PASS | TEST 25: items=384 identification icons=60 failures=0; named semantics and per-index hashes pass. New Hatchling occupies index 539. |
+| 26 | PASS | TEST 26: three stains and floor/chasm/water/trap placement failures=0. |
+| 27 | PASS | TEST 27 PASS: 300 idle turns leave charges unchanged; 12 charges unlock Wraith at level 1; hostile attacked within 2 turns. Ghoul remains locked through +4, unlocks at +5 and heals 15% of health actually removed, capped against overkill. |
+| 28 | RETIRED | Superseded by recovery: rendered-cache rebuild no longer produces the restored shipping world/characters. |
+| 29 | RETIRED | Superseded by recovery: rerendering is prohibited; Blender/cache retained unused. |
+| 30 | RETIRED | Superseded by recovery: generated character hue-distance gate replaced by upstream pixel provenance 44. |
+| 31 | PASS | Fresh: 240 GPU-completed frames, 40 gas + 10 fire cells, mean=0.6702ms p95=0.9588ms; effects-off pixel differences=0; batched-fire maximum channel difference=0. Unchanged 2ms gate. |
+| 32 | PASS | TEST 32: three scorch sizes, actual floor fire expiration, water/chasm rejection failures=0. |
+| 33 | PASS | TEST 33 RANGED PASS: actual carried thrown-weapon and Spirit Bow inscriptions, thrown stack split/merge, arrow proc dispatch, ownership and melee-only filtering, unchanged duration. Trade knowledge, armor inscriptions and persistent-library checks also pass. Both orientations additionally pass actual equipment-picker armor selection, scrolled glyph selection, touch weapon/info, drag suppression and zero-charge rejection. |
+| 34 | PASS | TEST 34: old/future version, portrait exception and deletion failures=0. |
+| 35 | RETIRED | Superseded by recovery: source-string grep replaced by compiled/runtime handler and network test 46. |
+| 36 | PASS | Native landscape/portrait suites exercise inventory, scroll bounds, all-rank descriptions, pointer purchases, Hurl, clipboard, Hatchling and the new shield/minion menus. Geometry covers nine splashes/portraits, talents, skills and ItemSlots. Nine-class selection/36 handbook-page coverage is retained from the prior checkpoint and repeated by CI. |
+| 37 | PASS | TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment. |
+| 38 | permanent known issue | 18 supplied images lack verified allowed redistribution licenses; excluded from Git; 70 licensed files eligible. |
+| 39 | RETIRED | Superseded by recovery: rejected regional iteration histories remain archival; their art no longer ships. |
+| 40 | RETIRED | Superseded by recovery: generated-room isolated metrics replaced by remembered-terrain 43 and distinctness 45. |
+| 41 | RETIRED | Superseded by recovery: generated animated liquid atlas replaced by historical scrolling water. |
+| 42 | RETIRED | Superseded by recovery: calibrated generated-region gates replaced by restored-region test 45. |
+| 43 | PASS | Retained v1.14.0/local and prior CI five-region remembered-terrain and wall-cap results; this patch does not change terrain or fog. Not rerun locally in this patch; CI repeats all five regions. |
+| 44 | PASS | Retained v1.14.0 offline reconstruction: assets=124 source sheets=115 launcher resources=55, failures=0. This patch reuses existing painted glyphs and changes no source PNGs or atlases. CI repeats reconstruction. |
+| 45 | permanent known issue | Retained Windows measurement: 22/76 failed comparisons (Sewers 5/15, Prison 1/10, Caves 8/21, City 3/15, Halls 5/15). Not remeasured locally in this rendering-behavior patch. Unchanged 0.12 luminance / 40-degree hue thresholds remain enforced; CI refreshes all five regions. |
+| 46 | PASS | Fresh compiled handler audit: classes=2925, guarded browser sinks=1, HTTP/socket calls=0, failures=0; native runtime title controls=5, credits handlers=4, repository URLs=4, external opens=0, scene fetches=0, failures=0. |
+| 47 | PASS | Retained prior five-region CI results: 24 zoom/pan cases per region, exact 1:1 fog ratio, aligned light quad, hidden cells black, visible cells unobscured. No fog changes or local rerun this patch; CI repeats all five. |
+| 48 | PASS | Push/Hurl exact movement and every collision/trap/chasm/boss rider at Crystal levels 0-10. |
+| 49 | PASS | All levels 0-10: Grasp preserves sight range and adds 1/2 cells at Crystal levels 3/7, requires visibility and rejects out-of-range targets without cost; Glimpse lasts 5/7/9 turns at 0/5/10. Existing XP thresholds, upgrade exclusions and persistence pass. |
+| 50 | PASS | Level-six direction/follow/attacks; level-eight 15-turn survival, permanent single-floor slot, replacement release, save/load, stairs, normal kill ownership and boss immunity. |
+| 51 | PASS | Existing Ashlight feed/charge/shutter/invisibility/resistance/Flare/persistence suite passes. New Infernal Brew feeding and level-8 disguised-mimic burning thresholds pass. Real native artifact menus pass in both orientations. |
+| 52 | PASS | Guarded Playtest, 314 item types/20 artifact caps, nine kits/progression, branch travel/save isolation pass. New checks consolidate populated duplicate pouches, preserve seeds across class changes/reload, and invoke real ascent into unvisited floors 5/10/15/20/25 after travel. |
+| 53 | PASS | Existing artifact/feeding/mimic/rank/armor/barricade/mobile timing checks pass. Both native orientations pass real pointer handbook, all ranks in one description, long-scroll bounds, Hurl and unknown-source/remembered-wall-cap checks. |
+| 54 | PASS | Ten Enchanter seeds cover proc rates, power/curses/other-class isolation, caps/refunds and Lucky stacking: later failed rolls preserve same-hit success, next attacks clear stale success, shared bow results survive, both Overcharge slots generate loot, eligible loot actually enters a heap, and overleveled enemies retain upstream loot exclusion. Both native orientations pass actual third-rank purchase and repeated cap rejection. |
+| 55 | PASS | Fresh all-nine Hatchling scenarios and native portrait/landscape suites pass. Regression asserts display titles rather than Java identities; warnings cancel long movement/rest and wait for real Hero readiness, then the next player turn feeds. Slow-action and saved-warning barriers are covered. Native log: Your hatchling mimic devours your shortsword. It sniffs the air, sensing treasure nearby. Existing hierarchy, benefits, debt, transformation, theft and persistence checks remain passing. |
+| 56 | PASS | Fresh balance/class/effect regressions pass. Native effects cover five families and 16 Speck kinds including NPC RATTLE. Actual Necromancer summoning emitter captured. Shaman overlap regression checks all three variants, sprite-to-cell alignment, Actor occupancy, melee eligibility and actual examine targets. Eight status icons stay inside the HUD in portrait/landscape; painted resume/skull resolve. Exact reported floor-11 save and physical tablet remain unavailable. |
+
 # Painted effects and class balance - v1.14.0
 
 Release: **v1.14.0-effects**. Main implementation begins at `74b81abec`; the tag identifies the final source/evidence commit. The new source art was produced with built-in image generation; exact prompts and source PNGs are committed under `tools/painted/`.

@@ -822,7 +822,14 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     capture("hatchling-warning-and-hud");
                     Dungeon.hero.rest(false);break;
                 case 59:
-                    if(Dungeon.hero.belongings.contains(warningMeal))throw new AssertionError("55: feeding did not resume after player's next turn");
+                    if(Dungeon.hero.belongings.contains(warningMeal)) {
+                        HatchlingMimic pending=HatchlingMimic.carried();
+                        HatchlingMimic.Feeding clock=Dungeon.hero.buff(HatchlingMimic.Feeding.class);
+                        java.lang.reflect.Field actor=Actor.class.getDeclaredField("current");actor.setAccessible(true);
+                        throw new AssertionError("55: feeding did not resume: ready="+Dungeon.hero.ready+" paralysis="+Dungeon.hero.paralysed
+                                +" heroCooldown="+Dungeon.hero.cooldown()+" feeding="+(clock==null?"absent":clock.cooldown())
+                                +" barrier="+RecoveryChecks.field(pending,"awaitingChoice")+" current="+actor.get(null));
+                    }
                     if(allReviewText(Game.scene()).contains("com.shatteredpixel"))throw new AssertionError("55: object identity in meal log");
                     capture("hatchling-meal-name");
                     reviewRegionTransition(5);break;
@@ -867,10 +874,15 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }
         // A real long-move command must be cancelled, even while a slow action has more ticks due.
         HatchlingMimic item=HatchlingMimic.carried();
-        if(item==null){item=new HatchlingMimic();item.collect();}
+        if(item==null)item=new HatchlingMimic();
         for(com.shatteredpixel.shatteredpixeldungeon.items.Item candidate:new java.util.ArrayList<>(Dungeon.hero.belongings.backpack.items))
             if(HatchlingMimic.foodPriority(candidate,Dungeon.hero)>=0)candidate.detachAll(Dungeon.hero.belongings.backpack);
-        warningMeal=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword().identify();warningMeal.collect();
+        // Make space before pickup; earlier catalogue tests can fill the backpack.
+        // Recollect after class changes so the real feeding Actor is installed.
+        item.detachAll(Dungeon.hero.belongings.backpack);
+        if(!item.collect() || HatchlingMimic.carried()!=item)throw new AssertionError("Hatchling fixture pickup failed");
+        warningMeal=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword().identify();
+        if(!warningMeal.collect())throw new AssertionError("Hatchling fixture meal pickup failed");
         com.watabou.utils.Bundle state=new com.watabou.utils.Bundle();item.storeInBundle(state);state.put("hunger_left",2);state.put("hunger_warned",false);item.restoreFromBundle(state);
         Dungeon.hero.curAction=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroAction.Move(Dungeon.hero.pos+5);
         Dungeon.hero.resting=true;

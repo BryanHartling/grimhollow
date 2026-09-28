@@ -2,6 +2,8 @@
 package com.shatteredpixel.shatteredpixeldungeon;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.ExpeditionDragon;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.TreasureHunter;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
@@ -21,6 +23,9 @@ public final class DragonExpedition {
     public static final boolean AVAILABLE = false;
     public static int hunterDepth, hunterPos = -1, returnCell = -1;
     public static java.util.ArrayList<Item> fallenItems = new java.util.ArrayList<>();
+    public static ExpeditionDragon dragon;
+    public static int dragonFloor = CHASM;
+    public static boolean victoryPending;
     public static boolean accepted, entered, dragonSlain, spiderSlain, rewardsCreated;
 
     public static void reset() {
@@ -29,6 +34,7 @@ public final class DragonExpedition {
         Random.popGenerator();
         hunterPos = returnCell = -1;
         fallenItems.clear();
+        dragon = null; dragonFloor = CHASM; victoryPending = false;
         accepted = entered = dragonSlain = spiderSlain = rewardsCreated = false;
     }
 
@@ -39,6 +45,7 @@ public final class DragonExpedition {
         b.put("dragon_slain", dragonSlain); b.put("spider_slain", spiderSlain);
         b.put("rewards_created", rewardsCreated);
         b.put("fallen_items", fallenItems);
+        b.put("dragon", dragon); b.put("dragon_floor", dragonFloor); b.put("victory_pending", victoryPending);
         parent.put("dragon_expedition", b);
     }
 
@@ -51,7 +58,28 @@ public final class DragonExpedition {
         accepted = b.getBoolean("accepted"); entered = b.getBoolean("entered");
         dragonSlain = b.getBoolean("dragon_slain"); spiderSlain = b.getBoolean("spider_slain");
         rewardsCreated = b.getBoolean("rewards_created");
+        dragon = (ExpeditionDragon) b.get("dragon"); dragonFloor = b.getInt("dragon_floor");
+        victoryPending = b.getBoolean("victory_pending");
         for (com.watabou.utils.Bundlable item : b.getCollection("fallen_items")) fallenItems.add((Item) item);
+    }
+
+    /** Quest snapshot is authoritative; stale floor files cannot duplicate or heal the dragon. */
+    public static void arriveDragon(Level level) {
+        if (Dungeon.branch != BRANCH || Dungeon.depth != CHASM && Dungeon.depth != HOARD) return;
+        for (Mob mob : level.mobs.toArray(new Mob[0])) if (mob instanceof ExpeditionDragon) level.mobs.remove(mob);
+        if (dragonSlain) return;
+        if (dragon == null) {
+            dragon = new ExpeditionDragon();
+            dragon.pos = level.randomRespawnCell(dragon);
+            dragonFloor = Dungeon.depth;
+        } else if (dragonFloor != Dungeon.depth || !level.insideMap(dragon.pos)) {
+            dragon.pos = level.randomRespawnCell(dragon);
+            dragon.pending = ExpeditionDragon.Attack.NONE;
+            dragonFloor = Dungeon.depth;
+        }
+        if (dragon.pos < 0) dragon.pos = level.entrance() + 1;
+        dragon.timeToNow();
+        level.mobs.add(dragon);
     }
 
     public static void spawnHunter(Level level) {

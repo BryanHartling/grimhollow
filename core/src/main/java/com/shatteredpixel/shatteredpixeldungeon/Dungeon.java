@@ -496,6 +496,7 @@ public class Dungeon {
 			hero.buff(AscensionChallenge.class).onLevelSwitch();
 		}
 
+		DragonExpedition.arriveDragon(level);
 		Mob.restoreAllies( level, pos );
         if (level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel)
             ((com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel) level).arrive();

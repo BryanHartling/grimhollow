@@ -1,3 +1,9 @@
+## Dragon expedition — component 4 (dragon combat)
+
+- Adds a flying, melee-accessible dragon with a fixed-direction one-turn warning before a six-cell fire cone or two-cell wingbeat. Breath has a three-turn minimum cooldown; wingbeat has a five-turn cooldown and uses the existing collision/chasm knockback path.
+- Dragon state is held by the quest, not independent copies on each floor. Health never regenerates and damage, cooldowns and pending attacks survive saving. Stale floor snapshots cannot resurrect or heal it.
+- The dragon has a single logical target cell so it can close on narrow bridges; large wings are visual overhang. Hoard transfer/rewards follow in component 5; bespoke artwork follows in component 6.
+
 ## Dragon expedition — component 3 (cavern and broodmother)
 
 - Adds an open dark cavern with separated 2×2 pillars, forty finite bone heaps (including three rations and four torches), six scavengers and a poisonous broodmother.

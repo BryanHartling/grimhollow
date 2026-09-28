@@ -124,6 +124,57 @@ final class ExpeditionScenario {
         check(Dungeon.level.mobs.isEmpty() && Dungeon.level.heaps.size == 40, "reentry regenerates enemies/supplies");
         System.out.println("TEST 59 cavern PASS: pillars, guaranteed finite supplies, descent/climb, fall/Feather Fall, brood caps and persistence, cleared floor remains safe");
     }
+    private static void dragon() throws Exception {
+        Dungeon.init(); Dungeon.branch = DragonExpedition.BRANCH; Dungeon.depth = DragonExpedition.CHASM;
+        Dungeon.switchLevel(Dungeon.newLevel(), -1);
+        ExpeditionDragon dragon = DragonExpedition.dragon;
+        int center = DragonChasmLevel.centerCell(), width = Dungeon.level.width();
+        for (int y = -8; y <= 8; y++) for (int x = -8; x <= 8; x++) Level.set(center + y*width + x, Terrain.EMPTY_SP);
+        dragon.pos = center; dragon.sprite = dragon.sprite(); dragon.sprite.visible = false;
+        Dungeon.hero.pos = center + 5; Dungeon.hero.sprite = new HeroSprite(); Dungeon.hero.sprite.visible = false;
+        Dungeon.hero.HP = Dungeon.hero.HT = 200; Dungeon.hero.lvl = 24;
+        java.util.Arrays.fill(Dungeon.level.heroFOV, true); dragon.aggro(Dungeon.hero);
+        int hp = Dungeon.hero.HP;
+        check(dragon.prepare(ExpeditionDragon.Attack.BREATH, Dungeon.hero.pos), "breath preparation");
+        check(Dungeon.hero.HP == hp, "windup deals damage");
+        java.util.Set<Integer> cone = dragon.attackCells(ExpeditionDragon.Attack.BREATH, Dungeon.hero.pos);
+        check(cone.contains(Dungeon.hero.pos) && !cone.contains(center + 8), "breath range/cone");
+        Level.set(center+3, Terrain.WALL);
+        check(!dragon.attackCells(ExpeditionDragon.Attack.BREATH, Dungeon.hero.pos).contains(center+5), "breath passes through wall");
+        Level.set(center+3, Terrain.EMPTY_SP);
+        Dungeon.hero.pos = center - 5; dragon.release();
+        check(Dungeon.hero.HP == hp, "breath tracks hero after warning");
+        check(!dragon.prepare(ExpeditionDragon.Attack.BREATH, center+5), "immediate repeat breath");
+        java.lang.reflect.Method spend = ExpeditionDragon.class.getDeclaredMethod("spend", float.class); spend.setAccessible(true);
+        spend.invoke(dragon, 2f); check(!dragon.prepare(ExpeditionDragon.Attack.BREATH, center+5), "breath before three turns");
+        spend.invoke(dragon, 1f); check(dragon.prepare(ExpeditionDragon.Attack.BREATH, center+5), "breath after three turns");
+        Dungeon.hero.pos = center + 5; dragon.release(); check(Dungeon.hero.HP < hp, "breath misses target in warned cone");
+        Buff.detach(Dungeon.hero, Burning.class); Dungeon.level.blobs.clear();
+        Dungeon.hero.pos = center+1; hp = Dungeon.hero.HP;
+        check(dragon.prepare(ExpeditionDragon.Attack.WINGBEAT, Dungeon.hero.pos), "wingbeat prep");
+        dragon.release(); check(Dungeon.hero.pos == center+3 && Dungeon.hero.HP < hp, "wingbeat damage and two-cell push");
+        int old = dragon.HP; dragon.damage(31, ExpeditionScenario.class); int wounded = dragon.HP;
+        check(wounded < old && dragon.heal(999) == 0, "dragon healed");
+        DragonExpedition.arriveDragon(Dungeon.level);
+        check(Dungeon.level.mobs.stream().filter(m -> m instanceof ExpeditionDragon).count() == 1, "duplicate dragon");
+        Dungeon.saveAll(); Dungeon.loadGame(GamesInProgress.curSlot);
+        Dungeon.switchLevel(Dungeon.loadLevel(GamesInProgress.curSlot), Dungeon.hero.pos);
+        check(DragonExpedition.dragon.HP == wounded && DragonExpedition.dragon.breathDelay == dragon.breathDelay, "dragon HP/cooldown reset on save");
+        InterlevelScene.curTransition = Dungeon.level.getTransition(LevelTransition.Type.REGULAR_ENTRANCE);
+        java.lang.reflect.Method ascend = InterlevelScene.class.getDeclaredMethod("ascend"); ascend.setAccessible(true); ascend.invoke(new InterlevelScene());
+        check(Dungeon.level.mobs.stream().noneMatch(m -> m instanceof ExpeditionDragon), "dragon follows into lower cavern");
+        Dungeon.saveAll(); Dungeon.loadGame(GamesInProgress.curSlot);
+        Dungeon.switchLevel(Dungeon.loadLevel(GamesInProgress.curSlot), Dungeon.hero.pos);
+        InterlevelScene.curTransition = Dungeon.level.getTransition(null);
+        java.lang.reflect.Method descend = InterlevelScene.class.getDeclaredMethod("descend"); descend.setAccessible(true); descend.invoke(new InterlevelScene());
+        check(DragonExpedition.dragon.HP == wounded && Dungeon.level.mobs.contains(DragonExpedition.dragon), "dragon healed/disappeared after cavern round trip");
+        Dungeon.hero.sprite = new HeroSprite(); DragonExpedition.dragon.sprite = DragonExpedition.dragon.sprite();
+        DragonExpedition.dragon.HP = 0; DragonExpedition.dragon.die(Dungeon.hero);
+        check(DragonExpedition.dragonSlain && DragonExpedition.victoryPending, "victory not recorded");
+        DragonExpedition.arriveDragon(Dungeon.level);
+        check(Dungeon.level.mobs.stream().noneMatch(m -> m instanceof ExpeditionDragon), "dead dragon respawns");
+        System.out.println("TEST 59 dragon PASS: warned fixed cone, range/occlusion, three-turn cooldown, wingbeat distance, no healing, single persistent boss, cavern round trip and death");
+    }
     static void run() throws Exception {
         Dungeon.init();
         int chosen = DragonExpedition.hunterDepth;
@@ -152,7 +203,7 @@ final class ExpeditionScenario {
         DragonExpedition.restore(new Bundle());
         check(!DragonExpedition.accepted && !DragonExpedition.entered && DragonExpedition.returnCell == -1, "old save/new run inherits quest");
         check(DragonExpedition.BRANCH != 1, "expedition aliases Vault branch");
-        maze(); cavern();
+        maze(); cavern(); dragon();
         System.out.println("TEST 59 foundation PASS: seeded placement, healing exchange, unique rewards, protected map, disk save/load, legacy defaults");
     }
 }

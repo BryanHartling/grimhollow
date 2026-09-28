@@ -27,7 +27,9 @@ public class Broodmother extends Mob {
     @Override public int damageRoll() { return Random.NormalIntRange(16, 24); }
     @Override public int drRoll() { return Random.NormalIntRange(2, 7); }
     @Override public int attackProc(Char enemy, int damage) {
-        Buff.affect(enemy, Poison.class).set(6); return super.attackProc(enemy, damage);
+        Poison poison = Buff.affect(enemy, Poison.class);
+        if (poison != null) poison.set(6);
+        return super.attackProc(enemy, damage);
     }
     @Override public void notice() { if (sprite != null) super.notice(); BossHealthBar.assignBoss(this); }
     public void alertArrival() { target = Dungeon.hero.pos; aggro(Dungeon.hero); }

@@ -43,6 +43,12 @@ public final class GameGeometry {
             com.badlogic.gdx.utils.JsonValue json=new com.badlogic.gdx.utils.JsonReader().parse(
                     com.badlogic.gdx.Gdx.files.internal("sprites/character-layouts.json"));
             for(com.badlogic.gdx.utils.JsonValue entry:json)characterLayouts.put(entry.name,entry.asIntArray());
+            // Original additions declare their logical atlas layout in the offline painted manifest.
+            com.badlogic.gdx.utils.JsonValue painted=new com.badlogic.gdx.utils.JsonReader().parse(
+                    com.badlogic.gdx.Gdx.files.internal("painted-assets.json")).get("assets");
+            for(com.badlogic.gdx.utils.JsonValue entry:painted)
+                if(entry.getBoolean("character",false) && entry.has("logical_size"))
+                    characterLayouts.put(entry.name,entry.get("logical_size").asIntArray());
         }
         if(texture instanceof String)return characterLayouts.get(texture);
         if(textureLayouts.containsKey(texture))return textureLayouts.get(texture);

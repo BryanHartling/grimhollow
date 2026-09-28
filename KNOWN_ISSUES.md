@@ -1,12 +1,10 @@
 # Known issues
 
-- Expedition component 7 tuning passes native menu input and headless generation/persistence checks. The quest remains disabled until component 8; tuning does not establish campaign balance or physical tablet performance.
-
-- Component 6 replaces expedition placeholder art with original paintings and passes native portrait/landscape review and offline reconstruction; the quest remains disabled pending balance controls and final release integration. Physical tablet review and campaign balance remain unverified.
-
-- Dragon expedition components 1–5 are a development checkpoint, not an enabled campaign quest: bespoke dragon/broodmother/hunter/map/platform/hoard visuals, expedition balance controls, and final native desktop/tablet verification remain. `DragonExpedition.AVAILABLE` is false until those components finish; interim art reuses existing painted assets.
-- Expedition mechanics pass test 59 across all nine classes and Windows desktop/Android packaging; these headless scenarios do not establish combat balance or visual/input quality on the Samsung tablet. No physical device or complete player-driven expedition was tested.
-- Existing contrast test 45 remains enforced and is not repaired by the expedition work. Prior tests retain their documented limitations/retirements; no CI check was removed or weakened.
+- Dragon expedition v1.16.0 is enabled and all eight components are implemented. Campaign combat balance and Samsung tablet performance still require human playtesting; automated boss defeats use controlled fixtures and are not a complete player-driven campaign.
+- The hunter appears only during creation of its seeded City floor (16–19); an existing save that already generated that floor will not gain the NPC retroactively. A new run gives the normal quest path; Playtest also provides direct expedition travel.
+- Playtest rebuild resets a floor, not the expedition's saved victories or one-time reward flag. Use a fresh test save to repeat the entire quest. The dragon never heals; previously used brood and collected rewards stay consumed on ordinary revisits.
+- Expedition text currently uses English fallback in other locales. The APK is a debug-signed sideload build; no physical Android device was connected for this run.
+- Existing terrain contrast test 45 remains enforced and unresolved: the prior checkpoint records 22/76 failures (Sewers 5/15, Prison 1/10, Caves 8/21, City 3/15, Halls 5/15). Exact release-head CI is recorded in the release tag/report; no threshold or check was weakened.
 
 - Version 1.15.0 balance tuning passes headless generation/persistence and native portrait-touch/landscape-mouse checks; physical Samsung tablet input and campaign balance under custom settings still need playtesting. Settings are save-local, and generation changes need a new or rebuilt floor. Existing contrast test 45 remains enforced and is not repaired by this settings patch.
 

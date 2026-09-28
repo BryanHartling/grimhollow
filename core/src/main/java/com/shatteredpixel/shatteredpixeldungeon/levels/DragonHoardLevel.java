@@ -23,6 +23,7 @@ public class DragonHoardLevel extends ExpeditionLevel {
     @Override public String tilesTex() { return "environment/tiles_expedition_hoard.png"; }
     public static final int WIDTH = 25, HEIGHT = 23;
     public static final int ARRIVAL = 19 * WIDTH + 4, RETURN = 19 * WIDTH + 20, TREASURE = 6 * WIDTH + 12;
+    public static final int VICTORY_ARRIVAL = TREASURE + 3 * WIDTH;
     { viewDistance = 8; }
     @Override protected boolean build() {
         setSize(WIDTH, HEIGHT);

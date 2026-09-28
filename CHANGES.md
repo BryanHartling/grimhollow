@@ -1,3 +1,12 @@
+# Dragon expedition — component 8 / v1.16.0
+
+- Enables the complete expedition in normal campaigns. The hunter is placed on an unoccupied, approachable cell on one seeded City floor; previously visited floors are preserved.
+- Adds direct expedition destinations to Playtest and a valid City return for that route. Normal entry still requires the healing exchange and map beside the hunter.
+- The flying dragon patrols its upper floor instead of starting asleep. Native release verification exercises the actual exchange, warning, entry, continue, fall, blocked climb, boss-clear transport and return exit in both orientations.
+- Victory arrives beside the newly accessible treasure; expedition arrival text names its areas instead of calling them ordinary dungeon floors.
+- Registers the original creature atlases in the common eightfold density metadata and shared frame/filter path; repairs CI test 56 without changing art or weakening the gate.
+- Bumps the desktop/Android release to 1.16.0 (Android code 962); no existing loot table, character balance or terrain contrast threshold is changed by this integration component.
+
 # Dragon expedition — component 7
 
 - Added 22 bounded expedition controls to the existing paged Balance tuning menu. Boss health and initial populations apply to new encounters; attack controls affect subsequent actions. Completed rewards and spent brood remain consumed.

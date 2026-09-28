@@ -11,7 +11,7 @@ public class DragonVictoryPassage extends Buff {
     @Override public boolean act() {
         detach();
         if (DragonExpedition.victoryPending && Dungeon.hero.isAlive())
-            DragonExpedition.travel(DragonExpedition.HOARD, DragonExpedition.BRANCH, DragonHoardLevel.RETURN - 1);
+            DragonExpedition.travel(DragonExpedition.HOARD, DragonExpedition.BRANCH, DragonHoardLevel.VICTORY_ARRIVAL);
         return true;
     }
 }

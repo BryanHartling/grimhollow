@@ -33,7 +33,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean encounters=Boolean.getBoolean("grimhollow.encounterTests");
     private final boolean interfaceReview=Boolean.getBoolean("grimhollow.interfaceReview");
     private final boolean expeditionReview=Boolean.getBoolean("grimhollow.expeditionReview");
-    private int expeditionStep, expeditionFrames;
+    private int expeditionStep, expeditionFrames, expeditionTown, expeditionExitAttempts;
+    private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.TreasureHunter expeditionHunter;
     private final boolean roomReview=Boolean.getBoolean("grimhollow.roomReview");
     private int roomStep, roomFrames, ritualTable, ritualCage, roomCenter;
     private final boolean presentationReview=Boolean.getBoolean("grimhollow.presentationReview");
@@ -91,7 +92,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     ||painting.height()+.01f<Camera.main.height)throw new AssertionError("Region painting does not fill the viewport");
             // The scene switch occurs after the previous scene's draw on this frame.
             Gdx.gl.glClear(Gdx.gl.GL_COLOR_BUFFER_BIT);Game.scene().draw();
-            capture("loading-"+new String[]{"sewers","prison","caves","city","halls"}[Math.min(4,InterlevelScene.lastRegion-1)]);
+            capture((expeditionReview?"expedition-loading-":"loading-")+new String[]{"sewers","prison","caves","city","halls"}[Math.min(4,InterlevelScene.lastRegion-1)]);
             loadingCaptures.add(InterlevelScene.lastRegion);
         }
         if(expeditionReview && frames>180) { expeditionTick(); return; }
@@ -1011,8 +1012,66 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(!playtestClickPage("Expedition supplies and hoard"))expeditionStep--;break;
             case 18:
                 interfaceBounds();capture("expedition-tuning-hoard");closeReviewWindows();BalanceTuning.reset();break;
+            case 19:
+                questField(GameScene.class,"scene",null);Dungeon.init();
+                Dungeon.depth=expeditionTown=DragonExpedition.hunterDepth;
+                Level city=Dungeon.newLevel();expeditionHunter=null;
+                for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:new java.util.ArrayList<>(city.mobs)) {
+                    if(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.TreasureHunter)expeditionHunter=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.TreasureHunter)m;
+                    else if(m.alignment==Char.Alignment.ENEMY)city.mobs.remove(m);
+                }
+                if(expeditionHunter==null)throw new AssertionError("Campaign hunter missing");
+                int approach=-1;
+                for(int d:new int[]{-1,1,-city.width(),city.width()})if(city.passable[expeditionHunter.pos+d] && city.findMob(expeditionHunter.pos+d)==null){approach=expeditionHunter.pos+d;break;}
+                if(approach<0)throw new AssertionError("No hunter approach");
+                Dungeon.switchLevel(city,approach);Playtest.enable();Playtest.god(true);
+                for(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing potion:Dungeon.hero.belongings.getAllItems(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing.class))potion.detachAll(Dungeon.hero.belongings.backpack);
+                new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing().quantity(2).collect();
+                switchNoFade(GameScene.class);break;
+            case 20:
+                expeditionHunter.interact(Dungeon.hero);break;
+            case 21:
+                interfaceBounds();capture("expedition-city-offer");playtestClick("Give a potion of healing");break;
+            case 22:
+                if(!DragonExpedition.accepted || Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing.class).quantity()!=1)
+                    throw new AssertionError("Native healing exchange");
+                interfaceBounds();capture("expedition-city-thanks");closeReviewWindows();break;
+            case 23:
+                Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.quest.ExpeditionMap.class).execute(Dungeon.hero,com.shatteredpixel.shatteredpixeldungeon.items.quest.ExpeditionMap.OPEN);break;
+            case 24:
+                interfaceBounds();capture("expedition-entry-warning");playtestClick("Enter the expedition");break;
+            case 25:
+                if(Dungeon.branch!=2 || !(Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.DragonChasmLevel))throw new AssertionError("Native map did not enter expedition");
+                capture("expedition-entry-complete");
+                try {Dungeon.saveAll();}catch(java.io.IOException error){throw new AssertionError(error);}
+                InterlevelScene.mode=InterlevelScene.Mode.CONTINUE;Game.switchScene(InterlevelScene.class);break;
+            case 26:
+                if(Dungeon.branch!=2 || Dungeon.level.mobs.stream().filter(m->m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.ExpeditionDragon).count()!=1)
+                    throw new AssertionError("Native continue lost/duplicated boss");
+                com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm.heroFall(Dungeon.hero.pos+1);break;
+            case 27:
+                if(!(Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel))throw new AssertionError("Native fall destination");
+                if(Dungeon.level.activateTransition(Dungeon.hero,Dungeon.level.getTransition(null)))throw new AssertionError("Native living broodmother permits climb");
+                capture("expedition-fall-and-blocked-climb");break;
+            case 28:
+                for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:new java.util.ArrayList<>(Dungeon.level.mobs))if(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Broodmother){m.HP=0;m.die(Dungeon.hero);}
+                Dungeon.hero.pos=com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel.CENTER;Dungeon.hero.sprite.place(Dungeon.hero.pos);
+                Dungeon.level.activateTransition(Dungeon.hero,Dungeon.level.getTransition(null));break;
+            case 29:
+                if(!(Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.DragonChasmLevel) || Dungeon.hero.pos!=com.shatteredpixel.shatteredpixeldungeon.levels.DragonChasmLevel.centerCell())throw new AssertionError("Native climb destination");
+                DragonExpedition.dragon.HP=0;DragonExpedition.dragon.die(Dungeon.hero);Dungeon.hero.spendAndNext(1f);break;
+            case 30:
+                if(!(Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.DragonHoardLevel) || !DragonExpedition.rewardsCreated || DragonExpedition.victoryPending)
+                    throw new AssertionError("Scheduled native victory transport/reward");
+                capture("expedition-victory-arrival");
+                Dungeon.hero.pos=com.shatteredpixel.shatteredpixeldungeon.levels.DragonHoardLevel.RETURN;Dungeon.hero.sprite.place(Dungeon.hero.pos);Dungeon.observe();
+                pointerCell(com.shatteredpixel.shatteredpixeldungeon.levels.DragonHoardLevel.RETURN);break;
+            case 31:
+                if(Dungeon.branch==2 && expeditionExitAttempts++<3){pointerCell(com.shatteredpixel.shatteredpixeldungeon.levels.DragonHoardLevel.RETURN);expeditionStep--;break;}
+                if(Dungeon.branch!=0 || Dungeon.depth!=expeditionTown || Dungeon.hero.pos!=DragonExpedition.returnCell)throw new AssertionError("Native hoard exit lost original City return");
+                capture("expedition-safe-return");break;
             default:
-                System.out.println("TEST 59 NATIVE PASS: painted dragon/broodmother/hunter/map, timber maze, normal cavern fog, guarded hoard and preview bounds; orientation="+(Boolean.getBoolean("grimhollow.interfacePortrait")?"portrait":"landscape"));
+                System.out.println("TEST 59 NATIVE PASS: painted assets, dark cavern, menu input, actual NPC exchange/map/continue/fall/blocked climb/boss clear/scheduled victory and pointer exit to original City; orientation="+(Boolean.getBoolean("grimhollow.interfacePortrait")?"portrait":"landscape"));
                 Gdx.app.exit();
         }
     }

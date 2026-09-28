@@ -180,6 +180,9 @@ public class WndPlaytest extends Window {
         rows.add(new Entry("Rebuild current floor",()->show("Rebuild floor "+Dungeon.depth,
                 "Replace this floor's terrain, creatures and loot so you can repeat its encounters. Keep your hero and inventory. Other visited floors stay.",
                 Arrays.asList(new Entry("Rebuild this floor",()->{Playtest.require();InterlevelScene.mode=InterlevelScene.Mode.PLAYTEST_RESET;Game.switchScene(InterlevelScene.class);})),WndPlaytest::floors)));
+        rows.add(new Entry("Dragon expedition - platforms",()->travel(DragonExpedition.CHASM,DragonExpedition.BRANCH)));
+        rows.add(new Entry("Dragon expedition - cavern",()->travel(DragonExpedition.CAVERN,DragonExpedition.BRANCH)));
+        rows.add(new Entry("Dragon expedition - hoard",()->travel(DragonExpedition.HOARD,DragonExpedition.BRANCH)));
         for(int d=1;d<=26;d++){
             final int depth=d;
             String region=d<=5?"Sewers":d<=10?"Prison":d<=15?"Caves":d<=20?"City":d<=25?"Halls":"Amulet";

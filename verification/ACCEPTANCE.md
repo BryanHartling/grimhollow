@@ -1,3 +1,37 @@
+# Dragon expedition release — v1.16.0 (all eight components)
+
+The expedition is now enabled. The sections below this release record are historical checkpoints; their then-incomplete component lists do not describe this release. No physical Samsung tablet or full player-driven combat campaign was tested.
+
+| Gate | Result | Actual command output / scope |
+|---|---|---|
+| Final mechanics, including 59 | PASS | `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeUpstream=true --no-daemon --console=plain`: **Runs=90 failures=0; BUILD SUCCESSFUL in 2m 18s**. Includes the real hunter exchange/entry, all eight exit locations across 64 maze seeds per hero, falls, brood limits, persistent dragon, hoard, two active trinkets, tuning and direct Playtest travel. |
+| Class-only coverage | PASS | Necromancer 10/0, Enchanter 10/0, Psychic 10/0 and combined 30/0 are included in the nine-class 90/0 run. Exact release-head CI additionally executes each separate class job. |
+| Final packaging and JUnit | PASS | After the shared density metadata fix: `core:test desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 1m 47s**. Seven JUnit tests, zero failures/errors. APK `com.grimhollow.dungeon`, code 962, version 1.16.0-INDEV, SDK 21/36. |
+| 59 native quest flow | PASS | Existing `--smoke-sewers` runner with `grimhollow.interfaceReview=true` and `grimhollow.expeditionReview=true`: **TEST 59 NATIVE PASS** in landscape and portrait. Actual button input: exchange one healing potion, map warning/entry, disk continue, fall/Cripple, blocked climb, broodmother death/climb, scheduled dragon-victory transport, and pointer exit to the original City cell. Boss deaths are controlled fixtures, not a claim of a balanced combat campaign. |
+| 59 native presentation/tuning | PASS | 1280×720 landscape and 720×1061 portrait framebuffer captures; popup bounds, painted creatures/platforms/hoard, normal cavern darkness, all three tuning sections and actual numeric edit. Victory arrives beside visible treasure. |
+| 24–26 / 34 / 36 / 56 | PASS | Native geometry run: 9 heroes, 125 existing mob forms, 74 creature atlases with eightfold density, 385 item frames, 60 identification overlays, 113 skill icons and 13 plants; failures=0. New expedition sprites also have their own test-59 presentation checks. |
+| 31 / 32 / 56 effects | PASS | Native GPU-completed benchmark: 40 gas + 10 fire cells, 240 frames, **mean=0.4836ms p95=0.6858ms failures=0**; batch channel difference=0. Soft-alpha particle/ray and scorch checks pass. |
+| 44 provenance / reconstruction | PASS | `python tools/recovery_assets.py --check`: **PAINTED assets=136 source sheets=124 failures=0**; 55 launcher resources; **verified painted replacements=136 failures=0**. Metadata repair changed no image pixels. |
+| Native Windows launcher | PASS | `tools/package-windows.ps1`; bundled `Grimhollow.exe --smoke-title` in an isolated profile: **LAUNCHER_EXIT=0; RENDERED=TitleScene**. Portable ZIP also produced. |
+| Physical Android device | NOT RUN | `adb devices -l` returned an empty list. Desktop portrait input is not a hardware performance test. |
+| Full CI / 21 / 45 | Permanent known issue | Test 45 remains enforced with unchanged contrast thresholds; preceding CI is 22/76 failures. Exact release-head CI outcome is recorded in the annotated release tag and delivery. No failing check is disabled. |
+| Other prior numbered subjects | Prior status retained | Existing headless/JUnit scenarios were rerun; the numbered 1–58 records below retain their stated scope, retirements and permanent known issues. Full campaign, exhaustive talent combat and reference licensing gaps are not claimed resolved. |
+
+Component-7 CI exposed three missing density declarations (test 56) for the original dragon, broodmother and hunter. This release adds their logical layout metadata and uses the common character frame/filter path; the same check passes locally, with unchanged artwork and thresholds. A native capture also found victory treasure offscreen; arrival was moved beside the hoard and rechecked in both orientations. Intermediate attempts remain in ignored `.local/expedition-*` diagnostics.
+
+Screenshots: [dragon warning](interface/landscape/expedition-breath-warning.png), [cavern](interface/portrait/expedition-cavern-darkness.png), [actual hunter exchange](interface/portrait/expedition-city-offer.png), [entry warning](interface/portrait/expedition-entry-warning.png), [victory beside the hoard](interface/landscape/expedition-victory-arrival.png), [safe return](interface/portrait/expedition-safe-return.png). Sources/prompts are in `tools/painted/sources/expedition/` and `tools/painted/expedition-prompts.json`; the packer needs no image-generation service at build time.
+
+| Component | Pushed checkpoint |
+|---|---|
+| 1 Foundation | v1.16.0-expedition-foundation |
+| 2 Upper maze | v1.16.0-expedition-maze |
+| 3 Cavern / broodmother | v1.16.0-expedition-cavern |
+| 4 Persistent dragon | v1.16.0-expedition-dragon |
+| 5 Hoard / retreat | v1.16.0-expedition-hoard |
+| 6 Original painted presentation | v1.16.0-expedition-visuals |
+| 7 Save-local tuning | v1.16.0-expedition-tuning |
+| 8 Integration / release | v1.16.0-dragon-expedition |
+
 # Dragon expedition — component 7 tuning checkpoint
 
 `core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeClass=PSYCHIC --no-daemon --console=plain`: **BUILD SUCCESSFUL in 1m 25s; Runs=10 failures=0**; seven existing JUnit cases pass. Test 59 additionally verifies isolated offer RNG, boss HP/damage/cooldown, zero initial spinners/live brood, configured sight and guaranteed supplies, zero gold/artifact rewards, one upgraded equipment item and guaranteed non-duplicate trinket, disk persistence and reset. Existing baseline expedition assertions remain unchanged and pass.

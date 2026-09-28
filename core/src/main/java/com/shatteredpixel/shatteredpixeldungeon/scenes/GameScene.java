@@ -678,7 +678,11 @@ public class GameScene extends PixelScene {
 		Camera.main.panTo(hero.center(), 2.5f);
 
 		if (InterlevelScene.mode != InterlevelScene.Mode.NONE) {
-			if (Dungeon.depth == Statistics.deepestFloor
+            if (Dungeon.branch == com.shatteredpixel.shatteredpixeldungeon.DragonExpedition.BRANCH
+                    && InterlevelScene.mode != InterlevelScene.Mode.RESURRECT && InterlevelScene.mode != InterlevelScene.Mode.RESET) {
+                GLog.h(Messages.get(this, "expedition_" + Dungeon.depth));
+                Sample.INSTANCE.play(Assets.Sounds.DESCEND);
+            } else if (Dungeon.depth == Statistics.deepestFloor
 					&& (InterlevelScene.mode == InterlevelScene.Mode.DESCEND || InterlevelScene.mode == InterlevelScene.Mode.FALL)) {
 				GLog.h(Messages.get(this, "descend"), Dungeon.depth);
 				Sample.INSTANCE.play(Assets.Sounds.DESCEND);

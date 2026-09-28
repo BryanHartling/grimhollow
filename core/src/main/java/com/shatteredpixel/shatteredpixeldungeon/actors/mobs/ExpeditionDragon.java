@@ -30,7 +30,7 @@ public class ExpeditionDragon extends Mob {
     public int aim = -1, origin = -1, lowestHP;
     public float breathDelay, wingDelay;
     { spriteClass = ExpeditionDragonSprite.class; HP = HT = BalanceTuning.get(DRAGON_HEALTH); lowestHP = HT; defenseSkill = 22;
-        EXP = 40; maxLvl = 30; flying = true; viewDistance = 6;
+        EXP = 40; maxLvl = 30; flying = true; viewDistance = 6; state = WANDERING;
         properties.add(Property.BOSS);
         // Its wings overhang the tile, but it must approach heroes on one-cell bridges.
         immunities.add(Burning.class); immunities.add(Fire.class); HUNTING = new DragonHunting(); }

@@ -6,7 +6,7 @@ public class BroodmotherSprite extends MobSprite {
     @Override public float visualFootprint() { return 26; }
     public BroodmotherSprite() {
         texture("sprites/expedition_spider.png");
-        TextureFilm frames = new TextureFilm(texture, 512, 512);
+        TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 64, 64);
         idle = new Animation(1, true); idle.frames(frames, 0);
         run = idle.clone();
         attack = new Animation(10, false); attack.frames(frames, 1, 2, 0);

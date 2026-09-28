@@ -228,16 +228,22 @@ public final class Playtest {
     }
     public static void travel(int depth,int branch) throws IOException {
         require();
-        if(depth<1 || depth>26 || branch<0 || branch>1 || (branch==1 && !(depth>=11&&depth<=14 || depth>=16&&depth<=19)))
+        if(depth<1 || depth>26 || branch<0 || branch>2 || (branch==1 && !(depth>=11&&depth<=14 || depth>=16&&depth<=19))
+                || (branch==2 && (depth<DragonExpedition.CHASM || depth>DragonExpedition.HOARD)))
             throw new IllegalArgumentException("Choose a dungeon floor or a supported quest branch.");
         Level.beforeTransition();
         Mob.holdAllies(Dungeon.level);
         Dungeon.saveAll();
         // Generate skipped main floors in order: shops, limited drops and quest placement depend on this.
-        int generateThrough=branch==1?(depth<=14?14:19):depth;
+        int generateThrough=branch==2?Math.max(depth,DragonExpedition.hunterDepth):branch==1?(depth<=14?14:19):depth;
         for(int d=1;d<=generateThrough;d++)if(!Dungeon.levelHasBeenGenerated(d,0)){
             Dungeon.depth=d;Dungeon.branch=0;Dungeon.level=Dungeon.newLevel();
             Dungeon.saveLevel(GamesInProgress.curSlot);
+        }
+        if (branch==DragonExpedition.BRANCH && DragonExpedition.returnCell<0) {
+            Dungeon.depth=DragonExpedition.hunterDepth;Dungeon.branch=0;
+            Level city=Dungeon.loadLevel(GamesInProgress.curSlot);
+            DragonExpedition.returnCell=city.entrance();DragonExpedition.entered=true;
         }
         Dungeon.depth=depth;Dungeon.branch=branch;
         Level level=Dungeon.levelHasBeenGenerated(depth,branch)?Dungeon.loadLevel(GamesInProgress.curSlot):Dungeon.newLevel();

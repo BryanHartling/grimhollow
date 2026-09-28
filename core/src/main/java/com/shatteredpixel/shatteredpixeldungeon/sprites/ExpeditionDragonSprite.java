@@ -19,7 +19,7 @@ public class ExpeditionDragonSprite extends MobSprite {
     }
     public ExpeditionDragonSprite() {
         texture("sprites/expedition_dragon.png");
-        TextureFilm frames = poses = new TextureFilm(texture, 512, 512);
+        TextureFilm frames = poses = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 64, 64);
         idle = new Animation(1, true); idle.frames(frames, 0);
         run = new Animation(8, true); run.frames(frames, 0);
         attack = new Animation(12, false); attack.frames(frames, 0, 2, 0);

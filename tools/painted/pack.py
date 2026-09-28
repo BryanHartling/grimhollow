@@ -257,6 +257,7 @@ def main():
         if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]
         if path.startswith('sprites/expedition_'):
             manifest['assets'][path]['character']=True
+            manifest['assets'][path]['logical_size']=[im.width//8,im.height//8]
             frame=256 if 'hunter' in path else 512
             manifest['assets'][path]['painted_rects']=[[x,y,x+frame,y+frame] for y in range(0,im.height,frame) for x in range(0,im.width,frame)]
         target=ASSETS/path

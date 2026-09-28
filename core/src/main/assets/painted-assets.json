@@ -9125,6 +9125,10 @@
       ],
       "rgba_sha256": "77a414f924749ee77fff218f1f698eb96f56005dfafdfc60a7e7f39d5c9c1e3e",
       "character": true,
+      "logical_size": [
+        128,
+        128
+      ],
       "painted_rects": [
         [
           0,
@@ -9159,6 +9163,10 @@
       ],
       "rgba_sha256": "a7560b0defe213914215966a875154e1a0be52a3e4e0792ca4793b1023a6b138",
       "character": true,
+      "logical_size": [
+        128,
+        128
+      ],
       "painted_rects": [
         [
           0,
@@ -9193,6 +9201,10 @@
       ],
       "rgba_sha256": "560c7f34436c0e2b9750d9050199fde86abf8f7ca6f2531978bb65a3b4b788c0",
       "character": true,
+      "logical_size": [
+        32,
+        32
+      ],
       "painted_rects": [
         [
           0,

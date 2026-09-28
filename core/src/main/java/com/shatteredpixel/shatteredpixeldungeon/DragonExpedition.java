@@ -19,8 +19,8 @@ import com.watabou.utils.Random;
 public final class DragonExpedition {
     private DragonExpedition() {}
     public static final int BRANCH = 2, CHASM = 17, CAVERN = 18, HOARD = 19;
-    // Enable the campaign entrance after the visual/presentation and final release components.
-    public static final boolean AVAILABLE = false;
+    // All expedition components are integrated; normal runs offer one City entrance.
+    public static final boolean AVAILABLE = true;
     public static int hunterDepth, hunterPos = -1, returnCell = -1;
     public static java.util.ArrayList<Item> fallenItems = new java.util.ArrayList<>();
     public static ExpeditionDragon dragon;
@@ -105,7 +105,17 @@ public final class DragonExpedition {
     }
     public static void spawnHunter(Level level) {
         if (!AVAILABLE || Dungeon.branch != 0 || Dungeon.depth != hunterDepth || !offerAvailable()) return;
-        int cell = level.randomRespawnCell(null);
+        int cell = -1;
+        for (int attempt = 0; attempt < 50; attempt++) {
+            int candidate = level.randomRespawnCell(null);
+            if (candidate < 0 || level.findMob(candidate) != null) continue;
+            boolean approach = false;
+            for (int d : new int[]{-1, 1, -level.width(), level.width()}) {
+                int next = candidate + d;
+                if (level.insideMap(next) && level.passable[next] && level.findMob(next) == null) approach = true;
+            }
+            if (approach) { cell = candidate; break; }
+        }
         if (cell < 0) return;
         TreasureHunter hunter = new TreasureHunter();
         hunter.pos = hunterPos = cell;

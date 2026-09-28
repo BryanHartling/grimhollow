@@ -1,14 +1,16 @@
-# Dragon expedition: component 7 checkpoint
-
-The existing Playtest → Balance tuning menu now includes Expedition dragon, Expedition cavern, and Expedition supplies and hoard. Twenty-two bounded, save-local controls cover offer chance, boss stats/attacks, sight/fall damage, spider budgets, finite supplies and one-time rewards. Normal saves retain the approved defaults. Entry remains disabled pending final component 8.
-
-# Dragon expedition: component 6 checkpoint
-
-Original painted dragon, broodmother, treasure hunter, timber platforms, continuous hoard and map are integrated. The campaign entrance remains disabled until balance controls and final release integration finish (components 7–8). Runtime version is still 1.15.0. Native portrait/landscape screenshots: `verification/interface/*/expedition-*.png`. Source art and exact prompts: `tools/painted/sources/expedition/` and `tools/painted/expedition-prompts.json`.
-
 # Grimhollow
 
-**Dragon expedition development checkpoint (components 1–5):** the saved quest, platform maze, dark cavern/broodmother, persistent dragon combat, retreat route and one-time hoard rewards are implemented. The campaign entrance is intentionally disabled while bespoke visuals, expedition balance controls and final native release verification remain unfinished. This is not a player release of the quest; the existing v1.15.0 game remains available. Each completed component has a `v1.16.0-expedition-*` tag. [Checkpoint verification](verification/ACCEPTANCE.md) and [remaining work](KNOWN_ISSUES.md).
+**Dragon expedition v1.16.0:** find a wounded treasure hunter on one newly generated City floor (16–19). Give one Potion of Healing to receive an Expedition Map and an Elixir of Feather Fall. Open the map beside the hunter to enter a wooden-platform maze over a deep chasm. The only way back to the dungeon is through the Hoard Room's return exit, which remains usable even while the dragon lives.
+
+The dragon flies, warns before breathing fire or sweeping you off a platform, and retains damage between visits. The lower cavern has limited natural sight, scattered finite supplies, six scavengers and a poisonous broodmother. Defeat her to clear the cavern and unlock the climb back to the center. Killing the dragon carries you to the hoard and unlocks its one-time treasure. The reward can include an artifact and an additional, distinct trinket; carried trinkets retain their normal simultaneous effects.
+
+For rapid testing, open **Menu → Playtest → enable for this save → Travel to any floor / quest branch** and select the expedition platforms, cavern or hoard. God mode is optional. **Balance tuning** has three expedition sections with 22 bounded controls for the offer, bosses, sight, falls, brood limits, supplies and rewards. Rebuilding floors does not reset completed quest history or recreate collected hoard rewards; start a new test save for a fresh expedition.
+
+Existing saves remain compatible, but the hunter is not retroactively inserted into an already generated City floor. A new run is the reliable way to experience the normal quest. All eight components have committed checkpoints; see [verification](verification/ACCEPTANCE.md) and [known issues](KNOWN_ISSUES.md). The existing terrain-contrast gate remains enforced and is still a known failure; no full green CI or physical-tablet playtest is claimed.
+
+Local launchers after building: `desktop/build/windows/1.16.0/Grimhollow/Grimhollow.exe` (keep its whole folder), `desktop/build/libs/desktop-1.16.0.jar`, and `android/build/outputs/apk/debug/android-debug.apk`. Android is a debug-signed sideload build.
+
+Original expedition paintings, exact generation prompts and the offline packing recipe are in [sources](tools/painted/sources/expedition/), [prompts](tools/painted/expedition-prompts.json), and [packer](tools/painted/expedition.py). Native screenshots are in `verification/interface/{landscape,portrait}/expedition-*.png`; CI reconstructs the committed sources without an image-generation service.
 
 **Balance tuning v1.15.0:** open the game menu > **Playtest** > enable it for this save > **Balance tuning**. God mode is optional. Twenty-seven controls adjust enemy population/respawn speed, rare variants, curse-bound chance/bonus health/bonus loot, Hexcaster rotations, Chainwarden, random floor loot, ordinary enemy drops, equipment tiers/upgrade/curse/enchantment rates, rare enchantments, Bone Armor substitution, and eleven item-category weights. Each entry shows its current value and explains its range, default, and scope.
 
@@ -92,7 +94,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-1.14.1.jar
+java -jar desktop\build\libs\desktop-1.16.0.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.

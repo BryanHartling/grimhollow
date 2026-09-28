@@ -207,7 +207,7 @@ final class ExpeditionScenario {
         dragon = DragonExpedition.dragon; dragon.sprite = dragon.sprite(); dragon.HP = 0; dragon.die(Dungeon.hero);
         DragonVictoryPassage passage = Dungeon.hero.buff(DragonVictoryPassage.class);
         check(passage != null, "no immediate victory passage"); passage.act(); returnRoute();
-        check(Dungeon.level instanceof DragonHoardLevel && Dungeon.hero.pos == DragonHoardLevel.RETURN-1
+        check(Dungeon.level instanceof DragonHoardLevel && Dungeon.hero.pos == DragonHoardLevel.VICTORY_ARRIVAL
                 && !DragonExpedition.victoryPending && Dungeon.hero.buff(DragonVictoryPassage.class) == null, "victory placement or repeated transport");
         check(Dungeon.level.mobs.stream().anyMatch(m -> m instanceof NecroSkeleton)
                 && Dungeon.level.mobs.stream().noneMatch(m -> m instanceof ExpeditionDragon), "victory loses ally or retains dragon");
@@ -273,6 +273,13 @@ final class ExpeditionScenario {
         Dungeon.saveAll();Dungeon.loadGame(GamesInProgress.curSlot);Dungeon.switchLevel(Dungeon.loadLevel(GamesInProgress.curSlot),Dungeon.hero.pos);
         check(BalanceTuning.get(DRAGON_HEALTH)==777 && BalanceTuning.get(HOARD_TRINKET)==100,"expedition tuning lost on disk");
         BalanceTuning.reset();check(new ExpeditionDragon().HT==480 && BalanceTuning.get(CAVERN_RATIONS)==3,"expedition reset");
+        Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();
+        for(int depth:new int[]{DragonExpedition.CHASM,DragonExpedition.CAVERN,DragonExpedition.HOARD}){
+            Playtest.travel(depth,DragonExpedition.BRANCH);
+            check(Dungeon.branch==2 && Dungeon.depth==depth && Dungeon.level.passable[Dungeon.hero.pos] && DragonExpedition.returnCell>=0,"playtest expedition destination");
+        }
+        Dungeon.level.activateTransition(Dungeon.hero,Dungeon.level.getTransition(LevelTransition.Type.REGULAR_EXIT));returnRoute();
+        check(Dungeon.branch==0 && Dungeon.depth==DragonExpedition.hunterDepth && Dungeon.level.passable[Dungeon.hero.pos],"playtest expedition retreat");
         System.out.println("TEST 59 tuning PASS: isolated offer RNG, custom boss stats/cooldown, cavern population/sight/supplies, brood cap, one-time reward count/quality/chances, disk persistence/reset");
     }
     static void run() throws Exception {
@@ -284,7 +291,16 @@ final class ExpeditionScenario {
         check(Random.Long() == expected && DragonExpedition.hunterDepth == chosen, "quest seed perturbs main RNG");
         Random.popGenerator();
         Dungeon.depth = chosen; Dungeon.switchLevel(Dungeon.newLevel(), -1);
-        DragonExpedition.hunterPos = Dungeon.hero.pos;
+        Mob hunter=null;
+        for(Mob mob:Dungeon.level.mobs)if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.TreasureHunter){check(hunter==null,"duplicate hunter");hunter=mob;}
+        check(hunter!=null && hunter.pos==DragonExpedition.hunterPos,"campaign hunter missing");
+        int approach=-1;
+        for(int d:new int[]{-1,1,-Dungeon.level.width(),Dungeon.level.width()}){
+            int cell=hunter.pos+d;
+            if(Dungeon.level.passable[cell] && Dungeon.level.findMob(cell)==null){approach=cell;break;}
+        }
+        check(approach>=0,"hunter cannot be approached");Dungeon.hero.pos=approach;
+        check(!DragonExpedition.canEnter(Dungeon.hero),"entry without exchange");
         for (PotionOfHealing p : Dungeon.hero.belongings.getAllItems(PotionOfHealing.class)) p.detachAll(Dungeon.hero.belongings.backpack);
         check(!DragonExpedition.accept(Dungeon.hero), "free map without healing potion");
         new PotionOfHealing().quantity(2).collect();
@@ -293,7 +309,10 @@ final class ExpeditionScenario {
         check(Dungeon.hero.belongings.getItem(ExpeditionMap.class) != null
                 && Dungeon.hero.belongings.getItem(ElixirOfFeatherFall.class) != null, "missing quest supplies");
         check(!DragonExpedition.accept(Dungeon.hero), "repeat reward");
-        DragonExpedition.entered = true; DragonExpedition.returnCell = Dungeon.hero.pos;
+        check(DragonExpedition.canEnter(Dungeon.hero),"earned map cannot open at hunter");
+        int savedReturn=Dungeon.hero.pos;DragonExpedition.enter(Dungeon.hero);returnRoute();
+        check(Dungeon.branch==2 && Dungeon.level instanceof DragonChasmLevel && !DragonExpedition.canEnter(Dungeon.hero),"actual map entry/one-way gate");
+        DragonExpedition.travel(chosen,0,savedReturn);returnRoute();
         DragonExpedition.spiderSlain = true;
         Dungeon.saveAll(); Dungeon.loadGame(GamesInProgress.curSlot);
         Dungeon.switchLevel(Dungeon.loadLevel(GamesInProgress.curSlot), Dungeon.hero.pos);

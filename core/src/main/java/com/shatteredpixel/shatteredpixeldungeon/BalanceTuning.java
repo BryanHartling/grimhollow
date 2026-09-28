@@ -27,7 +27,10 @@ public final class BalanceTuning {
         SPIDERS_INITIAL(5,6,0,12), BROOD_LIVE(5,3,0,6), BROOD_TOTAL(5,6,0,18),
         SPIDERS_CAP(5,9,0,18), BROOD_INTERVAL(5,5,2,12),
         CAVERN_RATIONS(6,3,0,8), CAVERN_TORCHES(6,4,0,12), HOARD_GOLD(6,2500,0,10000),
-        HOARD_EQUIPMENT(6,3,0,6), HOARD_UPGRADES(6,3,0,10), HOARD_ARTIFACT(6,25,0,100), HOARD_TRINKET(6,25,0,100);
+        HOARD_EQUIPMENT(6,3,0,6), HOARD_UPGRADES(6,3,0,10), HOARD_ARTIFACT(6,25,0,100), HOARD_TRINKET(6,25,0,100),
+        CAVERN_REMAINS(7,48,20,100), CAVERN_GEAR_WEIGHT(7,80,0,100), CAVERN_RING_WEIGHT(7,5,0,100),
+        CAVERN_GOLD_WEIGHT(7,10,0,100), CAVERN_CONSUMABLE_WEIGHT(7,5,0,100),
+        CAVERN_MAX_TIER(7,3,1,5), CAVERN_UPGRADES(7,0,0,3);
 
         public final int group, baseline, min, max;
         Key(int group) { this(group,100,0,1000); }
@@ -41,6 +44,8 @@ public final class BalanceTuning {
             return value+(percentage?"%":""); }
     }
     private static final EnumMap<Key,Integer> values=new EnumMap<>(Key.class);
+    public static final Key[] CAVERN_LOOT_WEIGHTS={Key.CAVERN_GEAR_WEIGHT,Key.CAVERN_RING_WEIGHT,
+            Key.CAVERN_GOLD_WEIGHT,Key.CAVERN_CONSUMABLE_WEIGHT};
     private static final String PROFILE="balance_profile_v1";
     public static int get(Key key) { return Playtest.enabled()?values.getOrDefault(key,key.baseline):key.baseline; }
     public static float multiplier(Key key) { return get(key)/100f; }
@@ -51,6 +56,11 @@ public final class BalanceTuning {
             boolean any=false;
             for(Key other:Key.values())if(other.group==3 && other!=key && get(other)>0)any=true;
             if(!any)throw new IllegalArgumentException("Keep at least one item category above zero.");
+        }
+        if(java.util.Arrays.asList(CAVERN_LOOT_WEIGHTS).contains(key) && value==0) {
+            boolean any=false;
+            for(Key other:CAVERN_LOOT_WEIGHTS)if(other!=key && get(other)>0)any=true;
+            if(!any)throw new IllegalArgumentException("Keep at least one cavern loot weight above zero.");
         }
         if(value==key.baseline)values.remove(key);else values.put(key,value);
         persist();
@@ -98,6 +108,9 @@ public final class BalanceTuning {
         boolean any=false;
         for(Key key:Key.values())if(key.group==3 && values.getOrDefault(key,key.baseline)>0)any=true;
         if(!any)for(Key key:Key.values())if(key.group==3)values.remove(key);
+        any=false;
+        for(Key key:CAVERN_LOOT_WEIGHTS)if(values.getOrDefault(key,key.baseline)>0)any=true;
+        if(!any)for(Key key:CAVERN_LOOT_WEIGHTS)values.remove(key);
     }
     public static int count(Key key,int count) { return Math.round(count*multiplier(key)); }
     public static boolean roll(Key key,int denominator,int successes) {

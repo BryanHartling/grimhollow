@@ -972,14 +972,20 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)
                     if(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Broodmother)brood=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Broodmother)m;
                 if(brood==null || brood.sprite.visualFootprint()!=26)throw new AssertionError("Broodmother art/size");
-                Dungeon.hero.pos=brood.pos+Dungeon.level.width();Dungeon.hero.sprite.place(Dungeon.hero.pos);Dungeon.observe();
+                for(int d:com.watabou.utils.PathFinder.NEIGHBOURS8)
+                    if(Dungeon.level.passable[brood.pos+d]&&Dungeon.level.findMob(brood.pos+d)==null){Dungeon.hero.pos=brood.pos+d;break;}
+                Dungeon.hero.sprite.place(Dungeon.hero.pos);Dungeon.observe();
                 com.watabou.noosa.Camera.main.panFollow(Dungeon.hero.sprite, 5);
                 brood.damage(0,Dungeon.hero);
                 break;
             case 5:
                 if(!(RecoveryChecks.field(RecoveryChecks.field(Game.scene(),"boss"),"boss") instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Broodmother))
                     throw new AssertionError("Expedition broodmother boss HUD missing");
-                capture("expedition-broodmother");expeditionFloor(DragonExpedition.HOARD);break;
+                capture("expedition-broodmother");
+                Dungeon.hero.pos=com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel.CENTER;
+                Dungeon.hero.sprite.place(Dungeon.hero.pos);Playtest.enable();Playtest.reveal();
+                com.watabou.noosa.Camera.main.zoom(1f);
+                com.watabou.noosa.Camera.main.panFollow(Dungeon.hero.sprite,5);expeditionStep=42;break;
             case 6:
                 if(Dungeon.level.heaps.size!=0)throw new AssertionError("Locked hoard has stealable loot");
                 for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap tile:Dungeon.level.customTiles)
@@ -1017,7 +1023,14 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 17:
                 if(!playtestClickPage("Expedition supplies and hoard"))expeditionStep--;break;
             case 18:
-                interfaceBounds();capture("expedition-tuning-hoard");closeReviewWindows();BalanceTuning.reset();break;
+                interfaceBounds();capture("expedition-tuning-hoard");closeReviewWindows();
+                com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();expeditionStep=40;break;
+            case 40:
+                if(!playtestClickPage("Cavern remains loot"))expeditionStep--;break;
+            case 41:
+                interfaceBounds();capture("expedition-tuning-remains");closeReviewWindows();BalanceTuning.reset();expeditionStep=19;break;
+            case 42:
+                capture("expedition-cavern-overview");expeditionFloor(DragonExpedition.HOARD);expeditionStep=6;break;
             case 19:
                 questField(GameScene.class,"scene",null);Dungeon.init();
                 Dungeon.depth=expeditionTown=DragonExpedition.hunterDepth;

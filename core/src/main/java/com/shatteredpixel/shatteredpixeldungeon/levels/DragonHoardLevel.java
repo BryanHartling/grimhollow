@@ -29,7 +29,7 @@ public class DragonHoardLevel extends ExpeditionLevel {
         setSize(WIDTH, HEIGHT);
         for (int y = 2; y < HEIGHT - 2; y++) for (int x = 2; x < WIDTH - 2; x++) map[y*WIDTH+x] = Terrain.EMPTY;
         for (int y = 4; y <= 8; y++) for (int x = 9; x <= 15; x++) map[y*WIDTH+x] = Terrain.PEDESTAL;
-        map[ARRIVAL] = Terrain.ENTRANCE; map[RETURN] = Terrain.EXIT;
+        map[ARRIVAL] = Terrain.ENTRANCE; map[RETURN] = Terrain.ENTRANCE;
         transitions.add(new LevelTransition(this, ARRIVAL, LevelTransition.Type.REGULAR_ENTRANCE,
                 DragonExpedition.CHASM, DragonExpedition.BRANCH, LevelTransition.Type.REGULAR_EXIT));
         transitions.add(new LevelTransition(this, RETURN, LevelTransition.Type.REGULAR_EXIT,
@@ -38,6 +38,9 @@ public class DragonHoardLevel extends ExpeditionLevel {
         return true;
     }
     @Override protected void createItems() { unlockHoard(); }
+    @Override public void restoreFromBundle(com.watabou.utils.Bundle bundle) {
+        super.restoreFromBundle(bundle);map[RETURN]=Terrain.ENTRANCE;
+    }
 
     /** There are no real treasure items to burn, steal, pull or collect before victory. */
     public void unlockHoard() {

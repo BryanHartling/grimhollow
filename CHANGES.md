@@ -1,3 +1,9 @@
+# Expedition playtest follow-up — natural cavern and salvage
+
+- Replaced the rectangular lower cavern with a connected, irregular rock outline and separated 2x2 pillars. Broodmother starts at least 14 cells from the center; ordinary spinners occupy the approaches. Falls land in the central clearing away from the boss and do not alert her; deliberate climbing down still does.
+- Cavern climb and Hoard return now draw upward stairs, including already saved floors; branch routing is unchanged. Existing cavern shapes and heaps are preserved until a new or rebuilt floor.
+- Default cavern contains 48 alternating bone piles/adventurer remains: three rations, four torches, 33 tier-1–3 +0 equipment finds, two rings, four small gold finds and two consumables. Challenge restrictions still apply. Seven shared controls set count, relative loot mix, tier ceiling and upgrades.
+
 # Expedition playtest follow-up — shared settings and Hatchling identification
 
 - Hatchling identification now searches every possessed item, including equipment and nested bags; feeding, permanent upgrades and enchantments keep their loose-only restrictions.

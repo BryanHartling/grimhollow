@@ -20,6 +20,11 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite;
 
 final class ExpeditionScenario {
     static void check(boolean ok, String message) { if (!ok) throw new AssertionError("59: " + message); }
+    private static int weaponTier(Item item) {
+        return item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon
+                ?((com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon)item).tier
+                :((com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon)item).tier;
+    }
     private static void maze() throws Exception {
         java.util.Set<Integer> exits = new java.util.HashSet<>();
         long originalSeed = Dungeon.seed;
@@ -68,16 +73,27 @@ final class ExpeditionScenario {
         int hp = Dungeon.hero.HP; ascend.invoke(new InterlevelScene());
         check(Dungeon.level instanceof DragonCavernLevel && Dungeon.hero.HP == hp && Dungeon.hero.buff(Cripple.class) == null, "voluntary descent harms hero");
         DragonCavernLevel level = (DragonCavernLevel) Dungeon.level;
-        check(level.viewDistance == 3 && level.addRespawner() == null && level.heaps.size == 40, "dark finite cavern");
-        int food = 0, torches = 0;
+        check(level.viewDistance == 3 && level.addRespawner() == null && level.heaps.size == 48, "dark finite cavern");
+        check(level.map[DragonCavernLevel.CENTER]==Terrain.ENTRANCE,"cavern climb must depict stairs up");
+        int food = 0, torches = 0, gear=0, rings=0, bones=0, remains=0;
+        for(Heap heap:level.heaps.valueList()){if(heap.type==Heap.Type.SKELETON)bones++;if(heap.type==Heap.Type.REMAINS)remains++;}
         for (Heap heap : level.heaps.valueList()) for (Item item : heap.items) {
             if (item instanceof Food) food += item.quantity(); if (item instanceof Torch) torches += item.quantity();
+            if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor){
+                gear++;check(item.trueLevel()==0,"common remains have upgrades");
+                if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)
+                    check(weaponTier(item)<=3,"remains weapon tier");
+                else check(((com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor)item).tier<=3,"remains armor tier");
+            }
+            if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring)rings++;
         }
         check(food == 3 && torches == 4, "guaranteed supplies");
+        check(gear==33&&rings==2&&bones==24&&remains==24,"equipment majority, occasional rings and mixed remains");
         int pillars = 0;
         for (int y = 1; y < level.height()-1; y++) for (int x = 1; x < level.width()-1; x++) {
             int c = y * level.width() + x;
-            if (level.map[c] == Terrain.WALL && level.map[c-1] != Terrain.WALL && level.map[c-level.width()] != Terrain.WALL) {
+            if (x<level.width()-2&&y<level.height()-2&&level.map[c] == Terrain.WALL && level.map[c-1] != Terrain.WALL
+                    && level.map[c-level.width()] != Terrain.WALL&&level.map[c+2]!=Terrain.WALL&&level.map[c+2*level.width()]!=Terrain.WALL) {
                 check(level.map[c+1] == Terrain.WALL && level.map[c+level.width()] == Terrain.WALL
                         && level.map[c+level.width()+1] == Terrain.WALL, "pillar not 2x2"); pillars++;
             }
@@ -122,8 +138,34 @@ final class ExpeditionScenario {
         check(Dungeon.level instanceof DragonChasmLevel && Dungeon.hero.pos == DragonChasmLevel.centerCell(), "return climb destination");
         InterlevelScene.curTransition = Dungeon.level.getTransition(LevelTransition.Type.REGULAR_ENTRANCE);
         ascend.invoke(new InterlevelScene());
-        check(Dungeon.level.mobs.isEmpty() && Dungeon.level.heaps.size == 40, "reentry regenerates enemies/supplies");
-        System.out.println("TEST 59 cavern PASS: pillars, guaranteed finite supplies, descent/climb, fall/Feather Fall, brood caps and persistence, cleared floor remains safe");
+        check(Dungeon.level.mobs.isEmpty() && Dungeon.level.heaps.size == 48, "reentry regenerates enemies/supplies");
+        check(Dungeon.level.map[DragonCavernLevel.CENTER]==Terrain.ENTRANCE,"loaded cavern stairs up");
+        long originalSeed=Dungeon.seed;
+        for(int seed=0;seed<32;seed++) {
+            Dungeon.init();Dungeon.seed=seed;Dungeon.branch=DragonExpedition.BRANCH;Dungeon.depth=DragonExpedition.CAVERN;
+            level=(DragonCavernLevel)Dungeon.newLevel();
+            Buff.affect(Dungeon.hero,Chasm.Falling.class);
+            Dungeon.switchLevel(level,level.fallCell(false));
+            Broodmother mother=null;for(Mob mob:level.mobs)if(mob instanceof Broodmother)mother=(Broodmother)mob;
+            check(mother!=null&&mother.state!=mother.HUNTING,"fall immediately alerts broodmother");
+            check(level.distance(mother.pos,DragonCavernLevel.CENTER)>=14,"broodmother too near central landing");
+            for(int trial=0;trial<20;trial++)check(level.distance(level.fallCell(false),mother.pos)>=10,"fall lands beside broodmother");
+            boolean[] reached=new boolean[level.length()];java.util.ArrayDeque<Integer> queue=new java.util.ArrayDeque<>();
+            reached[DragonCavernLevel.CENTER]=true;queue.add(DragonCavernLevel.CENTER);
+            while(!queue.isEmpty()){int cell=queue.remove();for(int d:new int[]{-1,1,-level.width(),level.width()}){
+                int n=cell+d;if(level.insideMap(n)&&level.passable[n]&&!reached[n]){reached[n]=true;queue.add(n);}
+            }}
+            int walkable=0;java.util.HashSet<Integer> edges=new java.util.HashSet<>();
+            for(int cell=0;cell<level.length();cell++)if(level.passable[cell]){check(reached[cell],"disconnected natural cavern");walkable++;}
+            for(int y=2;y<level.height()-2;y++)for(int x=1;x<level.width()-1;x++)if(level.passable[y*level.width()+x]){edges.add(x);break;}
+            check(walkable>650&&walkable<1200&&edges.size()>=7,"cavern lacks open interior / natural contour");
+            for(Mob mob:level.mobs)if(mob instanceof CavernSpinner)
+                check(level.distance(mob.pos,DragonCavernLevel.CENTER)<=10,"standard spiders not on approach");
+            check(level.map[1*level.width()+1]==Terrain.WALL,"square room corner still open");
+            Buff.detach(Dungeon.hero,Chasm.Falling.class);
+        }
+        Dungeon.seed=originalSeed;
+        System.out.println("TEST 59 cavern PASS: 32 connected natural outlines, 640 separated fall landings, outer broodmother/inner spiders, mixed 48 remains with 33 common gear/2 rings, finite supplies, up stairs, brood caps and persistence");
     }
     private static void dragon() throws Exception {
         Dungeon.init(); Dungeon.branch = DragonExpedition.BRANCH; Dungeon.depth = DragonExpedition.CHASM;
@@ -195,6 +237,7 @@ final class ExpeditionScenario {
         check(Dungeon.level instanceof DragonHoardLevel && DragonExpedition.dragon.HP == wounded
                 && Dungeon.level.mobs.stream().filter(m -> m instanceof ExpeditionDragon).count() == 1, "hoard relocation clones or heals dragon");
         DragonHoardLevel level = (DragonHoardLevel) Dungeon.level;
+        check(level.map[DragonHoardLevel.RETURN]==Terrain.ENTRANCE,"hoard return must depict stairs up");
         check(level.heaps.size == 0 && !DragonExpedition.rewardsCreated, "treasure exists before dragon dies");
         check(level.activateTransition(Dungeon.hero, level.getTransition(LevelTransition.Type.REGULAR_EXIT)), "living dragon blocks permitted escape");
         returnRoute();
@@ -254,7 +297,30 @@ final class ExpeditionScenario {
         check(brood.HP==333 && brood.damageRoll()==0 && !brood.canHatch(),"configured brood stats/cap");
         int food=0,torches=0;
         for(Heap heap:level.heaps.valueList())for(Item item:heap.items){if(item instanceof Food)food++;if(item instanceof Torch)torches++;}
-        check(food==1 && torches==2 && level.heaps.size==40,"configured guaranteed supplies");
+        check(food==1 && torches==2 && level.heaps.size==48,"configured guaranteed supplies");
+        BalanceTuning.set(CAVERN_REMAINS,36);BalanceTuning.set(CAVERN_GEAR_WEIGHT,100);
+        BalanceTuning.set(CAVERN_RING_WEIGHT,0);BalanceTuning.set(CAVERN_GOLD_WEIGHT,0);BalanceTuning.set(CAVERN_CONSUMABLE_WEIGHT,0);
+        BalanceTuning.set(CAVERN_MAX_TIER,1);BalanceTuning.set(CAVERN_UPGRADES,2);
+        DragonCavernLevel configured=(DragonCavernLevel)Dungeon.newLevel();
+        Dungeon.switchLevel(configured,DragonCavernLevel.CENTER);
+        check(configured.heaps.size==36,"configured remains count");
+        for(Heap heap:configured.heaps.valueList())for(Item item:heap.items)if(!(item instanceof Food)&&!(item instanceof Torch)){
+            check(item.trueLevel()==2,"configured remains upgrade");
+            if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)
+                check(weaponTier(item)==1,"configured weapon tier");
+            else check(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor
+                    &&((com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor)item).tier==1,"configured gear-only mix/tier");
+        }
+        boolean rejected=false;try{BalanceTuning.set(CAVERN_GEAR_WEIGHT,0);}catch(IllegalArgumentException zeroWeights){rejected=true;}
+        check(rejected,"all-zero cavern weights accepted");
+        BalanceTuning.set(CAVERN_CONSUMABLE_WEIGHT,100);BalanceTuning.set(CAVERN_GEAR_WEIGHT,0);
+        configured=(DragonCavernLevel)Dungeon.newLevel();
+        Dungeon.switchLevel(configured,DragonCavernLevel.CENTER);
+        for(Heap heap:configured.heaps.valueList())for(Item item:heap.items)check(item instanceof Food||item instanceof Torch
+                ||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion
+                ||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll
+                ||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.stones.Runestone
+                ||item instanceof com.shatteredpixel.shatteredpixeldungeon.plants.Plant.Seed,"configured consumable-only mix");
         ExpeditionDragon dragon=new ExpeditionDragon();dragon.sprite=dragon.sprite(); dragon.pos=Dungeon.hero.pos+2;
         check(dragon.HP==777 && dragon.damageRoll()==0,"configured dragon stats");
         check(dragon.prepare(ExpeditionDragon.Attack.BREATH,dragon.pos+1),"configured breath prepare");dragon.release();

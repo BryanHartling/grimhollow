@@ -1,3 +1,10 @@
+# Grimhollow update log — v1.17.1
+
+- Replaced the live upstream version tabs and coming-soon roadmap with Grimhollow's player-facing release history, curated from this document, README, release commits and verification records. Upstream 4.0 is one foundation entry; attribution and historical source files remain intact.
+- Covered shipped classes, content, painted art, interface and effect upgrades, artifacts, Hatchling Mimic, dragon expedition, Lurking Horror, Playtest and balance tools, balance revisions and playtest fixes. Superseded recovery art is identified as historical rather than current.
+- Renamed the welcome-screen entry to Update Log and refreshed stale welcome text. Portrait change details now use normal outside-tap dismissal so their descriptions can scroll; landscape details keep wrapped titles separate from their text.
+- Version 1.17.1 uses Android code 965. No gameplay or save-format changes.
+
 # Regrowth plant paintings â€” v1.16.1
 
 - Replaced the retained Dewcatcher and Seedpod art with original transparent paintings, reproducibly packed into their existing cells. All 15 plant sprites now participate in the existing native geometry and sprouting review; harvesting is unchanged.

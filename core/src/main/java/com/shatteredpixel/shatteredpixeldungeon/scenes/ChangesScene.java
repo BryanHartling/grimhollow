@@ -32,24 +32,10 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
 import com.shatteredpixel.shatteredpixeldungeon.ui.TitleBackground;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock;
 import com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane;
-import com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.ChangeInfo;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.Pixel_Dungeon_Changes;
+import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.GrimhollowChanges;
 import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.WndChanges;
 import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.WndChangesTabbed;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v0_1_X_Changes;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v0_2_X_Changes;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v0_3_X_Changes;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v0_4_X_Changes;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v0_5_X_Changes;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v0_6_X_Changes;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v0_7_X_Changes;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v0_8_X_Changes;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v0_9_X_Changes;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v1_X_Changes;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v2_X_Changes;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v3_X_Changes;
-import com.shatteredpixel.shatteredpixeldungeon.ui.changelist.v4_X_Changes;
 import com.shatteredpixel.shatteredpixeldungeon.windows.IconTitle;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Image;
@@ -63,7 +49,6 @@ import java.util.ArrayList;
 
 public class ChangesScene extends PixelScene {
 	
-	public static int changesSelected = 0;
 
 	private NinePatch rightPanel;
 	private ScrollPane rightScroll;
@@ -106,7 +91,7 @@ public class ChangesScene extends PixelScene {
 		NinePatch panel = Chrome.get(Chrome.Type.TOAST);
 
 		int pw = 135 + panel.marginLeft() + panel.marginRight() - 2;
-		int ph = h - 36;
+		int ph = h - 24;
 
 		if (h >= PixelScene.MIN_HEIGHT_FULL && w >= 300) {
 			panel.size( pw, ph );
@@ -115,8 +100,8 @@ public class ChangesScene extends PixelScene {
 
 			rightPanel = Chrome.get(Chrome.Type.TOAST);
 			rightPanel.size( pw, ph );
-			rightPanel.x = (w - pw) / 2f + pw/2 + 1;
-			rightPanel.y = 20;
+			rightPanel.x = insets.left + (w - pw) / 2f + pw/2 + 1;
+			rightPanel.y = insets.top + 20;
 			add(rightPanel);
 
 			rightScroll = new ScrollPane(new Component());
@@ -130,7 +115,7 @@ public class ChangesScene extends PixelScene {
 
 			changeTitle = new IconTitle(Icons.get(Icons.CHANGES), Messages.get(this, "right_title"));
 			changeTitle.setPos(0, 1);
-			changeTitle.setSize(pw, 20);
+			changeTitle.setSize(rightScroll.width() - 2, 20);
 			rightScroll.content().add(changeTitle);
 
 			String body = Messages.get(this, "right_body");
@@ -156,40 +141,7 @@ public class ChangesScene extends PixelScene {
 			changeInfos.add(langWarn);
 		}
 		
-		switch (changesSelected){
-			case 0: default:
-				v4_X_Changes.addAllChanges(changeInfos);
-				break;
-			case 1:
-				v3_X_Changes.addAllChanges(changeInfos);
-				break;
-			case 2:
-				v2_X_Changes.addAllChanges(changeInfos);
-				break;
-			case 3:
-				v1_X_Changes.addAllChanges(changeInfos);
-				break;
-			case 4:
-				v0_9_X_Changes.addAllChanges(changeInfos);
-				break;
-			case 5:
-				v0_8_X_Changes.addAllChanges(changeInfos);
-				break;
-			case 6:
-				v0_7_X_Changes.addAllChanges(changeInfos);
-				break;
-			case 7:
-				v0_6_X_Changes.addAllChanges(changeInfos);
-				break;
-			case 8:
-				v0_5_X_Changes.addAllChanges(changeInfos);
-				v0_4_X_Changes.addAllChanges(changeInfos);
-				v0_3_X_Changes.addAllChanges(changeInfos);
-				v0_2_X_Changes.addAllChanges(changeInfos);
-				v0_1_X_Changes.addAllChanges(changeInfos);
-				Pixel_Dungeon_Changes.addAllChanges(changeInfos);
-				break;
-		}
+		GrimhollowChanges.addAllChanges(changeInfos);
 
 		ScrollPane list = new ScrollPane( new Component() ){
 
@@ -243,47 +195,9 @@ public class ChangesScene extends PixelScene {
 				panel.innerHeight() + 2);
 		list.scrollTo(0, 0);
 
-		float left = list.left()-4f;
-
-		if (changesSelected <= 3){
-
-			left = setupChangesSelectionButton(0, "v4.X", left, list.bottom(), 24);
-			left = setupChangesSelectionButton(1, "v3.X", left, list.bottom(), 24);
-			left = setupChangesSelectionButton(2, "v2.X", left, list.bottom(), 24);
-			left = setupChangesSelectionButton(3, "v1.X", left, list.bottom(), 24);
-			left = setupChangesSelectionButton(4, "PreRelease->", left, list.bottom(), 53);
-
-		} else {
-
-			left = setupChangesSelectionButton(3, "<-Release", left, list.bottom(), 40);
-			left = setupChangesSelectionButton(4, "v0.9", left, list.bottom(), 22);
-			left = setupChangesSelectionButton(5, "v0.8", left, list.bottom(), 22);
-			left = setupChangesSelectionButton(6, "v0.7", left, list.bottom(), 22);
-			left = setupChangesSelectionButton(7, "v0.6", left, list.bottom(), 22);
-			left = setupChangesSelectionButton(8, "v0.5-", left, list.bottom(), 23);
-
-		}
-
 		addToBack( BG );
 
 		fadeIn();
-	}
-
-	private float setupChangesSelectionButton(int idx, String text, float left, float top, float width){
-		StyledButton button = new StyledButton(Chrome.Type.GREY_BUTTON_TR, text, 8){
-			@Override
-			protected void onClick() {
-				super.onClick();
-				if (changesSelected != idx) {
-					changesSelected = idx;
-					ShatteredPixelDungeon.seamlessResetScene();
-				}
-			}
-		};
-		if (changesSelected != idx) button.textColor( 0xBBBBBB );
-		button.setRect(left, top, width, changesSelected == idx ? 19 : 15);
-		addToBack(button);
-		return button.right()-2;
 	}
 
 	private void updateChangesText(Image icon, String title, String... messages){
@@ -300,6 +214,7 @@ public class ChangesScene extends PixelScene {
 				}
 			}
 			changeBody.text(message);
+			changeBody.setPos(0, changeTitle.bottom()+2);
 			rightScroll.content().setSize(rightScroll.width(), changeBody.bottom()+2);
 			rightScroll.setSize(rightScroll.width(), rightScroll.height());
 			rightScroll.scrollTo(0, 0);

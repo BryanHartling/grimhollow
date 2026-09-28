@@ -39,10 +39,17 @@ public class ExpeditionDragon extends Mob {
     @Override public int damageRoll() { return Math.round(Random.NormalIntRange(22, 32) * BalanceTuning.multiplier(DRAGON_DAMAGE)); }
     @Override public int drRoll() { return Random.NormalIntRange(4, 10); }
     @Override public int heal(int amount) { return 0; }
-    @Override public void damage(int damage, Object source) { super.damage(damage, source); lowestHP = Math.min(lowestHP, HP); }
+    @Override public void damage(int damage, Object source) {
+        if (isAlive() && Dungeon.level.mobs.contains(this)) BossHealthBar.assignBoss(this);
+        super.damage(damage, source); lowestHP = Math.min(lowestHP, HP);
+    }
     @Override public void notice() { if (sprite != null) super.notice(); BossHealthBar.assignBoss(this); }
     @Override public void rollToDropLoot() {} // Its reward is the protected hoard.
-    @Override protected boolean act() { HP = Math.min(HP, lowestHP); return super.act(); }
+    @Override protected boolean act() {
+        HP = Math.min(HP, lowestHP);
+        if (isAlive() && Dungeon.level.heroFOV[pos] && !BossHealthBar.isAssigned()) BossHealthBar.assignBoss(this);
+        return super.act();
+    }
     @Override protected void spend(float time) {
         float before = cooldown(); super.spend(time);
         float elapsed = Math.max(0, cooldown() - before);

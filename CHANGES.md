@@ -5,6 +5,7 @@
 - The flying dragon patrols its upper floor instead of starting asleep. Native release verification exercises the actual exchange, warning, entry, continue, fall, blocked climb, boss-clear transport and return exit in both orientations.
 - Victory arrives beside the newly accessible treasure; expedition arrival text names its areas instead of calling them ordinary dungeon floors.
 - Registers the original creature atlases in the common eightfold density metadata and shared frame/filter path; repairs CI test 56 without changing art or weakening the gate.
+- Ensures pre-alerted expedition bosses claim the shared health bar when seen or damaged, including after a floor change; native review covers both painted boss HUDs.
 - Bumps the desktop/Android release to 1.16.0 (Android code 962); no existing loot table, character balance or terrain contrast threshold is changed by this integration component.
 
 # Dragon expedition — component 7

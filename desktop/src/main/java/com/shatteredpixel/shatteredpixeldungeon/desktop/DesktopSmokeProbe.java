@@ -956,8 +956,11 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(!(DragonExpedition.dragon.sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.ExpeditionDragonSprite)
                         || DragonExpedition.dragon.sprite.visualFootprint()!=40)throw new AssertionError("Dragon art/size");
                 capture("expedition-chasm");
+                DragonExpedition.dragon.damage(0,Dungeon.hero);
                 DragonExpedition.dragon.prepare(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.ExpeditionDragon.Attack.BREATH,Dungeon.hero.pos);break;
             case 2:
+                if(RecoveryChecks.field(RecoveryChecks.field(Game.scene(),"boss"),"boss")!=DragonExpedition.dragon)
+                    throw new AssertionError("Expedition dragon boss HUD missing");
                 capture("expedition-breath-warning");
                 GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoMob(DragonExpedition.dragon));break;
             case 3:
@@ -971,8 +974,11 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(brood==null || brood.sprite.visualFootprint()!=26)throw new AssertionError("Broodmother art/size");
                 Dungeon.hero.pos=brood.pos+Dungeon.level.width();Dungeon.hero.sprite.place(Dungeon.hero.pos);Dungeon.observe();
                 com.watabou.noosa.Camera.main.panFollow(Dungeon.hero.sprite, 5);
+                brood.damage(0,Dungeon.hero);
                 break;
             case 5:
+                if(!(RecoveryChecks.field(RecoveryChecks.field(Game.scene(),"boss"),"boss") instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Broodmother))
+                    throw new AssertionError("Expedition broodmother boss HUD missing");
                 capture("expedition-broodmother");expeditionFloor(DragonExpedition.HOARD);break;
             case 6:
                 if(Dungeon.level.heaps.size!=0)throw new AssertionError("Locked hoard has stealable loot");

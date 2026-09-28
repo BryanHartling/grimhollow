@@ -37,6 +37,14 @@ public class Broodmother extends Mob {
         }
         return super.attackProc(enemy, damage);
     }
+    @Override protected boolean act() {
+        if (isAlive() && Dungeon.level.heroFOV[pos] && !BossHealthBar.isAssigned()) BossHealthBar.assignBoss(this);
+        return super.act();
+    }
+    @Override public void damage(int damage, Object source) {
+        if (isAlive() && Dungeon.level.mobs.contains(this)) BossHealthBar.assignBoss(this);
+        super.damage(damage, source);
+    }
     @Override public void notice() { if (sprite != null) super.notice(); BossHealthBar.assignBoss(this); }
     public void alertArrival() { target = Dungeon.hero.pos; aggro(Dungeon.hero); }
 

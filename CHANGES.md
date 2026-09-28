@@ -1,3 +1,9 @@
+# Dragon expedition — component 7
+
+- Added 22 bounded expedition controls to the existing paged Balance tuning menu. Boss health and initial populations apply to new encounters; attack controls affect subsequent actions. Completed rewards and spent brood remain consumed.
+- Preserved baseline random calls for hoard chances; offer chance uses isolated seeded randomness. Zero food/torch overrides still leave forty finite bone heaps; initial spinners respect the overall cap.
+- Boss descriptions reflect tuned cooldown, knockback and brood limits. Ordinary burning/fire terrain keeps its existing damage rules; the dragon damage control adjusts direct impact only.
+
 # Dragon expedition — component 6
 
 - Added six original built-in imagegen sources and deterministic offline packing for the dragon, broodmother, hunter, timber, hoard and map. CI uses committed sources only. Existing regions/creatures stay unchanged.

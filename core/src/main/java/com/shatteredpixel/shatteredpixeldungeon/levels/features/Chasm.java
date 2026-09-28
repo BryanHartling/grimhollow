@@ -21,6 +21,9 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.levels.features;
 
+import com.shatteredpixel.shatteredpixeldungeon.BalanceTuning;
+import static com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.*;
+
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
@@ -146,7 +149,8 @@ public class Chasm implements Hero.Doom {
 		Buff.prolong( hero, Cripple.class, Cripple.DURATION );
 
 		if (Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel) {
-            hero.damage(Math.max(1, Math.round(hero.HT * 0.15f)), new Chasm());
+            int damage = Math.round(hero.HT * BalanceTuning.multiplier(EXPEDITION_FALL_DAMAGE));
+            if (BalanceTuning.get(EXPEDITION_FALL_DAMAGE) > 0) hero.damage(Math.max(1, damage), new Chasm());
             return;
         }
 

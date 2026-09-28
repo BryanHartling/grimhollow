@@ -991,8 +991,27 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 9:
                 interfaceBounds();capture("expedition-hunter");closeReviewWindows();
                 GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(new com.shatteredpixel.shatteredpixeldungeon.items.quest.ExpeditionMap()));break;
+            case 10:
+                interfaceBounds();capture("expedition-map");closeReviewWindows();Playtest.enable();
+                com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();break;
+            case 11:
+                if(!playtestClickPage("Expedition dragon"))expeditionStep--;break;
+            case 12:
+                interfaceBounds();capture("expedition-tuning-dragon");playtestClick("Dragon health: 480");break;
+            case 13:
+                interfaceBounds();capture("expedition-tuning-value");playtestInput("720","Apply");break;
+            case 14:
+                if(BalanceTuning.get(BalanceTuning.Key.DRAGON_HEALTH)!=720)throw new AssertionError("Expedition numeric tuning input");
+                closeReviewWindows();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();break;
+            case 15:
+                if(!playtestClickPage("Expedition cavern"))expeditionStep--;break;
+            case 16:
+                interfaceBounds();capture("expedition-tuning-cavern");closeReviewWindows();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();break;
+            case 17:
+                if(!playtestClickPage("Expedition supplies and hoard"))expeditionStep--;break;
+            case 18:
+                interfaceBounds();capture("expedition-tuning-hoard");closeReviewWindows();BalanceTuning.reset();break;
             default:
-                interfaceBounds();capture("expedition-map");
                 System.out.println("TEST 59 NATIVE PASS: painted dragon/broodmother/hunter/map, timber maze, normal cavern fog, guarded hoard and preview bounds; orientation="+(Boolean.getBoolean("grimhollow.interfacePortrait")?"portrait":"landscape"));
                 Gdx.app.exit();
         }

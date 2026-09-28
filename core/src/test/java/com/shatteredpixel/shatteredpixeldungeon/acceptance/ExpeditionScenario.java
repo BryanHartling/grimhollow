@@ -2,6 +2,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.acceptance;
 
 import com.shatteredpixel.shatteredpixeldungeon.*;
+import static com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.*;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing;
 import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfFeatherFall;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.ExpeditionMap;
@@ -234,6 +235,46 @@ final class ExpeditionScenario {
         }
         System.out.println("TEST 59 hoard PASS: living-dragon retreat, original return cell, wounded reentry, safe victory/ally transfer, sealed treasure, one-time rewards, two active trinkets");
     }
+    private static void tuning() throws Exception {
+        Dungeon.init(); Playtest.enable();
+        BalanceTuning.set(EXPEDITION_CHANCE, 0); check(!DragonExpedition.offerAvailable(), "disabled offer");
+        BalanceTuning.set(EXPEDITION_CHANCE, 100); check(DragonExpedition.offerAvailable(), "guaranteed offer");
+        BalanceTuning.set(EXPEDITION_CHANCE, 50);
+        Random.pushGenerator(991); long expected=Random.Long(); Random.popGenerator();
+        Random.pushGenerator(991); boolean offer=DragonExpedition.offerAvailable();
+        check(offer==DragonExpedition.offerAvailable() && Random.Long()==expected,"offer tuning perturbs main RNG"); Random.popGenerator();
+        BalanceTuning.set(DRAGON_HEALTH,777); BalanceTuning.set(DRAGON_DAMAGE,0); BalanceTuning.set(DRAGON_BREATH_COOLDOWN,7);
+        BalanceTuning.set(DRAGON_KNOCKBACK,0); BalanceTuning.set(BROOD_HEALTH,333); BalanceTuning.set(BROOD_DAMAGE,0);
+        BalanceTuning.set(CAVERN_SIGHT,5); BalanceTuning.set(SPIDERS_INITIAL,0); BalanceTuning.set(BROOD_LIVE,0);
+        BalanceTuning.set(CAVERN_RATIONS,1); BalanceTuning.set(CAVERN_TORCHES,2);
+        Dungeon.branch=2; Dungeon.depth=DragonExpedition.CAVERN;
+        DragonCavernLevel level=(DragonCavernLevel)Dungeon.newLevel(); Dungeon.switchLevel(level,DragonCavernLevel.CENTER);
+        check(level.viewDistance==5 && level.mobs.size()==1,"configured cavern sight/population");
+        Broodmother brood=(Broodmother)level.mobs.iterator().next();
+        check(brood.HP==333 && brood.damageRoll()==0 && !brood.canHatch(),"configured brood stats/cap");
+        int food=0,torches=0;
+        for(Heap heap:level.heaps.valueList())for(Item item:heap.items){if(item instanceof Food)food++;if(item instanceof Torch)torches++;}
+        check(food==1 && torches==2 && level.heaps.size==40,"configured guaranteed supplies");
+        ExpeditionDragon dragon=new ExpeditionDragon();dragon.sprite=dragon.sprite(); dragon.pos=Dungeon.hero.pos+2;
+        check(dragon.HP==777 && dragon.damageRoll()==0,"configured dragon stats");
+        check(dragon.prepare(ExpeditionDragon.Attack.BREATH,dragon.pos+1),"configured breath prepare");dragon.release();
+        check(dragon.breathDelay==7,"configured cooldown");
+        BalanceTuning.set(HOARD_GOLD,0);BalanceTuning.set(HOARD_EQUIPMENT,1);BalanceTuning.set(HOARD_UPGRADES,5);
+        BalanceTuning.set(HOARD_ARTIFACT,0);BalanceTuning.set(HOARD_TRINKET,100);
+        DragonExpedition.dragonSlain=true;Dungeon.depth=DragonExpedition.HOARD;
+        Dungeon.switchLevel(Dungeon.newLevel(),DragonHoardLevel.ARRIVAL);
+        int equipment=0,trinkets=0;
+        for(Heap heap:Dungeon.level.heaps.valueList())for(Item item:heap.items){
+            check(!(item instanceof Gold) && !(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact),"disabled bonus/gold");
+            if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.trinkets.Trinket)trinkets++;
+            else {equipment++;check(item.trueLevel()>=5 && item.trueLevel()<=6,"configured reward level");}
+        }
+        check(equipment==1 && trinkets==1,"configured reward count/trinket chance");
+        Dungeon.saveAll();Dungeon.loadGame(GamesInProgress.curSlot);Dungeon.switchLevel(Dungeon.loadLevel(GamesInProgress.curSlot),Dungeon.hero.pos);
+        check(BalanceTuning.get(DRAGON_HEALTH)==777 && BalanceTuning.get(HOARD_TRINKET)==100,"expedition tuning lost on disk");
+        BalanceTuning.reset();check(new ExpeditionDragon().HT==480 && BalanceTuning.get(CAVERN_RATIONS)==3,"expedition reset");
+        System.out.println("TEST 59 tuning PASS: isolated offer RNG, custom boss stats/cooldown, cavern population/sight/supplies, brood cap, one-time reward count/quality/chances, disk persistence/reset");
+    }
     static void run() throws Exception {
         Dungeon.init();
         int chosen = DragonExpedition.hunterDepth;
@@ -262,7 +303,7 @@ final class ExpeditionScenario {
         DragonExpedition.restore(new Bundle());
         check(!DragonExpedition.accepted && !DragonExpedition.entered && DragonExpedition.returnCell == -1, "old save/new run inherits quest");
         check(DragonExpedition.BRANCH != 1, "expedition aliases Vault branch");
-        maze(); cavern(); dragon(); hoard();
+        maze(); cavern(); dragon(); hoard(); tuning();
         System.out.println("TEST 59 foundation PASS: seeded placement, healing exchange, unique rewards, protected map, disk save/load, legacy defaults");
     }
 }

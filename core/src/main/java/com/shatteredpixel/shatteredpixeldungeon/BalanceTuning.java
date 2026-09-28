@@ -19,7 +19,15 @@ public final class BalanceTuning {
         UPGRADES(2,100,0,400), CURSED_GEAR(2,100,0,400), ENCHANTED_GEAR(2,100,0,1000),
         RARE_ENCHANT(2,100,0,1000), BONE_ARMOR(2,50,0,100),
         WEAPON(3), ARMOR(3), MISSILE(3), WAND(3), RING(3), ARTIFACT(3),
-        POTION(3), SCROLL(3), SEED(3), STONE(3), GOLD(3);
+        POTION(3), SCROLL(3), SEED(3), STONE(3), GOLD(3),
+        EXPEDITION_CHANCE(4,100,0,100), DRAGON_HEALTH(4,480,120,1500), DRAGON_DAMAGE(4,100,0,300),
+        DRAGON_BREATH_COOLDOWN(4,3,3,12), DRAGON_KNOCKBACK(4,2,0,5),
+        CAVERN_SIGHT(5,3,2,8), EXPEDITION_FALL_DAMAGE(5,15,0,50),
+        BROOD_HEALTH(5,240,60,900), BROOD_DAMAGE(5,100,0,300), BROOD_POISON(5,6,0,20),
+        SPIDERS_INITIAL(5,6,0,12), BROOD_LIVE(5,3,0,6), BROOD_TOTAL(5,6,0,18),
+        SPIDERS_CAP(5,9,0,18), BROOD_INTERVAL(5,5,2,12),
+        CAVERN_RATIONS(6,3,0,8), CAVERN_TORCHES(6,4,0,12), HOARD_GOLD(6,2500,0,10000),
+        HOARD_EQUIPMENT(6,3,0,6), HOARD_UPGRADES(6,3,0,10), HOARD_ARTIFACT(6,25,0,100), HOARD_TRINKET(6,25,0,100);
 
         public final int group, baseline, min, max;
         Key(int group) { this(group,100,0,1000); }
@@ -27,7 +35,10 @@ public final class BalanceTuning {
             this.group=group;this.baseline=baseline;this.min=min;this.max=max;
         }
         public String id() { return name().toLowerCase(Locale.ROOT); }
-        public String display(int value) { return value+(this==TIER_SHIFT?"":"%"); }
+        public String display(int value) { boolean percentage = this != TIER_SHIFT && (group < 4 || this == EXPEDITION_CHANCE
+                    || this == DRAGON_DAMAGE || this == BROOD_DAMAGE || this == EXPEDITION_FALL_DAMAGE
+                    || this == HOARD_ARTIFACT || this == HOARD_TRINKET);
+            return value+(percentage?"%":""); }
     }
     private static final EnumMap<Key,Integer> values=new EnumMap<>(Key.class);
     public static int get(Key key) { return Playtest.enabled()?values.getOrDefault(key,key.baseline):key.baseline; }

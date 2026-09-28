@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 package com.shatteredpixel.shatteredpixeldungeon.levels;
 
+import com.shatteredpixel.shatteredpixeldungeon.BalanceTuning;
+import static com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.*;
+
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.DragonExpedition;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
@@ -41,8 +44,9 @@ public class DragonHoardLevel extends ExpeditionLevel {
         Fire fire = (Fire) blobs.get(Fire.class); if (fire != null) fire.fullyClear();
         if (DragonExpedition.rewardsCreated) return;
         ArrayList<Item> rewards = new ArrayList<>();
-        rewards.add(new Gold(Random.IntRange(2000, 3000)));
-        for (int i = 0; i < 3; i++) {
+        int gold = BalanceTuning.get(HOARD_GOLD);
+        if (gold > 0) rewards.add(new Gold(Random.IntRange(Math.round(gold * .8f), Math.round(gold * 1.2f))));
+        for (int i = 0; i < BalanceTuning.get(HOARD_EQUIPMENT); i++) {
             Item item;
             int attempts = 0;
             do {
@@ -54,18 +58,19 @@ public class DragonHoardLevel extends ExpeditionLevel {
                 }
             } while (Challenges.isItemBlocked(item) && ++attempts < 100);
             if (Challenges.isItemBlocked(item)) { rewards.add(new Gold(500)); continue; }
-            item.level(Random.IntRange(3, 4)); item.cursed = false;
+            int upgrade = BalanceTuning.get(HOARD_UPGRADES);
+            item.level(Random.IntRange(upgrade, Math.min(10, upgrade + 1))); item.cursed = false;
             if (item instanceof Weapon) ((Weapon) item).enchant();
             if (item instanceof Armor) ((Armor) item).inscribe();
             rewards.add(item.identify());
         }
-        if (Random.Int(4) == 0) {
+        if (BalanceTuning.roll(HOARD_ARTIFACT, 4, 1)) {
             Artifact artifact = (Artifact) Generator.randomArtifact();
             if (artifact != null && !Challenges.isItemBlocked(artifact)) {
                 artifact.cursed = false; artifact.transferUpgrade(5); rewards.add(artifact.identify());
             }
         }
-        if (Random.Int(4) == 0) {
+        if (BalanceTuning.roll(HOARD_TRINKET, 4, 1)) {
             Trinket trinket = bonusTrinket(); if (trinket != null) rewards.add(trinket);
         }
         for (int i = 0; i < rewards.size(); i++) drop(rewards.get(i), TREASURE + (i % 3) - 1 + (i / 3) * WIDTH);

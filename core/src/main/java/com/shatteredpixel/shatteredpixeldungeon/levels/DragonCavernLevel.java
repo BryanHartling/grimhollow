@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 package com.shatteredpixel.shatteredpixeldungeon.levels;
 
+import com.shatteredpixel.shatteredpixeldungeon.BalanceTuning;
+import static com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.*;
+
 import com.shatteredpixel.shatteredpixeldungeon.DragonExpedition;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
@@ -18,7 +21,7 @@ import java.util.ArrayList;
 
 public class DragonCavernLevel extends ExpeditionLevel {
     public static final int SIZE = 43, CENTER = 21 * SIZE + 21;
-    { viewDistance = 3; }
+    { viewDistance = BalanceTuning.get(CAVERN_SIGHT); }
     @Override protected boolean build() {
         setSize(SIZE, SIZE);
         for (int y = 1; y < SIZE - 1; y++) for (int x = 1; x < SIZE - 1; x++) map[y * SIZE + x] = Terrain.EMPTY;
@@ -41,7 +44,7 @@ public class DragonCavernLevel extends ExpeditionLevel {
     @Override protected void createMobs() {
         if (DragonExpedition.spiderSlain) return;
         Broodmother boss = new Broodmother(); boss.pos = CENTER - 4 * SIZE; mobs.add(boss);
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < Math.min(BalanceTuning.get(SPIDERS_INITIAL), BalanceTuning.get(SPIDERS_CAP)); i++) {
             CavernSpinner spider = new CavernSpinner(); spider.pos = randomRespawnCell(spider);
             if (spider.pos >= 0) mobs.add(spider);
         }
@@ -49,11 +52,12 @@ public class DragonCavernLevel extends ExpeditionLevel {
     @Override protected void createItems() {
         ArrayList<Integer> cells = new ArrayList<>();
         for (int i = 0; i < length(); i++) if (passable[i] && distance(i, CENTER) > 4 && findMob(i) == null) cells.add(i);
+        int food = BalanceTuning.get(CAVERN_RATIONS), torches = BalanceTuning.get(CAVERN_TORCHES);
         for (int i = 0; i < 40 && !cells.isEmpty(); i++) {
             int cell = cells.remove(Random.Int(cells.size()));
             Item item;
-            if (i < 3) item = new Food();
-            else if (i < 7) item = new Torch();
+            if (i < food) item = new Food();
+            else if (i < food + torches) item = new Torch();
             else if (i % 3 == 0) item = new Gold(Random.IntRange(15, 40));
             else item = Generator.randomUsingDefaults(new Generator.Category[]{Generator.Category.SEED,
                     Generator.Category.STONE, Generator.Category.POTION, Generator.Category.SCROLL}[Random.Int(4)]);

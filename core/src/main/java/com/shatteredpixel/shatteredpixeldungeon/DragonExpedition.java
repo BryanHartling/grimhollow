@@ -97,8 +97,14 @@ public final class DragonExpedition {
                     com.shatteredpixel.shatteredpixeldungeon.actors.buffs.DragonVictoryPassage.class);
     }
 
+    public static boolean offerAvailable() {
+        int chance = BalanceTuning.get(BalanceTuning.Key.EXPEDITION_CHANCE);
+        if (chance == 0 || chance == 100) return chance == 100;
+        Random.pushGenerator(Dungeon.seed ^ 0x4F46464552L);
+        try { return Random.Int(100) < chance; } finally { Random.popGenerator(); }
+    }
     public static void spawnHunter(Level level) {
-        if (!AVAILABLE || Dungeon.branch != 0 || Dungeon.depth != hunterDepth) return;
+        if (!AVAILABLE || Dungeon.branch != 0 || Dungeon.depth != hunterDepth || !offerAvailable()) return;
         int cell = level.randomRespawnCell(null);
         if (cell < 0) return;
         TreasureHunter hunter = new TreasureHunter();

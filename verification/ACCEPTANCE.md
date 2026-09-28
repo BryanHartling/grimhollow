@@ -1,3 +1,9 @@
+# Dragon expedition — component 7 tuning checkpoint
+
+`core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeClass=PSYCHIC --no-daemon --console=plain`: **BUILD SUCCESSFUL in 1m 25s; Runs=10 failures=0**; seven existing JUnit cases pass. Test 59 additionally verifies isolated offer RNG, boss HP/damage/cooldown, zero initial spinners/live brood, configured sight and guaranteed supplies, zero gold/artifact rewards, one upgraded equipment item and guaranteed non-duplicate trinket, disk persistence and reset. Existing baseline expedition assertions remain unchanged and pass.
+
+Native portrait and landscape `expeditionReview` passes real pointer navigation through all three sections, paged controls and numeric input (480 → 720 HP), with saved screenshots `interface/*/expedition-tuning-*.png`. No art changed or art loop ran in component 7. Final campaign activation, native complete quest flow and release packaging remain component 8; existing contrast test 45 stays enforced.
+
 # Dragon expedition — component 6 visual checkpoint
 
 `core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeClass=NECROMANCER --no-daemon --console=plain`: **BUILD SUCCESSFUL in 2m 17s; Runs=10 failures=0**. The existing seven JUnit cases passed. Native `--smoke-sewers` with `grimhollow.interfaceReview=true` and `grimhollow.expeditionReview=true` passes at 1280×720 landscape and 720×1061 portrait, with isolated profiles. Test 59 checks new creature dimensions, message availability, sealed-hoard protection and popup bounds. Evidence: `interface/landscape/expedition-*.png` and `interface/portrait/expedition-*.png`.

@@ -1,5 +1,7 @@
 # Known issues
 
+- Expedition component 7 tuning passes native menu input and headless generation/persistence checks. The quest remains disabled until component 8; tuning does not establish campaign balance or physical tablet performance.
+
 - Component 6 replaces expedition placeholder art with original paintings and passes native portrait/landscape review and offline reconstruction; the quest remains disabled pending balance controls and final release integration. Physical tablet review and campaign balance remain unverified.
 
 - Dragon expedition components 1–5 are a development checkpoint, not an enabled campaign quest: bespoke dragon/broodmother/hunter/map/platform/hoard visuals, expedition balance controls, and final native desktop/tablet verification remain. `DragonExpedition.AVAILABLE` is false until those components finish; interim art reuses existing painted assets.

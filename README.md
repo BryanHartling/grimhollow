@@ -1,3 +1,7 @@
+# Dragon expedition: component 7 checkpoint
+
+The existing Playtest → Balance tuning menu now includes Expedition dragon, Expedition cavern, and Expedition supplies and hoard. Twenty-two bounded, save-local controls cover offer chance, boss stats/attacks, sight/fall damage, spider budgets, finite supplies and one-time rewards. Normal saves retain the approved defaults. Entry remains disabled pending final component 8.
+
 # Dragon expedition: component 6 checkpoint
 
 Original painted dragon, broodmother, treasure hunter, timber platforms, continuous hoard and map are integrated. The campaign entrance remains disabled until balance controls and final release integration finish (components 7–8). Runtime version is still 1.15.0. Native portrait/landscape screenshots: `verification/interface/*/expedition-*.png`. Source art and exact prompts: `tools/painted/sources/expedition/` and `tools/painted/expedition-prompts.json`.

@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 package com.shatteredpixel.shatteredpixeldungeon.actors.mobs;
 
+import com.shatteredpixel.shatteredpixeldungeon.BalanceTuning;
+import static com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.*;
+
 import com.shatteredpixel.shatteredpixeldungeon.DragonExpedition;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
@@ -19,16 +22,19 @@ import com.watabou.utils.Random;
 import java.util.ArrayList;
 
 public class Broodmother extends Mob {
-    public int hatched, hatchCooldown = 5, hatchCell = -1;
-    { spriteClass = com.shatteredpixel.shatteredpixeldungeon.sprites.BroodmotherSprite.class; HP = HT = 240; defenseSkill = 18; EXP = 25; maxLvl = 30;
+    public int hatched, hatchCooldown = BalanceTuning.get(BROOD_INTERVAL), hatchCell = -1;
+    { spriteClass = com.shatteredpixel.shatteredpixeldungeon.sprites.BroodmotherSprite.class; HP = HT = BalanceTuning.get(BROOD_HEALTH); defenseSkill = 18; EXP = 25; maxLvl = 30;
         properties.add(Property.BOSS); properties.add(Property.LARGE);
         resistances.add(Poison.class); HUNTING = new BroodHunting(); }
+    @Override public String description() { return Messages.get(this, "desc", BalanceTuning.get(BROOD_TOTAL), BalanceTuning.get(BROOD_LIVE)); }
     @Override public int attackSkill(Char enemy) { return 26; }
-    @Override public int damageRoll() { return Random.NormalIntRange(16, 24); }
+    @Override public int damageRoll() { return Math.round(Random.NormalIntRange(16, 24) * BalanceTuning.multiplier(BROOD_DAMAGE)); }
     @Override public int drRoll() { return Random.NormalIntRange(2, 7); }
     @Override public int attackProc(Char enemy, int damage) {
-        Poison poison = Buff.affect(enemy, Poison.class);
-        if (poison != null) poison.set(6);
+        if (BalanceTuning.get(BROOD_POISON) > 0) {
+            Poison poison = Buff.affect(enemy, Poison.class);
+            if (poison != null) poison.set(BalanceTuning.get(BROOD_POISON));
+        }
         return super.attackProc(enemy, damage);
     }
     @Override public void notice() { if (sprite != null) super.notice(); BossHealthBar.assignBoss(this); }
@@ -39,7 +45,7 @@ public class Broodmother extends Mob {
         for (Mob mob : Dungeon.level.mobs) if (mob instanceof CavernSpinner && mob.isAlive()) {
             alive++; if (((CavernSpinner) mob).hatchling) brood++;
         }
-        return !DragonExpedition.spiderSlain && hatched < 6 && brood < 3 && alive < 9;
+        return !DragonExpedition.spiderSlain && hatched < BalanceTuning.get(BROOD_TOTAL) && brood < BalanceTuning.get(BROOD_LIVE) && alive < BalanceTuning.get(SPIDERS_CAP);
     }
     private int chooseHatchCell() {
         ArrayList<Integer> cells = new ArrayList<>();
@@ -58,7 +64,7 @@ public class Broodmother extends Mob {
     }
     private class BroodHunting extends Mob.Hunting {
         @Override public boolean act(boolean enemyInFOV, boolean justAlerted) {
-            if (hatchCell >= 0) { hatch(); hatchCooldown = 5; spend(TICK); return true; }
+            if (hatchCell >= 0) { hatch(); hatchCooldown = BalanceTuning.get(BROOD_INTERVAL); spend(TICK); return true; }
             if (enemyInFOV && --hatchCooldown <= 0 && canHatch()) {
                 hatchCell = chooseHatchCell();
                 if (hatchCell >= 0) {

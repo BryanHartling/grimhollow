@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 package com.shatteredpixel.shatteredpixeldungeon.actors.mobs;
 
+import com.shatteredpixel.shatteredpixeldungeon.BalanceTuning;
+import static com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.*;
+
 import com.shatteredpixel.shatteredpixeldungeon.DragonExpedition;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
@@ -26,13 +29,14 @@ public class ExpeditionDragon extends Mob {
     public Attack pending = Attack.NONE;
     public int aim = -1, origin = -1, lowestHP;
     public float breathDelay, wingDelay;
-    { spriteClass = ExpeditionDragonSprite.class; HP = HT = 480; lowestHP = HT; defenseSkill = 22;
+    { spriteClass = ExpeditionDragonSprite.class; HP = HT = BalanceTuning.get(DRAGON_HEALTH); lowestHP = HT; defenseSkill = 22;
         EXP = 40; maxLvl = 30; flying = true; viewDistance = 6;
         properties.add(Property.BOSS);
         // Its wings overhang the tile, but it must approach heroes on one-cell bridges.
         immunities.add(Burning.class); immunities.add(Fire.class); HUNTING = new DragonHunting(); }
+    @Override public String description() { return Messages.get(this, "desc", BalanceTuning.get(DRAGON_BREATH_COOLDOWN), BalanceTuning.get(DRAGON_KNOCKBACK)); }
     @Override public int attackSkill(Char enemy) { return 32; }
-    @Override public int damageRoll() { return Random.NormalIntRange(22, 32); }
+    @Override public int damageRoll() { return Math.round(Random.NormalIntRange(22, 32) * BalanceTuning.multiplier(DRAGON_DAMAGE)); }
     @Override public int drRoll() { return Random.NormalIntRange(4, 10); }
     @Override public int heal(int amount) { return 0; }
     @Override public void damage(int damage, Object source) { super.damage(damage, source); lowestHP = Math.min(lowestHP, HP); }
@@ -74,14 +78,14 @@ public class ExpeditionDragon extends Mob {
         Attack attack = pending; pending = Attack.NONE;
         if (attack == Attack.NONE || origin != pos) return;
         HashSet<Integer> cells = attackCells(attack, aim);
-        if (attack == Attack.BREATH) breathDelay = 3;
+        if (attack == Attack.BREATH) breathDelay = BalanceTuning.get(DRAGON_BREATH_COOLDOWN);
         else wingDelay = 5;
         for (int cell : cells) {
             if (attack == Attack.BREATH) {
                 GameScene.add(Blob.seed(cell, 3, Fire.class));
                 Char ch = Actor.findChar(cell);
                 if (ch != null && ch != this) {
-                    ch.damage(Random.NormalIntRange(14, 22), new Fire());
+                    ch.damage(Math.round(Random.NormalIntRange(14, 22) * BalanceTuning.multiplier(DRAGON_DAMAGE)), new Fire());
                     if (ch.isAlive() && !ch.isImmune(Fire.class)) {
                         Burning burn = Buff.affect(ch, Burning.class);
                         if (burn != null) burn.reignite(ch);
@@ -94,11 +98,11 @@ public class ExpeditionDragon extends Mob {
             java.util.ArrayList<Char> hit = new java.util.ArrayList<>();
             for (int cell : cells) { Char ch = Actor.findChar(cell); if (ch != null && ch != this) hit.add(ch); }
             for (Char ch : hit) {
-                ch.damage(Random.NormalIntRange(8, 14), this);
+                ch.damage(Math.round(Random.NormalIntRange(8, 14) * BalanceTuning.multiplier(DRAGON_DAMAGE)), this);
                 if (!ch.isAlive()) continue;
                 Ballistica ray = new Ballistica(pos, ch.pos, Ballistica.WONT_STOP);
                 int end = ray.path.get(ray.path.size() - 1);
-                WandOfBlastWave.throwChar(ch, new Ballistica(ch.pos, end, Ballistica.STOP_SOLID), 2,
+                WandOfBlastWave.throwChar(ch, new Ballistica(ch.pos, end, Ballistica.STOP_SOLID), BalanceTuning.get(DRAGON_KNOCKBACK),
                         false, false, ExpeditionDragon.class, new WandOfBlastWave.LandingRules(true) {
                             @Override public void collide(Char target, int moved) {}
                         });

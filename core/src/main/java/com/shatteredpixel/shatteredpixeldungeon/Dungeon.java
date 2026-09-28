@@ -361,6 +361,8 @@ public class Dungeon {
 			level = new com.shatteredpixel.shatteredpixeldungeon.levels.DragonChasmLevel();
 		} else if (branch == DragonExpedition.BRANCH && depth == DragonExpedition.CAVERN) {
 			level = new com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel();
+		} else if (branch == DragonExpedition.BRANCH && depth == DragonExpedition.HOARD) {
+			level = new com.shatteredpixel.shatteredpixeldungeon.levels.DragonHoardLevel();
 		} else if (branch == 1) {
 			switch (depth) {
 				case 11:

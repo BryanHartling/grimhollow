@@ -19,7 +19,7 @@ import com.watabou.utils.Random;
 public final class DragonExpedition {
     private DragonExpedition() {}
     public static final int BRANCH = 2, CHASM = 17, CAVERN = 18, HOARD = 19;
-    // Enable only after the connected encounter and its return route are complete.
+    // Enable the campaign entrance after the visual/presentation and final release components.
     public static final boolean AVAILABLE = false;
     public static int hunterDepth, hunterPos = -1, returnCell = -1;
     public static java.util.ArrayList<Item> fallenItems = new java.util.ArrayList<>();
@@ -67,7 +67,15 @@ public final class DragonExpedition {
     public static void arriveDragon(Level level) {
         if (Dungeon.branch != BRANCH || Dungeon.depth != CHASM && Dungeon.depth != HOARD) return;
         for (Mob mob : level.mobs.toArray(new Mob[0])) if (mob instanceof ExpeditionDragon) level.mobs.remove(mob);
-        if (dragonSlain) return;
+        if (dragonSlain) {
+            if (level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.DragonHoardLevel) {
+                ((com.shatteredpixel.shatteredpixeldungeon.levels.DragonHoardLevel) level).unlockHoard();
+                victoryPending = false;
+                com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.detach(Dungeon.hero,
+                        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.DragonVictoryPassage.class);
+            } else queueVictory();
+            return;
+        }
         if (dragon == null) {
             dragon = new ExpeditionDragon();
             dragon.pos = level.randomRespawnCell(dragon);
@@ -79,7 +87,14 @@ public final class DragonExpedition {
         }
         if (dragon.pos < 0) dragon.pos = level.entrance() + 1;
         dragon.timeToNow();
+        if (Dungeon.depth == HOARD) dragon.aggro(Dungeon.hero);
         level.mobs.add(dragon);
+    }
+
+    public static void queueVictory() {
+        if (victoryPending && Dungeon.branch == BRANCH && Dungeon.hero.isAlive())
+            com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.affect(Dungeon.hero,
+                    com.shatteredpixel.shatteredpixeldungeon.actors.buffs.DragonVictoryPassage.class);
     }
 
     public static void spawnHunter(Level level) {

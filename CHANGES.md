@@ -1,3 +1,10 @@
+## Dragon expedition — component 5 (hoard and escape)
+
+- Adds the Hoard Room, a permanently usable dungeon return exit and relocation of the same wounded dragon when the hero enters. The Expedition Map cannot serve as an escape from inside.
+- Victory schedules immediate transport through normal save/ally-transfer handling, clears fire in the hoard and opens its one-time reward: 2,000–3,000 gold, three identified +3–4 equipment pieces, and independent 25% chances for a unique artifact and a random additional trinket not already carried.
+- Treasure is scenery until victory, so fire, theft and remote item-grabbing cannot destroy or bypass the seal. Both distinct carried trinkets use their existing passives concurrently; no catalyst or trinket-slot restriction is added.
+- This remains a development checkpoint. The campaign entrance is withheld until bespoke presentation and release verification; no existing game content is replaced by the interim boss/hunter artwork.
+
 ## Dragon expedition — component 4 (dragon combat)
 
 - Adds a flying, melee-accessible dragon with a fixed-direction one-turn warning before a six-cell fire cone or two-cell wingbeat. Breath has a three-turn minimum cooldown; wingbeat has a five-turn cooldown and uses the existing collision/chasm knockback path.

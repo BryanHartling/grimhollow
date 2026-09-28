@@ -1,3 +1,24 @@
+# Dragon expedition — components 1–5 development checkpoint
+
+Campaign entry is disabled pending components 6 (bespoke visuals/presentation), 7 (balance controls), and 8 (native release verification). No new art was generated in these components. Version remains the existing 1.15.0 until release integration.
+
+Local final command: `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeUpstream=true --no-daemon --console=plain` — **BUILD SUCCESSFUL in 2m 44s; Runs=90 failures=0**. All nine hero classes ran ten seeds. Existing seven JUnit cases passed. New test 59 runs for every class alongside existing scenarios, including 64 maze seeds per class.
+
+| Gate | Status | Actual scope |
+|---|---|---|
+| 59 foundation | PASS | Isolated seeded City placement; exactly one healing potion; no repeat exchange; map/elixir; actual disk persistence; missing-state defaults. |
+| 59 maze | PASS | All eight perimeter positions observed across 64 seeds; four-way connectivity of every platform; central arrival; loops and dead ends; nonflammable platform cells; actual saved layout retained. |
+| 59 cavern | PASS | Open cavern and 2×2 pillars; forty finite bone heaps including three rations/four torches; six initial scavengers; live/lifetime brood caps; no hatchling loot/XP; fall damage/Cripple, Feather Fall, actual descent/climb and safe cleared reentry. |
+| 59 dragon | PASS | Fixed warned cone, occlusion/range, no windup damage, three-turn breath minimum, two-cell wingbeat, healing rejection, single boss and wounded/cooldown persistence through disk save and cavern round trip. |
+| 59 hoard | PASS | Wounded dragon relocates; retreat works while alive; original City return cell; victory schedules transport; travelling minion retained; no treasure before victory; reward quality; collected treasure never regenerates; two carried trinket passives and non-duplicate bonus selection. |
+| New-class gates | PASS | Necromancer 10/0, Enchanter 10/0, Psychic 10/0; combined 30/0 included in all-nine 90/0. |
+| Desktop / Android builds | PASS | `desktop:dist` and `android:assembleDebug`, final command above. No new native launcher package is advertised. |
+| Existing tests 1–58 | Checkpoint scope retained | Existing headless/JUnit scenarios rerun; no fresh local rendered-art evidence, physical tablet tests or full campaign. Retired tests and permanent known issues below remain unchanged. |
+| Full CI / test 45 | Permanent known issue | Existing contrast gate remains enforced. Exact-head workflow status is reported with the checkpoint delivery. |
+| Components 6–8 | NOT RUN | No bespoke expedition art, tuning menu entries, native expedition screenshots or player-ready release yet. |
+
+Intermediate repairs: generation-time transition lookup now uses the level being built rather than `Dungeon.level`; the headless Feather Fall fixture supplies its normal visual-only emitter. Tests retain production fall, damage, floor transition and persistence paths.
+
 # Balance tuning - v1.15.0
 
 New test **58 PASS** in the existing headless and native interface runners. Build command: `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeUpstream=true --no-daemon --console=plain` -> **BUILD SUCCESSFUL in 1m 1s; Runs=90 failures=0**. Seven JUnit tests, zero failures/errors. All nine heroes cover ten seeds; Necromancer 10/0, Enchanter 10/0, Psychic 10/0, combined added classes 30/0 are included. `tools/package-windows.ps1` creates the 1.15.0 native Windows application with the existing icon and bundled runtime.

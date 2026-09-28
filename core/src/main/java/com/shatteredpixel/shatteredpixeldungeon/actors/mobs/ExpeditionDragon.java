@@ -125,6 +125,7 @@ public class ExpeditionDragon extends Mob {
         pending = Attack.NONE;
         GLog.p(Messages.get(this, "defeated"));
         super.die(cause);
+        DragonExpedition.queueVictory();
     }
     @Override public void storeInBundle(Bundle b) {
         HP = Math.min(HP, lowestHP);

@@ -175,6 +175,65 @@ final class ExpeditionScenario {
         check(Dungeon.level.mobs.stream().noneMatch(m -> m instanceof ExpeditionDragon), "dead dragon respawns");
         System.out.println("TEST 59 dragon PASS: warned fixed cone, range/occlusion, three-turn cooldown, wingbeat distance, no healing, single persistent boss, cavern round trip and death");
     }
+    private static void returnRoute() throws Exception {
+        java.lang.reflect.Method route = InterlevelScene.class.getDeclaredMethod("returnTo");
+        route.setAccessible(true); route.invoke(new InterlevelScene());
+    }
+    private static void hoard() throws Exception {
+        Dungeon.init(); Dungeon.depth = DragonExpedition.hunterDepth; Dungeon.switchLevel(Dungeon.newLevel(), -1);
+        DragonExpedition.hunterPos = Dungeon.hero.pos; DragonExpedition.returnCell = Dungeon.hero.pos;
+        new PotionOfHealing().collect(); check(DragonExpedition.accept(Dungeon.hero), "quest exchange for full route");
+        int town = Dungeon.depth, returnCell = Dungeon.hero.pos;
+        DragonExpedition.travel(DragonExpedition.CHASM, DragonExpedition.BRANCH, -1); returnRoute();
+        check(Dungeon.branch == 2 && Dungeon.level instanceof DragonChasmLevel, "expedition entry route");
+        ExpeditionDragon dragon = DragonExpedition.dragon; dragon.sprite = dragon.sprite(); dragon.damage(41, ExpeditionScenario.class);
+        int wounded = dragon.HP;
+        InterlevelScene.curTransition = Dungeon.level.getTransition(LevelTransition.Type.REGULAR_EXIT);
+        java.lang.reflect.Method descend = InterlevelScene.class.getDeclaredMethod("descend"); descend.setAccessible(true);
+        descend.invoke(new InterlevelScene());
+        check(Dungeon.level instanceof DragonHoardLevel && DragonExpedition.dragon.HP == wounded
+                && Dungeon.level.mobs.stream().filter(m -> m instanceof ExpeditionDragon).count() == 1, "hoard relocation clones or heals dragon");
+        DragonHoardLevel level = (DragonHoardLevel) Dungeon.level;
+        check(level.heaps.size == 0 && !DragonExpedition.rewardsCreated, "treasure exists before dragon dies");
+        check(level.activateTransition(Dungeon.hero, level.getTransition(LevelTransition.Type.REGULAR_EXIT)), "living dragon blocks permitted escape");
+        returnRoute();
+        check(Dungeon.branch == 0 && Dungeon.depth == town && Dungeon.hero.pos == returnCell, "escape loses original City location");
+        DragonExpedition.travel(DragonExpedition.CHASM, DragonExpedition.BRANCH, -1); returnRoute();
+        check(DragonExpedition.dragon.HP == wounded, "reentry heals boss");
+        NecroSkeleton ally = new NecroSkeleton(); ally.pos = Dungeon.level.randomRespawnCell(ally);
+        Dungeon.level.mobs.add(ally); Actor.add(ally); ally.sprite = ally.sprite();
+        Dungeon.hero.sprite = new HeroSprite(); Dungeon.hero.lvl = 30;
+        dragon = DragonExpedition.dragon; dragon.sprite = dragon.sprite(); dragon.HP = 0; dragon.die(Dungeon.hero);
+        DragonVictoryPassage passage = Dungeon.hero.buff(DragonVictoryPassage.class);
+        check(passage != null, "no immediate victory passage"); passage.act(); returnRoute();
+        check(Dungeon.level instanceof DragonHoardLevel && Dungeon.hero.pos == DragonHoardLevel.RETURN-1
+                && !DragonExpedition.victoryPending && Dungeon.hero.buff(DragonVictoryPassage.class) == null, "victory placement or repeated transport");
+        check(Dungeon.level.mobs.stream().anyMatch(m -> m instanceof NecroSkeleton)
+                && Dungeon.level.mobs.stream().noneMatch(m -> m instanceof ExpeditionDragon), "victory loses ally or retains dragon");
+        check(DragonExpedition.rewardsCreated && Dungeon.level.heaps.size >= 4, "victory reward missing");
+        for (Heap heap : Dungeon.level.heaps.valueList()) for (Item item : heap.items) {
+            if (item instanceof Gold) check(item.quantity() >= 2000 && item.quantity() <= 3000, "hoard gold bounds");
+            else if (!(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact)
+                    && !(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.trinkets.Trinket))
+                check(item.trueLevel() >= 3 && item.trueLevel() <= 4 && item.isIdentified() && !item.cursed, "exceptional gear quality");
+        }
+        Dungeon.level.heaps.clear(); Dungeon.saveAll(); Dungeon.loadGame(GamesInProgress.curSlot);
+        Dungeon.switchLevel(Dungeon.loadLevel(GamesInProgress.curSlot), Dungeon.hero.pos);
+        ((DragonHoardLevel) Dungeon.level).unlockHoard(); check(Dungeon.level.heaps.size == 0, "collected hoard regenerates on save/load");
+        Dungeon.level.activateTransition(Dungeon.hero, Dungeon.level.getTransition(LevelTransition.Type.REGULAR_EXIT)); returnRoute();
+        DragonExpedition.travel(DragonExpedition.HOARD, DragonExpedition.BRANCH, DragonHoardLevel.ARRIVAL); returnRoute();
+        check(Dungeon.level.heaps.size == 0, "return visit duplicates treasure");
+        new com.shatteredpixel.shatteredpixeldungeon.items.trinkets.MimicTooth().collect();
+        new com.shatteredpixel.shatteredpixeldungeon.items.trinkets.ParchmentScrap().collect();
+        check(com.shatteredpixel.shatteredpixeldungeon.items.trinkets.MimicTooth.mimicChanceMultiplier() == 1.5f
+                && com.shatteredpixel.shatteredpixeldungeon.items.trinkets.ParchmentScrap.enchantChanceMultiplier() == 2f,
+                "two carried trinkets not simultaneously active");
+        for (int i = 0; i < 30; i++) {
+            com.shatteredpixel.shatteredpixeldungeon.items.trinkets.Trinket bonus = DragonHoardLevel.bonusTrinket();
+            check(bonus != null && Dungeon.hero.belongings.getItem(bonus.getClass()) == null, "bonus trinket duplicates carried type");
+        }
+        System.out.println("TEST 59 hoard PASS: living-dragon retreat, original return cell, wounded reentry, safe victory/ally transfer, sealed treasure, one-time rewards, two active trinkets");
+    }
     static void run() throws Exception {
         Dungeon.init();
         int chosen = DragonExpedition.hunterDepth;
@@ -203,7 +262,7 @@ final class ExpeditionScenario {
         DragonExpedition.restore(new Bundle());
         check(!DragonExpedition.accepted && !DragonExpedition.entered && DragonExpedition.returnCell == -1, "old save/new run inherits quest");
         check(DragonExpedition.BRANCH != 1, "expedition aliases Vault branch");
-        maze(); cavern(); dragon();
+        maze(); cavern(); dragon(); hoard();
         System.out.println("TEST 59 foundation PASS: seeded placement, healing exchange, unique rewards, protected map, disk save/load, legacy defaults");
     }
 }

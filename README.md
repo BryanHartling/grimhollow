@@ -1,6 +1,8 @@
 # Grimhollow
 
-**Dragon expedition v1.16.0:** find a wounded treasure hunter on one newly generated City floor (16–19). Give one Potion of Healing to receive an Expedition Map and an Elixir of Feather Fall. Open the map beside the hunter to enter a wooden-platform maze over a deep chasm. The only way back to the dungeon is through the Hoard Room's return exit, which remains usable even while the dragon lives.
+**Playtest follow-up v1.16.1:** Hatchling identification reaches equipped gear and every bag. Balance settings are shared across games on this device. The expedition cavern has natural edges, safer fall arrivals, equipment-heavy remains and upward exits. Dewcatchers and seedpods now have distinct painted sprites. Existing cavern geometry and loot need a new or rebuilt floor.
+
+**Dragon expedition v1.16.1:** find a wounded treasure hunter on one newly generated City floor (16–19). Give one Potion of Healing to receive an Expedition Map and an Elixir of Feather Fall. Open the map beside the hunter to enter a wooden-platform maze over a deep chasm. The only way back to the dungeon is through the Hoard Room's return exit, which remains usable even while the dragon lives.
 
 The dragon flies, warns before breathing fire or sweeping you off a platform, and retains damage between visits. The lower cavern has rough natural edges, limited sight, six scavengers nearer the landing area, and a distant poisonous broodmother. Its 48 mixed bone piles and adventurer remains favor basic tier-1–3 equipment, with occasional rings, three guaranteed rations and four torches. The Cavern remains loot menu controls count, mix, tier ceiling and upgrades. Defeat her to clear the cavern and unlock the climb back to the center. Killing the dragon carries you to the hoard and unlocks its one-time treasure. The reward can include an artifact and an additional, distinct trinket; carried trinkets retain their normal simultaneous effects.
 
@@ -8,7 +10,7 @@ For rapid testing, open **Menu → Playtest → enable for this save → Travel 
 
 Existing saves remain compatible, but the hunter is not retroactively inserted into an already generated City floor. A new run is the reliable way to experience the normal quest. All eight components have committed checkpoints; see [verification](verification/ACCEPTANCE.md) and [known issues](KNOWN_ISSUES.md). The existing terrain-contrast gate remains enforced and is still a known failure; no full green CI or physical-tablet playtest is claimed.
 
-Local launchers after building: `desktop/build/windows/1.16.0/Grimhollow/Grimhollow.exe` (keep its whole folder), `desktop/build/libs/desktop-1.16.0.jar`, and `android/build/outputs/apk/debug/android-debug.apk`. Android is a debug-signed sideload build.
+Local launchers after building: `desktop/build/windows/1.16.1/Grimhollow/Grimhollow.exe` (keep its whole folder), `desktop/build/libs/desktop-1.16.1.jar`, and `android/build/outputs/apk/debug/android-debug.apk`. Android is a debug-signed sideload build.
 
 Original expedition paintings, exact generation prompts and the offline packing recipe are in [sources](tools/painted/sources/expedition/), [prompts](tools/painted/expedition-prompts.json), and [packer](tools/painted/expedition.py). Native screenshots are in `verification/interface/{landscape,portrait}/expedition-*.png`; CI reconstructs the committed sources without an image-generation service.
 
@@ -94,7 +96,7 @@ Desktop-only excludes the Android module and Android plugin and works with no SD
 
 ```powershell
 .\gradlew.bat desktop:dist -PdesktopOnly=true --no-daemon
-java -jar desktop\build\libs\desktop-1.16.0.jar
+java -jar desktop\build\libs\desktop-1.16.1.jar
 ```
 
 `desktop:dist` aliases upstream's `desktop:release` fat-jar task. `desktop:run` supplies required launcher metadata. Linux/macOS use `./gradlew`; on macOS the run task adds `-XstartOnFirstThread`.

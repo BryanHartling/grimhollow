@@ -1,3 +1,7 @@
+# Regrowth plants — v1.16.1
+
+`botany_skills.py` now fills the two previously retained plant cells (Dewcatcher 125 and Seedpod 126) from individual transparent paintings. The dewcatcher uses blue-green cupped leaves and silver water drops; the seedpod uses a dry ochre three-capsule silhouette. Sources are in `sources/botany-skills/`; exact built-in imagegen prompts are in `regrowth-plants-prompts.json`. The offline packer fits each at the same 64px tile density and foot anchor as the other 13 plants. No harvesting code or plant index changes. New source paintings and derivatives are GPL-3.0-or-later.
+
 # Dragon expedition - component 6
 
 `expedition.py` packs six original built-in imagegen paintings from `sources/expedition/`: four dragon poses, four broodmother poses, the wounded hunter, timber, a single continuous hoard, and the expedition map. `expedition-prompts.json` records exact prompts, including the spider alpha cleanup. The source PNGs and derivatives use GPL-3.0-or-later. Alpha-connected extraction preserves wings/legs crossing a nominal source quadrant; all poses use one common scale. The two bosses have steady idle/travel poses and action-only animation. Existing creatures and regions are unchanged. `pack.py` and `recovery_assets.py --check` reproduce all outputs offline; no model or Blender runs in builds or CI.

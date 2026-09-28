@@ -1,3 +1,8 @@
+# Regrowth plant paintings — v1.16.1
+
+- Replaced the retained Dewcatcher and Seedpod art with original transparent paintings, reproducibly packed into their existing cells. All 15 plant sprites now participate in the existing native geometry and sprouting review; harvesting is unchanged.
+- Version 1.16.1 uses Android code 963 and preserves existing save data.
+
 # Expedition playtest follow-up — natural cavern and salvage
 
 - Replaced the rectangular lower cavern with a connected, irregular rock outline and separated 2x2 pillars. Broodmother starts at least 14 cells from the center; ordinary spinners occupy the approaches. Falls land in the central clearing away from the boss and do not alert her; deliberate climbing down still does.

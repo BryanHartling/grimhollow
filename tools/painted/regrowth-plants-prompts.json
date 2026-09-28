@@ -1,0 +1,15 @@
+{
+  "generator": "Built-in image_gen; committed transparent sources, offline deterministic packing; GPL-3.0-or-later",
+  "plants": [
+    {
+      "source": "sources/botany-skills/dewcatcher.png",
+      "terrainFeatureCell": 125,
+      "prompt": "Use case: stylized-concept. Asset type: one original painted plant sprite for a dark gothic dungeon crawler, designed to remain readable at 64x64 pixels. Primary request: a dewcatcher plant, a low rosette of five broad cupped blue-green leaves holding three large glass-clear dew drops with silver-blue highlights. Distinctive open shallow bowl silhouette, succulent waxy leaves, short dark roots at bottom. Hand-painted naturalistic fantasy illustration, crisp controlled edges and broad readable shapes rather than tiny noisy detail, angled slightly down from the front to match a top-down dungeon game. Soft warm light from upper left, cool deep leaf shadows. Entire plant centered and fully isolated with generous transparent margins, upright front view, no ground plane, no pot, no text, no border, no particles, no square pixel art. Truly transparent background."
+    },
+    {
+      "source": "sources/botany-skills/seedpod.png",
+      "terrainFeatureCell": 126,
+      "prompt": "Use case: stylized-concept. Asset type: one original painted plant sprite for a dark gothic dungeon crawler, designed to remain readable at 64x64 pixels. Primary request: a seedpod plant, a compact branching cluster of three plump dry ochre seed capsules, one capsule split open with a few large amber seeds visible, on short crooked woody stems above a low collar of olive-green leaves. Distinctive upright three-lobed silhouette, warm tan papery ribbed husks, short dark roots at bottom. Hand-painted naturalistic fantasy illustration, crisp controlled edges and broad readable shapes rather than tiny noisy detail, angled slightly down from the front to match a top-down dungeon game. Soft warm light from upper left with rich umber shadows. Entire plant centered and fully isolated with generous transparent margins, upright front view, no ground plane, no pot, no text, no border, no particles, no square pixel art. Truly transparent background."
+    }
+  ]
+}

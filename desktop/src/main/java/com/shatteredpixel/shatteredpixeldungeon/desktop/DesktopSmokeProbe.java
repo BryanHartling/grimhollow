@@ -284,7 +284,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 for(int i=0;i<PAINTED_PLANTS.length;i++){
                     int pos=Dungeon.hero.pos+(i/4-2)*Dungeon.level.width()+i%4-4;
                     Level.set(pos,Terrain.EMPTY);Dungeon.level.traps.remove(pos);
-                    com.shatteredpixel.shatteredpixeldungeon.plants.Plant.Seed seed=(com.shatteredpixel.shatteredpixeldungeon.plants.Plant.Seed)Class.forName("com.shatteredpixel.shatteredpixeldungeon.plants."+PAINTED_PLANTS[i]+"$Seed").getDeclaredConstructor().newInstance();
+                    com.shatteredpixel.shatteredpixeldungeon.plants.Plant.Seed seed=(com.shatteredpixel.shatteredpixeldungeon.plants.Plant.Seed)Class.forName(plantClass(i)+"$Seed").getDeclaredConstructor().newInstance();
                     if(Dungeon.level.plant(seed,pos)==null)throw new AssertionError("Plant did not sprout");
                 }
                 Dungeon.observe();GameScene.updateMap();
@@ -341,7 +341,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(Dungeon.hero.belongings.armor.inscribed.getClass()!=choices.get(choices.size()-1))throw new AssertionError("Bottom inscription chose wrong glyph");
                 if(Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).charges()!=1)
                     throw new AssertionError("Scrolled inscription did not spend exactly one charge");
-                System.out.println("TEST 33/36 BOTANY UI: sprouted plants=13 pointer armor selections=2 glyph library="+choices.size()+" scrolling/offset=PASS failures=0");
+                System.out.println("TEST 33/36 BOTANY UI: sprouted plants="+PAINTED_PLANTS.length+" pointer armor selections=2 glyph library="+choices.size()+" scrolling/offset=PASS failures=0");
             }
             if(frame==335){
                 com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush brush=Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class);brush.gainCharge(3);
@@ -1929,7 +1929,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }
         if(ids.size()!=113||unique.size()!=113)failures.add("36 missing/duplicate skill art "+ids.size()+"/"+unique.size());
         for(int i=0;i<PAINTED_PLANTS.length;i++){
-            com.shatteredpixel.shatteredpixeldungeon.plants.Plant plant=(com.shatteredpixel.shatteredpixeldungeon.plants.Plant)Class.forName("com.shatteredpixel.shatteredpixeldungeon.plants."+PAINTED_PLANTS[i]).getDeclaredConstructor().newInstance();
+            com.shatteredpixel.shatteredpixeldungeon.plants.Plant plant=(com.shatteredpixel.shatteredpixeldungeon.plants.Plant)Class.forName(plantClass(i)).getDeclaredConstructor().newInstance();
             Image icon=com.shatteredpixel.shatteredpixeldungeon.tiles.TerrainFeaturesTilemap.getPlantVisual(plant);
             if(plant.image!=i||icon.width()!=16||icon.height()!=16||GameGeometry.opaqueHeight(icon.texture,icon.frame())==0)failures.add("25 plant "+PAINTED_PLANTS[i]);
             if(Math.abs(icon.frame().left*icon.texture.width-(i*64+.5f))>.01f||Math.abs(icon.frame().top*icon.texture.height-(7*64+.5f))>.01f)failures.add("25 plant texel alignment "+PAINTED_PLANTS[i]);
@@ -1937,7 +1937,10 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }
         System.out.println("PAINTED SKILLS/PLANTS: unique skills="+unique.size()+" plants="+PAINTED_PLANTS.length);
     }
-    private static final String[] PAINTED_PLANTS={"Rotberry","Firebloom","Swiftthistle","Sungrass","Icecap","Stormvine","Sorrowmoss","Mageroyal","Earthroot","Starflower","Fadeleaf","Blindweed","BlandfruitBush"};
+    private static final String[] PAINTED_PLANTS={"Rotberry","Firebloom","Swiftthistle","Sungrass","Icecap","Stormvine","Sorrowmoss","Mageroyal","Earthroot","Starflower","Fadeleaf","Blindweed","BlandfruitBush","Dewcatcher","Seedpod"};
+    private static String plantClass(int index) {
+        return "com.shatteredpixel.shatteredpixeldungeon."+(index<13?"plants.":"items.wands.WandOfRegrowth$")+PAINTED_PLANTS[index];
+    }
     private void steadyIdle(com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite sprite,java.util.List<String> failures)throws Exception {
         if(sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite)return;
         com.watabou.noosa.MovieClip.Animation idle=(com.watabou.noosa.MovieClip.Animation)RecoveryChecks.field(sprite,"idle");

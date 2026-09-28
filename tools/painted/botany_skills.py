@@ -24,6 +24,16 @@ def plants(features):
         tile=Image.new('RGBA',(64,64))
         tile.alpha_composite(part,((64-part.width)//2,61-part.height))
         put(features,7*16+i,tile)
+    # Regrowth-only plants occupy the next two upstream cells, after Blandfruit.
+    for i,name in enumerate(('dewcatcher','seedpod'),13):
+        source=Image.open(HERE/'sources/botany-skills'/f'{name}.png').convert('RGBA')
+        assert source.getchannel('A').getextrema()[0]==0,(name,'needs real alpha')
+        box=source.getchannel('A').point(lambda a:255 if a>=16 else 0).getbbox()
+        assert box is not None,(name,'empty authored source')
+        part=ImageOps.contain(source.crop(box),(56,58),Image.Resampling.LANCZOS)
+        part.putalpha(part.getchannel('A').point(lambda a:0 if a<8 else a))
+        tile=Image.new('RGBA',(64,64));tile.alpha_composite(part,((64-part.width)//2,61-part.height))
+        put(features,7*16+i,tile)
 
 def outputs():
     atlas=Image.new('RGBA',(1024,512));hashes=set();count=0

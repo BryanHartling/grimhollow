@@ -1,3 +1,22 @@
+# Playtest follow-up — v1.16.1
+
+The numbered historical records below retain their stated limits and retirements. This patch changes Hatchling identification, shared tuning, expedition cavern generation/stair art, and the two Regrowth-only plant sprites. No physical Android tablet or full combat campaign was tested.
+
+| Check | Result | Actual evidence |
+|---|---|---|
+| 55 / 58 / 59 mechanics | PASS | `gradlew.bat core:test core:smokeRun desktop:dist -PsmokeUpstream=true --no-daemon --console=plain`: **Runs=90 failures=0; BUILD SUCCESSFUL in 1m 16s**. All nine classes, including each added class at 10/0. |
+| 55 identification | PASS | `TEST 55 IDENTIFY PASS`: bagged consumables/wands, equipped gear/artifacts and nested bags. Eating, upgrades and enchantments remain loose-only. |
+| 58 shared settings | PASS | Disk-backed preference reload; current, old and new games use shared values; saved older values cannot undo a reset; malformed values clamp; legacy save migration; default RNG unchanged. |
+| 59 cavern | PASS | Per class: 32 connected natural outlines, 640 safe fall samples, distant broodmother and nearer scavengers. Default 48 heaps: 24 bone/24 adventurer remains, 33 common +0 gear, two rings, three rations, four torches. Loot-only controls, tier/upgrade bounds and finite supplies verified. |
+| 59 native expedition | PASS | Landscape and portrait: real NPC exchange/map/continue/fall/blocked climb/boss clear/victory/return input. Both upward exits keep their destinations. New cavern overview and loot-menu captures are under `interface/{landscape,portrait}/expedition-*.png`. Overview deliberately uses debug mapping; normal darkness has a separate capture. |
+| 25 / 33 / 36 plants and interface | PASS | `BOTANY UI: sprouted plants=15 ... failures=0` in both orientations. Existing geometry checks confirm 15 correct plant indices/UVs and footprints, 113 skills, 385 item frames and 60 identification overlays. New plants visible in `painted-sprouted-plants.png`. |
+| 24 / 26 / 34 / 56 | PASS | Native geometry, popup and handler checks; nine heroes, 125 creature forms, 74 eightfold-density atlases; failures=0. |
+| 31 / 32 / 56 effects | PASS | 40 gas + 10 fire cells, 240 GPU-completed frames: **mean=0.9376ms p95=1.3068ms failures=0**. Batched flame max channel difference=0. |
+| 44 artwork reconstruction | PASS | `python tools/recovery_assets.py --check`: **PAINTED assets=136 source sheets=126 failures=0; verified painted replacements=136 failures=0**. 55 launcher resources. |
+| Desktop / Android build | PASS | `gradlew.bat core:test desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 43s**. Seven JUnit cases, zero failures/errors. Version 1.16.1-INDEV, Android code 963. |
+| Windows package | PASS | `tools/package-windows.ps1` produced the bundled-runtime executable and portable ZIP; packaged `Grimhollow.exe --smoke-title` returned **LAUNCHER_EXIT=0; RENDERED=TitleScene**. |
+| CI / test 45 | PENDING / existing known issue | Exact release commit CI status is reported in the delivery message. Test 45 remains enforced; its prior Windows result failed 22/76 comparisons. Other prior known issues have not been reclassified by this patch. |
+
 # Dragon expedition release — v1.16.0 (all eight components)
 
 The expedition is now enabled. The sections below this release record are historical checkpoints; their then-incomplete component lists do not describe this release. No physical Samsung tablet or full player-driven combat campaign was tested.

@@ -357,6 +357,8 @@ public class Dungeon {
 				default:
 					level = new DeadEndLevel();
 			}
+		} else if (branch == DragonExpedition.BRANCH && depth == DragonExpedition.CHASM) {
+			level = new com.shatteredpixel.shatteredpixeldungeon.levels.DragonChasmLevel();
 		} else if (branch == 1) {
 			switch (depth) {
 				case 11:
@@ -459,6 +461,7 @@ public class Dungeon {
 	public static boolean interfloorTeleportAllowed(){
 		if (Dungeon.level.locked
 				|| Dungeon.level instanceof MiningLevel || Dungeon.level instanceof VaultLevel
+				|| Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.ExpeditionLevel
 				|| (Dungeon.hero != null && Dungeon.hero.belongings.getItem(Amulet.class) != null)){
 			return false;
 		}

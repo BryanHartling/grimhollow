@@ -1,3 +1,9 @@
+## Dragon expedition — component 2 (platform maze)
+
+- Adds a 43×43 chasm with 49 timber platforms, a randomized connected maze, preserved dead ends, extra loops, central climb and one of eight perimeter hoard entrances. Platforms are structurally nonflammable.
+- Branch floors have no ordinary respawn/supply schedule and reject portable interfloor escape. The quest entrance remains gated pending the connected cavern/dragon/hoard components.
+- Gate: 64 generated mazes exercise all eight exits, four-way connectivity, nonflammability and disk save/load without rerolling.
+
 ## Dragon expedition — component 1 (foundation)
 
 - Adds save-local quest state on branch 2, a wounded treasure hunter's one-potion exchange, protected Expedition Map, feather-fall elixir and entry warning. City placement uses an isolated seeded stream.

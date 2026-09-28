@@ -56,6 +56,7 @@
     "items/wands.png": "1ed7236765e5985f9f5638eae9586d4bb990153d18262f896f6b9f11da48bea9",
     "items/weapons-a.png": "bbfe5b4d5e77adcf88e3e7c88c712e18d4d28b3a7936649780330283a4f63dc3",
     "items/weapons-b.png": "9bbd1c0373663b3259182068b3588e72f49c2a6b6cc4cdaed02b3ad803b83bd3",
+    "lurking-horror.png": "6419bf9f7c07a7ee71905d2e5d82a6678b47504349b63aa07c3a9f506d735cf9",
     "mine-workshop.png": "728edc15da07e9e76025c3951e6c78b4dc8a93ebbf858e25448230529486a920",
     "monsters/allies.png": "264101226458aa1df4e91112cdd0be35d706a04001cd995a6fbbbae53dbdd57c",
     "monsters/caves-city.png": "60dd3d8fef26ca9d2edacc0bc33089fde4ab225b641c16979a5f98de7e5477f6",
@@ -9236,6 +9237,44 @@
         256
       ],
       "rgba_sha256": "ab03f161c9517f6012421ed12341fbaa9ce4f6219073dba8e6973ea06d67c189"
+    },
+    "sprites/lurking_horror.png": {
+      "size": [
+        512,
+        512
+      ],
+      "rgba_sha256": "224887be0074fc8014d6c471773c852576b124f3f0ff3dd9f8131800934d756e",
+      "character": true,
+      "logical_size": [
+        64,
+        64
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          256,
+          256
+        ],
+        [
+          256,
+          0,
+          512,
+          256
+        ],
+        [
+          0,
+          256,
+          256,
+          512
+        ],
+        [
+          256,
+          256,
+          512,
+          512
+        ]
+      ]
     }
   }
 }

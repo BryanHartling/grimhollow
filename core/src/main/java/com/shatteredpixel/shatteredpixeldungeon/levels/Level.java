@@ -1488,6 +1488,7 @@ public abstract class Level implements Bundlable {
 				}
 
 				for (Mob mob : mobs) {
+					if (mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror) continue;
 					if ((mob instanceof Mimic && mob.alignment == Char.Alignment.NEUTRAL && ((Mimic) mob).stealthy())
 						|| Char.hasProp(mob, Char.Property.OBJECT)){
 						continue;
@@ -1510,7 +1511,8 @@ public abstract class Level implements Bundlable {
 
 			for (TalismanOfForesight.CharAwareness a : c.buffs(TalismanOfForesight.CharAwareness.class)){
 				Char ch = (Char) Actor.findById(a.charID);
-				if (ch == null || !ch.isAlive() || Char.hasProp(ch, Char.Property.OBJECT)) {
+				if (ch == null || !ch.isAlive() || Char.hasProp(ch, Char.Property.OBJECT)
+						|| ch instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror) {
 					continue;
 				}
 				int p = ch.pos;
@@ -1543,6 +1545,12 @@ public abstract class Level implements Bundlable {
 
 			//set mind vision chars
 			for (Mob mob : mobs) {
+				if (mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror) {
+					com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror horror=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror)mob;
+					horror.observe(mindVisRange);
+					if(horror.sensed() && !fieldOfView[mob.pos]) Dungeon.hero.mindVisionEnemies.add(mob);
+					continue;
+				}
 				if (heroMindFov[mob.pos] && !fieldOfView[mob.pos]){
 					Dungeon.hero.mindVisionEnemies.add(mob);
 				}

@@ -4227,3 +4227,11 @@ v1.4.0 display scale: replace the uniform creature-height rule with species size
 v1.4.0 text: correct 49 missing items/actors/levels/windows key prefixes. Gravity had inherited the Blast Wave name and a two-argument damage format while supplying one pull-distance argument; actual wand behavior and balance are unchanged.
 v1.4.0 effects and walls: 86 painted HUD status symbols plus overhead alert/question/sleep; preserve tint and duration displays. Composite approved torch foreground pixels over current regional masonry instead of preserving the obsolete wall patch.
 v1.4.0 verification: test 43 now measures world/fog separately from HUD text; the larger hero shifted a sampled unseen cell onto the green movement hint (screen 144,135, RGBA 000400FF). Exact black/remembered-pixel requirements are unchanged, and samples now include the previously excluded screen margins.
+
+## Lurking Horror: behavior and perception component
+
+- Added an original painted predator with quiet idle/travel poses, regional stats, an explicit player-response gate, exposed flight, and fifty-turn recovery with a lifetime 25% healing ceiling. The content is not yet inserted into generated floors in this component.
+- Mind Vision (including Glimpse/Seer sight), Talisman scry and open Ashlight +6 expose the entity without revealing terrain; intentional nearby search and prismatic damage also break shadowmeld. All projectile/collision occupancy remains native.
+- The legacy draft's one-frame warning is replaced by an 0.8-second directional edge cue, a persistent log warning and a mandatory fresh player action; City/Halls follow-ups have their own response and ordinary accuracy/damage. Paralysis was removed from the first balance pass.
+- Upstream uses percentage search, not a d20: passive search against shadowmeld uses its trap chance minus 15 percentage points, within the existing class/talent search radius.
+- Ordinary damage starts at 2-4/3-6/4-8/5-10/6-12; warned multipliers remain 1.5/1.5/1.75/1.75/2, exposed evasion is 8/10/12/14/16. The global balance menu can tune chance, damage, evasion, flight and lifetime healing, but cannot disable warning fairness.

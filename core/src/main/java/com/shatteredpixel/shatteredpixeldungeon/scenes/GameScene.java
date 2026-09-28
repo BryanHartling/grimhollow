@@ -406,6 +406,7 @@ public class GameScene extends PixelScene {
 		fog = new FogOfWar( Dungeon.level.width(), Dungeon.level.height() );
 		add( fog );
         add(new com.shatteredpixel.shatteredpixeldungeon.effects.HatchlingSenseLayer());
+        add(new com.shatteredpixel.shatteredpixeldungeon.effects.HorrorSenseLayer());
 		add(new com.shatteredpixel.shatteredpixeldungeon.effects.HealthVignette());
 
 		spells = new Group();
@@ -1587,7 +1588,8 @@ public class GameScene extends PixelScene {
 						//TODO can probably migrate this to Charsprite.visibleOutOfFFOV
 						mob.sprite.visible = true;
 					} else {
-						mob.sprite.visible = mob.sprite.visibleOutOfFFOV || Dungeon.level.heroFOV[mob.pos];
+						mob.sprite.visible = !com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.hidden(mob)
+								&& (mob.sprite.visibleOutOfFFOV || Dungeon.level.heroFOV[mob.pos]);
 					}
 				}
 				if (mob instanceof Ghoul){
@@ -1806,7 +1808,8 @@ public class GameScene extends PixelScene {
 		if (cell == null
 				|| cell < 0
 				|| cell >= Dungeon.level.length()
-				|| (!Dungeon.level.visited[cell] && !Dungeon.level.mapped[cell])) {
+				|| (!Dungeon.level.visited[cell] && !Dungeon.level.mapped[cell]
+					&& !com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.sensed(Actor.findChar(cell)))) {
 			return;
 		}
 
@@ -1837,11 +1840,14 @@ public class GameScene extends PixelScene {
 
 		Char ch = Actor.findChar(cell);
 		if (ch != null && ch != Dungeon.hero){
-			if (Dungeon.level.heroFOV[cell] || Char.hasProp(ch, Char.Property.OBJECT)){
+			if (!com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.hidden(ch)
+					&& (Dungeon.level.heroFOV[cell] || com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.sensed(ch) || Char.hasProp(ch, Char.Property.OBJECT))){
 				objects.add(ch);
 			}
 		}
 
+		// A sensed Horror on an unknown cell must not expose plants, heaps or terrain there.
+		if (!Dungeon.level.visited[cell] && !Dungeon.level.mapped[cell]) return objects;
 		Heap heap = Dungeon.level.heaps.get(cell);
 		if (heap != null && heap.seen) objects.add(heap);
 
@@ -1907,7 +1913,8 @@ public class GameScene extends PixelScene {
 			if (cell == null
 					|| cell < 0
 					|| cell > Dungeon.level.length()
-					|| (!Dungeon.level.visited[cell] && !Dungeon.level.mapped[cell])) {
+					|| (!Dungeon.level.visited[cell] && !Dungeon.level.mapped[cell]
+						&& !com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.sensed(Actor.findChar(cell)))) {
 				return;
 			}
 

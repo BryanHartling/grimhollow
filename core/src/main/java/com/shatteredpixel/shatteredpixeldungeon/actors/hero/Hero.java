@@ -837,6 +837,7 @@ public class Hero extends Char {
         super.spendConstant(time);
         float paid=cooldown()-before;
         if(paid>0){
+            com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.onHeroSpent(paid);
             if(ashesDebt>0){ashesDebt=Math.max(0,ashesDebt-paid);ashesLastCost=0;}
             else ashesLastCost=paid;
         }
@@ -973,6 +974,7 @@ public class Hero extends Char {
 		com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic hatchling =
 				com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.carried();
 		if (hatchling != null) hatchling.onHeroReady();
+		com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.onHeroReady();
 
 		AttackIndicator.updateState();
 		
@@ -1490,6 +1492,9 @@ public class Hero extends Char {
 	private boolean actAttack( HeroAction.Attack action ) {
 
 		attackTarget = action.target;
+		if (com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.hidden(attackTarget)) {
+			ready(); return false;
+		}
 
 		if (isCharmedBy(attackTarget)){
 			GLog.w( Messages.get(Charm.class, "cant_attack"));
@@ -1761,7 +1766,8 @@ public class Hero extends Char {
 				Notes.add(m.landmark());
 			}
 
-			if (fieldOfView[ m.pos ] && m.alignment == Alignment.ENEMY) {
+			if ((fieldOfView[m.pos] || com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.sensed(m))
+					&& !com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.hidden(m) && m.alignment == Alignment.ENEMY) {
 				visible.add(m);
 				if (!visibleEnemies.contains( m )) {
 					newMob = true;
@@ -1983,7 +1989,8 @@ public class Hero extends Char {
 			
 			curAction = new HeroAction.Alchemy( cell );
 			
-		} else if (ch instanceof Mob && (fieldOfView[cell] || Char.hasProp(ch, Property.OBJECT))) {
+		} else if (ch instanceof Mob && !com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.hidden(ch)
+				&& (fieldOfView[cell] || com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.sensed(ch) || Char.hasProp(ch, Property.OBJECT))) {
 
 			if (((Mob) ch).heroShouldInteract()) {
 				curAction = new HeroAction.Interact( ch );
@@ -2575,6 +2582,13 @@ public class Hero extends Char {
 			for (curr = left + y * Dungeon.level.width(); curr <= right + y * Dungeon.level.width(); curr++){
 
 				if ((foresight || fieldOfView[curr]) && curr != pos) {
+					Char hidden = Actor.findChar(curr);
+					if (hidden instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror
+							&& ((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror)hidden).shadowmelded()
+							&& (intentional || foresight || (!cursed && Random.Float()<Math.max(0,.25f-Dungeon.depth/250f)))) {
+						((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror)hidden).expose();
+						smthFound=true;
+					}
 
 					if ((foresight && (!Dungeon.level.mapped[curr] || foresightScan))){
 						GameScene.checkedCell(curr, foresightScan ? pos : curr);

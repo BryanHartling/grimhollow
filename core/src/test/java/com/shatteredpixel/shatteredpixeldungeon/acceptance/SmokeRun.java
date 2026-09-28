@@ -77,7 +77,7 @@ public class SmokeRun {
                             if(Dungeon.depth!=6) throw new AssertionError("Save/load depth mismatch");
                         }
                     }
-                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();HatchlingScenario.run();keepsakeScenario();TuningScenario.run();ExpeditionScenario.run();}
+                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();HatchlingScenario.run();keepsakeScenario();TuningScenario.run();ExpeditionScenario.run();HorrorScenario.run();}
                     String line="PASS "+name+" seed="+seed+" floor=6 save/load=ok";
                     System.out.println(line); log.println(line);
                 } catch(Throwable error) {

@@ -30,7 +30,9 @@ public final class BalanceTuning {
         HOARD_EQUIPMENT(6,3,0,6), HOARD_UPGRADES(6,3,0,10), HOARD_ARTIFACT(6,25,0,100), HOARD_TRINKET(6,25,0,100),
         CAVERN_REMAINS(7,48,20,100), CAVERN_GEAR_WEIGHT(7,80,0,100), CAVERN_RING_WEIGHT(7,5,0,100),
         CAVERN_GOLD_WEIGHT(7,10,0,100), CAVERN_CONSUMABLE_WEIGHT(7,5,0,100),
-        CAVERN_MAX_TIER(7,3,1,5), CAVERN_UPGRADES(7,0,0,3);
+        CAVERN_MAX_TIER(7,3,1,5), CAVERN_UPGRADES(7,0,0,3),
+        HORROR_CHANCE(8,50,0,100), HORROR_DAMAGE(8,100,0,200), HORROR_EVASION(8,100,25,200),
+        HORROR_FLIGHT(8,100,25,200), HORROR_HEALING(8,25,0,25);
 
         public final int group, baseline, min, max;
         Key(int group) { this(group,100,0,1000); }
@@ -40,7 +42,7 @@ public final class BalanceTuning {
         public String id() { return name().toLowerCase(Locale.ROOT); }
         public String display(int value) { boolean percentage = this != TIER_SHIFT && (group < 4 || this == EXPEDITION_CHANCE
                     || this == DRAGON_DAMAGE || this == BROOD_DAMAGE || this == EXPEDITION_FALL_DAMAGE
-                    || this == HOARD_ARTIFACT || this == HOARD_TRINKET);
+                    || this == HOARD_ARTIFACT || this == HOARD_TRINKET || group==8);
             return value+(percentage?"%":""); }
     }
     private static final EnumMap<Key,Integer> values=new EnumMap<>(Key.class);

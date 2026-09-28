@@ -321,7 +321,8 @@ public class QuickSlotButton extends Button {
 				Actor.chars().contains( lastTarget ) &&
 				lastTarget.isAlive() &&
 				lastTarget.alignment != Char.Alignment.ALLY &&
-				Dungeon.level.heroFOV[lastTarget.pos]) {
+				!com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.hidden(lastTarget) &&
+				(Dungeon.level.heroFOV[lastTarget.pos] || com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.sensed(lastTarget))) {
 
 			targetingSlot = slotNum;
 			CharSprite sprite = lastTarget.sprite;

@@ -296,7 +296,8 @@ public abstract class Mob extends Char {
 		
 		enemy = chooseEnemy();
 		
-		boolean enemyInFOV = enemy != null && enemy.isAlive() && fieldOfView[enemy.pos] && enemy.invisible <= 0;
+		boolean enemyInFOV = enemy != null && enemy.isAlive() && fieldOfView[enemy.pos] && enemy.invisible <= 0
+				&& !LurkingHorror.concealed(enemy);
 
 		//prevents action, but still updates enemy seen status
 		if (buff(Feint.AfterImage.FeintConfusion.class) != null){
@@ -460,7 +461,7 @@ public abstract class Mob extends Char {
 				//look for hostile mobs to attack
 				for (Mob mob : Dungeon.level.mobs)
 					if (mob.alignment == Alignment.ENEMY && fieldOfView[mob.pos]
-							&& mob.invisible <= 0 && !mob.isInvulnerable(getClass()))
+							&& mob.invisible <= 0 && !LurkingHorror.concealed(mob) && !mob.isInvulnerable(getClass()))
 						//do not target passive mobs
 						//intelligent allies also don't target mobs which are wandering or asleep
 						if (mob.state != mob.PASSIVE &&

@@ -302,6 +302,10 @@ public class TalismanOfForesight extends Artifact {
 
 		public void checkAwareness(){
 			boolean smthFound = false;
+			for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs)
+				if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror
+						&& ((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror)mob).shadowmelded()
+						&& Dungeon.level.heroFOV[mob.pos] && Dungeon.level.distance(target.pos,mob.pos)<=3) smthFound=true;
 
 			int distance = 3;
 

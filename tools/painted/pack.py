@@ -213,6 +213,8 @@ def outputs():
     result.update(quest_rooms(result,features))
     from expedition import outputs as expedition
     result.update(expedition(result))
+    from horror import outputs as horror
+    result.update(horror())
     return result
 
 
@@ -252,13 +254,14 @@ def main():
         if path=='interfaces/painted_depth.png':expected=(512,256)
         from expedition import SIZES
         expected=SIZES.get(path,expected)
+        if path=='sprites/lurking_horror.png':expected=(512,512)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]
-        if path.startswith('sprites/expedition_'):
+        if path.startswith('sprites/expedition_') or path=='sprites/lurking_horror.png':
             manifest['assets'][path]['character']=True
             manifest['assets'][path]['logical_size']=[im.width//8,im.height//8]
-            frame=256 if 'hunter' in path else 512
+            frame=256 if 'hunter' in path or 'horror' in path else 512
             manifest['assets'][path]['painted_rects']=[[x,y,x+frame,y+frame] for y in range(0,im.height,frame) for x in range(0,im.width,frame)]
         target=ASSETS/path
         if args.check:

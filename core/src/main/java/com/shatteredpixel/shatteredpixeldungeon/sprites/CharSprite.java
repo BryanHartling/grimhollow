@@ -165,6 +165,10 @@ public class CharSprite extends MovieClip implements Tweener.Listener, MovieClip
 	protected Animation operate;
 	protected Animation zap;
 	protected Animation die;
+	/** A still death pose for inspected remains; does not play an animation or link an actor. */
+	public com.watabou.utils.RectF remainsFrame() {
+		return die!=null && die.frames.length>0 ? die.frames[die.frames.length-1] : frame();
+	}
 	
 	protected Callback animCallback;
 	

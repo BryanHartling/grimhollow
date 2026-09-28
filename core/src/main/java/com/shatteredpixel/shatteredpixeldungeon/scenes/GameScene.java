@@ -338,6 +338,7 @@ public class GameScene extends PixelScene {
 		bloodDecals=new Group();
 		terrain.add(bloodDecals);
         terrain.add(new com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.FloorLayer());
+        terrain.add(new com.shatteredpixel.shatteredpixeldungeon.effects.FreshRemainsLayer());
 		add(new LightingOverlay());
 		
 		levelVisuals = Dungeon.level.addVisuals();
@@ -1848,8 +1849,10 @@ public class GameScene extends PixelScene {
 
 		// A sensed Horror on an unknown cell must not expose plants, heaps or terrain there.
 		if (!Dungeon.level.visited[cell] && !Dungeon.level.mapped[cell]) return objects;
+		com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains remains=Dungeon.level.freshRemains.get(cell);
 		Heap heap = Dungeon.level.heaps.get(cell);
 		if (heap != null && heap.seen) objects.add(heap);
+		if(remains!=null && remains.seen)objects.add(remains);
 
 		Plant plant = Dungeon.level.plants.get( cell );
 		if (plant != null) objects.add(plant);
@@ -1872,11 +1875,17 @@ public class GameScene extends PixelScene {
 			else if (obj instanceof Heap)   names.add(Messages.titleCase( ((Heap)obj).title() ));
 			else if (obj instanceof Plant)  names.add(Messages.titleCase( ((Plant) obj).name() ));
 			else if (obj instanceof Trap)   names.add(Messages.titleCase( ((Trap) obj).name() ));
+			else if (obj instanceof com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains)
+				names.add(Messages.titleCase(((com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains)obj).name()));
 		}
 		return names;
 	}
 
 	public static void examineObject(Object o){
+		if(o instanceof com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains) {
+			com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains remains=(com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains)o;
+			GameScene.show(new WndMessage(Messages.titleCase(remains.name())+"\n\n"+remains.description())); return;
+		}
 		if (o == Dungeon.hero){
 			GameScene.show( new WndHero() );
 		} else if ( o instanceof Mob && ((Mob) o).isActive() ){
@@ -1942,6 +1951,9 @@ public class GameScene extends PixelScene {
 			} else if (objects.get(0) instanceof Plant) {
 				title = textLines.remove(0);
 				image = TerrainFeaturesTilemap.tile(cell, Dungeon.level.map[cell]);
+			} else if (objects.get(0) instanceof com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains) {
+				title=textLines.remove(0);
+				image=((com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains)objects.get(0)).image();
 			} else if (objects.get(0) instanceof Trap) {
 				title = textLines.remove(0);
 				image = TerrainFeaturesTilemap.tile(cell, Dungeon.level.map[cell]);
@@ -1972,6 +1984,8 @@ public class GameScene extends PixelScene {
 				}
 			} else if (objects.get(0) instanceof Plant) {
 				textLines.add(0, Messages.get(GameScene.class, "trample"));
+			} else if (objects.get(0) instanceof com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains) {
+				textLines.add(0, Messages.get(GameScene.class, "go_here"));
 			} else if (objects.get(0) instanceof Trap) {
 				textLines.add(0, Messages.get(GameScene.class, "interact"));
 			}

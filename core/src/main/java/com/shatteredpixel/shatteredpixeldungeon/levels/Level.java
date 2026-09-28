@@ -192,6 +192,7 @@ public abstract class Level implements Bundlable {
 	public SparseArray<Plant> plants;
 	public SparseArray<Trap> traps;
 	public ArrayList<CustomTilemap> customTiles;
+    public final SparseArray<com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains> freshRemains=new SparseArray<>();
 	public ArrayList<CustomTilemap> customTerrain;
 	public ArrayList<CustomTilemap> customWalls;
 	
@@ -326,6 +327,7 @@ public abstract class Level implements Bundlable {
 		
 		createMobs();
 		createItems();
+        com.shatteredpixel.shatteredpixeldungeon.levels.features.HorrorHunts.populate(this);
 
 		Random.popGenerator();
 	}
@@ -383,6 +385,11 @@ public abstract class Level implements Bundlable {
 		}
 
 		setSize( bundle.getInt(WIDTH), bundle.getInt(HEIGHT));
+        freshRemains.clear();
+        for(Bundlable value:bundle.getCollection("fresh_remains")) {
+            com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains remains=(com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains)value;
+            freshRemains.put(remains.pos,remains);
+        }
 		
 		mobs = new HashSet<>();
 		heaps = new SparseArray<>();
@@ -494,6 +501,7 @@ public abstract class Level implements Bundlable {
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
+        bundle.put("fresh_remains",freshRemains.valueList());
         bundle.put("force_cells",forceOriginal.keyArray());int[] forceValues=new int[forceOriginal.keyArray().length];int fi=0;for(int cell:forceOriginal.keyArray())forceValues[fi++]=forceOriginal.get(cell);bundle.put("force_values",forceValues);
         bundle.put("bone_cells",boneOriginal.keyArray());int[] original=new int[boneOriginal.keyArray().length];int bi=0;for(int cell:boneOriginal.keyArray())original[bi++]=boneOriginal.get(cell);bundle.put("bone_values",original);
         bundle.put("corpse_cells",corpses.keyArray());int[] values=new int[corpses.keyArray().length];int ci=0;for(int cell:corpses.keyArray())values[ci++]=corpses.get(cell);bundle.put("corpse_values",values);
@@ -1393,6 +1401,8 @@ public abstract class Level implements Bundlable {
 			
 			ShadowCaster.castShadow( cx, cy, width(), fieldOfView, blocking, AshlightLantern.sightRadius(c, viewDist) );
             if (lantern != null) lantern.rememberLight(this, fieldOfView);
+            if(c==Dungeon.hero) for(com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains remains:freshRemains.valueList())
+                if(fieldOfView[remains.pos])remains.seen=true;
             int announcement = AshlightLantern.awarenessBonus();
             if (c != Dungeon.hero && c.alignment == Char.Alignment.ENEMY && announcement > 0) {
                 boolean[] announced = new boolean[length()];

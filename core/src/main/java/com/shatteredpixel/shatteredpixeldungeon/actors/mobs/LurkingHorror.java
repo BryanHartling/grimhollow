@@ -141,7 +141,8 @@ public class LurkingHorror extends Mob {
         if (paralysed>0 || buff(Sleep.class)!=null) { spend(TICK); return true; }
         if (buff(Terror.class)!=null || buff(Dread.class)!=null) expose();
         if (phase==Phase.STALKING) {
-            if (tryPredation()) return true;
+            Boolean predation=tryPredation();
+            if (predation!=null) return predation;
             if (Dungeon.hero.invisible>0) { spend(TICK); return true; }
             if (!solitary()) { spend(TICK); return true; }
             if (canAmbush()) { warn(false); spend(TICK); return true; }
@@ -186,16 +187,29 @@ public class LurkingHorror extends Mob {
         }
         int step=Dungeon.flee(this,Dungeon.hero.pos,passable,fieldOfView,true);
         if (step<0 || Actor.findChar(step)!=null) return false;
-        AshlightLantern lantern=AshlightLantern.open(Dungeon.hero);
-        // Prefer an equally good escape step out of the lantern's light.
-        if(lantern!=null && lantern.lights(step)) for(int offset:PathFinder.NEIGHBOURS8) {
+        float light=illumination(step);
+        // Distance takes priority, then prefer an equally good route away from light.
+        for(int offset:PathFinder.NEIGHBOURS8) {
             int candidate=pos+offset;
             if(Dungeon.level.insideMap(candidate) && passable[candidate] && Actor.findChar(candidate)==null
-                    && !lantern.lights(candidate) && Dungeon.level.distance(candidate,Dungeon.hero.pos)>=Dungeon.level.distance(step,Dungeon.hero.pos)) {
-                step=candidate; break;
+                    && Dungeon.level.distance(candidate,Dungeon.hero.pos)>=Dungeon.level.distance(step,Dungeon.hero.pos)
+                    && illumination(candidate)<light) {
+                step=candidate; light=illumination(step);
             }
         }
         move(step); return true;
+    }
+    private float illumination(int cell) {
+        AshlightLantern lantern=AshlightLantern.open(Dungeon.hero);
+        float result=lantern!=null && lantern.lights(cell)?4:0;
+        int w=Dungeon.level.width();
+        for(int y=-3;y<=3;y++)for(int x=-3;x<=3;x++) {
+            int p=cell+x+y*w;
+            if(Dungeon.level.insideMap(p) && Dungeon.level.distance(cell,p)<=3
+                    && com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.torchAt(Dungeon.level,p))
+                result+=1f/(1+Dungeon.level.distance(cell,p));
+        }
+        return result;
     }
     @Override public void damage(int damage,Object source) {
         expose(); recoveryHealed=0;
@@ -229,8 +243,35 @@ public class LurkingHorror extends Mob {
         return Messages.get(this,"desc")+"\n\n"+Messages.get(this,"phase_"+phase.name().toLowerCase(java.util.Locale.ROOT))
                 +(Bestiary.encounterCount(getClass())>0?"\n\n"+Messages.get(this,"bestiary"):"");
     }
-    // Predation is implemented alongside the persistent remains feature.
-    private boolean tryPredation() { return false; }
+    public boolean predationUsed() { return predationUsed; }
+    public static boolean ediblePrey(Mob prey) {
+        return prey.isAlive() && prey.alignment==Alignment.ENEMY && prey.state==prey.SLEEPING
+                && Bestiary.REGIONAL.entities().contains(prey.getClass())
+                && !Char.hasProp(prey,Property.BOSS) && !Char.hasProp(prey,Property.MINIBOSS)
+                && !Char.hasProp(prey,Property.IMMOVABLE) && !Char.hasProp(prey,Property.INORGANIC)
+                && prey.buffs(ChampionEnemy.class).isEmpty() && prey.buff(CursedVariant.class)==null;
+    }
+    private Boolean tryPredation() {
+        if(predationUsed || Dungeon.level.distance(pos,Dungeon.hero.pos)<=6)return null;
+        Char old=Actor.findById(preyId) instanceof Char?(Char)Actor.findById(preyId):null;
+        Mob prey=old instanceof Mob && ediblePrey((Mob)old)?(Mob)old:null;
+        if(prey==null) {
+            for(Mob candidate:Dungeon.level.mobs) if(ediblePrey(candidate) && fieldOfView[candidate.pos]
+                    && (prey==null || Dungeon.level.distance(pos,candidate.pos)<Dungeon.level.distance(pos,prey.pos)))prey=candidate;
+            preyId=prey==null?-1:prey.id();
+        }
+        if(prey==null)return null;
+        if(Dungeon.level.adjacent(pos,prey.pos)) {
+            predationUsed=true; expose(); ambushAttack=true;
+            attack(prey,region<2?1.5f:region<4?1.75f:2f,0,1);
+            ambushAttack=false;
+            if(prey.isAlive())prey.aggro(this);
+            spend(attackDelay()); return true;
+        }
+        int from=pos;
+        if(getCloser(prey.pos)) { spend(1/speed()); return moveSprite(from,pos); }
+        return null;
+    }
 
     @Override public void storeInBundle(Bundle b) {
         super.storeInBundle(b);
@@ -239,6 +280,7 @@ public class LurkingHorror extends Mob {
         b.put("horror_offered",responseOffered); b.put("horror_answered",responseTaken); b.put("horror_followup",followUp);
         b.put("horror_omen",omen); b.put("horror_predation",predationUsed); b.put("horror_prey",preyId);
         b.put("horror_controlled",controlled);
+        b.put("horror_evasion",defenseSkill);
     }
     @Override public void restoreFromBundle(Bundle b) {
         super.restoreFromBundle(b);
@@ -246,7 +288,7 @@ public class LurkingHorror extends Mob {
         lastClock=b.getFloat("horror_clock"); healed=b.getInt("horror_healed"); recoveryHealed=b.getInt("horror_recovery_healed");
         responseOffered=b.getBoolean("horror_offered"); responseTaken=b.getBoolean("horror_answered"); followUp=b.getBoolean("horror_followup");
         omen=b.getBoolean("horror_omen"); predationUsed=b.getBoolean("horror_predation"); preyId=b.getInt("horror_prey");
-        controlled=b.getBoolean("horror_controlled"); defenseSkill=Math.round((8+2*region)*BalanceTuning.multiplier(HORROR_EVASION));
+        controlled=b.getBoolean("horror_controlled"); defenseSkill=b.getInt("horror_evasion");
         EXP=3+region*3;
     }
 }

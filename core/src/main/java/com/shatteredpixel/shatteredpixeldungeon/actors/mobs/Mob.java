@@ -134,6 +134,7 @@ public abstract class Mob extends Char {
 	
 	public int EXP = 1;
 	public int maxLvl = Hero.MAX_LEVEL-1;
+    private boolean killedByHorror;
 	
 	protected Char enemy;
 	protected int enemyID = -1; //used for save/restore
@@ -1100,7 +1101,7 @@ public abstract class Mob extends Char {
 
 		if (Dungeon.hero.isAlive()) {
 			
-			if (alignment == Alignment.ENEMY) {
+			if (alignment == Alignment.ENEMY && !killedByHorror) {
 				Statistics.enemiesSlain++;
 				Badges.validateMonstersSlain();
 				Statistics.qualifiedForNoKilling = false;
@@ -1144,9 +1145,15 @@ public abstract class Mob extends Char {
 	
 	@Override
 	public void die( Object cause ) {
+        killedByHorror=cause instanceof LurkingHorror && ((LurkingHorror)cause).alignment==Alignment.ENEMY;
+        if(killedByHorror) {
+            Dungeon.level.freshRemains.put(pos,new com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains(this));
+            Dungeon.level.corpses.put(pos,HT);
+        } else {
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.onDeath(this,cause);
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.onDeath(this,cause);
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.onDeath(this,cause);
+        }
 
 		if (cause == Chasm.class){
 			//50% chance to round up, 50% to round down
@@ -1180,7 +1187,7 @@ public abstract class Mob extends Char {
 		}
 
 		if (Dungeon.hero.isAlive() && !Dungeon.level.heroFOV[pos]) {
-			GLog.i( Messages.get(this, "died") );
+			GLog.i( killedByHorror ? Messages.get(LurkingHorror.class,"distant_"+Random.Int(3)) : Messages.get(this, "died") );
 		}
 
 		boolean soulMarked = buff(SoulMark.class) != null;
@@ -1223,6 +1230,14 @@ public abstract class Mob extends Char {
 	}
 	
 	public void rollToDropLoot(){
+        if(killedByHorror) {
+            // Only the victim's ordinary loot. No hero Wealth/Lucky/food bonuses or XP.
+            if(Random.Float()<lootChance) {
+                Item ordinary=createLoot();
+                if(ordinary!=null)Dungeon.level.drop(ordinary,pos).sprite.drop();
+            }
+            return;
+        }
 		if (Dungeon.hero.lvl > maxLvl + 2) return;
 
 		MasterThievesArmband.StolenTracker stolen = buff(MasterThievesArmband.StolenTracker.class);

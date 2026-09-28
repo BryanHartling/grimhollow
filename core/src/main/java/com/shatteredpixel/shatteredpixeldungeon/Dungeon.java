@@ -142,7 +142,8 @@ public class Dungeon {
 		LORE_PRISON,
 		LORE_CAVES,
 		LORE_CITY,
-		LORE_HALLS;
+		LORE_HALLS,
+		HORROR_REGIONS; // bit mask of regions which already spawned their solitary predator
 
 		public int count = 0;
 

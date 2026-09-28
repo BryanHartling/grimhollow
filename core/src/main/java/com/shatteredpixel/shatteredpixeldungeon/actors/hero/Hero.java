@@ -865,6 +865,8 @@ public class Hero extends Char {
 	
 	@Override
 	public boolean act() {
+		for(Mob mob:Dungeon.level.mobs) if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror)
+			((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror)mob).announceArrival();
 		
 		//calls to dungeon.observe will also update hero's local FOV.
 		fieldOfView = Dungeon.level.heroFOV;

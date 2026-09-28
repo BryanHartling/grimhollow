@@ -20,7 +20,7 @@ public class CorpseExplosion extends ArmorAbility {
     @Override public void activate(ClassArmor armor,Hero hero,Integer cell){
         if(cell==null||!Dungeon.level.insideMap(cell)||!Dungeon.level.heroFOV[cell]||Dungeon.level.corpses.get(cell)==null||armor.charge<chargeUse(hero))return;
         int damage=Math.max(10,Math.round(Dungeon.level.corpses.get(cell)*.2f)+2*hero.lvl),radius=1+hero.pointsInTalent(Talent.WIDER_BLAST);
-        Dungeon.level.corpses.remove(cell);armor.charge-=chargeUse(hero);
+        Dungeon.level.corpses.remove(cell);Dungeon.level.freshRemains.remove(cell);armor.charge-=chargeUse(hero);
         for(Mob m:Dungeon.level.mobs.toArray(new Mob[0]))if(m.alignment==Char.Alignment.ENEMY && Dungeon.level.distance(cell,m.pos)<=radius){
             int p=hero.pointsInTalent(Talent.ROT);if(p>0)Buff.affect(m,Corrosion.class).set(1+2*p,2);
             Buff.prolong(m,Necromancy.HeroDamage.class,8);

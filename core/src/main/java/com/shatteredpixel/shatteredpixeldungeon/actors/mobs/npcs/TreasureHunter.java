@@ -13,7 +13,7 @@ import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
 import com.watabou.noosa.Game;
 
 public class TreasureHunter extends NPC {
-    { spriteClass = WandmakerSprite.class; properties.add(Property.IMMOVABLE); }
+    { spriteClass = com.shatteredpixel.shatteredpixeldungeon.sprites.TreasureHunterSprite.class; properties.add(Property.IMMOVABLE); }
     @Override public int defenseSkill(Char enemy) { return INFINITE_EVASION; }
     @Override public void damage(int damage, Object source) {}
     @Override public boolean add(Buff buff) { return false; }

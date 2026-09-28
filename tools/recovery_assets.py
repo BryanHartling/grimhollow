@@ -184,7 +184,7 @@ def main():
     if args.check:
         for current in (ASSETS/'sprites').glob('*.png'):
             path=current.relative_to(ASSETS).as_posix()
-            if current.name not in {'items.png','item_icons.png','avatars.png','amulet.png'} and not entries.get(path,{}).get('character'):
+            if current.name not in {'items.png','item_icons.png','avatars.png','amulet.png'} and not entries.get(path,{}).get('character') and not painted.get(path,{}).get('character'):
                 failures.append('Unaccounted character '+path)
         for name in ('warrior','mage','rogue','huntress','duelist','cleric','necromancer','enchanter','psychic'):
             if (ASSETS/f'splashes/{name}.png').exists():failures.append('Rejected splash still packaged '+name)

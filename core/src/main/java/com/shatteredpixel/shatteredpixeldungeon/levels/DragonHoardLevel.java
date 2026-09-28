@@ -17,6 +17,7 @@ import com.watabou.utils.Random;
 import java.util.ArrayList;
 
 public class DragonHoardLevel extends ExpeditionLevel {
+    @Override public String tilesTex() { return "environment/tiles_expedition_hoard.png"; }
     public static final int WIDTH = 25, HEIGHT = 23;
     public static final int ARRIVAL = 19 * WIDTH + 4, RETURN = 19 * WIDTH + 20, TREASURE = 6 * WIDTH + 12;
     { viewDistance = 8; }
@@ -29,6 +30,7 @@ public class DragonHoardLevel extends ExpeditionLevel {
                 DragonExpedition.CHASM, DragonExpedition.BRANCH, LevelTransition.Type.REGULAR_EXIT));
         transitions.add(new LevelTransition(this, RETURN, LevelTransition.Type.REGULAR_EXIT,
                 DragonExpedition.hunterDepth, 0, LevelTransition.Type.REGULAR_ENTRANCE));
+        customTiles.add(new com.shatteredpixel.shatteredpixeldungeon.tiles.ExpeditionHoardTiles());
         return true;
     }
     @Override protected void createItems() { unlockHoard(); }

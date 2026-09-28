@@ -2685,6 +2685,12 @@
       "artIndex": 539,
       "cellSize": 64,
       "rgbaSha256": "93f188d8abf3cef53610fc04cc834a175931cc302fea7e1c013a6f229c5e4e9d"
+    },
+    "EXPEDITION_MAP": {
+      "id": 540,
+      "artIndex": 540,
+      "cellSize": 64,
+      "rgbaSha256": "0e1f9b9c0cf52c6f1931c39bd0df09da39c9935646a07039f375bb9c350d1e19"
     }
   },
   "icons": {

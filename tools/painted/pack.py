@@ -211,6 +211,8 @@ def outputs():
     result.update(particles())
     from quest_rooms import outputs as quest_rooms
     result.update(quest_rooms(result,features))
+    from expedition import outputs as expedition
+    result.update(expedition(result))
     return result
 
 
@@ -248,9 +250,15 @@ def main():
         if path=='environment/custom_tiles/caves_quest.png':expected=(256,512)
         if path=='interfaces/boss_hp.png':expected=(512,256)
         if path=='interfaces/painted_depth.png':expected=(512,256)
+        from expedition import SIZES
+        expected=SIZES.get(path,expected)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]
+        if path.startswith('sprites/expedition_'):
+            manifest['assets'][path]['character']=True
+            frame=256 if 'hunter' in path else 512
+            manifest['assets'][path]['painted_rects']=[[x,y,x+frame,y+frame] for y in range(0,im.height,frame) for x in range(0,im.width,frame)]
         target=ASSETS/path
         if args.check:
             if not target.exists() or digest(Image.open(target))!=digest(im):failures.append(path)

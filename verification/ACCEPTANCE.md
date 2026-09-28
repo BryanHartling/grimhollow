@@ -1,3 +1,11 @@
+# Dragon expedition — component 6 visual checkpoint
+
+`core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeClass=NECROMANCER --no-daemon --console=plain`: **BUILD SUCCESSFUL in 2m 17s; Runs=10 failures=0**. The existing seven JUnit cases passed. Native `--smoke-sewers` with `grimhollow.interfaceReview=true` and `grimhollow.expeditionReview=true` passes at 1280×720 landscape and 720×1061 portrait, with isolated profiles. Test 59 checks new creature dimensions, message availability, sealed-hoard protection and popup bounds. Evidence: `interface/landscape/expedition-*.png` and `interface/portrait/expedition-*.png`.
+
+`python tools/recovery_assets.py --check`: **PAINTED assets=136 source sheets=124 failures=0; TEST 44 verified painted replacements=136 failures=0**, plus 55 launch resources. Inspection covered corrected dragon/hunter text, broodmother silhouette, normal cavern darkness, timber/drop separation, continuous sealed hoard and map. No physical tablet or full player-led expedition is claimed. Campaign entry remains disabled pending components 7–8; test 45 is unchanged.
+
+Intermediate repairs: a native fixture used `size()` instead of the engine collection's `size` field; an obsolete archived JAR was initially selected, then replaced with the explicit current JAR. Native inspection revealed incorrectly prefixed expedition messages, corrected before the passing evidence. New characters are accounted for by their verified painted-source metadata.
+
 # Dragon expedition — components 1–5 development checkpoint
 
 Campaign entry is disabled pending components 6 (bespoke visuals/presentation), 7 (balance controls), and 8 (native release verification). No new art was generated in these components. Version remains the existing 1.15.0 until release integration.

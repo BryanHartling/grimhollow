@@ -1,3 +1,7 @@
+# Dragon expedition: component 6 checkpoint
+
+Original painted dragon, broodmother, treasure hunter, timber platforms, continuous hoard and map are integrated. The campaign entrance remains disabled until balance controls and final release integration finish (components 7–8). Runtime version is still 1.15.0. Native portrait/landscape screenshots: `verification/interface/*/expedition-*.png`. Source art and exact prompts: `tools/painted/sources/expedition/` and `tools/painted/expedition-prompts.json`.
+
 # Grimhollow
 
 **Dragon expedition development checkpoint (components 1–5):** the saved quest, platform maze, dark cavern/broodmother, persistent dragon combat, retreat route and one-time hoard rewards are implemented. The campaign entrance is intentionally disabled while bespoke visuals, expedition balance controls and final native release verification remain unfinished. This is not a player release of the quest; the existing v1.15.0 game remains available. Each completed component has a `v1.16.0-expedition-*` tag. [Checkpoint verification](verification/ACCEPTANCE.md) and [remaining work](KNOWN_ISSUES.md).

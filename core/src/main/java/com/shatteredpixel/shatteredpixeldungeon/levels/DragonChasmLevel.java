@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 /** A spanning maze with additional loops; platform timber never changes its collision geometry. */
 public class DragonChasmLevel extends ExpeditionLevel {
+    @Override public String tilesTex() { return "environment/tiles_expedition.png"; }
     public static final int SIZE = 43, GRID = 7;
     public static final int[] EXIT_NODES = {0, 3, 6, 21, 27, 42, 45, 48};
     public int exitIndex;
@@ -65,6 +66,14 @@ public class DragonChasmLevel extends ExpeditionLevel {
         return loopCount >= 1 && deadEnds >= 4;
     }
 
+    @Override public String tileName(int tile) {
+        return tile == Terrain.EMPTY_SP || tile == Terrain.ENTRANCE || tile == Terrain.EXIT
+                ? com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(this, "tile_"+tile+"_name") : super.tileName(tile);
+    }
+    @Override public String tileDesc(int tile) {
+        return tile == Terrain.EMPTY_SP || tile == Terrain.ENTRANCE || tile == Terrain.EXIT
+                ? com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(this, "tile_"+tile+"_desc") : super.tileDesc(tile);
+    }
     private static ArrayList<Integer> neighbours(int n) {
         ArrayList<Integer> result = new ArrayList<>();
         if (n % GRID > 0) result.add(n - 1);

@@ -182,6 +182,10 @@ public class InterlevelScene extends PixelScene {
             default: loadingAsset=Assets.Splashes.HALLS;
         }
 
+        int loadingBranch = mode == Mode.RETURN || mode == Mode.PLAYTEST ? returnBranch
+                : (mode == Mode.ASCEND || mode == Mode.DESCEND) && curTransition != null ? curTransition.destBranch : Dungeon.branch;
+        if (loadingBranch == com.shatteredpixel.shatteredpixeldungeon.DragonExpedition.BRANCH) loadingAsset = Assets.Splashes.CAVES;
+
 		if (DeviceCompat.isDebug()){
 			fadeTime = 0f;
 		}

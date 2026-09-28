@@ -1,3 +1,10 @@
+# Dragon expedition — component 6
+
+- Added six original built-in imagegen sources and deterministic offline packing for the dragon, broodmother, hunter, timber, hoard and map. CI uses committed sources only. Existing regions/creatures stay unchanged.
+- Kept both bosses' idle/travel poses steady, with action silhouettes and a distinct dragon windup pose; logical movement/collision remains 16 units per tile.
+- Native review found and repaired missing package prefixes in expedition message keys and replaced the hoard's repeated pedestal graphics with cavern floor under one continuous treasure painting.
+- Extended the existing native runner for expedition views and popup/text bounds in portrait/landscape. New character provenance is explicitly declared and fully reconstructed by test 44; no exemption from source verification.
+
 ## Dragon expedition — component 5 (hoard and escape)
 
 - Adds the Hoard Room, a permanently usable dungeon return exit and relocation of the same wounded dragon when the hero enters. The Expedition Map cannot serve as an escape from inside.

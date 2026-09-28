@@ -22,6 +22,7 @@ public final class GameGeometry {
                 || texture.equals("environment/tiles_caves.png")
                 || texture.equals("environment/tiles_city.png")
                 || texture.equals("environment/tiles_halls.png")
+                || texture.startsWith("environment/tiles_expedition")
                 || texture.startsWith("environment/custom_tiles/")
                 || texture.equals(Assets.Environment.TERRAIN_FEATURES)
                 || texture.equals(Assets.Environment.RAISED_TERRAIN)

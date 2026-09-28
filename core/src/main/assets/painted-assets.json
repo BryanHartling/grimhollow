@@ -23,6 +23,12 @@
     "city-materials.png": "f3316e1efa15a6b91712798d1bc54397fdc2563b9f589cdb89d85c275869cafc",
     "details.png": "e00209673cb5d728a3fbc173f1ede610c474d37c8ab7f5f33eae0c56fda72631",
     "door-states.png": "83e3ee128b98dcd8cd669dc6112bee07175544ed4a9f70711581aebb50b9853f",
+    "expedition/dragon.png": "b7688e9fe13bd99b68ef1f0be342692bae2990aec32937bf65b629dc03fb50d7",
+    "expedition/hoard.png": "8c51f57f9791373536d050e713a8f6405d3d8d5d82b7d048dc5acc007ac1de20",
+    "expedition/hunter.png": "e9a21799d2a16f5c0914309a7eba5e32e48e6097ba9814739d615198b0269960",
+    "expedition/map.png": "951017d542a669b314a195f91666aa66d6adde9cff573dfde6914b43f53991e1",
+    "expedition/spider.png": "da930ab597510c792df8b72d958bb7839abf23a7d07f682932c4eb5f14b3741c",
+    "expedition/timber.png": "7626efcd25a2f7765df7feaa1b73dd12085f8e4758468e4600f03a4c82cc0077",
     "halls-materials.png": "ca23d09f9bcbcf2bcae30ffc4f906539c5d7a39889f521ce3f537a5661235d00",
     "interface/frames.png": "0a38c310f9864bce7f352a26548fb2aa32161f8a6bac003614673373fc1d3550",
     "interface/navigation-a.png": "e86bbb2e781d1ce1f8e69b993770fe554400cb24e12af159259824e482bb1c5e",
@@ -358,7 +364,7 @@
         1024,
         2176
       ],
-      "rgba_sha256": "bf0d9dc1c46e56641c7d8ade5cafbdaf4f369c6f162b24fdef1c7cd61b2a1b66"
+      "rgba_sha256": "7e8df40a97251586b9dbc44de4234f760e52a26b325e7a24fa26d159af6a3599"
     },
     "sprites/item_icons.png": {
       "size": [
@@ -9111,6 +9117,111 @@
         512
       ],
       "rgba_sha256": "6e04973a6165debb1315eb50a6007b365cec405a1e5281152b7750349aff29ce"
+    },
+    "sprites/expedition_dragon.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "77a414f924749ee77fff218f1f698eb96f56005dfafdfc60a7e7f39d5c9c1e3e",
+      "character": true,
+      "painted_rects": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ]
+      ]
+    },
+    "sprites/expedition_spider.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "a7560b0defe213914215966a875154e1a0be52a3e4e0792ca4793b1023a6b138",
+      "character": true,
+      "painted_rects": [
+        [
+          0,
+          0,
+          512,
+          512
+        ],
+        [
+          512,
+          0,
+          1024,
+          512
+        ],
+        [
+          0,
+          512,
+          512,
+          1024
+        ],
+        [
+          512,
+          512,
+          1024,
+          1024
+        ]
+      ]
+    },
+    "sprites/expedition_hunter.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "560c7f34436c0e2b9750d9050199fde86abf8f7ca6f2531978bb65a3b4b788c0",
+      "character": true,
+      "painted_rects": [
+        [
+          0,
+          0,
+          256,
+          256
+        ]
+      ]
+    },
+    "environment/tiles_expedition.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "c2aeba9e8c25a5de108bdb0d2d17c0316300b86d24dbd032ffb5c058abe516b1"
+    },
+    "environment/tiles_expedition_hoard.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "15c10748149881f8061f5dba24d5f2165b6310d384f2ca784d18f7d5d95aa031"
+    },
+    "environment/custom_tiles/expedition_hoard.png": {
+      "size": [
+        512,
+        256
+      ],
+      "rgba_sha256": "ab03f161c9517f6012421ed12341fbaa9ce4f6219073dba8e6973ea06d67c189"
     }
   }
 }

@@ -1,5 +1,7 @@
 # Known issues
 
+- Component 6 replaces expedition placeholder art with original paintings and passes native portrait/landscape review and offline reconstruction; the quest remains disabled pending balance controls and final release integration. Physical tablet review and campaign balance remain unverified.
+
 - Dragon expedition components 1–5 are a development checkpoint, not an enabled campaign quest: bespoke dragon/broodmother/hunter/map/platform/hoard visuals, expedition balance controls, and final native desktop/tablet verification remain. `DragonExpedition.AVAILABLE` is false until those components finish; interim art reuses existing painted assets.
 - Expedition mechanics pass test 59 across all nine classes and Windows desktop/Android packaging; these headless scenarios do not establish combat balance or visual/input quality on the Samsung tablet. No physical device or complete player-driven expedition was tested.
 - Existing contrast test 45 remains enforced and is not repaired by the expedition work. Prior tests retain their documented limitations/retirements; no CI check was removed or weakened.

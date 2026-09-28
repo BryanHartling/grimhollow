@@ -32,6 +32,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean vault=Boolean.getBoolean("grimhollow.vault");
     private final boolean encounters=Boolean.getBoolean("grimhollow.encounterTests");
     private final boolean interfaceReview=Boolean.getBoolean("grimhollow.interfaceReview");
+    private final boolean expeditionReview=Boolean.getBoolean("grimhollow.expeditionReview");
+    private int expeditionStep, expeditionFrames;
     private final boolean roomReview=Boolean.getBoolean("grimhollow.roomReview");
     private int roomStep, roomFrames, ritualTable, ritualCage, roomCenter;
     private final boolean presentationReview=Boolean.getBoolean("grimhollow.presentationReview");
@@ -92,6 +94,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             capture("loading-"+new String[]{"sewers","prison","caves","city","halls"}[Math.min(4,InterlevelScene.lastRegion-1)]);
             loadingCaptures.add(InterlevelScene.lastRegion);
         }
+        if(expeditionReview && frames>180) { expeditionTick(); return; }
         if(presentationReview && frames>180) { presentationTick(); return; }
         if(roomReview && frames>180) { roomTick(); return; }
         if(interfaceReview && frames>180) { interfaceTick(); return; }
@@ -109,7 +112,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if (vault && sewers) vaultFrames();
         if (frames==180) {
             if (!(Game.scene() instanceof TitleScene)) throw new AssertionError("Title scene did not launch");
-            capture("title");
+            if(!expeditionReview)capture("title");
             if(presentationReview) {
                 GamesInProgress.selectedClass=null;
                 switchNoFade(com.shatteredpixel.shatteredpixeldungeon.scenes.HeroSelectScene.class);
@@ -926,6 +929,73 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if(image.width()>16.01f || image.height()>16.01f || maxX>16.01f || maxY>16.01f)
             throw new AssertionError("Preview layout/drawn vertices disagree: "+image.width()+"/"+maxX+" x "+image.height()+"/"+maxY);
         image.destroy();
+    }
+    private void expeditionFloor(int depth) {
+        questField(GameScene.class,"scene",null);
+        Dungeon.branch=DragonExpedition.BRANCH;Dungeon.depth=depth;
+        Level level=Dungeon.newLevel();
+        int arrival=depth==DragonExpedition.CAVERN?com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel.CENTER
+                :depth==DragonExpedition.HOARD?com.shatteredpixel.shatteredpixeldungeon.levels.DragonHoardLevel.TREASURE+3*level.width():level.entrance();
+        Dungeon.switchLevel(level,arrival);
+        if(DragonExpedition.dragon!=null && level.mobs.contains(DragonExpedition.dragon))DragonExpedition.dragon.pos=arrival-2*level.width();
+        Dungeon.observe();switchNoFade(GameScene.class);
+    }
+    private void expeditionTick(){
+        if(!(Game.scene() instanceof GameScene)||++expeditionFrames%60!=0)return;
+        switch(expeditionStep++) {
+            case 0:
+                for(Class<?> type:new Class[]{com.shatteredpixel.shatteredpixeldungeon.actors.mobs.ExpeditionDragon.class,
+                        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Broodmother.class,
+                        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.TreasureHunter.class,
+                        com.shatteredpixel.shatteredpixeldungeon.items.quest.ExpeditionMap.class})
+                    for(String key:new String[]{"name","desc"})
+                        if(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(type,key).contains("NO TEXT"))throw new AssertionError("Missing expedition text: "+type+"/"+key);
+                expeditionFloor(DragonExpedition.CHASM);break;
+            case 1:
+                if(!(DragonExpedition.dragon.sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.ExpeditionDragonSprite)
+                        || DragonExpedition.dragon.sprite.visualFootprint()!=40)throw new AssertionError("Dragon art/size");
+                capture("expedition-chasm");
+                DragonExpedition.dragon.prepare(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.ExpeditionDragon.Attack.BREATH,Dungeon.hero.pos);break;
+            case 2:
+                capture("expedition-breath-warning");
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoMob(DragonExpedition.dragon));break;
+            case 3:
+                interfaceBounds();capture("expedition-dragon-details");closeReviewWindows();
+                expeditionFloor(DragonExpedition.CAVERN);break;
+            case 4:
+                capture("expedition-cavern-darkness");
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Broodmother brood=null;
+                for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)
+                    if(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Broodmother)brood=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Broodmother)m;
+                if(brood==null || brood.sprite.visualFootprint()!=26)throw new AssertionError("Broodmother art/size");
+                Dungeon.hero.pos=brood.pos+Dungeon.level.width();Dungeon.hero.sprite.place(Dungeon.hero.pos);Dungeon.observe();
+                com.watabou.noosa.Camera.main.panFollow(Dungeon.hero.sprite, 5);
+                break;
+            case 5:
+                capture("expedition-broodmother");expeditionFloor(DragonExpedition.HOARD);break;
+            case 6:
+                if(Dungeon.level.heaps.size!=0)throw new AssertionError("Locked hoard has stealable loot");
+                for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap tile:Dungeon.level.customTiles)
+                    if(tile instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.ExpeditionHoardTiles)tilePreview(tile.image(3,2));
+                capture("expedition-hoard-sealed");
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoCell(com.shatteredpixel.shatteredpixeldungeon.levels.DragonHoardLevel.TREASURE));break;
+            case 7:
+                interfaceBounds();capture("expedition-hoard-details");closeReviewWindows();
+                DragonExpedition.dragonSlain=true;DragonExpedition.dragon.destroy();DragonExpedition.dragon.sprite.killAndErase();
+                ((com.shatteredpixel.shatteredpixeldungeon.levels.DragonHoardLevel)Dungeon.level).unlockHoard();
+                Dungeon.observe();break;
+            case 8:
+                capture("expedition-hoard-reward");
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.TreasureHunter hunter=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.TreasureHunter();
+                hunter.pos=Dungeon.hero.pos+1;GameScene.add(hunter);hunter.interact(Dungeon.hero);break;
+            case 9:
+                interfaceBounds();capture("expedition-hunter");closeReviewWindows();
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(new com.shatteredpixel.shatteredpixeldungeon.items.quest.ExpeditionMap()));break;
+            default:
+                interfaceBounds();capture("expedition-map");
+                System.out.println("TEST 59 NATIVE PASS: painted dragon/broodmother/hunter/map, timber maze, normal cavern fog, guarded hoard and preview bounds; orientation="+(Boolean.getBoolean("grimhollow.interfacePortrait")?"portrait":"landscape"));
+                Gdx.app.exit();
+        }
     }
     private void roomTick(){
         if(!(Game.scene() instanceof GameScene)||++roomFrames%60!=0)return;

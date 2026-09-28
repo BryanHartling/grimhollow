@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class ExpeditionMap extends Item {
     public static final String OPEN = "OPEN";
-    { image = ItemSpriteSheet.SCROLL_NAUDIZ; unique = true; defaultAction = OPEN; }
+    { image = ItemSpriteSheet.EXPEDITION_MAP; unique = true; defaultAction = OPEN; }
     @Override public boolean isUpgradable() { return false; }
     @Override public boolean isIdentified() { return true; }
     @Override public ArrayList<String> actions(Hero hero) {

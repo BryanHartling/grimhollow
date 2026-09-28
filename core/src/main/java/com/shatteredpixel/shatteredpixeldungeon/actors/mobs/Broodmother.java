@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class Broodmother extends Mob {
     public int hatched, hatchCooldown = 5, hatchCell = -1;
-    { spriteClass = SpinnerSprite.class; HP = HT = 240; defenseSkill = 18; EXP = 25; maxLvl = 30;
+    { spriteClass = com.shatteredpixel.shatteredpixeldungeon.sprites.BroodmotherSprite.class; HP = HT = 240; defenseSkill = 18; EXP = 25; maxLvl = 30;
         properties.add(Property.BOSS); properties.add(Property.LARGE);
         resistances.add(Poison.class); HUNTING = new BroodHunting(); }
     @Override public int attackSkill(Char enemy) { return 26; }

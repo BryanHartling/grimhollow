@@ -32,6 +32,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean vault=Boolean.getBoolean("grimhollow.vault");
     private final boolean encounters=Boolean.getBoolean("grimhollow.encounterTests");
     private final boolean interfaceReview=Boolean.getBoolean("grimhollow.interfaceReview");
+    private final boolean roomReview=Boolean.getBoolean("grimhollow.roomReview");
+    private int roomStep, roomFrames, ritualTable, ritualCage, roomCenter;
     private final boolean presentationReview=Boolean.getBoolean("grimhollow.presentationReview");
     private boolean presentationStarted;
     private final java.util.HashSet<Integer> loadingCaptures=new java.util.HashSet<>();
@@ -91,6 +93,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             loadingCaptures.add(InterlevelScene.lastRegion);
         }
         if(presentationReview && frames>180) { presentationTick(); return; }
+        if(roomReview && frames>180) { roomTick(); return; }
         if(interfaceReview && frames>180) { interfaceTick(); return; }
         if(encounters && frames>180) { encounterTick(); return; }
         if(recovery!=null&&frames>180) {
@@ -137,7 +140,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             else {
                 Dungeon.seed=Long.getLong("grimhollow.seed",417L);
                 Dungeon.init();
-                Dungeon.switchLevel(Dungeon.newLevel(),-1);
+                if(roomReview)prepareRooms(0);
+                else Dungeon.switchLevel(Dungeon.newLevel(),-1);
                 if(Boolean.getBoolean("grimhollow.renderPoc"))pocRoom();
             }
             InterlevelScene.mode=InterlevelScene.Mode.DESCEND;
@@ -841,6 +845,174 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             playtestStep++;
         }catch(ReflectiveOperationException | java.io.IOException error){throw new AssertionError(error);}
     }
+    private static void questField(Class<?> type,String name,Object value) {
+        try {java.lang.reflect.Field field=type.getDeclaredField(name);field.setAccessible(true);field.set(null,value);}
+        catch(ReflectiveOperationException error){throw new AssertionError(error);}
+    }
+    private void prepareRooms(int kind) {
+        // Like InterlevelScene, generate with no live GameScene receiving map
+        // callbacks for the outgoing floor; the next scene installs itself.
+        questField(GameScene.class,"scene",null);
+        Dungeon.branch=kind>=2?1:0;Dungeon.depth=kind==0?8:14;
+        if(kind==0)questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker.Quest.class,"type",2);
+        if(kind>=2)questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.class,"type",kind==2?2:1);
+        Level level=Dungeon.newLevel();
+        int center=level.entrance();
+        if(kind==0){
+            center=com.shatteredpixel.shatteredpixeldungeon.items.quest.CeremonialCandle.ritualPos+2*level.width();
+            for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap map:level.customTerrain)
+                if(map instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.RitualSiteRoom.Table)
+                    ritualTable=map.tileX+(map.tileY+1)*level.width();
+            com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room room=((com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel)level).room(center);
+            for(int cell=0;cell<level.length();cell++)if(level.map[cell]==Terrain.REGION_DECO && room.inside(level.cellToPoint(cell)))ritualCage=cell;
+        } else if(kind==1){
+            for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap map:level.customTiles)
+                if(map instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.BlacksmithRoom.SmithyVisuals)
+                    center=map.tileX+map.tileW/2+(map.tileY+map.tileH/2)*level.width();
+        } else {
+            for(int cell=level.width();cell<level.length()-level.width();cell++)
+                if(level.map[cell]==Terrain.WALL_DECO && level.passable[cell+level.width()]){center=cell+level.width();break;}
+        }
+        // Keep real generated quest terrain, actors and rewards; remove ordinary combat only.
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:new java.util.ArrayList<>(level.mobs))
+            if(mob.alignment==Char.Alignment.ENEMY)level.mobs.remove(mob);
+        Dungeon.switchLevel(level,center);roomCenter=center;
+        if(kind==0)sharedSightCheck();
+        java.util.Arrays.fill(level.visited,true);
+        Dungeon.observe();
+    }
+    private void sharedSightCheck(){
+        Dungeon.hero.viewDistance=8;
+        Dungeon.level.updateFieldOfView(Dungeon.hero,Dungeon.level.heroFOV);
+        int distant=-1;
+        for(int cell=0;cell<Dungeon.level.length();cell++)if(Dungeon.level.passable[cell]&&!Dungeon.level.heroFOV[cell]
+                && Dungeon.level.distance(cell,Dungeon.hero.pos)>12){distant=cell;break;}
+        if(distant<0)throw new AssertionError("No remote sight fixture");
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroSkeleton ally=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroSkeleton();
+        ally.pos=distant;ally.configure(8);Dungeon.level.mobs.add(ally);
+        com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent talent=com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.CORPSE_SENSE;
+        Dungeon.hero.talents.get(1).put(talent,1);
+        Dungeon.level.updateFieldOfView(Dungeon.hero,Dungeon.level.heroFOV);
+        if(!Dungeon.level.heroFOV[distant])throw new AssertionError("Corpse Sense lost remote ally sight");
+        Dungeon.level.mobs.remove(ally);Dungeon.hero.talents.get(1).remove(talent);
+        Dungeon.level.updateFieldOfView(Dungeon.hero,Dungeon.level.heroFOV);
+        if(Dungeon.level.heroFOV[distant])throw new AssertionError("Remote light remained after shared sight removed");
+        System.out.println("TEST 57 SIGHT PASS: remote ally reveals a separate patch only while Corpse Sense supplies vision");
+    }
+    private static void tilePreview(Image image) {
+        if(image==null)throw new AssertionError("Missing tile preview");
+        float[] vertices=(float[])RecoveryChecks.field(image,"vertices");
+        float maxX=0,maxY=0;
+        for(int i=0;i<16;i+=4){maxX=Math.max(maxX,vertices[i]);maxY=Math.max(maxY,vertices[i+1]);}
+        if(image.width()>16.01f || image.height()>16.01f || maxX>16.01f || maxY>16.01f)
+            throw new AssertionError("Preview layout/drawn vertices disagree: "+image.width()+"/"+maxX+" x "+image.height()+"/"+maxY);
+        image.destroy();
+    }
+    private void roomTick(){
+        if(!(Game.scene() instanceof GameScene)||++roomFrames%60!=0)return;
+        try {
+            switch(roomStep++){
+                case 0:
+                    for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap map:Dungeon.level.customTiles)
+                        if(map instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.RitualSiteRoom.RitualMarker)tilePreview(map.image(2,2));
+                    for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap map:Dungeon.level.customTerrain)
+                        if(map instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.RitualSiteRoom.Table)tilePreview(map.image(0,1));
+                    capture("ritual-room");GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoCell(ritualTable));break;
+                case 1:
+                    interfaceBounds();capture("ritual-table-popup");closeReviewWindows();
+                    tilePreview(com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTerrainTilemap.tile(ritualCage,Terrain.REGION_DECO));
+                    GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoCell(ritualCage));break;
+                case 2:
+                    interfaceBounds();capture("cage-popup");closeReviewWindows();
+                    GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoCell(com.shatteredpixel.shatteredpixeldungeon.items.quest.CeremonialCandle.ritualPos));break;
+                case 3:
+                    interfaceBounds();capture("ritual-circle-popup");closeReviewWindows();
+                    int ritual=com.shatteredpixel.shatteredpixeldungeon.items.quest.CeremonialCandle.ritualPos;
+                    java.lang.reflect.Method drop=com.shatteredpixel.shatteredpixeldungeon.items.quest.CeremonialCandle.class.getDeclaredMethod("onThrow",int.class);drop.setAccessible(true);
+                    int[] offsets={-Dungeon.level.width(),1,Dungeon.level.width(),-1};
+                    for(int i=0;i<4;i++){
+                        drop.invoke(new com.shatteredpixel.shatteredpixeldungeon.items.quest.CeremonialCandle(),ritual+offsets[i]);
+                        long count=Dungeon.level.mobs.stream().filter(m->m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Elemental.NewbornFireElemental).count();
+                        if(count!=(i==3?1:0))throw new AssertionError("Ritual required four cardinal candles: "+i+" -> "+count);
+                    }
+                    break;
+                case 4:
+                    capture("ritual-elemental-summoned");
+                    for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:new java.util.ArrayList<>(Dungeon.level.mobs))
+                        if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Elemental.NewbornFireElemental)mob.die(Dungeon.hero);
+                    com.shatteredpixel.shatteredpixeldungeon.items.quest.Embers embers=null;
+                    for(com.shatteredpixel.shatteredpixeldungeon.items.Heap heap:Dungeon.level.heaps.valueList())
+                        for(com.shatteredpixel.shatteredpixeldungeon.items.Item item:heap.items)
+                            if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.Embers)embers=(com.shatteredpixel.shatteredpixeldungeon.items.quest.Embers)item;
+                    if(embers==null || !embers.collect())throw new AssertionError("Elemental did not yield collectable quest embers");
+                    questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker.Quest.class,"given",true);
+                    for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs)
+                        if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker)mob.interact(Dungeon.hero);
+                    break;
+                case 5:
+                    interfaceBounds();capture("wandmaker-reward");
+                    boolean reward=false;
+                    for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))
+                        if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndWandmaker){
+                            java.lang.reflect.Method select=child.getClass().getDeclaredMethod("selectReward",com.shatteredpixel.shatteredpixeldungeon.items.Item.class);select.setAccessible(true);
+                            com.shatteredpixel.shatteredpixeldungeon.items.Item wand=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker.Quest.wand1;
+                            select.invoke(child,wand);
+                            if(!Dungeon.hero.belongings.contains(wand)||com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker.Quest.wand1!=null)throw new AssertionError("Quest reward not completed");
+                            reward=true;
+                        }
+                    if(!reward)throw new AssertionError("Wandmaker reward dialog absent");
+                    System.out.println("TEST 57 RITUAL PASS: four real candle throws, elemental, embers and Wandmaker reward completion; 16-unit popup vertices");
+                    closeReviewWindows();prepareRooms(1);switchNoFade(GameScene.class);break;
+                case 6:
+                    capture("smithy-room");
+                    for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap map:Dungeon.level.customTiles)
+                        if(map instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.BlacksmithRoom.SmithyVisuals)tilePreview(map.image(0,0));
+                    // Exercise all rail junctions and ensure unknown neighbors do not select a branch.
+                    int c=roomCenter,w=Dungeon.level.width();int[] near={c-w,c+1,c+w,c-1};
+                    Level.set(c,Terrain.REGION_DECO);
+                    for(int cell:near)Level.set(cell,Terrain.REGION_DECO);
+                    for(int mask=0;mask<16;mask++){
+                        for(int i=0;i<4;i++){Dungeon.level.heroFOV[near[i]]=false;Dungeon.level.mapped[near[i]]=false;Dungeon.level.visited[near[i]]=(mask&(1<<i))!=0;}
+                        if(com.shatteredpixel.shatteredpixeldungeon.tiles.TerrainFeaturesTilemap.railConnections(c)!=mask)throw new AssertionError("Rail adjacency/knowledge mismatch");
+                    }
+                    java.util.Arrays.fill(Dungeon.level.visited,true);GameScene.updateMap();
+                    GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoCell(c));break;
+                case 7:
+                    interfaceBounds();capture("rail-popup");closeReviewWindows();prepareRooms(2);switchNoFade(GameScene.class);break;
+                case 8:
+                    miningTorchChecks();capture("gnoll-mine-ore");
+                    // Removing the source also retires a previously created flame on the next frame.
+                    int ore=roomCenter-Dungeon.level.width();Level.set(ore,Terrain.WALL_DECO);
+                    EnhancedEffects.Torch flame=new EnhancedEffects.Torch(ore);Level.set(ore,Terrain.EMPTY);flame.update();
+                    if(flame.alive)throw new AssertionError("Flame survived source mining");
+                    GameScene.updateMap();break;
+                case 9:
+                    capture("gnoll-mine-after-mining");prepareRooms(3);switchNoFade(GameScene.class);break;
+                case 10:
+                    miningTorchChecks();capture("crystal-mine");
+                    com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Chainwarden boss=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Chainwarden();
+                    boss.pos=Dungeon.hero.pos+1;boss.HP=boss.HT/2;GameScene.add(boss);com.shatteredpixel.shatteredpixeldungeon.ui.BossHealthBar.assignBoss(boss);
+                    break;
+                case 11:
+                    capture("painted-boss-bar");
+                    for(Icons icon:new Icons[]{Icons.DEPTH,Icons.DEPTH_CHASM,Icons.DEPTH_WATER,Icons.DEPTH_GRASS,Icons.DEPTH_DARK,Icons.DEPTH_LARGE,Icons.DEPTH_TRAPS,Icons.DEPTH_SECRETS}){
+                        Image visual=icon.get();if(visual.frame().width()*visual.texture.width<63)throw new AssertionError("Pixel depth icon: "+icon);visual.destroy();
+                    }
+                    System.out.println("TEST 57 ROOMS PASS: generated ritual/smithy/both mines, quest completion, preview vertices, 16 rail junctions, no ore flames/light, source removal, shared sight and painted boss/depth HUD");
+                    Gdx.app.exit();return;
+            }
+        } catch(ReflectiveOperationException error){throw new AssertionError(error);}
+    }
+    private void miningTorchChecks(){
+        int ore=0;
+        for(int cell=0;cell<Dungeon.level.length();cell++)if(Dungeon.level.map[cell]==Terrain.WALL_DECO){
+            ore++;if(EnhancedEffects.torchAt(Dungeon.level,cell))throw new AssertionError("Mining ore emits torch light");
+        }
+        if(ore==0)throw new AssertionError("No ore in generated mine");
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))
+            if(child instanceof EnhancedEffects.Torch)throw new AssertionError("Ore torch was instantiated");
+    }
+
     private void reviewRegionTransition(int floor) throws java.io.IOException {
         InterlevelScene.returnDepth=floor+1;InterlevelScene.returnBranch=0;
         InterlevelScene.mode=InterlevelScene.Mode.PLAYTEST;

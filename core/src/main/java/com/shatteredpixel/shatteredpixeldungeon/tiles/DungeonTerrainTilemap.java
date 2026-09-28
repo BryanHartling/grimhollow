@@ -134,7 +134,7 @@ public class DungeonTerrainTilemap extends DungeonTilemap {
 	public static Image tile(int pos, int tile ) {
 		Image img = new Image( instance.texture );
 		img.frame( instance.tileset.get( instance.getTileVisual( pos, tile, true ) ) );
-		img.width = img.height = SIZE;
+		img.logicalSize(SIZE, SIZE);
 		return img;
 	}
 

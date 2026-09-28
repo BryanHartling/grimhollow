@@ -1,3 +1,19 @@
+# Tablet quest rooms and terrain presentation - v1.14.2
+
+Current delivery: **v1.14.2-tablet-rooms**. This section records fresh results; the complete numbered 1-56 checkpoint table below remains historical where not explicitly rerun here. No physical tablet was connected (`adb devices -l`: empty).
+
+| Check | Result | Actual output / scope |
+|---|---|---|
+| Desktop/Android, 1/2/22 | PASS | `core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeUpstream=true --no-daemon --console=plain`: BUILD SUCCESSFUL in 1m 49s. Final packaging after text/fixture repairs: BUILD SUCCESSFUL in 45s. APK com.grimhollow.dungeon, code 960, 1.14.2-INDEV, SDK 21/36. Windows bundled-runtime launcher packaged. |
+| Unit tests | PASS | Seven tests, zero failures/errors: RecoveryTest 2; LightMapTest 5. |
+| Class gate, 5/15 | PASS | `Runs=90 failures=0`; Necromancer 10/0, Enchanter 10/0, Psychic 10/0, combined added classes 30/0 included in all nine classes. Existing class/content/Hatchling/defensive-sigil assertions ran. |
+| Provenance/rebuild, 44 | PASS | PAINTED assets=130 source sheets=118 failures=0; launcher resources=55. TEST 44: upstream-derived character sheets=7; restored assets=25; verified painted replacements=130; failures=0. |
+| 57: tablet rooms and quest | PASS | Native portrait and landscape: four real candle throws, only the fourth summons one elemental, embers drop, Wandmaker reward dialog and selected-wand completion. Generated smithy and both mining branches, 16-unit tile preview vertices, all 16 knowledge-dependent rail masks, no ore torch sprites/sources, removed source kills flame, painted depth/boss HUD. |
+| 57: separate sight patch | PASS | Remote raised ally's cell enters hero FOV with Corpse Sense and leaves FOV when the ally is removed. The player's exact save is unavailable. |
+| CI / 21 / 45 | permanent known issue | Full workflow remains mandatory. Test 45 has an existing contrast failure; exact release-head CI is recorded in the annotated release tag and delivery. No checks were weakened. |
+
+Evidence: [ritual before summoning](interface/portrait/ritual-room.png), [readable circle instructions](interface/portrait/ritual-circle-popup.png), [summoned elemental](interface/portrait/ritual-elemental-summoned.png), [wand reward](interface/portrait/wandmaker-reward.png), [contained cage preview](interface/portrait/cage-popup.png), [smithy](interface/portrait/smithy-room.png), [painted mine and ore](interface/portrait/gnoll-mine-ore.png), [after mining](interface/portrait/gnoll-mine-after-mining.png), [rail preview](interface/portrait/rail-popup.png), [boss HUD](interface/landscape/painted-boss-bar.png). Corresponding portrait/landscape captures use the actual renderer; fixture exploration state is deliberately revealed for room inspection. Native fixture generation initially ran with an outgoing scene still registered and failed during a map callback; clearing that diagnostic scene as in InterlevelScene fixed the fixture, without changing production level generation.
+
 # Feeding, HUD and creature-position fixes - v1.14.1
 
 Release: **v1.14.1-playtest-fixes**. Runtime implementation: `c083db422`; the annotated release tag identifies the final source/evidence commit and exact-head CI result. No art generation or gameplay balance changes were made.

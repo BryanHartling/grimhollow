@@ -76,6 +76,7 @@ jobs:
             portrait=false
             if [ "$orientation" = portrait ]; then portrait=true; fi
             xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-ui-$orientation" -Dgrimhollow.interfaceReview=true -Dgrimhollow.interfacePortrait=$portrait -Dgrimhollow.smokeDir="verification/interface/$orientation" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
+            xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-rooms-$orientation" -Dgrimhollow.interfaceReview=true -Dgrimhollow.roomReview=true -Dgrimhollow.interfacePortrait=$portrait -Dgrimhollow.smokeDir="verification/interface/$orientation" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
           done
       - name: Vault boss arena and elemental forms in the existing renderer
         if: ${{ !cancelled() && runner.os == 'Linux' }}

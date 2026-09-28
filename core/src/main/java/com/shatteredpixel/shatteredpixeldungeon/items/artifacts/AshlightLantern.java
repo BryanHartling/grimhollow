@@ -224,7 +224,7 @@ public class AshlightLantern extends Artifact {
             for(int sx=Math.max(0,x-4);sx<=Math.min(level.width()-1,x+4);sx++){
                 int source=sx+sy*level.width();
                 float distance=(float)Math.hypot(sx-x,sy-y);
-                if(level.map[source]==Terrain.WALL_DECO)added+=.258f*LightMap.falloff(distance,Dungeon.depth>=16 && Dungeon.depth<=20 ? 4 : 3);
+                if(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.torchAt(level,source))added+=.258f*LightMap.falloff(distance,Dungeon.depth>=16 && Dungeon.depth<=20 ? 4 : 3);
                 if(lava && level.water[source])added+=.263f*LightMap.falloff(distance,1.25f);
                 for(Blob blob:level.blobs.values())if(blob.cur!=null && blob.volume>0 && blob.cur[source]>0){
                     String type=blob.getClass().getSimpleName();

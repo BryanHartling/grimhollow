@@ -1,5 +1,7 @@
 # Grimhollow
 
+**Tablet rooms and quest visuals v1.14.2:** corrected ritual/smithy atlas layouts, contained terrain-inspection images, painted mining floors/boulders/crystals/ore and workshop props, connected mine rails and bookshelves, matching laboratory floor, and painted boss/floor indicators. Ore walls no longer emit torch flames or torch light, and removing a torch's terrain removes its flame. Chainwarden remains the intentional alternate Prison boss; Corpse Sense retains remote minion vision. [Changes](CHANGES.md) and [verification](verification/ACCEPTANCE.md).
+
 **Hatchling and HUD fixes v1.14.1:** readable item names in feeding messages, a warning that stops queued actions and waits for player control, contained status icons, and painted resume/enemy indicators. This update includes the v1.14.0 particle and creature improvements below. [Full changes](CHANGES.md).
 
 **Painted effects and balance v1.14.0:** soft grass, curse, electricity and related particle effects; clearer gas; sharper exports across the creature roster. Enchanter Field Repair becomes **Defensive Sigil** in the Brush menu: one charge and one turn for **6/10 shielding**, lasting up to six turns and refreshing without stacking. Ghoul unlock moves to **Phylactery +5**, with **15%** hero healing. Raised-undead inspection shows time remaining; the summoning menu now says **Raise Dead**. Remains give only the current class's keepsake. [Changes and balance decisions](CHANGES.md).

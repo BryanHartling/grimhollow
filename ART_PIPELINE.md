@@ -1,6 +1,6 @@
 # Current painted presentation
 
-The September 2026 visual-overhaul requests authorize original painted art and supersede the historical recovery-only restrictions below. `tools/painted/README.md` documents the workflow. The v1.14.0 manifest contains 115 committed source PNGs and 124 shipping images, plus 55 launcher resources. CI reconstructs them with Pillow/numpy and pinned Git templates; it needs neither an image generator nor Blender.
+The September 2026 visual-overhaul requests authorize original painted art and supersede the historical recovery-only restrictions below. `tools/painted/README.md` documents the workflow. The v1.14.2 manifest contains 118 committed source PNGs and 130 shipping images, plus 55 launcher resources. CI reconstructs them with Pillow/numpy and pinned Git templates; it needs neither an image generator nor Blender. The latest quest-room module restores v4 atlas layouts and composes painted ritual/workshop art, both mining branches, connected rails/shelves and boss/depth HUD materials.
 
 All 71 creature atlases (129 authored forms) now export directly from their original paintings at eight texture pixels per logical world unit. `character-layouts.json` supplies the original frame layout; runtime density is derived from the actual sheet dimensions, including irregular wards and sentries. Logical sprite footprints are preserved, with a shared half-texel allowance for bilinear silhouette fringes.
 

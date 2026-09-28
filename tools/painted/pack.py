@@ -124,7 +124,7 @@ def region_atlas(region, features, raised):
     stage=['sewers','prison','caves','city','halls'].index(region)
     feature_slots={64:135,65:134,66:128,67:130,69:129,70:131,72:136,73:136}
     for flat,lower,upper,source,w,h in placements:
-        ground=special if flat in [73,75] else grass if source==1 else floor
+        ground=special if flat in [64,73,75] else grass if source==1 else floor
         art=props[source]
         if source==4 and region in ['city','halls']:art=regional[4 if region=='city' else 5]
         if source in [1,2] and region=='halls':art=regional[7]
@@ -209,6 +209,8 @@ def outputs():
     result.update(regions())
     from particles import outputs as particles
     result.update(particles())
+    from quest_rooms import outputs as quest_rooms
+    result.update(quest_rooms(result,features))
     return result
 
 
@@ -243,6 +245,9 @@ def main():
         if path=='effects/readability.png':expected=(512,64)
         if path in ('effects/painted_particles.png','effects/painted_specks.png','effects/painted_rays.png'):expected=(256,256)
         if path=='sprites/item_icons.png':expected=(512,256)
+        if path=='environment/custom_tiles/caves_quest.png':expected=(256,512)
+        if path=='interfaces/boss_hp.png':expected=(512,256)
+        if path=='interfaces/painted_depth.png':expected=(512,256)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]

@@ -72,7 +72,9 @@ public abstract class CustomTilemap implements Bundlable {
 	//assumes tileW and tileH have already been set
 	protected int[] mapSimpleImage(int txX, int txY, int texW){
 		int[] data = new int[tileW * tileH];
-		int texTileWidth = texW/SIZE;
+		// The atlas, rather than a historical caller width, owns its column count.
+		int texTileWidth = com.watabou.gltextures.TextureCache.get(texture).width
+				/ com.shatteredpixel.shatteredpixeldungeon.GameGeometry.tileFrame(String.valueOf(texture));
 		int x = txX, y = txY;
 		for (int i = 0; i < data.length; i++){
 			data[i] = x + (texTileWidth*y);

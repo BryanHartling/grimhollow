@@ -41,7 +41,16 @@ public final class PaintedInterface {
         Image replacement;
         int bag=type==Icons.SEED_POUCH?ItemSpriteSheet.POUCH:type==Icons.SCROLL_HOLDER?ItemSpriteSheet.HOLDER:
                 type==Icons.WAND_HOLSTER?ItemSpriteSheet.HOLSTER:type==Icons.POTION_BANDOLIER?ItemSpriteSheet.BANDOLIER:-1;
-        if(type==Icons.SKULL) {
+        if(name.startsWith("DEPTH")) {
+            int feeling=type.ordinal()-Icons.DEPTH.ordinal();
+            int run=com.shatteredpixel.shatteredpixeldungeon.Dungeon.daily
+                    ? (com.shatteredpixel.shatteredpixeldungeon.Dungeon.dailyReplay?3:2)
+                    : (com.shatteredpixel.shatteredpixeldungeon.Dungeon.customSeedText.isEmpty()?0:1);
+            replacement=new Image("interfaces/painted_depth.png");
+            replacement.texture.filter(GL20.GL_LINEAR,GL20.GL_LINEAR);
+            replacement.frame(feeling*64,run*64,64,64);
+            replacement.logicalSize(original.width,original.height);
+        } else if(type==Icons.SKULL) {
             replacement=new BuffIcon(BuffIndicator.CORRUPT, true);
             replacement.logicalSize(original.width,original.height);
         } else if(bag>=0) {

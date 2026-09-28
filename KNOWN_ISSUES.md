@@ -1,5 +1,9 @@
 # Known issues
 
+- Version 1.14.2 passes native portrait/landscape quest-room checks and builds Android, but no physical Samsung tablet is connected; the painted mine/workshop/ritual/HUD changes still need tablet visual and movement review.
+- The v1.13 screenshot's isolated illuminated patch is consistent with Corpse Sense sharing a raised ally's sight; the native test verifies that behavior and removes the patch when the ally is removed, but the original save is unavailable for exact reproduction. Chainwarden is an intentional 30% alternate Prison boss.
+- The corrected summoning-circle instructions are English; other locales retain their existing translations. Earlier contrast test 45 remains enforced with its known failures; this patch does not claim full CI is green.
+
 - Version 1.14.1 reproduces and fixes Shaman sprite displacement from overlapping walk/teleport animations and covers knockback overlap; the original floor-11 save and exact cursed-wand roll were unavailable, so the complete reported encounter is not claimed reproduced.
 - Version 1.14.1 HUD and feeding regressions run in the native renderer with portrait touch and landscape mouse input; no physical Samsung tablet was connected. NPC bone particles require Enhanced Effects, as in v1.14.0; the legacy effects-off option remains available.
 

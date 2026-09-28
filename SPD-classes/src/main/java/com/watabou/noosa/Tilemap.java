@@ -99,6 +99,7 @@ public class Tilemap extends Visual {
 		} else {
 			Image img = new Image(texture);
 			img.frame(tileset.get(data[x + mapWidth * y]));
+			img.logicalSize(cellW, cellH);
 			return img;
 		}
 	}

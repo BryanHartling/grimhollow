@@ -382,7 +382,7 @@ public class GameScene extends PixelScene {
 
 		levelWallVisuals = Dungeon.level.addWallVisuals();
 		add( levelWallVisuals );
-        for(int cell=0;cell<Dungeon.level.length();cell++)if(Dungeon.level.map[cell]==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WALL_DECO)add(new com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Torch(cell));
+        for(int cell=0;cell<Dungeon.level.length();cell++)if(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.torchAt(Dungeon.level,cell))add(new com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Torch(cell));
 
 		wallBlocking = new WallBlockingTilemap();
 		add (wallBlocking);
@@ -1571,6 +1571,7 @@ public class GameScene extends PixelScene {
 	public static void afterObserve() {
 		if (scene != null) {
             scene.tiles.updateKnowledge();
+            scene.terrainFeatures.updateRailKnowledge();
 			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
 				if (mob.sprite != null) {
 					if (mob instanceof Mimic && mob.state == mob.PASSIVE && ((Mimic) mob).stealthy() && Dungeon.level.visited[mob.pos]){

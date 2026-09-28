@@ -48,6 +48,7 @@
     "items/wands.png": "1ed7236765e5985f9f5638eae9586d4bb990153d18262f896f6b9f11da48bea9",
     "items/weapons-a.png": "bbfe5b4d5e77adcf88e3e7c88c712e18d4d28b3a7936649780330283a4f63dc3",
     "items/weapons-b.png": "9bbd1c0373663b3259182068b3588e72f49c2a6b6cc4cdaed02b3ad803b83bd3",
+    "mine-workshop.png": "728edc15da07e9e76025c3951e6c78b4dc8a93ebbf858e25448230529486a920",
     "monsters/allies.png": "264101226458aa1df4e91112cdd0be35d706a04001cd995a6fbbbae53dbdd57c",
     "monsters/caves-city.png": "60dd3d8fef26ca9d2edacc0bc33089fde4ab225b641c16979a5f98de7e5477f6",
     "monsters/caves.png": "bf9c5ecc7c1856d37d199a8fa8f644ac80e99144aebba0373782268af3fca348",
@@ -106,6 +107,7 @@
     "regions/halls.png": "ebcba7baef3c9b2e73517d057b0e88eefe2fd2421dee679e65c95109941f9bce",
     "regions/prison.png": "b0053c1b3e1c80a1e5c963a3e458277c966a188ef02514ad3e708f4b0fe8b67e",
     "regions/sewers.png": "47889d8797ab3dd9a53cf8a6a8d991febd3b4c5f5dd25ddd22577fc51d95beb7",
+    "ritual-mark.png": "94aa09715005e11e082f4823d78f8d5cee65418d94f8c73a42a88fa733726c9c",
     "sewers-materials.png": "0b951d4ce0bb5902c6a940c1bc56db1173580ca57c33d652c16754dd91c9ddc2",
     "status/status-0.png": "7bf546acdbc789262e8008fa82737af3c3389ee1c43fd58c8b27709d6fb225b7",
     "status/status-1.png": "6cc7256d450879b5aa756c47587373fc653d4cb2b54132d1efad809329dca5db",
@@ -113,6 +115,7 @@
     "status/status-3.png": "301582606a321242e8500335c2a85d40c79ed4446e771f252bb966b85f0c689d",
     "status/status-4.png": "a7710032fa06c593cb665895c2bc916932a9039c7f09d730229ba3c17a1bf104",
     "status/status-5.png": "ba99b2852a983be3406c879a8a338fbeea736e6e7e37c111a36c52f641abf832",
+    "tablet-room-props.png": "4b854e8341e84b101e6137f7aa20a0bfe65057faf6fed790d5182fba205675d8",
     "title-crypt.png": "66fd899845160ef31bce8c3193c8bb126788672e621563d44ca51d3d92dff04d",
     "title-mist.png": "8686123f111541d132b3aec2f81194cb470545da3af65c9487b9252aea159cb0",
     "title-wordmark.png": "9eabb2f05d010aea0edf720a4897ebd7e33e3bcf8c1a4d01270d9ae4cda322a2",
@@ -124,7 +127,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "611ae37fd109df82991bfd9f33691325f6db973029fc0e960e9880371fd0384d"
+      "rgba_sha256": "7ca8c7efe4b5814182bd5f55063e5ed394be133972f6684368e5a2acf765baf6"
     },
     "environment/water0.png": {
       "size": [
@@ -138,14 +141,14 @@
         1024,
         1024
       ],
-      "rgba_sha256": "611ae37fd109df82991bfd9f33691325f6db973029fc0e960e9880371fd0384d"
+      "rgba_sha256": "7ca8c7efe4b5814182bd5f55063e5ed394be133972f6684368e5a2acf765baf6"
     },
     "environment/tiles_prison.png": {
       "size": [
         1024,
         1024
       ],
-      "rgba_sha256": "d37ba95ca8ba62cc05996f36c8c0e38869883b6e63ddeb15a3d74c58569e990a"
+      "rgba_sha256": "89bf1a26899bf9396c6db0eba1b496ae3a5ed525f04ab8e205e37a4f6ef6b911"
     },
     "environment/water1.png": {
       "size": [
@@ -159,7 +162,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "b28bed1516eb1deecf504504d04822cce734011adf4b3cdad7989b97b50b4998"
+      "rgba_sha256": "b2979a8670b01787395200d74bbce3c7a8e8e59143df99cfb64ff48e1ff1a368"
     },
     "environment/water2.png": {
       "size": [
@@ -173,7 +176,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "b17e22647ec735ed77831c73c7db61722bb4ca47020b753e14c43bf60f210663"
+      "rgba_sha256": "4465ae1e76dadf542b85be4b33e67ce875af6bfe8ff6ee8174dda8ff67fd5ae7"
     },
     "environment/water3.png": {
       "size": [
@@ -187,7 +190,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "111cd6fd0c31c5bea85dc24545675f6aabfd73adce0fd6c8dfdd60f50c3497a0"
+      "rgba_sha256": "9ea073288ca60c4c4613b6bf98562992da7c452e4b0b7def10683fdc07d6ae1f"
     },
     "environment/water4.png": {
       "size": [
@@ -201,7 +204,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "1c5300ea64ddd0ffa1d395a7f1ac29aedf18d0ca23645a116c979d7f9c82948f"
+      "rgba_sha256": "a975917c24c9d3d14bd9577e46770cd0f223e3e98bb38196533a58a011e573ad"
     },
     "splashes/painted_warrior.png": {
       "size": [
@@ -8997,6 +9000,20 @@
       ],
       "rgba_sha256": "67f9ccbfba3e2f29f5cbb6b239e9a96434da71dc92b77d22efb36d6f6deba037"
     },
+    "interfaces/boss_hp.png": {
+      "size": [
+        512,
+        256
+      ],
+      "rgba_sha256": "4d7ac2293fe0c4cf643c16241cd6ce90c5607fb7a2d41392df6ef8cc95be272f"
+    },
+    "interfaces/painted_depth.png": {
+      "size": [
+        512,
+        256
+      ],
+      "rgba_sha256": "d26e34b1dd3f041f002d839d8c3d2ed2b1883dd652b1dca041c62487118f4aac"
+    },
     "interfaces/painted_badges.png": {
       "size": [
         1024,
@@ -9066,6 +9083,34 @@
         256
       ],
       "rgba_sha256": "94fcfb9419477674359bf7699d64c1b6848cfacb2e46bc0da364abd0f5ddba9c"
+    },
+    "environment/tiles_caves_gnoll.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "eacd9f8e697b2ebd0189a11e1b34846decb163973b7a75054b929fd810b31ff4"
+    },
+    "environment/tiles_caves_crystal.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "8b845a6537b4d38f02d993ccb861d7f1f830f0fcb80dba5ef664a3ad8e2cd096"
+    },
+    "environment/custom_tiles/prison_quest.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "rgba_sha256": "c92421d8a4ccf4928296765a6ad364fbffeb7b58b4e058032a8eb15626c07142"
+    },
+    "environment/custom_tiles/caves_quest.png": {
+      "size": [
+        256,
+        512
+      ],
+      "rgba_sha256": "6e04973a6165debb1315eb50a6007b365cec405a1e5281152b7750349aff29ce"
     }
   }
 }

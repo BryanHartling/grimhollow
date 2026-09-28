@@ -1,3 +1,14 @@
+# Tablet rooms and quest visuals - v1.14.2
+
+- Restore the v4 Prison and Blacksmith custom-atlas layouts underneath the v4 room code. The old Prison sheet made an Ominous Table display ritual fragments and left the true circle unreadable; the old Caves sheet selected unrelated ladders and floor pieces. Pack original painted ritual, table, hatch, furnace and workbench sources at the actual slot locations.
+- Call the ritual marker a Summoning circle and replace the misleading "four corners" instruction with the four cardinal candle positions actually checked by the quest.
+- Fix tile-preview geometry at the shared Tilemap.image and terrain-image factories: drawn vertices and layout now both use 16 world/UI units. Custom image mapping derives its column count from the actual atlas rather than historical texture-width arguments.
+- Paint both mining branches using the existing Caves material family, sharper boulders/crystals and new gold ore. Mining WALL_DECO is ore, so exclude it from torch sprites, light sources and Ashlight ambient sampling; a removed source retires its flame immediately.
+- Pack edge-connected rail modules selected from known neighboring cells, continuous shelf fronts/wooden caps, and the laboratory's own floor beneath its cauldron. Existing v1.14 painted bubbles remain in the enhanced-effects path.
+- Add painted compact/large boss frames and floor indicators, preserving all eight floor feelings and regular/seeded/daily/replay markers. Enemy-count/resume glyphs and NPC summoning particles retain the fixes already shipped after the supplied v1.13 screenshots.
+- Extend the existing native UI renderer with generated ritual/smithy/mine fixtures, four-candle summoning and wand reward flow, tile vertex bounds, rail knowledge masks, ore flame checks and Corpse Sense remote sight. No new gameplay, balance or quest rules.
+- Chainwarden is the intentional 30% alternate Prison boss, not a mistaken Tengu label. Corpse Sense deliberately reveals a separate patch around a raised ally; the original save is unavailable, so the screenshot's bright patch is not claimed reproduced exactly.
+
 # Hatchling warning and HUD fixes - v1.14.1
 
 - Use localized item titles (including known upgrades and stack counts) in Hatchling meal, upgrade and enchantment messages. The v4 Item API uses title(), so Object.toString() leaked Java class names and identity hashes into the log.

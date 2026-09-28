@@ -77,4 +77,28 @@ def outputs():
         status.paste(gold.resize((w*SCALE,h*SCALE),Image.Resampling.LANCZOS),(x*SCALE,y*SCALE))
     atlas=Image.new('RGBA',(512,256))
     for i,art in enumerate(glyphs().values()):atlas.paste(art,(i%8*64,i//8*64))
-    return {'interfaces/chrome.png':chrome,'interfaces/status_pane.png':status,'interfaces/painted_glyphs.png':atlas}
+    boss=Image.new('RGBA',(512,256))
+    for x,y,w,h in [(0,0,64,16),(0,16,128,30)]:
+        boss.paste(patch(frames[0],(w*4,h*4),(8,8,8,8)),(x*4,y*4))
+    for x,y,w,h,material in [(71,0,47,4,7),(71,5,47,4,8),(0,46,96,9,7),(0,55,96,9,8)]:
+        glass=frames[material].crop((65,95,frames[material].width-65,frames[material].height-75))
+        boss.paste(glass.resize((w*4,h*4),Image.Resampling.LANCZOS),(x*4,y*4))
+    from pack import panels as terrain_panels, fit
+    depth=Image.new('RGBA',(512,256))
+    stair=fit(terrain_panels('details.png')[1],58,58)
+    symbols=[None,'WARNING','ALCHEMY','BUFFS','WAIT','PLUS','WARNING','MAGNIFY']
+    for run in range(4):
+        for feeling in range(8):
+            icon=Image.new('RGBA',(64,64));icon.alpha_composite(stair,((64-stair.width)//2,(64-stair.height)//2))
+            if feeling:
+                mark=glyphs()[symbols[feeling]].resize((30,30),Image.Resampling.LANCZOS)
+                if feeling==2:
+                    mark=fit(terrain_panels('details.png')[7],30,30)
+                if feeling==3:mark=fit(terrain_panels('props.png')[1],30,30)
+                icon.alpha_composite(mark,(34,30))
+            if run:
+                emblem=glyphs()[['DATA','RANKINGS','REPEAT'][run-1]].resize((26,26),Image.Resampling.LANCZOS)
+                icon.alpha_composite(emblem,(0,0))
+            depth.paste(icon,(feeling*64,run*64))
+    return {'interfaces/chrome.png':chrome,'interfaces/status_pane.png':status,'interfaces/painted_glyphs.png':atlas,
+            'interfaces/boss_hp.png':boss,'interfaces/painted_depth.png':depth}

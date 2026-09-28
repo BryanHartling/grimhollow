@@ -199,10 +199,18 @@ public final class EnhancedEffects {
             angle=(float)Math.sin(phase)*t*15;alpha((float)Math.sin(Math.PI*t)*(spark?.95f:.55f));
         }
     }
+    public static boolean torchAt(com.shatteredpixel.shatteredpixeldungeon.levels.Level level, int cell) {
+        // Mining uses decorated walls for ore, not a light-bearing fixture.
+        return level != null && cell >= 0 && cell < level.length()
+                && level.map[cell] == com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WALL_DECO
+                && !(level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.MiningLevel);
+    }
     public static class Torch extends Image {
         final int cell;float time;
         public Torch(int cell){super(ATLAS);this.cell=cell;point(DungeonTilemap.tileToWorld(cell));x+=4;y+=1;}
-        @Override public void update(){time+=Game.elapsed;visible=enabled()&&Dungeon.level.heroFOV[cell];
+        @Override public void update(){
+            if (!torchAt(Dungeon.level,cell)) {killAndErase();return;}
+            time+=Game.elapsed;visible=enabled()&&Dungeon.level.heroFOV[cell];
             EnhancedEffects.frame(this,Style.FLAME,((int)(time*8+phase(cell)%4)%4)*5/3,8,8);}
     }
     public static class Ember extends PaintedParticle {

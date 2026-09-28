@@ -1,3 +1,7 @@
+# Tablet quest rooms and connected details - v1.14.2
+
+`quest_rooms.py` restores the v4 Prison (16 columns) and Caves quest (4 columns) atlas layouts and packs three new authored sheets: `ritual-mark.png`, `tablet-room-props.png`, and `mine-workshop.png`. Exact prompts are in `tablet-rooms-prompts.json` and `mine-workshop-prompt.txt`. Their derivatives include a continuous five-cell ritual overlay with cardinal candle sockets, separate table, single mine hatch, furnace/workbench, and both mine tile atlases. Existing Caves materials, boulder and crystal paintings supply geology. Sixteen rail masks use edge-spanning modules and continuous shelf fronts replace isolated cabinets. The boss and floor HUD reuse established painted interface materials. Source PNGs and derivatives use GPL-3.0-or-later; generation is never required during packaging or CI.
+
 # Painted effects and universal creature export - v1.14.0
 
 `particles.py` packs committed neutral particle motifs, four colored beam ribbons and existing status/UI symbols into three 256px effect atlases. The shared PixelParticle/Speck paths use these textures only with enhanced effects enabled; lightning/rays retain their timing and logical geometry. `botany_skills.py` replaces Field Repair with the original Defensive Sigil icon. Exact built-in image-generation prompts: `particles-prompts.json`, `rays-prompt.json`, `defensive-sigil-prompt.json`. New source PNGs are in `sources/particles/`, licensed GPL-3.0-or-later.

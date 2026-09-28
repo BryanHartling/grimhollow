@@ -96,10 +96,10 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 			return 136 + 16*stage;
 
 		} else if (tile == Terrain.REGION_DECO) {
-			return 137 + 16 * stage;
+			return stage == 2 ? 224 + railConnections(pos) : 137 + 16 * stage;
 
 		} else if (tile == Terrain.REGION_DECO_ALT) {
-			return 138 + 16 * stage;
+			return stage == 2 ? 224 + railConnections(pos) : 138 + 16 * stage;
 
 		} else if (tile == Terrain.EMBERS) {
 			if (DungeonTileSheet.getVisualWithAlts(DungeonTileSheet.EMBERS, pos) == DungeonTileSheet.EMBERS_ALT){
@@ -134,6 +134,28 @@ public class TerrainFeaturesTilemap extends DungeonTilemap {
 		}
 
 		return -1;
+	}
+
+	public synchronized void updateRailKnowledge() {
+		if(Dungeon.depth<11 || Dungeon.depth>15)return;
+		for(int pos=0;pos<map.length;pos++)if(map[pos]==Terrain.REGION_DECO || map[pos]==Terrain.REGION_DECO_ALT) {
+			int visual=getTileVisual(pos,map[pos],false);
+			if(data[pos]!=visual)super.updateMapCell(pos);
+		}
+	}
+
+	/** Join only known neighboring rail cells; never expose an unexplored branch. */
+	public static int railConnections(int pos) {
+		int width=Dungeon.level.width(), mask=0;
+		int[] offsets={-width,1,width,-1};
+		for(int i=0;i<4;i++) {
+			int next=pos+offsets[i];
+			if(next<0 || next>=Dungeon.level.length() || Math.abs(next%width-pos%width)>1)continue;
+			if(!Dungeon.level.heroFOV[next] && !Dungeon.level.visited[next] && !Dungeon.level.mapped[next])continue;
+			int terrain=Dungeon.level.map[next];
+			if(terrain==Terrain.REGION_DECO || terrain==Terrain.REGION_DECO_ALT)mask|=1<<i;
+		}
+		return mask;
 	}
 
 	public static Image getTrapVisual( Trap trap ){

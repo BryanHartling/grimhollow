@@ -77,19 +77,19 @@ public class BossHealthBar extends Component {
 	protected void createChildren() {
 		this.large = SPDSettings.interfaceSize() != 0;
 
-		bar = large ? new Image(asset, 0, 16, 128, 30) : new Image(asset, 0, 0, 64, 16);
+		bar = large ? PaintedInterface.image(asset, 0, 16, 128, 30) : PaintedInterface.image(asset, 0, 0, 64, 16);
 		add(bar);
 
 		width = bar.width;
 		height = bar.height;
 
-		shieldHP = large ? new Image(asset, 0, 55, 96, 9) : new Image(asset, 71, 5, 47, 4);
+		shieldHP = large ? PaintedInterface.image(asset, 0, 55, 96, 9) : PaintedInterface.image(asset, 71, 5, 47, 4);
 		add(shieldHP);
 
-		hp = large ? new Image(asset, 0, 46, 96, 9) : new Image(asset, 71, 0, 47, 4);
+		hp = large ? PaintedInterface.image(asset, 0, 46, 96, 9) : PaintedInterface.image(asset, 71, 0, 47, 4);
 		add(hp);
 
-		Dot = large ? new Image(asset, 0, 46, 96, 9) : new Image(asset, 71, 0, 47, 4);
+		Dot = large ? PaintedInterface.image(asset, 0, 46, 96, 9) : PaintedInterface.image(asset, 71, 0, 47, 4);
 		Dot.hardlight(0, 0, 0);
 		Dot.alpha(0.25f);
 		add(Dot);
@@ -126,7 +126,7 @@ public class BossHealthBar extends Component {
 		if (boss != null && large) {
 			skull = boss.sprite();
 		} else {
-			skull = new Image(asset, 64, 0, 6, 6);
+			skull = Icons.SKULL.get();
 		}
 		add(skull);
 

@@ -31,7 +31,7 @@ final class TuningScenario {
         out.append(Random.Long());Random.popGenerator();return out.toString();
     }
     static void run() throws Exception {
-        Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        BalanceTuning.reset();Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);
         boolean rejected=false;try{BalanceTuning.set(CURSEBOUND,0);}catch(IllegalStateException expected){rejected=true;}
         check(rejected,"ordinary save accepted mutation");
         String standard=sequence();Playtest.enable();check(standard.equals(sequence()),"default tuning changes seeded generator/RNG");
@@ -91,11 +91,23 @@ final class TuningScenario {
         BalanceTuning.set(DENSITY,200);BalanceTuning.set(FLOOR_LOOT,300);Dungeon.depth=2;
         Dungeon.switchLevel(Dungeon.newLevel(),-1);check(Dungeon.level.mobLimit()>=10,"higher population not applied");
         Bundle saved=new Bundle();Playtest.store(saved);Playtest.reset();Playtest.restore(saved);check(BalanceTuning.get(DENSITY)==200,"bundle persistence");
+        com.badlogic.gdx.Preferences reloaded=new com.badlogic.gdx.backends.headless.HeadlessPreferences(
+                com.badlogic.gdx.Gdx.files.absolute(System.getProperty("grimhollow.smokeOutput")+"/prefs/settings.xml"));
+        SPDSettings.set(reloaded);Playtest.reset();check(BalanceTuning.get(DENSITY)==200,"preference file reload");
         Bundle corrupt=new Bundle(),tuning=new Bundle();corrupt.put("playtest",true);tuning.put("density",9999);
         for(BalanceTuning.Key key:BalanceTuning.Key.values())if(key.group==3)tuning.put(key.id(),0);
         corrupt.put("balance_tuning",tuning);Playtest.restore(corrupt);check(BalanceTuning.get(DENSITY)==200&&!BalanceTuning.customItemMix(),"corrupt save sanitization");
-        Playtest.restore(new Bundle());check(!Playtest.enabled()&&BalanceTuning.get(DENSITY)==100,"old save defaults");
-        Playtest.enable();BalanceTuning.set(CURSEBOUND,0);Dungeon.init();check(!Playtest.enabled()&&BalanceTuning.get(CURSEBOUND)==10,"settings leaked into new game");
-        System.out.println("TEST 58 PASS: default seeded RNG; spawn/loot/quality/category boundaries; unique artifacts; generated five regions; save/load, old saves, reset and run isolation");
+        Playtest.restore(new Bundle());check(Playtest.enabled()&&BalanceTuning.get(DENSITY)==200&&!Playtest.god(),"old save did not adopt shared tuning");
+        BalanceTuning.set(CURSEBOUND,0);Dungeon.init();
+        check(Playtest.enabled()&&!Playtest.god()&&BalanceTuning.get(CURSEBOUND)==0,"new game did not adopt shared tuning");
+        BalanceTuning.reset();Playtest.restore(saved);
+        check(Playtest.enabled()&&BalanceTuning.changedCount()==0&&BalanceTuning.get(DENSITY)==100,"old save resurrected reset settings");
+        SPDSettings.put("balance_profile_v1","density=9999;removed_key=2;respawn=bad;weapon=0;armor=0;missile=0;wand=0;ring=0;artifact=0;potion=0;scroll=0;seed=0;stone=0;gold=0;");
+        Playtest.reset();check(BalanceTuning.get(DENSITY)==200&&!BalanceTuning.customItemMix(),"damaged shared profile sanitization");
+        BalanceTuning.reset();Dungeon.init();check(!Playtest.enabled()&&!Playtest.god(),"reset should permit ordinary future games");
+        reloaded.remove("balance_profile_v1");reloaded.flush();Playtest.restore(corrupt);
+        check(Playtest.enabled()&&BalanceTuning.get(DENSITY)==200&&!BalanceTuning.customItemMix(),"legacy save migration/clamping");
+        BalanceTuning.reset();Dungeon.init();
+        System.out.println("TEST 58 PASS: default seeded RNG; spawn/loot/quality/category boundaries; unique artifacts; generated five regions; disk persistence, shared new/old games, reset precedence and profile sanitization");
     }
 }

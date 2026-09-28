@@ -37,7 +37,9 @@ final class HatchlingScenario {
     private static HatchlingMimic fresh(){
         Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);SmokeRun.clearArena();
         hero().belongings.backpack.items.clear();
-        HatchlingMimic hatchling=new HatchlingMimic();hatchling.collect();return hatchling;
+        HatchlingMimic hatchling=new HatchlingMimic();hatchling.collect();
+        hero().belongings.identify(); // The test kit is not an unknown target in meal fixtures.
+        return hatchling;
     }
     private static void carry(Item...items){hero().belongings.backpack.items.addAll(Arrays.asList(items));}
     private static void due(HatchlingMimic item){while(!item.warned())item.tick(hero());item.onHeroReady();}
@@ -148,6 +150,24 @@ final class HatchlingScenario {
         }
         hatchling=fresh();Potion potion=new PotionOfHealing();carry(potion);hatchling.benefit(hero(),Tier.MINOR);
         check(potion.isIdentified(),"consumables can be identified");
+        hatchling=fresh();
+        MagicalHolster holster=new MagicalHolster(); ScrollHolder holder=new ScrollHolder();
+        PotionBandolier bandolier=new PotionBandolier(); VelvetPouch pouch=new VelvetPouch();
+        carry(holster,holder,bandolier,pouch);
+        Item[] protectedTargets={new WandOfMagicMissile(),new ScrollOfIdentify(),new PotionOfHealing(),
+                new Dagger(),new LeatherArmor(),new RingOfEvasion(),new AshlightLantern()};
+        holster.items.add(protectedTargets[0]);holder.items.add(protectedTargets[1]);bandolier.items.add(protectedTargets[2]);
+        hero().belongings.weapon=(Weapon)protectedTargets[3];hero().belongings.armor=(Armor)protectedTargets[4];
+        hero().belongings.ring=(Ring)protectedTargets[5];hero().belongings.artifact=(Artifact)protectedTargets[6];
+        for(int i=0;i<protectedTargets.length;i++)hatchling.benefit(hero(),Tier.MINOR);
+        for(Item target:protectedTargets)check(target.isIdentified(),"identification reaches bagged/equipped "+target.getClass());
+        check(hatchling.nextFood(hero())==null,"wider identification must not widen feeding");
+        WandOfLightning nested=new WandOfLightning();pouch.items.add(new VelvetPouch());
+        ((VelvetPouch)pouch.items.get(0)).items.add(nested);
+        hatchling.level(3);hatchling.benefit(hero(),Tier.EXCEPTIONAL);
+        check(nested.isIdentified()&&nested.trueLevel()==0,"nested bag identification without upgrade");
+        for(Item target:protectedTargets)check(target.trueLevel()==0,"protected targets cannot be upgraded");
+        System.out.println("TEST 55 IDENTIFY PASS: bagged consumables/wands, equipped gear/artifact and nested bags; feeding and upgrades remain loose-only");
         for(int level=1;level<4;level++)for(Tier tier:new Tier[]{Tier.MAJOR,Tier.EXCEPTIONAL}){
             int curses=0,rare=0;
             hatchling=fresh();hatchling.level(level);

@@ -47,6 +47,11 @@ public class SmokeRun {
             config.updatesPerSecond=-1;
             config.preferencesDirectory=output.resolve("prefs").toString();
             HeadlessApplication app=new HeadlessApplication(new ApplicationAdapter(){},config);
+            // HeadlessApplication treats its preference directory as external, even if absolute.
+            // Use an absolute handle so persisted balance tests stay inside the test output.
+            com.badlogic.gdx.Preferences prefs=new com.badlogic.gdx.backends.headless.HeadlessPreferences(
+                    com.badlogic.gdx.Gdx.files.absolute(output.resolve("prefs/settings.xml").toString()));
+            prefs.clear();prefs.flush();SPDSettings.set(prefs);
             new ShatteredPixelDungeon(null);
             Game.version=System.getProperty("grimhollow.version"); Game.versionCode=Integer.getInteger("grimhollow.versionCode");
             FileUtils.setDefaultFileProperties(Files.FileType.Absolute,output.resolve("saves").toString()+"/");

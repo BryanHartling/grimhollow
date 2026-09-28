@@ -8,7 +8,7 @@ import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 
-/** Save-local playtest overrides. Defaults deliberately retain the original RNG calls. */
+/** Device-wide playtest balance profile. Defaults retain the original RNG calls. */
 public final class BalanceTuning {
     private BalanceTuning() {}
     public enum Key {
@@ -41,6 +41,7 @@ public final class BalanceTuning {
             return value+(percentage?"%":""); }
     }
     private static final EnumMap<Key,Integer> values=new EnumMap<>(Key.class);
+    private static final String PROFILE="balance_profile_v1";
     public static int get(Key key) { return Playtest.enabled()?values.getOrDefault(key,key.baseline):key.baseline; }
     public static float multiplier(Key key) { return get(key)/100f; }
     public static void set(Key key,int value) {
@@ -52,24 +53,50 @@ public final class BalanceTuning {
             if(!any)throw new IllegalArgumentException("Keep at least one item category above zero.");
         }
         if(value==key.baseline)values.remove(key);else values.put(key,value);
+        persist();
     }
-    public static void reset() { values.clear(); }
-    public static int changedCount() { return Playtest.enabled()?values.size():0; }
+    public static void reset() { values.clear(); persist(); }
+    public static int changedCount() { return values.size(); }
+    private static void persist() {
+        StringBuilder profile=new StringBuilder();
+        for(Key key:values.keySet())profile.append(key.id()).append('=').append(values.get(key)).append(';');
+        // An empty profile is authoritative: old saves must not undo a reset.
+        SPDSettings.put(PROFILE,profile.toString());
+    }
+    public static void loadShared() {
+        values.clear();
+        for(String entry:SPDSettings.getString(PROFILE,"").split(";")) {
+            String[] pair=entry.split("=");
+            if(pair.length!=2)continue;
+            try {
+                Key key=Key.valueOf(pair[0].toUpperCase(Locale.ROOT));
+                int value=Math.max(key.min,Math.min(key.max,Integer.parseInt(pair[1])));
+                if(value!=key.baseline)values.put(key,value);
+            } catch(IllegalArgumentException ignored) { /* Ignore removed keys or damaged entries. */ }
+        }
+        sanitize();
+    }
     public static void store(Bundle bundle) {
         Bundle tuning=new Bundle();
         for(Key key:values.keySet())tuning.put(key.id(),values.get(key));
         bundle.put("balance_tuning",tuning);
     }
     public static void restore(Bundle bundle) {
-        reset();
+        if(SPDSettings.contains(PROFILE)) { loadShared(); return; }
+        values.clear();
         if(!Playtest.enabled() || !bundle.contains("balance_tuning"))return;
         Bundle tuning=bundle.getBundle("balance_tuning");
         for(Key key:Key.values())if(tuning.contains(key.id())) {
             int value=Math.max(key.min,Math.min(key.max,tuning.getInt(key.id())));
             if(value!=key.baseline)values.put(key,value);
         }
+        sanitize();
+        // Adopt the first legacy customized save once, until the user edits or resets it.
+        if(!values.isEmpty())persist();
+    }
+    private static void sanitize() {
         boolean any=false;
-        for(Key key:Key.values())if(key.group==3 && get(key)>0)any=true;
+        for(Key key:Key.values())if(key.group==3 && values.getOrDefault(key,key.baseline)>0)any=true;
         if(!any)for(Key key:Key.values())if(key.group==3)values.remove(key);
     }
     public static int count(Key key,int count) { return Math.round(count*multiplier(key)); }

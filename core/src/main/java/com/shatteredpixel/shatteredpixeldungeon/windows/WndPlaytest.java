@@ -31,7 +31,7 @@ public class WndPlaytest extends Window {
     }
     public WndPlaytest(){this("Playtest",Playtest.enabled()
             ?"Level "+Dungeon.hero.lvl+" | Floor "+Dungeon.depth+" | God mode "+(Playtest.god()?"ON":"OFF")
-            :"Enable testing for this save. This permanently marks it as a playtest: no rankings, badges, item-catalog credit or bones. Other saves stay normal. Powers can be toggled off.",rootEntries(),0,null);}
+            :"Enable testing for this save: no rankings, badges, catalog credit or bones. Balance settings apply to every game on this device and mark affected games as Playtests. God mode and direct actions affect this save only.",rootEntries(),0,null);}
 
     private WndPlaytest(String title,String body,List<Entry> entries,int page,Runnable back){
         int width=(int)Math.min(PixelScene.landscape()?220:170,PixelScene.uiCamera.width-24);

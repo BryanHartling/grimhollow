@@ -225,15 +225,17 @@ public class HatchlingMimic extends Trinket {
     public String benefit(Hero hero, Tier tier) {
         ArrayList<String> descriptions = new ArrayList<>();
         boolean eligibleEffect = false;
-        Item identified = benefitTarget(hero, i -> !i.isIdentified());
+        ArrayList<Item> unknown = new ArrayList<>();
+        for (Item item : hero.belongings) if (!item.isIdentified()) unknown.add(item);
+        Item identified = minimum(unknown, Comparator.comparingInt(HatchlingMimic::unitValue));
         if (identified != null) {
             identified.identify(); eligibleEffect = true;
             descriptions.add(Messages.get(this, "identified", identified.name()));
         }
         if (tier == Tier.EXCEPTIONAL) {
             boolean any = false;
-            for (Item item : hero.belongings.backpack.items)
-                if(foodPriority(item,hero)>=0&&!item.isIdentified()){item.identify();any=true;}
+            for (Item item : hero.belongings)
+                if(!item.isIdentified()){item.identify();any=true;}
             for (Heap heap : Dungeon.level.heaps.valueList()) for (Item item : heap.items)
                 if (!item.isIdentified()) { item.identify(); any = true; }
             if (any) { eligibleEffect = true; descriptions.add(Messages.get(this, "identified_floor")); }

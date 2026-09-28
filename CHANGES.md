@@ -1,3 +1,9 @@
+# Expedition playtest follow-up — shared settings and Hatchling identification
+
+- Hatchling identification now searches every possessed item, including equipment and nested bags; feeding, permanent upgrades and enchantments keep their loose-only restrictions.
+- Balance tuning is a shared device preference for existing saves and new games. Custom balance marks affected runs as Playtests; god mode and direct actions remain save-local. Reset is authoritative over older saves; the first legacy customized save migrates once.
+- Fixed the existing headless runner's external/absolute preference-path mismatch so disk-backed tuning checks work on Windows and Linux.
+
 # Dragon expedition — component 8 / v1.16.0
 
 - Enables the complete expedition in normal campaigns. The hunter is placed on an unoccupied, approachable cell on one seeded City floor; previously visited floors are preserved.

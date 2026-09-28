@@ -22,6 +22,8 @@
 package com.shatteredpixel.shatteredpixeldungeon.items;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.BalanceTuning;
+import static com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.*;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClericArmor;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor;
@@ -678,6 +680,10 @@ public class Generator {
 	}
 	
 	public static Item random() {
+        if(BalanceTuning.customItemMix()) {
+            Category tuned=BalanceTuning.itemCategory();
+            return tuned==Category.SEED ? randomUsingDefaults(tuned) : random(tuned);
+        }
 		Category cat = Random.chances( categoryProbs );
 		if (cat == null){
 			usingFirstDeck = !usingFirstDeck;
@@ -697,7 +703,7 @@ public class Generator {
 	}
 
 	public static Item randomUsingDefaults(){
-		return randomUsingDefaults(Random.chances( defaultCatProbs ));
+		return randomUsingDefaults(BalanceTuning.customItemMix()?BalanceTuning.itemCategory():Random.chances(defaultCatProbs));
 	}
 	
 	public static Item random( Category cat ) {
@@ -786,8 +792,8 @@ public class Generator {
 
 		floorSet = (int)GameMath.gate(0, floorSet, floorSetTierProbs.length-1);
 		
-		Armor a = (Armor)Reflection.newInstance(Category.ARMOR.classes[Random.chances(floorSetTierProbs[floorSet])]);
-        if(a instanceof MailArmor&&Random.Int(2)==0)a=new com.shatteredpixel.shatteredpixeldungeon.items.armor.BoneArmor();
+		Armor a = (Armor)Reflection.newInstance(Category.ARMOR.classes[BalanceTuning.tier(Random.chances(floorSetTierProbs[floorSet]))]);
+        if(a instanceof MailArmor&&BalanceTuning.roll(BONE_ARMOR,2,1))a=new com.shatteredpixel.shatteredpixeldungeon.items.armor.BoneArmor();
 		a.random();
 		return a;
 	}
@@ -818,9 +824,9 @@ public class Generator {
 
 		MeleeWeapon w;
 		if (useDefaults){
-			w = (MeleeWeapon) randomUsingDefaults(wepTiers[Random.chances(floorSetTierProbs[floorSet])]);
+			w = (MeleeWeapon) randomUsingDefaults(wepTiers[BalanceTuning.tier(Random.chances(floorSetTierProbs[floorSet]))]);
 		} else {
-			w = (MeleeWeapon) random(wepTiers[Random.chances(floorSetTierProbs[floorSet])]);
+			w = (MeleeWeapon) random(wepTiers[BalanceTuning.tier(Random.chances(floorSetTierProbs[floorSet]))]);
 		}
 		return w;
 	}
@@ -851,9 +857,9 @@ public class Generator {
 
 		MissileWeapon w;
 		if (useDefaults){
-			w = (MissileWeapon)randomUsingDefaults(misTiers[Random.chances(floorSetTierProbs[floorSet])]);
+			w = (MissileWeapon)randomUsingDefaults(misTiers[BalanceTuning.tier(Random.chances(floorSetTierProbs[floorSet]))]);
 		} else {
-			w = (MissileWeapon)random(misTiers[Random.chances(floorSetTierProbs[floorSet])]);
+			w = (MissileWeapon)random(misTiers[BalanceTuning.tier(Random.chances(floorSetTierProbs[floorSet]))]);
 		}
 		return w;
 	}

@@ -602,7 +602,7 @@ public abstract class Elemental extends Mob {
 	}
 	
 	public static Class<? extends Elemental> random(){
-		float altChance = 1/50f * RatSkull.exoticChanceMultiplier();
+		float altChance = 1/50f * RatSkull.exoticChanceMultiplier() * com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.multiplier(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.RARE_MOBS);
 		if (Random.Float() < altChance){
 			return ChaosElemental.class;
 		}

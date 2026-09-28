@@ -89,6 +89,7 @@ public class WndPlaytest extends Window {
             return rows;
         }
         rows.add(new Entry("God mode: "+(Playtest.god()?"ON":"OFF"),()->changed(()->Playtest.god(!Playtest.god()),WndPlaytest::root)));
+        rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning"),WndPlaytest::tuning));
         rows.add(new Entry("Create items",WndPlaytest::categories));
         rows.add(new Entry("Edit carried equipment / recharge",WndPlaytest::inventory));
         rows.add(new Entry("Hero, class and progression",WndPlaytest::hero));
@@ -104,6 +105,26 @@ public class WndPlaytest extends Window {
         rows.add(new Entry("Spawn a creature",WndPlaytest::creatures));
         rows.add(new Entry("Identify all carried items",()->changed(()->Dungeon.hero.belongings.identify(),WndPlaytest::root)));
         return rows;
+    }
+    public static void tuning(){
+        Playtest.require();
+        List<Entry> rows=new ArrayList<>();
+        for(int i=0;i<4;i++){
+            final int group=i;
+            rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_group_"+i),()->tuningGroup(group)));
+        }
+        rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_reset"),()->changed(BalanceTuning::reset,WndPlaytest::tuning)));
+        show(Messages.get(WndPlaytest.class,"tuning"),Messages.get(WndPlaytest.class,"tuning_intro",BalanceTuning.changedCount()),rows,WndPlaytest::root);
+    }
+    private static void tuningGroup(int group){
+        List<Entry> rows=new ArrayList<>();
+        for(BalanceTuning.Key key:BalanceTuning.Key.values())if(key.group==group){
+            String title=Messages.get(BalanceTuning.class,key.id());
+            rows.add(new Entry(title+": "+key.display(BalanceTuning.get(key)),()->number(title,
+                    Messages.get(BalanceTuning.class,key.id()+"_desc")+"\n\n"+Messages.get(WndPlaytest.class,"tuning_default",key.display(key.baseline)),
+                    BalanceTuning.get(key),key.min,key.max,n->BalanceTuning.set(key,n),()->tuningGroup(group))));
+        }
+        show(Messages.get(WndPlaytest.class,"tuning_group_"+group),Messages.get(WndPlaytest.class,"tuning_hint_"+group),rows,WndPlaytest::tuning);
     }
     private static void number(String title,String body,int value,int min,int max,IntConsumer action,Runnable back){
         number(title,body,value,min,max,action,back,back);

@@ -1,5 +1,7 @@
 # Known issues
 
+- Version 1.15.0 balance tuning passes headless generation/persistence and native portrait-touch/landscape-mouse checks; physical Samsung tablet input and campaign balance under custom settings still need playtesting. Settings are save-local, and generation changes need a new or rebuilt floor. Existing contrast test 45 remains enforced and is not repaired by this settings patch.
+
 - Version 1.14.2 passes native portrait/landscape quest-room checks and builds Android, but no physical Samsung tablet is connected; the painted mine/workshop/ritual/HUD changes still need tablet visual and movement review.
 - The v1.13 screenshot's isolated illuminated patch is consistent with Corpse Sense sharing a raised ally's sight; the native test verifies that behavior and removes the patch when the ally is removed, but the original save is unavailable for exact reproduction. Chainwarden is an intentional 30% alternate Prison boss.
 - The corrected summoning-circle instructions are English; other locales retain their existing translations. Earlier contrast test 45 remains enforced with its known failures; this patch does not claim full CI is green.

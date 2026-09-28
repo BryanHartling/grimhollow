@@ -1,3 +1,11 @@
+# Balance tuning - v1.15.0
+
+New test **58 PASS** in the existing headless and native interface runners. Build command: `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeUpstream=true --no-daemon --console=plain` -> **BUILD SUCCESSFUL in 1m 1s; Runs=90 failures=0**. Seven JUnit tests, zero failures/errors. All nine heroes cover ten seeds; Necromancer 10/0, Enchanter 10/0, Psychic 10/0, combined added classes 30/0 are included. `tools/package-windows.ps1` creates the 1.15.0 native Windows application with the existing icon and bundled runtime.
+
+Test 58 covers default seeded RNG equivalence, chance/multiplier boundaries, real enemy/gear/category generators, artifact uniqueness and exhaustion fallback, generation in five regions at zero population/optional floor loot while retaining supplies, high population, disk save/load, invalid saved settings, reset and new-run isolation. The existing OpenGL interface run passes in 1280x720 landscape with mouse input and 720x1061 portrait with touch input: menu traversal, paged category controls, numeric changes, saved values, reset and bounds. No physical Android tablet test is claimed.
+
+[Portrait menu](interface/portrait/balance-tuning.png), [numeric control](interface/portrait/balance-tuning-value.png), [landscape enemy controls](interface/landscape/balance-tuning-enemies.png). The remaining numbered acceptance record below retains its checkpoint provenance; this settings patch changes no art or rendering thresholds. Contrast test 45 remains an enforced known failure. The initial new test compilation used a method rather than the engine collection's size field and was corrected before the passing run.
+
 # Tablet quest rooms and terrain presentation - v1.14.2
 
 Current delivery: **v1.14.2-tablet-rooms**. This section records fresh results; the complete numbered 1-56 checkpoint table below remains historical where not explicitly rerun here. No physical tablet was connected (`adb devices -l`: empty).

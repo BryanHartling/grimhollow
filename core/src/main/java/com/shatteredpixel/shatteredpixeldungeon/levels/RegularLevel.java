@@ -24,6 +24,8 @@ package com.shatteredpixel.shatteredpixeldungeon.levels;
 import com.shatteredpixel.shatteredpixeldungeon.Bones;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.BalanceTuning;
+import static com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.*;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -206,20 +208,20 @@ public abstract class RegularLevel extends Level {
 	public int mobLimit() {
 		if (Dungeon.depth <= 1){
 			if (!Statistics.amuletObtained) return 0;
-			else                            return 10;
+			else                            return BalanceTuning.count(DENSITY,10);
 		}
 
 		int mobs = 3 + Dungeon.depth % 5 + Random.Int(3);
 		if (feeling == Feeling.LARGE){
 			mobs = (int)Math.ceil(mobs * 1.33f);
 		}
-		return mobs;
+		return BalanceTuning.count(DENSITY,mobs);
 	}
 	
 	@Override
 	protected void createMobs() {
 		//on floor 1, 8 pre-set mobs are created so the player can get level 2.
-		int mobsToSpawn = Dungeon.depth == 1 ? 8 : mobLimit();
+		int mobsToSpawn = Dungeon.depth == 1 ? BalanceTuning.count(DENSITY,8) : mobLimit();
 
 		ArrayList<Room> stdRooms = new ArrayList<>();
 		for (Room room : rooms) {
@@ -252,7 +254,9 @@ public abstract class RegularLevel extends Level {
 		PathFinder.buildDistanceMap(entrance(), entranceWalkable, 8);
 
 		Mob mob = null;
-		while (mobsToSpawn > 0) {
+		// Tuned density can fill every valid cell; never hang generation trying to overfill.
+        int placementBudget=1000;
+        while (mobsToSpawn > 0 && (BalanceTuning.get(DENSITY)==100 || placementBudget-- > 0)) {
 			if (mob == null) mob = createMob();
 			Room roomToSpawn;
 			
@@ -383,7 +387,8 @@ public abstract class RegularLevel extends Level {
 			nItems += 2;
 		}
 		
-		for (int i=0; i < nItems; i++) {
+		nItems=BalanceTuning.count(FLOOR_LOOT,nItems);
+        for (int i=0; i < nItems; i++) {
 
 			Item toDrop = Generator.random();
 			if (toDrop == null) continue;

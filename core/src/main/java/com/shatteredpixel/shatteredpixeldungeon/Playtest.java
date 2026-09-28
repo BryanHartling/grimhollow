@@ -32,14 +32,14 @@ public final class Playtest {
     private static boolean enabled, god;
     public static boolean enabled() { return enabled; }
     public static boolean god() { return enabled && god; }
-    public static void reset() { enabled = god = false; }
+    public static void reset() { enabled = god = false; BalanceTuning.reset(); }
     public static void enable() { enabled = true; }
     public static void require() {
         if (!enabled || Dungeon.hero == null || Dungeon.level == null)
             throw new IllegalStateException("Enable Playtest mode in this save first.");
     }
-    public static void store(Bundle b) { b.put("playtest", enabled); b.put("playtest_god", god); }
-    public static void restore(Bundle b) { enabled=b.getBoolean("playtest"); god=enabled && b.getBoolean("playtest_god"); }
+    public static void store(Bundle b) { b.put("playtest", enabled); b.put("playtest_god", god); BalanceTuning.store(b); }
+    public static void restore(Bundle b) { enabled=b.getBoolean("playtest"); god=enabled && b.getBoolean("playtest_god"); BalanceTuning.restore(b); }
     public static void god(boolean value) { require(); god=value; if(value)Dungeon.hero.HP=Dungeon.hero.HT; }
 
     public static void restoreHero() {

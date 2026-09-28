@@ -610,7 +610,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 11:
                 if(Dungeon.hero.belongings.getAllItems(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern.class).stream().noneMatch(i->i.level()==10))throw new AssertionError("Native +10 lantern creation failed");
                 closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());break;
-            case 12:playtestClick("Hero, class and progression");break;
+            case 12:if(!playtestClickPage("Hero, class and progression"))return;break;
             case 13:playtestClick("Set hero level");break;
             case 14:playtestInput("24","Apply");break;
             case 15:if(Dungeon.hero.lvl!=24)throw new AssertionError("Native level input failed");playtestClick("Choose subclass");break;
@@ -618,7 +618,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 17:
                 if(Dungeon.hero.subClass!=com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass.SEER)throw new AssertionError("Native subclass/load failed");
                 GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());break;
-            case 18:playtestClick("Hero, class and progression");break;
+            case 18:if(!playtestClickPage("Hero, class and progression"))return;break;
             case 19:if(!playtestClickPage("Choose armor ability / grant class armor"))return;break;
             case 20:playtestClick(Dungeon.hero.heroClass.armorAbilities()[0].name());break;
             case 21:
@@ -629,7 +629,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 24:
                 if(Dungeon.depth!=21||Dungeon.hero.lvl!=24||!Playtest.god())throw new AssertionError("Native travel/load lost hero or flags");
                 capture("playtest-halls");GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());break;
-            case 25:playtestClick("Hero, class and progression");break;
+            case 25:if(!playtestClickPage("Hero, class and progression"))return;break;
             case 26:playtestClick("Change class and starter kit");break;
             case 27:interfaceBounds();capture("playtest-classes");if(!playtestClickPage("Enchanter"))return;break;
             case 28:
@@ -840,7 +840,26 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 case 60:reviewRegionTransition(10);break;
                 case 61:reviewRegionTransition(15);break;
                 case 62:reviewRegionTransition(20);break;
-                case 63:Gdx.app.exit();return;
+                case 63:GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());break;
+                case 64:if(!playtestClickPage("Balance tuning"))return;break;
+                case 65:interfaceBounds();capture("balance-tuning");playtestClick("Grimhollow enemies");break;
+                case 66:interfaceBounds();playtestClick("Curse-bound chance: 10%");break;
+                case 67:interfaceBounds();capture("balance-tuning-value");playtestInput("0","Apply");break;
+                case 68:
+                    if(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.get(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.CURSEBOUND)!=0)throw new AssertionError("58: tuning input did not apply");
+                    interfaceBounds();capture("balance-tuning-enemies");
+                    closeReviewWindows();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();break;
+                case 69:playtestClick("Item category weights");break;
+                case 70:if(!playtestClickPage("Gold: 100%"))return;break;
+                case 71:interfaceBounds();playtestInput("50","Apply");break;
+                case 72:
+                    if(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.get(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.GOLD)!=50)throw new AssertionError("58: paged tuning input");
+                    closeReviewWindows();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();break;
+                case 73:if(!playtestClickPage("Reset all balance tuning"))return;break;
+                case 74:
+                    if(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.changedCount()!=0||!Playtest.enabled())throw new AssertionError("58: tuning reset/playtest isolation");
+                    System.out.println("TEST 58 UI PASS: balance menu, paging, numeric input, saved changes and reset via native pointer input");
+                    Gdx.app.exit();return;
             }
             playtestStep++;
         }catch(ReflectiveOperationException | java.io.IOException error){throw new AssertionError(error);}

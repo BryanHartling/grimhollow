@@ -1,5 +1,15 @@
 # Tablet rooms and quest visuals - v1.14.2
 
+## v1.15.0 - Save-local balance tuning
+
+- Add Playtest > Balance tuning with 27 bounded numeric controls, current values, default/scope explanations, category paging and reset. No turn passes; God mode stays independent. Existing Playtest ranking/badge isolation applies.
+- Persist overrides in each run, sanitize invalid saved ranges and all-zero item weights, and reset on new games/legacy saves. Unchanged settings retain the existing random calls and seeded output.
+- Tune regular enemy population (0-200%), timed respawn speed (0-400%), rare enemy multiplier, curse-bound frequency/bonus HP/bonus loot, Hexcaster rotation chance, and Chainwarden replacement chance. Added density is bounded by valid spawn space; zero respawns still yield actor time during ascension.
+- Tune random floor-item count, ordinary mob loot chance, generated equipment tier offset, pre-upgraded gear chance, randomized gear curses/enchantments, rare enchantment/glyph weight, and Mail-to-Bone Armor substitution. Guaranteed supplies and quest rewards are not removed or multiplied; randomized reward equipment still uses quality/tier settings. Special residents, existing gear and combat proc rules remain intact.
+- Eleven relative item-category weights use independent category draws when customized; the ordinary category deck pauses until all weights return to default. This gives the requested immediate and sustained frequency change without resetting specific-item decks or artifact uniqueness. Explicit category rewards bypass these weights; exhausted artifacts retain their native ring fallback.
+- Extend the existing headless/native interface runners with test 58: production generator boundaries, seeded default equivalence, five-region generation, artifact uniqueness, actual disk persistence, reset/new-run isolation, and portrait/landscape tuning input and paging.
+
+
 - Restore the v4 Prison and Blacksmith custom-atlas layouts underneath the v4 room code. The old Prison sheet made an Ominous Table display ritual fragments and left the true circle unreadable; the old Caves sheet selected unrelated ladders and floor pieces. Pack original painted ritual, table, hatch, furnace and workbench sources at the actual slot locations.
 - Call the ritual marker a Summoning circle and replace the misleading "four corners" instruction with the four cardinal candle positions actually checked by the quest.
 - Fix tile-preview geometry at the shared Tilemap.image and terrain-image factories: drawn vertices and layout now both use 16 world/UI units. Custom image mapping derives its column count from the actual atlas rather than historical texture-width arguments.

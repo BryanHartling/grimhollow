@@ -24,6 +24,8 @@ package com.shatteredpixel.shatteredpixeldungeon.items.armor;
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.BalanceTuning;
+import static com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.*;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
@@ -670,7 +672,7 @@ public class Armor extends EquipableItem {
 		//+1: 20% (4/20)
 		//+2: 5%  (1/20)
 		int n = 0;
-		if (Random.Int(4) == 0) {
+		if (BalanceTuning.upgradeRoll(4)) {
 			n++;
 			if (Random.Int(5) == 0) {
 				n++;
@@ -685,10 +687,10 @@ public class Armor extends EquipableItem {
 			//30% chance to be cursed
 			//15% chance to be inscribed
 			float effectRoll = Random.Float();
-			if (effectRoll < 0.3f * ParchmentScrap.curseChanceMultiplier()) {
+			if (effectRoll < 0.3f * ParchmentScrap.curseChanceMultiplier() * BalanceTuning.multiplier(CURSED_GEAR)) {
 				inscribe(Glyph.randomCurse());
 				cursed = true;
-			} else if (effectRoll >= 1f - (0.15f * ParchmentScrap.enchantChanceMultiplier())){
+			} else if (effectRoll >= 1f - (0.15f * ParchmentScrap.enchantChanceMultiplier() * BalanceTuning.multiplier(ENCHANTED_GEAR))){
 				inscribe();
 			}
 
@@ -877,7 +879,7 @@ public class Armor extends EquipableItem {
 
 		@SuppressWarnings("unchecked")
 		public static Glyph random( Class<? extends Glyph> ... toIgnore ) {
-			switch(Random.chances(typeChances)){
+			switch(Random.chances(BalanceTuning.enchantRarity(typeChances))){
 				case 0: default:
 					return randomCommon( toIgnore );
 				case 1:

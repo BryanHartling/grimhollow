@@ -20,8 +20,11 @@ public abstract class ExpeditionLevel extends Level {
     @Override public int randomRespawnCell(Char ch) {
         ArrayList<Integer> cells = new ArrayList<>();
         for (int i = 0; i < length(); i++) {
+            boolean transition = false;
+            for (com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition t : transitions)
+                if (t.inside(cellToPoint(i))) { transition = true; break; }
             if (insideMap(i) && passable[i] && !pit[i] && findMob(i) == null
-                    && (Dungeon.hero == null || Dungeon.hero.pos != i) && getTransition(i) == null) cells.add(i);
+                    && (Dungeon.hero == null || Dungeon.hero.pos != i) && !transition) cells.add(i);
         }
         return cells.isEmpty() ? -1 : Random.element(cells);
     }

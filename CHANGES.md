@@ -1,3 +1,10 @@
+## Dragon expedition — component 3 (cavern and broodmother)
+
+- Adds an open dark cavern with separated 2×2 pillars, forty finite bone heaps (including three rations and four torches), six scavengers and a poisonous broodmother.
+- Brood is telegraphed, takes the boss's action, and is capped at three living hatchlings/nine small spiders/six hatchlings total. Hatchlings give no loot/XP. Killing the boss clears its brood and webs and unlocks the climb; existing poison on the hero expires normally.
+- Deliberate descent is harmless and alerts the broodmother. Forced falls cause 15% maximum-health damage plus normal 10-turn Cripple, without bleeding; Feather Fall retains its usual protection. Returning climbs to the upper center.
+- Falling items use expedition-local saved storage, avoiding leakage into the main dungeon. Ally transition suppression is narrowed to the Vault; expedition companions retain normal travel.
+
 ## Dragon expedition — component 2 (platform maze)
 
 - Adds a 43×43 chasm with 49 timber platforms, a randomized connected maze, preserved dead ends, extra loops, central climb and one of eight perimeter hoard entrances. Platforms are structurally nonflammable.

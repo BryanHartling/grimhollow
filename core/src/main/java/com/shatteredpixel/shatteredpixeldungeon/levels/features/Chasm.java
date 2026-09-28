@@ -145,7 +145,12 @@ public class Chasm implements Hero.Doom {
 		Dungeon.level.occupyCell(hero );
 		Buff.prolong( hero, Cripple.class, Cripple.DURATION );
 
-		//The lower the hero's HP, the more bleed and the less upfront damage.
+		if (Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel) {
+            hero.damage(Math.max(1, Math.round(hero.HT * 0.15f)), new Chasm());
+            return;
+        }
+
+        //The lower the hero's HP, the more bleed and the less upfront damage.
 		//Hero has a 50% chance to bleed out at 66% HP, and begins to risk instant-death at 25%
 		Buff.affect( hero, Bleeding.class).set( Math.round(hero.HT / (6f + (6f*(hero.HP/(float)hero.HT)))), Chasm.class);
 		hero.damage( Math.max( hero.HP / 2, Random.NormalIntRange( hero.HP / 2, hero.HT / 4 )), new Chasm() );

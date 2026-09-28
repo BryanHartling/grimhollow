@@ -641,7 +641,10 @@ public class GameScene extends PixelScene {
 				break;
 		}
 
-		ArrayList<Item> dropped = Dungeon.droppedItems.get( Dungeon.depth );
+		boolean expeditionFall = Dungeon.branch == com.shatteredpixel.shatteredpixeldungeon.DragonExpedition.BRANCH
+                && Dungeon.depth == com.shatteredpixel.shatteredpixeldungeon.DragonExpedition.CAVERN;
+        ArrayList<Item> dropped = expeditionFall ? new ArrayList<>(com.shatteredpixel.shatteredpixeldungeon.DragonExpedition.fallenItems)
+                : Dungeon.droppedItems.get( Dungeon.depth );
 		if (dropped != null) {
 			for (Item item : dropped) {
 				int pos = Dungeon.level.randomRespawnCell( null );
@@ -656,7 +659,8 @@ public class GameScene extends PixelScene {
 					Dungeon.level.drop(item, pos);
 				}
 			}
-			Dungeon.droppedItems.remove( Dungeon.depth );
+			if (expeditionFall) com.shatteredpixel.shatteredpixeldungeon.DragonExpedition.fallenItems.clear();
+            else Dungeon.droppedItems.remove( Dungeon.depth );
 		}
 
 		Dungeon.hero.next();

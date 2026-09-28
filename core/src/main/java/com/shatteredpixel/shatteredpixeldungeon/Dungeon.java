@@ -359,6 +359,8 @@ public class Dungeon {
 			}
 		} else if (branch == DragonExpedition.BRANCH && depth == DragonExpedition.CHASM) {
 			level = new com.shatteredpixel.shatteredpixeldungeon.levels.DragonChasmLevel();
+		} else if (branch == DragonExpedition.BRANCH && depth == DragonExpedition.CAVERN) {
+			level = new com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel();
 		} else if (branch == 1) {
 			switch (depth) {
 				case 11:
@@ -495,6 +497,8 @@ public class Dungeon {
 		}
 
 		Mob.restoreAllies( level, pos );
+        if (level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel)
+            ((com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel) level).arrive();
 
 		Actor.init();
 
@@ -528,6 +532,9 @@ public class Dungeon {
 	}
 
 	public static void dropToChasm( Item item ) {
+        if (branch == DragonExpedition.BRANCH && depth == DragonExpedition.CHASM) {
+            DragonExpedition.fallenItems.add(item); return;
+        }
 		int depth = Dungeon.depth + 1;
 		ArrayList<Item> dropped = Dungeon.droppedItems.get( depth );
 		if (dropped == null) {

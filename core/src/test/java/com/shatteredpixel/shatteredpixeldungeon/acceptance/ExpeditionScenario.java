@@ -7,6 +7,15 @@ import com.shatteredpixel.shatteredpixeldungeon.items.potions.elixirs.ElixirOfFe
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.ExpeditionMap;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+import com.shatteredpixel.shatteredpixeldungeon.actors.*;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.*;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.*;
+import com.shatteredpixel.shatteredpixeldungeon.items.*;
+import com.shatteredpixel.shatteredpixeldungeon.items.food.Food;
+import com.shatteredpixel.shatteredpixeldungeon.levels.*;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.*;
+import com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite;
 
 final class ExpeditionScenario {
     static void check(boolean ok, String message) { if (!ok) throw new AssertionError("59: " + message); }
@@ -46,6 +55,75 @@ final class ExpeditionScenario {
         Dungeon.seed = originalSeed;
         System.out.println("TEST 59 maze PASS: 64 seeds, 8 exit positions, all platforms reachable, loops/dead ends, nonflammable, disk persistence");
     }
+    private static void cavern() throws Exception {
+        Dungeon.init(); Dungeon.branch = DragonExpedition.BRANCH; Dungeon.depth = DragonExpedition.CHASM;
+        Dungeon.switchLevel(Dungeon.newLevel(), -1);
+        Dungeon.dropToChasm(new Torch());
+        Dungeon.saveAll(); Dungeon.loadGame(GamesInProgress.curSlot);
+        Dungeon.switchLevel(Dungeon.loadLevel(GamesInProgress.curSlot), Dungeon.hero.pos);
+        check(DragonExpedition.fallenItems.size() == 1 && Dungeon.droppedItems.get(18) == null, "fallen items leak into main dungeon or disappear on save");
+        InterlevelScene.curTransition = Dungeon.level.getTransition(LevelTransition.Type.REGULAR_ENTRANCE);
+        java.lang.reflect.Method ascend = InterlevelScene.class.getDeclaredMethod("ascend"); ascend.setAccessible(true);
+        int hp = Dungeon.hero.HP; ascend.invoke(new InterlevelScene());
+        check(Dungeon.level instanceof DragonCavernLevel && Dungeon.hero.HP == hp && Dungeon.hero.buff(Cripple.class) == null, "voluntary descent harms hero");
+        DragonCavernLevel level = (DragonCavernLevel) Dungeon.level;
+        check(level.viewDistance == 3 && level.addRespawner() == null && level.heaps.size == 40, "dark finite cavern");
+        int food = 0, torches = 0;
+        for (Heap heap : level.heaps.valueList()) for (Item item : heap.items) {
+            if (item instanceof Food) food += item.quantity(); if (item instanceof Torch) torches += item.quantity();
+        }
+        check(food == 3 && torches == 4, "guaranteed supplies");
+        int pillars = 0;
+        for (int y = 1; y < level.height()-1; y++) for (int x = 1; x < level.width()-1; x++) {
+            int c = y * level.width() + x;
+            if (level.map[c] == Terrain.WALL && level.map[c-1] != Terrain.WALL && level.map[c-level.width()] != Terrain.WALL) {
+                check(level.map[c+1] == Terrain.WALL && level.map[c+level.width()] == Terrain.WALL
+                        && level.map[c+level.width()+1] == Terrain.WALL, "pillar not 2x2"); pillars++;
+            }
+        }
+        check(pillars >= 15, "not enough pillars");
+        Broodmother boss = null;
+        for (Mob mob : level.mobs) { mob.sprite = mob.sprite(); if (mob instanceof Broodmother) boss = (Broodmother) mob; }
+        // Supply the visual-only emitter normally owned by GameScene in this headless fixture.
+        Dungeon.hero.sprite = new HeroSprite() {
+            @Override public com.watabou.noosa.particles.Emitter emitter() { return new com.watabou.noosa.particles.Emitter(); }
+        };
+        check(boss != null && boss.state == boss.HUNTING && level.mobs.size() == 7, "arrival fails to alert boss / initial count");
+        check(!level.activateTransition(Dungeon.hero, level.getTransition(null)), "climb bypasses living boss");
+        Dungeon.hero.HT = Dungeon.hero.HP = 100;
+        com.watabou.noosa.Camera.main = new com.watabou.noosa.Camera(0,0,320,240,1);
+        Chasm.heroLand();
+        check(Dungeon.hero.HP == 85 && Dungeon.hero.buff(Cripple.class) != null
+                && Dungeon.hero.buff(Bleeding.class) == null, "special fall damage/cripple/bleeding");
+        Buff.detach(Dungeon.hero, Cripple.class);
+        Buff.affect(Dungeon.hero, ElixirOfFeatherFall.FeatherBuff.class, 50f);
+        Chasm.heroLand();
+        check(Dungeon.hero.HP == 85 && Dungeon.hero.buff(Cripple.class) == null, "feather fall protection");
+        for (int i = 0; i < 3; i++) {
+            boss.hatchCell = level.randomRespawnCell(null); check(boss.hatch(), "valid hatch rejected");
+        }
+        check(!boss.canHatch(), "live brood cap");
+        for (int wave = 0; wave < 3; wave++) {
+            for (Mob mob : level.mobs.toArray(new Mob[0])) if (mob instanceof CavernSpinner && ((CavernSpinner) mob).hatchling) {
+                check(mob.EXP == 0 && mob.lootChance() == 0, "hatchling farming");
+                mob.alignment = Char.Alignment.NEUTRAL; mob.destroy();
+            }
+            boss.hatchCell = level.randomRespawnCell(null); check(boss.hatch(), "later hatch rejected");
+        }
+        check(boss.hatched == 6 && !boss.canHatch(), "finite lifetime brood budget");
+        Bundle b = new Bundle(); b.put("boss", boss); Broodmother copy = (Broodmother) b.get("boss");
+        check(copy.hatched == 6 && !copy.canHatch(), "brood budget reset on load");
+        Dungeon.hero.lvl = 30; boss.HP = 0; boss.die(Dungeon.hero);
+        check(DragonExpedition.spiderSlain && level.mobs.isEmpty(), "cavern not safe after victory");
+        InterlevelScene.curTransition = level.getTransition(null);
+        java.lang.reflect.Method descend = InterlevelScene.class.getDeclaredMethod("descend"); descend.setAccessible(true);
+        descend.invoke(new InterlevelScene());
+        check(Dungeon.level instanceof DragonChasmLevel && Dungeon.hero.pos == DragonChasmLevel.centerCell(), "return climb destination");
+        InterlevelScene.curTransition = Dungeon.level.getTransition(LevelTransition.Type.REGULAR_ENTRANCE);
+        ascend.invoke(new InterlevelScene());
+        check(Dungeon.level.mobs.isEmpty() && Dungeon.level.heaps.size == 40, "reentry regenerates enemies/supplies");
+        System.out.println("TEST 59 cavern PASS: pillars, guaranteed finite supplies, descent/climb, fall/Feather Fall, brood caps and persistence, cleared floor remains safe");
+    }
     static void run() throws Exception {
         Dungeon.init();
         int chosen = DragonExpedition.hunterDepth;
@@ -74,7 +152,7 @@ final class ExpeditionScenario {
         DragonExpedition.restore(new Bundle());
         check(!DragonExpedition.accepted && !DragonExpedition.entered && DragonExpedition.returnCell == -1, "old save/new run inherits quest");
         check(DragonExpedition.BRANCH != 1, "expedition aliases Vault branch");
-        maze();
+        maze(); cavern();
         System.out.println("TEST 59 foundation PASS: seeded placement, healing exchange, unique rewards, protected map, disk save/load, legacy defaults");
     }
 }

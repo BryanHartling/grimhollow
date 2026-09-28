@@ -20,6 +20,7 @@ public final class DragonExpedition {
     // Enable only after the connected encounter and its return route are complete.
     public static final boolean AVAILABLE = false;
     public static int hunterDepth, hunterPos = -1, returnCell = -1;
+    public static java.util.ArrayList<Item> fallenItems = new java.util.ArrayList<>();
     public static boolean accepted, entered, dragonSlain, spiderSlain, rewardsCreated;
 
     public static void reset() {
@@ -27,6 +28,7 @@ public final class DragonExpedition {
         hunterDepth = Random.IntRange(16, 19);
         Random.popGenerator();
         hunterPos = returnCell = -1;
+        fallenItems.clear();
         accepted = entered = dragonSlain = spiderSlain = rewardsCreated = false;
     }
 
@@ -36,6 +38,7 @@ public final class DragonExpedition {
         b.put("return_cell", returnCell); b.put("accepted", accepted); b.put("entered", entered);
         b.put("dragon_slain", dragonSlain); b.put("spider_slain", spiderSlain);
         b.put("rewards_created", rewardsCreated);
+        b.put("fallen_items", fallenItems);
         parent.put("dragon_expedition", b);
     }
 
@@ -48,6 +51,7 @@ public final class DragonExpedition {
         accepted = b.getBoolean("accepted"); entered = b.getBoolean("entered");
         dragonSlain = b.getBoolean("dragon_slain"); spiderSlain = b.getBoolean("spider_slain");
         rewardsCreated = b.getBoolean("rewards_created");
+        for (com.watabou.utils.Bundlable item : b.getCollection("fallen_items")) fallenItems.add((Item) item);
     }
 
     public static void spawnHunter(Level level) {

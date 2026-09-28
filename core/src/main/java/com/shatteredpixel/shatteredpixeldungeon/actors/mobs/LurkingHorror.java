@@ -29,7 +29,7 @@ public class LurkingHorror extends Mob {
     private boolean responseOffered, responseTaken, followUp;
     private boolean sensed, omen, predationUsed;
     private int preyId = -1;
-    private boolean ambushAttack, controlled;
+    private boolean ambushAttack, controlled, predatoryStrike;
     private boolean strikePending, strikeFollowUp;
     private static final int[] HEALTH = {12,18,28,40,55};
     private static final int[] FLIGHT = {15,12,10,8,6};
@@ -62,6 +62,11 @@ public class LurkingHorror extends Mob {
     @Override public float speed() { return super.speed()*(phase==Phase.FLEEING ? 1.5f : phase==Phase.RECOVERING ? .5f : 1f); }
     public int flightTurns() { return Math.max(1, Math.round(FLIGHT[region]*BalanceTuning.multiplier(HORROR_FLIGHT))); }
     public int healingBudget() { return HT*BalanceTuning.get(HORROR_HEALING)/100; }
+    public boolean predatoryStrike() { return predatoryStrike; }
+    @Override protected void onAdd() {
+        if(firstAdded) lastClock=now()+cooldown();
+        super.onAdd();
+    }
 
     /** Called from the hero's FOV computation. Never writes terrain knowledge. */
     public void observe(int mindRange) {
@@ -81,6 +86,7 @@ public class LurkingHorror extends Mob {
     }
     private void enter(Phase next) {
         phase=next; phaseAge=0; responseOffered=responseTaken=false;
+        lastClock=now()+cooldown();
         state=next==Phase.STALKING || next==Phase.WARNING ? HUNTING : FLEEING;
     }
     public static void onHeroReady() {
@@ -262,9 +268,9 @@ public class LurkingHorror extends Mob {
         }
         if(prey==null)return null;
         if(Dungeon.level.adjacent(pos,prey.pos)) {
-            predationUsed=true; expose(); ambushAttack=true;
-            attack(prey,region<2?1.5f:region<4?1.75f:2f,0,1);
-            ambushAttack=false;
+            predationUsed=true; expose(); ambushAttack=predatoryStrike=true;
+            try { attack(prey,region<2?1.5f:region<4?1.75f:2f,0,1); }
+            finally { ambushAttack=predatoryStrike=false; }
             if(prey.isAlive())prey.aggro(this);
             spend(attackDelay()); return true;
         }

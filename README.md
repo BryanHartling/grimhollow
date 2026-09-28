@@ -1,5 +1,11 @@
 # Grimhollow
 
+**Lurking Horror v1.17.0:** a rare living ambush predator can stalk one newly generated ordinary floor in each region. An arrival omen hints at its presence. Its attack warning stops automatic movement and leaves you a fresh action to evade, reveal it, or turn invisible. Once exposed it stays vulnerable through flight and recovery; it can recover only 25% of its maximum health over its lifetime. Mind Vision shows the creature without revealing nearby terrain. Search, Talisman Scry, prismatic light and an open Ashlight Lantern at +6 also counter it.
+
+It may attempt one hunt of an ordinary sleeping creature. A distant death cry marks a real kill; exploring the cell reveals species-specific **fresh remains**, which can be examined separately from dropped loot. Killing a Horror teaches the bestiary entry and lets you recognize its wounds. **Menu → Playtest → Balance tuning → Lurking Horror** controls regional chance, damage, evasion, flight duration and recovery allowance; warning fairness is fixed. Its regional roll can be skipped if the chosen floor has no suitable empty room. Existing generated floors are not retrofitted.
+
+For a quick encounter, use **Playtest → Spawn a creature → Lurking Horror** on an otherwise empty floor. It scales to the current region. God mode is optional; extra nearby hostiles deliberately prevent it from ambushing you.
+
 **Playtest follow-up v1.16.1:** Hatchling identification reaches equipped gear and every bag. Balance settings are shared across games on this device. The expedition cavern has natural edges, safer fall arrivals, equipment-heavy remains and upward exits. Dewcatchers and seedpods now have distinct painted sprites. Existing cavern geometry and loot need a new or rebuilt floor.
 
 **Dragon expedition v1.16.1:** find a wounded treasure hunter on one newly generated City floor (16–19). Give one Potion of Healing to receive an Expedition Map and an Elixir of Feather Fall. Open the map beside the hunter to enter a wooden-platform maze over a deep chasm. The only way back to the dungeon is through the Hoard Room's return exit, which remains usable even while the dragon lives.
@@ -10,7 +16,7 @@ For rapid testing, open **Menu → Playtest → enable for this save → Travel 
 
 Existing saves remain compatible, but the hunter is not retroactively inserted into an already generated City floor. A new run is the reliable way to experience the normal quest. All eight components have committed checkpoints; see [verification](verification/ACCEPTANCE.md) and [known issues](KNOWN_ISSUES.md). The existing terrain-contrast gate remains enforced and is still a known failure; no full green CI or physical-tablet playtest is claimed.
 
-Local launchers after building: `desktop/build/windows/1.16.1/Grimhollow/Grimhollow.exe` (keep its whole folder), `desktop/build/libs/desktop-1.16.1.jar`, and `android/build/outputs/apk/debug/android-debug.apk`. Android is a debug-signed sideload build.
+Local launchers after building: `desktop/build/windows/1.17.0/Grimhollow/Grimhollow.exe` (keep its whole folder), `desktop/build/libs/desktop-1.17.0.jar`, and `android/build/outputs/apk/debug/android-debug.apk`. Android is a debug-signed sideload build.
 
 Original expedition paintings, exact generation prompts and the offline packing recipe are in [sources](tools/painted/sources/expedition/), [prompts](tools/painted/expedition-prompts.json), and [packer](tools/painted/expedition.py). Native screenshots are in `verification/interface/{landscape,portrait}/expedition-*.png`; CI reconstructs the committed sources without an image-generation service.
 

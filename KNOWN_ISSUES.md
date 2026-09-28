@@ -1,10 +1,12 @@
 # Known issues
 
+- Lurking Horror v1.17.0 uses a 50% regional roll, but skips a selected floor with no suitable empty room; it is not retroactively inserted into generated floors. Encounter balance and physical Samsung tablet performance still require human playtesting.
+- Lurking Horror text currently falls back to English in other locales. Its fleeing/recovery poses are deliberately steady; the new attack animation and detection overlay do not animate terrain or alter movement timing.
 - Dragon expedition v1.16.0 is enabled and all eight components are implemented. Campaign combat balance and Samsung tablet performance still require human playtesting; automated boss defeats use controlled fixtures and are not a complete player-driven campaign.
 - The hunter appears only during creation of its seeded City floor (16–19); an existing save that already generated that floor will not gain the NPC retroactively. A new run gives the normal quest path; Playtest also provides direct expedition travel.
 - Playtest rebuild resets a floor, not the expedition's saved victories or one-time reward flag. Use a fresh test save to repeat the entire quest. The dragon never heals; previously used brood and collected rewards stay consumed on ordinary revisits.
 - Expedition text currently uses English fallback in other locales. The APK is a debug-signed sideload build; no physical Android device was connected for this run.
-- Existing terrain contrast test 45 remains enforced and unresolved: the prior checkpoint records 22/76 failures (Sewers 5/15, Prison 1/10, Caves 8/21, City 3/15, Halls 5/15). Exact release-head CI is recorded in the release tag/report; no threshold or check was weakened.
+- Existing terrain contrast test 45 remains enforced and unresolved: fresh v1.17.0 Windows captures fail 25/82 comparisons (Sewers 8/21, Prison 1/10, Caves 8/21, City 3/15, Halls 5/15); the Sewers sample now includes a trap. Art and thresholds are unchanged; exact release-head CI status is reported at delivery.
 
 - Version 1.15.0 balance tuning passes headless generation/persistence and native portrait-touch/landscape-mouse checks; physical Samsung tablet input and campaign balance under custom settings still need playtesting. Settings are save-local, and generation changes need a new or rebuilt floor. Existing contrast test 45 remains enforced and is not repaired by this settings patch.
 

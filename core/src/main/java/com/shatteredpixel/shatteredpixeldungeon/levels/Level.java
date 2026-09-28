@@ -1452,6 +1452,7 @@ public abstract class Level implements Bundlable {
 		if (c instanceof SpiritHawk.HawkAlly && Dungeon.hero.pointsInTalent(Talent.EAGLE_EYE) >= 3){
 			int range = 1+(Dungeon.hero.pointsInTalent(Talent.EAGLE_EYE)-2);
 			for (Mob mob : mobs) {
+				if (mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror) continue;
 				int p = mob.pos;
 				if (!fieldOfView[p] && distance(c.pos, p) <= range) {
 					for (int i : PathFinder.NEIGHBOURS9) {

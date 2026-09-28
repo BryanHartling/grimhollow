@@ -1145,7 +1145,7 @@ public abstract class Mob extends Char {
 	
 	@Override
 	public void die( Object cause ) {
-        killedByHorror=cause instanceof LurkingHorror && ((LurkingHorror)cause).alignment==Alignment.ENEMY;
+        killedByHorror=cause instanceof LurkingHorror && ((LurkingHorror)cause).predatoryStrike();
         if(killedByHorror) {
             Dungeon.level.freshRemains.put(pos,new com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains(this));
             Dungeon.level.corpses.put(pos,HT);

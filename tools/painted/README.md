@@ -1,3 +1,7 @@
+# Lurking Horror — v1.17.0
+
+`sources/lurking-horror.png` is an original four-pose transparent painting produced with built-in imagegen. The exact prompt and provenance are in `lurking-horror-prompt.json`. `horror.py` reproducibly extracts the idle, travel, strike and collapsed poses with a shared scale and foot anchor into a 512px atlas. The sprite has a steady idle and a short attack animation; eightfold texture density preserves the existing logical world units. Source and derivatives are GPL-3.0-or-later. Fresh victim remains reuse the existing painted species death pose. `pack.py` and `recovery_assets.py --check` require no model, network or Blender run.
+
 # Regrowth plants — v1.16.1
 
 `botany_skills.py` now fills the two previously retained plant cells (Dewcatcher 125 and Seedpod 126) from individual transparent paintings. The dewcatcher uses blue-green cupped leaves and silver water drops; the seedpod uses a dry ochre three-capsule silhouette. Sources are in `sources/botany-skills/`; exact built-in imagegen prompts are in `regrowth-plants-prompts.json`. The offline packer fits each at the same 64px tile density and foot anchor as the other 13 plants. No harvesting code or plant index changes. New source paintings and derivatives are GPL-3.0-or-later.

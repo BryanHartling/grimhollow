@@ -336,6 +336,6 @@ public final class PlaytestCatalog {
             Bat.class,Brute.class,ArmoredBrute.class,Shaman.RedShaman.class,Shaman.BlueShaman.class,Shaman.PurpleShaman.class,Spinner.class,DM200.class,DM201.class,
             Ghoul.class,Warlock.class,Monk.class,Senior.class,Golem.class,Succubus.class,Scorpio.class,
             RipperDemon.class,Eye.class,Acidic.class,Wraith.class,Mimic.class,GoldenMimic.class,
-            CrystalMimic.class,Hexcaster.class);
+            CrystalMimic.class,Hexcaster.class,LurkingHorror.class);
     }
 }

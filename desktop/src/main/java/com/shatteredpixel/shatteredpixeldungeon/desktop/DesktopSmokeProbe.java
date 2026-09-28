@@ -33,6 +33,11 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean encounters=Boolean.getBoolean("grimhollow.encounterTests");
     private final boolean interfaceReview=Boolean.getBoolean("grimhollow.interfaceReview");
     private final boolean expeditionReview=Boolean.getBoolean("grimhollow.expeditionReview");
+    private final boolean horrorReview=Boolean.getBoolean("grimhollow.horrorReview");
+    private int horrorFrames, horrorStep, horrorStart, horrorHealth;
+    private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror reviewHorror;
+    private boolean[] horrorFov, horrorVisited, horrorMapped;
+    private boolean horrorWarningCaptured;
     private int expeditionStep, expeditionFrames, expeditionTown, expeditionExitAttempts;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.TreasureHunter expeditionHunter;
     private final boolean roomReview=Boolean.getBoolean("grimhollow.roomReview");
@@ -95,6 +100,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             capture((expeditionReview?"expedition-loading-":"loading-")+new String[]{"sewers","prison","caves","city","halls"}[Math.min(4,InterlevelScene.lastRegion-1)]);
             loadingCaptures.add(InterlevelScene.lastRegion);
         }
+        if(horrorReview && frames>180) { horrorTick(); return; }
         if(expeditionReview && frames>180) { expeditionTick(); return; }
         if(presentationReview && frames>180) { presentationTick(); return; }
         if(roomReview && frames>180) { roomTick(); return; }
@@ -113,7 +119,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if (vault && sewers) vaultFrames();
         if (frames==180) {
             if (!(Game.scene() instanceof TitleScene)) throw new AssertionError("Title scene did not launch");
-            if(!expeditionReview)capture("title");
+            if(!expeditionReview && !horrorReview)capture("title");
             if(presentationReview) {
                 GamesInProgress.selectedClass=null;
                 switchNoFade(com.shatteredpixel.shatteredpixeldungeon.scenes.HeroSelectScene.class);
@@ -147,6 +153,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(roomReview)prepareRooms(0);
                 else Dungeon.switchLevel(Dungeon.newLevel(),-1);
                 if(Boolean.getBoolean("grimhollow.renderPoc"))pocRoom();
+                if(horrorReview)prepareHorror();
             }
             InterlevelScene.mode=InterlevelScene.Mode.DESCEND;
             SPDSettings.dynamicLighting(true);
@@ -930,6 +937,101 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if(image.width()>16.01f || image.height()>16.01f || maxX>16.01f || maxY>16.01f)
             throw new AssertionError("Preview layout/drawn vertices disagree: "+image.width()+"/"+maxX+" x "+image.height()+"/"+maxY);
         image.destroy();
+    }
+    private void prepareHorror() {
+        Level level=Dungeon.level;
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:level.mobs)Actor.remove(mob);
+        level.mobs.clear();level.heaps.clear();level.traps.clear();level.plants.clear();
+        for(Blob blob:level.blobs.values())Actor.remove(blob);
+        level.blobs.clear();level.customTiles.clear();level.customWalls.clear();level.customTerrain.clear();
+        level.freshRemains.clear();
+        int w=level.width(),cx=w/2,cy=level.height()/2;
+        for(int c=0;c<level.length();c++) {
+            if(!level.insideMap(c))continue;
+            boolean inside=Math.abs(c%w-cx)<=8 && Math.abs(c/w-cy)<=6;
+            Level.set(c,inside?Terrain.EMPTY:Terrain.WALL);
+        }
+        level.cleanWalls();
+        java.util.Arrays.fill(level.visited,false);java.util.Arrays.fill(level.mapped,false);
+        Dungeon.hero.pos=horrorStart=cx+cy*w;Dungeon.hero.HP=Dungeon.hero.HT=200;
+        Dungeon.hero.viewDistance=8;
+        // Disable the native random passive search so this fixture specifically exercises the warning.
+        com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TalismanOfForesight talisman=new com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TalismanOfForesight();
+        talisman.cursed=true;Dungeon.hero.belongings.artifact=talisman;talisman.activate(Dungeon.hero);
+        reviewHorror=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror();
+        reviewHorror.pos=horrorStart-w;level.mobs.add(reviewHorror);Actor.add(reviewHorror);
+        Dungeon.observe();
+    }
+    private void horrorTick() {
+        if(!(Game.scene() instanceof GameScene))return;
+        if(reviewHorror.phase()==com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.Phase.WARNING
+                && Dungeon.hero.ready && !horrorWarningCaptured) {
+            capture("horror-warning");horrorWarningCaptured=true;
+        }
+        if(++horrorFrames%60!=0)return;
+        com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero hero=Dungeon.hero;
+        switch(horrorStep++) {
+            case 0:
+                if(!hero.ready){horrorStep--;return;}
+                horrorHealth=hero.HP;
+                if(reviewHorror.sprite.visible)throw new AssertionError("Shadowmeld sprite visible before detection");
+                pointerCell(horrorStart+6);break;
+            case 1:
+                if(!hero.ready || hero.pos!=horrorStart+1 || hero.HP!=horrorHealth
+                        || reviewHorror.phase()!=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.Phase.WARNING)
+                    throw new AssertionError("Real pointer travel failed to stop for warning: pos="+hero.pos+" start="+horrorStart+" ready="+hero.ready+" hp="+hero.HP+" phase="+reviewHorror.phase());
+                break;
+            case 2:
+                if(hero.HP!=horrorHealth || reviewHorror.phase()!=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.Phase.WARNING)
+                    throw new AssertionError("Warning attacked before a fresh player action");
+                pointerCell(horrorStart+2);break;
+            case 3:
+                if(hero.HP!=horrorHealth || hero.pos!=horrorStart+2 || reviewHorror.shadowmelded())
+                    throw new AssertionError("Fresh movement did not evade ambush");
+                capture("horror-exposed");
+                reviewHorror.pos=hero.pos-5;reviewHorror.sprite.place(reviewHorror.pos);reviewHorror.rooted=true;
+                hero.viewDistance=2;
+                java.util.Arrays.fill(Dungeon.level.visited,false);java.util.Arrays.fill(Dungeon.level.mapped,false);
+                Dungeon.observe();GameScene.updateFog();
+                horrorFov=Dungeon.level.heroFOV.clone();horrorVisited=Dungeon.level.visited.clone();horrorMapped=Dungeon.level.mapped.clone();
+                Buff.affect(hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MindVision.class,10);Dungeon.observe();break;
+            case 4:
+                if(!reviewHorror.sensed() || reviewHorror.sprite.visible
+                        || !java.util.Arrays.equals(horrorFov,Dungeon.level.heroFOV)
+                        || !java.util.Arrays.equals(horrorVisited,Dungeon.level.visited)
+                        || !java.util.Arrays.equals(horrorMapped,Dungeon.level.mapped))throw new AssertionError("Native Mind Vision leaked terrain or drew the ordinary sprite");
+                if(Actor.findChar(reviewHorror.pos)!=reviewHorror)throw new AssertionError("Hidden entity lost collision occupancy");
+                capture("horror-entity-only-sense");GameScene.examineCell(reviewHorror.pos);break;
+            case 5:
+                interfaceBounds();checkReviewText(Game.scene());
+                if(!allReviewText(Game.scene()).contains("Lurking Horror"))throw new AssertionError("Unknown-cell entity inspection failed");
+                capture("horror-description");closeReviewWindows();
+                Buff.detach(hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MindVision.class);hero.viewDistance=8;
+                reviewHorror.pos=hero.pos-3;reviewHorror.sprite.place(reviewHorror.pos);
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat dead=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();
+                dead.pos=hero.pos+Dungeon.level.width();
+                Dungeon.level.freshRemains.put(dead.pos,new com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains(dead));
+                Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.Gold(7),dead.pos);
+                dead.pos--;
+                Dungeon.level.freshRemains.put(dead.pos,new com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains(dead));
+                Dungeon.observe();break;
+            case 6:
+                capture("horror-and-fresh-remains");GameScene.examineCell(hero.pos+Dungeon.level.width());break;
+            case 7:
+                interfaceBounds();capture("horror-remains-and-loot");
+                playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.titleCase(Dungeon.level.freshRemains.get(hero.pos+Dungeon.level.width()).name()));break;
+            case 8:
+                interfaceBounds();checkReviewText(Game.scene());
+                if(!allReviewText(Game.scene()).contains("narrow wounds"))throw new AssertionError("Missing remains evidence text");
+                capture("horror-remains-description");closeReviewWindows();
+                Playtest.enable();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();break;
+            case 9:if(!playtestClickPage("Lurking Horror"))horrorStep--;break;
+            case 10:
+                interfaceBounds();capture("horror-balance-tuning");closeReviewWindows();
+                if(!horrorWarningCaptured)throw new AssertionError("Warning evidence not captured");
+                System.out.println("TEST 60 NATIVE PASS: real pointer auto-travel interruption, fresh-action evasion, painted exposed sprite, entity-only Mind Vision, unknown-cell inspection, remains/loot inspection and balance menu; failures=0");
+                Gdx.app.exit();break;
+        }
     }
     private void expeditionFloor(int depth) {
         questField(GameScene.class,"scene",null);

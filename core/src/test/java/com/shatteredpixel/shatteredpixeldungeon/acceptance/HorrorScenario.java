@@ -26,6 +26,7 @@ final class HorrorScenario {
         for(int cell=0;cell<Dungeon.level.length();cell++) if(Dungeon.level.insideMap(cell)) Level.set(cell,Terrain.EMPTY);
         Dungeon.level.cleanWalls();
         Dungeon.depth=depth; Dungeon.hero.HP=Dungeon.hero.HT=200; Dungeon.hero.belongings.armor=null;
+        Dungeon.hero.fieldOfView=Dungeon.level.heroFOV;
         LurkingHorror h=new LurkingHorror(); h.pos=Dungeon.hero.pos+1; h.sprite=h.sprite(); h.sprite.link(h);
         Dungeon.level.mobs.add(h); Actor.add(h); return h;
     }
@@ -88,8 +89,37 @@ final class HorrorScenario {
             for(int i=0;i<50;i++)check(h.damageRoll()<=4+2*region,"regional base damage");
             check(!Char.hasProp(h,Char.Property.UNDEAD) && !Char.hasProp(h,Char.Property.DEMONIC),"Horror classified as undead/demon");
         }
-        predation(); generation();
+        counters(); predation(); generation();
         System.out.println("TEST 60 Horror PASS: five-region stats, real warning/response, retargeting, invisibility, solitary hunt, entity-only Mind Vision/Scry, collision occupancy, finite healing, predation/remains, regional generation, bundle/disk persistence");
+    }
+    private static void counters() throws Exception {
+        LurkingHorror h=fresh(7); h.pos=Dungeon.hero.pos+4;
+        AshlightLantern lamp=new AshlightLantern();lamp.identify();lamp.level(5);
+        Dungeon.hero.belongings.artifact=lamp;lamp.activate(Dungeon.hero);Dungeon.observe();
+        check(!h.sensed() && h.shadowmelded(),"Lantern revealed before level six");
+        lamp.level(6);Dungeon.observe();check(h.sensed() && !h.shadowmelded(),"open level-six light did not reveal");
+        lamp.toggle(Dungeon.hero);Dungeon.observe();check(!h.sensed() && !h.shadowmelded(),"shuttering restored stealth too soon");
+        h=fresh(2);Dungeon.observe();Dungeon.hero.search(true);
+        check(!h.shadowmelded(),"intentional search failed to expose");
+        h=fresh(12);h.damage(0,new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfPrismaticLight());
+        check(!h.shadowmelded(),"zero-damage illumination failed to expose");
+        h=fresh(17);act(h);ready();Dungeon.hero.spend(1);int hp=Dungeon.hero.HP;act(h);
+        check(h.phase()==LurkingHorror.Phase.WARNING && Dungeon.hero.HP<hp,"City follow-up not separately warned");
+        hp=Dungeon.hero.HP;for(int i=0;i<4;i++)act(h);
+        check(hp==Dungeon.hero.HP,"follow-up attacked without another fresh action");
+        ready();Dungeon.hero.spend(1);Dungeon.hero.pos-=2;act(h);
+        check(hp==Dungeon.hero.HP && h.phase()==LurkingHorror.Phase.FLEEING,"follow-up could not be evaded");
+        for(int depth:new int[]{17,22}) {
+            h=fresh(depth);int from=h.pos;
+            for(int off:PathFinder.NEIGHBOURS8)if(from+off!=Dungeon.hero.pos)Level.set(from+off,Terrain.WALL);
+            Level.set(from+1,Terrain.BARRICADE);h.expose();act(h);
+            check(h.pos==(depth==22?from+1:from),"wood-only Halls phasing tier "+depth);
+        }
+        h=fresh(2);h.alignment=Char.Alignment.ALLY;
+        Rat rat=new Rat();rat.pos=h.pos+1;rat.sprite=rat.sprite();rat.sprite.link(rat);
+        Dungeon.level.mobs.add(rat);Actor.add(rat);int kills=Statistics.enemiesSlain;
+        rat.damage(100,h);
+        check(Statistics.enemiesSlain==kills+1 && Dungeon.level.freshRemains.get(rat.pos)==null,"controlled Horror kills misclassified as predation");
     }
     private static void predation() throws Exception {
         LurkingHorror h=fresh(2); h.pos=Dungeon.hero.pos+8;

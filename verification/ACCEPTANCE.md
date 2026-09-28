@@ -1,3 +1,26 @@
+# Lurking Horror — v1.17.0
+
+The three implementation components are complete. This is automated encounter coverage, not a claim of a balanced full campaign or physical Samsung tablet testing. Historical numbered results and retirements below remain in force; test 45 is still enforced.
+
+| Gate | Result | Executed evidence |
+|---|---|---|
+| Final mechanics / desktop / Android | PASS | `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeUpstream=true --no-daemon --console=plain`: **Runs=90 failures=0; BUILD SUCCESSFUL in 2m 46s**. Seven JUnit tests, no failures/errors. APK version code 964, version 1.17.0-INDEV. |
+| Class gates | PASS | Ten seeded runs each for all nine heroes. Necromancer 10/0, Enchanter 10/0, Psychic 10/0, combined new classes 30/0 are included in 90/0. The earlier dedicated Necromancer component run also finished at 10/0. |
+| 60 behavior / counterplay | PASS | Real AI acts: warning interrupts movement/rest and waits for readiness plus a paid response; free actions do not count. Attack follows current position; moving away/invisibility/reveal cancel it. Another sleeping hostile cancels it. City follow-up requires a second response. Ashlight +5/+6, intentional search, prismatic exposure, Mind Vision/Scry entity-only FOV, unchanged collision occupancy, Halls barricade-only phasing and controlled-kill attribution pass. |
+| 60 persistence / predation / generation | PASS | All five region stats, lifetime 25% recovery, second-cycle cap, phase/allowance bundle and disk reload. One real prey attack; surviving prey wakes/retaliates; deaths grant no hero XP, expose species-specific remains only after exploration, and log one distant event. 1035/2000 regional rolls; 22 real generated placements across all five regions in the generation fixture; empty-room, one-per-region, branch and floor-one exclusions pass. |
+| 60 native input / presentation | PASS | Existing `--smoke-sewers` runner, `grimhollow.interfaceReview=true`, `grimhollow.horrorReview=true`, `grimhollow.heroClass=WARRIOR`, portrait false/true: **TEST 60 NATIVE PASS ... failures=0** in both orientations. Real pointer travel stops before damage; fresh movement evades. Unknown-cell entity inspection reveals no terrain; popup bounds, remains/loot chooser and paged tuning menu pass. Screenshots use an isolated room; headless generation checks use real generated floors. |
+| 43 / 47 fog and remembered terrain | PASS | Fresh native `grimhollow.recovery=true`, `grimhollow.fogTests=true` runs for regions 0–4: **failures=0**. 788 movement steps (100/202/200/172/114), 1384 door-transition frames, three zooms × four pans before/after walking in each region. Every-cell black/visible sampling, **fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned**. |
+| 24–26 / 34 / 56 geometry | PASS | Native renderer: nine heroes, 126 creature forms, 75 eightfold-density atlases, 385 item frames and 60 identification overlays; failures=0. |
+| 31 / 32 / 56 effects | PASS | 40 gas + 10 fire cells, 240 GPU-completed frames: **mean=0.6454ms p95=0.8982ms failures=0**. Batched fire channel difference=0; painted particle families/rays and scorch placement pass. |
+| 44 source reconstruction | PASS | `python tools/recovery_assets.py --check`: **PAINTED assets=137 source sheets=127 failures=0**; 55 launcher resources; **verified painted replacements=137 failures=0**. No generation service or Blender is required. |
+| 46 packaged code | PASS | `python tools/recovery_checks.py --jar desktop/build/libs/desktop-1.17.0.jar`: **classes=2955 guarded browser sinks=1 HTTP/socket calls=0 failures=0**. Native title/credits handlers also pass. |
+| Windows app | PASS | `tools/package-windows.ps1`; packaged `Grimhollow.exe --smoke-title` in a separate profile: **LAUNCHER_EXIT=0; RENDERED=TitleScene**. |
+| 45 contrast | Permanent known issue | `python tools/recovery_checks.py --all-regions` on fresh Windows captures: **25/82 failed** (Sewers 8/21, Prison 1/10, Caves 8/21, City 3/15, Halls 5/15). The fresh Sewers fixture includes a seventh terrain type, a trap; source art and thresholds are unchanged. |
+| Full CI | Known contrast blocker | Full workflow remains subject to test 45. Exact release-head CI status and tag are reported at delivery; no check was disabled or weakened. |
+| Other numbered subjects | Prior status retained | Existing headless/JUnit scenarios were rerun in the 90/0 gate. Prior render-loop retirements, campaign limitations and physical-device gaps remain as recorded below. |
+
+Painted source and exact prompt: `tools/painted/sources/lurking-horror.png` and `tools/painted/lurking-horror-prompt.json`. Native evidence: `interface/{landscape,portrait}/horror-*.png`. The native warning fixture equips a cursed Talisman to prevent random passive detection from pre-empting the warning; deliberate detection has separate tests. Initial fixture failures (border-cell setup, headless FOV initialization and the localized rat label) were corrected before these passing runs.
+
 # Playtest follow-up — v1.16.1
 
 The numbered historical records below retain their stated limits and retirements. This patch changes Hatchling identification, shared tuning, expedition cavern generation/stair art, and the two Regrowth-only plant sprites. No physical Android tablet or full combat campaign was tested.

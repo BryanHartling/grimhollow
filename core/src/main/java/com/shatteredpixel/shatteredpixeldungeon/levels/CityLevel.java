@@ -189,6 +189,12 @@ public class CityLevel extends RegularLevel {
 	}
 
 	@Override
+	protected void createMobs() {
+		super.createMobs();
+		com.shatteredpixel.shatteredpixeldungeon.DragonExpedition.spawnHunter(this);
+	}
+
+	@Override
 	protected ArrayList<Room> initRooms() {
 		return Imp.Quest.spawn(super.initRooms());
 	}

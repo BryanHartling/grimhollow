@@ -1,3 +1,9 @@
+## Dragon expedition — component 1 (foundation)
+
+- Adds save-local quest state on branch 2, a wounded treasure hunter's one-potion exchange, protected Expedition Map, feather-fall elixir and entry warning. City placement uses an isolated seeded stream.
+- The encounter remains unavailable until its connected combat and escape components are complete. The interim hunter/map art uses existing painted assets, to be replaced in the visual component.
+- The map opens beside the hunter, not from inside the expedition; repeat visits preserve the same expedition. Existing saves without quest state receive clean defaults.
+
 # Tablet rooms and quest visuals - v1.14.2
 
 ## v1.15.0 - Save-local balance tuning

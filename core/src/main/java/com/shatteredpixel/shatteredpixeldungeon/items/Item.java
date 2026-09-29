@@ -198,6 +198,7 @@ public class Item implements Bundlable {
 	public Item merge( Item other ){
 		if (isSimilar( other )){
 			quantity += other.quantity;
+            enchanterAppraised |= other.enchanterAppraised;
 			other.quantity = 0;
 		}
 		return this;
@@ -589,6 +590,7 @@ public class Item implements Bundlable {
 	
 	private static final String QUANTITY		= "quantity";
 	private static final String LEVEL			= "level";
+	public boolean enchanterAppraised;
 	private static final String LEVEL_KNOWN		= "levelKnown";
 	private static final String CURSED			= "cursed";
 	private static final String CURSED_KNOWN	= "cursedKnown";
@@ -598,6 +600,7 @@ public class Item implements Bundlable {
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
+		bundle.put("enchanter_appraised",enchanterAppraised);
 		bundle.put("inscription_turns",inscriptionTurns);bundle.put("reinforce_turns",reinforceTurns);bundle.put("reinforce_flat",reinforceFlat);
         bundle.put( QUANTITY, quantity );
 		bundle.put( LEVEL, level );
@@ -613,6 +616,7 @@ public class Item implements Bundlable {
 	
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
+		enchanterAppraised=bundle.getBoolean("enchanter_appraised");
 		inscriptionTurns=bundle.getInt("inscription_turns");reinforceTurns=bundle.getInt("reinforce_turns");reinforceFlat=bundle.getInt("reinforce_flat");
         quantity	= bundle.getInt( QUANTITY );
 		levelKnown	= bundle.getBoolean( LEVEL_KNOWN );

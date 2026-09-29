@@ -68,6 +68,11 @@ public class WndGame extends Window {
 			curBtn.icon(Icons.get(Icons.INFO));
 		}
 
+        addButton(curBtn=new RedButton(Messages.get(WndMessageHistory.class,"title")){
+            @Override protected void onClick(){hide();GameScene.show(new WndMessageHistory());}
+        });
+        curBtn.icon(Icons.JOURNAL.get());
+
 		// Challenges window
 		if (Dungeon.challenges > 0) {
 			addButton( curBtn = new RedButton( Messages.get(this, "challenges") ) {

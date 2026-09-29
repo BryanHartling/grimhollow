@@ -1582,6 +1582,7 @@ public class GameScene extends PixelScene {
 		if (scene != null) {
             scene.tiles.updateKnowledge();
             scene.terrainFeatures.updateRailKnowledge();
+            for(CustomTilemap visual:Dungeon.level.customWalls)visual.updateKnowledge();
 			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
 				if (mob.sprite != null) {
 					if (mob instanceof Mimic && mob.state == mob.PASSIVE && ((Mimic) mob).stealthy() && Dungeon.level.visited[mob.pos]){

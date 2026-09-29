@@ -47,6 +47,31 @@ public class HatchlingMimic extends Trinket {
     private final HashSet<Integer> charmedFloors = new HashSet<>();
     { image = ItemSpriteSheet.HATCHLING_MIMIC; bones = false; }
 
+    public static final String AC_FEED = "FEED";
+    @Override public ArrayList<String> actions(Hero hero){
+        ArrayList<String> actions=super.actions(hero);
+        if(hero.belongings.contains(this))actions.add(AC_FEED);
+        return actions;
+    }
+    @Override public void execute(Hero hero,String action){
+        super.execute(hero,action);
+        if(AC_FEED.equals(action))GameScene.selectItem(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBag.ItemSelector(){
+            public String textPrompt(){return Messages.get(HatchlingMimic.class,"feed_prompt");}
+            public Class<? extends Bag> preferredBag(){return com.shatteredpixel.shatteredpixeldungeon.actors.hero.Belongings.Backpack.class;}
+            public boolean itemSelectable(Item item){return canFeed(hero,item);}
+            public void onSelect(Item item){if(item!=null)feedChosen(hero,item);}
+        });
+    }
+    public boolean canFeed(Hero hero,Item item){
+        return hero!=null && hero.isAlive() && hero.belongings.contains(this)
+                && hero.belongings.backpack.items.contains(item) && foodPriority(item,hero)>=0;
+    }
+    public boolean feedChosen(Hero hero,Item item){
+        if(!canFeed(hero,item) || !consume(hero,item))return false;
+        remaining=interval();warned=false;awaitingChoice=false;
+        hero.spendAndNext(1);
+        return true;
+    }
     public static HatchlingMimic carried() {
         return Dungeon.hero == null ? null : Dungeon.hero.belongings.getItem(HatchlingMimic.class);
     }
@@ -164,7 +189,9 @@ public class HatchlingMimic extends Trinket {
         }
     }
     private boolean feed(Hero hero) {
-        Item meal = nextFood(hero);
+        return consume(hero,nextFood(hero));
+    }
+    private boolean consume(Hero hero, Item meal) {
         if (meal instanceof Artifact) {
             int cell = closestSpawn(hero.pos);
             if (cell < 0) return false; // An entirely full level postpones consumption, without losing the warning.

@@ -100,7 +100,8 @@ def region_atlas(region, features, raised):
     if region=='sewers':
         for index in [1,7]:put(atlas,index,grass)
     for index,source in [(16,0),(17,1),(18,3),(19,2),(20,4),(22,0),(3,5),(9,5)]:
-        put(atlas,index,prop(special if index==22 else floor,details[source],60,56,True)[0])
+        art=Image.open(HERE/'sources/playtest-polish'/('stairs-down.png' if index==17 else 'stairs-up.png')).convert('RGBA') if index in (16,17,22) else details[source]
+        put(atlas,index,prop(special if index==22 else floor,art,60,56,True)[0])
     # Chasm art cannot resemble walkable paving. Preserve the original ledge alpha.
     for index in range(24,32):
         template=cell(old,index)
@@ -215,6 +216,9 @@ def outputs():
     result.update(expedition(result))
     from horror import outputs as horror
     result.update(horror())
+    meal=fit(Image.open(HERE/'sources/playtest-polish/eating.png').convert('RGBA'),60,60)
+    icon=Image.new('RGBA',(64,64));icon.alpha_composite(meal,((64-meal.width)//2,(64-meal.height)//2))
+    result['effects/painted_food.png']=icon
     return result
 
 
@@ -246,6 +250,7 @@ def main():
         if path=='interfaces/painted_portraits.png':expected=(384,384)
         if path=='interfaces/painted_skills.png':expected=(1024,512)
         if path=='interfaces/painted_badges.png':expected=(1024,512)
+        if path=='effects/painted_food.png':expected=(64,64)
         if path=='effects/readability.png':expected=(512,64)
         if path in ('effects/painted_particles.png','effects/painted_specks.png','effects/painted_rays.png'):expected=(256,256)
         if path=='sprites/item_icons.png':expected=(512,256)

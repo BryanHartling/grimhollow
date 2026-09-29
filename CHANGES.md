@@ -1,3 +1,16 @@
+# Playtest polish - v1.18.0
+
+- Garden shadowmeld shafts now use softly fading painted motes; shared healing/spirit users receive the same visual upgrade with mechanics unchanged.
+- Rat King crowns use visibility/knowledge of the statue's source cell. Seeing only the wall above no longer reveals the hidden room.
+- Hatchling Feed lets the player choose an eligible loose item, takes one turn, uses the normal benefits/artifact transformation and resets hunger. Thrown stacks are eaten whole; other consumables lose one item. Protected and bagged items remain excluded. Automatic feeding and permanently escalating gold debt remain.
+- Menu > Message History stores the latest 500 colored messages, scrollable and saved per run. Old discarded messages cannot be recovered.
+- Every class identifies its starting belongings; Enchanter adds three steel-tipped darts. Playtest class changes do not identify preexisting gear.
+- Defensive Sigil: 6/10 shielding for 6/10 turns. Rune Etching: full strength and +25% class proc rate, replacing half-strength processing at the temporary inscription rate. Resonance: 1.2x/1.3x.
+- Dual Inscription becomes Wandering Brush: casting and 50%/75% recharge while carried unequipped, without double charging when equipped. Attunement becomes Appraisal: 20%/30% full identification of collected gear, checked once per item from its first pickup with the talent. Saved flags, splits and merges cannot reroll. Legacy talent identifiers preserve invested ranks.
+- Overload remains unchanged pending the user's choice; Spellguard (10%/20% magic damage reduction while armor is inscribed) is a proposal only.
+- New painted up/down stairs and meal overlay have committed original sources, exact prompts and offline deterministic packing. Logical sizes and stair behavior are unchanged.
+- Validation: all nine classes Runs=90 failures=0; final Enchanter Runs=10 failures=0; seven JUnit tests; desktop and Android builds; native portrait/landscape history/Feed/painted-effect checks; offline provenance and painted reproduction failures=0. Existing test-45 contrast failure is not waived.
+
 # Grimhollow update log — v1.17.1
 
 - Replaced the live upstream version tabs and coming-soon roadmap with Grimhollow's player-facing release history, curated from this document, README, release commits and verification records. Upstream 4.0 is one foundation entry; attribution and historical source files remain intact.

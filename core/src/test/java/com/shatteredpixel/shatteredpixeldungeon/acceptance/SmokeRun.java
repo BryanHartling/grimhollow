@@ -61,6 +61,7 @@ public class SmokeRun {
                     GamesInProgress.curSlot=99;
                     Dungeon.seed=seed;
                     Dungeon.init();
+                    PlaytestPolishScenario.startingKit();
                     if(Dungeon.hero.heroClass!=GamesInProgress.selectedClass) throw new AssertionError("Wrong hero class");
                     for(int depth=1;depth<=6;depth++) {
                         Dungeon.depth=depth;
@@ -77,7 +78,7 @@ public class SmokeRun {
                             if(Dungeon.depth!=6) throw new AssertionError("Save/load depth mismatch");
                         }
                     }
-                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();HatchlingScenario.run();keepsakeScenario();TuningScenario.run();ExpeditionScenario.run();HorrorScenario.run();}
+                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();HatchlingScenario.run();keepsakeScenario();TuningScenario.run();ExpeditionScenario.run();HorrorScenario.run();PlaytestPolishScenario.run();}
                     String line="PASS "+name+" seed="+seed+" floor=6 save/load=ok";
                     System.out.println(line); log.println(line);
                 } catch(Throwable error) {
@@ -991,8 +992,8 @@ public class SmokeRun {
         RateEnchantment permanent=new RateEnchantment(),temporary=new RateEnchantment(),floor=new RateEnchantment();
         w.enchantment=permanent;w.inscribed=temporary;w.inscriptionTurns=30;w.runeEtching=new RuneEtching();w.runeEtching.floorEnchant=floor;
         check(w.proc(h,enemy,10)==10,"54: bonus changes no base damage");
-        check(Math.abs(permanent.chance-.25f)<.0001f&&Math.abs(temporary.chance-.4f)<.0001f&&Math.abs(floor.chance-.2f)<.0001f,"54: permanent 1.25x, inscription 2x, half-strength floor rune 2x");
-        check(permanent.power==1&&temporary.power==1&&floor.power==.5f,"54: proc power unchanged");
+        check(Math.abs(permanent.chance-.25f)<.0001f&&Math.abs(temporary.chance-.4f)<.0001f&&Math.abs(floor.chance-.25f)<.0001f,"54: permanent 1.25x, inscription 2x, full-strength floor rune 1.25x");
+        check(permanent.power==1&&temporary.power==1&&floor.power==1f,"54: proc power unchanged");
         permanent.cursed=true;w.proc(h,enemy,10);check(Math.abs(permanent.chance-.2f)<.0001f,"54: curses not amplified");permanent.cursed=false;
         HeroClass old=h.heroClass;h.heroClass=HeroClass.ROGUE;w.proc(h,enemy,10);h.heroClass=old;
         check(Math.abs(permanent.chance-.2f)<.0001f&&Math.abs(temporary.chance-.2f)<.0001f,"54: other classes unchanged");
@@ -1055,7 +1056,7 @@ public class SmokeRun {
             check(h.buff(DefensiveSigil.class)==null,"56: expired shield removed");
         }finally{now.setFloat(null,before);}
         h.talents.get(0).put(Talent.FIELD_REPAIR,2);brush.gainCharge(10);
-        check(brush.cast(h,"defensive_sigil",h.pos,null,null)&&h.buff(DefensiveSigil.class).shielding()==10,"56: rank two ten shielding");
+        check(brush.cast(h,"defensive_sigil",h.pos,null,null)&&h.buff(DefensiveSigil.class).shielding()==10&&h.buff(DefensiveSigil.class).cooldown()==10,"56: rank two ten shielding for ten turns");
         ward=h.buff(DefensiveSigil.class);check(ward.absorbDamage(13)==3&&h.buff(DefensiveSigil.class)==null,"56: depletion detaches and excess damage passes through");
         Buff.affect(h,MagicImmune.class);charges=brush.charges();time=h.cooldown();
         check(!brush.cast(h,"defensive_sigil",h.pos,null,null)&&brush.charges()==charges&&h.cooldown()==time,"56: magic immunity costs nothing");Buff.detach(h,MagicImmune.class);
@@ -1066,7 +1067,7 @@ public class SmokeRun {
         check(restoredHero.pointsInTalent(Talent.FIELD_REPAIR)==2&&Arrays.asList(brush.spells(restoredHero)).contains("defensive_sigil"),"56: legacy FIELD_REPAIR saved ranks unlock renamed talent");
         int depth=Dungeon.depth;brush.gainCharge(-100);Dungeon.depth=depth+1;EnchanterMagic.state().arrive();check(brush.charges()==0,"56: old floor-entry recharge removed");Dungeon.depth=depth;EnchanterMagic.state().arrive();
         h.talents.get(0).put(Talent.FIELD_REPAIR,0);brush.gainCharge(10);
-        System.out.println("TEST 56 SIGIL PASS: rank 1/2 = 6/10 shield, one charge/turn, six-turn expiry, refresh, damage, failure gates, save/load and legacy talent migration");
+        System.out.println("TEST 56 SIGIL PASS: rank 1/2 = 6/10 shield, one charge/turn, six/ten-turn expiry, refresh, damage, failure gates, save/load and legacy talent migration");
     }
 
     private static void keepsakeScenario() throws Exception {

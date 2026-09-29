@@ -102,6 +102,8 @@ public class EnchanterMagic extends Buff {
     }
     @Override public boolean act(){
         Hero h=(Hero)target;
+        SigilBrush carried=h.belongings.getItem(SigilBrush.class);
+        if(carried!=null)carried.rechargeCarried(h);
         if(lastPos==h.pos)stationary++;else{lastPos=h.pos;stationary=0;}
         if(stationary>=3&&points(Talent.WARDING_SIGILS)>0)Buff.affect(h,Barkskin.class).setForDuration(h.lvl*points(Talent.WARDING_SIGILS),5);
         Set<Item> items=new HashSet<>();for(Item item:h.belongings)items.add(item);
@@ -121,7 +123,20 @@ public class EnchanterMagic extends Buff {
         spend(TICK);return true;
     }
     public static void consume(Hero h){SigilBrush brush=h.belongings.getItem(SigilBrush.class);if(brush!=null)brush.advance(5*h.pointsInTalent(Talent.KEEN_STUDY));}
-    public static void collect(Item item){if(state()==null)return;if(Random.Float()<.5f*points(Talent.ATTUNEMENT))item.cursedKnown=true;learn(item);}
+    public static void collect(Item item){
+        if(state()==null)return;
+        int rank=points(Talent.ATTUNEMENT);
+        boolean gear=item instanceof Weapon || item instanceof Armor || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand
+                || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.rings.Ring || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact;
+        if(rank>0 && gear && !item.enchanterAppraised){
+            item.enchanterAppraised=true;
+            if(!item.isIdentified() && Random.Float()<(rank==1?.2f:.3f)){
+                item.identify();
+                com.shatteredpixel.shatteredpixeldungeon.utils.GLog.p(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(SigilBrush.class,"appraised",item.title()));
+            }
+        }
+        learn(item);
+    }
     public static int armorRoll(Char ch){if(ch.buff(FracturedArmor.class)!=null||ch.buff(Unmade.class)!=null)return 0;int dr=ch.drRoll();return ch.buff(DegradedGear.class)!=null?Math.round(dr*.7f):dr;}
     public static void counterweight(){if(Dungeon.hero.subClass==HeroSubClass.SCRIVENER&&points(Talent.COUNTERWEIGHT)>0)Buff.affect(Dungeon.hero,Barkskin.class).setForDuration(Dungeon.hero.lvl/2,points(Talent.COUNTERWEIGHT));}
     public static float procChance(Char ch,float chance){
@@ -130,11 +145,11 @@ public class EnchanterMagic extends Buff {
         return ch.buff(Overcharged.class)!=null?Math.max(1f,chance/boost)*boost:chance;
     }
     public static float procStrength(Char ch){return strength.get()*(ch.buff(Overcharged.class)!=null?1+.25f*points(Talent.AMPLIFIED):1);}
-    public static float permanent(Item item){return item.inscriptionTurns>0?1+.1f*points(Talent.RESONANCE):1;}
+    public static float permanent(Item item){int rank=points(Talent.RESONANCE);return item.inscriptionTurns>0&&rank>0?1.1f+.1f*rank:1;}
     public static int weaponProc(Weapon.Enchantment enchant,Weapon w,Char a,Char d,int damage,float power){
         if(a.buff(Unmade.class)!=null)return damage;
         float previous=strength.get(),previousRate=rate.get();strength.set(previous*power);
-        rate.set(enchant.curse()?1f:enchant==w.enchantment?1.25f:2f);
+        rate.set(enchant.curse()?1f:(enchant==w.enchantment || w.runeEtching!=null && enchant==w.runeEtching.floorEnchant)?1.25f:2f);
         try{if(a==Dungeon.hero&&state()!=null)Buff.prolong(d,EnchanterDamage.class,20);return enchant.proc(w,a,d,damage);}finally{strength.set(previous);rate.set(previousRate);}
     }
     public static int glyphProc(Armor.Glyph glyph,Armor armor,Char a,Char d,int damage,float power){

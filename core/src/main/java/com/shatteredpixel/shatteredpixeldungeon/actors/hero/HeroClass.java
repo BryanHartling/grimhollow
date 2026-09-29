@@ -101,6 +101,8 @@ public enum HeroClass {
 
 	public void initHero( Hero hero ) {
 
+		java.util.HashSet<Item> previousKit = new java.util.HashSet<>();
+        for(Item item:hero.belongings)previousKit.add(item);
 		hero.heroClass = this;
 		Talent.initClassTalents(hero);
 
@@ -148,6 +150,8 @@ public enum HeroClass {
 				break;
 		}
 
+		for(Item starter:hero.belongings)if(!previousKit.contains(starter))starter.identify();
+
 		if (SPDSettings.quickslotWaterskin()) {
 			for (int s = 0; s < QuickSlot.SIZE; s++) {
 				if (Dungeon.quickslot.getItem(s) == null) {
@@ -174,6 +178,7 @@ public enum HeroClass {
         com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush item=new com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush();
         (hero.belongings.artifact=item).identify();item.activate(hero);
         new Food().collect();new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment().identify();new ScrollOfIdentify().collect();new PotionOfHealing().collect();
+        new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.darts.Dart().quantity(3).identify().collect();
         Dungeon.quickslot.setSlot(0,item);
     }
 	private static void initNecromancer(Hero hero) {

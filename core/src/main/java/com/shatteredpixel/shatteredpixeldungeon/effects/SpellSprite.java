@@ -71,7 +71,15 @@ public class SpellSprite extends Image {
 	}
 	
 	public void reset( int index ) {
-		frame( film.get( index ) );
+        if(index==FOOD){
+            texture("effects/painted_food.png");
+            frame(0,0,64,64);
+            texture.filter(com.watabou.gltextures.SmartTexture.LINEAR,com.watabou.gltextures.SmartTexture.LINEAR);
+        }else{
+            texture(Assets.Effects.SPELL_ICONS);
+            frame(film.get(index));
+        }
+        logicalSize(SIZE,SIZE);
 		origin.set( width / 2, height / 2 );
 		
 		phase = Phase.FADE_IN;

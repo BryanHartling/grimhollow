@@ -1,3 +1,7 @@
+# Playtest polish — v1.18.0
+
+`sources/playtest-polish/` contains three original built-in imagegen paintings: ascending stairs, descending stairs, and the eating icon. Exact prompts and GPL-3.0-or-later provenance are in `playtest-polish-prompts.json`. `pack.py` composites stair frames 16/17/22 across the five region atlases and inherited expedition terrain, and exports the transparent 64px meal to `effects/painted_food.png`. Garden motes reuse the existing painted particle atlas. All outputs rebuild offline; world units and stair behavior are unchanged.
+
 # Lurking Horror — v1.17.0
 
 `sources/lurking-horror.png` is an original four-pose transparent painting produced with built-in imagegen. The exact prompt and provenance are in `lurking-horror-prompt.json`. `horror.py` reproducibly extracts the idle, travel, strike and collapsed poses with a shared scale and foot anchor into a 512px atlas. The sprite has a steady idle and a short attack animation; eightfold texture density preserves the existing logical world units. Source and derivatives are GPL-3.0-or-later. Fresh victim remains reuse the existing painted species death pose. `pack.py` and `recovery_assets.py --check` require no model, network or Blender run.

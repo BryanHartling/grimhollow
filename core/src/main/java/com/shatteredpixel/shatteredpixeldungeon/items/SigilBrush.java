@@ -16,6 +16,17 @@ import java.util.*;
 import com.watabou.utils.Random;
 public class SigilBrush extends ClassSpellItem {
     {image=ItemSpriteSheet.SIGIL_BRUSH;}
+    @Override protected boolean canCastFrom(Hero h){
+        return isEquipped(h) || h.hasTalent(Talent.DUAL_INSCRIPTION) && h.belongings.contains(this);
+    }
+    public float carriedRechargeRate(Hero h){
+        int rank=h.pointsInTalent(Talent.DUAL_INSCRIPTION);
+        return rank==0?0:rank==1?.5f:.75f;
+    }
+    public void rechargeCarried(Hero h){
+        if(!isEquipped(h) && h.belongings.contains(this) && h.buff(MagicImmune.class)==null)
+            advance(carriedRechargeRate(h));
+    }
     public static final String AC_ETCH="ETCH";
     @Override public ArrayList<String> actions(Hero h){ArrayList<String> a=super.actions(h);a.add(AC_ETCH);return a;}
     @Override public void execute(Hero h,String action){if(action.equals(AC_ETCH)){if(RuneEtching.etch(h))h.spendAndNext(1);else com.shatteredpixel.shatteredpixeldungeon.utils.GLog.w(Messages.get(this,"etch_invalid"));}else super.execute(h,action);}
@@ -60,10 +71,6 @@ public class SigilBrush extends ClassSpellItem {
             case "inscribe":
                 if(!inscriptionTarget(h,item)||magic==null||!magic.choices(item).contains(choice))return false;
                 inscribe(item,choice,30+10*h.pointsInTalent(Talent.STEADY_HAND));
-                if(Random.Float()<.25f*h.pointsInTalent(Talent.DUAL_INSCRIPTION)){
-                    Item other=item instanceof Weapon?h.belongings.armor:h.belongings.weapon;
-                    if(other!=null){java.util.List<Class<?>> choices=magic.choices(other instanceof Armor);Class<?> second=choices.isEmpty()?(other instanceof Armor?Armor.Glyph.common[0]:Weapon.Enchantment.common[0]):Random.element(choices);inscribe(other,second,30+10*h.pointsInTalent(Talent.STEADY_HAND));}
-                }
                 if(Random.Float()<.1f*h.pointsInTalent(Talent.EFFICIENT_SIGILS))cost=0;
                 break;
             case "transmute":

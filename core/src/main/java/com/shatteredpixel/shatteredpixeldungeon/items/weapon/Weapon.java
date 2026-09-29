@@ -144,7 +144,7 @@ abstract public class Weapon extends KindOfWeapon {
         // A new hit replaces the previous hit's Lucky result. Multiple enchantment
         // slots on THIS hit must not cancel each other's successful rolls.
         if (!Lucky.inAttack()) Buff.detach(defender, Lucky.LuckProc.class);
-        if(runeEtching!=null&&attacker.buff(MagicImmune.class)==null&&defender.isAlive())damage=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.weaponProc(runeEtching.floorEnchant,this,attacker,defender,damage,.5f);
+        if(runeEtching!=null&&attacker.buff(MagicImmune.class)==null&&defender.isAlive())damage=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.weaponProc(runeEtching.floorEnchant,this,attacker,defender,damage,1f);
 
 		if(inscribed!=null&&attacker.buff(MagicImmune.class)==null)damage=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.weaponProc(inscribed,this,attacker,defender,damage,1);
 		if (attacker.buff(MagicImmune.class) == null) {

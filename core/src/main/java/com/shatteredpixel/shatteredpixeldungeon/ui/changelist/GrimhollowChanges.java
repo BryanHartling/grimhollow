@@ -20,7 +20,19 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.17.1","Grimhollow's update log.");
+        ChangeInfo r=release(list,"v1.18.0","Prepared explorers and a better-fed companion.");
+        note(r,Icons.JOURNAL,"Feed deliberately, revisit the log",
+                "The Hatchling's Feed action lets you choose an eligible loose item, using its usual benefits and risks. Feeding takes one turn and restarts its hunger interval; unattended feeding still happens, and gold demands never reset. "
+                +"Message History in the game menu keeps the latest 500 messages, scrollable and saved with your run. All nine heroes begin knowing their own equipment.");
+        note(r,Icons.TALENT,"Enchanter refinements",
+                "The Enchanter starts with three steel-tipped darts. Rune Etching now works at full strength with the class's 25% proc-rate bonus. Defensive Sigil lasts 6/10 turns. "
+                +"Wandering Brush replaces Dual Inscription: cast from inventory and recharge at 50%/75% of the equipped rate. Resonance rises to 1.2x/1.3x. "
+                +"Appraisal replaces Attunement: newly collected gear has a 20%/30% chance of full identification, checked once per item. Existing talent investments carry over.");
+        note(r,Icons.STAIRS,"Clearer dungeon details",
+                "Ascending and descending stairs and the eating symbol have new painted artwork. Garden shadowmeld motes now use soft painted light. "
+                +"The Rat King's statue crown stays hidden until its statue cell has been discovered.");
+
+        r=release(list,"v1.17.1","Grimhollow's update log.");
         note(r,Icons.JOURNAL,"Our journey so far",
                 "The update log now follows Grimhollow's own releases, from its three new heroes to the Lurking Horror. "
                 +"Browse the entries below for new adventures, equipment, painted artwork, balance changes and playtest fixes. "

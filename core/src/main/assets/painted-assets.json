@@ -95,6 +95,9 @@
     "particles/defensive-sigil.png": "92e9c8ca0ccde3a87936b244fdeec4d2ff24bdcff43e95f9286620049a7d3709",
     "particles/motifs.png": "1d756eac0e9922a4da959a902f8af78464593fac48ec18248ac8829398ae9465",
     "particles/rays.png": "701f1bce3b4b0b5cc4eefcc210d745bdac7ed87153dde2b9fd25e861fc0e6ea4",
+    "playtest-polish/eating.png": "482ae5fcf8f9ec37c80b6fcc01acad660cb437db5908a6470a28ac5a54f7433b",
+    "playtest-polish/stairs-down.png": "464ab16dcabd14d151a719824bee1d363160f7612aeb6881f951c6558c870811",
+    "playtest-polish/stairs-up.png": "0ad09ba29d2c6442c91377e7cd57a5af7ef2748b427f709298deaaeb1c6b703b",
     "presentation/cleric.png": "dde202c11b91d98e4d989ea6fd33596bc09ea5c0ce9ff0071e0e335a7685b406",
     "presentation/duelist.png": "872aa0cc9cbd179b94aa88b8e9a30288fec86777c465703f905c6b6789e49ec2",
     "presentation/enchanter.png": "4b7f36fce29b03ff7349808e59ad04e792e06b0db495701ff925dad3fe413934",
@@ -136,7 +139,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "7ca8c7efe4b5814182bd5f55063e5ed394be133972f6684368e5a2acf765baf6"
+      "rgba_sha256": "d99de0e4f8d933d1cbcdd182408ad24e632f30dc11c7b9a640a2ac339d2a53d8"
     },
     "environment/water0.png": {
       "size": [
@@ -150,14 +153,14 @@
         1024,
         1024
       ],
-      "rgba_sha256": "7ca8c7efe4b5814182bd5f55063e5ed394be133972f6684368e5a2acf765baf6"
+      "rgba_sha256": "d99de0e4f8d933d1cbcdd182408ad24e632f30dc11c7b9a640a2ac339d2a53d8"
     },
     "environment/tiles_prison.png": {
       "size": [
         1024,
         1024
       ],
-      "rgba_sha256": "89bf1a26899bf9396c6db0eba1b496ae3a5ed525f04ab8e205e37a4f6ef6b911"
+      "rgba_sha256": "e7bb66b29eaee39552545c0a8f05fd5eabcebfdd5d31c9c14f666bd968f30309"
     },
     "environment/water1.png": {
       "size": [
@@ -171,7 +174,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "b2979a8670b01787395200d74bbce3c7a8e8e59143df99cfb64ff48e1ff1a368"
+      "rgba_sha256": "127922637ec1458cc06ba2a76c41d9262d2423f4c6944f298ef3385e791c3bb0"
     },
     "environment/water2.png": {
       "size": [
@@ -185,7 +188,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "4465ae1e76dadf542b85be4b33e67ce875af6bfe8ff6ee8174dda8ff67fd5ae7"
+      "rgba_sha256": "0ffffc2f1dade2ae24480167b6e80a980a810f33bb65dcc59027169ce4109e00"
     },
     "environment/water3.png": {
       "size": [
@@ -199,7 +202,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "9ea073288ca60c4c4613b6bf98562992da7c452e4b0b7def10683fdc07d6ae1f"
+      "rgba_sha256": "f3064512a23d1a2f8b1e79a52cd250527198d1a6379023525c3a26da6f6544ee"
     },
     "environment/water4.png": {
       "size": [
@@ -9098,14 +9101,14 @@
         1024,
         1024
       ],
-      "rgba_sha256": "eacd9f8e697b2ebd0189a11e1b34846decb163973b7a75054b929fd810b31ff4"
+      "rgba_sha256": "36fea6e4ca85cc50184e86bb361dab9c468cfa9315e0b526e1711ea5723dfc90"
     },
     "environment/tiles_caves_crystal.png": {
       "size": [
         1024,
         1024
       ],
-      "rgba_sha256": "8b845a6537b4d38f02d993ccb861d7f1f830f0fcb80dba5ef664a3ad8e2cd096"
+      "rgba_sha256": "102d15fca49f01c4f54a5ed633b0803eaa7504759b0d81afc7b48b13dfbe5328"
     },
     "environment/custom_tiles/prison_quest.png": {
       "size": [
@@ -9222,14 +9225,14 @@
         1024,
         1024
       ],
-      "rgba_sha256": "c2aeba9e8c25a5de108bdb0d2d17c0316300b86d24dbd032ffb5c058abe516b1"
+      "rgba_sha256": "c0b61c3403e5207218beed1289a9ef8db363153ed583674cf99cfe23f376aac0"
     },
     "environment/tiles_expedition_hoard.png": {
       "size": [
         1024,
         1024
       ],
-      "rgba_sha256": "15c10748149881f8061f5dba24d5f2165b6310d384f2ca784d18f7d5d95aa031"
+      "rgba_sha256": "bdad1a98e04475368922804ef2d9d22756b4f18234251dfc5fe4c1b8c0e6901c"
     },
     "environment/custom_tiles/expedition_hoard.png": {
       "size": [
@@ -9275,6 +9278,13 @@
           512
         ]
       ]
+    },
+    "effects/painted_food.png": {
+      "size": [
+        64,
+        64
+      ],
+      "rgba_sha256": "316031279d1d13d269a15f6901cbb8fac54a9142f35fff0c24daa15f8ed96b92"
     }
   }
 }

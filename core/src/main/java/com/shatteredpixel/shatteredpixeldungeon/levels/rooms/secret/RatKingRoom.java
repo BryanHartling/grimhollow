@@ -227,6 +227,13 @@ public class RatKingRoom extends SecretRoom {
 	}
 
 	public static class StatueOverhang extends CustomTilemap {
+        @Override protected boolean knownSource(int localCell){
+            int source=tileX+localCell%tileW+(tileY+localCell/tileW+1)*Dungeon.level.width();
+            return Dungeon.level.insideMap(source) && (Dungeon.level.heroFOV[source]
+                    || Dungeon.level.visited[source] || Dungeon.level.mapped[source]);
+        }
+        @Override public void updateKnowledge(){if(vis!=null)vis.updateMap();}
+
 
 		{
 			texture = Assets.Environment.RAT_KING_ROOM;
@@ -240,7 +247,7 @@ public class RatKingRoom extends SecretRoom {
 			for (int y = 0; y < tileH; y++){
 				int cell = tileX + (tileY+y)*Dungeon.level.width();
 				for (int x = 0; x < tileW; x++){
-					if (Dungeon.level.map[cell + Dungeon.level.width()] == Terrain.CUSTOM_DECO){
+					if (Dungeon.level.insideMap(cell + Dungeon.level.width()) && Dungeon.level.map[cell + Dungeon.level.width()] == Terrain.CUSTOM_DECO){
 						//statue overhang
 						data[i] = 2;
 					} else {

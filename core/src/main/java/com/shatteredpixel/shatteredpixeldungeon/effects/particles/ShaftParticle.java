@@ -22,49 +22,30 @@
 package com.shatteredpixel.shatteredpixeldungeon.effects.particles;
 
 import com.watabou.noosa.particles.Emitter;
-import com.watabou.noosa.particles.Emitter.Factory;
-import com.shatteredpixel.shatteredpixeldungeon.effects.PaintedParticle;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.Image;
+import com.shatteredpixel.shatteredpixeldungeon.effects.ParticleArt;
 import com.watabou.utils.Random;
 
-public class ShaftParticle extends PaintedParticle {
-	
-	public static final Emitter.Factory FACTORY = new Factory() {
-		@Override
-		public void emit( Emitter emitter, int index, float x, float y ) {
-			((ShaftParticle)emitter.recycle( ShaftParticle.class )).reset( x, y );
-		}
-		@Override
-		public boolean lightMode() {
-			return true;
-		}
-	};
-	
-	public ShaftParticle() {
-		super();
-		
-		lifespan = 1.2f;
-		speed.set( 0, -6 );
-	}
-	
-	private float offs;
-	
-	public void reset( float x, float y ) {
-		revive();
-		
-		this.x = x;
-		this.y = y;
-		
-		offs = -Random.Float( lifespan );
-		left = lifespan - offs;
-	}
-	
-	@Override
-	public void update() {
-		super.update();
-		
-		float p = left / lifespan;
-		am = p < 0.5f ? p : 1 - p;
-		scale.x = (1 - p) * 4;
-		scale.y = 16 + (1 - p) * 16;
-	}
+/** Soft garden motes, with bounded positive scale and no stretched solid-pixel shaft. */
+public class ShaftParticle extends Image {
+    public static final Emitter.Factory FACTORY=new Emitter.Factory(){
+        @Override public void emit(Emitter emitter,int index,float x,float y){
+            ((ShaftParticle)emitter.recycle(ShaftParticle.class)).reset(x,y);
+        }
+        @Override public boolean lightMode(){return true;}
+    };
+    private float lifespan,left,startX,startY,phase;
+    public ShaftParticle(){ParticleArt.frame(this,ParticleArt.MOTE,4,4);originToCenter();hardlight(0xD9E9B5);}
+    public void reset(float x,float y){
+        revive();startX=x;startY=y;lifespan=left=Random.Float(2.4f,3.6f);phase=Random.Float(6.283f);alpha(0);
+    }
+    @Override public void update(){
+        super.update();left-=Game.elapsed;if(left<=0){kill();return;}
+        float progress=1-left/lifespan;
+        x=startX+(float)Math.sin(phase+progress*4)*2-width/2;
+        y=startY-progress*8-height/2;
+        scale.set(.55f+.25f*(float)Math.sin(Math.PI*progress));
+        alpha(.6f*(float)Math.sin(Math.PI*progress));
+    }
 }

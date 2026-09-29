@@ -1,5 +1,7 @@
 # Known issues
 
+- Playtest polish v1.18.0: Overload is unchanged pending a replacement choice; new text uses English fallback. Physical Samsung tablet playtesting is outstanding. Message History cannot recover messages discarded before this update.
+
 - Lurking Horror v1.17.0 uses a 50% regional roll, but skips a selected floor with no suitable empty room; it is not retroactively inserted into generated floors. Encounter balance and physical Samsung tablet performance still require human playtesting.
 - Lurking Horror text currently falls back to English in other locales. Its fleeing/recovery poses are deliberately steady; the new attack animation and detection overlay do not animate terrain or alter movement timing.
 - Dragon expedition v1.16.0 is enabled and all eight components are implemented. Campaign combat balance and Samsung tablet performance still require human playtesting; automated boss defeats use controlled fixtures and are not a complete player-driven campaign.

@@ -435,6 +435,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
 
     /** Review actual inventory, scrolling descriptions and class controls in both orientations. */
     private void interfaceTick() {
+        if(Boolean.getBoolean("grimhollow.polishReview")){polishTick();return;}
         if(frames>=1200){playtestTick();return;}
         if(!(Game.scene() instanceof GameScene))return;
         Camera.main.edgeScroll.set(0);
@@ -474,6 +475,46 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     +Gdx.graphics.getWidth()+"x"+Gdx.graphics.getHeight()+"; failures=0");
         }
         if(frames>=700)readabilityReview();
+    }
+    private void polishTick(){
+        if(!(Game.scene() instanceof GameScene))return;
+        if(frames==220){
+            Camera.main.snapTo(Dungeon.hero.sprite.center().x,Dungeon.hero.sprite.center().y);
+            for(int i=0;i<40;i++)com.shatteredpixel.shatteredpixeldungeon.utils.MessageHistory.add(com.shatteredpixel.shatteredpixeldungeon.utils.GLog.WARNING+"History entry "+i+": your hatchling mimic grumbles hungrily. It needs to eat!");
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndGame());
+        }else if(frames==240){interfaceBounds();capture("polish-game-menu");playtestClick("Message History");}
+        else if(frames==270){
+            interfaceBounds();capture("polish-history-newest");
+            for(com.watabou.noosa.Gizmo g:RecoveryChecks.members(Game.scene()))
+                if(g instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndMessageHistory)
+                    for(com.watabou.noosa.Gizmo p:RecoveryChecks.members((Group)g))
+                        if(p instanceof com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)
+                            ((com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)p).scrollTo(0,0);
+        }else if(frames==300){
+            interfaceBounds();capture("polish-history-oldest");closeReviewWindows();
+            HatchlingMimic pet=new HatchlingMimic();pet.collect();
+            Dungeon.hero.belongings.backpack.items.add(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing());
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,pet));
+        }else if(frames==330){interfaceBounds();capture("polish-hatchling-actions");playtestClick("FEED");}
+        else if(frames==360){
+            if(Boolean.getBoolean("grimhollow.interfacePortrait"))interfaceBounds();
+            else {
+                com.shatteredpixel.shatteredpixeldungeon.ui.InventoryPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.InventoryPane)RecoveryChecks.field(Game.scene(),"inventory");
+                if(!pane.isSelecting()||!pane.getSelector().textPrompt().contains("Feed"))throw new AssertionError("61: Feed inventory selection missing");
+            }
+            capture("polish-feed-picker");closeReviewWindows();GameScene.cancel();
+            int cell=Dungeon.hero.pos;
+            com.shatteredpixel.shatteredpixeldungeon.levels.Level.set(cell-1,Terrain.ENTRANCE);
+            com.shatteredpixel.shatteredpixeldungeon.levels.Level.set(cell+1,Terrain.EXIT);
+            GameScene.updateMap();Dungeon.observe();
+            com.shatteredpixel.shatteredpixeldungeon.effects.CellEmitter.get(cell).pour(
+                    com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShaftParticle.FACTORY,.15f);
+            com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite.show(Dungeon.hero,com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite.FOOD);
+        }else if(frames==385){capture("polish-stairs-meal-motes");}
+        else if(frames==410){
+            System.out.println("TEST 61 UI PASS: native menu input, scrollable history newest/oldest, Hatchling Feed action/picker, painted stairs/eating/motes");
+            Gdx.app.exit();
+        }
     }
     private int inspectPosition,inspectGold,inspectCharges;
     private float inspectTime;

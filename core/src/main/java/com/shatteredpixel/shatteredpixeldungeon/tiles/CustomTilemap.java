@@ -88,11 +88,15 @@ public abstract class CustomTilemap implements Bundlable {
 		return data;
 	}
 	
+	protected boolean knownSource(int localCell){return true;}
+	public void updateKnowledge(){}
+
 	public Tilemap create(){
 		if (vis != null && vis.alive) vis.killAndErase();
 		int frame = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.tileFrame(String.valueOf(texture));
 		vis = new Tilemap(texture, new TextureFilm( texture, frame, frame )){
 			{ cellSize(SIZE, SIZE); }
+            @Override protected boolean needsRender(int pos){return super.needsRender(pos) && CustomTilemap.this.knownSource(pos);}
 			@Override
 			protected NoosaScript script() {
 				//allow lighting for custom tilemaps

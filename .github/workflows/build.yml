@@ -79,6 +79,7 @@ jobs:
             xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-rooms-$orientation" -Dgrimhollow.interfaceReview=true -Dgrimhollow.roomReview=true -Dgrimhollow.interfacePortrait=$portrait -Dgrimhollow.smokeDir="verification/interface/$orientation" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
             xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-expedition-$orientation" -Dgrimhollow.interfaceReview=true -Dgrimhollow.expeditionReview=true -Dgrimhollow.interfacePortrait=$portrait -Dgrimhollow.smokeDir="verification/interface/$orientation" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
             xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-horror-$orientation" -Dgrimhollow.interfaceReview=true -Dgrimhollow.horrorReview=true -Dgrimhollow.heroClass=WARRIOR -Dgrimhollow.interfacePortrait=$portrait -Dgrimhollow.smokeDir="verification/interface/$orientation" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
+            xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-polish-$orientation" -Dgrimhollow.interfaceReview=true -Dgrimhollow.polishReview=true -Dgrimhollow.interfacePortrait=$portrait -Dgrimhollow.smokeDir="verification/interface/$orientation" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
           done
       - name: Vault boss arena and elemental forms in the existing renderer
         if: ${{ !cancelled() && runner.os == 'Linux' }}

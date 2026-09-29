@@ -1,5 +1,9 @@
 # Grimhollow
 
+**Playtest polish v1.18.0:** open **Menu → Message History** to scroll through the latest 500 messages; history follows the save across floors and reloads. Examine the **Hatchling Mimic → Feed** to choose an eligible loose item. Feeding costs one turn, applies its usual effects, and restarts the hunger interval. Automatic feeding remains active.
+
+All nine heroes now identify their starting belongings; Enchanter adds three steel-tipped darts. Defensive Sigil lasts 6/10 turns, Rune Etching works at full strength with +25% proc chance, Resonance is 1.2x/1.3x, Wandering Brush allows inventory casting and 50%/75% recharge, and Appraisal gives collected gear a one-time 20%/30% identification roll. Existing talent ranks carry over. Overload is unchanged pending a replacement choice. Stairs and eating use new painted art; garden motes are soft, and the hidden Rat King crown no longer reveals its room.
+
 **Update Log v1.17.1:** the welcome-screen Update Log now presents Grimhollow's shipped releases, newest first, with one upstream 4.0 foundation entry. It covers the new heroes, painted visuals, artifacts and trinket, expedition, Lurking Horror, Playtest tools, balance changes and repairs. Long entries scroll in portrait and landscape.
 
 **Lurking Horror v1.17.0:** a rare living ambush predator can stalk one newly generated ordinary floor in each region. An arrival omen hints at its presence. Its attack warning stops automatic movement and leaves you a fresh action to evade, reveal it, or turn invisible. Once exposed it stays vulnerable through flight and recovery; it can recover only 25% of its maximum health over its lifetime. Mind Vision shows the creature without revealing nearby terrain. Search, Talisman Scry, prismatic light and an open Ashlight Lantern at +6 also counter it.

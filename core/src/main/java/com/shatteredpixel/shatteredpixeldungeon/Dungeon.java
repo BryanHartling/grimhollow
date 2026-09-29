@@ -232,6 +232,7 @@ public class Dungeon {
 	}
 	
 	public static void init() {
+        com.shatteredpixel.shatteredpixeldungeon.utils.MessageHistory.clear();
         com.shatteredpixel.shatteredpixeldungeon.journal.Journal.loadGlobal();
 		Playtest.reset();
 
@@ -692,6 +693,7 @@ public class Dungeon {
 			SecretRoom.storeRoomsInBundle( bundle );
 			
 			Statistics.storeInBundle( bundle );
+            com.shatteredpixel.shatteredpixeldungeon.utils.MessageHistory.store(bundle);
 			Notes.storeInBundle( bundle );
 			Generator.storeInBundle( bundle );
 
@@ -845,6 +847,7 @@ public class Dungeon {
 		energy = bundle.getInt( ENERGY );
 
 		Statistics.restoreFromBundle( bundle );
+        com.shatteredpixel.shatteredpixeldungeon.utils.MessageHistory.restore(bundle);
 		Generator.restoreFromBundle( bundle );
 
 	}

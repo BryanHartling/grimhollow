@@ -17,7 +17,8 @@ public abstract class ClassSpellItem extends Artifact {
     public void gainCharge(int n){chargeCap=cap();charge=Math.min(cap(),Math.max(0,charge+n));Item.updateQuickslot();}
     public void advance(float turns){chargeCap=cap();if(charge<cap()){partialCharge+=turns/Math.max(20,40-2*Dungeon.hero.lvl);while(partialCharge>=1&&charge<cap()){charge++;partialCharge--;}}else partialCharge=0;Item.updateQuickslot();}
     protected float regeneration(){return 1;}
-    public boolean ready(Hero hero,int cost){return isEquipped(hero)&&hero.buff(MagicImmune.class)==null&&charge>=cost;}
+    protected boolean canCastFrom(Hero hero){return isEquipped(hero);}
+    public boolean ready(Hero hero,int cost){return canCastFrom(hero)&&hero.buff(MagicImmune.class)==null&&charge>=cost;}
     protected void finish(Hero hero,int cost){charge-=cost;onChargesSpent(cost);Item.updateQuickslot();hero.spendAndNext(1);}
     protected void onChargesSpent(int cost) {}
     @Override public boolean isIdentified(){return true;}
@@ -27,10 +28,10 @@ public abstract class ClassSpellItem extends Artifact {
     public class Charger extends ArtifactBuff {@Override public boolean act(){advance(regeneration());spend(TICK);return true;}}
     @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);charge=b.getInt("charge");}
     @Override public void doDrop(Hero hero){}
-    @Override public ArrayList<String> actions(Hero hero){ArrayList<String> a=super.actions(hero);a.remove(AC_DROP);a.remove(AC_THROW);if(isEquipped(hero))a.add("CAST");return a;}
+    @Override public ArrayList<String> actions(Hero hero){ArrayList<String> a=super.actions(hero);a.remove(AC_DROP);a.remove(AC_THROW);if(canCastFrom(hero))a.add("CAST");return a;}
     protected abstract String[] spells(Hero hero);
     protected abstract void select(Hero hero,String spell);
-    @Override public void execute(Hero hero,String action){super.execute(hero,action);if(action.equals("CAST")&&isEquipped(hero))GameScene.show(new Window(){
+    @Override public void execute(Hero hero,String action){super.execute(hero,action);if(action.equals("CAST")&&canCastFrom(hero))GameScene.show(new Window(){
         {int w=Math.min(220,(int)com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.uiCamera.width-24);
             int h=Math.min(170,(int)com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.uiCamera.height-30);
             resize(w,h);String[] choices=spells(hero);float buttonWidth=Math.min(72,(w-12)*.35f),buttonHeight=choices.length>=6?Math.min(30,(h-8)/5f):34;

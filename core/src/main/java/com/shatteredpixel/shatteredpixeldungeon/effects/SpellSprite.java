@@ -63,22 +63,16 @@ public class SpellSprite extends Image {
 	private static HashMap<Char,SpellSprite> all = new HashMap<>();
 	
 	public SpellSprite() {
-		super( Assets.Effects.SPELL_ICONS );
+		super("effects/painted_spells.png");
 		
 		if (film == null) {
-			film = new TextureFilm( texture, SIZE );
+			film = new TextureFilm(texture, 64);
 		}
 	}
 	
 	public void reset( int index ) {
-        if(index==FOOD){
-            texture("effects/painted_food.png");
-            frame(0,0,64,64);
-            texture.filter(com.watabou.gltextures.SmartTexture.LINEAR,com.watabou.gltextures.SmartTexture.LINEAR);
-        }else{
-            texture(Assets.Effects.SPELL_ICONS);
-            frame(film.get(index));
-        }
+        frame(film.get(index));
+        texture.filter(com.watabou.gltextures.SmartTexture.LINEAR,com.watabou.gltextures.SmartTexture.LINEAR);
         logicalSize(SIZE,SIZE);
 		origin.set( width / 2, height / 2 );
 		

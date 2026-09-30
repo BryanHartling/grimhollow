@@ -39,6 +39,13 @@ public class Effects {
 	}
 	
     public static Image get( Type type ) {
+        if(type == Type.EXCLAMATION){
+            Image alert = new Image(FloatingText.ICONS);
+            alert.frame(FloatingText.iconFilm.get(83));
+            alert.logicalSize(6,9);
+            alert.texture.filter(com.watabou.gltextures.SmartTexture.LINEAR,com.watabou.gltextures.SmartTexture.LINEAR);
+            return alert;
+        }
         Image icon = new Image( Assets.Effects.EFFECTS );
         if(EnhancedEffects.enabled()){
             switch(type){

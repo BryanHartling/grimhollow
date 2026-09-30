@@ -219,6 +219,8 @@ def outputs():
     meal=fit(Image.open(HERE/'sources/playtest-polish/eating.png').convert('RGBA'),60,60)
     icon=Image.new('RGBA',(64,64));icon.alpha_composite(meal,((64-meal.width)//2,(64-meal.height)//2))
     result['effects/painted_food.png']=icon
+    from notifications import outputs as notifications
+    result.update(notifications(result))
     return result
 
 
@@ -251,6 +253,8 @@ def main():
         if path=='interfaces/painted_skills.png':expected=(1024,512)
         if path=='interfaces/painted_badges.png':expected=(1024,512)
         if path=='effects/painted_food.png':expected=(64,64)
+        if path=='effects/painted_notifications.png':expected=(1008,320)
+        if path=='effects/painted_spells.png':expected=(512,64)
         if path=='effects/readability.png':expected=(512,64)
         if path in ('effects/painted_particles.png','effects/painted_specks.png','effects/painted_rays.png'):expected=(256,256)
         if path=='sprites/item_icons.png':expected=(512,256)

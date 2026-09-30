@@ -72,7 +72,8 @@ public class FloatingText extends RenderedTextBlock {
 
 	public static final int ICON_WIDTH = 7;
 	public static final int ICON_HEIGHT = 8;
-	public static TextureFilm iconFilm = new TextureFilm( Assets.Effects.TEXT_ICONS, ICON_WIDTH, ICON_HEIGHT );
+	public static final String ICONS = "effects/painted_notifications.png";
+	public static TextureFilm iconFilm = new TextureFilm(ICONS, ICON_WIDTH*8, ICON_HEIGHT*8);
 
 	public static int NO_ICON   = -1;
 
@@ -225,8 +226,11 @@ public class FloatingText extends RenderedTextBlock {
 		hardlight( color );
 
 		if (iconIdx != NO_ICON){
-			icon = new Image( Assets.Effects.TEXT_ICONS);
+			icon = new Image(ICONS);
 			icon.frame(iconFilm.get(iconIdx));
+			icon.logicalSize(ICON_WIDTH, ICON_HEIGHT);
+			if (iconIdx == HEALING) icon.hardlight(1f, .18f, .24f);
+			icon.texture.filter(com.watabou.gltextures.SmartTexture.LINEAR, com.watabou.gltextures.SmartTexture.LINEAR);
 			add(icon);
 			iconLeft = left;
 			if (iconLeft){

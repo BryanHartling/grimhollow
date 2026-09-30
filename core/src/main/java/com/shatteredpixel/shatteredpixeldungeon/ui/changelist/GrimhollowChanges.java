@@ -20,7 +20,17 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.18.0","Prepared explorers and a better-fed companion.");
+        ChangeInfo r=release(list,"v1.18.1","A measured appetite and clearer signals.");
+        note(r,Icons.BACKPACK,"Hatchling balance",
+                "Manual feeding is available once the hatchling becomes hungry, during the final quarter of its feeding cycle. Automatic meals and warning interruptions remain. "
+                +"Item Sense marks only one nearest undiscovered loot pile for 20 turns, within 5/8/12/16 cells at +0/+1/+2/+3. Collecting it does not reveal another; refresh replaces the scent. "
+                +"A meal upgrades OR enchants, with a 75% preference for upgrades when both are eligible. Exceptional upgrades stay +2 and rings remain Exceptional. "
+                +"Identification reaches your belongings, including bags and equipped gear, but never floor loot.");
+        note(r,Icons.INFO,"Clearer portraits and notifications",
+                "Target-box creatures fill the available space without counting transparent sprite padding. The home screen opens this complete update log directly. "
+                +"Healing wells and healing bursts show red hearts, and floating combat, pickup and spell notifications use painted symbols.");
+
+        r=release(list,"v1.18.0","Prepared explorers and a better-fed companion.");
         note(r,Icons.JOURNAL,"Feed deliberately, revisit the log",
                 "The Hatchling's Feed action lets you choose an eligible loose item, using its usual benefits and risks. Feeding takes one turn and restarts its hunger interval; unattended feeding still happens, and gold demands never reset. "
                 +"Message History in the game menu keeps the latest 500 messages, scrollable and saved with your run. All nine heroes begin knowing their own equipment.");

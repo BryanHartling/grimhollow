@@ -1,9 +1,12 @@
-# Hatchling balance - v1.18.1
+# Hatchling balance and readable notifications - v1.18.1
 
 - Manual Feed now requires hunger (last quarter of the interval); automatic feeding and the action-interrupt warning remain.
 - Item Sense marks only the nearest undiscovered loot pile for 20 turns within 5/8/12/16 cells; refresh replaces the scent, collection never chains, and terrain/mimics remain hidden. Legacy floor-wide scent expires on loading.
 - A meal upgrades OR enchants (75% upgrade preference when both are eligible). Exceptional upgrades remain +2, rings remain Exceptional, and identification reaches only owned belongings including bags and equipped gear.
-- Validation: core tests and Enchanter headless gate Runs=10 failures=0, including Hatchling balance and existing interaction regressions.
+- Target portraits fit opaque creature bounds into 20 logical pixels, preserving aspect ratio and world sprite sizes. Home now opens the existing complete update log.
+- Reuse committed painted symbols for all floating damage, healing, pickup and hit/miss notifications, all eight spell overlays and alert marks. Healing-well and recovery hearts are red; particle timing and gameplay are unchanged. All new atlases are reproduced by the offline packer.
+- Glimpse and potions share Mind Vision: revealing ordinary mimics is expected; specially concealed mimics retain their existing exclusion.
+- Validation: seven JUnit tests; three-class headless gate Runs=30 failures=0; desktop and Android builds; native landscape/portrait checks for home navigation, text fit, Hatchling description and Feed, notification sizes/colors, five creature portrait shapes and both tag orientations; 140 painted assets reproduced with failures=0. Existing test-45 contrast failure remains enforced.
 
 # Playtest polish - v1.18.0
 

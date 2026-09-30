@@ -35,11 +35,15 @@ final class RecoveryChecks {
     }
 
     static void titleControls() {
-        String[] fields={"btnPlay","btnRankings","btnJournal","btnSettings","btnCredits"};
-        for(String name:fields)if(field(Game.scene(),name)==null)throw new AssertionError("Missing title control "+name);
+        String[] fields={"btnPlay","btnChanges","btnRankings","btnJournal","btnSettings","btnCredits"};
+        for(String name:fields){
+            com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton button=(com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)field(Game.scene(),name);
+            if(button==null)throw new AssertionError("Missing title control "+name);
+            if(button.reqWidth()>button.width()+.01f)throw new AssertionError("Title text overflows "+name);
+        }
         int controls=0;
         for(Gizmo child:members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)controls++;
-        if(controls!=5)throw new AssertionError("Title must contain exactly five main controls, found "+controls);
+        if(controls!=6)throw new AssertionError("Title must contain exactly six main controls, found "+controls);
     }
 
     static void linkHandlers() {
@@ -68,7 +72,7 @@ final class RecoveryChecks {
             if(com.shatteredpixel.shatteredpixeldungeon.services.news.News.service!=null
                     ||com.shatteredpixel.shatteredpixeldungeon.services.updates.Updates.service!=null)
                 throw new AssertionError("A network feed service is active");
-            System.out.println("TEST 46 runtime: title controls=5 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0");
+            System.out.println("TEST 46 runtime: title controls=6 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0");
         } catch(Exception e){throw new AssertionError(e);}
         finally {Gdx.net=previous;Dungeon.hero=hero;}
     }

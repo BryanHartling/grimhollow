@@ -116,6 +116,18 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             }
             return;
         }
+        if(Boolean.getBoolean("grimhollow.polishReview")){
+            if(frames==100){
+                RecoveryChecks.titleControls();capture("polish-home");
+                pointerGestureReview(RecoveryChecks.field(Game.scene(),"btnChanges"),
+                        Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
+            }else if(frames==125){
+                if(!(Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.ChangesScene))throw new AssertionError("Home Update Log did not open");
+                capture("polish-update-log");scrollReview(Game.scene());
+            }else if(frames==150){
+                capture("polish-update-log-scrolled");switchNoFade(TitleScene.class);
+            }
+        }
         if (vault && sewers) vaultFrames();
         if (frames==180) {
             if (!(Game.scene() instanceof TitleScene)) throw new AssertionError("Title scene did not launch");
@@ -493,6 +505,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }else if(frames==300){
             interfaceBounds();capture("polish-history-oldest");closeReviewWindows();
             HatchlingMimic pet=new HatchlingMimic();pet.collect();while(!pet.hungry())pet.tick(Dungeon.hero);
+            if(!pet.info().contains("75%")||pet.info().contains("%1$d")||pet.info().contains("%2$d"))throw new AssertionError("Hatchling description formatting");
             Dungeon.hero.belongings.backpack.items.add(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing());
             GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,pet));
         }else if(frames==330){interfaceBounds();capture("polish-hatchling-actions");playtestClick("FEED");}
@@ -511,10 +524,54 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShaftParticle.FACTORY,.15f);
             com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite.show(Dungeon.hero,com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite.FOOD);
         }else if(frames==385){capture("polish-stairs-meal-motes");}
-        else if(frames==410){
-            System.out.println("TEST 61 UI PASS: native menu input, scrollable history newest/oldest, Hatchling Feed action/picker, painted stairs/eating/motes");
+        else if(frames==410){notificationReview();}
+        else if(frames==418){capture("polish-painted-notifications");}
+        else if(frames==440){targetPortraitReview();}
+        else if(frames==460){
+            capture("polish-target-portrait");
+            System.out.println("TEST 61 UI PASS: home Update Log, history, Feed, painted notification/healing/spell icons and visible-body target portraits; failures=0");
             Gdx.app.exit();
         }
+    }
+    private void notificationReview(){
+        com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite spell=new com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite();
+        for(int i=0;i<8;i++){
+            spell.reset(i);
+            if(spell.texture.width!=512||spell.width()!=16||spell.height()!=16)throw new AssertionError("Painted spell geometry "+i);
+        }
+        spell.destroy();
+        com.shatteredpixel.shatteredpixeldungeon.effects.Speck heart=new com.shatteredpixel.shatteredpixeldungeon.effects.Speck();
+        heart.reset(0,0,0,com.shatteredpixel.shatteredpixeldungeon.effects.Speck.HEALING);
+        if(heart.rm<=heart.gm*2||heart.rm<=heart.bm*2)throw new AssertionError("Healing hearts are not red");heart.destroy();
+        int[] indices={0,1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23,24,36,37,38,39,40,41,42,43,44,45,46,47,54,55,56,57,58,59,60,61,62,63,64,65,72,73,74,75,76,77,78,79,80,81,82};
+        for(int i=0;i<indices.length;i++){
+            com.shatteredpixel.shatteredpixeldungeon.effects.FloatingText text=new com.shatteredpixel.shatteredpixeldungeon.effects.FloatingText();
+            text.reset(30+(i%8)*25,50+(i/8)*13,"+1",0xFFFFFF,indices[i],true);
+            Image icon=(Image)RecoveryChecks.field(text,"icon");
+            if(icon.texture.width!=1008||icon.width()!=7||icon.height()!=8)throw new AssertionError("Painted floating icon geometry "+indices[i]);
+            text.camera=com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.uiCamera;Game.scene().add(text);
+        }
+        Dungeon.hero.sprite.emitter().burst(com.shatteredpixel.shatteredpixeldungeon.effects.Speck.factory(com.shatteredpixel.shatteredpixeldungeon.effects.Speck.HEALING),8);
+    }
+    private void targetPortraitReview(){
+        com.shatteredpixel.shatteredpixeldungeon.ui.AttackIndicator indicator=(com.shatteredpixel.shatteredpixeldungeon.ui.AttackIndicator)RecoveryChecks.field(Game.scene(),"attack");
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob[] targets={new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat(),new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Skeleton(),new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.RedShaman(),new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Brute(),new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Goo()};
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:targets){
+            mob.pos=Dungeon.hero.pos+1;
+            com.shatteredpixel.shatteredpixeldungeon.ui.AttackIndicator.target(mob);
+            indicator.setRect(100,50,24,24);
+            for(boolean flip:new boolean[]{false,true}){
+                indicator.flip(flip);
+                com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite sprite=(com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite)RecoveryChecks.field(indicator,"sprite");
+                com.watabou.utils.RectF body=sprite.visibleBounds();
+                if(Math.abs(Math.max(body.width(),body.height())-20)>.05f||body.left<99.9f||body.right>124.1f||body.top<49.9f||body.bottom>74.1f)throw new AssertionError("Target portrait fit "+mob.getClass()+" "+body);
+            }
+        }
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat rat=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();
+        rat.pos=Dungeon.hero.pos+1;Level.set(rat.pos,Terrain.EMPTY);GameScene.add(rat);Dungeon.observe();Dungeon.hero.checkVisibleMobs();
+        com.shatteredpixel.shatteredpixeldungeon.ui.AttackIndicator.updateState();
+        com.shatteredpixel.shatteredpixeldungeon.ui.AttackIndicator.target(rat);
+        if(!((Image)RecoveryChecks.field(indicator,"sprite")).visible)throw new AssertionError("Attack portrait is hidden");
     }
     private int inspectPosition,inspectGold,inspectCharges;
     private float inspectTime;

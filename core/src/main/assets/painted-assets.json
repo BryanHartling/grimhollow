@@ -9285,6 +9285,20 @@
         64
       ],
       "rgba_sha256": "316031279d1d13d269a15f6901cbb8fac54a9142f35fff0c24daa15f8ed96b92"
+    },
+    "effects/painted_notifications.png": {
+      "size": [
+        1008,
+        320
+      ],
+      "rgba_sha256": "87a4b4ce7694675cafaf1fe6e209189b94562bd1c014191bb3703f2df70153ee"
+    },
+    "effects/painted_spells.png": {
+      "size": [
+        512,
+        64
+      ],
+      "rgba_sha256": "2c42682762ce45fc676ff78cdabf787ba9aa752e20bc696b196096961aa56efd"
     }
   }
 }

@@ -166,6 +166,7 @@ public class Speck extends Image {
 		switch (type) {
 			
 		case HEALING:
+			hardlight(1f, .18f, .24f);
 			speed.set( 0, -20 );
 			lifespan = 1f;
 			break;
@@ -307,6 +308,7 @@ public class Speck extends Image {
 			break;
 			
 		case HEART:
+			hardlight(1f, .18f, .24f);
 			speed.set( Random.IntRange( -10, +10 ), -40 );
 			angularSpeed = Random.Float( -45, +45 );
 			lifespan = 1f;

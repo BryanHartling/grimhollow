@@ -1,5 +1,8 @@
 # Known issues
 
+- v1.18.1 Hatchling balance and notification/UI changes need physical Samsung tablet playtesting; native portrait/landscape checks do not substitute for a device. Existing test-45 terrain contrast failures remain enforced.
+- Old floor-wide Hatchling Item Sense expires when loading a pre-v1.18.1 save; the next meal selects one scent. New text falls back to English where translations are unavailable.
+
 - Playtest polish v1.18.0: Overload is unchanged pending a replacement choice; new text uses English fallback. Physical Samsung tablet playtesting is outstanding. Message History cannot recover messages discarded before this update.
 
 - Lurking Horror v1.17.0 uses a 50% regional roll, but skips a selected floor with no suitable empty room; it is not retroactively inserted into generated floors. Encounter balance and physical Samsung tablet performance still require human playtesting.

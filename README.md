@@ -1,5 +1,8 @@
 # Grimhollow
 
+**v1.18.1 balance and readability:** the home screen now opens **Update Log** directly. Target portraits fit the creature rather than its transparent frame. Healing hearts are red, with painted combat/pickup/spell notifications. Hatchling manual feeding requires hunger (last quarter of its interval); Item Sense marks one nearest undiscovered loot pile for 20 turns within 5/8/12/16 cells. Each meal upgrades OR enchants, favoring upgrades 75% when both are possible. Exceptional upgrades stay +2; rings remain Exceptional; identification only reaches owned belongings.
+
+
 **Playtest polish v1.18.0:** open **Menu → Message History** to scroll through the latest 500 messages; history follows the save across floors and reloads. Examine the **Hatchling Mimic → Feed** to choose an eligible loose item. Feeding costs one turn, applies its usual effects, and restarts the hunger interval. Automatic feeding remains active.
 
 All nine heroes now identify their starting belongings; Enchanter adds three steel-tipped darts. Defensive Sigil lasts 6/10 turns, Rune Etching works at full strength with +25% proc chance, Resonance is 1.2x/1.3x, Wandering Brush allows inventory casting and 50%/75% recharge, and Appraisal gives collected gear a one-time 20%/30% identification roll. Existing talent ranks carry over. Overload is unchanged pending a replacement choice. Stairs and eating use new painted art; garden motes are soft, and the hidden Rat King crown no longer reveals its room.

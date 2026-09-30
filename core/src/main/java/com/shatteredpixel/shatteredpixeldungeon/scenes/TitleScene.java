@@ -64,6 +64,7 @@ public class TitleScene extends PixelScene {
 	private Image title;
 
 	private StyledButton btnPlay;
+	private StyledButton btnChanges;
 	private StyledButton btnRankings;
 	private StyledButton btnJournal;
 	private StyledButton btnSettings;
@@ -138,6 +139,14 @@ public class TitleScene extends PixelScene {
 		btnPlay.icon(Icons.get(Icons.ENTER));
 		add(btnPlay);
 
+		btnChanges = new StyledButton(GREY_TR, Messages.get(this, "update_log")){
+			@Override protected void onClick() {
+				ShatteredPixelDungeon.switchNoFade(ChangesScene.class);
+			}
+		};
+		btnChanges.icon(Icons.get(Icons.CHANGES));
+		add(btnChanges);
+
 
 		btnRankings = new StyledButton(GREY_TR,Messages.get(this, "rankings")){
 			@Override
@@ -173,19 +182,20 @@ public class TitleScene extends PixelScene {
 		add(btnCredits);
 		
 		final int BTN_HEIGHT = 20;
-		int GAP = (int)(h - topRegion - (landscape() ? 3 : 4)*BTN_HEIGHT)/3;
+		int GAP = (int)(h - topRegion - 4*BTN_HEIGHT)/3;
 		GAP /= landscape() ? 3 : 5;
 		GAP = Math.max(GAP, 2);
 
 		float buttonAreaWidth = landscape() ? PixelScene.MIN_WIDTH_L-6 : PixelScene.MIN_WIDTH_P-2;
 		float btnAreaLeft = insets.left + (w - buttonAreaWidth) / 2f;
+        float half=(buttonAreaWidth-2)/2;
 		btnPlay.setRect(btnAreaLeft, insets.top+topRegion+GAP, buttonAreaWidth, BTN_HEIGHT);
         align(btnPlay);
-        float half=(buttonAreaWidth-2)/2;
         btnRankings.setRect(btnPlay.left(),btnPlay.bottom()+GAP,half,BTN_HEIGHT);
         btnJournal.setRect(btnRankings.right()+2,btnRankings.top(),half,BTN_HEIGHT);
         btnSettings.setRect(btnPlay.left(),btnRankings.bottom()+GAP,half,BTN_HEIGHT);
         btnCredits.setRect(btnSettings.right()+2,btnSettings.top(),half,BTN_HEIGHT);
+        btnChanges.setRect(btnAreaLeft,btnSettings.bottom()+GAP,buttonAreaWidth,BTN_HEIGHT);
 
 		version = new BitmapText( "v" + Game.version, pixelFont);
 		version.measure();
@@ -253,12 +263,14 @@ public class TitleScene extends PixelScene {
 		title.am = alpha;
 
 		btnPlay.enable(alpha != 0);
+		btnChanges.enable(alpha != 0);
 		btnRankings.enable(alpha != 0);
 		btnJournal.enable(alpha != 0);
 		btnSettings.enable(alpha != 0);
 		btnCredits.enable(alpha != 0);
 
 		btnPlay.alpha(alpha);
+		btnChanges.alpha(alpha);
 		btnRankings.alpha(alpha);
 		btnJournal.alpha(alpha);
 		btnSettings.alpha(alpha);

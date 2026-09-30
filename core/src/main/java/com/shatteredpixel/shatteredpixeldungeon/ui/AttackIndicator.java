@@ -33,6 +33,7 @@ import com.watabou.input.GameAction;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Random;
 import com.watabou.utils.Reflection;
+import com.watabou.utils.RectF;
 
 import java.util.ArrayList;
 
@@ -79,9 +80,10 @@ public class AttackIndicator extends Tag {
 		super.layout();
 
 		if (sprite != null) {
-			if (!flipped)   sprite.x = x + (SIZE - sprite.width()) / 2f + 1;
-			else            sprite.x = x + width - (SIZE + sprite.width()) / 2f - 1;
-			sprite.y = y + (height - sprite.height()) / 2f;
+			RectF body = sprite.visibleBounds();
+			float centerX = !flipped ? x + SIZE/2f + 1 : x + width - SIZE/2f - 1;
+			sprite.x += centerX - (body.left + body.right)/2f;
+			sprite.y += y + height/2f - (body.top + body.bottom)/2f;
 			PixelScene.align(sprite);
 		}
 	}
@@ -156,9 +158,10 @@ public class AttackIndicator extends Tag {
 		sprite.paused = true;
 		sprite.visible = bg.visible;
 
-		if (sprite.width() > 20 || sprite.height() > 20){
-			sprite.scale.set(sprite.scale.x * PixelScene.align(20f/Math.max(sprite.width(), sprite.height())));
-		}
+		// Fit the visible creature, not the transparent padding in its painted frame.
+		RectF body = sprite.visibleBounds();
+		float factor = 20f/Math.max(1f, Math.max(body.width(), body.height()));
+		sprite.scale.set(sprite.scale.x * factor, sprite.scale.y * factor);
 
 		add( sprite );
 

@@ -122,20 +122,27 @@ final class HatchlingScenario {
         check(hero().buff(Escape.class)==null&&Dungeon.level.mobs.stream().anyMatch(m->m instanceof Mimic&&((Mimic)m).hatchlingBorn),"escape encounter arrives once on next floor");
         check(HatchlingMimic.nextEscapeDepth(4)==6&&HatchlingMimic.nextEscapeDepth(24)==26&&HatchlingMimic.nextEscapeDepth(26)==24,"boss/final-floor boundaries");
 
-        int[][] duration={{20,40,80,150},{30,60,100,200},{50,80,150,300},{80,120,200,400}};
-        int[][] radius={{5,8,-1,-1},{8,-1,-1,-1},{-1,-1,-1,-1},{-1,-1,-1,-1}};
-        hatchling=fresh();
+        hatchling=fresh();Dungeon.level.heaps.clear();
+        int near=hero().pos+2,far=hero().pos+3;
+        lootSprite(near);lootSprite(far);
+        Dungeon.level.heaps.get(near).items.add(new Dagger());Dungeon.level.heaps.get(far).items.add(new Dagger());
+        Dungeon.level.heroFOV[near]=Dungeon.level.heroFOV[far]=false;
+        Dungeon.level.heaps.get(near).seen=Dungeon.level.heaps.get(far).seen=false;
         boolean[] fov=Dungeon.level.heroFOV.clone(),visited=Dungeon.level.visited.clone(),mapped=Dungeon.level.mapped.clone();
         for(int level=0;level<4;level++)for(Tier tier:Tier.values()){
-            Buff.detach(hero(),ItemSense.class);ItemSense sense=Buff.affect(hero(),ItemSense.class);sense.refresh(level,tier);
-            check(sense.turnsLeft()==duration[level][tier.ordinal()]&&sense.radius()==radius[level][tier.ordinal()],"sense table "+level+"/"+tier);
-            check(sense.revealsMimics()==(level==3&&tier==Tier.EXCEPTIONAL),"mimic reveal threshold");
-            sense.act();sense.refresh(level,tier);check(sense.turnsLeft()==duration[level][tier.ordinal()],"refresh does not stack");
+            ItemSense sense=Buff.affect(hero(),ItemSense.class);sense.refresh(level,tier);
+            check(sense.turnsLeft()==20&&sense.radius()==new int[]{5,8,12,16}[level],"nearest scent duration/range");
+            check(sense.senses(near)&&!sense.senses(far)&&!sense.revealsMimics(),"exactly nearest pile, no mimic scan");
+            Bundle saved=new Bundle();sense.storeInBundle(saved);ItemSense copy=new ItemSense();copy.restoreFromBundle(saved);
+            check(copy.senses(near)&&!copy.senses(far),"selected scent survives reload");
+            sense.act();sense.refresh(level,tier);check(sense.turnsLeft()==20,"refresh replaces duration");
         }
-        ItemSense sense=hero().buff(ItemSense.class);sense.act();sense.refresh(3,Tier.MINOR);
-        check(sense.revealsMimics()&&sense.turnsLeft()==399,"minor refresh cannot cancel exceptional reveal");
+        ItemSense sense=hero().buff(ItemSense.class);Dungeon.level.heaps.remove(near);
+        check(!sense.senses(near)&&!sense.senses(far),"collection never chains to another pile");
+        sense.refresh(3,Tier.MINOR);check(sense.senses(far),"next meal may choose next pile");
         check(Arrays.equals(fov,Dungeon.level.heroFOV)&&Arrays.equals(visited,Dungeon.level.visited)&&Arrays.equals(mapped,Dungeon.level.mapped),"Sense never reveals terrain");
-        Dungeon.depth++;check(!sense.senses(hero().pos)&&!sense.revealsMimics(),"Sense is restricted to original floor");
+        for(int i=0;i<20;i++)sense.act();check(!sense.senses(far),"scent expires in twenty turns");
+        sense.refresh(3,Tier.EXCEPTIONAL);Dungeon.depth++;check(!sense.senses(far),"no scent across floors");
 
         for(int level=0;level<4;level++)for(Tier tier:Tier.values()){
             hatchling=fresh();hatchling.level(level);Ring ring=new RingOfEvasion();carry(ring);
@@ -164,24 +171,29 @@ final class HatchlingScenario {
         check(hatchling.nextFood(hero())==null,"wider identification must not widen feeding");
         WandOfLightning nested=new WandOfLightning();pouch.items.add(new VelvetPouch());
         ((VelvetPouch)pouch.items.get(0)).items.add(nested);
-        hatchling.level(3);hatchling.benefit(hero(),Tier.EXCEPTIONAL);
+        hatchling.level(3);lootSprite(hero().pos+1);Wand floorWand=new WandOfLightning();Dungeon.level.heaps.get(hero().pos+1).items.add(floorWand);
+        hatchling.benefit(hero(),Tier.EXCEPTIONAL);check(!floorWand.isIdentified(),"unowned floor gear not identified");
         check(nested.isIdentified()&&nested.trueLevel()==0,"nested bag identification without upgrade");
         for(Item target:protectedTargets)check(target.trueLevel()==0,"protected targets cannot be upgraded");
         System.out.println("TEST 55 IDENTIFY PASS: bagged consumables/wands, equipped gear/artifact and nested bags; feeding and upgrades remain loose-only");
         for(int level=1;level<4;level++)for(Tier tier:new Tier[]{Tier.MAJOR,Tier.EXCEPTIONAL}){
-            int curses=0,rare=0;
+            int curses=0,rare=0,enchants=0,upgrades=0;
             hatchling=fresh();hatchling.level(level);
             Random.pushGenerator(5500+4*level+tier.ordinal());
-            for(int trial=0;trial<160;trial++){
+            for(int trial=0;trial<640;trial++){
                 Greatsword sword=new Greatsword();sword.identify();carry(sword);
                 hatchling.benefit(hero(),tier);
-                check(sword.enchantment!=null&&sword.inscriptionTurns==0,"permanent enchantment applied");
+                check((sword.enchantment!=null)!=(sword.level()>0),"exactly one equipment reward");
+                check(sword.inscriptionTurns==0,"permanent reward");
+                if(sword.enchantment==null){upgrades++;check(sword.level()==(tier==Tier.EXCEPTIONAL?2:1),"major +1 and exceptional +2 unchanged");sword.detachAll(hero().belongings.backpack);continue;}
+                enchants++;
                 if(sword.hasCurseEnchant())curses++;
                 if(Arrays.asList(Weapon.Enchantment.rare).contains(sword.enchantment.getClass()))rare++;
                 sword.detachAll(hero().belongings.backpack);
             }
             Random.popGenerator();
             check(curses>0&&curses<65,"curse outcomes present without dominating");
+            check(upgrades>enchants&&enchants>10,"upgrade-biased exclusive reward choice");
             if(tier==Tier.EXCEPTIONAL)check(rare>30,"elevated rare enchantment chance");
         }
 

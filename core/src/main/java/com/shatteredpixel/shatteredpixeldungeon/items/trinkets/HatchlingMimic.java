@@ -55,6 +55,7 @@ public class HatchlingMimic extends Trinket {
     }
     @Override public void execute(Hero hero,String action){
         super.execute(hero,action);
+        if(AC_FEED.equals(action) && !hungry()){GLog.w(Messages.get(this,"digesting"));return;}
         if(AC_FEED.equals(action))GameScene.selectItem(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBag.ItemSelector(){
             public String textPrompt(){return Messages.get(HatchlingMimic.class,"feed_prompt");}
             public Class<? extends Bag> preferredBag(){return com.shatteredpixel.shatteredpixeldungeon.actors.hero.Belongings.Backpack.class;}
@@ -63,7 +64,7 @@ public class HatchlingMimic extends Trinket {
         });
     }
     public boolean canFeed(Hero hero,Item item){
-        return hero!=null && hero.isAlive() && hero.belongings.contains(this)
+        return hungry() && hero!=null && hero.isAlive() && hero.belongings.contains(this)
                 && hero.belongings.backpack.items.contains(item) && foodPriority(item,hero)>=0;
     }
     public boolean feedChosen(Hero hero,Item item){
@@ -77,6 +78,7 @@ public class HatchlingMimic extends Trinket {
     }
     public int interval() { return 300 - 50 * Math.max(0, Math.min(3, level())); }
     public int remaining() { return remaining; }
+    public boolean hungry(){return remaining*4<=interval();}
     public long goldDemand() { return goldDemand; }
     public boolean warned() { return warned; }
     /** Called only when the hero is ready for a fresh player command. */
@@ -263,13 +265,15 @@ public class HatchlingMimic extends Trinket {
             boolean any = false;
             for (Item item : hero.belongings)
                 if(!item.isIdentified()){item.identify();any=true;}
-            for (Heap heap : Dungeon.level.heaps.valueList()) for (Item item : heap.items)
-                if (!item.isIdentified()) { item.identify(); any = true; }
             if (any) { eligibleEffect = true; descriptions.add(Messages.get(this, "identified_floor")); }
         }
         float chance = upgradeChance(level(), tier);
         Item upgrade = chance == 0 ? null : benefitTarget(hero, HatchlingMimic::canUpgrade);
-        if (upgrade != null) {
+        Item enchanted = level()>=1 && tier.ordinal()>=Tier.MAJOR.ordinal()
+                ? benefitTarget(hero, i -> i instanceof Weapon || i instanceof Armor) : null;
+        // Prefer permanent levels, but never grant both kinds of equipment reward.
+        boolean chooseEnchant=enchanted!=null && (upgrade==null || Random.Int(4)==0);
+        if (upgrade != null && !chooseEnchant) {
             eligibleEffect = true;
             if (Random.Float() < chance) {
                 int amount = tier == Tier.EXCEPTIONAL ? 2 : 1;
@@ -277,8 +281,7 @@ public class HatchlingMimic extends Trinket {
                 descriptions.add(Messages.get(this, "upgraded", upgrade.title(), amount));
             }
         }
-        if (level() >= 1 && tier.ordinal() >= Tier.MAJOR.ordinal()) {
-            Item enchanted = benefitTarget(hero, i -> i instanceof Weapon || i instanceof Armor);
+        if (chooseEnchant) {
             if (enchanted != null) {
                 eligibleEffect = true;
                 boolean curse = Random.Float() < curseChance(level(), tier);
@@ -362,43 +365,44 @@ public class HatchlingMimic extends Trinket {
         }
     }
     public static class ItemSense extends Buff {
-        private int[] clocks = new int[16];
-        private int depth, branch;
-        private static final int[][] DURATIONS = {{20,40,80,150},{30,60,100,200},{50,80,150,300},{80,120,200,400}};
-        private static final int[][] RADII = {{5,8,-1,-1},{8,-1,-1,-1},{-1,-1,-1,-1},{-1,-1,-1,-1}};
+        private int depth, branch, turns, range, cell=-1;
+        private static final int[] RADII={5,8,12,16};
         { type = buffType.POSITIVE; }
-        public static int duration(int level, Tier tier) { return DURATIONS[level][tier.ordinal()]; }
-        public static int radius(int level, Tier tier) { return RADII[level][tier.ordinal()]; }
-        public int turnsLeft() { return Arrays.stream(clocks).max().orElse(0); }
-        public int radius() {
-            int radius=0;
-            for(int i=0;i<clocks.length;i++) if(clocks[i]>0) {
-                int r=RADII[i/4][i%4]; if(r<0)return -1; radius=Math.max(radius,r);
+        public static int duration(int level,Tier tier){return 20;}
+        public static int radius(int level,Tier tier){return RADII[Math.max(0,Math.min(3,level))];}
+        public int turnsLeft(){return turns;}
+        public int radius(){return range;}
+        public boolean revealsMimics(){return false;}
+        public void refresh(int level,Tier tier){
+            depth=Dungeon.depth;branch=Dungeon.branch;turns=20;range=radius(level,tier);cell=-1;
+            int distance=Integer.MAX_VALUE;
+            for(Heap heap:Dungeon.level.heaps.valueList()){
+                if(heap.isEmpty()||heap.seen||Dungeon.level.heroFOV[heap.pos])continue;
+                int d=Dungeon.level.distance(target.pos,heap.pos);
+                if(d<=range&&(d<distance||d==distance&&heap.pos<cell)){distance=d;cell=heap.pos;}
             }
-            return radius;
         }
-        public boolean revealsMimics() { return depth==Dungeon.depth&&branch==Dungeon.branch&&clocks[15]>0; }
-        public void refresh(int level, Tier tier) {
-            if(depth!=Dungeon.depth||branch!=Dungeon.branch)Arrays.fill(clocks,0);
-            depth=Dungeon.depth; branch=Dungeon.branch;
-            clocks[level*4+tier.ordinal()]=duration(level,tier);
+        public boolean senses(int pos){
+            if(depth!=Dungeon.depth||branch!=Dungeon.branch||turns<=0||cell<0)return false;
+            Heap heap=Dungeon.level.heaps.get(cell);
+            if(heap==null||heap.isEmpty()||heap.seen){cell=-1;return false;}
+            return cell==pos;
         }
-        public boolean senses(int cell) { return depth==Dungeon.depth&&branch==Dungeon.branch&&turnsLeft()>0
-                && (radius()<0||Dungeon.level.distance(target.pos,cell)<=radius()); }
-        @Override public int icon() { return BuffIndicator.FORESIGHT; }
-        @Override public String iconTextDisplay() { return Integer.toString(turnsLeft()); }
-        @Override public boolean act() {
-            for(int i=0;i<clocks.length;i++)clocks[i]=Math.max(0,clocks[i]-1);
-            if(turnsLeft()==0||depth!=Dungeon.depth||branch!=Dungeon.branch)detach();
-            spend(TICK); return true;
+        @Override public int icon(){return BuffIndicator.FORESIGHT;}
+        @Override public String iconTextDisplay(){return Integer.toString(turns);}
+        @Override public boolean act(){
+            if(--turns<=0||depth!=Dungeon.depth||branch!=Dungeon.branch)detach();
+            spend(TICK);return true;
         }
-        @Override public String desc() { return Messages.get(this,"desc",turnsLeft(),radius()<0?Messages.get(this,"floor"):radius()); }
-        @Override public void storeInBundle(Bundle b) { super.storeInBundle(b); b.put("clocks",clocks); b.put("depth",depth); b.put("branch",branch); }
-        @Override public void restoreFromBundle(Bundle b) {
-            super.restoreFromBundle(b); int[] saved=b.getIntArray("clocks");
-            clocks=Arrays.copyOf(saved,16); depth=b.getInt("depth"); branch=b.getInt("branch");
+        @Override public String desc(){return Messages.get(this,"desc",turns,range);}
+        @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("scent_turns",turns);b.put("scent_range",range);b.put("scent_cell",cell);b.put("depth",depth);b.put("branch",branch);}
+        @Override public void restoreFromBundle(Bundle b){
+            super.restoreFromBundle(b);turns=b.getInt("scent_turns");range=b.getInt("scent_range");cell=b.contains("scent_cell")?b.getInt("scent_cell"):-1;
+            depth=b.getInt("depth");branch=b.getInt("branch");
+            // Old floor-wide clocks expire; the next meal selects one new scent.
         }
     }
+
     public static class Kinship extends ScrollOfSirensSong.Enthralled {
         @Override public void detach() {
             if (target != null) {

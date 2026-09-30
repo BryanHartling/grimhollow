@@ -492,7 +492,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                             ((com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)p).scrollTo(0,0);
         }else if(frames==300){
             interfaceBounds();capture("polish-history-oldest");closeReviewWindows();
-            HatchlingMimic pet=new HatchlingMimic();pet.collect();
+            HatchlingMimic pet=new HatchlingMimic();pet.collect();while(!pet.hungry())pet.tick(Dungeon.hero);
             Dungeon.hero.belongings.backpack.items.add(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing());
             GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,pet));
         }else if(frames==330){interfaceBounds();capture("polish-hatchling-actions");playtestClick("FEED");}

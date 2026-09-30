@@ -87,6 +87,8 @@ final class PlaytestPolishScenario {
         check(h.cooldown()==time+1&&pet.remaining()==pet.interval()&&!pet.warned(),"manual feeding spends one turn, resets pending hunger");
         pet.onHeroReady();pet.tick(h);
         check(h.belongings.contains(priority)&&chosen.quantity()==2,"no second meal after manual warning response");
+        check(!pet.feedChosen(h,priority),"digestion blocks consecutive rewards");
+        while(!pet.hungry())pet.tick(h);
         check(pet.feedChosen(h,priority)&&!h.belongings.contains(priority)&&pet.goldDemand()==debt,"whole thrown stack, persistent gold demand");
         time=h.cooldown();check(!pet.feedChosen(h,new Food())&&!pet.feedChosen(h,h.belongings.weapon())&&h.cooldown()==time,"invalid/protected selections spend nothing");
         HatchlingMimic saved=(HatchlingMimic)pet.duplicate();check(saved.remaining()==pet.interval()&&!saved.warned(),"manual hunger reset persists");

@@ -1,3 +1,10 @@
+# Hatchling balance - v1.18.1
+
+- Manual Feed now requires hunger (last quarter of the interval); automatic feeding and the action-interrupt warning remain.
+- Item Sense marks only the nearest undiscovered loot pile for 20 turns within 5/8/12/16 cells; refresh replaces the scent, collection never chains, and terrain/mimics remain hidden. Legacy floor-wide scent expires on loading.
+- A meal upgrades OR enchants (75% upgrade preference when both are eligible). Exceptional upgrades remain +2, rings remain Exceptional, and identification reaches only owned belongings including bags and equipped gear.
+- Validation: core tests and Enchanter headless gate Runs=10 failures=0, including Hatchling balance and existing interaction regressions.
+
 # Playtest polish - v1.18.0
 
 - Garden shadowmeld shafts now use softly fading painted motes; shared healing/spirit users receive the same visual upgrade with mechanics unchanged.

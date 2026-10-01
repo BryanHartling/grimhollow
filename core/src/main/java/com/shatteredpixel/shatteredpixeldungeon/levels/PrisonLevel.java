@@ -232,6 +232,7 @@ public class PrisonLevel extends RegularLevel {
 			super();
 			
 			this.pos = pos;
+			visible = false;
 			
 			PointF p = DungeonTilemap.tileCenterToWorld( pos );
 			pos( p.x - 1, p.y + 2, 2, 0 );
@@ -246,9 +247,13 @@ public class PrisonLevel extends RegularLevel {
 		@Override
 		public void update() {
 			halo.visible = !com.shatteredpixel.shatteredpixeldungeon.SPDSettings.dynamicLighting();
-            if (visible = (pos < Dungeon.level.heroFOV.length && Dungeon.level.heroFOV[pos])) {
+            if (visible = com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.wallTorchVisible(Dungeon.level, pos)) {
 				super.update();
 			}
 		}
+
+        @Override public boolean isVisible() {
+            return super.isVisible() && com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.wallTorchVisible(Dungeon.level, pos);
+        }
 	}
 }

@@ -116,6 +116,8 @@ public class Armor extends EquipableItem {
 	public Augment augment = Augment.NONE;
 	
 	public Glyph inscribed;
+	public com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching runeEtching;
+	@Override protected void onDetach(){super.onDetach();com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching.recover(this);}
 	public Glyph glyph;
 	public boolean glyphHardened = false;
 	public boolean curseInfusionBonus = false;
@@ -150,6 +152,7 @@ public class Armor extends EquipableItem {
 		super.storeInBundle( bundle );
         bundle.put("bone_construction",boneConstruction);bundle.put("leather_variant",leatherVariant);
         bundle.put("inscribed",inscribed);
+        bundle.put("rune_etching",runeEtching);
 		bundle.put( USES_LEFT_TO_ID, usesLeftToID );
 		bundle.put( AVAILABLE_USES, availableUsesToID );
 		bundle.put( GLYPH, glyph );
@@ -165,6 +168,7 @@ public class Armor extends EquipableItem {
 		super.restoreFromBundle(bundle);
         boneConstruction=bundle.getBoolean("bone_construction")||this instanceof BoneArmor;leatherVariant=bundle.getBoolean("leather_variant");updateAppearance();
         inscribed=(Glyph)bundle.get("inscribed");
+        runeEtching=(com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching)bundle.get("rune_etching");
 		usesLeftToID = bundle.getInt( USES_LEFT_TO_ID );
 		availableUsesToID = bundle.getInt( AVAILABLE_USES );
 		inscribe((Glyph) bundle.get(GLYPH));
@@ -252,7 +256,8 @@ public class Armor extends EquipableItem {
 			return false;
 		}
 
-		detach(hero.belongings.backpack);
+		com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching.equipping=true;
+		try {detach(hero.belongings.backpack);} finally {com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching.equipping=false;}
 
 		Armor oldArmor = hero.belongings.armor;
 		if (hero.belongings.armor == null || hero.belongings.armor.doUnequip( hero, true, false )) {
@@ -505,11 +510,14 @@ public class Armor extends EquipableItem {
 
 		if (seal != null && seal.level() == 0)
 			seal.upgrade();
+		else if (runeEtching != null && runeEtching.level() == 0)
+			runeEtching.level(1);
 
 		return super.upgrade();
 	}
 	
 	public int proc( Char attacker, Char defender, int damage ) {
+        if(runeEtching!=null&&defender.buff(MagicImmune.class)==null)damage=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.glyphProc(runeEtching.floorGlyph,this,attacker,defender,damage,1);
         if(inscribed!=null&&defender.buff(MagicImmune.class)==null)damage=com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.glyphProc(inscribed,this,attacker,defender,damage,1);
 
 		if (defender.buff(MagicImmune.class) == null) {
@@ -652,6 +660,7 @@ public class Armor extends EquipableItem {
 			info += "\n\n" + Messages.get(Armor.class, "seal_attached", seal.maxShield(tier, level()));
 		}
 		
+		if(runeEtching!=null)info+="\n\n"+Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching.class,"attached",runeEtching.floorGlyph.name(),runeEtching.level())+"\n"+runeEtching.floorGlyph.desc();
 		return info+sigilInfo();
 	}
 
@@ -765,6 +774,7 @@ public class Armor extends EquipableItem {
 	}
 
 	public boolean hasGlyph(Class<?extends Glyph> type, Char owner) {
+        if(owner.buff(MagicImmune.class)==null&&runeEtching!=null&&runeEtching.floorGlyph.getClass()==type)return true;
         if(owner.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.MagicImmune.class)==null&&inscribed!=null&&inscribed.getClass()==type)return true;
 		if (owner.buff(MagicImmune.class) != null) {
 			return false;

@@ -205,12 +205,27 @@ public final class EnhancedEffects {
                 && level.map[cell] == com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.WALL_DECO
                 && !(level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.MiningLevel);
     }
+    /** A visible wall back/cap does not expose the fixture on its south-facing side. */
+    public static boolean wallTorchVisible(com.shatteredpixel.shatteredpixeldungeon.levels.Level level, int cell) {
+        if (level == null || cell < 0 || cell + level.width() >= level.length()) return false;
+        int front = cell + level.width();
+        return level.heroFOV[cell] && level.heroFOV[front]
+                && com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet.wallStitcheable(level.map[cell])
+                && !com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet.wallStitcheable(level.map[front])
+                // Doorway masonry uses a different frame without a torch fixture.
+                && !com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet.doorTile(level.map[front]);
+    }
     public static class Torch extends Image {
         final int cell;float time;
-        public Torch(int cell){super(ATLAS);this.cell=cell;point(DungeonTilemap.tileToWorld(cell));x+=4;y+=1;}
+        public Torch(int cell){super(ATLAS);this.cell=cell;point(DungeonTilemap.tileToWorld(cell));x+=4;y+=1;visible=false;
+            EnhancedEffects.frame(this,Style.FLAME,0,8,8);}
+        @Override public boolean isVisible(){
+            // FOV can change between animation update and draw on the actor thread.
+            return super.isVisible() && enabled() && torchAt(Dungeon.level,cell) && wallTorchVisible(Dungeon.level,cell);
+        }
         @Override public void update(){
             if (!torchAt(Dungeon.level,cell)) {killAndErase();return;}
-            time+=Game.elapsed;visible=enabled()&&Dungeon.level.heroFOV[cell];
+            time+=Game.elapsed;visible=enabled()&&wallTorchVisible(Dungeon.level,cell);
             EnhancedEffects.frame(this,Style.FLAME,((int)(time*8+phase(cell)%4)%4)*5/3,8,8);}
     }
     public static class Ember extends PaintedParticle {

@@ -3,6 +3,7 @@ package com.shatteredpixel.shatteredpixeldungeon.items;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.*;
@@ -15,33 +16,63 @@ public class RuneEtching extends Item {
     public static boolean equipping;
     public static final Class<?>[] FLOOR_ENCHANTS={Blazing.class,Shocking.class,Chilling.class,Kinetic.class,Lucky.class,Blooming.class};
     public Weapon.Enchantment floorEnchant;
+    public Armor.Glyph floorGlyph;
+    private boolean armorMode;
     {unique=true;bones=false;image=ItemSpriteSheet.RUNE_ETCHING;identify();roll();}
-    public void roll(){floorEnchant=(Weapon.Enchantment)Reflection.newInstance(Random.element(FLOOR_ENCHANTS));}
+    public void roll(){
+        floorEnchant=(Weapon.Enchantment)Reflection.newInstance(Random.element(FLOOR_ENCHANTS));
+        floorGlyph=Armor.Glyph.randomCommon();
+    }
+    public Class<?> activeEffect(){return armorMode?floorGlyph.getClass():floorEnchant.getClass();}
     @Override public ArrayList<String> actions(Hero h){return new ArrayList<>();}
     @Override public void doDrop(Hero h){}
     @Override public boolean isUpgradable(){return false;}
     public static RuneEtching find(Hero hero){
-        for(Item item:hero.belongings)if(item instanceof Weapon&&((Weapon)item).runeEtching!=null)return ((Weapon)item).runeEtching;
+        for(Item item:hero.belongings)if(attached(item)!=null)return attached(item);
         return hero.belongings.getItem(RuneEtching.class);
     }
     public static boolean etch(Hero hero){
-        if(!(hero.belongings.weapon instanceof MeleeWeapon))return false;
-        Weapon next=(Weapon)hero.belongings.weapon;RuneEtching rune=find(hero);
-        if(rune==null||next.runeEtching==rune)return false;
-        for(Item item:hero.belongings)if(item instanceof Weapon&&((Weapon)item).runeEtching==rune)detach((Weapon)item);
-        rune.detachAll(hero.belongings.backpack);next.runeEtching=rune;next.level(next.level()+rune.level());Item.updateQuickslot();return true;
+        return etch(hero,hero.belongings.weapon);
     }
-    private static RuneEtching detach(Weapon weapon){
-        RuneEtching rune=weapon.runeEtching;weapon.runeEtching=null;
-        if(rune!=null)weapon.level(weapon.level()-rune.level());return rune;
+    public static RuneEtching attached(Item item){
+        return item instanceof Weapon?((Weapon)item).runeEtching:item instanceof Armor?((Armor)item).runeEtching:null;
     }
-    public static void recover(Weapon weapon){
-        if(equipping||weapon.runeEtching==null||Dungeon.hero==null)return;
-        RuneEtching rune=detach(weapon);
+    public static boolean canEtch(Hero hero,Item item){
+        return item!=null && (item instanceof MeleeWeapon || item instanceof Armor)
+                && item.isEquipped(hero) && attached(item)==null && find(hero)!=null;
+    }
+    public static boolean etch(Hero hero,Item next){
+        if(!canEtch(hero,next))return false;
+        RuneEtching rune=find(hero);
+        // Learn the old effect before changing the carrier; transfers never reroll.
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic magic=hero.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.class);
+        if(magic!=null)magic.choices(rune.armorMode);
+        for(Item item:hero.belongings)if(attached(item)==rune)detach(item);
+        rune.detachAll(hero.belongings.backpack);
+        rune.armorMode=next instanceof Armor;
+        if(next instanceof Armor)((Armor)next).runeEtching=rune;else ((Weapon)next).runeEtching=rune;
+        next.level(next.trueLevel()+rune.level());
+        if(magic!=null)magic.choices(rune.armorMode);
+        Item.updateQuickslot();return true;
+    }
+    private static RuneEtching detach(Item carrier){
+        RuneEtching rune=attached(carrier);
+        if(carrier instanceof Weapon)((Weapon)carrier).runeEtching=null;else ((Armor)carrier).runeEtching=null;
+        if(rune!=null)carrier.level(carrier.trueLevel()-rune.level());return rune;
+    }
+    public static void recover(Item carrier){
+        if(equipping||attached(carrier)==null||Dungeon.hero==null)return;
+        RuneEtching rune=detach(carrier);
         // This mandatory attachment must survive a full pack when its carrier is lost.
         if(!rune.collect())Dungeon.hero.belongings.backpack.items.add(rune);
     }
-    @Override public String info(){return super.info()+"\n\n"+floorEnchant.name()+": "+floorEnchant.desc();}
-    @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("floor_enchant",floorEnchant);}
-    @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);floorEnchant=(Weapon.Enchantment)b.get("floor_enchant");if(floorEnchant==null)roll();}
+    @Override public String info(){return super.info()+"\n\n"+floorEnchant.name()+": "+floorEnchant.desc()+"\n\n"+floorGlyph.name()+": "+floorGlyph.desc();}
+    @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("floor_enchant",floorEnchant);b.put("floor_glyph",floorGlyph);b.put("armor_mode",armorMode);}
+    @Override public void restoreFromBundle(Bundle b){
+        super.restoreFromBundle(b);
+        floorEnchant=(Weapon.Enchantment)b.get("floor_enchant");
+        floorGlyph=(Armor.Glyph)b.get("floor_glyph");armorMode=b.getBoolean("armor_mode");
+        if(floorEnchant==null)floorEnchant=(Weapon.Enchantment)Reflection.newInstance(Random.element(FLOOR_ENCHANTS));
+        if(floorGlyph==null)floorGlyph=Armor.Glyph.randomCommon();
+    }
 }

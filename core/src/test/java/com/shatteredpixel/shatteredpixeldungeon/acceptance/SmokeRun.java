@@ -96,6 +96,66 @@ public class SmokeRun {
     }
     private static void check(boolean condition,String message){if(!condition)throw new AssertionError(message);}
 
+    private static void checkRuneDescription(Item carrier) {
+        RuneEtching rune=RuneEtching.attached(carrier);
+        Weapon.Enchantment previous=rune.floorEnchant;
+        Armor.Glyph previousGlyph=rune.floorGlyph;
+        try {
+            for(Class<?> type:carrier instanceof Armor?Armor.Glyph.common:RuneEtching.FLOOR_ENCHANTS) {
+                String name;
+                if(carrier instanceof Armor){rune.floorGlyph=(Armor.Glyph)com.watabou.utils.Reflection.newInstance(type);name=rune.floorGlyph.name();}
+                else {rune.floorEnchant=(Weapon.Enchantment)com.watabou.utils.Reflection.newInstance(type);name=rune.floorEnchant.name();}
+                String info=carrier.info();
+                check(info.contains("Rune Etching: "+name)
+                        && info.contains("Carries "+rune.level()+" upgrade level")
+                        && info.contains("25% class bonus") && !info.contains("%1$s") && !info.contains("%2$d")
+                        && !info.contains("25%%"),"37: actual attached Rune Etching description resolves name, upgrade and percent");
+            }
+        } finally {rune.floorEnchant=previous;rune.floorGlyph=previousGlyph;}
+    }
+
+    private static void armorEtchingScenario(Hero h,Weapon weapon){
+        if(h.sprite==null)h.sprite=new HeroSprite();
+        Armor original=h.belongings.armor;
+        ClothArmor armor=new ClothArmor();armor.identify();h.belongings.armor=armor;
+        RuneEtching rune=weapon.runeEtching;
+        int weaponLevel=weapon.level(),charges=h.belongings.getItem(SigilBrush.class).charges();
+        Weapon.Enchantment enchant=rune.floorEnchant;Armor.Glyph glyph=rune.floorGlyph;
+        check(!RuneEtching.etch(h,null)&&!RuneEtching.canEtch(h,new ClothArmor())&&!RuneEtching.canEtch(h,new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife()),"37: cancelled, unworn and ranged Etch targets rejected");
+        check(RuneEtching.etch(h,armor)&&weapon.runeEtching==null&&weapon.level()==weaponLevel-rune.level()&&armor.level()==rune.level(),"37: weapon-to-armor moves one rune and its upgrade");
+        check(!RuneEtching.etch(h,armor)&&rune.floorEnchant==enchant&&rune.floorGlyph==glyph,"37: same carrier rejected and transfers never reroll");
+        weapon.curseInfusionBonus=armor.curseInfusionBonus=true;
+        for(int i=0;i<3;i++)check(RuneEtching.etch(h,weapon)&&RuneEtching.etch(h,armor)&&weapon.trueLevel()==weaponLevel-1&&armor.trueLevel()==1,"37: transfers never convert Curse Infusion bonus into real upgrades");
+        weapon.curseInfusionBonus=armor.curseInfusionBonus=false;
+        checkRuneDescription(armor);
+        armor.inscribe(new com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Obfuscation());
+        armor.inscribed=new com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Viscosity();armor.inscriptionTurns=20;
+        rune.floorGlyph=new com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Swiftness();
+        check(armor.hasGlyph(rune.floorGlyph.getClass(),h)&&armor.hasGlyph(armor.glyph.getClass(),h)&&armor.hasGlyph(armor.inscribed.getClass(),h),"37: etched passive, permanent glyph and temporary inscription coexist");
+        Buff.affect(h,MagicImmune.class);check(!armor.hasGlyph(rune.floorGlyph.getClass(),h),"37: magic immunity suppresses etched passive");Buff.detach(h,MagicImmune.class);
+        int depth=Dungeon.depth;Dungeon.depth=depth+1;EnchanterMagic.state().arrive();
+        check(Arrays.asList(Armor.Glyph.common).contains(rune.floorGlyph.getClass())&&armor.glyph instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Obfuscation&&armor.inscribed!=null&&EnchanterMagic.state().choices(true).contains(rune.floorGlyph.getClass()),"37: floor glyph rerolls independently, knowledge persists, other slots remain");
+        Bundle saved=new Bundle();saved.put("armor",armor);Armor restored=(Armor)saved.get("armor");
+        check(restored.runeEtching!=null&&restored.level()==armor.level()&&restored.runeEtching.level()==rune.level()&&restored.runeEtching.activeEffect()==rune.activeEffect()&&restored.runeEtching.floorEnchant.getClass()==rune.floorEnchant.getClass()&&restored.inscribed!=null,"37: armor rune, both floor effects, upgrade and inscription survive save/load");
+        Bundle oldSave=new Bundle();oldSave.put("floor_enchant",enchant);RuneEtching migrated=new RuneEtching();migrated.restoreFromBundle(oldSave);
+        check(migrated.floorEnchant.getClass()==enchant.getClass()&&migrated.floorGlyph!=null&&migrated.activeEffect()==enchant.getClass(),"37: legacy weapon rune acquires glyph without replacing existing enchantment");
+        // The crown must transfer ownership, or disposing the old armor recovers a duplicate rune.
+        ClassArmor crown=ClassArmor.upgrade(h,armor);h.belongings.armor=crown;
+        check(crown.runeEtching==rune&&armor.runeEtching==null&&crown.level()==restored.level(),"37: class armor conversion retains one rune and exact level");
+        check(RuneEtching.etch(h,weapon)&&weapon.level()==weaponLevel&&crown.level()==0,"37: armor-to-weapon conserves upgrade");
+        // A fresh rune banks the first armor upgrade, but never a second one.
+        rune.level(0);weapon.level(weaponLevel-1);h.belongings.armor=armor;armor.level(0);armor.inscribe(null);armor.inscribed=null;
+        check(RuneEtching.etch(h,armor),"37: fresh armor attachment");armor.upgrade();armor.upgrade();
+        check(rune.level()==1&&armor.level()==2,"37: armor banks at most one upgrade");
+        armor.doUnequip(h,true);check(armor.doEquip(h)&&armor.runeEtching==rune,"37: unequip and re-equip retain attachment");
+        armor.doUnequip(h,true);armor.detachAll(h.belongings.backpack);
+        check(armor.runeEtching==null&&armor.level()==1&&h.belongings.getItem(RuneEtching.class)==rune,"37: dropped armor recovers rune and removes only carried upgrade");
+        h.belongings.armor=original;check(RuneEtching.etch(h,weapon)&&weapon.level()==weaponLevel,"37: reattach recovered armor rune");
+        Dungeon.depth=depth;EnchanterMagic.state().arrive();
+        check(h.belongings.getItem(SigilBrush.class).charges()==charges,"37: Etch uses no Brush charges");
+        System.out.println("TEST 37 ARMOR PASS: transfer, single upgrade, passive glyph, independent slots, floor roll, save migration, crown, equip/loss and formatted descriptions");
+    }
+
     private static void playtestScenario() throws Exception {
         Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);clearArena();
         check(!Playtest.enabled()&&!Playtest.god(),"Playtest leaked into ordinary new run");
@@ -999,7 +1059,9 @@ public class SmokeRun {
         check(Math.abs(permanent.chance-.2f)<.0001f&&Math.abs(temporary.chance-.2f)<.0001f,"54: other classes unchanged");
         w.proc(enemy,h,10);check(Math.abs(permanent.chance-.2f)<.0001f,"54: enemy procs unchanged");
         ClothArmor armor=new ClothArmor();RateGlyph glyph=new RateGlyph(),sigil=new RateGlyph();armor.glyph=glyph;armor.inscribed=sigil;armor.inscriptionTurns=30;
-        armor.proc(enemy,h,10);check(Math.abs(glyph.chance-.25f)<.0001f&&Math.abs(sigil.chance-.4f)<.0001f,"54: permanent and inscribed armor rates");
+        RateGlyph etched=new RateGlyph();armor.runeEtching=new RuneEtching();armor.runeEtching.floorGlyph=etched;
+        armor.proc(enemy,h,10);check(Math.abs(glyph.chance-.25f)<.0001f&&Math.abs(sigil.chance-.4f)<.0001f&&Math.abs(etched.chance-.25f)<.0001f,"54: permanent and etched armor 1.25x, temporary 2x, no damage increase");
+        etched.chance=0;Buff.affect(h,MagicImmune.class);armor.proc(enemy,h,10);Buff.detach(h,MagicImmune.class);check(etched.chance==0,"54: magic immunity suppresses etched proc");
         check(EnchanterMagic.procRate(h)==1&&EnchanterMagic.procStrength(h)==1,"54: scoped rates restored");
         Hero test=new Hero();test.heroClass=HeroClass.ENCHANTER;test.subClass=HeroSubClass.ARTIFICER;test.lvl=30;
         Talent.initClassTalents(test);Talent.initSubclassTalents(test);
@@ -1138,17 +1200,20 @@ public class SmokeRun {
         bow.inscriptionTurns=knives.inscriptionTurns=1;EnchanterMagic.state().act();check(bow.inscribed==null&&knives.inscribed==null,"33: ranged inscriptions expire normally");
         bow.detachAll(h.belongings.backpack);knives.detachAll(h.belongings.backpack);brush.gainCharge(3);
         System.out.println("TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc");
-        RuneEtching rune=starter.runeEtching;starter.upgrade();
+        RuneEtching rune=starter.runeEtching;
+        checkRuneDescription(starter);starter.upgrade();checkRuneDescription(starter);
         check(starter.actions(h).contains(Item.AC_DROP)&&starter.value()>0,"37: ordinary sellable starter");
         com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword replacement=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword();
         replacement.identify();replacement.collect();check(replacement.doEquip(h),"37: replace starting weapon");
         int chargesBefore=brush.charges();check(RuneEtching.etch(h)&&brush.charges()==chargesBefore&&replacement.runeEtching==rune&&starter.runeEtching==null&&starter.level()==0&&replacement.level()==1,"37: transfer exactly one upgrade without charge");
+        checkRuneDescription(replacement);
         replacement.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing());
         Dungeon.depth=2;EnchanterMagic.state().arrive();check(Arrays.asList(RuneEtching.FLOOR_ENCHANTS).contains(rune.floorEnchant.getClass())&&replacement.enchantment instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing,"37: replacement rolls floor rune beside permanent enchant");Dungeon.depth=1;EnchanterMagic.state().arrive();
         replacement.doUnequip(h,true);replacement.detachAll(h.belongings.backpack);
         check(h.belongings.getItem(RuneEtching.class)==rune&&replacement.runeEtching==null&&replacement.level()==0,"37: lost carrier returns rune");
         starter.doEquip(h);check(RuneEtching.etch(h)&&starter.level()==1&&starter.runeEtching==rune,"37: reattach after carrier loss");
         check(!rune.actions(h).contains(Item.AC_DROP),"37: rune cannot be dropped");
+        armorEtchingScenario(h,starter);
         System.out.println("TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment");
         runecraftScenario(h,brush,starter);
         clearArena();Rat enemy=target(h.pos+1);enemy.sprite.visible=false;

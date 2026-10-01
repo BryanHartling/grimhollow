@@ -1,5 +1,16 @@
 # Terrain readability and playtest decisions - v1.18.2
 
+## v1.18.3 - Wall torch visibility and armor Rune Etching
+
+- Fixed wall flames, legacy halos and dynamic torch light leaking from an unseen south-facing room when the wall back/cap was visible. Require current FOV for wall and exposed front cell, including a draw-time check after movement; physical torch locations and Ashlight charging are unchanged.
+- Escaped the literal percent in the formatted Rune Etching description so effect names and carried upgrade levels substitute correctly.
+- Sigil Brush Etch now selects worn armor or a wielded melee weapon. One rune moves between them, carrying at most one upgrade, for one turn and no charge. Armor grants a common glyph alongside permanent and temporary effects, with the class 25% proc-rate bonus.
+- Engineering choice: the armor glyph uses the existing common-glyph pool; both floor outcomes are cached, so swapping equipment cannot fish for another roll. Only the active effect is learned for Inscribe.
+- Armor etchings persist through saves, equipment swaps and the crown; lost armor returns the rune. A single armor upgrade cannot be claimed by both a Broken Seal and a rune. Transfers use true upgrade levels so Curse Infusion cannot generate permanent upgrades.
+- Extended existing tests 37/54 for armor transfer, proc/passive behavior, descriptions, saves and recovery, and test 47 for hidden torch faces in painted/legacy and dynamic/halo modes. No art generation or asset changes.
+- Terrain contrast remains subject to the unchanged failing test 45; Spellguard remains queued, Psychic Pull skipped, and tablet movement resolved per user playtesting.
+
+
 - Reduce the strong regional/personal-light color cast so cool rock, foliage and warm walkable floor retain their painted material differences. Keep local torch/fire colors, fog, sight radii, lighting cost and Ashlight charging rules unchanged.
 - Give the existing flattened-grass painting a wider visible ground footprint (60x34 rather than 60x20) through the deterministic packer; no new source art or terrain rules.
 - Keep test 45 and its original thresholds enforced. Terrain changes require human review and are not declared passing by this patch.

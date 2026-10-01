@@ -1,5 +1,9 @@
 # Grimhollow
 
+**Torch and armor Etching v1.18.3:** wall flames and their light require sight of the wall's facing side, so viewing its back cannot reveal a torch in an unseen room. Rune Etching descriptions resolve the effect name, upgrade and 25% bonus correctly.
+
+**Sigil Brush > Etch** now offers your equipped melee weapon or armor. This moves the same single rune and its one carried upgrade for **one turn, no charge**. Armor receives a common glyph (Obfuscation, Swiftness, Viscosity or Potential), alongside its permanent glyph and temporary inscription. The weapon enchantment and armor glyph roll once on entering a floor; switching carriers never rerolls them. Existing weapon runes and saves remain compatible.
+
 **Terrain readability v1.18.2:** restrained regional ambient color and a nearly neutral personal light preserve the painted material colors; torches and fire retain their warm light. Flattened grass has a fuller spread of low leaves. Visibility and gameplay are unchanged. This is a visual correction for review, **not a passing declaration for test 45**; its thresholds remain enforced.
 
 **Current plan:** tablet movement performance is **resolved per user playtesting**. Campaign balance remains with the user for continued playtesting. Psychic Pull is skipped. **Spellguard is queued** to replace Overload: 10%/20% magic damage reduction while armor is inscribed; it is not implemented yet. These decisions supersede older pending-performance and replacement-choice notes below. The separate stale Hatchling UI-test fixture remains to be repaired; see [known issues](KNOWN_ISSUES.md).

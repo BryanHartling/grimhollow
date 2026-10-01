@@ -69,7 +69,8 @@ public class LightingOverlay extends Image {
                 if (Dungeon.level.water[cell] && Dungeon.level.heroFOV[cell]) source(cell,1.25f,.38f,.25f,.05f);
         }
         for (int cell=0; cell<Dungeon.level.length(); cell++) {
-            if (Dungeon.level.heroFOV[cell] && com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.torchAt(Dungeon.level,cell))
+            if (com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.torchAt(Dungeon.level,cell)
+                    && com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.wallTorchVisible(Dungeon.level,cell))
                 source(cell, Dungeon.depth >= 16 && Dungeon.depth <= 20 ? 4 : 3, .38f, .24f, .08f);
         }
         for (Blob blob : Dungeon.level.blobs.values()) {

@@ -48,7 +48,7 @@ public class EnchanterMagic extends Buff {
         for(Class<?> type:Statistics.itemTypesDiscovered)remember(type);
         for(Item item:Dungeon.hero.belongings)learn(item);
         RuneEtching etching=RuneEtching.find(Dungeon.hero);
-        if(etching!=null&&etching.floorEnchant!=null)remember(etching.floorEnchant.getClass());
+        if(etching!=null)remember(etching.activeEffect());
     }
     public java.util.List<Class<?>> choices(boolean armor){
         rememberAvailable();
@@ -81,7 +81,7 @@ public class EnchanterMagic extends Buff {
         boolean descending=lastFloor!=-1&&floor>lastFloor;lastFloor=floor;lastPos=Dungeon.hero.pos;stationary=0;
         Hero h=Dungeon.hero;
         rememberAvailable();
-        RuneEtching etching=RuneEtching.find(h);if(etching!=null){etching.roll();remember(etching.floorEnchant.getClass());}
+        RuneEtching etching=RuneEtching.find(h);if(etching!=null){etching.roll();remember(etching.activeEffect());}
         boolean firstVisit=floors.add(floor);
         // Discoveries persist. Returning up/down the same stairs grants no extra knowledge.
         if(firstVisit){
@@ -154,7 +154,7 @@ public class EnchanterMagic extends Buff {
     }
     public static int glyphProc(Armor.Glyph glyph,Armor armor,Char a,Char d,int damage,float power){
         float previous=strength.get(),previousRate=rate.get();strength.set(previous*power);
-        rate.set(glyph.curse()?1f:glyph==armor.glyph?1.25f:2f);
+        rate.set(glyph.curse()?1f:(glyph==armor.glyph || armor.runeEtching!=null && glyph==armor.runeEtching.floorGlyph)?1.25f:2f);
         try{return glyph.proc(armor,a,d,damage);}finally{strength.set(previous);rate.set(previousRate);}
     }
     public static class EnchanterDamage extends FlavourBuff {}

@@ -20,7 +20,14 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.18.2","Read the materials, keep the atmosphere.");
+        ChangeInfo r=release(list,"v1.18.3","A rune for your armor, and light behind the right walls.");
+        note(r,Icons.TALENT,"Armor Rune Etching",
+                "Sigil Brush > Etch now lets you choose your equipped melee weapon or armor. The same single rune carries one upgrade and grants a changing common glyph on armor, alongside permanent and temporary inscriptions. "
+                +"Moving it costs one turn and no charge, and never rerolls its floor effects. Etching descriptions now correctly show effect names, upgrade levels and the 25% class bonus.");
+        note(r,Icons.MAGNIFY,"Hidden torch flames",
+                "Wall torches and their light now require sight of the wall's facing side. Seeing the back of a wall no longer exposes a flame or glow in an unexplored room.");
+
+        r=release(list,"v1.18.2","Read the materials, keep the atmosphere.");
         note(r,Icons.MAGNIFY,"Clearer terrain",
                 "Regional ambient light and the hero's visibility light preserve more of the painted stone and foliage colors. "
                 +"Torches and fire still cast warm local light. Flattened grass has a fuller spread of low leaves, making it easier to distinguish from bare paving. "

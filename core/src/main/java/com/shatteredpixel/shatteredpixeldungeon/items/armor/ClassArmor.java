@@ -128,6 +128,8 @@ abstract public class ClassArmor extends Armor {
         classArmor.boneConstruction=armor.boneConstruction;
 		classArmor.augment = armor.augment;
 		classArmor.inscribe(armor.glyph);
+        classArmor.runeEtching=armor.runeEtching;
+        armor.runeEtching=null; // The crown consumes the original carrier.
 		if (armor.seal != null) {
 			classArmor.seal = armor.seal;
 		}

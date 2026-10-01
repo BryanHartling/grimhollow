@@ -29,7 +29,18 @@ public class SigilBrush extends ClassSpellItem {
     }
     public static final String AC_ETCH="ETCH";
     @Override public ArrayList<String> actions(Hero h){ArrayList<String> a=super.actions(h);a.add(AC_ETCH);return a;}
-    @Override public void execute(Hero h,String action){if(action.equals(AC_ETCH)){if(RuneEtching.etch(h))h.spendAndNext(1);else com.shatteredpixel.shatteredpixeldungeon.utils.GLog.w(Messages.get(this,"etch_invalid"));}else super.execute(h,action);}
+    @Override public void execute(Hero h,String action){
+        if(action.equals(AC_ETCH)){
+            if(!RuneEtching.canEtch(h,h.belongings.weapon)&&!RuneEtching.canEtch(h,h.belongings.armor)){
+                com.shatteredpixel.shatteredpixeldungeon.utils.GLog.w(Messages.get(this,"etch_invalid"));return;
+            }
+            GameScene.selectItem(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBag.ItemSelector(){
+                public String textPrompt(){return Messages.get(SigilBrush.class,"etch_equipment");}
+                public boolean itemSelectable(Item item){return RuneEtching.canEtch(h,item);}
+                public void onSelect(Item item){if(RuneEtching.etch(h,item))h.spendAndNext(1);}
+            });
+        }else super.execute(h,action);
+    }
     @Override public String[] spells(Hero h){
         ArrayList<String> spells=new ArrayList<>(Arrays.asList("inscribe","hex"));
         if(h.hasTalent(Talent.FIELD_REPAIR))spells.add("defensive_sigil");

@@ -7,12 +7,12 @@ mesh, additional textures, movement rules or animation timing changes are needed
 """
 from functools import lru_cache
 import math
-import numpy as np
 from PIL import Image, ImageDraw
 from actors import HERE, SCALE, FRAME_WIDTH, FRAME_HEIGHT
 
 HEROES = ('warrior', 'enchanter')
 SIZE = (48*SCALE, 60*SCALE)
+GRID = 4096
 
 
 @lru_cache(None)
@@ -97,23 +97,35 @@ def mesh(hero, index):
         for x0, x1 in zip(xs, xs[1:]):
             corners = ((x0,y0), (x1,y0), (x1,y1), (x0,y1))
             for ids in ((0,1,2), (0,2,3)):
-                src = np.array([[corners[i][0]*SCALE, corners[i][1]*SCALE] for i in ids])
-                dest = np.array([displacement(hero,index,*corners[i]) for i in ids])
+                src = [(corners[i][0]*SCALE, corners[i][1]*SCALE) for i in ids]
+                # Commit to a 1/4096-pixel grid before deriving the inverse map.
+                # BLAS-backed floating solves produced different edge pixels on
+                # two Linux CI machines. Integer determinants make the exported
+                # atlas independent of CPU-specific linear-algebra kernels.
+                dest = [tuple(round(v*GRID) for v in displacement(hero,index,*corners[i])) for i in ids]
+                (ax,ay),(bx,by),(cx,cy) = dest
+                determinant = ax*(by-cy)+bx*(cy-ay)+cx*(ay-by)
                 # An inverted triangle folds the painted body over itself.
-                if np.linalg.det(np.column_stack((dest, np.ones(3)))) <= 0:
+                if determinant <= 0:
                     raise ValueError(f'Folded {hero} pose {index} at {x0},{y0}')
-                left = max(0, math.floor(dest[:,0].min()))
-                top = max(0, math.floor(dest[:,1].min()))
-                right = min(SIZE[0], math.ceil(dest[:,0].max())+1)
-                bottom = min(SIZE[1], math.ceil(dest[:,1].max())+1)
+                left = max(0, min(p[0] for p in dest)//GRID)
+                top = max(0, min(p[1] for p in dest)//GRID)
+                right = min(SIZE[0], -(-max(p[0] for p in dest)//GRID)+1)
+                bottom = min(SIZE[1], -(-max(p[1] for p in dest)//GRID)+1)
                 if right <= left or bottom <= top:
                     continue
-                transform = np.linalg.solve(np.column_stack((dest, np.ones(3))), src).T
-                transform[:,2] += transform[:,:2] @ np.array([left,top])
-                points = [(round(p[0]-left), round(p[1]-top)) for p in dest]
+                transform = []
+                for axis in (0,1):
+                    a,b,c = (p[axis] for p in src)
+                    m = (a*(by-cy)+b*(cy-ay)+c*(ay-by))*GRID
+                    n = (a*(cx-bx)+b*(ax-cx)+c*(bx-ax))*GRID
+                    k = a*(bx*cy-cx*by)+b*(cx*ay-ax*cy)+c*(ax*by-bx*ay)
+                    transform.extend((m/determinant, n/determinant,
+                                      (k+m*left+n*top)/determinant))
+                points = [(round(p[0]/GRID-left), round(p[1]/GRID-top)) for p in dest]
                 mask = Image.new('L',(right-left,bottom-top))
                 ImageDraw.Draw(mask).polygon(points, fill=255)
-                result.append(((left,top), mask, tuple(transform.flatten())))
+                result.append(((left,top), mask, tuple(transform)))
     return result
 
 

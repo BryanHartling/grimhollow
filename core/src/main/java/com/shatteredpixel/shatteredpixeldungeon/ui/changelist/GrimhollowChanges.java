@@ -20,7 +20,7 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.20.0","Warrior and Enchanter character-art proof of concept.");
+        ChangeInfo r=release(list,"v1.20.1","Warrior and Enchanter character-art proof of concept.");
         note(r,Icons.TALENT,"Two distinct silhouettes",
                 "Warrior and Enchanter have new painted bodies with natural proportions and armor fitted to their individual costumes. Warrior retains his red gambeson and grounded stance; Enchanter wears a slender blue artisan coat with split tails and a tool belt. Their faces match their existing portraits.");
         note(r,Icons.MAGNIFY,"Calmer motion",

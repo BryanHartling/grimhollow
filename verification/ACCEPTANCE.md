@@ -1,3 +1,11 @@
+# Deterministic hero export repair - v1.20.1
+
+- The original branch run **36913560174** failed exact Linux reproduction of `hero_warrior.png`, `hero_enchanter.png` and their manifest hashes; the same commit passed that gate on Windows and another Linux runner. Its failure and `v1.20.0-hero-pilot` tag remain in place. No check is disabled or weakened.
+- Replace CPU-dependent floating matrix solves with a 1/4096-pixel grid and exact integer determinants. Repack both heroes and the action previews from the same committed paintings; no new art or gameplay changes.
+- Fresh local `desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 42s**. Fresh `tools/recovery_assets.py --check`: **145 assets, 137 source sheets, 55 launcher resources, failures=0; TEST 44 failures=0**. Packaged `desktop/build/windows/1.20.1/Grimhollow/Grimhollow.exe --smoke-title`: **exit=0** with an isolated settings directory.
+- The gameplay/JUnit results below are the executed checks of this art-only pilot; the exporter repair does not change gameplay. Final-head CI is reported at delivery. Test 45 remains abandoned and was not run.
+- Fresh native geometry: **heroes=9 mob sprites=126 steady idle checks=126 failures=0; TESTS 24-26, 34, 36 PASS**. All four final-build cloth/plate bridge-room captures passed and replace the original captures. The geometry fixture requires the repository working directory; an invocation from the isolated capture directory failed to find `item-semantics.json`, then passed when rerun from the repository.
+
 # Warrior and Enchanter art pilot - v1.20.0
 
 | Gate | Result | Executed evidence |

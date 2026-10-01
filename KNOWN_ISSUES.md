@@ -1,6 +1,7 @@
 # Known issues
 
-- v1.20.0: Warrior/Enchanter art is a proof of concept awaiting human review, including physical Samsung tablet play. Only those two heroes are revised. Motion is restrained offline deformation of complete painted figures, not a new directional animation system.
+- v1.20.1: Warrior/Enchanter art is a proof of concept awaiting human review, including physical Samsung tablet play. Only those two heroes are revised. Motion is restrained offline deformation of complete painted figures, not a new directional animation system.
+- v1.20.0 branch CI run 36913560174 failed exact reproduction of the two new hero atlases on Linux, while the same commit passed on another Linux runner and Windows. v1.20.1 replaces floating matrix solves with fixed-grid integer arithmetic; the failed run and original tag remain available, and checks are unchanged.
 - v1.20.0: the sandbox denied the initial `.git` scratch write and fetch; the documented authorized escalation route succeeded. No credentials are stored in committed files.
 
 - v1.19.2: physical Samsung tablet review of the refreshed journal icons remains with the user. Treasury reminder text uses English fallback where translations are unavailable.

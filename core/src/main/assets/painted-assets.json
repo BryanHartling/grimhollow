@@ -314,7 +314,7 @@
         2048,
         1024
       ],
-      "rgba_sha256": "e9c7a16a7a96baeb7cf866c8f9aad0d639ce290040c13e481c195c85cba01f08"
+      "rgba_sha256": "c88f9981f6923bf20a5fbec1dbf10e06cdd78130ab2f06c252e48fa4fd650829"
     },
     "sprites/hero_mage.png": {
       "size": [
@@ -363,7 +363,7 @@
         2048,
         1024
       ],
-      "rgba_sha256": "5f26fb301b1eb4a162c375ec956c309ad5878526b5c8e88ebe27dadaac3ea934"
+      "rgba_sha256": "9dde276d92a5f68a6a6320798db64eefa992bfff77e5f8cfa8b1657cd072a053"
     },
     "sprites/hero_psychic.png": {
       "size": [

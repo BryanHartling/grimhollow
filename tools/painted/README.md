@@ -42,7 +42,7 @@ Five original paintings in `sources/regions` provide the Sewers, Prison, Caves, 
 
 The raised skeleton atlas is packed at density 8 directly from the existing original monster painting, preserving its world size and action timing. The full offline check now reconstructs **121 game images from 112 sources**, plus **55 launcher resources**. Run `python tools/recovery_assets.py --check`; no image-generation service or Blender is needed in CI.
 
-# Warrior / Enchanter anatomy pilot - v1.20.0
+# Warrior / Enchanter anatomy pilot - v1.20.1
 
 `hero_pilot.py` overrides only Warrior and Enchanter. Each source sheet in `sources/hero-pilot/` contains eight coherent, fully painted armor variants derived from the matching original selection portrait. The packer crops their transparent gutters, fits each figure uniformly and uses a small offline deformation mesh for existing poses. No shared chest panel is pasted over either figure. Idle frames are identical, faces remain rigid during walking, and legs/coat/arms use restrained class-specific motion. The other seven rigs and all runtime timings are unchanged. This is a bounded visual trial awaiting human review.
 

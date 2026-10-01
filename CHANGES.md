@@ -1,8 +1,9 @@
-# Two-character art proof of concept - v1.20.0
+# Two-character art proof of concept - v1.20.1
 
 - Warrior and Enchanter use complete painted figures with their existing portrait identities. Armor is painted to fit each body across all eight atlas rows, replacing the shared enlarged chest overlay only for these two heroes. Warrior retains a sturdy, tapered red silhouette; Enchanter gains a slender blue artisan coat, split tails, tool belt and visible legs.
 - Offline deformation preserves continuous painted joints, with restrained class-specific movement and still idle frames. Source figures keep their aspect ratio. The 96x120 frames, 2048x1024 atlases, runtime animation timing, world height, collision, equipment rules and all gameplay remain unchanged. The other seven heroes are untouched.
 - Original built-in imagegen sources, exact prompts and deterministic packing are committed. CI uses the committed paintings, never an image generator. This is a proof of concept pending human review; it does not approve a rollout to the remaining classes.
+- The initial v1.20.0 branch CI run reproduced different animation-edge pixels on one Linux runner. Replace BLAS floating matrix solves with a 1/4096-pixel grid and exact integer determinants before sampling; retain the exact pixel-comparison gate and original failed run.
 
 # Painted Adventuring Notes - v1.19.2
 

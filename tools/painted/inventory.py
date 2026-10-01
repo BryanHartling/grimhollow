@@ -104,6 +104,8 @@ def build():
     replacements['HATCHLING_MIMIC']=icon(Image.open(HERE/'sources/items/hatchling.png').convert('RGBA'))
     semantics['items']['EXPEDITION_MAP']={'id':540,'artIndex':540,'cellSize':64}
     replacements['EXPEDITION_MAP']=icon(Image.open(HERE/'sources/expedition/map.png').convert('RGBA'))
+    semantics['items']['BLANK_PARCHMENT']={'id':541,'artIndex':541,'cellSize':64}
+    replacements['BLANK_PARCHMENT']=icon(Image.open(HERE/'sources/sprint/parchment.png').convert('RGBA'))
     written={}
     for name,image in replacements.items():
         if name not in semantics['items']:raise ValueError('Unknown inventory ID '+name)

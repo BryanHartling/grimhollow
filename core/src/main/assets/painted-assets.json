@@ -122,6 +122,7 @@
     "ritual-mark.png": "94aa09715005e11e082f4823d78f8d5cee65418d94f8c73a42a88fa733726c9c",
     "sewers-materials.png": "0b951d4ce0bb5902c6a940c1bc56db1173580ca57c33d652c16754dd91c9ddc2",
     "sprint/journal.png": "2398fb10a25e058c0bc3ec5c36f47f9c016edd2524f965f166f6e352516bb400",
+    "sprint/parchment.png": "95161b4a9f013bb417d9f40ddee8b9ada3b6bbe44a6f0f568fe282680112ddd9",
     "sprint/spellguard.png": "d3385ea1354437f0248c514219c64af2ae79112cefa818185c3d3b10080e572a",
     "status/status-0.png": "7bf546acdbc789262e8008fa82737af3c3389ee1c43fd58c8b27709d6fb225b7",
     "status/status-1.png": "6cc7256d450879b5aa756c47587373fc653d4cb2b54132d1efad809329dca5db",
@@ -372,7 +373,7 @@
         1024,
         2176
       ],
-      "rgba_sha256": "7e8df40a97251586b9dbc44de4234f760e52a26b325e7a24fa26d159af6a3599"
+      "rgba_sha256": "5b535f2c88d59a02b22b4f8a9eb1dddc201650aaf94c651b3458cab3bb1fed32"
     },
     "sprites/item_icons.png": {
       "size": [

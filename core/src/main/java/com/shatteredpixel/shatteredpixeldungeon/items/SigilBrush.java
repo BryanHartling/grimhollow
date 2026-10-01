@@ -28,9 +28,11 @@ public class SigilBrush extends ClassSpellItem {
             advance(carriedRechargeRate(h));
     }
     public static final String AC_ETCH="ETCH";
-    @Override public ArrayList<String> actions(Hero h){ArrayList<String> a=super.actions(h);a.add(AC_ETCH);return a;}
+    @Override public ArrayList<String> actions(Hero h){ArrayList<String> a=super.actions(h);a.add(AC_ETCH);if(h.heroClass==HeroClass.ENCHANTER)a.add(BlankParchment.AC_SCRIBE);return a;}
     @Override public void execute(Hero h,String action){
-        if(action.equals(AC_ETCH)){
+        if(action.equals(BlankParchment.AC_SCRIBE)&&h.heroClass==HeroClass.ENCHANTER){
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndScribe(h));
+        }else if(action.equals(AC_ETCH)){
             if(!RuneEtching.canEtch(h,h.belongings.weapon)&&!RuneEtching.canEtch(h,h.belongings.armor)){
                 com.shatteredpixel.shatteredpixeldungeon.utils.GLog.w(Messages.get(this,"etch_invalid"));return;
             }

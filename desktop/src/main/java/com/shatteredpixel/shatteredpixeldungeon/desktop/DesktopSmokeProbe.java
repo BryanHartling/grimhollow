@@ -590,7 +590,29 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 icon.destroy();
             }
             System.out.println("JOURNAL UI PASS: real HUD menu/journal input, notes, alchemy and catalog bounds, all sixteen painted icon dimensions");
-            Gdx.app.exit();
+            closeReviewWindows();
+        }else if(frames==690){
+            com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll.initLabels();
+            new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify().identify();
+            new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTransmutation().identify();
+            new com.shatteredpixel.shatteredpixeldungeon.items.BlankParchment().quantity(5).collect();
+            Dungeon.energy=100;
+            com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush brush=Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class);
+            brush.gainCharge(100);brush.advance(0);brush.execute(Dungeon.hero,"SCRIBE");
+        }else if(frames==720){
+            interfaceBounds();checkReviewText(Game.scene());capture("enchanter-scribe");
+            boolean clicked=false;
+            for(com.watabou.noosa.Gizmo g:RecoveryChecks.members(Game.scene()))if(g instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndScribe){
+                com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(g,"pane");
+                pointerGestureReview(RecoveryChecks.members(pane.content()).get(0),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);clicked=true;break;
+            }
+            if(!clicked)throw new AssertionError("Scribe picker missing");
+        }else if(frames==760){
+            if(Dungeon.energy!=88||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.BlankParchment.class).quantity()!=4
+                    ||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).charges()!=2
+                    ||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify.class)==null)throw new AssertionError("Scribe actual pointer purchase/resources");
+            capture("enchanter-scribe-complete");
+            System.out.println("TEST 63 UI PASS: native Scribe menu, readable costs, scroll selector and actual mouse/touch purchase");Gdx.app.exit();
         }
     }
     private void notificationReview(){

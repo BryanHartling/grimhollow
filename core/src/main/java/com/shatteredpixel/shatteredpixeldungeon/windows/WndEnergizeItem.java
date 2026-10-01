@@ -132,6 +132,7 @@ public class WndEnergizeItem extends WndInfoItem {
 	}
 
 	public static void energizeAll(Item item ) {
+        if(item==null || !Dungeon.hero.belongings.contains(item) || item.energyVal()<=0)return;
 
 		if (item.isEquipped( Dungeon.hero ) && !((EquipableItem)item).doUnequip( Dungeon.hero, false )) {
 			return;
@@ -141,6 +142,7 @@ public class WndEnergizeItem extends WndInfoItem {
 	}
 
 	public static void energizeOne( Item item ) {
+        if(item==null || !Dungeon.hero.belongings.contains(item) || item.energyVal()<=0)return;
 
 		if (item.quantity() <= 1) {
 			energizeAll( item );
@@ -151,6 +153,8 @@ public class WndEnergizeItem extends WndInfoItem {
 
 	private static void energize(Item item){
 		Hero hero = Dungeon.hero;
+        if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll)
+            com.shatteredpixel.shatteredpixeldungeon.items.BlankParchment.recycle(hero,item.quantity());
 
 		if (ShatteredPixelDungeon.scene() instanceof AlchemyScene){
 

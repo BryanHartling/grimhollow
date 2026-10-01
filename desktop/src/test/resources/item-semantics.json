@@ -2691,6 +2691,12 @@
       "artIndex": 540,
       "cellSize": 64,
       "rgbaSha256": "0e1f9b9c0cf52c6f1931c39bd0df09da39c9935646a07039f375bb9c350d1e19"
+    },
+    "BLANK_PARCHMENT": {
+      "id": 541,
+      "artIndex": 541,
+      "cellSize": 64,
+      "rgbaSha256": "8b5e05d7663d765955e6a7e8db860ee442a3c7316c19c862899c42d89b762513"
     }
   },
   "icons": {

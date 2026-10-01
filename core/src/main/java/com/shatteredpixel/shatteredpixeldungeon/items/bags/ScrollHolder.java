@@ -38,7 +38,7 @@ public class ScrollHolder extends Bag {
 
 	@Override
 	public boolean canHold( Item item ) {
-		if (item instanceof Scroll || item instanceof Spell
+		if (item instanceof Scroll || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.BlankParchment || item instanceof Spell
 				|| item instanceof ArcaneResin || item instanceof Stylus){
 			return super.canHold(item);
 		} else {

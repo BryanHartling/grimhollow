@@ -20,6 +20,7 @@ public final class PlaytestCatalog {
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.Ankh.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.ArcaneResin.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.BrokenSeal.class);
+        items.add(com.shatteredpixel.shatteredpixeldungeon.items.BlankParchment.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.Dewdrop.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.EnergyCrystal.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal.class);

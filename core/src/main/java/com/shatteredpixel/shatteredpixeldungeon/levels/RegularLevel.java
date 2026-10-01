@@ -379,6 +379,8 @@ public abstract class RegularLevel extends Level {
 	
 	@Override
 	protected void createItems() {
+        if(com.shatteredpixel.shatteredpixeldungeon.items.BlankParchment.spawnsOn(Dungeon.depth,Dungeon.branch,Dungeon.hero.heroClass,Dungeon.seed))
+            addItemToSpawn(new com.shatteredpixel.shatteredpixeldungeon.items.BlankParchment());
 		
 		// drops 3/4/5 items 60%/30%/10% of the time
 		int nItems = 3 + Random.chances(new float[]{6, 3, 1});

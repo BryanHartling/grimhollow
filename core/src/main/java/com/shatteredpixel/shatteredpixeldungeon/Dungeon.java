@@ -1052,6 +1052,7 @@ public class Dungeon {
 			}
 		}
 
+		com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.updateNotes(level);
 		GameScene.afterObserve();
 	}
 

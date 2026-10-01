@@ -1,0 +1,24 @@
+{
+  "license": "GPL-3.0-or-later",
+  "generator": "Built-in imagegen",
+  "source": "sources/sprint/journal-landmarks.png",
+  "names": [
+    "STAIRS",
+    "STAIRS_CHASM",
+    "STAIRS_WATER",
+    "STAIRS_GRASS",
+    "STAIRS_DARK",
+    "STAIRS_LARGE",
+    "STAIRS_TRAPS",
+    "STAIRS_SECRETS",
+    "GRASS",
+    "DISTANT_WELL",
+    "WELL_HEALTH",
+    "WELL_AWARENESS",
+    "SACRIFICE_ALTAR",
+    "ALCHEMY",
+    "BACKPACK_LRG",
+    "SCROLL_COLOR"
+  ],
+  "prompt": "Use case: stylized-concept. Asset type: ONE production sprite atlas for Grimhollow's Adventuring Notes, exactly sixteen painted dark-fantasy journal icons arranged in an evenly spaced 4 by 4 grid on a truly transparent background. Original artwork, no borrowed game assets. Every cell is an isolated miniature vignette, fully contained with wide transparent gutters between cells, no outer frame, no lettering, numbers or labels. Detailed hand-painted natural stone, worn brass, leather and foliage, soft realistic shading but crisp silhouettes and strong restrained color differences, readable at 64 pixels, not pixel art, not cartoon, no square backplates. A slightly elevated three-quarter view. Exact row-major order: row 1: (1) ancient stone stairs descending into a dark doorway; (2) two broken stone ledges over a deep black chasm, visibly separated by a wide void; (3) flooded flagstones with blue-teal water and clean silver ripples; (4) overgrown flagstones with tall green grasses. Row 2: (5) unlit dungeon arch swallowed by purple-black shadow, a faint cool rim distinguishes the silhouette; (6) a spacious broad vaulted stone hall with distant pillars and vanishing-point perspective; (7) a steel spike floor trap with distinct raised spikes and a bronze pressure plate; (8) a hidden stone door slightly ajar with a thin warm seam of light, ivy and stone joints. Row 3: (9) a lush sheltered garden of fern and leaves around small pale flowers; (10) a small stone well far below a broken ledge, a thin pale glimmer in the water, depth clearly suggested; (11) a stone healing well containing crimson-red glowing water with a simple bright RED HEART emblem above it; (12) a stone awareness well containing azure water and a clear luminous blue EYE symbol above it. Row 4: (13) a low dark stone sacrificial altar bearing vivid orange-red flames; (14) a black iron alchemy cauldron with a few smooth green bubbles and little brass tools; (15) a worn tan leather adventurer's backpack with rolled blanket and buckles; (16) an open parchment notebook and dark quill with several subtle ink strokes, no legible writing. All sixteen icons similar visible size, centered within their individual equal grid cells with at least 12 percent clear margin, consistent top-left lighting, no cast shadow outside each vignette. Transparent negative space throughout. Output square atlas."
+}

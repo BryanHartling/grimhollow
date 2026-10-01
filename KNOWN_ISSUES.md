@@ -1,5 +1,8 @@
 # Known issues
 
+- v1.19.2: physical Samsung tablet review of the refreshed journal icons remains with the user. Treasury reminder text uses English fallback where translations are unavailable.
+- Prior branch CI run 36899034139 failed Linux effects timing test 31: p95 2.1246 ms exceeds its unchanged <2 ms limit; all fog checks passed. Journal changes do not alter the effects renderer. The timing gate remains active.
+
 - **Terrain contrast (test 45): Abandoned: test failed.** User decision, 2026-10-01: stop testing it. Removed from Linux/Windows CI and the local CLI. Last recorded result: 17/76 failed comparisons (Sewers 5/15, Prison 1/10, Caves 6/21, City 1/15, Halls 4/15). Historical measurements remain preserved; this is not PASS and is no longer an active issue or release gate. This decision supersedes all older instructions to enforce or rerun test 45.
 
 - v1.19.1: Playtest now opens from the home screen; return via Main Menu to reopen run tools. Physical tablet confirmation remains with the user.

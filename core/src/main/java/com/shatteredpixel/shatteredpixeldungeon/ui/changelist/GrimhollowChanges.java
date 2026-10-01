@@ -20,7 +20,12 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.19.1","Playtest tools move to the home screen.");
+        ChangeInfo r=release(list,"v1.19.2","Painted adventuring notes and reminders for sealed treasuries.");
+        note(r,Icons.STAIRS_WATER,"Adventuring Notes",
+                "Floor conditions, gardens, wells and other journal landmarks now have painted icons. NPC portraits fit their note tiles and description windows. Healing wells use a red heart.");
+        note(r,Icons.STAIRS_SECRETS,"Treasury reminders",
+                "Discovering an elemental treasury's clue or revealing its door adds a fire, water or lightning reminder to that floor's Adventuring Notes. The note explains how to return prepared, persists between visits and saved games, and clears once you open the seal.");
+        r=release(list,"v1.19.1","Playtest tools move to the home screen.");
         note(r,Icons.TALENT,"Home-screen Playtest",
                 "Open Playtest from the home screen to tune balance without loading a game, or select a saved run or start a new one for God mode, item creation and travel. Run-specific tools open once the selected dungeon is loaded. The active-run menu no longer contains Playtest. Ordinary saves keep their normal status until testing is enabled or custom balance is applied.");
         r=release(list,"v1.19.0","Written power, elemental treasuries, and a painted journal.");

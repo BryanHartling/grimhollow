@@ -1,3 +1,9 @@
+# Painted Adventuring Notes - v1.19.2
+
+- Refresh all seven floor-condition icons, the default stairs, garden, distant/health/awareness wells, sacrificial fire, alchemy, backpack and custom-note icons from one committed painted source sheet. NPC landmarks use their existing painted bodies fitted to the note cell, without transparent animation padding. The same icons appear in note descriptions.
+- Discovering a fire, water or lightning treasury's mechanism, or revealing its hidden door, records a distinct painted reminder under that floor in Adventuring Notes. The description explains the required element and Skeleton Key alternative. Reminders persist across floors/save-load, do not reveal undiscovered treasuries, and clear when the seal opens. Existing saved floors gain reminders when their known clues are observed again.
+- The offline painted packer reproduces the atlas from its committed source. No terrain artwork, unlock rules, generation or combat balance changes. Terrain contrast test 45 remains **Abandoned: test failed** and is not run.
+
 # Terrain contrast gate abandoned - 2026-10-01
 
 - Test 45 is **Abandoned: test failed**, at the user's explicit request. Stop running the numerical terrain-contrast test in Linux/Windows CI and remove its local CLI entry points. Preserve its historical implementation, screenshots and failed measurements; do not relabel them PASS.

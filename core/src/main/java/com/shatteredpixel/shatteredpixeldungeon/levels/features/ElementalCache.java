@@ -4,6 +4,7 @@ package com.shatteredpixel.shatteredpixeldungeon.levels.features;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.items.Waterskin;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -20,6 +21,31 @@ public class ElementalCache implements Bundlable {
     public int door, mechanism, keyCost;
     public Kind kind;
     public boolean opened;
+
+    public Notes.Landmark landmark() {
+        switch (kind) {
+            case FIRE: return Notes.Landmark.FIRE_TREASURY;
+            case WATER: return Notes.Landmark.WATER_TREASURY;
+            default: return Notes.Landmark.LIGHTNING_TREASURY;
+        }
+    }
+    public void noteDiscovered(Level level) {
+        if (level == Dungeon.level && Dungeon.branch == 0 && !opened) Notes.add(landmark());
+    }
+    /** Record only clues/doors the player knows; never expose an unobserved treasury. */
+    public static void updateNotes(Level level) {
+        if (level != Dungeon.level || Dungeon.branch != 0) return;
+        for (ElementalCache cache : level.elementalCaches) {
+            if (cache.opened) Notes.remove(cache.landmark());
+            else if (known(level, cache.mechanism)
+                    || (level.map[cache.door] != Terrain.SECRET_DOOR && known(level, cache.door))) {
+                cache.noteDiscovered(level);
+            }
+        }
+    }
+    private static boolean known(Level level, int cell) {
+        return level.heroFOV[cell] || level.visited[cell] || level.mapped[cell];
+    }
 
     public static ElementalCache atDoor(Level level, int cell) {
         if (level != null) for (ElementalCache cache : level.elementalCaches) if (cache.door == cell) return cache;
@@ -48,6 +74,7 @@ public class ElementalCache implements Bundlable {
         Level.set(door, Terrain.DOOR, level);
         level.mapped[door] = true;
         if (level == Dungeon.level) {
+            if (Dungeon.branch == 0) Notes.remove(landmark());
             GameScene.updateMap(door);
             for (CustomTilemap tile : level.customTiles) if (tile instanceof MechanismTile) tile.updateKnowledge();
             if (Dungeon.hero != null) {

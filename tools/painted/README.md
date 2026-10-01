@@ -1,3 +1,7 @@
+# Adventuring Notes — v1.19.2
+
+`journal.py` packs sixteen landmark paintings from `sources/sprint/journal-landmarks.png` into `interfaces/painted_landmarks.png`. The exact built-in imagegen prompt and row-major names are in `journal-landmarks-prompt.json`; source and derivatives are GPL-3.0-or-later. Treasury reminders reuse the three committed elemental mechanism paintings. Existing painted NPC sprites are fitted at runtime without animation padding. The offline packer and normal provenance check reproduce the assets without generation. Terrain contrast test 45 remains abandoned.
+
 # Enchanter craft and elemental caches — v1.19.0
 
 `journal.py` packs sixteen original navigation/category paintings and the existing leather/brass materials into the journal atlas, HUD buttons and key display. `botany_skills.py` replaces Overload with its own Spellguard painting. Sources are in `sources/sprint/`; exact built-in imagegen prompts are in `sprint-prompts.json`. New paintings and derivatives are GPL-3.0-or-later. The normal offline packer reproduces the outputs; UI geometry remains in the existing logical units.

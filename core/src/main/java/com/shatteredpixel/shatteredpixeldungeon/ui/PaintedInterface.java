@@ -38,7 +38,13 @@ public final class PaintedInterface {
         if (type==Icons.GOLD) name="COIN_SML";
         if (type==Icons.ARROW) name="RIGHTARROW";
         if (type==Icons.NEWS || type==Icons.CHANGES) name="JOURNAL";
-        Image replacement;
+        Image replacement=JournalIcons.landmark(type);
+        if(replacement!=null) {
+            replacement.logicalSize(original.width,original.height);
+            replacement.scale.set(original.scale);
+            original.destroy();
+            return replacement;
+        }
         int bag=type==Icons.SEED_POUCH?ItemSpriteSheet.POUCH:type==Icons.SCROLL_HOLDER?ItemSpriteSheet.HOLDER:
                 type==Icons.WAND_HOLSTER?ItemSpriteSheet.HOLSTER:type==Icons.POTION_BANDOLIER?ItemSpriteSheet.BANDOLIER:-1;
         if(name.startsWith("DEPTH")) {

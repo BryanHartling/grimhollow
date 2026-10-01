@@ -20,6 +20,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.*;
 import com.shatteredpixel.shatteredpixeldungeon.items.artifacts.*;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.*;
 import com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica;
+import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
 import com.watabou.utils.Random;
 
 /** Real gameplay regressions for Spellguard, scroll scribing and elemental caches. */
@@ -83,15 +84,41 @@ final class ScribingRoomsScenario {
             Bundle saved=new Bundle();saved.put("level",level);Level restored=(Level)saved.get("level");
             ElementalCache copy=restored.elementalCaches.get(0);
             check(copy.door==cache.door&&copy.mechanism==cache.mechanism&&copy.kind==kind&&!copy.opened&&copy.keyCost==cache.keyCost,"closed state persists");
+            // The journal may remember a discovered clue, but must not spoil unseen rooms.
+            Notes.remove(cache.landmark());
+            level.heroFOV[cache.mechanism]=level.visited[cache.mechanism]=level.mapped[cache.mechanism]=false;
+            level.heroFOV[cache.door]=level.visited[cache.door]=level.mapped[cache.door]=false;
+            ElementalCache.updateNotes(level);
+            check(!Notes.contains(cache.landmark()),"unseen treasury stays out of journal");
+            level.visited[cache.door]=true;
+            ElementalCache.updateNotes(level);
+            check(!Notes.contains(cache.landmark()),"seeing a disguised door does not spoil treasury");
+            level.heroFOV[cache.mechanism]=true;
+            ElementalCache.updateNotes(level);
+            check(Notes.contains(cache.landmark()),"visible clue records the sealed treasury");
+            level.heroFOV[cache.mechanism]=false;
+            Bundle journal=new Bundle();Notes.storeInBundle(journal);Notes.reset();Notes.restoreFromBundle(journal);
+            Dungeon.depth=oldDepth+1;
+            check(Notes.contains(cache.landmark(),oldDepth)&&!Notes.contains(cache.landmark()),"journal reminder survives save/load and changing floors");
+            Dungeon.depth=oldDepth;
+            Notes.remove(cache.landmark());level.mapped[cache.mechanism]=true;
+            ElementalCache.updateNotes(level);
+            check(Notes.contains(cache.landmark()),"mapped clue records treasury");
+            Notes.remove(cache.landmark());level.mapped[cache.mechanism]=false;
             check(ElementalCache.searchChance(level,cache.door,1,false)==.5f&&ElementalCache.searchChance(level,cache.door,.1f,false)==.05f
                     &&ElementalCache.searchChance(level,cache.door,1,true)==1,"manual/passive search penalty and foresight exemption");
             level.discover(cache.door);check(level.map[cache.door]==Terrain.LOCKED_DOOR&&!cache.opened&&!level.passable[cache.door],"discovery reveals without opening");
+            check(Notes.contains(cache.landmark()),"revealing the hidden door records treasury immediately");
+            ElementalCache.updateNotes(level);ElementalCache.updateNotes(level);
+            check(Notes.getRecords(oldDepth).stream().filter(r->r.equals(new Notes.LandmarkRecord(cache.landmark(),oldDepth))).count()==1,"treasury reminder is not duplicated");
             level.destroy(cache.door);check(level.map[cache.door]==Terrain.LOCKED_DOOR,"terrain destruction cannot bypass seal");
             for(ElementalCache.Kind wrong:ElementalCache.Kind.values())if(wrong!=kind)check(!ElementalCache.activate(level,cache.mechanism,wrong)&&!cache.opened,"wrong element rejected");
             if(kind==ElementalCache.Kind.FIRE)new Fire().seed(level,cache.mechanism,2);
             else if(kind==ElementalCache.Kind.WATER)check(level.setCellToWater(true,cache.mechanism),"real water creation");
             else new Electricity().seed(level,cache.mechanism,2);
             check(cache.opened&&level.map[cache.door]==Terrain.DOOR&&level.passable[cache.door],"matching gameplay effect opens");
+            ElementalCache.updateNotes(level);
+            check(!Notes.contains(cache.landmark()),"opened treasury clears its return reminder");
             saved=new Bundle();saved.put("level",level);restored=(Level)saved.get("level");
             check(restored.elementalCaches.get(0).opened&&restored.map[cache.door]==Terrain.DOOR,"opened seal and contents survive load");
             int heaps=level.heaps.size;check(!ElementalCache.activate(level,cache.mechanism,kind)&&heaps==level.heaps.size,"repeat activation yields no new loot");

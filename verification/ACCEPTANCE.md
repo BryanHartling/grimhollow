@@ -1,3 +1,15 @@
+# Painted Adventuring Notes - v1.19.2
+
+| Gate | Result | Executed evidence |
+|---|---|---|
+| JUnit and class gates | PASS | `gradlew.bat core:test core:smokeRun --no-daemon --console=plain`: **BUILD SUCCESSFUL in 2m 22s**, **Runs=30 failures=0**. |
+| 64 treasury reminders | PASS | Existing fifteen-room/five-region scenario now also checks unseen-room exclusion, disguised-door exclusion, observed/mapped clue registration, revealed-door registration, duplicate prevention, save/load and floor persistence, and removal after opening. |
+| Painted journal interface | PASS | Existing native polish fixture in portrait and landscape: **JOURNAL UI PASS: real HUD input, all 26 painted landmarks, chasm/water/treasury descriptions, notes/alchemy/catalog bounds and navigation icon dimensions**. Screenshots visually inspected; new evidence is `verification/interface/{portrait,landscape}/journal-note-*.png` and `journal-notes.png`. Other assertions in this fixture (37/61/63/64) also passed. |
+| 44 asset provenance/reproduction | PASS | `python tools/recovery_assets.py --check`: **PAINTED assets=145 source sheets=135 failures=0**, 55 launcher resources; **TEST 44 ... verified painted replacements=145; failures=0**. |
+| Windows and Android builds | PASS | `gradlew.bat desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 1m 8s**. Windows package produced by `tools/package-windows.ps1`; Android version code 972. |
+| 45 terrain contrast | **Abandoned: test failed** | Not run; remains excluded from local CLI and CI. No terrain art changed. |
+| CI / physical tablet | Not claimed here | CI status is reported at delivery. Physical Samsung tablet review remains with the user. The prior branch run 36899034139 failed only Linux effects timing test 31 (p95 2.1246 ms versus the unchanged <2 ms limit); all fog checks in that run passed. |
+
 # Current disposition - 2026-10-01
 
 | Test | Status | Decision and preserved evidence |

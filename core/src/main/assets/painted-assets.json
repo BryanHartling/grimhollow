@@ -122,6 +122,7 @@
     "ritual-mark.png": "94aa09715005e11e082f4823d78f8d5cee65418d94f8c73a42a88fa733726c9c",
     "sewers-materials.png": "0b951d4ce0bb5902c6a940c1bc56db1173580ca57c33d652c16754dd91c9ddc2",
     "sprint/elemental-cache.png": "442b0aff01bfc6bbacbcdd232c3032dfa3387ef1c2c7f6c66ad90059a90c8464",
+    "sprint/journal-landmarks.png": "555c7a695d2ec8d1cf6dfc1993f131fdd54b2def13093f544bd9cd16d81aab70",
     "sprint/journal.png": "2398fb10a25e058c0bc3ec5c36f47f9c016edd2524f965f166f6e352516bb400",
     "sprint/parchment.png": "95161b4a9f013bb417d9f40ddee8b9ada3b6bbe44a6f0f568fe282680112ddd9",
     "sprint/spellguard.png": "d3385ea1354437f0248c514219c64af2ae79112cefa818185c3d3b10080e572a",
@@ -9030,6 +9031,41 @@
       ],
       "rgba_sha256": "d26e34b1dd3f041f002d839d8c3d2ed2b1883dd652b1dca041c62487118f4aac"
     },
+    "interfaces/painted_journal.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "126029300142db767d619476c57d15bd1d2ee0fa1cf35a584054e8b85a0af0e1"
+    },
+    "interfaces/painted_landmarks.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "a3253f77813d6b6bb789a5ba5ca10eeca65000677a7b76bd431b8c517f7b2d08"
+    },
+    "interfaces/menu_button.png": {
+      "size": [
+        256,
+        64
+      ],
+      "rgba_sha256": "de10c515889397c5291f69d4e6ade19b6580e5036b2523f25a6271088611ce74"
+    },
+    "interfaces/menu_pane.png": {
+      "size": [
+        128,
+        128
+      ],
+      "rgba_sha256": "ff24e1fe64a35280f354af776d6c19993950e7ff6e44959c4d389f169f48d20f"
+    },
+    "environment/custom_tiles/elemental_cache.png": {
+      "size": [
+        256,
+        128
+      ],
+      "rgba_sha256": "a0e481fdded01a49ca43debf3b678018c888d667995a45a4b6bebe0e58aefdbf"
+    },
     "interfaces/painted_badges.png": {
       "size": [
         1024,
@@ -9303,34 +9339,6 @@
         64
       ],
       "rgba_sha256": "2c42682762ce45fc676ff78cdabf787ba9aa752e20bc696b196096961aa56efd"
-    },
-    "interfaces/painted_journal.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "126029300142db767d619476c57d15bd1d2ee0fa1cf35a584054e8b85a0af0e1"
-    },
-    "interfaces/menu_button.png": {
-      "size": [
-        256,
-        64
-      ],
-      "rgba_sha256": "de10c515889397c5291f69d4e6ade19b6580e5036b2523f25a6271088611ce74"
-    },
-    "interfaces/menu_pane.png": {
-      "size": [
-        128,
-        128
-      ],
-      "rgba_sha256": "ff24e1fe64a35280f354af776d6c19993950e7ff6e44959c4d389f169f48d20f"
-    },
-    "environment/custom_tiles/elemental_cache.png": {
-      "size": [
-        256,
-        128
-      ],
-      "rgba_sha256": "a0e481fdded01a49ca43debf3b678018c888d667995a45a4b6bebe0e58aefdbf"
     }
   }
 }

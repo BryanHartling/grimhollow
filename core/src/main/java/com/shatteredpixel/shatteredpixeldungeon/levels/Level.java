@@ -1139,6 +1139,8 @@ public abstract class Level implements Bundlable {
 
 	public void discover( int cell ) {
 		set(cell, map[cell] == Terrain.SECRET_DOOR && ElementalCache.sealed(this, cell) ? Terrain.LOCKED_DOOR : Terrain.discover(map[cell]), this);
+		ElementalCache cache = ElementalCache.atDoor(this, cell);
+		if (cache != null) cache.noteDiscovered(this);
 		Trap trap = traps.get( cell );
 		if (trap != null)
 			trap.reveal();

@@ -255,6 +255,7 @@ def main():
         if path.startswith('splashes/painted_'):expected=(1600,900)
         if path=='interfaces/painted_portraits.png':expected=(384,384)
         if path=='interfaces/painted_journal.png':expected=(256,256)
+        if path=='interfaces/painted_landmarks.png':expected=(256,256)
         if path=='interfaces/menu_button.png':expected=(256,64)
         if path=='interfaces/menu_pane.png':expected=(128,128)
         if path=='environment/custom_tiles/elemental_cache.png':expected=(256,128)

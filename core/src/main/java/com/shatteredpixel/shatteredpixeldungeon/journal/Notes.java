@@ -23,6 +23,7 @@ package com.shatteredpixel.shatteredpixeldungeon.journal;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.GameGeometry;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Foliage;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SacrificialFire;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.WaterOfAwareness;
@@ -43,10 +44,12 @@ import com.shatteredpixel.shatteredpixeldungeon.items.LostBackpack;
 import com.shatteredpixel.shatteredpixeldungeon.items.keys.Key;
 import com.shatteredpixel.shatteredpixeldungeon.items.spells.BeaconOfReturning;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache;
 import com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.WeakFloorRoom;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.BlacksmithSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.GhostSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ImpSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
@@ -57,12 +60,14 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.SpawnerSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.StatueSprite;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.WandmakerSprite;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
+import com.shatteredpixel.shatteredpixeldungeon.ui.JournalIcons;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.Visual;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Reflection;
+import com.watabou.utils.RectF;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -139,7 +144,11 @@ public class Notes {
 		TROLL,
 		IMP,
 
-		DEMON_SPAWNER;
+		DEMON_SPAWNER,
+
+		FIRE_TREASURY,
+		WATER_TREASURY,
+		LIGHTNING_TREASURY;
 	}
 	
 	public static class LandmarkRecord extends Record {
@@ -174,8 +183,8 @@ public class Notes {
 					return Icons.STAIRS_SECRETS.get();
 
 				case SHOP:
-					if (depth == 20)    return new Image(new ImpSprite());
-					else                return new Image(new ShopkeeperSprite());
+					if (depth == 20)    return characterIcon(new ImpSprite());
+					else                return characterIcon(new ShopkeeperSprite());
 				case ALCHEMY:
 					return Icons.get(Icons.ALCHEMY);
 				case GARDEN:
@@ -189,7 +198,7 @@ public class Notes {
 				case SACRIFICIAL_FIRE:
 					return Icons.get(Icons.SACRIFICE_ALTAR);
 				case STATUE:
-					return new Image(new StatueSprite());
+					return characterIcon(new StatueSprite());
 
 				case LOST_PACK:
 					return Icons.get(Icons.BACKPACK_LRG);
@@ -197,19 +206,40 @@ public class Notes {
 					return new ItemSprite(ItemSpriteSheet.RETURN_BEACON);
 
 				case GHOST:
-					return new Image(new GhostSprite());
+					return characterIcon(new GhostSprite());
 				case RAT_KING:
-					return new Image(new RatKingSprite());
+					return characterIcon(new RatKingSprite());
 				case WANDMAKER:
-					return new Image(new WandmakerSprite());
+					return characterIcon(new WandmakerSprite());
 				case TROLL:
-					return new Image(new BlacksmithSprite());
+					return characterIcon(new BlacksmithSprite());
 				case IMP:
-					return new Image(new ImpSprite());
+					return characterIcon(new ImpSprite());
 
 				case DEMON_SPAWNER:
-					return new Image(new SpawnerSprite());
+					return characterIcon(new SpawnerSprite());
+				case FIRE_TREASURY:
+					return JournalIcons.treasury(ElementalCache.Kind.FIRE);
+				case WATER_TREASURY:
+					return JournalIcons.treasury(ElementalCache.Kind.WATER);
+				case LIGHTNING_TREASURY:
+					return JournalIcons.treasury(ElementalCache.Kind.LIGHTNING);
 			}
+		}
+
+		private static Image characterIcon(CharSprite sprite) {
+			Image icon = new Image(sprite);
+			sprite.destroy();
+			icon.scale.set(1);
+			RectF frame = icon.frame();
+			RectF body = GameGeometry.opaqueBounds(icon.texture, frame);
+			if (body.width() > 0 && body.height() > 0) {
+				float x = frame.left * icon.texture.width, y = frame.top * icon.texture.height;
+				icon.frame(icon.texture.uvRect(x+body.left, y+body.top, x+body.right, y+body.bottom));
+				float scale = 16 / Math.max(body.width(), body.height());
+				icon.logicalSize(body.width()*scale, body.height()*scale);
+			}
+			return icon;
 		}
 
 		@Override
@@ -263,6 +293,10 @@ public class Notes {
 				case IMP:           return Messages.get(Imp.class, "desc");
 
 				case DEMON_SPAWNER: return Messages.get(DemonSpawner.class, "desc");
+				case FIRE_TREASURY:
+				case WATER_TREASURY:
+				case LIGHTNING_TREASURY:
+					return Messages.get(Landmark.class, landmark.name()+"_desc");
 			}
 		}
 

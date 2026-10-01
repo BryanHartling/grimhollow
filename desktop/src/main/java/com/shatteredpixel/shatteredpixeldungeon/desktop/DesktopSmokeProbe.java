@@ -489,6 +489,12 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }
         if(frames>=700)readabilityReview();
     }
+    private void journalNoteReview(com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark landmark){
+        com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord record=
+                new com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord(landmark,Dungeon.depth);
+        GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndJournalItem(record.icon(),record.title(),record.desc()));
+    }
+
     private void polishTick(){
         if(!(Game.scene() instanceof GameScene))return;
         // Advance the fixture only at genuine input boundaries; never remove a mob
@@ -579,14 +585,27 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             pointerGestureReview((com.watabou.noosa.Gizmo)RecoveryChecks.field(menu,"btnMenu"),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
         }else if(frames==610){
             interfaceBounds();capture("journal-menu");closeReviewWindows();
+            for(com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark landmark:com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark.values())
+                com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(landmark);
+            com.shatteredpixel.shatteredpixeldungeon.Statistics.deepestFloor=Math.max(com.shatteredpixel.shatteredpixeldungeon.Statistics.deepestFloor,Dungeon.depth);
+            com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal.last_index=0;
             Object menu=RecoveryChecks.field(Game.scene(),"menu");
             pointerGestureReview((com.watabou.noosa.Gizmo)RecoveryChecks.field(menu,"btnJournal"),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
         }else if(frames==630){
             interfaceBounds();capture("journal-notes");closeReviewWindows();
+            journalNoteReview(com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark.CHASM_FLOOR);
+        }else if(frames==640){
+            interfaceBounds();capture("journal-note-chasm");closeReviewWindows();
+            journalNoteReview(com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark.WATER_FLOOR);
+        }else if(frames==645){
+            interfaceBounds();capture("journal-note-water");closeReviewWindows();
+            journalNoteReview(com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark.LIGHTNING_TREASURY);
+        }else if(frames==650){
+            interfaceBounds();checkReviewText(Game.scene());capture("journal-note-treasury");closeReviewWindows();
             for(String page:com.shatteredpixel.shatteredpixeldungeon.journal.Document.ALCHEMY_GUIDE.pageNames())com.shatteredpixel.shatteredpixeldungeon.journal.Document.ALCHEMY_GUIDE.findPage(page);
             com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal.last_index=2;
             GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal());
-        }else if(frames==650){
+        }else if(frames==660){
             interfaceBounds();capture("journal-alchemy");closeReviewWindows();
             com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal.last_index=3;
             GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal());
@@ -597,7 +616,15 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(icon.width()!=16||icon.height()!=16||icon.texture.width!=256)throw new AssertionError("Journal logical/texture scale "+i);
                 icon.destroy();
             }
-            System.out.println("JOURNAL UI PASS: real HUD menu/journal input, notes, alchemy and catalog bounds, all sixteen painted icon dimensions");
+            for(com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark landmark:com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark.values()){
+                Image icon=new com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord(landmark,Dungeon.depth).icon();
+                if(icon.texture==com.watabou.gltextures.TextureCache.get(com.shatteredpixel.shatteredpixeldungeon.Assets.Interfaces.ICONS)
+                        ||icon.width()>16.01f||icon.height()>16.01f
+                        ||com.shatteredpixel.shatteredpixeldungeon.GameGeometry.opaqueHeight(icon.texture,icon.frame())<24)
+                    throw new AssertionError("Journal landmark must use fitted painted art: "+landmark+" "+icon.width()+"x"+icon.height());
+                icon.destroy();
+            }
+            System.out.println("JOURNAL UI PASS: real HUD input, all 26 painted landmarks, chasm/water/treasury descriptions, notes/alchemy/catalog bounds and navigation icon dimensions");
             closeReviewWindows();
         }else if(frames==690){
             com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll.initLabels();

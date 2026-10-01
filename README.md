@@ -1,5 +1,7 @@
 # Grimhollow
 
+v1.19.2 refreshes Adventuring Notes with painted terrain/landmark icons and fitted NPC portraits. Discovered elemental treasuries receive persistent fire, water or lightning reminders, including preparation tips, until their seals are opened. The home-screen Update Log describes this release.
+
 **Terrain contrast test 45: Abandoned: test failed.** At the user's request (2026-10-01), it no longer runs locally or in CI. The last 17/76 failed comparisons remain historical evidence, not a passing result. This supersedes older test-45 enforcement statements below; fog, visibility, geometry, art-provenance and gameplay checks remain active.
 
 **Playtest moves home in v1.19.1:** choose **Playtest** on the home screen. Balance tuning works without loading a run and applies across games. Choose **Open tools for a saved run**, or **Start a new run for testing**, to load a dungeon and open God mode, item creation, progression and travel controls. The active-run menu no longer has Playtest; return through **Main Menu** to access it again. Opening the menu alone does not mark a save as a Playtest.

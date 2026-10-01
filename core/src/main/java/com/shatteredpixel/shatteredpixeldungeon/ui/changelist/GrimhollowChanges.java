@@ -20,7 +20,13 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.18.1","A measured appetite and clearer signals.");
+        ChangeInfo r=release(list,"v1.18.2","Read the materials, keep the atmosphere.");
+        note(r,Icons.MAGNIFY,"Clearer terrain",
+                "Regional ambient light and the hero's visibility light preserve more of the painted stone and foliage colors. "
+                +"Torches and fire still cast warm local light. Flattened grass has a fuller spread of low leaves, making it easier to distinguish from bare paving. "
+                +"Sight, fog, traps, movement and artifact charging are unchanged.");
+
+        r=release(list,"v1.18.1","A measured appetite and clearer signals.");
         note(r,Icons.BACKPACK,"Hatchling balance",
                 "Manual feeding is available once the hatchling becomes hungry, during the final quarter of its feeding cycle. Automatic meals and warning interruptions remain. "
                 +"Item Sense marks only one nearest undiscovered loot pile for 20 turns, within 5/8/12/16 cells at +0/+1/+2/+3. Collecting it does not reveal another; refresh replaces the scent. "

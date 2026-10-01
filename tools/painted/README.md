@@ -1,3 +1,7 @@
+# Terrain readability — v1.18.2
+
+`terrain_details.py` packs the existing flattened-grass painting into a 60x34 footprint instead of 60x20. It remains below both standing states and exposes paving around the leaves. No source painting, terrain index, collision or alpha stencil is replaced; the standard offline packer reproduces the change. Regional ambient and personal-light corrections live in the renderer, preserving localized torch/fire colors and all visibility rules. Test 45 is measured independently, with unchanged thresholds and no manual pass override.
+
 # Playtest polish — v1.18.0
 
 `sources/playtest-polish/` contains three original built-in imagegen paintings: ascending stairs, descending stairs, and the eating icon. Exact prompts and GPL-3.0-or-later provenance are in `playtest-polish-prompts.json`. `pack.py` composites stair frames 16/17/22 across the five region atlases and inherited expedition terrain, and exports the transparent 64px meal to `effects/painted_food.png`. Garden motes reuse the existing painted particle atlas. All outputs rebuild offline; world units and stair behavior are unchanged.

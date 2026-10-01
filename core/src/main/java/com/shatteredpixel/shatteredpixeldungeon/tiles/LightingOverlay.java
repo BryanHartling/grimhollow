@@ -60,7 +60,9 @@ public class LightingOverlay extends Image {
     }
     private void rebuild() {
         map.clear((Dungeon.depth-1)/5);
-        source(Dungeon.hero.pos, heroLightRadius(), .45f, .31f, .12f);
+        // A nearly neutral visibility fill keeps terrain legible; actual fire
+        // and torches below still supply the warm, localized pools of light.
+        source(Dungeon.hero.pos, heroLightRadius(), .30f, .29f, .27f);
         boolean lavaSurface = Dungeon.level.waterTex().equals(com.shatteredpixel.shatteredpixeldungeon.Assets.Environment.WATER_HALLS);
         if (lavaSurface) {
             for (int cell=0;cell<Dungeon.level.length();cell++)

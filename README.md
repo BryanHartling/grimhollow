@@ -1,5 +1,9 @@
 # Grimhollow
 
+**Terrain readability v1.18.2:** restrained regional ambient color and a nearly neutral personal light preserve the painted material colors; torches and fire retain their warm light. Flattened grass has a fuller spread of low leaves. Visibility and gameplay are unchanged. This is a visual correction for review, **not a passing declaration for test 45**; its thresholds remain enforced.
+
+**Current plan:** tablet movement performance is **resolved per user playtesting**. Campaign balance remains with the user for continued playtesting. Psychic Pull is skipped. **Spellguard is queued** to replace Overload: 10%/20% magic damage reduction while armor is inscribed; it is not implemented yet. These decisions supersede older pending-performance and replacement-choice notes below. The separate stale Hatchling UI-test fixture remains to be repaired; see [known issues](KNOWN_ISSUES.md).
+
 **v1.18.1 balance and readability:** the home screen now opens **Update Log** directly. Target portraits fit the creature rather than its transparent frame. Healing hearts are red, with painted combat/pickup/spell notifications. Hatchling manual feeding requires hunger (last quarter of its interval); Item Sense marks one nearest undiscovered loot pile for 20 turns within 5/8/12/16 cells. Each meal upgrades OR enchants, favoring upgrades 75% when both are possible. Exceptional upgrades stay +2; rings remain Exceptional; identification only reaches owned belongings.
 
 

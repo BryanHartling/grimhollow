@@ -1,5 +1,14 @@
 # Known issues
 
+- Current plan (2026-09-30): tablet movement performance is resolved per the user's playtesting. Balance remains under the user's campaign playtesting; no balance changes are part of this terrain patch.
+- Queued: replace Enchanter Overload with Spellguard (10%/20% magic damage reduction while armor is inscribed). Not implemented in this patch. Psychic Pull is skipped and is no longer queued.
+- Terrain readability: reduce the ambient/personal-light color cast and enlarge the existing flattened-grass presentation. Human acceptance remains pending; test 45 stays enforced at its existing thresholds and is not marked passing by this work.
+- v1.18.1 CI also exposed a stale full-interface Hatchling fixture: it expects a marker on a heap already marked seen, contrary to nearest-undiscovered-item sensing. This separate test-fixture repair remains outstanding; Android and all class gates passed run 36791233065. No gameplay failure is inferred from that fixture alone.
+
+## Historical release limitations
+
+The dated entries below retain their original verification scope. Their pending tablet-performance notes are superseded by the user's resolution above; they are not reopened tasks or claims that automated tests measured the physical tablet.
+
 - v1.18.1 Hatchling balance and notification/UI changes need physical Samsung tablet playtesting; native portrait/landscape checks do not substitute for a device. Existing test-45 terrain contrast failures remain enforced.
 - Old floor-wide Hatchling Item Sense expires when loading a pre-v1.18.1 save; the next meal selects one scent. New text falls back to English where translations are unavailable.
 

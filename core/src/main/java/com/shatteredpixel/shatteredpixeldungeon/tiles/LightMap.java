@@ -3,9 +3,13 @@ package com.shatteredpixel.shatteredpixeldungeon.tiles;
 
 /** Pure CPU light accumulation; testable without OpenGL. Values multiply terrain once. */
 public final class LightMap {
+    // Restrained regional casts preserve the painted material colors. Strong
+    // amber ambient plus personal light used to turn blue rock and green plants
+    // into the same brown as the walkable floor. These are render values only;
+    // sight, fog and Ashlight's environmental charge calculation are independent.
     public static final float[][] AMBIENT = {
-        {.56f, .61f, .51f}, {.50f, .50f, .58f}, {.60f, .45f, .35f},
-        {.52f, .57f, .64f}, {.45f, .45f, .57f}
+        {.56f, .60f, .57f}, {.53f, .55f, .60f}, {.54f, .58f, .62f},
+        {.56f, .58f, .64f}, {.50f, .52f, .59f}
     };
     public final int width, height, samples;
     private final float[] rgb;

@@ -43,7 +43,9 @@ def patch(region, atlas, old, floor, cap, features, raised):
     # low clippings; HIGH_GRASS and FURROWED_GRASS retain their gameplay flags.
     for alt in range(2):
         source=plants[2] if alt==0 else plants[2].transpose(Image.Transpose.FLIP_LEFT_RIGHT)
-        low,_=split(source,clear,(60,20))
+        # Flattened leaves cover enough ground to survive downsampling and dim
+        # lighting, while staying far shorter than either standing grass state.
+        low,_=split(source,clear,(60,34))
         put(atlas,2+6*alt,floor)
         put(features,132+16*stage+alt,low)
         for state in range(2):

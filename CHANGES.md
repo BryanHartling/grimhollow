@@ -1,3 +1,12 @@
+# Terrain readability and playtest decisions - v1.18.2
+
+- Reduce the strong regional/personal-light color cast so cool rock, foliage and warm walkable floor retain their painted material differences. Keep local torch/fire colors, fog, sight radii, lighting cost and Ashlight charging rules unchanged.
+- Give the existing flattened-grass painting a wider visible ground footprint (60x34 rather than 60x20) through the deterministic packer; no new source art or terrain rules.
+- Keep test 45 and its original thresholds enforced. Terrain changes require human review and are not declared passing by this patch.
+- Tablet movement performance is resolved per user playtesting. The user continues campaign balance review; this patch changes no balance values.
+- Psychic Pull is skipped. Queue Spellguard as the Overload replacement: 10%/20% magic damage reduction while armor is inscribed. Queue only, not shipped gameplay.
+- Version 1.18.2 uses Android code 968 and retains save compatibility.
+
 # Hatchling balance and readable notifications - v1.18.1
 
 - Manual Feed now requires hunger (last quarter of the interval); automatic feeding and the action-interrupt warning remain.

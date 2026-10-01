@@ -1,3 +1,22 @@
+# Terrain readability - v1.18.2
+
+This is a visual correction for human review, not a declaration that terrain readability or test 45 passes. The existing source paintings, fog rules and gameplay are retained. Tablet movement performance is resolved per the user's playtesting (2026-09-30); no physical-device benchmark was performed here. Campaign balance stays under user review. Spellguard is queued, and Psychic Pull is skipped.
+
+| Gate | Result | Executed evidence |
+|---|---|---|
+| Desktop / Android / JUnit | PASS | `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 1m 2s**. Seven JUnit tests, zero failures/errors. Android code 968, version 1.18.2. |
+| Class gates | PASS | **Runs=30 failures=0**: ten seeded runs each for Necromancer, Enchanter and Psychic, including existing content/artifact/quest regressions. No balance values changed. |
+| 43 / 47 fog, walking and doors | PASS | Fresh native recovery/fog checks for all five regions: **NATIVE_REGION_FAILURES=0**. 788 adjacent walking steps, 1252 door-transition frames, three zooms and four pans before/after walking in every region. **fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned**. The host paused during Caves; the same process resumed and completed without a test reset. |
+| 24-26 / 34 / 36 / 56 geometry | PASS | Nine heroes, 126 mob forms, 75 creature atlases, 385 item frames, 60 identification overlays, 63 trap variants, 113 skill icons and 15 plants; native checks report failures=0. |
+| 44 source reproduction | PASS | `python tools/recovery_assets.py --check`: **PAINTED assets=140 source sheets=130 failures=0**, 55 launcher resources, **verified painted replacements=140 failures=0**. No generated source art or Blender run. |
+| 46 runtime handlers | PASS | Actual title controls=6, credits handlers=4, allowed repository URLs=4, external opens=0, scene fetches=0, failures=0. Compiled call-site audit retains its earlier result and was not rerun for this visual patch. |
+| Windows launcher | Built | `tools/package-windows.ps1` completed and produced `desktop/build/windows/1.18.2/Grimhollow/Grimhollow.exe`; gameplay was tested through the same packaged desktop jar. |
+| 45 terrain contrast | Permanent known issue - NOT PASS | `python tools/recovery_checks.py --all-regions` returned exit 1: **17/76 failed**. Sewers **5/15**, Prison **1/10**, Caves **6/21**, City **1/15**, Halls **4/15**. Original luminance 0.12 / hue 40-degree thresholds and all terrain pairs remain enforced. The current Sewers fixture has six visible types rather than the prior seven; do not treat the older 25/82 aggregate as a matched comparison. |
+| Full CI | Not green | Test 45 remains a blocker. The separately identified stale Hatchling full-interface fixture from v1.18.1 remains outstanding; this patch does not modify its assertion or gameplay. Exact release-head CI is linked in the delivery. |
+| Other numbered tests / retirements | Prior status retained | This patch adds no acceptance test and claims no new campaign-balance or physical-tablet verification. Earlier numbered records below keep their stated scope and retirements. |
+
+Fresh five-region lit captures, room measurements and walking sequences are in [recovery](recovery/). The restrained ambient/personal-light color preserves the existing painted materials, while torches/fire retain localized warmth. Flattened grass uses its existing painting at a taller low-profile footprint. Door/grass/decor averages and dark cave surfaces still have failing comparisons; human readability review remains required.
+
 # Lurking Horror — v1.17.0
 
 The three implementation components are complete. This is automated encounter coverage, not a claim of a balanced full campaign or physical Samsung tablet testing. Historical numbered results and retirements below remain in force; test 45 is still enforced.

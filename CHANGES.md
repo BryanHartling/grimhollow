@@ -6,6 +6,7 @@
 - Tablet movement performance is resolved per user playtesting. The user continues campaign balance review; this patch changes no balance values.
 - Psychic Pull is skipped. Queue Spellguard as the Overload replacement: 10%/20% magic damage reduction while armor is inscribed. Queue only, not shipped gameplay.
 - Version 1.18.2 uses Android code 968 and retains save compatibility.
+- Validation: desktop/Android builds, seven JUnit tests, Runs=30 failures=0, all five native fog/walking/door checks and 140-asset offline reproduction pass. Test 45 remains failing at 17/76 comparisons (5/1/6/1/4 by region); no threshold or test waiver.
 
 # Hatchling balance and readable notifications - v1.18.1
 

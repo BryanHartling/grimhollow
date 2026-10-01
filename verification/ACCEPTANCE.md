@@ -1,3 +1,17 @@
+# Warrior and Enchanter art pilot - v1.20.0
+
+| Gate | Result | Executed evidence |
+|---|---|---|
+| Desktop / Android / JUnit / class smoke | PASS | `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 2m 50s**. JUnit: **7 tests, 0 failures, 0 errors, 0 skipped**. Combined class gate: **Runs=30 failures=0**. |
+| 44 reproducible art | PASS | `python tools/recovery_assets.py --check`: **145 assets, 137 source sheets, 55 launcher resources, failures=0**; **TEST 44 ... verified painted replacements=145; failures=0**. Only the Warrior and Enchanter shipping atlases changed. |
+| 24 geometry / animation coverage | PASS | Existing native GPU fixture: **heroes=9 mob sprites=126 steady idle checks=126 failures=0**, complete animation coverage; hero/rat height ratio **2.2325034**. All eight hero rows and existing pose indices remain valid. |
+| Native rendering | PASS | Both heroes rendered in cloth and plate with lighting on/off, then captured in the existing generated bridge-room fixture (`-Dgrimhollow.iteration=true`, optional `-Dgrimhollow.heroArmorTier=5`) for unobscured review. Four lit captures visually inspected; full images and labelled crops are in `verification/heroes/pilot/native/` and `ingame-comparison.png`. |
+| Other assertions in native geometry fixture | PASS | Tests **25, 26, 34, 36** passed: 386 items, 60 identification icons, 63 trap states, 113 skills, 15 plants, nine class paintings/descriptions and slot sizing. Test 35 remains retired. |
+| Packaged Windows launch | PASS | `tools/package-windows.ps1` produced `desktop/build/windows/1.20.0/Grimhollow/Grimhollow.exe`; the actual launcher with bundled runtime and an isolated settings directory completed `--smoke-title` with **exit=0**. Android APK built; no physical tablet run is claimed. |
+| 45 terrain contrast | **Abandoned: test failed** | Not run. No terrain art changes. |
+| Aesthetic approval / physical tablet | Pending human review | This is the requested two-character proof of concept, not approval to replace the remaining seven heroes. Still idles and restrained baked poses preserve existing runtime timing; no new directional animation system. |
+| Remote CI | Reported at delivery | Workflow and thresholds are unchanged. Prior test results below retain their own release provenance. |
+
 # Painted Adventuring Notes - v1.19.2
 
 | Gate | Result | Executed evidence |

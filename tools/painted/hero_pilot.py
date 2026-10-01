@@ -219,6 +219,18 @@ def summary():
                 canvas.paste(native,(gx+col*190+78,y+253),native)
         if row==1:d.text((28,y+270),'Small samples: 3x camera scale',font=small,fill='#b7bab9')
     canvas.save(target/'summary.png')
+    if all((target/'native'/f'{hero}-{tier}'/'sewers-lighting-on.png').exists()
+           for hero in HEROES for tier in (1,5)):
+        board=Image.new('RGB',(920,980),(25,29,31)); draw=ImageDraw.Draw(board)
+        draw.text((20,15),'Actual game captures | lighting on | crops at 100%',font=label,fill='#eedcc0')
+        for row,hero in enumerate(HEROES):
+            for col,tier in enumerate((1,5)):
+                screenshot=Image.open(target/'native'/f'{hero}-{tier}'/'sewers-lighting-on.png')
+                crop=screenshot.crop((680,320,1120,760))
+                x=20+col*450;y=55+row*460
+                draw.text((x,y),hero.title()+(' / cloth' if tier==1 else ' / plate'),font=label,fill='#eedcc0')
+                board.paste(crop,(x,y+25))
+        board.save(target/'ingame-comparison.png')
 
 
 if __name__ == '__main__':

@@ -59,6 +59,9 @@ def limb(canvas, part, start, end, width):
 
 
 def frame(hero, tier, index):
+    from hero_pilot import HEROES as PILOT, frame as pilot_frame
+    if hero in PILOT:
+        return pilot_frame(hero,tier,index)
     from hero_rigs import necromancer, humanoid
     return necromancer(tier,index) if hero=='necromancer' else humanoid(hero,tier,index)
 

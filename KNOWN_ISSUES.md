@@ -1,5 +1,8 @@
 # Known issues
 
+- v1.20.0: Warrior/Enchanter art is a proof of concept awaiting human review, including physical Samsung tablet play. Only those two heroes are revised. Motion is restrained offline deformation of complete painted figures, not a new directional animation system.
+- v1.20.0: the sandbox denied the initial `.git` scratch write and fetch; the documented authorized escalation route succeeded. No credentials are stored in committed files.
+
 - v1.19.2: physical Samsung tablet review of the refreshed journal icons remains with the user. Treasury reminder text uses English fallback where translations are unavailable.
 - Prior branch CI run 36899034139 failed Linux effects timing test 31: p95 2.1246 ms exceeds its unchanged <2 ms limit; all fog checks passed. Journal changes do not alter the effects renderer. The timing gate remains active.
 

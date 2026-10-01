@@ -20,7 +20,12 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.19.2","Painted adventuring notes and reminders for sealed treasuries.");
+        ChangeInfo r=release(list,"v1.20.0","Warrior and Enchanter character-art proof of concept.");
+        note(r,Icons.TALENT,"Two distinct silhouettes",
+                "Warrior and Enchanter have new painted bodies with natural proportions and armor fitted to their individual costumes. Warrior retains his red gambeson and grounded stance; Enchanter wears a slender blue artisan coat with split tails and a tool belt. Their faces match their existing portraits.");
+        note(r,Icons.MAGNIFY,"Calmer motion",
+                "Both characters hold still while idle, with restrained walking and action poses. This two-character trial changes appearance only: gameplay, equipment, movement speed and combat timing are unchanged. The other seven characters keep their current artwork while this direction is reviewed.");
+        r=release(list,"v1.19.2","Painted adventuring notes and reminders for sealed treasuries.");
         note(r,Icons.STAIRS_WATER,"Adventuring Notes",
                 "Floor conditions, gardens, wells and other journal landmarks now have painted icons. NPC portraits fit their note tiles and description windows. Healing wells use a red heart.");
         note(r,Icons.STAIRS_SECRETS,"Treasury reminders",

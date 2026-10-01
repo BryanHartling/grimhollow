@@ -1,0 +1,229 @@
+"""Two-hero proof of concept: animate complete, anatomically painted figures.
+
+Authored armor variants are uniformly fitted, never stretched into a torso box.
+A small offline deformation mesh preserves the continuous painting at joints.
+The game still consumes its original 21 poses and eight armor rows; no runtime
+mesh, additional textures, movement rules or animation timing changes are needed.
+"""
+from functools import lru_cache
+import math
+import numpy as np
+from PIL import Image, ImageDraw
+from actors import HERE, SCALE, FRAME_WIDTH, FRAME_HEIGHT
+
+HEROES = ('warrior', 'enchanter')
+SIZE = (48*SCALE, 60*SCALE)
+
+
+@lru_cache(None)
+def standing(hero, tier):
+    source = Image.open(HERE/'sources/hero-pilot'/f'{hero}.png').convert('RGBA')
+    x, y = tier % 4, tier // 4
+    part = source.crop((x*source.width//4, y*source.height//2,
+                        (x+1)*source.width//4, (y+1)*source.height//2))
+    alpha = part.getchannel('A').point(lambda a: 0 if a < 8 else a)
+    box = alpha.point(lambda a: 255 if a >= 16 else 0).getbbox()
+    if not box:
+        raise ValueError(f'Missing {hero} armor {tier}')
+    part.putalpha(alpha)
+    part = part.crop(box)
+    ratio = min(52*SCALE/part.height, 36*SCALE/part.width)
+    part = part.resize((round(part.width*ratio), round(part.height*ratio)), Image.Resampling.LANCZOS)
+    result = Image.new('RGBA', SIZE)
+    # Identical ground line for every armor variant and pose.
+    result.alpha_composite(part, ((SIZE[0]-part.width)//2, 56*SCALE-part.height))
+    return result
+
+
+def smooth(a, b, value):
+    t = min(1., max(0., (value-a)/(b-a)))
+    return t*t*(3-2*t)
+
+
+def displacement(hero, index, x, y):
+    """Skin weights in composition coordinates, shared by fitted armor variants."""
+    enchanter = hero == 'enchanter'
+    dx = dy = 0.
+    phase = (index-2)*math.tau/6 if 2 <= index <= 7 else 0.
+    stride = math.sin(phase) if 2 <= index <= 7 else 0.
+    side = -1 if x < 24 else 1
+    lower = smooth(32, 53, y)
+    if 2 <= index <= 7:
+        # Opposed legs, small planted-foot lift; the head does not bob or swell.
+        dx += side*stride*(1.35 if enchanter else 1.9)*lower
+        dy -= max(0., side*stride)*.85*lower
+        # A low-amplitude counter-swing and delayed coat motion.
+        arm = smooth(5.5, 10., abs(x-24))*smooth(14, 29, y)*(1-smooth(33, 37, y))
+        dx -= side*stride*(.5 if enchanter else .7)*arm
+        dy += side*stride*.4*arm
+        coat = smooth(28, 36, y)*(1-smooth(43, 51, y))
+        dx += math.sin(phase-.6)*(.45 if enchanter else .25)*coat
+    # Pose 1 deliberately equals pose 0: no continuous twitching at rest.
+    if index in (13, 14, 15):
+        # Wind-up, extension, recovery. Rotation preserves the forearm's shape;
+        # the shoulder weight eases to zero inside the ribcage.
+        angle = ((10, -8, -2) if enchanter else (-12, 10, 3))[index-13]
+        arm_side = 24-x if enchanter else x-24
+        end = 44 if enchanter else 33
+        amount = smooth(5.5, 10., arm_side)*smooth(13, 23, y)*(1-smooth(end, end+4, y))
+        px, py = x-(16 if enchanter else 32), y-16
+        theta = math.radians(angle)
+        dx += (px*math.cos(theta)-py*math.sin(theta)-px)*amount
+        dy += (px*math.sin(theta)+py*math.cos(theta)-py)*amount
+        torso = (1-smooth(28, 39, y))
+        dx += (-.45, 1.2, .25)[index-13]*torso
+        dy += (.15, .35, .1)[index-13]*torso
+    if index in (16, 17):
+        bend = (1-smooth(27, 45, y))
+        dx += 1.1*bend
+        dy += (1.8 if index == 16 else 2.1)*bend
+    if index == 18:
+        dy -= 1.2*lower
+        dx += side*.65*lower
+    if index in (19, 20):
+        arm = smooth(5., 10., abs(x-24))*smooth(15, 29, y)*(1-smooth(33, 37, y))
+        dx -= side*1.8*arm
+        dy -= 2.2*arm
+    return (x+dx)*SCALE, (y+dy)*SCALE
+
+
+@lru_cache(None)
+def mesh(hero, index):
+    # Dense near elbows, waist, knees and ankles; faces retain a rigid surface.
+    xs = (0, 6, 10, 14, 17, 20, 24, 28, 31, 34, 38, 42, 48)
+    ys = (0, 4, 9, 13, 16, 20, 24, 28, 32, 35, 39, 43, 47, 51, 56, 60)
+    result = []
+    for y0, y1 in zip(ys, ys[1:]):
+        for x0, x1 in zip(xs, xs[1:]):
+            corners = ((x0,y0), (x1,y0), (x1,y1), (x0,y1))
+            for ids in ((0,1,2), (0,2,3)):
+                src = np.array([[corners[i][0]*SCALE, corners[i][1]*SCALE] for i in ids])
+                dest = np.array([displacement(hero,index,*corners[i]) for i in ids])
+                # An inverted triangle folds the painted body over itself.
+                if np.linalg.det(np.column_stack((dest, np.ones(3)))) <= 0:
+                    raise ValueError(f'Folded {hero} pose {index} at {x0},{y0}')
+                left = max(0, math.floor(dest[:,0].min()))
+                top = max(0, math.floor(dest[:,1].min()))
+                right = min(SIZE[0], math.ceil(dest[:,0].max())+1)
+                bottom = min(SIZE[1], math.ceil(dest[:,1].max())+1)
+                if right <= left or bottom <= top:
+                    continue
+                transform = np.linalg.solve(np.column_stack((dest, np.ones(3))), src).T
+                transform[:,2] += transform[:,:2] @ np.array([left,top])
+                points = [(round(p[0]-left), round(p[1]-top)) for p in dest]
+                mask = Image.new('L',(right-left,bottom-top))
+                ImageDraw.Draw(mask).polygon(points, fill=255)
+                result.append(((left,top), mask, tuple(transform.flatten())))
+    return result
+
+
+def frame(hero, tier, index):
+    from hero_rigs import finish
+    base = standing(hero, tier)
+    if index in (0, 1) or 8 <= index <= 12:
+        return finish(base.copy(), index)
+    canvas = Image.new('RGBA', SIZE)
+    for origin, mask, coefficients in mesh(hero,index):
+        tile = base.transform(mask.size, Image.Transform.AFFINE, coefficients,
+                              Image.Resampling.BICUBIC)
+        canvas.paste(tile, origin, mask)
+    if index in (19, 20):
+        from actors import parts, place
+        place(canvas,parts('armor-front',2)[7],(23.5,31),(17,7))
+    return finish(canvas,index)
+
+
+def review(hero):
+    """Before/after, all armor rows, action frames and loops from shipping pixels."""
+    import subprocess
+    from io import BytesIO
+    from PIL import ImageFont
+    from actors import atlas
+    target = HERE.parents[1]/'verification/heroes/pilot'
+    target.mkdir(parents=True,exist_ok=True)
+    previous = Image.open(BytesIO(subprocess.check_output(['git','show',
+        '5d1ecc2a7:core/src/main/assets/sprites/hero_'+hero+'.png'],cwd=HERE.parents[1]))).convert('RGBA')
+    current = atlas(hero)
+    font = ImageFont.load_default(size=19)
+    small = ImageFont.load_default(size=14)
+    sheet = Image.new('RGB',(1120,710),(25,29,31)); draw = ImageDraw.Draw(sheet)
+    draw.text((22,15),hero.title()+' | previous / pilot | equal visible height',font=font,fill='#eedcc0')
+    for col,tier in enumerate((0,1,2,3,4,5,6,7)):
+        x=col*140
+        draw.text((x+10,52),('Base','Cloth','Leather','Mail','Scale','Plate','Class','Ancient')[col],font=small,fill='#b7bab9')
+        for row,source in enumerate((previous,current)):
+            figure=source.crop((0,tier*FRAME_HEIGHT,FRAME_WIDTH,(tier+1)*FRAME_HEIGHT))
+            box=figure.getchannel('A').point(lambda a:255 if a>=8 else 0).getbbox()
+            figure=figure.crop(box); factor=174/figure.height
+            figure=figure.resize((round(figure.width*factor),174),Image.Resampling.LANCZOS)
+            sheet.paste(figure,(x+(140-figure.width)//2,80+row*195),figure)
+        # Native-sized presentation, without enlarging anatomy to hide defects.
+        figure=frame(hero,tier,0)
+        sheet.paste(figure,(x+22,490),figure)
+        draw.text((x+12,621),'96 x 120 frame',font=small,fill='#b7bab9')
+    draw.text((22,672),'Original portrait identity | quiet idle | unchanged gameplay and world height',font=small,fill='#eedcc0')
+    sheet.save(target/f'{hero}-comparison.png')
+    poses=(0,2,3,4,5,6,7,13,14,15,16,17,18,19,20,12)
+    board=Image.new('RGB',(960,600),(25,29,31)); d=ImageDraw.Draw(board)
+    for i,pose in enumerate(poses):
+        x=(i%8)*120;y=(i//8)*280
+        # Preserve the full canvas at one texture pixel per display pixel.
+        im=frame(hero,1,pose)
+        board.paste(im,(x+12,y+65),im)
+        d.text((x+12,y+30),f'pose {pose}',font=small,fill='#eedcc0')
+        im=frame(hero,5,pose);board.paste(im,(x+12,y+190),im)
+    board.save(target/f'{hero}-poses.png')
+    sequence=[(0,1500)]+[(i,80) for _ in range(3) for i in range(2,8)]+[(0,800),(13,70),(14,70),(15,60),(0,1000),(16,130),(17,120),(16,130),(17,120),(0,1000),(19,50),(20,400),(19,50),(0,1500)]
+    frames=[]; durations=[]
+    for pose,duration in sequence:
+        panel=Image.new('RGB',(800,320),(25,29,31)); d=ImageDraw.Draw(panel)
+        d.text((18,15),hero.title()+' | tablet cadence; cloth / plate',font=font,fill='#eedcc0')
+        for x,tier in ((160,1),(480,5)):
+            im=frame(hero,tier,pose).resize((192,240),Image.Resampling.LANCZOS)
+            panel.paste(im,(x,65),im)
+        frames.append(panel); durations.append(duration)
+    palette=sheet.quantize(255)
+    frames=[im.quantize(palette=palette,dither=Image.Dither.NONE) for im in frames]
+    frames[0].save(target/f'{hero}-animation.gif',save_all=True,append_images=frames[1:],duration=durations,loop=0,optimize=False,disposal=2)
+
+
+def summary():
+    """Compact, clearly labelled comparison at the same visible body height."""
+    import subprocess
+    from io import BytesIO
+    from PIL import ImageFont
+    target = HERE.parents[1]/'verification/heroes/pilot'
+    canvas = Image.new('RGB',(1200,760),(25,29,31)); d = ImageDraw.Draw(canvas)
+    title = ImageFont.load_default(size=27)
+    label = ImageFont.load_default(size=17)
+    small = ImageFont.load_default(size=14)
+    d.text((28,19),'GRIMHOLLOW  /  TWO-CHARACTER ART PILOT',font=title,fill='#eedcc0')
+    d.text((28,58),'Equal visible height. Existing portrait identity. Gameplay unchanged.',font=label,fill='#b7bab9')
+    for row,hero in enumerate(HEROES):
+        previous = Image.open(BytesIO(subprocess.check_output(['git','show',
+            '5d1ecc2a7:core/src/main/assets/sprites/hero_'+hero+'.png'],cwd=HERE.parents[1]))).convert('RGBA')
+        y=100+row*320
+        d.text((28,y),hero.title(),font=title,fill='#eedcc0')
+        d.text((28,y+40),'Cloth / plate',font=label,fill='#b7bab9')
+        for group,(name,tiers) in enumerate((('Previous',(1,5)),('Pilot',(1,5)))):
+            gx=210+group*440
+            d.text((gx+64,y),name,font=label,fill='#eedcc0')
+            for col,tier in enumerate(tiers):
+                im=previous.crop((0,tier*FRAME_HEIGHT,FRAME_WIDTH,(tier+1)*FRAME_HEIGHT)) if group==0 else frame(hero,tier,0)
+                box=im.getchannel('A').point(lambda a:255 if a>=8 else 0).getbbox()
+                im=im.crop(box); factor=210/im.height
+                im=im.resize((round(im.width*factor),210),Image.Resampling.LANCZOS)
+                canvas.paste(im,(gx+col*190+(180-im.width)//2,y+39),im)
+                # 54px body sample corresponds to a 3x world camera.
+                native=im.resize((round(im.width*54/210),54),Image.Resampling.LANCZOS)
+                canvas.paste(native,(gx+col*190+78,y+253),native)
+        if row==1:d.text((28,y+270),'Small samples: 3x camera scale',font=small,fill='#b7bab9')
+    canvas.save(target/'summary.png')
+
+
+if __name__ == '__main__':
+    import argparse
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--review', choices=HEROES, required=True)
+    review(parser.parse_args().review)
+    summary()

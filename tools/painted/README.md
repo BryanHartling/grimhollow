@@ -42,6 +42,12 @@ Five original paintings in `sources/regions` provide the Sewers, Prison, Caves, 
 
 The raised skeleton atlas is packed at density 8 directly from the existing original monster painting, preserving its world size and action timing. The full offline check now reconstructs **121 game images from 112 sources**, plus **55 launcher resources**. Run `python tools/recovery_assets.py --check`; no image-generation service or Blender is needed in CI.
 
+# Warrior / Enchanter anatomy pilot - v1.20.0
+
+`hero_pilot.py` overrides only Warrior and Enchanter. Each source sheet in `sources/hero-pilot/` contains eight coherent, fully painted armor variants derived from the matching original selection portrait. The packer crops their transparent gutters, fits each figure uniformly and uses a small offline deformation mesh for existing poses. No shared chest panel is pasted over either figure. Idle frames are identical, faces remain rigid during walking, and legs/coat/arms use restrained class-specific motion. The other seven rigs and all runtime timings are unchanged. This is a bounded visual trial awaiting human review.
+
+Exact built-in imagegen prompts and identity references are in `hero-pilot-prompts.json`; new sources and derivatives are GPL-3.0-or-later. `python tools/painted/pack.py --hero warrior` and `--hero enchanter` package the individual atlases. `python tools/painted/hero_pilot.py --review warrior` (or `enchanter`) reproduces comparisons against `5d1ecc2a7`, all armor rows, pose sheets and animation GIFs in `verification/heroes/pilot/`. GIF walking uses tablet cadence rounded to 10ms; combat poses use existing timings. Native screenshots come from the existing desktop smoke renderer, with optional `-Dgrimhollow.heroArmorTier=5` for plate.
+
 # All nine hero rigs - v1.10.1
 
 `hero_rigs.py` now contains eight individual profiles and the Necromancer rig, with class-specific body proportions, silhouettes, guards, footwork and action gestures. `caster-robes.png` supplies separate Mage/Cleric/Enchanter/Psychic garments; its right two columns split at y=526 rather than 512. `armor-front.png` provides solid chest panels without the old empty arm sockets. Existing heads, class colors, limb paintings and matching portraits are retained. Exact built-in imagegen prompts/references for all three new sources are in `hero-rigs-prompts.json`.

@@ -168,6 +168,11 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(Boolean.getBoolean("grimhollow.renderPoc"))pocRoom();
                 if(horrorReview)prepareHorror();
             }
+            // Optional armor variant for the existing native character-art capture.
+            // Isolated diagnostic saves only; normal game equipment is untouched.
+            if (Integer.getInteger("grimhollow.heroArmorTier",1)==5) {
+                Dungeon.hero.belongings.armor = new com.shatteredpixel.shatteredpixeldungeon.items.armor.PlateArmor();
+            }
             InterlevelScene.mode=InterlevelScene.Mode.DESCEND;
             SPDSettings.dynamicLighting(true);
             switchNoFade(GameScene.class);

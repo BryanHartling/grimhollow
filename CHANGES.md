@@ -1,3 +1,9 @@
+# Two-character art proof of concept - v1.20.0
+
+- Warrior and Enchanter use complete painted figures with their existing portrait identities. Armor is painted to fit each body across all eight atlas rows, replacing the shared enlarged chest overlay only for these two heroes. Warrior retains a sturdy, tapered red silhouette; Enchanter gains a slender blue artisan coat, split tails, tool belt and visible legs.
+- Offline deformation preserves continuous painted joints, with restrained class-specific movement and still idle frames. Source figures keep their aspect ratio. The 96x120 frames, 2048x1024 atlases, runtime animation timing, world height, collision, equipment rules and all gameplay remain unchanged. The other seven heroes are untouched.
+- Original built-in imagegen sources, exact prompts and deterministic packing are committed. CI uses the committed paintings, never an image generator. This is a proof of concept pending human review; it does not approve a rollout to the remaining classes.
+
 # Painted Adventuring Notes - v1.19.2
 
 - Refresh all seven floor-condition icons, the default stairs, garden, distant/health/awareness wells, sacrificial fire, alchemy, backpack and custom-note icons from one committed painted source sheet. NPC landmarks use their existing painted bodies fitted to the note cell, without transparent animation padding. The same icons appear in note descriptions.

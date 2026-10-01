@@ -32,6 +32,8 @@
     "expedition/spider.png": "da930ab597510c792df8b72d958bb7839abf23a7d07f682932c4eb5f14b3741c",
     "expedition/timber.png": "7626efcd25a2f7765df7feaa1b73dd12085f8e4758468e4600f03a4c82cc0077",
     "halls-materials.png": "ca23d09f9bcbcf2bcae30ffc4f906539c5d7a39889f521ce3f537a5661235d00",
+    "hero-pilot/enchanter.png": "edfb54d01d7ef9ca8ca80c8e06bbd542f92947b02146fb9f610995ea96072f4e",
+    "hero-pilot/warrior.png": "8a32dfbac9f50803e5ac4ebdbd7291f5e70d486b1b692c3cabaadf7480bbe7bf",
     "interface/frames.png": "0a38c310f9864bce7f352a26548fb2aa32161f8a6bac003614673373fc1d3550",
     "interface/navigation-a.png": "e86bbb2e781d1ce1f8e69b993770fe554400cb24e12af159259824e482bb1c5e",
     "interface/navigation-b.png": "2a315b774c1c6882b690a2950323ec755c1e81af0e4167b9ecc7f51d0a04c4bf",
@@ -312,7 +314,7 @@
         2048,
         1024
       ],
-      "rgba_sha256": "fad0dcac15f90ca5a4fdba3d360088d2dc4a9eb4f50070f031c5f0c7465d63db"
+      "rgba_sha256": "e9c7a16a7a96baeb7cf866c8f9aad0d639ce290040c13e481c195c85cba01f08"
     },
     "sprites/hero_mage.png": {
       "size": [
@@ -361,7 +363,7 @@
         2048,
         1024
       ],
-      "rgba_sha256": "fcf56199c382a8d0361a2005b31e4eca498399854bb1cae13aebb30904de97e7"
+      "rgba_sha256": "5f26fb301b1eb4a162c375ec956c309ad5878526b5c8e88ebe27dadaac3ea934"
     },
     "sprites/hero_psychic.png": {
       "size": [

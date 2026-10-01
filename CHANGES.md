@@ -1,3 +1,10 @@
+# Enchanter craft and elemental caches - v1.19.0
+
+## Component 1 - Spellguard
+
+- Replace Overload with Spellguard: 10%/20% less magical damage while worn armor has an active temporary inscription. Permanent glyphs and Rune Etching alone do not qualify; other protection multiplies normally and physical damage/debuff duration are unchanged.
+- Migrate saved Overload ranks and metamorphosis replacements to Spellguard. Its painted cuirass-and-ward icon is reproducible from a committed imagegen source.
+
 # Terrain readability and playtest decisions - v1.18.2
 
 ## v1.18.3 - Wall torch visibility and armor Rune Etching

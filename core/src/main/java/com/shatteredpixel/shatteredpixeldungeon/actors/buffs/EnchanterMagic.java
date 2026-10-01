@@ -111,16 +111,19 @@ public class EnchanterMagic extends Buff {
         for(Item item:items){
             if(item.reinforceTurns>0&&--item.reinforceTurns==0)item.reinforceFlat=0;
             if(item.inscriptionTurns>0&&--item.inscriptionTurns==0){
-                int p=points(Talent.OVERLOAD);
-                if(p>0&&item.isEquipped(h))for(Mob mob:Dungeon.level.mobs.toArray(new Mob[0]))if(mob.alignment==Char.Alignment.ENEMY&&Dungeon.level.adjacent(h.pos,mob.pos)){
-                    if(item instanceof Weapon&&((Weapon)item).inscribed!=null)weaponProc(((Weapon)item).inscribed,(Weapon)item,h,mob,0,p*.5f);
-                    if(item instanceof Armor&&((Armor)item).inscribed!=null)glyphProc(((Armor)item).inscribed,(Armor)item,mob,h,0,p*.5f);
-                }
                 if(item instanceof Weapon)((Weapon)item).inscribed=null;
                 if(item instanceof Armor)((Armor)item).inscribed=null;
             }
         }
         spend(TICK);return true;
+    }
+    /** Spellguard reduces damage only, using the same magic sources as Anti-Magic armor. */
+    public static float spellguardMultiplier(Hero hero, Object source) {
+        Armor armor = hero.belongings.armor();
+        if (armor == null || armor.inscribed == null || armor.inscriptionTurns <= 0
+                || hero.buff(MagicImmune.class) != null || source == null
+                || !com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.AntiMagic.RESISTS.contains(source.getClass())) return 1f;
+        return 1f - .1f * hero.pointsInTalent(Talent.SPELLGUARD);
     }
     public static void consume(Hero h){SigilBrush brush=h.belongings.getItem(SigilBrush.class);if(brush!=null)brush.advance(5*h.pointsInTalent(Talent.KEEN_STUDY));}
     public static void collect(Item item){

@@ -941,10 +941,14 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 0:
                 if(!Dungeon.hero.ready)return;
                 if(GamesInProgress.curSlot!=1||Playtest.enabled()||playtestButton("Enable Playtest for this save")==null)throw new AssertionError("Selected save did not load with its test controls and original flags");
-                System.out.println("TEST 52 HOME PASS: home button, cold-launch tuning, saved-run selection, new-run slot safety/cancel and no active-run menu entry");
+                System.out.println("TEST 52 HOME PASS: home button, cold-launch tuning, saved-run selection, new-run slot safety/cancel and no Playtest entry in ordinary saves");
                 playtestStep=1;break;
             case 2:interfaceBounds();capture("playtest-enable");playtestClick("Enable Playtest for this save");break;
-            case 3:if(!Playtest.enabled())throw new AssertionError("Playtest enable pointer failed");playtestClick("God mode: OFF");break;
+            case 3:
+                if(!Playtest.enabled())throw new AssertionError("Playtest enable pointer failed");
+                closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndGame());
+                interfaceBounds();capture("playtest-enabled-run-menu");playtestClick("Playtest");
+                playtestClick("God mode: OFF");break;
             case 4:if(!Playtest.god())throw new AssertionError("God toggle failed");interfaceBounds();capture("playtest-menu");playtestClick("Create items");break;
             case 5:interfaceBounds();playtestClick("Search all items");break;
             case 6:playtestInput("Ashlight","Search");break;
@@ -962,7 +966,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 16:playtestClick("Seer");break;
             case 17:
                 if(Dungeon.hero.subClass!=com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass.SEER)throw new AssertionError("Native subclass/load failed");
-                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());break;
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndGame());
+                interfaceBounds();playtestClick("Playtest");break;
             case 18:if(!playtestClickPage("Hero, class and progression"))return;break;
             case 19:if(!playtestClickPage("Choose armor ability / grant class armor"))return;break;
             case 20:playtestClick(Dungeon.hero.heroClass.armorAbilities()[0].name());break;
@@ -973,7 +978,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 23:interfaceBounds();if(!playtestClickPage("Floor 21 - Halls"))return;break;
             case 24:
                 if(Dungeon.depth!=21||Dungeon.hero.lvl!=24||!Playtest.god())throw new AssertionError("Native travel/load lost hero or flags");
-                capture("playtest-halls");GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());break;
+                capture("playtest-halls");GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndGame());
+                interfaceBounds();playtestClick("Playtest");break;
             case 25:if(!playtestClickPage("Hero, class and progression"))return;break;
             case 26:playtestClick("Change class and starter kit");break;
             case 27:interfaceBounds();capture("playtest-classes");if(!playtestClickPage("Enchanter"))return;break;

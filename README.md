@@ -1,12 +1,14 @@
 # Grimhollow
 
-v1.20.1 is a **Warrior and Enchanter art proof of concept**: proportioned painted bodies, class-fitted armor, distinct silhouettes and restrained motion with still idles. Faces match the existing selection portraits. Gameplay, world height and animation timings are unchanged; the other seven heroes await review of this pilot. Comparisons, pose sheets and animation previews are in [verification/heroes/pilot](verification/heroes/pilot/). Windows launcher: `desktop/build/windows/1.20.1/Grimhollow/Grimhollow.exe`; Android: `android/build/outputs/apk/debug/android-debug.apk`.
+v1.20.2 restores in-game Playtest access for enabled saves; see the instructions below. The remaining seven hero upgrades and equipment-aware character sprites are queued under **Next sprint: character presentation** at the end of this document.
+
+v1.20.1 is a **Warrior and Enchanter art proof of concept**: proportioned painted bodies, class-fitted armor, distinct silhouettes and restrained motion with still idles. Faces match the existing selection portraits. Gameplay, world height and animation timings are unchanged; the other seven heroes await review of this pilot. Comparisons, pose sheets and animation previews are in [verification/heroes/pilot](verification/heroes/pilot/). Windows launcher: `desktop/build/windows/1.20.2/Grimhollow/Grimhollow.exe`; Android: `android/build/outputs/apk/debug/android-debug.apk`.
 
 v1.19.2 refreshes Adventuring Notes with painted terrain/landmark icons and fitted NPC portraits. Discovered elemental treasuries receive persistent fire, water or lightning reminders, including preparation tips, until their seals are opened. The home-screen Update Log describes these releases.
 
 **Terrain contrast test 45: Abandoned: test failed.** At the user's request (2026-10-01), it no longer runs locally or in CI. The last 17/76 failed comparisons remain historical evidence, not a passing result. This supersedes older test-45 enforcement statements below; fog, visibility, geometry, art-provenance and gameplay checks remain active.
 
-**Playtest moves home in v1.19.1:** choose **Playtest** on the home screen. Balance tuning works without loading a run and applies across games. Choose **Open tools for a saved run**, or **Start a new run for testing**, to load a dungeon and open God mode, item creation, progression and travel controls. The active-run menu no longer has Playtest; return through **Main Menu** to access it again. Opening the menu alone does not mark a save as a Playtest.
+**Playtest access (v1.20.2):** choose **Playtest** on the home screen. Balance tuning works without loading a run and applies across games. Choose **Open tools for a saved run**, or **Start a new run for testing**, to load a dungeon and open God mode, item creation, progression and travel controls. Select **Enable Playtest for this save** once; its in-game menu then includes **Playtest** for reopening all tools without leaving the dungeon. Existing Playtest saves already have access, which persists across reloads and floor changes. Ordinary saves do not show the shortcut. Opening the menu alone does not mark a save as a Playtest.
 
 **Enchanter craft and elemental treasuries v1.19.0:** Spellguard replaces Overload (10%/20% less magical damage while worn armor has a live temporary inscription). Journal/menu controls and journal categories now use painted artwork.
 
@@ -239,3 +241,9 @@ Original game by **Oleg Dolya**: [Pixel Dungeon project](https://github.com/wata
 ## Shattered Pixel Dungeon
 
 By **Evan Debenham and contributors**: [Shattered Pixel Dungeon project](https://github.com/00-Evan/shattered-pixel-dungeon). Upstream sprites and paintings are used under GPL-3.0-or-later; [license](LICENSE.txt).
+
+## Next sprint: character presentation
+
+Queued, not implemented in v1.20.2. Extend the reviewed Warrior/Enchanter direction to Mage, Rogue, Huntress, Duelist, Cleric, Necromancer and Psychic, in individual batches with a usage check before each. Preserve portrait identity; emphasize individual anatomy, silhouettes, colors, fitted armor and restrained animation. Review cloth/plate and actual game-size samples for each.
+
+Prototype equipment-aware sprites on Warrior and Enchanter before carrying the approach to the other seven. Use separate painted weapon layers and class-specific grip/pose anchors so the displayed weapon follows equipped gear without repainting every armor/weapon combination. Cover empty hands, one-handed/two-handed melee, bows, staffs and thrown-weapon actions, including Duelist swaps. Preserve attack timing, movement, hitboxes and all mechanics. Keep tiny effects readable and test layer order, transparency, armor clipping and tablet texture/memory cost. Ship character batches only after their visual review; use category silhouettes first, adding individual weapon detail where it remains readable.

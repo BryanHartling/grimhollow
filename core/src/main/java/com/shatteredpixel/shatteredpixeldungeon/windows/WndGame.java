@@ -23,6 +23,7 @@ package com.shatteredpixel.shatteredpixeldungeon.windows;
 
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.GamesInProgress;
+import com.shatteredpixel.shatteredpixeldungeon.Playtest;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -65,6 +66,17 @@ public class WndGame extends Window {
             @Override protected void onClick(){hide();GameScene.show(new WndMessageHistory());}
         });
         curBtn.icon(Icons.JOURNAL.get());
+
+        // Opt in through the home-screen tools once; the saved flag survives reloads.
+        if (Playtest.enabled() && Dungeon.hero != null && Dungeon.hero.isAlive()) {
+            addButton(curBtn = new RedButton("Playtest") {
+                @Override protected void onClick() {
+                    hide();
+                    GameScene.show(new WndPlaytest());
+                }
+            });
+            curBtn.icon(Icons.TALENT.get());
+        }
 
 		// Challenges window
 		if (Dungeon.challenges > 0) {

@@ -1,3 +1,9 @@
+# In-game Playtest access - v1.20.2
+
+- Restore Playtest in the active-run menu for living heroes whose save already has Playtest enabled. Opt in through the home-screen tools once; reuse the existing persistent save flag, including older Playtest saves. Opening menus does not change normal-run eligibility.
+- Keep the home entry and all existing tools. Extend the native pointer scenario to reopen through the run menu immediately after enabling, after disk reload and after floor travel.
+- Queue the remaining seven hero art batches and equipment-aware sprite layering in README; neither art nor combat mechanics change in this patch.
+
 # Two-character art proof of concept - v1.20.1
 
 - Warrior and Enchanter use complete painted figures with their existing portrait identities. Armor is painted to fit each body across all eight atlas rows, replacing the shared enlarged chest overlay only for these two heroes. Warrior retains a sturdy, tapered red silhouette; Enchanter gains a slender blue artisan coat, split tails, tool belt and visible legs.

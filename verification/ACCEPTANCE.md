@@ -1,3 +1,13 @@
+# In-game Playtest access - v1.20.2
+
+| Gate | Result | Executed evidence |
+|---|---|---|
+| Windows / Android / unit tests | PASS | `gradlew.bat core:test desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 50s**; seven JUnit tests, zero failures/errors/skips. `tools/package-windows.ps1` produced `desktop/build/windows/1.20.2/Grimhollow/Grimhollow.exe`. |
+| 52 home and in-game access | PASS | Existing native `--smoke-sewers` interface scenario, isolated landscape and portrait profiles: **exit=0** and **TEST 52 ... failures=0** in both. Actual pointer clicks verify no shortcut in an ordinary save, enable through the home entry, reopen via the run menu immediately, after saved-game reload and after floor travel. Menu bounds checked at 1280x720 and 720x1061. |
+| Other checks in native interface scenario | PASS | Existing 36/51/53/54/55/56/58 interface checks and shaman-position/issue-report checks passed in both orientations. Outputs remain under `.local/playtest-1.20.2/`. No claim of a physical tablet test. |
+| 45 terrain contrast | **Abandoned: test failed** | Not run. No artwork changed. |
+| Full remote CI | Pending at commit | Triggered on push; retain the workflow unchanged. Earlier results below retain their original release provenance. |
+
 # Deterministic hero export repair - v1.20.1
 
 - The original branch run **36913560174** failed exact Linux reproduction of `hero_warrior.png`, `hero_enchanter.png` and their manifest hashes; the same commit passed that gate on Windows and another Linux runner. Its failure and `v1.20.0-hero-pilot` tag remain in place. No check is disabled or weakened.

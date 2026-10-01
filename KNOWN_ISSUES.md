@@ -9,7 +9,7 @@
 
 - **Terrain contrast (test 45): Abandoned: test failed.** User decision, 2026-10-01: stop testing it. Removed from Linux/Windows CI and the local CLI. Last recorded result: 17/76 failed comparisons (Sewers 5/15, Prison 1/10, Caves 6/21, City 1/15, Halls 4/15). Historical measurements remain preserved; this is not PASS and is no longer an active issue or release gate. This decision supersedes all older instructions to enforce or rerun test 45.
 
-- v1.19.1: Playtest now opens from the home screen; return via Main Menu to reopen run tools. Physical tablet confirmation remains with the user.
+- v1.20.2: Enabled Playtest saves can reopen tools from the in-game menu. Physical tablet confirmation remains with the user.
 
 - GitHub denied cancellation of superseded v1.19.1 workflows 36897952329 and 36897952033 (HTTP 403); those runs retain the old workflow definition. Subsequent commits no longer schedule test 45.
 

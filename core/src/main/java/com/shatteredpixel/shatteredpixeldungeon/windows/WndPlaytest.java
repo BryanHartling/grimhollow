@@ -40,7 +40,7 @@ public class WndPlaytest extends Window {
         Entry(String label,Runnable action,Item item){this.label=label;this.action=action;this.item=item;}
     }
     public WndPlaytest(){this("Playtest",atHome()
-            ?"Tune balance for every game on this device, or open a run for God mode, items and travel. Run tools open after the selected dungeon loads. Custom balance marks affected games as Playtests."
+            ?"Tune balance for every game on this device, or open a run for God mode, items and travel. Once Playtest is enabled for a save, reopen these tools from its in-game menu. Custom balance marks affected games as Playtests."
             :Playtest.enabled()
             ?"Level "+Dungeon.hero.lvl+" | Floor "+Dungeon.depth+" | God mode "+(Playtest.god()?"ON":"OFF")
             :"Enable testing for this save: no rankings, badges, catalog credit or bones. Balance settings apply to every game on this device and mark affected games as Playtests. God mode and direct actions affect this save only.",rootEntries(),0,null);}

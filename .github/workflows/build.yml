@@ -50,7 +50,6 @@ jobs:
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         shell: bash
         run: |
-          regions=(sewers prison caves city halls)
           result=0
           for index in 0 1 2 3 4; do
             options=()
@@ -58,12 +57,10 @@ jobs:
               options=(-Dgrimhollow.geometryTests=true -Dgrimhollow.effectsTests=true)
             fi
             xvfb-run -a java -Dgrimhollow.recovery=true -Dgrimhollow.fogTests=true -Dgrimhollow.region=$index "${options[@]}" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers || result=1
-            python tools/recovery_checks.py --region "${regions[$index]}" || result=1
           done
           exit "$result"
-      - name: Committed Windows room distinctness evidence (test 45)
-        if: ${{ !cancelled() && runner.os == 'Windows' }}
-        run: python tools/recovery_checks.py --all-regions
+      # Test 45: Abandoned: test failed (user decision, 2026-10-01).
+      # Historical measurements remain in verification/recovery; do not rerun.
       - name: Necromancer live encounters, actor drops and death rendering
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         shell: bash

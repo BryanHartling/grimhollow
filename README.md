@@ -1,5 +1,7 @@
 # Grimhollow
 
+**Terrain contrast test 45: Abandoned: test failed.** At the user's request (2026-10-01), it no longer runs locally or in CI. The last 17/76 failed comparisons remain historical evidence, not a passing result. This supersedes older test-45 enforcement statements below; fog, visibility, geometry, art-provenance and gameplay checks remain active.
+
 **Playtest moves home in v1.19.1:** choose **Playtest** on the home screen. Balance tuning works without loading a run and applies across games. Choose **Open tools for a saved run**, or **Start a new run for testing**, to load a dungeon and open God mode, item creation, progression and travel controls. The active-run menu no longer has Playtest; return through **Main Menu** to access it again. Opening the menu alone does not mark a save as a Playtest.
 
 **Enchanter craft and elemental treasuries v1.19.0:** Spellguard replaces Overload (10%/20% less magical damage while worn armor has a live temporary inscription). Journal/menu controls and journal categories now use painted artwork.
@@ -166,11 +168,10 @@ The exact debug application ID is `com.grimhollow.dungeon` (no `.indev` suffix);
 .\gradlew.bat core:test core:smokeRun -PsmokeUpstream=true -PdesktopOnly=true --no-daemon
 python tools/recovery_assets.py --check
 java "-Dgrimhollow.recovery=true" "-Dgrimhollow.fogTests=true" "-Dgrimhollow.region=0" "-Dgrimhollow.geometryTests=true" "-Dgrimhollow.effectsTests=true" -jar desktop/build/libs/desktop-1.7.0.jar --smoke-sewers
-python tools/recovery_checks.py --all-regions
 python tools/recovery_checks.py --jar desktop/build/libs/desktop-1.7.0.jar
 ```
 
-Repeat the recovery renderer with region indices 1–4 for Prison, Caves, City and Halls. It walks normal adjacent moves on generated terrain in diagnostic slot 99, captures remembered terrain and verifies remembered-cell fog compositing. Test 47 checks all pixels of every visible and never-seen cell in five generated regions, before and after walking, at three zooms and four camera offsets, plus the shared wall-light shader during intermediate door frames. Test 25 pins every named item/identification index to existing atlas pixels and checks all section 9 items. Waterskin maps to its painted capped leather canteen at 480. Potion bottle colours retain their randomized identification mapping. Test 45 measures every pair of types in each lit room, including decor; failures remain active in CI. Test 44 reconstructs expected pixels in memory from Git objects and does not overwrite assets. Test 46 inspects compiled invocation sites and exercises actual menu handlers with a recording network adapter.
+Repeat the recovery renderer with region indices 1–4 for Prison, Caves, City and Halls. It walks normal adjacent moves on generated terrain in diagnostic slot 99, captures remembered terrain and verifies remembered-cell fog compositing. Test 47 checks all pixels of every visible and never-seen cell in five generated regions, before and after walking, at three zooms and four camera offsets, plus the shared wall-light shader during intermediate door frames. Test 25 pins every named item/identification index to existing atlas pixels and checks all section 9 items. Waterskin maps to its painted capped leather canteen at 480. Potion bottle colours retain their randomized identification mapping. Test 45 is **Abandoned: test failed** and must not be run. Test 44 reconstructs expected pixels in memory from Git objects and does not overwrite assets. Test 46 inspects compiled invocation sites and exercises actual menu handlers with a recording network adapter.
 
 
 The optional desktop probe renders actual OpenGL frames into `.local/acceptance/` and exits. The Sewer probe uses test save slot 99. The default headless gate targets the three new heroes. `-PsmokeUpstream=true` runs all nine classes, including the six retained classes: generate floors 1–6, save/load, ten seeds each. This diagnostic does not count as new-class acceptance or simulated combat.

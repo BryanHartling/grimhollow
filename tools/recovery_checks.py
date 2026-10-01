@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Recovery acceptance over real renderer evidence and compiled call sites.
+"""Recovery acceptance over compiled call sites (test 46).
 
-This tool never generates or changes shipped art. It replaces the retired
-per-tile art-loop checks with the requested within-room comparisons.
+Terrain contrast (test 45): Abandoned: test failed, by user request 2026-10-01.
+Its implementation and failed evidence are retained for historical reference
+only. The contrast CLI entry points are removed; no contrast check is executed.
 """
 from pathlib import Path
 import argparse
@@ -20,7 +21,8 @@ ROOT=Path(__file__).resolve().parents[1]
 REGIONS=('sewers','prison','caves','city','halls')
 
 
-def room(region):
+def archived_room(region):
+    """Historical test 45 implementation; abandoned and not called by this tool."""
     folder=ROOT/'verification/recovery'/region
     data=json.loads((folder/'room.json').read_text(encoding='utf-8'))
     image=np.asarray(Image.open(folder/'lit.png').convert('RGB'),dtype=float)/255
@@ -96,8 +98,7 @@ def handlers(jar):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--region',choices=REGIONS);p.add_argument('--all-regions',action='store_true');p.add_argument('--jar',type=Path)
-    args=p.parse_args();failed=False
-    if args.jar:failed|=handlers(args.jar)
-    for region in REGIONS if args.all_regions else ([args.region] if args.region else []):failed|=room(region)
-    raise SystemExit(failed)
+    p=argparse.ArgumentParser(description='Compiled handler audit (test 46). Test 45: Abandoned: test failed; no longer runnable from this CLI.')
+    p.add_argument('--jar',type=Path,required=True)
+    args=p.parse_args()
+    raise SystemExit(handlers(args.jar))

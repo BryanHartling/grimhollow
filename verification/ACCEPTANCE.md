@@ -1,3 +1,11 @@
+# Current disposition - 2026-10-01
+
+| Test | Status | Decision and preserved evidence |
+|---|---|---|
+| 45 terrain contrast | **Abandoned: test failed** | User requested that testing stop. Removed from Linux/Windows CI and the local CLI. Last recorded result: **17/76 failures** (Sewers 5/15, Prison 1/10, Caves 6/21, City 1/15, Halls 4/15). Historical measurements and implementation remain preserved. Not PASS; no further execution or release blocking. |
+
+This disposition supersedes every older statement below requiring test 45 to run or remain enforced. Those dated results remain historical records. All other checks retain their existing status and execution, including fog/visibility tests 43/47 and art/handler tests 44/46. No contrast test was run for this change.
+
 # Home-screen Playtest - v1.19.1
 
 | Gate | Result | Executed evidence |

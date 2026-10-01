@@ -1,3 +1,8 @@
+# Terrain contrast gate abandoned - 2026-10-01
+
+- Test 45 is **Abandoned: test failed**, at the user's explicit request. Stop running the numerical terrain-contrast test in Linux/Windows CI and remove its local CLI entry points. Preserve its historical implementation, screenshots and failed measurements; do not relabel them PASS.
+- Fog alignment, remembered terrain, torch visibility, geometry, effects, art provenance, compiled handlers, builds and gameplay checks remain active. No game code, art or contrast thresholds changed.
+
 # Home-screen Playtest - v1.19.1
 
 - Move the Playtest entry from the active-run menu to the home screen, beside Update Log; retain painted icons and the existing four-row layout.

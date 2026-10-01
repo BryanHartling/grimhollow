@@ -1,19 +1,22 @@
 # Known issues
 
-- v1.19.1: Playtest now opens from the home screen; return via Main Menu to reopen run tools. Existing terrain-contrast test 45 remains unresolved; this navigation change does not alter art or its thresholds. Physical tablet confirmation remains with the user.
+- **Terrain contrast (test 45): Abandoned: test failed.** User decision, 2026-10-01: stop testing it. Removed from Linux/Windows CI and the local CLI. Last recorded result: 17/76 failed comparisons (Sewers 5/15, Prison 1/10, Caves 6/21, City 1/15, Halls 4/15). Historical measurements remain preserved; this is not PASS and is no longer an active issue or release gate. This decision supersedes all older instructions to enforce or rerun test 45.
 
-- v1.19.0: fresh five-region terrain contrast test 45 still fails 17/76 pairs (Sewers 5/15, Prison 1/10, Caves 6/21, City 1/15, Halls 4/15); thresholds remain enforced and full-green CI is not claimed.
+- v1.19.1: Playtest now opens from the home screen; return via Main Menu to reopen run tools. Physical tablet confirmation remains with the user.
+
+- GitHub denied cancellation of superseded v1.19.1 workflows 36897952329 and 36897952033 (HTTP 403); those runs retain the old workflow definition. Subsequent commits no longer schedule test 45.
+
 - v1.19.0: physical Samsung tablet review and campaign balance of Scribe, Spellguard and elemental treasures remain with the user; native portrait/touch checks are not physical-device testing.
 - Elemental rooms and loose parchment are added only to newly generated floors. Already generated floors are not retrofitted. New text uses English fallback where translations are unavailable.
 - v1.18.3: armor Etching and hidden-torch repairs remain covered by automated desktop/headless checks; physical Samsung tablet confirmation remains with the user.
 - Current plan (2026-09-30): tablet movement performance is resolved per the user's playtesting. Balance remains under the user's campaign playtesting; no balance changes are part of this terrain patch.
 - Spellguard replaces Overload in v1.19.0: 10%/20% magical damage reduction requires a worn, temporarily inscribed armor piece. Psychic Pull remains skipped.
-- Terrain readability v1.18.2: restrained ambient/personal-light color and fuller flattened grass improve material separation. Human acceptance remains pending. Fresh Windows test 45 still fails 17/76 comparisons: Sewers 5/15, Prison 1/10, Caves 6/21, City 1/15, Halls 4/15. The 0.12 luminance / 40-degree hue thresholds stay enforced; no passing override. This Sewers capture has six types rather than the earlier seven, so the old 25/82 aggregate is not a matched comparison.
+- Terrain readability v1.18.2: restrained lighting and fuller flattened grass remain shipped. Its failed numerical contrast test is now abandoned as recorded above; no art was changed for this decision.
 - Resolved in v1.19.0: the stale full-interface Hatchling fixture now marks its test heap undiscovered before checking nearest-item sensing; the complete landscape interface test passes. No gameplay rule or assertion was weakened.
 
 ## Historical release limitations
 
-The dated entries below retain their original verification scope. Their pending tablet-performance notes are superseded by the user's resolution above; they are not reopened tasks or claims that automated tests measured the physical tablet.
+The dated entries below retain their original verification scope. Their test-45 enforcement statements are superseded by its abandonment above. Their pending tablet-performance notes are superseded by the user's resolution above; they are not reopened tasks or claims that automated tests measured the physical tablet.
 
 - v1.18.1 Hatchling balance and notification/UI changes need physical Samsung tablet playtesting; native portrait/landscape checks do not substitute for a device. Existing test-45 terrain contrast failures remain enforced.
 - Old floor-wide Hatchling Item Sense expires when loading a pre-v1.18.1 save; the next meal selects one scent. New text falls back to English where translations are unavailable.

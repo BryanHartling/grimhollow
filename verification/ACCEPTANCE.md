@@ -1,3 +1,26 @@
+# Enchanter craft and elemental treasuries - v1.19.0
+
+All four authorized sprint components are implemented. The following results were executed locally against this release; earlier numbered results and retirements below retain their original scope. Physical Android playtesting is not claimed.
+
+| Gate | Result | Executed evidence |
+|---|---|---|
+| Desktop / Android / JUnit | PASS | `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon`: **BUILD SUCCESSFUL in 2m 29s**; seven JUnit tests, zero failures/errors. Android 1.19.0, code 970. Final desktop fixture synchronization rebuild: **BUILD SUCCESSFUL in 32s**. |
+| Class gates | PASS | **Runs=30 failures=0**: Necromancer 10/0, Enchanter 10/0, Psychic 10/0. |
+| 62 Spellguard | PASS | Actual magical damage at both ranks; physical damage unchanged; expiry, equipped armor, permanent glyph/rune exclusion, Magic Immunity and old/new talent save migration. |
+| 63 Scribe | PASS | Current-run knowledge and recipe exclusions; atomic resource costs; exactly three turns; carried Brush talent; scroll recycling one/stack/exotic/stale ownership; parchment bag/save and seeded opportunities **386/100 runs**. Actual mouse/touch purchases pass in both orientations. |
+| 64 elemental treasuries | PASS | Fifteen generated rooms across all five regions; independent ordinary secret slots, routes, all three types together with distinct clues, once-per-type save persistence, sealed/open save/load, search penalty, matching/wrong elements, full Waterskin cost, Skeleton Key **4/5/6**, finite depth-scaled loot. **16,948 rooms/10,000 seeds; 0/1/2/3 distribution [788,3241,4206,1765]**, mean **1.6948**. |
+| 64 actual renderer interactions | PASS | Native landscape and portrait: concealed/revealed/open painted mechanisms, fitted descriptions, real Prismatic Light/Talisman/Mapping revelation without unlocking, actual Pour pointer targeting, Liquid Flame ignition and all four direct electrical items (Lightning Wand, Stone of Shock, Shocking Brew, Flashbang Bomb). |
+| Journal / existing UI | PASS | Actual HUD/journal input, notes/alchemy/catalog bounds, sixteen 16-logical-pixel painted icons in both orientations. Existing polish tests 37/61 pass. Complete landscape interface run passes, including the repaired nearest-undiscovered-heap Hatchling fixture, balance menu and Hurl. |
+| 43 / 47 fog, torch and walking | PASS | Five fresh regional renderer runs, **788 walking steps / 1,373 door-transition frames**, three zooms and four pans before/after walking. Every region: **fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned failures=0**, including hidden/back-facing torches and draw-time FOV changes. Checks ran from an immutable JAR snapshot to avoid rebuilding a file in use. |
+| 44 art reproduction | PASS | `python -X utf8 tools/recovery_assets.py --check`: **upstream-derived character sheets=7; restored assets=25; verified painted replacements=144; failures=0**. Offline packer: **source sheets=134**, launcher resources=55. |
+| 46 compiled handler audit | PASS | `python -X utf8 tools/recovery_checks.py --jar ...`: **classes=2971 guarded browser sinks=1 HTTP/socket calls=0 failures=0**. |
+| Windows launcher | PASS | `tools/package-windows.ps1` produced `desktop/build/windows/1.19.0/Grimhollow/Grimhollow.exe`; isolated-save `--smoke-sewers` launch: **PASS: Sewer scene renders with dynamic lighting on and off.** Keep the whole application directory. |
+| 45 terrain contrast | Permanent known issue - NOT PASS | `python -X utf8 tools/recovery_checks.py --all-regions` returned exit 1: **17/76 failed** (Sewers 5/15, Prison 1/10, Caves 6/21, City 1/15, Halls 4/15). Original thresholds remain enforced. |
+| Release CI | Not claimed green | Exact release-head workflow status is reported in the delivery. The known terrain-contrast failure remains enabled; no workflow step was disabled or weakened. |
+| Other tests / retirements | Prior status retained | Historical results below are not presented as newly executed. Physical tablet performance remains resolved per user playtesting; campaign balance remains for human review. |
+
+Native evidence: [Scribe portrait](interface/portrait/enchanter-scribe.png), [journal landscape](interface/landscape/journal-catalog.png), [concealed mechanisms](interface/landscape/elemental-seals-concealed.png), [fountain description](interface/portrait/elemental-fountain-description.png), [activated seals](interface/landscape/elemental-seals-open.png). Fresh fog and contrast measurements remain under `verification/recovery/`.
+
 # Torch visibility and armor Rune Etching - v1.18.3
 
 This patch fixes hidden wall-facing flames/glows, corrects the Rune Etching format string, and allows the single rune to move between equipped melee weapons and armor. Armor uses the existing common-glyph pool and preserves permanent/temporary effects. No new art or terrain thresholds were introduced. Historical numbered results and retirements below remain in force.

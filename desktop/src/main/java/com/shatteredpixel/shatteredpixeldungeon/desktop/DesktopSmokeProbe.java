@@ -56,6 +56,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultFinalRoom vaultArena;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental vaultBoss;
     private int frames;
+    private int polishWaitFrames;
     private boolean originalLighting;
     private int originalZoom;
     private int[] reviewBounds;
@@ -490,6 +491,13 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     }
     private void polishTick(){
         if(!(Game.scene() instanceof GameScene))return;
+        // Advance the fixture only at genuine input boundaries; never remove a mob
+        // while its animation is responsible for releasing the actor scheduler.
+        if((frames==790||frames==820||frames==850||frames==940)&&!Dungeon.hero.ready){
+            if(++polishWaitFrames>1200)throw new AssertionError("Polish action did not finish at "+frames);
+            frames--;return;
+        }
+        polishWaitFrames=0;
         if(frames==220){
             Camera.main.snapTo(Dungeon.hero.sprite.center().x,Dungeon.hero.sprite.center().y);
             for(int i=0;i<40;i++)com.shatteredpixel.shatteredpixeldungeon.utils.MessageHistory.add(com.shatteredpixel.shatteredpixeldungeon.utils.GLog.WARNING+"History entry "+i+": your hatchling mimic grumbles hungrily. It needs to eat!");
@@ -612,7 +620,79 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     ||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).charges()!=2
                     ||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify.class)==null)throw new AssertionError("Scribe actual pointer purchase/resources");
             capture("enchanter-scribe-complete");
-            System.out.println("TEST 63 UI PASS: native Scribe menu, readable costs, scroll selector and actual mouse/touch purchase");Gdx.app.exit();
+            System.out.println("TEST 63 UI PASS: native Scribe menu, readable costs, scroll selector and actual mouse/touch purchase");
+        }else if(frames==790){
+            closeReviewWindows();
+            for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs.toArray(new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob[0])){
+                com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(mob);
+                for(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff buff:mob.buffs())com.shatteredpixel.shatteredpixeldungeon.actors.Actor.remove(buff);
+                if(mob.sprite!=null)mob.sprite.killAndErase();
+            }
+            Dungeon.level.mobs.clear();Playtest.god(true);
+            Level level=Dungeon.level;int center=Dungeon.hero.pos,w=level.width();
+            level.elementalCaches.clear();
+            for(int y=-4;y<=1;y++)for(int x=-4;x<=4;x++) {
+                int cell=center+x+y*w;Level.set(cell,y==-3?Terrain.WALL:Terrain.EMPTY_SP);
+                level.visited[cell]=y>-3;level.mapped[cell]=false;
+            }
+            for(int i=0;i<3;i++) {
+                com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache c=new com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache();
+                c.door=center+(i-1)*2-3*w;c.mechanism=c.door+w;c.keyCost=4+i;
+                c.kind=com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.Kind.values()[i];
+                level.elementalCaches.add(c);Level.set(c.door,Terrain.SECRET_DOOR);
+                com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.MechanismTile tile=new com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.MechanismTile();
+                tile.pos(c.mechanism);level.customTiles.add(tile);GameScene.add(tile,false);
+            }
+            level.cleanWalls();GameScene.resetMap();Dungeon.observe();
+        }else if(frames==820){
+            capture("elemental-seals-concealed");
+            try {
+                int target=Dungeon.level.elementalCaches.get(0).door;
+                java.lang.reflect.Method map=com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfPrismaticLight.class.getDeclaredMethod("affectMap",com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.class);map.setAccessible(true);
+                map.invoke(new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfPrismaticLight(),new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(Dungeon.hero.pos,target,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.STOP_TARGET));
+                if(Dungeon.level.map[target]!=Terrain.LOCKED_DOOR)throw new AssertionError("Prismatic light must expose seal");
+                target=Dungeon.level.elementalCaches.get(2).door;
+                com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TalismanOfForesight talisman=new com.shatteredpixel.shatteredpixeldungeon.items.artifacts.TalismanOfForesight();talisman.playtestRecharge();
+                java.lang.reflect.Field user=com.shatteredpixel.shatteredpixeldungeon.items.Item.class.getDeclaredField("curUser");user.setAccessible(true);user.set(null,Dungeon.hero);
+                talisman.scry.onSelect(target);
+                if(Dungeon.level.map[target]!=Terrain.LOCKED_DOOR)throw new AssertionError("Talisman must expose seal");
+            }catch(ReflectiveOperationException e){throw new AssertionError(e);}
+        }else if(frames==850){
+            for(com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache c:Dungeon.level.elementalCaches)Level.set(c.door,Terrain.SECRET_DOOR);
+            new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping().doRead();
+            for(com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache c:Dungeon.level.elementalCaches)
+                if(c.opened||Dungeon.level.map[c.door]!=Terrain.LOCKED_DOOR)throw new AssertionError("Mapping must reveal, never unlock, every seal");
+        }else if(frames==880){
+            capture("elemental-seals-revealed");
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoCell(Dungeon.level.elementalCaches.get(1).mechanism));
+        }else if(frames==910){
+            interfaceBounds();checkReviewText(Game.scene());capture("elemental-fountain-description");closeReviewWindows();
+            com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache c=Dungeon.level.elementalCaches.get(1);
+            Dungeon.hero.pos=c.mechanism+Dungeon.level.width();Dungeon.hero.sprite.place(Dungeon.hero.pos);Dungeon.observe();
+            Camera.main.snapTo(Dungeon.hero.sprite.center().x,Dungeon.hero.sprite.center().y);
+        }else if(frames==940){
+            com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache c=Dungeon.level.elementalCaches.get(1);
+            if(!Dungeon.hero.ready)throw new AssertionError("Prior discovery animation has not returned control");
+            com.shatteredpixel.shatteredpixeldungeon.items.Waterskin skin=Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.Waterskin.class);skin.fill();skin.execute(Dungeon.hero,"POUR");
+            pointerCell(c.mechanism);
+        }else if(frames==980){
+            if(!Dungeon.level.elementalCaches.get(1).opened||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.Waterskin.class).isFull())throw new AssertionError("Actual Pour target did not open water seal");
+            new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfLiquidFlame().shatter(Dungeon.level.elementalCaches.get(0).mechanism);
+            com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache rod=Dungeon.level.elementalCaches.get(2);
+            for(int method=0;method<4;method++) {
+                rod.opened=false;Level.set(rod.door,Terrain.LOCKED_DOOR);
+                if(method==0)new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfLightning().onZap(new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(Dungeon.hero.pos,rod.mechanism,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.STOP_TARGET));
+                if(method==1)try {
+                    java.lang.reflect.Method activate=com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfShock.class.getDeclaredMethod("activate",int.class);activate.setAccessible(true);activate.invoke(new com.shatteredpixel.shatteredpixeldungeon.items.stones.StoneOfShock(),rod.mechanism);
+                }catch(ReflectiveOperationException e){throw new AssertionError(e);}
+                if(method==2)new com.shatteredpixel.shatteredpixeldungeon.items.potions.brews.ShockingBrew().shatter(rod.mechanism);
+                if(method==3)new com.shatteredpixel.shatteredpixeldungeon.items.bombs.FlashBangBomb().explode(rod.mechanism);
+                if(!rod.opened)throw new AssertionError("Lightning key method "+method);
+            }
+        }else if(frames==1010){
+            for(com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache c:Dungeon.level.elementalCaches)if(!c.opened||!Dungeon.level.passable[c.door])throw new AssertionError("Elemental effect failed to open seal");
+            capture("elemental-seals-open");
+            System.out.println("TEST 64 UI PASS: painted mechanisms, concealed/revealed/open states, fitted descriptions and actual Pour pointer targeting");Gdx.app.exit();
         }
     }
     private void notificationReview(){
@@ -972,6 +1052,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     Dungeon.observe();GameScene.updateMap();
                     hatchlingHiddenCell=center+3+2*width;
                     Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey(Dungeon.depth),hatchlingHiddenCell);
+                    // Item Sense now selects one undiscovered heap; dropping into current FOV marks it seen.
+                    Dungeon.level.heaps.get(hatchlingHiddenCell).seen=false;
                     Dungeon.level.heroFOV[hatchlingHiddenCell]=Dungeon.level.visited[hatchlingHiddenCell]=Dungeon.level.mapped[hatchlingHiddenCell]=false;
                     GameScene.updateFog();
                     hatchlingFov=Dungeon.level.heroFOV.clone();hatchlingVisited=Dungeon.level.visited.clone();hatchlingMapped=Dungeon.level.mapped.clone();

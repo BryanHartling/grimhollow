@@ -45,6 +45,7 @@ public class ShockingDart extends TippedDart {
 
 		//when processing charged shot, only shock enemies
 		if (!processingChargedShot || attacker.alignment != defender.alignment) {
+			com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.activate(Dungeon.level, defender.pos, com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.Kind.LIGHTNING);
 			defender.damage(Random.NormalIntRange(5 + Dungeon.scalingDepth() / 4, 10 + Dungeon.scalingDepth() / 4), new Electricity());
 
 			CharSprite s = defender.sprite;

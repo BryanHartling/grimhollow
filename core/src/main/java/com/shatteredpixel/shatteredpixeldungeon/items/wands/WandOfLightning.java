@@ -21,6 +21,8 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.wands;
 
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache;
+
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
@@ -69,6 +71,8 @@ public class WandOfLightning extends DamageWand {
 	
 	@Override
 	public void onZap(Ballistica bolt) {
+		ElementalCache.activate(Dungeon.level,bolt.collisionPos,ElementalCache.Kind.LIGHTNING);
+		for (Char hit : affected) ElementalCache.activate(Dungeon.level,hit.pos,ElementalCache.Kind.LIGHTNING);
 
 		for (Char ch : affected.toArray(new Char[0])){
 			if (ch != curUser && ch.alignment == curUser.alignment && ch.pos != bolt.collisionPos){

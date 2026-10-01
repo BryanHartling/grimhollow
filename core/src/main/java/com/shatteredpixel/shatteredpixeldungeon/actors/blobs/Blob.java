@@ -21,6 +21,8 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.actors.blobs;
 
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache;
+
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.effects.BlobEmitter;
@@ -211,6 +213,10 @@ float prior=com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap.POWER.get
 	}
 
 	public void seed( Level level, int cell, int amount ) {
+        if(amount>0) {
+            if(this instanceof Fire || this instanceof Inferno || this instanceof Soulfire) ElementalCache.activate(level,cell,ElementalCache.Kind.FIRE);
+            else if(this instanceof Electricity) ElementalCache.activate(level,cell,ElementalCache.Kind.LIGHTNING);
+        }
 		if (cur == null) cur = new int[level.length()];
 		if (off == null) off = new int[cur.length];
 

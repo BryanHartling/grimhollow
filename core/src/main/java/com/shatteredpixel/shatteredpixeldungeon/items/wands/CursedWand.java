@@ -548,6 +548,7 @@ public class CursedWand {
 			user.sprite.parent.add(new Lightning(user.pos - 1 - Dungeon.level.width(), user.pos + 1 + Dungeon.level.width(), null));
 			user.sprite.parent.add(new Lightning(user.pos - 1 + Dungeon.level.width(), user.pos + 1 - Dungeon.level.width(), null));
 			for (int i : PathFinder.NEIGHBOURS9){
+				com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.activate(Dungeon.level, user.pos+i, com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.Kind.LIGHTNING);
 				if (Actor.findChar(user.pos+i) != null){
 					affected.add(Actor.findChar(user.pos+i));
 				}
@@ -559,6 +560,7 @@ public class CursedWand {
 			user.sprite.parent.add(new Lightning(pos - 1 - Dungeon.level.width(), pos + 1 + Dungeon.level.width(), null));
 			user.sprite.parent.add(new Lightning(pos - 1 + Dungeon.level.width(), pos + 1 - Dungeon.level.width(), null));
 			for (int i : PathFinder.NEIGHBOURS9){
+				com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.activate(Dungeon.level, pos+i, com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.Kind.LIGHTNING);
 				if (Actor.findChar(pos+i) != null && !affected.contains(Actor.findChar(pos+i))){
 					affected.add(Actor.findChar(pos+i));
 				}

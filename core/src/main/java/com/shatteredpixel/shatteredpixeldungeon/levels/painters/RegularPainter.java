@@ -21,6 +21,8 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.levels.painters;
 
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache;
+
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
@@ -151,6 +153,7 @@ public abstract class RegularPainter extends Painter {
 			decorate( level, rooms );
 
 		Random.popGenerator();
+		ElementalCache.finishPlacement(level);
 
 		return true;
 	}

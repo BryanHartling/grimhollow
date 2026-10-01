@@ -1,5 +1,21 @@
 # Enchanter craft and elemental caches - v1.19.0
 
+## Component 4 - Independent elemental treasuries
+
+- Fire, water and lightning each have one independent seeded roll per region until that type is generated. Regional percentages are 6/12/18/24/30, 5/10/15/20/25 and 4/8/12/16/20 respectively. Their added leaf rooms do not consume ordinary secret-room slots; each type appears at most once in a run, including after save/load. Floor 1, bosses and side branches are excluded. Ten thousand seeded full-run opportunities produced 16,948 rooms: 788 runs with none, 3,241 with one, 4,206 with two and 1,765 with all three.
+- Three committed painted mechanisms each have idle and activated states. Their clues stand outside the room and remain under normal terrain fog. Search chance is halved, including intentional search; mapping, prismatic light and Talisman foresight expose a special locked door without opening it. Ordinary iron keys and terrain destruction cannot bypass the seal.
+- Matching fire/water/electricity opens the seal once. Full Waterskin > Pour costs one turn and all its water, retaining the item. Fireblast, Dragon's Breath, Soulfire and level-2+ Ashlight Flare count as fire; illumination and frost do not. Water creation includes Storm Clouds. Lightning Wand, Stone of Shock, Shocking Brew and Flashbang Bomb work directly; Shocking procs, Shocking Dart hits and cursed lightning discharge also activate a conductor in the affected cells.
+- An equipped, uncursed, unsuppressed Skeleton Key bypasses a revealed seal for 4/5/6 charges, one turn, and normal use experience. It consumes no ordinary key and creates no replacement-key credit. Saved rooms retain their assigned cost.
+- Gold scales with floor depth. Default chest counts are 1/2/3 by element, plus one in Caves/City and two in Halls. Equipment tiers advance with the region and are capped to its tier ceiling; water gains equipment from Prison, fire from Caves, and lightning always guarantees improved equipment (+1 early, at least +2 in City/Halls). Lightning has a 10% additional artifact roll respecting unique generation. Loot is finite and persists on revisits.
+- Playtest > Balance > Elemental treasuries exposes the overall encounter multiplier, each type's starting regional chance, loot quantity and three key costs. The shared device profile applies to new rooms in all games. Probability and reward changes follow the latest user direction, superseding the initial replacement-slot proposal.
+
+## Component 3 - Scribe
+
+- Enchanter can write a regular scroll identified in the current run without a pot. A committed action takes three turns, one Blank Parchment, one Brush charge and 12 energy (20 for Transmutation); Scroll of Upgrade and all exotic scrolls are excluded. Wandering Brush permits inventory use. Invalid or stale choices spend nothing.
+- Recycling one scroll or a stack, including exotics, returns one parchment per scroll at the normal energy value. The shared pot/Toolkit/Alchemize path checks current ownership to prevent stale-item duplication. Parchment has no sale or energy value; craft costs exceed recycling returns.
+- Unused parchment appears for Enchanter on floor 2, then has a seeded 75% opportunity in each later region, with no bosses/side floors or changes to other-class drops. One hundred seeds yielded 386 sheets across full-run opportunities. Parchment fits the Scroll Holder and survives save/load.
+- Tests 62/63 cover real Spellguard damage and rank migration, Scribe eligibility/costs/timing, recycling and persistence. Native portrait/landscape fixtures exercise the actual recipe clicks and resulting inventory/resources.
+
 ## Component 2 - Painted journal and menu
 
 - Replace the HUD menu/journal plates and key symbols with fourfold texture detail, retaining their logical dimensions and input areas.
@@ -55,7 +71,7 @@
 - New painted up/down stairs and meal overlay have committed original sources, exact prompts and offline deterministic packing. Logical sizes and stair behavior are unchanged.
 - Validation: all nine classes Runs=90 failures=0; final Enchanter Runs=10 failures=0; seven JUnit tests; desktop and Android builds; native portrait/landscape history/Feed/painted-effect checks; offline provenance and painted reproduction failures=0. Existing test-45 contrast failure is not waived.
 
-# Grimhollow update log — v1.17.1
+# Grimhollow update log â€” v1.17.1
 
 - Replaced the live upstream version tabs and coming-soon roadmap with Grimhollow's player-facing release history, curated from this document, README, release commits and verification records. Upstream 4.0 is one foundation entry; attribution and historical source files remain intact.
 - Covered shipped classes, content, painted art, interface and effect upgrades, artifacts, Hatchling Mimic, dragon expedition, Lurking Horror, Playtest and balance tools, balance revisions and playtest fixes. Superseded recovery art is identified as historical rather than current.

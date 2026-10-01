@@ -83,6 +83,7 @@ public class Shocking extends Weapon.Enchantment {
 	
 	public static void arc( Char attacker, Char defender, int dist, ArrayList<Char> affected, ArrayList<Lightning.Arc> arcs ) {
 
+		com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.activate(Dungeon.level,defender.pos,com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.Kind.LIGHTNING);
 		defender.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);
 		defender.sprite.flash();
 

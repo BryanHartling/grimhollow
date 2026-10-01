@@ -164,6 +164,7 @@ public abstract class RegularLevel extends Level {
 			initRooms.add(SecretRoom.createRoom());
 		}
 		
+		com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.addRooms(initRooms);
 		return initRooms;
 	}
 	

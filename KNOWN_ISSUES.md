@@ -1,10 +1,13 @@
 # Known issues
 
-- v1.18.3: armor Etching and hidden-torch repairs are covered by automated desktop/headless checks; physical Samsung tablet confirmation remains with the user. Fresh test 45 still fails 17/76 pairs (5/15 Sewers, 1/10 Prison, 6/21 Caves, 1/15 City, 4/15 Halls); neither it nor the separately recorded Hatchling fixture issue is waived.
+- v1.19.0: fresh five-region terrain contrast test 45 still fails 17/76 pairs (Sewers 5/15, Prison 1/10, Caves 6/21, City 1/15, Halls 4/15); thresholds remain enforced and full-green CI is not claimed.
+- v1.19.0: physical Samsung tablet review and campaign balance of Scribe, Spellguard and elemental treasures remain with the user; native portrait/touch checks are not physical-device testing.
+- Elemental rooms and loose parchment are added only to newly generated floors. Already generated floors are not retrofitted. New text uses English fallback where translations are unavailable.
+- v1.18.3: armor Etching and hidden-torch repairs remain covered by automated desktop/headless checks; physical Samsung tablet confirmation remains with the user.
 - Current plan (2026-09-30): tablet movement performance is resolved per the user's playtesting. Balance remains under the user's campaign playtesting; no balance changes are part of this terrain patch.
 - Spellguard replaces Overload in v1.19.0: 10%/20% magical damage reduction requires a worn, temporarily inscribed armor piece. Psychic Pull remains skipped.
 - Terrain readability v1.18.2: restrained ambient/personal-light color and fuller flattened grass improve material separation. Human acceptance remains pending. Fresh Windows test 45 still fails 17/76 comparisons: Sewers 5/15, Prison 1/10, Caves 6/21, City 1/15, Halls 4/15. The 0.12 luminance / 40-degree hue thresholds stay enforced; no passing override. This Sewers capture has six types rather than the earlier seven, so the old 25/82 aggregate is not a matched comparison.
-- v1.18.1 CI also exposed a stale full-interface Hatchling fixture: it expects a marker on a heap already marked seen, contrary to nearest-undiscovered-item sensing. This separate test-fixture repair remains outstanding; Android and all class gates passed run 36791233065. No gameplay failure is inferred from that fixture alone.
+- Resolved in v1.19.0: the stale full-interface Hatchling fixture now marks its test heap undiscovered before checking nearest-item sensing; the complete landscape interface test passes. No gameplay rule or assertion was weakened.
 
 ## Historical release limitations
 

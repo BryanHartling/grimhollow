@@ -55,6 +55,7 @@ public class StoneOfShock extends Runestone {
 		PathFinder.buildDistanceMap( cell, BArray.not( Dungeon.level.solid, null ), 2 );
 		for (int i = 0; i < PathFinder.distance.length; i++) {
 			if (PathFinder.distance[i] < Integer.MAX_VALUE) {
+                com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.activate(Dungeon.level, i, com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.Kind.LIGHTNING);
 				Char n = Actor.findChar(i);
 				if (n != null) {
 					arcs.add(new Lightning.Arc(cell, n.sprite.center()));

@@ -408,6 +408,7 @@ public class Dungeon {
 		Statistics.qualifiedForBossRemainsBadge = false;
 		
 		level.create();
+		com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.record(level);
 		
 		if (branch == 0) Statistics.qualifiedForNoKilling = !bossLevel();
 		Statistics.qualifiedForBossChallengeBadge = false;

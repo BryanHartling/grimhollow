@@ -62,6 +62,7 @@ public class FlashBangBomb extends Bomb {
 		ArrayList<Char> affected = new ArrayList<>();
 		PathFinder.buildDistanceMap( cell, BArray.not( Dungeon.level.solid, null ), explosionRange() );
 		for (int i = 0; i < PathFinder.distance.length; i++) {
+			if (PathFinder.distance[i] < Integer.MAX_VALUE) com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.activate(Dungeon.level, i, com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.Kind.LIGHTNING);
 			if (PathFinder.distance[i] < Integer.MAX_VALUE && Actor.findChar(i) != null) {
 				affected.add(Actor.findChar(i));
 			}

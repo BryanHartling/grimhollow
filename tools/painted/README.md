@@ -1,4 +1,4 @@
-# Enchanter craft and elemental caches — v1.19.0
+# Enchanter craft and elemental caches â€” v1.19.0
 
 `journal.py` packs sixteen original navigation/category paintings and the existing leather/brass materials into the journal atlas, HUD buttons and key display. `botany_skills.py` replaces Overload with its own Spellguard painting. Sources are in `sources/sprint/`; exact built-in imagegen prompts are in `sprint-prompts.json`. New paintings and derivatives are GPL-3.0-or-later. The normal offline packer reproduces the outputs; UI geometry remains in the existing logical units.
 
@@ -109,3 +109,7 @@ Judge the result in real lit rooms, at play scale. A colour statistic is support
 Run: python tools/painted/pack.py (write) or python tools/painted/pack.py --check (verify only). Requires Pillow 12.3.0 and numpy 2.3.5. Ninety-nine shipping images reconstruct from seventy-five source sheets and pinned Git layout templates. New artwork is distributed with this project under GPL-3.0-or-later. Image generation is not repeated in CI.
 
 The 1.4.0 pass adds 86 painted status emblems and three overhead symbols, retaining 7/16 logical HUD dimensions and dynamic buff colors. Creature display heights now distinguish heroes (18.125 world units), humanoids (14.5), rats (8.15625) and large creatures/bosses; collision stays at 16 world units. Torch foreground pixels are isolated with the existing committed render alpha mask and composited over the current regional wall. No renderer or generation loop runs during packaging. `painted_rects` in the output manifest lets the GPU acceptance check reject untouched animation/variant frames.
+
+## Enchanter craft and elemental treasury assets
+
+Original imagegen sources in `sources/sprint/` and exact prompts in `sprint-prompts.json` supply Spellguard, Blank Parchment, sixteen journal/category icons and six elemental-mechanism states. `botany_skills.py`, `inventory.py`, `journal.py` and `elemental_cache.py` pack the committed paintings; `pack.py --check` verifies every shipping pixel without network or generation. Logical geometry remains unchanged. This release reconstructs 144 assets from 134 source sheets plus 55 launcher resources.

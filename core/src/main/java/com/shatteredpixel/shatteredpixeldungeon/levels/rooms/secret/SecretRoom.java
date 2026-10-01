@@ -48,6 +48,7 @@ public abstract class SecretRoom extends SpecialRoom {
 	private static int[] regionSecretsThisRun = new int[5];
 	
 	public static void initForRun(){
+		SecretElementalRoom.reset();
 		
 		float[] regionChances = baseRegionSecrets.clone();
 		
@@ -104,6 +105,7 @@ public abstract class SecretRoom extends SpecialRoom {
 	private static final String REGIONS	= "region_secrets";
 	
 	public static void restoreRoomsFromBundle( Bundle bundle ) {
+		SecretElementalRoom.restoreRun(bundle);
 		runSecrets.clear();
 		if (bundle.contains( ROOMS )) {
 			for (Class<? extends SecretRoom> type : bundle.getClassArray(ROOMS)) {
@@ -117,6 +119,7 @@ public abstract class SecretRoom extends SpecialRoom {
 	}
 	
 	public static void storeRoomsInBundle( Bundle bundle ) {
+		SecretElementalRoom.storeRun(bundle);
 		bundle.put( ROOMS, runSecrets.toArray(new Class[0]) );
 		bundle.put( REGIONS, regionSecretsThisRun );
 	}

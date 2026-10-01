@@ -21,6 +21,8 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.windows;
 
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache;
+
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
@@ -84,6 +86,7 @@ public class WndInfoCell extends Window {
 	}
 
 	public static String cellName( int cell ){
+		if(Dungeon.level.map[cell]==Terrain.LOCKED_DOOR && ElementalCache.sealed(Dungeon.level,cell)) return Messages.get(ElementalCache.class,"seal");
 
 		CustomTilemap customTile = null;
 		int x = cell % Dungeon.level.width();
@@ -166,6 +169,7 @@ public class WndInfoCell extends Window {
 
 			desc += Dungeon.level.tileDesc(Dungeon.level.map[cell]);
 		}
+		if(Dungeon.level.map[cell]==Terrain.LOCKED_DOOR && ElementalCache.sealed(Dungeon.level,cell)) desc=ElementalCache.atDoor(Dungeon.level,cell).doorDescription();
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 

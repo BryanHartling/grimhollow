@@ -21,6 +21,8 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.levels;
 
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache;
+
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
@@ -125,6 +127,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public abstract class Level implements Bundlable {
+	public ArrayList<ElementalCache> elementalCaches = new ArrayList<>();
 	
 	public static enum Feeling {
 		NONE,
@@ -316,6 +319,7 @@ public abstract class Level implements Bundlable {
 			blobs = new HashMap<>();
 			plants = new SparseArray<>();
 			traps = new SparseArray<>();
+			elementalCaches.clear();
 			customTiles = new ArrayList<>();
 			customTerrain = new ArrayList<>();
 			customWalls = new ArrayList<>();
@@ -376,6 +380,8 @@ public abstract class Level implements Bundlable {
 	
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
+		elementalCaches.clear();
+		for (Bundlable entry : bundle.getCollection("elemental_caches")) elementalCaches.add((ElementalCache)entry);
 
 		version = bundle.getInt( VERSION );
 		
@@ -501,6 +507,7 @@ public abstract class Level implements Bundlable {
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
+		bundle.put("elemental_caches", elementalCaches);
         bundle.put("fresh_remains",freshRemains.valueList());
         bundle.put("force_cells",forceOriginal.keyArray());int[] forceValues=new int[forceOriginal.keyArray().length];int fi=0;for(int cell:forceOriginal.keyArray())forceValues[fi++]=forceOriginal.get(cell);bundle.put("force_values",forceValues);
         bundle.put("bone_cells",boneOriginal.keyArray());int[] original=new int[boneOriginal.keyArray().length];int bi=0;for(int cell:boneOriginal.keyArray())original[bi++]=boneOriginal.get(cell);bundle.put("bone_values",original);
@@ -950,6 +957,7 @@ public abstract class Level implements Bundlable {
 	}
 
 	public void destroy( int pos ) {
+		if (ElementalCache.sealed(this, pos)) return;
 		//if raw tile type is flammable or empty
 		int terr = map[pos];
 		if (terr == Terrain.EMPTY || terr == Terrain.EMPTY_DECO
@@ -1130,7 +1138,7 @@ public abstract class Level implements Bundlable {
 	}
 
 	public void discover( int cell ) {
-		set( cell, Terrain.discover( map[cell] ) );
+		set(cell, map[cell] == Terrain.SECRET_DOOR && ElementalCache.sealed(this, cell) ? Terrain.LOCKED_DOOR : Terrain.discover(map[cell]), this);
 		Trap trap = traps.get( cell );
 		if (trap != null)
 			trap.reveal();
@@ -1138,6 +1146,7 @@ public abstract class Level implements Bundlable {
 	}
 
 	public boolean setCellToWater( boolean includeTraps, int cell ){
+		if (ElementalCache.activate(this, cell, ElementalCache.Kind.WATER)) return true;
 		Point p = cellToPoint(cell);
 
 		//if a custom tilemap is over that cell, check if it allows water

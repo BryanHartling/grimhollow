@@ -21,6 +21,8 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.actors.hero;
 
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache;
+
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Bones;
@@ -1288,6 +1290,15 @@ public class Hero extends Char {
 			
 			boolean hasKey = false;
 			int door = Dungeon.level.map[doorCell];
+			if (ElementalCache.sealed(Dungeon.level, doorCell)) {
+				SkeletonKey key = belongings.getItem(SkeletonKey.class);
+				curAction = null;
+				if (key == null || !key.openElemental(this, doorCell)) {
+					GLog.w(ElementalCache.atDoor(Dungeon.level, doorCell).doorDescription());
+					ready();
+				}
+				return false;
+			}
 			
 			if (Dungeon.branch != 0) {
 
@@ -2443,6 +2454,7 @@ public class Hero extends Char {
 		if (curAction instanceof HeroAction.Unlock) {
 
 			int doorCell = ((HeroAction.Unlock)curAction).dst;
+			if (ElementalCache.sealed(Dungeon.level, doorCell)) { curAction=null; ready(); return; }
 			int door = Dungeon.level.map[doorCell];
 
 			SkeletonKey.keyRecharge skele = buff(SkeletonKey.keyRecharge.class);
@@ -2638,7 +2650,8 @@ public class Hero extends Char {
 							chance = 0;
 						}
 						
-						if (Random.Float() < chance) {
+						chance = ElementalCache.searchChance(Dungeon.level, curr, chance, foresight);
+					if (Random.Float() < chance) {
 						
 							int oldValue = Dungeon.level.map[curr];
 							

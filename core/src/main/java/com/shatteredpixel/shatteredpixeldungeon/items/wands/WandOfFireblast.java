@@ -87,6 +87,7 @@ public class WandOfFireblast extends DamageWand {
 		ArrayList<Char> affectedChars = new ArrayList<>();
 		ArrayList<Integer> adjacentCells = new ArrayList<>();
 		for( int cell : cone.cells ){
+            com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.activate(Dungeon.level,cell,com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.Kind.FIRE);
 
 			//ignore caster cell
 			if (cell == bolt.sourcePos){

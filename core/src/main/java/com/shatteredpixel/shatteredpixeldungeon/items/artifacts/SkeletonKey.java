@@ -21,6 +21,8 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items.artifacts;
 
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache;
+
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
@@ -127,7 +129,24 @@ public class SkeletonKey extends Artifact {
 
 	}
 
-	public CellSelector.Listener targeter = new CellSelector.Listener(){
+	/** Atomic bypass of a revealed seal; ordinary iron keys never satisfy this lock. */
+    public boolean openElemental(Hero hero, int cell) {
+        ElementalCache cache=ElementalCache.atDoor(Dungeon.level,cell);
+        if (cache==null || cache.opened || Dungeon.level.map[cell]!=Terrain.LOCKED_DOOR
+                || !Dungeon.level.adjacent(hero.pos,cell) || !(Dungeon.level.visited[cell] || Dungeon.level.mapped[cell])
+                || !isEquipped(hero) || cursed || hero.buff(MagicImmune.class)!=null
+                || Dungeon.branch!=0 || Dungeon.level.locked || charge<cache.keyCost) return false;
+        charge-=cache.keyCost;
+        cache.open(Dungeon.level);
+        gainExp(2+cache.keyCost);
+        Talent.onArtifactUsed(hero);
+        Item.updateQuickslot();
+        hero.busy();hero.spend(1f);
+        if(hero.sprite!=null)hero.sprite.operate(cell);else hero.next();
+        return true;
+    }
+
+    public CellSelector.Listener targeter = new CellSelector.Listener(){
 
 		@Override
 		public void onSelect(Integer target) {
@@ -139,7 +158,11 @@ public class SkeletonKey extends Artifact {
 					return;
 				}
 
-				if (Dungeon.level.adjacent(target, curUser.pos)) {
+				if (ElementalCache.sealed(Dungeon.level, target)) {
+                    if (!openElemental(curUser,target)) GLog.w(ElementalCache.atDoor(Dungeon.level,target).doorDescription());
+                    return;
+                }
+                if (Dungeon.level.adjacent(target, curUser.pos)) {
 					if (Dungeon.level.map[target] == Terrain.LOCKED_EXIT){
 						GLog.w(Messages.get(SkeletonKey.class, "wont_open"));
 						return;

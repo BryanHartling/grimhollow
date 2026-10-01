@@ -121,6 +121,7 @@
     "regions/sewers.png": "47889d8797ab3dd9a53cf8a6a8d991febd3b4c5f5dd25ddd22577fc51d95beb7",
     "ritual-mark.png": "94aa09715005e11e082f4823d78f8d5cee65418d94f8c73a42a88fa733726c9c",
     "sewers-materials.png": "0b951d4ce0bb5902c6a940c1bc56db1173580ca57c33d652c16754dd91c9ddc2",
+    "sprint/elemental-cache.png": "442b0aff01bfc6bbacbcdd232c3032dfa3387ef1c2c7f6c66ad90059a90c8464",
     "sprint/journal.png": "2398fb10a25e058c0bc3ec5c36f47f9c016edd2524f965f166f6e352516bb400",
     "sprint/parchment.png": "95161b4a9f013bb417d9f40ddee8b9ada3b6bbe44a6f0f568fe282680112ddd9",
     "sprint/spellguard.png": "d3385ea1354437f0248c514219c64af2ae79112cefa818185c3d3b10080e572a",
@@ -9323,6 +9324,13 @@
         128
       ],
       "rgba_sha256": "ff24e1fe64a35280f354af776d6c19993950e7ff6e44959c4d389f169f48d20f"
+    },
+    "environment/custom_tiles/elemental_cache.png": {
+      "size": [
+        256,
+        128
+      ],
+      "rgba_sha256": "a0e481fdded01a49ca43debf3b678018c888d667995a45a4b6bebe0e58aefdbf"
     }
   }
 }

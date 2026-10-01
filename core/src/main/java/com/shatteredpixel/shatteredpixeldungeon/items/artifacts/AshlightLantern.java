@@ -151,6 +151,8 @@ public class AshlightLantern extends Artifact {
             Buff.prolong(mob,Blindness.class,4f);
             if(level()>=8){ Burning burn=Buff.affect(mob,Burning.class); if(burn!=null)burn.reignite(mob); }
         }
+        if(level()>=2)for(int cell=0;cell<burst.length;cell++)if(burst[cell])
+            com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.activate(level,cell,com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.Kind.FIRE);
         if(level()>=2)for(int cell=0;cell<burst.length;cell++)if(burst[cell]
                 && level.map[cell]!=Terrain.BONE_WALL && level.map[cell]!=Terrain.FORCE_WALL
                 && (level.flamable[cell] || Blob.volumeAt(cell,Web.class)>0)){

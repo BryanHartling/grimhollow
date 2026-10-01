@@ -21,6 +21,8 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.actors.blobs;
 
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache;
+
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -99,6 +101,7 @@ public class Fire extends Blob {
 	}
 	
 	public static void burn( int pos ) {
+		ElementalCache.activate(Dungeon.level,pos,ElementalCache.Kind.FIRE);
 		Char ch = Actor.findChar( pos );
 		if (ch != null && !ch.isImmune(Fire.class)) {
 			Buff.affect( ch, Burning.class ).reignite( ch );

@@ -21,6 +21,8 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.items;
 
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache;
+
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Barrier;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
@@ -40,6 +42,7 @@ public class Waterskin extends Item {
 
 	private static final int MAX_VOLUME	= 20;
 
+	public static final String AC_POUR = "POUR";
 	private static final String AC_DRINK	= "DRINK";
 
 	private static final float TIME_TO_DRINK = 1f;
@@ -76,6 +79,7 @@ public class Waterskin extends Item {
 		if (volume > 0) {
 			actions.add( AC_DRINK );
 		}
+		if (isFull()) actions.add(AC_POUR);
 		return actions;
 	}
 
@@ -84,6 +88,15 @@ public class Waterskin extends Item {
 
 		super.execute( hero, action );
 
+        if (action.equals(AC_POUR)) {
+            com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.selectCell(new com.shatteredpixel.shatteredpixeldungeon.scenes.CellSelector.Listener() {
+                public String prompt() { return Messages.get(Waterskin.class,"pour_prompt"); }
+                public void onSelect(Integer cell) {
+                    if(cell!=null && !ElementalCache.pour(hero,Waterskin.this,cell)) GLog.w(Messages.get(Waterskin.class,"pour_invalid"));
+                }
+            });
+            return;
+        }
 		if (action.equals( AC_DRINK )) {
 
 			if (volume > 0) {

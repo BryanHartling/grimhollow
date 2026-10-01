@@ -21,6 +21,8 @@
 
 package com.shatteredpixel.shatteredpixeldungeon.actors.blobs;
 
+import com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache;
+
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
@@ -58,6 +60,7 @@ public class Electricity extends Blob {
 				cell = i + j*Dungeon.level.width();
 				
 				if (cur[cell] > 0) {
+					ElementalCache.activate(Dungeon.level,cell,ElementalCache.Kind.LIGHTNING);
 					spreadFromCell(cell, cur[cell]);
 				}
 			}

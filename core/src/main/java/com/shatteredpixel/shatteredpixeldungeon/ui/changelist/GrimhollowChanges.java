@@ -20,7 +20,19 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.18.3","A rune for your armor, and light behind the right walls.");
+        ChangeInfo r=release(list,"v1.19.0","Written power, elemental treasuries, and a painted journal.");
+        note(r,Icons.TALENT,"Spellguard",
+                "Spellguard replaces Overload. Take 10%/20% less magical damage while your worn armor carries a live temporary inscription. Permanent glyphs and Rune Etching alone do not qualify. Existing Overload ranks carry over.");
+        note(r,Icons.SCROLL_COLOR,"Scribe",
+                "Enchanters can use the Sigil Brush or Blank Parchment to write regular scrolls identified in this run, without an alchemy pot. Each scroll takes three turns, one parchment, one Brush charge and 12 energy; Transmutation costs 20. Upgrade and exotic scrolls cannot be written. "
+                +"Recycling any scroll for energy returns one parchment per scroll. The Enchanter can also find a little unused parchment in the dungeon. Wandering Brush permits scribing with the Brush in inventory.");
+        note(r,Icons.STAIRS_SECRETS,"Elemental treasuries",
+                "Look for a cold brazier, dry fountain or lightning rod. Fire, water and electricity open their matching concealed treasury doors. A full Waterskin can be poured into the fountain. Search chances are halved; mapping, prismatic light and foresight reveal a door without unlocking it. Skeleton Key bypasses cost 4/5/6 charges. "
+                +"Each type appears at most once per run, independently of ordinary secret rooms. Chances rise with region depth, averaging about 1.7 rooms across a complete run. Deeper treasuries contain more valuable rewards. Playtest balance settings include their frequency, loot and bypass costs.");
+        note(r,Icons.JOURNAL,"Painted navigation",
+                "Journal and menu buttons, journal tabs, alchemy categories and catalog icons have new painted artwork. Bestiary portraits fit their frames without cropping.");
+
+        r=release(list,"v1.18.3","A rune for your armor, and light behind the right walls.");
         note(r,Icons.TALENT,"Armor Rune Etching",
                 "Sigil Brush > Etch now lets you choose your equipped melee weapon or armor. The same single rune carries one upgrade and grants a changing common glyph on armor, alongside permanent and temporary inscriptions. "
                 +"Moving it costs one turn and no charge, and never rerolls its floor effects. Etching descriptions now correctly show effect names, upgrade levels and the 25% class bonus.");

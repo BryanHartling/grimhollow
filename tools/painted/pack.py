@@ -206,6 +206,8 @@ def outputs():
     result.update(interface_art())
     from journal import outputs as journal
     result.update(journal(result['sprites/items.png']))
+    from elemental_cache import outputs as elemental_cache
+    result.update(elemental_cache())
     from readability import outputs as readability
     result.update(readability())
     from regions import outputs as regions
@@ -255,6 +257,7 @@ def main():
         if path=='interfaces/painted_journal.png':expected=(256,256)
         if path=='interfaces/menu_button.png':expected=(256,64)
         if path=='interfaces/menu_pane.png':expected=(128,128)
+        if path=='environment/custom_tiles/elemental_cache.png':expected=(256,128)
         if path=='interfaces/painted_skills.png':expected=(1024,512)
         if path=='interfaces/painted_badges.png':expected=(1024,512)
         if path=='effects/painted_food.png':expected=(64,64)

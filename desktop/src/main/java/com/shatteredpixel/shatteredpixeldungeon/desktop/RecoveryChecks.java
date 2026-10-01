@@ -35,7 +35,7 @@ final class RecoveryChecks {
     }
 
     static void titleControls() {
-        String[] fields={"btnPlay","btnChanges","btnRankings","btnJournal","btnSettings","btnCredits"};
+        String[] fields={"btnPlay","btnChanges","btnRankings","btnJournal","btnSettings","btnCredits","btnPlaytest"};
         for(String name:fields){
             com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton button=(com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)field(Game.scene(),name);
             if(button==null)throw new AssertionError("Missing title control "+name);
@@ -43,7 +43,7 @@ final class RecoveryChecks {
         }
         int controls=0;
         for(Gizmo child:members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)controls++;
-        if(controls!=6)throw new AssertionError("Title must contain exactly six main controls, found "+controls);
+        if(controls!=7)throw new AssertionError("Title must contain exactly seven main controls, found "+controls);
     }
 
     static void linkHandlers() {

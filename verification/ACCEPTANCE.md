@@ -1,3 +1,17 @@
+# Home-screen Playtest - v1.19.1
+
+| Gate | Result | Executed evidence |
+|---|---|---|
+| Windows / Android / JUnit | PASS | `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon`: **BUILD SUCCESSFUL in 2m 11s**; Android code 971. |
+| Class gates | PASS | **Runs=30 failures=0**: Necromancer, Enchanter and Psychic each 10/0. |
+| 52 home navigation / run tools | PASS | Actual portrait touch and landscape mouse: seven fitted title buttons, no active-run Playtest button, home menu with no hero loaded, shared balance input, safe empty slot selection, cancellation, saved-run loading with ordinary flags preserved, then God mode, item creation, class/progression and floor travel. **TEST 52 HOME PASS** and **TEST 52 UI ... failures=0** in both orientations. |
+| 58 shared profile | PASS | Home edits persist without a hero or run mutation; bounds and nonempty item pools enforced; next game adopts customized profile. Existing seeded generation, saves, reset and sanitization checks pass. |
+| Windows package | PASS | `tools/package-windows.ps1`; isolated `Grimhollow.exe --smoke-sewers` exits 0: **PASS: Sewer scene renders with dynamic lighting on and off.** |
+| 45 and other historical gates | Prior status retained | Terrain contrast remains the known **17/76** failure. No art or fog changes; those checks were not rerun locally for this navigation patch. Physical tablet confirmation remains with the user. |
+| CI | Reported at delivery | No check disabled or threshold changed. Full-green CI is not claimed while test 45 remains unresolved. |
+
+Screenshots: [home screen](interface/landscape/playtest-home.png), [portrait menu](interface/portrait/playtest-home-menu.png), [home tuning](interface/portrait/playtest-home-balance.png), [save picker](interface/landscape/playtest-home-saves.png), [active-run menu](interface/portrait/playtest-run-menu.png).
+
 # Enchanter craft and elemental treasuries - v1.19.0
 
 All four authorized sprint components are implemented. The following results were executed locally against this release; earlier numbered results and retirements below retain their original scope. Physical Android playtesting is not claimed.

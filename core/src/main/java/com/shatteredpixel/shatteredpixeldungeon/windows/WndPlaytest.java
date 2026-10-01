@@ -24,12 +24,24 @@ import java.util.function.IntConsumer;
 
 /** Paged, touch-sized controls. No nested scroll ownership or off-screen action buttons. */
 public class WndPlaytest extends Window {
+    private static int requestedSlot=-1;
+    private static boolean atHome(){return !(Game.scene() instanceof GameScene);}
+    public static void openHome(){BalanceTuning.loadShared();root();}
+    public static void cancelRequestedRun(){requestedSlot=-1;}
+    public static void openRequestedRun(){
+        if(requestedSlot<0 || Dungeon.hero==null || !Dungeon.hero.ready)return;
+        boolean matches=requestedSlot==GamesInProgress.curSlot;
+        requestedSlot=-1;
+        if(matches && Dungeon.hero.isAlive())root();
+    }
     private static class Entry {
         final String label; final Runnable action; final Item item;
         Entry(String label,Runnable action){this(label,action,null);}
         Entry(String label,Runnable action,Item item){this.label=label;this.action=action;this.item=item;}
     }
-    public WndPlaytest(){this("Playtest",Playtest.enabled()
+    public WndPlaytest(){this("Playtest",atHome()
+            ?"Tune balance for every game on this device, or open a run for God mode, items and travel. Run tools open after the selected dungeon loads. Custom balance marks affected games as Playtests."
+            :Playtest.enabled()
             ?"Level "+Dungeon.hero.lvl+" | Floor "+Dungeon.depth+" | God mode "+(Playtest.god()?"ON":"OFF")
             :"Enable testing for this save: no rankings, badges, catalog credit or bones. Balance settings apply to every game on this device and mark affected games as Playtests. God mode and direct actions affect this save only.",rootEntries(),0,null);}
 
@@ -74,16 +86,29 @@ public class WndPlaytest extends Window {
         resize(width,(int)y+20);
     }
     private static void run(Runnable action){
-        try{action.run();}catch(RuntimeException e){GameScene.show(new WndError(e.getMessage()==null?"Unable to apply this playtest action.":e.getMessage()));}
+        try{action.run();}catch(RuntimeException e){present(new WndError(e.getMessage()==null?"Unable to apply this playtest action.":e.getMessage()));}
     }
-    private static void show(String title,String body,List<Entry> rows,int page,Runnable back){GameScene.show(new WndPlaytest(title,body,rows,page,back));}
+    private static void present(Window window){if(atHome())Game.scene().addToFront(window);else GameScene.show(window);}
+    private static void show(String title,String body,List<Entry> rows,int page,Runnable back){present(new WndPlaytest(title,body,rows,page,back));}
     private static void show(String title,String body,List<Entry> rows,Runnable back){show(title,body,rows,0,back);}
-    private static void root(){GameScene.show(new WndPlaytest());}
-    private static void save(){try{Dungeon.saveAll();}catch(IOException e){throw new IllegalStateException("Could not save playtest: "+e.getMessage(),e);}}
+    private static void root(){present(new WndPlaytest());}
+    private static void save(){if(atHome())return;try{Dungeon.saveAll();}catch(IOException e){throw new IllegalStateException("Could not save playtest: "+e.getMessage(),e);}}
     private static void changed(Runnable action,Runnable after){action.run();save();after.run();}
     private static void reload(){save();InterlevelScene.mode=InterlevelScene.Mode.CONTINUE;Game.switchScene(InterlevelScene.class);}
     private static List<Entry> rootEntries(){
         List<Entry> rows=new ArrayList<>();
+        if(atHome()){
+            rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning"),WndPlaytest::tuning));
+            rows.add(new Entry("Start a new run for testing",()->{
+                int slot=GamesInProgress.firstEmpty();
+                if(slot<0)throw new IllegalStateException("All save slots are occupied. Open an existing run or free a slot through Enter the Dungeon.");
+                requestedSlot=GamesInProgress.curSlot=slot;
+                GamesInProgress.selectedClass=null;
+                ShatteredPixelDungeon.switchScene(HeroSelectScene.class);
+            }));
+            rows.add(new Entry("Open tools for a saved run",WndPlaytest::savedRuns));
+            return rows;
+        }
         if(!Playtest.enabled()){
             rows.add(new Entry("Enable Playtest for this save",()->changed(Playtest::enable,WndPlaytest::root)));
             return rows;
@@ -106,8 +131,22 @@ public class WndPlaytest extends Window {
         rows.add(new Entry("Identify all carried items",()->changed(()->Dungeon.hero.belongings.identify(),WndPlaytest::root)));
         return rows;
     }
+    private static void savedRuns(){
+        List<Entry> rows=new ArrayList<>();
+        for(GamesInProgress.Info info:GamesInProgress.checkAll()){
+            if(info.incompatible || info.hp<=0)continue;
+            rows.add(new Entry("Slot "+info.slot+": "+Messages.titleCase(info.heroClass.title())+" | Level "+info.level+" | Floor "+info.depth,()->{
+                requestedSlot=GamesInProgress.curSlot=info.slot;
+                Dungeon.hero=null;Dungeon.daily=Dungeon.dailyReplay=false;
+                ActionIndicator.clearAction();
+                InterlevelScene.mode=InterlevelScene.Mode.CONTINUE;
+                ShatteredPixelDungeon.switchScene(InterlevelScene.class);
+            }));
+        }
+        show("Choose a saved run","Loads the selected run and opens its testing tools. Ordinary saves remain normal until you enable Playtest or use custom balance.",rows,WndPlaytest::root);
+    }
     public static void tuning(){
-        Playtest.require();
+        if(!atHome())Playtest.require();
         List<Entry> rows=new ArrayList<>();
         for(int i=0;i<10;i++){
             final int group=i;
@@ -120,9 +159,9 @@ public class WndPlaytest extends Window {
         List<Entry> rows=new ArrayList<>();
         for(BalanceTuning.Key key:BalanceTuning.Key.values())if(key.group==group){
             String title=Messages.get(BalanceTuning.class,key.id());
-            rows.add(new Entry(title+": "+key.display(BalanceTuning.get(key)),()->number(title,
+            rows.add(new Entry(title+": "+key.display(BalanceTuning.configured(key)),()->number(title,
                     Messages.get(BalanceTuning.class,key.id()+"_desc")+"\n\n"+Messages.get(WndPlaytest.class,"tuning_default",key.display(key.baseline)),
-                    BalanceTuning.get(key),key.min,key.max,n->BalanceTuning.set(key,n),()->tuningGroup(group))));
+                    BalanceTuning.configured(key),key.min,key.max,n->{if(atHome())BalanceTuning.setShared(key,n);else BalanceTuning.set(key,n);},()->tuningGroup(group))));
         }
         show(Messages.get(WndPlaytest.class,"tuning_group_"+group),Messages.get(WndPlaytest.class,"tuning_hint_"+group),rows,WndPlaytest::tuning);
     }
@@ -130,7 +169,7 @@ public class WndPlaytest extends Window {
         number(title,body,value,min,max,action,back,back);
     }
     private static void number(String title,String body,int value,int min,int max,IntConsumer action,Runnable back,Runnable cancel){
-        GameScene.show(new WndTextInput(title,body+" ("+min+"-"+max+")",Integer.toString(value),6,false,"Apply","Cancel"){
+        present(new WndTextInput(title,body+" ("+min+"-"+max+")",Integer.toString(value),6,false,"Apply","Cancel"){
             @Override public void onSelect(boolean positive,String text){
                 if(!positive){cancel.run();return;}
                 run(()->{

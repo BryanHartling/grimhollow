@@ -20,7 +20,10 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.19.0","Written power, elemental treasuries, and a painted journal.");
+        ChangeInfo r=release(list,"v1.19.1","Playtest tools move to the home screen.");
+        note(r,Icons.TALENT,"Home-screen Playtest",
+                "Open Playtest from the home screen to tune balance without loading a game, or select a saved run or start a new one for God mode, item creation and travel. Run-specific tools open once the selected dungeon is loaded. The active-run menu no longer contains Playtest. Ordinary saves keep their normal status until testing is enabled or custom balance is applied.");
+        r=release(list,"v1.19.0","Written power, elemental treasuries, and a painted journal.");
         note(r,Icons.TALENT,"Spellguard",
                 "Spellguard replaces Overload. Take 10%/20% less magical damage while your worn armor carries a live temporary inscription. Permanent glyphs and Rune Etching alone do not qualify. Existing Overload ranks carry over.");
         note(r,Icons.SCROLL_COLOR,"Scribe",

@@ -52,19 +52,24 @@ public final class BalanceTuning {
             Key.CAVERN_GOLD_WEIGHT,Key.CAVERN_CONSUMABLE_WEIGHT};
     public static final Key[] CACHE_BASE_CHANCES={Key.CACHE_FIRE_CHANCE,Key.CACHE_WATER_CHANCE,Key.CACHE_LIGHTNING_CHANCE};
     private static final String PROFILE="balance_profile_v1";
-    public static int get(Key key) { return Playtest.enabled()?values.getOrDefault(key,key.baseline):key.baseline; }
+    public static int configured(Key key) { return values.getOrDefault(key,key.baseline); }
+    public static int get(Key key) { return Playtest.enabled()?configured(key):key.baseline; }
     public static float multiplier(Key key) { return get(key)/100f; }
     public static void set(Key key,int value) {
         Playtest.require();
+        setShared(key,value);
+    }
+    /** Edit the device profile without loading or modifying a saved hero. */
+    public static void setShared(Key key,int value) {
         if(value<key.min || value>key.max)throw new IllegalArgumentException("Value outside tuning range.");
         if(key.group==3 && value==0) {
             boolean any=false;
-            for(Key other:Key.values())if(other.group==3 && other!=key && get(other)>0)any=true;
+            for(Key other:Key.values())if(other.group==3 && other!=key && configured(other)>0)any=true;
             if(!any)throw new IllegalArgumentException("Keep at least one item category above zero.");
         }
         if(java.util.Arrays.asList(CAVERN_LOOT_WEIGHTS).contains(key) && value==0) {
             boolean any=false;
-            for(Key other:CAVERN_LOOT_WEIGHTS)if(other!=key && get(other)>0)any=true;
+            for(Key other:CAVERN_LOOT_WEIGHTS)if(other!=key && configured(other)>0)any=true;
             if(!any)throw new IllegalArgumentException("Keep at least one cavern loot weight above zero.");
         }
         if(value==key.baseline)values.remove(key);else values.put(key,value);

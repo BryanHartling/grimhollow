@@ -1,5 +1,7 @@
 # Grimhollow
 
+**Playtest moves home in v1.19.1:** choose **Playtest** on the home screen. Balance tuning works without loading a run and applies across games. Choose **Open tools for a saved run**, or **Start a new run for testing**, to load a dungeon and open God mode, item creation, progression and travel controls. The active-run menu no longer has Playtest; return through **Main Menu** to access it again. Opening the menu alone does not mark a save as a Playtest.
+
 **Enchanter craft and elemental treasuries v1.19.0:** Spellguard replaces Overload (10%/20% less magical damage while worn armor has a live temporary inscription). Journal/menu controls and journal categories now use painted artwork.
 
 **Scribe:** use Sigil Brush or Blank Parchment to write a regular scroll identified this run, without a pot. Each action takes **3 turns, 1 parchment, 1 Brush charge and 12 energy** (20 for Transmutation). Upgrade and exotic scrolls cannot be written. Recycling any scroll returns one parchment per scroll; Enchanter can also find a few blank sheets. Wandering Brush permits inventory scribing.

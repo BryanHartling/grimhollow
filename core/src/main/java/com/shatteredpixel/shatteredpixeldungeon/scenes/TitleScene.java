@@ -69,6 +69,7 @@ public class TitleScene extends PixelScene {
 	private StyledButton btnJournal;
 	private StyledButton btnSettings;
 	private StyledButton btnCredits;
+	private StyledButton btnPlaytest;
 
 	private BitmapText version;
 	private IconButton btnFade;
@@ -78,6 +79,7 @@ public class TitleScene extends PixelScene {
 	public void create() {
 		
 		super.create();
+		com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.cancelRequestedRun();
 
 		Music.INSTANCE.playTracks(
 				new String[]{Assets.Music.THEME_1, Assets.Music.THEME_2},
@@ -180,6 +182,14 @@ public class TitleScene extends PixelScene {
 		};
 		btnCredits.icon(Icons.get(Icons.INFO));
 		add(btnCredits);
+
+		btnPlaytest = new StyledButton(GREY_TR, "Playtest") {
+			@Override protected void onClick() {
+				com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.openHome();
+			}
+		};
+		btnPlaytest.icon(Icons.get(Icons.TALENT));
+		add(btnPlaytest);
 		
 		final int BTN_HEIGHT = 20;
 		int GAP = (int)(h - topRegion - 4*BTN_HEIGHT)/3;
@@ -195,7 +205,8 @@ public class TitleScene extends PixelScene {
         btnJournal.setRect(btnRankings.right()+2,btnRankings.top(),half,BTN_HEIGHT);
         btnSettings.setRect(btnPlay.left(),btnRankings.bottom()+GAP,half,BTN_HEIGHT);
         btnCredits.setRect(btnSettings.right()+2,btnSettings.top(),half,BTN_HEIGHT);
-        btnChanges.setRect(btnAreaLeft,btnSettings.bottom()+GAP,buttonAreaWidth,BTN_HEIGHT);
+        btnChanges.setRect(btnAreaLeft,btnSettings.bottom()+GAP,half,BTN_HEIGHT);
+        btnPlaytest.setRect(btnChanges.right()+2,btnChanges.top(),half,BTN_HEIGHT);
 
 		version = new BitmapText( "v" + Game.version, pixelFont);
 		version.measure();
@@ -268,6 +279,7 @@ public class TitleScene extends PixelScene {
 		btnJournal.enable(alpha != 0);
 		btnSettings.enable(alpha != 0);
 		btnCredits.enable(alpha != 0);
+		btnPlaytest.enable(alpha != 0);
 
 		btnPlay.alpha(alpha);
 		btnChanges.alpha(alpha);
@@ -275,6 +287,7 @@ public class TitleScene extends PixelScene {
 		btnJournal.alpha(alpha);
 		btnSettings.alpha(alpha);
 		btnCredits.alpha(alpha);
+		btnPlaytest.alpha(alpha);
 
 		version.alpha(alpha);
 		btnFade.icon().alpha(alpha);

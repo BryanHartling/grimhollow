@@ -31,6 +31,16 @@ final class TuningScenario {
         out.append(Random.Long());Random.popGenerator();return out.toString();
     }
     static void run() throws Exception {
+        BalanceTuning.reset();Playtest.reset();Dungeon.hero=null;Dungeon.level=null;
+        BalanceTuning.setShared(DENSITY,125);BalanceTuning.loadShared();
+        check(BalanceTuning.configured(DENSITY)==125&&!Playtest.enabled()&&BalanceTuning.get(DENSITY)==100,"home profile changed gameplay without a loaded test run");
+        boolean homeRejected=false;
+        try{BalanceTuning.setShared(DENSITY,201);}catch(IllegalArgumentException expected){homeRejected=true;}
+        check(homeRejected&&BalanceTuning.configured(DENSITY)==125,"home profile range enforcement");
+        for(BalanceTuning.Key key:BalanceTuning.Key.values())if(key.group==3&&key!=GOLD)BalanceTuning.setShared(key,0);
+        homeRejected=false;try{BalanceTuning.setShared(GOLD,0);}catch(IllegalArgumentException expected){homeRejected=true;}
+        check(homeRejected&&BalanceTuning.configured(GOLD)==100,"home item weights accepted an empty loot pool");
+        Playtest.reset();check(Playtest.enabled()&&BalanceTuning.get(DENSITY)==125&&!Playtest.god(),"new run did not adopt home settings");
         BalanceTuning.reset();Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);
         boolean rejected=false;try{BalanceTuning.set(CURSEBOUND,0);}catch(IllegalStateException expected){rejected=true;}
         check(rejected,"ordinary save accepted mutation");

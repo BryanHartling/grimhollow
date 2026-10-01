@@ -856,7 +856,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             SPDSettings.dynamicLighting(originalLighting);SPDSettings.zoom(originalZoom);
         }
     }
-    private int playtestStep,playtestWait;
+    private int playtestStep=-13,playtestWait;
     private void playtestTick(){
         if(playtestStep>=32){tabletTick();return;}
         if(++playtestWait>12000)throw new AssertionError("Playtest menu scenario stalled at "+playtestStep);
@@ -865,10 +865,52 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if(button instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton && ((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button).active)pointerClickReview(button);
             return;
         }
-        if(!(Game.scene() instanceof GameScene)||frames%20!=0)return;
+        if(frames%20!=0)return;
+        if(playtestStep>=0 && !(Game.scene() instanceof GameScene))return;
         switch(playtestStep){
-            case 0:closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndGame());break;
-            case 1:playtestClick("Playtest");break;
+            case -13:
+                if(!Dungeon.hero.ready)return;
+                closeReviewWindows();GamesInProgress.curSlot=1;
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndGame());
+                if(playtestButton("Playtest")!=null||playtestButton("Playtest (active)")!=null)throw new AssertionError("Playtest entry remains in active-run menu");
+                capture("playtest-run-menu");break;
+            case -12:playtestClick("Main Menu");break;
+            case -11:
+                if(!(Game.scene() instanceof TitleScene))return;
+                RecoveryChecks.titleControls();capture("playtest-home");
+                Dungeon.hero=null;Dungeon.level=null; // Also exercise the cold-launch case.
+                pointerClickReview(RecoveryChecks.field(Game.scene(),"btnPlaytest"));break;
+            case -10:interfaceBounds();capture("playtest-home-menu");playtestClick("Start a new run for testing");break;
+            case -9:
+                if(!(Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.HeroSelectScene))return;
+                if(GamesInProgress.curSlot!=2)throw new AssertionError("Home new-run action reused an occupied slot");
+                pointerClickReview(RecoveryChecks.field(Game.scene(),"btnExit"));break;
+            case -8:
+                if(!(Game.scene() instanceof TitleScene))return;
+                try {
+                    java.lang.reflect.Field pending=com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.class.getDeclaredField("requestedSlot");pending.setAccessible(true);
+                    if(pending.getInt(null)!=-1)throw new AssertionError("Cancelled new-run request leaked");
+                }catch(ReflectiveOperationException e){throw new AssertionError(e);}
+                pointerClickReview(RecoveryChecks.field(Game.scene(),"btnPlaytest"));break;
+            case -7:playtestClick("Balance tuning");break;
+            case -6:interfaceBounds();playtestClick("Encounters");break;
+            case -5:playtestClick("Enemy population: 100%");break;
+            case -4:interfaceBounds();playtestInput("125","Apply");break;
+            case -3:
+                BalanceTuning.loadShared();
+                if(BalanceTuning.configured(BalanceTuning.Key.DENSITY)!=125||Dungeon.hero!=null||Playtest.enabled())throw new AssertionError("Home tuning required or mutated a live hero");
+                interfaceBounds();capture("playtest-home-balance");BalanceTuning.reset();closeReviewWindows();
+                com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.openHome();break;
+            case -2:playtestClick("Open tools for a saved run");break;
+            case -1:
+                interfaceBounds();capture("playtest-home-saves");
+                GamesInProgress.Info saved=GamesInProgress.check(1);
+                playtestClick("Slot 1: "+com.shatteredpixel.shatteredpixeldungeon.messages.Messages.titleCase(saved.heroClass.title())+" | Level "+saved.level+" | Floor "+saved.depth);break;
+            case 0:
+                if(!Dungeon.hero.ready)return;
+                if(GamesInProgress.curSlot!=1||Playtest.enabled()||playtestButton("Enable Playtest for this save")==null)throw new AssertionError("Selected save did not load with its test controls and original flags");
+                System.out.println("TEST 52 HOME PASS: home button, cold-launch tuning, saved-run selection, new-run slot safety/cancel and no active-run menu entry");
+                playtestStep=1;break;
             case 2:interfaceBounds();capture("playtest-enable");playtestClick("Enable Playtest for this save");break;
             case 3:if(!Playtest.enabled())throw new AssertionError("Playtest enable pointer failed");playtestClick("God mode: OFF");break;
             case 4:if(!Playtest.god())throw new AssertionError("God toggle failed");interfaceBounds();capture("playtest-menu");playtestClick("Create items");break;
@@ -909,7 +951,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 29:playtestClick("God mode: ON");break;
             case 30:
                 if(!Playtest.enabled()||Playtest.god())throw new AssertionError("Native toggle did not preserve save marker");
-                closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndGameInProgress(99));break;
+                closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndGameInProgress(GamesInProgress.curSlot));break;
             case 31:interfaceBounds();capture("playtest-save");
                 System.out.println("TEST 52 UI: real pointer enable/god/search/+10 artifact/hero level/subclass/armor/class switch/floor-21 travel and save marker; landscape or portrait bounds; failures=0");
                 break;

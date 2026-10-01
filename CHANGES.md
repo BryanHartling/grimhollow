@@ -1,3 +1,9 @@
+# Home-screen Playtest - v1.19.1
+
+- Move the Playtest entry from the active-run menu to the home screen, beside Update Log; retain painted icons and the existing four-row layout.
+- Edit the shared balance profile without a loaded hero. Preserve range validation, nonempty loot pools and ordinary-run protection; modified profiles still mark affected runs as Playtests on load/start.
+- Choose a compatible living saved hero or create a run in an empty slot; open run-specific tools only after that dungeon is ready. Cancelling character selection clears the pending request. No saves are overwritten by home-screen settings.
+
 # Enchanter craft and elemental caches - v1.19.0
 
 ## Component 4 - Independent elemental treasuries

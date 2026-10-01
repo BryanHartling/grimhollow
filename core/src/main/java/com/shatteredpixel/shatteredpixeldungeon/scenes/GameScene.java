@@ -979,6 +979,7 @@ public class GameScene extends PixelScene {
 		}
 
 		if (Dungeon.hero.ready && Dungeon.hero.paralysed == 0) {
+			com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.openRequestedRun();
 			log.newLine();
 		}
 

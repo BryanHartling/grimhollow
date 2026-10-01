@@ -1,5 +1,7 @@
 # Known issues
 
+- v1.19.1: Playtest now opens from the home screen; return via Main Menu to reopen run tools. Existing terrain-contrast test 45 remains unresolved; this navigation change does not alter art or its thresholds. Physical tablet confirmation remains with the user.
+
 - v1.19.0: fresh five-region terrain contrast test 45 still fails 17/76 pairs (Sewers 5/15, Prison 1/10, Caves 6/21, City 1/15, Halls 4/15); thresholds remain enforced and full-green CI is not claimed.
 - v1.19.0: physical Samsung tablet review and campaign balance of Scribe, Spellguard and elemental treasures remain with the user; native portrait/touch checks are not physical-device testing.
 - Elemental rooms and loose parchment are added only to newly generated floors. Already generated floors are not retrofitted. New text uses English fallback where translations are unavailable.

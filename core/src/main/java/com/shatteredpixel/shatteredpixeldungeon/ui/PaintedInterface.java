@@ -58,6 +58,9 @@ public final class PaintedInterface {
             replacement.texture.filter(GL20.GL_LINEAR,GL20.GL_LINEAR);
             replacement.frame(ItemSpriteSheet.film.get(bag));
             replacement.logicalSize(original.width,original.height);
+        } else if(type==Icons.JOURNAL || type==Icons.NEWS || type==Icons.CHANGES || type==Icons.ALCHEMY || type==Icons.CATALOG) {
+            replacement=JournalIcons.get(type==Icons.ALCHEMY?JournalIcons.ALCHEMY:type==Icons.CATALOG?JournalIcons.LORE:JournalIcons.JOURNAL);
+            replacement.logicalSize(original.width,original.height);
         } else replacement=glyph(name, original.width, original.height);
         if (replacement==null) return original;
         replacement.scale.set(original.scale);

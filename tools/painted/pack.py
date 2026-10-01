@@ -204,6 +204,8 @@ def outputs():
     result.update(status())
     from interface_art import outputs as interface_art
     result.update(interface_art())
+    from journal import outputs as journal
+    result.update(journal(result['sprites/items.png']))
     from readability import outputs as readability
     result.update(readability())
     from regions import outputs as regions
@@ -250,6 +252,9 @@ def main():
         expected={'interfaces/buffs.png':(448,224),'interfaces/large_buffs.png':(1024,512),'interfaces/chrome.png':(512,384),'interfaces/status_pane.png':(1024,512),'interfaces/painted_glyphs.png':(512,256)}.get(path,expected)
         if path.startswith('splashes/painted_'):expected=(1600,900)
         if path=='interfaces/painted_portraits.png':expected=(384,384)
+        if path=='interfaces/painted_journal.png':expected=(256,256)
+        if path=='interfaces/menu_button.png':expected=(256,64)
+        if path=='interfaces/menu_pane.png':expected=(128,128)
         if path=='interfaces/painted_skills.png':expected=(1024,512)
         if path=='interfaces/painted_badges.png':expected=(1024,512)
         if path=='effects/painted_food.png':expected=(64,64)

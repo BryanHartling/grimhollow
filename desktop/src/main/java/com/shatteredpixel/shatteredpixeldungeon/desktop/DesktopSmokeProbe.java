@@ -565,6 +565,31 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }else if(frames==570){
             interfaceBounds();capture("polish-armor-etch-description");
             System.out.println("TEST 37 UI PASS: actual Etch selector accepts armor, rejects current carrier, attaches glyph, and renders resolved description; failures=0");
+            closeReviewWindows();
+        }else if(frames==590){
+            Object menu=RecoveryChecks.field(Game.scene(),"menu");
+            pointerGestureReview((com.watabou.noosa.Gizmo)RecoveryChecks.field(menu,"btnMenu"),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
+        }else if(frames==610){
+            interfaceBounds();capture("journal-menu");closeReviewWindows();
+            Object menu=RecoveryChecks.field(Game.scene(),"menu");
+            pointerGestureReview((com.watabou.noosa.Gizmo)RecoveryChecks.field(menu,"btnJournal"),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
+        }else if(frames==630){
+            interfaceBounds();capture("journal-notes");closeReviewWindows();
+            for(String page:com.shatteredpixel.shatteredpixeldungeon.journal.Document.ALCHEMY_GUIDE.pageNames())com.shatteredpixel.shatteredpixeldungeon.journal.Document.ALCHEMY_GUIDE.findPage(page);
+            com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal.last_index=2;
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal());
+        }else if(frames==650){
+            interfaceBounds();capture("journal-alchemy");closeReviewWindows();
+            com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal.last_index=3;
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal());
+        }else if(frames==670){
+            interfaceBounds();capture("journal-catalog");
+            for(int i=0;i<16;i++){
+                Image icon=com.shatteredpixel.shatteredpixeldungeon.ui.JournalIcons.get(i);
+                if(icon.width()!=16||icon.height()!=16||icon.texture.width!=256)throw new AssertionError("Journal logical/texture scale "+i);
+                icon.destroy();
+            }
+            System.out.println("JOURNAL UI PASS: real HUD menu/journal input, notes, alchemy and catalog bounds, all sixteen painted icon dimensions");
             Gdx.app.exit();
         }
     }

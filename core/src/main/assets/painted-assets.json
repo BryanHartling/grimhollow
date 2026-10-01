@@ -121,6 +121,7 @@
     "regions/sewers.png": "47889d8797ab3dd9a53cf8a6a8d991febd3b4c5f5dd25ddd22577fc51d95beb7",
     "ritual-mark.png": "94aa09715005e11e082f4823d78f8d5cee65418d94f8c73a42a88fa733726c9c",
     "sewers-materials.png": "0b951d4ce0bb5902c6a940c1bc56db1173580ca57c33d652c16754dd91c9ddc2",
+    "sprint/journal.png": "2398fb10a25e058c0bc3ec5c36f47f9c016edd2524f965f166f6e352516bb400",
     "sprint/spellguard.png": "d3385ea1354437f0248c514219c64af2ae79112cefa818185c3d3b10080e572a",
     "status/status-0.png": "7bf546acdbc789262e8008fa82737af3c3389ee1c43fd58c8b27709d6fb225b7",
     "status/status-1.png": "6cc7256d450879b5aa756c47587373fc653d4cb2b54132d1efad809329dca5db",
@@ -9300,6 +9301,27 @@
         64
       ],
       "rgba_sha256": "2c42682762ce45fc676ff78cdabf787ba9aa752e20bc696b196096961aa56efd"
+    },
+    "interfaces/painted_journal.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "126029300142db767d619476c57d15bd1d2ee0fa1cf35a584054e8b85a0af0e1"
+    },
+    "interfaces/menu_button.png": {
+      "size": [
+        256,
+        64
+      ],
+      "rgba_sha256": "de10c515889397c5291f69d4e6ade19b6580e5036b2523f25a6271088611ce74"
+    },
+    "interfaces/menu_pane.png": {
+      "size": [
+        128,
+        128
+      ],
+      "rgba_sha256": "ff24e1fe64a35280f354af776d6c19993950e7ff6e44959c4d389f169f48d20f"
     }
   }
 }

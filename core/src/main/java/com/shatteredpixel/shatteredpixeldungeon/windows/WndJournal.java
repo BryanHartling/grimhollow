@@ -65,6 +65,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.BadgesGrid;
 import com.shatteredpixel.shatteredpixeldungeon.ui.BadgesList;
 import com.shatteredpixel.shatteredpixeldungeon.ui.CustomNoteButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
+import com.shatteredpixel.shatteredpixeldungeon.ui.JournalIcons;
 import com.shatteredpixel.shatteredpixeldungeon.ui.QuickRecipe;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RedButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock;
@@ -141,7 +142,7 @@ public class WndJournal extends WndTabbed {
 		badgesTab.updateList();
 		
 		Tab[] tabs = {
-				new IconTab( Icons.JOURNAL.get() ) {
+				new IconTab( JournalIcons.get(JournalIcons.NOTES) ) {
 					protected void select( boolean value ) {
 						super.select( value );
 						notesTab.active = notesTab.visible = value;
@@ -153,7 +154,7 @@ public class WndJournal extends WndTabbed {
 						return Messages.get(notesTab, "title");
 					}
 				},
-				new IconTab( new ItemSprite(ItemSpriteSheet.MASTERY, null) ) {
+				new IconTab( JournalIcons.get(JournalIcons.GUIDE) ) {
 					protected void select( boolean value ) {
 						super.select( value );
 						guideTab.active = guideTab.visible = value;
@@ -322,7 +323,7 @@ public class WndJournal extends WndTabbed {
 					}
 				};
 				if (Document.ALCHEMY_GUIDE.isPageFound(i)) {
-					pageButtons[i].icon(new ItemSprite(sprites[i], null));
+					pageButtons[i].icon(JournalIcons.get(new int[]{9,10,13,8,0,14,15,11,12}[i]));
 				} else {
 					pageButtons[i].icon(new ItemSprite(ItemSpriteSheet.SOMETHING, null));
 					pageButtons[i].enable(false);
@@ -595,10 +596,10 @@ public class WndJournal extends WndTabbed {
 				};
 				add( itemButtons[i] );
 			}
-			itemButtons[EQUIP_IDX].icon(new ItemSprite(ItemSpriteSheet.WEAPON_HOLDER));
-			itemButtons[CONSUM_IDX].icon(new ItemSprite(ItemSpriteSheet.POTION_HOLDER));
-			itemButtons[BESTIARY_IDX].icon(new ItemSprite(ItemSpriteSheet.MOB_HOLDER));
-			itemButtons[LORE_IDX].icon(new ItemSprite(ItemSpriteSheet.DOCUMENT_HOLDER));
+			itemButtons[EQUIP_IDX].icon(JournalIcons.get(7));
+			itemButtons[CONSUM_IDX].icon(JournalIcons.get(8));
+			itemButtons[BESTIARY_IDX].icon(JournalIcons.get(5));
+			itemButtons[LORE_IDX].icon(JournalIcons.get(6));
 
 			grid = new ScrollingGridPane(){
 				@Override
@@ -925,22 +926,8 @@ public class WndJournal extends WndTabbed {
 					desc += "\n\n" + Messages.get(mob, "discover_hint");
 				}
 
-				//we have to clip the bounds of the sprite if it's too large
-				if (icon.width() >= 17 || icon.height() >= 17) {
-					RectF frame = icon.frame();
-
-					float wShrink = frame.width() * (1f - 17f / icon.width());
-					if (wShrink > 0) {
-						frame.left += wShrink / 2f;
-						frame.right -= wShrink / 2f;
-					}
-					float hShrink = frame.height() * (1f - 17f / icon.height());
-					if (hShrink > 0) {
-						frame.top += hShrink / 2f;
-						frame.bottom -= hShrink / 2f;
-					}
-					icon.frame(frame);
-				}
+				// Preserve the entire painted creature silhouette in its journal cell.
+				icon.scale.set(Math.min(1f, 17f / Math.max(icon.width, icon.height)));
 			} else if (Trap.class.isAssignableFrom(entityCls)){
 
 				Trap trap = (Trap) Reflection.newInstance(entityCls);

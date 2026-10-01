@@ -1,3 +1,7 @@
+# Enchanter craft and elemental caches — v1.19.0
+
+`journal.py` packs sixteen original navigation/category paintings and the existing leather/brass materials into the journal atlas, HUD buttons and key display. `botany_skills.py` replaces Overload with its own Spellguard painting. Sources are in `sources/sprint/`; exact built-in imagegen prompts are in `sprint-prompts.json`. New paintings and derivatives are GPL-3.0-or-later. The normal offline packer reproduces the outputs; UI geometry remains in the existing logical units.
+
 # Terrain readability â€” v1.18.2
 
 `terrain_details.py` packs the existing flattened-grass painting into a 60x34 footprint instead of 60x20. It remains below both standing states and exposes paving around the leaves. No source painting, terrain index, collision or alpha stencil is replaced; the standard offline packer reproduces the change. Regional ambient and personal-light corrections live in the renderer, preserving localized torch/fire colors and all visibility rules. Test 45 is measured independently, with unchanged thresholds and no manual pass override.

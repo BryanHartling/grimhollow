@@ -172,8 +172,8 @@ public class KeyDisplay extends Visual {
 			}
 			
 			//texture coordinates
-			RectF r = tx.uvRect(43 + 3*keyIdx, shortKeys ? 8 : 0,
-					46 + 3*keyIdx, shortKeys ? 12 : 7);
+			RectF r = tx.uvRect((43 + 3*keyIdx)*4, (shortKeys ? 8 : 0)*4,
+					(46 + 3*keyIdx)*4, (shortKeys ? 12 : 7)*4);
 			
 			vertices[2] = r.left;
 			vertices[3] = r.top;

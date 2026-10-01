@@ -1,5 +1,11 @@
 # Enchanter craft and elemental caches - v1.19.0
 
+## Component 2 - Painted journal and menu
+
+- Replace the HUD menu/journal plates and key symbols with fourfold texture detail, retaining their logical dimensions and input areas.
+- Add sixteen painted navigation/category icons, used in journal tabs, alchemy pages and catalog categories. Fit bestiary silhouettes proportionally rather than cropping them.
+- The existing native interface fixture now exercises actual journal/menu input and captures notes, alchemy and catalog layouts in portrait and landscape.
+
 ## Component 1 - Spellguard
 
 - Replace Overload with Spellguard: 10%/20% less magical damage while worn armor has an active temporary inscription. Permanent glyphs and Rune Etching alone do not qualify; other protection multiplies normally and physical damage/debuff duration are unchanged.

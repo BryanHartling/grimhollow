@@ -75,10 +75,10 @@ public class MenuPane extends Component {
 	protected void createChildren() {
 		super.createChildren();
 
-		bg = new Image(Assets.Interfaces.MENU, 1, 0, 31, 21);
+		bg = PaintedInterface.image(Assets.Interfaces.MENU, 1, 0, 31, 21);
 		add(bg);
 
-		versionOverflowBG = new NinePatch(bg.texture, 1, 22, 6, 8, 3, 0, 2, 0);
+		versionOverflowBG = PaintedInterface.patch(Assets.Interfaces.MENU, 1, 22, 6, 8, 3, 0, 2, 0);
 		add(versionOverflowBG);
 
 		version = new BitmapText( "v" + Game.version , PixelScene.pixelFont);
@@ -252,10 +252,10 @@ public class MenuPane extends Component {
 		protected void createChildren() {
 			super.createChildren();
 
-			bg = new Image( Assets.Interfaces.MENU_BTN, 2, 2, 13, 11 );
+			bg = PaintedInterface.image( Assets.Interfaces.MENU_BTN, 2, 2, 13, 11 );
 			add( bg );
 
-			journalIcon = new Image( Assets.Interfaces.MENU_BTN, 31, 0, 11, 6);
+			journalIcon = PaintedInterface.image( Assets.Interfaces.MENU_BTN, 31, 0, 11, 6);
 			add( journalIcon );
 
 			keyIcon = new KeyDisplay();
@@ -380,7 +380,7 @@ public class MenuPane extends Component {
 		protected void createChildren() {
 			super.createChildren();
 
-			image = new Image( Assets.Interfaces.MENU_BTN, 17, 2, 12, 11 );
+			image = PaintedInterface.image( Assets.Interfaces.MENU_BTN, 17, 2, 12, 11 );
 			add( image );
 		}
 

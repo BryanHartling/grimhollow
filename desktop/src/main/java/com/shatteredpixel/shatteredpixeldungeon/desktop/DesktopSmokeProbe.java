@@ -532,20 +532,31 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             System.out.println("TEST 61 UI PASS: home Update Log, history, Feed, painted notification/healing/spell icons and visible-body target portraits; failures=0");
         }else if(frames==480){
             closeReviewWindows();GameScene.cancel();
+            Playtest.enable();
             Playtest.heroClass(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER);
             Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).execute(Dungeon.hero,"ETCH");
         }else if(frames==510){
-            interfaceBounds();capture("polish-armor-etch-picker");
+            if(Boolean.getBoolean("grimhollow.interfacePortrait"))interfaceBounds();
+            capture("polish-armor-etch-picker");
             com.shatteredpixel.shatteredpixeldungeon.windows.WndBag.ItemSelector selector=null;
+            Group picker=null;
             for(com.watabou.noosa.Gizmo g:RecoveryChecks.members(Game.scene()))
-                if(g instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndBag)
+                if(g instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndBag){
+                    picker=(Group)g;
                     selector=((com.shatteredpixel.shatteredpixeldungeon.windows.WndBag)g).getSelector();
+                }
             if(selector==null){
                 com.shatteredpixel.shatteredpixeldungeon.ui.InventoryPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.InventoryPane)RecoveryChecks.field(Game.scene(),"inventory");
-                selector=pane.getSelector();
+                if(!pane.isSelecting())throw new AssertionError("37: inline Etch inventory selection missing");
+                selector=pane.getSelector();picker=pane;
             }
             if(selector==null||!selector.itemSelectable(Dungeon.hero.belongings.armor)||selector.itemSelectable(Dungeon.hero.belongings.weapon))throw new AssertionError("37: Etch picker must offer armor, excluding its current weapon carrier");
-            closeReviewWindows();GameScene.cancel();selector.onSelect(Dungeon.hero.belongings.armor);
+            boolean clicked=false;
+            for(com.watabou.noosa.Gizmo g:RecoveryChecks.members(picker))
+                if(g instanceof com.shatteredpixel.shatteredpixeldungeon.ui.InventorySlot&&((com.shatteredpixel.shatteredpixeldungeon.ui.InventorySlot)g).item()==Dungeon.hero.belongings.armor){
+                    pointerGestureReview(g,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);clicked=true;break;
+                }
+            if(!clicked)throw new AssertionError("37: armor slot missing from Etch picker");
         }else if(frames==540){
             if(Dungeon.hero.belongings.armor.runeEtching==null)throw new AssertionError("37: Etch picker did not attach armor rune");
             String text=Dungeon.hero.belongings.armor.info();

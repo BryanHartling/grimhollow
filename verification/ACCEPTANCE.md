@@ -1,3 +1,23 @@
+# Torch visibility and armor Rune Etching - v1.18.3
+
+This patch fixes hidden wall-facing flames/glows, corrects the Rune Etching format string, and allows the single rune to move between equipped melee weapons and armor. Armor uses the existing common-glyph pool and preserves permanent/temporary effects. No new art or terrain thresholds were introduced. Historical numbered results and retirements below remain in force.
+
+| Gate | Result | Executed evidence |
+|---|---|---|
+| Desktop / Android / JUnit | PASS | `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 2m 35s**. Seven JUnit tests, zero failures/errors. Android version 1.18.3, code 969. After final player-text/desktop-diagnostic edits, `desktop:dist android:assembleDebug` also passed in 38s; core behavior was unchanged. |
+| Class gates | PASS | **Runs=30 failures=0**: Necromancer 10/0, Enchanter 10/0, Psychic 10/0. |
+| 37 / 54 armor Etching | PASS | All weapon enchantment/common-glyph descriptions resolve names, upgrade levels and literal percent signs. Actual transfers conserve one rune/upgrade even with Curse Infusion, do not reroll, reject invalid targets, preserve passive and temporary/permanent glyphs, suppress magic when immune, survive save migration and crown conversion, and recover on carrier loss. Permanent/etched proc rates 1.25x; temporary 2x. |
+| 37 native picker / popup | PASS | Mouse selection through the landscape inventory and touch selection through the portrait bag attach the rune to armor. Both layouts reject the current weapon carrier; rendered glyph/upgrade/percent text resolves and fits. Final title shortened after visual review; screenshots inspected. Existing polish test 61 also passes in both orientations. |
+| 43 / 47 torch faces, fog and walking | PASS | Five regions, **788 walking steps / 1379 door-transition frames**, three zooms and four pans before/after walking. Every region passed hidden/back-facing, remembered, mapped, exposed, obstructed and doorway torch cases in painted/legacy x dynamic/halo modes, plus a draw-time FOV change and a hidden-source light-map comparison. **fogTexel/cell=1:1 worldUnits=16 lightQuad=aligned**, failures=0. |
+| 46 compiled handler audit | PASS | `python tools/recovery_checks.py --jar desktop/build/libs/desktop-1.18.3.jar`: classes=2960 guarded browser sinks=1 HTTP/socket calls=0 failures=0. |
+| Windows launcher | Built | `tools/package-windows.ps1`: `desktop/build/windows/1.18.3/Grimhollow/Grimhollow.exe`. Keep its whole directory. |
+| 45 terrain contrast | Permanent known issue - NOT PASS | `python tools/recovery_checks.py --all-regions` returned exit 1: **17/76 failed** (Sewers 5/15, Prison 1/10, Caves 6/21, City 1/15, Halls 4/15). Original 0.12 luminance / 40-degree hue thresholds and all pairs remain enforced. No art was changed to chase this result. |
+| 44 art reproduction | Prior status retained | No source art, assets or packer changed; not rerun locally for this code patch. CI retains the check. |
+| Full CI | Not claimed green | Existing contrast and stale Hatchling full-interface fixture failures remain enforced. Release-head CI is linked in the delivery; no full-green claim. Prior run 36858153350 confirmed Android and all class gates green, with the existing contrast/interface failures on desktop. |
+| Other tests and retirements | Prior status retained | No new physical-tablet or campaign-balance verification is claimed. Spellguard remains queued, Psychic Pull skipped, tablet movement resolved per user playtesting. |
+
+Native Etch screenshots: [portrait picker](interface/portrait/polish-armor-etch-picker.png), [portrait description](interface/portrait/polish-armor-etch-description.png), [landscape picker](interface/landscape/polish-armor-etch-picker.png), [landscape description](interface/landscape/polish-armor-etch-description.png). Fresh torch/fog/walking evidence is in the existing five [regional folders](recovery/).
+
 # Terrain readability - v1.18.2
 
 This is a visual correction for human review, not a declaration that terrain readability or test 45 passes. The existing source paintings, fog rules and gameplay are retained. Tablet movement performance is resolved per the user's playtesting (2026-09-30); no physical-device benchmark was performed here. Campaign balance stays under user review. Spellguard is queued, and Psychic Pull is skipped.

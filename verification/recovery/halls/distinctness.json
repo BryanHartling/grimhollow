@@ -28,8 +28,8 @@
       "pixels": 20736
     },
     "water": {
-      "luminance": 0.12597043045343137,
-      "hue": 0.12417561501990697,
+      "luminance": 0.1259111904275599,
+      "hue": 0.1036012702515099,
       "pixels": 4608
     }
   },
@@ -75,8 +75,8 @@
         "decor",
         "water"
       ],
-      "luminance_difference": 0.04222248157509531,
-      "hue_difference": 73.35230058418301,
+      "luminance_difference": 0.04228172160096677,
+      "hue_difference": 73.33172623941459,
       "passing": true
     },
     {
@@ -111,8 +111,8 @@
         "door",
         "water"
       ],
-      "luminance_difference": 0.05020211277913944,
-      "hue_difference": 9.816520544536843,
+      "luminance_difference": 0.0502613528050109,
+      "hue_difference": 9.795946199768423,
       "passing": false
     },
     {
@@ -138,8 +138,8 @@
         "floor",
         "water"
       ],
-      "luminance_difference": 0.044238884597881556,
-      "hue_difference": 50.69722631881325,
+      "luminance_difference": 0.044298124623753016,
+      "hue_difference": 50.67665197404483,
       "passing": true
     },
     {
@@ -156,8 +156,8 @@
         "grass",
         "water"
       ],
-      "luminance_difference": 0.04233734413296569,
-      "hue_difference": 72.39764585158724,
+      "luminance_difference": 0.04239658415883715,
+      "hue_difference": 72.37707150681882,
       "passing": true
     },
     {
@@ -165,8 +165,8 @@
         "wall",
         "water"
       ],
-      "luminance_difference": 0.1053326122042181,
-      "hue_difference": 74.78057644431544,
+      "luminance_difference": 0.10527337217834665,
+      "hue_difference": 74.76000209954702,
       "passing": true
     }
   ],
@@ -194,8 +194,8 @@
         "door",
         "water"
       ],
-      "luminance_difference": 0.05020211277913944,
-      "hue_difference": 9.816520544536843,
+      "luminance_difference": 0.0502613528050109,
+      "hue_difference": 9.795946199768423,
       "passing": false
     },
     {

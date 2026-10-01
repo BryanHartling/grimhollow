@@ -3,8 +3,8 @@
   "seed": 417,
   "measurements": {
     "decor": {
-      "luminance": 0.23365028203295207,
-      "hue": 10.93717027129317,
+      "luminance": 0.23326030977668843,
+      "hue": 10.92994974759037,
       "pixels": 4608
     },
     "door": {
@@ -13,18 +13,18 @@
       "pixels": 2304
     },
     "floor": {
-      "luminance": 0.3862293738652869,
-      "hue": 97.13975804167566,
+      "luminance": 0.3867946123923054,
+      "hue": 97.09580347877947,
       "pixels": 76032
     },
     "wall": {
-      "luminance": 0.09174331310301899,
-      "hue": 36.19066530312988,
+      "luminance": 0.09184964149548709,
+      "hue": 36.19717556609419,
       "pixels": 64512
     },
     "water": {
-      "luminance": 0.10963083474361965,
-      "hue": 196.4616616059963,
+      "luminance": 0.10813380227785557,
+      "hue": 196.6954866989431,
       "pixels": 16128
     }
   },
@@ -34,8 +34,8 @@
         "decor",
         "door"
       ],
-      "luminance_difference": 0.005259218239379054,
-      "hue_difference": 15.534097326806897,
+      "luminance_difference": 0.004869245983115417,
+      "hue_difference": 15.541317850509696,
       "passing": false
     },
     {
@@ -43,8 +43,8 @@
         "decor",
         "floor"
       ],
-      "luminance_difference": 0.1525790918323348,
-      "hue_difference": 86.2025877703825,
+      "luminance_difference": 0.15353430261561696,
+      "hue_difference": 86.1658537311891,
       "passing": true
     },
     {
@@ -52,8 +52,8 @@
         "decor",
         "wall"
       ],
-      "luminance_difference": 0.1419069689299331,
-      "hue_difference": 25.253495031836714,
+      "luminance_difference": 0.14141066828120136,
+      "hue_difference": 25.267225818503817,
       "passing": true
     },
     {
@@ -61,8 +61,8 @@
         "decor",
         "water"
       ],
-      "luminance_difference": 0.12401944728933242,
-      "hue_difference": 174.47550866529684,
+      "luminance_difference": 0.12512650749883286,
+      "hue_difference": 174.23446304864726,
       "passing": true
     },
     {
@@ -70,8 +70,8 @@
         "door",
         "floor"
       ],
-      "luminance_difference": 0.15783831007171387,
-      "hue_difference": 70.66849044357559,
+      "luminance_difference": 0.15840354859873237,
+      "hue_difference": 70.6245358806794,
       "passing": true
     },
     {
@@ -79,8 +79,8 @@
         "door",
         "wall"
       ],
-      "luminance_difference": 0.13664775069055402,
-      "hue_difference": 9.719397705029817,
+      "luminance_difference": 0.1365414222980859,
+      "hue_difference": 9.725907967994122,
       "passing": true
     },
     {
@@ -88,8 +88,8 @@
         "door",
         "water"
       ],
-      "luminance_difference": 0.11876022904995337,
-      "hue_difference": 169.99039400789624,
+      "luminance_difference": 0.12025726151571745,
+      "hue_difference": 170.22421910084304,
       "passing": true
     },
     {
@@ -97,8 +97,8 @@
         "floor",
         "wall"
       ],
-      "luminance_difference": 0.2944860607622679,
-      "hue_difference": 60.94909273854578,
+      "luminance_difference": 0.2949449708968183,
+      "hue_difference": 60.898627912685285,
       "passing": true
     },
     {
@@ -106,8 +106,8 @@
         "floor",
         "water"
       ],
-      "luminance_difference": 0.2765985391216672,
-      "hue_difference": 99.32190356432065,
+      "luminance_difference": 0.2786608101144498,
+      "hue_difference": 99.59968322016364,
       "passing": true
     },
     {
@@ -115,8 +115,8 @@
         "wall",
         "water"
       ],
-      "luminance_difference": 0.01788752164060066,
-      "hue_difference": 160.27099630286642,
+      "luminance_difference": 0.01628416078236848,
+      "hue_difference": 160.49831113284893,
       "passing": true
     }
   ],
@@ -126,8 +126,8 @@
         "decor",
         "door"
       ],
-      "luminance_difference": 0.005259218239379054,
-      "hue_difference": 15.534097326806897,
+      "luminance_difference": 0.004869245983115417,
+      "hue_difference": 15.541317850509696,
       "passing": false
     }
   ]

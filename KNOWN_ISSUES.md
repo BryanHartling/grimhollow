@@ -1,5 +1,6 @@
 # Known issues
 
+- v1.18.3: armor Etching and hidden-torch repairs are covered by automated desktop/headless checks; physical Samsung tablet confirmation remains with the user. Fresh test 45 still fails 17/76 pairs (5/15 Sewers, 1/10 Prison, 6/21 Caves, 1/15 City, 4/15 Halls); neither it nor the separately recorded Hatchling fixture issue is waived.
 - Current plan (2026-09-30): tablet movement performance is resolved per the user's playtesting. Balance remains under the user's campaign playtesting; no balance changes are part of this terrain patch.
 - Queued: replace Enchanter Overload with Spellguard (10%/20% magic damage reduction while armor is inscribed). Not implemented in this patch. Psychic Pull is skipped and is no longer queued.
 - Terrain readability v1.18.2: restrained ambient/personal-light color and fuller flattened grass improve material separation. Human acceptance remains pending. Fresh Windows test 45 still fails 17/76 comparisons: Sewers 5/15, Prison 1/10, Caves 6/21, City 1/15, Halls 4/15. The 0.12 luminance / 40-degree hue thresholds stay enforced; no passing override. This Sewers capture has six types rather than the earlier seven, so the old 25/82 aggregate is not a matched comparison.

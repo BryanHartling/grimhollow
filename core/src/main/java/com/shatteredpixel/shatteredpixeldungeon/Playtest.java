@@ -61,12 +61,14 @@ public final class Playtest {
     }
     public static void recharge(Item item) {
         require();
+        if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal)((com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal)item).gainCharge(100);
         if(item instanceof Artifact)((Artifact)item).playtestRecharge();
         if(item instanceof Wand)((Wand)item).curCharges=((Wand)item).maxCharges;
         if(item instanceof MagesStaff)((MagesStaff)item).gainCharge(100);
         if(item instanceof ClassArmor)((ClassArmor)item).charge=100;
     }
     public static int maxItemLevel(Item item) {
+        if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal)return 10;
         if(item instanceof Artifact)return ((Artifact)item).playtestLevelCap()>0?10:0;
         if(item instanceof Trinket)return 3;
         return item.isUpgradable()?20:0;
@@ -74,7 +76,8 @@ public final class Playtest {
     public static void itemLevel(Item item,int level) {
         require();
         if(level<0 || level>maxItemLevel(item))throw new IllegalArgumentException("Level outside this item's range.");
-        if(item instanceof Artifact)((Artifact)item).playtestLevel(level);
+        if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal)((com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal)item).playtestLevel(level);
+        else if(item instanceof Artifact)((Artifact)item).playtestLevel(level);
         else item.level(level);
         recharge(item);
         Dungeon.hero.updateHT(false);

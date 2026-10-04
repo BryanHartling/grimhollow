@@ -1,3 +1,10 @@
+# Sprint component 4 - v1.21.3
+
+- Focus Crystal is the Psychic's starting weapon, freeing the artifact slot. Its 0.8-turn melee damage grows from 1–5 at usage level 0 to 6–20 at level 10, requires 10 Strength and grants no charge-spending experience on hits. Growth and spell riders still come only from charges spent; Upgrade/Infusion/Toolkit cannot level it.
+- Unbound Focus replaces Kinetic Reserve, retaining allocated ranks: carried casting plus 50%/75% carried recharge, with full recharge while wielded. Remove floor-entry charge grants. Saved Crystal growth, charge and experience survive migration; chosen weapons are retained and the legacy starting Focus Ring is stored rather than destroyed.
+- Treasure Sense grants first-entry item-only markers within 4/6/8 cells for 15/20/25 turns, fading during the final five turns. No terrain/doors/traps are mapped, and revisits/reloads do not refresh it.
+- Trap Sense rolls once at 15%/30% when searchable hidden traps first enter ordinary sight, with saved roll history. Manual trap search gains one/two cells (four/five total for Seer), limited to ordinary sight; Seer's guaranteed three-cell enemy/secret awareness is preserved. Remote-trap damage riders remain 1.25/1.5.
+
 # Sprint component 3 - v1.21.2
 
 - Enchanter keeps a weapon Rune Etching and an armor Rune Etching simultaneously. Their floor effects, carried paid upgrade and transfers remain independent; category transfers never reroll or copy upgrades.

@@ -164,6 +164,7 @@ public abstract class Level implements Bundlable {
 	public int viewDistance = Dungeon.isChallenged( Challenges.DARKNESS ) ? 2 : 8;
 	
 	public boolean[] heroFOV;
+    public boolean[] heroOrdinaryFOV;
     public SparseArray<Integer> corpses=new SparseArray<>();
     public SparseArray<Integer> forceOriginal=new SparseArray<>(),forceTurns=new SparseArray<>();
     public SparseArray<Integer> boneOriginal=new SparseArray<>(),boneTurns=new SparseArray<>();
@@ -349,6 +350,7 @@ public abstract class Level implements Bundlable {
 		mapped      = new boolean[length];
 		
 		heroFOV     = new boolean[length];
+        heroOrdinaryFOV = new boolean[length];
 		
 		passable	= new boolean[length];
 		losBlocking	= new boolean[length];
@@ -1473,7 +1475,11 @@ public abstract class Level implements Bundlable {
 			}
 		}
 
-		//Currently only the hero can get mind vision or awareness
+		if(c==Dungeon.hero){
+            if(heroOrdinaryFOV==null || heroOrdinaryFOV.length!=length())heroOrdinaryFOV=new boolean[length()];
+            System.arraycopy(fieldOfView,0,heroOrdinaryFOV,0,length());
+        }
+        //Currently only the hero can get mind vision or awareness
 		if (c.isAlive() && c == Dungeon.hero) {
 
 			if (heroMindFov == null || heroMindFov.length != length()){

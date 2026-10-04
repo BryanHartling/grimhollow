@@ -78,7 +78,7 @@ public class SmokeRun {
                             if(Dungeon.depth!=6) throw new AssertionError("Save/load depth mismatch");
                         }
                     }
-                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();HatchlingScenario.run();keepsakeScenario();TuningScenario.run();ExpeditionScenario.run();HorrorScenario.run();PlaytestPolishScenario.run();ScribingRoomsScenario.spellguard();ScribingRoomsScenario.scribing();ScribingRoomsScenario.elementalRooms();}
+                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();psychicWeaponAndDetectionScenario();HatchlingScenario.run();keepsakeScenario();TuningScenario.run();ExpeditionScenario.run();HorrorScenario.run();PlaytestPolishScenario.run();ScribingRoomsScenario.spellguard();ScribingRoomsScenario.scribing();ScribingRoomsScenario.elementalRooms();}
                     String line="PASS "+name+" seed="+seed+" floor=6 save/load=ok";
                     System.out.println(line); log.println(line);
                 } catch(Throwable error) {
@@ -274,6 +274,75 @@ public class SmokeRun {
         System.out.println("TEST 52 PASS: guarded persistent playtest; god mode; "+catalog+" item types, "+artifacts+" artifact caps/restore; nine class kits/subclasses/armor/talents; every region/boss/final floor, Vault/Mine and return; spawn/map/teleport/recovery; rankings and catalog isolation");
     }
 
+    private static void psychicWeaponAndDetectionScenario() throws Exception {
+        GamesInProgress.selectedClass=HeroClass.PSYCHIC;Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);clearArena();
+        Hero h=Dungeon.hero;h.sprite=new HeroSprite();FocusCrystal crystal=h.belongings.getItem(FocusCrystal.class);
+        check(h.belongings.weapon==crystal&&h.belongings.artifact==null,"Psychic: weapon-only Crystal kit");
+        int xp=crystal.spentExperience(),charges=crystal.charges();Rat rat=target(h.pos+1);
+        for(int i=0;i<8;i++)crystal.proc(h,rat,crystal.damageRoll(h));
+        check(crystal.charges()==charges&&crystal.spentExperience()==xp,"Psychic: melee cannot consume charges or grow Crystal");
+        for(int level=0;level<=10;level++){
+            crystal.level(level);check(crystal.min(level)==1+level/2&&crystal.max(level)==5+3*level/2&&crystal.delayFactor(h)==.8f,"Psychic: modest melee level curve/timing "+level);
+        }
+        for(int strength:new int[]{10,15,20}){
+            h.STR=strength;crystal.level(strength==10?0:10);
+            com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon conventional=strength==10?new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger():new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Sword();conventional.level(strength==10?1:6);
+            float crystalDps=0,weaponDps=0;for(int i=0;i<3000;i++){crystalDps+=crystal.damageRoll(h)/crystal.delayFactor(h);weaponDps+=conventional.damageRoll(h)/conventional.delayFactor(h);}
+            check(crystalDps<weaponDps,"Psychic: Crystal outperforms suitable upgraded tier-three weapon at Strength "+strength);
+        }
+        h.STR=10;crystal.level(0);crystal.doUnequip(h,true,false);
+        for(int rank=0;rank<=2;rank++){
+            h.talents.get(1).put(Talent.KINETIC_RESERVE,rank);
+            Bundle state=new Bundle();crystal.storeInBundle(state);state.put("charge",0);state.put("partialcharge",0f);crystal.restoreFromBundle(state);
+            check(crystal.ready(h,0)==(rank>0)&&crystal.carriedRate(h)==new float[]{0,.5f,.75f}[rank],"Psychic: carried casting gates/rate "+rank);
+            for(int i=0;i<77;i++)h.buff(FocusCrystal.CrystalCharger.class).act();
+            check(crystal.charges()==(rank==0?0:rank==1?1:1),"Psychic: carried recharge cadence "+rank);
+            if(rank==2){for(int i=0;i<25;i++)h.buff(FocusCrystal.CrystalCharger.class).act();check(crystal.charges()==2,"Psychic: rank-two carried recharge at 102 turns");}
+        }
+        crystal.doEquip(h);crystal.gainCharge(100);check(crystal.carriedRate(h)==1,"Psychic: wielded full rate");
+        // Encode the old slot layout around the same serialized item, including paid usage growth.
+        Bundle item=new Bundle();crystal.storeInBundle(item);item.put("level",4);item.put("spent_experience",7);item.put("charge",3);crystal.restoreFromBundle(item);
+        Bundle old=new Bundle();h.belongings.storeInBundle(old);old.put("artifact",crystal);
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Sword chosen=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Sword();chosen.level(3);old.put("weapon",chosen);
+        h.belongings.restoreFromBundle(old);crystal=h.belongings.getItem(FocusCrystal.class);
+        check(h.belongings.artifact==null&&h.belongings.weapon instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Sword
+                &&h.belongings.weapon.level()==3&&crystal.level()==4&&crystal.spentExperience()==7&&crystal.charges()==3,
+                "Psychic: legacy artifact migration preserves chosen weapon and Crystal state");
+        old=new Bundle();h.belongings.storeInBundle(old);crystal.detachAll(h.belongings.backpack);old.put("artifact",crystal);old.put("weapon",new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.FocusRing());
+        h.belongings.restoreFromBundle(old);crystal=h.belongings.getItem(FocusCrystal.class);
+        check(h.belongings.weapon==crystal&&h.belongings.artifact==null&&h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.FocusRing.class)!=null,"Psychic: legacy starter migration preserves old ring in inventory");
+        clearArena();h.subClass=HeroSubClass.NONE;h.talents.get(0).put(Talent.TRAP_SENSE,2);
+        Buff.detach(h,PsychicMind.class);PsychicMind mind=Buff.affect(h,PsychicMind.class);
+        Arrays.fill(Dungeon.level.heroFOV,true);Arrays.fill(Dungeon.level.heroOrdinaryFOV,true);int c=h.pos,w=Dungeon.level.width(),detected=0;
+        for(int i=0;i<100;i++){
+            int cell=2+i%10+(2+i/10)*w;
+            com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap t=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().hide();Dungeon.level.setTrap(t,cell);Level.set(cell,Terrain.SECRET_TRAP);
+        }
+        mind.detectTraps();for(com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap t:Dungeon.level.traps.valueList())if(t.visible)detected++;
+        check(detected>0&&detected<100,"Psychic: Trap Sense is probabilistic");
+        for(int i=0;i<100;i++)mind.detectTraps();int after=0;for(com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap t:Dungeon.level.traps.valueList())if(t.visible)after++;
+        check(after==detected,"Psychic: waiting rerolls Trap Sense");
+        Bundle seen=new Bundle();mind.storeInBundle(seen);mind.detach();mind=Buff.affect(h,PsychicMind.class);mind.restoreFromBundle(seen);mind.detectTraps();after=0;
+        for(com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap t:Dungeon.level.traps.valueList())if(t.visible)after++;
+        check(after==detected,"Psychic: reload rerolls Trap Sense");
+        clearArena();int cell=c+3;com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap t=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().hide();Dungeon.level.setTrap(t,cell);Level.set(cell,Terrain.SECRET_TRAP);
+        check(PsychicMind.searchTraps(h)&&t.visible,"Psychic: manual extended trap reach");
+        t.hide();Level.set(cell,Terrain.SECRET_TRAP);Dungeon.level.heroOrdinaryFOV[cell]=false;
+        check(!PsychicMind.searchTraps(h)&&!t.visible,"Psychic: manual extension cannot pass walls/ordinary sight");
+        clearArena();Arrays.fill(Dungeon.level.mapped,false);Arrays.fill(Dungeon.level.visited,false);Arrays.fill(Dungeon.level.heroFOV,false);
+        h.subClass=HeroSubClass.SEER;Talent.initSubclassTalents(h);h.talents.get(2).put(Talent.TREASURE_SENSE,3);
+        mind.detach();mind=Buff.affect(h,PsychicMind.class);Heap heap=Dungeon.level.drop(new Food(),c+8);heap.seen=false;mind.arrive();
+        PsychicMind.TreasureMarkers markers=h.buff(PsychicMind.TreasureMarkers.class);
+        check(markers.senses(c+8)&&!markers.senses(c+9)&&markers.remaining()==25&&!heap.seen,"Psychic: exact item marker boundary");
+        for(boolean mapped:Dungeon.level.mapped)check(!mapped,"Psychic: marker maps surrounding terrain");
+        for(int i=0;i<21;i++)markers.act();check(markers.alpha()<1&&markers.remaining()==4,"Psychic: marker fade");
+        Bundle marker=new Bundle();marker.put("sense",markers);PsychicMind.TreasureMarkers copy=(PsychicMind.TreasureMarkers)marker.get("sense");
+        check(copy.remaining()==4&&copy.senses(c+8),"Psychic: marker remaining time persists");
+        for(int i=0;i<4;i++)markers.act();check(h.buff(PsychicMind.TreasureMarkers.class)==null,"Psychic: marker expires");
+        mind.arrive();check(h.buff(PsychicMind.TreasureMarkers.class)==null,"Psychic: floor revisit renews marker");
+        System.out.println("PSYCHIC WEAPON/DETECTION PASS: level curve/DPS, no melee XP, carried gates/cadence, both legacy slots, one-roll traps/reload, manual sight boundary, item-only fading markers and no revisit refresh");
+    }
+
     private static void lanternCharge(Artifact item,int charge)throws Exception{
         java.lang.reflect.Field field=Artifact.class.getDeclaredField("charge");field.setAccessible(true);field.setInt(item,charge);
     }
@@ -283,11 +352,11 @@ public class SmokeRun {
         Hero h=Dungeon.hero;FocusCrystal crystal=h.belongings.getItem(FocusCrystal.class);
         crystal.level(5);int charges=crystal.charges();
         check(crystal.actions(h).contains("UNEQUIP")&&crystal.doUnequip(h,true,false),"53 Crystal can be unequipped");
-        check(h.buff(ClassSpellItem.Charger.class)==null&&!crystal.ready(h,1)&&h.belongings.contains(crystal),"53 Unequipped Crystal stops casting and charging, stays in bag");
+        check(crystal.carriedRate(h)==0&&!crystal.ready(h,1)&&h.belongings.contains(crystal),"53 Unequipped Crystal stops casting and charging, stays in bag");
         AshlightLantern lamp=new AshlightLantern();lamp.identify();lamp.collect();
         check(lamp.doEquip(h)&&lamp.isEquipped(h),"53 Ashlight replaces Crystal");
         check(lamp.doUnequip(h,true,false)&&crystal.doEquip(h)&&crystal.level()==5&&crystal.charges()==charges,"53 Crystal re-equip retains growth and charge");
-        check(h.buff(ClassSpellItem.Charger.class)!=null,"53 Crystal charger restored");
+        check(h.buff(FocusCrystal.CrystalCharger.class)!=null,"53 Crystal charger restored");
         for(int rank=0;rank<=3;rank++){
             h.talents.get(2).put(Talent.FOCUSED_MIND,rank);
             check(crystal.cap()==3+rank,"53 Focused Mind capacity rank "+rank);
@@ -311,9 +380,9 @@ public class SmokeRun {
             com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().hide();
             Dungeon.level.setTrap(trap,cell-Dungeon.level.width());Level.set(trap.pos,Terrain.SECRET_TRAP);
             h.talents.get(2).put(Talent.TREASURE_SENSE,rank);mind.arrive();
-            check(heap.seen,"53 Treasure Sense loot rank "+rank);
-            check((Dungeon.level.map[cell+Dungeon.level.width()]==Terrain.DOOR)==(rank>=2),"53 Treasure Sense door threshold");
-            check(trap.visible==(rank>=3)&&trap.active,"53 Treasure Sense trap threshold; never fires trap");
+            PsychicMind.TreasureMarkers markers=h.buff(PsychicMind.TreasureMarkers.class);
+            check(markers!=null&&markers.senses(cell)&&markers.radius()==2+2*rank&&markers.remaining()==10+5*rank&&!heap.seen,"53 temporary item-only Treasure Sense rank "+rank);
+            check(Dungeon.level.map[cell+Dungeon.level.width()]==Terrain.SECRET_DOOR&&!trap.visible&&trap.active,"53 Treasure Sense reveals no door/trap");
         }
         h.armorAbility=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.MindMeld();Talent.initArmorTalents(h);
         Buff.prolong(h,MeldedMind.class,20);
@@ -788,12 +857,12 @@ public class SmokeRun {
     private static void psychicScenario() throws Exception {
         Hero h=Dungeon.hero;FocusCrystal crystal=h.belongings.getItem(FocusCrystal.class);
         check(h.HP==20&&h.HT==20&&h.STR==10&&crystal!=null&&crystal.charges()==3&&crystal.cap()==3,"Psychic base kit");
-        check(h.belongings.weapon instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.FocusRing&&h.belongings.armor instanceof ClothArmor&&h.belongings.getItem(Food.class).quantity()==2,"Psychic equipment and food");
+        check(h.belongings.weapon==crystal&&h.belongings.artifact==null&&h.belongings.armor instanceof ClothArmor&&h.belongings.getItem(Food.class).quantity()==2,"Psychic equipment and food");
         check(h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife.class).quantity()==3&&h.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision.class).isIdentified()&&new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping().isKnown(),"Psychic consumables and identification");
         check(h.talents.get(0).size()==4&&h.talents.get(1).size()==5,"Psychic talent tiers");
         clearArena();int center=h.pos,width=Dungeon.level.width();
         check(crystal.cast(h,"glimpse",h.pos,null)&&h.buff(MindVision.class)!=null,"Glimpse");
-        for(int i=0;i<37;i++)h.buff(ClassSpellItem.Charger.class).act();check(crystal.charges()==2,"Crystal no early charge");h.buff(ClassSpellItem.Charger.class).act();check(crystal.charges()==3,"Crystal level-one cadence");
+        for(int i=0;i<37;i++)h.buff(FocusCrystal.CrystalCharger.class).act();check(crystal.charges()==2,"Crystal no early charge");h.buff(FocusCrystal.CrystalCharger.class).act();check(crystal.charges()==3,"Crystal level-one cadence");
         int[] levels={1,7,8,16,24,30}, expected={1,2,2,3,5,5};
         for(int i=0;i<levels.length;i++){
             h.lvl=levels[i];
@@ -848,7 +917,7 @@ public class SmokeRun {
         int dominatedCell=enemy.pos;Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);h=Dungeon.hero;h.sprite=new HeroSprite();crystal=h.belongings.getItem(FocusCrystal.class);
         enemy=(Rat)Dungeon.level.findMob(dominatedCell);check(enemy!=null&&enemy.buff(Amok.class)!=null&&enemy.buff(Amok.class).dominated,"14: domination survives save/load");check(!PsychicMind.state().dodge(110,enemy),"Precognition expenditure survives save/load");
         clearArena();Buff.detach(h,MindVision.class);Buff.detach(h,Bless.class);Buff.detach(h,Haste.class);
-        crystal.gainCharge(-crystal.charges());for(int i=0;i<16;i++)h.buff(ClassSpellItem.Charger.class).act();check(crystal.charges()==1,"Deep Focus accelerates calm regeneration");
+        crystal.gainCharge(-crystal.charges());for(int i=0;i<16;i++)h.buff(FocusCrystal.CrystalCharger.class).act();check(crystal.charges()==1,"Deep Focus accelerates calm regeneration");
         h.subClass=HeroSubClass.SEER;h.talents.clear();Talent.initClassTalents(h);Talent.initSubclassTalents(h);maxTalents();
         for(int y=-4;y<=4;y++)Level.set(center+1+y*width,Terrain.WALL);
         enemy=target(center+2);Rat distant=target(center+4);int secret=center+2+width;Level.set(secret,Terrain.SECRET_DOOR);
@@ -858,7 +927,7 @@ public class SmokeRun {
         Level.set(center+4+width,Terrain.WALL);crystal.gainCharge(10);check(crystal.cast(h,"hurl",enemy.pos,center+4+width)&&enemy.pos==center+3+width&&enemy.buff(Paralysis.class)!=null,"Hurl wall impact");
         clearArena();enemy=target(center-2+width);trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().reveal();Dungeon.level.setTrap(trap,center+3+width);Level.set(trap.pos,Terrain.TRAP);crystal.gainCharge(10);check(crystal.cast(h,"hurl",enemy.pos,center-1+width)&&enemy.pos==trap.pos&&!trap.active,"Hurl landing triggers trap");
         clearArena();int revealCell=center+3;Dungeon.level.drop(new Food(),revealCell);trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().hide();Dungeon.level.setTrap(trap,revealCell+width);Level.set(trap.pos,Terrain.SECRET_TRAP);
-        crystal.gainCharge(-crystal.charges());Dungeon.depth=2;PsychicMind.state().arrive();check(crystal.charges()==2&&Dungeon.level.heaps.get(revealCell).seen&&trap.visible,"Kinetic Reserve and Treasure Sense");crystal.gainCharge(-2);PsychicMind.state().arrive();check(crystal.charges()==0,"No floor-entry recharge exploit");Dungeon.depth=1;
+        Dungeon.level.heaps.get(revealCell).seen=false;crystal.gainCharge(-crystal.charges());Dungeon.depth=2;PsychicMind.state().arrive();check(crystal.charges()==0&&h.buff(PsychicMind.TreasureMarkers.class).senses(revealCell)&&!Dungeon.level.heaps.get(revealCell).seen&&!trap.visible,"Unbound Focus grants no floor charge and Treasure Sense maps nothing");PsychicMind.state().arrive();check(crystal.charges()==0,"No floor-entry recharge exploit");Dungeon.depth=1;
         clearArena();enemy=target(center+2);Rat other=target(center+2+width);ClassArmor armor=ClassArmor.upgrade(h,new ClothArmor());
         h.armorAbility=new com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.PsychicStorm();Talent.initArmorTalents(h);maxTalents();armor.charge=100;((com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.psychic.PsychicStorm)h.armorAbility).activate(armor,h,h.pos);
         check(enemy.buff(Amok.class)!=null&&enemy.buff(Vertigo.class)!=null&&enemy.buff(Terror.class)!=null&&crystal.charges()==2,"Psychic Storm, Dread and Backlash");
@@ -905,7 +974,7 @@ public class SmokeRun {
     private static void psychicGrowthScenario()throws Exception {
         Hero h=Dungeon.hero;FocusCrystal crystal=h.belongings.getItem(FocusCrystal.class);
         h.subClass=HeroSubClass.SEER;h.armorAbility=null;h.talents.clear();Talent.initClassTalents(h);Talent.initSubclassTalents(h);
-        for(Buff buff:h.buffs())if(!(buff instanceof PsychicMind)&&!(buff instanceof ClassSpellItem.Charger))buff.detach();
+        for(Buff buff:h.buffs())if(!(buff instanceof PsychicMind)&&!(buff instanceof FocusCrystal.CrystalCharger))buff.detach();
         h.HP=h.HT=200;h.lvl=12;
         for(int tier=0;tier<=10;tier++){
             for(String spell:new String[]{"push","hurl"}){
@@ -936,7 +1005,7 @@ public class SmokeRun {
         Bundle fresh=new Bundle();crystal.storeInBundle(fresh);fresh.put("spent_experience",0);crystal.restoreFromBundle(fresh);
         for(int cast=0;cast<12;cast++){crystal.gainCharge(100);check(crystal.cast(h,"glimpse",h.pos,null),"49: spending cast");}
         check(crystal.level()==1&&crystal.spentExperience()==2,"49: twelve charges -> level one, two XP");
-        for(int turn=0;turn<300;turn++)h.buff(ClassSpellItem.Charger.class).act();
+        for(int turn=0;turn<300;turn++)h.buff(FocusCrystal.CrystalCharger.class).act();
         check(crystal.level()==1&&crystal.spentExperience()==2,"49: 300 idle turns grant no XP");
         check(!crystal.isUpgradable(),"49: excluded from Upgrade and Magical Infusion selectors");
         crystal.upgrade();crystal.upgrade(3);crystal.transferUpgrade(10);crystal.charge(h,100);

@@ -165,9 +165,8 @@ public enum HeroClass {
 
     private static void initPsychic(Hero hero){
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.affect(hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.class);
-        (hero.belongings.weapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.FocusRing()).identify();
         com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal crystal=new com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal();
-        (hero.belongings.artifact=crystal).identify();crystal.activate(hero);
+        (hero.belongings.weapon=crystal).identify();crystal.activate(hero);
         new Food().collect();new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife().quantity(3).collect();
         new PotionOfMindVision().identify().collect();new ScrollOfMagicMapping().identify();Dungeon.quickslot.setSlot(0,crystal);
     }

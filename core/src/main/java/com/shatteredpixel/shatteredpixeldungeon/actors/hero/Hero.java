@@ -2678,6 +2678,7 @@ public class Hero extends Char {
 			}
 		}
 		
+		if(intentional && com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.searchTraps(this))smthFound=true;
 		if (intentional) {
 			sprite.showStatus( CharSprite.DEFAULT, Messages.get(this, "search") );
 			sprite.operate( pos );

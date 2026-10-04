@@ -198,10 +198,14 @@ public class Belongings implements Iterable<Item> {
 		armor = (Armor)bundle.get( ARMOR );
 		if (armor() != null)        armor().activate( owner );
 
-		artifact = (Artifact) bundle.get(ARTIFACT);
+		Item oldArtifact=(Item)bundle.get(ARTIFACT);
+        artifact=oldArtifact instanceof Artifact?(Artifact)oldArtifact:null;
+        migrateCrystal(oldArtifact);
 		if (artifact() != null)     artifact().activate(owner);
 
-		misc = (KindofMisc) bundle.get(MISC);
+		Item oldMisc=(Item)bundle.get(MISC);
+        misc=oldMisc instanceof KindofMisc?(KindofMisc)oldMisc:null;
+        migrateCrystal(oldMisc);
 		if (misc() != null)         misc().activate( owner );
 
 		ring = (Ring) bundle.get(RING);
@@ -213,6 +217,14 @@ public class Belongings implements Iterable<Item> {
 		bundleRestoring = false;
 		consolidateBags();
 	}
+
+    private void migrateCrystal(Item candidate){
+        if(!(candidate instanceof com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal))return;
+        if(weapon==null || weapon instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.FocusRing){
+            if(weapon!=null && !weapon.collect(backpack))backpack.items.add(weapon);
+            weapon=(KindOfWeapon)candidate;weapon.activate(owner);
+        }else if(!candidate.collect(backpack))backpack.items.add(candidate);
+    }
 
 	/** Repair duplicate starter bags from older Playtest class switches without losing contents. */
 	public void consolidateBags() {

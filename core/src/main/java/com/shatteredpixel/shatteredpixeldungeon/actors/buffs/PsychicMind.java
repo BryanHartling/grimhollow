@@ -12,6 +12,7 @@ import java.util.HashSet;
 public class PsychicMind extends Buff {
     { revivePersists = true; }
     private final HashSet<Integer> floors=new HashSet<>();
+    private final HashSet<Integer> checkedTraps=new HashSet<>();
     private final java.util.HashMap<Integer,Integer> precognitionUses=new java.util.HashMap<>();
     public static int points(Talent t){return Dungeon.hero==null?0:Dungeon.hero.pointsInTalent(t);}
     public static PsychicMind state(){return Dungeon.hero==null?null:Dungeon.hero.buff(PsychicMind.class);}
@@ -22,7 +23,50 @@ public class PsychicMind extends Buff {
     public static int effectiveUpgrade(Hero h,int actual){return force(h)>0?Math.max(actual,force(h)):actual;}
     public static int thrownDamage(Hero h,int damage){if(h.buff(MeldedMind.class)!=null&&h.hasTalent(Talent.KINETIC_SURGE))damage=Math.round(damage*(1+.125f*h.pointsInTalent(Talent.KINETIC_SURGE)));return damage;}
     public static boolean calm(){if(Dungeon.level==null)return true;for(Mob mob:Dungeon.level.mobs)if(mob.alignment==Char.Alignment.ENEMY&&Dungeon.level.heroFOV[mob.pos]&&mob.invisible<=0)return false;return true;}
-    public void arrive(){int floor=Dungeon.depth+100*Dungeon.branch;if(!floors.add(floor))return;FocusCrystal crystal=Dungeon.hero.belongings.getItem(FocusCrystal.class);if(crystal!=null)crystal.gainCharge(points(Talent.KINETIC_RESERVE));if(Dungeon.hero.subClass==HeroSubClass.SEER&&points(Talent.TREASURE_SENSE)>0)reveal(true,points(Talent.TREASURE_SENSE)>=3,false,false);if(Dungeon.hero.subClass==HeroSubClass.SEER&&points(Talent.TREASURE_SENSE)>=2)revealDoors(Integer.MAX_VALUE);}
+    public void arrive(){
+        int floor=Dungeon.depth+100*Dungeon.branch;
+        if(!floors.add(floor))return;
+        int rank=points(Talent.TREASURE_SENSE);
+        if(Dungeon.hero.subClass==HeroSubClass.SEER&&rank>0)
+            Buff.affect(Dungeon.hero,TreasureMarkers.class).begin(floor,Dungeon.hero.pos,2+2*rank,10+5*rank);
+    }
+    /** Searchable traps receive a single passive roll on first ordinary sight, saved per floor. */
+    public void detectTraps(){
+        int rank=points(Talent.TRAP_SENSE),floor=Dungeon.depth+100*Dungeon.branch;
+        if(rank<=0)return;
+        for(Trap trap:Dungeon.level.traps.valueList())
+            if(!trap.visible && trap.canBeSearched && Dungeon.level.heroOrdinaryFOV[trap.pos]
+                    && checkedTraps.add(floor*100000+trap.pos) && Random.Float()<.15f*rank)
+                Dungeon.level.discover(trap.pos);
+    }
+    public static boolean searchTraps(Hero hero){
+        int rank=hero.pointsInTalent(Talent.TRAP_SENSE);
+        if(rank<=0)return false;
+        int radius=(hero.subClass==HeroSubClass.SEER?3:1)+rank;
+        boolean found=false;
+        for(Trap trap:Dungeon.level.traps.valueList())if(!trap.visible && trap.canBeSearched
+                && Dungeon.level.heroOrdinaryFOV[trap.pos] && Dungeon.level.distance(hero.pos,trap.pos)<=radius){
+            com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.discoverTile(trap.pos,Dungeon.level.map[trap.pos]);
+            Dungeon.level.discover(trap.pos);
+            if(com.watabou.noosa.Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene)
+                com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfMagicMapping.discover(trap.pos);
+            found=true;
+        }
+        return found;
+    }
+    public static class TreasureMarkers extends Buff {
+        private int floor,origin,radius;
+        private float remaining;
+        public void begin(int floor,int origin,int radius,int turns){this.floor=floor;this.origin=origin;this.radius=radius;remaining=turns;}
+        public boolean senses(int cell){return remaining>0 && floor==Dungeon.depth+100*Dungeon.branch
+                && Dungeon.level.distance(origin,cell)<=radius;}
+        public float alpha(){return Math.min(1,remaining/5f);}
+        public float remaining(){return remaining;}
+        public int radius(){return radius;}
+        @Override public boolean act(){if(--remaining<=0 || floor!=Dungeon.depth+100*Dungeon.branch)detach();else spend(TICK);return true;}
+        @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("floor",floor);b.put("origin",origin);b.put("radius",radius);b.put("remaining",remaining);}
+        @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);floor=b.getInt("floor");origin=b.getInt("origin");radius=b.getInt("radius");remaining=b.getFloat("remaining");}
+    }
     public boolean dodge(int damage,Object source){
         Hero h=(Hero)target;int floor=Dungeon.depth+100*Dungeon.branch;
         if(!(source instanceof Hunger)&&damage>0&&points(Talent.PRECOGNITION)>0&&h.HP+h.shielding()-damage<h.HT*.25f&&precognitionUses.getOrDefault(floor,0)<points(Talent.PRECOGNITION)){precognitionUses.put(floor,precognitionUses.getOrDefault(floor,0)+1);return true;}return false;
@@ -31,7 +75,7 @@ public class PsychicMind extends Buff {
         Hero h=(Hero)target;
         if(h.subClass==HeroSubClass.SEER){Buff.affect(h,SeerSight.class);for(int cell=0;cell<Dungeon.level.length();cell++)if(Dungeon.level.distance(h.pos,cell)<=3&&(Dungeon.level.secret[cell]||Dungeon.level.traps.get(cell)!=null))Dungeon.level.discover(cell);}
         else Buff.detach(h,SeerSight.class);
-        if(points(Talent.TRAP_SENSE)>0)for(Trap trap:Dungeon.level.traps.valueList())if(Dungeon.level.heroFOV[trap.pos]&&trap.canBeSearched)Dungeon.level.discover(trap.pos);
+        detectTraps();
         for(Mob mob:Dungeon.level.mobs){Amok amok=mob.buff(Amok.class);if(amok!=null&&amok.dominated)amok.share(h);PsychicDomination control=mob.buff(PsychicDomination.class);if(control!=null)control.share(h);}
         spend(TICK);return true;
     }
@@ -54,6 +98,6 @@ public class PsychicMind extends Buff {
         if(cause instanceof Mob){Amok amok=((Mob)cause).buff(Amok.class);PsychicDomination control=((Mob)cause).buff(PsychicDomination.class);if(((amok!=null&&amok.dominated)||(control!=null&&control.ownedBy(h)))&&crystal!=null&&Random.Float()<points(Talent.HARVEST_THOUGHT)/3f)crystal.gainCharge(1);}
         if(cause==h||mob.buff(PsychicDamage.class)!=null){MindVision sight=h.buff(MindVision.class);if(sight!=null)Buff.affect(h,MindVision.class,points(Talent.LINGERING_SIGHT));}
     }
-    @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("floors",floors.stream().mapToInt(Integer::intValue).toArray());int[] keys=precognitionUses.keySet().stream().mapToInt(Integer::intValue).toArray();b.put("precognition_floors",keys);b.put("precognition_uses",java.util.Arrays.stream(keys).map(k->precognitionUses.get(k)).toArray());}
-    @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);for(int i:b.getIntArray("floors"))floors.add(i);precognitionUses.clear();int[] keys=b.getIntArray("precognition_floors"),counts=b.getIntArray("precognition_uses");for(int i=0;i<keys.length;i++)precognitionUses.put(keys[i],i<counts.length?counts[i]:1);}
+    @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("floors",floors.stream().mapToInt(Integer::intValue).toArray());b.put("checked_traps",checkedTraps.stream().mapToInt(Integer::intValue).toArray());int[] keys=precognitionUses.keySet().stream().mapToInt(Integer::intValue).toArray();b.put("precognition_floors",keys);b.put("precognition_uses",java.util.Arrays.stream(keys).map(k->precognitionUses.get(k)).toArray());}
+    @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);floors.clear();checkedTraps.clear();if(b.contains("checked_traps"))for(int i:b.getIntArray("checked_traps"))checkedTraps.add(i);for(int i:b.getIntArray("floors"))floors.add(i);precognitionUses.clear();int[] keys=b.getIntArray("precognition_floors"),counts=b.getIntArray("precognition_uses");for(int i=0;i<keys.length;i++)precognitionUses.put(keys[i],i<counts.length?counts[i]:1);}
 }

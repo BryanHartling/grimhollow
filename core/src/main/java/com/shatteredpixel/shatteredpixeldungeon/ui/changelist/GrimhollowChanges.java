@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.21.2","Two runes, working together.");
+        ChangeInfo r=release(list,"v1.21.3","A dependable weapon and more focused senses.");
+        note(r,Icons.TALENT,"Psychic Crystal and senses","Focus Crystal is your starting weapon, with modest damage growth from charges spent. Unbound Focus permits carried casting and 50%/75% recharge. Treasure Sense supplies temporary nearby item markers without mapping terrain. Trap Sense rolls once per trap and extends manual trap search; the Seer retains guaranteed nearby awareness.");
+        r=release(list,"v1.21.2","Two runes, working together.");
         note(r,Icons.TALENT,"Independent Rune Etchings","Enchanters can etch both weapon and armor at the same time. Each rune keeps its own floor-changing effect and paid upgrade, and transfers within its equipment category. Existing saves receive an unupgraded counterpart without losing their current rune.");
         r=release(list,"v1.21.1","A patient hunter finds its way back into shadow.");
         note(r,Icons.MAGNIFY,"Lurking Horror","The Horror follows reachable escape routes, continues fleeing while visible, and recovers hidden without attacking. It avoids nearby heroes and doorways. Tools and physical encounters expose it, and its lifetime healing remains limited to a quarter of its health.");

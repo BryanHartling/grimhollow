@@ -1,3 +1,11 @@
+# Sprint component 4 - v1.21.3
+
+- Final `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 2m 4s**; seven JUnit tests pass; **Runs=30 failures=0**. All existing spell/growth/domination/rank gates pass.
+- **PSYCHIC WEAPON/DETECTION PASS**: weapon-only kit; all eleven melee level breakpoints and 0.8-turn timing; actual damage including Strength and speed is below suitable upgraded weapons at Strength 10/15/20; melee grants no charge-spending XP; rank 0/1/2 carried casting/recharge gates and cadence; legacy artifact-slot migration with chosen weapon retained or old Focus Ring stored; Crystal charge, level and XP preserved.
+- Item markers assert radius, duration, fade, expiration, save/load and no revisit refresh without modifying heap discovery or surrounding terrain. Trap rolls are probabilistic, saved and cannot reroll while waiting/reloading; manual extension respects ordinary sight, independently of Mind Vision. Existing Seer three-cell through-wall enemy/secret discovery still passes.
+- Native interface fixtures pass in portrait and landscape: **TEST 53 UI PASS ... failures=0** covers real Hurl enemy/direction selection and charge, scrollable Crystal/skill descriptions and bounds. Crystal weapon description/screenshots visually inspected. First headless run stopped on renderer-only discovery particles; guard visuals outside GameScene, keeping the actual discovery assertions intact.
+- Test 45 remains **Abandoned: test failed**, not run. Physical tablet/campaign balance confirmation remains with the user. Full CI checked after push with unchanged gates.
+
 # Sprint component 3 - v1.21.2
 
 - **TEST 37 ARMOR PASS**: simultaneous weapon/armor runes, independent paid upgrades and category transfers, no rerolls on transfer, floor effects and accumulated knowledge, legacy unupgraded counterpart, crown ownership, carrier loss, resolved descriptions and save/load. Existing weapon transfer checks still pass. **Runs=30 failures=0**; seven JUnit tests pass.

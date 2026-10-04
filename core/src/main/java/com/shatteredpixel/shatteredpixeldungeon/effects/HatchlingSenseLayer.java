@@ -27,6 +27,12 @@ public class HatchlingSenseLayer extends Group {
                 if (mob instanceof Mimic && mob.isAlive() && sense.senses(mob.pos))
                     mark(mob.pos,ItemSpriteSheet.HATCHLING_MIMIC,used);
         }
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.TreasureMarkers treasure=
+                Dungeon.hero.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.TreasureMarkers.class);
+        if(treasure!=null)for(Heap heap:Dungeon.level.heaps.valueList())
+            if(!heap.isEmpty() && treasure.senses(heap.pos) && !Dungeon.level.heroFOV[heap.pos] && !used.contains(heap.pos)){
+                mark(heap.pos,heapImage(heap),used);markers.get(heap.pos).alpha(.9f*treasure.alpha());
+            }
         for (Integer cell : new HashSet<>(markers.keySet())) if (!used.contains(cell)) {
             ItemSprite sprite=markers.remove(cell); remove(sprite); sprite.destroy(); images.remove(cell);
         }

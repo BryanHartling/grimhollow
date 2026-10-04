@@ -13,19 +13,71 @@ import com.shatteredpixel.shatteredpixeldungeon.scenes.*;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.utils.Bundle;
 import java.util.Arrays;
-public class FocusCrystal extends ClassSpellItem {
-    {image=ItemSpriteSheet.FOCUS_CRYSTAL;levelCap=10;}
+public class FocusCrystal extends com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon {
+    {tier=1;image=ItemSpriteSheet.FOCUS_CRYSTAL;unique=true;bones=false;DLY=.8f;defaultAction="CAST";identify();}
+    private int charge=3;
+    private float partialCharge;
+    @Override public int min(int level){return 1+Math.max(0,Math.min(10,level))/2;}
+    @Override public int max(int level){return 5+3*Math.max(0,Math.min(10,level))/2;}
+    @Override public int STRReq(int level){return 10;}
+    @Override public String defaultAction(){return "CAST";}
+    @Override public boolean isIdentified(){return true;}
+    @Override public boolean isUpgradable(){return false;}
+    @Override public int value(){return 0;}
+    @Override public void doDrop(Hero hero){}
+    public int charges(){return charge;}
+    public void gainCharge(int count){charge=Math.min(cap(),Math.max(0,charge+count));Item.updateQuickslot();}
+    public void advance(float turns){
+        if(Dungeon.hero==null || Dungeon.hero.buff(MagicImmune.class)!=null)return;
+        if(charge<cap()){
+            partialCharge+=turns/Math.max(20,40-2*Dungeon.hero.lvl);
+            while(partialCharge>=1&&charge<cap()){charge++;partialCharge--;}
+        }else partialCharge=0;
+        Item.updateQuickslot();
+    }
+    public float carriedRate(Hero hero){if(hero==null)return 0;return isEquipped(hero)?1:hero.pointsInTalent(Talent.KINETIC_RESERVE)==1?.5f:hero.pointsInTalent(Talent.KINETIC_RESERVE)>=2?.75f:0;}
+    public boolean canCastFrom(Hero hero){return isEquipped(hero)||hero.belongings.contains(this)&&hero.hasTalent(Talent.KINETIC_RESERVE);}
+    public boolean ready(Hero hero,int cost){return canCastFrom(hero)&&hero.buff(MagicImmune.class)==null&&charge>=cost;}
+    private void finish(Hero hero,int cost){charge-=cost;onChargesSpent(cost);Item.updateQuickslot();hero.spendAndNext(1);}
+    @Override public String status(){return charge+"/"+cap();}
+    @Override public void activate(Char hero){super.activate(hero);Buff.affect(hero,CrystalCharger.class);}
+    @Override public boolean collect(com.shatteredpixel.shatteredpixeldungeon.items.bags.Bag bag){
+        if(!super.collect(bag))return false;
+        if(bag.owner!=null)Buff.affect(bag.owner,CrystalCharger.class);
+        return true;
+    }
+    public static class CrystalCharger extends Buff {
+        @Override public boolean act(){
+            if(!(target instanceof Hero)){detach();return true;}
+            Hero hero=(Hero)target;boolean found=false;
+            for(Item item:hero.belongings)if(item instanceof FocusCrystal){
+                FocusCrystal crystal=(FocusCrystal)item;found=true;
+                crystal.advance(crystal.carriedRate(hero)*crystal.regeneration());
+            }
+            if(!found)detach();else spend(TICK);return true;
+        }
+    }
+    public void playtestLevel(int level){level(Math.max(0,Math.min(10,level)));spentExperience=0;gainCharge(cap());}
+    public void transferUpgrade(int level){}
+    public void charge(Hero hero,float amount){} // External artifact charging does not level or charge this weapon.
+    @Override public java.util.ArrayList<String> actions(Hero hero){
+        java.util.ArrayList<String> actions=super.actions(hero);
+        actions.remove(AC_DROP);actions.remove(AC_THROW);actions.remove(AC_ABILITY);
+        if(canCastFrom(hero))actions.add("CAST");return actions;
+    }
+    @Override public void execute(Hero hero,String action){
+        super.execute(hero,action);
+        if(action.equals("CAST")&&canCastFrom(hero))ClassSpellItem.showMenu(this,hero,spells(hero),status(),spell->select(hero,spell));
+    }
     private int spentExperience;
-    @Override protected void onPlaytestLevelSet(){spentExperience=0;}
-    @Override public int cap(){return super.cap()+PsychicMind.points(Talent.FOCUSED_MIND);}
+    public int cap(){int level=Dungeon.hero==null?1:Dungeon.hero.lvl;return 3+(level>=7?1:0)+(level>=13?1:0)+(level>=20?1:0)+PsychicMind.points(Talent.FOCUSED_MIND);}
     @Override public int visiblyUpgraded(){return level();}
     @Override public Item upgrade(){return this;}
-    @Override public void transferUpgrade(int level) {}
-    @Override protected void onChargesSpent(int cost){
+    private void onChargesSpent(int cost){
         spentExperience+=cost;
         while(level()<10&&spentExperience>=10+5*level()){
             spentExperience-=10+5*level();
-            super.upgrade();
+            level(level()+1);
         }
         if(level()>=10)spentExperience=0;
     }
@@ -42,13 +94,13 @@ public class FocusCrystal extends ClassSpellItem {
     @Override public String desc(){
         return super.desc()+"\n\n"+Messages.get(this,"progress",level(),spentExperience,level()<10?10+5*level():0)
                 +"\n\n"+Messages.get(this,"utility_stats",graspRange(Dungeon.hero),glimpseDuration())
-                +"\n\n"+Messages.get(this,"push_stats",pushDistance())+"\n\n"+Messages.get(this,"grasp_opening");
+                +"\n\n"+Messages.get(this,"push_stats",pushDistance())+"\n\n"+Messages.get(this,"grasp_opening")+"\n\n"+Messages.get(this,"weapon_stats",min(level()),max(level()),Math.round(100*carriedRate(Dungeon.hero)));
     }
-    @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("spent_experience",spentExperience);}
-    @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);level(Math.max(0,Math.min(10,b.getInt("level"))));spentExperience=b.getInt("spent_experience");chargeCap=cap();}
-    @Override protected float regeneration(){return PsychicMind.calm()?1+.15f*PsychicMind.points(Talent.DEEP_FOCUS):1;}
-    @Override public String[] spells(Hero h){return h.subClass==HeroSubClass.PUPPETEER?new String[]{"grasp","glimpse","push","dominate","suggestion"}:h.subClass==HeroSubClass.SEER?new String[]{"grasp","glimpse","push","hurl"}:new String[]{"grasp","glimpse","push"};}
-    @Override protected void select(Hero h,String spell){
+    @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("spent_experience",spentExperience);b.put("charge",charge);b.put("partialcharge",partialCharge);}
+    @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);level(Math.max(0,Math.min(10,b.getInt("level"))));spentExperience=b.getInt("spent_experience");charge=Math.max(0,b.getInt("charge"));partialCharge=b.getFloat("partialcharge");}
+    protected float regeneration(){return PsychicMind.calm()?1+.15f*PsychicMind.points(Talent.DEEP_FOCUS):1;}
+    public String[] spells(Hero h){return h.subClass==HeroSubClass.PUPPETEER?new String[]{"grasp","glimpse","push","dominate","suggestion"}:h.subClass==HeroSubClass.SEER?new String[]{"grasp","glimpse","push","hurl"}:new String[]{"grasp","glimpse","push"};}
+    protected void select(Hero h,String spell){
         if(spell.equals("glimpse")){cast(h,spell,h.pos,null);return;}
         GameScene.selectCell(new CellSelector.Listener(){public void onSelect(Integer cell){if(cell==null)return;if(spell.equals("hurl"))GameScene.selectCell(new CellSelector.Listener(){public void onSelect(Integer direction){cast(h,spell,cell,direction);}public String prompt(){return Messages.get(FocusCrystal.class,"direction");}});else cast(h,spell,cell,null);}public String prompt(){return Messages.get(FocusCrystal.class,"target");}});
     }

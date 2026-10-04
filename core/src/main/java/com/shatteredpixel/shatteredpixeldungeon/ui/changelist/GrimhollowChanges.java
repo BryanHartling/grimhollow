@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.21.0","Clearer characters and signals.");
+        ChangeInfo r=release(list,"v1.21.1","A patient hunter finds its way back into shadow.");
+        note(r,Icons.MAGNIFY,"Lurking Horror","The Horror follows reachable escape routes, continues fleeing while visible, and recovers hidden without attacking. It avoids nearby heroes and doorways. Tools and physical encounters expose it, and its lifetime healing remains limited to a quarter of its health.");
+        r=release(list,"v1.21.0","Clearer characters and signals.");
         note(r,Icons.JOURNAL,"Visibility and interface fixes","Tall grass now stands behind upper bodies, with foreground blades around feet. The journal stays visible beside its keys and uses a small unread badge. Talent ranks distinguish filled and empty sockets and show available points. Hexcaster retreat stays aligned with its map position.");
         r=release(list,"v1.20.2","Reopen testing tools without leaving the dungeon.");
         note(r,Icons.TALENT,"Playtest in your run",

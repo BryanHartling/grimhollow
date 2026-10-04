@@ -89,8 +89,61 @@ final class HorrorScenario {
             for(int i=0;i<50;i++)check(h.damageRoll()<=4+2*region,"regional base damage");
             check(!Char.hasProp(h,Char.Property.UNDEAD) && !Char.hasProp(h,Char.Property.DEMONIC),"Horror classified as undead/demon");
         }
-        counters(); predation(); generation();
-        System.out.println("TEST 60 Horror PASS: five-region stats, real warning/response, retargeting, invisibility, solitary hunt, entity-only Mind Vision/Scry, collision occupancy, finite healing, predation/remains, regional generation, bundle/disk persistence");
+        recoveryAndRouting(); counters(); predation(); generation();
+        System.out.println("TEST 60 Horror PASS: five-region stats, real warning/response, retargeting, invisibility, solitary hunt, entity-only Mind Vision/Scry, collision occupancy, finite healing, concealed mobile recovery, tool/collision reveals, routed escape, predation/remains, regional generation, bundle/disk persistence");
+    }
+    private static void field(LurkingHorror h,String name,Object value) throws Exception {
+        java.lang.reflect.Field f=LurkingHorror.class.getDeclaredField(name);f.setAccessible(true);f.set(h,value);
+    }
+    private static void recoveryAndRouting() throws Exception {
+        LurkingHorror h=fresh(7);h.pos=Dungeon.hero.pos+8;h.HP=1;h.rooted=true;h.expose();
+        field(h,"phaseAge",100f);Arrays.fill(Dungeon.level.heroFOV,true);act(h);
+        check(h.phase()==LurkingHorror.Phase.FLEEING,"visible flight entered recovery");
+        Arrays.fill(Dungeon.level.heroFOV,false);act(h);
+        check(h.phase()==LurkingHorror.Phase.RECOVERING && h.shadowmelded(),"eligible flight did not conceal recovery");
+        Dungeon.level.heroFOV[h.pos]=true;h.observe(0);
+        check(h.phase()==LurkingHorror.Phase.RECOVERING && !h.visibleToHero(),"ordinary room entry exposes recovery");
+        h.rooted=false;Dungeon.hero.pos=h.pos-1;int hp=Dungeon.hero.HP,from=h.pos;
+        act(h);check(h.pos!=from && Dungeon.hero.HP==hp,"hidden recovery did not evade hero without attacking");
+        Bundle b=new Bundle();b.put("h",h);LurkingHorror restored=(LurkingHorror)b.get("h");
+        check(restored.shadowmelded() && restored.phase()==h.phase(),"concealed recovery save/load");
+        TalismanOfForesight.CharAwareness aware=Buff.append(Dungeon.hero,TalismanOfForesight.CharAwareness.class,10);
+        aware.charID=h.id();h.observe(0);check(h.phase()==LurkingHorror.Phase.FLEEING,"recovery ignored full reveal");
+
+        h=fresh(2);hp=Dungeon.hero.HP;
+        field(h,"phase",LurkingHorror.Phase.RECOVERING);h.HP=1;
+        Dungeon.hero.curAction=new HeroAction.Move(h.pos);
+        Method move=Hero.class.getDeclaredMethod("getCloser",int.class);move.setAccessible(true);
+        check(!(boolean)move.invoke(Dungeon.hero,h.pos) && h.phase()==LurkingHorror.Phase.FLEEING
+                && Dungeon.hero.HP==hp && Dungeon.hero.curAction==null && Actor.findChar(h.pos)==h,
+                "physical encounter must stop, expose, preserve occupancy and not ambush");
+
+        h=fresh(2);h.pos=Dungeon.hero.pos+8;h.rooted=true;h.expose();
+        Arrays.fill(Dungeon.level.heroFOV,false);field(h,"phaseAge",100f);act(h);
+        check(h.phase()==LurkingHorror.Phase.STALKING,"full-health Horror forced through idle recovery");
+        h=fresh(2);h.pos=Dungeon.hero.pos+8;h.rooted=true;h.expose();h.HP=1;
+        field(h,"healed",h.healingBudget());Arrays.fill(Dungeon.level.heroFOV,false);field(h,"phaseAge",100f);act(h);
+        check(h.phase()==LurkingHorror.Phase.STALKING,"spent lifetime allowance forced idle recovery");
+
+        h=fresh(7);int w=Dungeon.level.width();
+        for(int c=0;c<Dungeon.level.length();c++)if(Dungeon.level.insideMap(c))Level.set(c,Terrain.WALL);
+        // The first escape step approaches the hero. A connected corridor then doubles back
+        // behind the obstacle and opens into a hiding room.
+        int x=6,y=6;h.pos=y*w+x;Dungeon.hero.pos=y*w+x+4;
+        Level.set(h.pos,Terrain.EMPTY);Level.set(h.pos+1,Terrain.EMPTY);
+        for(int yy=y+1;yy<=y+9;yy++)Level.set(yy*w+x+1,Terrain.EMPTY);
+        for(int xx=2;xx<=x+1;xx++)Level.set((y+9)*w+xx,Terrain.EMPTY);
+        for(int yy=y+9;yy<=y+12;yy++)for(int xx=2;xx<=5;xx++)Level.set(yy*w+xx,Terrain.EMPTY);
+        Level.set(Dungeon.hero.pos,Terrain.EMPTY);
+        Arrays.fill(Dungeon.level.heroFOV,true);h.HP=1;h.expose();from=h.pos;act(h);
+        check(h.pos%w==x+1 && Dungeon.level.distance(h.pos,Dungeon.hero.pos)<Dungeon.level.distance(from,Dungeon.hero.pos),"routed flight cannot approach briefly to escape dead end");
+        java.util.Set<Integer> reached=new java.util.HashSet<>();reached.add(h.pos);
+        for(int i=0;i<10;i++){act(h);reached.add(h.pos);}
+        check(reached.size()>=9 && Dungeon.level.distance(h.pos,Dungeon.hero.pos)>=6,
+                "routed escape oscillated instead of clearing the corridor");
+        Arrays.fill(Dungeon.level.heroFOV,false);field(h,"phaseAge",100f);act(h);
+        for(int i=0;i<3;i++)act(h);
+        check(h.phase()==LurkingHorror.Phase.RECOVERING && h.shadowmelded(),"route failed to reach concealed room recovery");
     }
     private static void counters() throws Exception {
         LurkingHorror h=fresh(7); h.pos=Dungeon.hero.pos+4;

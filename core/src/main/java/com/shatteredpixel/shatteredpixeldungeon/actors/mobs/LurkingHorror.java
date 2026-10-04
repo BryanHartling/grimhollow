@@ -31,6 +31,8 @@ public class LurkingHorror extends Mob {
     private int preyId = -1;
     private boolean ambushAttack, controlled, predatoryStrike;
     private boolean strikePending, strikeFollowUp;
+    private int escapeGoal = -1;
+    private boolean recoveryCue;
     private static final int[] HEALTH = {12,18,28,40,55};
     private static final int[] FLIGHT = {15,12,10,8,6};
 
@@ -47,7 +49,7 @@ public class LurkingHorror extends Mob {
     public Phase phase() { return phase; }
     public int healedTotal() { return healed; }
     public float phaseAge() { return phaseAge; }
-    public boolean shadowmelded() { return phase == Phase.STALKING || (phase == Phase.WARNING && !followUp); }
+    public boolean shadowmelded() { return phase == Phase.STALKING || phase == Phase.RECOVERING || (phase == Phase.WARNING && !followUp); }
     public boolean sensed() { return sensed; }
     public boolean visibleToHero() { return isAlive() && (!shadowmelded() && Dungeon.level.heroFOV[pos] || sensed); }
     public static boolean hidden(Char ch) { return ch instanceof LurkingHorror && !((LurkingHorror)ch).visibleToHero(); }
@@ -84,8 +86,18 @@ public class LurkingHorror extends Mob {
         followUp=false; preyId=-1;
         if (sprite!=null) sprite.visible=visibleToHero();
     }
+    /** A concealed body still occupies its cell. A bump reveals it without a free strike. */
+    public static boolean encounter(Char occupant) {
+        if (!(occupant instanceof LurkingHorror) || !concealed(occupant)) return false;
+        ((LurkingHorror)occupant).expose();
+        Dungeon.hero.interrupt(); Dungeon.hero.lastAction=null;
+        GLog.w(Messages.get(occupant,"shift"));
+        return true;
+    }
     private void enter(Phase next) {
         phase=next; phaseAge=0; responseOffered=responseTaken=false;
+        escapeGoal=-1;
+        if(next==Phase.RECOVERING) { recoveryHealed=0; recoveryCue=false; }
         lastClock=now()+cooldown();
         state=next==Phase.STALKING || next==Phase.WARNING ? HUNTING : FLEEING;
     }
@@ -165,11 +177,14 @@ public class LurkingHorror extends Mob {
             }
             resolveStrike(); return true;
         } else if (phase==Phase.FLEEING) {
-            if (phaseAge>=flightTurns() && Dungeon.level.distance(pos,Dungeon.hero.pos)>=6) {
-                enter(Phase.RECOVERING); spend(TICK); return true;
+            if (phaseAge>=flightTurns() && !Dungeon.level.heroFOV[pos] && !sensed
+                    && Dungeon.level.distance(pos,Dungeon.hero.pos)>=6) {
+                enter(HP==HT || healed>=healingBudget()?Phase.STALKING:Phase.RECOVERING);
+                if(sprite!=null) sprite.visible=visibleToHero();
+                spend(TICK); return true;
             }
             int old=pos;
-            if (retreat()) { spend(1/speed()); return moveSprite(old,pos); }
+            if (retreat(false)) { spend(1/speed()); return moveSprite(old,pos); }
             // A cornered animal can fight, but only with ordinary damage and accuracy.
             if (Dungeon.level.adjacent(pos,Dungeon.hero.pos) && Dungeon.hero.invisible<=0) attack(Dungeon.hero);
         } else {
@@ -177,33 +192,71 @@ public class LurkingHorror extends Mob {
             int due=Math.min(available, (int)(phaseAge*healingBudget()/50)-recoveryHealed);
             int amount=Math.min(Math.max(0,due),HT-HP);
             HP+=amount; healed+=amount; recoveryHealed+=amount;
-            if (phaseAge>=50 && !Dungeon.level.heroFOV[pos] && !sensed && Dungeon.level.distance(pos,Dungeon.hero.pos)>=6) {
-                enter(Phase.STALKING); followUp=false; recoveryHealed=0;
+            if (HP==HT || healed>=healingBudget()) {
+                enter(Phase.STALKING); followUp=false;
+            } else {
+                if(Dungeon.level.distance(pos,Dungeon.hero.pos)<=2 && !recoveryCue) {
+                    recoveryCue=true; GLog.i(Messages.get(this,"shift"));
+                }
+                int old=pos;
+                if(retreat(true)) { spend(1/speed()); return moveSprite(old,pos); }
+                // Rooted creatures can still heal. Otherwise an unsafe blocked hiding place
+                // resumes exposed flight instead of silently occupying a doorway.
+                if(!rooted && (!hidingCell(pos) || Dungeon.level.adjacent(pos,Dungeon.hero.pos))) expose();
             }
         }
         spend(TICK); return true;
     }
     private int recoveryHealed;
-    private boolean retreat() {
+    private boolean retreat(boolean recovering) {
         if (rooted) return false;
-        boolean[] passable=Dungeon.level.passable;
-        if (region==4) {
-            passable=passable.clone();
-            for(int c=0;c<passable.length;c++) if(Dungeon.level.map[c]==Terrain.BARRICADE)passable[c]=true;
+        Level level=Dungeon.level;
+        boolean[] passable=level.passable.clone();
+        if (region==4) for(int c=0;c<passable.length;c++)
+            if(level.map[c]==Terrain.BARRICADE)passable[c]=true;
+        modifyPassable(passable);
+        for(Char c:Actor.chars()) if(c!=this && level.insideMap(c.pos)) passable[c.pos]=false;
+        if(recovering) for(int off:PathFinder.NEIGHBOURS8) {
+            int c=Dungeon.hero.pos+off;
+            if(level.insideMap(c)) passable[c]=false;
         }
-        int step=Dungeon.flee(this,Dungeon.hero.pos,passable,fieldOfView,true);
-        if (step<0 || Actor.findChar(step)!=null) return false;
-        float light=illumination(step);
-        // Distance takes priority, then prefer an equally good route away from light.
-        for(int offset:PathFinder.NEIGHBOURS8) {
-            int candidate=pos+offset;
-            if(Dungeon.level.insideMap(candidate) && passable[candidate] && Actor.findChar(candidate)==null
-                    && Dungeon.level.distance(candidate,Dungeon.hero.pos)>=Dungeon.level.distance(step,Dungeon.hero.pos)
-                    && illumination(candidate)<light) {
-                step=candidate; light=illumination(step);
+        // A reachable destination stays fixed while following its shortest route. Unlike a
+        // greedy distance step, this can briefly approach the hero to escape a dead end.
+        int[] distance=new int[level.length()], previous=new int[level.length()], queue=new int[level.length()];
+        java.util.Arrays.fill(distance,-1);
+        int head=0,tail=0; queue[tail++]=pos; distance[pos]=0;
+        while(head<tail) {
+            int from=queue[head++];
+            for(int off:PathFinder.NEIGHBOURS8) {
+                int c=from+off;
+                if(level.insideMap(c) && passable[c] && distance[c]<0) {
+                    distance[c]=distance[from]+1; previous[c]=from; queue[tail++]=c;
+                }
             }
         }
+        if(escapeGoal<0 || distance[escapeGoal]<0 || pos==escapeGoal
+                || level.distance(escapeGoal,Dungeon.hero.pos)<3) {
+            escapeGoal=-1; float best=-Float.MAX_VALUE;
+            for(int i=0;i<tail;i++) {
+                int c=queue[i], away=level.distance(c,Dungeon.hero.pos);
+                if(recovering && (away<3 || !hidingCell(c))) continue;
+                float score=10*Math.min(away,12)-distance[c]-(level.heroFOV[c]?35:0)-illumination(c)*4;
+                if(score>best) { best=score; escapeGoal=c; }
+            }
+        }
+        if(escapeGoal<0 || escapeGoal==pos) return false;
+        int step=escapeGoal;
+        while(previous[step]!=pos) step=previous[step];
+        if(Actor.findChar(step)!=null) { escapeGoal=-1; return false; }
         move(step); return true;
+    }
+    private boolean hidingCell(int cell) {
+        int terrain=Dungeon.level.map[cell];
+        if(terrain==Terrain.DOOR || terrain==Terrain.OPEN_DOOR || terrain==Terrain.LOCKED_DOOR) return false;
+        int open=0;
+        for(int off:PathFinder.NEIGHBOURS8) if(Dungeon.level.insideMap(cell+off)
+                && Dungeon.level.passable[cell+off]) open++;
+        return open>=3;
     }
     private float illumination(int cell) {
         AshlightLantern lantern=AshlightLantern.open(Dungeon.hero);
@@ -287,6 +340,7 @@ public class LurkingHorror extends Mob {
         b.put("horror_omen",omen); b.put("horror_predation",predationUsed); b.put("horror_prey",preyId);
         b.put("horror_controlled",controlled);
         b.put("horror_evasion",defenseSkill);
+        b.put("horror_goal",escapeGoal); b.put("horror_cue",recoveryCue);
     }
     @Override public void restoreFromBundle(Bundle b) {
         super.restoreFromBundle(b);
@@ -296,5 +350,7 @@ public class LurkingHorror extends Mob {
         omen=b.getBoolean("horror_omen"); predationUsed=b.getBoolean("horror_predation"); preyId=b.getInt("horror_prey");
         controlled=b.getBoolean("horror_controlled"); defenseSkill=b.getInt("horror_evasion");
         EXP=3+region*3;
+        escapeGoal=b.contains("horror_goal")?b.getInt("horror_goal"):-1;
+        recoveryCue=b.getBoolean("horror_cue");
     }
 }

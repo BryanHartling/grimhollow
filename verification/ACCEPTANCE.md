@@ -1,3 +1,10 @@
+# Sprint component 2 - v1.21.1
+
+- Extended **TEST 60 Horror PASS** in all three class gates: routed dead-end escape, visible flight exclusion, concealed room-entry recovery, hero evasion without attack, physical bump interruption/occupancy, full-reveal exposure, skipped recovery at full health/spent allowance, save/load and the original finite-healing/warning/generation contracts. **Runs=30 failures=0**.
+- `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon --console=plain` plus the corrected diagonal-route fixture rerun: seven JUnit tests pass; final build **BUILD SUCCESSFUL in 51s**. Existing native Horror checks pass in landscape and portrait, **TEST 60 NATIVE PASS ... failures=0**. The first portrait invocation lacked the launcher's `interfaceReview` surface flag; its geometry assertion failed, then the correct tall-surface invocation passed.
+- Damage remains at the existing default 100%; the Sewers headless warned burst is bounded at six damage. This is behavior verification, not a complete campaign balance verdict. Physical tablet and campaign danger remain human playtests.
+- Test 45 remains **Abandoned: test failed**, not run. CI checks unchanged.
+
 # Sprint component 1 - v1.21.0
 
 - `gradlew.bat core:test desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 49s**, seven JUnit tests with zero failures. Packaged `desktop/build/windows/1.21.0/Grimhollow/Grimhollow.exe`.

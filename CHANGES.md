@@ -1,3 +1,10 @@
+# Sprint component 2 - v1.21.1
+
+- Horror flight follows a reachable escape destination instead of choosing alternating greedy steps. Routes may approach briefly to leave dead ends; occupied cells are blocked.
+- After its minimum flight it regains shadowmeld only outside ordinary sight and full reveals. Hidden recovery avoids the hero and doorways; ordinary room entry does not expose it. Physical encounters stop movement and reveal it without an ambush.
+- Recovery ends as soon as health is full or its lifetime 25% healing allowance is exhausted. Full-health or spent-allowance Horrors skip recovery. Detection tools and damage resume exposed flight, with saved goal/cue/healing state.
+- Preserve existing regional damage at 100%, solitary rules and action-before-ambush warnings; no numerical damage increase in this behavior patch.
+
 # Sprint component 1 - v1.21.0
 
 - Hexcaster retreat now animates its logical move through the same callback as other mobs, keeping attacks and examination aligned. Extend the native displacement checks to exercise its real retreat, teleport and knockback paths.

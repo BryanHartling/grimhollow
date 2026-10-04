@@ -1879,6 +1879,7 @@ public class Hero extends Char {
             com.shatteredpixel.shatteredpixeldungeon.levels.features.BoneWalls.unlock(target);
 
 			path = null;
+            if (com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.encounter(Actor.findChar(target))) return false;
 
 			if (Actor.findChar( target ) == null) {
 				if (Dungeon.level.passable[target] || Dungeon.level.avoid[target] || com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.heroPasses(target)) {
@@ -1900,6 +1901,7 @@ public class Hero extends Char {
 			else if (path.getLast() != target)
 				newPath = true;
 			else {
+                if (com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.encounter(Actor.findChar(path.get(0)))) return false;
 				if ((!Dungeon.level.passable[path.get(0)] && !com.shatteredpixel.shatteredpixeldungeon.levels.features.ForceWalls.heroPasses(path.get(0))) || Actor.findChar(path.get(0)) != null) {
 					newPath = true;
 				}

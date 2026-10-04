@@ -17,9 +17,9 @@ PROFILES={
     'warrior':(1.9,.7,.25,(-12,10,3),1.2),
     'enchanter':(1.35,.5,.45,(10,-8,-2),1.2),
     'mage':(1.1,.35,.65,(-6,8,2),.65),
-    'rogue':(1.7,.8,.2,(-14,16,2),1.8),
-    'huntress':(2.1,.65,.4,(-10,14,2),1.4),
-    'duelist':(1.8,.6,.2,(-18,16,4),1.6),
+    'rogue':(1.7,.8,.2,(-12,9,2),1.4),
+    'huntress':(2.1,.65,.4,(8,-7,2),1.4),
+    'duelist':(1.8,.6,.2,(-14,10,4),1.2),
     'cleric':(1.,.35,.7,(-10,10,3),.6),
     'necromancer':(.95,.3,.75,(7,-7,-1),.7),
     'psychic':(.8,.3,.6,(-4,7,1),.5),
@@ -278,6 +278,41 @@ def equipment_review():
     board.save(target/'weapon-aware.png')
 
 
+def portfolio():
+    """Review every delivered figure and actual dungeon crop at labelled scales."""
+    from PIL import ImageFont
+    target=HERE.parents[1]/'verification/heroes'
+    board=Image.new('RGB',(1200,1230),(25,29,31));draw=ImageDraw.Draw(board)
+    title=ImageFont.load_default(size=26);label=ImageFont.load_default(size=17)
+    small=ImageFont.load_default(size=13)
+    draw.text((25,18),'GRIMHOLLOW / INDIVIDUAL PAINTED HEROES',font=title,fill='#eedcc0')
+    draw.text((25,55),'Cloth / plate. Portrait identity preserved. Quiet idles. Held equipment follows your loadout.',font=label,fill='#b7bab9')
+    live=Image.new('RGB',(1200,1080),(25,29,31));ld=ImageDraw.Draw(live)
+    ld.text((25,18),'Actual dungeon captures / lighting on / crops at 100%',font=title,fill='#eedcc0')
+    for i,hero in enumerate(ALL_HEROES):
+        x=i%3*400;y=100+i//3*370
+        draw.text((x+22,y),hero.title(),font=title,fill='#eedcc0')
+        if hero not in HEROES:
+            draw.text((x+22,y+55),'Awaiting its individual batch',font=label,fill='#b7bab9');continue
+        for col,tier in enumerate((1,5)):
+            im=frame(hero,tier,0)
+            enlarged=im.resize((192,240),Image.Resampling.LANCZOS)
+            board.paste(enlarged,(x+col*190+7,y+35),enlarged)
+            native=im.resize((48,60),Image.Resampling.LANCZOS)
+            board.paste(native,(x+col*190+77,y+280),native)
+            draw.text((x+col*190+45,y+344),'Cloth' if tier==1 else 'Plate',font=small,fill='#b7bab9')
+        path=target/'pilot/native'/f'{hero}-1'/'sewers-lighting-on.png' if hero in PILOT else target/hero/'native/1/sewers-lighting-on.png'
+        lx=i%3*400;ly=65+i//3*335
+        ld.text((lx+15,ly),hero.title()+' / cloth',font=label,fill='#eedcc0')
+        if path.exists():
+            capture=Image.open(path).convert('RGB')
+            cx,cy=capture.width//2,capture.height//2
+            crop=capture.crop((cx-190,cy-140,cx+190,cy+150))
+            live.paste(crop,(lx+10,ly+30))
+    board.save(target/'sprint-summary.png')
+    live.save(target/'sprint-ingame.png')
+
+
 if __name__ == '__main__':
     import argparse
     parser=argparse.ArgumentParser()
@@ -285,3 +320,4 @@ if __name__ == '__main__':
     review(parser.parse_args().review)
     summary()
     equipment_review()
+    portfolio()

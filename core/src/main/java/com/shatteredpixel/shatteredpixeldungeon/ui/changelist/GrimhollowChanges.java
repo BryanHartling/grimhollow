@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.22.0","A leaner painted Mage.");
+        ChangeInfo r=release(list,"v1.22.1","A nimble painted Rogue.");
+        note(r,Icons.TALENT,"Rogue presentation","Rogue has a lean hooded silhouette, short asymmetric cloak, fitted charcoal armor and a muted teal sash. His empty hands display the equipped weapon, with quick restrained action poses. Gameplay and timing remain unchanged.");
+        r=release(list,"v1.22.0","A leaner painted Mage.");
         note(r,Icons.TALENT,"Mage presentation","Mage now has a lean purple scholarly silhouette, long astronomical stole, armor fitted to his robe and restrained class-specific movement. His equipped staff or weapon uses the painted grip layer. Gameplay and timing remain unchanged.");
         r=release(list,"v1.21.5","Your equipment becomes part of your silhouette.");
         note(r,Icons.TALENT,"Held weapon prototype","Warrior and Enchanter now display the painted weapon they wield. Grip and swing follow the class, facing and weapon category; thrown and ability-selected weapons appear during their action. Gear uses the existing paintings, with gameplay and combat timing unchanged.");

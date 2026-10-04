@@ -1,3 +1,9 @@
+# Sprint component 7 - Rogue v1.22.1
+
+- Windows/Android build and seven JUnit tests: **BUILD SUCCESSFUL in 59s**; native Windows application packaged. Focused reproducibility: **PAINTED assets=1 source sheets=144 failures=0**.
+- Existing geometry: **HERO EQUIPMENT: native draws=768 cloth/plate, both facings, eight loadouts, movement/action poses, secondary and thrown capture; failures=0**. Nine heroes, 126 creature sprites, 386 items and 60 identity emblems pass. Source, fitted cloth/plate poses, animation preview and actual lit/unlit dungeon captures reviewed in verification/heroes/rogue/.
+- No gameplay or timings changed. Test 45 remains abandoned and is not run. Physical tablet and campaign review remain with the user.
+
 # Sprint component 7 - Mage v1.22.0
 
 - Windows/Android build and seven JUnit tests: **BUILD SUCCESSFUL in 2m 29s**. Focused offline Mage export check: **assets=1 sources=143 failures=0**.

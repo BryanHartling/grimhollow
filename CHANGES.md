@@ -1,3 +1,8 @@
+# Sprint component 7 - Rogue v1.22.1
+
+- Rogue gains a lean hooded figure, asymmetric short cloak, charcoal fitted armor and teal sash, with quicker restrained poses. The existing no-fold mesh gate caught an overextended forearm; smaller reviewed attack angles preserve coherent anatomy.
+- Committed source and prompt compile offline into the existing eight armor rows and 21 poses, with class-specific grip/motion. Gameplay, world height and combat timings are unchanged.
+
 # Sprint component 7 - Mage v1.22.0
 
 - Mage retains his portrait identity in a lean purple robe and long astronomical stole, with fitted armor across all eight rows and restrained robe motion. Empty painted hands display the actual equipped staff or weapon.

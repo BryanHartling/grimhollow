@@ -1,3 +1,8 @@
+# Sprint component 7 - Cleric v1.22.4
+
+- Cleric keeps his portrait face, ivory cape and long stole panels over armor fitted to a grounded natural silhouette. Complete the grass depth repair: foreground blades in the row above upper bodies move to a cached background pass, while current-cell blades remain around feet. Use synchronized actor snapshots when summons appear; terrain art, fog and rules are unchanged.
+- Committed source and prompt compile offline into the existing eight armor rows and 21 poses, with class-specific grip/motion. Gameplay, world height and combat timings are unchanged.
+
 # Sprint component 7 - Duelist v1.22.3
 
 - Duelist keeps her portrait face and cropped curls, with a poised fencing stance, fitted teal doublet, ivory collar and asymmetric shoulder armor. Primary, ability-selected and thrown weapons use her individual grip, without changing attack timing.

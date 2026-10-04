@@ -168,7 +168,7 @@ public class GameScene extends PixelScene {
 	private GridTileMap visualGrid;
 	private WallOcclusionTilemap occlusion;
 	private TerrainFeaturesTilemap terrainFeatures;
-	private RaisedTerrainTilemap raisedTerrain;
+	private RaisedTerrainTilemap raisedTerrain, raisedTerrainBehind;
     private com.shatteredpixel.shatteredpixeldungeon.tiles.GrassOverhangTilemap grassOverhang;
 	private DungeonWallsTilemap walls;
 	private WallBlockingTilemap wallBlocking;
@@ -363,6 +363,8 @@ public class GameScene extends PixelScene {
 		
 		grassOverhang = new com.shatteredpixel.shatteredpixeldungeon.tiles.GrassOverhangTilemap();
         add(grassOverhang);
+        raisedTerrainBehind = new RaisedTerrainTilemap(true);
+        add(raisedTerrainBehind);
 
         mobs = new Group();
 		add( mobs );
@@ -1440,6 +1442,7 @@ public class GameScene extends PixelScene {
 			scene.visualGrid.map(Dungeon.level.map, Dungeon.level.width() );
 			scene.terrainFeatures.map(Dungeon.level.map, Dungeon.level.width() );
 			scene.raisedTerrain.map(Dungeon.level.map, Dungeon.level.width() );
+            scene.raisedTerrainBehind.map(Dungeon.level.map, Dungeon.level.width());
 			scene.walls.map(Dungeon.level.map, Dungeon.level.width() );
             scene.grassOverhang.map(Dungeon.level.map, Dungeon.level.width());
 		}
@@ -1454,6 +1457,7 @@ public class GameScene extends PixelScene {
 			scene.visualGrid.updateMap();
 			scene.terrainFeatures.updateMap();
 			scene.raisedTerrain.updateMap();
+            scene.raisedTerrainBehind.updateMap();
 			scene.walls.updateMap();
             scene.grassOverhang.updateMap();
 			updateFog();
@@ -1467,6 +1471,7 @@ public class GameScene extends PixelScene {
 			scene.visualGrid.updateMapCell( cell );
 			scene.terrainFeatures.updateMapCell( cell );
 			scene.raisedTerrain.updateMapCell( cell );
+            scene.raisedTerrainBehind.updateMapCell(cell);
 			scene.walls.updateMapCell( cell );
             scene.grassOverhang.updateMapCell(cell);
 			//update adjacent cells too

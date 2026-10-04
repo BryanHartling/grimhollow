@@ -32,6 +32,7 @@
     "expedition/spider.png": "da930ab597510c792df8b72d958bb7839abf23a7d07f682932c4eb5f14b3741c",
     "expedition/timber.png": "7626efcd25a2f7765df7feaa1b73dd12085f8e4758468e4600f03a4c82cc0077",
     "halls-materials.png": "ca23d09f9bcbcf2bcae30ffc4f906539c5d7a39889f521ce3f537a5661235d00",
+    "hero-pilot/cleric.png": "1980dd2d85017f134b718ec0349e422983fbeeac3217e0f41a92baf5e4c05902",
     "hero-pilot/duelist.png": "a5d8cb9f57c54b7b4aca37e2f55b54731d31a5ad00408873b6c39fc1d2984389",
     "hero-pilot/enchanter.png": "ec5aa94b5e95c42e050945920d2b3e5c57a1f372cb94b4d465bdc246c8d81a06",
     "hero-pilot/huntress.png": "e5f96fea13760e101f4d314c26acc10136b4490f7d005fb4d4269292302f3e6f",
@@ -358,7 +359,7 @@
         2048,
         1024
       ],
-      "rgba_sha256": "4580a124d2c095e2fbfbd3ac5df6cb2d64dbb8aae3989310b52c19414442b3b2"
+      "rgba_sha256": "cda8e0811ef420601ad467c2ad94a995173005629599d67d93eefba18a6065a6"
     },
     "sprites/hero_necromancer.png": {
       "size": [

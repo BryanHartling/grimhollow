@@ -1,3 +1,14 @@
+# Sprint component 7 - Cleric v1.22.4
+
+- Windows/Android build and seven JUnit tests: **BUILD SUCCESSFUL in 46s**; native Windows application packaged. Focused reproducibility: **PAINTED assets=1 source sheets=147 failures=0**.
+- Existing geometry: **HERO EQUIPMENT: native draws=1344 cloth/plate, both facings, eight loadouts, movement/action poses, secondary and thrown capture; failures=0**. Nine heroes, 126 creature sprites, 386 items and 60 identity emblems pass. Source, fitted cloth/plate poses, animation preview and actual lit/unlit dungeon captures reviewed in verification/heroes/cleric/.
+- No gameplay or timings changed. Test 45 remains abandoned and is not run. Physical tablet and campaign review remain with the user.
+
+# Grass foreground follow-up - v1.22.4
+
+- Existing geometry gate extended: **GRASS DEPTH checks=54 failures=0**, all nine heroes, standing/rustled grass and movement offsets. Grass drawing has disjoint complete background/foreground partitions; the northern foreground tile cannot cover the head, while the current cell retains foot blades at rest.
+- Live Cleric capture confirms the upper body remains visible in a grassy spawn cell. One additional cached tile batch reuses the grass texture; synchronized actor snapshots protect rendering during summons/despawns. No source pixels, terrain, fog or gameplay rules changed.
+
 # Sprint component 7 - Duelist v1.22.3
 
 - Windows/Android build and seven JUnit tests: **BUILD SUCCESSFUL in 46s**; native Windows application packaged. Focused reproducibility: **PAINTED assets=1 source sheets=146 failures=0**.

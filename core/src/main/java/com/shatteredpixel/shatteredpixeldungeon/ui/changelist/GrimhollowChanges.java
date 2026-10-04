@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.22.3","A poised painted Duelist.");
+        ChangeInfo r=release(list,"v1.22.4","A steadfast painted Cleric and clearer grass overlap.");
+        note(r,Icons.TALENT,"Cleric presentation","Cleric gains ivory cape and stole panels over fitted armor, with his portrait face and grounded natural proportions. Grass in the row behind upper bodies now draws behind them while blades remain around feet. Gameplay and timing remain unchanged.");
+        r=release(list,"v1.22.3","A poised painted Duelist.");
         note(r,Icons.TALENT,"Duelist presentation","Duelist gains a fencing stance, fitted teal doublet, ivory collar and asymmetric shoulder armor, with her portrait identity and natural proportions. Equipped and ability-selected weapons follow her grip. Gameplay and timing remain unchanged.");
         r=release(list,"v1.22.2","A long-legged painted ranger.");
         note(r,Icons.TALENT,"Huntress presentation","Huntress has a moss-green split coat, short fur mantle, long legs and fitted ranger armor. Her held bow or other weapon follows the equipped loadout, with restrained coat movement. Gameplay and timing remain unchanged.");

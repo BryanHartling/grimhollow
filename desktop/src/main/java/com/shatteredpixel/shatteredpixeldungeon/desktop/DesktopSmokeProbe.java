@@ -2249,6 +2249,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             }
             Dungeon.hero.heroClass=original;Dungeon.hero.sprite=originalSprite;
             heroEquipmentChecks(buffer,camera,failures);
+            grassDepthChecks(failures);
             java.io.File jar=new java.io.File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
             try(java.util.jar.JarFile classes=new java.util.jar.JarFile(jar)) {
                 java.util.Enumeration<java.util.jar.JarEntry> entries=classes.entries();
@@ -2389,6 +2390,51 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if(!failures.isEmpty())throw new AssertionError("Rendering acceptance failures="+failures.size());
             System.out.println("TESTS 24-26, 34, 36 PASS; test 35 retired by recovery");
         }catch(Exception e){throw new RuntimeException(e);}
+    }
+    private void grassDepthChecks(java.util.List<String> failures)throws Exception {
+        Class<?> type=com.shatteredpixel.shatteredpixeldungeon.tiles.RaisedTerrainTilemap.class;
+        java.lang.reflect.Field behindField=type.getDeclaredField("behindCells"),nextField=type.getDeclaredField("next");
+        behindField.setAccessible(true);nextField.setAccessible(true);
+        java.util.Set<Integer> behind=(java.util.Set<Integer>)behindField.get(null),next=(java.util.Set<Integer>)nextField.get(null);
+        java.util.Set<Integer> savedBehind=new java.util.HashSet<>(behind),savedSkip=new java.util.HashSet<>(com.shatteredpixel.shatteredpixeldungeon.tiles.RaisedTerrainTilemap.skipCells);
+        java.lang.reflect.Method protect=type.getDeclaredMethod("protectUpperBody",com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite.class);
+        java.lang.reflect.Method visual=type.getDeclaredMethod("getTileVisual",int.class,int.class,boolean.class);
+        protect.setAccessible(true);visual.setAccessible(true);
+        HeroClass original=Dungeon.hero.heroClass;com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite originalSprite=Dungeon.hero.sprite;
+        java.util.Map<Integer,Integer> terrain=new java.util.HashMap<>();
+        int cell=Dungeon.hero.pos,width=Dungeon.level.width(),checks=0;
+        for(int dy=-2;dy<=1;dy++)for(int dx=-1;dx<=1;dx++){int p=cell+dy*width+dx;if(p>=0&&p<Dungeon.level.length())terrain.put(p,Dungeon.level.map[p]);}
+        com.shatteredpixel.shatteredpixeldungeon.tiles.RaisedTerrainTilemap back=new com.shatteredpixel.shatteredpixeldungeon.tiles.RaisedTerrainTilemap(true),front=new com.shatteredpixel.shatteredpixeldungeon.tiles.RaisedTerrainTilemap();
+        try {
+            for(HeroClass hero:HeroClass.values()){
+                Dungeon.hero.heroClass=hero;
+                com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
+                for(int state:new int[]{Terrain.HIGH_GRASS,Terrain.FURROWED_GRASS}){
+                    for(int p:terrain.keySet())Dungeon.level.map[p]=state;
+                    for(float offset:new float[]{-4,0,4}){
+                        sprite.place(cell);sprite.x+=offset;sprite.y+=offset;
+                        next.clear();protect.invoke(null,sprite);behind.clear();behind.addAll(next);
+                        for(int p:terrain.keySet()){
+                            int a=(Integer)visual.invoke(back,p,state,false),b=(Integer)visual.invoke(front,p,state,false);
+                            if((a>=0)==(b>=0))failures.add("24 grass omitted/duplicated "+hero+" cell="+p);
+                        }
+                        if(offset==0){
+                            if((Integer)visual.invoke(front,cell-width,state,false)>=0)failures.add("24 grass covers head "+hero);
+                            if((Integer)visual.invoke(front,cell,state,false)<0)failures.add("24 grass missing at feet "+hero);
+                        }
+                        checks++;
+                    }
+                }
+                sprite.destroy();
+            }
+        }finally{
+            for(java.util.Map.Entry<Integer,Integer> e:terrain.entrySet())Dungeon.level.map[e.getKey()]=e.getValue();
+            Dungeon.hero.heroClass=original;Dungeon.hero.sprite=originalSprite;
+            behind.clear();behind.addAll(savedBehind);next.clear();
+            com.shatteredpixel.shatteredpixeldungeon.tiles.RaisedTerrainTilemap.skipCells.clear();com.shatteredpixel.shatteredpixeldungeon.tiles.RaisedTerrainTilemap.skipCells.addAll(savedSkip);
+            back.destroy();front.destroy();
+        }
+        System.out.println("GRASS DEPTH: nine heroes, standing/rustled, movement offsets, head/feet partition checks="+checks+" failures="+failures.size());
     }
     private void heroEquipmentChecks(com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,Camera camera,java.util.List<String> failures)throws Exception {
         com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero hero=Dungeon.hero;

@@ -54,6 +54,7 @@ public class TalentButton extends Button {
 	Image bg;
 
 	ColorBlock fill;
+    private ColorBlock[] sockets, centers;
 
 	public enum Mode {
 		INFO,
@@ -75,6 +76,11 @@ public class TalentButton extends Button {
 
 		icon = new TalentIcon( talent );
 		add(icon);
+        sockets=new ColorBlock[talent.maxPoints()];centers=new ColorBlock[sockets.length];
+        for(int i=0;i<sockets.length;i++){
+            sockets[i]=new ColorBlock(1,1,0xFF857766);add(sockets[i]);
+            centers[i]=new ColorBlock(1,1,0xFF171511);add(centers[i]);
+        }
 	}
 
 	@Override
@@ -82,7 +88,7 @@ public class TalentButton extends Button {
 		super.createChildren();
 
 		fill = new ColorBlock(0, 4, 0xFFFFFF44);
-		add(fill);
+		add(fill);fill.visible=false;
 
 		bg = new Image(Assets.Interfaces.TALENT_BUTTON);
 		add(bg);
@@ -105,6 +111,13 @@ public class TalentButton extends Button {
 		icon.x = x + 2;
 		icon.y = y + 2;
 		PixelScene.align(icon);
+        if(sockets!=null)for(int i=0;i<sockets.length;i++){
+            float cell=(WIDTH-4f)/sockets.length;
+            sockets[i].x=x+2+i*cell;sockets[i].y=y+21;sockets[i].size(cell-1,4);
+            centers[i].x=sockets[i].x+.6f;centers[i].y=y+21.6f;centers[i].size(cell-2.2f,2.8f);
+            sockets[i].hardlight(i<pointsInTalent?0xFFE59A:0x857766);
+            centers[i].hardlight(i<pointsInTalent?0xFFC84A:0x171511);
+        }
 	}
 
 	@Override

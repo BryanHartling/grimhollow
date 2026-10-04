@@ -169,6 +169,7 @@ public class GameScene extends PixelScene {
 	private WallOcclusionTilemap occlusion;
 	private TerrainFeaturesTilemap terrainFeatures;
 	private RaisedTerrainTilemap raisedTerrain;
+    private com.shatteredpixel.shatteredpixeldungeon.tiles.GrassOverhangTilemap grassOverhang;
 	private DungeonWallsTilemap walls;
 	private WallBlockingTilemap wallBlocking;
 	private FogOfWar fog;
@@ -360,7 +361,10 @@ public class GameScene extends PixelScene {
 		emoicons = new Group();
 		overFogEffects = new Group();
 		
-		mobs = new Group();
+		grassOverhang = new com.shatteredpixel.shatteredpixeldungeon.tiles.GrassOverhangTilemap();
+        add(grassOverhang);
+
+        mobs = new Group();
 		add( mobs );
 
 		hero = new HeroSprite();
@@ -1437,6 +1441,7 @@ public class GameScene extends PixelScene {
 			scene.terrainFeatures.map(Dungeon.level.map, Dungeon.level.width() );
 			scene.raisedTerrain.map(Dungeon.level.map, Dungeon.level.width() );
 			scene.walls.map(Dungeon.level.map, Dungeon.level.width() );
+            scene.grassOverhang.map(Dungeon.level.map, Dungeon.level.width());
 		}
 		updateFog();
 	}
@@ -1450,6 +1455,7 @@ public class GameScene extends PixelScene {
 			scene.terrainFeatures.updateMap();
 			scene.raisedTerrain.updateMap();
 			scene.walls.updateMap();
+            scene.grassOverhang.updateMap();
 			updateFog();
 		}
 	}
@@ -1462,6 +1468,7 @@ public class GameScene extends PixelScene {
 			scene.terrainFeatures.updateMapCell( cell );
 			scene.raisedTerrain.updateMapCell( cell );
 			scene.walls.updateMapCell( cell );
+            scene.grassOverhang.updateMapCell(cell);
 			//update adjacent cells too
 			updateFog( cell, 1 );
 		}
@@ -1560,6 +1567,7 @@ public class GameScene extends PixelScene {
 			scene.fog.updateFog();
 			scene.wallBlocking.updateMap();
 			scene.walls.updateMap();
+            scene.grassOverhang.updateMap();
 		}
 	}
 
@@ -1568,6 +1576,7 @@ public class GameScene extends PixelScene {
 			scene.fog.updateFogArea(x, y, w, h);
 			scene.wallBlocking.updateArea(x, y, w, h);
 			scene.walls.updateMap();
+            scene.grassOverhang.updateMap();
 		}
 	}
 	
@@ -1576,6 +1585,7 @@ public class GameScene extends PixelScene {
 			scene.fog.updateFog( cell, radius );
 			scene.wallBlocking.updateArea( cell, radius );
 			scene.walls.updateMap();
+            scene.grassOverhang.updateMap();
 		}
 	}
 	

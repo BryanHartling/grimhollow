@@ -1,3 +1,9 @@
+# Sprint component 1 - v1.21.0
+
+- Hexcaster retreat now animates its logical move through the same callback as other mobs, keeping attacks and examination aligned. Extend the native displacement checks to exercise its real retreat, teleport and knockback paths.
+- Move upper grass from the foreground wall layer into its own lit, fog-covered layer behind characters; retain the lower foreground blades around their feet. All terrain rules and source artwork are unchanged.
+- Keep the journal book visible with keys in a separate strip; unread pages pulse a small gold badge, never fade the book or flash the container. Talent ranks use solid gold versus hollow dark sockets, with an explicit available-point count.
+
 # In-game Playtest access - v1.20.2
 
 - Restore Playtest in the active-run menu for living heroes whose save already has Playtest enabled. Opt in through the home-screen tools once; reuse the existing persistent save flag, including older Playtest saves. Opening menus does not change normal-run eligibility.

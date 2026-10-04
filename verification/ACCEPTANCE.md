@@ -1,3 +1,11 @@
+# Sprint component 1 - v1.21.0
+
+- `gradlew.bat core:test desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 49s**, seven JUnit tests with zero failures. Packaged `desktop/build/windows/1.21.0/Grimhollow/Grimhollow.exe`.
+- Existing native interface and polish scenarios each passed in landscape and portrait: **four exit=0**. **SHAMAN POSITION PASS** covers all three shaman variants plus Hexcaster retreat, teleport, knockback, occupancy, melee and examination. **JOURNAL UI PASS** includes a persistent book while carrying keys, separate unread badge, acknowledgement through real input and fitted journal pages. Talent input/rank limits remain **TEST 54 UI PASS ... failures=0**.
+- Upper tall/furrowed grass is now in a dedicated layer before characters; the lower foreground remains after characters. No terrain rules or assets changed. Native talent-panel screenshots visually inspected; gold filled versus hollow ranks and available-point labels fit both layouts.
+- Evidence: `verification/interface/{portrait,landscape}/enchanter-rank-cap.png` and `journal-notes.png`. Full local fixture output under `.local/sprint-component-1/`.
+- Test 45 remains **Abandoned: test failed**, not run. Physical tablet confirmation remains a human playtest. Remote CI is checked after push with unchanged checks.
+
 # In-game Playtest access - v1.20.2
 
 | Gate | Result | Executed evidence |

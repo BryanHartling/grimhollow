@@ -232,6 +232,7 @@ public class MenuPane extends Component {
 		private Image bg;
 		private Image journalIcon;
 		private KeyDisplay keyIcon;
+        private com.watabou.noosa.ColorBlock unread;
 
 		private Document flashingDoc = null;
 		private String flashingPage = null;
@@ -260,6 +261,8 @@ public class MenuPane extends Component {
 
 			keyIcon = new KeyDisplay();
 			add(keyIcon);
+            unread = new com.watabou.noosa.ColorBlock(2,2,0xFFFFD477);
+            unread.visible=false;add(unread);
 			updateKeyDisplay();
 		}
 
@@ -275,9 +278,10 @@ public class MenuPane extends Component {
 			PixelScene.align(journalIcon);
 
 			keyIcon.x = bg.x + 1;
-			keyIcon.y = bg.y + 1;
+			keyIcon.y = bg.y - 6;
 			keyIcon.width = bg.width - 2;
-			keyIcon.height = bg.height - 2;
+			keyIcon.height = 5;
+            unread.x=bg.x+bg.width()-2;unread.y=bg.y+1;
 			PixelScene.align(keyIcon);
 		}
 
@@ -287,25 +291,16 @@ public class MenuPane extends Component {
 		public void update() {
 			super.update();
 
-			if (flashingPage != null){
-				journalIcon.am = (float)Math.abs(Math.cos( StatusPane.FLASH_RATE * (time += Game.elapsed) ));
-				keyIcon.am = journalIcon.am;
-				bg.brightness(0.5f + journalIcon.am);
-				if (time >= Math.PI/StatusPane.FLASH_RATE) {
-					time = 0;
-				}
-			}
+            unread.visible=flashingPage!=null;
+            if(unread.visible)unread.alpha(.65f+.35f*(float)((1+Math.cos(2*(time+=Game.elapsed)))/2));
+
 		}
 
 		public void updateKeyDisplay() {
 			keyIcon.updateKeys();
 			keyIcon.visible = keyIcon.keyCount() > 0;
-			journalIcon.visible = !keyIcon.visible;
-			if (keyIcon.keyCount() > 0) {
-				bg.brightness(.8f - (Math.min(6, keyIcon.keyCount()) / 20f));
-			} else {
-				bg.resetColor();
-			}
+			journalIcon.visible = true;
+			bg.resetColor();
 		}
 
 		@Override
@@ -316,11 +311,7 @@ public class MenuPane extends Component {
 
 		@Override
 		protected void onPointerUp() {
-			if (keyIcon.keyCount() > 0) {
-				bg.brightness(.8f - (Math.min(6, keyIcon.keyCount()) / 20f));
-			} else {
-				bg.resetColor();
-			}
+			bg.resetColor();
 		}
 
 		@Override
@@ -354,6 +345,7 @@ public class MenuPane extends Component {
 					GameScene.show( new WndJournal() );
 				}
 				flashingPage = null;
+                unread.visible=false;
 			} else {
 				GameScene.show( new WndJournal() );
 			}

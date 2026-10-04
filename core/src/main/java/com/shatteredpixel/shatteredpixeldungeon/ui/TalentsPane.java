@@ -164,6 +164,7 @@ public class TalentsPane extends ScrollPane {
 		private int tier;
 
 		public RenderedTextBlock title;
+        private RenderedTextBlock available;
 		ArrayList<TalentButton> buttons;
 
 		ArrayList<Image> stars = new ArrayList<>();
@@ -257,13 +258,16 @@ public class TalentsPane extends ScrollPane {
 
 			int totStars = Talent.tierLevelThresholds[tier+1] - Talent.tierLevelThresholds[tier] + Dungeon.hero.bonusTalentPoints(tier);
 			int openStars = Dungeon.hero.talentPointsAvailable(tier);
+            if(available==null){available=PixelScene.renderTextBlock(6);add(available);}
+            available.text(Messages.get(TalentsPane.class,"available",openStars));
+            available.hardlight(openStars>0?0xFFE59A:0xA49B8B);
 			int usedStars = Dungeon.hero.talentPointsSpent(tier);
 			for (int i = 0; i < totStars; i++){
 				Image im = new Speck().image(Speck.STAR);
 				stars.add(im);
 				add(im);
 				if (i >= openStars && i < (openStars + usedStars)){
-					im.tint(0.75f, 0.75f, 0.75f, 0.9f);
+					im.hardlight(0x574F46);
 				} else if (i >= (openStars + usedStars)){
 					im.tint(0f, 0f, 0f, 0.9f);
 				}
@@ -282,7 +286,8 @@ public class TalentsPane extends ScrollPane {
 
 			int regStars = Talent.tierLevelThresholds[tier+1] - Talent.tierLevelThresholds[tier];
 
-			float titleWidth = title.width();
+			if(available!=null)available.setPos(x+(width-available.width())/2,y+title.height()+3);
+            float titleWidth = title.width();
 			titleWidth += 2 + Math.min(stars.size(), regStars)*6;
 			title.setPos(x + (width - titleWidth)/2f, y);
 
@@ -310,7 +315,7 @@ public class TalentsPane extends ScrollPane {
 			float gap = (width - buttons.size()*TalentButton.WIDTH)/(buttons.size()+1);
 			left = x + gap;
 			for (TalentButton btn : buttons){
-				btn.setPos(left, title.bottom() + 4);
+				btn.setPos(left, title.bottom() + (available==null?4:14));
 				PixelScene.align(btn);
 				left += btn.width() + gap;
 			}

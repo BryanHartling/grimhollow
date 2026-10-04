@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.20.2","Reopen testing tools without leaving the dungeon.");
+        ChangeInfo r=release(list,"v1.21.0","Clearer characters and signals.");
+        note(r,Icons.JOURNAL,"Visibility and interface fixes","Tall grass now stands behind upper bodies, with foreground blades around feet. The journal stays visible beside its keys and uses a small unread badge. Talent ranks distinguish filled and empty sockets and show available points. Hexcaster retreat stays aligned with its map position.");
+        r=release(list,"v1.20.2","Reopen testing tools without leaving the dungeon.");
         note(r,Icons.TALENT,"Playtest in your run",
                 "Enable Playtest for a save through the home-screen Playtest menu. That run's in-game menu then includes Playtest, with all its existing tools. The shortcut also appears for previously enabled saves and remains available after reloading or changing floors.");
         r=release(list,"v1.20.1","Warrior and Enchanter character-art proof of concept.");

@@ -595,6 +595,16 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             com.shatteredpixel.shatteredpixeldungeon.Statistics.deepestFloor=Math.max(com.shatteredpixel.shatteredpixeldungeon.Statistics.deepestFloor,Dungeon.depth);
             com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal.last_index=0;
             Object menu=RecoveryChecks.field(Game.scene(),"menu");
+            com.shatteredpixel.shatteredpixeldungeon.ui.MenuPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.MenuPane)menu;
+            com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey key=new com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey();key.depth=Dungeon.depth;
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(key);pane.updateKeys();
+            pane.flashForPage(com.shatteredpixel.shatteredpixeldungeon.journal.Document.ADVENTURERS_GUIDE,com.shatteredpixel.shatteredpixeldungeon.journal.Document.GUIDE_SURPRISE_ATKS);
+            pane.update();Object button=RecoveryChecks.field(menu,"btnJournal");
+            Image book=(Image)RecoveryChecks.field(button,"journalIcon");
+            if(!book.visible||book.am!=1||!((com.watabou.noosa.Gizmo)RecoveryChecks.field(button,"unread")).visible)throw new AssertionError("Unread journal must keep book opaque beside keys");
+            pointerGestureReview((com.watabou.noosa.Gizmo)RecoveryChecks.field(menu,"btnJournal"),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
+            closeReviewWindows();
+            if(((com.watabou.noosa.Gizmo)RecoveryChecks.field(button,"unread")).visible)throw new AssertionError("Journal acknowledgement did not clear unread badge");
             pointerGestureReview((com.watabou.noosa.Gizmo)RecoveryChecks.field(menu,"btnJournal"),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
         }else if(frames==630){
             interfaceBounds();capture("journal-notes");closeReviewWindows();
@@ -1708,11 +1718,12 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         float elapsed=Game.elapsed;
         try {
             Game.elapsed=.02f;
-            for(Class<? extends com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman> type:new Class[]{
+            for(Class<? extends com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob> type:new Class[]{
                     com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.RedShaman.class,
                     com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.BlueShaman.class,
-                    com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.PurpleShaman.class}) {
-                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman shaman=type.getDeclaredConstructor().newInstance();
+                    com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.PurpleShaman.class,
+                    com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Hexcaster.class}) {
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob shaman=type.getDeclaredConstructor().newInstance();
                 int origin=Dungeon.hero.pos-2,destination=Dungeon.hero.pos+1,w=Dungeon.level.width();
                 for(int dy=-2;dy<=2;dy++)for(int dx=-4;dx<=3;dx++)Level.set(Dungeon.hero.pos+dx+dy*w,Terrain.EMPTY);
                 if(Actor.findChar(destination)!=null)throw new AssertionError("Shaman fixture destination occupied");
@@ -1720,6 +1731,18 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 shaman.sprite=shaman.sprite();sprites.add(shaman.sprite);shaman.sprite.link(shaman);
                 Actor.add(shaman);Dungeon.level.mobs.add(shaman);
                 Dungeon.level.heroFOV[origin]=true;shaman.sprite.visible=true;
+                if(shaman instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Hexcaster){
+                    shaman.pos=Dungeon.hero.pos-1;shaman.sprite.place(shaman.pos);
+                    shaman.fieldOfView=new boolean[Dungeon.level.length()];java.util.Arrays.fill(shaman.fieldOfView,true);
+                    java.lang.reflect.Field enemy=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob.class.getDeclaredField("enemy");enemy.setAccessible(true);enemy.set(shaman,Dungeon.hero);
+                    int previous=shaman.pos;shaman.state=shaman.HUNTING;shaman.state.act(true,false);
+                    if(shaman.pos==previous)throw new AssertionError("Hexcaster retreat did not move");
+                    for(int frame=0;frame<30;frame++)sprites.update();
+                    com.watabou.utils.PointF expected=shaman.sprite.worldToCamera(shaman.pos);
+                    if(Math.abs(shaman.sprite.x-expected.x)>.01f||Math.abs(shaman.sprite.y-expected.y)>.01f)throw new AssertionError("Hexcaster retreat sprite remained in old cell");
+                    shaman.pos=origin;shaman.sprite.place(origin);
+                }
+
                 Buff.affect(shaman,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Vertigo.class,10);
                 for(int attempt=0;attempt<30 && shaman.pos==origin;attempt++)shaman.move(origin+1);
                 if(shaman.pos==origin)throw new AssertionError("Vertigo movement fixture did not move");
@@ -1750,7 +1773,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 shaman.HP=0;Actor.remove(shaman);Dungeon.level.mobs.remove(shaman);sprites.destroy();
             }
         } finally {Game.elapsed=elapsed;com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite.setMoveInterval(com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite.DEFAULT_MOVE_INTERVAL);}
-        System.out.println("SHAMAN POSITION PASS: all three variants, overlapping movement/teleport/knockback, sprite cell equals occupancy, melee and examine targets");
+        System.out.println("SHAMAN POSITION PASS: all three variants and Hexcaster retreat, overlapping movement/teleport/knockback, sprite cell equals occupancy, melee and examine targets");
     }
     @SuppressWarnings("unchecked") private com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane handbookPage(int index){
         return ((java.util.List<com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane>)RecoveryChecks.field(reviewHandbook(),"pages")).get(index);

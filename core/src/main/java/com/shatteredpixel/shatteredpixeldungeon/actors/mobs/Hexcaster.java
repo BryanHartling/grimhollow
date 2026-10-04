@@ -19,8 +19,9 @@ public class Hexcaster extends Warlock {
     @Override protected void zap(){spend(TICK);Invisibility.dispel(this);if(enemy!=null)curse(enemy);}
     private class HexHunting extends Hunting {
         @Override public boolean act(boolean inFOV,boolean alerted){
+            int oldPos=pos;
             if(inFOV&&enemy!=null&&Dungeon.level.adjacent(pos,enemy.pos)&&!rooted&&getFurther(enemy.pos)){
-                spend(1/speed());return true;
+                spend(1/speed());return moveSprite(oldPos,pos);
             }
             return super.act(inFOV,alerted);
         }

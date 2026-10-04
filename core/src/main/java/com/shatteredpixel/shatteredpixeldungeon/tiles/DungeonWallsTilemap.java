@@ -132,9 +132,9 @@ public class DungeonWallsTilemap extends DungeonTilemap {
 		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.BARRICADE){
 			return -1; // BarricadeLayer draws the complete boards inside their own cell.
 		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.HIGH_GRASS){
-			return DungeonTileSheet.getVisualWithAlts(DungeonTileSheet.HIGH_GRASS_OVERHANG, pos + mapWidth);
+			return -1; // Upper vegetation is behind actors, unlike solid walls.
 		} else if (pos + mapWidth < size && knownTerrain(pos+mapWidth) == Terrain.FURROWED_GRASS){
-			return DungeonTileSheet.getVisualWithAlts(DungeonTileSheet.FURROWED_OVERHANG, pos + mapWidth);
+			return -1;
 		}
 
 		return -1;

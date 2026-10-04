@@ -1,6 +1,6 @@
 # Grimhollow
 
-v1.20.2 restores in-game Playtest access for enabled saves; see the instructions below. The agreed playtesting fixes, class changes, remaining seven hero upgrades and equipment-aware character sprites are queued under **Next sprint: playtesting fixes and character presentation** at the end of this document.
+v1.21.0 fixes Hexcaster retreat, grass overlap, journal notifications and talent-rank contrast. In-game Playtest access remains available for enabled saves; see the instructions below. The agreed playtesting fixes, class changes, remaining seven hero upgrades and equipment-aware character sprites are queued under **Next sprint: playtesting fixes and character presentation** at the end of this document.
 
 v1.20.1 is a **Warrior and Enchanter art proof of concept**: proportioned painted bodies, class-fitted armor, distinct silhouettes and restrained motion with still idles. Faces match the existing selection portraits. Gameplay, world height and animation timings are unchanged; the other seven heroes await review of this pilot. Comparisons, pose sheets and animation previews are in [verification/heroes/pilot](verification/heroes/pilot/). Windows launcher: `desktop/build/windows/1.20.2/Grimhollow/Grimhollow.exe`; Android: `android/build/outputs/apk/debug/android-debug.apk`.
 
@@ -244,7 +244,7 @@ By **Evan Debenham and contributors**: [Shattered Pixel Dungeon project](https:/
 
 ## Next sprint: playtesting fixes and character presentation
 
-Agreed planning scope, updated 2026-10-04; implementation has not started. This incorporates the latest playtesting discussion and supersedes earlier proposals to expose a recovering Horror on ordinary sight, remove the Seer passive, or allow Crystal inventory casting without a talent. In-game Playtest access is already delivered in v1.20.2 and is not a new sprint task.
+Sprint in progress, updated 2026-10-04: component 1 delivered in v1.21.0; components 2–7 remain. This incorporates the latest playtesting discussion and supersedes earlier proposals to expose a recovering Horror on ordinary sight, remove the Seer passive, or allow Crystal inventory casting without a talent. In-game Playtest access is already delivered in v1.20.2 and is not a new sprint task.
 
 ### Component 1 - Positioning, grass and notification fixes
 
@@ -295,4 +295,4 @@ Extend the Warrior/Enchanter pilot direction to Mage, Rogue, Huntress, Duelist, 
 
 ### Delivery boundaries
 
-Check remaining usage before each component and each hero batch; notify the user and stop at a committed boundary if the next will not fit. Finish components in order, with clean builds, descriptive commits and pushes at boundaries. Reuse and extend relevant existing checks, verify once at each component's end, and preserve all unrelated gates. Run affected class gates and the combined gate after gameplay changes; build Windows/Android and confirm unchanged CI checks at release boundaries. Asset work must reproduce offline from committed sources. Report actual executed results and any device-playtesting limits. Terrain contrast test 45 remains **Abandoned: test failed** and is not run. This sprint plan does not authorize starting implementation in this planning turn.
+Check remaining usage before each component and each hero batch; notify the user and stop at a committed boundary if the next will not fit. Finish components in order, with clean builds, descriptive commits and pushes at boundaries. Reuse and extend relevant existing checks, verify once at each component's end, and preserve all unrelated gates. Run affected class gates and the combined gate after gameplay changes; build Windows/Android and confirm unchanged CI checks at release boundaries. Asset work must reproduce offline from committed sources. Report actual executed results and any device-playtesting limits. Terrain contrast test 45 remains **Abandoned: test failed** and is not run. Implementation was authorized after this plan was agreed.

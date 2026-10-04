@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.22.1","A nimble painted Rogue.");
+        ChangeInfo r=release(list,"v1.22.2","A long-legged painted ranger.");
+        note(r,Icons.TALENT,"Huntress presentation","Huntress has a moss-green split coat, short fur mantle, long legs and fitted ranger armor. Her held bow or other weapon follows the equipped loadout, with restrained coat movement. Gameplay and timing remain unchanged.");
+        r=release(list,"v1.22.1","A nimble painted Rogue.");
         note(r,Icons.TALENT,"Rogue presentation","Rogue has a lean hooded silhouette, short asymmetric cloak, fitted charcoal armor and a muted teal sash. His empty hands display the equipped weapon, with quick restrained action poses. Gameplay and timing remain unchanged.");
         r=release(list,"v1.22.0","A leaner painted Mage.");
         note(r,Icons.TALENT,"Mage presentation","Mage now has a lean purple scholarly silhouette, long astronomical stole, armor fitted to his robe and restrained class-specific movement. His equipped staff or weapon uses the painted grip layer. Gameplay and timing remain unchanged.");

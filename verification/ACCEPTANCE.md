@@ -1,3 +1,9 @@
+# Sprint component 7 - Huntress v1.22.2
+
+- Windows/Android build and seven JUnit tests: **BUILD SUCCESSFUL in 43s**; native Windows application packaged. Focused reproducibility: **PAINTED assets=1 source sheets=145 failures=0**.
+- Existing geometry: **HERO EQUIPMENT: native draws=960 cloth/plate, both facings, eight loadouts, movement/action poses, secondary and thrown capture; failures=0**. Nine heroes, 126 creature sprites, 386 items and 60 identity emblems pass. Source, fitted cloth/plate poses, animation preview and actual lit/unlit dungeon captures reviewed in verification/heroes/huntress/.
+- No gameplay or timings changed. Test 45 remains abandoned and is not run. Physical tablet and campaign review remain with the user.
+
 # Sprint component 7 - Rogue v1.22.1
 
 - Windows/Android build and seven JUnit tests: **BUILD SUCCESSFUL in 59s**; native Windows application packaged. Focused reproducibility: **PAINTED assets=1 source sheets=144 failures=0**.

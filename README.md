@@ -2,7 +2,7 @@
 
 v1.22.1 includes 2 of seven additional painted heroes, following the weapon-aware Warrior/Enchanter pilot and the sprint's interface, Horror, rune, Psychic and icon fixes. Each hero is reviewed at a committed batch boundary; remaining batches are listed below.
 
-v1.20.1 is a **Warrior and Enchanter art proof of concept**: proportioned painted bodies, class-fitted armor, distinct silhouettes and restrained motion with still idles. Faces match the existing selection portraits. Gameplay, world height and animation timings are unchanged; the other seven heroes await review of this pilot. Comparisons, pose sheets and animation previews are in [verification/heroes/pilot](verification/heroes/pilot/). Windows launcher: `desktop/build/windows/1.22.1/Grimhollow/Grimhollow.exe`; Android: `android/build/outputs/apk/debug/android-debug.apk`.
+v1.20.1 is a **Warrior and Enchanter art proof of concept**: proportioned painted bodies, class-fitted armor, distinct silhouettes and restrained motion with still idles. Faces match the existing selection portraits. Gameplay, world height and animation timings are unchanged; the other seven heroes await review of this pilot. Comparisons, pose sheets and animation previews are in [verification/heroes/pilot](verification/heroes/pilot/). Windows launcher: `desktop/build/windows/1.22.2/Grimhollow/Grimhollow.exe`; Android: `android/build/outputs/apk/debug/android-debug.apk`.
 
 v1.19.2 refreshes Adventuring Notes with painted terrain/landmark icons and fitted NPC portraits. Discovered elemental treasuries receive persistent fire, water or lightning reminders, including preparation tips, until their seals are opened. The home-screen Update Log describes these releases.
 
@@ -50,7 +50,7 @@ For rapid testing, open **Menu → Playtest → enable for this save → Travel 
 
 Existing saves remain compatible, but the hunter is not retroactively inserted into an already generated City floor. A new run is the reliable way to experience the normal quest. All eight components have committed checkpoints; see [verification](verification/ACCEPTANCE.md) and [known issues](KNOWN_ISSUES.md). The existing terrain-contrast gate remains enforced and is still a known failure; no full green CI or physical-tablet playtest is claimed.
 
-Local launchers after building: `desktop/build/windows/1.22.1/Grimhollow/Grimhollow.exe` (keep its whole folder), `desktop/build/libs/desktop-1.17.1.jar`, and `android/build/outputs/apk/debug/android-debug.apk`. Android is a debug-signed sideload build.
+Local launchers after building: `desktop/build/windows/1.22.2/Grimhollow/Grimhollow.exe` (keep its whole folder), `desktop/build/libs/desktop-1.17.1.jar`, and `android/build/outputs/apk/debug/android-debug.apk`. Android is a debug-signed sideload build.
 
 Original expedition paintings, exact generation prompts and the offline packing recipe are in [sources](tools/painted/sources/expedition/), [prompts](tools/painted/expedition-prompts.json), and [packer](tools/painted/expedition.py). Native screenshots are in `verification/interface/{landscape,portrait}/expedition-*.png`; CI reconstructs the committed sources without an image-generation service.
 
@@ -244,7 +244,7 @@ By **Evan Debenham and contributors**: [Shattered Pixel Dungeon project](https:/
 
 ## Next sprint: playtesting fixes and character presentation
 
-Sprint in progress, updated 2026-10-04: components 1–6 delivered in v1.21.0–1.21.5; component 7 has delivered 2 of seven additional hero batches through Rogue v1.22.1. This incorporates the latest playtesting discussion and supersedes earlier proposals to expose a recovering Horror on ordinary sight, remove the Seer passive, or allow Crystal inventory casting without a talent. In-game Playtest access is already delivered in v1.20.2 and is not a new sprint task.
+Sprint in progress, updated 2026-10-04: components 1–6 delivered in v1.21.0–1.21.5; component 7 has delivered 3 of seven additional hero batches through Huntress v1.22.2. This incorporates the latest playtesting discussion and supersedes earlier proposals to expose a recovering Horror on ordinary sight, remove the Seer passive, or allow Crystal inventory casting without a talent. In-game Playtest access is already delivered in v1.20.2 and is not a new sprint task.
 
 ### Component 1 - Positioning, grass and notification fixes
 

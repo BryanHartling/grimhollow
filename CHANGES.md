@@ -1,3 +1,8 @@
+# Sprint component 7 - Huntress v1.22.2
+
+- Huntress retains her portrait in a long-legged moss-green ranger silhouette, split coat and short fur mantle, with armor fitted to her body and calmer coat motion. Held bows and other equipped weapons use her left-hand anchors.
+- Committed source and prompt compile offline into the existing eight armor rows and 21 poses, with class-specific grip/motion. Gameplay, world height and combat timings are unchanged.
+
 # Sprint component 7 - Rogue v1.22.1
 
 - Rogue gains a lean hooded figure, asymmetric short cloak, charcoal fitted armor and teal sash, with quicker restrained poses. The existing no-fold mesh gate caught an overextended forearm; smaller reviewed attack angles preserve coherent anatomy.

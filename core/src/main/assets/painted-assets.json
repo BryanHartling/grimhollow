@@ -33,6 +33,7 @@
     "expedition/timber.png": "7626efcd25a2f7765df7feaa1b73dd12085f8e4758468e4600f03a4c82cc0077",
     "halls-materials.png": "ca23d09f9bcbcf2bcae30ffc4f906539c5d7a39889f521ce3f537a5661235d00",
     "hero-pilot/enchanter.png": "ec5aa94b5e95c42e050945920d2b3e5c57a1f372cb94b4d465bdc246c8d81a06",
+    "hero-pilot/huntress.png": "e5f96fea13760e101f4d314c26acc10136b4490f7d005fb4d4269292302f3e6f",
     "hero-pilot/mage.png": "d509082abad4f0468b58a2546ec365d34953fac99151e00c0d7a6e15c0f11a94",
     "hero-pilot/rogue.png": "f6ae2a4347d4fe5cbac60da9dac49f8724e5aefb5699b2417d9100e04faae6af",
     "hero-pilot/warrior.png": "8a32dfbac9f50803e5ac4ebdbd7291f5e70d486b1b692c3cabaadf7480bbe7bf",
@@ -342,7 +343,7 @@
         2048,
         1024
       ],
-      "rgba_sha256": "9234635004f0dd4c1d1e6b155acc01bf5b89923573846f2c986c000e8721de9d"
+      "rgba_sha256": "d142ecb3b61b30a68ceb998ab845bae917918f7d77a9378d883d8879561d62cf"
     },
     "sprites/hero_duelist.png": {
       "size": [

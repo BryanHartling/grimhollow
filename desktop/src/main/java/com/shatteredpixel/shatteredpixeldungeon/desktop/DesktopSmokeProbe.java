@@ -126,7 +126,20 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(!(Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.ChangesScene))throw new AssertionError("Home Update Log did not open");
                 capture("polish-update-log");scrollReview(Game.scene());
             }else if(frames==150){
-                capture("polish-update-log-scrolled");switchNoFade(TitleScene.class);
+                capture("polish-update-log-scrolled");
+                SPDSettings.version(com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon.versionCode-1);
+                SPDSettings.intro(false);
+                switchNoFade(com.shatteredpixel.shatteredpixeldungeon.scenes.WelcomeScene.class);
+            }else if(frames==170){
+                if(!(Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.WelcomeScene))throw new AssertionError("Update scene did not launch");
+                capture("polish-updated");
+                boolean clicked=false;
+                for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))
+                    if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton &&
+                            com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.scenes.WelcomeScene.class,"continue").equals(((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)child).text())){
+                        pointerGestureReview(child,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);clicked=true;break;
+                    }
+                if(!clicked)throw new AssertionError("Update Continue button missing");
             }
         }
         if (vault && sewers) vaultFrames();
@@ -2383,6 +2396,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 Pixmap drawn=renderSprite(icon,buffer,camera);drawn.dispose();icon.destroy();
             }
             paintedSkillsAndPlants(buffer,camera,failures);
+            rankAndKeyChecks(buffer,camera,failures);
             System.out.println("TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures="+(failures.size()-before));
             saveCompatibility(failures);
             System.out.println("TEST 35 RETIRED — superseded by recovery test 46 handler/network checks");
@@ -2448,7 +2462,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff(),
                 new com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal(),
                 new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife(),
-                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Spear()};
+                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Spear(),
+                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneRod(),
+                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword()};
         com.badlogic.gdx.utils.JsonValue anchors=new com.badlogic.gdx.utils.JsonReader().parse(Gdx.files.internal("sprites/hero-grips.json"));
         int checks=0;
         try {
@@ -2464,6 +2480,19 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                                     ||held.frame().top!=com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.film.get(item.image()).top))
                                 failures.add("24 wrong displayed weapon "+entry.name+" "+item);
                             if(held!=null&&(held.width()>14||held.height()>14||held.am!=sprite.am))failures.add("24 equipment footprint/alpha "+entry.name);
+                            if(held!=null){
+                                float gx=entry.get(pose).getFloat(0)/48f;if(flip)gx=1-gx;
+                                float gy=entry.get(pose).getFloat(1)/60f;
+                                if(Math.abs(held.x+held.origin.x-(sprite.x+gx*sprite.width))>.01f||Math.abs(held.y+held.origin.y-(sprite.y+gy*sprite.height))>.01f)
+                                    failures.add("24 handle detached from hand "+entry.name+" "+item);
+                                if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Spear||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneRod||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword){
+                                    com.badlogic.gdx.utils.JsonValue grip=new com.badlogic.gdx.utils.JsonReader().parse(Gdx.files.internal("sprites/equipment-grips.json")).get(Integer.toString(item.image()));
+                                    float dx=(grip.getFloat(2)-grip.getFloat(0))*held.width,dy=(grip.getFloat(3)-grip.getFloat(1))*held.height;
+                                    if(held.flipHorizontal)dx=-dx;
+                                    double rotation=Math.toRadians(held.angle);float tx=(float)(dx*Math.cos(rotation)-dy*Math.sin(rotation)),ty=(float)(dx*Math.sin(rotation)+dy*Math.cos(rotation));
+                                    if(pose==0&&ty>=0||pose==14&&(flip?tx>=0:tx<=0))failures.add("24 weapon tip points backwards "+entry.name+" "+item+" pose="+pose);
+                                }
+                            }
                             if(!flip&&pose==0){String label=item==null?"empty":item.getClass().getSimpleName();
                                 PixmapIO.writePNG(Gdx.files.absolute("verification/heroes/pilot/weapons/"+entry.name+"-"+tier+"-"+label+".png"),pixels,-1,true);}
                             pixels.dispose();checks++;
@@ -2478,7 +2507,39 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 }
             }
         }finally{hero.heroClass=original;hero.sprite=originalSprite;hero.belongings.weapon=originalWeapon;hero.belongings.abilityWeapon=second;hero.belongings.armor=originalArmor;}
-        System.out.println("HERO EQUIPMENT: native draws="+checks+" cloth/plate, both facings, eight loadouts, movement/action poses, secondary and thrown capture; failures="+failures.size());
+        System.out.println("HERO EQUIPMENT: native draws="+checks+" cloth/plate, both facings, ten loadouts, movement/action poses, hand grips/tip directions, secondary and thrown capture; failures="+failures.size());
+    }
+
+    private void rankAndKeyChecks(com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,Camera camera,java.util.List<String> failures)throws Exception{
+        int points=0;
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent talent:new com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent[]{com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.NECROTIC_TOUCH,com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.MASTER_CRAFT,com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.WIDER_BLAST})
+            for(int rank=0;rank<=talent.maxPoints();rank++){
+                com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton button=new com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton(1,talent,rank,com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton.Mode.INFO);button.setRect(0,0,20,26);
+                com.watabou.noosa.ColorBlock[] centers=(com.watabou.noosa.ColorBlock[])RecoveryChecks.field(button,"centers");
+                for(int i=0;i<centers.length;i++){
+                    Pixmap drawn=renderSprite(centers[i],buffer,camera);int brightest=0,gold=0;
+                    for(int y=0;y<256;y++)for(int x=0;x<256;x++){int px=drawn.getPixel(x,y);if((px&255)>200){brightest=Math.max(brightest,px>>>24);if((px>>>24)>220&&(px>>>16&255)>160&&(px>>>8&255)<120)gold++;}}
+                    if(i<rank?gold==0:brightest>60)failures.add("36 talent socket value "+talent+" rank="+rank+" socket="+i);
+                    drawn.dispose();points++;
+                }button.destroy();
+            }
+        com.watabou.utils.Bundle notes=new com.watabou.utils.Bundle();com.shatteredpixel.shatteredpixeldungeon.journal.Notes.storeInBundle(notes);
+        com.shatteredpixel.shatteredpixeldungeon.ui.KeyDisplay strip=new com.shatteredpixel.shatteredpixeldungeon.ui.KeyDisplay();
+        try{
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(new com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey(Dungeon.depth));
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(new com.shatteredpixel.shatteredpixeldungeon.items.keys.GoldenKey(Dungeon.depth));
+            strip.updateKeys();int count=strip.keyCount();strip.x=16;strip.y=8;strip.width=11;strip.height=5;strip.camera=camera;
+            for(int pass=0;pass<3;pass++){
+                if(pass==1){strip.width=24;strip.height=8;}strip.invalidateLayout();
+                buffer.begin();Gdx.gl.glDisable(com.badlogic.gdx.graphics.GL20.GL_SCISSOR_TEST);Gdx.gl.glClearColor(0,0,0,0);Gdx.gl.glClear(com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT);com.watabou.glwrap.Texture.clear();com.watabou.noosa.NoosaScript.get().resetCamera();strip.draw();
+                Pixmap drawn=Pixmap.createFromFrameBuffer(0,0,256,256);buffer.end();int visible=0;for(int y=0;y<256;y++)for(int x=0;x<256;x++)if((drawn.getPixel(x,y)&255)>80)visible++;
+                if(visible==0||strip.keyCount()!=count)failures.add("25 keys disappear or mutate on layout pass "+pass);drawn.dispose();
+            }
+            Image compass=com.shatteredpixel.shatteredpixeldungeon.ui.Icons.COMPASS.get();if(compass.texture.width!=32||compass.texture.height!=24)failures.add("25 legacy stair compass");compass.destroy();
+            Pixmap pointer=new Pixmap(Gdx.files.internal("gdx/grimhollow_cursor.png"));if(pointer.getWidth()!=64||pointer.getHeight()!=64)failures.add("25 painted pointer missing");pointer.dispose();
+        }finally{strip.destroy();com.shatteredpixel.shatteredpixeldungeon.journal.Notes.restoreFromBundle(notes);GameScene.updateKeyDisplay();}
+        if(RecoveryChecks.members(Game.scene()).indexOf((com.watabou.noosa.Gizmo)RecoveryChecks.field(Game.scene(),"levelWallVisuals"))>RecoveryChecks.members(Game.scene()).indexOf((com.watabou.noosa.Gizmo)RecoveryChecks.field(Game.scene(),"mobs")))failures.add("24 torches drawn over actors");
+        System.out.println("UI RANK/KEY PASS: rendered sockets="+points+"; key counts/paint survive three layouts; painted cursor/compass; torches behind actors; failures="+failures.size());
     }
 
     private void paintedSkillsAndPlants(com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,Camera camera,java.util.List<String> failures)throws Exception {

@@ -107,6 +107,11 @@
     "playtest-polish/eating.png": "482ae5fcf8f9ec37c80b6fcc01acad660cb437db5908a6470a28ac5a54f7433b",
     "playtest-polish/stairs-down.png": "464ab16dcabd14d151a719824bee1d363160f7612aeb6881f951c6558c870811",
     "playtest-polish/stairs-up.png": "0ad09ba29d2c6442c91377e7cd57a5af7ef2748b427f709298deaaeb1c6b703b",
+    "playtest-v123/compass.png": "b88148c0b0ecd7e8dcb419e0b3fbb8d8f406ff433040ff884a3bcc7d7ffdc175",
+    "playtest-v123/cursor.png": "d29a88df4db74788458dfced2a22ce52768b8a6d8b7639f687447b4efbd7cfc4",
+    "playtest-v123/statue-original.png": "586252852d27e13e471914904d8178c637479196288ce0645e23093b7ccf7328",
+    "playtest-v123/statue.png": "1d8f52dd4100a9fc57ed29cd7b4a63a5a0f88007da12fcf221a5a1264dbb9d32",
+    "playtest-v123/well.png": "d20ab8e2ecfd0f68037b586f0537b5aaab99e1b2b9d6470122d68cea1377942d",
     "presentation/cleric.png": "dde202c11b91d98e4d989ea6fd33596bc09ea5c0ce9ff0071e0e335a7685b406",
     "presentation/duelist.png": "872aa0cc9cbd179b94aa88b8e9a30288fec86777c465703f905c6b6789e49ec2",
     "presentation/enchanter.png": "4b7f36fce29b03ff7349808e59ad04e792e06b0db495701ff925dad3fe413934",
@@ -396,7 +401,7 @@
         512,
         256
       ],
-      "rgba_sha256": "8095bee7c9bcf9299c61f4e4a3f8c69ce9c9020f65ddfe6f69efb356a0e29482"
+      "rgba_sha256": "2be5f4881e829eb53b8cfe338cd8cfc2ef8c0e21b7d5b84b391f8cf9e9c77004"
     },
     "interfaces/painted_snake.png": {
       "size": [
@@ -9064,7 +9069,7 @@
         256,
         256
       ],
-      "rgba_sha256": "a3253f77813d6b6bb789a5ba5ca10eeca65000677a7b76bd431b8c517f7b2d08"
+      "rgba_sha256": "d91c3dcfadee3da0fbefbcb1ef94aee1251fbc0692fb3344380d4552c57b342b"
     },
     "interfaces/menu_button.png": {
       "size": [
@@ -9360,6 +9365,34 @@
         64
       ],
       "rgba_sha256": "2c42682762ce45fc676ff78cdabf787ba9aa752e20bc696b196096961aa56efd"
+    },
+    "gdx/grimhollow_cursor.png": {
+      "size": [
+        64,
+        64
+      ],
+      "rgba_sha256": "07967fe91b0e0192886ada6dfc258ad59d60131223f13ffe01f9d91ade17ffb0"
+    },
+    "interfaces/painted_compass.png": {
+      "size": [
+        32,
+        24
+      ],
+      "rgba_sha256": "b013a33fe4bd647061d88ffc644ff5e20181b04157eaac255a2c3197222f3b0b"
+    },
+    "environment/custom_tiles/weak_floor.png": {
+      "size": [
+        320,
+        64
+      ],
+      "rgba_sha256": "c98c42749895632b0e8a9b110b653a307e6b47bd5c42f47d0fb17b29f77d7a50"
+    },
+    "environment/custom_tiles/rat_king_room.png": {
+      "size": [
+        512,
+        64
+      ],
+      "rgba_sha256": "8bc9a4f44aa2e8452f4a0df80d8ca219ced63d2f9df17d04f5cbe8f4d9b0ea75"
     }
   }
 }

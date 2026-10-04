@@ -42,5 +42,7 @@ def outputs(items):
     for y in range(4):
         for x in range(4):
             notes.paste(icon(landmarks.crop((xs[x],ys[y],xs[x+1],ys[y+1]))),(x*64,y*64))
+    from playtest_presentation import well_icon
+    notes.paste(well_icon(),(64,128))
     return {'interfaces/painted_journal.png':atlas,'interfaces/painted_landmarks.png':notes,
             'interfaces/menu_button.png':buttons,'interfaces/menu_pane.png':menu_bg}

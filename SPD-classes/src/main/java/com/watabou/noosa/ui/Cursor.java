@@ -37,7 +37,7 @@ public class Cursor {
 	public enum Type {
 
 		//TODO if we ever add more cursors, should cache their pixmaps rather than always remaking
-		DEFAULT("gdx/cursor_mouse.png"),
+		DEFAULT("gdx/grimhollow_cursor.png"),
 		CONTROLLER("gdx/cursor_controller.png");
 
 		public final String file;
@@ -69,23 +69,25 @@ public class Cursor {
 
 		Pixmap cursorImg = new Pixmap(FileUtils.getFileHandle(Files.FileType.Internal, type.file));
 
-		int scaledWidth = cursorImg.getWidth()*zoom;
+        // The painted mouse image has four source pixels per logical cursor pixel.
+        int density=type==Type.DEFAULT?4:1;
+		int scaledWidth = cursorImg.getWidth()*zoom/density;
 		int width2 = 2;
 		while (width2 < scaledWidth) {
 			width2 <<= 1;
 		}
 
-		int scaledHeight = cursorImg.getHeight()*zoom;
+		int scaledHeight = cursorImg.getHeight()*zoom/density;
 		int height2 = 2;
 		while (height2 < scaledHeight) {
 			height2 <<= 1;
 		}
 
 		Pixmap scaledImg = new Pixmap(width2, height2, cursorImg.getFormat());
-		scaledImg.setFilter(Pixmap.Filter.NearestNeighbour);
+		scaledImg.setFilter(Pixmap.Filter.BiLinear);
 		scaledImg.drawPixmap(cursorImg, 0, 0, cursorImg.getWidth(), cursorImg.getHeight(), 0, 0, scaledWidth, scaledHeight);
 
-		currentCursor = Gdx.graphics.newCursor(scaledImg, 0, 0);
+		currentCursor = Gdx.graphics.newCursor(scaledImg, type==Type.DEFAULT?Math.round(2f*zoom/density):0, type==Type.DEFAULT?Math.round(2f*zoom/density):0);
 		Gdx.graphics.setCursor(currentCursor);
 		scaledImg.dispose();
 		cursorImg.dispose();

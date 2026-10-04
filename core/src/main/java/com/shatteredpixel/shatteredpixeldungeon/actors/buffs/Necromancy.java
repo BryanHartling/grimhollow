@@ -19,10 +19,30 @@ public class Necromancy extends Buff {
     public static void onHit(Char enemy) {
         int p=points(Talent.NECROTIC_TOUCH);
         if (p>0 && !(Dungeon.hero.belongings.attackingWeapon() instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.MissileWeapon)) {
-            Buff.affect(enemy,Corrosion.class).set(p,1); Buff.prolong(enemy,HeroDamage.class,p+1);
+            Buff.affect(enemy,NecroticTouch.class).refresh(p,Dungeon.hero.lvl); Buff.prolong(enemy,HeroDamage.class,p+1);
         }
     }
     public static class HeroDamage extends FlavourBuff {}
+    /** A fixed, refreshed wound, separate from escalating wand Corrosion. */
+    public static class NecroticTouch extends Corrosion {
+        private int remaining,damage;
+        {type=buffType.NEGATIVE;announced=true;}
+        public void refresh(int turns,int level){remaining=Math.max(remaining,turns);damage=Math.max(1,level);if(target!=null)target.needsIncomingDOTUpdate=true;}
+        @Override public boolean act(){
+            if(!target.isAlive()||remaining<=0){detach();return true;}
+            target.damage(damage,this);remaining--;target.needsIncomingDOTUpdate=true;
+            if(remaining<=0||!target.isAlive())detach();else spend(TICK);
+            return true;
+        }
+        @Override public int icon(){return com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator.POISON;}
+        @Override public void tintIcon(com.watabou.noosa.Image icon){icon.hardlight(0xA6C883);}
+        @Override public String iconTextDisplay(){return Integer.toString(damage);}
+        @Override public String desc(){return com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(this,"desc",damage,remaining);}
+        @Override public int totalIncomingDMG(){return damage*remaining;}
+        @Override public void detach(){if(target!=null)target.needsIncomingDOTUpdate=true;super.detach();}
+        @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("remaining",remaining);b.put("damage",damage);}
+        @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);remaining=b.getInt("remaining");damage=b.getInt("damage");}
+    }
     public static void markDamage(Char target,Object cause) {
         if (Dungeon.hero != null && Dungeon.hero.heroClass==HeroClass.NECROMANCER && target.alignment==Char.Alignment.ENEMY
             && (cause==Dungeon.hero || cause instanceof NecroSkeleton || cause instanceof Weapon || cause instanceof Wand || cause instanceof com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll || cause instanceof com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion || cause instanceof com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Blob || cause instanceof Buff)) Buff.prolong(target,HeroDamage.class,5);

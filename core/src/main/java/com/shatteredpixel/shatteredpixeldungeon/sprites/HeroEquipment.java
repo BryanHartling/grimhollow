@@ -58,7 +58,7 @@ final class HeroEquipment {
         float gx=points.get(pose).getFloat(0)/48f,gy=points.get(pose).getFloat(1)/60f;
         // Lowered gear points outside the silhouette; action poses turn it
         // toward the target. A left-handed caster must not hide her own face.
-        boolean artFlip=sprite.flipHorizontal ^ (gx<.5f && !(pose>=13&&pose<=15));
+        boolean artFlip=sprite.flipHorizontal;
         weapon.flipHorizontal=artFlip;weapon.frame(weaponFrame);
         weapon.logicalSize(length,length);
         if(sprite.flipHorizontal)gx=1-gx;
@@ -68,10 +68,15 @@ final class HeroEquipment {
         if(artFlip)ox=1-ox;
         weapon.origin.set(ox*weapon.width,oy*weapon.height);
         weapon.x=hx-weapon.origin.x;weapon.y=hy-weapon.origin.y;
-        float angle=crystal?0:staff?(-30):bow?(-35):(-15);
-        if(grip!=null)angle+=grip.getFloat(2);
-        if(pose>=13&&pose<=15)angle+=pose==13?-30:pose==14?65:10;
-        weapon.angle=angle*(artFlip?-1:1);
+        float tipX=grip==null?.78f:grip.getFloat(2),tipY=grip==null?.15f:grip.getFloat(3);
+        if(artFlip)tipX=1-tipX;
+        // Rotate the actual handle-to-tip axis, never a guessed inventory diagonal.
+        float axis=(float)Math.toDegrees(Math.atan2(tipY-oy,tipX-ox));
+        float desired=staff?-78:bow?-75:-65;
+        if(points.get(pose).getFloat(0)<24)desired=staff?-102:bow?-105:-115;
+        if(pose>=13&&pose<=15)desired=pose==13?-105:pose==14?-5:-45;
+        if(artFlip)desired=180-desired;
+        weapon.angle=crystal?0:desired-axis;
         weapon.camera=sprite.camera();copyLight(weapon);
         // Repaint the fingers over the grip; use the current armor/action frame,
         // not a separate generic hand that would change anatomy or complexion.

@@ -2703,273 +2703,273 @@
     "RING_ACCURACY": {
       "id": 0,
       "artIndex": 0,
-      "rgbaSha256": "ad27b48254de48521e59fea4ccb3642bd5bffd509ef6d4d9898589f1d4860dea",
+      "rgbaSha256": "2fe78e461a2f33b63ecb47d2e65ca865753c4bde61f796dfe0ae8c83231385ca",
       "sourcePainting": "identification-0:0",
       "concept": "bronze bullseye pierced by a straight arrow"
     },
     "RING_ARCANA": {
       "id": 1,
       "artIndex": 1,
-      "rgbaSha256": "b0562fa188a739e2fc67c0d28383a04ade8a757ca9e7f1fb9ee451bcdb5b289a",
+      "rgbaSha256": "12d48bb24f23ee98060280d149fdede14be72f6ad7943cb17d38ebe7d7d1e60d",
       "sourcePainting": "identification-0:1",
       "concept": "spiral crystal inside a silver arcanist compass"
     },
     "RING_ELEMENTS": {
       "id": 2,
       "artIndex": 2,
-      "rgbaSha256": "efae7ab43f4809f828a48c1860c40ff30e1b9398cfd4dd9e2d8ef96d8e2608d1",
+      "rgbaSha256": "7392df592a4da6f42d8b07add9d80db7fe279d9d708b3671f57e67e2f84e6360",
       "sourcePainting": "identification-0:2",
       "concept": "three different elemental facets forming a triangular shield"
     },
     "RING_ENERGY": {
       "id": 3,
       "artIndex": 3,
-      "rgbaSha256": "29a0ace27078618d472755ce374ee68d5ef461a60b31bfa49f0ef334d16698c7",
+      "rgbaSha256": "1c60879baefe54086324432c85a0ce338e7c8f56ad4114c62363d1d09767a14f",
       "sourcePainting": "identification-0:3",
       "concept": "purple lightning coil around a faceted battery gem"
     },
     "RING_EVASION": {
       "id": 4,
       "artIndex": 4,
-      "rgbaSha256": "f479e87ddccb010389bf0e0e5772477203bddcc4e84321409d1920435a8bfbd4",
+      "rgbaSha256": "d27a6c4f2db200c16cfa5c081151e491cab5e45a31079365b5ab301a8f8d22e8",
       "sourcePainting": "identification-0:4",
       "concept": "a leather boot bending under a passing arrow"
     },
     "RING_FORCE": {
       "id": 5,
       "artIndex": 5,
-      "rgbaSha256": "1f09d2b55096b1602cd6c9f166640d163a041ecca2724e432e85addd77827611",
+      "rgbaSha256": "692467f202e3ba7d5dfbfe5e385bb065e17afc14d8369064ac6440d0211d2958",
       "sourcePainting": "identification-0:5",
       "concept": "a clenched black iron fist with stone knuckles"
     },
     "RING_FUROR": {
       "id": 6,
       "artIndex": 6,
-      "rgbaSha256": "b6900820aa9b17f60eb2fc83c14a3f07abe7ae1d70e802385006b20bf16a1a26",
+      "rgbaSha256": "eca1dec58001126bc27243b2b351430cb4f9b1157fea1755d37f69394ab92b6c",
       "sourcePainting": "identification-0:6",
       "concept": "two curved crossed blades trailing red heat"
     },
     "RING_HASTE": {
       "id": 7,
       "artIndex": 7,
-      "rgbaSha256": "922000ce9e85c293bae45e2ad46555000d3b839ce4980274fba1a0958725e08f",
+      "rgbaSha256": "c6adf3e57670214f019ceabe8c55b644f8d2d8c464769ab3a461317553172a86",
       "sourcePainting": "identification-0:7",
       "concept": "winged boots angled forward"
     },
     "RING_MIGHT": {
       "id": 8,
       "artIndex": 8,
-      "rgbaSha256": "046dc0bdc039ca74cd3ec3054077b809a21246eb6ef0a343755ee0755bb8465a",
+      "rgbaSha256": "f131506f25357b39498321005ad5a4dcf8d0564f03c4227013deaf900cb3c4d1",
       "sourcePainting": "identification-0:8",
       "concept": "a broad bronze cuirass with a central ruby"
     },
     "RING_SHARPSHOOT": {
       "id": 9,
       "artIndex": 9,
-      "rgbaSha256": "37732da3d5ab9089febc886247ed7374ae8548a3bae6c7e4550fad2cd3145da1",
+      "rgbaSha256": "00280c83fb5bd7a4d22494d85ea30633db443d0fdcab62281e98ee5b5edc37f1",
       "sourcePainting": "identification-0:9",
       "concept": "three slender arrowheads in a fan with fletched tails"
     },
     "RING_TENACITY": {
       "id": 10,
       "artIndex": 10,
-      "rgbaSha256": "10dd3ee2d03b953b736267ea85651f803ed5009ddf5e47b280f2c37b65aa41c4",
+      "rgbaSha256": "99ca36e1ca86549a34a7f342eb97856d0d6e4eac42370fc588c76e5695cddcbf",
       "sourcePainting": "identification-0:10",
       "concept": "a cracked round shield held together by leather bands"
     },
     "RING_WEALTH": {
       "id": 11,
       "artIndex": 11,
-      "rgbaSha256": "e99d76330360c9e1a96c861c8e80ef775fb81b58e519eca276a48723f18d4271",
+      "rgbaSha256": "8939f3a828e4ea5e3f943245266f3282db1c136689bfd6b50a2112ca00895527",
       "sourcePainting": "identification-0:11",
       "concept": "an overflowing coin purse with a crown-shaped clasp"
     },
     "SCROLL_UPGRADE": {
       "id": 32,
       "artIndex": 32,
-      "rgbaSha256": "88e84c9ce41201df04b51b34cfd762fcfda3b94878f88db14bbe45e885fd8827",
+      "rgbaSha256": "a52ac3d358e3159aaa7f41a92f5b266995befc495f8bea3f30789f1e3e27a588",
       "sourcePainting": "identification-0:12",
       "concept": "a silver hammer striking a star-shaped anvil"
     },
     "SCROLL_IDENTIFY": {
       "id": 33,
       "artIndex": 33,
-      "rgbaSha256": "1e8d80d91245e89e2dd96f1a9aead2e97ac3aa1a11832f64d36d9e3794f71e75",
+      "rgbaSha256": "539cefea5199697269a009855f9a585edc0eac6777508d4291acc86b889b797f",
       "sourcePainting": "identification-0:13",
       "concept": "an open ivory book beneath a magnifying glass with a crisp visible lens"
     },
     "SCROLL_REMCURSE": {
       "id": 34,
       "artIndex": 34,
-      "rgbaSha256": "3906e0ac4620f975e87e261952051e8fc3b97cd59d9e8f794755069fa7aaa42d",
+      "rgbaSha256": "968750de163990b77160c582ed45b54f5f0a35f7be5220d6a73ea108567add9d",
       "sourcePainting": "identification-0:14",
       "concept": "a black chain broken apart by a white key"
     },
     "SCROLL_MIRRORIMG": {
       "id": 35,
       "artIndex": 35,
-      "rgbaSha256": "9d137c2590740fe273521b8ac36a53fa1ec361dbea2fd56b6f1c49c7257e7769",
+      "rgbaSha256": "35b20a74b5c5ae4f39a41eaa4d718ba05342dee9a7339146f5b1e0c6a3c39c92",
       "sourcePainting": "identification-0:15",
       "concept": "two opposed polished silver face masks"
     },
     "SCROLL_RECHARGE": {
       "id": 36,
       "artIndex": 36,
-      "rgbaSha256": "84b160809b679f6cfdde21df769ecc5452317fa80ce1cfebe7c16085d3906b3a",
+      "rgbaSha256": "902fed61e5bf1f735c0e6daa0bc8c64aa4e2d563dfddcf8ebd91445b074faf02",
       "sourcePainting": "identification-1:0",
       "concept": "a forked lightning rod charging a blue crystal"
     },
     "SCROLL_TELEPORT": {
       "id": 37,
       "artIndex": 37,
-      "rgbaSha256": "d6e691c414d60b33aafda879d8082942b8102bf9fccd3a36d9203a3823b9f3ee",
+      "rgbaSha256": "2694b079e2fc1e90065d78f063458e0b5d28f293d87611d066a978dec5513b0d",
       "sourcePainting": "identification-1:1",
       "concept": "a footstep entering a circular violet portal"
     },
     "SCROLL_LULLABY": {
       "id": 38,
       "artIndex": 38,
-      "rgbaSha256": "57e15316d2f4e0dd2a754f58f56df1cae0aeb988aea98a4da615c9e3faab8012",
+      "rgbaSha256": "8eedd43264a156bf7834b8d17c7db5584ce2ae92ddfe88557fca8f89e8f6a778",
       "sourcePainting": "identification-1:2",
       "concept": "a crescent moon cradling a tiny dark wooden lute"
     },
     "SCROLL_MAGICMAP": {
       "id": 39,
       "artIndex": 39,
-      "rgbaSha256": "5361aa7b4367a9fba321deafcf5a69a160e7fb45a91323dbcf445c109de104de",
+      "rgbaSha256": "b6d360e59dfde77e0e04b60e83f14756736b48b05543814cbf7c2c3ea722ac22",
       "sourcePainting": "identification-1:3",
       "concept": "a folded topographic map with a red path"
     },
     "SCROLL_RAGE": {
       "id": 40,
       "artIndex": 40,
-      "rgbaSha256": "8582508b88620aa3cb85a4e865b871f4e0367eb8e6bdb19f7215d9b0260f52aa",
+      "rgbaSha256": "b00e1fe9beaa458a795dcaf69e9835c0ba3022a9a13ef599aeb83a7887485337",
       "sourcePainting": "identification-1:4",
       "concept": "a snarling red wolf head surrounded by jagged streaks"
     },
     "SCROLL_RETRIB": {
       "id": 41,
       "artIndex": 41,
-      "rgbaSha256": "0595ee00e47cb85f7e9849592648646bf92a5ad541a51b09f1eb41436bda7bee",
+      "rgbaSha256": "03db5774b2e44ccdeaf3d4c2c37910a70e87dd033f862af447833d7215fa5884",
       "sourcePainting": "identification-1:5",
       "concept": "balanced scales struck by a red-white bolt"
     },
     "SCROLL_TERROR": {
       "id": 42,
       "artIndex": 42,
-      "rgbaSha256": "44ea6fe391f0b43dd3ba4e88b839c3f295cc12891894ada8f1f5414b18f18228",
+      "rgbaSha256": "88b8194e14c17103dcc5247ceead50b90d2837ee3011cb850590a0d7c7c2507a",
       "sourcePainting": "identification-1:6",
       "concept": "an elongated black claw gripping a terrified ivory mask"
     },
     "SCROLL_TRANSMUTE": {
       "id": 43,
       "artIndex": 43,
-      "rgbaSha256": "18262b9c730034d400e939b4de24f4dda7769479e4172e3d271b3bad733a7ebb",
+      "rgbaSha256": "3f5bbc4436ce3877243d2cc861885535f4d30eb3ab5adc18b2c45263a6ad4bf1",
       "sourcePainting": "identification-1:7",
       "concept": "a brass alchemical triangle with a serpent circling it"
     },
     "SCROLL_ENCHANT": {
       "id": 48,
       "artIndex": 48,
-      "rgbaSha256": "397ec32203a6aad656ec39c5dae809066c9020a3bdbeea28ddcdceb42606ed6a",
+      "rgbaSha256": "a466a95fbe485eccef357f83d1b7e1ff9d06ea7f4420edcf4286b6902ac86257",
       "sourcePainting": "identification-1:8",
       "concept": "a rune-writing quill leaving a single orange glowing stroke"
     },
     "SCROLL_DIVINATE": {
       "id": 49,
       "artIndex": 49,
-      "rgbaSha256": "8f706256a39aea163940ee5f5c3f63177df210b3085c0226d0a2629fa7b2376e",
+      "rgbaSha256": "be59b33ac302e3386470b1accfa2ddaa6943334ce815447900085d7031c8633e",
       "sourcePainting": "identification-1:9",
       "concept": "four fanned divination cards with four distinct emblems"
     },
     "SCROLL_ANTIMAGIC": {
       "id": 50,
       "artIndex": 50,
-      "rgbaSha256": "38f073a5fa87f1e0a846549e6aad6150ca67ddd79e84d5543ad8be789cd1a7c0",
+      "rgbaSha256": "360cc5207851effde1ea4e599663cfd26e3cda3d003c4e723a5877b353e7c259",
       "sourcePainting": "identification-1:10",
       "concept": "a closed silver palm stopping a broken blue bolt"
     },
     "SCROLL_PRISIMG": {
       "id": 51,
       "artIndex": 51,
-      "rgbaSha256": "c4e60e7a63659289726b5ae7d1fc1e2be69e4832117004653bb8d8ff5170b9df",
+      "rgbaSha256": "3cea8967a03de1cf39d1e2f59570e0b3e42dfc5cfaf66d8d732e7d91add89fbf",
       "sourcePainting": "identification-1:11",
       "concept": "a triangular glass prism reflecting three knight helmets"
     },
     "SCROLL_MYSTENRG": {
       "id": 52,
       "artIndex": 52,
-      "rgbaSha256": "cc3cd6007ffdde58435f856ddb31713139850941a126d5ea7c717b1111b207bc",
+      "rgbaSha256": "c670c059af6a2bd5210a9e479a33c916b2730ec34ca99d28cf93c8e9ad0cb25c",
       "sourcePainting": "identification-1:12",
       "concept": "an hourglass filled with blue embers"
     },
     "SCROLL_PASSAGE": {
       "id": 53,
       "artIndex": 53,
-      "rgbaSha256": "4e7fede38d1b36524000a893c623dee812cd4f6a3833afe0a6c7a17210fd0ffc",
+      "rgbaSha256": "d7ce80952d63408e010c7f85691d8f96d7e36494f8ca38db22bda5ef4428a4cb",
       "sourcePainting": "identification-1:13",
       "concept": "winding stone stairs inside a tall narrow arch"
     },
     "SCROLL_SIREN": {
       "id": 54,
       "artIndex": 54,
-      "rgbaSha256": "0a5b230b83edfd228722c3009b2eace9badadbb7f876a7c6d507afb3ba327f41",
+      "rgbaSha256": "57ea21779e02a6e79cdb4667a04fc7c7c1ee67286009530f58073013411cd60f",
       "sourcePainting": "identification-1:14",
       "concept": "a pearlescent conch shell with a singing feminine profile"
     },
     "SCROLL_FORESIGHT": {
       "id": 55,
       "artIndex": 55,
-      "rgbaSha256": "e8081e48e1b326a030a79543d0a6a119c4ae9336808018156aab29d949e2319b",
+      "rgbaSha256": "8e151c31e7177f9cea4001f33ff3d636365ead0a768d0c3195c6bc0b255b72b0",
       "sourcePainting": "identification-1:15",
       "concept": "a crystal ball with a tiny branching future path visible inside"
     },
     "SCROLL_CHALLENGE": {
       "id": 56,
       "artIndex": 56,
-      "rgbaSha256": "01b6f85c395f9599ca9876f26d0652b525e1f5aeb8324a660a05f5d762a91e03",
+      "rgbaSha256": "5d1b160282331f36b01ae7ab46d52a7db640e21a6444b4a19e8656acc2feed80",
       "sourcePainting": "identification-2:0",
       "concept": "a gold sword and shield beneath a challenge pennant"
     },
     "SCROLL_PSIBLAST": {
       "id": 57,
       "artIndex": 57,
-      "rgbaSha256": "1fe2e3e236492cdd57828977a90e749deaadc4a79f301a8e192a91d407c11046",
+      "rgbaSha256": "f67cdda487be09c5f8254c50b07ee2a91185ceb8d9521e3854b7f563d587d267",
       "sourcePainting": "identification-2:1",
       "concept": "a violet brain surrounded by an expanding shock ring"
     },
     "SCROLL_DREAD": {
       "id": 58,
       "artIndex": 58,
-      "rgbaSha256": "8b3d8efa7f3c617f1e01d95292d35d18cfa16c9f895cf4a95b0674e9b32793a0",
+      "rgbaSha256": "99deb17aa01af882f5afe17d11889cfd7658fe53f3d1574d00e9a3843450fefa",
       "sourcePainting": "identification-2:2",
       "concept": "a long red skull trailing black smoke"
     },
     "SCROLL_METAMORPH": {
       "id": 59,
       "artIndex": 59,
-      "rgbaSha256": "16117a33d03a93605a4149ef467e8be8e81dc27a4fa0ca943033f3be1e7ba08a",
+      "rgbaSha256": "17a8a8aa5d93b986903965687a459bae0ea9be67c9c6f05bcd4994ff312cd381",
       "sourcePainting": "identification-2:3",
       "concept": "a purple butterfly with asymmetric runic wing markings"
     },
     "POTION_STRENGTH": {
       "id": 80,
       "artIndex": 80,
-      "rgbaSha256": "e01857d96a13507ec58c57bd2d21b06eab46f7cb4e0f373ce9980cf3ca1dfaba",
+      "rgbaSha256": "87801892e9d0fcbbda9d855a804a2dd83950a35175e726246af59fac215a3cbe",
       "sourcePainting": "identification-2:4",
       "concept": "two square iron weights joined by a short barbell"
     },
     "POTION_HEALING": {
       "id": 81,
       "artIndex": 81,
-      "rgbaSha256": "85432003d4bc3b8f0050523998d42fb8150c5f3fc42c87526b0c60ac3f4feddd",
+      "rgbaSha256": "a2db76596e7c19393331d485adc03de3a134ee0b711b41c8b56aca8e62e63b16",
       "sourcePainting": "identification-2:5",
       "concept": "a red heart wrapped in an ivory bandage"
     },
     "POTION_MINDVIS": {
       "id": 82,
       "artIndex": 82,
-      "rgbaSha256": "98ec5dee44db26ec5a34968c8e01ed3246cc95104ebd52c16ffb69a157ecfdb9",
+      "rgbaSha256": "e3ea7d7da0f97cb7e6920b957fd645b29bb513da3ddc5eca5813427a87d0d654",
       "reason": "Dedicated third-eye profile, distinct from the Magical Sight prism.",
       "sourcePainting": "identification-2:6",
       "concept": "a side-profile head with a purple third eye and three outward thought arcs"
@@ -2977,147 +2977,147 @@
     "POTION_FROST": {
       "id": 83,
       "artIndex": 83,
-      "rgbaSha256": "f113461b643407a7c7eb51d84da3fb0d8a4a0981ffe1856f8cc9588fbc1b5060",
+      "rgbaSha256": "73bc8a6016c37101834ca44eb4ec65332e0b8ba557c833dc04e3af784a21f6fb",
       "sourcePainting": "identification-2:7",
       "concept": "one blue six-point snowflake with sharp arms"
     },
     "POTION_LIQFLAME": {
       "id": 84,
       "artIndex": 84,
-      "rgbaSha256": "32c7fe9c32defbfa7fbc9d2ecd3487186d2d28f6528dfdd4035772140b6a19b4",
+      "rgbaSha256": "976b57592297c87a5b2d70f4d5680505a2def78b5ae9b69cd9669fc67beca350",
       "sourcePainting": "identification-2:8",
       "concept": "a twisted orange tongue of liquid fire"
     },
     "POTION_TOXICGAS": {
       "id": 85,
       "artIndex": 85,
-      "rgbaSha256": "03050b93c0e24326cc3ee2384ba88e1b5a6dabe34878ef026a1915af4f9aa1df",
+      "rgbaSha256": "24b667890be1cba53bf2ed7623547cacc4c7cb5cb74b2fc1b60acfdab2505fe6",
       "sourcePainting": "identification-2:9",
       "concept": "a corroded leaking green vessel puffing toxic fumes"
     },
     "POTION_HASTE": {
       "id": 86,
       "artIndex": 86,
-      "rgbaSha256": "79aafde087d3cb272c11caed58029938ebc0b3af0fcf80b7ac0b7dc4b1c5b632",
+      "rgbaSha256": "3c95f1c33649df97545ea28ecd4f5de36f598ac0e86762c5cdfb64841bf2b06e",
       "sourcePainting": "identification-2:10",
       "concept": "a winged gold hourglass tilted forward"
     },
     "POTION_INVIS": {
       "id": 87,
       "artIndex": 87,
-      "rgbaSha256": "ca851bea51489efefb9e2fc203cb2ff078a8bae7fc0c6129409ced9a57ed4f62",
+      "rgbaSha256": "5fabbe06cc6b3126c37f3c227c7cff8cebb8cd4446920c8792b3e789dfee2c27",
       "sourcePainting": "identification-2:11",
       "concept": "a fading cloak with an empty head opening"
     },
     "POTION_LEVITATE": {
       "id": 88,
       "artIndex": 88,
-      "rgbaSha256": "cd863aa2ca6317bfd04c6300e1f3d314605ca0a85acf87005231d2cfd1c274a7",
+      "rgbaSha256": "cb04cc3a3398359956f57ab68527d2f32066821c30030f12d87005889dfa574e",
       "sourcePainting": "identification-2:12",
       "concept": "a curved white feather floating above three air lines"
     },
     "POTION_PARAGAS": {
       "id": 89,
       "artIndex": 89,
-      "rgbaSha256": "8d6a9c3712402749208c41b0e52d22b052480ae22928ecff11144b5d379fec3b",
+      "rgbaSha256": "2bedb49644550f33bd0808672776a94a08ae93e3008b2175c82d4eac12e2e0ac",
       "sourcePainting": "identification-2:13",
       "concept": "a yellow web net stretched across a rigid four-prong frame"
     },
     "POTION_PURITY": {
       "id": 90,
       "artIndex": 90,
-      "rgbaSha256": "7d01325a31ebe632ea9ccaf983b00f9ea8316ab6fda9600e19cad2a2594c6b3c",
+      "rgbaSha256": "175783e10b56fc1e4550221939075493641f4fb3864cb22268f0f6aedc1c336d",
       "sourcePainting": "identification-2:14",
       "concept": "a silver water droplet holding a single clean green leaf"
     },
     "POTION_EXP": {
       "id": 91,
       "artIndex": 91,
-      "rgbaSha256": "d55b291af1842c24b7b6ea237c794c916089e823889b172a303fcfd6504e9fff",
+      "rgbaSha256": "92add0f8a202d54b907ff2ff3a6561e65e6d30432d62744beb822dd298bb4eac",
       "sourcePainting": "identification-2:15",
       "concept": "a blue-gold constellation of five connected stars"
     },
     "POTION_MASTERY": {
       "id": 96,
       "artIndex": 96,
-      "rgbaSha256": "e716cf086ad61bf03d3466907021dcbdad99aeefeba10811195a226980380fe9",
+      "rgbaSha256": "f5b17bf5b05f61712ee173f648bbfd2a4959e0dcd9692b511542caef8e1d1c53",
       "sourcePainting": "identification-3:0",
       "concept": "a laureled bronze sword hilt grasped by a small hand"
     },
     "POTION_SHIELDING": {
       "id": 97,
       "artIndex": 97,
-      "rgbaSha256": "c996fd03eaf3904e7b3eb2dfada502d323bae3eef3fd26dd5f2de241467db2b3",
+      "rgbaSha256": "80c0cf6f1f736a63d89304eac065e3988b17b932511a6fafb3f5e994ac4c13a1",
       "sourcePainting": "identification-3:1",
       "concept": "a deep blue tower shield with three inset white gems"
     },
     "POTION_MAGISIGHT": {
       "id": 98,
       "artIndex": 98,
-      "rgbaSha256": "aa62fe855f0f3bed8cb4f33f2ac71ac9ddd081eefc32d321dd75cb69dcdfc1ed",
+      "rgbaSha256": "1a71976d4ae703bea39cfaf91275d6a759130ad823ffde09521f920a32b86cd7",
       "sourcePainting": "identification-3:2",
       "concept": "a triangular rainbow lens inside an asymmetric bronze optical instrument"
     },
     "POTION_SNAPFREEZ": {
       "id": 99,
       "artIndex": 99,
-      "rgbaSha256": "ccad7de436dcb044f6f424754665e945523e49f6e146acc07d0c62132e06d453",
+      "rgbaSha256": "ca6acb4cdd56b76d65f77a616e3066b4f7e552ae701e3436ce15824d22a8ffe7",
       "sourcePainting": "identification-3:3",
       "concept": "a rose trapped inside a square block of blue ice"
     },
     "POTION_DRGBREATH": {
       "id": 100,
       "artIndex": 100,
-      "rgbaSha256": "33f41a2abd2592a5345f0cda9e44f2a00eed18aaca0d950ed18f4c5b7951e255",
+      "rgbaSha256": "f977efa08403768d0896dadc2748481bd92f6134e2bf490b6730bf372a3343ec",
       "sourcePainting": "identification-3:4",
       "concept": "a curled dragon head exhaling an orange flame"
     },
     "POTION_CORROGAS": {
       "id": 101,
       "artIndex": 101,
-      "rgbaSha256": "4ea8051a00c37834707380d3099d464cee3ffe6e41f77514f2efd8d7f34ca9fa",
+      "rgbaSha256": "d6ae0a00e658247938bd446cd0e23f4cc3d2406065f456d26c28a24eca086242",
       "sourcePainting": "identification-3:5",
       "concept": "an acid vial dissolving a partly melted gear"
     },
     "POTION_STAMINA": {
       "id": 102,
       "artIndex": 102,
-      "rgbaSha256": "997e17f05044cc3c4905491cec011b9f3e7e4ca64678da38c181c10a36d44136",
+      "rgbaSha256": "ddc6b7c1c2f2c64466b61af091b9f0608f0fd8a324a046319b9d5b0d1edea93a",
       "sourcePainting": "identification-3:6",
       "concept": "a living green root curled into a loop around a seed"
     },
     "POTION_SHROUDFOG": {
       "id": 103,
       "artIndex": 103,
-      "rgbaSha256": "ee67385b073ec14aac660ef8adab48f0c6a6848abee9caa4dcc2172c0e9dfb07",
+      "rgbaSha256": "3d50894c3d084c96304054b81b3db2081640e18f8e7c94b6cb2577658a30dd46",
       "sourcePainting": "identification-3:7",
       "concept": "two pale grey fog banks concealing a dark crescent"
     },
     "POTION_STRMCLOUD": {
       "id": 104,
       "artIndex": 104,
-      "rgbaSha256": "e37570f66d23c9c9cd35a2f67c7f7849e559f01a185f9961a4c58b35efc98bef",
+      "rgbaSha256": "8d9415aa5fe133bca9f50e280216d26485a1a25d67d7a7aa58829559600098e1",
       "sourcePainting": "identification-3:8",
       "concept": "a tall storm cloud with three blue branching bolts"
     },
     "POTION_EARTHARMR": {
       "id": 105,
       "artIndex": 105,
-      "rgbaSha256": "5fa01feb837c3175cda171991d4f8c80b41ff3f3362e1a25fe3faffe082da7fd",
+      "rgbaSha256": "95a21db161a37483dd32096b5d6cbf3a2c655fca5280884a4d38650fbbb46879",
       "sourcePainting": "identification-3:9",
       "concept": "a jagged stone breastplate with two rocky shoulder shards"
     },
     "POTION_CLEANSE": {
       "id": 106,
       "artIndex": 106,
-      "rgbaSha256": "e38308b0a4f214c771f5900859758b2c94131015f60be5ac6ccaffb71e60599b",
+      "rgbaSha256": "ca99d3bfe995509fa36e3fc95677620facc79f7c556ead9861e3b56341775dc4",
       "sourcePainting": "identification-3:10",
       "concept": "clear cascading water washing three separate leaves"
     },
     "POTION_DIVINE": {
       "id": 107,
       "artIndex": 107,
-      "rgbaSha256": "4297645f8954123936880c48ee2e6d57112daa6a315a2e1154218aaf6c855c2f",
+      "rgbaSha256": "416af577e46351f94db502a7e53c88e77c341bd05d3ef6747b02d2e2a77d1ef8",
       "sourcePainting": "identification-3:11",
       "concept": "a golden chalice beneath a sunburst with long asymmetric rays"
     }

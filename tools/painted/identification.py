@@ -31,6 +31,11 @@ def build():
         assert sheet.getchannel('A').getextrema()[0]==0,'Identity sheet needs true transparency'
         for i,name in enumerate(spec['names']):
             im=cutout(sheet,i%4,i//4)
+            # A restrained shared value range reads at HUD size without color noise.
+            from PIL import ImageEnhance
+            alpha=im.getchannel('A')
+            values=ImageEnhance.Contrast(ImageOps.grayscale(im)).enhance(1.35)
+            im=ImageOps.colorize(values,'#241b11','#fff3ca').convert('RGBA');im.putalpha(alpha)
             cell=Image.new('RGBA',(32,32));cell.alpha_composite(im,((32-im.width)//2,(32-im.height)//2))
             digest=hashlib.sha256(cell.tobytes()).hexdigest()
             assert digest not in hashes,(name,'Duplicate identity painting')

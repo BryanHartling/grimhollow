@@ -1,3 +1,12 @@
+# Playtesting patch - v1.23.0
+
+- Necrotic Touch now deals hero-level damage on each of its one/two turns. Hits refresh one wound, never add a second or escalate its damage. Raised servants decay for 5% of maximum health (rounded up) per turn after binding expires instead of vanishing; decay cannot trigger expiry explosions or revival loops.
+- Phylactery spell information is available beside each menu action and for every summon choice, with an additional Necromancer handbook section. Curse talents explicitly name the Phylactery curses they require; ordinary debuffs and cursed equipment do not qualify.
+- Talent sockets use white base textures with bright gold fills, correcting multiplied dark tints. HUD keys use logical dimensions and preserve their counts when resizing. Weapon layers rotate the actual handle-to-tip axis and mirror with the hero, correcting reversed and detached grips.
+- Painted mouse pointer, stair direction arrow, Distant Well and Rat King statue come from committed sources and the offline packer. Identification symbols retain distinct silhouettes with higher-contrast ivory/gold values. The update screen uses the painted wordmark and a framed scrolling body. The existing smooth-font option is now the default; an explicit font preference is preserved.
+- Torch flames now belong to the wall-scenery group before actors; known-cell/face visibility checks remain. English item descriptions no longer contain broken dash encodings.
+- Red sentry behavior is unchanged: Haste is speed, not immunity. Generated four-sided traversal checks exercise the existing sentry AI; the reported campaign encounter is not claimed reproduced.
+
 # Sprint component 7 - Psychic v1.22.6
 
 - Psychic gains short silver curls, a thin circlet and an angular lavender mantle over individually fitted armor, with precise restrained poses and the equipped Crystal or other weapon. This completes all nine character bodies and their equipment layers; portrait identity, world height and movement/combat timing are preserved.

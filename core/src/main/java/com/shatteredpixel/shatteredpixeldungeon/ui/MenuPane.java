@@ -240,8 +240,8 @@ public class MenuPane extends Component {
 		public JournalButton() {
 			super();
 
-			width = bg.width + 4;
-			height = bg.height + 10;
+			width = bg.width() + 4;
+			height = bg.height() + 10;
 		}
 
 		@Override
@@ -279,8 +279,9 @@ public class MenuPane extends Component {
 
 			keyIcon.x = bg.x + 1;
 			keyIcon.y = bg.y - 6;
-			keyIcon.width = bg.width - 2;
+			keyIcon.width = bg.width() - 2;
 			keyIcon.height = 5;
+            keyIcon.invalidateLayout();
             unread.x=bg.x+bg.width()-2;unread.y=bg.y+1;
 			PixelScene.align(keyIcon);
 		}

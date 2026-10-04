@@ -205,8 +205,9 @@ public class TitleScene extends PixelScene {
         btnJournal.setRect(btnRankings.right()+2,btnRankings.top(),half,BTN_HEIGHT);
         btnSettings.setRect(btnPlay.left(),btnRankings.bottom()+GAP,half,BTN_HEIGHT);
         btnCredits.setRect(btnSettings.right()+2,btnSettings.top(),half,BTN_HEIGHT);
-        btnChanges.setRect(btnAreaLeft,btnSettings.bottom()+GAP,half,BTN_HEIGHT);
-        btnPlaytest.setRect(btnChanges.right()+2,btnChanges.top(),half,BTN_HEIGHT);
+        float changesWidth=(buttonAreaWidth-2+btnChanges.reqWidth()-btnPlaytest.reqWidth())/2f;
+        btnChanges.setRect(btnAreaLeft,btnSettings.bottom()+GAP,changesWidth,BTN_HEIGHT);
+        btnPlaytest.setRect(btnChanges.right()+2,btnChanges.top(),buttonAreaWidth-2-changesWidth,BTN_HEIGHT);
 
 		version = new BitmapText( "v" + Game.version, pixelFont);
 		version.measure();

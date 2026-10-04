@@ -78,8 +78,9 @@ public class TalentButton extends Button {
 		add(icon);
         sockets=new ColorBlock[talent.maxPoints()];centers=new ColorBlock[sockets.length];
         for(int i=0;i<sockets.length;i++){
-            sockets[i]=new ColorBlock(1,1,0xFF857766);add(sockets[i]);
-            centers[i]=new ColorBlock(1,1,0xFF171511);add(centers[i]);
+            // Tint a white texture: multiplying a dark texture can never make gold.
+            sockets[i]=new ColorBlock(1,1,0xFFFFFFFF);add(sockets[i]);
+            centers[i]=new ColorBlock(1,1,0xFFFFFFFF);add(centers[i]);
         }
 	}
 
@@ -115,8 +116,8 @@ public class TalentButton extends Button {
             float cell=(WIDTH-4f)/sockets.length;
             sockets[i].x=x+2+i*cell;sockets[i].y=y+21;sockets[i].size(cell-1,4);
             centers[i].x=sockets[i].x+.6f;centers[i].y=y+21.6f;centers[i].size(cell-2.2f,2.8f);
-            sockets[i].hardlight(i<pointsInTalent?0xFFE59A:0x857766);
-            centers[i].hardlight(i<pointsInTalent?0xFFC84A:0x171511);
+            sockets[i].hardlight(i<pointsInTalent?0xFFF1BA:0x857766);
+            centers[i].hardlight(i<pointsInTalent?0xFFCF45:0x171511);
         }
 	}
 

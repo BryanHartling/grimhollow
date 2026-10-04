@@ -164,7 +164,8 @@ public class RatKingRoom extends SecretRoom {
 				//custom visual for rat king statue examine
 				//TODO should make a method for this if we have to do it with any frequency
 				Image img = new Image(texture);
-				img.frame(64, 0, 16, 16);
+				img.frame(256, 0, 64, 64);
+                img.logicalSize(16,16);
 				return img;
 			} else {
 				return super.image(tileX, tileY);

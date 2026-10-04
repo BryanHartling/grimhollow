@@ -344,6 +344,10 @@ public class GameScene extends PixelScene {
 		
 		levelVisuals = Dungeon.level.addVisuals();
 		add(levelVisuals);
+        // Wall fixtures belong to the scenery. Actors in front cover their flames.
+        levelWallVisuals = Dungeon.level.addWallVisuals();
+        add(levelWallVisuals);
+        for(int cell=0;cell<Dungeon.level.length();cell++)if(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.torchAt(Dungeon.level,cell))levelWallVisuals.add(new com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Torch(cell));
 
 		floorEmitters = new Group();
 		add(floorEmitters);
@@ -387,9 +391,6 @@ public class GameScene extends PixelScene {
 		customWalls = new Group();
 		add(customWalls);
 
-		levelWallVisuals = Dungeon.level.addWallVisuals();
-		add( levelWallVisuals );
-        for(int cell=0;cell<Dungeon.level.length();cell++)if(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.torchAt(Dungeon.level,cell))add(new com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Torch(cell));
 
 		wallBlocking = new WallBlockingTilemap();
 		add (wallBlocking);

@@ -225,6 +225,8 @@ def outputs():
     result['effects/painted_food.png']=icon
     from notifications import outputs as notifications
     result.update(notifications(result))
+    from playtest_presentation import outputs as playtest_presentation
+    result.update(playtest_presentation())
     return result
 
 
@@ -280,6 +282,9 @@ def main():
         from expedition import SIZES
         expected=SIZES.get(path,expected)
         if path=='sprites/lurking_horror.png':expected=(512,512)
+        expected={'gdx/grimhollow_cursor.png':(64,64),'interfaces/painted_compass.png':(32,24),
+                  'environment/custom_tiles/weak_floor.png':(320,64),
+                  'environment/custom_tiles/rat_king_room.png':(512,64)}.get(path,expected)
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]

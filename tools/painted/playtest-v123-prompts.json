@@ -1,0 +1,27 @@
+{
+  "license": "GPL-3.0-or-later",
+  "generator": "Built-in imagegen",
+  "assets": {
+    "cursor.png": {
+      "prompt": "Original dark gothic painted game mouse pointer, one isolated small arrow cursor on a genuinely transparent background. Strong ivory silver blade silhouette with a very thin dark charcoal outline and restrained antique brass ridge. Crisp pointed tip at upper left, arrow shaft extending diagonally down right, a broad enough arrow head to be immediately legible at 20 screen pixels. Smooth painted material, clean edges, subtle three dimensional engraving, no pixel art, no glow, no text, no scenery, no decoration outside the arrow. Fill most of a square canvas, ample transparent margins. This is a functional pointer for Grimhollow, not a weapon or logo.",
+      "use": "Cursor"
+    },
+    "compass.png": {
+      "prompt": "One original painted direction-to-stairs indicator for a dark gothic RPG, on genuinely transparent background. A compact upward pointing triangular arrowhead formed from bright ivory silver, with dark black outline and a restrained warm brass inner facet. Simple thick silhouette, symmetrical and vertical, sharp tip at the top, broad base at bottom. Readable at only 7 by 6 screen pixels. No compass dial, text, glow, pixel art, floating specks, scenery or other symbols. Smooth clean painted shading with high contrast.",
+      "use": "Compass"
+    },
+    "well.png": {
+      "prompt": "Original dark gothic painted game prop, a distant underground well seen from a three-quarter overhead dungeon camera. A circular weathered stone well rim with a few large distinct masonry blocks, an ominous deep dark shaft visible inside, a tiny glint of cool blue water far below and a chipped irregular rim. No roof, canopy, rope, foliage, person or scenery. One isolated cutout on a genuinely transparent background. Strong readable stone silhouette, smooth detailed painted rendering with sharp clear edges, enough light neutral gray on the rim to stand out on a black chasm, never pixel art. Composition centered, occupies a square canvas with clear margins; useful as a single dungeon tile and a small journal icon.",
+      "use": "Well"
+    },
+    "statue.png": {
+      "prompt": "One original dark gothic RPG Rat King statue, sculpted weathered limestone, isolated on genuinely transparent background. A squat seated rat monarch on a low heavy circular stone plinth, a recognizably rat-shaped long muzzle and round ears, a small carved jagged crown, forepaws resting regally against its belly, tail curved around the base. Three-quarter slightly overhead dungeon camera, faces toward viewer and right. Full statue including crown and base, no clipping. Strong carved silhouette, warm light gray stone with dark grooves and restrained moss stain, sharp readable planes and detailed smooth painted realism at small size, no pixels, no glowing eyes or glow, no floor or background. Tall enough to span one and a half dungeon tiles but modest proportions. No text, weapons, living fur, other objects or scenery.",
+      "use": "Statue",
+      "alphaEdit": "Edit only the background/transparency of this Rat King stone statue. Preserve the complete statue, crown, rat face, stone cloak, paws, tail and circular plinth exactly as painted. Remove every trace of the surrounding brown/gray mist, vignette, halo, floor and shadow beyond the solid plinth. The statue must be an opaque clean cutout on genuinely transparent pixels, with only natural antialiasing at its silhouette. No glow and no translucent haze around the crown or base. Do not restyle, repaint or reshape the sculpture."
+    },
+    "statue-original.png": {
+      "prompt": "One original dark gothic RPG Rat King statue, sculpted weathered limestone, isolated on genuinely transparent background. A squat seated rat monarch on a low heavy circular stone plinth, a recognizably rat-shaped long muzzle and round ears, a small carved jagged crown, forepaws resting regally against its belly, tail curved around the base. Three-quarter slightly overhead dungeon camera, faces toward viewer and right. Full statue including crown and base, no clipping. Strong carved silhouette, warm light gray stone with dark grooves and restrained moss stain, sharp readable planes and detailed smooth painted realism at small size, no pixels, no glowing eyes or glow, no floor or background. Tall enough to span one and a half dungeon tiles but modest proportions. No text, weapons, living fur, other objects or scenery.",
+      "use": "Retained edit source for transparency cleanup"
+    }
+  }
+}

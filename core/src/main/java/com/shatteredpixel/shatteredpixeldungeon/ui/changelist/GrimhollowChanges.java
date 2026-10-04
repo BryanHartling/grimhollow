@@ -20,7 +20,11 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.22.6","Nine individual painted heroes complete the sprint.");
+        ChangeInfo r=release(list,"v1.23.0","Clearer controls, aligned equipment and renewed necromancy.");
+        note(r,Icons.TALENT,"Necromancy","Necrotic Touch deals your hero level in damage each turn for one/two turns. Repeated melee hits refresh it without stacking. Raised servants lose 5% of maximum health per turn after their binding expires instead of disappearing. Spell information explains Wither, the servants, and which Phylactery curses qualify for your talents.");
+        note(r,Icons.JOURNAL,"Readable controls","Spent talent sockets glow gold; unused sockets remain dark. Keys remain visible above the journal button. Identification emblems keep their individual shapes in a restrained ivory-and-gold palette. The mouse pointer, stairs direction arrow, Distant Well and Rat King statue have new painted artwork, and the update screen has a scrollable framed layout. Smooth text is the default; your selected font preference is retained.");
+        note(r,Icons.MAGNIFY,"Equipment and flames","Weapon layers align their actual handles and blade tips with both facing directions, including Bone Rod, spear and shortsword. Torch flames draw behind characters. Broken dash characters in English item descriptions are repaired. Haste remains movement speed rather than sentry immunity; other actions still give sentries time to charge.");
+        r=release(list,"v1.22.6","Nine individual painted heroes complete the sprint.");
         note(r,Icons.TALENT,"Psychic presentation","Psychic has short silver hair, a circlet and angular lavender mantle over fitted armor, with precise restrained poses and the equipped Crystal or weapon. All nine heroes now have individual painted figures, portrait identities, fitted armor and weapon layers. These character paintings preserve movement and combat timing.");
         r=release(list,"v1.22.5","A gaunt painted Necromancer.");
         note(r,Icons.TALENT,"Necromancer presentation","Necromancer retains the elderly portrait face, silver hair and bone charms in a gaunt olive-black silhouette. Fitted armor preserves the stoop and asymmetric cowl, with subtle robe motion and equipped weapons. Gameplay and timing remain unchanged.");

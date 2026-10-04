@@ -64,6 +64,9 @@ public class KeyDisplay extends Visual {
 	}
 	
 	private int totalKeys = 0;
+    private int displayedKeys;
+
+    public void invalidateLayout(){dirty=true;}
 	
 	public KeyDisplay() {
 		super(0, 0, 0, 0);
@@ -117,54 +120,57 @@ public class KeyDisplay extends Visual {
 		script.lighting(
 				rm, gm, bm, am,
 				ra, ga, ba, aa );
-		script.drawQuadSet( buffer, totalKeys, 0 );
+		if(displayedKeys>0)script.drawQuadSet( buffer, displayedKeys, 0 );
 	}
 	
 	private void updateVertices(){
 		//assumes shorter key sprite
-		int maxRows = (int)(height +1) / 5;
+		int maxRows = Math.max(0,(int)(height +1) / 5);
 		
 		//1 pixel of padding between each key
-		int maxPerRow = (int)(width + 1) / 4;
+		int maxPerRow = Math.max(1,(int)(width + 1) / 4);
 		
 		int maxKeys = maxPerRow * maxRows;
 		
 		
-		while (totalKeys > maxKeys){
+        int[] remaining=keys==null?new int[keyMap.size()+1]:keys.clone();
+        displayedKeys=totalKeys;
+		while (displayedKeys > maxKeys){
 			Class<? extends Key> mostType = null;
 			int mostNum = 0;
 			for (Class<?extends Key> k : keyMap.keySet()){
-				if (keys[keyMap.get(k)] >= mostNum){
+				if (remaining[keyMap.get(k)] >= mostNum){
 					mostType = k;
-					mostNum = keys[keyMap.get(k)];
+					mostNum = remaining[keyMap.get(k)];
 				}
 			}
-			keys[keyMap.get(mostType)]--;
-			totalKeys--;
+            if(mostNum==0){remaining[0]=0;displayedKeys--;continue;}
+			remaining[keyMap.get(mostType)]--;
+			displayedKeys--;
 		}
 		
-		int rows = (int)Math.ceil(totalKeys / (float)maxPerRow);
+		int rows = (int)Math.ceil(displayedKeys / (float)maxPerRow);
 		
 		boolean shortKeys = (rows * 8) > height;
 		float left;
-		if (totalKeys > maxPerRow){
+		if (displayedKeys > maxPerRow){
 			left = 0;
 		} else {
-			left = (width + 1 - (totalKeys*4))/2;
+			left = (width + 1 - (displayedKeys*4))/2;
 		}
 		float top = (height + 1 - (rows * (shortKeys ? 5 : 8)))/2;
-		quads = Quad.createSet(totalKeys);
-		for (int i = 0; i < totalKeys; i++){
+		quads = Quad.createSet(displayedKeys);
+		for (int i = 0; i < displayedKeys; i++){
 			int keyIdx = 0;
 			
-			if (i == 0 && keys[0] > 0){
+			if (i == 0 && remaining[0] > 0){
 				//black key
 				keyIdx = 0;
 				
 			} else {
 				for (int j = 1; j < keys.length; j++){
-					if (keys[j] > 0){
-						keys[j]--;
+					if (remaining[j] > 0){
+						remaining[j]--;
 						keyIdx = j;
 						break;
 					}

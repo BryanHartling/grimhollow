@@ -27,4 +27,12 @@ def item_metadata():
                   TOMAHAWK=(.4,.65,0),BOOMERANG=(.35,.7,0),BONE_ROD=(.4,.65,0),RUNED_BATON=(.4,.6,0),
                   BONE_SCYTHE=(.45,.68,0),REAPER_SCYTHE=(.55,.6,0),GRAVE_SCYTHE=(.55,.6,0))
     points.update({name:(.7,.3,180) for name in catalog if name=='DART' or name.endswith('_DART')})
+    # Endpoint replaces the old rotation guess; both describe the inventory painting.
+    points={name:(x,y,.18,.85) if angle==180 else (x,y,.82,.15)
+            for name,(x,y,angle) in points.items()}
+    points.update(BONE_ROD=(.38,.69,.76,.18),SPEAR=(.4,.62,.86,.13),
+                  SHORTSWORD=(.34,.7,.89,.16),WORN_SHORTSWORD=(.34,.7,.89,.16),
+                  MAGES_STAFF=(.34,.69,.75,.13),FLAIL=(.77,.27,.28,.75),
+                  GREATAXE=(.78,.75,.3,.25),SAI=(.7,.72,.35,.15),
+                  WHIP=(.75,.65,.25,.25),RUNED_BATON=(.35,.67,.83,.15))
     return (json.dumps({str(catalog[name]['id']):list(point) for name,point in points.items()},indent=2)+'\n').encode('utf-8')

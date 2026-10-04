@@ -30,6 +30,18 @@ public class WndHeroInfo extends WndTabbed {
         hint.maxWidth(pageWidth-44);hint.setPos(42,title.bottom()+3);add(hint);
         Page profile=new Page();
         profile.text(hero.shortDesc());profile.text(hero.desc());
+        if(hero==HeroClass.NECROMANCER){
+            profile.text(Messages.get(this,"necromancer_spells"));
+            for(com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.Spell spell:new com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.Spell[]{
+                    com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.Spell.WITHER,
+                    com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.Spell.RAISE_SKELETON,
+                    com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.Spell.RAISE_WRAITH,
+                    com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.Spell.RAISE_GHOUL,
+                    com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.Spell.RAISE_REVENANT}){
+                profile.choice(Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.class,spell.name()),SkillIcon.spell(spell.name()),
+                        ()->Game.scene().addToFront(new WndMessage(com.shatteredpixel.shatteredpixeldungeon.items.Phylactery.spellDescription(spell))));
+            }
+        }
         if(!hero.isUnlocked())profile.text(Messages.get(HeroClass.class,hero.name()+"_unlock"));
         addPage("profile",profile);
         Page growth=new Page();growth.text(Messages.get(this,"growth_msg"));

@@ -1,5 +1,10 @@
 # Known issues
 
+- v1.23.0 local verification briefly hit a Windows user-mapped PNG lock; moving the generated capture aside and rerunning the unchanged geometry gate succeeded. No game or check was altered for it.
+
+- v1.23.0: physical Samsung tablet and full campaign balance remain human playtesting; native portrait touch is not an Android device run. Smooth text is the default, but an explicit pixel-font setting is preserved.
+- v1.23.0: reported Haste/red-sentry encounter not reproduced; generated-room tests pass all four approaches without hasted shots. Sentry gameplay is unchanged; Haste remains speed rather than immunity.
+
 - Sprint v1.22.6: native desktop/headless/build checks do not replace physical Samsung tablet and campaign balance review. All nine figures and equipped-weapon layers are delivered; animation remains restrained offline deformation, with existing facing and timings.
 - Historical v1.21.1 CI run 37213690685 failed the unchanged effects timing gate (mean 1.7095 ms, p95 2.1713 ms, required both <2 ms). Later rune, Psychic and icon checkpoints passed full CI; no check was weakened.
 

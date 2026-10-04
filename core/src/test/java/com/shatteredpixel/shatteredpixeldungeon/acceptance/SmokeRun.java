@@ -744,6 +744,7 @@ public class SmokeRun {
     private static void maxTalents(){for(java.util.Map<Talent,Integer> tier:Dungeon.hero.talents)for(Talent t:tier.keySet())tier.put(t,t.maxPoints());}
     private static void necromancerScenario() throws Exception {
         Hero h=Dungeon.hero;Phylactery item=h.belongings.getItem(Phylactery.class);
+        sentryHasteScenario();
         check(h.HT==20&&h.HP==20&&h.STR==10,"Necromancer base stats");
         check(h.belongings.weapon instanceof BoneRod&&item!=null&&item.charges()==1&&item.cap()==3,"Necromancer equipment/charge kit");
         check(h.belongings.getItem(Food.class).quantity()==2&&h.belongings.getItem(PotionOfToxicGas.class).isIdentified()&&h.belongings.getItem(ScrollOfIdentify.class)!=null,"Necromancer bag kit");
@@ -756,7 +757,12 @@ public class SmokeRun {
         skeleton.sprite=new NecroSkeletonSprite();skeleton.sprite.link(skeleton);
         for(int i=0;i<29;i++)skeleton.buff(NecroSkeleton.Lifetime.class).act();
         check(skeleton.isAlive(),"Minion lives through turn 29");check(skeleton.description().contains("_1 more turns_"),"56: inspection counts down remaining binding");skeleton.buff(NecroSkeleton.Lifetime.class).act();
-        check(!NecroSkeleton.minions().contains(skeleton)&&h.HP==20,"Minion expires at turn 30 without explosion");
+        check(skeleton.isAlive()&&skeleton.remaining==0&&skeleton.HP==skeleton.HT-skeleton.decayDamage()&&h.HP==20,"Minion binding expires into gradual health decay without explosion");
+        check(skeleton.description().contains("loses _"+skeleton.decayDamage()+" health"),"Minion inspection explains post-binding decay");
+        com.watabou.utils.Bundle decaying=new com.watabou.utils.Bundle();decaying.put("minion",skeleton);
+        NecroSkeleton restoredDecay=(NecroSkeleton)decaying.get("minion");check(restoredDecay.remaining==0&&restoredDecay.HP==skeleton.HP,"Minion decay state survives save/load");
+        int decayTurns=0;while(skeleton.isAlive()&&decayTurns++<20)skeleton.buff(NecroSkeleton.Lifetime.class).act();
+        check(!skeleton.isAlive()&&!NecroSkeleton.minions().contains(skeleton)&&h.HP==20,"Decay eventually removes minion without expiry rebirth");
         clearArena();Rat enemy=target(h.pos+1);enemy.HP=1;enemy.damage(1,h);
         check(item.charges()==3&&Dungeon.level.corpses.get(enemy.pos)==200,"Hero kill charge and corpse tracking");
         // Acceptance 27: same equipped resource and scheduled keeper after a real kill, without further kills.
@@ -793,9 +799,15 @@ public class SmokeRun {
         ghoul.HP=1;Talent.onFoodEaten(h,100,new Food());check(ghoul.HP>1,"Bone Meal");
         enemy=target(h.pos+2);h.HP=50;ghoul.attackProc(enemy,20);check(h.HP==53,"56: Ghoul heals 15% of actual damage");
         enemy.HP=10;ghoul.attackProc(enemy,100);check(h.HP==55,"56: Ghoul overkill capped at remaining health");enemy.HP=200;
-        Talent.onAttackProc(h,enemy,5);check(enemy.buff(Corrosion.class)!=null,"Necrotic Touch");
-        Buff.detach(enemy,Corrosion.class);h.belongings.thrownWeapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife();
-        Talent.onAttackProc(h,enemy,5);check(enemy.buff(Corrosion.class)==null,"Necrotic Touch excludes thrown weapons");h.belongings.thrownWeapon=null;
+        Talent.onAttackProc(h,enemy,5);Necromancy.NecroticTouch wound=enemy.buff(Necromancy.NecroticTouch.class);
+        check(wound!=null&&wound.totalIncomingDMG()==2*h.lvl,"Necrotic Touch fixed hero-level damage");
+        Talent.onAttackProc(h,enemy,5);check(enemy.buffs(Necromancy.NecroticTouch.class).size()==1&&wound.totalIncomingDMG()==2*h.lvl,"Necrotic Touch refresh does not stack");
+        int woundHP=enemy.HP;wound.act();check(enemy.HP==woundHP-h.lvl&&wound.totalIncomingDMG()==h.lvl,"Necrotic Touch does not escalate its damage");
+        com.watabou.utils.Bundle woundBundle=new com.watabou.utils.Bundle();woundBundle.put("wound",wound);
+        check(((Necromancy.NecroticTouch)woundBundle.get("wound")).totalIncomingDMG()==h.lvl,"Necrotic Touch damage/duration serialize");
+        Buff.detach(enemy,Necromancy.NecroticTouch.class);h.belongings.thrownWeapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife();
+        Talent.onAttackProc(h,enemy,5);check(enemy.buff(Necromancy.NecroticTouch.class)==null,"Necrotic Touch excludes thrown weapons");h.belongings.thrownWeapon=null;
+        for(Phylactery.Spell spell:Phylactery.Spell.values())check(!Phylactery.spellDescription(spell).contains("NO TEXT")&&Phylactery.spellDescription(spell).length()>50,"Phylactery spell/minion tooltip: "+spell);
         Buff.prolong(h,Bless.class,10);Buff.prolong(h,Haste.class,10);Buff.affect(h,Barkskin.class).setForDuration(10,10);
         // Second Grave never permits more than cap+1, and the exemption ends after 5 turns.
         for(NecroSkeleton m:NecroSkeleton.minions()){m.sacrificed=true;if(m.sprite==null){m.sprite=new NecroSkeletonSprite();m.sprite.link(m);}m.die(h);}
@@ -852,6 +864,33 @@ public class SmokeRun {
         for(int cell:walls)check(Dungeon.level.map[cell]!=Terrain.BONE_WALL,"Bone Prison reverts on load");
         check(BoneWalls.prison(h.pos+3,10,1),"Exit prison");Level previous=Dungeon.level;Dungeon.newLevel();check(previous.boneOriginal.keyArray().length==0,"Bone Prison reverts on level exit");Dungeon.switchLevel(previous,h.pos);
         System.out.println("NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS");
+    }
+    private static void sentryHasteScenario() throws Exception {
+        Hero h=Dungeon.hero;int original=h.pos;
+        java.lang.reflect.Method act=com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SentryRoom.Sentry.class.getDeclaredMethod("act");act.setAccessible(true);
+        int traversals=0,slowShots=0;
+        try{
+            for(int side=0;side<4;side++)for(boolean haste:new boolean[]{true,false}){
+                clearArena();
+                com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SentryRoom room=new com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SentryRoom();room.set(3,3,15,15);
+                com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room.Door door=new com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room.Door(side==0?3:side==1?15:6,side==2?3:side==3?15:6);
+                room.connected.put(new com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.EmptyRoom(),door);room.paint(Dungeon.level);Dungeon.level.buildFlagMaps();
+                com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SentryRoom.Sentry sentry=null;
+                for(Mob mob:Dungeon.level.mobs)if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SentryRoom.Sentry)sentry=(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SentryRoom.Sentry)mob;
+                check(sentry!=null,"Generated red sentry");final int[] shots={0};
+                sentry.sprite=new SentrySprite.Red(){@Override public void charge(){}@Override public void idle(){}@Override public void zap(int cell){shots[0]++;}};
+                int prize=-1;for(Heap heap:Dungeon.level.heaps.valueList())if(heap.type==Heap.Type.CHEST&&Dungeon.level.map[heap.pos]==Terrain.PEDESTAL&&heap.pos!=sentry.pos&&room.inside(Dungeon.level.cellToPoint(heap.pos)))prize=heap.pos;
+                check(prize>=0,"Generated sentry prize");h.pos=door.x+door.y*Dungeon.level.width();
+                boolean[] passable=Dungeon.level.passable.clone();passable[h.pos]=true;passable[sentry.pos]=false;
+                com.watabou.utils.PathFinder.Path route=com.watabou.utils.PathFinder.find(h.pos,prize,passable);check(route!=null,"Sentry prize route");
+                if(haste)Buff.prolong(h,Haste.class,Haste.DURATION);else Buff.detach(h,Haste.class);
+                for(int cell:route){h.timeToNow();h.move(cell);h.spend(1f/h.speed());act.invoke(sentry);}
+                if(haste)check(shots[0]==0,"Haste crosses generated sentry room from side "+side+" without a shot");else slowShots+=shots[0];
+                sentry.sprite.destroy();traversals++;
+            }
+            check(slowShots>0,"Normal movement retains red sentry danger");
+            System.out.println("SENTRY HASTE PASS: generated entrances=4 traversals="+traversals+" haste shots=0 normal shots="+slowShots+"; haste is speed, not immunity");
+        }finally{Buff.detach(h,Haste.class);h.timeToNow();h.pos=original;clearArena();}
     }
 
     private static void psychicScenario() throws Exception {

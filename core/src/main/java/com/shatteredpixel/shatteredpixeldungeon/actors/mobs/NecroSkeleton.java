@@ -49,7 +49,7 @@ public class NecroSkeleton extends DirectableAlly {
     }
     private int directedTarget=-1;
     @Override public String description(){
-        String text=super.description()+"\n\n"+com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(NecroSkeleton.class,"lifetime",Math.max(0,remaining));
+        String text=super.description()+"\n\n"+com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(NecroSkeleton.class,remaining>0?"lifetime":"decaying",remaining>0?remaining:decayDamage());
         if(grace>0)text+="\n"+com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(NecroSkeleton.class,"grace",grace);
         return text;
     }
@@ -87,8 +87,15 @@ public class NecroSkeleton extends DirectableAlly {
     public static class Lifetime extends Buff {
         @Override public boolean act(){
             NecroSkeleton m=(NecroSkeleton)target;
-            if(--m.remaining<=0 || (m.grace>0 && --m.grace==0 && counted()>cap())) {m.sacrificed=true;m.die(this);detach();return true;}
+            if(m.grace>0 && --m.grace==0 && counted()>cap()){m.sacrificed=true;m.die(this);detach();return true;}
+            if(m.remaining>0)m.remaining--;
+            if(m.remaining==0){
+                // Binding decay ignores armor/shields and cannot create an expiry/rebirth loop.
+                m.HP-=m.decayDamage();
+                if(m.HP<=0){m.sacrificed=true;m.die(this);detach();return true;}
+            }
             spend(TICK);return true;
         }
     }
+    public int decayDamage(){return Math.max(1,(int)Math.ceil(HT*.05));}
 }

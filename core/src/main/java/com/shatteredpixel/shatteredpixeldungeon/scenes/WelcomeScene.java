@@ -29,8 +29,6 @@ import com.shatteredpixel.shatteredpixeldungeon.GamesInProgress;
 import com.shatteredpixel.shatteredpixeldungeon.Rankings;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
-import com.shatteredpixel.shatteredpixeldungeon.effects.BannerSprites;
-import com.shatteredpixel.shatteredpixeldungeon.effects.Fireball;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Document;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Journal;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
@@ -106,42 +104,19 @@ public class WelcomeScene extends PixelScene {
 		w -= insets.left + insets.right;
 		h -= insets.top + insets.bottom;
 
-		Image title = BannerSprites.get( landscape() ? BannerSprites.Type.TITLE_LAND : BannerSprites.Type.TITLE_PORT);
+		Image title = new Image("interfaces/title_wordmark.png");
+        title.texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR,com.badlogic.gdx.graphics.GL20.GL_LINEAR);
+        float titleWidth=Math.min(w-28,220);
+        title.logicalSize(titleWidth,titleWidth*144/1024f);
 		add( title );
 
-		float topRegion = Math.max(title.height - 6, h*0.45f);
+		float topRegion = Math.max(title.height+12,h*.24f);
 
 		title.x = insets.left + (w - title.width()) / 2f;
 		title.y = insets.top + 2 + (topRegion - title.height()) / 2f;
 
 		align(title);
 
-		if (landscape()){
-			placeTorch(title.x + 30, title.y + 35);
-			placeTorch(title.x + title.width - 30, title.y + 35);
-		} else {
-			placeTorch(title.x + 16, title.y + 70);
-			placeTorch(title.x + title.width - 16, title.y + 70);
-		}
-
-		Image signs = new Image(BannerSprites.get( landscape() ? BannerSprites.Type.TITLE_GLOW_LAND : BannerSprites.Type.TITLE_GLOW_PORT)){
-			private float time = 0;
-			@Override
-			public void update() {
-				super.update();
-				am = Math.max(0f, (float)Math.sin( time += Game.elapsed ));
-				if (time >= 1.5f*Math.PI) time = 0;
-			}
-			@Override
-			public void draw() {
-				Blending.setLightMode();
-				super.draw();
-				Blending.setNormalMode();
-			}
-		};
-		signs.x = title.x + (title.width() - signs.width())/2f;
-		signs.y = title.y;
-		add( signs );
 		
 		StyledButton okay = new StyledButton(Chrome.Type.GREY_BUTTON_TR, Messages.get(this, "continue")){
 			@Override
@@ -169,10 +144,11 @@ public class WelcomeScene extends PixelScene {
 			}
 		};
 
-		float buttonY = insets.top + Math.min(topRegion + (PixelScene.landscape() ? 60 : 120), h - 24);
+		float buttonY = insets.top+h-28;
 
 		float buttonAreaWidth = landscape() ? PixelScene.MIN_WIDTH_L-6 : PixelScene.MIN_WIDTH_P-2;
 		float btnAreaLeft = insets.left + (w - buttonAreaWidth) / 2f;
+        StyledButton updateLogButton=null;
 		if (previousVersion != 0 && !SPDSettings.intro()){
 			StyledButton changes = new StyledButton(Chrome.Type.GREY_BUTTON_TR, Messages.get(TitleScene.class, "changes")){
 				@Override
@@ -182,12 +158,14 @@ public class WelcomeScene extends PixelScene {
 					ShatteredPixelDungeon.switchScene(ChangesScene.class);
 				}
 			};
-			okay.setRect(btnAreaLeft, buttonY, (buttonAreaWidth/2)-1, 20);
+			changes.icon(Icons.get(Icons.CHANGES));
+            float okayWidth=(buttonAreaWidth-1+okay.reqWidth()-changes.reqWidth())/2f;
+			okay.setRect(btnAreaLeft, buttonY, okayWidth, 20);
 			add(okay);
 
-			changes.setRect(okay.right()+1, buttonY, okay.width(), 20);
-			changes.icon(Icons.get(Icons.CHANGES));
+			changes.setRect(okay.right()+1, buttonY, buttonAreaWidth-1-okayWidth, 20);
 			add(changes);
+            updateLogButton=changes;
 		} else {
 			okay.text(Messages.get(TitleScene.class, "enter"));
 			okay.setRect(btnAreaLeft, buttonY, buttonAreaWidth, 20);
@@ -212,11 +190,24 @@ public class WelcomeScene extends PixelScene {
 			message = Messages.get(this, "what_msg");
 		}
 
-		text.text(message, Math.min(w-20, 300));
-		float titleBottom = title.y + title.height();
-		float textSpace = okay.top() - titleBottom - 4;
-		text.setPos(insets.left + (w - text.width()) / 2f, (titleBottom + 2) + (textSpace - text.height())/2);
-		add(text);
+        float panelWidth=Math.min(w-20,280),panelX=insets.left+(w-panelWidth)/2;
+        text.text(message,(int)panelWidth-20);
+        float panelHeight=Math.min(h-topRegion-39,Math.max(66,text.height()+48));
+        float panelY=insets.top+topRegion+Math.max(3,(h-topRegion-panelHeight-36)/2);
+        buttonY=panelY+panelHeight+8;
+        okay.setPos(okay.left(),buttonY);
+        if(updateLogButton!=null)updateLogButton.setPos(updateLogButton.left(),buttonY);
+        com.watabou.noosa.NinePatch panel=Chrome.get(Chrome.Type.WINDOW);
+        panel.x=panelX;panel.y=panelY;panel.size(panelWidth,panelHeight);add(panel);
+        RenderedTextBlock heading=PixelScene.renderTextBlock(previousVersion==0?Messages.get(this,"welcome_title"):Messages.get(this,"release_title"),9);
+        heading.hardlight(com.shatteredpixel.shatteredpixeldungeon.ui.Window.TITLE_COLOR);
+        heading.setPos(panelX+(panelWidth-heading.width())/2,panelY+8);add(heading);
+        RenderedTextBlock version=PixelScene.renderTextBlock(Game.version,6);
+        version.hardlight(0xC0B69D);version.setPos(panelX+(panelWidth-version.width())/2,heading.bottom()+3);add(version);
+        text.setPos(0,0);
+        com.watabou.noosa.ui.Component content=new com.watabou.noosa.ui.Component();content.add(text);content.setSize(panelWidth-20,text.height());
+        com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane body=new com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane(content);
+        add(body);body.setRect(panelX+10,version.bottom()+7,panelWidth-20,Math.max(10,panelY+panelHeight-10-version.bottom()-7));
 
 		if (SPDSettings.intro() && ControllerHandler.isControllerConnected()){
 			addToFront(new WndHardNotification(Icons.CONTROLLER.get(),
@@ -230,15 +221,6 @@ public class WelcomeScene extends PixelScene {
 				}
 			});
 		}
-	}
-
-	private void placeTorch( float x, float y ) {
-		Fireball fb = new Fireball();
-		fb.x = x - fb.width()/2f;
-		fb.y = y - fb.height();
-
-		align(fb);
-		add( fb );
 	}
 
 	private void updateVersion(int previousVersion){

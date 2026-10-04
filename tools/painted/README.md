@@ -1,3 +1,9 @@
+# Playtesting presentation - v1.23.0
+
+`playtest_presentation.py` packs committed cutouts from `sources/playtest-v123/` into the mouse pointer, stair direction marker, Distant Well and Rat King statue. Exact built-in generation/edit prompts are in `playtest-v123-prompts.json`; the original statue edit source is retained. All are GPL-3.0-or-later. Unchanged Rat King pillow/decor cells come from the existing immutable recovery base. `journal.py` uses the same well painting for its landmark. `identification.py` preserves the sixty separate paintings in a restrained high-contrast ivory/gold range. The full offline check is unchanged.
+
+`equipment-grips.json` now records handle and blade-tip coordinates. `HeroEquipment` aligns that real axis to the class pose and mirrors it with the hero. Existing native checks cover ten loadouts in both facings, including Bone Rod, spear and shortsword; no attack timing changes.
+
 # Individual painted heroes - v1.22.6
 
 All nine classes now use complete painted figures from `sources/hero-pilot/`, with eight fitted armor variants each. Exact built-in imagegen prompts and portrait references are in `hero-pilot-prompts.json`. Sources and derivatives are GPL-3.0-or-later. Each source was generated and reviewed as a separate hero batch; no generator is required in builds or CI.

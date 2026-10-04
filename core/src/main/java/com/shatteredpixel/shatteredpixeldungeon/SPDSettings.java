@@ -200,9 +200,8 @@ public class SPDSettings extends GameSettings {
 	}
 
 	public static boolean systemFont(){
-		return getBoolean(KEY_SYSTEMFONT,
-				(language() == Languages.CHI_SMPL || language() == Languages.CHI_TRAD
-						|| language() == Languages.KOREAN || language() == Languages.JAPANESE));
+        // Use the existing smooth platform typeface unless the player chose pixel text.
+		return getBoolean(KEY_SYSTEMFONT, true);
 	}
 
 	public static void vibration(boolean value){

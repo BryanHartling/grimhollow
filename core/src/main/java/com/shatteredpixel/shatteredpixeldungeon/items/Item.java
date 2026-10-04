@@ -657,6 +657,8 @@ public class Item implements Bundlable {
 	public void cast( final Hero user, final int dst ) {
 		
 		final int cell = throwPos( user, dst );
+        if(user.sprite instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite)
+            ((com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite)user.sprite).presentProjectile(this);
 		user.sprite.zap( cell );
 		user.busy();
 

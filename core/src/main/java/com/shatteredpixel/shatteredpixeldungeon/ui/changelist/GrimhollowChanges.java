@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.21.4","Every identity has its own emblem.");
+        ChangeInfo r=release(list,"v1.21.5","Your equipment becomes part of your silhouette.");
+        note(r,Icons.TALENT,"Held weapon prototype","Warrior and Enchanter now display the painted weapon they wield. Grip and swing follow the class, facing and weapon category; thrown and ability-selected weapons appear during their action. Gear uses the existing paintings, with gameplay and combat timing unchanged.");
+        r=release(list,"v1.21.4","Every identity has its own emblem.");
         note(r,Icons.CATALOG,"Distinct painted icons","Rings, scrolls and potions now have sixty distinct painted identity emblems. Identify uses a book and lens, Mind Vision a third-eye profile, and Magical Sight a prism. The guide's surprise-attack serpent and Unbound Focus also have dedicated paintings. Unidentified appearances remain randomized.");
         r=release(list,"v1.21.3","A dependable weapon and more focused senses.");
         note(r,Icons.TALENT,"Psychic Crystal and senses","Focus Crystal is your starting weapon, with modest damage growth from charges spent. Unbound Focus permits carried casting and 50%/75% recharge. Treasure Sense supplies temporary nearby item markers without mapping terrain. Trap Sense rolls once per trap and extends manual trap search; the Seer retains guaranteed nearby awareness.");

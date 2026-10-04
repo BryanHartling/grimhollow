@@ -1,3 +1,8 @@
+# Sprint component 6 - v1.21.5
+
+- Warrior/Enchanter display equipped painted weapons with class/pose hand anchors, catalog-specific handles and category scale/swing. Ability-selected and thrown weapons are captured for their action, then return to the current loadout. Bare hands and fist gear remain clear.
+- Reuse the painted item atlas and current armor pixels for fingers over the grip: two extra quads, no new GPU textures, no actor or combat-timing changes. The Enchanter source retains its approved figure with only the fixed brush removed.
+- Native equipment captures use normal alpha blending for composed heroes; exact single-atlas pixel tests remain unblended. Offline metadata, sources and prompts reproduce through the normal packer.
 # Sprint component 5 - v1.21.4
 
 - Sixty dedicated painted identity emblems replace tinted shared status symbols. Remove the old Mind Vision/Magical Sight atlas alias; numeric IDs, identification and random unidentified appearances remain unchanged.

@@ -123,3 +123,9 @@ The 1.4.0 pass adds 86 painted status emblems and three overhead symbols, retain
 ## Enchanter craft and elemental treasury assets
 
 Original imagegen sources in `sources/sprint/` and exact prompts in `sprint-prompts.json` supply Spellguard, Blank Parchment, sixteen journal/category icons and six elemental-mechanism states. `botany_skills.py`, `inventory.py`, `journal.py` and `elemental_cache.py` pack the committed paintings; `pack.py --check` verifies every shipping pixel without network or generation. Logical geometry remains unchanged. This release reconstructs 144 assets from 134 source sheets plus 55 launcher resources.
+
+## Distinct identities and held equipment
+
+v1.21.4 compiles sixty distinct identity paintings from `sources/sprint-icons/`, with exact prompts and semantic assignments in `sprint-icons-prompts.json`. Mind Vision no longer aliases Magical Sight. `identification.py` exports the atlas, source/hash contracts and small-size review; the guide serpent and Unbound Focus use the special sheet. `pack.py --icons` is a focused export; full `--check` remains the CI gate.
+
+v1.21.5 prototypes held equipment on Warrior and Enchanter. `hero_equipment.py` exports deterministic per-pose hand anchors to `sprites/hero-grips.json`. The renderer reuses the existing item atlas and current hero armor pixels for the grip; it introduces no additional GPU textures or actor/gameplay changes. Equipped, ability-selected and thrown weapons use their own painted art, with category scale/swing, mirrored anchors and matching hero visibility/tint. No baked weapon remains in the Enchanter source. Production frame layout, combat callbacks and mobile cadence remain unchanged.

@@ -299,6 +299,12 @@ def main():
         pack_launchers(args.check,failures)
         from inventory import semantic_bytes, SEMANTICS
         expected_semantics=semantic_bytes()
+    from hero_equipment import metadata, item_metadata
+    for name,data in (('hero-grips',metadata()),('equipment-grips',item_metadata())):
+        grip_path=ASSETS/f'sprites/{name}.json'
+        if args.check:
+            if not grip_path.exists() or grip_path.read_bytes().replace(b'\r\n',b'\n')!=data:failures.append(f'sprites/{name}.json')
+        else:grip_path.write_bytes(data)
     if args.check:
         if not args.hero and (ROOT/SEMANTICS).read_bytes().replace(b'\r\n',b'\n')!=expected_semantics:failures.append(SEMANTICS)
         if not MANIFEST.exists() or json.loads(MANIFEST.read_text(encoding='utf-8'))!=manifest:failures.append('painted-assets.json')

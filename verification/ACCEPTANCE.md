@@ -1,3 +1,9 @@
+# Sprint component 6 - v1.21.5
+
+- Final `core:test desktop:dist android:assembleDebug --no-daemon`: **BUILD SUCCESSFUL in 1m 15s**, seven JUnit tests pass; native Windows application packaged. Initial package-name compile errors were corrected before release.
+- Existing native geometry gate: **HERO EQUIPMENT native draws=384, failures=0** across Warrior/Enchanter, cloth/plate, both facings, eight loadouts and six poses. Secondary-ability and thrown-weapon capture/restoration pass. Existing 24–26/34/36 gates pass. Layered hero measurements use the game's alpha blending; raw single-atlas semantic comparisons stay exact and unblended.
+- Four fresh live dungeon captures (two heroes × cloth/plate) pass with lighting on/off. Painted sources, poses, native equipment and actual in-game captures were visually reviewed; handle locations corrected for reversed inventory blades and lowered caster weapons point away from the face. Evidence: `verification/heroes/pilot/weapon-aware.png`, poses/GIF and native folders.
+- Full `tools/recovery_assets.py --check`: **146 painted assets, 142 sources, 55 launcher resources, TEST 44 failures=0**; includes deterministic hand/weapon grip metadata. Two reused draw quads, no added GPU textures; no combat callbacks/timings changed. Physical tablet validation remains human review; test 45 is abandoned and not run.
 # Sprint component 5 - v1.21.4
 
 - `core:test desktop:dist android:assembleDebug --no-daemon`: **BUILD SUCCESSFUL in 1m 13s**, seven JUnit tests pass. Final desktop rebuild after correcting a stale diagnostic label: **BUILD SUCCESSFUL in 34s**. Native Windows application packaged.

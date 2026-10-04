@@ -6,7 +6,7 @@ All 71 creature atlases (129 authored forms) now export directly from their orig
 
 The new particle motifs and Defensive Sigil were authored with the built-in image generator. Exact prompts are in `tools/painted/particles-prompts.json` `tools/painted/rays-prompt.json` and `tools/painted/defensive-sigil-prompt.json`; immutable source PNGs are in `tools/painted/sources/particles/`. `particles.py` packs three 256px atlases, also reusing established status/UI symbols for the legacy Speck meanings. `botany_skills.py` replaces the old Field Repair cell with the new Defensive Sigil painting. No generation occurs during packing or CI.
 
-The existing nine hero/splash designs, five painted regions, items, plants, traps, interface, status/talent art and launcher emblem remain included. Test 44 reconstructs every painted output and verifies unaffected restoration assets; test 25 retains named item semantics; test 45 keeps its existing room thresholds. Archived evidence and earlier workflows below are historical.
+The existing nine hero/splash designs, five painted regions, items, plants, traps, interface, status/talent art and launcher emblem remain included. Test 44 reconstructs every painted output and verifies unaffected restoration assets; test 25 retains named item semantics; test 45 is Abandoned: test failed, and is no longer run. Archived evidence and earlier workflows below are historical.
 
 ---
 

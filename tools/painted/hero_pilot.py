@@ -244,6 +244,24 @@ def summary():
                 board.paste(crop,(x,y+25))
         board.save(target/'ingame-comparison.png')
 
+def equipment_review():
+    from PIL import ImageFont
+    target=HERE.parents[1]/'verification/heroes/pilot'
+    names=('empty','Dagger','Greatsword','SpiritBow','MagesStaff','FocusCrystal','ThrowingKnife','Spear')
+    board=Image.new('RGB',(1200,730),(25,29,31));draw=ImageDraw.Draw(board)
+    font=ImageFont.load_default(size=16)
+    draw.text((20,12),'Held equipment | native OpenGL crops at 100% | cloth / plate',font=font,fill='#eedcc0')
+    for row,(hero,tier) in enumerate((('warrior',1),('warrior',5),('enchanter',1),('enchanter',5))):
+        y=45+row*170
+        draw.text((20,y),f'{hero.title()} / tier {tier}',font=font,fill='#eedcc0')
+        for col,name in enumerate(names):
+            path=target/'weapons'/f'{hero}-{tier}-{name}.png'
+            if not path.exists():continue
+            image=Image.open(path).convert('RGBA').crop((12,8,140,136))
+            board.paste(image,(col*150+12,y+25),image)
+            draw.text((col*150+12,y+151),name,font=font,fill='#b7bab9')
+    board.save(target/'weapon-aware.png')
+
 
 if __name__ == '__main__':
     import argparse
@@ -251,3 +269,4 @@ if __name__ == '__main__':
     parser.add_argument('--review', choices=HEROES, required=True)
     review(parser.parse_args().review)
     summary()
+    equipment_review()

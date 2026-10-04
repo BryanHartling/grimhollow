@@ -49,11 +49,14 @@ public class HeroSprite extends CharSprite {
 	
 	private Animation fly;
 	private Animation read;
+    private HeroEquipment equipment;
+    private HeroClass appearance;
 
 	public HeroSprite() {
 		super();
 		
 		texture( Dungeon.hero.heroClass.spritesheet() );
+        appearance=Dungeon.hero.heroClass;
 		texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR, com.badlogic.gdx.graphics.GL20.GL_LINEAR);
 		updateArmor();
 		
@@ -63,9 +66,13 @@ public class HeroSprite extends CharSprite {
 			idle();
 		else
 			die();
+        // Construct cached draw resources on the scene/render thread, before
+        // actor-thread attack callbacks can capture a transient weapon.
+        equipment=new HeroEquipment(this);
 	}
 
 	public void disguise(HeroClass cls){
+        appearance=cls;
 		texture( cls.spritesheet() );
 		texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR, com.badlogic.gdx.graphics.GL20.GL_LINEAR);
 		updateArmor();
@@ -121,6 +128,7 @@ public class HeroSprite extends CharSprite {
 
 	@Override
 	public void idle() {
+        if(equipment!=null)equipment.rest();
 		super.idle();
 		if (ch != null && ch.flying) {
 			play( fly );
@@ -144,6 +152,23 @@ public class HeroSprite extends CharSprite {
 		};
 		play( read );
 	}
+
+    public void presentProjectile(com.shatteredpixel.shatteredpixeldungeon.items.Item item){
+        equipment().capture(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.KindOfWeapon?item:null);
+    }
+    private HeroEquipment equipment(){if(equipment==null)equipment=new HeroEquipment(this);return equipment;}
+    public Image displayedEquipment(){return equipment().image();}
+    public com.shatteredpixel.shatteredpixeldungeon.items.Item displayedWeapon(){return equipment().displayedWeapon((Hero)ch);}
+    @Override public synchronized void attack(int cell,Callback callback){
+        equipment().capture(((Hero)ch).belongings.attackingWeapon());
+        super.attack(cell,callback);
+    }
+    @Override public void draw(){
+        super.draw();
+        int pose=Math.round(frame.left*texture.width/FRAME_WIDTH);
+        if(equipment().prepare(pose,appearance))equipment.draw();
+    }
+    @Override public void destroy(){if(equipment!=null)equipment.destroy();super.destroy();}
 
 	@Override
 	public void bloodBurstA(PointF from, int damage) {

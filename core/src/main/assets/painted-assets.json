@@ -37,6 +37,7 @@
     "hero-pilot/enchanter.png": "ec5aa94b5e95c42e050945920d2b3e5c57a1f372cb94b4d465bdc246c8d81a06",
     "hero-pilot/huntress.png": "e5f96fea13760e101f4d314c26acc10136b4490f7d005fb4d4269292302f3e6f",
     "hero-pilot/mage.png": "d509082abad4f0468b58a2546ec365d34953fac99151e00c0d7a6e15c0f11a94",
+    "hero-pilot/necromancer.png": "9adaa820d117195d806f0328e92dbfa99921682eef003ee6fe29d7d194940c4c",
     "hero-pilot/rogue.png": "f6ae2a4347d4fe5cbac60da9dac49f8724e5aefb5699b2417d9100e04faae6af",
     "hero-pilot/warrior.png": "8a32dfbac9f50803e5ac4ebdbd7291f5e70d486b1b692c3cabaadf7480bbe7bf",
     "interface/frames.png": "0a38c310f9864bce7f352a26548fb2aa32161f8a6bac003614673373fc1d3550",
@@ -366,7 +367,7 @@
         2048,
         1024
       ],
-      "rgba_sha256": "68087c41c98319ee2ecc396dbe7356883a17593a228721dea198f2cbb7c60f86"
+      "rgba_sha256": "b9bdd6633f1db3c88552490b01dd84c015a41a3146150e46cc835df9f6edfa95"
     },
     "sprites/hero_enchanter.png": {
       "size": [

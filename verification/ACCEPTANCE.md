@@ -1,3 +1,9 @@
+# Sprint component 7 - Necromancer v1.22.5
+
+- Windows/Android build and seven JUnit tests: **BUILD SUCCESSFUL in 44s**; native Windows application packaged. Focused reproducibility: **PAINTED assets=1 source sheets=148 failures=0**.
+- Existing geometry: **HERO EQUIPMENT: native draws=1536 cloth/plate, both facings, eight loadouts, movement/action poses, secondary and thrown capture; failures=0**. Nine heroes, 126 creature sprites, 386 items and 60 identity emblems pass. Source, fitted cloth/plate poses, animation preview and actual lit/unlit dungeon captures reviewed in verification/heroes/necromancer/.
+- No gameplay or timings changed. Test 45 remains abandoned and is not run. Physical tablet and campaign review remain with the user.
+
 # Sprint component 7 - Cleric v1.22.4
 
 - Windows/Android build and seven JUnit tests: **BUILD SUCCESSFUL in 46s**; native Windows application packaged. Focused reproducibility: **PAINTED assets=1 source sheets=147 failures=0**.

@@ -1,3 +1,8 @@
+# Sprint component 7 - Necromancer v1.22.5
+
+- Necromancer retains the elderly portrait face, silver hair and bone charms in a thin olive-black figure with an asymmetric ragged cowl. Armor follows the individual silhouette, with subtle robe motion and a separate layer for the equipped weapon.
+- Committed source and prompt compile offline into the existing eight armor rows and 21 poses, with class-specific grip/motion. Gameplay, world height and combat timings are unchanged.
+
 # Sprint component 7 - Cleric v1.22.4
 
 - Cleric keeps his portrait face, ivory cape and long stole panels over armor fitted to a grounded natural silhouette. Complete the grass depth repair: foreground blades in the row above upper bodies move to a cached background pass, while current-cell blades remain around feet. Use synchronized actor snapshots when summons appear; terrain art, fog and rules are unchanged.

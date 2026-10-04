@@ -1,3 +1,9 @@
+# Sprint component 7 - Mage v1.22.0
+
+- Windows/Android build and seven JUnit tests: **BUILD SUCCESSFUL in 2m 29s**. Focused offline Mage export check: **assets=1 sources=143 failures=0**.
+- Existing native geometry: **HERO EQUIPMENT draws=576 failures=0**, three revised heroes, cloth/plate, both facings, eight loadouts and six poses; nine hero/126 creature/386 item/60 identity checks pass. Source, armor comparison and poses visually reviewed. Live cloth/plate evidence is in erification/heroes/mage/native/.
+- No gameplay or timings changed. Test 45 remains abandoned and is not run; physical tablet review is still required.
+
 # Sprint component 6 - v1.21.5
 
 - Final `core:test desktop:dist android:assembleDebug --no-daemon`: **BUILD SUCCESSFUL in 1m 15s**, seven JUnit tests pass; native Windows application packaged. Initial package-name compile errors were corrected before release.

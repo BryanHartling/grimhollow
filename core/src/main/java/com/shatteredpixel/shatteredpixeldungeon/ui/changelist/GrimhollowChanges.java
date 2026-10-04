@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.21.5","Your equipment becomes part of your silhouette.");
+        ChangeInfo r=release(list,"v1.22.0","A leaner painted Mage.");
+        note(r,Icons.TALENT,"Mage presentation","Mage now has a lean purple scholarly silhouette, long astronomical stole, armor fitted to his robe and restrained class-specific movement. His equipped staff or weapon uses the painted grip layer. Gameplay and timing remain unchanged.");
+        r=release(list,"v1.21.5","Your equipment becomes part of your silhouette.");
         note(r,Icons.TALENT,"Held weapon prototype","Warrior and Enchanter now display the painted weapon they wield. Grip and swing follow the class, facing and weapon category; thrown and ability-selected weapons appear during their action. Gear uses the existing paintings, with gameplay and combat timing unchanged.");
         r=release(list,"v1.21.4","Every identity has its own emblem.");
         note(r,Icons.CATALOG,"Distinct painted icons","Rings, scrolls and potions now have sixty distinct painted identity emblems. Identify uses a book and lens, Mind Vision a third-eye profile, and Magical Sight a prism. The guide's surprise-attack serpent and Unbound Focus also have dedicated paintings. Unidentified appearances remain randomized.");

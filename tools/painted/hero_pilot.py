@@ -1,4 +1,4 @@
-"""Two-hero proof of concept: animate complete, anatomically painted figures.
+"""Animate complete, individually painted figures in the existing hero contract.
 
 Authored armor variants are uniformly fitted, never stretched into a torso box.
 A small offline deformation mesh preserves the continuous painting at joints.
@@ -10,7 +10,20 @@ import math
 from PIL import Image, ImageDraw
 from actors import HERE, SCALE, FRAME_WIDTH, FRAME_HEIGHT
 
-HEROES = ('warrior', 'enchanter')
+PILOT=('warrior','enchanter')
+from actors import HEROES as ALL_HEROES
+HEROES=tuple(hero for hero in ALL_HEROES if (HERE/'sources/hero-pilot'/f'{hero}.png').exists())
+PROFILES={
+    'warrior':(1.9,.7,.25,(-12,10,3),1.2),
+    'enchanter':(1.35,.5,.45,(10,-8,-2),1.2),
+    'mage':(1.1,.35,.65,(-6,8,2),.65),
+    'rogue':(1.7,.8,.2,(-14,16,2),1.8),
+    'huntress':(2.1,.65,.4,(-10,14,2),1.4),
+    'duelist':(1.8,.6,.2,(-18,16,4),1.6),
+    'cleric':(1.,.35,.7,(-10,10,3),.6),
+    'necromancer':(.95,.3,.75,(7,-7,-1),.7),
+    'psychic':(.8,.3,.6,(-4,7,1),.5),
+}
 SIZE = (48*SCALE, 60*SCALE)
 GRID = 4096
 
@@ -43,6 +56,8 @@ def smooth(a, b, value):
 def displacement(hero, index, x, y):
     """Skin weights in composition coordinates, shared by fitted armor variants."""
     enchanter = hero == 'enchanter'
+    left=hero in ('enchanter','huntress','necromancer')
+    step,arm_swing,cloth,angles,thrust=PROFILES[hero]
     dx = dy = 0.
     phase = (index-2)*math.tau/6 if 2 <= index <= 7 else 0.
     stride = math.sin(phase) if 2 <= index <= 7 else 0.
@@ -50,28 +65,28 @@ def displacement(hero, index, x, y):
     lower = smooth(32, 53, y)
     if 2 <= index <= 7:
         # Opposed legs, small planted-foot lift; the head does not bob or swell.
-        dx += side*stride*(1.35 if enchanter else 1.9)*lower
+        dx += side*stride*step*lower
         dy -= max(0., side*stride)*.85*lower
         # A low-amplitude counter-swing and delayed coat motion.
         arm = smooth(5.5, 10., abs(x-24))*smooth(14, 29, y)*(1-smooth(33, 37, y))
-        dx -= side*stride*(.5 if enchanter else .7)*arm
+        dx -= side*stride*arm_swing*arm
         dy += side*stride*.4*arm
         coat = smooth(28, 36, y)*(1-smooth(43, 51, y))
-        dx += math.sin(phase-.6)*(.45 if enchanter else .25)*coat
+        dx += math.sin(phase-.6)*cloth*coat
     # Pose 1 deliberately equals pose 0: no continuous twitching at rest.
     if index in (13, 14, 15):
         # Wind-up, extension, recovery. Rotation preserves the forearm's shape;
         # the shoulder weight eases to zero inside the ribcage.
-        angle = ((10, -8, -2) if enchanter else (-12, 10, 3))[index-13]
-        arm_side = 24-x if enchanter else x-24
-        end = 44 if enchanter else 33
+        angle = angles[index-13]
+        arm_side = 24-x if left else x-24
+        end = 44 if left else 33
         amount = smooth(5.5, 10., arm_side)*smooth(13, 23, y)*(1-smooth(end, end+4, y))
-        px, py = x-(16 if enchanter else 32), y-16
+        px, py = x-(16 if left else 32), y-16
         theta = math.radians(angle)
         dx += (px*math.cos(theta)-py*math.sin(theta)-px)*amount
         dy += (px*math.sin(theta)+py*math.cos(theta)-py)*amount
         torso = (1-smooth(28, 39, y))
-        dx += (-.45, 1.2, .25)[index-13]*torso
+        dx += (-.45, thrust, .25)[index-13]*torso
         dy += (.15, .35, .1)[index-13]*torso
     if index in (16, 17):
         bend = (1-smooth(27, 45, y))
@@ -151,7 +166,7 @@ def review(hero):
     from io import BytesIO
     from PIL import ImageFont
     from actors import atlas
-    target = HERE.parents[1]/'verification/heroes/pilot'
+    target = HERE.parents[1]/'verification/heroes'/('pilot' if hero in PILOT else hero)
     target.mkdir(parents=True,exist_ok=True)
     previous = Image.open(BytesIO(subprocess.check_output(['git','show',
         '5d1ecc2a7:core/src/main/assets/sprites/hero_'+hero+'.png'],cwd=HERE.parents[1]))).convert('RGBA')
@@ -211,7 +226,7 @@ def summary():
     small = ImageFont.load_default(size=14)
     d.text((28,19),'GRIMHOLLOW  /  TWO-CHARACTER ART PILOT',font=title,fill='#eedcc0')
     d.text((28,58),'Equal visible height. Existing portrait identity. Gameplay unchanged.',font=label,fill='#b7bab9')
-    for row,hero in enumerate(HEROES):
+    for row,hero in enumerate(PILOT):
         previous = Image.open(BytesIO(subprocess.check_output(['git','show',
             '5d1ecc2a7:core/src/main/assets/sprites/hero_'+hero+'.png'],cwd=HERE.parents[1]))).convert('RGBA')
         y=100+row*320
@@ -232,10 +247,10 @@ def summary():
         if row==1:d.text((28,y+270),'Small samples: 3x camera scale',font=small,fill='#b7bab9')
     canvas.save(target/'summary.png')
     if all((target/'native'/f'{hero}-{tier}'/'sewers-lighting-on.png').exists()
-           for hero in HEROES for tier in (1,5)):
+           for hero in PILOT for tier in (1,5)):
         board=Image.new('RGB',(920,980),(25,29,31)); draw=ImageDraw.Draw(board)
         draw.text((20,15),'Actual game captures | lighting on | crops at 100%',font=label,fill='#eedcc0')
-        for row,hero in enumerate(HEROES):
+        for row,hero in enumerate(PILOT):
             for col,tier in enumerate((1,5)):
                 screenshot=Image.open(target/'native'/f'{hero}-{tier}'/'sewers-lighting-on.png')
                 crop=screenshot.crop((680,320,1120,760))

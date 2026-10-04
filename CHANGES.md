@@ -1,3 +1,8 @@
+# Sprint component 7 - Mage v1.22.0
+
+- Mage retains his portrait identity in a lean purple robe and long astronomical stole, with fitted armor across all eight rows and restrained robe motion. Empty painted hands display the actual equipped staff or weapon.
+- Generalize the complete-figure exporter and deterministic grip metadata per reviewed hero source; unchanged combat, world height and animation timing. Remaining six character batches follow individually.
+
 # Sprint component 6 - v1.21.5
 
 - Warrior/Enchanter display equipped painted weapons with class/pose hand anchors, catalog-specific handles and category scale/swing. Ability-selected and thrown weapons are captured for their action, then return to the current loadout. Bare hands and fist gear remain clear.

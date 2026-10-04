@@ -1,9 +1,9 @@
 # Known issues
 
-- Sprint v1.21.0–1.21.5: native desktop/headless/build checks do not replace physical Samsung tablet and campaign balance review.
+- Sprint v1.22.6: native desktop/headless/build checks do not replace physical Samsung tablet and campaign balance review. All nine figures and equipped-weapon layers are delivered; animation remains restrained offline deformation, with existing facing and timings.
 - Historical v1.21.1 CI run 37213690685 failed the unchanged effects timing gate (mean 1.7095 ms, p95 2.1713 ms, required both <2 ms). Later rune, Psychic and icon checkpoints passed full CI; no check was weakened.
 
-- v1.20.1: Warrior/Enchanter art is a proof of concept awaiting human review, including physical Samsung tablet play. Only those two heroes are revised. Motion is restrained offline deformation of complete painted figures, not a new directional animation system.
+- Historical v1.20.1 revised Warrior/Enchanter only. Superseded by the nine individually painted heroes in v1.22.6; the original checkpoint and previews remain in Git history.
 - v1.20.0 branch CI run 36913560174 failed exact reproduction of the two new hero atlases on Linux, while the same commit passed on another Linux runner and Windows. v1.20.1 replaces floating matrix solves with fixed-grid integer arithmetic; the failed run and original tag remain available, and checks are unchanged.
 - v1.20.0: the sandbox denied the initial `.git` scratch write and fetch; the documented authorized escalation route succeeded. No credentials are stored in committed files.
 

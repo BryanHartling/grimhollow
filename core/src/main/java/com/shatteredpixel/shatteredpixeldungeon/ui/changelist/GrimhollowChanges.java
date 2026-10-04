@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.22.5","A gaunt painted Necromancer.");
+        ChangeInfo r=release(list,"v1.22.6","Nine individual painted heroes complete the sprint.");
+        note(r,Icons.TALENT,"Psychic presentation","Psychic has short silver hair, a circlet and angular lavender mantle over fitted armor, with precise restrained poses and the equipped Crystal or weapon. All nine heroes now have individual painted figures, portrait identities, fitted armor and weapon layers. These character paintings preserve movement and combat timing.");
+        r=release(list,"v1.22.5","A gaunt painted Necromancer.");
         note(r,Icons.TALENT,"Necromancer presentation","Necromancer retains the elderly portrait face, silver hair and bone charms in a gaunt olive-black silhouette. Fitted armor preserves the stoop and asymmetric cowl, with subtle robe motion and equipped weapons. Gameplay and timing remain unchanged.");
         r=release(list,"v1.22.4","A steadfast painted Cleric and clearer grass overlap.");
         note(r,Icons.TALENT,"Cleric presentation","Cleric gains ivory cape and stole panels over fitted armor, with his portrait face and grounded natural proportions. Grass in the row behind upper bodies now draws behind them while blades remain around feet. Gameplay and timing remain unchanged.");

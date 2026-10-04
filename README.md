@@ -1,8 +1,8 @@
 # Grimhollow
 
-v1.22.1 includes 2 of seven additional painted heroes, following the weapon-aware Warrior/Enchanter pilot and the sprint's interface, Horror, rune, Psychic and icon fixes. Each hero is reviewed at a committed batch boundary; remaining batches are listed below.
+v1.22.6 completes the seven-component playtesting and character sprint. All nine heroes have individual painted bodies, portrait identities, fitted armor, quiet idles and equipped-weapon layers. The release also fixes Hexcaster alignment, grass overlap, journal/talent signals, Horror escape/recovery, simultaneous Enchanter weapon/armor runes, Psychic Crystal/detection progression and duplicated identity emblems.
 
-v1.20.1 is a **Warrior and Enchanter art proof of concept**: proportioned painted bodies, class-fitted armor, distinct silhouettes and restrained motion with still idles. Faces match the existing selection portraits. Gameplay, world height and animation timings are unchanged; the other seven heroes await review of this pilot. Comparisons, pose sheets and animation previews are in [verification/heroes/pilot](verification/heroes/pilot/). Windows launcher: `desktop/build/windows/1.22.5/Grimhollow/Grimhollow.exe`; Android: `android/build/outputs/apk/debug/android-debug.apk`.
+Windows launcher: `desktop/build/windows/1.22.6/Grimhollow/Grimhollow.exe`; Android: `android/build/outputs/apk/debug/android-debug.apk`. Review the [nine-hero cloth/plate board](verification/heroes/sprint-summary.png), [actual lit dungeon crops](verification/heroes/sprint-ingame.png) and individual pose/animation previews under `verification/heroes/`. See [acceptance evidence](verification/ACCEPTANCE.md) and [known issues](KNOWN_ISSUES.md). Physical Samsung tablet and campaign balance review remain with the user.
 
 v1.19.2 refreshes Adventuring Notes with painted terrain/landmark icons and fitted NPC portraits. Discovered elemental treasuries receive persistent fire, water or lightning reminders, including preparation tips, until their seals are opened. The home-screen Update Log describes these releases.
 
@@ -50,7 +50,7 @@ For rapid testing, open **Menu → Playtest → enable for this save → Travel 
 
 Existing saves remain compatible, but the hunter is not retroactively inserted into an already generated City floor. A new run is the reliable way to experience the normal quest. All eight components have committed checkpoints; see [verification](verification/ACCEPTANCE.md) and [known issues](KNOWN_ISSUES.md). The existing terrain-contrast gate remains enforced and is still a known failure; no full green CI or physical-tablet playtest is claimed.
 
-Local launchers after building: `desktop/build/windows/1.22.5/Grimhollow/Grimhollow.exe` (keep its whole folder), `desktop/build/libs/desktop-1.17.1.jar`, and `android/build/outputs/apk/debug/android-debug.apk`. Android is a debug-signed sideload build.
+Local launchers after building: `desktop/build/windows/1.22.6/Grimhollow/Grimhollow.exe` (keep its whole folder), `desktop/build/libs/desktop-1.17.1.jar`, and `android/build/outputs/apk/debug/android-debug.apk`. Android is a debug-signed sideload build.
 
 Original expedition paintings, exact generation prompts and the offline packing recipe are in [sources](tools/painted/sources/expedition/), [prompts](tools/painted/expedition-prompts.json), and [packer](tools/painted/expedition.py). Native screenshots are in `verification/interface/{landscape,portrait}/expedition-*.png`; CI reconstructs the committed sources without an image-generation service.
 
@@ -220,7 +220,7 @@ Double-click `tools/play.bat` to launch the newest desktop jar without a console
 
 ## Archived art work
 
-`tools/artgen/`, the Blender pipeline, render caches and earlier verification images remain for history. Their generated world/character/liquid checks are **RETIRED — superseded by recovery**; do not run their build commands to restore this release. See [ART_PIPELINE.md](ART_PIPELINE.md) for provenance and historical instructions. Current assets restore through `python tools/recovery_assets.py --world --characters`, using only Git extraction, integer nearest-neighbour scaling, approved rectangular patches and fixed palette substitutions.
+`tools/artgen/`, the Blender pipeline, render caches and earlier verification images remain for history. Their generated world/character/liquid checks are **RETIRED — superseded by recovery**; do not run their build commands to restore this release. See [ART_PIPELINE.md](ART_PIPELINE.md) for provenance and historical instructions. Historical recovery assets restored through `python tools/recovery_assets.py --world --characters`, using only Git extraction, integer nearest-neighbour scaling, approved rectangular patches and fixed palette substitutions.
 
 The enhanced effects toggle and its existing tests 31–32 remain active. The normal grass sprite is restored; other shipped item/effect assets are retained.
 
@@ -242,9 +242,9 @@ Original game by **Oleg Dolya**: [Pixel Dungeon project](https://github.com/wata
 
 By **Evan Debenham and contributors**: [Shattered Pixel Dungeon project](https://github.com/00-Evan/shattered-pixel-dungeon). Upstream sprites and paintings are used under GPL-3.0-or-later; [license](LICENSE.txt).
 
-## Next sprint: playtesting fixes and character presentation
+## Completed sprint: playtesting fixes and character presentation
 
-Sprint in progress, updated 2026-10-04: components 1–6 delivered in v1.21.0–1.21.5; component 7 has delivered 6 of seven additional hero batches through Necromancer v1.22.5. This incorporates the latest playtesting discussion and supersedes earlier proposals to expose a recovering Horror on ordinary sight, remove the Seer passive, or allow Crystal inventory casting without a talent. In-game Playtest access is already delivered in v1.20.2 and is not a new sprint task.
+Completed 2026-10-04: all seven components delivered. Components 1-6 are tagged v1.21.0 through v1.21.5; the seven further character batches are v1.22.0 Mage, v1.22.1 Rogue, v1.22.2 Huntress, v1.22.3 Duelist, v1.22.4 Cleric, v1.22.5 Necromancer and v1.22.6 Psychic. The following records the agreed scope. In-game Playtest access remains delivered in v1.20.2.
 
 ### Component 1 - Positioning, grass and notification fixes
 
@@ -291,7 +291,7 @@ Prototype on Warrior and Enchanter before carrying the approach to the other sev
 
 ### Component 7 - Remaining seven heroes, one batch per character
 
-Extend the Warrior/Enchanter pilot direction to Mage, Rogue, Huntress, Duelist, Cleric, Necromancer and Psychic. Preserve portrait identity; give each individual anatomy, silhouette, colors, fitted armor and restrained animation, with still idles. Integrate the reviewed weapon-layer approach. Produce cloth/plate comparisons, pose/animation previews and native game-size screenshots for each character; review each batch before expanding further.
+Delivered the Warrior/Enchanter direction to Mage, Rogue, Huntress, Duelist, Cleric, Necromancer and Psychic in separate building checkpoints. Preserve portrait identity; give each individual anatomy, silhouette, colors, fitted armor and restrained animation, with still idles. Integrate the reviewed weapon-layer approach. Produce cloth/plate comparisons, pose/animation previews and native game-size screenshots for each character; review each batch before expanding further.
 
 ### Delivery boundaries
 

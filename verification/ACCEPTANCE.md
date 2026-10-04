@@ -1,3 +1,17 @@
+# Sprint component 7 - Psychic v1.22.6
+
+- Windows/Android build and seven JUnit tests: **BUILD SUCCESSFUL in 1m 9s**; native Windows application packaged. Focused reproducibility: **PAINTED assets=1 source sheets=149 failures=0**.
+- Existing geometry: **HERO EQUIPMENT: native draws=1728 cloth/plate, both facings, eight loadouts, movement/action poses, secondary and thrown capture; failures=0**. Nine heroes, 126 creature sprites, 386 items and 60 identity emblems pass. Source, fitted cloth/plate poses, animation preview and actual lit/unlit dungeon captures reviewed in verification/heroes/psychic/.
+- No gameplay or timings changed. Test 45 remains abandoned and is not run. Physical tablet and campaign review remain with the user.
+
+# Complete sprint - v1.22.6
+
+- All seven components and seven further hero batches delivered; Warrior/Enchanter prototype extends to all nine. Final `core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 1m 9s**, **Runs=30 failures=0**, seven JUnit tests with zero failures/errors. Native Windows launcher packaged; Android APK built.
+- Final existing native geometry: **HERO EQUIPMENT draws=1728 failures=0**, all nine heroes, cloth/plate, both facings, eight loadouts and six movement/action poses; secondary and thrown capture/restoration pass. **GRASS DEPTH checks=54 failures=0** for all nine bodies and both grass states with movement offsets; no omitted/duplicated partition cells, upper-body cover or missing foot blades at rest.
+- Existing 24-26/34/36 gates pass: nine hero sheets, 126 creature sprites with steady idles, 386 item indices, 60 unique painted identity emblems, 113 custom skills and 15 plants. Existing semantic assertions cover Mind Vision/Identify/Magical Sight and all added item slots. No assertion or timing threshold weakened.
+- Final full `python tools/recovery_assets.py --check`: **146 painted assets, 149 source sheets, 55 launcher resources; TEST 44 failures=0**. Artwork builds offline from committed paintings/prompts, including both grip metadata files. No generation service or Blender in CI.
+- Refreshed **18 native dungeon captures** (nine heroes × cloth/plate), each with lighting on/off, all pass against v1.22.6. Sources, comparisons, poses/GIFs, native equipment and final lit crops reviewed. Evidence: `verification/heroes/sprint-summary.png`, `sprint-ingame.png`, per-hero folders and prototype weapon crops. The sprite artwork preserves game timing/world height; the class and behavior changes are the separately agreed sprint work.
+- Physical Samsung tablet and full campaign balance remain human review. Test 45 stays **Abandoned: test failed**, not run. CI runs and logs are retained on GitHub; no check disabled.
 # Sprint component 7 - Necromancer v1.22.5
 
 - Windows/Android build and seven JUnit tests: **BUILD SUCCESSFUL in 44s**; native Windows application packaged. Focused reproducibility: **PAINTED assets=1 source sheets=148 failures=0**.

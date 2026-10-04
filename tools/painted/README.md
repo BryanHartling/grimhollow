@@ -1,3 +1,14 @@
+# Individual painted heroes - v1.22.6
+
+All nine classes now use complete painted figures from `sources/hero-pilot/`, with eight fitted armor variants each. Exact built-in imagegen prompts and portrait references are in `hero-pilot-prompts.json`. Sources and derivatives are GPL-3.0-or-later. Each source was generated and reviewed as a separate hero batch; no generator is required in builds or CI.
+
+`hero_pilot.py` uniformly fits each body, keeps faces rigid and idles identical, and deforms the existing action poses with restrained class-specific profiles. Integer determinant inversion on a fixed grid preserves cross-platform reproduction and rejects folded triangles. `pack.py --hero NAME` exports a single class; `--hero NAME --check` verifies it. The unchanged full CI command is `python tools/recovery_assets.py --check`.
+
+`hero_equipment.py` exports pose hand anchors into `sprites/hero-grips.json`; `HeroEquipment` renders equipped, ability-selected and thrown gear using two reused quads from existing item and hero textures. Armor variants retain their painted empty hands and get fingers over the grip. No runtime mesh, new hero textures, actor, combat callback or timing change is introduced.
+
+`hero_pilot.py --review NAME` exports armor comparisons, poses and animation GIFs. The portfolio also produces `verification/heroes/sprint-summary.png` and `sprint-ingame.png`, with labelled sizes and actual native crops. The existing native geometry runner exercises all nine bodies/loadouts and grass depth. Upper-body grass overlap is sorted behind visible actor silhouettes; lower blades remain around their feet, using one additional cached batch of the existing grass texture. Physical tablet review remains human playtesting. Test 45 remains abandoned.
+
+The sections below record earlier releases; the current nine-hero exporter supersedes the two-hero and older cutout rigs.
 # Adventuring Notes — v1.19.2
 
 `journal.py` packs sixteen landmark paintings from `sources/sprint/journal-landmarks.png` into `interfaces/painted_landmarks.png`. The exact built-in imagegen prompt and row-major names are in `journal-landmarks-prompt.json`; source and derivatives are GPL-3.0-or-later. Treasury reminders reuse the three committed elemental mechanism paintings. Existing painted NPC sprites are fitted at runtime without animation padding. The offline packer and normal provenance check reproduce the assets without generation. Terrain contrast test 45 remains abandoned.
@@ -8,7 +19,7 @@
 
 # Terrain readability — v1.18.2
 
-`terrain_details.py` packs the existing flattened-grass painting into a 60x34 footprint instead of 60x20. It remains below both standing states and exposes paving around the leaves. No source painting, terrain index, collision or alpha stencil is replaced; the standard offline packer reproduces the change. Regional ambient and personal-light corrections live in the renderer, preserving localized torch/fire colors and all visibility rules. Test 45 is measured independently, with unchanged thresholds and no manual pass override.
+`terrain_details.py` packs the existing flattened-grass painting into a 60x34 footprint instead of 60x20. It remains below both standing states and exposes paving around the leaves. No source painting, terrain index, collision or alpha stencil is replaced; the standard offline packer reproduces the change. Regional ambient and personal-light corrections live in the renderer, preserving localized torch/fire colors and all visibility rules. Historical measurements remain archived; test 45 is now Abandoned: test failed and is not run.
 
 # Playtest polish — v1.18.0
 

@@ -1,3 +1,8 @@
+# Sprint component 7 - Psychic v1.22.6
+
+- Psychic gains short silver curls, a thin circlet and an angular lavender mantle over individually fitted armor, with precise restrained poses and the equipped Crystal or other weapon. This completes all nine character bodies and their equipment layers; portrait identity, world height and movement/combat timing are preserved.
+- Committed source and prompt compile offline into the existing eight armor rows and 21 poses, with class-specific grip/motion. Gameplay, world height and combat timings are unchanged.
+
 # Sprint component 7 - Necromancer v1.22.5
 
 - Necromancer retains the elderly portrait face, silver hair and bone charms in a thin olive-black figure with an asymmetric ragged cowl. Armor follows the individual silhouette, with subtle robe motion and a separate layer for the equipped weapon.

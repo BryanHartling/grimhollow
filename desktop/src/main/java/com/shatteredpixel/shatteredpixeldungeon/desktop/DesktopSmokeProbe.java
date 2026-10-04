@@ -2318,16 +2318,24 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 actual.dispose();if(Math.max(r-l+1,b-t+1)<24*.7f*zoom)failures.add("25/36 ItemSlot underfilled "+field.getName());
                 buffer.begin();slot.draw();buffer.end();slot.destroy();
             }
+            java.util.Set<String> identitySources=new java.util.HashSet<>(),identityPixels=new java.util.HashSet<>();
             for(java.lang.reflect.Field field:com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.Icons.class.getFields()) {
                 if(field.getType()!=int.class||field.getName().equals("SIZE"))continue;
                 int index=field.getInt(null);if(index<0)continue;
                 com.watabou.noosa.Image icon=new com.watabou.noosa.Image(Assets.Sprites.ITEM_ICONS);
                 icon.frame(com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.Icons.film.get(index));
                 com.badlogic.gdx.utils.JsonValue expected=semantics.get("icons").get(field.getName());
+                if(!identitySources.add(expected.getString("sourcePainting"))||!identityPixels.add(expected.getString("rgbaSha256")))
+                    failures.add("25 duplicate identity painting: "+field.getName());
                 semanticItem(icon,index,expected,"icon "+field.getName(),failures);
                 exactRectangle(icon,expected.getInt("artIndex"),32,buffer,camera,zoom,failures,"icon "+field.getName());icons++;icon.destroy();
             }
             if(items!=semantics.get("items").size||icons!=semantics.get("icons").size)failures.add("25 incomplete named atlas inventory");
+            Image serpent=com.shatteredpixel.shatteredpixeldungeon.ui.Icons.SNAKE.get();
+            if(serpent.texture!=com.watabou.gltextures.TextureCache.get("interfaces/painted_snake.png")
+                    ||serpent.texture.width!=64||serpent.texture.height!=64||GameGeometry.opaqueHeight(serpent.texture,serpent.frame())==0)
+                failures.add("25 guide serpent needs its dedicated painting");
+            serpent.destroy();
             namedItems(semantics,failures);
             java.util.Set<String> trapPixels=new java.util.HashSet<>();
             for(int shape=0;shape<7;shape++)for(int color=0;color<9;color++){
@@ -2699,6 +2707,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if(mind.image()<352||mind.image()>363||mind.icon!=82)failures.add("25 Mind Vision bottle/identity");
         Image eye=new Image(Assets.Sprites.ITEM_ICONS);eye.frame(com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.Icons.film.get(mind.icon));
         semanticItem(eye,mind.icon,semantics.get("icons").get("POTION_MINDVIS"),"Potion of Mind Vision eye",failures);eye.destroy();
-        System.out.println("TEST 25 semantics: all 383 named item IDs + 60 icons, Waterskin=480, MindVision=eye@98 (ID 82), section9 items=11, class items=10, Ashlight open/closed=537/538");
+        System.out.println("TEST 25 semantics: all "+semantics.get("items").size+" named item IDs + "+semantics.get("icons").size
+                +" icons, Waterskin=480, MindVision=third-eye@"+semantics.get("icons").get("POTION_MINDVIS").getInt("artIndex")
+                +" (ID 82), section9 items=11, class items=10, Ashlight open/closed=537/538");
     }
 }

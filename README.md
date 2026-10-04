@@ -1,8 +1,8 @@
 # Grimhollow
 
-v1.21.3 adds the Psychic Crystal weapon, Unbound Focus carried casting, temporary Treasure Sense markers and one-roll Trap Sense, following the rune/Horror/interface fixes. In-game Playtest access remains available for enabled saves; see the instructions below. The agreed playtesting fixes, class changes, remaining seven hero upgrades and equipment-aware character sprites are queued under **Next sprint: playtesting fixes and character presentation** at the end of this document.
+v1.21.4 adds sixty distinct painted identity emblems, a guide serpent and Unbound Focus icon, following the Psychic weapon, rune, Horror and interface fixes. In-game Playtest access remains available for enabled saves; see the instructions below. The agreed playtesting fixes, class changes, remaining seven hero upgrades and equipment-aware character sprites are queued under **Next sprint: playtesting fixes and character presentation** at the end of this document.
 
-v1.20.1 is a **Warrior and Enchanter art proof of concept**: proportioned painted bodies, class-fitted armor, distinct silhouettes and restrained motion with still idles. Faces match the existing selection portraits. Gameplay, world height and animation timings are unchanged; the other seven heroes await review of this pilot. Comparisons, pose sheets and animation previews are in [verification/heroes/pilot](verification/heroes/pilot/). Windows launcher: `desktop/build/windows/1.20.2/Grimhollow/Grimhollow.exe`; Android: `android/build/outputs/apk/debug/android-debug.apk`.
+v1.20.1 is a **Warrior and Enchanter art proof of concept**: proportioned painted bodies, class-fitted armor, distinct silhouettes and restrained motion with still idles. Faces match the existing selection portraits. Gameplay, world height and animation timings are unchanged; the other seven heroes await review of this pilot. Comparisons, pose sheets and animation previews are in [verification/heroes/pilot](verification/heroes/pilot/). Windows launcher: `desktop/build/windows/1.21.4/Grimhollow/Grimhollow.exe`; Android: `android/build/outputs/apk/debug/android-debug.apk`.
 
 v1.19.2 refreshes Adventuring Notes with painted terrain/landmark icons and fitted NPC portraits. Discovered elemental treasuries receive persistent fire, water or lightning reminders, including preparation tips, until their seals are opened. The home-screen Update Log describes these releases.
 
@@ -244,7 +244,7 @@ By **Evan Debenham and contributors**: [Shattered Pixel Dungeon project](https:/
 
 ## Next sprint: playtesting fixes and character presentation
 
-Sprint in progress, updated 2026-10-04: components 1–4 delivered in v1.21.0–1.21.3; components 5–7 remain. This incorporates the latest playtesting discussion and supersedes earlier proposals to expose a recovering Horror on ordinary sight, remove the Seer passive, or allow Crystal inventory casting without a talent. In-game Playtest access is already delivered in v1.20.2 and is not a new sprint task.
+Sprint in progress, updated 2026-10-04: components 1–5 delivered in v1.21.0–1.21.4; components 6–7 remain. This incorporates the latest playtesting discussion and supersedes earlier proposals to expose a recovering Horror on ordinary sight, remove the Seer passive, or allow Crystal inventory casting without a talent. In-game Playtest access is already delivered in v1.20.2 and is not a new sprint task.
 
 ### Component 1 - Positioning, grass and notification fixes
 

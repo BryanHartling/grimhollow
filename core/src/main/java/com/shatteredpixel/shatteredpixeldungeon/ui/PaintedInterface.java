@@ -56,6 +56,10 @@ public final class PaintedInterface {
             replacement.texture.filter(GL20.GL_LINEAR,GL20.GL_LINEAR);
             replacement.frame(feeling*64,run*64,64,64);
             replacement.logicalSize(original.width,original.height);
+        } else if(type==Icons.SNAKE) {
+            replacement=new Image("interfaces/painted_snake.png");
+            replacement.texture.filter(GL20.GL_LINEAR,GL20.GL_LINEAR);
+            replacement.logicalSize(original.width,original.height);
         } else if(type==Icons.SKULL) {
             replacement=new BuffIcon(BuffIndicator.CORRUPT, true);
             replacement.logicalSize(original.width,original.height);

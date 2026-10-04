@@ -236,12 +236,18 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--check',action='store_true')
     from actors import HEROES, atlas as hero_atlas
     parser.add_argument('--hero',choices=HEROES,help='Package one character batch; full --check remains the CI gate')
+    parser.add_argument('--icons',action='store_true',help='Package identity/skill changes; full --check remains the CI gate')
     args=parser.parse_args()
-    built={f'sprites/hero_{args.hero}.png':hero_atlas(args.hero)} if args.hero else outputs()
+    if args.icons:
+        from identification import outputs as identities
+        from botany_skills import outputs as skills
+        built={**identities(),**skills()}
+    else:
+        built={f'sprites/hero_{args.hero}.png':hero_atlas(args.hero)} if args.hero else outputs()
     failures=[]
     sources={p.relative_to(HERE/'sources').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'sources').rglob('*.png'))}
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
-    if args.hero:
+    if args.hero or args.icons:
         manifest['assets']=json.loads(MANIFEST.read_text(encoding='utf-8'))['assets']
     from monsters import sizes as monster_sizes
     fixed_monster_sizes=monster_sizes()
@@ -255,6 +261,7 @@ def main():
         if path.startswith('splashes/painted_'):expected=(1600,900)
         if path=='interfaces/painted_portraits.png':expected=(384,384)
         if path=='interfaces/painted_journal.png':expected=(256,256)
+        if path=='interfaces/painted_snake.png':expected=(64,64)
         if path=='interfaces/painted_landmarks.png':expected=(256,256)
         if path=='interfaces/menu_button.png':expected=(256,64)
         if path=='interfaces/menu_pane.png':expected=(128,128)

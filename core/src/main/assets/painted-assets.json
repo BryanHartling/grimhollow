@@ -128,6 +128,11 @@
     "sprint/journal.png": "2398fb10a25e058c0bc3ec5c36f47f9c016edd2524f965f166f6e352516bb400",
     "sprint/parchment.png": "95161b4a9f013bb417d9f40ddee8b9ada3b6bbe44a6f0f568fe282680112ddd9",
     "sprint/spellguard.png": "d3385ea1354437f0248c514219c64af2ae79112cefa818185c3d3b10080e572a",
+    "sprint-icons/identification-0.png": "19213d72f4cc67cb39e6a262375f781d58ef08ba1f49f2529f95928cb0b236f5",
+    "sprint-icons/identification-1.png": "7695f627868a06f9b30a9f484810ab58431b303d7e812ebfb53b125dd56e91b9",
+    "sprint-icons/identification-2.png": "d48c5c978a74286016de965f70814004a9b1092988479d3d12f6dcb42b3fde32",
+    "sprint-icons/identification-3.png": "e8b47a83467c4b4db914a74d99aab30e6734e49dc704cc1acc87436256f14e65",
+    "sprint-icons/special.png": "cb347126b796be80f26f8f0cacd0544330d8913052edc814ba0867f864b21127",
     "status/status-0.png": "7bf546acdbc789262e8008fa82737af3c3389ee1c43fd58c8b27709d6fb225b7",
     "status/status-1.png": "6cc7256d450879b5aa756c47587373fc653d4cb2b54132d1efad809329dca5db",
     "status/status-2.png": "7c8ec495120a0428bf8ece3c46314eb8ed0a30c44b21d2e6e1347d156a4893c0",
@@ -300,7 +305,7 @@
         1024,
         512
       ],
-      "rgba_sha256": "8df6adeae2c1213222bb7dc215b1111c76209ec42410a3098e30efca8bc840ca"
+      "rgba_sha256": "8a0605d9abee528bcb2b994ea7f0e1058b6b3874fad10ccd9962e98081861f99"
     },
     "environment/raised_terrain.png": {
       "size": [
@@ -384,7 +389,14 @@
         512,
         256
       ],
-      "rgba_sha256": "bb03ba01c2f2a5b4e4398b943abe43d1c17b52515065872b52514db18926d5f9"
+      "rgba_sha256": "8095bee7c9bcf9299c61f4e4a3f8c69ce9c9020f65ddfe6f69efb356a0e29482"
+    },
+    "interfaces/painted_snake.png": {
+      "size": [
+        64,
+        64
+      ],
+      "rgba_sha256": "a4aeb751283bb5ca9ca32c222974fa0fd5124b73650b3a4d4128bd27b592589a"
     },
     "interfaces/title_grimhollow.png": {
       "size": [

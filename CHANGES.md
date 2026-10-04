@@ -1,3 +1,9 @@
+# Sprint component 5 - v1.21.4
+
+- Sixty dedicated painted identity emblems replace tinted shared status symbols. Remove the old Mind Vision/Magical Sight atlas alias; numeric IDs, identification and random unidentified appearances remain unchanged.
+- The Tome's surprise-attack serpent and Unbound Focus receive individual artwork. Existing distinct inventory/skill sources and deliberate same-item aliases remain; disguising mimics still look like their matching chests.
+- Committed paintings and prompts compile offline; exact source and pixel uniqueness checks extend the existing semantic gate. Tiny-size review caught and removed the legacy atlas alias before release.
+
 # Sprint component 4 - v1.21.3
 
 - Focus Crystal is the Psychic's starting weapon, freeing the artifact slot. Its 0.8-turn melee damage grows from 1–5 at usage level 0 to 6–20 at level 10, requires 10 Strength and grants no charge-spending experience on hits. Growth and spell riders still come only from charges spent; Upgrade/Infusion/Toolkit cannot level it.

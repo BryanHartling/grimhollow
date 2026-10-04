@@ -1,3 +1,9 @@
+# Sprint component 5 - v1.21.4
+
+- `core:test desktop:dist android:assembleDebug --no-daemon`: **BUILD SUCCESSFUL in 1m 13s**, seven JUnit tests pass. Final desktop rebuild after correcting a stale diagnostic label: **BUILD SUCCESSFUL in 34s**. Native Windows application packaged.
+- Existing native geometry and polish fixtures: **exit=0**. Tests 24–26/34/36 pass: nine heroes, 126 creature sprites, 386 item indices, 60 dedicated identity emblems, 113 custom skills and 15 plants. Explicit source/pixel uniqueness and the dedicated guide serpent pass. Polish includes real independent armor/weapon Etch, journal and elemental treasury input checks.
+- `python tools/recovery_assets.py --check`: **146 painted assets, 142 source sheets, 55 launcher resources; TEST 44 failures=0**. Art is compiled offline from committed paintings. Small-size visual board: `verification/interface/identity-emblems.png`; identified Mind Vision and Magical Sight now use separate atlas cells. Random unidentified appearances and intentional same-item aliases remain.
+- Test 45 remains **Abandoned: test failed**, not run. Physical tablet review remains with the user; no claim of an Android device test.
 # Sprint component 4 - v1.21.3
 
 - Final `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 2m 4s**; seven JUnit tests pass; **Runs=30 failures=0**. All existing spell/growth/domination/rank gates pass.

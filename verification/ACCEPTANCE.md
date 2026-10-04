@@ -1,3 +1,9 @@
+# Sprint component 3 - v1.21.2
+
+- **TEST 37 ARMOR PASS**: simultaneous weapon/armor runes, independent paid upgrades and category transfers, no rerolls on transfer, floor effects and accumulated knowledge, legacy unupgraded counterpart, crown ownership, carrier loss, resolved descriptions and save/load. Existing weapon transfer checks still pass. **Runs=30 failures=0**; seven JUnit tests pass.
+- Desktop and Android: **BUILD SUCCESSFUL in 2m 3s**. Adapted the existing native Etch fixture to transfer an armor rune from stored armor while retaining the weapon attachment; portrait and landscape both pass **TEST 37 UI PASS ... failures=0** with real input. No new gameplay probe or acceptance document.
+- No paid upgrade is granted by migration; the new counterpart starts at level zero. All prior checks and test-45 abandonment remain unchanged. Physical tablet review remains with the user.
+
 # Sprint component 2 - v1.21.1
 
 - Extended **TEST 60 Horror PASS** in all three class gates: routed dead-end escape, visible flight exclusion, concealed room-entry recovery, hero evasion without attack, physical bump interruption/occupancy, full-reveal exposure, skipped recovery at full health/spent allowance, save/load and the original finite-healing/warning/generation contracts. **Runs=30 failures=0**.

@@ -1,3 +1,8 @@
+# Sprint component 3 - v1.21.2
+
+- Enchanter keeps a weapon Rune Etching and an armor Rune Etching simultaneously. Their floor effects, carried paid upgrade and transfers remain independent; category transfers never reroll or copy upgrades.
+- Existing single-rune saves preserve their current rune, effect, gear and paid upgrade, adding an unupgraded counterpart. New Enchanters begin with both attachments. Knowledge, permanent glyphs/enchantments and temporary inscriptions remain intact.
+
 # Sprint component 2 - v1.21.1
 
 - Horror flight follows a reachable escape destination instead of choosing alternating greedy steps. Routes may approach briefly to leave dead ends; occupied cells are blocked.

@@ -553,6 +553,10 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             closeReviewWindows();GameScene.cancel();
             Playtest.enable();
             Playtest.heroClass(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER);
+            com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor oldArmor=Dungeon.hero.belongings.armor;
+            oldArmor.collect();
+            Dungeon.hero.belongings.armor=new com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor();
+            Dungeon.hero.belongings.armor.identify();
             Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).execute(Dungeon.hero,"ETCH");
         }else if(frames==510){
             if(Boolean.getBoolean("grimhollow.interfacePortrait"))interfaceBounds();
@@ -577,13 +581,13 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 }
             if(!clicked)throw new AssertionError("37: armor slot missing from Etch picker");
         }else if(frames==540){
-            if(Dungeon.hero.belongings.armor.runeEtching==null)throw new AssertionError("37: Etch picker did not attach armor rune");
+            if(Dungeon.hero.belongings.armor.runeEtching==null || ((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)Dungeon.hero.belongings.weapon).runeEtching==null || Dungeon.hero.belongings.armor.runeEtching==((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)Dungeon.hero.belongings.weapon).runeEtching)throw new AssertionError("37: Etch picker did not attach armor rune");
             String text=Dungeon.hero.belongings.armor.info();
             if(!text.contains("Rune Etching:")||!text.contains("25%")||text.contains("%1$s")||text.contains("%2$d"))throw new AssertionError("37: rendered armor description placeholders");
             GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(Dungeon.hero.belongings.armor));
         }else if(frames==570){
             interfaceBounds();capture("polish-armor-etch-description");
-            System.out.println("TEST 37 UI PASS: actual Etch selector accepts armor, rejects current carrier, attaches glyph, and renders resolved description; failures=0");
+            System.out.println("TEST 37 UI PASS: actual Etch selector accepts armor, rejects current carrier, retains independent weapon rune, attaches armor glyph, and renders resolved description; failures=0");
             closeReviewWindows();
         }else if(frames==590){
             Object menu=RecoveryChecks.field(Game.scene(),"menu");

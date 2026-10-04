@@ -175,6 +175,7 @@ public enum HeroClass {
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.affect(hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.class);
         (hero.belongings.weapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.RunedBaton()).identify();
         ((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)hero.belongings.weapon).runeEtching=new com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching();
+        com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching.ensurePair(hero);
         com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush item=new com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush();
         (hero.belongings.artifact=item).identify();item.activate(hero);
         new Food().collect();new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment().identify();new ScrollOfIdentify().collect();new PotionOfHealing().collect();

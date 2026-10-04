@@ -11,7 +11,7 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.utils.*;
 import java.util.ArrayList;
 
-/** A single movable rune, including at most one of its carrier's upgrades. */
+/** Independent category-bound runes, each banking at most one paid carrier upgrade. */
 public class RuneEtching extends Item {
     public static boolean equipping;
     public static final Class<?>[] FLOOR_ENCHANTS={Blazing.class,Shocking.class,Chilling.class,Kinetic.class,Lucky.class,Blooming.class};
@@ -19,6 +19,9 @@ public class RuneEtching extends Item {
     public Armor.Glyph floorGlyph;
     private boolean armorMode;
     {unique=true;bones=false;image=ItemSpriteSheet.RUNE_ETCHING;identify();roll();}
+    public RuneEtching() {}
+    public RuneEtching(boolean armor){armorMode=armor;}
+    public boolean armorMode(){return armorMode;}
     public void roll(){
         floorEnchant=(Weapon.Enchantment)Reflection.newInstance(Random.element(FLOOR_ENCHANTS));
         floorGlyph=Armor.Glyph.randomCommon();
@@ -28,8 +31,30 @@ public class RuneEtching extends Item {
     @Override public void doDrop(Hero h){}
     @Override public boolean isUpgradable(){return false;}
     public static RuneEtching find(Hero hero){
-        for(Item item:hero.belongings)if(attached(item)!=null)return attached(item);
-        return hero.belongings.getItem(RuneEtching.class);
+        RuneEtching weapon=find(hero,false);return weapon!=null?weapon:find(hero,true);
+    }
+    public static RuneEtching find(Hero hero,boolean armor){
+        for(Item item:hero.belongings){
+            RuneEtching rune=attached(item);
+            if(rune!=null){
+                // The carrier is authoritative for legacy saves whose category was implicit.
+                rune.armorMode=item instanceof Armor;
+                if(rune.armorMode==armor)return rune;
+            }
+        }
+        for(Item item:hero.belongings)if(item instanceof RuneEtching
+                && ((RuneEtching)item).armorMode==armor)return (RuneEtching)item;
+        return null;
+    }
+    public static void ensurePair(Hero hero){
+        if(hero.heroClass!=com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.ENCHANTER)return;
+        for(boolean armor:new boolean[]{false,true})if(find(hero,armor)==null){
+            RuneEtching rune=new RuneEtching(armor);
+            Item carrier=armor?hero.belongings.armor:hero.belongings.weapon;
+            if(carrier instanceof Armor && attached(carrier)==null)((Armor)carrier).runeEtching=rune;
+            else if(carrier instanceof MeleeWeapon && attached(carrier)==null)((Weapon)carrier).runeEtching=rune;
+            else if(!rune.collect(hero.belongings.backpack))hero.belongings.backpack.items.add(rune);
+        }
     }
     public static boolean etch(Hero hero){
         return etch(hero,hero.belongings.weapon);
@@ -39,11 +64,11 @@ public class RuneEtching extends Item {
     }
     public static boolean canEtch(Hero hero,Item item){
         return item!=null && (item instanceof MeleeWeapon || item instanceof Armor)
-                && item.isEquipped(hero) && attached(item)==null && find(hero)!=null;
+                && item.isEquipped(hero) && attached(item)==null && find(hero,item instanceof Armor)!=null;
     }
     public static boolean etch(Hero hero,Item next){
         if(!canEtch(hero,next))return false;
-        RuneEtching rune=find(hero);
+        RuneEtching rune=find(hero,next instanceof Armor);
         // Learn the old effect before changing the carrier; transfers never reroll.
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic magic=hero.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.class);
         if(magic!=null)magic.choices(rune.armorMode);

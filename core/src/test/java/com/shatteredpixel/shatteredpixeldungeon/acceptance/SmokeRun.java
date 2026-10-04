@@ -117,43 +117,55 @@ public class SmokeRun {
     private static void armorEtchingScenario(Hero h,Weapon weapon){
         if(h.sprite==null)h.sprite=new HeroSprite();
         Armor original=h.belongings.armor;
-        ClothArmor armor=new ClothArmor();armor.identify();h.belongings.armor=armor;
-        RuneEtching rune=weapon.runeEtching;
-        int weaponLevel=weapon.level(),charges=h.belongings.getItem(SigilBrush.class).charges();
-        Weapon.Enchantment enchant=rune.floorEnchant;Armor.Glyph glyph=rune.floorGlyph;
-        check(!RuneEtching.etch(h,null)&&!RuneEtching.canEtch(h,new ClothArmor())&&!RuneEtching.canEtch(h,new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife()),"37: cancelled, unworn and ranged Etch targets rejected");
-        check(RuneEtching.etch(h,armor)&&weapon.runeEtching==null&&weapon.level()==weaponLevel-rune.level()&&armor.level()==rune.level(),"37: weapon-to-armor moves one rune and its upgrade");
-        check(!RuneEtching.etch(h,armor)&&rune.floorEnchant==enchant&&rune.floorGlyph==glyph,"37: same carrier rejected and transfers never reroll");
-        weapon.curseInfusionBonus=armor.curseInfusionBonus=true;
-        for(int i=0;i<3;i++)check(RuneEtching.etch(h,weapon)&&RuneEtching.etch(h,armor)&&weapon.trueLevel()==weaponLevel-1&&armor.trueLevel()==1,"37: transfers never convert Curse Infusion bonus into real upgrades");
-        weapon.curseInfusionBonus=armor.curseInfusionBonus=false;
-        checkRuneDescription(armor);
+        RuneEtching weaponRune=weapon.runeEtching;
+        int weaponLevel=weapon.trueLevel(),charges=h.belongings.getItem(SigilBrush.class).charges();
+        Weapon.Enchantment enchant=weaponRune.floorEnchant;
+        original.runeEtching=null;RuneEtching.ensurePair(h);
+        RuneEtching rune=original.runeEtching;
+        check(rune!=null&&rune!=weaponRune&&rune.level()==0&&weapon.trueLevel()==weaponLevel&&weaponRune.floorEnchant==enchant,
+                "37: legacy migration preserves paid weapon rune and adds unupgraded armor counterpart");
+        original.collect();ClothArmor armor=new ClothArmor();armor.identify();h.belongings.armor=armor;
+        Armor.Glyph glyph=rune.floorGlyph;
+        check(!RuneEtching.etch(h,null)&&!RuneEtching.canEtch(h,new ClothArmor())
+                &&!RuneEtching.canEtch(h,new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife()),
+                "37: cancelled, unworn and ranged Etch targets rejected");
+        check(RuneEtching.etch(h,armor)&&armor.runeEtching==rune&&original.runeEtching==null
+                &&weapon.runeEtching==weaponRune&&weapon.trueLevel()==weaponLevel,"37: concurrent independent runes");
+        check(!RuneEtching.etch(h,armor)&&rune.floorGlyph==glyph,"37: same carrier rejected without reroll");
+        armor.upgrade();armor.upgrade();check(rune.level()==1&&armor.trueLevel()==2,"37: banks one paid armor upgrade");
+        armor.collect();weapon.curseInfusionBonus=armor.curseInfusionBonus=original.curseInfusionBonus=true;
+        for(int i=0;i<3;i++){
+            h.belongings.armor=original;check(RuneEtching.etch(h,original),"37: armor transfer");
+            h.belongings.armor=armor;check(RuneEtching.etch(h,armor)&&armor.trueLevel()==2&&original.trueLevel()==0
+                    &&weapon.trueLevel()==weaponLevel&&weapon.runeEtching==weaponRune&&rune.floorGlyph==glyph,
+                    "37: separate upgrades/effects conserve across transfers and Curse Infusion");
+        }
+        weapon.curseInfusionBonus=armor.curseInfusionBonus=original.curseInfusionBonus=false;
+        checkRuneDescription(armor);checkRuneDescription(weapon);
         armor.inscribe(new com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Obfuscation());
         armor.inscribed=new com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Viscosity();armor.inscriptionTurns=20;
         rune.floorGlyph=new com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Swiftness();
-        check(armor.hasGlyph(rune.floorGlyph.getClass(),h)&&armor.hasGlyph(armor.glyph.getClass(),h)&&armor.hasGlyph(armor.inscribed.getClass(),h),"37: etched passive, permanent glyph and temporary inscription coexist");
-        Buff.affect(h,MagicImmune.class);check(!armor.hasGlyph(rune.floorGlyph.getClass(),h),"37: magic immunity suppresses etched passive");Buff.detach(h,MagicImmune.class);
+        check(armor.hasGlyph(rune.floorGlyph.getClass(),h)&&armor.hasGlyph(armor.glyph.getClass(),h)&&armor.hasGlyph(armor.inscribed.getClass(),h),"37: three glyph layers coexist");
+        Buff.affect(h,MagicImmune.class);check(!armor.hasGlyph(rune.floorGlyph.getClass(),h),"37: magic immunity");Buff.detach(h,MagicImmune.class);
         int depth=Dungeon.depth;Dungeon.depth=depth+1;EnchanterMagic.state().arrive();
-        check(Arrays.asList(Armor.Glyph.common).contains(rune.floorGlyph.getClass())&&armor.glyph instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Obfuscation&&armor.inscribed!=null&&EnchanterMagic.state().choices(true).contains(rune.floorGlyph.getClass()),"37: floor glyph rerolls independently, knowledge persists, other slots remain");
-        Bundle saved=new Bundle();saved.put("armor",armor);Armor restored=(Armor)saved.get("armor");
-        check(restored.runeEtching!=null&&restored.level()==armor.level()&&restored.runeEtching.level()==rune.level()&&restored.runeEtching.activeEffect()==rune.activeEffect()&&restored.runeEtching.floorEnchant.getClass()==rune.floorEnchant.getClass()&&restored.inscribed!=null,"37: armor rune, both floor effects, upgrade and inscription survive save/load");
-        Bundle oldSave=new Bundle();oldSave.put("floor_enchant",enchant);RuneEtching migrated=new RuneEtching();migrated.restoreFromBundle(oldSave);
-        check(migrated.floorEnchant.getClass()==enchant.getClass()&&migrated.floorGlyph!=null&&migrated.activeEffect()==enchant.getClass(),"37: legacy weapon rune acquires glyph without replacing existing enchantment");
-        // The crown must transfer ownership, or disposing the old armor recovers a duplicate rune.
+        check(Arrays.asList(Armor.Glyph.common).contains(rune.floorGlyph.getClass())
+                &&Arrays.asList(RuneEtching.FLOOR_ENCHANTS).contains(weaponRune.floorEnchant.getClass())
+                &&armor.inscribed!=null&&EnchanterMagic.state().choices(true).contains(rune.activeEffect())
+                &&EnchanterMagic.state().choices(false).contains(weaponRune.activeEffect()),"37: floor rolls preserve both knowledge catalogs");
+        Bundle saved=new Bundle();saved.put("armor",armor);saved.put("weapon",weapon);
+        Armor restored=(Armor)saved.get("armor");Weapon restoredWeapon=(Weapon)saved.get("weapon");
+        check(restored.runeEtching!=null&&restored.level()==armor.level()&&restored.runeEtching.level()==1
+                &&restored.runeEtching.armorMode()&&restoredWeapon.runeEtching!=null&&!restoredWeapon.runeEtching.armorMode()
+                &&restoredWeapon.trueLevel()==weaponLevel&&restored.inscribed!=null,"37: dual-rune save/load");
         ClassArmor crown=ClassArmor.upgrade(h,armor);h.belongings.armor=crown;
-        check(crown.runeEtching==rune&&armor.runeEtching==null&&crown.level()==restored.level(),"37: class armor conversion retains one rune and exact level");
-        check(RuneEtching.etch(h,weapon)&&weapon.level()==weaponLevel&&crown.level()==0,"37: armor-to-weapon conserves upgrade");
-        // A fresh rune banks the first armor upgrade, but never a second one.
-        rune.level(0);weapon.level(weaponLevel-1);h.belongings.armor=armor;armor.level(0);armor.inscribe(null);armor.inscribed=null;
-        check(RuneEtching.etch(h,armor),"37: fresh armor attachment");armor.upgrade();armor.upgrade();
-        check(rune.level()==1&&armor.level()==2,"37: armor banks at most one upgrade");
-        armor.doUnequip(h,true);check(armor.doEquip(h)&&armor.runeEtching==rune,"37: unequip and re-equip retain attachment");
-        armor.doUnequip(h,true);armor.detachAll(h.belongings.backpack);
-        check(armor.runeEtching==null&&armor.level()==1&&h.belongings.getItem(RuneEtching.class)==rune,"37: dropped armor recovers rune and removes only carried upgrade");
-        h.belongings.armor=original;check(RuneEtching.etch(h,weapon)&&weapon.level()==weaponLevel,"37: reattach recovered armor rune");
+        check(crown.runeEtching==rune&&armor.runeEtching==null&&crown.level()==restored.level(),"37: crown rune ownership");
+        crown.doUnequip(h,true);crown.detachAll(h.belongings.backpack);
+        check(crown.runeEtching==null&&crown.trueLevel()==1&&RuneEtching.find(h,true)==rune
+                &&weapon.runeEtching==weaponRune&&weapon.trueLevel()==weaponLevel,"37: armor loss recovers only armor rune");
+        h.belongings.armor=original;check(RuneEtching.etch(h,original)&&original.trueLevel()==1,"37: armor recovery reattachment");
         Dungeon.depth=depth;EnchanterMagic.state().arrive();
-        check(h.belongings.getItem(SigilBrush.class).charges()==charges,"37: Etch uses no Brush charges");
-        System.out.println("TEST 37 ARMOR PASS: transfer, single upgrade, passive glyph, independent slots, floor roll, save migration, crown, equip/loss and formatted descriptions");
+        check(h.belongings.getItem(SigilBrush.class).charges()==charges,"37: no Brush charge spent");
+        System.out.println("TEST 37 ARMOR PASS: simultaneous category runes, independent upgrades/transfers/floor effects, migration, crown, loss, descriptions and save/load");
     }
 
     private static void playtestScenario() throws Exception {

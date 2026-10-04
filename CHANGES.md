@@ -1,3 +1,8 @@
+# Sprint component 7 - Duelist v1.22.3
+
+- Duelist keeps her portrait face and cropped curls, with a poised fencing stance, fitted teal doublet, ivory collar and asymmetric shoulder armor. Primary, ability-selected and thrown weapons use her individual grip, without changing attack timing.
+- Committed source and prompt compile offline into the existing eight armor rows and 21 poses, with class-specific grip/motion. Gameplay, world height and combat timings are unchanged.
+
 # Sprint component 7 - Huntress v1.22.2
 
 - Huntress retains her portrait in a long-legged moss-green ranger silhouette, split coat and short fur mantle, with armor fitted to her body and calmer coat motion. Held bows and other equipped weapons use her left-hand anchors.

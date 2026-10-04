@@ -1,6 +1,6 @@
 # Grimhollow
 
-v1.20.2 restores in-game Playtest access for enabled saves; see the instructions below. The remaining seven hero upgrades and equipment-aware character sprites are queued under **Next sprint: character presentation** at the end of this document.
+v1.20.2 restores in-game Playtest access for enabled saves; see the instructions below. The agreed playtesting fixes, class changes, remaining seven hero upgrades and equipment-aware character sprites are queued under **Next sprint: playtesting fixes and character presentation** at the end of this document.
 
 v1.20.1 is a **Warrior and Enchanter art proof of concept**: proportioned painted bodies, class-fitted armor, distinct silhouettes and restrained motion with still idles. Faces match the existing selection portraits. Gameplay, world height and animation timings are unchanged; the other seven heroes await review of this pilot. Comparisons, pose sheets and animation previews are in [verification/heroes/pilot](verification/heroes/pilot/). Windows launcher: `desktop/build/windows/1.20.2/Grimhollow/Grimhollow.exe`; Android: `android/build/outputs/apk/debug/android-debug.apk`.
 
@@ -242,8 +242,57 @@ Original game by **Oleg Dolya**: [Pixel Dungeon project](https://github.com/wata
 
 By **Evan Debenham and contributors**: [Shattered Pixel Dungeon project](https://github.com/00-Evan/shattered-pixel-dungeon). Upstream sprites and paintings are used under GPL-3.0-or-later; [license](LICENSE.txt).
 
-## Next sprint: character presentation
+## Next sprint: playtesting fixes and character presentation
 
-Queued, not implemented in v1.20.2. Extend the reviewed Warrior/Enchanter direction to Mage, Rogue, Huntress, Duelist, Cleric, Necromancer and Psychic, in individual batches with a usage check before each. Preserve portrait identity; emphasize individual anatomy, silhouettes, colors, fitted armor and restrained animation. Review cloth/plate and actual game-size samples for each.
+Agreed planning scope, updated 2026-10-04; implementation has not started. This incorporates the latest playtesting discussion and supersedes earlier proposals to expose a recovering Horror on ordinary sight, remove the Seer passive, or allow Crystal inventory casting without a talent. In-game Playtest access is already delivered in v1.20.2 and is not a new sprint task.
 
-Prototype equipment-aware sprites on Warrior and Enchanter before carrying the approach to the other seven. Use separate painted weapon layers and class-specific grip/pose anchors so the displayed weapon follows equipped gear without repainting every armor/weapon combination. Cover empty hands, one-handed/two-handed melee, bows, staffs and thrown-weapon actions, including Duelist swaps. Preserve attack timing, movement, hitboxes and all mechanics. Keep tiny effects readable and test layer order, transparency, armor clipping and tablet texture/memory cost. Ship character batches only after their visual review; use category silhouettes first, adding individual weapon detail where it remains readable.
+### Component 1 - Positioning, grass and notification fixes
+
+- Repair Hexcaster's retreat path so logical movement and sprite movement stay synchronized. Exercise retreat, ordinary movement, knockback, teleportation, melee/projectile targeting and examination; apply any shared fix to related casters. A creature must occupy the cell in which it is drawn, including after interrupted animations.
+- Correct tall/furrowed grass foreground placement and overlap: grass may cover feet and lower legs, while heads and torsos remain readable. Check all nine heroes and creature silhouettes, including during movement and at different zooms; preserve terrain and movement rules.
+- Keep the journal symbol visible when notes arrive. Use a restrained unread badge/pulse without fading the symbol to zero or flashing the whole container. Display keys separately so they do not replace the book. Verify unread/acknowledged states and portrait/landscape layouts.
+- Distinguish purchased talent ranks with solid bright gold and unpurchased ranks with dark hollow sockets. Clearly label available points; use shape and value contrast as well as color, retaining existing rank limits and input behavior.
+
+### Component 2 - Lurking Horror behavior
+
+- Preserve regional minimum flight durations, detection counters, the player's response opportunity before an ambush, ordinary cornered attacks and the lifetime healing limit of 25% maximum HP. Fix oscillation using a reachable escape destination and route memory; an escape route may briefly approach the hero if that is necessary to get out. Review danger at the default 100% damage setting after the behavior repair before proposing another damage increase.
+- After minimum flight, enter recovery shadowmeld only outside ordinary hero sight and without an active full reveal. If still visible, continue fleeing. If already at full health or unable to heal further, skip recovery and return to stalking once eligible to regain shadowmeld.
+- Once recovery shadowmeld starts, entering the room or seeing its cell normally does not reveal the Horror. It does not attack during recovery. It moves toward a reachable hiding spot, avoids the hero, and vacates doors/narrow corridors rather than standing in them. If no hiding spot is reachable, keep escaping or use ordinary defensive combat when exposed and cornered.
+- A close evasion can produce "Something shifts nearby." at most once per recovery period, without a marker or terrain disclosure. An unavoidable physical encounter exposes it and interrupts hero movement without a free ambush or shared occupancy. Damage and existing full-reveal tools also expose it and resume fleeing; accrued healing is never reset.
+- Heal at the existing slow cadence while hidden and mobile. End recovery as soon as full health is reached or the remaining lifetime healing allowance is exhausted; do not force an idle 50-turn wait. Return to stalking, with the usual warning before the next strike.
+- Verify dead ends, blocked exits, looping paths, corridor clearance, ordinary room entry during recovery, tool reveals, collision, repeated recovery, phase timing and save/load. Preserve solitary-hunter and once-per-region generation rules.
+
+### Component 3 - Simultaneous Enchanter etchings
+
+- Support one weapon rune and one armor rune at the same time. Each carries its appropriate floor-changing enchantment/glyph alongside permanent and temporary inscriptions, at the existing full proc strength and class bonus.
+- Track the two runes independently. Each retains its own paid upgrade level when transferred within its equipment category; transfers do not copy upgrades between weapon and armor or reroll their effects. Preserve learned inscription knowledge.
+- Migrate existing saves without losing the current rune, gear or upgrades; add an unupgraded counterpart. Cover equipment changes, recovery of attachments, floor transitions, descriptions and save/load. Do not grant a free upgrade as part of migration.
+
+### Component 4 - Psychic detection and Crystal weapon
+
+- Replace Treasure Sense's permanent loot-surroundings mapping and floor-wide door/trap revelation with temporary item-only markers on first floor entry. Rank 1: radius 4, duration 15 turns; rank 2: radius 6, duration 20; rank 3: radius 8, duration 25. Fade markers visibly near expiration; reveal no surrounding terrain and do not renew the benefit by revisiting/reloading.
+- Trap Sense becomes 15%/30% passive detection of searchable hidden traps in ordinary visible terrain, checked on their first entry into sight rather than rerolled while waiting or refreshing FOV. Preserve its existing remote-trap damage riders unless separately changed in balance review.
+- Keep the Seer's automatic nearby enemy awareness and hidden-door/trap discovery within three cells, including through walls. Stack the talent by coverage: outside the guaranteed zone, Trap Sense still supplies probabilistic detection within normal sight.
+- Manual search already guarantees ordinary searchable traps in range, so provide reach rather than an ineffective percentage bonus. Add one/two cells of manual trap-search reach by talent rank; for a Seer, extend from its three-cell guaranteed area to four/five cells. The extension is trap-only and respects sight/walls; it grants no extra terrain mapping or hidden-door range. Preserve non-searchable-trap rules for ordinary searching and existing full-reveal tools.
+- Move Focus Crystal to the weapon slot as the Psychic's starting weapon, replacing Focus Ring, with its artifact-style charge system and usage-based levels 0-10. It occupies only the weapon slot. Base casting and full recharge require wielding it. Preserve spell/rider progression and prohibit Upgrade/Infusion/Toolkit levelling; melee hits neither spend charges nor award Crystal experience.
+- Replace the two-rank Kinetic Reserve talent with **Unbound Focus**: rank 1 permits inventory casting and 50% carried recharge; rank 2 permits inventory casting and 75% carried recharge. Wielded recharge remains 100% of its applicable rate. Remove the former floor-entry charge restoration, migrate allocated ranks without changing point totals, and keep capacity/recharge descriptions accurate with other Psychic talents.
+- Crystal melee damage grows modestly at every Crystal level. Proposed base curve: minimum `1 + floor(level/2)`, maximum `5 + floor(1.5*level)`, with a 0.8-turn attack and normal armor reduction. Milestones: level 0 = 1-5, 2 = 2-8, 5 = 3-12, 8 = 5-17, 10 = 6-20. These are starting balance values: verify sustained damage including Strength and attack speed so the Crystal remains dependable against late-game enemies but weaker than suitable conventionally upgraded weapons.
+- Preserve existing Crystal levels, charges, experience and owned gear during migration from the artifact slot; do not overwrite a player's chosen weapon. Account for the freed artifact slot in balance scenarios. Verify wielded/carried casting at all talent ranks, charges, spell growth, melee timing, detection boundaries, marker expiry and persistence.
+
+### Component 5 - Distinct icon artwork
+
+- Refresh the snake/surprise-attack illustration in the Tome of Dungeon Mastery and audit the other guide illustrations for legacy art.
+- Audit item identification emblems, inventory art and ability/talent symbols across categories. Every distinct type needs distinctive artwork; Identify, Mind Vision and Magical Sight are known reused-source examples. Family framing may remain consistent, but tinting the same emblem is insufficient. Keep each type's identity consistent wherever that same type is shown.
+- Preserve randomized unidentified potion/scroll appearances and the identification game. Check source-art reuse and semantic mappings in the existing pipeline/validator, then visually review silhouettes at actual UI size; a raw pixel hash alone cannot establish meaningful uniqueness. Batch this work by category and regenerate assets through the established reproducible painted pipeline.
+
+### Component 6 - Weapon-aware character prototype
+
+Prototype on Warrior and Enchanter before carrying the approach to the other seven. Use separate painted weapon layers and class-specific grip/pose anchors so the displayed weapon follows equipped gear without repainting every armor/weapon combination. Cover empty hands, one-/two-handed melee, bows, staffs, the new Crystal weapon and thrown-weapon actions, including Duelist swaps. Preserve attack timing, movement, hitboxes and gameplay. Review layer order, transparency, armor clipping, facing, actual game-size readability and tablet texture/memory cost. Use category silhouettes first, adding individual weapon detail where readable.
+
+### Component 7 - Remaining seven heroes, one batch per character
+
+Extend the Warrior/Enchanter pilot direction to Mage, Rogue, Huntress, Duelist, Cleric, Necromancer and Psychic. Preserve portrait identity; give each individual anatomy, silhouette, colors, fitted armor and restrained animation, with still idles. Integrate the reviewed weapon-layer approach. Produce cloth/plate comparisons, pose/animation previews and native game-size screenshots for each character; review each batch before expanding further.
+
+### Delivery boundaries
+
+Check remaining usage before each component and each hero batch; notify the user and stop at a committed boundary if the next will not fit. Finish components in order, with clean builds, descriptive commits and pushes at boundaries. Reuse and extend relevant existing checks, verify once at each component's end, and preserve all unrelated gates. Run affected class gates and the combined gate after gameplay changes; build Windows/Android and confirm unchanged CI checks at release boundaries. Asset work must reproduce offline from committed sources. Report actual executed results and any device-playtesting limits. Terrain contrast test 45 remains **Abandoned: test failed** and is not run. This sprint plan does not authorize starting implementation in this planning turn.

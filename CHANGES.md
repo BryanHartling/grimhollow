@@ -10,6 +10,7 @@
 - Added 20 device-wide playtest values in separate Doubloon and companion balance pages, with explanatory units, bounded inputs and default reset. Two painted coin faces and a companion harness, custom luck emblems and the home-screen Update Log use the existing presentation and reproducible packing paths. Heads is the initial display only; there is no neutral face or passive Favor state.
 - New artifact scenarios cover costs/growth, Black Spot, Plunder, deferred last hand, theft, shop distributions, regional cache plans, both transformations, guardian pilfer/root/recovery, loose-gold collection and saved state. The existing native interface fixture exercises both tuning pages and the live transformation in landscape and portrait.
 - Release verification: 30 generated class runs and seven JUnit tests passed; all five native region walking/fog gates passed, with Halls rerun unchanged under isolated test preferences after an initial interrupted move. Both interface orientations, all 389 named item indices, painted-asset reproduction and compiled network-handler checks passed. Native Windows launcher and Android debug APK were built; physical tablet/campaign balance remains human playtesting.
+- The release commit passed all seven branch CI jobs. Its tag attempt exceeded the unchanged effects timing threshold on another runner; GitHub denied retry access. Record both runs and their measurements in KNOWN_ISSUES.md; gameplay, rendering and checks are unchanged in this documentation follow-up.
 
 # Key HUD and description controls - v1.23.3
 

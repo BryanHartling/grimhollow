@@ -1,5 +1,8 @@
 # Known issues
 
+- v1.24.0: Doubloon/Golden Mimic campaign balance and physical Samsung tablet playtesting remain with the user; automated generated runs and native portrait input are not a complete campaign or hardware test. New text falls back to English in other locales. Regional cache plans and already-generated shop/floor stock are not rerolled by equipping the coin later.
+- v1.24.0 local Halls walking verification initially stopped at cell 655 before moving to 690; the identical build and assertion passed all 114 steps using isolated test preferences. The initial interruption remains unexplained; no game rule or check was altered to obtain the passing result.
+
 - Historical v1.23.3 tag v1.23.3-readable-controls and branch CI runs 37250259548/37250259385 failed live key pickup because text was measured on the actor thread. The readable-controls-fix follow-up queues the HUD refresh on the render thread; the failed runs remain available and checks are unchanged.
 
 - v1.23.3 environment: automatic approval review timed out on three parallel native-test/package commands; individual retries succeeded through the existing escalation route. No check was disabled.

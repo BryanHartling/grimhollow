@@ -70,7 +70,9 @@ def icon(image):
 def build():
     config=json.loads((HERE/'items.json').read_text(encoding='utf-8'))
     semantics=json.loads(base_file(SEMANTICS))
-    atlas=Image.open(BytesIO(base_file('core/src/main/assets/sprites/items.png'))).convert('RGBA').resize((1024,2176),Image.Resampling.NEAREST)
+    original=Image.open(BytesIO(base_file('core/src/main/assets/sprites/items.png'))).convert('RGBA').resize((1024,2176),Image.Resampling.NEAREST)
+    atlas=Image.new('RGBA',(1024,2240))
+    atlas.alpha_composite(original)
     replacements={}
     for sheet,names in config['sheets'].items():
         if len(names)!=16:raise ValueError(f'{sheet}: expected sixteen named cells')
@@ -106,6 +108,12 @@ def build():
     replacements['EXPEDITION_MAP']=icon(Image.open(HERE/'sources/expedition/map.png').convert('RGBA'))
     semantics['items']['BLANK_PARCHMENT']={'id':541,'artIndex':541,'cellSize':64}
     replacements['BLANK_PARCHMENT']=icon(Image.open(HERE/'sources/sprint/parchment.png').convert('RGBA'))
+    coin=Image.open(HERE/'sources/items/doubloon.png').convert('RGBA')
+    if coin.getchannel('A').getextrema()[0]!=0:raise ValueError('Doubloon source lacks genuine alpha')
+    for panel,name in enumerate(('FICKLE_HEADS','FICKLE_TAILS','GOLDEN_COMPANION'),start=1):
+        x,y=panel%2,panel//2
+        semantics['items'][name]={'id':541+panel,'artIndex':541+panel,'cellSize':64}
+        replacements[name]=icon(coin.crop((x*coin.width//2,y*coin.height//2,(x+1)*coin.width//2,(y+1)*coin.height//2)))
     written={}
     for name,image in replacements.items():
         if name not in semantics['items']:raise ValueError('Unknown inventory ID '+name)

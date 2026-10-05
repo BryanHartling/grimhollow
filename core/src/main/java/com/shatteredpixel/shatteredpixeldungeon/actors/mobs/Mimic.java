@@ -145,9 +145,12 @@ public class Mimic extends Mob {
 	@Override
 	protected boolean act() {
         if(forfeitedCoin!=null && (coinFleeing||HP*2<=HT)){
+            if(paralysed>0){spend(TICK);return true;}
+            if(fieldOfView==null || fieldOfView.length!=Dungeon.level.length())fieldOfView=new boolean[Dungeon.level.length()];
+            Dungeon.level.updateFieldOfView(this,fieldOfView);
             coinFleeing=true;int exit=Dungeon.level.exit();
             if(pos==exit){forfeitedCoin=null;destroy();if(sprite!=null)sprite.killAndErase();return true;}
-            if(exit>=0)getCloser(exit);spend(1/speed());return true;
+            int old=pos;boolean moved=exit>=0&&getCloser(exit);spend(1/speed());return !moved||sprite==null||moveSprite(old,pos);
         }
         if (actForHatchling()) return true;
 		if (alignment == Alignment.NEUTRAL && state != PASSIVE){

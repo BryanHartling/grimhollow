@@ -760,9 +760,57 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }else if(frames==1010){
             for(com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache c:Dungeon.level.elementalCaches)if(!c.opened||!Dungeon.level.passable[c.door])throw new AssertionError("Elemental effect failed to open seal");
             capture("elemental-seals-open");
-            System.out.println("TEST 64 UI PASS: painted mechanisms, concealed/revealed/open states, fitted descriptions and actual Pour pointer targeting");Gdx.app.exit();
+            System.out.println("TEST 64 UI PASS: painted mechanisms, concealed/revealed/open states, fitted descriptions and actual Pour pointer targeting");
+        }else if(frames==1030){
+            closeReviewWindows();GameScene.cancel();Playtest.enable();
+            for(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact a:Dungeon.hero.belongings.getAllItems(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.Artifact.class))if(a.isEquipped(Dungeon.hero))a.doUnequip(Dungeon.hero,true,false);
+            reviewCoin=new com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon();reviewCoin.identify();reviewCoin.playtestLevel(10);reviewCoin.collect();
+            if(!reviewCoin.doEquip(Dungeon.hero))throw new AssertionError("Coin equip failed");
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,reviewCoin));
+        }else if(frames==1060){
+            interfaceBounds();checkReviewText(Game.scene());capture("doubloon-actions");closeReviewWindows();
+            com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();
+        }else if(frames==1090){
+            if(!playtestClickPage("Fickle Doubloon")){frames--;return;}
+        }else if(frames==1120){
+            interfaceBounds();checkReviewText(Game.scene());capture("doubloon-tuning");playtestClick("Heads chance at +0: 50%");
+        }else if(frames==1150){
+            interfaceBounds();checkReviewText(Game.scene());capture("doubloon-odds-setting");playtestInput("51","Apply");
+            if(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.configured(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.COIN_HEADS)!=51)throw new AssertionError("Coin tuning input failed");
+            closeReviewWindows();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();
+        }else if(frames==1180){
+            if(!playtestClickPage("Golden Mimic companion")){frames--;return;}
+        }else if(frames==1210){
+            interfaceBounds();checkReviewText(Game.scene());capture("doubloon-companion-tuning");closeReviewWindows();
+            com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.reset();
+            com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.set(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.COIN_HEADS,70);
+            reviewCoin.playtestRecharge();
+            if(!reviewCoin.flip(Dungeon.hero)||reviewCoin.image!=com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.FICKLE_HEADS)throw new AssertionError("Painted Heads flip failed");
+        }else if(frames==1240){
+            com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.Luck luck=Dungeon.hero.buff(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.Luck.class);
+            if(luck==null||!luck.favor)throw new AssertionError("Live coin favor missing");
+            com.shatteredpixel.shatteredpixeldungeon.ui.BuffIcon icon=new com.shatteredpixel.shatteredpixeldungeon.ui.BuffIcon(luck,true);icon.refresh(luck);
+            if(icon.width()!=16||icon.height()!=16||icon.texture.height!=2240)throw new AssertionError("Luck painted icon geometry");icon.destroy();
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoBuff(luck));
+        }else if(frames==1270){
+            interfaceBounds();checkReviewText(Game.scene());capture("doubloon-favor");closeReviewWindows();
+            com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.detach(Dungeon.hero,com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.Luck.class);
+            HatchlingMimic pet=Dungeon.hero.belongings.getItem(HatchlingMimic.class);
+            while(!pet.hungry())pet.tick(Dungeon.hero);
+            com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DoubloonFeeding.confirm(Dungeon.hero,pet,reviewCoin);
+        }else if(frames==1300){
+            interfaceBounds();checkReviewText(Game.scene());capture("doubloon-feeding-warning");playtestClick("FEED THE COIN");
+        }else if(frames==1330){
+            com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion harness=com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion.carried();
+            if(harness==null||harness.ally()==null)throw new AssertionError("Live golden companion missing");
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(harness));
+        }else if(frames==1360){
+            interfaceBounds();checkReviewText(Game.scene());capture("doubloon-golden-companion");
+            com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.reset();
+            System.out.println("DOUBLOON UI PASS: fitted painted actions, both tuning menus, odds input, Heads flip, repeated custom buff refresh, irreversible feeding confirmation and Golden Mimic transformation; failures=0");Gdx.app.exit();
         }
     }
+    private com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon reviewCoin;
     private void notificationReview(){
         com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite spell=new com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite();
         for(int i=0;i<8;i++){

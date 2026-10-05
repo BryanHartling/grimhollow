@@ -22,8 +22,8 @@ public class FickleDoubloon extends Artifact {
     public static final String AC_FLIP="FLIP";
     private static final int[] FLIPS={3,6,10,15,21,28,36,45,55,66};
     private final HashSet<Integer> lastHands=new HashSet<>();
-    private int face;
-    { levelCap=10; chargeCap=1; image=ItemSpriteSheet.GOLD; defaultAction=AC_FLIP; }
+    private int face=1;
+    { levelCap=10; chargeCap=1; image=ItemSpriteSheet.FICKLE_HEADS; defaultAction=AC_FLIP; }
     public static FickleDoubloon equipped(){
         Hero h=Dungeon.hero;
         if(h==null)return null;
@@ -68,18 +68,23 @@ public class FickleDoubloon extends Artifact {
         if(!isEquipped(h)||charge<1||luckRunning(h)||h.buff(MagicImmune.class)!=null){GLog.w(Messages.get(this,"unavailable"));return false;}
         int duration=level();
         boolean favor=!cursed && Random.Float()<headsChance();
-        charge--;face=favor?1:2;
+        charge--;face=favor?1:2;updateImage();
         Buff.affect(h,Luck.class).start(favor,duration,false);
         exp++;
         while(level()<10 && exp>=FLIPS[level()]){super.upgrade();GLog.p(Messages.get(this,"levelup"));}
         chargeCap=level()+1;updateQuickslot();
         GLog.w(Messages.get(this,favor?"heads":"tails"));
+        if(h.sprite!=null && h.sprite.parent!=null){
+            com.watabou.noosa.audio.Sample.INSTANCE.play(Assets.Sounds.GOLD);
+            h.sprite.emitter().burst(com.shatteredpixel.shatteredpixeldungeon.effects.Speck.factory(com.shatteredpixel.shatteredpixeldungeon.effects.Speck.STAR),6);
+        }
         h.spendAndNext(1);return true;
     }
     @Override public Item upgrade(){return this;}
+    private void updateImage(){image=face==2?ItemSpriteSheet.FICKLE_TAILS:ItemSpriteSheet.FICKLE_HEADS;}
     @Override public void transferUpgrade(int amount){}
     @Override public void resetForTrinity(int visibleLevel){}
-    @Override protected void onPlaytestLevelSet(){chargeCap=level()+1;}
+    @Override protected void onPlaytestLevelSet(){chargeCap=level()+1;exp=level()==0?0:FLIPS[level()-1];playtestRecharge();}
     @Override public boolean doUnequip(Hero h,boolean collect,boolean single){
         if(luckRunning(h)){GLog.n(Messages.get(this,"bound"));return false;}return super.doUnequip(h,collect,single);
     }
@@ -147,12 +152,17 @@ public class FickleDoubloon extends Artifact {
         @Override public boolean act(){if(used||Actor.now()>=expires)detach();spend(TICK);return true;}
         @Override public void fixTime(float decrement){super.fixTime(decrement);expires-=decrement;}
         @Override public int icon(){return BuffIndicator.BLESS;}
-        @Override public void tintIcon(com.watabou.noosa.Image icon){icon.hardlight(favor?0xE0982F:0xA52B35);}
+        @Override public void tintIcon(com.watabou.noosa.Image icon){
+            float size=icon.width();
+            icon.texture(Assets.Sprites.ITEMS);
+            icon.frame(ItemSpriteSheet.film.get(favor?ItemSpriteSheet.FICKLE_HEADS:ItemSpriteSheet.FICKLE_TAILS));
+            icon.logicalSize(size,size);
+        }
         @Override public String name(){return Messages.get(FickleDoubloon.class,lastHand?"last_hand_name":favor?"favor":"wane");}
         @Override public String desc(){return Messages.get(FickleDoubloon.class,favor?"favor_desc":"wane_desc");}
         @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("favor",favor);b.put("single",single);b.put("used",used);b.put("last_hand",lastHand);b.put("expires",expires);}
         @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);favor=b.getBoolean("favor");single=b.getBoolean("single");used=b.getBoolean("used");lastHand=b.getBoolean("last_hand");expires=b.getFloat("expires");type=favor?buffType.POSITIVE:buffType.NEGATIVE;}
     }
     @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("coin_face",face);b.put("last_hands",lastHands.stream().mapToInt(Integer::intValue).toArray());}
-    @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);level(Math.max(0,Math.min(10,b.getInt("level"))));chargeCap=level()+1;charge=Math.min(chargeCap,b.getInt("charge"));face=b.getInt("coin_face");lastHands.clear();for(int n:b.getIntArray("last_hands"))lastHands.add(n);}
+    @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);level(Math.max(0,Math.min(10,b.getInt("level"))));chargeCap=level()+1;charge=Math.min(chargeCap,b.getInt("charge"));face=b.getInt("coin_face")==2?2:1;updateImage();lastHands.clear();for(int n:b.getIntArray("last_hands"))lastHands.add(n);}
 }

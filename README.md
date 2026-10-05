@@ -1,10 +1,18 @@
 # Grimhollow
 
+**Fickle Doubloon v1.24.0:** a new artifact grows through coin flips, favors or hinders the hero's combat rolls, rewards held gold, improves eligible ordinary loot and invites thief pursuit. Black Spot copies rig the wager against you. At its highest level, the coin can improve future shops and treasure generation, including elemental caches without relaxing their one-per-type limits.
+
+Feeding it to a Hatchling makes an irreversible wager: Heads trades both items for a directable Golden Mimic guardian; Tails releases a stronger hostile mimic carrying the recoverable coin. The guardian steals finite gold once per eligible enemy, roots ordinary enemies, collects visible safe loose gold and retreats into its harness when defeated. Recovery needs both time and entry to a different floor. Neither outcome permanently removes an artifact slot.
+
+**Playtest > Balance tuning > Fickle Doubloon / Golden Mimic companion** exposes 20 adjustable values, including Heads chance, charging, fortune, theft resistance, room/cache chances, special shop rolls, guardian health/damage, stealing, roots, recovery and collection range. Settings persist across games on this device and mark affected runs as Playtests. Reset restores the agreed defaults; the normal game retains them.
+
+The two painted coin faces and companion harness are packed from `tools/painted/sources/items/doubloon.png`, with the generation prompt in `tools/painted/doubloon-prompts.json`. The unused neutral concept is excluded from the shipped atlas. The coin initially displays Heads without granting an active Favor effect, then displays its last flip. The offline packer regenerates the item atlas and semantic hashes without a generation service. Older item IDs and cells retain their positions.
+
 **Readable controls v1.23.3:** collected keys have a separate framed HUD row with larger painted icons and counts. Long item, creature and talent descriptions have visible scroll arrows and a bronze scrollbar, with touch dragging/mouse-wheel input and extra final-line padding. Ashlight feeding text uses plain readable hyphens. All four raised servant types decay for **15% of maximum health per turn, rounded up**, after their binding expires.
 
 **Bone wall and Horror v1.23.2:** Wand of Bone/Bone Prison have stable painted barricades and an examination result with remaining turns. The Horror has modestly stronger combat damage and a separate stronger sleeping-prey pounce, with the same damage tuning setting. Its floor omen is a framed six-second notice; the larger ambush warning remains visible until you respond. Detection, response fairness and recovery limits are unchanged. Balance still requires campaign playtesting.
 
-Latest Windows launcher: `desktop/build/windows/1.23.3/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`.
+Latest Windows launcher: `desktop/build/windows/1.24.0/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`.
 
 **Talent panel v1.23.1:** rounded bronze studs replace the blocky gold rank markers. Larger ivory available, bronze spent and hollow future tier markers accompany an explicit available/spent count. Random allocation has a brass shuffle medallion and a larger hit area. Allocation rules, point costs and caps are unchanged.
 

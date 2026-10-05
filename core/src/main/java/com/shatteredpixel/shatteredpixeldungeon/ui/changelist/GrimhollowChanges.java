@@ -20,7 +20,11 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.23.3","Readable keys, description controls and faster servant decay.");
+        ChangeInfo r=release(list,"v1.24.0","A pirate's wager, and a golden guardian.");
+        note(r,Icons.GOLD,"Fickle Doubloon","A rare coin grows through wagers, draws fortune from a hoard, and invites unwanted attention from thieves. Its Black Spot turns every flip against its bearer. It will not share its place with another artifact.");
+        note(r,Icons.TALENT,"A costly transformation","Feed the coin to your hatchling for a final wager. Heads creates a directable golden protector that gathers loose gold; Tails releases a hostile mimic carrying the coin. The sacrifice ends the hatchling's feeding gifts without sacrificing an artifact slot.");
+        note(r,Icons.PREFS,"Playtest controls","The balance menu now has separate Fickle Doubloon and Golden Mimic sections for odds, recharge, fortune, theft, treasure generation and companion strength and recovery. Changes persist across games on this device.");
+        r=release(list,"v1.23.3","Readable keys, description controls and faster servant decay.");
         note(r,Icons.JOURNAL,"Collected keys","Collected key types and counts have a separate framed HUD row below the menu. Larger painted keys are no longer squeezed into the version label; the enemy counter moves down when keys are present.");
         note(r,Icons.MAGNIFY,"Complete descriptions","Long item, talent and creature descriptions have visible up/down controls and a bronze scrollbar, alongside dragging and mouse-wheel scrolling. Action buttons stay outside the text viewport. The last line has extra padding. Ashlight's feeding costs use readable hyphens.");
         note(r,Icons.TALENT,"Raised servants","Once their binding expires, all raised undead lose 15% of maximum health, rounded up, each turn. Descriptions show the new rate and exact health loss; decay death still cannot explode or revive them.");

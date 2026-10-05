@@ -1,0 +1,6 @@
+{
+  "tool": "image_gen built-in",
+  "sources": {
+    "items/doubloon.png": "Use case: stylized-concept. Asset type: four painted dark-gothic dungeon inventory icons, production source sheet. Create a square transparent PNG with exactly FOUR isolated cutout objects in a clean evenly spaced 2 by 2 grid, each fully inside its quadrant with generous clear gutters. TOP LEFT: neutral worn antique gold pirate doubloon, thick milled edge, face bearing a simple windrose, battered and weighty. TOP RIGHT: same coin, face embossed with a treasure chest, subtle warm amber glint. BOTTOM LEFT: same coin, face embossed with skull and crossed bones, tarnished crimson glint. BOTTOM RIGHT: a stout folded brown leather harness holding a small golden mimic treasure chest with amber eyes and little teeth, representing a loyal protector. Style: crisp hand-painted realistic materials, restrained painterly edges, grim dungeon fantasy, strong silhouettes and bright focal accents readable when reduced to 64px; original design, no copied game assets. Objects face camera at slight three-quarter view. Gold and leather materials, dark recesses, consistent upper-left illumination. No text, letters, numbers, backgrounds, shadows outside the isolated objects, frames or decorations. Preserve genuine transparent alpha."
+  }
+}

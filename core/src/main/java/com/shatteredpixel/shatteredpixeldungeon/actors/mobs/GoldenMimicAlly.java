@@ -45,7 +45,7 @@ public class GoldenMimicAlly extends DirectableAlly {
         refreshStrength(false);
         if(paralysed>0||rooted)return super.act();
         boolean hostile=false;for(Mob m:Dungeon.level.mobs)if(m.alignment==Alignment.ENEMY&&fieldOfView[m.pos]&&m.invisible==0){hostile=true;break;}
-        if(!hostile && defendingPos<0 && (enemy==null||!enemy.isAlive()||!fieldOfView[enemy.pos])){
+        if(!hostile && BalanceTuning.get(COMPANION_COLLECT)>0 && defendingPos<0 && (enemy==null||!enemy.isAlive()||!fieldOfView[enemy.pos])){
             Heap best=null;int distance=Integer.MAX_VALUE;
             for(Heap heap:Dungeon.level.heaps.valueList())if(heap.type==Heap.Type.HEAP && !heap.hidden && Dungeon.level.heroFOV[heap.pos]
                     && Dungeon.level.distance(Dungeon.hero.pos,heap.pos)<=BalanceTuning.get(COMPANION_COLLECT)
@@ -58,7 +58,7 @@ public class GoldenMimicAlly extends DirectableAlly {
                 boolean[] safe=new boolean[Dungeon.level.length()];
                 for(int i=0;i<safe.length;i++)safe[i]=Dungeon.level.passable[i]&&Dungeon.level.heroFOV[i]&&!Dungeon.level.avoid[i]&&!Dungeon.level.pit[i]&&Dungeon.level.traps.get(i)==null;
                 int step=Dungeon.findStep(this,best.pos,safe,fieldOfView,true);
-                if(step>=0){int old=pos;move(step);if(sprite!=null)sprite.move(old,step);spend(1/speed());return true;}
+                if(step>=0){int old=pos;move(step);spend(1/speed());return sprite==null||moveSprite(old,pos);}
             }
         }
         return super.act();

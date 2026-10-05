@@ -51,6 +51,7 @@
     "items/botanicals-stones.png": "bd98baa6554495c48d5a451e22ae3116edcee9f99f4ba88f44d7043bd1feb9c6",
     "items/class-kit.png": "590b04ac662584c0106a97191921dec36b55d939d11cb785a26a6f3f8a87ff3b",
     "items/crafted-spells.png": "4faf92adb8112089616d03b69ae16260eb34bfa8db06b6b381ad26cb6a8c4ffd",
+    "items/doubloon.png": "1c066c52528e300eb526078c1d3ee8fb2a3c8680d85152122b44b9a1186fe97d",
     "items/food-quest.png": "94c2e1c23acdc6b7ebdd98732bf30527e4f1f1aba9a9c6393f71513f707f0bef",
     "items/hatchling.png": "68c7c99bd2e3d642e9b054e6a15b40cbdd1a98439f9d0dbcd1f0807bb8bbe1c2",
     "items/missiles.png": "fd0b7a31bf6a408fa29bf938cb3e1ffcc13f377d9f497f61eaeca12dc2630d23",
@@ -152,11 +153,11 @@
     "status/status-4.png": "a7710032fa06c593cb665895c2bc916932a9039c7f09d730229ba3c17a1bf104",
     "status/status-5.png": "ba99b2852a983be3406c879a8a338fbeea736e6e7e37c111a36c52f641abf832",
     "tablet-room-props.png": "4b854e8341e84b101e6137f7aa20a0bfe65057faf6fed790d5182fba205675d8",
+    "terrain/bone-wall.png": "f9c88b4fbded22809f82ad41d164f61936afaeb3a0342077423efdeff76d54b4",
     "title-crypt.png": "66fd899845160ef31bce8c3193c8bb126788672e621563d44ca51d3d92dff04d",
     "title-mist.png": "8686123f111541d132b3aec2f81194cb470545da3af65c9487b9252aea159cb0",
     "title-wordmark.png": "9eabb2f05d010aea0edf720a4897ebd7e33e3bcf8c1a4d01270d9ae4cda322a2",
-    "vegetation-states.png": "845fd40c6899b40d19a52fc603342666c5345562fd489714c23ac3f614719e42",
-    "terrain/bone-wall.png": "f9c88b4fbded22809f82ad41d164f61936afaeb3a0342077423efdeff76d54b4"
+    "vegetation-states.png": "845fd40c6899b40d19a52fc603342666c5345562fd489714c23ac3f614719e42"
   },
   "assets": {
     "environment/tiles_sewers.png": {
@@ -393,9 +394,9 @@
     "sprites/items.png": {
       "size": [
         1024,
-        2176
+        2240
       ],
-      "rgba_sha256": "5b535f2c88d59a02b22b4f8a9eb1dddc201650aaf94c651b3458cab3bb1fed32"
+      "rgba_sha256": "9bc75e077dd3864ba2036aa9e8e9f01431efa3aa6d48e97d64d8eb4af04c8bcb"
     },
     "sprites/item_icons.png": {
       "size": [

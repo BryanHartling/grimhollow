@@ -45,13 +45,30 @@ public class Thief extends Mob {
             coinAlerted=true;state=WANDERING;
             if(Dungeon.hero.invisible==0){enemy=Dungeon.hero;target=enemy.pos;state=HUNTING;}
         }
+        if(coinAlerted && alignment==Alignment.ENEMY && item==null && Dungeon.hero.invisible==0
+                && com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.carried()!=null
+                && buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Amok.class)==null
+                && buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Charm.class)==null
+                && (state==WANDERING || state==SLEEPING || state==HUNTING)){
+            enemy=Dungeon.hero;target=enemy.pos;state=HUNTING;
+        }
+    }
+    @Override protected Char chooseEnemy(){
+        if(coinAlerted && alignment==Alignment.ENEMY && Dungeon.hero.invisible==0
+                && com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.carried()!=null
+                && buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Amok.class)==null
+                && buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Charm.class)==null)return Dungeon.hero;
+        return super.chooseEnemy();
     }
     @Override public boolean act(){
         alertForCoin();
         if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon){
+            if(paralysed>0){spend(TICK);return true;}
+            if(fieldOfView==null || fieldOfView.length!=Dungeon.level.length())fieldOfView=new boolean[Dungeon.level.length()];
+            Dungeon.level.updateFieldOfView(this,fieldOfView);
             int exit=Dungeon.level.exit();
             if(pos==exit){GLog.n(Messages.get(Thief.class,"escapes",item.name()));item=null;state=WANDERING;}
-            else {if(exit>=0)getCloser(exit);spend(1/speed());return true;}
+            else {int old=pos;boolean moved=exit>=0&&getCloser(exit);spend(1/speed());return !moved||sprite==null||moveSprite(old,pos);}
         }
         return super.act();
     }

@@ -14,6 +14,11 @@ public final class DoubloonScenario {
         com.watabou.utils.Random.popGenerator();
         check(premium>4900&&premium<5300&&artifacts>1700&&artifacts<2100,"double shop rarity distribution");
         c.cursed=true;check(FickleDoubloon.active()==null,"curse suppresses economic bonuses");c.cursed=false;
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Thief alerted=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Thief();
+        Dungeon.hero.invisible=1;alerted.alertForCoin();check(alerted.state==alerted.WANDERING,"invisible bearer wakes thieves without a location");
+        Dungeon.hero.invisible=0;alerted.alertForCoin();
+        java.lang.reflect.Field target=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob.class.getDeclaredField("target");target.setAccessible(true);
+        check(alerted.state==alerted.HUNTING&&target.getInt(alerted)==Dungeon.hero.pos,"coin pursuers resume after invisibility");
         java.lang.reflect.Method steal=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Thief.class.getDeclaredMethod("steal",com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero.class);steal.setAccessible(true);
         BalanceTuning.set(BalanceTuning.Key.COIN_THEFT_RESIST,100);
         check(!(Boolean)steal.invoke(new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Thief(),Dungeon.hero),"equipped resistance");
@@ -31,18 +36,40 @@ public final class DoubloonScenario {
             if(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.plannedDepth(seed,region,k,10)>=0)boost++;
         }
         check(boost>normal+1200&&boost<normal+1800,"cache regional percentage-point boost");
+        com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.reset();
+        Dungeon.depth=2;
+        com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.addRooms(new java.util.ArrayList<>());
+        Bundle plan=new Bundle();com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.storeRun(plan);
+        Dungeon.hero.belongings.artifact=null;
+        com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.addRooms(new java.util.ArrayList<>());
+        Bundle unchanged=new Bundle();com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.storeRun(unchanged);
+        check(java.util.Arrays.equals(plan.getIntArray("elemental_coin_plans"),unchanged.getIntArray("elemental_coin_plans")),"removing coin cannot reroll region plans");
+        com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.restoreRun(plan);
+        for(com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.Kind k:com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.Kind.values()){
+            com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache cache=new com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache();cache.kind=k;Dungeon.level.elementalCaches.add(cache);
+        }
+        com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.record(Dungeon.level);
+        java.util.ArrayList<com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room> rooms=new java.util.ArrayList<>();
+        for(int floor=2;floor<25;floor++){Dungeon.depth=floor;com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.addRooms(rooms);}
+        check(rooms.isEmpty(),"encountered caches never repeat even with bonus");Dungeon.level.elementalCaches.clear();Dungeon.hero.belongings.artifact=c;
     }
     public static void check(boolean ok,String text){if(!ok)throw new AssertionError("Doubloon: "+text);}
     public static void run() throws Exception {
         BalanceTuning.reset();Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();
         Dungeon.hero.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
         FickleDoubloon c=new FickleDoubloon();Dungeon.hero.belongings.artifact=c;Dungeon.hero.belongings.misc=null;
+        check(c.name().equals("Fickle Doubloon")&&!c.info().contains(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.NO_TEXT_FOUND),"localized item name and description");
         c.identify();c.playtestLevel(0);
+        check(c.charges()==1&&c.flips()==0,"level-zero playtest editing");
+        check(c.image==com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.FICKLE_HEADS&&!FickleDoubloon.luckRunning(Dungeon.hero),"initial face grants no active luck");
         check(c.flip(Dungeon.hero)&&c.flips()==1&&c.charges()==0,"flip cost and experience");
         check(!c.flip(Dungeon.hero)&&!c.doUnequip(Dungeon.hero,true,false),"active wager lock");
         FickleDoubloon.Luck luck=Dungeon.hero.buff(FickleDoubloon.Luck.class);
         check(luck.use()&&!luck.use(),"level-zero single roll");luck.detach();
-        c.cursed=true;c.playtestRecharge();check(c.flip(Dungeon.hero)&&!Dungeon.hero.buff(FickleDoubloon.Luck.class).favor,"Black Spot is rigged");
+        luck=Buff.affect(Dungeon.hero,FickleDoubloon.Luck.class);luck.start(true,2,false);
+        Bundle clock=new Bundle();luck.storeInBundle(clock);float expiry=clock.getFloat("expires");luck.fixTime(1);
+        Bundle adjusted=new Bundle();luck.storeInBundle(adjusted);check(adjusted.getFloat("expires")==expiry-1,"saved actor-clock normalization preserves luck expiry");luck.detach();
+        c.cursed=true;c.playtestRecharge();check(c.flip(Dungeon.hero)&&!Dungeon.hero.buff(FickleDoubloon.Luck.class).favor&&c.image==com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.FICKLE_TAILS,"Black Spot is rigged and displays Tails");
         Buff.detach(Dungeon.hero,FickleDoubloon.Luck.class);c.cursed=false;
         for(int i=c.flips();i<66;i++){c.playtestRecharge();check(c.flip(Dungeon.hero),"flip sequence");Buff.detach(Dungeon.hero,FickleDoubloon.Luck.class);}
         check(c.level()==10&&c.flips()==66,"cumulative flip curve");
@@ -72,6 +99,13 @@ public final class DoubloonScenario {
         check(harness!=null&&Dungeon.hero.belongings.artifact==null&&com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.carried()==null,"sacrifices without artifact-slot loss");
         check(Math.abs(harness.inheritedGold-.3f)<.001&&Math.abs(harness.inheritedQuality-.05f)<.001,"inherited snapshot not duplicated");
         com.shatteredpixel.shatteredpixeldungeon.actors.mobs.GoldenMimicAlly ally=harness.ally();check(ally!=null&&ally.isDirectableAlly(),"protector commands");
+        check(harness.name().equals("Golden Mimic Companion")&&harness.info().contains("Doubloon and hatchling are gone")&&!ally.description().contains(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.NO_TEXT_FOUND),"localized companion item and creature");
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:new java.util.ArrayList<>(Dungeon.level.mobs))if(m!=ally){m.destroy();}
+        com.shatteredpixel.shatteredpixeldungeon.levels.Level.set(ally.pos,com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.EMPTY);
+        Dungeon.level.heroFOV[ally.pos]=true;
+        com.shatteredpixel.shatteredpixeldungeon.items.Heap heap=Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.Gold(100),ally.pos);
+        com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing kept=new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing();heap.drop(kept);heap.type=com.shatteredpixel.shatteredpixeldungeon.items.Heap.Type.HEAP;
+        int collected=Dungeon.gold;ally.act();check(Dungeon.gold==collected+130&&heap.items.contains(kept)&&heap.items.stream().noneMatch(i->i instanceof com.shatteredpixel.shatteredpixeldungeon.items.Gold),"guardian gathers visible loose gold and preserves other loot");
         BalanceTuning.set(BalanceTuning.Key.COMPANION_STEAL,100);
         com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat rat=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();
         int gold=Dungeon.gold;check(ally.pilfer(rat)&&!ally.pilfer(rat)&&Dungeon.gold>gold,"one stealing success per enemy");
@@ -95,6 +129,9 @@ public final class DoubloonScenario {
         for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)if(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic&&((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic)m).forfeitedCoin!=null)hostile=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic)m;
         check(hostile!=null&&hostile.forfeitedCoin==c&&c.level()==10&&c.charges()==0&&FickleDoubloon.luckRunning(Dungeon.hero),"Tails stake, preserved levels, zero charges and waning fortune");
         hostile.rollToDropLoot();check(hostile.forfeitedCoin==null&&Dungeon.level.heaps.get(hostile.pos).items.contains(c),"kill before escape recovers coin");
+        hostile.forfeitedCoin=c;hostile.HP=hostile.HT/2;hostile.pos=Dungeon.level.exit();
+        java.lang.reflect.Method act=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic.class.getDeclaredMethod("act");act.setAccessible(true);act.invoke(hostile);
+        check(hostile.forfeitedCoin==null&&!Dungeon.level.mobs.contains(hostile),"escape permanently removes coin carrier");
         System.out.println("PASS Doubloon companion: sacrifices, inherited fortune, pilfer cap, recovery, persistence, rigged transformation, coin recovery");
     }
 }

@@ -512,6 +512,7 @@ public class Dungeon {
 		level.addRespawner();
 		
 		for(Mob m : level.mobs){
+			if(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Thief)((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Thief)m).alertForCoin();
 			if (m.pos == hero.pos && !Char.hasProp(m, Char.Property.IMMOVABLE)){
 				//displace mob
 				for(int i : PathFinder.NEIGHBOURS8){

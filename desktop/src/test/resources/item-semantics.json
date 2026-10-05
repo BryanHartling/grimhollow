@@ -2697,6 +2697,24 @@
       "artIndex": 541,
       "cellSize": 64,
       "rgbaSha256": "8b5e05d7663d765955e6a7e8db860ee442a3c7316c19c862899c42d89b762513"
+    },
+    "FICKLE_HEADS": {
+      "id": 542,
+      "artIndex": 542,
+      "cellSize": 64,
+      "rgbaSha256": "277828728f7d9e08f12a51793a58a9a2798a6390341aa5ccd60a1f2669b43d06"
+    },
+    "FICKLE_TAILS": {
+      "id": 543,
+      "artIndex": 543,
+      "cellSize": 64,
+      "rgbaSha256": "e217a0ebca6618af10480fe2d2a83fc07e6395e5faf7af64f33720192aed3c59"
+    },
+    "GOLDEN_COMPANION": {
+      "id": 544,
+      "artIndex": 544,
+      "cellSize": 64,
+      "rgbaSha256": "7990f51de43997643aa0c5fbb3d64ed4e179b6bdf1b5ed35dbc2bfd6d6a40240"
     }
   },
   "icons": {

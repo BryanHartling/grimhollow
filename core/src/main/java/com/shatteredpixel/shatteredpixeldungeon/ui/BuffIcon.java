@@ -54,6 +54,7 @@ public class BuffIcon extends Image {
 	}
 
 	public void refresh(int icon){
+		texture(large ? Assets.Interfaces.BUFFS_LARGE : Assets.Interfaces.BUFFS_SMALL);
 		texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR,com.badlogic.gdx.graphics.GL20.GL_LINEAR);
 		if (large){
 			if (largeFilm == null) largeFilm = new TextureFilm(texture, LRG_SIZE*4, LRG_SIZE*4);

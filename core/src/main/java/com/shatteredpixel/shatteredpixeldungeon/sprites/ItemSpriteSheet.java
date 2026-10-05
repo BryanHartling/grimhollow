@@ -30,12 +30,13 @@ public class ItemSpriteSheet {
     public static final int HATCHLING_MIMIC=539;
     public static final int EXPEDITION_MAP=540;
     public static final int BLANK_PARCHMENT=541;
+    public static final int FICKLE_HEADS=542, FICKLE_TAILS=543, GOLDEN_COMPANION=544;
     public static final int BONE_ROD=512, PHYLACTERY=513, ARMOR_NECROMANCER=514, RUNED_BATON=515, SIGIL_BRUSH=516, ARMOR_ENCHANTER=517, FOCUS_RING=518, FOCUS_CRYSTAL=519, ARMOR_PSYCHIC=520, RUNE_ETCHING=521;
 
 	public static final int SIZE = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM;
 
 	private static final int TX_WIDTH = 16 * SIZE;
-	private static final int TX_HEIGHT = 34 * SIZE;
+	private static final int TX_HEIGHT = 35 * SIZE;
 
 	private static final int WIDTH = TX_WIDTH / SIZE;
 

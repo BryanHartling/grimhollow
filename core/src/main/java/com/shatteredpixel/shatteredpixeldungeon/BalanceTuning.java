@@ -51,7 +51,9 @@ public final class BalanceTuning {
         public String id() { return name().toLowerCase(Locale.ROOT); }
         public String display(int value) { boolean percentage = this != TIER_SHIFT && (group < 4 || this == EXPEDITION_CHANCE
                     || this == DRAGON_DAMAGE || this == BROOD_DAMAGE || this == EXPEDITION_FALL_DAMAGE
-                    || group==9 && (this==CACHE_CHANCE || this==CACHE_LOOT || name().endsWith("_CHANCE")) || this == HOARD_ARTIFACT || this == HOARD_TRINKET || group==8);
+                    || group==9 && (this==CACHE_CHANCE || this==CACHE_LOOT || name().endsWith("_CHANCE")) || this == HOARD_ARTIFACT || this == HOARD_TRINKET || group==8
+                    || group==10 && this!=COIN_ZERO_EXPIRY && this!=COIN_CHARGE_TURNS && this!=COIN_GOLD_CHARGE && this!=COIN_SHOP_ROLLS
+                    || group==11 && (this==COMPANION_HEALTH || this==COMPANION_DAMAGE || this==COMPANION_STEAL || this==COMPANION_GOLD));
             return value+(percentage?"%":""); }
     }
     private static final EnumMap<Key,Integer> values=new EnumMap<>(Key.class);

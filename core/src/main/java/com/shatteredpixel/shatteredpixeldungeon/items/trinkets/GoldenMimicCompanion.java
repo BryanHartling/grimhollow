@@ -20,7 +20,7 @@ public class GoldenMimicCompanion extends Trinket {
     private int recovery,knockedOutFloor=-1,lastFloor=-1;
     private boolean resting;
     private final HashSet<Integer> charmed=new HashSet<>();
-    {image=ItemSpriteSheet.HATCHLING_MIMIC;level(3);bones=false;}
+    {image=ItemSpriteSheet.GOLDEN_COMPANION;level(3);bones=false;}
     public static GoldenMimicCompanion carried(){return Dungeon.hero==null?null:Dungeon.hero.belongings.getItem(GoldenMimicCompanion.class);}
     @Override protected int upgradeEnergyCost(){return 0;}
     @Override public Item upgrade(){return this;}

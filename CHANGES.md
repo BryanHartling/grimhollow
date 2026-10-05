@@ -1,3 +1,10 @@
+# Key HUD and description controls - v1.23.3
+
+- Move collected keys from the five-unit strip beside the version label to a separate framed HUD row. Use the existing painted item art at nine logical units and an explicit count for each current-floor type; never truncate larger counts. Move the enemy counter down only while the key row is present. Preserve past-floor reminders, main-branch restrictions and journal unread behavior.
+- Add a shared text-description viewport with up/down page controls and a bronze scrollbar for item, creature and talent windows. Touch dragging and the mouse wheel remain available; action buttons remain outside the scissor area. Reserve a gutter and four units below the last glyph to protect the final baseline. Ashlight's repaired feeding text is checked through the runtime item description as well as packaged English strings.
+- Raised Skeleton, Wraith, Ghoul and Revenant decay increases from 5% to 15% of maximum health, rounded up, each turn after binding expires. Update summon and creature descriptions. Save state, binding durations, cap/grace and decay death without explosion/revival remain unchanged.
+- Remove unrelated generated loot beneath the controlled sentry in the existing timing fixture. Its room paint overwrote terrain but retained heaps, causing an occasional renderer-only drop call in the headless run; speed, thaw, sentry and loot gameplay are unchanged.
+
 # Bone walls and Horror playtesting follow-up - v1.23.2
 
 - Wand of Bone and Bone Prison now share four stable painted barricades, packed from a committed transparent source and exact built-in image-generation prompt. Examination names the bone wall and explains blocking, fire immunity and remaining binding turns. No wall duration, collision or gameplay terrain rule changes.

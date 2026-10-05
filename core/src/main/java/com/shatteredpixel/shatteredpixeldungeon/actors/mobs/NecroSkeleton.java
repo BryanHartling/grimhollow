@@ -97,5 +97,5 @@ public class NecroSkeleton extends DirectableAlly {
             spend(TICK);return true;
         }
     }
-    public int decayDamage(){return Math.max(1,(int)Math.ceil(HT*.05));}
+    public int decayDamage(){return Math.max(1,(HT*15+99)/100);}
 }

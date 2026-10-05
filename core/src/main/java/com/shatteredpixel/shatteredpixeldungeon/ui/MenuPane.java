@@ -68,6 +68,7 @@ public class MenuPane extends Component {
 	private NinePatch versionOverflowBG;
 
 	private DangerIndicator danger;
+	private KeyDisplay keys;
 
 	public static final int WIDTH = 31;
 
@@ -146,6 +147,8 @@ public class MenuPane extends Component {
 
 		btnMenu = new MenuButton();
 		add( btnMenu );
+		keys = new KeyDisplay();
+		add(keys);
 
 		danger = new DangerIndicator();
 		add( danger );
@@ -207,7 +210,8 @@ public class MenuPane extends Component {
 			challengeButton.setRect(challengeIcon.x, challengeIcon.y, challengeIcon.width(), challengeIcon.height() + challengeText.height());
 		}
 
-		danger.setPos( x + WIDTH - danger.width(), y + bg.height + 1 );
+		keys.setPos(x+WIDTH-keys.width(),y+bg.height+1);
+		danger.setPos( x + WIDTH - danger.width(), keys.top() + (keys.visible?keys.height()+1:0) );
 		danger.setSize( camera.width - danger.width(), danger.height());
 	}
 
@@ -224,14 +228,15 @@ public class MenuPane extends Component {
 	}
 
 	public void updateKeys(){
+		keys.updateKeys();
 		btnJournal.updateKeyDisplay();
+		layout();
 	}
 
 	private static class JournalButton extends Button {
 
 		private Image bg;
 		private Image journalIcon;
-		private KeyDisplay keyIcon;
         private com.watabou.noosa.ColorBlock unread;
 
 		private Document flashingDoc = null;
@@ -259,8 +264,6 @@ public class MenuPane extends Component {
 			journalIcon = PaintedInterface.image( Assets.Interfaces.MENU_BTN, 31, 0, 11, 6);
 			add( journalIcon );
 
-			keyIcon = new KeyDisplay();
-			add(keyIcon);
             unread = new com.watabou.noosa.ColorBlock(2,2,0xFFFFD477);
             unread.visible=false;add(unread);
 			updateKeyDisplay();
@@ -277,13 +280,7 @@ public class MenuPane extends Component {
 			journalIcon.y = bg.y + (bg.height() - journalIcon.height())/2f;
 			PixelScene.align(journalIcon);
 
-			keyIcon.x = bg.x + 1;
-			keyIcon.y = bg.y - 6;
-			keyIcon.width = bg.width() - 2;
-			keyIcon.height = 5;
-            keyIcon.invalidateLayout();
             unread.x=bg.x+bg.width()-2;unread.y=bg.y+1;
-			PixelScene.align(keyIcon);
 		}
 
 		private float time;
@@ -298,8 +295,6 @@ public class MenuPane extends Component {
 		}
 
 		public void updateKeyDisplay() {
-			keyIcon.updateKeys();
-			keyIcon.visible = keyIcon.keyCount() > 0;
 			journalIcon.visible = true;
 			bg.resetColor();
 		}
@@ -318,7 +313,7 @@ public class MenuPane extends Component {
 		@Override
 		protected void onClick() {
 			time = 0;
-			keyIcon.am = journalIcon.am = 1;
+			journalIcon.am = 1;
 			if (flashingPage != null){
 				if (flashingDoc == Document.ALCHEMY_GUIDE){
 					WndJournal.last_index = 2;

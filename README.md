@@ -1,8 +1,10 @@
 # Grimhollow
 
+**Readable controls v1.23.3:** collected keys have a separate framed HUD row with larger painted icons and counts. Long item, creature and talent descriptions have visible scroll arrows and a bronze scrollbar, with touch dragging/mouse-wheel input and extra final-line padding. Ashlight feeding text uses plain readable hyphens. All four raised servant types decay for **15% of maximum health per turn, rounded up**, after their binding expires.
+
 **Bone wall and Horror v1.23.2:** Wand of Bone/Bone Prison have stable painted barricades and an examination result with remaining turns. The Horror has modestly stronger combat damage and a separate stronger sleeping-prey pounce, with the same damage tuning setting. Its floor omen is a framed six-second notice; the larger ambush warning remains visible until you respond. Detection, response fairness and recovery limits are unchanged. Balance still requires campaign playtesting.
 
-Latest Windows launcher: `desktop/build/windows/1.23.2/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`.
+Latest Windows launcher: `desktop/build/windows/1.23.3/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`.
 
 **Talent panel v1.23.1:** rounded bronze studs replace the blocky gold rank markers. Larger ivory available, bronze spent and hollow future tier markers accompany an explicit available/spent count. Random allocation has a brass shuffle medallion and a larger hit area. Allocation rules, point costs and caps are unchanged.
 
@@ -16,7 +18,7 @@ v1.23.0 refines the playtesting build: hero-level refreshing Necrotic Touch, gra
 
 Windows launcher: `desktop/build/windows/1.23.0/Grimhollow/Grimhollow.exe`; Android: `android/build/outputs/apk/debug/android-debug.apk`. See [acceptance evidence](verification/ACCEPTANCE.md), [known issues](KNOWN_ISSUES.md), [presentation artwork](verification/interface/presentation-polish.png), [identification symbols](verification/interface/identity-emblems.png) and the nine-hero previews under `verification/heroes/`. Physical Samsung tablet and campaign balance review remain with the user.
 
-**Necromancer:** Necrotic Touch deals hero-level damage per turn for one/two turns, refreshed without stacking. Once a servant's binding expires it loses 5% of maximum health, rounded up, each turn; it does not explode or revive on decay death. Phylactery actions and summon options have information buttons, and the hero handbook explains Wither and the servants. Curse-dependent talents explicitly refer to Phylactery curses rather than arbitrary debuffs.
+**Necromancer:** Necrotic Touch deals hero-level damage per turn for one/two turns, refreshed without stacking. Once a servant's binding expires it loses 15% of maximum health, rounded up, each turn; it does not explode or revive on decay death. Phylactery actions and summon options have information buttons, and the hero handbook explains Wither and the servants. Curse-dependent talents explicitly refer to Phylactery curses rather than arbitrary debuffs.
 
 **Haste/red sentry:** no rule change. The generated-room regression passes all four approach directions with no hasted shots and retains normal-speed danger. This does not reproduce the reported campaign encounter; Haste remains speed, not immunity, and slowed movement, searching and other actions can still allow the sentry to finish charging.
 

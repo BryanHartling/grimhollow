@@ -556,7 +556,11 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShaftParticle.FACTORY,.15f);
             com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite.show(Dungeon.hero,com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite.FOOD);
         }else if(frames==385){capture("polish-stairs-meal-motes");}
-        else if(frames==410){notificationReview();}
+        else if(frames==390){
+            if(descriptionReviewFrames==0)longItemInputReview();
+            if(!descriptionReviewTick()){frames--;return;}
+        }
+        else if(frames==410){closeReviewWindows();notificationReview();}
         else if(frames==418){capture("polish-painted-notifications");}
         else if(frames==440){targetPortraitReview();}
         else if(frames==460){
@@ -619,12 +623,17 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             pane.update();Object button=RecoveryChecks.field(menu,"btnJournal");
             Image book=(Image)RecoveryChecks.field(button,"journalIcon");
             if(!book.visible||book.am!=1||!((com.watabou.noosa.Gizmo)RecoveryChecks.field(button,"unread")).visible)throw new AssertionError("Unread journal must keep book opaque beside keys");
+            hudKeysReview(pane);
+            com.shatteredpixel.shatteredpixeldungeon.items.keys.GoldenKey gold=new com.shatteredpixel.shatteredpixeldungeon.items.keys.GoldenKey(Dungeon.depth);gold.quantity(3);
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(gold);
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(new com.shatteredpixel.shatteredpixeldungeon.items.keys.CrystalKey(Dungeon.depth));
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(new com.shatteredpixel.shatteredpixeldungeon.items.keys.WornKey(Dungeon.depth));pane.updateKeys();
             pointerGestureReview((com.watabou.noosa.Gizmo)RecoveryChecks.field(menu,"btnJournal"),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
             closeReviewWindows();
             if(((com.watabou.noosa.Gizmo)RecoveryChecks.field(button,"unread")).visible)throw new AssertionError("Journal acknowledgement did not clear unread badge");
             pointerGestureReview((com.watabou.noosa.Gizmo)RecoveryChecks.field(menu,"btnJournal"),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
         }else if(frames==630){
-            interfaceBounds();capture("journal-notes");closeReviewWindows();
+            interfaceBounds();capture("journal-notes");capture("collected-key-hud");closeReviewWindows();
             journalNoteReview(com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark.CHASM_FLOOR);
         }else if(frames==640){
             interfaceBounds();capture("journal-note-chasm");closeReviewWindows();
@@ -1928,6 +1937,111 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.Window)
                 ((com.shatteredpixel.shatteredpixeldungeon.ui.Window)child).hide();
     }
+    private void longItemInputReview() {
+        closeReviewWindows();
+        com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Quarterstaff staff=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Quarterstaff();
+        staff.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Vorpal());staff.identify();
+        com.shatteredpixel.shatteredpixeldungeon.items.Item[] items={staff,new com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern().identify(),new com.shatteredpixel.shatteredpixeldungeon.items.Phylactery().identify()};
+        int overflow=0,oldStrength=Dungeon.hero.STR;float time=Dungeon.hero.cooldown();
+        Dungeon.hero.STR=2;
+        try {
+            for(com.shatteredpixel.shatteredpixeldungeon.items.Item item:items){
+                Dungeon.hero.belongings.backpack.items.add(item);
+                com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem wnd=new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,item);GameScene.show(wnd);
+                wnd.offset(Boolean.getBoolean("grimhollow.interfacePortrait")?0:-12,3);wnd.boundOffsetWithMargin(3);
+                interfaceBounds();
+                com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(wnd,"description");
+                // Exercise a compact viewport as well as the naturally long artifact text.
+                pane.setSize(pane.width(),Math.min(60,Math.max(20,pane.content().height()-20)));
+                if(pane.content().height()>pane.height()+1){
+                    overflow++;
+                    pointerGestureReview(pane,com.watabou.input.PointerEvent.NONE,-60);
+                    if(pane.content().camera.scroll.y<=0)throw new AssertionError("Item touch scroll did not move: "+item.name());
+                    pane.scrollTo(0,0);
+                    com.watabou.utils.Point at=pane.camera().cameraToScreen(pane.centerX(),pane.centerY());
+                    com.watabou.input.ScrollEvent.addScrollEvent(new com.watabou.input.ScrollEvent(new com.watabou.utils.PointF(at.x,at.y),100));
+                    com.watabou.input.ScrollEvent.processScrollEvents();
+                    if(Math.abs(pane.content().camera.scroll.y-(pane.content().height()-pane.height()))>.1f)throw new AssertionError("Item mouse wheel cannot reach last line: "+item.name());
+                    pane.scrollTo(0,0);pane.update();
+                    com.shatteredpixel.shatteredpixeldungeon.ui.IconButton down=(com.shatteredpixel.shatteredpixeldungeon.ui.IconButton)RecoveryChecks.field(pane,"down");
+                    for(int clicks=0;down.active&&clicks<30;clicks++)pointerGestureReview(down,com.watabou.input.PointerEvent.NONE,0);
+                    if(down.active||Math.abs(pane.content().camera.scroll.y-(pane.content().height()-pane.height()))>.1f)throw new AssertionError("Description down control did not reach end");
+                    com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock text=(com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock)RecoveryChecks.members(pane.content()).get(0);
+                    com.watabou.noosa.RenderedText last=null;
+                    for(com.watabou.noosa.Gizmo word:RecoveryChecks.members(text))if(word instanceof com.watabou.noosa.RenderedText)last=(com.watabou.noosa.RenderedText)word;
+                    if(last==null||last.camera()!=pane.content().camera||last.y+last.height()>pane.content().camera.scroll.y+pane.height()-.9f)throw new AssertionError("Description final glyph is clipped or uses stale camera");
+                }
+                for(com.watabou.noosa.Gizmo g:RecoveryChecks.members(wnd))if(g instanceof com.shatteredpixel.shatteredpixeldungeon.ui.RedButton){
+                    com.shatteredpixel.shatteredpixeldungeon.ui.RedButton button=(com.shatteredpixel.shatteredpixeldungeon.ui.RedButton)g;
+                    if(button.top()<pane.bottom()||button.bottom()>wnd.camera().height)throw new AssertionError("Item action clipped/overlapped by description");
+                }
+                if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern){
+                    String text=item.info();
+                    if(!text.contains("Levels 1-6 cost one each; levels 7-10 cost two each.")||text.contains("\u00e2")||text.contains("%1$"))throw new AssertionError("Lantern feeding text regression");
+                }
+                wnd.hide();Dungeon.hero.belongings.backpack.items.remove(item);
+            }
+            if(overflow!=items.length)throw new AssertionError("Long-item fixture did not exercise every compact viewport: "+overflow);
+            if(Dungeon.hero.cooldown()!=time)throw new AssertionError("Reading item description spent a turn");
+        } finally {Dungeon.hero.STR=oldStrength;}
+        System.out.println("LONG ITEM INPUT PASS: Vorpal Quarterstaff, Ashlight and Phylactery; real touch drag and mouse wheel to last line; action/footer bounds; Lantern text; failures=0");
+    }
+
+    private int descriptionReviewFrames;
+    private com.shatteredpixel.shatteredpixeldungeon.items.Item descriptionItem;
+    private com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem descriptionWindow;
+    private boolean descriptionReviewTick(){
+        int tick=descriptionReviewFrames++,kind=tick/24,phase=tick%24;
+        if(kind>=3)return true;
+        String name=kind==0?"vorpal":kind==1?"ashlight":"phylactery";
+        if(phase==0){
+            descriptionItem=kind==0?new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Quarterstaff():kind==1?new com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern():new com.shatteredpixel.shatteredpixeldungeon.items.Phylactery();
+            if(kind==0)((com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Quarterstaff)descriptionItem).enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Vorpal());
+            descriptionItem.identify();Dungeon.hero.belongings.backpack.items.add(descriptionItem);
+            descriptionWindow=new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,descriptionItem);GameScene.show(descriptionWindow);
+        } else if(phase==8){interfaceBounds();capture(name+"-description-top");}
+        else if(phase==9){
+            com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(descriptionWindow,"description");
+            com.watabou.utils.Point at=pane.camera().cameraToScreen(pane.centerX(),pane.centerY());
+            com.watabou.input.ScrollEvent.addScrollEvent(new com.watabou.input.ScrollEvent(new com.watabou.utils.PointF(at.x,at.y),100));com.watabou.input.ScrollEvent.processScrollEvents();
+        }else if(phase==16){interfaceBounds();capture(name+"-description-bottom");}
+        else if(phase==23){descriptionWindow.hide();Dungeon.hero.belongings.backpack.items.remove(descriptionItem);}
+        return false;
+    }
+
+    private void hudKeysReview(com.shatteredpixel.shatteredpixeldungeon.ui.MenuPane menu){
+        com.watabou.utils.Bundle saved=new com.watabou.utils.Bundle();com.shatteredpixel.shatteredpixeldungeon.journal.Notes.storeInBundle(saved);
+        int depth=Dungeon.depth,branch=Dungeon.branch;
+        try {
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.reset();
+            com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey iron=new com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey(depth);
+            iron.quantity(2);iron.doPickUp(Dungeon.hero,Dungeon.hero.pos);
+            com.shatteredpixel.shatteredpixeldungeon.items.keys.GoldenKey gold=new com.shatteredpixel.shatteredpixeldungeon.items.keys.GoldenKey(depth);gold.quantity(3);
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(gold);
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(new com.shatteredpixel.shatteredpixeldungeon.items.keys.CrystalKey(depth));
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(new com.shatteredpixel.shatteredpixeldungeon.items.keys.WornKey(depth));
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(new com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey(depth-1));
+            menu.updateKeys();
+            com.shatteredpixel.shatteredpixeldungeon.ui.KeyDisplay keys=(com.shatteredpixel.shatteredpixeldungeon.ui.KeyDisplay)RecoveryChecks.field(menu,"keys");
+            java.util.List<?> icons=(java.util.List<?>)RecoveryChecks.field(keys,"icons");
+            if(keys.keyCount()!=8||icons.size()!=5||!keys.visible||keys.left()<0||keys.right()>keys.camera().width)throw new AssertionError("HUD key count/types/bounds");
+            com.watabou.noosa.Visual bg=(com.watabou.noosa.Visual)RecoveryChecks.field(menu,"bg");
+            if(keys.top()<bg.y+bg.height())throw new AssertionError("Keys overlap version/menu row");
+            for(Object object:icons){Image icon=(Image)object;if(Math.max(icon.width(),icon.height())<8||icon.y<keys.top()||icon.y+icon.height()>keys.bottom())throw new AssertionError("Key glyph too small/clipped");}
+            com.watabou.noosa.ui.Component danger=(com.watabou.noosa.ui.Component)RecoveryChecks.field(menu,"danger");
+            if(danger.top()<keys.bottom())throw new AssertionError("Enemy counter overlaps keys");
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.remove(new com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey(depth));menu.updateKeys();
+            if(keys.keyCount()!=7)throw new AssertionError("HUD key consumption did not update");
+            com.watabou.utils.Bundle reload=new com.watabou.utils.Bundle();com.shatteredpixel.shatteredpixeldungeon.journal.Notes.storeInBundle(reload);
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.reset();com.shatteredpixel.shatteredpixeldungeon.journal.Notes.restoreFromBundle(reload);menu.updateKeys();
+            if(keys.keyCount()!=7)throw new AssertionError("HUD key reload lost counts");
+            Dungeon.depth++;menu.updateKeys();if(keys.keyCount()!=1)throw new AssertionError("Past-floor keys must collapse to one reminder");
+            Dungeon.depth=depth;Dungeon.branch=1;menu.updateKeys();if(keys.keyCount()!=1)throw new AssertionError("Main-floor keys shown as usable inside branch");
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.reset();menu.updateKeys();if(keys.visible)throw new AssertionError("Empty key row remains visible");
+        } finally {Dungeon.depth=depth;Dungeon.branch=branch;com.shatteredpixel.shatteredpixeldungeon.journal.Notes.restoreFromBundle(saved);menu.updateKeys();}
+        System.out.println("HUD KEYS PASS: actual pickup, all four key types/counts, separate row, consumption, save/load, floor/branch rules and empty state; failures=0");
+    }
+
     private void scrollReview(Group group) {
         for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(group)) {
             if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)
@@ -2560,9 +2674,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         try{
             com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(new com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey(Dungeon.depth));
             com.shatteredpixel.shatteredpixeldungeon.journal.Notes.add(new com.shatteredpixel.shatteredpixeldungeon.items.keys.GoldenKey(Dungeon.depth));
-            strip.updateKeys();int count=strip.keyCount();strip.x=16;strip.y=8;strip.width=11;strip.height=5;strip.camera=camera;
+            strip.updateKeys();int count=strip.keyCount();strip.camera=camera;strip.setPos(16,8);
             for(int pass=0;pass<3;pass++){
-                if(pass==1){strip.width=24;strip.height=8;}strip.invalidateLayout();
+                if(pass==1)strip.setPos(24,14);strip.invalidateLayout();
                 buffer.begin();Gdx.gl.glDisable(com.badlogic.gdx.graphics.GL20.GL_SCISSOR_TEST);Gdx.gl.glClearColor(0,0,0,0);Gdx.gl.glClear(com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT);com.watabou.glwrap.Texture.clear();com.watabou.noosa.NoosaScript.get().resetCamera();strip.draw();
                 Pixmap drawn=Pixmap.createFromFrameBuffer(0,0,256,256);buffer.end();int visible=0;for(int y=0;y<256;y++)for(int x=0;x<256;x++)if((drawn.getPixel(x,y)&255)>80)visible++;
                 if(visible==0||strip.keyCount()!=count)failures.add("25 keys disappear or mutate on layout pass "+pass);drawn.dispose();

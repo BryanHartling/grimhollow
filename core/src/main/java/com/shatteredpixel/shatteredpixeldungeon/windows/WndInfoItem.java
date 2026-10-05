@@ -27,6 +27,7 @@ import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 import com.shatteredpixel.shatteredpixeldungeon.ui.ItemSlot;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock;
 import com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane;
+import com.shatteredpixel.shatteredpixeldungeon.ui.DescriptionPane;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Window;
 
 public class WndInfoItem extends Window {
@@ -108,14 +109,14 @@ public class WndInfoItem extends Window {
 	private void layoutFields(IconTitle title, RenderedTextBlock info){
 		int width = WIDTH_MIN;
 
-		info.maxWidth(width);
+		info.maxWidth(width-12);
 
 		//window can go out of the screen on landscape, so widen it as appropriate
 		while (PixelScene.landscape()
 				&& info.height() > 100
 				&& width < WIDTH_MAX){
 			width += 20;
-			info.maxWidth(width);
+			info.maxWidth(width-12);
 		}
 
 		//leaves some space to add the journal button in WndUseItem. This is messy I know.
@@ -127,8 +128,8 @@ public class WndInfoItem extends Window {
 		add( title );
 
 		descriptionTop=title.bottom()+GAP;
-		descriptionHeight=info.height();
-		description=new ScrollPane(info);
+		description=new DescriptionPane(info,width);
+		descriptionHeight=description.content().height();
 		add(description);
 		resize(width,0);
 		reserveFooter(0);

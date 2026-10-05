@@ -1,230 +1,65 @@
-/*
- * Pixel Dungeon
- * Copyright (C) 2012-2015 Oleg Dolya
- *
- * Shattered Pixel Dungeon
- * Copyright (C) 2014-2026 Evan Debenham
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>
- */
-
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Derived from the Pixel Dungeon / Shattered Pixel Dungeon key display.
+// Copyright (C) 2012-2015 Oleg Dolya; Copyright (C) 2014-2026 Evan Debenham.
 package com.shatteredpixel.shatteredpixeldungeon.ui;
 
-import com.shatteredpixel.shatteredpixeldungeon.Assets;
+import com.shatteredpixel.shatteredpixeldungeon.Chrome;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
-import com.shatteredpixel.shatteredpixeldungeon.items.keys.CrystalKey;
-import com.shatteredpixel.shatteredpixeldungeon.items.keys.GoldenKey;
-import com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey;
-import com.shatteredpixel.shatteredpixeldungeon.items.keys.Key;
-import com.shatteredpixel.shatteredpixeldungeon.items.keys.WornKey;
+import com.shatteredpixel.shatteredpixeldungeon.items.keys.*;
 import com.shatteredpixel.shatteredpixeldungeon.journal.Notes;
-import com.watabou.gltextures.SmartTexture;
-import com.watabou.gltextures.TextureCache;
-import com.watabou.glwrap.Quad;
-import com.watabou.glwrap.Vertexbuffer;
-import com.watabou.noosa.NoosaScript;
-import com.watabou.noosa.Visual;
-import com.watabou.utils.RectF;
+import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.NinePatch;
+import com.watabou.noosa.ui.Component;
+import java.util.ArrayList;
 
-import java.nio.Buffer;
-import java.nio.FloatBuffer;
-import java.util.LinkedHashMap;
+/** Collected keys on this floor, grouped without discarding larger counts. */
+public class KeyDisplay extends Component {
+    private static final Class<?>[] TYPES={WornKey.class,CrystalKey.class,GoldenKey.class,IronKey.class};
+    private static final int[] IMAGES={ItemSpriteSheet.WORN_KEY,ItemSpriteSheet.CRYSTAL_KEY,ItemSpriteSheet.GOLDEN_KEY,ItemSpriteSheet.IRON_KEY};
+    private final ArrayList<Image> icons=new ArrayList<>();
+    private final ArrayList<RenderedTextBlock> labels=new ArrayList<>();
+    private NinePatch bg;
+    private int totalKeys;
 
-public class KeyDisplay extends Visual {
-	
-	private float[] vertices = new float[16];
-	private FloatBuffer quads;
-	private Vertexbuffer buffer;
-	
-	private SmartTexture tx = TextureCache.get(Assets.Interfaces.MENU_BTN);
-	
-	private boolean dirty = true;
-	private int[] keys;
-	
-	//mapping of key types to slots in the array, 0 is reserved for black (missed) keys
-	//this also determines the order these keys will appear (lower first)
-	//and the order they will be truncated if there is no space (higher first, larger counts first)
-	private static final LinkedHashMap<Class<? extends Key>, Integer> keyMap = new LinkedHashMap<>();
-	static {
-		keyMap.put(WornKey.class, 1);
-		keyMap.put(CrystalKey.class, 2);
-		keyMap.put(GoldenKey.class, 3);
-		keyMap.put(IronKey.class, 4);
-	}
-	
-	private int totalKeys = 0;
-    private int displayedKeys;
+    public KeyDisplay(){updateKeys();}
+    @Override protected void createChildren(){bg=Chrome.get(Chrome.Type.GREY_BUTTON);add(bg);}
+    public int keyCount(){return totalKeys;}
+    public void invalidateLayout(){layout();}
 
-    public void invalidateLayout(){dirty=true;}
-	
-	public KeyDisplay() {
-		super(0, 0, 0, 0);
-	}
-	
-	public void updateKeys(){
-		keys = new int[keyMap.size()+1];
-		
-		for (Notes.KeyRecord rec : Notes.getRecords(Notes.KeyRecord.class)){
-			if (rec.depth() < Dungeon.depth){
-				//only ever 1 black key
-				keys[0] = 1;
-			} else if (rec.depth() == Dungeon.depth && Dungeon.branch == 0){
-				keys[keyMap.get(rec.type())] += rec.quantity();
-			}
-		}
-		
-		totalKeys = 0;
-		for (int k : keys){
-			totalKeys += k;
-		}
-		dirty = true;
-	}
-	
-	public int keyCount(){
-		return totalKeys;
-	}
-	
-	@Override
-	public void draw() {
-		super.draw();
-		if (dirty){
-			
-			updateVertices();
-
-			((Buffer)quads).limit(quads.position());
-			if (buffer == null)
-				buffer = new Vertexbuffer(quads);
-			else
-				buffer.updateVertices(quads);
-			
-		}
-		
-		NoosaScript script = NoosaScript.get();
-		
-		tx.bind();
-		
-		script.camera( camera() );
-		
-		script.uModel.valueM4( matrix );
-		script.lighting(
-				rm, gm, bm, am,
-				ra, ga, ba, aa );
-		if(displayedKeys>0)script.drawQuadSet( buffer, displayedKeys, 0 );
-	}
-	
-	private void updateVertices(){
-		//assumes shorter key sprite
-		int maxRows = Math.max(0,(int)(height +1) / 5);
-		
-		//1 pixel of padding between each key
-		int maxPerRow = Math.max(1,(int)(width + 1) / 4);
-		
-		int maxKeys = maxPerRow * maxRows;
-		
-		
-        int[] remaining=keys==null?new int[keyMap.size()+1]:keys.clone();
-        displayedKeys=totalKeys;
-		while (displayedKeys > maxKeys){
-			Class<? extends Key> mostType = null;
-			int mostNum = 0;
-			for (Class<?extends Key> k : keyMap.keySet()){
-				if (remaining[keyMap.get(k)] >= mostNum){
-					mostType = k;
-					mostNum = remaining[keyMap.get(k)];
-				}
-			}
-            if(mostNum==0){remaining[0]=0;displayedKeys--;continue;}
-			remaining[keyMap.get(mostType)]--;
-			displayedKeys--;
-		}
-		
-		int rows = (int)Math.ceil(displayedKeys / (float)maxPerRow);
-		
-		boolean shortKeys = (rows * 8) > height;
-		float left;
-		if (displayedKeys > maxPerRow){
-			left = 0;
-		} else {
-			left = (width + 1 - (displayedKeys*4))/2;
-		}
-		float top = (height + 1 - (rows * (shortKeys ? 5 : 8)))/2;
-		quads = Quad.createSet(displayedKeys);
-		for (int i = 0; i < displayedKeys; i++){
-			int keyIdx = 0;
-			
-			if (i == 0 && remaining[0] > 0){
-				//black key
-				keyIdx = 0;
-				
-			} else {
-				for (int j = 1; j < keys.length; j++){
-					if (remaining[j] > 0){
-						remaining[j]--;
-						keyIdx = j;
-						break;
-					}
-				}
-			}
-			
-			//texture coordinates
-			RectF r = tx.uvRect((43 + 3*keyIdx)*4, (shortKeys ? 8 : 0)*4,
-					(46 + 3*keyIdx)*4, (shortKeys ? 12 : 7)*4);
-			
-			vertices[2] = r.left;
-			vertices[3] = r.top;
-			
-			vertices[6] = r.right;
-			vertices[7] = r.top;
-			
-			vertices[10] = r.right;
-			vertices[11] = r.bottom;
-			
-			vertices[14] = r.left;
-			vertices[15] = r.bottom;
-			
-			//screen coordinates
-			vertices[0] = left;
-			vertices[1] = top;
-			
-			vertices[4] = left + 3;
-			vertices[5] = top;
-			
-			vertices[8] = left + 3;
-			vertices[9] = top + (shortKeys ? 4 : 7);
-			
-			vertices[12] = left;
-			vertices[13] = top + (shortKeys ? 4 : 7);
-			
-			quads.put(vertices);
-			
-			//move to the right for more keys, drop down if the row is done
-			left += 4;
-			if (left + 3 > width){
-				left = 0;
-				top += (shortKeys ? 5 : 8);
-			}
-		}
-		
-		dirty = false;
-		
-	}
-
-	@Override
-	public void destroy() {
-		super.destroy();
-		if (buffer != null)
-			buffer.delete();
-	}
-	
+    public void updateKeys(){
+        for(Image icon:icons){remove(icon);icon.destroy();}icons.clear();
+        for(RenderedTextBlock label:labels){remove(label);label.destroy();}labels.clear();
+        int[] counts=new int[TYPES.length];boolean missed=false;
+        for(Notes.KeyRecord rec:Notes.getRecords(Notes.KeyRecord.class)){
+            if(rec.depth()<Dungeon.depth)missed=true;
+            else if(rec.depth()==Dungeon.depth&&Dungeon.branch==0)
+                for(int i=0;i<TYPES.length;i++)if(rec.type()==TYPES[i])counts[i]+=rec.quantity();
+        }
+        totalKeys=missed?1:0;
+        if(missed)addKey(ItemSpriteSheet.IRON_KEY,"?",true);
+        for(int i=0;i<counts.length;i++)if(counts[i]>0){totalKeys+=counts[i];addKey(IMAGES[i],Integer.toString(counts[i]),false);}
+        visible=totalKeys>0;height=12;width=4;
+        for(int i=0;i<icons.size();i++)width+=9+labels.get(i).width()+3;
+        layout();
+    }
+    private void addKey(int image,String count,boolean missed){
+        ItemSprite icon=new ItemSprite(image);float scale=9/Math.max(icon.width(),icon.height());icon.scale.scale(scale);
+        if(missed)icon.hardlight(0x82786D);
+        icons.add(icon);add(icon);
+        RenderedTextBlock label=PixelScene.renderTextBlock(count,6);label.hardlight(missed?0xB8AA96:0xFFF0CB);
+        labels.add(label);add(label);
+    }
+    @Override protected void layout(){
+        bg.x=x;bg.y=y;bg.size(width,height);
+        float left=x+2;
+        for(int i=0;i<icons.size();i++){
+            Image icon=icons.get(i);RenderedTextBlock label=labels.get(i);
+            icon.x=left+(9-icon.width())/2;icon.y=y+(height-icon.height())/2;PixelScene.align(icon);
+            label.setPos(left+10,y+(height-label.height())/2);PixelScene.align(label);
+            left+=9+label.width()+3;
+        }
+    }
 }

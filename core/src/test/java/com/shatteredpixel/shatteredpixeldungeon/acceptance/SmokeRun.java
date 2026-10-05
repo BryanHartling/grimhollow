@@ -758,12 +758,14 @@ public class SmokeRun {
         skeleton.sprite=new NecroSkeletonSprite();skeleton.sprite.link(skeleton);
         for(int i=0;i<29;i++)skeleton.buff(NecroSkeleton.Lifetime.class).act();
         check(skeleton.isAlive(),"Minion lives through turn 29");check(skeleton.description().contains("_1 more turns_"),"56: inspection counts down remaining binding");skeleton.buff(NecroSkeleton.Lifetime.class).act();
-        check(skeleton.isAlive()&&skeleton.remaining==0&&skeleton.HP==skeleton.HT-skeleton.decayDamage()&&h.HP==20,"Minion binding expires into gradual health decay without explosion");
+        check(skeleton.decayDamage()==3&&skeleton.isAlive()&&skeleton.remaining==0&&skeleton.HP==16&&h.HP==20,"Minion binding expires into exact 15% rounded-up decay without explosion");
+        for(NecroSkeleton servant:new NecroSkeleton[]{new NecroSkeleton(),new NecroWraith(),new NecroGhoul(),new NecroRevenant()})
+            for(int health=1;health<=200;health++){servant.HT=health;check(servant.decayDamage()==(int)Math.ceil(health*.15),"15% decay for every raised servant/max health");}
         check(skeleton.description().contains("loses _"+skeleton.decayDamage()+" health"),"Minion inspection explains post-binding decay");
         com.watabou.utils.Bundle decaying=new com.watabou.utils.Bundle();decaying.put("minion",skeleton);
         NecroSkeleton restoredDecay=(NecroSkeleton)decaying.get("minion");check(restoredDecay.remaining==0&&restoredDecay.HP==skeleton.HP,"Minion decay state survives save/load");
         int decayTurns=0;while(skeleton.isAlive()&&decayTurns++<20)skeleton.buff(NecroSkeleton.Lifetime.class).act();
-        check(!skeleton.isAlive()&&!NecroSkeleton.minions().contains(skeleton)&&h.HP==20,"Decay eventually removes minion without expiry rebirth");
+        check(decayTurns==6&&!skeleton.isAlive()&&!NecroSkeleton.minions().contains(skeleton)&&h.HP==20,"15% decay removes full-health skeleton in seven ticks without expiry rebirth");
         clearArena();Rat enemy=target(h.pos+1);enemy.HP=1;enemy.damage(1,h);
         check(item.charges()==3&&Dungeon.level.corpses.get(enemy.pos)==200,"Hero kill charge and corpse tracking");
         // Acceptance 27: same equipped resource and scheduled keeper after a real kill, without further kills.
@@ -883,6 +885,9 @@ public class SmokeRun {
                 com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SentryRoom.Sentry sentry=null;
                 for(Mob mob:Dungeon.level.mobs)if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SentryRoom.Sentry)sentry=(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SentryRoom.Sentry)mob;
                 check(sentry!=null,"Generated red sentry");final int[] shots={0};
+                // The controlled room overwrites generated terrain, so remove any
+                // unrelated floor loot beneath its sentry before the headless act.
+                Dungeon.level.heaps.remove(sentry.pos);
                 sentry.sprite=new SentrySprite.Red(){@Override public void charge(){}@Override public void idle(){}@Override public void zap(int cell){shots[0]++;}};
                 int prize=-1;for(Heap heap:Dungeon.level.heaps.valueList())if(heap.type==Heap.Type.CHEST&&Dungeon.level.map[heap.pos]==Terrain.PEDESTAL&&heap.pos!=sentry.pos&&room.inside(Dungeon.level.cellToPoint(heap.pos)))prize=heap.pos;
                 check(prize>=0,"Generated sentry prize");h.pos=door.x+door.y*Dungeon.level.width();

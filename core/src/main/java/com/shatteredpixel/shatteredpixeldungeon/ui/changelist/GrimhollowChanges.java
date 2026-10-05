@@ -20,7 +20,11 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.23.2","Painted bone walls and a more threatening, clearly warned hunter.");
+        ChangeInfo r=release(list,"v1.23.3","Readable keys, description controls and faster servant decay.");
+        note(r,Icons.JOURNAL,"Collected keys","Collected key types and counts have a separate framed HUD row below the menu. Larger painted keys are no longer squeezed into the version label; the enemy counter moves down when keys are present.");
+        note(r,Icons.MAGNIFY,"Complete descriptions","Long item, talent and creature descriptions have visible up/down controls and a bronze scrollbar, alongside dragging and mouse-wheel scrolling. Action buttons stay outside the text viewport. The last line has extra padding. Ashlight's feeding costs use readable hyphens.");
+        note(r,Icons.TALENT,"Raised servants","Once their binding expires, all raised undead lose 15% of maximum health, rounded up, each turn. Descriptions show the new rate and exact health loss; decay death still cannot explode or revive them.");
+        r=release(list,"v1.23.2","Painted bone walls and a more threatening, clearly warned hunter.");
         note(r,Icons.TALENT,"Bone walls","Wand of Bone and Bone Prison share four stable painted bone barricades. Examine shows their movement/sight/projectile blocking, fire immunity and remaining binding turns. Their duration and terrain rules are unchanged.");
         note(r,Icons.WARNING,"Lurking Horror","Increase ordinary damage modestly and give sleeping-prey pounces their own stronger damage range. A full-health normal rat can no longer defeat the opening pounce at normal or doubled damage. The once-per-floor omen has a framed notice and audio cue; the larger ambush warning stays visible until you respond. Your fresh-action window, detection counters, solitary hunt and lifetime healing limit remain.");
         r=release(list,"v1.23.1","Bronze talent markers, natural weapon grips and clearer Haste rules.");

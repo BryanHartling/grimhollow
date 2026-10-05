@@ -53,7 +53,7 @@ public class WndTitledMessage extends Window {
 
 		RenderedTextBlock text = PixelScene.renderTextBlock( 6 );
 		if (!useHighlighting()) text.setHightlighting(false);
-		text.text( message, width );
+		text.text( message, width-12 );
 		text.setPos( titlebar.left(), titlebar.bottom() + 2*GAP );
 		add( text );
 
@@ -61,7 +61,7 @@ public class WndTitledMessage extends Window {
 			width = Math.min(width + 20, maxWidth);
 			titlebar.setRect(0, 0, width, 0);
 			text.setPos( titlebar.left(), titlebar.bottom() + 2*GAP );
-			text.maxWidth(width);
+			text.maxWidth(width-12);
 		}
 
 		bringToFront(titlebar);
@@ -69,12 +69,9 @@ public class WndTitledMessage extends Window {
 		remove(text);
 		descriptionTop=titlebar.bottom()+2*GAP;
 		text.setPos(0,0);
-		Component content=new Component();content.add(text);
-		// Include the last baseline and rounding margin in the scrollable bounds.
-		content.setSize(width,(float)Math.ceil(text.bottom())+4);
-		description=new com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane(content);
+		description=new com.shatteredpixel.shatteredpixeldungeon.ui.DescriptionPane(text,width);
 		add(description);
-		descriptionHeight=Math.max(18,Math.min(content.height(),Math.min(targetHeight(),PixelScene.uiCamera.height-36)-descriptionTop));
+		descriptionHeight=Math.max(18,Math.min(description.content().height(),Math.min(targetHeight(),PixelScene.uiCamera.height-36)-descriptionTop));
 		description.setRect(0,descriptionTop,width,descriptionHeight);
 		resize( width, (int)(descriptionTop+descriptionHeight)+2 );
 	}

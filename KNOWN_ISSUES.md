@@ -1,5 +1,9 @@
 # Known issues
 
+- v1.23.3 environment: automatic approval review timed out on three parallel native-test/package commands; individual retries succeeded through the existing escalation route. No check was disabled.
+
+- v1.23.3: a complete description-input failure did not reproduce in the native Lantern fixture; visible scroll controls and final-line padding address discoverability and clipping. Physical Samsung tablet verification of the key row and long descriptions remains with the user.
+
 - v1.23.2: the user's exact rat encounter/save is unavailable; full-health floor-two rats are tested at normal and doubled Horror damage. The new regional combat ranges still need human campaign balance review, and physical Samsung tablet warning/art review remains with the user.
 
 - v1.23.1 reproduces the reported Haste travel pauses after thawing in water: five turns of Chill still slow actions and trigger the sentry interruption. This matches the immutable upstream rules; Haste does not cleanse Chill. The original save was unavailable. The prior v1.23.0 unreproduced-encounter note below is superseded by this timing diagnosis.

@@ -52,6 +52,7 @@ public final class PlaytestCatalog {
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.armor.WarriorArmor.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AlchemistsToolkit.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern.class);
+        items.add(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CapeOfThorns.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.ChaliceOfBlood.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows.class);

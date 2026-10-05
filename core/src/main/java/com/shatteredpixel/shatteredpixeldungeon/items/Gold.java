@@ -37,6 +37,19 @@ import com.watabou.utils.Random;
 import java.util.ArrayList;
 
 public class Gold extends Item {
+    private boolean fortuneApplied;
+    public Gold sale(){fortuneApplied=true;return this;}
+    public int award(Hero hero){
+        com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon coin=com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.active();
+        if(!fortuneApplied&&coin!=null)quantity+=Math.round(quantity*coin.goldBonus());
+        fortuneApplied=true;
+        Dungeon.gold+=quantity;Statistics.goldCollected+=quantity;
+        coin=com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.equipped();
+        if(coin!=null)coin.earnedGold(quantity);
+        Badges.validateGoldCollected();return quantity;
+    }
+    @Override public void storeInBundle(com.watabou.utils.Bundle b){super.storeInBundle(b);b.put("fortune_applied",fortuneApplied);}
+    @Override public void restoreFromBundle(com.watabou.utils.Bundle b){super.restoreFromBundle(b);fortuneApplied=b.getBoolean("fortune_applied");}
 
 	{
 		image = ItemSpriteSheet.GOLD;
@@ -62,9 +75,7 @@ public class Gold extends Item {
 		Catalog.setSeen(getClass());
 		Statistics.itemTypesDiscovered.add(getClass());
 
-		Dungeon.gold += quantity;
-		Statistics.goldCollected += quantity;
-		Badges.validateGoldCollected();
+		award(hero);
 
 		GameScene.pickUp( this, pos );
 		hero.sprite.showStatusWithIcon( CharSprite.NEUTRAL, Integer.toString(quantity), FloatingText.GOLD );

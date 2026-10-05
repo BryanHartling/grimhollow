@@ -576,9 +576,9 @@ public class Generator {
 					TalismanOfForesight.class,
 					TimekeepersHourglass.class, com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HourglassOfAshes.class,
 					UnstableSpellbook.class,
-                    com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern.class
+                    com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern.class, com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.class
 			};
-			ARTIFACT.defaultProbs = new float[]{ 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+			ARTIFACT.defaultProbs = new float[]{ 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 			ARTIFACT.probs = ARTIFACT.defaultProbs.clone();
 
 			//Trinkets are unique like artifacts, but unlike them you can only have one at once
@@ -679,7 +679,8 @@ public class Generator {
 		}
 	}
 	
-	public static Item random() {
+	public static Item random() { return com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DoubloonLoot.improve(ordinaryRandom()); }
+	private static Item ordinaryRandom() {
         if(BalanceTuning.customItemMix()) {
             Category tuned=BalanceTuning.itemCategory();
             return tuned==Category.SEED ? randomUsingDefaults(tuned) : random(tuned);

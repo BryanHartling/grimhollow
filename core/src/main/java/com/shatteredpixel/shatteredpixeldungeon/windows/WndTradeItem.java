@@ -251,7 +251,7 @@ public class WndTradeItem extends WndInfoItem {
 		//selling items in the sell interface doesn't spend time
 		hero.spend(-hero.cooldown());
 
-		new Gold( item.value() ).doPickUp( hero );
+		new Gold( item.value() ).sale().doPickUp( hero );
 
 		if (shop != null){
 			shop.buybackItems.add(item);
@@ -278,7 +278,7 @@ public class WndTradeItem extends WndInfoItem {
 			//selling items in the sell interface doesn't spend time
 			hero.spend(-hero.cooldown());
 
-			new Gold( item.value() ).doPickUp( hero );
+			new Gold( item.value() ).sale().doPickUp( hero );
 
 			if (shop != null){
 				shop.buybackItems.add(item);

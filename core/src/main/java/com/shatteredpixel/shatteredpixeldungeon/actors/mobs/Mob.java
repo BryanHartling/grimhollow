@@ -1305,7 +1305,7 @@ public abstract class Mob extends Char {
 			item = (Item)loot;
 
 		}
-		return item;
+		return loot instanceof Generator.Category || loot instanceof Class<?> ? com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DoubloonLoot.improve(item) : item;
 	}
 
 	//how many mobs this one should count as when determining spawning totals

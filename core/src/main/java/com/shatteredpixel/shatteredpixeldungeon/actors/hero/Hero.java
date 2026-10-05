@@ -2657,6 +2657,7 @@ public class Hero extends Char {
 							chance = 0;
 						}
 						
+						if(chance>0 && chance<1 && com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.active()!=null)chance=Math.min(1,chance+com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.active().searchBonus(Dungeon.level.map[curr]==Terrain.SECRET_TRAP));
 						chance = ElementalCache.searchChance(Dungeon.level, curr, chance, foresight);
 					if (Random.Float() < chance) {
 						

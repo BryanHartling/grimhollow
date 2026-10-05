@@ -165,6 +165,9 @@ public abstract class RegularLevel extends Level {
 		}
 		
 		com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.addRooms(initRooms);
+        if(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DoubloonLoot.roomRoll()){
+            SpecialRoom bonus=SpecialRoom.coinTreasureRoom();if(bonus!=null)initRooms.add(bonus);
+        }
 		return initRooms;
 	}
 	

@@ -188,6 +188,15 @@ public abstract class SpecialRoom extends Room {
 		
 		}
 	}
+
+    public static SpecialRoom coinTreasureRoom(){
+        ArrayList<Class<? extends SpecialRoom>> allowed=new ArrayList<>();
+        for(Class<? extends SpecialRoom> type:Arrays.asList(TreasuryRoom.class,ArmoryRoom.class,CrystalVaultRoom.class,CrystalChoiceRoom.class))
+            if(floorSpecials.contains(type))allowed.add(type);
+        if(allowed.isEmpty())return null;
+        Class<? extends SpecialRoom> chosen=Random.element(allowed);useType(chosen);
+        return Reflection.newInstance(chosen);
+    }
 	
 	private static final String ROOMS	= "special_rooms";
 	private static final String PIT	    = "pit_needed";

@@ -21,27 +21,39 @@ import java.util.ArrayList;
 /** Independent optional leaf rooms, each elemental kind encountered at most once per run. */
 public class SecretElementalRoom extends SecretRoom {
     private static int encountered;
+    private static int[] plans=new int[15];
+    static { java.util.Arrays.fill(plans,Integer.MIN_VALUE); }
     private ElementalCache.Kind selectedKind=ElementalCache.Kind.FIRE;
     public SecretElementalRoom() {}
     public SecretElementalRoom(ElementalCache.Kind kind) { selectedKind=kind; }
-    public static void reset() { encountered=0; }
-    public static void storeRun(Bundle b) { b.put("elemental_types_seen",encountered); }
-    public static void restoreRun(Bundle b) { encountered=b.getInt("elemental_types_seen"); }
+    public static void reset() { encountered=0;java.util.Arrays.fill(plans,Integer.MIN_VALUE); }
+    public static void storeRun(Bundle b) { b.put("elemental_types_seen",encountered);b.put("elemental_coin_plans",plans); }
+    public static void restoreRun(Bundle b) { encountered=b.getInt("elemental_types_seen");plans=b.getIntArray("elemental_coin_plans");if(plans.length!=15){plans=new int[15];java.util.Arrays.fill(plans,Integer.MIN_VALUE);} }
     public static boolean encountered(ElementalCache.Kind kind) { return (encountered&(1<<kind.ordinal()))!=0; }
     public static int plannedDepth(long seed,int region,ElementalCache.Kind kind) {
+        return plannedDepth(seed,region,kind,0);
+    }
+    public static int plannedDepth(long seed,int region,ElementalCache.Kind kind,int bonus) {
         if(region<0||region>4)return -1;
         Random.pushGenerator(seed+0x454C454D454E54L+region*7919L+kind.ordinal()*104729L);
         try {
             float chance=Math.min(100,BalanceTuning.get(BalanceTuning.CACHE_BASE_CHANCES[kind.ordinal()])
                     *(region+1)*BalanceTuning.multiplier(BalanceTuning.Key.CACHE_CHANCE));
+            if(chance>0)chance=Math.min(100,chance+bonus);
             if(Random.Float()*100>=chance)return -1;
             return region==0?2+Random.Int(3):region*5+1+Random.Int(4);
         } finally { Random.popGenerator(); }
     }
     public static void addRooms(ArrayList<com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room> rooms) {
         if(Dungeon.branch!=0||Dungeon.depth<2||Dungeon.depth>24||Dungeon.depth%5==0)return;
-        for(ElementalCache.Kind kind:ElementalCache.Kind.values())
-            if(!encountered(kind)&&plannedDepth(Dungeon.seed,(Dungeon.depth-1)/5,kind)==Dungeon.depth)rooms.add(new SecretElementalRoom(kind));
+        for(ElementalCache.Kind kind:ElementalCache.Kind.values()) {
+            int region=(Dungeon.depth-1)/5,index=region*3+kind.ordinal();
+            if(plans[index]==Integer.MIN_VALUE){
+                com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon coin=com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.active();
+                plans[index]=plannedDepth(Dungeon.seed,region,kind,coin!=null&&coin.level()>=10?BalanceTuning.get(BalanceTuning.Key.COIN_CACHE):0);
+            }
+            if(!encountered(kind)&&plans[index]==Dungeon.depth)rooms.add(new SecretElementalRoom(kind));
+        }
     }
     public static void record(Level level) {
         if(Dungeon.branch==0)for(ElementalCache cache:level.elementalCaches)encountered|=1<<cache.kind.ordinal();

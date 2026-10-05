@@ -330,7 +330,7 @@ public class ShopRoom extends SpecialRoom {
 		}
 
 		Item rare;
-		switch (Random.Int(10)){
+		switch (com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DoubloonLoot.shopRoll()){
 			case 0:
 				rare = Generator.random( Generator.Category.WAND );
 				rare.level( 0 );

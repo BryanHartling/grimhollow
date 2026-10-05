@@ -39,6 +39,22 @@ import com.watabou.utils.Random;
 public class Thief extends Mob {
 	
 	public Item item;
+    private boolean coinAlerted;
+    public void alertForCoin(){
+        if(!coinAlerted&&alignment==Alignment.ENEMY&&com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.carried()!=null){
+            coinAlerted=true;state=WANDERING;
+            if(Dungeon.hero.invisible==0){enemy=Dungeon.hero;target=enemy.pos;state=HUNTING;}
+        }
+    }
+    @Override public boolean act(){
+        alertForCoin();
+        if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon){
+            int exit=Dungeon.level.exit();
+            if(pos==exit){GLog.n(Messages.get(Thief.class,"escapes",item.name()));item=null;state=WANDERING;}
+            else {if(exit>=0)getCloser(exit);spend(1/speed());return true;}
+        }
+        return super.act();
+    }
 	
 	{
 		spriteClass = ThiefSprite.class;
@@ -64,12 +80,14 @@ public class Thief extends Mob {
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
 		bundle.put( ITEM, item );
+        bundle.put("coin_alerted",coinAlerted);
 	}
 
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		super.restoreFromBundle( bundle );
 		item = (Item)bundle.get( ITEM );
+        coinAlerted=bundle.getBoolean("coin_alerted");
 	}
 
 	@Override
@@ -144,8 +162,15 @@ public class Thief extends Mob {
 	}
 
 	protected boolean steal( Hero hero ) {
+        com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon coin=com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.carried();
+        if(coin!=null&&hero.invisible==0&&!com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.luckRunning(hero)){
+            if(coin.isEquipped(hero)&&Random.Int(100)<com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.get(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.COIN_THEFT_RESIST))return false;
+            coin.stolen(hero);item=coin;GLog.w(Messages.get(Thief.class,"stole",coin.name()));return true;
+        }
 
 		Item toSteal = hero.belongings.randomUnequipped();
+        if(toSteal instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon
+                && (hero.invisible>0||com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.luckRunning(hero)))return false;
 
 		if (toSteal != null && !toSteal.unique && toSteal.level() < 1 ) {
 

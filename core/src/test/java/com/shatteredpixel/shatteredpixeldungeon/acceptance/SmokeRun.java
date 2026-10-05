@@ -518,8 +518,8 @@ public class SmokeRun {
         lamp.doUnequip(h,true,true);check(lamp.shuttered()&&AshlightLantern.open(h)==null,"51 unequip preserves shutter");lamp.doEquip(h);check(lamp.shuttered(),"51 re-equip preserves shutter");
         Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);
         lamp=AshlightLantern.equipped(Dungeon.hero);check(lamp!=null&&lamp.shuttered()&&lamp.level()==10&&lamp.charges()==6,"51 actual save/load and artifact slot");
-        check(Generator.Category.ARTIFACT.classes.length==15&&Generator.Category.ARTIFACT.classes[14]==AshlightLantern.class
-                &&Arrays.equals(Generator.Category.ARTIFACT.defaultProbs,new float[]{1,1,0,1,1,0,1,1,1,1,1,1,1,1,1}),"51 existing generation weights preserved");
+        check(Generator.Category.ARTIFACT.classes.length==16&&Generator.Category.ARTIFACT.classes[14]==AshlightLantern.class
+                &&Arrays.equals(Generator.Category.ARTIFACT.defaultProbs,new float[]{1,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1}),"51 existing generation weights preserved");
         float[] prior={0,1,0,0,1,0,1,0,1,0,1,0,1,0};saved=new Bundle();saved.put("artifact_probs",prior);Generator.restoreFromBundle(saved);
         check(Arrays.equals(Arrays.copyOf(Generator.Category.ARTIFACT.probs,14),prior)&&Generator.Category.ARTIFACT.probs[14]==1,"51 existing save artifact uniqueness migrated");
         System.out.println("TEST 51 PASS: Ashlight feeding 14 units/10 levels; dark-only charge; free persistent shutter; vision/awareness/invisibility; Cloak 2x drain without timer reset; all Flare tiers/LOS; wraith movement; secrets; fire protection; save/load; unchanged old generation weights");

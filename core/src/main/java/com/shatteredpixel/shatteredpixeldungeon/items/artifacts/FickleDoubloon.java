@@ -35,6 +35,14 @@ public class FickleDoubloon extends Artifact {
         return c!=null && !c.cursed && Dungeon.hero.buff(MagicImmune.class)==null ? c:null;
     }
     public static boolean luckRunning(Hero h){return h.buff(Luck.class)!=null;}
+    public static FickleDoubloon carried(){return Dungeon.hero==null?null:Dungeon.hero.belongings.getItem(FickleDoubloon.class);}
+    public void stolen(Hero h){
+        if(h.belongings.artifact==this)h.belongings.artifact=null;
+        if(h.belongings.misc==this)h.belongings.misc=null;
+        if(passiveBuff!=null)passiveBuff.detach();
+        detachAll(h.belongings.backpack);updateQuickslot();
+    }
+    @Override public String info(){return super.info()+(cursed&&cursedKnown?"\n\n"+Messages.get(this,"black_spot"):"");}
     public int charges(){return charge;}
     public int flips(){return exp;}
     public int face(){return face;}
@@ -137,5 +145,5 @@ public class FickleDoubloon extends Artifact {
         @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);favor=b.getBoolean("favor");single=b.getBoolean("single");used=b.getBoolean("used");lastHand=b.getBoolean("last_hand");expires=b.getFloat("expires");type=favor?buffType.POSITIVE:buffType.NEGATIVE;}
     }
     @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("coin_face",face);b.put("last_hands",lastHands.stream().mapToInt(Integer::intValue).toArray());}
-    @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);chargeCap=level()+1;charge=Math.min(chargeCap,b.getInt("charge"));face=b.getInt("coin_face");lastHands.clear();for(int n:b.getIntArray("last_hands"))lastHands.add(n);}
+    @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);level(Math.max(0,Math.min(10,b.getInt("level"))));chargeCap=level()+1;charge=Math.min(chargeCap,b.getInt("charge"));face=b.getInt("coin_face");lastHands.clear();for(int n:b.getIntArray("last_hands"))lastHands.add(n);}
 }

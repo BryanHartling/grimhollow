@@ -56,8 +56,8 @@ final class HeroEquipment {
         float length=crystal?4:item instanceof MissileWeapon&&!bow?6:heavy?13:bow?12:8;
         // Inventory silhouettes retain their individual art, fitted once on gear changes.
         float gx=points.get(pose).getFloat(0)/48f,gy=points.get(pose).getFloat(1)/60f;
-        // Lowered gear points outside the silhouette; action poses turn it
-        // toward the target. A left-handed caster must not hide her own face.
+        // An arm hanging at the hip carries a short blade downward. Polearms,
+        // bows and hooked blades stay upright beside the body, not across it.
         boolean artFlip=sprite.flipHorizontal;
         weapon.flipHorizontal=artFlip;weapon.frame(weaponFrame);
         weapon.logicalSize(length,length);
@@ -72,8 +72,9 @@ final class HeroEquipment {
         if(artFlip)tipX=1-tipX;
         // Rotate the actual handle-to-tip axis, never a guessed inventory diagonal.
         float axis=(float)Math.toDegrees(Math.atan2(tipY-oy,tipX-ox));
-        float desired=staff?-78:bow?-75:-65;
-        if(points.get(pose).getFloat(0)<24)desired=staff?-102:bow?-105:-115;
+        boolean leftHand=points.get(pose).getFloat(0)<24;
+        boolean upright=heavy||bow||name.contains("Sickle")||name.contains("Whip")||name.contains("Rod")||name.contains("Baton");
+        float desired=upright?(leftHand?-94:-86):(leftHand?115:65);
         if(pose>=13&&pose<=15)desired=pose==13?-105:pose==14?-5:-45;
         if(artFlip)desired=180-desired;
         weapon.angle=crystal?0:desired-axis;

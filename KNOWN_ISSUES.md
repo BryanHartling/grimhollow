@@ -1,5 +1,9 @@
 # Known issues
 
+- v1.23.1 reproduces the reported Haste travel pauses after thawing in water: five turns of Chill still slow actions and trigger the sentry interruption. This matches the immutable upstream rules; Haste does not cleanse Chill. The original save was unavailable. The prior v1.23.0 unreproduced-encounter note below is superseded by this timing diagnosis.
+- v1.23.1 painted-hand and actual-handle checks correct the v1.23.0 grip regression; physical Samsung tablet review of the new carry poses remains with the user. No character painting or gameplay rule changed.
+- Historical v1.23.0 tag CI run 37240922970 failed effects timing at mean 1.4671 ms / p95 2.0726 ms against the unchanged 2 ms gate; the same commit's branch run 37240922993 passed all seven jobs (effects p95 1.3890 ms). Both runs remain available.
+
 - v1.23.0 local verification briefly hit a Windows user-mapped PNG lock; moving the generated capture aside and rerunning the unchanged geometry gate succeeded. No game or check was altered for it.
 
 - v1.23.0: physical Samsung tablet and full campaign balance remain human playtesting; native portrait touch is not an Android device run. Smooth text is the default, but an explicit pixel-font setting is preserved.

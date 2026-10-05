@@ -1,3 +1,9 @@
+# Equipment grip correction - v1.23.1
+
+`talent_trim.py` draws original GPL-3.0-or-later bronze talent frames, round rank/point studs and a shuffle medallion into `interfaces/painted_talents.png`. It uses deterministic antialiased vector geometry and the existing authored panel trim; the normal offline packer and provenance validator reproduce it without an image generation service.
+
+`hero_equipment.py` anchors equipment to the visible palms in all eight armor rows. Handle coordinates are reviewed against opaque pixels in the existing inventory paintings; curved blades use their shaft/collar axis. `HeroEquipment` carries short blades downward and hooked blades, rods and polearms upright beside the body, with unchanged target-facing attacks. The existing native gate includes Sickle and War Scythe, all eight rows, both facings and movement/attack poses. No painting or animation atlas was regenerated.
+
 # Playtesting presentation - v1.23.0
 
 `playtest_presentation.py` packs committed cutouts from `sources/playtest-v123/` into the mouse pointer, stair direction marker, Distant Well and Rat King statue. Exact built-in generation/edit prompts are in `playtest-v123-prompts.json`; the original statue edit source is retained. All are GPL-3.0-or-later. Unchanged Rat King pillow/decor cells come from the existing immutable recovery base. `journal.py` uses the same well painting for its landmark. `identification.py` preserves the sixty separate paintings in a restrained high-contrast ivory/gold range. The full offline check is unchanged.

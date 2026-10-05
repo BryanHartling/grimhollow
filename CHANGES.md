@@ -1,3 +1,10 @@
+# Bronze talent markers, weapon grips and Haste clarification - v1.23.1
+
+- Replace rectangular gold rank fills with rounded bronze studs and a matching painted frame. Tier totals use larger ivory available, bronze spent and hollow future markers, accompanied by an explicit available/spent count. Random allocation uses a brass shuffle medallion and a larger hit area; costs, caps and allocation behavior are unchanged. The trim is original vector geometry compiled through the existing offline art packer.
+
+- Move all nine heroes' equipment anchors onto their painted palms, reviewed across all eight armor appearances. Correct narrow and curved handle coordinates, including Sickle and scythes. Short blades carry downward at rest; hooked blades, rods and polearms remain upright. Attack directions and all gameplay timings are unchanged. Existing native checks now require opaque palm/handle pixels and include the Sickle in both facings and all armor rows.
+- Reproduce Frost thawing in water followed by Potion of Haste: lingering Chill doubles a hasted step from one third to two thirds of a turn, triggering the red sentry's existing travel interruption. Dry-ground thawing does not leave Chill. Clarify potion/status descriptions instead of changing speed, thaw or sentry rules; the user's exact save is unavailable.
+
 # Playtesting patch - v1.23.0
 
 - Necrotic Touch now deals hero-level damage on each of its one/two turns. Hits refresh one wound, never add a second or escalate its damage. Raised servants decay for 5% of maximum health (rounded up) per turn after binding expires instead of vanishing; decay cannot trigger expiry explosions or revival loops.

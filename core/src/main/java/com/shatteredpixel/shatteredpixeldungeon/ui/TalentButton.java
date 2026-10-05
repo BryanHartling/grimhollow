@@ -54,7 +54,7 @@ public class TalentButton extends Button {
 	Image bg;
 
 	ColorBlock fill;
-    private ColorBlock[] sockets, centers;
+    private Image[] centers;
 
 	public enum Mode {
 		INFO,
@@ -72,15 +72,11 @@ public class TalentButton extends Button {
 		this.pointsInTalent = points;
 		this.mode = mode;
 
-		bg.frame(20*(talent.maxPoints()-1), 0, WIDTH, HEIGHT);
-
 		icon = new TalentIcon( talent );
 		add(icon);
-        sockets=new ColorBlock[talent.maxPoints()];centers=new ColorBlock[sockets.length];
-        for(int i=0;i<sockets.length;i++){
-            // Tint a white texture: multiplying a dark texture can never make gold.
-            sockets[i]=new ColorBlock(1,1,0xFFFFFFFF);add(sockets[i]);
-            centers[i]=new ColorBlock(1,1,0xFFFFFFFF);add(centers[i]);
+        centers=new Image[talent.maxPoints()];
+        for(int i=0;i<centers.length;i++){
+            centers[i]=TalentMarkers.image(0,4.4f);add(centers[i]);
         }
 	}
 
@@ -91,7 +87,7 @@ public class TalentButton extends Button {
 		fill = new ColorBlock(0, 4, 0xFFFFFF44);
 		add(fill);fill.visible=false;
 
-		bg = new Image(Assets.Interfaces.TALENT_BUTTON);
+        bg = TalentMarkers.image(6,WIDTH);
 		add(bg);
 	}
 
@@ -112,12 +108,10 @@ public class TalentButton extends Button {
 		icon.x = x + 2;
 		icon.y = y + 2;
 		PixelScene.align(icon);
-        if(sockets!=null)for(int i=0;i<sockets.length;i++){
-            float cell=(WIDTH-4f)/sockets.length;
-            sockets[i].x=x+2+i*cell;sockets[i].y=y+21;sockets[i].size(cell-1,4);
-            centers[i].x=sockets[i].x+.6f;centers[i].y=y+21.6f;centers[i].size(cell-2.2f,2.8f);
-            sockets[i].hardlight(i<pointsInTalent?0xFFF1BA:0x857766);
-            centers[i].hardlight(i<pointsInTalent?0xFFCF45:0x171511);
+        if(centers!=null)for(int i=0;i<centers.length;i++){
+            float cell=(WIDTH-4f)/centers.length,size=Math.min(5.5f,cell-.4f);
+            TalentMarkers.frame(centers[i],i<pointsInTalent?1:0,size);
+            centers[i].x=x+2+i*cell+(cell-size)/2;centers[i].y=y+23-size/2;
         }
 	}
 
@@ -263,6 +257,7 @@ public class TalentButton extends Button {
 		active = value;
 		icon.alpha( value ? 1.0f : 0.3f );
 		bg.alpha( value ? 1.0f : 0.3f );
+        if(centers!=null)for(Image pip:centers)pip.alpha(value?1f:.3f);
 	}
 
 	public void upgradeTalent(){

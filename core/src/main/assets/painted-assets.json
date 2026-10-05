@@ -9393,6 +9393,13 @@
         64
       ],
       "rgba_sha256": "8bc9a4f44aa2e8452f4a0df80d8ca219ced63d2f9df17d04f5cbe8f4d9b0ea75"
+    },
+    "interfaces/painted_talents.png": {
+      "size": [
+        512,
+        64
+      ],
+      "rgba_sha256": "3846d662588ec95dc7ee79a21a8b88aca1085b432a2e0e508d3f6fe0267b37d9"
     }
   }
 }

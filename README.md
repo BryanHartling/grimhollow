@@ -1,5 +1,13 @@
 # Grimhollow
 
+**Talent panel v1.23.1:** rounded bronze studs replace the blocky gold rank markers. Larger ivory available, bronze spent and hollow future tier markers accompany an explicit available/spent count. Random allocation has a brass shuffle medallion and a larger hit area. Allocation rules, point costs and caps are unchanged.
+
+v1.23.1 corrects equipment grips on all nine painted heroes, including the Necromancer's Sickle. Weapons anchor to visible palms rather than robe edges; curved/narrow handles use their actual painted positions. Short blades hang naturally and hooked blades/polearms stay upright. Existing checks cover all eight armor appearances and both facings. Gameplay and source paintings are unchanged.
+
+**Haste after freezing:** thawing in water leaves five turns of Chill. Haste does not remove it, so a hasted step can still take two thirds of a turn and trigger a red sentry's travel interruption. Dry-ground thawing does not leave Chill. Potion/status descriptions now explain this; the original save is unavailable, but the timing sequence is reproduced.
+
+Latest Windows launcher: `desktop/build/windows/1.23.1/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`.
+
 v1.23.0 refines the playtesting build: hero-level refreshing Necrotic Touch, gradual minion decay, Phylactery spell information, visible golden talent sockets and HUD keys, corrected equipment grips and torch depth, painted pointer/stairs/well/statue, restrained high-contrast identity symbols and a framed update screen. Smooth text is the default; a player's explicit font preference is preserved. All nine painted heroes from v1.22.6 remain.
 
 Windows launcher: `desktop/build/windows/1.23.0/Grimhollow/Grimhollow.exe`; Android: `android/build/outputs/apk/debug/android-debug.apk`. See [acceptance evidence](verification/ACCEPTANCE.md), [known issues](KNOWN_ISSUES.md), [presentation artwork](verification/interface/presentation-polish.png), [identification symbols](verification/interface/identity-emblems.png) and the nine-hero previews under `verification/heroes/`. Physical Samsung tablet and campaign balance review remain with the user.

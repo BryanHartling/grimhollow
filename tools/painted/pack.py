@@ -227,6 +227,8 @@ def outputs():
     result.update(notifications(result))
     from playtest_presentation import outputs as playtest_presentation
     result.update(playtest_presentation())
+    from talent_trim import outputs as talent_trim
+    result.update(talent_trim())
     return result
 
 
@@ -266,6 +268,7 @@ def main():
         if path=='interfaces/painted_snake.png':expected=(64,64)
         if path=='interfaces/painted_landmarks.png':expected=(256,256)
         if path=='interfaces/menu_button.png':expected=(256,64)
+        if path=='interfaces/painted_talents.png':expected=(512,64)
         if path=='interfaces/menu_pane.png':expected=(128,128)
         if path=='environment/custom_tiles/elemental_cache.png':expected=(256,128)
         if path=='interfaces/painted_skills.png':expected=(1024,512)

@@ -868,10 +868,14 @@ public class SmokeRun {
     private static void sentryHasteScenario() throws Exception {
         Hero h=Dungeon.hero;int original=h.pos;
         java.lang.reflect.Method act=com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SentryRoom.Sentry.class.getDeclaredMethod("act");act.setAccessible(true);
-        int traversals=0,slowShots=0;
+        int traversals=0,slowShots=0,chilledPauses=0;
+        java.util.ArrayList<Item> pack=new java.util.ArrayList<>(h.belongings.backpack.items);
         try{
-            for(int side=0;side<4;side++)for(boolean haste:new boolean[]{true,false}){
+            // Keep Frost's unrelated potion-shattering RNG out of this timing fixture.
+            h.belongings.backpack.items.removeIf(i->i instanceof com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion||i instanceof com.shatteredpixel.shatteredpixeldungeon.items.food.MysteryMeat);
+            for(int side=0;side<4;side++)for(int mode=0;mode<4;mode++){
                 clearArena();
+                Buff.detach(h,Haste.class);Buff.detach(h,Chill.class);h.timeToNow();
                 com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SentryRoom room=new com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.SentryRoom();room.set(3,3,15,15);
                 com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room.Door door=new com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room.Door(side==0?3:side==1?15:6,side==2?3:side==3?15:6);
                 room.connected.put(new com.shatteredpixel.shatteredpixeldungeon.levels.rooms.standard.EmptyRoom(),door);room.paint(Dungeon.level);Dungeon.level.buildFlagMaps();
@@ -883,14 +887,32 @@ public class SmokeRun {
                 check(prize>=0,"Generated sentry prize");h.pos=door.x+door.y*Dungeon.level.width();
                 boolean[] passable=Dungeon.level.passable.clone();passable[h.pos]=true;passable[sentry.pos]=false;
                 com.watabou.utils.PathFinder.Path route=com.watabou.utils.PathFinder.find(h.pos,prize,passable);check(route!=null,"Sentry prize route");
-                if(haste)Buff.prolong(h,Haste.class,Haste.DURATION);else Buff.detach(h,Haste.class);
-                for(int cell:route){h.timeToNow();h.move(cell);h.spend(1f/h.speed());act.invoke(sentry);}
-                if(haste)check(shots[0]==0,"Haste crosses generated sentry room from side "+side+" without a shot");else slowShots+=shots[0];
+                if(mode>=2){
+                    boolean water=Dungeon.level.water[h.pos];Dungeon.level.water[h.pos]=mode==2;
+                    Frost freeze=Buff.affect(h,Frost.class);check(h.paralysed>0,"Frost immobilizes before thaw");freeze.detach();Dungeon.level.water[h.pos]=water;
+                    check(h.paralysed==0&&(h.buff(Chill.class)!=null)==(mode==2),"Only thawing in water leaves five turns of Chill");
+                }
+                if(mode!=1){
+                    // This headless fixture has no GameScene for spell sprites.
+                    // Use the ordinary offscreen path, retaining the real potion effect.
+                    boolean visible=h.sprite.visible;h.sprite.visible=false;
+                    try{new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHaste().apply(h);}finally{h.sprite.visible=visible;}
+                }
+                int pauses=0;
+                for(int cell:route){
+                    h.timeToNow();h.move(cell);h.curAction=new HeroAction.Move(prize);h.spend(1f/h.speed());
+                    if(mode==2)check(Math.abs(h.cooldown()-2f/3f)<.001f,"Water-thaw Chill doubles a hasted movement step");
+                    else if(mode!=1)check(Math.abs(h.cooldown()-1f/3f)<.001f,"Unslowed haste takes one third turn per step");
+                    act.invoke(sentry);if(h.curAction==null)pauses++;
+                }
+                if(mode==0||mode==3)check(shots[0]==0&&pauses==0,"Unslowed Haste crosses from side "+side+" without a shot or auto-travel pause");
+                else if(mode==1)slowShots+=shots[0];
+                else {check(pauses>0&&h.buff(Haste.class)!=null&&h.buff(Chill.class)!=null,"Thaw-in-water + Haste reproduces sentry pauses with both effects active");chilledPauses+=pauses;}
                 sentry.sprite.destroy();traversals++;
             }
             check(slowShots>0,"Normal movement retains red sentry danger");
-            System.out.println("SENTRY HASTE PASS: generated entrances=4 traversals="+traversals+" haste shots=0 normal shots="+slowShots+"; haste is speed, not immunity");
-        }finally{Buff.detach(h,Haste.class);h.timeToNow();h.pos=original;clearArena();}
+            System.out.println("SENTRY HASTE PASS: generated entrances=4 traversals="+traversals+" clean/dry-thaw haste shots/pauses=0 normal shots="+slowShots+" water-thaw + haste pauses="+chilledPauses+" step=0.6667 vs 0.3333 turns; existing mechanics unchanged");
+        }finally{Buff.detach(h,Haste.class);Buff.detach(h,Chill.class);h.belongings.backpack.items.clear();h.belongings.backpack.items.addAll(pack);h.curAction=null;h.timeToNow();h.pos=original;clearArena();}
     }
 
     private static void psychicScenario() throws Exception {

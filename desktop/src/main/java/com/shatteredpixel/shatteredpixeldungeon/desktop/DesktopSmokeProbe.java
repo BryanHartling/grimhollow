@@ -2464,13 +2464,16 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife(),
                 new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Spear(),
                 new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneRod(),
-                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword()};
+                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword(),
+                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Sickle(),
+                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WarScythe()};
         com.badlogic.gdx.utils.JsonValue anchors=new com.badlogic.gdx.utils.JsonReader().parse(Gdx.files.internal("sprites/hero-grips.json"));
         int checks=0;
         try {
             for(com.badlogic.gdx.utils.JsonValue entry:anchors){hero.heroClass=HeroClass.valueOf(entry.name.toUpperCase(java.util.Locale.ROOT));
-                for(int tier:new int[]{1,5}){
-                    hero.belongings.armor=tier==1?new com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor():new com.shatteredpixel.shatteredpixeldungeon.items.armor.PlateArmor();
+                for(int tier=0;tier<8;tier++){
+                    hero.belongings.armor=new com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor();
+                    hero.belongings.armor.tier=tier;
                     com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
                     for(com.shatteredpixel.shatteredpixeldungeon.items.KindOfWeapon item:weapons){hero.belongings.weapon=item;
                         for(boolean flip:new boolean[]{false,true})for(int pose:new int[]{0,2,5,13,14,15}){
@@ -2483,18 +2486,30 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                             if(held!=null){
                                 float gx=entry.get(pose).getFloat(0)/48f;if(flip)gx=1-gx;
                                 float gy=entry.get(pose).getFloat(1)/60f;
+                                // Independent pixel occupancy rejects a declared anchor in air.
+                                // Matching two metadata coordinates alone cannot prove a grip.
+                                int handX=Math.round(entry.get(pose).getFloat(0)*2),handY=Math.round(entry.get(pose).getFloat(1)*2);
+                                int bodyX=Math.round(sprite.frame().left*sprite.texture.width),bodyY=Math.round(sprite.frame().top*sprite.texture.height);
+                                if((sprite.texture.bitmap.getPixel(bodyX+handX,bodyY+handY)&255)<32)
+                                    failures.add("24 hand anchor misses painted body "+entry.name+" tier="+tier+" pose="+pose);
+                                com.badlogic.gdx.utils.JsonValue grip=new com.badlogic.gdx.utils.JsonReader().parse(Gdx.files.internal("sprites/equipment-grips.json")).get(Integer.toString(item.image()));
+                                int handleX=(int)(grip.getFloat(0)*64),handleY=(int)(grip.getFloat(1)*64);
+                                if((held.texture.bitmap.getPixel(Math.round(held.frame().left*held.texture.width)+handleX,Math.round(held.frame().top*held.texture.height)+handleY)&255)<32)
+                                    failures.add("24 grip misses painted handle "+item.getClass().getSimpleName());
                                 if(Math.abs(held.x+held.origin.x-(sprite.x+gx*sprite.width))>.01f||Math.abs(held.y+held.origin.y-(sprite.y+gy*sprite.height))>.01f)
                                     failures.add("24 handle detached from hand "+entry.name+" "+item);
-                                if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Spear||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneRod||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword){
-                                    com.badlogic.gdx.utils.JsonValue grip=new com.badlogic.gdx.utils.JsonReader().parse(Gdx.files.internal("sprites/equipment-grips.json")).get(Integer.toString(item.image()));
+                                if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Spear||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneRod||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Sickle){
                                     float dx=(grip.getFloat(2)-grip.getFloat(0))*held.width,dy=(grip.getFloat(3)-grip.getFloat(1))*held.height;
                                     if(held.flipHorizontal)dx=-dx;
                                     double rotation=Math.toRadians(held.angle);float tx=(float)(dx*Math.cos(rotation)-dy*Math.sin(rotation)),ty=(float)(dx*Math.sin(rotation)+dy*Math.cos(rotation));
-                                    if(pose==0&&ty>=0||pose==14&&(flip?tx>=0:tx<=0))failures.add("24 weapon tip points backwards "+entry.name+" "+item+" pose="+pose);
+                                    boolean upright=!(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword);
+                                    if(pose==0&&(upright?ty>=0:ty<=0)||pose==14&&(flip?tx>=0:tx<=0))failures.add("24 weapon axis points backwards "+entry.name+" "+item+" pose="+pose);
                                 }
                             }
-                            if(!flip&&pose==0){String label=item==null?"empty":item.getClass().getSimpleName();
+                            if(!flip&&pose==0&&(tier==1||tier==5)){String label=item==null?"empty":item.getClass().getSimpleName();
                                 PixmapIO.writePNG(Gdx.files.absolute("verification/heroes/pilot/weapons/"+entry.name+"-"+tier+"-"+label+".png"),pixels,-1,true);}
+                            if(hero.heroClass==HeroClass.NECROMANCER&&tier==1&&(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Sickle||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneRod))
+                                PixmapIO.writePNG(Gdx.files.absolute("verification/heroes/pilot/weapons/necromancer-"+item.getClass().getSimpleName()+"-pose"+pose+"-"+(flip?"left":"right")+".png"),pixels,-1,true);
                             pixels.dispose();checks++;
                         }
                     }
@@ -2507,7 +2522,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 }
             }
         }finally{hero.heroClass=original;hero.sprite=originalSprite;hero.belongings.weapon=originalWeapon;hero.belongings.abilityWeapon=second;hero.belongings.armor=originalArmor;}
-        System.out.println("HERO EQUIPMENT: native draws="+checks+" cloth/plate, both facings, ten loadouts, movement/action poses, hand grips/tip directions, secondary and thrown capture; failures="+failures.size());
+        System.out.println("HERO EQUIPMENT: native draws="+checks+" eight armor rows, both facings, twelve loadouts, movement/action poses, opaque palms/handles, carry/attack axes, secondary and thrown capture; failures="+failures.size());
     }
 
     private void rankAndKeyChecks(com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,Camera camera,java.util.List<String> failures)throws Exception{
@@ -2515,11 +2530,14 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         for(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent talent:new com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent[]{com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.NECROTIC_TOUCH,com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.MASTER_CRAFT,com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.WIDER_BLAST})
             for(int rank=0;rank<=talent.maxPoints();rank++){
                 com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton button=new com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton(1,talent,rank,com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton.Mode.INFO);button.setRect(0,0,20,26);
-                com.watabou.noosa.ColorBlock[] centers=(com.watabou.noosa.ColorBlock[])RecoveryChecks.field(button,"centers");
+                Image[] centers=(Image[])RecoveryChecks.field(button,"centers");
                 for(int i=0;i<centers.length;i++){
                     Pixmap drawn=renderSprite(centers[i],buffer,camera);int brightest=0,gold=0;
                     for(int y=0;y<256;y++)for(int x=0;x<256;x++){int px=drawn.getPixel(x,y);if((px&255)>200){brightest=Math.max(brightest,px>>>24);if((px>>>24)>220&&(px>>>16&255)>160&&(px>>>8&255)<120)gold++;}}
-                    if(i<rank?gold==0:brightest>60)failures.add("36 talent socket value "+talent+" rank="+rank+" socket="+i);
+                    if(i<rank?brightest<180:brightest>=180)failures.add("36 bronze talent pip value "+talent+" rank="+rank+" socket="+i);
+                    int cellX=Math.round(centers[i].frame().left*centers[i].texture.width);
+                    if((centers[i].texture.bitmap.getPixel(cellX+2,2)&255)!=0||(centers[i].texture.bitmap.getPixel(cellX+32,32)&255)<240)
+                        failures.add("36 rank pip is not rounded/opaque at centre");
                     drawn.dispose();points++;
                 }button.destroy();
             }
@@ -2539,7 +2557,26 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             Pixmap pointer=new Pixmap(Gdx.files.internal("gdx/grimhollow_cursor.png"));if(pointer.getWidth()!=64||pointer.getHeight()!=64)failures.add("25 painted pointer missing");pointer.dispose();
         }finally{strip.destroy();com.shatteredpixel.shatteredpixeldungeon.journal.Notes.restoreFromBundle(notes);GameScene.updateKeyDisplay();}
         if(RecoveryChecks.members(Game.scene()).indexOf((com.watabou.noosa.Gizmo)RecoveryChecks.field(Game.scene(),"levelWallVisuals"))>RecoveryChecks.members(Game.scene()).indexOf((com.watabou.noosa.Gizmo)RecoveryChecks.field(Game.scene(),"mobs")))failures.add("24 torches drawn over actors");
-        System.out.println("UI RANK/KEY PASS: rendered sockets="+points+"; key counts/paint survive three layouts; painted cursor/compass; torches behind actors; failures="+failures.size());
+        Image shuffle=com.shatteredpixel.shatteredpixeldungeon.ui.Icons.SHUFFLE.get();
+        if(shuffle.texture.width!=512||shuffle.texture.height!=64||shuffle.width()!=14)failures.add("36 legacy random talent icon");shuffle.destroy();
+        for(int state=2;state<=4;state++){
+            Image pip=com.shatteredpixel.shatteredpixeldungeon.ui.TalentMarkers.image(state,6);Pixmap rendered=renderSprite(pip,buffer,camera);
+            if(GameGeometry.opaqueHeight(pip.texture,pip.frame())<45)failures.add("36 tier point indicator too small");rendered.dispose();pip.destroy();
+        }
+        int originalLevel=Dungeon.hero.lvl;
+        try{
+            Dungeon.hero.lvl=30;
+            for(int tier=1;tier<=4;tier++)for(int width:new int[]{128,180}){
+                com.shatteredpixel.shatteredpixeldungeon.ui.TalentsPane.TalentTierPane pane=new com.shatteredpixel.shatteredpixeldungeon.ui.TalentsPane.TalentTierPane(Dungeon.hero.talents.get(0),tier,com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton.Mode.UPGRADE);
+                pane.setRect(0,0,width,0);
+                java.util.List<Image> stars=(java.util.List<Image>)RecoveryChecks.field(pane,"stars");
+                com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock summary=(com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock)RecoveryChecks.field(pane,"available");
+                for(Image star:stars)if(star.x<0||star.x+star.width()>width||star.y+star.height()>summary.top())failures.add("36 tier marker clips/overlaps tier="+tier+" width="+width);
+                for(Object member:(java.util.List<?>)RecoveryChecks.field(pane,"buttons"))if(((com.shatteredpixel.shatteredpixeldungeon.ui.TalentButton)member).top()<summary.bottom())failures.add("36 tier summary overlaps ranks");
+                pane.destroy();
+            }
+        }finally{Dungeon.hero.lvl=originalLevel;}
+        System.out.println("UI RANK/KEY PASS: rendered bronze pips="+points+" rounded alpha; available/spent/future indicators, modern shuffle and eight tier/width layouts; key counts/paint survive three layouts; painted cursor/compass; torches behind actors; failures="+failures.size());
     }
 
     private void paintedSkillsAndPlants(com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,Camera camera,java.util.List<String> failures)throws Exception {

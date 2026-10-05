@@ -27,7 +27,6 @@ import com.shatteredpixel.shatteredpixeldungeon.Statistics;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.abilities.Ratmogrify;
-import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
@@ -176,7 +175,7 @@ public class TalentsPane extends ScrollPane {
 			this.tier = tier;
 
 			title = PixelScene.renderTextBlock(Messages.titleCase(Messages.get(TalentsPane.class, "tier", tier)), 9);
-			title.hardlight(Window.TITLE_COLOR);
+            title.hardlight(0xE3BE7A);
 			add(title);
 
 			if (mode == TalentButton.Mode.UPGRADE) {
@@ -225,6 +224,7 @@ public class TalentsPane extends ScrollPane {
 							}
 							super.update();
 						}
+                        @Override protected String hoverText(){return Messages.get(TalentsPane.class,"random_title");}
 					};
 					add(random);
 				}
@@ -259,18 +259,13 @@ public class TalentsPane extends ScrollPane {
 			int totStars = Talent.tierLevelThresholds[tier+1] - Talent.tierLevelThresholds[tier] + Dungeon.hero.bonusTalentPoints(tier);
 			int openStars = Dungeon.hero.talentPointsAvailable(tier);
             if(available==null){available=PixelScene.renderTextBlock(6);add(available);}
-            available.text(Messages.get(TalentsPane.class,"available",openStars));
-            available.hardlight(openStars>0?0xFFE59A:0xA49B8B);
 			int usedStars = Dungeon.hero.talentPointsSpent(tier);
+            available.text(Messages.get(TalentsPane.class,"point_summary",openStars,usedStars));
+            available.hardlight(openStars>0?0xF9E7BA:0xC7B291);
 			for (int i = 0; i < totStars; i++){
-				Image im = new Speck().image(Speck.STAR);
+                Image im = TalentMarkers.image(i<openStars?2:i<(openStars+usedStars)?3:4,6);
 				stars.add(im);
 				add(im);
-				if (i >= openStars && i < (openStars + usedStars)){
-					im.hardlight(0x574F46);
-				} else if (i >= (openStars + usedStars)){
-					im.tint(0f, 0f, 0f, 0.9f);
-				}
 			}
 
 			if (random != null && openStars == 0){
@@ -284,38 +279,34 @@ public class TalentsPane extends ScrollPane {
 		protected void layout() {
 			super.layout();
 
-			int regStars = Talent.tierLevelThresholds[tier+1] - Talent.tierLevelThresholds[tier];
-
-			if(available!=null)available.setPos(x+(width-available.width())/2,y+title.height()+3);
-            float titleWidth = title.width();
-			titleWidth += 2 + Math.min(stars.size(), regStars)*6;
-			title.setPos(x + (width - titleWidth)/2f, y);
-
-			float left = title.right() + 2;
-
-			float starTop = title.top();
-			if (regStars < stars.size()) starTop -= 2;
-
-			for (Image star : stars){
-				star.x = left;
-				star.y = starTop;
-				PixelScene.align(star);
-				left += 6;
-				regStars--;
-				if (regStars == 0){
-					starTop += 6;
-					left = title.right() + 2;
-				}
-			}
+            float headerWidth=width-(random!=null?20:0);
+            float combined=title.width()+(stars.isEmpty()?0:2+stars.size()*7);
+            boolean inline=combined<=headerWidth;
+            title.setPos(x+(headerWidth-(inline?combined:title.width()))/2f,y);
+            int perRow=Math.max(1,(int)(width/7));
+            float headerBottom=title.bottom();
+            for(int i=0;i<stars.size();i++){
+                Image star=stars.get(i);
+                int row=inline?0:i/perRow, column=inline?i:i%perRow;
+                int rowCount=Math.min(perRow,stars.size()-row*perRow);
+                star.x=inline?title.right()+2+i*7:x+(width-rowCount*7)/2+column*7;
+                star.y=inline?title.top()+(title.height()-6)/2:title.bottom()+2+row*7;
+                PixelScene.align(star);
+                headerBottom=Math.max(headerBottom,star.y+6);
+            }
+            if(available!=null){
+                available.setPos(x+(width-available.width())/2,headerBottom+3);
+                headerBottom=available.bottom();
+            }
 
 			if (random != null){
-				random.setRect(width - 16, y-2, 16, 14);
+                random.setRect(x + width - 18, y-1, 18, 18);
 			}
 
 			float gap = (width - buttons.size()*TalentButton.WIDTH)/(buttons.size()+1);
-			left = x + gap;
+			float left = x + gap;
 			for (TalentButton btn : buttons){
-				btn.setPos(left, title.bottom() + (available==null?4:14));
+				btn.setPos(left, headerBottom+5);
 				PixelScene.align(btn);
 				left += btn.width() + gap;
 			}

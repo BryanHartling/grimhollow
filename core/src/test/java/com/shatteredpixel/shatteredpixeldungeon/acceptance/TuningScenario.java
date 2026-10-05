@@ -33,14 +33,14 @@ final class TuningScenario {
     static void run() throws Exception {
         BalanceTuning.reset();Playtest.reset();Dungeon.hero=null;Dungeon.level=null;
         BalanceTuning.setShared(DENSITY,125);BalanceTuning.loadShared();
-        check(BalanceTuning.configured(DENSITY)==125&&!Playtest.enabled()&&BalanceTuning.get(DENSITY)==100,"home profile changed gameplay without a loaded test run");
+        check(BalanceTuning.configured(DENSITY)==125&&!Playtest.enabled()&&BalanceTuning.get(DENSITY)==125,"home settings must remain separate from tool access");
         boolean homeRejected=false;
         try{BalanceTuning.setShared(DENSITY,201);}catch(IllegalArgumentException expected){homeRejected=true;}
         check(homeRejected&&BalanceTuning.configured(DENSITY)==125,"home profile range enforcement");
         for(BalanceTuning.Key key:BalanceTuning.Key.values())if(key.group==3&&key!=GOLD)BalanceTuning.setShared(key,0);
         homeRejected=false;try{BalanceTuning.setShared(GOLD,0);}catch(IllegalArgumentException expected){homeRejected=true;}
         check(homeRejected&&BalanceTuning.configured(GOLD)==100,"home item weights accepted an empty loot pool");
-        Playtest.reset();check(Playtest.enabled()&&BalanceTuning.get(DENSITY)==125&&!Playtest.god(),"new run did not adopt home settings");
+        Playtest.reset();check(!Playtest.enabled()&&Playtest.unranked()&&BalanceTuning.get(DENSITY)==125&&!Playtest.god(),"new run adopts tuning without enabling tools or God mode");
         BalanceTuning.reset();Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);
         boolean rejected=false;try{BalanceTuning.set(CURSEBOUND,0);}catch(IllegalStateException expected){rejected=true;}
         check(rejected,"ordinary save accepted mutation");
@@ -107,14 +107,26 @@ final class TuningScenario {
         Bundle corrupt=new Bundle(),tuning=new Bundle();corrupt.put("playtest",true);tuning.put("density",9999);
         for(BalanceTuning.Key key:BalanceTuning.Key.values())if(key.group==3)tuning.put(key.id(),0);
         corrupt.put("balance_tuning",tuning);Playtest.restore(corrupt);check(BalanceTuning.get(DENSITY)==200&&!BalanceTuning.customItemMix(),"corrupt save sanitization");
-        Playtest.restore(new Bundle());check(Playtest.enabled()&&BalanceTuning.get(DENSITY)==200&&!Playtest.god(),"old save did not adopt shared tuning");
-        BalanceTuning.set(CURSEBOUND,0);Dungeon.init();
-        check(Playtest.enabled()&&!Playtest.god()&&BalanceTuning.get(CURSEBOUND)==0,"new game did not adopt shared tuning");
+        Playtest.restore(new Bundle());check(!Playtest.enabled()&&Playtest.unranked()&&BalanceTuning.get(DENSITY)==200&&!Playtest.god(),"ordinary save adopts shared tuning without enabling tools");
+        BalanceTuning.setShared(CURSEBOUND,0);Dungeon.init();
+        check(!Playtest.enabled()&&Playtest.unranked()&&!Playtest.god()&&BalanceTuning.get(CURSEBOUND)==0,"new game keeps shared balance and requires explicit tools");
         BalanceTuning.reset();Playtest.restore(saved);
         check(Playtest.enabled()&&BalanceTuning.changedCount()==0&&BalanceTuning.get(DENSITY)==100,"old save resurrected reset settings");
         SPDSettings.put("balance_profile_v1","density=9999;removed_key=2;respawn=bad;weapon=0;armor=0;missile=0;wand=0;ring=0;artifact=0;potion=0;scroll=0;seed=0;stone=0;gold=0;");
         Playtest.reset();check(BalanceTuning.get(DENSITY)==200&&!BalanceTuning.customItemMix(),"damaged shared profile sanitization");
         BalanceTuning.reset();Dungeon.init();check(!Playtest.enabled()&&!Playtest.god(),"reset should permit ordinary future games");
+        check(!Playtest.unranked(),"fresh defaults must permit a ranked game");
+        BalanceTuning.setShared(DENSITY,125);Playtest.reset();
+        Bundle ordinaryTuned=new Bundle();Playtest.store(ordinaryTuned);
+        check(!ordinaryTuned.getBoolean("playtest")&&ordinaryTuned.getBoolean("custom_balance"),"save separates custom balance and explicit tools");
+        BalanceTuning.reset();Playtest.restore(ordinaryTuned);
+        check(!Playtest.enabled()&&!Playtest.god()&&Playtest.unranked(),"resetting balance must not rank an already customized run");
+        Dungeon.saveAll();
+        Bundle oldGame=com.watabou.utils.FileUtils.bundleFromFile(GamesInProgress.gameFile(GamesInProgress.curSlot));
+        oldGame.remove("elemental_coin_plans");
+        com.watabou.utils.FileUtils.bundleToFile(GamesInProgress.gameFile(GamesInProgress.curSlot),oldGame);
+        Dungeon.loadGame(GamesInProgress.curSlot);Dungeon.switchLevel(Dungeon.loadLevel(GamesInProgress.curSlot),Dungeon.hero.pos);
+        check(Dungeon.hero.isAlive()&&Dungeon.level.insideMap(Dungeon.hero.pos),"legacy full save without elemental plans must load");
         reloaded.remove("balance_profile_v1");reloaded.flush();Playtest.restore(corrupt);
         check(Playtest.enabled()&&BalanceTuning.get(DENSITY)==200&&!BalanceTuning.customItemMix(),"legacy save migration/clamping");
         BalanceTuning.reset();Dungeon.init();

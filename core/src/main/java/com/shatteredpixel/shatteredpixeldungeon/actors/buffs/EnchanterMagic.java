@@ -47,10 +47,6 @@ public class EnchanterMagic extends Buff {
     private void rememberAvailable(){
         for(Class<?> type:Statistics.itemTypesDiscovered)remember(type);
         for(Item item:Dungeon.hero.belongings)learn(item);
-        for(boolean armor:new boolean[]{false,true}){
-            RuneEtching etching=RuneEtching.find(Dungeon.hero,armor);
-            if(etching!=null)remember(etching.activeEffect());
-        }
     }
     public java.util.List<Class<?>> choices(boolean armor){
         rememberAvailable();
@@ -84,7 +80,7 @@ public class EnchanterMagic extends Buff {
         boolean descending=lastFloor!=-1&&floor>lastFloor;lastFloor=floor;lastPos=Dungeon.hero.pos;stationary=0;
         Hero h=Dungeon.hero;
         rememberAvailable();
-        for(boolean armor:new boolean[]{false,true}){RuneEtching etching=RuneEtching.find(h,armor);if(etching!=null){etching.roll();remember(etching.activeEffect());}}
+        for(boolean armor:new boolean[]{false,true}){RuneEtching etching=RuneEtching.find(h,armor);if(etching!=null)etching.roll();}
         boolean firstVisit=floors.add(floor);
         // Discoveries persist. Returning up/down the same stairs grants no extra knowledge.
         if(firstVisit){

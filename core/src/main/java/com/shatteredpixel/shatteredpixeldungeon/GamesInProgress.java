@@ -141,6 +141,7 @@ public class GamesInProgress {
 		
 		info.level = Dungeon.hero.lvl;
 		info.playtest = Playtest.enabled();
+        info.customBalance = Playtest.customBalance();
 		info.str = Dungeon.hero.STR;
 		info.strBonus = Dungeon.hero.STR() - Dungeon.hero.STR;
 		info.exp = Dungeon.hero.exp;
@@ -167,6 +168,7 @@ public class GamesInProgress {
 	
 	public static class Info {
 		public boolean playtest;
+        public boolean customBalance;
 		public int slot;
         public boolean incompatible;
 

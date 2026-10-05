@@ -28,7 +28,14 @@ public class SecretElementalRoom extends SecretRoom {
     public SecretElementalRoom(ElementalCache.Kind kind) { selectedKind=kind; }
     public static void reset() { encountered=0;java.util.Arrays.fill(plans,Integer.MIN_VALUE); }
     public static void storeRun(Bundle b) { b.put("elemental_types_seen",encountered);b.put("elemental_coin_plans",plans); }
-    public static void restoreRun(Bundle b) { encountered=b.getInt("elemental_types_seen");plans=b.getIntArray("elemental_coin_plans");if(plans.length!=15){plans=new int[15];java.util.Arrays.fill(plans,Integer.MIN_VALUE);} }
+    public static void restoreRun(Bundle b) {
+        encountered=b.getInt("elemental_types_seen");
+        int[] saved=b.getIntArray("elemental_coin_plans");
+        plans=new int[15];java.util.Arrays.fill(plans,Integer.MIN_VALUE);
+        // Before the Doubloon these plans were not serialized. Keep the encounter
+        // mask and initialize only the missing future plans, never the entire run.
+        if(saved!=null && saved.length==plans.length)System.arraycopy(saved,0,plans,0,plans.length);
+    }
     public static boolean encountered(ElementalCache.Kind kind) { return (encountered&(1<<kind.ordinal()))!=0; }
     public static int plannedDepth(long seed,int region,ElementalCache.Kind kind) {
         return plannedDepth(seed,region,kind,0);

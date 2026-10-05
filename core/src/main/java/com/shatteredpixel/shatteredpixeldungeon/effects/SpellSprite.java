@@ -137,6 +137,9 @@ public class SpellSprite extends Image {
 	}
 	
 	public static void show( Char ch, int index, float r, float g, float b ) {
+
+        // Accelerated heroes now show a quiet movement trail at their boots.
+        if(index==HASTE && ch instanceof com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero)return;
 		
 		if (!ch.sprite.visible) {
 			return;

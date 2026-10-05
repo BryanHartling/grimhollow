@@ -1,5 +1,9 @@
 # Grimhollow
 
+**Playtest repairs v1.25.1:** older saved games without elemental treasury plans load safely. Device-wide balance settings keep applying across games, while Playtest tools now require explicit activation per save. Tuned games remain excluded from rankings and badges. New Enchanters have exactly three starting weapon enchantments and three armor glyphs; free Rune Etching rolls no longer expand their permanent library. Previously learned knowledge is preserved.
+
+Heroes use their generic painted poses instead of floating weapon icons. Haste has short soft wisps at the boots during movement, fading when stationary; mechanics and timing are unchanged.
+
 **Wayward Chart v1.25.0:** a new carried trinket points to painted treasure mounds without exposing nearby terrain. Strengthening it improves discovery and treasure. Magic Mapping settles an unfulfilled regional promise; a defeated dragon has one additional overlooked pocket. Taking treasure can fade an explored room on any visited floor in that region. Earlier losses remain until those rooms are revisited or their floors mapped. Terrain, exploration flags, visible cells, doors, stairs and known hazards are not rewritten.
 
 **Playtest > Balance tuning > Wayward Chart** exposes discovery at all four ranks, gold, item counts, quality comparisons and the size of faded room memories. Settings persist across games. Its painted Chart, treasure mound states, treasure X and memory veil reproduce from [committed sources and prompts](tools/painted/wayward-prompts.json) through the offline packer; CI needs no generation service.
@@ -8,7 +12,7 @@
 
 Feeding it to a Hatchling makes an irreversible wager: Heads trades both items for a directable Golden Mimic guardian; Tails releases a stronger hostile mimic carrying the recoverable coin. The guardian steals finite gold once per eligible enemy, roots ordinary enemies, collects visible safe loose gold and retreats into its harness when defeated. Recovery needs both time and entry to a different floor. Neither outcome permanently removes an artifact slot.
 
-**Playtest > Balance tuning > Fickle Doubloon / Golden Mimic companion** exposes 20 adjustable values, including Heads chance, charging, fortune, theft resistance, room/cache chances, special shop rolls, guardian health/damage, stealing, roots, recovery and collection range. Settings persist across games on this device and mark affected runs as Playtests. Reset restores the agreed defaults; the normal game retains them.
+**Playtest > Balance tuning > Fickle Doubloon / Golden Mimic companion** exposes 20 adjustable values, including Heads chance, charging, fortune, theft resistance, room/cache chances, special shop rolls, guardian health/damage, stealing, roots, recovery and collection range. Settings persist across games on this device and mark affected runs as custom balance without automatically enabling tools. Reset restores the agreed defaults for future games.
 
 The two painted coin faces and companion harness are packed from `tools/painted/sources/items/doubloon.png`, with the generation prompt in `tools/painted/doubloon-prompts.json`. The unused neutral concept is excluded from the shipped atlas. The coin initially displays Heads without granting an active Favor effect, then displays its last flip. The offline packer regenerates the item atlas and semantic hashes without a generation service. Older item IDs and cells retain their positions.
 
@@ -16,7 +20,7 @@ The two painted coin faces and companion harness are packed from `tools/painted/
 
 **Bone wall and Horror v1.23.2:** Wand of Bone/Bone Prison have stable painted barricades and an examination result with remaining turns. The Horror has modestly stronger combat damage and a separate stronger sleeping-prey pounce, with the same damage tuning setting. Its floor omen is a framed six-second notice; the larger ambush warning remains visible until you respond. Detection, response fairness and recovery limits are unchanged. Balance still requires campaign playtesting.
 
-Latest local Windows launcher: `desktop/build/windows/1.25.0-release/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`. The release folder permits an older local launcher to stay open during packaging; CI packages the same version under `windows/1.25.0`.
+Latest local Windows launcher: `desktop/build/windows/1.25.1/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`. The previous Chart checkpoint remains under `windows/1.25.0-release`.
 
 **Talent panel v1.23.1:** rounded bronze studs replace the blocky gold rank markers. Larger ivory available, bronze spent and hollow future tier markers accompany an explicit available/spent count. Random allocation has a brass shuffle medallion and a larger hit area. Allocation rules, point costs and caps are unchanged.
 

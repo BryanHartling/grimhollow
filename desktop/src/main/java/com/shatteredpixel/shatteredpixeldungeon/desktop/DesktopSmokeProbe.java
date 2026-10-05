@@ -2501,6 +2501,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             }
             Dungeon.hero.heroClass=original;Dungeon.hero.sprite=originalSprite;
             heroEquipmentChecks(buffer,camera,failures);
+            hasteVisualChecks(buffer,camera,failures);
             grassDepthChecks(failures);
             java.io.File jar=new java.io.File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
             try(java.util.jar.JarFile classes=new java.util.jar.JarFile(jar)) {
@@ -2705,7 +2706,10 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneRod(),
                 new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword(),
                 new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Sickle(),
-                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WarScythe()};
+                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WarScythe(),
+                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Whip(),
+                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BattleAxe(),
+                new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Flail()};
         com.badlogic.gdx.utils.JsonValue anchors=new com.badlogic.gdx.utils.JsonReader().parse(Gdx.files.internal("sprites/hero-grips.json"));
         int checks=0;
         try {
@@ -2714,41 +2718,23 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     hero.belongings.armor=new com.shatteredpixel.shatteredpixeldungeon.items.armor.ClothArmor();
                     hero.belongings.armor.tier=tier;
                     com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
+                    long[][] genericPixels=new long[2][21];
                     for(com.shatteredpixel.shatteredpixeldungeon.items.KindOfWeapon item:weapons){hero.belongings.weapon=item;
                         for(boolean flip:new boolean[]{false,true})for(int pose:new int[]{0,2,5,13,14,15}){
                             sprite.flipHorizontal=flip;sprite.frame(sprite.texture.uvRect(pose*96,tier*120,(pose+1)*96,(tier+1)*120));
                             Pixmap pixels=renderSprite(sprite,buffer,camera);Image held=sprite.displayedEquipment();
-                            if(item==null&&held!=null||item!=null&&(held==null||held.frame().left!=com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.film.get(item.image()).left
-                                    ||held.frame().top!=com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet.film.get(item.image()).top))
-                                failures.add("24 wrong displayed weapon "+entry.name+" "+item);
-                            if(held!=null&&(held.width()>14||held.height()>14||held.am!=sprite.am))failures.add("24 equipment footprint/alpha "+entry.name);
-                            if(held!=null){
-                                float gx=entry.get(pose).getFloat(0)/48f;if(flip)gx=1-gx;
-                                float gy=entry.get(pose).getFloat(1)/60f;
-                                // Independent pixel occupancy rejects a declared anchor in air.
-                                // Matching two metadata coordinates alone cannot prove a grip.
-                                int handX=Math.round(entry.get(pose).getFloat(0)*2),handY=Math.round(entry.get(pose).getFloat(1)*2);
-                                int bodyX=Math.round(sprite.frame().left*sprite.texture.width),bodyY=Math.round(sprite.frame().top*sprite.texture.height);
-                                if((sprite.texture.bitmap.getPixel(bodyX+handX,bodyY+handY)&255)<32)
-                                    failures.add("24 hand anchor misses painted body "+entry.name+" tier="+tier+" pose="+pose);
-                                com.badlogic.gdx.utils.JsonValue grip=new com.badlogic.gdx.utils.JsonReader().parse(Gdx.files.internal("sprites/equipment-grips.json")).get(Integer.toString(item.image()));
-                                int handleX=(int)(grip.getFloat(0)*64),handleY=(int)(grip.getFloat(1)*64);
-                                if((held.texture.bitmap.getPixel(Math.round(held.frame().left*held.texture.width)+handleX,Math.round(held.frame().top*held.texture.height)+handleY)&255)<32)
-                                    failures.add("24 grip misses painted handle "+item.getClass().getSimpleName());
-                                if(Math.abs(held.x+held.origin.x-(sprite.x+gx*sprite.width))>.01f||Math.abs(held.y+held.origin.y-(sprite.y+gy*sprite.height))>.01f)
-                                    failures.add("24 handle detached from hand "+entry.name+" "+item);
-                                if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Spear||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneRod||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Sickle){
-                                    float dx=(grip.getFloat(2)-grip.getFloat(0))*held.width,dy=(grip.getFloat(3)-grip.getFloat(1))*held.height;
-                                    if(held.flipHorizontal)dx=-dx;
-                                    double rotation=Math.toRadians(held.angle);float tx=(float)(dx*Math.cos(rotation)-dy*Math.sin(rotation)),ty=(float)(dx*Math.sin(rotation)+dy*Math.cos(rotation));
-                                    boolean upright=!(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Shortsword);
-                                    if(pose==0&&(upright?ty>=0:ty<=0)||pose==14&&(flip?tx>=0:tx<=0))failures.add("24 weapon axis points backwards "+entry.name+" "+item+" pose="+pose);
-                                }
-                            }
+                            // Per-item grip tests are retired: the user requested generic painted poses.
+                            // Exercise every loadout/pose anyway and reject any floating item overlay.
+                            if(held!=null)failures.add("24 generic hero still draws an inventory weapon "+entry.name+" "+item);
+                            java.util.zip.CRC32 pixelHash=new java.util.zip.CRC32();pixelHash.update(pixels.getPixels().duplicate());
+                            if(item==null)genericPixels[flip?1:0][pose]=pixelHash.getValue();
+                            else if(pixelHash.getValue()!=genericPixels[flip?1:0][pose])failures.add("24 generic pose retains weapon pixels "+entry.name+" "+item);
                             if(!flip&&pose==0&&(tier==1||tier==5)){String label=item==null?"empty":item.getClass().getSimpleName();
                                 PixmapIO.writePNG(Gdx.files.absolute("verification/heroes/pilot/weapons/"+entry.name+"-"+tier+"-"+label+".png"),pixels,-1,true);}
                             if(hero.heroClass==HeroClass.NECROMANCER&&tier==1&&(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Sickle||item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.BoneRod))
                                 PixmapIO.writePNG(Gdx.files.absolute("verification/heroes/pilot/weapons/necromancer-"+item.getClass().getSimpleName()+"-pose"+pose+"-"+(flip?"left":"right")+".png"),pixels,-1,true);
+                            if(hero.heroClass==HeroClass.PSYCHIC&&tier==1&&!flip&&pose==0&&item!=null&&java.util.Arrays.asList("Whip","BattleAxe","Flail").contains(item.getClass().getSimpleName()))
+                                PixmapIO.writePNG(Gdx.files.absolute("verification/interface/generic-"+item.getClass().getSimpleName()+".png"),pixels,-1,true);
                             pixels.dispose();checks++;
                         }
                     }
@@ -2761,7 +2747,39 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 }
             }
         }finally{hero.heroClass=original;hero.sprite=originalSprite;hero.belongings.weapon=originalWeapon;hero.belongings.abilityWeapon=second;hero.belongings.armor=originalArmor;}
-        System.out.println("HERO EQUIPMENT: native draws="+checks+" eight armor rows, both facings, twelve loadouts, movement/action poses, opaque palms/handles, carry/attack axes, secondary and thrown capture; failures="+failures.size());
+        System.out.println("HERO EQUIPMENT: native draws="+checks+" eight armor rows, both facings, fifteen loadouts, generic movement/action pixels match empty loadout, secondary and thrown capture; prior grip/axis assertions retired by user request; failures="+failures.size());
+    }
+
+    private void hasteVisualChecks(com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,Camera camera,java.util.List<String> failures)throws Exception{
+        com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero hero=Dungeon.hero;
+        com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite original=hero.sprite;
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Haste prior=hero.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Haste.class);
+        boolean enhanced=SPDSettings.enhancedEffects();float elapsed=Game.elapsed;
+        com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
+        Pixmap baseline=null,moving=null,stopped=null;
+        try{
+            SPDSettings.enhancedEffects(true);
+            baseline=renderSprite(sprite,buffer,camera);
+            com.shatteredpixel.shatteredpixeldungeon.effects.HasteTrail trail=(com.shatteredpixel.shatteredpixeldungeon.effects.HasteTrail)RecoveryChecks.field(sprite,"hasteTrail");
+            trail.update();
+            com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.affect(hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Haste.class);
+            sprite.isMoving=true;sprite.x+=.25f;trail.update();
+            moving=renderSprite(sprite,buffer,camera);
+            int changed=0,aboveBoots=0;
+            float midline=256-(8+sprite.height/2)*camera.zoom;
+            for(int y=0;y<256;y++)for(int x=0;x<256;x++)if(baseline.getPixel(x,y)!=moving.getPixel(x,y)){changed++;if(y>midline)aboveBoots++;}
+            if(changed==0||aboveBoots>0)failures.add("32 Haste movement trail missing or reaches upper body: "+changed+"/"+aboveBoots);
+            PixmapIO.writePNG(Gdx.files.absolute("verification/interface/haste-moving.png"),moving,-1,true);
+            sprite.isMoving=false;Game.elapsed=.2f;trail.update();stopped=renderSprite(sprite,buffer,camera);
+            java.util.zip.CRC32 a=new java.util.zip.CRC32(),b=new java.util.zip.CRC32();a.update(baseline.getPixels().duplicate());b.update(stopped.getPixels().duplicate());
+            if(a.getValue()!=b.getValue())failures.add("32 Haste still draws while standing");
+            PixmapIO.writePNG(Gdx.files.absolute("verification/interface/haste-standing.png"),stopped,-1,true);
+            System.out.println("HASTE VISUAL: moving boot pixels="+changed+", upper-body pixels="+aboveBoots+", standing matches normal sprite; failures="+failures.size());
+        }finally{
+            if(prior==null)com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.detach(hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Haste.class);
+            sprite.destroy();hero.sprite=original;Game.elapsed=elapsed;SPDSettings.enhancedEffects(enhanced);
+            if(baseline!=null)baseline.dispose();if(moving!=null)moving.dispose();if(stopped!=null)stopped.dispose();
+        }
     }
 
     private void rankAndKeyChecks(com.badlogic.gdx.graphics.glutils.FrameBuffer buffer,Camera camera,java.util.List<String> failures)throws Exception{
@@ -3073,8 +3091,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if(image instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite){java.lang.reflect.Field shadow=com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite.class.getDeclaredField("renderShadow");shadow.setAccessible(true);shadow.setBoolean(image,false);}
         image.x=16;image.y=8;image.camera=camera;
         buffer.begin();Gdx.gl.glDisable(com.badlogic.gdx.graphics.GL20.GL_SCISSOR_TEST);Gdx.gl.glDisable(com.badlogic.gdx.graphics.GL20.GL_BLEND);Gdx.gl.glClearColor(0,0,0,0);Gdx.gl.glClear(com.badlogic.gdx.graphics.GL20.GL_COLOR_BUFFER_BIT);
-        // Held equipment composes multiple quads. It needs the game's alpha
-        // blending; raw single-atlas pixel comparisons below remain unblended.
+        // Hero body and boot wisps use the game's alpha blending; raw atlas
+        // pixel comparisons below remain unblended.
         if(image instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite)com.watabou.glwrap.Blending.useDefault();
         // Widget construction may upload a libGDX font texture between these draws.
         // Match the game's per-frame binding reset before drawing the measured image.

@@ -31,7 +31,7 @@ public class WndSupportPrompt extends WndTitledMessage {
         if(Gdx.graphics!=null)text.append("\nDisplay: ").append(Gdx.graphics.getWidth()).append(" x ").append(Gdx.graphics.getHeight()).append("; FPS: ").append(Gdx.graphics.getFramesPerSecond());
         if(Dungeon.hero!=null)text.append("\nHero: ").append(Dungeon.hero.heroClass).append(" level ").append(Dungeon.hero.lvl)
                 .append("\nFloor: ").append(Dungeon.depth).append("; branch: ").append(Dungeon.branch).append("; cell: ").append(Dungeon.hero.pos)
-                .append("\nSeed: ").append(Dungeon.seed).append("; Playtest: ").append(Playtest.enabled());
+                .append("\nSeed: ").append(Dungeon.seed).append("; Playtest: ").append(Playtest.enabled()).append("; Custom balance: ").append(Playtest.customBalance());
         text.append("\n\n").append(issue==null?"No error was captured in this session. Describe what happened when sharing this report.":issue);
         return text.toString();
     }

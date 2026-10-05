@@ -1,3 +1,11 @@
+# Playtesting repairs - v1.25.1
+
+- Guard absent and malformed elemental-room plan arrays when restoring older saves; preserve the encountered-type mask. Extend the existing save tests with missing/wrong-length/current fields and a complete disk save/load with the field removed.
+- Separate global balance tuning from explicit save-local Playtest tools. Ordinary new games and ordinary old saves use the shared profile without gaining tools or God mode. Preserve a separate saved custom-balance history so returning settings to defaults cannot rank a previously customized game. Rankings, badges, catalog credit and cross-run bones keep their restrictions.
+- Stop teaching permanent inscription knowledge from free floor Rune Etching rolls. Fresh Enchanters have exactly Blazing/Shocking/Chilling and Obfuscation/Swiftness/Viscosity; identified gear, discoveries and Deep Knowledge still expand the run library. Preserve already learned libraries rather than deleting paid/legitimate knowledge from old saves.
+- Replace inventory-icon weapon overlays with generic painted poses for all nine heroes, as requested after repeated anatomical grip failures. Retire the old per-item grip/axis assertions explicitly; retain all armor/facing/action draws and compare actual rendered pixels with the same empty-loadout pose, including the reported Whip, BattleAxe and Flail. No character painting or attack rule changes.
+- Replace the hero's overhead Haste flash with two cached soft ankle wisps visible only while moving with Haste, Greater Haste or freerunning. They inherit hero visibility/lighting, fade promptly at rest and allocate no per-frame objects. HUD status icons and all speed/turn rules are unchanged.
+
 # Fickle Doubloon - v1.24.0
 
 - Added the agreed level 0-10 artifact to the existing generation pool, without changing previous artifact weights. Growth counts successful flips only: cumulative 3/6/10/15/21/28/36/45/55/66. A flip uses one charge and one turn; an active wager blocks another flip and unequipping.

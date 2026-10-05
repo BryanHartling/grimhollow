@@ -147,11 +147,12 @@ public class SmokeRun {
         rune.floorGlyph=new com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Swiftness();
         check(armor.hasGlyph(rune.floorGlyph.getClass(),h)&&armor.hasGlyph(armor.glyph.getClass(),h)&&armor.hasGlyph(armor.inscribed.getClass(),h),"37: three glyph layers coexist");
         Buff.affect(h,MagicImmune.class);check(!armor.hasGlyph(rune.floorGlyph.getClass(),h),"37: magic immunity");Buff.detach(h,MagicImmune.class);
+        java.util.List<Class<?>> knownGlyphs=EnchanterMagic.state().choices(true),knownEnchants=EnchanterMagic.state().choices(false);
         int depth=Dungeon.depth;Dungeon.depth=depth+1;EnchanterMagic.state().arrive();
         check(Arrays.asList(Armor.Glyph.common).contains(rune.floorGlyph.getClass())
                 &&Arrays.asList(RuneEtching.FLOOR_ENCHANTS).contains(weaponRune.floorEnchant.getClass())
-                &&armor.inscribed!=null&&EnchanterMagic.state().choices(true).contains(rune.activeEffect())
-                &&EnchanterMagic.state().choices(false).contains(weaponRune.activeEffect()),"37: floor rolls preserve both knowledge catalogs");
+                &&armor.inscribed!=null&&EnchanterMagic.state().choices(true).equals(knownGlyphs)
+                &&EnchanterMagic.state().choices(false).equals(knownEnchants),"37: floor rolls preserve both knowledge catalogs without teaching their free effects");
         Bundle saved=new Bundle();saved.put("armor",armor);saved.put("weapon",weapon);
         Armor restored=(Armor)saved.get("armor");Weapon restoredWeapon=(Weapon)saved.get("weapon");
         check(restored.runeEtching!=null&&restored.level()==armor.level()&&restored.runeEtching.level()==1
@@ -1281,7 +1282,7 @@ public class SmokeRun {
     }
 
     private static void keepsakeScenario() throws Exception {
-        Playtest.reset();Dungeon.daily=false;Dungeon.customSeedText="";Dungeon.challenges=0;
+        BalanceTuning.reset();Playtest.reset();Dungeon.daily=false;Dungeon.customSeedText="";Dungeon.challenges=0;
         java.lang.reflect.Field depth=Bones.class.getDeclaredField("depth"),branch=Bones.class.getDeclaredField("branch"),previous=Bones.class.getDeclaredField("heroClass"),loot=Bones.class.getDeclaredField("item");
         for(java.lang.reflect.Field f:new java.lang.reflect.Field[]{depth,branch,previous,loot})f.setAccessible(true);
         HeroClass current=Dungeon.hero.heroClass;
@@ -1315,6 +1316,13 @@ public class SmokeRun {
         for(Class<?> glyph:new Class<?>[]{com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Obfuscation.class,com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Swiftness.class,com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Viscosity.class})
             check(EnchanterMagic.state().choices(true).contains(glyph),"33: level-one armor trade knowledge "+glyph.getSimpleName());
         check(Statistics.itemTypesDiscovered.isEmpty(),"33: armor trade knowledge does not identify found gear");
+        check(EnchanterMagic.state().choices(false).size()==3&&EnchanterMagic.state().choices(true).size()==3,
+                "33: fresh Enchanter has exactly three enchantments and three glyphs");
+        int startingDepth=Dungeon.depth;
+        for(int entry=2;entry<=4;entry++){Dungeon.depth=entry;EnchanterMagic.state().arrive();}
+        check(EnchanterMagic.state().choices(false).size()==3&&EnchanterMagic.state().choices(true).size()==3,
+                "33: free floor rune rolls do not teach inscriptions");
+        Dungeon.depth=startingDepth;EnchanterMagic.state().arrive();
         com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor startingArmor=h.belongings.armor;
         startingArmor.inscribe(new com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Brimstone());
         check(brush.cast(h,"inscribe",h.pos,startingArmor,com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.Obfuscation.class)

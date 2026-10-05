@@ -266,6 +266,7 @@ public class StartScene extends PixelScene {
 				}
 				
 				if(info.playtest)lastPlayed.text("PLAYTEST");
+                else if(info.customBalance)lastPlayed.text("CUSTOM BALANCE");
 				depth.text(Integer.toString(info.depth));
 				depth.measure();
 				

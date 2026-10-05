@@ -7,6 +7,29 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class RecoveryTest {
+    @Test public void oldElementalRoomSavesKeepEncounterHistoryWithoutPlans() {
+        com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.reset();
+        com.watabou.utils.Bundle old=new com.watabou.utils.Bundle();
+        old.put("elemental_types_seen",5);
+        try {
+            com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.restoreRun(old);
+            assertTrue(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.encountered(
+                    com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.Kind.FIRE));
+            com.watabou.utils.Bundle migrated=new com.watabou.utils.Bundle();
+            com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.storeRun(migrated);
+            assertEquals(5,migrated.getInt("elemental_types_seen"));
+            assertEquals(15,migrated.getIntArray("elemental_coin_plans").length);
+            for(int plan:migrated.getIntArray("elemental_coin_plans"))assertEquals(Integer.MIN_VALUE,plan);
+            old.put("elemental_coin_plans",new int[]{2});
+            com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.restoreRun(old);
+            com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.storeRun(migrated);
+            assertEquals(15,migrated.getIntArray("elemental_coin_plans").length);
+            int[] valid=new int[15];valid[4]=7;old.put("elemental_coin_plans",valid);
+            com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.restoreRun(old);
+            com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.storeRun(migrated);
+            assertArrayEquals(valid,migrated.getIntArray("elemental_coin_plans"));
+        } finally { com.shatteredpixel.shatteredpixeldungeon.levels.rooms.secret.SecretElementalRoom.reset(); }
+    }
     @Test public void textureFilteringWaitsForRenderThreadAndSurvivesReload() throws Exception {
         com.badlogic.gdx.utils.GdxNativesLoader.load();
         com.badlogic.gdx.graphics.GL20 previous=com.badlogic.gdx.Gdx.gl;

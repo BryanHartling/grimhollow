@@ -894,6 +894,7 @@ public class Dungeon {
 	
 	public static void preview( GamesInProgress.Info info, Bundle bundle ) {
 		info.playtest = bundle.getBoolean("playtest");
+        info.customBalance = bundle.getBoolean("custom_balance");
 		info.depth = bundle.getInt( DEPTH );
 		info.version = bundle.getInt( VERSION );
 		info.challenges = bundle.getInt( CHALLENGES );

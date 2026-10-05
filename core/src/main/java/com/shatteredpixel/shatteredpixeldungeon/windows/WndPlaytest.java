@@ -40,10 +40,10 @@ public class WndPlaytest extends Window {
         Entry(String label,Runnable action,Item item){this.label=label;this.action=action;this.item=item;}
     }
     public WndPlaytest(){this("Playtest",atHome()
-            ?"Tune balance for every game on this device, or open a run for God mode, items and travel. Once Playtest is enabled for a save, reopen these tools from its in-game menu. Custom balance marks affected games as Playtests."
+            ?"Tune balance for every game on this device, or open a run for God mode, items and travel. Once Playtest is enabled for a save, reopen these tools from its in-game menu. Custom balance applies to every game; customized runs have no rankings or badges. Tools are enabled separately for each save."
             :Playtest.enabled()
             ?"Level "+Dungeon.hero.lvl+" | Floor "+Dungeon.depth+" | God mode "+(Playtest.god()?"ON":"OFF")
-            :"Enable testing for this save: no rankings, badges, catalog credit or bones. Balance settings apply to every game on this device and mark affected games as Playtests. God mode and direct actions affect this save only.",rootEntries(),0,null);}
+            :"Enable testing for this save: no rankings, badges, catalog credit or bones. Balance settings apply to every game on this device; customized runs have no rankings or badges. God mode and direct actions affect this save only.",rootEntries(),0,null);}
 
     private WndPlaytest(String title,String body,List<Entry> entries,int page,Runnable back){
         int width=(int)Math.min(PixelScene.landscape()?220:170,PixelScene.uiCamera.width-24);

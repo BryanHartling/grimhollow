@@ -49,14 +49,13 @@ public class HeroSprite extends CharSprite {
 	
 	private Animation fly;
 	private Animation read;
-    private HeroEquipment equipment;
-    private HeroClass appearance;
+    private volatile com.shatteredpixel.shatteredpixeldungeon.items.Item actionWeapon;
+    private com.shatteredpixel.shatteredpixeldungeon.effects.HasteTrail hasteTrail;
 
 	public HeroSprite() {
 		super();
 		
 		texture( Dungeon.hero.heroClass.spritesheet() );
-        appearance=Dungeon.hero.heroClass;
 		texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR, com.badlogic.gdx.graphics.GL20.GL_LINEAR);
 		updateArmor();
 		
@@ -66,13 +65,11 @@ public class HeroSprite extends CharSprite {
 			idle();
 		else
 			die();
-        // Construct cached draw resources on the scene/render thread, before
-        // actor-thread attack callbacks can capture a transient weapon.
-        equipment=new HeroEquipment(this);
+        // Cache draw resources on the scene/render thread, never in actor callbacks.
+        hasteTrail=new com.shatteredpixel.shatteredpixeldungeon.effects.HasteTrail(this);
 	}
 
 	public void disguise(HeroClass cls){
-        appearance=cls;
 		texture( cls.spritesheet() );
 		texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR, com.badlogic.gdx.graphics.GL20.GL_LINEAR);
 		updateArmor();
@@ -128,7 +125,7 @@ public class HeroSprite extends CharSprite {
 
 	@Override
 	public void idle() {
-        if(equipment!=null)equipment.rest();
+        actionWeapon=null;
 		super.idle();
 		if (ch != null && ch.flying) {
 			play( fly );
@@ -154,21 +151,20 @@ public class HeroSprite extends CharSprite {
 	}
 
     public void presentProjectile(com.shatteredpixel.shatteredpixeldungeon.items.Item item){
-        equipment().capture(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.KindOfWeapon?item:null);
+        actionWeapon=item instanceof com.shatteredpixel.shatteredpixeldungeon.items.KindOfWeapon?item:null;
     }
-    private HeroEquipment equipment(){if(equipment==null)equipment=new HeroEquipment(this);return equipment;}
-    public Image displayedEquipment(){return equipment().image();}
-    public com.shatteredpixel.shatteredpixeldungeon.items.Item displayedWeapon(){return equipment().displayedWeapon((Hero)ch);}
+    // Generic painted poses replace inventory icons used as anatomical overlays.
+    public Image displayedEquipment(){return null;}
+    public com.shatteredpixel.shatteredpixeldungeon.items.Item displayedWeapon(){return actionWeapon!=null?actionWeapon:((Hero)ch).belongings.weapon();}
     @Override public synchronized void attack(int cell,Callback callback){
-        equipment().capture(((Hero)ch).belongings.attackingWeapon());
+        actionWeapon=((Hero)ch).belongings.attackingWeapon();
         super.attack(cell,callback);
     }
     @Override public void draw(){
+        if(hasteTrail!=null)hasteTrail.draw();
         super.draw();
-        int pose=Math.round(frame.left*texture.width/FRAME_WIDTH);
-        if(equipment().prepare(pose,appearance))equipment.draw();
     }
-    @Override public void destroy(){if(equipment!=null)equipment.destroy();super.destroy();}
+    @Override public void destroy(){if(hasteTrail!=null)hasteTrail.destroy();super.destroy();}
 
 	@Override
 	public void bloodBurstA(PointF from, int damage) {
@@ -187,6 +183,7 @@ public class HeroSprite extends CharSprite {
 		sleeping = ch.isAlive() && ((Hero)ch).resting;
 		
 		super.update();
+        if(hasteTrail!=null)hasteTrail.update();
 	}
 	
 	public void sprint( float speed ) {

@@ -20,7 +20,12 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.25.0","A chart that trades old paths for hidden treasure.");
+        ChangeInfo r=release(list,"v1.25.1","Safer old saves and quieter hero presentation.");
+        note(r,Icons.INFO,"Saved games","Older games missing an elemental-room planning field now load safely. Their previously encountered treasuries remain recorded.");
+        note(r,Icons.PREFS,"Ordinary new games","Shared balance tuning still applies across games, but no longer enables Playtest tools automatically. Explicit tools and God mode remain separate for each save; customized games remain outside rankings and badges.");
+        note(r,Icons.TALENT,"Enchanter knowledge","New Enchanters begin with three weapon enchantments and three armor glyphs. A random Rune Etching effect no longer becomes permanent trade knowledge just by crossing floors; actual discoveries and knowledge talents still work.");
+        note(r,Icons.TALENT,"Hero presentation","Floating inventory weapon overlays are replaced by the heroes' generic painted poses. Accelerated movement has two short soft wisps at the boots, fading when you stop, instead of the overhead Haste flash. Combat, speed and timing are unchanged.");
+        r=release(list,"v1.25.0","A chart that trades old paths for hidden treasure.");
         note(r,Icons.JOURNAL,"Wayward Chart","A new trinket marks painted treasure mounds without revealing their surroundings. Its promises grow with the chart, and it remembers which regions have already rewarded you.");
         note(r,Icons.INFO,"Wandering ink","Taking treasure can fade an explored room on any visited floor in that region. Return to the room or read Magic Mapping there to restore it. Mapping can also settle an unfulfilled treasure promise; a defeated dragon has one extra secret.");
         note(r,Icons.PREFS,"Chart controls","Playtest balance includes discovery odds, reward counts, gold, quality comparisons and the size of faded memories. Terrain, visible cells, doors and known hazards remain reliable.");

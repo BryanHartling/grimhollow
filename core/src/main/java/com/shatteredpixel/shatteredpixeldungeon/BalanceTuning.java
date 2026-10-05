@@ -66,7 +66,7 @@ public final class BalanceTuning {
     public static final Key[] CACHE_BASE_CHANCES={Key.CACHE_FIRE_CHANCE,Key.CACHE_WATER_CHANCE,Key.CACHE_LIGHTNING_CHANCE};
     private static final String PROFILE="balance_profile_v1";
     public static int configured(Key key) { return values.getOrDefault(key,key.baseline); }
-    public static int get(Key key) { return Playtest.enabled()?configured(key):key.baseline; }
+    public static int get(Key key) { return configured(key); }
     public static float multiplier(Key key) { return get(key)/100f; }
     public static void set(Key key,int value) {
         Playtest.require();
@@ -87,8 +87,9 @@ public final class BalanceTuning {
         }
         if(value==key.baseline)values.remove(key);else values.put(key,value);
         persist();
+        if(Dungeon.hero!=null)Playtest.customBalance();
     }
-    public static void reset() { values.clear(); persist(); }
+    public static void reset() { Playtest.customBalance(); values.clear(); persist(); }
     public static int changedCount() { return values.size(); }
     private static void persist() {
         StringBuilder profile=new StringBuilder();
@@ -117,7 +118,7 @@ public final class BalanceTuning {
     public static void restore(Bundle bundle) {
         if(SPDSettings.contains(PROFILE)) { loadShared(); return; }
         values.clear();
-        if(!Playtest.enabled() || !bundle.contains("balance_tuning"))return;
+        if(!(Playtest.enabled() || bundle.getBoolean("custom_balance")) || !bundle.contains("balance_tuning"))return;
         Bundle tuning=bundle.getBundle("balance_tuning");
         for(Key key:Key.values())if(tuning.contains(key.id())) {
             int value=Math.max(key.min,Math.min(key.max,tuning.getInt(key.id())));

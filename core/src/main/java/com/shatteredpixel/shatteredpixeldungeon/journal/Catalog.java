@@ -331,7 +331,7 @@ public enum Catalog {
 	}
 
 	public static void countUses(Class<?> cls, int uses){
-		if (com.shatteredpixel.shatteredpixeldungeon.Playtest.enabled()) return;
+		if (com.shatteredpixel.shatteredpixeldungeon.Playtest.unranked()) return;
 		for (Catalog cat : values()) {
 			if (cat.useCount.containsKey(cls) && cat.useCount.get(cls) != Integer.MAX_VALUE) {
 				cat.useCount.put(cls, cat.useCount.get(cls)+uses);

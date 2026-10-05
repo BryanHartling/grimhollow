@@ -81,7 +81,7 @@ public enum Rankings {
 	public LinkedHashMap<Long, Integer> dailyScoreHistory = new LinkedHashMap<>();
 
 	public void submit( boolean win, Object cause ) {
-		if (Playtest.enabled()) return;
+		if (Playtest.unranked()) return;
 
 		load();
 		

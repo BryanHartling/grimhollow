@@ -16,8 +16,8 @@ allprojects {
         appName = 'Grimhollow'
         appPackageName = 'com.grimhollow.dungeon'
 
-        appVersionCode = 993
-        appVersionName = '1.24.0'
+        appVersionCode = 994
+        appVersionName = '1.25.0'
 
         appJavaCompatibility = JavaVersion.VERSION_11
 

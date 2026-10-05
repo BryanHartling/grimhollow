@@ -807,10 +807,66 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }else if(frames==1360){
             interfaceBounds();checkReviewText(Game.scene());capture("doubloon-golden-companion");
             com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.reset();
-            System.out.println("DOUBLOON UI PASS: fitted painted actions, both tuning menus, odds input, Heads flip, repeated custom buff refresh, irreversible feeding confirmation and Golden Mimic transformation; failures=0");Gdx.app.exit();
+            System.out.println("DOUBLOON UI PASS: fitted painted actions, both tuning menus, odds input, Heads flip, repeated custom buff refresh, irreversible feeding confirmation and Golden Mimic transformation; failures=0");
+        }else if(frames==1390){
+            closeReviewWindows();GameScene.cancel();
+            reviewChart=new com.shatteredpixel.shatteredpixeldungeon.items.trinkets.WaywardChart();reviewChart.level(3);reviewChart.identify();
+            if(!reviewChart.collect())throw new AssertionError("Chart fixture inventory full");
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(reviewChart));
+        }else if(frames==1420){
+            interfaceBounds();checkReviewText(Game.scene());capture("wayward-description");closeReviewWindows();
+            com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();
+        }else if(frames==1450){
+            if(!playtestClickPage("Wayward Chart")){frames--;return;}
+        }else if(frames==1480){
+            interfaceBounds();checkReviewText(Game.scene());capture("wayward-tuning");playtestClick("Chart discovery at +0: 10%");
+        }else if(frames==1510){
+            playtestInput("0","Apply");
+            if(BalanceTuning.configured(BalanceTuning.Key.CHART_CHANCE_0)!=0)throw new AssertionError("Chart tuning input");
+            closeReviewWindows();WaywardJourney.reset();
+            for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs.toArray(new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob[0]))Actor.remove(m);
+            Dungeon.level.mobs.clear();WaywardJourney.mapping();
+            if(WaywardJourney.caches().size()!=1)throw new AssertionError("Chart paid discovery");
+            reviewCache=WaywardJourney.caches().get(0);int cell=reviewCache.pos;
+            Dungeon.level.visited[cell]=Dungeon.level.mapped[cell]=Dungeon.level.heroFOV[cell]=false;
+            GameScene.updateFog();Camera.main.snapTo((cell%Dungeon.level.width()+.5f)*16,(cell/Dungeon.level.width()+.5f)*16);
+        }else if(frames==1540){
+            if(Dungeon.level.visited[reviewCache.pos]||Dungeon.level.mapped[reviewCache.pos]||Dungeon.level.heroFOV[reviewCache.pos])throw new AssertionError("Chart X reveals terrain");
+            capture("wayward-unexplored-marker");
+            Dungeon.hero.pos=reviewCache.pos;Dungeon.hero.sprite.place(Dungeon.hero.pos);Dungeon.observe();
+            Camera.main.snapTo(Dungeon.hero.sprite.center().x,Dungeon.hero.sprite.center().y);
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(Dungeon.level.heaps.get(reviewCache.pos)));
+        }else if(frames==1570){
+            interfaceBounds();checkReviewText(Game.scene());capture("wayward-mound-description");closeReviewWindows();
+            // Existing room exploration is the real substrate for a claim's memory cost.
+            java.util.Arrays.fill(Dungeon.level.visited,true);WaywardJourney.captureRooms();
+            com.shatteredpixel.shatteredpixeldungeon.items.Heap heap=Dungeon.level.heaps.get(reviewCache.pos);
+            if(heap.sprite.frame().width()*heap.sprite.texture.width!=64)throw new AssertionError("Chart mound texture size");
+            if(!Dungeon.hero.ready){frames--;return;}pointerCell(reviewCache.pos);
+        }else if(frames==1610){
+            if(!reviewCache.claimed||reviewCache.state()!=1)throw new AssertionError("Actual pointer pickup did not claim painted cache");
+            capture("wayward-mound-partial");
+            com.shatteredpixel.shatteredpixeldungeon.items.Heap heap=Dungeon.level.heaps.get(reviewCache.pos);
+            while(!heap.isEmpty())heap.pickUp();
+            for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap tile:Dungeon.level.customTiles)
+                if(tile instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.WaywardMoundTile)tile.updateKnowledge();
+        }else if(frames==1640){
+            if(reviewCache.state()!=2)throw new AssertionError("Exhausted mound state");capture("wayward-mound-exhausted");
+            WaywardJourney.Memory memory=WaywardJourney.memories().stream().filter(m->m.forgotten).findFirst().orElseThrow(()->new AssertionError("No claim memory veil"));
+            java.util.Arrays.fill(Dungeon.level.heroFOV,false);GameScene.updateFog();
+            int cell=memory.cells[memory.cells.length/2];Camera.main.snapTo((cell%Dungeon.level.width()+.5f)*16,(cell/Dungeon.level.width()+.5f)*16);
+        }else if(frames==1670){
+            if(!java.util.stream.IntStream.range(0,Dungeon.level.length()).anyMatch(i->WaywardJourney.veilCells()[i]))throw new AssertionError("Remembered terrain veil missing");
+            capture("wayward-forgotten-room");WaywardJourney.mapping();
+        }else if(frames==1700){
+            if(WaywardJourney.memories().stream().anyMatch(m->m.forgotten))throw new AssertionError("Mapping did not restore native veil");
+            capture("wayward-restored-room");BalanceTuning.reset();
+            System.out.println("WAYWARD UI PASS: painted Chart and mound states, no terrain-revealing marker, native mouse/touch claim, accumulated memory layer, mapping restore and tuning input; failures=0");Gdx.app.exit();
         }
     }
     private com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon reviewCoin;
+    private com.shatteredpixel.shatteredpixeldungeon.items.trinkets.WaywardChart reviewChart;
+    private WaywardJourney.Cache reviewCache;
     private void notificationReview(){
         com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite spell=new com.shatteredpixel.shatteredpixeldungeon.effects.SpellSprite();
         for(int i=0;i<8;i++){

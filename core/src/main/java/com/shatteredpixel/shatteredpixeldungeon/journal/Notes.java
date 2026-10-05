@@ -74,6 +74,23 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class Notes {
+    public static class ChartRecord extends Record {
+        public int cacheID;
+        public ChartRecord() {}
+        public ChartRecord(int id,int floor){cacheID=id;depth=floor;}
+        @Override public Image icon(){return new ItemSprite(ItemSpriteSheet.WAYWARD_CHART);}
+        @Override protected int order(){return 900;}
+        @Override public String title(){
+            com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.Cache c=com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.cache(cacheID);
+            return Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.trinkets.WaywardChart.class,c!=null && c.hoard?"hoard_note":"cache_name");
+        }
+        @Override public String desc(){return Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.trinkets.WaywardChart.class,"note_desc");}
+        @Override public boolean equals(Object other){return other instanceof ChartRecord && ((ChartRecord)other).cacheID==cacheID;}
+        @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("cache_id",cacheID);}
+        @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);cacheID=b.getInt("cache_id");}
+    }
+    public static void addChart(int id,int floor){ChartRecord record=new ChartRecord(id,floor);if(!records.contains(record)){records.add(record);Collections.sort(records,comparator);}}
+    public static void removeChart(int id){records.remove(new ChartRecord(id,0));}
 	
 	public static abstract class Record implements Comparable<Record>, Bundlable {
 

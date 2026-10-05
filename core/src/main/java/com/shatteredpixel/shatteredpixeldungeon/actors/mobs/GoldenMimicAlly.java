@@ -53,7 +53,7 @@ public class GoldenMimicAlly extends DirectableAlly {
                 int d=Dungeon.level.distance(pos,heap.pos);if(d<distance){best=heap;distance=d;}
             }
             if(best!=null){
-                if(best.pos==pos){for(Item i:new java.util.ArrayList<>(best.items))if(i instanceof Gold){((Gold)i).award(Dungeon.hero);best.remove(i);}spend(TICK);return true;}
+                if(best.pos==pos){for(Item i:new java.util.ArrayList<>(best.items))if(i instanceof Gold){((Gold)i).award(Dungeon.hero);com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.collected(best);best.remove(i);}spend(TICK);return true;}
                 // Follow only a known, safe route. Do not scout outside direct hero sight.
                 boolean[] safe=new boolean[Dungeon.level.length()];
                 for(int i=0;i<safe.length;i++)safe[i]=Dungeon.level.passable[i]&&Dungeon.level.heroFOV[i]&&!Dungeon.level.avoid[i]&&!Dungeon.level.pit[i]&&Dungeon.level.traps.get(i)==null;

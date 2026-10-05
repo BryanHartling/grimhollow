@@ -601,9 +601,10 @@ public class Generator {
 					ChaoticCenser.class,
 					FerretTuft.class,
 					CrackedSpyglass.class,
-					com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.class
+					com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.class,
+                    com.shatteredpixel.shatteredpixeldungeon.items.trinkets.WaywardChart.class
 			};
-			TRINKET.defaultProbs = new float[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+			TRINKET.defaultProbs = new float[]{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 			TRINKET.probs = TRINKET.defaultProbs.clone();
 
 			for (Category cat : Category.values()){

@@ -157,7 +157,9 @@
     "title-crypt.png": "66fd899845160ef31bce8c3193c8bb126788672e621563d44ca51d3d92dff04d",
     "title-mist.png": "8686123f111541d132b3aec2f81194cb470545da3af65c9487b9252aea159cb0",
     "title-wordmark.png": "9eabb2f05d010aea0edf720a4897ebd7e33e3bcf8c1a4d01270d9ae4cda322a2",
-    "vegetation-states.png": "845fd40c6899b40d19a52fc603342666c5345562fd489714c23ac3f614719e42"
+    "vegetation-states.png": "845fd40c6899b40d19a52fc603342666c5345562fd489714c23ac3f614719e42",
+    "wayward/cache.png": "fbcf81c4b7dc3046a1a15fe6537967d1347a9e823099c279489b7cac350ff098",
+    "wayward/chart.png": "ff615e5e6cf4d314c520f11311b15e7558ac32d4924b0f239b2d1f38acd5ff2c"
   },
   "assets": {
     "environment/tiles_sewers.png": {
@@ -396,7 +398,7 @@
         1024,
         2240
       ],
-      "rgba_sha256": "9bc75e077dd3864ba2036aa9e8e9f01431efa3aa6d48e97d64d8eb4af04c8bcb"
+      "rgba_sha256": "3fbf472f062b5082d67c090765b5a67f0cdeab75f3eb4d6392704ee0cdea08c7"
     },
     "sprites/item_icons.png": {
       "size": [
@@ -9409,6 +9411,20 @@
         256
       ],
       "rgba_sha256": "84559abdd24dde256bca1fb22c0e7972a3762959fbb31379d39def3bbd4b34c8"
+    },
+    "environment/custom_tiles/wayward_cache.png": {
+      "size": [
+        192,
+        64
+      ],
+      "rgba_sha256": "91d099d07737124effd89aad9cabf46bd2feb2bdc455fb9b384012526bda7c03"
+    },
+    "effects/wayward_veil.png": {
+      "size": [
+        64,
+        64
+      ],
+      "rgba_sha256": "d0a8d93e24abc6410fb489451ce9bf2ae042d92c3a478c1465ae597b12ca4272"
     }
   }
 }

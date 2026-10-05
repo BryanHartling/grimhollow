@@ -41,7 +41,10 @@ public final class BalanceTuning {
         COIN_CACHE(10,10,0,100), COIN_SHOP_ROLLS(10,2,1,3),
         COMPANION_HEALTH(11,100,25,300), COMPANION_DAMAGE(11,100,25,300), COMPANION_STEAL(11,30,0,100),
         COMPANION_GOLD(11,100,0,300), COMPANION_ROOT(11,2,0,5), COMPANION_ROOT_COOLDOWN(11,8,3,30),
-        COMPANION_RECOVERY(11,100,25,400), COMPANION_COLLECT(11,5,0,8);
+        COMPANION_RECOVERY(11,100,25,400), COMPANION_COLLECT(11,5,0,8),
+        CHART_CHANCE_0(12,10,0,100), CHART_CHANCE_1(12,15,0,100), CHART_CHANCE_2(12,20,0,100), CHART_CHANCE_3(12,25,0,100),
+        CHART_GOLD(12,100,25,300), CHART_ITEMS_0(12,2,2,8), CHART_ITEMS_1(12,3,2,8), CHART_ITEMS_2(12,4,2,8), CHART_ITEMS_3(12,5,2,8),
+        CHART_QUALITY_ROLLS(12,2,1,4), CHART_MEMORY_CELLS(12,36,6,100);
 
         public final int group, baseline, min, max;
         Key(int group) { this(group,100,0,1000); }
@@ -54,6 +57,7 @@ public final class BalanceTuning {
                     || group==9 && (this==CACHE_CHANCE || this==CACHE_LOOT || name().endsWith("_CHANCE")) || this == HOARD_ARTIFACT || this == HOARD_TRINKET || group==8
                     || group==10 && this!=COIN_ZERO_EXPIRY && this!=COIN_CHARGE_TURNS && this!=COIN_GOLD_CHARGE && this!=COIN_SHOP_ROLLS
                     || group==11 && (this==COMPANION_HEALTH || this==COMPANION_DAMAGE || this==COMPANION_STEAL || this==COMPANION_GOLD));
+            percentage |= group==12 && (name().startsWith("CHART_CHANCE") || this==CHART_GOLD);
             return value+(percentage?"%":""); }
     }
     private static final EnumMap<Key,Integer> values=new EnumMap<>(Key.class);

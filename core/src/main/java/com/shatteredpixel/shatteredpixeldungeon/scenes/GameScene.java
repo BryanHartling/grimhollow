@@ -413,6 +413,7 @@ public class GameScene extends PixelScene {
 		add(new com.shatteredpixel.shatteredpixeldungeon.effects.HeapReadability());
 		fog = new FogOfWar( Dungeon.level.width(), Dungeon.level.height() );
 		add( fog );
+        add(new com.shatteredpixel.shatteredpixeldungeon.effects.WaywardChartOverlay());
         add(new com.shatteredpixel.shatteredpixeldungeon.effects.HatchlingSenseLayer());
         add(new com.shatteredpixel.shatteredpixeldungeon.effects.HorrorSenseLayer());
 		add(new com.shatteredpixel.shatteredpixeldungeon.effects.HealthVignette());
@@ -1608,6 +1609,7 @@ public class GameScene extends PixelScene {
             scene.tiles.updateKnowledge();
             scene.terrainFeatures.updateRailKnowledge();
             for(CustomTilemap visual:Dungeon.level.customWalls)visual.updateKnowledge();
+            for(CustomTilemap visual:Dungeon.level.customTiles)if(visual instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.WaywardMoundTile)visual.updateKnowledge();
             for(CustomTilemap visual:Dungeon.level.customTiles)if(visual instanceof com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.MechanismTile)visual.updateKnowledge();
 			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
 				if (mob.sprite != null) {

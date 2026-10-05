@@ -1,5 +1,9 @@
 # Grimhollow
 
+**Wayward Chart v1.25.0:** a new carried trinket points to painted treasure mounds without exposing nearby terrain. Strengthening it improves discovery and treasure. Magic Mapping settles an unfulfilled regional promise; a defeated dragon has one additional overlooked pocket. Taking treasure can fade an explored room on any visited ordinary floor in that region. Earlier losses remain until those rooms are revisited or their floors mapped. Terrain, exploration flags, visible cells, doors, stairs and known hazards are not rewritten.
+
+**Playtest > Balance tuning > Wayward Chart** exposes discovery at all four ranks, gold, item counts, quality comparisons and the size of faded room memories. Settings persist across games. Its painted Chart, treasure mound states, treasure X and memory veil reproduce from [committed sources and prompts](tools/painted/wayward-prompts.json) through the offline packer; CI needs no generation service.
+
 **Fickle Doubloon v1.24.0:** a new artifact grows through coin flips, favors or hinders the hero's combat rolls, rewards held gold, improves eligible ordinary loot and invites thief pursuit. Black Spot copies rig the wager against you. At its highest level, the coin can improve future shops and treasure generation, including elemental caches without relaxing their one-per-type limits.
 
 Feeding it to a Hatchling makes an irreversible wager: Heads trades both items for a directable Golden Mimic guardian; Tails releases a stronger hostile mimic carrying the recoverable coin. The guardian steals finite gold once per eligible enemy, roots ordinary enemies, collects visible safe loose gold and retreats into its harness when defeated. Recovery needs both time and entry to a different floor. Neither outcome permanently removes an artifact slot.

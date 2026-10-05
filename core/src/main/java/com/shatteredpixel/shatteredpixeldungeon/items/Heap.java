@@ -72,6 +72,7 @@ public class Heap implements Bundlable {
 	public Type type = Type.HEAP;
 	
 	public int pos = 0;
+    public int waywardCache;
 	
 	public ItemSprite sprite;
 	public boolean seen = false;
@@ -137,6 +138,7 @@ public class Heap implements Bundlable {
 			return null;
 		}
 		Item item = items.removeFirst();
+        com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.changed(this);
 		if (items.isEmpty()) {
 			destroy();
 		} else if (sprite != null) {
@@ -205,6 +207,7 @@ public class Heap implements Bundlable {
 	public void remove( Item a ){
 		hidden = false;
 		items.remove(a);
+        com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.changed(this);
 		if (items.isEmpty()){
 			destroy();
 		} else if (sprite != null) {
@@ -369,6 +372,7 @@ public class Heap implements Bundlable {
 	}
 
 	public String title(){
+        if(waywardCache>0)return Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.trinkets.WaywardChart.class,"cache_name");
 		switch(type){
 			case FOR_SALE:
 				Item i = peek();
@@ -395,6 +399,7 @@ public class Heap implements Bundlable {
 	}
 
 	public String info(){
+        if(waywardCache>0)return Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.trinkets.WaywardChart.class,"cache_desc");
 		switch(type){
 			case CHEST:
 				return Messages.get(this, "chest_desc");
@@ -430,6 +435,7 @@ public class Heap implements Bundlable {
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		pos = bundle.getInt( POS );
+        waywardCache=bundle.getInt("wayward_cache");
 		seen = bundle.getBoolean( SEEN );
 		type = Type.valueOf( bundle.getString( TYPE ) );
 		
@@ -456,6 +462,7 @@ public class Heap implements Bundlable {
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		bundle.put( POS, pos );
+        bundle.put("wayward_cache",waywardCache);
 		bundle.put( SEEN, seen );
 		bundle.put( TYPE, type );
 		bundle.put( ITEMS, items );

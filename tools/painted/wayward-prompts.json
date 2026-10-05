@@ -1,0 +1,14 @@
+{
+  "tool": "built-in image_gen",
+  "use_case": "stylized-concept",
+  "sources": [
+    {
+      "file": "sources/wayward/chart.png",
+      "prompt": "Use case: stylized-concept. Asset type: original painted fantasy dungeon game inventory icon. Primary request: a Wayward Chart, weathered curled parchment map with dark wandering ink paths and a small rich crimson treasure X, a brass compass tucked beside it. Isolated single object centered with ample margin on a genuinely transparent background. Hand-painted dark gothic fantasy realism, crisp readable silhouette and restrained gold highlights, aged cream parchment, deep brown ink. Three-quarter overhead game-item view. Square composition, no lettering, no words, no watermark, no UI, no frame, no drop shadow outside the object. Must read at 64 pixels. Not pixel art, not a chest."
+    },
+    {
+      "file": "sources/wayward/cache.png",
+      "prompt": "Use case: stylized-concept. Asset type: three states of one original hand-painted treasure mound for a dark gothic dungeon game. Wide horizontal sprite sheet, exactly three equal panels side by side with generous transparent gutters and a genuinely transparent background. Left panel: an untouched small overflowing mound of gold coins with tangled jewelry necklaces, a silver jeweled goblet, deep burgundy torn cloth and an old sword hilt protruding. Middle: the exact same mound partly collected, fewer coins and remaining goblet and hilt, same camera. Right: exhausted mound, only empty torn cloth and a few worthless dark fragments, no remaining valuable loot. Each object is independently isolated and centered in its own equal panel. Three-quarter overhead view matching tabletop dungeon floor items, readable compact broad silhouette, crisp painted brushwork, high contrast gold against dark earth tones, muted ivory highlights. No chest, no text, no labels, no UI, no square ground tiles, no pixel art, no watermark. Match spatial footprint and perspective across all three states, no cut-off elements."
+    }
+  ]
+}

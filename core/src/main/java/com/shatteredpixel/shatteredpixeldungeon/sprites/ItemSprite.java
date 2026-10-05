@@ -220,6 +220,8 @@ public class ItemSprite extends MovieClip {
 			return view( 0, null );
 		}
 
+        if(heap.waywardCache>0){com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.Cache c=com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.cache(heap.waywardCache);
+            return view(ItemSpriteSheet.WAYWARD_FULL+(c==null?0:c.state()),null);}
 		switch (heap.type) {
 			case HEAP: case FOR_SALE:
 				view( heap.peek() ); break;

@@ -1,5 +1,7 @@
 # Known issues
 
+- v1.25.0: Wayward Chart reward balance and physical Samsung tablet review remain human playtesting; generated runs and native portrait input are not a full campaign or hardware test. New text falls back to English in other locales. Already generated floors do not gain entry rerolls; paid Magic Mapping can still fulfill an unclaimed regional promise on an eligible floor.
+
 - v1.24.0: Doubloon/Golden Mimic campaign balance and physical Samsung tablet playtesting remain with the user; automated generated runs and native portrait input are not a complete campaign or hardware test. New text falls back to English in other locales. Regional cache plans and already-generated shop/floor stock are not rerolled by equipping the coin later.
 - v1.24.0 local Halls walking verification initially stopped at cell 655 before moving to 690; the identical build and assertion passed all 114 steps using isolated test preferences. The initial interruption remains unexplained; no game rule or check was altered to obtain the passing result.
 - v1.24.0 tag CI run 37331589801 failed the unchanged effects timing gate (mean 1.6659 ms, p95 2.2813 ms; both must be below 2 ms). The identical commit's branch run 37331499034 passed all seven jobs, with effects mean 0.9589 ms and p95 1.2325 ms. GitHub denied the unchanged failed-job retry with HTTP 403 (token lacks Actions rerun access); both runs remain available and no check was weakened.

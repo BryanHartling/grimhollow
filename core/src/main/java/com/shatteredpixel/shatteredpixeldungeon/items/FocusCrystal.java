@@ -115,7 +115,7 @@ public class FocusCrystal extends com.shatteredpixel.shatteredpixeldungeon.items
             Heap heap=Dungeon.level.heaps.get(cell);Trap trap=Dungeon.level.traps.get(cell);
             if(heap!=null&&heap.type==Heap.Type.HEAP&&!heap.isEmpty()){
                 if(enemy!=null&&enemy.alignment==Char.Alignment.ENEMY&&h.hasTalent(Talent.WRENCH))Buff.prolong(enemy,Vertigo.class,2*h.pointsInTalent(Talent.WRENCH));
-                float time=0;while(!heap.isEmpty()){Item item=heap.pickUp();if(item.doPickUp(h,h.pos))time+=item.pickupDelay();else Dungeon.level.drop(item,h.pos);}
+                float time=0;while(!heap.isEmpty()){Item item=heap.peek();if(item.doPickUp(h,h.pos)){com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.collected(heap);time+=item.pickupDelay();heap.pickUp();}else {heap.pickUp();Dungeon.level.drop(item,h.pos);}}
                 h.spend(-time);
             }else if(heap!=null&&canOpenWithGrasp(heap.type)){
                 heap.open(h); // Preserve haunted remains and normal opening consequences.

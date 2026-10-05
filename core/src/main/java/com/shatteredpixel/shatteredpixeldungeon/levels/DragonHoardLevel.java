@@ -46,7 +46,7 @@ public class DragonHoardLevel extends ExpeditionLevel {
     public void unlockHoard() {
         if (!DragonExpedition.dragonSlain) return;
         Fire fire = (Fire) blobs.get(Fire.class); if (fire != null) fire.fullyClear();
-        if (DragonExpedition.rewardsCreated) return;
+        if (DragonExpedition.rewardsCreated) { com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.discoverHoard(); return; }
         ArrayList<Item> rewards = new ArrayList<>();
         int gold = BalanceTuning.get(HOARD_GOLD);
         if (gold > 0) rewards.add(new Gold(Random.IntRange(Math.round(gold * .8f), Math.round(gold * 1.2f))));
@@ -79,6 +79,7 @@ public class DragonHoardLevel extends ExpeditionLevel {
         }
         for (int i = 0; i < rewards.size(); i++) drop(rewards.get(i), TREASURE + (i % 3) - 1 + (i / 3) * WIDTH);
         DragonExpedition.rewardsCreated = true;
+        com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.discoverHoard();
     }
 
     public static Trinket bonusTrinket() {

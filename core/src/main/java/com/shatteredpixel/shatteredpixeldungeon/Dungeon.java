@@ -259,6 +259,7 @@ public class Dungeon {
 		
 		Statistics.reset();
 		Notes.reset();
+        WaywardJourney.reset();
 
 		quickslot.reset();
 		QuickSlotButton.reset();
@@ -530,6 +531,7 @@ public class Dungeon {
 		hero.curAction = hero.lastAction = null;
 
 		observe();
+        WaywardJourney.arrive();
 		try {
 			saveAll();
 		} catch (IOException e) {
@@ -650,6 +652,7 @@ public class Dungeon {
 		try {
 			Bundle bundle = new Bundle();
 			Playtest.store(bundle);
+            WaywardJourney.store(bundle);
 
 			bundle.put( INIT_VER, initialVersion );
 			bundle.put( VERSION, version = Game.versionCode );
@@ -810,11 +813,13 @@ public class Dungeon {
 			SpecialRoom.restoreRoomsFromBundle(bundle);
 			SecretRoom.restoreRoomsFromBundle(bundle);
 
+			WaywardJourney.restore(bundle);
 			generatedLevels.clear();
 			for (int i : bundle.getIntArray(GENERATED_LEVELS)){
 				generatedLevels.add(i);
 			}
 
+            if(!bundle.contains("wayward_journey"))WaywardJourney.migrateVisited(generatedLevels);
 			droppedItems = new SparseArray<>();
 			for (int i=1; i <= 26; i++) {
 
@@ -1055,6 +1060,7 @@ public class Dungeon {
 		}
 
 		com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.updateNotes(level);
+        WaywardJourney.observe();
 		GameScene.afterObserve();
 	}
 

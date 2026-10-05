@@ -114,6 +114,11 @@ def build():
         x,y=panel%2,panel//2
         semantics['items'][name]={'id':541+panel,'artIndex':541+panel,'cellSize':64}
         replacements[name]=icon(coin.crop((x*coin.width//2,y*coin.height//2,(x+1)*coin.width//2,(y+1)*coin.height//2)))
+    from wayward import items as wayward_items
+    for offset,(name,art) in enumerate(wayward_items().items()):
+        index=545+offset
+        semantics['items'][name]={'id':index,'artIndex':index,'cellSize':64}
+        replacements[name]=art
     written={}
     for name,image in replacements.items():
         if name not in semantics['items']:raise ValueError('Unknown inventory ID '+name)

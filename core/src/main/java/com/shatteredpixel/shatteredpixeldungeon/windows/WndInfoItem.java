@@ -51,7 +51,7 @@ public class WndInfoItem extends Window {
 		}
 		INSTANCE = this;
 
-		if (heap.type == Heap.Type.HEAP) {
+        if (heap.type == Heap.Type.HEAP && heap.waywardCache == 0) {
 			fillFields( heap.peek() );
 
 		} else {

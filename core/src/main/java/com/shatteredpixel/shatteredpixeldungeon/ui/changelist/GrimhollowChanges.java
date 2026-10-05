@@ -20,7 +20,11 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.24.0","A pirate's wager, and a golden guardian.");
+        ChangeInfo r=release(list,"v1.25.0","A chart that trades old paths for hidden treasure.");
+        note(r,Icons.JOURNAL,"Wayward Chart","A new trinket marks painted treasure mounds without revealing their surroundings. Its promises grow with the chart, and it remembers which regions have already rewarded you.");
+        note(r,Icons.INFO,"Wandering ink","Taking treasure can fade an explored room on any visited floor in that region. Return to the room or read Magic Mapping there to restore it. Mapping can also settle an unfulfilled treasure promise; a defeated dragon has one extra secret.");
+        note(r,Icons.PREFS,"Chart controls","Playtest balance includes discovery odds, reward counts, gold, quality comparisons and the size of faded memories. Terrain, visible cells, doors and known hazards remain reliable.");
+        r=release(list,"v1.24.0","A pirate's wager, and a golden guardian.");
         note(r,Icons.GOLD,"Fickle Doubloon","A rare coin grows through wagers, draws fortune from a hoard, and invites unwanted attention from thieves. Its Black Spot turns every flip against its bearer. It will not share its place with another artifact.");
         note(r,Icons.TALENT,"A costly transformation","Feed the coin to your hatchling for a final wager. Heads creates a directable golden protector that gathers loose gold; Tails releases a hostile mimic carrying the coin. The sacrifice ends the hatchling's feeding gifts without sacrificing an artifact slot.");
         note(r,Icons.PREFS,"Playtest controls","The balance menu now has separate Fickle Doubloon and Golden Mimic sections for odds, recharge, fortune, theft, treasure generation and companion strength and recovery. Changes persist across games on this device.");

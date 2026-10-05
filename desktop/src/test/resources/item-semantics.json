@@ -2715,6 +2715,36 @@
       "artIndex": 544,
       "cellSize": 64,
       "rgbaSha256": "7990f51de43997643aa0c5fbb3d64ed4e179b6bdf1b5ed35dbc2bfd6d6a40240"
+    },
+    "WAYWARD_CHART": {
+      "id": 545,
+      "artIndex": 545,
+      "cellSize": 64,
+      "rgbaSha256": "8a7e85988e49f236eb89781c20a3132b8dd353f6ba5447dd0224b7adbec1dc7e"
+    },
+    "WAYWARD_FULL": {
+      "id": 546,
+      "artIndex": 546,
+      "cellSize": 64,
+      "rgbaSha256": "a39c9e0c7782817aba04e8fc1fffb1312df4d5f189d41911846b9ac7f40a199d"
+    },
+    "WAYWARD_PARTIAL": {
+      "id": 547,
+      "artIndex": 547,
+      "cellSize": 64,
+      "rgbaSha256": "67846705bddb3c5fa8a93364e03bfaa83714fab06307a50b8a664649029b648c"
+    },
+    "WAYWARD_EMPTY": {
+      "id": 548,
+      "artIndex": 548,
+      "cellSize": 64,
+      "rgbaSha256": "d9cb3e687e00a8414814090f9196129282c7a68372ba4b33039de61fa6db2ca3"
+    },
+    "WAYWARD_MARKER": {
+      "id": 549,
+      "artIndex": 549,
+      "cellSize": 64,
+      "rgbaSha256": "ca32eac82c5851e3b14f7a15be84259faed3560608b2c45ec634c264fed61f65"
     }
   },
   "icons": {

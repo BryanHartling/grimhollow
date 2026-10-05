@@ -231,6 +231,8 @@ def outputs():
     result.update(talent_trim())
     from bone_wall import outputs as bone_wall
     result.update(bone_wall())
+    from wayward import outputs as wayward
+    result.update(wayward())
     return result
 
 
@@ -243,8 +245,13 @@ def main():
     from actors import HEROES, atlas as hero_atlas
     parser.add_argument('--hero',choices=HEROES,help='Package one character batch; full --check remains the CI gate')
     parser.add_argument('--icons',action='store_true',help='Package identity/skill changes; full --check remains the CI gate')
+    parser.add_argument('--wayward',action='store_true',help='Package Chart items and memory visuals; full --check remains the CI gate')
     args=parser.parse_args()
-    if args.icons:
+    if args.wayward:
+        from inventory import outputs as inventory
+        from wayward import outputs as wayward
+        built={**inventory(),**wayward()}
+    elif args.icons:
         from identification import outputs as identities
         from botany_skills import outputs as skills
         built={**identities(),**skills()}
@@ -253,7 +260,7 @@ def main():
     failures=[]
     sources={p.relative_to(HERE/'sources').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'sources').rglob('*.png'))}
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
-    if args.hero or args.icons:
+    if args.hero or args.icons or args.wayward:
         manifest['assets']=json.loads(MANIFEST.read_text(encoding='utf-8'))['assets']
     from monsters import sizes as monster_sizes
     fixed_monster_sizes=monster_sizes()
@@ -272,6 +279,8 @@ def main():
         if path=='interfaces/menu_button.png':expected=(256,64)
         if path=='interfaces/painted_talents.png':expected=(512,64)
         if path=='environment/painted_bone_wall.png':expected=(256,256)
+        if path=='environment/custom_tiles/wayward_cache.png':expected=(192,64)
+        if path=='effects/wayward_veil.png':expected=(64,64)
         if path=='interfaces/menu_pane.png':expected=(128,128)
         if path=='environment/custom_tiles/elemental_cache.png':expected=(256,128)
         if path=='interfaces/painted_skills.png':expected=(1024,512)

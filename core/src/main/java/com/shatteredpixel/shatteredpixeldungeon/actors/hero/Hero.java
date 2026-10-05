@@ -1160,6 +1160,7 @@ public class Hero extends Char {
 			if (heap != null) {
 				Item item = heap.peek();
 				if (item.doPickUp( this )) {
+                    com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.collected(heap);
 					heap.pickUp();
 
 					//TODO this statement is getting silly, might be better to handle this as a propery of items

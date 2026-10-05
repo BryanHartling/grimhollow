@@ -70,6 +70,7 @@ public class ScrollOfMagicMapping extends Scroll {
 				}
 			}
 		}
+        com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.mapping();
 		GameScene.updateFog();
 		
 		GLog.i( Messages.get(this, "layout") );

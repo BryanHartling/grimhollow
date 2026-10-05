@@ -148,7 +148,7 @@ public class WndPlaytest extends Window {
     public static void tuning(){
         if(!atHome())Playtest.require();
         List<Entry> rows=new ArrayList<>();
-        for(int i=0;i<12;i++){
+        for(int i=0;i<13;i++){
             final int group=i;
             rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_group_"+i),()->tuningGroup(group)));
         }

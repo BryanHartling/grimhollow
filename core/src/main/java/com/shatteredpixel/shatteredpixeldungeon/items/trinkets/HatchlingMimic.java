@@ -41,6 +41,7 @@ import java.util.function.Predicate;
 public class HatchlingMimic extends Trinket {
     public enum Tier { MINOR, STANDARD, MAJOR, EXCEPTIONAL }
     private int remaining = 300;
+    private int lastInterval=300;
     private boolean warned;
     private boolean awaitingChoice;
     private long goldDemand = 50;
@@ -60,12 +61,14 @@ public class HatchlingMimic extends Trinket {
             public String textPrompt(){return Messages.get(HatchlingMimic.class,"feed_prompt");}
             public Class<? extends Bag> preferredBag(){return com.shatteredpixel.shatteredpixeldungeon.actors.hero.Belongings.Backpack.class;}
             public boolean itemSelectable(Item item){return canFeed(hero,item);}
-            public void onSelect(Item item){if(item!=null)feedChosen(hero,item);}
+            public void onSelect(Item item){if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon)com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DoubloonFeeding.confirm(hero,HatchlingMimic.this,(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon)item);else if(item!=null)feedChosen(hero,item);}
         });
     }
     public boolean canFeed(Hero hero,Item item){
         return hungry() && hero!=null && hero.isAlive() && hero.belongings.contains(this)
-                && hero.belongings.backpack.items.contains(item) && foodPriority(item,hero)>=0;
+                && (hero.belongings.backpack.items.contains(item) && foodPriority(item,hero)>=0
+                || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon && item.isEquipped(hero)
+                && !com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.luckRunning(hero));
     }
     public boolean feedChosen(Hero hero,Item item){
         if(!canFeed(hero,item) || !consume(hero,item))return false;
@@ -76,7 +79,7 @@ public class HatchlingMimic extends Trinket {
     public static HatchlingMimic carried() {
         return Dungeon.hero == null ? null : Dungeon.hero.belongings.getItem(HatchlingMimic.class);
     }
-    public int interval() { return 300 - 50 * Math.max(0, Math.min(3, level())); }
+    public int interval() { return Math.round((300 - 50 * Math.max(0, Math.min(3, level())))*(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.active()!=null?1.2f:1)); }
     public int remaining() { return remaining; }
     public boolean hungry(){return remaining*4<=interval();}
     public long goldDemand() { return goldDemand; }
@@ -88,6 +91,7 @@ public class HatchlingMimic extends Trinket {
         int oldInterval = interval();
         super.upgrade();
         if (!warned) remaining = Math.max(2, (int)Math.ceil(remaining * interval() / (float)oldInterval));
+        lastInterval=interval();
         return this;
     }
     @Override public boolean collect(Bag bag) {
@@ -107,12 +111,14 @@ public class HatchlingMimic extends Trinket {
     @Override public void storeInBundle(Bundle b) {
         super.storeInBundle(b);
         b.put("hunger_left", remaining); b.put("hunger_warned", warned); b.put("gold_demand", goldDemand);
+        b.put("last_interval",lastInterval);
         b.put("hunger_awaiting_choice", awaitingChoice);
         b.put("charmed_floors", charmedFloors.stream().mapToInt(Integer::intValue).toArray());
     }
     @Override public void restoreFromBundle(Bundle b) {
         super.restoreFromBundle(b);
         remaining = b.contains("hunger_left") ? Math.max(0, b.getInt("hunger_left")) : interval();
+        lastInterval=b.contains("last_interval")?b.getInt("last_interval"):300-50*Math.max(0,Math.min(3,level()));
         warned = b.getBoolean("hunger_warned");
         awaitingChoice = warned && (!b.contains("hunger_awaiting_choice") || b.getBoolean("hunger_awaiting_choice"));
         goldDemand = b.contains("gold_demand") ? Math.max(50, b.getLong("gold_demand")) : 50;
@@ -180,6 +186,8 @@ public class HatchlingMimic extends Trinket {
 
     /** One world turn; the warning and consumption are separate serialized states. */
     public void tick(Hero hero) {
+        int current=interval();
+        if(current!=lastInterval){if(remaining>1)remaining=Math.max(2,Math.round(remaining*current/(float)Math.max(1,lastInterval)));lastInterval=current;}
         if (remaining > 1) remaining--;
         if (remaining == 1 && !warned) {
             warned = true;
@@ -194,6 +202,8 @@ public class HatchlingMimic extends Trinket {
         return consume(hero,nextFood(hero));
     }
     private boolean consume(Hero hero, Item meal) {
+        if(meal instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon)
+            return com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DoubloonFeeding.consume(hero,this,(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon)meal);
         if (meal instanceof Artifact) {
             int cell = closestSpawn(hero.pos);
             if (cell < 0) return false; // An entirely full level postpones consumption, without losing the warning.
@@ -207,6 +217,7 @@ public class HatchlingMimic extends Trinket {
             grown.items.add(wealthReward(consumed));
             awaken(grown);
             GameScene.add(grown);
+            com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DoubloonFeeding.ordinaryArtifact();
             Item.updateQuickslot();
             return true; // Deliberately no consumption/confirmation message.
         }
@@ -214,9 +225,10 @@ public class HatchlingMimic extends Trinket {
             Tier tier = foodTier(meal);
             Item eaten = meal instanceof MissileWeapon ? meal.detachAll(hero.belongings.backpack) : meal.detach(hero.belongings.backpack);
             String effects = benefit(hero, tier);
+            com.shatteredpixel.shatteredpixeldungeon.items.artifacts.DoubloonFeeding.meal(tier);
             GLog.w(Messages.get(this, "ate", eaten.title(), effects));
         } else {
-            long demand = goldDemand;
+            long demand = com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.active()!=null?(goldDemand/4*3+(goldDemand%4*3+3)/4):goldDemand;
             if (Dungeon.gold < demand) {
                 int taken = Dungeon.gold; Dungeon.gold = 0;
                 GLog.w(Messages.get(this, "escape_gold", taken));
@@ -226,7 +238,7 @@ public class HatchlingMimic extends Trinket {
                 return true;
             }
             Dungeon.gold -= (int)demand;
-            goldDemand = demand > Long.MAX_VALUE / 2 ? Long.MAX_VALUE : demand * 2;
+            goldDemand = goldDemand > Long.MAX_VALUE / 2 ? Long.MAX_VALUE : goldDemand * 2;
             String effects = benefit(hero, goldTier(demand));
             GLog.w(Messages.get(this, "ate_gold", demand));
             if (!effects.isEmpty()) GLog.w(effects);

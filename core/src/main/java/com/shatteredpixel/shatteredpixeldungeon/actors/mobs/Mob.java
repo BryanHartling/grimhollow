@@ -133,6 +133,7 @@ public abstract class Mob extends Char {
 	public int defenseSkill = 0;
 	
 	public int EXP = 1;
+    public boolean goldPilfered,generatedRespawn;
 	public int maxLvl = Hero.MAX_LEVEL-1;
     private boolean killedByHorror;
 	
@@ -171,6 +172,7 @@ public abstract class Mob extends Char {
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
+        bundle.put("gold_pilfered",goldPilfered);bundle.put("generated_respawn",generatedRespawn);
 		
 		super.storeInBundle( bundle );
 
@@ -213,6 +215,7 @@ public abstract class Mob extends Char {
 	
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
+        goldPilfered=bundle.getBoolean("gold_pilfered");generatedRespawn=bundle.getBoolean("generated_respawn");
 		
 		super.restoreFromBundle( bundle );
 

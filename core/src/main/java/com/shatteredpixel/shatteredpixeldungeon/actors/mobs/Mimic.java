@@ -69,6 +69,8 @@ public class Mimic extends Mob {
 	}
 	
 	public ArrayList<Item> items;
+    public com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon forfeitedCoin;
+    private boolean coinFleeing;
 
 	private boolean stealthy = false;
 	
@@ -82,7 +84,7 @@ public class Mimic extends Mob {
 		if (items != null) bundle.put( ITEMS, items );
 		bundle.put( LEVEL, level );
 		bundle.put( STEALTHY, stealthy );
-        bundle.put("hatchling_born", hatchlingBorn);
+        bundle.put("hatchling_born", hatchlingBorn);bundle.put("forfeited_coin",forfeitedCoin);bundle.put("coin_fleeing",coinFleeing);
         bundle.put("pursuing_hatchling", pursuingHatchling);
         if (stolenHatchling != null) bundle.put("stolen_hatchling", stolenHatchling);
 	}
@@ -96,7 +98,7 @@ public class Mimic extends Mob {
 		level = bundle.getInt( LEVEL );
 		adjustStats(level);
 		stealthy = bundle.getBoolean(STEALTHY);
-        hatchlingBorn=bundle.getBoolean("hatchling_born");
+        hatchlingBorn=bundle.getBoolean("hatchling_born");forfeitedCoin=(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon)bundle.get("forfeited_coin");coinFleeing=bundle.getBoolean("coin_fleeing");
         pursuingHatchling=bundle.getBoolean("pursuing_hatchling");
         if(bundle.contains("stolen_hatchling")) stolenHatchling=(HatchlingMimic)bundle.get("stolen_hatchling");
 		super.restoreFromBundle(bundle);
@@ -142,6 +144,11 @@ public class Mimic extends Mob {
 
 	@Override
 	protected boolean act() {
+        if(forfeitedCoin!=null && (coinFleeing||HP*2<=HT)){
+            coinFleeing=true;int exit=Dungeon.level.exit();
+            if(pos==exit){forfeitedCoin=null;destroy();if(sprite!=null)sprite.killAndErase();return true;}
+            if(exit>=0)getCloser(exit);spend(1/speed());return true;
+        }
         if (actForHatchling()) return true;
 		if (alignment == Alignment.NEUTRAL && state != PASSIVE){
 			alignment = Alignment.ENEMY;
@@ -204,6 +211,9 @@ public class Mimic extends Mob {
             return true;
         }
         HatchlingMimic hatchling=HatchlingMimic.carried();
+        if(com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion.carried()!=null && getClass()==Mimic.class && !hatchlingBorn && alignment==Alignment.NEUTRAL && Dungeon.level.adjacent(pos,Dungeon.hero.pos)){
+            hatchlingStep(Dungeon.hero.pos,true);spend(TICK);return true;
+        }
         if (hatchling == null || hatchlingBorn || alignment == Alignment.ALLY) return false;
         if (this instanceof EbonyMimic) {
             if (alignment == Alignment.NEUTRAL && sharesRoomWithHero()) {
@@ -255,6 +265,8 @@ public class Mimic extends Mob {
 
 	@Override
 	public boolean interact(Char c) {
+        com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion pet=com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion.carried();
+        if(c==Dungeon.hero&&pet!=null&&getClass()==Mimic.class&&!hatchlingBorn&&alignment==Alignment.NEUTRAL){if(!pet.charm(this))hatchlingStep(Dungeon.hero.pos,true);Dungeon.hero.spendAndNext(1);return true;}
         HatchlingMimic hatchling = HatchlingMimic.carried();
         if (c == Dungeon.hero && hatchling != null && !hatchlingBorn && alignment == Alignment.NEUTRAL
                 && this instanceof CrystalMimic) {
@@ -345,7 +357,8 @@ public class Mimic extends Mob {
 	}
 
 	@Override
-	public int damageRoll() {
+	public int damageRoll() { return Math.round(ordinaryDamageRoll()*(forfeitedCoin!=null?1.25f:1)); }
+    private int ordinaryDamageRoll() {
 		if (alignment == Alignment.NEUTRAL){
 			return Random.NormalIntRange( 2 + 2*level, 2 + 2*level);
 		} else {
@@ -388,6 +401,7 @@ public class Mimic extends Mob {
 	
 	@Override
 	public void rollToDropLoot(){
+        if(forfeitedCoin!=null){if(items==null)items=new ArrayList<>();items.add(forfeitedCoin);forfeitedCoin=null;}
         if (stolenHatchling != null) {
             if (items == null) items = new ArrayList<>();
             items.add(stolenHatchling);
@@ -397,7 +411,7 @@ public class Mimic extends Mob {
 		
 		if (items != null) {
 			for (Item item : items) {
-				Dungeon.level.drop( item, pos ).sprite.drop();
+				Heap dropped=Dungeon.level.drop(item,pos);if(dropped.sprite!=null)dropped.sprite.drop();
 			}
 			items = null;
 		}

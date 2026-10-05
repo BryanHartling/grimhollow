@@ -57,7 +57,44 @@ public final class DoubloonScenario {
         Bundle b=new Bundle();b.put("coin",c);c=(FickleDoubloon)b.get("coin");Dungeon.hero.belongings.artifact=c;
         FickleDoubloon.damaged(Dungeon.hero,20);check(!FickleDoubloon.luckRunning(Dungeon.hero),"last-hand floor persists");
         check(FickleDoubloon.choose(2,8,true)==8&&FickleDoubloon.choose(2,8,false)==2,"sample selection");
+        companion();
         BalanceTuning.reset();Playtest.reset();
         System.out.println("PASS Doubloon core: curve, cost, single roll, curse, Plunder, deferred last hand, persistence");
+    }
+    private static void companion() throws Exception {
+        Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();
+        Dungeon.hero.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
+        FickleDoubloon c=new FickleDoubloon();c.playtestLevel(10);Dungeon.hero.belongings.artifact=c;Dungeon.hero.belongings.misc=null;
+        com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic hatchling=new com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic();hatchling.level(3);hatchling.collect(Dungeon.hero.belongings.backpack);
+        Dungeon.gold=2500;BalanceTuning.set(BalanceTuning.Key.COIN_HEADS,70);
+        check(DoubloonFeeding.consume(Dungeon.hero,hatchling,c),"Heads transformation");
+        com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion harness=com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion.carried();
+        check(harness!=null&&Dungeon.hero.belongings.artifact==null&&com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.carried()==null,"sacrifices without artifact-slot loss");
+        check(Math.abs(harness.inheritedGold-.3f)<.001&&Math.abs(harness.inheritedQuality-.05f)<.001,"inherited snapshot not duplicated");
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.GoldenMimicAlly ally=harness.ally();check(ally!=null&&ally.isDirectableAlly(),"protector commands");
+        BalanceTuning.set(BalanceTuning.Key.COMPANION_STEAL,100);
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat rat=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();
+        int gold=Dungeon.gold;check(ally.pilfer(rat)&&!ally.pilfer(rat)&&Dungeon.gold>gold,"one stealing success per enemy");
+        rat=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();rat.generatedRespawn=true;check(!ally.pilfer(rat),"respawn farming exclusion");
+        BalanceTuning.set(BalanceTuning.Key.COMPANION_STEAL,0);
+        rat=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();ally.attackProc(rat,4);check(rat.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Roots.class)!=null,"protector clamping bite");
+        rat=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();rat.properties().add(com.shatteredpixel.shatteredpixeldungeon.actors.Char.Property.BOSS);ally.attackProc(rat,4);check(rat.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Roots.class)==null,"boss root exclusion");
+        rat.generatedRespawn=true;
+        Bundle saved=new Bundle();saved.put("rat",rat);check(((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat)saved.get("rat")).generatedRespawn,"respawn flag persists");
+        ally.die(DoubloonScenario.class);check(harness.resting(),"incapacitation retains harness");
+        Dungeon.depth=2;harness.arrive();check(harness.resting(),"immediate stair transition cannot revive");
+        for(int n=0;n<100;n++)harness.tick();harness.arrive();check(harness.resting(),"timer alone on same floor cannot revive");
+        Dungeon.depth=3;harness.arrive();check(!harness.resting()&&harness.ally()!=null,"different-floor recovery");
+        saved=new Bundle();saved.put("harness",harness);com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion copy=(com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion)saved.get("harness");
+        check(copy.coinLevel==10&&copy.hatchlingLevel==3&&copy.inheritedGold==harness.inheritedGold,"companion snapshot persistence");
+        Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();Dungeon.hero.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
+        c=new FickleDoubloon();c.playtestLevel(10);c.cursed=true;Dungeon.hero.belongings.artifact=c;Dungeon.hero.belongings.misc=null;
+        hatchling=new com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic();hatchling.collect(Dungeon.hero.belongings.backpack);
+        check(DoubloonFeeding.consume(Dungeon.hero,hatchling,c)&&com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion.carried()==null,"Black Spot cannot create a friendly companion");
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic hostile=null;
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)if(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic&&((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic)m).forfeitedCoin!=null)hostile=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic)m;
+        check(hostile!=null&&hostile.forfeitedCoin==c&&c.level()==10&&c.charges()==0&&FickleDoubloon.luckRunning(Dungeon.hero),"Tails stake, preserved levels, zero charges and waning fortune");
+        hostile.rollToDropLoot();check(hostile.forfeitedCoin==null&&Dungeon.level.heaps.get(hostile.pos).items.contains(c),"kill before escape recovers coin");
+        System.out.println("PASS Doubloon companion: sacrifices, inherited fortune, pilfer cap, recovery, persistence, rigged transformation, coin recovery");
     }
 }

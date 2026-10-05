@@ -13,9 +13,9 @@ import com.watabou.utils.Reflection;
 /** Only ordinary random floor loot and enemy equipment call this, not authored rewards. */
 public final class DoubloonLoot {
     public static Item improve(Item first){
-        FickleDoubloon coin=FickleDoubloon.active();
-        if(coin==null||first==null||first.unique||!(first instanceof Weapon||first instanceof Armor||first instanceof Wand||first instanceof Ring)
-                ||Random.Float()>=coin.qualityChance())return first;
+        float chance=FickleDoubloon.qualityBonus();
+        if(chance<=0||first==null||first.unique||!(first instanceof Weapon||first instanceof Armor||first instanceof Wand||first instanceof Ring)
+                ||Random.Float()>=chance)return first;
         // A second roll of this subtype preserves every source-specific tier restriction,
         // and consumes neither a unique artifact nor a finite generator deck entry.
         Item second=Reflection.newInstance(first.getClass()).random();

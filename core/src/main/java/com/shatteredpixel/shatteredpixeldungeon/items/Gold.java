@@ -41,7 +41,7 @@ public class Gold extends Item {
     public Gold sale(){fortuneApplied=true;return this;}
     public int award(Hero hero){
         com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon coin=com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.active();
-        if(!fortuneApplied&&coin!=null)quantity+=Math.round(quantity*coin.goldBonus());
+        if(!fortuneApplied)quantity+=Math.round(quantity*com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.goldFindBonus());
         fortuneApplied=true;
         Dungeon.gold+=quantity;Statistics.goldCollected+=quantity;
         coin=com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.equipped();

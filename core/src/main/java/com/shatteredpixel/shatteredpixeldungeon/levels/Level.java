@@ -804,6 +804,7 @@ public abstract class Level implements Bundlable {
 		PathFinder.buildDistanceMap(Dungeon.hero.pos, BArray.or(passable, avoid, null));
 
 		Mob mob = createMob();
+        mob.generatedRespawn=true;
 		if (mob.state != mob.PASSIVE) {
 			mob.state = mob.WANDERING;
 		}

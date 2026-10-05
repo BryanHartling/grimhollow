@@ -155,7 +155,8 @@
     "title-crypt.png": "66fd899845160ef31bce8c3193c8bb126788672e621563d44ca51d3d92dff04d",
     "title-mist.png": "8686123f111541d132b3aec2f81194cb470545da3af65c9487b9252aea159cb0",
     "title-wordmark.png": "9eabb2f05d010aea0edf720a4897ebd7e33e3bcf8c1a4d01270d9ae4cda322a2",
-    "vegetation-states.png": "845fd40c6899b40d19a52fc603342666c5345562fd489714c23ac3f614719e42"
+    "vegetation-states.png": "845fd40c6899b40d19a52fc603342666c5345562fd489714c23ac3f614719e42",
+    "terrain/bone-wall.png": "f9c88b4fbded22809f82ad41d164f61936afaeb3a0342077423efdeff76d54b4"
   },
   "assets": {
     "environment/tiles_sewers.png": {
@@ -9400,6 +9401,13 @@
         64
       ],
       "rgba_sha256": "3846d662588ec95dc7ee79a21a8b88aca1085b432a2e0e508d3f6fe0267b37d9"
+    },
+    "environment/painted_bone_wall.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "84559abdd24dde256bca1fb22c0e7972a3762959fbb31379d39def3bbd4b34c8"
     }
   }
 }

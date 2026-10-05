@@ -1335,7 +1335,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if(!(Game.scene() instanceof GameScene))return;
         if(reviewHorror.phase()==com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.Phase.WARNING
                 && Dungeon.hero.ready && !horrorWarningCaptured) {
-            capture("horror-warning");horrorWarningCaptured=true;
+            if(horrorNoticeVisible()){capture("horror-warning");horrorWarningCaptured=true;}
         }
         if(++horrorFrames%60!=0)return;
         com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero hero=Dungeon.hero;
@@ -1353,6 +1353,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 2:
                 if(hero.HP!=horrorHealth || reviewHorror.phase()!=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.Phase.WARNING)
                     throw new AssertionError("Warning attacked before a fresh player action");
+                if(!horrorNoticeVisible())throw new AssertionError("Ambush HUD warning faded before the player responded");
                 pointerCell(horrorStart+2);break;
             case 3:
                 if(hero.HP!=horrorHealth || hero.pos!=horrorStart+2 || reviewHorror.shadowmelded())
@@ -1393,14 +1394,27 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 interfaceBounds();checkReviewText(Game.scene());
                 if(!allReviewText(Game.scene()).contains("narrow wounds"))throw new AssertionError("Missing remains evidence text");
                 capture("horror-remains-description");closeReviewWindows();
+                new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBone().onZap(new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(hero.pos,hero.pos+3,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.STOP_TARGET));
+                capture("painted-bone-wall");GameScene.examineCell(hero.pos+3);break;
+            case 9:
+                interfaceBounds();checkReviewText(Game.scene());
+                if(!allReviewText(Game.scene()).contains("Bone Wall") || !allReviewText(Game.scene()).contains("binding holds for"))throw new AssertionError("Bone-wall inspection missing identity/lifetime");
+                Image wall=com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoCell.cellImage(hero.pos+3);
+                if(wall.texture!=com.watabou.gltextures.TextureCache.get(com.shatteredpixel.shatteredpixeldungeon.effects.BoneWallArt.TEXTURE))throw new AssertionError("Bone-wall inspection uses old barricade art");wall.destroy();
+                capture("bone-wall-inspection");closeReviewWindows();
                 Playtest.enable();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();break;
-            case 9:if(!playtestClickPage("Lurking Horror"))horrorStep--;break;
-            case 10:
+            case 10:if(!playtestClickPage("Lurking Horror"))horrorStep--;break;
+            case 11:
                 interfaceBounds();capture("horror-balance-tuning");closeReviewWindows();
                 if(!horrorWarningCaptured)throw new AssertionError("Warning evidence not captured");
-                System.out.println("TEST 60 NATIVE PASS: real pointer auto-travel interruption, fresh-action evasion, painted exposed sprite, entity-only Mind Vision, unknown-cell inspection, remains/loot inspection and balance menu; failures=0");
+                System.out.println("TEST 60 NATIVE PASS: persistent ambush HUD, real pointer auto-travel interruption, fresh-action evasion, painted exposed sprite, entity-only Mind Vision, unknown-cell inspection, remains/loot and painted bone-wall lifetime inspection, balance menu; failures=0");
                 Gdx.app.exit();break;
         }
+    }
+    private boolean horrorNoticeVisible(){
+        for(com.watabou.noosa.Gizmo member:RecoveryChecks.members(Game.scene()))if(member instanceof com.shatteredpixel.shatteredpixeldungeon.effects.HorrorSenseLayer)
+            return ((com.shatteredpixel.shatteredpixeldungeon.effects.HorrorSenseLayer)member).ambushNoticeVisible();
+        return false;
     }
     private void expeditionFloor(int depth) {
         questField(GameScene.class,"scene",null);

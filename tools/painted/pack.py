@@ -229,6 +229,8 @@ def outputs():
     result.update(playtest_presentation())
     from talent_trim import outputs as talent_trim
     result.update(talent_trim())
+    from bone_wall import outputs as bone_wall
+    result.update(bone_wall())
     return result
 
 
@@ -269,6 +271,7 @@ def main():
         if path=='interfaces/painted_landmarks.png':expected=(256,256)
         if path=='interfaces/menu_button.png':expected=(256,64)
         if path=='interfaces/painted_talents.png':expected=(512,64)
+        if path=='environment/painted_bone_wall.png':expected=(256,256)
         if path=='interfaces/menu_pane.png':expected=(128,128)
         if path=='environment/custom_tiles/elemental_cache.png':expected=(256,128)
         if path=='interfaces/painted_skills.png':expected=(1024,512)

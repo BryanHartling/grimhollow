@@ -47,7 +47,7 @@ final class HorrorScenario {
         check(copy.phase()==h.phase() && copy.healedTotal()==h.healedTotal(),"phase save round trip");
         Dungeon.hero.spend(1); act(h);
         check(Dungeon.hero.HP<hp && h.phase()==LurkingHorror.Phase.FLEEING,"responded warning did not resolve");
-        check(hp-Dungeon.hero.HP<=6,"Sewers burst exceeds reduced damage range");
+        check(hp-Dungeon.hero.HP<=9,"Sewers ambush exceeds the 3-6 base range times 1.5");
 
         h=fresh(2); act(h); LurkingHorror.onHeroReady(); LurkingHorror.onHeroSpent(1);
         Dungeon.hero.pos+=Dungeon.level.width(); // Still adjacent: attack follows the hero, not a committed cell.
@@ -86,7 +86,7 @@ final class HorrorScenario {
         for(int depth:new int[]{2,7,12,17,22}) {
             h=fresh(depth); int region=(depth-1)/5;
             check(h.HT==new int[]{12,18,28,40,55}[region],"regional health");
-            for(int i=0;i<50;i++)check(h.damageRoll()<=4+2*region,"regional base damage");
+            for(int i=0;i<50;i++){int rolled=h.damageRoll();check(rolled>=3+region && rolled<=6+2*region,"regional base damage");}
             check(!Char.hasProp(h,Char.Property.UNDEAD) && !Char.hasProp(h,Char.Property.DEMONIC),"Horror classified as undead/demon");
         }
         recoveryAndRouting(); counters(); predation(); generation();
@@ -176,7 +176,7 @@ final class HorrorScenario {
     }
     private static void predation() throws Exception {
         LurkingHorror h=fresh(2); h.pos=Dungeon.hero.pos+8;
-        Rat victim=new Rat(); victim.HP=1; victim.pos=h.pos+1;
+        Rat victim=new Rat(); victim.pos=h.pos+1;
         victim.sprite=victim.sprite(); victim.sprite.link(victim); victim.sprite.visible=false;
         Dungeon.level.mobs.add(victim); Actor.add(victim);
         Arrays.fill(Dungeon.level.heroFOV,false);
@@ -211,6 +211,24 @@ final class HorrorScenario {
         Rat survivor=new Rat();survivor.HP=survivor.HT=100;survivor.pos=h.pos+1;
         survivor.sprite=survivor.sprite();survivor.sprite.link(survivor);Dungeon.level.mobs.add(survivor);Actor.add(survivor);
         act(h);check(survivor.isAlive() && survivor.HP<100 && survivor.isTargeting(h) && h.predationUsed(),"survivor did not wake/retaliate, or failed hunt did not count");
+        int previousDamage=BalanceTuning.get(BalanceTuning.Key.HORROR_DAMAGE);
+        try{
+            for(int percent:new int[]{100,200}){
+                BalanceTuning.setShared(BalanceTuning.Key.HORROR_DAMAGE,percent);
+                h=fresh(2);h.pos=Dungeon.hero.pos+8;
+                for(int seed=0;seed<100;seed++){
+                    Random.pushGenerator(seed);
+                    try{
+                        Rat rat=new Rat();rat.pos=h.pos+1;rat.sprite=rat.sprite();rat.sprite.link(rat);
+                        Dungeon.level.mobs.add(rat);Actor.add(rat);
+                        field(h,"predationUsed",false);field(h,"preyId",-1);field(h,"phase",LurkingHorror.Phase.STALKING);
+                        Arrays.fill(Dungeon.level.heroFOV,false);int before=h.HP;
+                        act(h);check(!rat.isAlive() && h.HP==before && h.predationUsed(),"full-health floor-two rat survives sleeping-prey pounce at "+percent+" percent seed="+seed);
+                    }finally{Random.popGenerator();}
+                }
+            }
+        }finally{BalanceTuning.setShared(BalanceTuning.Key.HORROR_DAMAGE,previousDamage);}
+        System.out.println("HORROR PREDATION PASS: 200 full-health floor-two rats, damage settings 100/200 percent; no retaliation, no hero kill credit; strengthened player damage remains separately bounded");
     }
     private static void generation() throws Exception {
         Dungeon.init(); int opportunities=0;

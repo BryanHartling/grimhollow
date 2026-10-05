@@ -86,10 +86,17 @@ public final class EnhancedEffects {
                 else if(tile==Terrain.FORCE_WALL)style=Style.FORCE_WALL;
                 boolean shown=style!=null&&(Dungeon.level.heroFOV[cell]||Dungeon.level.visited[cell]||Dungeon.level.mapped[cell]);
                 Image image=images[cell];
-                if(shown){if(image==null){image=images[cell]=new Image(ATLAS);image.point(DungeonTilemap.tileToWorld(cell));add(image);}
+                if(shown){boolean bone=style==Style.BONE_WALL;
+                    if(image==null || image.texture!=com.watabou.gltextures.TextureCache.get(bone?BoneWallArt.TEXTURE:ATLAS)){
+                        if(image!=null)image.killAndErase();
+                        image=images[cell]=bone?BoneWallArt.image(cell):new Image(ATLAS);add(image);
+                    }
+                    image.point(DungeonTilemap.tileToWorld(cell));
                     float phase=phase(cell)%997/997f;
                     float t=steps[cell]>0?(.6f-steps[cell])*10:time*5+phase*style.count;
-                    frame(image,style,(int)t,16,16);image.alpha(style==Style.FORCE_WALL?.75f:1);}
+                    if(bone){BoneWallArt.frame(image,cell);image.y-=4;}
+                    else frame(image,style,(int)t,16,16);
+                    image.alpha(style==Style.FORCE_WALL?.75f:1);}
                 if(image!=null)image.visible=shown;
                 steps[cell]=Math.max(0,steps[cell]-Game.elapsed);
             }

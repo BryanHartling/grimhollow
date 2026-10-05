@@ -596,6 +596,7 @@ public class SmokeRun {
         com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBone wandBone=new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBone();
         wandBone.onZap(new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(center,wallCell,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.STOP_TARGET));
         check(Dungeon.level.map[wallCell]==Terrain.BONE_WALL&&Dungeon.level.solid[wallCell]&&!Dungeon.level.passable[wallCell],"9: Wand of Bone blocks movement and LOS");
+        check(Dungeon.level.tileName(Terrain.BONE_WALL).equals("Bone Wall") && Dungeon.level.tileDesc(Terrain.BONE_WALL).contains("Fire cannot burn"),"9: Bone wall has its own meaningful inspection result");
         check(new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(center,center+3,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.MAGIC_BOLT).collisionPos==wallCell-1,"9: Wand of Bone stops bolts before the solid cell (upstream Ballistica)");
         for(int i=0;i<5;i++)h.buff(BoneWalls.class).act();check(Dungeon.level.map[wallCell]==Terrain.EMPTY,"9: Wand wall expires after five turns");
         BoneWalls.raise(wallCell,5);Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);h=Dungeon.hero;

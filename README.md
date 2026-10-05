@@ -1,12 +1,16 @@
 # Grimhollow
 
+**Bone wall and Horror v1.23.2:** Wand of Bone/Bone Prison have stable painted barricades and an examination result with remaining turns. The Horror has modestly stronger combat damage and a separate stronger sleeping-prey pounce, with the same damage tuning setting. Its floor omen is a framed six-second notice; the larger ambush warning remains visible until you respond. Detection, response fairness and recovery limits are unchanged. Balance still requires campaign playtesting.
+
+Latest Windows launcher: `desktop/build/windows/1.23.2/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`.
+
 **Talent panel v1.23.1:** rounded bronze studs replace the blocky gold rank markers. Larger ivory available, bronze spent and hollow future tier markers accompany an explicit available/spent count. Random allocation has a brass shuffle medallion and a larger hit area. Allocation rules, point costs and caps are unchanged.
 
 v1.23.1 corrects equipment grips on all nine painted heroes, including the Necromancer's Sickle. Weapons anchor to visible palms rather than robe edges; curved/narrow handles use their actual painted positions. Short blades hang naturally and hooked blades/polearms stay upright. Existing checks cover all eight armor appearances and both facings. Gameplay and source paintings are unchanged.
 
 **Haste after freezing:** thawing in water leaves five turns of Chill. Haste does not remove it, so a hasted step can still take two thirds of a turn and trigger a red sentry's travel interruption. Dry-ground thawing does not leave Chill. Potion/status descriptions now explain this; the original save is unavailable, but the timing sequence is reproduced.
 
-Latest Windows launcher: `desktop/build/windows/1.23.1/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`.
+Talent/grip checkpoint Windows launcher: `desktop/build/windows/1.23.1/Grimhollow/Grimhollow.exe`; the latest APK path is listed above.
 
 v1.23.0 refines the playtesting build: hero-level refreshing Necrotic Touch, gradual minion decay, Phylactery spell information, visible golden talent sockets and HUD keys, corrected equipment grips and torch depth, painted pointer/stairs/well/statue, restrained high-contrast identity symbols and a framed update screen. Smooth text is the default; a player's explicit font preference is preserved. All nine painted heroes from v1.22.6 remain.
 

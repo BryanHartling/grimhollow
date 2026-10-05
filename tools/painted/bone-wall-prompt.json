@@ -1,0 +1,7 @@
+{
+  "source": "sources/terrain/bone-wall.png",
+  "tool": "built-in image_gen",
+  "license": "GPL-3.0-or-later",
+  "transparent_background": true,
+  "prompt": "Use case: stylized-concept. Production game asset for Grimhollow, an original dark gothic painted dungeon crawler. Create a transparent sprite reference sheet containing FOUR separated small wall sections arranged in a strict evenly spaced 2 by 2 grid, one complete section per quadrant, no text or labels. Each section is a dense, solid magical barricade built entirely from tangled ivory femurs, ribs, vertebrae and a few weathered skulls, clearly recognizable as a WALL OF BONES, tall enough to block a person. Organic bone spikes along the top; dark recesses, warm aged bone, faint muted olive necromantic undertone but no glow cloud. Painterly hand-rendered high quality realistic fantasy game illustration, readable simple silhouette and large forms when downscaled, sharp clean edges, fine detail subordinate to silhouette, no pixel art. Slight overhead view with visible front face, orthographic near-front projection suitable for a top-down dungeon; compact roughly square upright footprint, feet/base aligned along lower edge. Four material/arrangement variants, all the same size and height. Absolutely transparent background, isolated cutouts, generous transparent gutters between all four sections, no ground tiles, no surroundings, no people, no UI, no cast shadow outside the silhouette."
+}

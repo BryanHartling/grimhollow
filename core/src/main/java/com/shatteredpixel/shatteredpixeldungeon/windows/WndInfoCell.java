@@ -43,6 +43,7 @@ public class WndInfoCell extends Window {
 
 	public static Image cellImage( int cell ){
 		int tile = Dungeon.level.map[cell];
+        if(tile==Terrain.BONE_WALL)return com.shatteredpixel.shatteredpixeldungeon.effects.BoneWallArt.image(cell);
 		if (Dungeon.level.water[cell]) {
 			tile = Terrain.WATER;
 		} else if (Dungeon.level.pit[cell]) {
@@ -170,6 +171,8 @@ public class WndInfoCell extends Window {
 			desc += Dungeon.level.tileDesc(Dungeon.level.map[cell]);
 		}
 		if(Dungeon.level.map[cell]==Terrain.LOCKED_DOOR && ElementalCache.sealed(Dungeon.level,cell)) desc=ElementalCache.atDoor(Dungeon.level,cell).doorDescription();
+        if(Dungeon.level.map[cell]==Terrain.BONE_WALL && Dungeon.level.boneTurns.get(cell)!=null)
+            desc+="\n\n"+Messages.get(com.shatteredpixel.shatteredpixeldungeon.levels.features.BoneWalls.class,"remaining",Dungeon.level.boneTurns.get(cell));
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 

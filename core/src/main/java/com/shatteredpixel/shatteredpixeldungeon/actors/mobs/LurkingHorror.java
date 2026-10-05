@@ -59,7 +59,11 @@ public class LurkingHorror extends Mob {
     @Override public float spawningWeight() { return 0; } // Regional allocation only, never respawns.
     @Override public boolean reset() { return true; }
     @Override public int attackSkill(Char target) { return ambushAttack ? INFINITE_ACCURACY : 10+region*5; }
-    @Override public int damageRoll() { return Math.round(Random.NormalIntRange(2+region,4+2*region)*BalanceTuning.multiplier(HORROR_DAMAGE)); }
+    @Override public int damageRoll() {
+        // A sleeping-prey pounce is separate from the hero-facing combat range.
+        int low=predatoryStrike?9+4*region:3+region,high=predatoryStrike?13+6*region:6+2*region;
+        return Math.round(Random.NormalIntRange(low,high)*BalanceTuning.multiplier(HORROR_DAMAGE));
+    }
     @Override public int drRoll() { return super.drRoll()+region; }
     @Override public float speed() { return super.speed()*(phase==Phase.FLEEING ? 1.5f : phase==Phase.RECOVERING ? .5f : 1f); }
     public int flightTurns() { return Math.max(1, Math.round(FLIGHT[region]*BalanceTuning.multiplier(HORROR_FLIGHT))); }
@@ -124,7 +128,9 @@ public class LurkingHorror extends Mob {
     }
     public void announceArrival() {
         if (!omen && isAlive() && alignment==Alignment.ENEMY) {
-            omen=true; GLog.i(Messages.get(this,"omen"));
+            omen=true; GLog.w(Messages.get(this,"omen"));
+            com.shatteredpixel.shatteredpixeldungeon.effects.HorrorSenseLayer.arrival();
+            Sample.INSTANCE.play(Assets.Sounds.MISS,.75f,.65f);
         }
     }
     public static boolean sameHuntArea(Level level, int a, int b) {
@@ -322,7 +328,7 @@ public class LurkingHorror extends Mob {
         if(prey==null)return null;
         if(Dungeon.level.adjacent(pos,prey.pos)) {
             predationUsed=true; expose(); ambushAttack=predatoryStrike=true;
-            try { attack(prey,region<2?1.5f:region<4?1.75f:2f,0,1); }
+            try { attack(prey,1f,0,1); }
             finally { ambushAttack=predatoryStrike=false; }
             if(prey.isAlive())prey.aggro(this);
             spend(attackDelay()); return true;

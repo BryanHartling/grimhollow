@@ -1,3 +1,9 @@
+# Bone walls and Horror playtesting follow-up - v1.23.2
+
+- Wand of Bone and Bone Prison now share four stable painted barricades, packed from a committed transparent source and exact built-in image-generation prompt. Examination names the bone wall and explains blocking, fire immunity and remaining binding turns. No wall duration, collision or gameplay terrain rule changes.
+- The Horror's previous sleeping-prey strike reused its reduced player damage; a full-health rat could survive and retaliate. Use a separate prey range of 9-13 / 13-19 / 17-25 / 21-31 / 25-37 by region, with the existing damage tuning multiplier and normal damage reduction. This remains an actual attack, not an automatic execution: tougher prey can survive. Ordinary player-facing base damage increases from 2-4 / 3-6 / 4-8 / 5-10 / 6-12 to 3-6 / 4-8 / 5-10 / 6-12 / 7-14; existing ambush multipliers, accuracy rules, counters, solitary hunting and lifetime recovery cap remain.
+- Make the once-per-floor omen yellow, audible and visible in a framed six-second notice. The enlarged amber direction cue and framed ambush instruction persist for the entire warning phase, including while the player thinks or inspects. Travel/rest still halt before the ambush, and it still requires a fresh time-consuming player action; no modal acknowledgment or terrain reveal is added.
+
 # Bronze talent markers, weapon grips and Haste clarification - v1.23.1
 
 - Replace rectangular gold rank fills with rounded bronze studs and a matching painted frame. Tier totals use larger ivory available, bronze spent and hollow future markers, accompanied by an explicit available/spent count. Random allocation uses a brass shuffle medallion and a larger hit area; costs, caps and allocation behavior are unchanged. The trim is original vector geometry compiled through the existing offline art packer.

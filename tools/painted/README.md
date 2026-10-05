@@ -1,3 +1,7 @@
+# Bone-wall presentation - v1.23.2
+
+`bone_wall.py` packs four authored sections from `sources/terrain/bone-wall.png` into `environment/painted_bone_wall.png`. The exact built-in `image_gen` prompt, transparency setting and GPL-3.0-or-later release are recorded in `bone-wall-prompt.json`. The wall's cell chooses one stable arrangement; there is no continuously cycling wall animation or runtime generation. The normal full offline provenance gate verifies the atlas.
+
 # Equipment grip correction - v1.23.1
 
 `talent_trim.py` draws original GPL-3.0-or-later bronze talent frames, round rank/point studs and a shuffle medallion into `interfaces/painted_talents.png`. It uses deterministic antialiased vector geometry and the existing authored panel trim; the normal offline packer and provenance validator reproduce it without an image generation service.

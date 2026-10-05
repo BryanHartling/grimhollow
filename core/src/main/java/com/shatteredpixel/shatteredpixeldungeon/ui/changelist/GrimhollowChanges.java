@@ -20,7 +20,10 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.23.1","Bronze talent markers, natural weapon grips and clearer Haste rules.");
+        ChangeInfo r=release(list,"v1.23.2","Painted bone walls and a more threatening, clearly warned hunter.");
+        note(r,Icons.TALENT,"Bone walls","Wand of Bone and Bone Prison share four stable painted bone barricades. Examine shows their movement/sight/projectile blocking, fire immunity and remaining binding turns. Their duration and terrain rules are unchanged.");
+        note(r,Icons.WARNING,"Lurking Horror","Increase ordinary damage modestly and give sleeping-prey pounces their own stronger damage range. A full-health normal rat can no longer defeat the opening pounce at normal or doubled damage. The once-per-floor omen has a framed notice and audio cue; the larger ambush warning stays visible until you respond. Your fresh-action window, detection counters, solitary hunt and lifetime healing limit remain.");
+        r=release(list,"v1.23.1","Bronze talent markers, natural weapon grips and clearer Haste rules.");
         note(r,Icons.TALENT,"Bronze talent markers","Rounded bronze studs show the ranks you have purchased. Tier headers distinguish ivory available points, bronze spent points and hollow future points, with an explicit available/spent count. A brass shuffle medallion replaces the old Random allocation icon. Talent costs and allocation rules are unchanged.");
         note(r,Icons.TALENT,"Weapon grips","Correct the palm anchors for all nine heroes and the handles of curved and narrow weapons. Short blades hang naturally at rest; hooked blades and polearms stay upright beside the body. Attacks still point toward the target. Combat and movement timings are unchanged.");
         note(r,Icons.INFO,"Haste and lingering cold","Haste triples movement speed but does not clear Chill, Slow or Cripple. Thawing in water leaves Chill, so a hasted step can still take long enough for a red sentry to interrupt travel. The potion and status descriptions now explain this interaction.");

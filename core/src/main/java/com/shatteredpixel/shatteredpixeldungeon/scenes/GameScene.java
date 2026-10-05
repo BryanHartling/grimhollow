@@ -1425,7 +1425,15 @@ public class GameScene extends PixelScene {
 	}
 	
 	public static void updateKeyDisplay(){
-		if (scene != null && scene.menu != null) scene.menu.updateKeys();
+		final GameScene target = scene;
+		if (target != null && target.menu != null) {
+			// Pickup/unlock runs on the actor thread; count labels need the renderer's fonts.
+			ShatteredPixelDungeon.runOnRenderThread(new Callback() {
+				@Override public void call() {
+					if (scene == target && target.menu != null) target.menu.updateKeys();
+				}
+			});
+		}
 	}
 
 	public static void showlevelUpStars(){

@@ -1,5 +1,7 @@
 # Known issues
 
+- Historical v1.23.3 tag v1.23.3-readable-controls and branch CI runs 37250259548/37250259385 failed live key pickup because text was measured on the actor thread. The readable-controls-fix follow-up queues the HUD refresh on the render thread; the failed runs remain available and checks are unchanged.
+
 - v1.23.3 environment: automatic approval review timed out on three parallel native-test/package commands; individual retries succeeded through the existing escalation route. No check was disabled.
 
 - v1.23.3: a complete description-input failure did not reproduce in the native Lantern fixture; visible scroll controls and final-line padding address discoverability and clipping. Physical Samsung tablet verification of the key row and long descriptions remains with the user.

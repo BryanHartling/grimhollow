@@ -2116,6 +2116,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                                 heap.drop(new com.shatteredpixel.shatteredpixeldungeon.items.Gold());
                                 // Removing the top item changes the already uploaded atlas frame.
                                 if(heap.pickUp()==null)throw new AssertionError("Actor pickup failed");
+                                // Key pickup must also rebuild its text count safely off this actor thread.
+                                com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey key=new com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey(Dungeon.depth);
+                                key.quantity(2);if(!key.doPickUp(Dungeon.hero,cell))throw new AssertionError("Actor key pickup failed");
                                 encounterDrops=true;
                                 encounterSummon=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroSkeleton.raise(cell,false,false)!=null;
                                 break;
@@ -2134,6 +2137,10 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 System.out.println("ENCOUNTER REPLAY actions="+encounterActions+" steps="+encounterSteps+" attacks="+encounterAttacks+" failures=0");
                 Gdx.app.exit();return;
             }
+            com.shatteredpixel.shatteredpixeldungeon.ui.MenuPane menu=(com.shatteredpixel.shatteredpixeldungeon.ui.MenuPane)RecoveryChecks.field(Game.scene(),"menu");
+            com.shatteredpixel.shatteredpixeldungeon.ui.KeyDisplay keys=(com.shatteredpixel.shatteredpixeldungeon.ui.KeyDisplay)RecoveryChecks.field(menu,"keys");
+            if(keys.keyCount()<2||!keys.visible)throw new AssertionError("Actor pickup did not reach rendered key HUD");
+            System.out.println("ACTOR KEY HUD PASS: pickup on gameplay thread, count labels on render thread; failures=0");
             com.shatteredpixel.shatteredpixeldungeon.actors.Actor.add(new com.shatteredpixel.shatteredpixeldungeon.actors.Actor() {
                 { actPriority=VFX_PRIO; }
                 @Override protected boolean act() {

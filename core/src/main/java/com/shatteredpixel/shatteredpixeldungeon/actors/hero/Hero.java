@@ -720,6 +720,9 @@ public class Hero extends Char {
 
 	//damage rolls that come from the hero can have their RNG influenced by clover
 	public static int heroDamageIntRange(int min, int max ){
+		return com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.damageRoll(min,max,()->ordinaryHeroDamage(min,max));
+	}
+	private static int ordinaryHeroDamage(int min,int max){
 		if (Random.Float() < ThirteenLeafClover.alterHeroDamageChance()){
 			return ThirteenLeafClover.alterDamageRoll(min, max);
 		} else {
@@ -1729,9 +1732,11 @@ public class Hero extends Char {
 		//we ceil this one to avoid letting the player easily take 0 dmg from tenacity early
 		dmg = (int)Math.ceil(dmg * RingOfTenacity.damageMultiplier( this ));
 
+		int coinPreHP = HP;
 		int preHP = HP + shielding();
 		if (src instanceof Hunger) preHP -= shielding();
         super.damage( dmg, src );
+		com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.damaged(this,coinPreHP);
         if(buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.class)!=null)buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Necromancy.class).ward();
 		int postHP = HP + shielding();
 		if (src instanceof Hunger) postHP -= shielding();

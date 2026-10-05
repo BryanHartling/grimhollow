@@ -672,7 +672,7 @@ public abstract class Char extends Actor {
 			return true;
 		}
 
-		float acuRoll = Random.Float( acuStat );
+		float acuRoll = attacker instanceof Hero ? com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.roll((Hero)attacker,acuStat) : Random.Float(acuStat);
 		if (attacker.buff(Bless.class) != null) acuRoll *= 1.25f;
 		if (attacker.buff(  Hex.class) != null) acuRoll *= com.shatteredpixel.shatteredpixeldungeon.actors.blobs.SanctuaryZone.contains(attacker.pos) ? .7f : .8f;
 		if (attacker.buff( Daze.class) != null) acuRoll *= 0.5f;
@@ -688,7 +688,7 @@ public abstract class Char extends Actor {
 		}
 		acuRoll *= accMulti;
 
-		float defRoll = Random.Float( defStat );
+		float defRoll = defender instanceof Hero ? com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.roll((Hero)defender,defStat) : Random.Float(defStat);
 		if (defender.buff(Bless.class) != null) defRoll *= 1.25f;
 		if (defender.buff(  Hex.class) != null) defRoll *= 0.8f;
 		if (defender.buff( Daze.class) != null) defRoll *= 0.5f;

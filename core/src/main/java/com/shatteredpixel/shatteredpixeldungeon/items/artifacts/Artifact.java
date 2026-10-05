@@ -96,6 +96,9 @@ public class Artifact extends KindofMisc {
 
 	@Override
 	public boolean doEquip( final Hero hero ) {
+		if (!(this instanceof FickleDoubloon) && FickleDoubloon.equipped()!=null){
+			GLog.w(Messages.get(FickleDoubloon.class,"exclusive"));return false;
+		}
 
 		if ((hero.belongings.artifact != null && hero.belongings.artifact.getClass() == this.getClass())
 				|| (hero.belongings.misc != null && hero.belongings.misc.getClass() == this.getClass())){

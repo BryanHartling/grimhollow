@@ -1,6 +1,6 @@
 # Grimhollow
 
-**Wayward Chart v1.25.0:** a new carried trinket points to painted treasure mounds without exposing nearby terrain. Strengthening it improves discovery and treasure. Magic Mapping settles an unfulfilled regional promise; a defeated dragon has one additional overlooked pocket. Taking treasure can fade an explored room on any visited ordinary floor in that region. Earlier losses remain until those rooms are revisited or their floors mapped. Terrain, exploration flags, visible cells, doors, stairs and known hazards are not rewritten.
+**Wayward Chart v1.25.0:** a new carried trinket points to painted treasure mounds without exposing nearby terrain. Strengthening it improves discovery and treasure. Magic Mapping settles an unfulfilled regional promise; a defeated dragon has one additional overlooked pocket. Taking treasure can fade an explored room on any visited floor in that region. Earlier losses remain until those rooms are revisited or their floors mapped. Terrain, exploration flags, visible cells, doors, stairs and known hazards are not rewritten.
 
 **Playtest > Balance tuning > Wayward Chart** exposes discovery at all four ranks, gold, item counts, quality comparisons and the size of faded room memories. Settings persist across games. Its painted Chart, treasure mound states, treasure X and memory veil reproduce from [committed sources and prompts](tools/painted/wayward-prompts.json) through the offline packer; CI needs no generation service.
 
@@ -16,7 +16,7 @@ The two painted coin faces and companion harness are packed from `tools/painted/
 
 **Bone wall and Horror v1.23.2:** Wand of Bone/Bone Prison have stable painted barricades and an examination result with remaining turns. The Horror has modestly stronger combat damage and a separate stronger sleeping-prey pounce, with the same damage tuning setting. Its floor omen is a framed six-second notice; the larger ambush warning remains visible until you respond. Detection, response fairness and recovery limits are unchanged. Balance still requires campaign playtesting.
 
-Latest Windows launcher: `desktop/build/windows/1.24.0/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`.
+Latest local Windows launcher: `desktop/build/windows/1.25.0-release/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`. The release folder permits an older local launcher to stay open during packaging; CI packages the same version under `windows/1.25.0`.
 
 **Talent panel v1.23.1:** rounded bronze studs replace the blocky gold rank markers. Larger ivory available, bronze spent and hollow future tier markers accompany an explicit available/spent count. Random allocation has a brass shuffle medallion and a larger hit area. Allocation rules, point costs and caps are unchanged.
 

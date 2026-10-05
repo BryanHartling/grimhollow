@@ -39,6 +39,7 @@ public final class WaywardJourney {
         return Dungeon.branch == 0 && Dungeon.depth > 0 && Dungeon.depth < 25
                 && Dungeon.depth % 5 != 0 && Dungeon.level instanceof RegularLevel;
     }
+    private static boolean mainFloor(){return Dungeon.branch==0 && Dungeon.depth>0 && Dungeon.depth<=25 && Dungeon.level!=null;}
     public static int region(int depth) { return Math.max(0, Math.min(4, (depth-1)/5)); }
     public static boolean regionRewarded(int region) { return rewarded[region]; }
     public static boolean floorEntered(int depth) { return entered[depth]; }
@@ -172,7 +173,8 @@ public final class WaywardJourney {
     }
     /** Snapshot only rooms whose interior terrain has really been explored; keep it bounded. */
     public static synchronized void captureRooms() {
-        if(!eligible())return;
+        if(!mainFloor())return;
+        if(!(Dungeon.level instanceof RegularLevel)){captureArena();return;}
         RegularLevel level=(RegularLevel)Dungeon.level;
         for(Room room:level.rooms())if(ordinary(room)){
             int anchor=room.left+room.top*level.width();Memory m=null;
@@ -189,6 +191,38 @@ public final class WaywardJourney {
             int limit=Math.min(cells.size(),BalanceTuning.get(CHART_MEMORY_CELLS));
             m.cells=new int[limit];for(int i=0;i<limit;i++)m.cells[i]=cells.get(i);
         }
+    }
+    /** Cleared boss floors also have explored memories, even without generated Room objects. */
+    private static void captureArena(){
+        Level level=Dungeon.level;if(level.locked)return;
+        Memory previous=null;
+        for(Memory m:memories)if(m.depth==Dungeon.depth && m.anchor==-1){previous=m;break;}
+        if(previous!=null && previous.forgotten)return;
+        boolean[] scanned=new boolean[level.length()];ArrayList<Integer> largest=new ArrayList<>();
+        for(int start=0;start<scanned.length;start++)if(!scanned[start] && level.insideMap(start)
+                && level.visited[start] && level.passable[start] && !protectedCell(start)){
+            ArrayList<Integer> part=new ArrayList<>();ArrayDeque<Integer> queue=new ArrayDeque<>();queue.add(start);scanned[start]=true;
+            while(!queue.isEmpty()){
+                int cell=queue.remove();part.add(cell);
+                for(int delta:new int[]{-1,1,-level.width(),level.width()}){
+                    int next=cell+delta;
+                    if(level.insideMap(next) && !scanned[next] && level.visited[next] && level.passable[next] && !protectedCell(next)){
+                        scanned[next]=true;queue.add(next);
+                    }
+                }
+            }
+            if(part.size()>largest.size())largest=part;
+        }
+        if(largest.size()<6)return;
+        Memory m=previous==null?new Memory():previous;m.depth=Dungeon.depth;m.anchor=-1;m.width=level.width();
+        int limit=Math.min(largest.size(),BalanceTuning.get(CHART_MEMORY_CELLS));m.cells=new int[limit];
+        m.left=level.width();m.top=level.height();m.right=m.bottom=0;
+        for(int i=0;i<limit;i++){
+            int cell=largest.get(i);m.cells[i]=cell;
+            m.left=Math.min(m.left,cell%level.width()-1);m.right=Math.max(m.right,cell%level.width()+1);
+            m.top=Math.min(m.top,cell/level.width()-1);m.bottom=Math.max(m.bottom,cell/level.width()+1);
+        }
+        if(previous==null)memories.add(m);
     }
     private static void assignDebt(int region) {
         while(debt[region]>0){
@@ -213,9 +247,9 @@ public final class WaywardJourney {
         }
         if(restored){revision++;GLog.w(Messages.get(WaywardChart.class,"restored"));}
         else if(Dungeon.branch==0 && memories.stream().anyMatch(m->m.forgotten && m.depth==Dungeon.depth))revision++;
-        if(eligible() && debt[region(Dungeon.depth)]>0){captureRooms();assignDebt(region(Dungeon.depth));}
+        if(mainFloor() && debt[region(Dungeon.depth)]>0){captureRooms();assignDebt(region(Dungeon.depth));}
     }
-    public static boolean protectedCell(int cell) {
+    public static synchronized boolean protectedCell(int cell) {
         Level l=Dungeon.level;
         if(l.getTransition(cell)!=null || l.map[cell]==Terrain.ENTRANCE || l.map[cell]==Terrain.EXIT
                 || l.map[cell]==Terrain.DOOR || l.map[cell]==Terrain.OPEN_DOOR || l.map[cell]==Terrain.LOCKED_DOOR

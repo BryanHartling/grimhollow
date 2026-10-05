@@ -123,6 +123,9 @@ final class WaywardScenario {
             WaywardJourney.arrive();WaywardJourney.mapping();
             check(WaywardJourney.caches().size()==region+1,"regional repeat cap "+region);
         }
+        Dungeon.depth=5;Dungeon.switchLevel(Dungeon.newLevel(),-1);Dungeon.level.locked=false;
+        Arrays.fill(Dungeon.level.visited,true);WaywardJourney.captureRooms();
+        check(WaywardJourney.memories().stream().anyMatch(m->m.depth==5 && m.cells.length>=6),"cleared boss floor memory is eligible");
         Bundle old=new Bundle();WaywardJourney.restore(old);WaywardJourney.migrateVisited(Arrays.asList(1,6,1002));
         check(WaywardJourney.floorEntered(1) && WaywardJourney.floorEntered(6) && !WaywardJourney.floorEntered(2),"old main-floor migration excludes branches");
         BalanceTuning.reset();Playtest.reset();

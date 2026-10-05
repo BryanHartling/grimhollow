@@ -1,6 +1,7 @@
 # Known issues
 
 - v1.25.0: Wayward Chart reward balance and physical Samsung tablet review remain human playtesting; generated runs and native portrait input are not a full campaign or hardware test. New text falls back to English in other locales. Already generated floors do not gain entry rerolls; paid Magic Mapping can still fulfill an unclaimed regional promise on an eligible floor.
+- v1.25.0 local packaging: the open Windows launcher locked its JAR during replacement. The final package is in `desktop/build/windows/1.25.0-release/Grimhollow`; missing support files in the original folder were restored without touching locked files or interrupting the active game. CI uses the normal clean version folder.
 
 - v1.24.0: Doubloon/Golden Mimic campaign balance and physical Samsung tablet playtesting remain with the user; automated generated runs and native portrait input are not a complete campaign or hardware test. New text falls back to English in other locales. Regional cache plans and already-generated shop/floor stock are not rerolled by equipping the coin later.
 - v1.24.0 local Halls walking verification initially stopped at cell 655 before moving to 690; the identical build and assertion passed all 114 steps using isolated test preferences. The initial interruption remains unexplained; no game rule or check was altered to obtain the passing result.

@@ -10,7 +10,7 @@ import java.util.Arrays;
 /** A separate faded-ink veil and treasure X; neither can reveal terrain or unseen creatures. */
 public class WaywardChartOverlay extends Group {
     private final Tilemap veil;
-    private int revision=-1,heroPos=-1;
+    private int revision=-1;
     public WaywardChartOverlay(){
         veil=new Tilemap("effects/wayward_veil.png",new TextureFilm("effects/wayward_veil.png",64,64)){
             {cellSize(GameGeometry.WORLD_TILE_SIZE,GameGeometry.WORLD_TILE_SIZE);}
@@ -35,10 +35,12 @@ public class WaywardChartOverlay extends Group {
             marker.logicalSize(12,12);marker.x=(c.pos%Dungeon.level.width())*16+2;marker.y=(c.pos/Dungeon.level.width())*16+2;
             add(marker);
         }
-        revision=WaywardJourney.revision;heroPos=Dungeon.hero.pos;
+        revision=WaywardJourney.revision;
     }
     @Override public void update(){
-        if(revision!=WaywardJourney.revision || heroPos!=Dungeon.hero.pos)refresh();
+        // Observe advances the revision when a live memory needs a new visibility mask.
+        // Ordinary movement without a forgotten room must not rebuild a whole tilemap.
+        if(revision!=WaywardJourney.revision)refresh();
         super.update();
     }
 }

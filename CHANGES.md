@@ -12,6 +12,7 @@
 - Refine generation lists to actual random choices and keep disabled rare/subtype rolls from creating an empty enemy rotation. Catalog navigation does not consume gameplay randomness. Imminent Hatchling popups are re-presented after loading a warned save.
 - Final local validation: Runs=30 failures=0, eight JUnit tests, both native orientations for menus/rooms/polish/Horror/Expedition, all five fog and memory walks, 12,960 generic hero draws, 155 reproducible assets and Windows launcher exit 0. Existing effects gate reports mean 0.6276ms/p95 0.9340ms. No physical tablet verification is claimed; test 45 stays abandoned.
 - CI exposed a race in the existing live encounter fixture: after action 150 it mistook its deliberate actor-thread death for an unexpected death. Wait for the scheduled callback before measuring all 120 death frames; gameplay and every encounter assertion are unchanged.
+- Game commit 789f0cdd4, tag v1.26.0-mystery-playtest, passes all seven branch CI jobs (37403674554). Its tag run (37403674799) fails only the unchanged effects p95 gate at 2.0028ms; GitHub denies a failed-job retry with HTTP 403. Preserve that run and record it honestly rather than weakening the 2ms limit.
 
 # Playtesting repairs - v1.25.1
 

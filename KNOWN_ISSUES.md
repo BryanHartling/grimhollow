@@ -1,5 +1,7 @@
 # Known issues
 
+- v1.26.0 tag run 37403674799 passed every check except unchanged effects timing test 31: mean 1.5280ms, p95 2.0028ms against the strict <2ms gate. The identical game commit 789f0cdd4 passed all seven branch jobs in run 37403674554. GitHub denied the failed-job retry with HTTP 403; both runs remain available and no check was weakened. Later report-only commits do not change the game or packaged builds.
+
 - Historical v1.26.0 branch run 37401404725 failed the live encounter fixture after its deliberate death at action 150; zero HP reached the render check before the actor's completion flag. The fixture now waits for that scheduled callback while retaining unexpected-death, encounter coverage, summon/pickup and 120-frame death assertions. The failed run remains available.
 
 - v1.26.0: physical Samsung tablet and full campaign balance remain human review; native portrait input is not a device test. Revised descriptions fall back to English where translations are unavailable.

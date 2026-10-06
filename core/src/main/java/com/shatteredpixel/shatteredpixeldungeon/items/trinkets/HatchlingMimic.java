@@ -192,8 +192,14 @@ public class HatchlingMimic extends Trinket {
         if (remaining == 1 && !warned) {
             warned = true;
             awaitingChoice = true;
-            hero.interrupt(); hero.resting = false;
+            hero.interrupt(); hero.lastAction=null; hero.resting = false;
             GLog.w(Messages.get(this, "warning"));
+            if(com.watabou.noosa.Game.scene() instanceof GameScene)
+                com.watabou.noosa.Game.runOnRenderThread(()->{
+                    if(hero==Dungeon.hero && warned && hero.belongings.contains(this))
+                        GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage(
+                            new com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite(this),name(),Messages.get(this,"warning")));
+                });
         } else if (warned && !awaitingChoice) {
             if (feed(hero)) { remaining = interval(); warned = false; }
         }

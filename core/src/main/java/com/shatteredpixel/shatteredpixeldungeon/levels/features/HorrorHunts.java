@@ -22,7 +22,7 @@ public final class HorrorHunts {
     }
     public static void populate(Level level) {
         int region=(Dungeon.depth-1)/5;
-        if(Dungeon.branch!=0 || BalanceTuning.get(BalanceTuning.Key.DENSITY)==0
+        if(!GenerationToggles.allowed(LurkingHorror.class) || Dungeon.branch!=0 || BalanceTuning.get(BalanceTuning.Key.DENSITY)==0
                 || !(level instanceof RegularLevel) || Dungeon.depth<2 || Dungeon.depth>24
                 || Dungeon.bossLevel() || selectedFloor(Dungeon.seed,region)!=Dungeon.depth
                 || (Dungeon.LimitedDrops.HORROR_REGIONS.count & (1<<region))!=0) return;

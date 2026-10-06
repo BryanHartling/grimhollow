@@ -130,6 +130,30 @@ final class TuningScenario {
         reloaded.remove("balance_profile_v1");reloaded.flush();Playtest.restore(corrupt);
         check(Playtest.enabled()&&BalanceTuning.get(DENSITY)==200&&!BalanceTuning.customItemMix(),"legacy save migration/clamping");
         BalanceTuning.reset();Dungeon.init();
+        GenerationToggles.reset();Generator.fullReset();
+        GenerationToggles.toggle(com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern.class);
+        GenerationToggles.toggle(com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.class);
+        GenerationToggles.toggle(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision.class);
+        GenerationToggles.toggle(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Hexcaster.class);
+        GenerationToggles.toggle(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.class);
+        for(int draw=0;draw<100;draw++){
+            check(!(Generator.random(Generator.Category.ARTIFACT) instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern),"disabled artifact returned after deck reset");
+            check(!(Generator.random(Generator.Category.TRINKET) instanceof com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic),"disabled trinket returned");
+            check(!(Generator.random(Generator.Category.POTION) instanceof com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision),"disabled potion returned across alternating decks");
+            check(!(Generator.randomUsingDefaults(Generator.Category.POTION) instanceof com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision),"disabled default potion returned");
+            check(!MobSpawner.getMobRotation(12).contains(Hexcaster.class),"disabled enemy rotation");
+        }
+        GenerationToggles.load();check(!GenerationToggles.allowed(com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.class),"eligibility survives preference reload");
+        for(Class<?> type:Generator.Category.ARMOR.classes)if(type!=PlateArmor.class && (type==ClothArmor.class || type==LeatherArmor.class || type==MailArmor.class || type==ScaleArmor.class))GenerationToggles.toggle(type);
+        for(int region=0;region<5;region++)check(Generator.randomArmor(region) instanceof PlateArmor,"depth-weighted armor exclusion "+region);
+        boolean protectedPool=false;try{GenerationToggles.toggle(PlateArmor.class);}catch(IllegalArgumentException expected){protectedPool=true;}
+        check(protectedPool&&GenerationToggles.allowed(PlateArmor.class),"empty armor pool rejected atomically");
+        GenerationToggles.reset();check(GenerationToggles.changedCount()==0,"reset restores eligibility");
+        Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();
+        Waterskin skin=Dungeon.hero.belongings.getItem(Waterskin.class);if(skin==null){skin=new Waterskin();skin.collect();}
+        skin.empty();Playtest.recharge(skin);check(skin.isFull(),"individual recharge fills Waterskin");
+        skin.empty();Playtest.recharge();check(skin.isFull(),"bulk recharge fills Waterskin");
+        check(com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.itemGroup(new FocusCrystal()).equals("Class items"),"Crystal class-item category");
         System.out.println("TEST 58 PASS: default seeded RNG; spawn/loot/quality/category boundaries; unique artifacts; generated five regions; disk persistence, shared new/old games, reset precedence and profile sanitization");
     }
 }

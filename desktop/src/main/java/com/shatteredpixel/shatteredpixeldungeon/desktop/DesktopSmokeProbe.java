@@ -2010,6 +2010,14 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     }
     private boolean playtestClickPage(String label){
         if(playtestButton(label)!=null){playtestClick(label);return true;}
+        String parent=null;
+        if(label.equals("Fickle Doubloon") || label.equals("Golden Mimic companion") || label.equals("Wayward Chart")){
+            if(playtestButton("Artifacts and trinkets")!=null)parent="Artifacts and trinkets";
+            else if(label.equals("Golden Mimic companion") && playtestButton("Hatchling Mimic")!=null)parent="Hatchling Mimic";
+        }else if(label.equals("Lurking Horror") && playtestButton("Grimhollow enemies")!=null)parent="Grimhollow enemies";
+        else if(label.startsWith("Expedition ") || label.equals("Cavern remains loot")){if(playtestButton("Dragon expedition")!=null)parent="Dragon expedition";}
+        else if(label.startsWith("Floor 21") && playtestButton("Halls")!=null)parent="Halls";
+        if(parent!=null){playtestClick(parent);return false;}
         if(playtestButton(">")!=null && playtestButton(">").active){playtestClick(">");return false;}
         throw new AssertionError("Playtest entry missing from paged menu: "+label);
     }

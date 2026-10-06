@@ -708,6 +708,10 @@ public class Generator {
 		return randomUsingDefaults(BalanceTuning.customItemMix()?BalanceTuning.itemCategory():Random.chances(defaultCatProbs));
 	}
 	
+    private static boolean noEligibleCards(Category cat){
+        for(int i=0;i<cat.probs.length;i++)if(cat.probs[i]>0 && com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(cat.classes[i]))return false;
+        return true;
+    }
 	public static Item random( Category cat ) {
 		switch (cat) {
 			case ARMOR:
@@ -727,10 +731,11 @@ public class Generator {
 					for (int i = 0; i < cat.dropped; i++) Random.Long();
 				}
 
-				int i = Random.chances(cat.probs);
+				int i = com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.pick(cat.probs,cat.classes);
 				if (i == -1) {
 					reset(cat);
-					i = Random.chances(cat.probs);
+					if(com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.changedCount()>0 && noEligibleCards(cat))reset(cat);
+					i = com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.pick(cat.probs,cat.classes);
 				}
 				if (cat.defaultProbs != null) cat.probs[i]--;
 				Class<?> itemCls = cat.classes[i];
@@ -741,11 +746,11 @@ public class Generator {
 				}
 
 				if (ExoticPotion.regToExo.containsKey(itemCls)){
-					if (Random.Float() < ExoticCrystals.consumableExoticChance()){
+					if (Random.Float() < ExoticCrystals.consumableExoticChance() && com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(ExoticPotion.regToExo.containsKey(itemCls)?ExoticPotion.regToExo.get(itemCls):ExoticScroll.regToExo.get(itemCls))){
 						itemCls = ExoticPotion.regToExo.get(itemCls);
 					}
 				} else if (ExoticScroll.regToExo.containsKey(itemCls)){
-					if (Random.Float() < ExoticCrystals.consumableExoticChance()){
+					if (Random.Float() < ExoticCrystals.consumableExoticChance() && com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(ExoticPotion.regToExo.containsKey(itemCls)?ExoticPotion.regToExo.get(itemCls):ExoticScroll.regToExo.get(itemCls))){
 						itemCls = ExoticScroll.regToExo.get(itemCls);
 					}
 				}
@@ -764,16 +769,16 @@ public class Generator {
 		} else if (cat.defaultProbs == null || cat == Category.ARTIFACT) {
 			return random(cat);
 		} else if (cat.defaultProbsTotal != null){
-			return ((Item) Reflection.newInstance(cat.classes[Random.chances(cat.defaultProbsTotal)])).random();
+			return ((Item) Reflection.newInstance(cat.classes[com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.pick(cat.defaultProbsTotal,cat.classes)])).random();
 		} else {
-			Class<?> itemCls = cat.classes[Random.chances(cat.defaultProbs)];
+			Class<?> itemCls = cat.classes[com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.pick(cat.defaultProbs,cat.classes)];
 
 			if (ExoticPotion.regToExo.containsKey(itemCls)){
-				if (Random.Float() < ExoticCrystals.consumableExoticChance()){
+				if (Random.Float() < ExoticCrystals.consumableExoticChance() && com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(ExoticPotion.regToExo.containsKey(itemCls)?ExoticPotion.regToExo.get(itemCls):ExoticScroll.regToExo.get(itemCls))){
 					itemCls = ExoticPotion.regToExo.get(itemCls);
 				}
 			} else if (ExoticScroll.regToExo.containsKey(itemCls)){
-				if (Random.Float() < ExoticCrystals.consumableExoticChance()){
+				if (Random.Float() < ExoticCrystals.consumableExoticChance() && com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(ExoticPotion.regToExo.containsKey(itemCls)?ExoticPotion.regToExo.get(itemCls):ExoticScroll.regToExo.get(itemCls))){
 					itemCls = ExoticScroll.regToExo.get(itemCls);
 				}
 			}
@@ -790,12 +795,21 @@ public class Generator {
 		return randomArmor(Dungeon.depth / 5);
 	}
 	
+    private static int armorIndex(int floorSet){
+        int index=BalanceTuning.tier(Random.chances(floorSetTierProbs[floorSet]));
+        if(com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(Category.ARMOR.classes[index]))return index;
+        for(int offset=1;offset<5;offset++){
+            if(index-offset>=0 && com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(Category.ARMOR.classes[index-offset]))return index-offset;
+            if(index+offset<5 && com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(Category.ARMOR.classes[index+offset]))return index+offset;
+        }
+        throw new IllegalStateException("Armor generation pool is empty.");
+    }
 	public static Armor randomArmor(int floorSet) {
 
 		floorSet = (int)GameMath.gate(0, floorSet, floorSetTierProbs.length-1);
 		
-		Armor a = (Armor)Reflection.newInstance(Category.ARMOR.classes[BalanceTuning.tier(Random.chances(floorSetTierProbs[floorSet]))]);
-        if(a instanceof MailArmor&&BalanceTuning.roll(BONE_ARMOR,2,1))a=new com.shatteredpixel.shatteredpixeldungeon.items.armor.BoneArmor();
+		Armor a = (Armor)Reflection.newInstance(Category.ARMOR.classes[armorIndex(floorSet)]);
+        if(a instanceof MailArmor&&BalanceTuning.roll(BONE_ARMOR,2,1) && com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(com.shatteredpixel.shatteredpixeldungeon.items.armor.BoneArmor.class))a=new com.shatteredpixel.shatteredpixeldungeon.items.armor.BoneArmor();
 		a.random();
 		return a;
 	}
@@ -876,7 +890,7 @@ public class Generator {
 			for (int i = 0; i < cat.dropped; i++) Random.Long();
 		}
 
-		int i = Random.chances( cat.probs );
+		int i = com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.pick(cat.probs,cat.classes);
 
 		if (cat.defaultProbs != null && cat.seed != null){
 			Random.popGenerator();

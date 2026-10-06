@@ -115,6 +115,11 @@ public final class DoubloonScenario {
         rat=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();rat.properties().add(com.shatteredpixel.shatteredpixeldungeon.actors.Char.Property.BOSS);ally.attackProc(rat,4);check(rat.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Roots.class)==null,"boss root exclusion");
         rat.generatedRespawn=true;
         Bundle saved=new Bundle();saved.put("rat",rat);check(((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat)saved.get("rat")).generatedRespawn,"respawn flag persists");
+        check(harness.actions(Dungeon.hero).contains(com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion.AC_DIRECT),"harness exposes Direct action");
+        int guard=ally.pos;ally.directTocell(guard);
+        java.lang.reflect.Field defending=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob.class.getDeclaredField("defendingPos");defending.setAccessible(true);
+        check(defending.getInt(ally)==guard,"Golden Mimic accepts a guard command");
+        ally.directTocell(Dungeon.hero.pos);check(defending.getInt(ally)==-1,"Golden Mimic accepts Follow command");
         ally.die(DoubloonScenario.class);check(harness.resting(),"incapacitation retains harness");
         Dungeon.depth=2;harness.arrive();check(harness.resting(),"immediate stair transition cannot revive");
         for(int n=0;n<100;n++)harness.tick();harness.arrive();check(harness.resting(),"timer alone on same floor cannot revive");
@@ -132,6 +137,17 @@ public final class DoubloonScenario {
         hostile.forfeitedCoin=c;hostile.HP=hostile.HT/2;hostile.pos=Dungeon.level.exit();
         java.lang.reflect.Method act=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mimic.class.getDeclaredMethod("act");act.setAccessible(true);act.invoke(hostile);
         check(hostile.forfeitedCoin==null&&!Dungeon.level.mobs.contains(hostile),"escape permanently removes coin carrier");
+        Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();Playtest.god(false);
+        com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero psychic=Dungeon.hero;
+        psychic.heroClass=com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.PSYCHIC;
+        com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.initClassTalents(psychic);
+        psychic.talents.get(1).put(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.PRECOGNITION,1);
+        Buff.affect(psychic,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicMind.class);
+        c=new FickleDoubloon();c.playtestLevel(10);psychic.belongings.artifact=c;
+        psychic.HT=100;psychic.HP=25;
+        check(!c.actions(psychic).contains("FEED_HATCHLING"),"coin does not advertise the hidden feeding interaction");
+        psychic.damage(5,new Object());check(psychic.HP==25&&!FickleDoubloon.luckRunning(psychic),"Precognition prevention leaves Dead Man's Hand unspent");
+        psychic.damage(5,new Object());check(psychic.HP==20&&FickleDoubloon.luckRunning(psychic),"actual low-health damage triggers the preserved hand");
         System.out.println("PASS Doubloon companion: sacrifices, inherited fortune, pilfer cap, recovery, persistence, rigged transformation, coin recovery");
     }
 }

@@ -1,3 +1,12 @@
+# Mystery and Playtest usability - in progress
+
+- Repair individual and bulk Waterskin refill, expose the Golden Mimic's normal ally directions from both examination and its harness, and present the Hatchling's imminent meal as a modal warning while clearing queued movement and rest.
+- Remove the Doubloon's explicit feeding shortcut; the Hatchling's ordinary feeding picker still accepts it. Gold collection does not heal the companion.
+- Group Playtest travel, expedition tuning, companion tuning, class items and custom enemies. Remember submenu pages, offer a main-menu shortcut and retain the last submenu within the same loaded run.
+- Add device-wide exclusions for random artifact, trinket, item and roaming-enemy generation. Preserve inventory and fixed quest rewards; reject changes that empty a required typed pool. Custom generation latches the same unranked history as balance tuning.
+- Replace Psychic Wrench with Rebuff: a successful Push grants 4/7 shielding for three turns, refreshed rather than stacked. Retain the WRENCH save key. Grasp, Glimpse and failed Push casts grant no ward.
+- Component verification: combined generated gate Runs=30 failures=0; individual and bulk refill, persistent exclusions and pool safeguards, companion direction, coin/Precognition ordering and every Rebuff rank are covered by the existing scenarios.
+
 # Playtesting repairs - v1.25.1
 
 - Guard absent and malformed elemental-room plan arrays when restoring older saves; preserve the encountered-type mask. Extend the existing save tests with missing/wrong-length/current fields and a complete disk save/load with the field removed.

@@ -114,7 +114,6 @@ public class FocusCrystal extends com.shatteredpixel.shatteredpixeldungeon.items
             if(Dungeon.level.distance(h.pos,cell)>range)return false;
             Heap heap=Dungeon.level.heaps.get(cell);Trap trap=Dungeon.level.traps.get(cell);
             if(heap!=null&&heap.type==Heap.Type.HEAP&&!heap.isEmpty()){
-                if(enemy!=null&&enemy.alignment==Char.Alignment.ENEMY&&h.hasTalent(Talent.WRENCH))Buff.prolong(enemy,Vertigo.class,2*h.pointsInTalent(Talent.WRENCH));
                 float time=0;while(!heap.isEmpty()){Item item=heap.peek();if(item.doPickUp(h,h.pos)){com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.collected(heap);time+=item.pickupDelay();heap.pickUp();}else {heap.pickUp();Dungeon.level.drop(item,h.pos);}}
                 h.spend(-time);
             }else if(heap!=null&&canOpenWithGrasp(heap.type)){
@@ -166,6 +165,7 @@ public class FocusCrystal extends com.shatteredpixel.shatteredpixeldungeon.items
             }else return false;
             if(enemy.isAlive())Buff.prolong(enemy,PsychicMind.PsychicDamage.class,20);
         }
+        if(spell.equals("push") && h.hasTalent(Talent.WRENCH))Buff.affect(h,PsychicMind.PushWard.class).refresh(h.pointsInTalent(Talent.WRENCH));
         com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.burst(cell==null?h.pos:cell,com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Style.PSYCHIC,16,.6f);finish(h,cost);return true;
     }
 }

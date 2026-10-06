@@ -37,7 +37,7 @@ public class WndInfoMob extends WndTitledMessage {
 
 		super( new MobTitle( mob ), mob.info() );
 
-		if (mob.isDirectableAlly() && mob.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.PsychicDomination.class) != null) {
+		if (mob.isDirectableAlly()) {
 			com.shatteredpixel.shatteredpixeldungeon.ui.RedButton direct = new com.shatteredpixel.shatteredpixeldungeon.ui.RedButton(Messages.get(this, "direct")) {
 				@Override protected void onClick() {
 					hide();

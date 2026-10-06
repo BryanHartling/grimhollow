@@ -61,9 +61,9 @@ public class FickleDoubloon extends Artifact {
     public float qualityChance(){return level()<2?0:(level()+2*plunder())*BalanceTuning.multiplier(BalanceTuning.Key.COIN_QUALITY)/100f;}
     public float searchBonus(boolean trap){return level()<(trap?4:3)?0:(level()+plunder())/100f;}
     @Override public ArrayList<String> actions(Hero h){
-        ArrayList<String> a=super.actions(h);if(isEquipped(h)){a.add(AC_FLIP);if(HatchlingMimic.carried()!=null)a.add("FEED_HATCHLING");}return a;
+        ArrayList<String> a=super.actions(h);if(isEquipped(h))a.add(AC_FLIP);return a;
     }
-    @Override public void execute(Hero h,String action){super.execute(h,action);if(AC_FLIP.equals(action))flip(h);if("FEED_HATCHLING".equals(action)){HatchlingMimic pet=HatchlingMimic.carried();if(pet!=null&&pet.canFeed(h,this))DoubloonFeeding.confirm(h,pet,this);else GLog.w(Messages.get(this,"unavailable"));}}
+    @Override public void execute(Hero h,String action){super.execute(h,action);if(AC_FLIP.equals(action))flip(h);}
     public boolean flip(Hero h){
         if(!isEquipped(h)||charge<1||luckRunning(h)||h.buff(MagicImmune.class)!=null){GLog.w(Messages.get(this,"unavailable"));return false;}
         int duration=level();

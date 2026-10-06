@@ -955,12 +955,28 @@ public class SmokeRun {
         int food=h.belongings.getItem(Food.class).quantity();crystal.gainCharge(10);
         check(crystal.cast(h,"grasp",heapCell,null),"11: cast Grasp on visible heap");
         check(h.belongings.getItem(Food.class).quantity()==food+1&&Dungeon.level.heaps.get(heapCell)==null,"11: Grasp collects heap");
-        check(trap.active&&enemy.buff(Vertigo.class)!=null,"11: Grasp heap priority and Wrench");
+        check(trap.active&&enemy.buff(Vertigo.class)==null&&h.buff(PsychicMind.PushWard.class)==null,"11: Grasp heap priority; retired Wrench does not debuff enemies or grant Rebuff");
         Buff.detach(enemy,Vertigo.class);int oldHP=enemy.HP;
         check(crystal.cast(h,"grasp",heapCell,null)&&!trap.active&&Dungeon.level.traps.get(heapCell)==null,"11: Grasp triggers and removes trap");
         com.shatteredpixel.shatteredpixeldungeon.actors.blobs.ToxicGas gas=(com.shatteredpixel.shatteredpixeldungeon.actors.blobs.ToxicGas)Dungeon.level.blobs.get(com.shatteredpixel.shatteredpixeldungeon.actors.blobs.ToxicGas.class);gas.act();
         check(oldHP-enemy.HP==Math.round(1.5f*(1+Dungeon.scalingDepth()/5)),"Trap Sense scales remote hazard damage");
         int charge=crystal.charges();check(!crystal.cast(h,"grasp",center-2,null)&&crystal.charges()==charge,"11: empty Grasp is free");
+        for(int rank=0;rank<=2;rank++){
+            clearArena();crystal.playtestLevel(0);h.talents.get(0).put(Talent.WRENCH,rank);
+            enemy=target(center+1);
+            check(crystal.cast(h,"push",enemy.pos,null),"Rebuff Push succeeds");
+            PsychicMind.PushWard ward=h.buff(PsychicMind.PushWard.class);
+            check(rank==0?ward==null:ward!=null && ward.shielding()==(rank==1?4:7),"Rebuff shield by rank "+rank);
+            if(ward!=null){
+                ward.absorbDamage(2);enemy.pos=center+1;crystal.gainCharge(100);
+                check(crystal.cast(h,"push",enemy.pos,null)&&ward.shielding()==(rank==1?4:7),"Rebuff refresh does not stack");
+                Bundle wardSave=new Bundle();wardSave.put("ward",ward);
+                check(((PsychicMind.PushWard)wardSave.get("ward")).shielding()==ward.shielding(),"Rebuff persistence");
+                ward.act();check(h.buff(PsychicMind.PushWard.class)==null,"Rebuff scheduled expiry");
+            }
+            int left=crystal.charges();check(!crystal.cast(h,"push",center-2,null)&&h.buff(PsychicMind.PushWard.class)==null&&crystal.charges()==left,"failed Push grants no shield");
+        }
+        h.talents.get(0).put(Talent.WRENCH,2);
         clearArena();enemy=target(center+1);Rat rival=target(center+2);
         Buff.prolong(h,Bless.class,10);Buff.prolong(h,Haste.class,10);Buff.affect(h,Barkskin.class).setForDuration(8,10);
         crystal.gainCharge(10);check(crystal.cast(h,"dominate",enemy.pos,null)&&enemy.buff(Amok.class).dominated&&enemy.buff(Bless.class)!=null&&enemy.buff(Haste.class)!=null&&Barkskin.currentLevel(enemy)==8,"Dominate and Shared Will");

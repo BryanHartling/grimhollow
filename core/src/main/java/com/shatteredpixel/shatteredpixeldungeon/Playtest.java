@@ -32,8 +32,8 @@ public final class Playtest {
     private static boolean enabled, god, customized;
     public static boolean enabled() { return enabled; }
     public static boolean god() { return enabled && god; }
-    public static void reset() { BalanceTuning.loadShared(); enabled=false; god=false; customized=BalanceTuning.changedCount()>0; }
-    public static boolean customBalance() { customized |= BalanceTuning.changedCount()>0; return customized; }
+    public static void reset() { BalanceTuning.loadShared(); GenerationToggles.load(); enabled=false; god=false; customized=BalanceTuning.changedCount()>0 || GenerationToggles.changedCount()>0; }
+    public static boolean customBalance() { customized |= BalanceTuning.changedCount()>0 || GenerationToggles.changedCount()>0; return customized; }
     public static boolean unranked() { return enabled || customBalance(); }
     public static void enable() { enabled = true; }
     public static void require() {
@@ -43,7 +43,7 @@ public final class Playtest {
     public static void store(Bundle b) { b.put("playtest", enabled); b.put("playtest_god", god); b.put("custom_balance",customBalance()); BalanceTuning.store(b); }
     public static void restore(Bundle b) {
         enabled=b.getBoolean("playtest"); god=enabled && b.getBoolean("playtest_god");
-        BalanceTuning.restore(b); customized=b.getBoolean("custom_balance") || BalanceTuning.changedCount()>0;
+        BalanceTuning.restore(b); GenerationToggles.load(); customized=b.getBoolean("custom_balance") || BalanceTuning.changedCount()>0;
     }
     public static void god(boolean value) { require(); god=value; if(value)Dungeon.hero.HP=Dungeon.hero.HT; }
 
@@ -63,6 +63,7 @@ public final class Playtest {
     }
     public static void recharge(Item item) {
         require();
+        if(item instanceof Waterskin)((Waterskin)item).fill();
         if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal)((com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal)item).gainCharge(100);
         if(item instanceof Artifact)((Artifact)item).playtestRecharge();
         if(item instanceof Wand)((Wand)item).curCharges=((Wand)item).maxCharges;

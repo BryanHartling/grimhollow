@@ -25,8 +25,14 @@ import java.util.function.IntConsumer;
 /** Paged, touch-sized controls. No nested scroll ownership or off-screen action buttons. */
 public class WndPlaytest extends Window {
     private static int requestedSlot=-1;
+    private static Runnable lastMenu;
+    private static Object lastContext;
+    private static Object context(){return atHome()?WndPlaytest.class:Dungeon.hero;}
+    private static String pageKey(String title){return "playtest_page_"+title;}
+    public static String itemGroup(Item item){return group(item);}
+
     private static boolean atHome(){return !(Game.scene() instanceof GameScene);}
-    public static void openHome(){BalanceTuning.loadShared();root();}
+    public static void openHome(){BalanceTuning.loadShared();GenerationToggles.load();root();}
     public static void cancelRequestedRun(){requestedSlot=-1;}
     public static void openRequestedRun(){
         if(requestedSlot<0 || Dungeon.hero==null || !Dungeon.hero.ready)return;
@@ -43,7 +49,7 @@ public class WndPlaytest extends Window {
             ?"Tune balance for every game on this device, or open a run for God mode, items and travel. Once Playtest is enabled for a save, reopen these tools from its in-game menu. Custom balance applies to every game; customized runs have no rankings or badges. Tools are enabled separately for each save."
             :Playtest.enabled()
             ?"Level "+Dungeon.hero.lvl+" | Floor "+Dungeon.depth+" | God mode "+(Playtest.god()?"ON":"OFF")
-            :"Enable testing for this save: no rankings, badges, catalog credit or bones. Balance settings apply to every game on this device; customized runs have no rankings or badges. God mode and direct actions affect this save only.",rootEntries(),0,null);}
+            :"Enable testing for this save: no rankings, badges, catalog credit or bones. Balance settings apply to every game on this device; customized runs have no rankings or badges. God mode and direct actions affect this save only.",rootEntries(),-1,null);}
 
     private WndPlaytest(String title,String body,List<Entry> entries,int page,Runnable back){
         int width=(int)Math.min(PixelScene.landscape()?220:170,PixelScene.uiCamera.width-24);
@@ -53,9 +59,13 @@ public class WndPlaytest extends Window {
         RenderedTextBlock hint=PixelScene.renderTextBlock(body,6);
         hint.maxWidth(width-4);hint.setPos(2,heading.bottom()+4);add(hint);
         float y=hint.bottom()+5;
-        int count=Math.max(1,(int)((maxHeight-y-25)/24));
+        int count=Math.max(1,(int)((maxHeight-y-49)/24));
         int pages=Math.max(1,(entries.size()+count-1)/count);
+        if(page<0)page=SPDSettings.getInt(pageKey(title),0);
         page=Math.max(0,Math.min(page,pages-1));
+        SPDSettings.put(pageKey(title),page);
+        if(back!=null){lastContext=context();final int remembered=page;lastMenu=()->show(title,body,entries,remembered,back);}
+
         final int current=page;
         for(int i=page*count;i<Math.min(entries.size(),(page+1)*count);i++){
             Entry entry=entries.get(i);
@@ -83,20 +93,26 @@ public class WndPlaytest extends Window {
             RedButton close=new RedButton(back==null?"Close":"Back",7){@Override protected void onClick(){hide();if(back!=null)run(back);}};
             add(close);close.setRect(0,y,width,20);
         }
-        resize(width,(int)y+20);
+        if(back!=null){
+            RedButton main=new RedButton("Main Playtest menu",6){@Override protected void onClick(){hide();root();}};
+            add(main);main.setRect(0,y+22,width,20);resize(width,(int)y+42);
+        }else resize(width,(int)y+20);
+
     }
     private static void run(Runnable action){
         try{action.run();}catch(RuntimeException e){present(new WndError(e.getMessage()==null?"Unable to apply this playtest action.":e.getMessage()));}
     }
     private static void present(Window window){if(atHome())Game.scene().addToFront(window);else GameScene.show(window);}
     private static void show(String title,String body,List<Entry> rows,int page,Runnable back){present(new WndPlaytest(title,body,rows,page,back));}
-    private static void show(String title,String body,List<Entry> rows,Runnable back){show(title,body,rows,0,back);}
+    private static void show(String title,String body,List<Entry> rows,Runnable back){show(title,body,rows,-1,back);}
     private static void root(){present(new WndPlaytest());}
     private static void save(){if(atHome())return;try{Dungeon.saveAll();}catch(IOException e){throw new IllegalStateException("Could not save playtest: "+e.getMessage(),e);}}
     private static void changed(Runnable action,Runnable after){action.run();save();after.run();}
     private static void reload(){save();InterlevelScene.mode=InterlevelScene.Mode.CONTINUE;Game.switchScene(InterlevelScene.class);}
     private static List<Entry> rootEntries(){
         List<Entry> rows=new ArrayList<>();
+        if(lastMenu!=null && lastContext==context())rows.add(new Entry("Resume last menu",lastMenu));
+        rows.add(new Entry("Generation toggles",WndPlaytest::generation));
         if(atHome()){
             rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning"),WndPlaytest::tuning));
             rows.add(new Entry("Start a new run for testing",()->{
@@ -131,6 +147,31 @@ public class WndPlaytest extends Window {
         rows.add(new Entry("Identify all carried items",()->changed(()->Dungeon.hero.belongings.identify(),WndPlaytest::root)));
         return rows;
     }
+    private static void generation(){
+        show("Generation toggles","Choose which types may appear in future random generation. Existing possessions and authored quest essentials stay.",Arrays.asList(
+            new Entry("Artifacts",()->generationTypes("Artifacts",Artifact.class)),
+            new Entry("Trinkets",()->generationTypes("Trinkets",Trinket.class)),
+            new Entry("Items",()->generationTypes("Items",Item.class)),
+            new Entry("Enemies",WndPlaytest::generationEnemies),
+            new Entry("Enable all generation",()->{GenerationToggles.reset();root();})),WndPlaytest::root);
+    }
+    private static void generationTypes(String title,Class<?> family){
+        List<Entry> rows=new ArrayList<>();
+        for(Class<? extends Item> type:GenerationToggles.itemTypes()){
+            if(!family.isAssignableFrom(type) || family==Item.class && (Artifact.class.isAssignableFrom(type)||Trinket.class.isAssignableFrom(type)))continue;
+            Item sample=Reflection.newInstance(type);
+            rows.add(new Entry((GenerationToggles.allowed(type)?"ON: ":"OFF: ")+name(sample),()->{GenerationToggles.toggle(type);generationTypes(title,family);},sample));
+        }
+        show("Generation: "+title,"Random pools only. At least one choice must remain in each equipment tier and the trinket pool.",rows,WndPlaytest::generation);
+    }
+    private static void generationEnemies(){
+        List<Entry> rows=new ArrayList<>();
+        for(Class<? extends Mob> type:PlaytestCatalog.mobs()){
+            Mob sample=Reflection.newInstance(type);
+            rows.add(new Entry((GenerationToggles.allowed(type)?"ON: ":"OFF: ")+Messages.titleCase(sample.name()),()->{GenerationToggles.toggle(type);generationEnemies();}));
+        }
+        show("Generation: Enemies","Future roaming spawns only; bosses and fixed quest encounters stay. Keep at least one normal enemy in each regional roster.",rows,WndPlaytest::generation);
+    }
     private static void savedRuns(){
         List<Entry> rows=new ArrayList<>();
         for(GamesInProgress.Info info:GamesInProgress.checkAll()){
@@ -148,12 +189,28 @@ public class WndPlaytest extends Window {
     public static void tuning(){
         if(!atHome())Playtest.require();
         List<Entry> rows=new ArrayList<>();
-        for(int i=0;i<13;i++){
-            final int group=i;
-            rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_group_"+i),()->tuningGroup(group)));
+        for(int i:new int[]{0,1,2,3,9}){
+            final int group=i;rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_group_"+i),()->tuningGroup(group)));
         }
+        rows.add(new Entry("Dragon expedition",()->tuningFamily("Dragon expedition",new int[]{4,5,6,7})));
+        rows.add(new Entry("Artifacts and trinkets",WndPlaytest::tuningItems));
         rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_reset"),()->changed(BalanceTuning::reset,WndPlaytest::tuning)));
         show(Messages.get(WndPlaytest.class,"tuning"),Messages.get(WndPlaytest.class,"tuning_intro",BalanceTuning.changedCount()),rows,WndPlaytest::root);
+    }
+    private static void tuningFamily(String title,int[] groups){
+        List<Entry> rows=new ArrayList<>();
+        for(int group:groups)rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_group_"+group),()->tuningGroup(group)));
+        show(title,"Shared balance controls; existing encounters keep their saved state.",rows,WndPlaytest::tuning);
+    }
+    private static void tuningItems(){
+        show("Artifacts and trinkets","Controls for Grimhollow's carried companions and curios.",Arrays.asList(
+            new Entry("Fickle Doubloon",()->tuningGroup(10)),
+            new Entry("Hatchling Mimic",WndPlaytest::tuningHatchling),
+            new Entry("Wayward Chart",()->tuningGroup(12))),WndPlaytest::tuning);
+    }
+    private static void tuningHatchling(){
+        show("Hatchling Mimic","The Golden Mimic inherits a consumed coin's fortune.",Arrays.asList(
+            new Entry("Golden Mimic companion",()->tuningGroup(11))),WndPlaytest::tuningItems);
     }
     private static void tuningGroup(int group){
         List<Entry> rows=new ArrayList<>();
@@ -163,7 +220,9 @@ public class WndPlaytest extends Window {
                     Messages.get(BalanceTuning.class,key.id()+"_desc")+"\n\n"+Messages.get(WndPlaytest.class,"tuning_default",key.display(key.baseline)),
                     BalanceTuning.configured(key),key.min,key.max,n->{if(atHome())BalanceTuning.setShared(key,n);else BalanceTuning.set(key,n);},()->tuningGroup(group))));
         }
-        show(Messages.get(WndPlaytest.class,"tuning_group_"+group),Messages.get(WndPlaytest.class,"tuning_hint_"+group),rows,WndPlaytest::tuning);
+        if(group==1)rows.add(new Entry("Lurking Horror",()->tuningGroup(8)));
+        Runnable back=group>=4 && group<=7?()->tuningFamily("Dragon expedition",new int[]{4,5,6,7}):group==8?()->tuningGroup(1):group==11?WndPlaytest::tuningHatchling:group==10||group==12?WndPlaytest::tuningItems:WndPlaytest::tuning;
+        show(Messages.get(WndPlaytest.class,"tuning_group_"+group),Messages.get(WndPlaytest.class,"tuning_hint_"+group),rows,back);
     }
     private static void number(String title,String body,int value,int min,int max,IntConsumer action,Runnable back){
         number(title,body,value,min,max,action,back,back);
@@ -219,17 +278,33 @@ public class WndPlaytest extends Window {
         rows.add(new Entry("Rebuild current floor",()->show("Rebuild floor "+Dungeon.depth,
                 "Replace this floor's terrain, creatures and loot so you can repeat its encounters. Keep your hero and inventory. Other visited floors stay.",
                 Arrays.asList(new Entry("Rebuild this floor",()->{Playtest.require();InterlevelScene.mode=InterlevelScene.Mode.PLAYTEST_RESET;Game.switchScene(InterlevelScene.class);})),WndPlaytest::floors)));
-        rows.add(new Entry("Dragon expedition - platforms",()->travel(DragonExpedition.CHASM,DragonExpedition.BRANCH)));
-        rows.add(new Entry("Dragon expedition - cavern",()->travel(DragonExpedition.CAVERN,DragonExpedition.BRANCH)));
-        rows.add(new Entry("Dragon expedition - hoard",()->travel(DragonExpedition.HOARD,DragonExpedition.BRANCH)));
-        for(int d=1;d<=26;d++){
-            final int depth=d;
-            String region=d<=5?"Sewers":d<=10?"Prison":d<=15?"Caves":d<=20?"City":d<=25?"Halls":"Amulet";
-            rows.add(new Entry("Floor "+d+" - "+region+(Dungeon.bossLevel(d)?" boss":""),()->travel(depth,0)));
+        rows.add(new Entry("Dragon expedition",WndPlaytest::expeditionTravel));
+        String[] regions={"Sewers","Prison","Caves","City","Halls"};
+        for(int region=0;region<5;region++){final int r=region;
+            rows.add(new Entry(regions[r],()->regionTravel(r,regions[r])));
         }
+        rows.add(new Entry("Amulet floor",()->travel(26,0)));
+        rows.add(new Entry("Mine and Imp Vault",WndPlaytest::branchTravel));
+        show("Floor travel","Keep this hero and inventory. Skipped floors are generated in order; visited floors retain their state. Arrival is at the entrance, even in sealed arenas.",rows,WndPlaytest::root);
+    }
+    private static void expeditionTravel(){
+        show("Dragon expedition travel","Enter any expedition stage with your current hero.",Arrays.asList(
+            new Entry("Dragon expedition - platforms",()->travel(DragonExpedition.CHASM,DragonExpedition.BRANCH)),
+            new Entry("Dragon expedition - cavern",()->travel(DragonExpedition.CAVERN,DragonExpedition.BRANCH)),
+            new Entry("Dragon expedition - hoard",()->travel(DragonExpedition.HOARD,DragonExpedition.BRANCH))),WndPlaytest::floors);
+    }
+    private static void regionTravel(int region,String name){
+        List<Entry> rows=new ArrayList<>();
+        for(int d=region*5+1;d<=region*5+5;d++){final int depth=d;
+            rows.add(new Entry("Floor "+d+" - "+name+(Dungeon.bossLevel(d)?" boss":""),()->travel(depth,0)));
+        }
+        show(name+" travel","Visited floors retain their state; new floors are generated in order.",rows,WndPlaytest::floors);
+    }
+    private static void branchTravel(){
+        List<Entry> rows=new ArrayList<>();
         for(int d=11;d<=14;d++){final int depth=d;rows.add(new Entry("Mine branch at floor "+d,()->travel(depth,1)));}
         for(int d=16;d<=19;d++){final int depth=d;rows.add(new Entry("Imp Vault at floor "+d,()->travel(depth,1)));}
-        show("Floor travel","Keep this hero and inventory. Skipped floors are generated in order; visited floors retain their state. Arrival is at the entrance, even in sealed arenas.",rows,WndPlaytest::root);
+        show("Mine and Imp Vault","Quest branches use their authored entrances and encounters.",rows,WndPlaytest::floors);
     }
     private static void travel(int depth,int branch){
         Playtest.require();
@@ -237,7 +312,12 @@ public class WndPlaytest extends Window {
         InterlevelScene.mode=InterlevelScene.Mode.PLAYTEST;Game.switchScene(InterlevelScene.class);
     }
     private static String group(Item item){
-        if(item instanceof Artifact)return "Artifacts and class focuses";
+        if(item instanceof FocusCrystal || item instanceof Phylactery || item instanceof SigilBrush
+                || item instanceof BrokenSeal || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.SpiritBow
+                || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MagesStaff
+                || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.CloakOfShadows
+                || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.HolyTome)return "Class items";
+        if(item instanceof Artifact)return "Artifacts";
         if(item instanceof Trinket)return "Trinkets";
         if(item instanceof Weapon)return "Weapons and ammunition";
         if(item instanceof Armor)return "Armor";
@@ -272,6 +352,7 @@ public class WndPlaytest extends Window {
         }
         matches.sort(Comparator.comparing(WndPlaytest::name));
         rows.add(new Entry("Search / filter",()->search(category)));
+        matches.removeIf(item->item instanceof com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion);
         for(Item item:matches)rows.add(new Entry(name(item),()->spawnOptions(item,1,0,true,false,category,query),item));
         show(category==null?"All items":category,matches.size()+" matches"+(query.isEmpty()?"":" for \""+query+"\""),rows,WndPlaytest::categories);
     }
@@ -283,6 +364,8 @@ public class WndPlaytest extends Window {
             boolean packed=Playtest.give(item);save();GLog.p(name(item)+(packed?" created.":" placed at your feet (inventory full)."));
             spawnOptions(template,qty,level,identified,cursed,category,query);
         },template));
+        if(template instanceof com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic)
+            rows.add(new Entry("Golden Mimic companion",()->spawnOptions(new com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion(),1,3,true,false,category,query)));
         if(template.stackable)rows.add(new Entry("Quantity: "+qty,()->number("Quantity","Stack size",qty,1,100,
                 n->spawnOptions(template,n,level,identified,cursed,category,query),()->{},()->spawnOptions(template,qty,level,identified,cursed,category,query))));
         int cap=Playtest.maxItemLevel(template);
@@ -317,14 +400,21 @@ public class WndPlaytest extends Window {
         show("Enchantment or glyph","Includes curses. Applies a permanent effect to this item.",rows,()->edit(item));
     }
     private static void creatures(){
+        show("Spawn creatures","Choose an encounter family.",Arrays.asList(
+            new Entry("Dungeon creatures",()->creatureList(false)),
+            new Entry("Grimhollow enemies",()->creatureList(true))),WndPlaytest::root);
+    }
+    private static void creatureList(boolean custom){
         List<Entry> rows=new ArrayList<>();
         for(Class<? extends Mob> type:PlaytestCatalog.mobs()){
+            boolean gh=type==com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Hexcaster.class || type==com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.class;
+            if(gh!=custom)continue;
             Mob sample=Reflection.newInstance(type);
             rows.add(new Entry(Messages.titleCase(sample.name()),()->GameScene.selectCell(new CellSelector.Listener(){
                 @Override public String prompt(){return "Place "+sample.name()+" on an empty walkable cell";}
-                @Override public void onSelect(Integer cell){if(cell!=null)run(()->changed(()->Playtest.spawnMob(type,cell),()->{}));}
+                @Override public void onSelect(Integer cell){if(cell!=null)run(()->changed(()->Playtest.spawnMob(type,cell),()->creatureList(custom)));else creatureList(custom);}
             })));
         }
-        show("Spawn creatures","These use normal AI. Test arena bosses through Floor travel, so their arenas and encounter scripts exist.",rows,WndPlaytest::root);
+        show(custom?"Grimhollow enemies":"Dungeon creatures","These use normal AI. Test arena bosses through Floor travel.",rows,WndPlaytest::creatures);
     }
 }

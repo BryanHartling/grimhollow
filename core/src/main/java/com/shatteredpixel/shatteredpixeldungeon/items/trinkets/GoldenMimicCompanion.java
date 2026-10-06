@@ -22,6 +22,22 @@ public class GoldenMimicCompanion extends Trinket {
     private final HashSet<Integer> charmed=new HashSet<>();
     {image=ItemSpriteSheet.GOLDEN_COMPANION;level(3);bones=false;}
     public static GoldenMimicCompanion carried(){return Dungeon.hero==null?null:Dungeon.hero.belongings.getItem(GoldenMimicCompanion.class);}
+    public static final String AC_DIRECT="DIRECT";
+    @Override public ArrayList<String> actions(Hero hero){
+        ArrayList<String> actions=super.actions(hero);
+        if(hero.belongings.contains(this) && !resting && Dungeon.level!=null && ally()!=null)actions.add(AC_DIRECT);
+        return actions;
+    }
+    @Override public void execute(Hero hero,String action){
+        super.execute(hero,action);
+        if(AC_DIRECT.equals(action) && hero.belongings.contains(this) && !resting){
+            GoldenMimicAlly companion=ally();
+            if(companion!=null)GameScene.selectCell(new com.shatteredpixel.shatteredpixeldungeon.scenes.CellSelector.Listener(){
+                public void onSelect(Integer cell){if(cell!=null && companion.isAlive())companion.directTocell(cell);}
+                public String prompt(){return Messages.get(GoldenMimicCompanion.class,"direct_prompt");}
+            });
+        }
+    }
     @Override protected int upgradeEnergyCost(){return 0;}
     @Override public Item upgrade(){return this;}
     @Override public String statsDesc(){return Messages.get(this,resting?"resting":"awake");}

@@ -92,6 +92,16 @@ public class PsychicMind extends Buff {
         Dungeon.observe();com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.updateFog();
     }
     public static class PsychicDamage extends FlavourBuff {}
+    /** The WRENCH save key remains stable; its replacement rewards a successful combat cast. */
+    public static class PushWard extends ShieldBuff {
+        {type=buffType.POSITIVE;shieldUsePriority=2;}
+        public void refresh(int rank){setShield(rank>=2?7:4);spendConstant(3-cooldown());com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator.refreshHero();}
+        @Override public boolean act(){detach();return true;}
+        @Override public int icon(){return com.shatteredpixel.shatteredpixeldungeon.ui.BuffIndicator.ARMOR;}
+        @Override public void tintIcon(com.watabou.noosa.Image icon){float w=icon.width,h=icon.height;com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.apply(icon,85);icon.logicalSize(w,h);}
+        @Override public String desc(){return com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(this,"desc");}
+        @Override public float iconFadePercent(){return Math.max(0,1-cooldown()/3);}
+    }
     public static void onDeath(Mob mob,Object cause){
         if(state()==null||mob.alignment!=Char.Alignment.ENEMY)return;
         Hero h=Dungeon.hero;FocusCrystal crystal=h.belongings.getItem(FocusCrystal.class);

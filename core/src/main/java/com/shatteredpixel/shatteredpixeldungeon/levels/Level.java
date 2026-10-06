@@ -565,6 +565,7 @@ public abstract class Level implements Bundlable {
 	private ArrayList<Class<?extends Mob>> mobsToSpawn = new ArrayList<>();
 	
 	public Mob createMob() {
+        if(mobsToSpawn!=null)mobsToSpawn.removeIf(type->!com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(type));
 		if (mobsToSpawn == null || mobsToSpawn.isEmpty()) {
 			mobsToSpawn = MobSpawner.getMobRotation(Dungeon.depth);
 		}

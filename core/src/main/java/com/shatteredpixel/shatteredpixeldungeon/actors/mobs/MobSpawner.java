@@ -72,12 +72,13 @@ public class MobSpawner extends Actor {
 		addRareMobs(depth, mobs);
         if(depth>=11&&depth<=20&&BalanceTuning.roll(HEXCASTER,10,1))mobs.add(Hexcaster.class);
 		swapMobAlts(mobs);
+		mobs.removeIf(type->!com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(type));
 		Random.shuffle(mobs);
 		return mobs;
 	}
 
 	//returns a rotation of standard mobs, unshuffled.
-	private static ArrayList<Class<? extends Mob>> standardMobRotation( int depth ){
+	public static ArrayList<Class<? extends Mob>> standardMobRotation( int depth ){
 		switch(depth){
 
 			// Sewers

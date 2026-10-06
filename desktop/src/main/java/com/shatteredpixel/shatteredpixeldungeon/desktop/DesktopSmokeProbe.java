@@ -52,6 +52,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private int encounterActions, encounterSteps, encounterAttacks, encounterLastCell=-1;
     private int[] encounterVisits;
     private volatile boolean encounterDrops, encounterSummon, encounterDeath;
+    private boolean encounterDeathScheduled;
     private int encounterDeathFrames;
     private com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultFinalRoom vaultArena;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental vaultBoss;
@@ -2288,6 +2289,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private void encounterTick() {
         if(!(Game.scene() instanceof GameScene)||frames<240)return;
         if(frames>36000)throw new AssertionError("Encounter replay stalled");
+        // The actor deliberately kills the hero after the replay. Wait for the
+        // whole callback, rather than observing HP=0 halfway through die().
+        if(encounterDeathScheduled&&!encounterDeath)return;
         if(encounterDeath) {
             if(++encounterDeathFrames<120)return;
             if(Dungeon.hero.isAlive()||!encounterDrops||!encounterSummon)throw new AssertionError("Incomplete encounter/death coverage");
@@ -2342,6 +2346,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             com.shatteredpixel.shatteredpixeldungeon.ui.KeyDisplay keys=(com.shatteredpixel.shatteredpixeldungeon.ui.KeyDisplay)RecoveryChecks.field(menu,"keys");
             if(keys.keyCount()<2||!keys.visible)throw new AssertionError("Actor pickup did not reach rendered key HUD");
             System.out.println("ACTOR KEY HUD PASS: pickup on gameplay thread, count labels on render thread; failures=0");
+            encounterDeathScheduled=true;
             com.shatteredpixel.shatteredpixeldungeon.actors.Actor.add(new com.shatteredpixel.shatteredpixeldungeon.actors.Actor() {
                 { actPriority=VFX_PRIO; }
                 @Override protected boolean act() {

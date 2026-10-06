@@ -11,6 +11,7 @@
 - Add a painted floor-five descent gateway, Rat King cushion and Rebuff icon from committed generated sources/exact prompts. Packing and 155-asset reproduction run offline. The gateway retains its logical footprint and updates its padlock when the exit unlocks. Living Earth shards gain size, visible facets and motion with the original emission times and random samples.
 - Refine generation lists to actual random choices and keep disabled rare/subtype rolls from creating an empty enemy rotation. Catalog navigation does not consume gameplay randomness. Imminent Hatchling popups are re-presented after loading a warned save.
 - Final local validation: Runs=30 failures=0, eight JUnit tests, both native orientations for menus/rooms/polish/Horror/Expedition, all five fog and memory walks, 12,960 generic hero draws, 155 reproducible assets and Windows launcher exit 0. Existing effects gate reports mean 0.6276ms/p95 0.9340ms. No physical tablet verification is claimed; test 45 stays abandoned.
+- CI exposed a race in the existing live encounter fixture: after action 150 it mistook its deliberate actor-thread death for an unexpected death. Wait for the scheduled callback before measuring all 120 death frames; gameplay and every encounter assertion are unchanged.
 
 # Playtesting repairs - v1.25.1
 

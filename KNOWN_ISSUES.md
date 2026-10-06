@@ -1,5 +1,7 @@
 # Known issues
 
+- Historical v1.26.0 branch run 37401404725 failed the live encounter fixture after its deliberate death at action 150; zero HP reached the render check before the actor's completion flag. The fixture now waits for that scheduled callback while retaining unexpected-death, encounter coverage, summon/pickup and 120-frame death assertions. The failed run remains available.
+
 - v1.26.0: physical Samsung tablet and full campaign balance remain human review; native portrait input is not a device test. Revised descriptions fall back to English where translations are unavailable.
 - v1.26.0 verification: the first compiled audit was sandbox-blocked from reading the packaged JAR; the existing escalation route passed. Native menu fixtures needed the new submenu routes and remembered pages; formula-copy assertions were superseded by thematic text checks. Initial fixture failures remain recorded locally and are not passing results.
 - v1.26.0 local captures: a Windows user-mapped lock on tablet-hurl.png was resolved by moving the old generated capture aside and rerunning the unchanged landscape fixture. Native starts attempted during JAR replacement failed before launching and were rerun after the build completed.

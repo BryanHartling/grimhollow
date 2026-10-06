@@ -20,23 +20,28 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.25.1","Safer old saves and quieter hero presentation.");
+        ChangeInfo r=release(list,"v1.26.0","More mystery, clearer companions and organized testing tools.");
+        note(r,Icons.INFO,"Rediscover the dungeon","Descriptions of Grimhollow's additions now favor atmosphere and useful hints over formulas and hidden reward tables. Actions and current conditions remain readable.");
+        note(r,Icons.TALENT,"Rebuff","Psychics can learn a brief protective ward that answers a successful Push. Golden Mimic companions accept directions from their harness or inspection window.");
+        note(r,Icons.PREFS,"Testing tools","Travel, expedition settings, class items and companion controls are grouped into submenus. Pages are remembered, with shortcuts to the main menu and the last submenu. Generation controls choose which types can appear in future random finds and roaming spawns.");
+        note(r,Icons.JOURNAL,"Warnings and artwork","The Hatchling's hunger warning opens a popup and stops queued actions. Waterskin refill works in the testing tools. The Sewers boss exit, royal cushion, Rebuff and Living Earth fragments have renewed painted presentation.");
+        r=release(list,"v1.25.1","Safer old saves and quieter hero presentation.");
         note(r,Icons.INFO,"Saved games","Older games missing an elemental-room planning field now load safely. Their previously encountered treasuries remain recorded.");
         note(r,Icons.PREFS,"Ordinary new games","Shared balance tuning still applies across games, but no longer enables Playtest tools automatically. Explicit tools and God mode remain separate for each save; customized games remain outside rankings and badges.");
         note(r,Icons.TALENT,"Enchanter knowledge","New Enchanters begin with three weapon enchantments and three armor glyphs. A random Rune Etching effect no longer becomes permanent trade knowledge just by crossing floors; actual discoveries and knowledge talents still work.");
         note(r,Icons.TALENT,"Hero presentation","Floating inventory weapon overlays are replaced by the heroes' generic painted poses. Accelerated movement has two short soft wisps at the boots, fading when you stop, instead of the overhead Haste flash. Combat, speed and timing are unchanged.");
         r=release(list,"v1.25.0","A chart that trades old paths for hidden treasure.");
         note(r,Icons.JOURNAL,"Wayward Chart","A new trinket marks painted treasure mounds without revealing their surroundings. Its promises grow with the chart, and it remembers which regions have already rewarded you.");
-        note(r,Icons.INFO,"Wandering ink","Taking treasure can fade an explored room on any visited floor in that region. Return to the room or read Magic Mapping there to restore it. Mapping can also settle an unfulfilled treasure promise; a defeated dragon has one extra secret.");
+        note(r,Icons.INFO,"Wandering ink","The Chart can leave old paths faint after keeping a promise. Familiar mapping magic may help its wandering lines settle.");
         note(r,Icons.PREFS,"Chart controls","Playtest balance includes discovery odds, reward counts, gold, quality comparisons and the size of faded memories. Terrain, visible cells, doors and known hazards remain reliable.");
         r=release(list,"v1.24.0","A pirate's wager, and a golden guardian.");
         note(r,Icons.GOLD,"Fickle Doubloon","A rare coin grows through wagers, draws fortune from a hoard, and invites unwanted attention from thieves. Its Black Spot turns every flip against its bearer. It will not share its place with another artifact.");
-        note(r,Icons.TALENT,"A costly transformation","Feed the coin to your hatchling for a final wager. Heads creates a directable golden protector that gathers loose gold; Tails releases a hostile mimic carrying the coin. The sacrifice ends the hatchling's feeding gifts without sacrificing an artifact slot.");
+        note(r,Icons.TALENT,"A costly transformation","A golden guardian has joined Grimhollow’s possibilities. Some dungeon bargains ask for more than gold; their outcomes are yours to discover.");
         note(r,Icons.PREFS,"Playtest controls","The balance menu now has separate Fickle Doubloon and Golden Mimic sections for odds, recharge, fortune, theft, treasure generation and companion strength and recovery. Changes persist across games on this device.");
         r=release(list,"v1.23.3","Readable keys, description controls and faster servant decay.");
         note(r,Icons.JOURNAL,"Collected keys","Collected key types and counts have a separate framed HUD row below the menu. Larger painted keys are no longer squeezed into the version label; the enemy counter moves down when keys are present.");
         note(r,Icons.MAGNIFY,"Complete descriptions","Long item, talent and creature descriptions have visible up/down controls and a bronze scrollbar, alongside dragging and mouse-wheel scrolling. Action buttons stay outside the text viewport. The last line has extra padding. Ashlight's feeding costs use readable hyphens.");
-        note(r,Icons.TALENT,"Raised servants","Once their binding expires, all raised undead lose 15% of maximum health, rounded up, each turn. Descriptions show the new rate and exact health loss; decay death still cannot explode or revive them.");
+        note(r,Icons.TALENT,"Raised servants","Raised undead now deteriorate after their binding fades instead of disappearing instantly. Their remaining binding can still be examined.");
         r=release(list,"v1.23.2","Painted bone walls and a more threatening, clearly warned hunter.");
         note(r,Icons.TALENT,"Bone walls","Wand of Bone and Bone Prison share four stable painted bone barricades. Examine shows their movement/sight/projectile blocking, fire immunity and remaining binding turns. Their duration and terrain rules are unchanged.");
         note(r,Icons.WARNING,"Lurking Horror","Increase ordinary damage modestly and give sleeping-prey pounces their own stronger damage range. A full-health normal rat can no longer defeat the opening pounce at normal or doubled damage. The once-per-floor omen has a framed notice and audio cue; the larger ambush warning stays visible until you respond. Your fresh-action window, detection counters, solitary hunt and lifetime healing limit remain.");
@@ -45,7 +50,7 @@ public final class GrimhollowChanges {
         note(r,Icons.TALENT,"Weapon grips","Correct the palm anchors for all nine heroes and the handles of curved and narrow weapons. Short blades hang naturally at rest; hooked blades and polearms stay upright beside the body. Attacks still point toward the target. Combat and movement timings are unchanged.");
         note(r,Icons.INFO,"Haste and lingering cold","Haste triples movement speed but does not clear Chill, Slow or Cripple. Thawing in water leaves Chill, so a hasted step can still take long enough for a red sentry to interrupt travel. The potion and status descriptions now explain this interaction.");
         r=release(list,"v1.23.0","Clearer controls, aligned equipment and renewed necromancy.");
-        note(r,Icons.TALENT,"Necromancy","Necrotic Touch deals your hero level in damage each turn for one/two turns. Repeated melee hits refresh it without stacking. Raised servants lose 5% of maximum health per turn after their binding expires instead of disappearing. Spell information explains Wither, the servants, and which Phylactery curses qualify for your talents.");
+        note(r,Icons.TALENT,"Necromancy","Necrotic Touch leaves a stronger refreshed wound. Raised servants deteriorate as their binding fades, and spell information offers clearer guidance about the Phylactery’s curses.");
         note(r,Icons.JOURNAL,"Readable controls","Spent talent sockets glow gold; unused sockets remain dark. Keys remain visible above the journal button. Identification emblems keep their individual shapes in a restrained ivory-and-gold palette. The mouse pointer, stairs direction arrow, Distant Well and Rat King statue have new painted artwork, and the update screen has a scrollable framed layout. Smooth text is the default; your selected font preference is retained.");
         note(r,Icons.MAGNIFY,"Equipment and flames","Weapon layers align their actual handles and blade tips with both facing directions, including Bone Rod, spear and shortsword. Torch flames draw behind characters. Broken dash characters in English item descriptions are repaired. Haste remains movement speed rather than sentry immunity; other actions still give sentries time to charge.");
         r=release(list,"v1.22.6","Nine individual painted heroes complete the sprint.");
@@ -67,7 +72,7 @@ public final class GrimhollowChanges {
         r=release(list,"v1.21.4","Every identity has its own emblem.");
         note(r,Icons.CATALOG,"Distinct painted icons","Rings, scrolls and potions now have sixty distinct painted identity emblems. Identify uses a book and lens, Mind Vision a third-eye profile, and Magical Sight a prism. The guide's surprise-attack serpent and Unbound Focus also have dedicated paintings. Unidentified appearances remain randomized.");
         r=release(list,"v1.21.3","A dependable weapon and more focused senses.");
-        note(r,Icons.TALENT,"Psychic Crystal and senses","Focus Crystal is your starting weapon, with modest damage growth from charges spent. Unbound Focus permits carried casting and 50%/75% recharge. Treasure Sense supplies temporary nearby item markers without mapping terrain. Trap Sense rolls once per trap and extends manual trap search; the Seer retains guaranteed nearby awareness.");
+        note(r,Icons.TALENT,"Psychic Crystal and senses","The Focus Crystal is a modest, growing weapon. Unbound Focus permits carried casting and recovery. Treasure Sense supplies a fleeting impression of nearby items, while Trap Sense improves searching and the Seer keeps its close awareness.");
         r=release(list,"v1.21.2","Two runes, working together.");
         note(r,Icons.TALENT,"Independent Rune Etchings","Enchanters can etch both weapon and armor at the same time. Each rune keeps its own floor-changing effect and paid upgrade, and transfers within its equipment category. Existing saves receive an unupgraded counterpart without losing their current rune.");
         r=release(list,"v1.21.1","A patient hunter finds its way back into shadow.");
@@ -91,21 +96,14 @@ public final class GrimhollowChanges {
         note(r,Icons.TALENT,"Home-screen Playtest",
                 "Open Playtest from the home screen to tune balance without loading a game, or select a saved run or start a new one for God mode, item creation and travel. Run-specific tools open once the selected dungeon is loaded. The active-run menu no longer contains Playtest. Ordinary saves keep their normal status until testing is enabled or custom balance is applied.");
         r=release(list,"v1.19.0","Written power, elemental treasuries, and a painted journal.");
-        note(r,Icons.TALENT,"Spellguard",
-                "Spellguard replaces Overload. Take 10%/20% less magical damage while your worn armor carries a live temporary inscription. Permanent glyphs and Rune Etching alone do not qualify. Existing Overload ranks carry over.");
-        note(r,Icons.SCROLL_COLOR,"Scribe",
-                "Enchanters can use the Sigil Brush or Blank Parchment to write regular scrolls identified in this run, without an alchemy pot. Each scroll takes three turns, one parchment, one Brush charge and 12 energy; Transmutation costs 20. Upgrade and exotic scrolls cannot be written. "
-                +"Recycling any scroll for energy returns one parchment per scroll. The Enchanter can also find a little unused parchment in the dungeon. Wandering Brush permits scribing with the Brush in inventory.");
-        note(r,Icons.STAIRS_SECRETS,"Elemental treasuries",
-                "Look for a cold brazier, dry fountain or lightning rod. Fire, water and electricity open their matching concealed treasury doors. A full Waterskin can be poured into the fountain. Search chances are halved; mapping, prismatic light and foresight reveal a door without unlocking it. Skeleton Key bypasses cost 4/5/6 charges. "
-                +"Each type appears at most once per run, independently of ordinary secret rooms. Chances rise with region depth, averaging about 1.7 rooms across a complete run. Deeper treasuries contain more valuable rewards. Playtest balance settings include their frequency, loot and bypass costs.");
+        note(r,Icons.TALENT,"Spellguard","Spellguard replaces Overload, sheltering the Enchanter from hostile magic while worn armor carries a temporary inscription. Existing talent investments carry over.");
+        note(r,Icons.SCROLL_COLOR,"Scribe","The Sigil Brush can write familiar scrolls on blank parchment using crystallized energy. Careful work takes time. Recycling scrolls can leave useful parchment behind.");
+        note(r,Icons.STAIRS_SECRETS,"Elemental treasuries","Unfamiliar braziers, dry fountains and brass conductors may lead to hidden riches. These new treasuries grow rarer and richer with the dungeon’s depths, alongside ordinary secret rooms. Their seals reward experimentation.");
         note(r,Icons.JOURNAL,"Painted navigation",
                 "Journal and menu buttons, journal tabs, alchemy categories and catalog icons have new painted artwork. Bestiary portraits fit their frames without cropping.");
 
         r=release(list,"v1.18.3","A rune for your armor, and light behind the right walls.");
-        note(r,Icons.TALENT,"Armor Rune Etching",
-                "Sigil Brush > Etch now lets you choose your equipped melee weapon or armor. The same single rune carries one upgrade and grants a changing common glyph on armor, alongside permanent and temporary inscriptions. "
-                +"Moving it costs one turn and no charge, and never rerolls its floor effects. Etching descriptions now correctly show effect names, upgrade levels and the 25% class bonus.");
+        note(r,Icons.TALENT,"Armor Rune Etching","Rune Etching can now take a home on armor as well as weapons. Its changing pattern travels through the Sigil Brush without losing the strength entrusted to it.");
         note(r,Icons.MAGNIFY,"Hidden torch flames",
                 "Wall torches and their light now require sight of the wall's facing side. Seeing the back of a wall no longer exposes a flame or glow in an unexplored room.");
 
@@ -116,23 +114,14 @@ public final class GrimhollowChanges {
                 +"Sight, fog, traps, movement and artifact charging are unchanged.");
 
         r=release(list,"v1.18.1","A measured appetite and clearer signals.");
-        note(r,Icons.BACKPACK,"Hatchling balance",
-                "Manual feeding is available once the hatchling becomes hungry, during the final quarter of its feeding cycle. Automatic meals and warning interruptions remain. "
-                +"Item Sense marks only one nearest undiscovered loot pile for 20 turns, within 5/8/12/16 cells at +0/+1/+2/+3. Collecting it does not reveal another; refresh replaces the scent. "
-                +"A meal upgrades OR enchants, with a 75% preference for upgrades when both are eligible. Exceptional upgrades stay +2 and rings remain Exceptional. "
-                +"Identification reaches your belongings, including bags and equipped gear, but never floor loot.");
+        note(r,Icons.BACKPACK,"Hatchling balance","The Hatchling’s gifts are more restrained. It scents nearby treasure rather than revealing a whole floor, and a meal favors a single improvement. Identification concerns your own belongings.");
         note(r,Icons.INFO,"Clearer portraits and notifications",
                 "Target-box creatures fill the available space without counting transparent sprite padding. The home screen opens this complete update log directly. "
                 +"Healing wells and healing bursts show red hearts, and floating combat, pickup and spell notifications use painted symbols.");
 
         r=release(list,"v1.18.0","Prepared explorers and a better-fed companion.");
-        note(r,Icons.JOURNAL,"Feed deliberately, revisit the log",
-                "The Hatchling's Feed action lets you choose an eligible loose item, using its usual benefits and risks. Feeding takes one turn and restarts its hunger interval; unattended feeding still happens, and gold demands never reset. "
-                +"Message History in the game menu keeps the latest 500 messages, scrollable and saved with your run. All nine heroes begin knowing their own equipment.");
-        note(r,Icons.TALENT,"Enchanter refinements",
-                "The Enchanter starts with three steel-tipped darts. Rune Etching now works at full strength with the class's 25% proc-rate bonus. Defensive Sigil lasts 6/10 turns. "
-                +"Wandering Brush replaces Dual Inscription: cast from inventory and recharge at 50%/75% of the equipped rate. Resonance rises to 1.2x/1.3x. "
-                +"Appraisal replaces Attunement: newly collected gear has a 20%/30% chance of full identification, checked once per item. Existing talent investments carry over.");
+        note(r,Icons.JOURNAL,"Feed deliberately, revisit the log","The Hatchling accepts deliberate meals when hungry. Neglect still invites its appetite. Message History provides a saved, scrollable record, and every hero begins knowing their own equipment.");
+        note(r,Icons.TALENT,"Enchanter refinements","The Enchanter enters with steel-tipped darts and stronger etchings. Defensive Sigil lasts longer; Wandering Brush permits carried casting. Resonance and Appraisal offer stronger magic and a trained eye for fresh finds.");
         note(r,Icons.STAIRS,"Clearer dungeon details",
                 "Ascending and descending stairs and the eating symbol have new painted artwork. Garden shadowmeld motes now use soft painted light. "
                 +"The Rat King's statue crown stays hidden until its statue cell has been discovered.");
@@ -150,11 +139,7 @@ public final class GrimhollowChanges {
                 +"It follows your current position rather than striking an abandoned cell. Another nearby hostile prevents its ambush.\n\n"
                 +"Revealing it forces an exposed retreat and recovery before it can hide again. It can heal only a quarter of its maximum health over its lifetime. "
                 +"Later regions bring stronger attacks and separately warned follow-up strikes; in the Halls it can flee through wooden barricades.");
-        note(r,Icons.MAGNIFY,"Detection and fresh remains",
-                "Mind Vision and Talisman scry reveal the Horror itself without uncovering surrounding terrain. Searching, prismatic light and an open Ashlight Lantern at +6 also counter it.\n\n"
-                +"It may attempt one hunt of an ordinary sleeping creature. An actual distant kill can leave a death cry and fresh, species-specific remains. "
-                +"Examine the remains separately from any dropped loot; after your first Horror kill, you can recognize its wounds. "
-                +"Playtest includes direct spawning and controls for its regional chance, damage, evasion, flight and recovery.");
+        note(r,Icons.MAGNIFY,"Detection and fresh remains","Detection tools can expose the Horror without mapping its surroundings. Its hunts may leave a distant death cry and fresh remains. Examination can reveal the marks of a patient predator.");
 
         r=release(list,"v1.16.1","Cavern salvage and shared settings.");
         note(r,Icons.STAIRS,"Expedition refinements",
@@ -168,18 +153,8 @@ public final class GrimhollowChanges {
                 +"Dewcatchers and seedpods now have distinct painted forms.");
 
         r=release(list,"v1.16.0","The dragon expedition.");
-        note(r,Icons.STAIRS_CHASM,"A map and a warning",
-                "A wounded treasure hunter on a newly generated City floor offers an Expedition Map and Feather Fall in exchange for a Potion of Healing. "
-                +"The map leads to a wooden-platform maze over a vast chasm, with an exit in one of eight positions. "
-                +"The only retreat to the dungeon is through the Hoard Room's return exit, even while the dragon is alive.\n\n"
-                +"The flying dragon warns before breathing fire or sweeping you from a platform. Its wounds persist across the expedition. "
-                +"A fall sends you into the dark cavern below; the central descent offers a deliberate route down.");
-        note(r,Icons.GOLD,"The cavern and the hoard",
-                "Explore around stone pillars, fallen adventurers and cave spinners in limited light. A poisonous broodmother guards the climb back; "
-                +"defeating her ends the brood threat and unlocks the return to the platform center.\n\n"
-                +"The dragon protects a visible treasure hoard. Killing it carries you to the hoard and unlocks a one-time cache of exceptional loot, "
-                +"potentially including an artifact and an additional trinket. Carried trinkets work together under their usual rules. "
-                +"Playtest includes branch travel and controls for the bosses, supplies and rewards.");
+        note(r,Icons.STAIRS_CHASM,"A map and a warning","A wounded City explorer offers an expedition into a dragon’s territory. Wooden bridges cross a vast chasm above a dark cavern. The way home lies beyond the hoard; heed the hunter’s warning.");
+        note(r,Icons.GOLD,"The cavern and the hoard","Fallen adventurers lie beneath the bridges, watched by a poisonous broodmother and hungry scavengers. Above them, a dragon guards its treasure. New branches, bosses and rewards are available through Playtest for testing.");
 
         r=release(list,"v1.15.0","Tune the dungeon.");
         note(r,Icons.PREFS,"Balance tuning",
@@ -195,11 +170,7 @@ public final class GrimhollowChanges {
                 +"Lightning and death, light and healing beams have painted cores. Gas is more visible while known loot remains readable through it. "
                 +"Sharper exports cover creatures, merchants, NPCs, summons, bosses and sentries. "
                 +"Raised-undead inspection shows remaining binding time; the Phylactery's summon menu is called Raise Dead.");
-        note(r,Icons.TALENT,"Defensive Sigil and Ghouls",
-                "Enchanter's Field Repair becomes Defensive Sigil: spend one Brush charge and one turn for 6/10 shielding at ranks 1/2, "
-                +"lasting up to six turns. Recasting refreshes it instead of stacking. "
-                +"Ghouls unlock at Phylactery +5 and heal their master for 15% of damage dealt. "
-                +"Remains offer keepsakes appropriate to the current hero rather than unrelated class items.");
+        note(r,Icons.TALENT,"Defensive Sigil and Ghouls","Defensive Sigil replaces Field Repair, giving the Enchanter a deliberate protective ward. Ghouls answer more experienced Necromancers and return less stolen vitality. Keepsakes now suit the current hero.");
         note(r,Icons.CHANGES,"Tablet and quest fixes",
                 "Hatchling meals show readable item names, and feeding warnings stop queued or held movement before giving the player a fresh action. "
                 +"Status icons wrap within the panel; the enemy counter and movement-resume arrow use painted art. "
@@ -210,18 +181,13 @@ public final class GrimhollowChanges {
 
         r=release(list,"v1.13.0","Hatchling Mimic and a new dungeon story.");
         note(r,Icons.BACKPACK_LRG,"Hatchling Mimic",
-                "A new carried trinket eats eligible loose belongings and can identify, upgrade or enchant what remains. "
-                +"Its feeding cycle speeds up with its three cauldron upgrades, costing 10/15/20 energy. "
-                +"Examine it for hunger clues and the next gold demand. A warning gives you time to act.\n\n"
-                +"Protected equipment, bags and their contents, quest items and class focuses are safe from feeding. "
-                +"If food runs out it eats gold in a permanently doubling sequence. Consuming a loose artifact transforms it; "
-                +"insufficient gold makes it escape. The later encounter's special reward uses the equipment pool of a +10 Ring of Wealth. "
-                +"Ordinary and Golden Mimics recognize its kinship, Ebony Mimics enrage, and Crystal Mimics may try to steal it. "
-                +"Item Sense reveals objects without mapping their surroundings.");
+                "A tiny mimic adopts your hoard and grazes on loose belongings. A well-fed hatchling can be surprisingly agreeable. "
+                +"Examine it for hunger clues, and heed its warning before the next meal. "
+                +"Its kin recognize the creature in your harness; not all welcome the sight.");
         note(r,Icons.JOURNAL,"Grimhollow's story and discoveries",
                 "New regional introductions and journal lore tell Grimhollow's own story, accompanied by five painted loading screens. "
                 +"Journal reference discoveries persist between games; potion, scroll and ring identities still reset for each run. "
-                +"Grasp can open bones at Crystal level 3 and ordinary unlocked chests at level 7. "
+                +"A practiced Grasp can disturb remains and open ordinary unlocked chests. "
                 +"Known loot remains visible beneath gas, raised skeletons are sharper, and long descriptions scroll to their last line. "
                 +"The Windows app has a custom icon and bundled runtime, and fullscreen remains open when focus changes.");
 
@@ -241,18 +207,8 @@ public final class GrimhollowChanges {
                 +"Travel into an unvisited floor chooses a valid arrival cell instead of placing the hero outside the map.");
 
         r=release(list,"v1.11.1-1.11.2","Class progression and tablet fixes.");
-        note(r,Icons.TALENT,"Enchanter and meaningful talent ranks",
-                "Enchanter's permanent enchantments and glyphs trigger 25% more often; temporary inscriptions and Rune Etching trigger twice as often. "
-                +"These are chance bonuses, capped at certainty. "
-                +"Talent purchases reject duplicate or stale offers, enforce rank limits and refund excess ranks from older saves.\n\n"
-                +"Each new class retains three armor paths, each with four talents of four ranks. Repeated or ineffective ranks now give distinct benefits, "
-                +"with explicit descriptions for Focused Mind, Far Reach, Precognition, Treasure Sense and the other class and armor talents.");
-        note(r,Icons.CONTROLLER,"Touch, targeting and equipment",
-                "Android steps have smoother visual timing and camera follow. Barricades span horizontal and vertical passages. "
-                +"Handbook skills accept taps, and long skill, item and status descriptions scroll. "
-                +"Hurl preserves its enemy-then-direction targeting. The Focus Crystal and Sigil Brush can be unequipped while retaining their growth and charges.\n\n"
-                +"Infernal Brew supplies three Ashlight feeding units. Level-8 Flare ignites disguised hostile mimics. "
-                +"Upgrade scrolls use a painted rising-gold effect.");
+        note(r,Icons.TALENT,"Enchanter and meaningful talent ranks","Enchanter workings answer more readily. Talent purchases enforce limits and repair excess ranks from older saves. New-class armor paths and previously ineffective ranks now offer distinct progression.");
+        note(r,Icons.CONTROLLER,"Touch, targeting and equipment","Android movement and camera follow are smoother. Barricades span their passages, descriptions scroll and Hurl retains its enemy-then-direction targeting. Class focuses preserve growth when replaced. Upgrade effects use painted rising light.");
 
         r=release(list,"v1.11.0","In-game Playtest menu.");
         note(r,Icons.PREFS,"Build a test run",
@@ -270,20 +226,14 @@ public final class GrimhollowChanges {
                 +"Each face and class palette remains recognizable as armor improves. World size and action timing stay consistent.");
 
         r=release(list,"v1.9.0-1.9.1","Ashlight Lantern and inscription input.");
-        note(r,Icons.ALCHEMY,"Ashlight Lantern",
-                "A fire-fed artifact with a free, persistent shutter. Feed Liquid Flame, Dragon's Breath or Soulfire to grow it; "
-                +"charges accumulate in low ambient light, faster while shuttered. "
-                +"Open light extends sight and attracts attention. Flare blinds nearby enemies, later igniting terrain and creatures. "
-                +"Higher levels repel hostile wraiths, reveal secrets in direct light, and grant fire resistance or immunity. "
-                +"Invisibility stays absolute, including the Cloak; using an open lantern with the Cloak doubles its charge drain. "
-                +"Weapon and armor inscription rows now respond correctly to mouse and touch, including after scrolling.");
+        note(r,Icons.ALCHEMY,"Ashlight Lantern","A soot-stained lantern feeds on alchemical fire. Its open light holds back darkness and announces its bearer. Experiment with its shutter and gathered ember; the dungeon’s shadows do not welcome them.");
 
         r=release(list,"v1.8.0-1.8.1","Readability, inspection and scouting.");
         note(r,Icons.MAGNIFY,"Read the battlefield",
                 "Locked doors have clear lock markers, and ground items, especially keys, have stronger outlines. "
                 +"Gas uses soft overlapping clouds; altar motes and environmental particles are larger. "
                 +"Awards have distinct painted medals. Repeated inspection can be locked by pressing Examine twice, including for shops and inventory.\n\n"
-                +"The Focus Crystal extends Grasp at levels 3/7 and Glimpse at levels 5/10. "
+                +"The Focus Crystal's reach and scouting grow with practice. "
                 +"Gas overdraw was reduced and flame particles batched to lower rendering cost without changing hazard rules.");
 
         r=release(list,"v1.7.0","Plants, skill icons and lasting knowledge.");
@@ -301,13 +251,7 @@ public final class GrimhollowChanges {
                 +"Enemy idle poses are steady, traps have painted mechanisms, and a shared iron-and-amber emblem supplies Windows and Android launcher icons.");
 
         r=release(list,"v1.5.0","Psychic growth and a painted interface.");
-        note(r,Icons.TALENT,"Psychic and Enchanter openings",
-                "Psychic thrown weapons use an effective upgrade floor of +1/+2/+3/+4/+5 at hero levels 1/6/12/18/24, "
-                +"improving damage and durability without stacking with real upgrades. "
-                +"The Focus Crystal starts with three charges and gains levels through charges spent. Push gains distance and riders as the Crystal grows; "
-                +"Seer's Hurl stays stronger, and Puppeteer gains direction and lasting floor-bound enthrallment.\n\n"
-                +"Enchanter starts with three Brush charges and inscription knowledge of Blazing, Shocking and Chilling, "
-                +"without identifying those effects on found gear. Curse-bound creature descriptions explain their aura and curse.");
+        note(r,Icons.TALENT,"Psychic and Enchanter openings","Psychic thrown weapons endure better, and the Focus Crystal learns through use. Push, Hurl and domination gain richer progression. Enchanters begin with familiar inscriptions and a steadier Brush; finding equipment remains an act of discovery.");
         note(r,Icons.BACKPACK_LRG,"Inventory and menus",
                 "Painted bronze and leather panels, enamel buttons, equipment borders, glass status bars and navigation symbols refresh the interface. "
                 +"Item artwork covers weapons, armor, artifacts and their states, potions, scrolls, seeds, stones, spells and quest objects. "

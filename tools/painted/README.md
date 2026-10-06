@@ -1,3 +1,7 @@
+# Mystery presentation - v1.26.0
+
+`mystery.py` cuts one authored Sewers descent gateway into the existing three-by-five logical footprint, with a locked-state center composed from the previously approved padlock painting. `playtest_presentation.py` replaces only the royal cushion cell; `botany_skills.py` places the new Rebuff at the stable WRENCH icon index. Sources and exact built-in imagegen prompts are in `sources/mystery/`. `pack.py --mystery` exports this component; full `--check` verifies all 155 assets, 161 sources and launcher resources without generation. Artwork is released with the project under GPL-3.0-or-later.
+
 # Bone-wall presentation - v1.23.2
 
 `bone_wall.py` packs four authored sections from `sources/terrain/bone-wall.png` into `environment/painted_bone_wall.png`. The exact built-in `image_gen` prompt, transparency setting and GPL-3.0-or-later release are recorded in `bone-wall-prompt.json`. The wall's cell chooses one stable arrangement; there is no continuously cycling wall animation or runtime generation. The normal full offline provenance gate verifies the atlas.

@@ -376,6 +376,21 @@ public class MagicMissile extends Emitter {
 	}
 	
 	public static class EarthParticle extends PaintedParticle.Shrinking {
+        private com.watabou.noosa.Image shard;
+        @Override public void draw(){
+            if(!EnhancedEffects.enabled() || getClass()!=EarthParticle.class){super.draw();return;}
+            if(shard==null){shard=new com.watabou.noosa.Image();ParticleArt.frame(shard,ParticleArt.STONE,1,1);}
+            ParticleArt.appearance(this,shard);
+            shard.scale.scale(1.8f);
+            shard.x-=scale.x*.4f;shard.y-=scale.y*.4f;
+            // Let the authored stone facets remain visible instead of multiplying
+            // them into a tiny dark chip. No new random samples or emitter timing.
+            shard.rm=Math.max(.85f,rm);shard.gm=Math.max(.78f,gm);shard.bm=Math.max(.65f,bm);
+            shard.angle=(float)Math.toDegrees(Math.atan2(speed.y,speed.x))+(lifespan-left)*90;
+            shard.am=Math.min(1,left/lifespan*2);
+            shard.draw();
+        }
+        @Override public void destroy(){if(shard!=null)shard.destroy();super.destroy();}
 		
 		public static final Emitter.Factory FACTORY = new Factory() {
 			@Override

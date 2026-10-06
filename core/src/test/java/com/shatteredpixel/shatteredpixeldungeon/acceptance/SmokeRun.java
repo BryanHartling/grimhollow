@@ -107,9 +107,9 @@ public class SmokeRun {
                 else {rune.floorEnchant=(Weapon.Enchantment)com.watabou.utils.Reflection.newInstance(type);name=rune.floorEnchant.name();}
                 String info=carrier.info();
                 check(info.contains("Rune Etching: "+name)
-                        && info.contains("Carries "+rune.level()+" upgrade level")
-                        && info.contains("25% class bonus") && !info.contains("%1$s") && !info.contains("%2$d")
-                        && !info.contains("25%%"),"37: actual attached Rune Etching description resolves name, upgrade and percent");
+                        && info.contains("strength travels with the rune")
+                        && !info.contains("class bonus") && !info.contains("%1$s") && !info.contains("%2$d")
+                        && !info.contains("25%%"),"37: Rune Etching description resolves its live effect without formula spoilers");
             }
         } finally {rune.floorEnchant=previous;rune.floorGlyph=previousGlyph;}
     }

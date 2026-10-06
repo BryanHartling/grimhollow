@@ -50,6 +50,9 @@ def outputs():
             if skills[i]['key']=='KINETIC_RESERVE':
                 from identification import special
                 part=special(1)
+            if skills[i]['key']=='WRENCH':
+                from mystery import source
+                part=source('rebuff',(58,58))
             tile=Image.new('RGBA',(64,64))
             tile.alpha_composite(part,((64-part.width)//2,(64-part.height)//2))
             digest=hashlib.sha256(tile.tobytes()).hexdigest()

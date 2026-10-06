@@ -26,5 +26,7 @@ def outputs():
     whole.alpha_composite(statue,((64-statue.width)//2,124-statue.height))
     for index,im in ((0,flat),(1,whole.crop((0,64,64,128))),(2,whole.crop((0,0,64,64))),(4,flat)):
         rat.paste(im,(index*64,0))
+    from mystery import cushion
+    rat.paste(cushion(),(3*64,0))
     return {'gdx/grimhollow_cursor.png':cursor,'interfaces/painted_compass.png':compass,
             'environment/custom_tiles/weak_floor.png':well,'environment/custom_tiles/rat_king_room.png':rat}

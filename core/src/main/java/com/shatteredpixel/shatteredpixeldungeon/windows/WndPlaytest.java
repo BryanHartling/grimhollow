@@ -28,7 +28,7 @@ public class WndPlaytest extends Window {
     private static Runnable lastMenu;
     private static Object lastContext;
     private static Object context(){return atHome()?WndPlaytest.class:Dungeon.hero;}
-    private static String pageKey(String title){return "playtest_page_"+title;}
+    private static String pageKey(String title){return "playtest_page_"+title+(title.equals("Playtest")?(atHome()?"_home":"_run"):"");}
     public static String itemGroup(Item item){return group(item);}
 
     private static boolean atHome(){return !(Game.scene() instanceof GameScene);}
@@ -151,22 +151,32 @@ public class WndPlaytest extends Window {
         show("Generation toggles","Choose which types may appear in future random generation. Existing possessions and authored quest essentials stay.",Arrays.asList(
             new Entry("Artifacts",()->generationTypes("Artifacts",Artifact.class)),
             new Entry("Trinkets",()->generationTypes("Trinkets",Trinket.class)),
-            new Entry("Items",()->generationTypes("Items",Item.class)),
+            new Entry("Items",WndPlaytest::generationItemGroups),
             new Entry("Enemies",WndPlaytest::generationEnemies),
             new Entry("Enable all generation",()->{GenerationToggles.reset();root();})),WndPlaytest::root);
+    }
+    private static void generationItemGroups(){
+        List<Entry> rows=new ArrayList<>();Set<String> groups=new TreeSet<>();
+        for(Class<? extends Item> type:GenerationToggles.itemTypes()){
+            Item sample=Reflection.newInstance(type);
+            if(!(sample instanceof Artifact || sample instanceof Trinket))groups.add(group(sample));
+        }
+        for(String family:groups)rows.add(new Entry(family,()->generationTypes(family,Item.class)));
+        show("Item generation","Choose an item family.",rows,WndPlaytest::generation);
     }
     private static void generationTypes(String title,Class<?> family){
         List<Entry> rows=new ArrayList<>();
         for(Class<? extends Item> type:GenerationToggles.itemTypes()){
             if(!family.isAssignableFrom(type) || family==Item.class && (Artifact.class.isAssignableFrom(type)||Trinket.class.isAssignableFrom(type)))continue;
             Item sample=Reflection.newInstance(type);
+            if(family==Item.class && !group(sample).equals(title))continue;
             rows.add(new Entry((GenerationToggles.allowed(type)?"ON: ":"OFF: ")+name(sample),()->{GenerationToggles.toggle(type);generationTypes(title,family);},sample));
         }
-        show("Generation: "+title,"Random pools only. At least one choice must remain in each equipment tier and the trinket pool.",rows,WndPlaytest::generation);
+        show("Generation: "+title,"Random pools only. At least one choice must remain in each required typed pool.",rows,family==Item.class?WndPlaytest::generationItemGroups:WndPlaytest::generation);
     }
     private static void generationEnemies(){
         List<Entry> rows=new ArrayList<>();
-        for(Class<? extends Mob> type:PlaytestCatalog.mobs()){
+        for(Class<? extends Mob> type:GenerationToggles.enemyTypes()){
             Mob sample=Reflection.newInstance(type);
             rows.add(new Entry((GenerationToggles.allowed(type)?"ON: ":"OFF: ")+Messages.titleCase(sample.name()),()->{GenerationToggles.toggle(type);generationEnemies();}));
         }

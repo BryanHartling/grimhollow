@@ -1,5 +1,9 @@
 # Known issues
 
+- v1.26.0: physical Samsung tablet and full campaign balance remain human review; native portrait input is not a device test. Revised descriptions fall back to English where translations are unavailable.
+- v1.26.0 verification: the first compiled audit was sandbox-blocked from reading the packaged JAR; the existing escalation route passed. Native menu fixtures needed the new submenu routes and remembered pages; formula-copy assertions were superseded by thematic text checks. Initial fixture failures remain recorded locally and are not passing results.
+- v1.26.0 local captures: a Windows user-mapped lock on tablet-hurl.png was resolved by moving the old generated capture aside and rerunning the unchanged landscape fixture. Native starts attempted during JAR replacement failed before launching and were rerun after the build completed.
+
 - v1.25.1: the original crashing campaign saves were not provided; migration is verified with the exact missing-field condition in unit tests and a complete disk save/load. Existing saves explicitly marked Playtest keep that flag; older automatic flags cannot safely be distinguished from intentional testing.
 - v1.25.1: per-item hero weapon grip/axis checks are RETIRED by the user's approved generic painted-pose fallback. Weapon-dependent inventory overlays no longer ship; armor, facing, movement/action rendering and secondary/thrown combat context remain checked. Physical Samsung tablet visual review remains with the user.
 - v1.25.1 local environment: the first compiled audit omitted the session JDK setup and could not locate javap; it passed after loading tools/env.ps1. Windows briefly denied clipboard polling during native number entry; both orientation fixtures completed with failures=0 and no check changed.

@@ -1,0 +1,18 @@
+{
+  "tool": "built-in image_gen",
+  "transparent_background": true,
+  "assets": [
+    {
+      "source": "sewer-exit.png",
+      "prompt": "Use case: stylized-concept. Asset type: game environment cutout for an original painted dark gothic dungeon. Primary request: one large sewer descent gateway, front-on with a slight overhead perspective, isolated on genuine transparent background. Heavy mossy limestone arch spans three floor tiles, rusty dark iron entrance sides, central open void reveals broad stone stairs descending into darkness. Upper arch is fully visible and the foreground apron is a flat worn stone ledge, no side perspective. Rectangular silhouette 3 tiles wide and 5 tiles tall, arch in upper 2/5, entrance in central 2/5, apron in bottom 1/5. Materials richly painted and sharp at small scale, olive grey stone and bronze iron fit Grimhollow. No torches, no glowing aura, no characters, no text, no letters, no surrounding floor or background. Shape must read as usable downward exit. Illustration has natural paint details, no pixel art or blocky edges."
+    },
+    {
+      "source": "cushion.png",
+      "prompt": "Use case: stylized-concept. Asset type: original painted dungeon prop sprite. Primary request: a squat royal rat cushion isolated on a genuine transparent background. A worn burgundy velvet square pillow with frayed golden rope trim, stitched sunken central depression, four small brass tassels, viewed from a high slightly frontal dungeon camera. Rich hand painted medieval dark fantasy style matching olive grey stone floors and bronze accents of Grimhollow, natural cloth folds and readable silhouette. Entire cushion visible, wide square footprint, no rat, no crown, no throne, no floor plane, no glow, no text, no pixel art, no blocky edges. Designed to remain clear when reduced to a 64 by 64 game sprite."
+    },
+    {
+      "source": "rebuff.png",
+      "prompt": "Use case: stylized-concept. Asset type: Grimhollow fantasy talent icon, isolated on genuine transparent background. Primary request: an original painted telekinetic defensive ward formed by three curved bands of indigo glass and pale silver light turning outward around a small dark amethyst at the centre. The ward is oval and slightly tilted, a force wave pushing outward from its left edge, with a strong clear shield silhouette and generous transparent margins. Dark gothic painted illustration, restrained indigo and silver, warm bronze tiny binding accents. Crisp legible at 64x64. No text, no letters, no border or square frame, no ground, no person, no pixel art. Distinct from fire or holy shields."
+    }
+  ]
+}

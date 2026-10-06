@@ -1,4 +1,4 @@
-# Mystery and Playtest usability - in progress
+# Mystery and Playtest usability - v1.26.0
 
 - Repair individual and bulk Waterskin refill, expose the Golden Mimic's normal ally directions from both examination and its harness, and present the Hatchling's imminent meal as a modal warning while clearing queued movement and rest.
 - Remove the Doubloon's explicit feeding shortcut; the Hatchling's ordinary feeding picker still accepts it. Gold collection does not heal the companion.
@@ -6,6 +6,11 @@
 - Add device-wide exclusions for random artifact, trinket, item and roaming-enemy generation. Preserve inventory and fixed quest rewards; reject changes that empty a required typed pool. Custom generation latches the same unranked history as balance tuning.
 - Replace Psychic Wrench with Rebuff: a successful Push grants 4/7 shielding for three turns, refreshed rather than stacked. Retain the WRENCH save key. Grasp, Glimpse and failed Push casts grant no ward.
 - Component verification: combined generated gate Runs=30 failures=0; individual and bulk refill, persistent exclusions and pool safeguards, companion direction, coin/Precognition ordering and every Rebuff rank are covered by the existing scenarios.
+
+- Rewrite new items, class/subclass/armor paths, 72 talents and their 214 progression entries, creature/room descriptions and spoiler-heavy player update entries as atmospheric hints. Keep action affordances, ordinary equipment facts and current live status/countdowns. Developer formulas stay in this history and testing tools. The old Ashlight formula-text and Rune Etching percent-copy assertions are superseded by the requested presentation; all effect/balance assertions remain.
+- Add a painted floor-five descent gateway, Rat King cushion and Rebuff icon from committed generated sources/exact prompts. Packing and 155-asset reproduction run offline. The gateway retains its logical footprint and updates its padlock when the exit unlocks. Living Earth shards gain size, visible facets and motion with the original emission times and random samples.
+- Refine generation lists to actual random choices and keep disabled rare/subtype rolls from creating an empty enemy rotation. Catalog navigation does not consume gameplay randomness. Imminent Hatchling popups are re-presented after loading a warned save.
+- Final local validation: Runs=30 failures=0, eight JUnit tests, both native orientations for menus/rooms/polish/Horror/Expedition, all five fog and memory walks, 12,960 generic hero draws, 155 reproducible assets and Windows launcher exit 0. Existing effects gate reports mean 0.6276ms/p95 0.9340ms. No physical tablet verification is claimed; test 45 stays abandoned.
 
 # Playtesting repairs - v1.25.1
 

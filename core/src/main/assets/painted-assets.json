@@ -102,6 +102,9 @@
     "monsters/wards-log.png": "d2c0151f763a35783f599eae55ce509da73d00df1a1f17b54a720f39a8b9a378",
     "monsters/wildlife.png": "26f263b014e2015b240613581ac520339eb397b23486c13a3aa7d6361e7d5bfe",
     "monsters/wisps-larva.png": "0d7221e0b6cd17f09351ccbf45ee164c4dde6ab9bf3fa3c12471e018e5bc4029",
+    "mystery/cushion.png": "91a24f31b36b7518ac7544ab79e61bdd4c3264de7ec535017742ceabc1d3a6a5",
+    "mystery/rebuff.png": "8a79613cc859234e8b054de1cee396356ae9ee32aaeffe2841236091fd5d8c34",
+    "mystery/sewer-exit.png": "ca4c90d33a40ffd8c8a915eea512b5a0a54ded8614d29423199965169b9e39e7",
     "particles/defensive-sigil.png": "92e9c8ca0ccde3a87936b244fdeec4d2ff24bdcff43e95f9286620049a7d3709",
     "particles/motifs.png": "1d756eac0e9922a4da959a902f8af78464593fac48ec18248ac8829398ae9465",
     "particles/rays.png": "701f1bce3b4b0b5cc4eefcc210d745bdac7ed87153dde2b9fd25e861fc0e6ea4",
@@ -321,7 +324,7 @@
         1024,
         512
       ],
-      "rgba_sha256": "8a0605d9abee528bcb2b994ea7f0e1058b6b3874fad10ccd9962e98081861f99"
+      "rgba_sha256": "8d37ee032537167e96e4904662d31310119cabae8a9a851bee17b98aa2b857ff"
     },
     "environment/raised_terrain.png": {
       "size": [
@@ -9396,7 +9399,7 @@
         512,
         64
       ],
-      "rgba_sha256": "8bc9a4f44aa2e8452f4a0df80d8ca219ced63d2f9df17d04f5cbe8f4d9b0ea75"
+      "rgba_sha256": "d84c5080afd5748f7115c1730a4d22314a7269d0c6358f69203fc884a4d3bc5c"
     },
     "interfaces/painted_talents.png": {
       "size": [
@@ -9425,6 +9428,13 @@
         64
       ],
       "rgba_sha256": "d0a8d93e24abc6410fb489451ce9bf2ae042d92c3a478c1465ae597b12ca4272"
+    },
+    "environment/custom_tiles/painted_sewer_exit.png": {
+      "size": [
+        192,
+        384
+      ],
+      "rgba_sha256": "d24ff83b9e8ac20c9d85cbad7728d1369b6dbe1d8a1709dca4d2e802a5d859ce"
     }
   }
 }

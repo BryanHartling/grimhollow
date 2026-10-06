@@ -54,7 +54,11 @@ public class WndInfoMob extends WndTitledMessage {
 		
 	}
 	
-	private static class MobTitle extends Component {
+    @Override protected float targetHeight(){
+        // Reserve the command row before sizing a long ally description.
+        return super.targetHeight()-23;
+    }
+    private static class MobTitle extends Component {
 
 		private static final int GAP	= 2;
 		

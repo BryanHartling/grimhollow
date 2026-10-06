@@ -1470,6 +1470,7 @@ public class GameScene extends PixelScene {
             scene.raisedTerrainBehind.updateMap();
 			scene.walls.updateMap();
             scene.grassOverhang.updateMap();
+            refreshSewerExit();
 			updateFog();
 		}
 	}
@@ -1484,6 +1485,7 @@ public class GameScene extends PixelScene {
             scene.raisedTerrainBehind.updateMapCell(cell);
 			scene.walls.updateMapCell( cell );
             scene.grassOverhang.updateMapCell(cell);
+            refreshSewerExit();
 			//update adjacent cells too
 			updateFog( cell, 1 );
 		}
@@ -1529,7 +1531,11 @@ public class GameScene extends PixelScene {
 		}
 	}
 
-	public static boolean showingWindow(){
+    private static void refreshSewerExit(){
+        for(CustomTilemap visual:Dungeon.level.customTiles)
+            if(visual instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.sewerboss.SewerBossExitRoom.SewerExit)visual.updateKnowledge();
+    }
+    public static boolean showingWindow(){
 		if (scene == null) return false;
 
 		for (Gizmo g : scene.members){
@@ -1611,6 +1617,7 @@ public class GameScene extends PixelScene {
             for(CustomTilemap visual:Dungeon.level.customWalls)visual.updateKnowledge();
             for(CustomTilemap visual:Dungeon.level.customTiles)if(visual instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.WaywardMoundTile)visual.updateKnowledge();
             for(CustomTilemap visual:Dungeon.level.customTiles)if(visual instanceof com.shatteredpixel.shatteredpixeldungeon.levels.features.ElementalCache.MechanismTile)visual.updateKnowledge();
+            for(CustomTilemap visual:Dungeon.level.customTiles)if(visual instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.sewerboss.SewerBossExitRoom.SewerExit)visual.updateKnowledge();
 			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
 				if (mob.sprite != null) {
 					if (mob instanceof Mimic && mob.state == mob.PASSIVE && ((Mimic) mob).stealthy() && Dungeon.level.visited[mob.pos]){

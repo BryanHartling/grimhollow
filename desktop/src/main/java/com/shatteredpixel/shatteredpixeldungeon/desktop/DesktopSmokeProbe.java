@@ -537,7 +537,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }else if(frames==300){
             interfaceBounds();capture("polish-history-oldest");closeReviewWindows();
             HatchlingMimic pet=new HatchlingMimic();pet.collect();while(!pet.hungry())pet.tick(Dungeon.hero);
-            if(!pet.info().contains("75%")||pet.info().contains("%1$d")||pet.info().contains("%2$d"))throw new AssertionError("Hatchling description formatting");
+            String hunger=com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(HatchlingMimic.class,"hunger_hungry");
+            if(!pet.info().contains(hunger)||pet.info().contains("75%")||pet.info().contains("%1$d")||pet.info().contains("%2$d"))throw new AssertionError("Hatchling hunger hint or description formatting");
             Dungeon.hero.belongings.backpack.items.add(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing());
             GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,pet));
         }else if(frames==330){interfaceBounds();capture("polish-hatchling-actions");playtestClick("FEED");}
@@ -600,7 +601,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }else if(frames==540){
             if(Dungeon.hero.belongings.armor.runeEtching==null || ((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)Dungeon.hero.belongings.weapon).runeEtching==null || Dungeon.hero.belongings.armor.runeEtching==((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)Dungeon.hero.belongings.weapon).runeEtching)throw new AssertionError("37: Etch picker did not attach armor rune");
             String text=Dungeon.hero.belongings.armor.info();
-            if(!text.contains("Rune Etching:")||!text.contains("25%")||text.contains("%1$s")||text.contains("%2$d"))throw new AssertionError("37: rendered armor description placeholders");
+            if(!text.contains("Rune Etching:")||!text.contains("travels with the rune")||text.contains("%1$s")||text.contains("%2$d"))throw new AssertionError("37: rendered armor description identity or placeholders");
             GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(Dungeon.hero.belongings.armor));
         }else if(frames==570){
             interfaceBounds();capture("polish-armor-etch-description");
@@ -806,6 +807,18 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(harness));
         }else if(frames==1360){
             interfaceBounds();checkReviewText(Game.scene());capture("doubloon-golden-companion");
+            closeReviewWindows();
+            com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion harness=com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion.carried();
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,harness));
+            interfaceBounds();playtestClick("DIRECT");
+            int guard=-1;
+            for(int offset:com.watabou.utils.PathFinder.NEIGHBOURS8){int cell=Dungeon.hero.pos+offset;if(Dungeon.level.passable[cell]&&Dungeon.level.heroFOV[cell]&&Actor.findChar(cell)==null){guard=cell;break;}}
+            if(guard<0)throw new AssertionError("Golden Mimic guard fixture has no empty cell");
+            pointerCell(guard);
+            if((int)RecoveryChecks.field(harness.ally(),"defendingPos")!=guard)throw new AssertionError("Harness direction command failed");
+            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoMob(harness.ally()));
+            interfaceBounds();playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoMob.class,"direct"));pointerCell(Dungeon.hero.pos);
+            if((int)RecoveryChecks.field(harness.ally(),"defendingPos")!=-1)throw new AssertionError("Inspection follow command failed");
             com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.reset();
             System.out.println("DOUBLOON UI PASS: fitted painted actions, both tuning menus, odds input, Heads flip, repeated custom buff refresh, irreversible feeding confirmation and Golden Mimic transformation; failures=0");
         }else if(frames==1390){
@@ -1073,7 +1086,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(BalanceTuning.configured(BalanceTuning.Key.DENSITY)!=125||Dungeon.hero!=null||Playtest.enabled())throw new AssertionError("Home tuning required or mutated a live hero");
                 interfaceBounds();capture("playtest-home-balance");BalanceTuning.reset();closeReviewWindows();
                 com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.openHome();break;
-            case -2:playtestClick("Open tools for a saved run");break;
+            case -2:if(!playtestClickPage("Open tools for a saved run"))return;break;
             case -1:
                 interfaceBounds();capture("playtest-home-saves");
                 GamesInProgress.Info saved=GamesInProgress.check(1);
@@ -1126,7 +1139,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 28:
                 if(Dungeon.hero.heroClass!=HeroClass.ENCHANTER||Dungeon.hero.lvl!=24||Dungeon.depth!=21||!(Dungeon.hero.belongings.artifact instanceof com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush))throw new AssertionError("Native class switch/kit failed");
                 capture("playtest-enchanter-halls");GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());break;
-            case 29:playtestClick("God mode: ON");break;
+            case 29:if(!playtestClickPage("God mode: ON"))return;break;
             case 30:
                 if(!Playtest.enabled()||Playtest.god())throw new AssertionError("Native toggle did not preserve save marker");
                 closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndGameInProgress(GamesInProgress.curSlot));break;
@@ -1158,8 +1171,12 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 case 34:
                     if(talentWindow()==null)throw new AssertionError("Handbook talent pointer did not open details");
                     interfaceBounds();firstRankText=allReviewText(talentWindow());
-                    if(!firstRankText.contains("12.5%"))throw new AssertionError("Rank-one numeric description missing");
-                    if(!firstRankText.contains("50%")||!firstRankText.contains("Rank 4"))throw new AssertionError("Full progression missing from description");
+                    for(int rank=1;rank<=4;rank++){
+                        String detail=com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.class,"kinetic_surge.rank"+rank);
+                        if(detail.length()<40||!firstRankText.contains(detail)||!firstRankText.contains("Rank "+rank))throw new AssertionError("Rank "+rank+" thematic progression missing from description");
+                        if(rank>1&&detail.equals(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.class,"kinetic_surge.rank"+(rank-1))))throw new AssertionError("Indistinguishable rank descriptions");
+                    }
+                    if(firstRankText.contains("12.5%")||firstRankText.contains("50%"))throw new AssertionError("Hidden formula still exposed in talent text");
                     com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane progression=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(talentWindow(),"description");
                     pointerGestureReview(progression,com.watabou.input.PointerEvent.NONE,-25);
                     if(progression.content().height()>progression.height() && progression.content().camera.scroll.y<=0)throw new AssertionError("Overflowing progression does not scroll");
@@ -1167,7 +1184,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     capture("tablet-talent-rank1");break;
                 case 35:
                     interfaceBounds();String fourth=allReviewText(talentWindow());
-                    if(!fourth.equals(firstRankText)||!fourth.contains("50%"))throw new AssertionError("Scrolling changed progression content");
+                    if(!fourth.equals(firstRankText)||!fourth.contains("Rank 4"))throw new AssertionError("Scrolling changed progression content");
                     capture("tablet-talent-rank4");closeReviewWindows();
                     GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage(
                             com.shatteredpixel.shatteredpixeldungeon.ui.Icons.get(com.shatteredpixel.shatteredpixeldungeon.ui.Icons.INFO),
@@ -1316,7 +1333,13 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     break;
                 case 58:
                     if(!Dungeon.hero.belongings.contains(warningMeal))throw new AssertionError("55: meal eaten before player response");
+                    if(!allReviewText(Game.scene()).contains("Your hatchling mimic grumbles hungrily"))throw new AssertionError("55: missing modal hunger warning");
+                    boolean modal=false;
+                    for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage)modal=true;
+                    if(!modal)throw new AssertionError("55: warning is not a modal popup");
+                    if(Dungeon.hero.curAction!=null || Dungeon.hero.lastAction!=null || Dungeon.hero.resting)throw new AssertionError("55: queued actions survived warning");
                     capture("hatchling-warning-and-hud");
+                    closeReviewWindows();
                     Dungeon.hero.rest(false);break;
                 case 59:
                     if(Dungeon.hero.belongings.contains(warningMeal)) {
@@ -1351,6 +1374,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 case 73:if(!playtestClickPage("Reset all balance tuning"))return;break;
                 case 74:
                     if(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.changedCount()!=0||!Playtest.enabled())throw new AssertionError("58: tuning reset/playtest isolation");
+                    if(!mysteryMenuChecks())return;
                     System.out.println("TEST 58 UI PASS: balance menu, paging, numeric input, saved changes and reset via native pointer input");
                     Gdx.app.exit();return;
             }
@@ -1365,9 +1389,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         // Like InterlevelScene, generate with no live GameScene receiving map
         // callbacks for the outgoing floor; the next scene installs itself.
         questField(GameScene.class,"scene",null);
-        Dungeon.branch=kind>=2?1:0;Dungeon.depth=kind==0?8:14;
+        Dungeon.branch=kind==2||kind==3?1:0;Dungeon.depth=kind==0?8:kind==4?5:14;
         if(kind==0)questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker.Quest.class,"type",2);
-        if(kind>=2)questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.class,"type",kind==2?2:1);
+        if(kind==2||kind==3)questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.class,"type",kind==2?2:1);
         Level level=Dungeon.newLevel();
         int center=level.entrance();
         if(kind==0){
@@ -1381,6 +1405,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap map:level.customTiles)
                 if(map instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.BlacksmithRoom.SmithyVisuals)
                     center=map.tileX+map.tileW/2+(map.tileY+map.tileH/2)*level.width();
+        } else if(kind==4){
+            center=level.exit()+level.width();
         } else {
             for(int cell=level.width();cell<level.length()-level.width();cell++)
                 if(level.map[cell]==Terrain.WALL_DECO && level.passable[cell+level.width()]){center=cell+level.width();break;}
@@ -1783,9 +1809,34 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                         Image visual=icon.get();if(visual.frame().width()*visual.texture.width<63)throw new AssertionError("Pixel depth icon: "+icon);visual.destroy();
                     }
                     System.out.println("TEST 57 ROOMS PASS: generated ritual/smithy/both mines, quest completion, preview vertices, 16 rail junctions, no ore flames/light, source removal, shared sight and painted boss/depth HUD");
+                    prepareRooms(4);switchNoFade(GameScene.class);break;
+                case 12:
+                    sewerExitArtworkCheck(15);capture("sewer-exit-locked");
+                    Level.set(Dungeon.level.exit(),Terrain.EXIT);GameScene.updateMap(Dungeon.level.exit());break;
+                case 13:
+                    sewerExitArtworkCheck(7);capture("sewer-exit-open");
+                    for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs)
+                        if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.RatKing){Dungeon.hero.pos=mob.pos+Dungeon.level.width();Dungeon.hero.sprite.place(Dungeon.hero.pos);Dungeon.observe();}
+                    break;
+                case 14:
+                    capture("rat-king-cushion");
+                    System.out.println("PAINTED EXIT PASS: generated floor-five gateway, locked/open live cell refresh and Rat King cushion; failures=0");
                     Gdx.app.exit();return;
             }
         } catch(ReflectiveOperationException error){throw new AssertionError(error);}
+    }
+    private void sewerExitArtworkCheck(int index){
+        boolean found=false;
+        for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap tile:Dungeon.level.customTiles)
+            if(tile instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.sewerboss.SewerBossExitRoom.SewerExit){
+                com.watabou.noosa.Tilemap vis=(com.watabou.noosa.Tilemap)RecoveryChecks.field(tile,"vis");
+                Image middle=vis.image(1,0);
+                com.watabou.utils.RectF expected=new com.watabou.noosa.TextureFilm("environment/custom_tiles/painted_sewer_exit.png",64,64).get(index);
+                com.watabou.utils.RectF actual=middle.frame();
+                if(middle.texture.width!=192 || middle.texture.height!=384 || actual.left!=expected.left || actual.top!=expected.top || actual.right!=expected.right || actual.bottom!=expected.bottom)throw new AssertionError("Sewer exit painted state: "+index);
+                middle.destroy();found=true;
+            }
+        if(!found)throw new AssertionError("Missing generated sewer exit");
     }
     private void miningTorchChecks(){
         int ore=0;
@@ -1997,6 +2048,39 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         Level.set(horizontal,Terrain.BARRICADE);Level.set(horizontal-1,Terrain.EMPTY);Level.set(horizontal+1,Terrain.WALL);
         Dungeon.observe();GameScene.updateMap();
     }
+    private void menuEntry(String label){
+        for(int tries=0;tries<100;tries++)if(playtestClickPage(label))return;
+        throw new AssertionError("Unable to reach Playtest menu entry: "+label);
+    }
+    private int mysteryMenuStep,mysteryRememberedPage;
+    private boolean mysteryMenuChecks(){
+        // Each state gets genuine rendered frames before its screenshot.
+        String potionName=com.shatteredpixel.shatteredpixeldungeon.messages.Messages.titleCase(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision().trueName());
+        switch(mysteryMenuStep++){
+            case 0:
+                closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest());
+                menuEntry("Generation toggles");menuEntry("Artifacts");
+                for(int page=0;page<2;page++)if(playtestButton(">")!=null && playtestButton(">").active)playtestClick(">");
+                mysteryRememberedPage=SPDSettings.getInt("playtest_page_Generation: Artifacts",0);
+                if(mysteryRememberedPage==0)throw new AssertionError("Artifact page fixture did not advance");break;
+            case 1:
+                interfaceBounds();capture("generation-artifacts-page");playtestClick("Main Playtest menu");menuEntry("Resume last menu");break;
+            case 2:
+                if(SPDSettings.getInt("playtest_page_Generation: Artifacts",0)!=mysteryRememberedPage || !allReviewText(Game.scene()).contains("Generation: Artifacts"))throw new AssertionError("Resume lost submenu or page");
+                playtestClick("Main Playtest menu");menuEntry("Generation toggles");menuEntry("Items");menuEntry("Potions, brews and elixirs");menuEntry("ON: "+potionName);
+                if(com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision.class))throw new AssertionError("Generation toggle did not disable potion");break;
+            case 3:
+                interfaceBounds();capture("generation-potions");menuEntry("OFF: "+potionName);
+                playtestClick("Main Playtest menu");menuEntry("Create items");menuEntry("Class items");break;
+            case 4:
+                interfaceBounds();capture("playtest-class-items");menuEntry("Focus Crystal");break;
+            case 5:
+                if(!allReviewText(Game.scene()).contains("Focus Crystal") || playtestButton("Create 1 (single item)")==null)throw new AssertionError("Focus Crystal creation is not in class items");
+                closeReviewWindows();com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.reset();
+                System.out.println("PLAYTEST ORGANIZATION PASS: grouped item exclusions, native toggle input, class Crystal, persistent submenu page and main/resume navigation; failures=0");return true;
+        }
+        return false;
+    }
     private com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton playtestButton(String label){
         for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.Window)
             for(com.watabou.noosa.Gizmo button:RecoveryChecks.members((Group)child))
@@ -2008,8 +2092,11 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         Object button=playtestButton(label);if(button==null)throw new AssertionError("Playtest missing button: "+label+" at step "+playtestStep);
         pointerGestureReview(button,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
     }
+    private String playtestSearchLabel;
+    private boolean playtestSearchStarted;
     private boolean playtestClickPage(String label){
-        if(playtestButton(label)!=null){playtestClick(label);return true;}
+        if(!label.equals(playtestSearchLabel)){playtestSearchLabel=label;playtestSearchStarted=false;}
+        if(playtestButton(label)!=null){playtestClick(label);playtestSearchLabel=null;playtestSearchStarted=false;return true;}
         String parent=null;
         if(label.equals("Fickle Doubloon") || label.equals("Golden Mimic companion") || label.equals("Wayward Chart")){
             if(playtestButton("Artifacts and trinkets")!=null)parent="Artifacts and trinkets";
@@ -2017,7 +2104,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }else if(label.equals("Lurking Horror") && playtestButton("Grimhollow enemies")!=null)parent="Grimhollow enemies";
         else if(label.startsWith("Expedition ") || label.equals("Cavern remains loot")){if(playtestButton("Dragon expedition")!=null)parent="Dragon expedition";}
         else if(label.startsWith("Floor 21") && playtestButton("Halls")!=null)parent="Halls";
-        if(parent!=null){playtestClick(parent);return false;}
+        if(parent!=null){playtestClick(parent);playtestSearchStarted=false;return false;}
+        if(!playtestSearchStarted && playtestButton("<")!=null && playtestButton("<").active){playtestClick("<");return false;}
+        playtestSearchStarted=true;
         if(playtestButton(">")!=null && playtestButton(">").active){playtestClick(">");return false;}
         throw new AssertionError("Playtest entry missing from paged menu: "+label);
     }
@@ -2089,7 +2178,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 }
                 if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern){
                     String text=item.info();
-                    if(!text.contains("Levels 1-6 cost one each; levels 7-10 cost two each.")||text.contains("\u00e2")||text.contains("%1$"))throw new AssertionError("Lantern feeding text regression");
+                    if(!text.contains("Alchemy feeds the ember")||text.contains("Levels 1-6")||text.contains("\u00e2")||text.contains("%1$"))throw new AssertionError("Lantern mystery/encoding regression");
                 }
                 wnd.hide();Dungeon.hero.belongings.backpack.items.remove(item);
             }
@@ -3000,8 +3089,11 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     new com.shatteredpixel.shatteredpixeldungeon.effects.particles.ShadowParticle(),
                     new com.shatteredpixel.shatteredpixeldungeon.effects.particles.SparkParticle(),
                     new com.shatteredpixel.shatteredpixeldungeon.effects.particles.EarthParticle(),
+                    new com.shatteredpixel.shatteredpixeldungeon.effects.MagicMissile.EarthParticle(),
                     new com.shatteredpixel.shatteredpixeldungeon.effects.particles.BloodParticle()}){
                 particle.reset(0,0,0xFFFFFF,8,1);
+                if(particle instanceof com.shatteredpixel.shatteredpixeldungeon.effects.MagicMissile.EarthParticle)
+                    ((com.shatteredpixel.shatteredpixeldungeon.effects.MagicMissile.EarthParticle)particle).reset(0,0);
                 SPDSettings.enhancedEffects(false);Pixmap oldPixels=renderSprite(particle,buffer,camera);
                 SPDSettings.enhancedEffects(true);Pixmap newPixels=renderSprite(particle,buffer,camera);
                 int difference=0,soft=0,opaque=0;
@@ -3010,6 +3102,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     if(oldPixels.getPixel(x,y)!=newPixels.getPixel(x,y))difference++;
                 }
                 if(difference==0||soft<10||soft+opaque<20)failures.add("56 empty, square or unchanged particle "+particle.getClass().getSimpleName());
+                if(particle instanceof com.shatteredpixel.shatteredpixeldungeon.effects.MagicMissile.EarthParticle)
+                    PixmapIO.writePNG(Gdx.files.absolute("verification/living-earth.png"),newPixels);
                 oldPixels.dispose();newPixels.dispose();particle.destroy();paintedFamilies++;
             }
             int speckKinds=0;

@@ -92,9 +92,7 @@ public class FocusCrystal extends com.shatteredpixel.shatteredpixeldungeon.items
     }
     public int glimpseDuration(){return level()>=10?9:level()>=5?7:5;}
     @Override public String desc(){
-        return super.desc()+"\n\n"+Messages.get(this,"progress",level(),spentExperience,level()<10?10+5*level():0)
-                +"\n\n"+Messages.get(this,"utility_stats",graspRange(Dungeon.hero),glimpseDuration())
-                +"\n\n"+Messages.get(this,"push_stats",pushDistance())+"\n\n"+Messages.get(this,"grasp_opening")+"\n\n"+Messages.get(this,"weapon_stats",min(level()),max(level()),Math.round(100*carriedRate(Dungeon.hero)));
+        return super.desc();
     }
     @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("spent_experience",spentExperience);b.put("charge",charge);b.put("partialcharge",partialCharge);}
     @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);level(Math.max(0,Math.min(10,b.getInt("level"))));spentExperience=b.getInt("spent_experience");charge=Math.max(0,b.getInt("charge"));partialCharge=b.getFloat("partialcharge");}

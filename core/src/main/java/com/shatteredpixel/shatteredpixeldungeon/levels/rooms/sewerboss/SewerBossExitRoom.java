@@ -22,6 +22,7 @@
 package com.shatteredpixel.shatteredpixeldungeon.levels.rooms.sewerboss;
 
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
+import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Terrain;
 import com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition;
@@ -80,24 +81,30 @@ public class SewerBossExitRoom extends ExitRoom {
 	public static class SewerExit extends CustomTilemap {
 		
 		{
-			texture = Assets.Environment.SEWER_BOSS;
+            texture = "environment/custom_tiles/painted_sewer_exit.png";
 			
 			tileW = 3;
 			tileH = 3;
 		}
 		
 		private static final int[] layout = new int[]{
-				21, -1, 22,
-				23, 23, 23,
-				24, 24, 24
+                6, 7, 8,
+                9, 10, 11,
+                12, 13, 14
 		};
 		
 		@Override
 		public Tilemap create() {
 			Tilemap v = super.create();
-			v.map(layout, 3);
+            updateKnowledge();
 			return v;
 		}
+        @Override public void updateKnowledge(){
+            if(vis==null || Dungeon.level==null)return;
+            int[] data=layout.clone();
+            if(Dungeon.level.map[tileY*Dungeon.level.width()+tileX+1]==Terrain.LOCKED_EXIT)data[1]=15;
+            vis.map(data,3);
+        }
 		
 		@Override
 		public Image image(int tileX, int tileY) {
@@ -111,15 +118,15 @@ public class SewerBossExitRoom extends ExitRoom {
 	public static class SewerExitOverhang extends CustomTilemap {
 		
 		{
-			texture = Assets.Environment.SEWER_BOSS;
+            texture = "environment/custom_tiles/painted_sewer_exit.png";
 			
 			tileW = 3;
 			tileH = 2;
 		}
 		
 		private static final int[] layout = new int[]{
-				16, 17, 18,
-				19, -1, 20
+                0, 1, 2,
+                3, 4, 5
 		};
 		
 		@Override

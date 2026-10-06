@@ -149,6 +149,23 @@ final class TuningScenario {
         boolean protectedPool=false;try{GenerationToggles.toggle(PlateArmor.class);}catch(IllegalArgumentException expected){protectedPool=true;}
         check(protectedPool&&GenerationToggles.allowed(PlateArmor.class),"empty armor pool rejected atomically");
         GenerationToggles.reset();check(GenerationToggles.changedCount()==0,"reset restores eligibility");
+        com.watabou.utils.Random.pushGenerator(77);long rosterSeed=com.watabou.utils.Random.Long();com.watabou.utils.Random.popGenerator();
+        com.watabou.utils.Random.pushGenerator(77);GenerationToggles.enemyTypes();
+        check(com.watabou.utils.Random.Long()==rosterSeed,"opening the enemy catalog must not consume gameplay RNG");com.watabou.utils.Random.popGenerator();
+        check(!GenerationToggles.enemyTypes().contains(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Goo.class)
+                &&!GenerationToggles.itemTypes().contains(Phylactery.class),"fixed bosses and class essentials are not misleading toggles");
+        for(Class<?> type:new Class<?>[]{com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Bat.class,
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Brute.class,
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.DM200.class,
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Spinner.class,
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Hexcaster.class,
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.RedShaman.class,
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.BlueShaman.class})GenerationToggles.toggle(type);
+        for(int draw=0;draw<200;draw++){
+            java.util.ArrayList<Class<? extends com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob>> roster=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.MobSpawner.getMobRotation(11);
+            check(!roster.isEmpty()&&roster.stream().allMatch(t->t==com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Shaman.PurpleShaman.class),"eligible shaman variant fallback "+draw);
+        }
+        GenerationToggles.reset();
         Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();
         Waterskin skin=Dungeon.hero.belongings.getItem(Waterskin.class);if(skin==null){skin=new Waterskin();skin.collect();}
         skin.empty();Playtest.recharge(skin);check(skin.isFull(),"individual recharge fills Waterskin");

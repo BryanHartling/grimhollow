@@ -44,6 +44,7 @@ public class HatchlingMimic extends Trinket {
     private int lastInterval=300;
     private boolean warned;
     private boolean awaitingChoice;
+    private transient boolean warningShown;
     private long goldDemand = 50;
     private final HashSet<Integer> charmedFloors = new HashSet<>();
     { image = ItemSpriteSheet.HATCHLING_MIMIC; bones = false; }
@@ -85,7 +86,17 @@ public class HatchlingMimic extends Trinket {
     public long goldDemand() { return goldDemand; }
     public boolean warned() { return warned; }
     /** Called only when the hero is ready for a fresh player command. */
-    public void onHeroReady() { awaitingChoice = false; }
+    public void onHeroReady() { if(warned)showWarning(Dungeon.hero); awaitingChoice = false; }
+    private void showWarning(Hero hero){
+        if(!warningShown && hero!=null && com.watabou.noosa.Game.scene() instanceof GameScene){
+            warningShown=true;
+            com.watabou.noosa.Game.runOnRenderThread(()->{
+                if(hero==Dungeon.hero && warned && hero.belongings.contains(this))
+                    GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage(
+                        new com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite(this),name(),Messages.get(this,"warning")));
+            });
+        }
+    }
     @Override public int upgradeEnergyCost() { return 10 + 5 * level(); }
     @Override public Item upgrade() {
         int oldInterval = interval();
@@ -106,7 +117,7 @@ public class HatchlingMimic extends Trinket {
         return Messages.get(this,hunger)+"\n\n"+super.info();
     }
     @Override public String statsDesc() {
-        return Messages.get(this, "stats", interval(), goldDemand)+"\n\n"+Messages.get(this, "benefits_" + level());
+        return Messages.get(this, "stats")+"\n\n"+Messages.get(this, "benefits_" + level());
     }
     @Override public void storeInBundle(Bundle b) {
         super.storeInBundle(b);
@@ -194,12 +205,7 @@ public class HatchlingMimic extends Trinket {
             awaitingChoice = true;
             hero.interrupt(); hero.lastAction=null; hero.resting = false;
             GLog.w(Messages.get(this, "warning"));
-            if(com.watabou.noosa.Game.scene() instanceof GameScene)
-                com.watabou.noosa.Game.runOnRenderThread(()->{
-                    if(hero==Dungeon.hero && warned && hero.belongings.contains(this))
-                        GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage(
-                            new com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite(this),name(),Messages.get(this,"warning")));
-                });
+            warningShown=false;showWarning(hero);
         } else if (warned && !awaitingChoice) {
             if (feed(hero)) { remaining = interval(); warned = false; }
         }

@@ -73,6 +73,10 @@ public class MobSpawner extends Actor {
         if(depth>=11&&depth<=20&&BalanceTuning.roll(HEXCASTER,10,1))mobs.add(Hexcaster.class);
 		swapMobAlts(mobs);
 		mobs.removeIf(type->!com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(type));
+        // A rotation may roll only disabled elemental/shaman variants or rare
+        // replacements. Fall back to the guaranteed eligible normal roster.
+        if(mobs.isEmpty())for(Class<? extends Mob> type:com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.normalEnemies(depth))
+            if(com.shatteredpixel.shatteredpixeldungeon.GenerationToggles.allowed(type))mobs.add(type);
 		Random.shuffle(mobs);
 		return mobs;
 	}

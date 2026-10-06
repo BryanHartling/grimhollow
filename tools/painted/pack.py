@@ -233,6 +233,8 @@ def outputs():
     result.update(bone_wall())
     from wayward import outputs as wayward
     result.update(wayward())
+    from mystery import outputs as mystery
+    result.update(mystery())
     return result
 
 
@@ -246,8 +248,14 @@ def main():
     parser.add_argument('--hero',choices=HEROES,help='Package one character batch; full --check remains the CI gate')
     parser.add_argument('--icons',action='store_true',help='Package identity/skill changes; full --check remains the CI gate')
     parser.add_argument('--wayward',action='store_true',help='Package Chart items and memory visuals; full --check remains the CI gate')
+    parser.add_argument('--mystery',action='store_true',help='Package exit, cushion and Rebuff; full --check remains the CI gate')
     args=parser.parse_args()
-    if args.wayward:
+    if args.mystery:
+        from mystery import outputs as mystery
+        from playtest_presentation import outputs as presentation
+        from botany_skills import outputs as skills
+        built={**mystery(),**presentation(),**skills()}
+    elif args.wayward:
         from inventory import outputs as inventory
         from wayward import outputs as wayward
         built={**inventory(),**wayward()}
@@ -260,7 +268,7 @@ def main():
     failures=[]
     sources={p.relative_to(HERE/'sources').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'sources').rglob('*.png'))}
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
-    if args.hero or args.icons or args.wayward:
+    if args.hero or args.icons or args.wayward or args.mystery:
         manifest['assets']=json.loads(MANIFEST.read_text(encoding='utf-8'))['assets']
     from monsters import sizes as monster_sizes
     fixed_monster_sizes=monster_sizes()
@@ -280,6 +288,7 @@ def main():
         if path=='interfaces/painted_talents.png':expected=(512,64)
         if path=='environment/painted_bone_wall.png':expected=(256,256)
         if path=='environment/custom_tiles/wayward_cache.png':expected=(192,64)
+        if path=='environment/custom_tiles/painted_sewer_exit.png':expected=(192,384)
         if path=='effects/wayward_veil.png':expected=(64,64)
         if path=='interfaces/menu_pane.png':expected=(128,128)
         if path=='environment/custom_tiles/elemental_cache.png':expected=(256,128)

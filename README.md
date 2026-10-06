@@ -1,3 +1,13 @@
+# Mystery and Playtest usability - v1.26.0
+
+Grimhollow's new descriptions now use atmospheric hints instead of hidden formulas and reward tables. Action costs and current equipment/status information remain available where needed to choose an action. Psychic **Rebuff** replaces Wrench: successful Push casts grant a brief shield. Gold collection does not heal the Golden Mimic.
+
+Playtest groups expedition travel and tuning, Hatchling/companion settings, class items and custom enemies. Submenu pages persist on this device; within the same loaded run, **Resume last menu** returns to the last submenu. Every submenu also has **Main Playtest menu**. **Generation toggles** persist across games and filter future random pools without deleting belongings or replacing fixed quest essentials. They keep required pools nonempty and mark affected games as custom balance independently of save-local tools.
+
+Individual and bulk recharge fill the Waterskin. The Hatchling warning stops queued travel/rest and opens a modal popup, including when an imminent warning is restored from a save. The Doubloon has no explicit feeding shortcut; ordinary Hatchling feeding remains available. Golden Mimic directions work from its harness and examination.
+
+The floor-five exit, Rat King cushion and Rebuff icon reproduce from [committed paintings and prompts](tools/painted/sources/mystery/prompts.json). Living Earth uses larger, brighter painted stone fragments with unchanged emitter timing. Full asset checks run offline without an art-generation service.
+
 # Grimhollow
 
 **Playtest repairs v1.25.1:** older saved games without elemental treasury plans load safely. Device-wide balance settings keep applying across games, while Playtest tools now require explicit activation per save. Tuned games remain excluded from rankings and badges. New Enchanters have exactly three starting weapon enchantments and three armor glyphs; free Rune Etching rolls no longer expand their permanent library. Previously learned knowledge is preserved.
@@ -20,7 +30,7 @@ The two painted coin faces and companion harness are packed from `tools/painted/
 
 **Bone wall and Horror v1.23.2:** Wand of Bone/Bone Prison have stable painted barricades and an examination result with remaining turns. The Horror has modestly stronger combat damage and a separate stronger sleeping-prey pounce, with the same damage tuning setting. Its floor omen is a framed six-second notice; the larger ambush warning remains visible until you respond. Detection, response fairness and recovery limits are unchanged. Balance still requires campaign playtesting.
 
-Latest local Windows launcher: `desktop/build/windows/1.25.1/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`. The previous Chart checkpoint remains under `windows/1.25.0-release`.
+Latest local Windows launcher: `desktop/build/windows/1.26.0/Grimhollow/Grimhollow.exe`; APK: `android/build/outputs/apk/debug/android-debug.apk`. The previous Chart checkpoint remains under `windows/1.25.0-release`.
 
 **Talent panel v1.23.1:** rounded bronze studs replace the blocky gold rank markers. Larger ivory available, bronze spent and hollow future tier markers accompany an explicit available/spent count. Random allocation has a brass shuffle medallion and a larger hit area. Allocation rules, point costs and caps are unchanged.
 

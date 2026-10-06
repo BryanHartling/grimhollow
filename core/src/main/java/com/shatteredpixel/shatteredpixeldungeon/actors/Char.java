@@ -239,6 +239,7 @@ public abstract class Char extends Actor {
     public String name(){
 		return Messages.get(this, "name");
 	}
+    public boolean wardensGuardUsed;
 
 	public boolean canInteract(Char c){
 		if (Dungeon.level.adjacent( pos, c.pos )){
@@ -349,6 +350,7 @@ public abstract class Char extends Actor {
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
+        bundle.put("wardens_guard_used", wardensGuardUsed);
 		
 		super.storeInBundle( bundle );
         bundle.put("healing_fraction",healingFraction);
@@ -362,6 +364,7 @@ public abstract class Char extends Actor {
 	
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
+        wardensGuardUsed = bundle.getBoolean("wardens_guard_used");
 		
 		super.restoreFromBundle( bundle );
         healingFraction=bundle.getFloat("healing_fraction");
@@ -403,10 +406,11 @@ public abstract class Char extends Actor {
 
 			return false;
 
-		} else if (hit( this, enemy, accMulti, false )) {
+		} else if (hit(this, enemy, accMulti * com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.accuracy(this, enemy), false)) {
 			
 			int dr = Math.round(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.EnchanterMagic.armorRoll(enemy) * AscensionChallenge.statModifier(enemy));
             if(this instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.NecroWraith)dr/=2;
+            dr = com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.armor(this, enemy, dr);
 			
 			if (this instanceof Hero){
 				Hero h = (Hero)this;
@@ -1016,6 +1020,8 @@ public abstract class Char extends Actor {
 			return;
 		}
 
+		if (this == Dungeon.hero && Dungeon.hero.belongings.armor() != null)
+            dmg = Dungeon.hero.belongings.armor().guardFirstHit(DirectAttack.owner(src), dmg);
 		int shielded = dmg;
 		dmg = ShieldBuff.processDamage(this, dmg, src);
 		shielded -= dmg;

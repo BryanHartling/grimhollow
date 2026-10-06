@@ -58,6 +58,7 @@ final class BountyScenario {
                 check(BountyBoard.shopClosed && BountyBoard.stock[0] == null, "disk-save receipts");
             }
             contracts();
+            items();
             System.out.println("BOUNTY COMPONENTS 1-2 PASS: ten reachable offices, finite double-price stock, isolated closure, disk receipts; accepted-only saved targets, real deaths, timing, Warrants and once-only rewards");
         } catch (java.io.IOException error) { throw new AssertionError(error); }
         finally { BountyBoard.AVAILABLE = enabled; BountyBoard.reset(); }
@@ -113,5 +114,63 @@ final class BountyScenario {
         com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob savedTarget=legendary.target;
         Dungeon.level.mobs.remove(savedTarget); BountyBoard.arrive(Dungeon.level);
         check(Dungeon.level.mobs.contains(savedTarget)&&legendary.spawned,"rebuild loses pending target");
+        // The headless backend has no GameScene emitter; retain the real Guard death animation.
+        savedTarget.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.GuardSprite(){
+            @Override public com.watabou.noosa.particles.Emitter emitter(){return new com.watabou.noosa.particles.Emitter();}
+        }; savedTarget.sprite.link(savedTarget);
+        savedTarget.HP=0; savedTarget.die(Dungeon.hero);
+        int coats=0; for(Heap heap:Dungeon.level.heaps.valueList()) for(Item item:heap.items)
+            if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.WardensCoat) {
+                coats++; check(item.trueLevel()==2,"found coat level");
+            }
+        check(coats==1&&legendary.coatIssued,"unique carried prize");
+        BountyBoard.targetDied(savedTarget);
+        int after=0; for(Heap heap:Dungeon.level.heaps.valueList()) for(Item item:heap.items)
+            if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.WardensCoat)after++;
+        check(after==1,"duplicate corpse prize");
+    }
+    private static void items() {
+        Dungeon.init(); Dungeon.depth=7; Dungeon.branch=0; Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff b:Dungeon.hero.buffs())b.detach();
+        com.shatteredpixel.shatteredpixeldungeon.items.armor.WardensCoat coat=new com.shatteredpixel.shatteredpixeldungeon.items.armor.WardensCoat();
+        for(int lvl=2;lvl<=10;lvl+=2){coat.level(lvl);check(coat.DRMin(lvl)==lvl&&coat.DRMax(lvl)==4*lvl+4,"coat protection table "+lvl);}
+        coat.level(2);
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat rat=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();
+        check(coat.guardFirstHit(rat,0)==0&&!rat.wardensGuardUsed,"fully blocked consumes guard");
+        check(coat.guardFirstHit(rat,99)==80&&rat.wardensGuardUsed&&coat.guardFirstHit(rat,99)==99,"per-enemy ceil/one hit");
+        Bundle record=new Bundle();record.put("rat",rat);rat=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat)record.get("rat");
+        check(coat.guardFirstHit(rat,99)==99,"enemy guard reload");
+        coat.curseInfusionBonus=true;
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat fresh=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();
+        check(coat.level()>coat.trueLevel()&&coat.guardFirstHit(fresh,100)==80,"temporary levels raise first-hit percent");
+        coat.curseInfusionBonus=false;for(int i=0;i<8;i++)coat.upgrade();
+        Dungeon.hero.belongings.armor=coat;
+        Dungeon.hero.HT=Dungeon.hero.HP=500;Dungeon.hero.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();Dungeon.hero.sprite.link(Dungeon.hero);
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat enemy=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat();enemy.pos=Dungeon.hero.pos;
+        Dungeon.hero.damage(20,enemy);check(Dungeon.hero.HP==500&&enemy.wardensGuardUsed,"actual +10 direct absorption");
+        Dungeon.hero.damage(20,enemy);check(Dungeon.hero.HP==480,"second hit protected");
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.DM100 caster=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.DM100();
+        com.shatteredpixel.shatteredpixeldungeon.actors.DirectAttack.apply(Dungeon.hero,20,new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.DM100.LightningBolt(),caster);
+        check(Dungeon.hero.HP==480&&caster.wardensGuardUsed,"spell owner first-hit protection");
+        Dungeon.hero.damage(10,com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm.class);check(Dungeon.hero.HP==470,"environmental damage protected");
+        com.shatteredpixel.shatteredpixeldungeon.items.armor.ClassArmor converted=com.shatteredpixel.shatteredpixeldungeon.items.armor.ClassArmor.upgrade(Dungeon.hero,coat);
+        check(converted.wardensCoat&&converted.DRMax(10)==44&&converted.guardFirstHit(enemy,20)==20,"crown transfers growth and receipts");
+        record.put("armor",converted);converted=(com.shatteredpixel.shatteredpixeldungeon.items.armor.ClassArmor)record.get("armor");
+        check(converted.wardensCoat&&converted.DRMin(10)==10,"class armor save");
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.prolong(enemy,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.class,8);
+        check(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.accuracy(Dungeon.hero,enemy)==1.25f
+                &&com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.armor(Dungeon.hero,enemy,9)==5,"Brand weapon accuracy/rolled DR");
+        check(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.accuracy(fresh,enemy)==1f
+                &&com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.armor(fresh,enemy,9)==9,"allies inherit Brand");
+        com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.prolong(enemy,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.class,8);
+        check(enemy.buffs(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.class).size()==1,"Brand stacks");
+        enemy.pos=Dungeon.level.exit(); Dungeon.level.mobs.add(enemy); Dungeon.level.heroFOV[enemy.pos]=false;
+        boolean[] mapped=Dungeon.level.mapped.clone(),visited=Dungeon.level.visited.clone(),fov=Dungeon.level.heroFOV.clone();
+        new com.shatteredpixel.shatteredpixeldungeon.effects.HatchlingSenseLayer().update();
+        check(java.util.Arrays.equals(mapped,Dungeon.level.mapped)&&java.util.Arrays.equals(visited,Dungeon.level.visited)
+                &&java.util.Arrays.equals(fov,Dungeon.level.heroFOV),"tracking reveals terrain");
+        enemy.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.class).act();
+        check(enemy.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.class)==null,"Brand expiration");
+        System.out.println("BOUNTY COMPONENT 3 PASS: unique +2 coat, actual +10 upgrades, growth table, per-enemy receipts, direct spell attribution, environment exclusion, crown/save, Brand benefits/refresh/tracking");
     }
 }

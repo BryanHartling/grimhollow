@@ -127,6 +127,14 @@ public class Armor extends EquipableItem {
 	
 	public int tier;
     public boolean boneConstruction;
+    public boolean wardensCoat;
+    public int guardFirstHit(com.shatteredpixel.shatteredpixeldungeon.actors.Char enemy, int damage) {
+        if (!wardensCoat || damage <= 0 || enemy == null || enemy.wardensGuardUsed
+                || enemy.alignment != com.shatteredpixel.shatteredpixeldungeon.actors.Char.Alignment.ENEMY
+                || trueLevel() <= 0) return damage;
+        enemy.wardensGuardUsed = true;
+        return (int)Math.ceil(damage * (1d-Math.min(1d, Math.max(0, trueLevel())/10d)));
+    }
     private boolean leatherVariant;
     private void updateAppearance(){if(leatherVariant){if(getClass()==LeatherArmor.class)image=ItemSpriteSheet.ARMOR_LEATHER_OCHRE;else if(getClass()==MailArmor.class)image=ItemSpriteSheet.ARMOR_LEATHER_ASH;}}
 	
@@ -150,6 +158,7 @@ public class Armor extends EquipableItem {
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		super.storeInBundle( bundle );
+        bundle.put("wardens_coat", wardensCoat);
         bundle.put("bone_construction",boneConstruction);bundle.put("leather_variant",leatherVariant);
         bundle.put("inscribed",inscribed);
         bundle.put("rune_etching",runeEtching);
@@ -166,6 +175,7 @@ public class Armor extends EquipableItem {
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		super.restoreFromBundle(bundle);
+        wardensCoat = bundle.getBoolean("wardens_coat") || this instanceof WardensCoat;
         boneConstruction=bundle.getBoolean("bone_construction")||this instanceof BoneArmor;leatherVariant=bundle.getBoolean("leather_variant");updateAppearance();
         inscribed=(Glyph)bundle.get("inscribed");
         runeEtching=(com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching)bundle.get("rune_etching");
@@ -400,7 +410,8 @@ public class Armor extends EquipableItem {
 			return 1 + tier + lvl + augment.defenseFactor(lvl);
 		}
 
-		int max = (boneConstruction?4:tier) * (2 + lvl) + augment.defenseFactor(lvl)+(boneConstruction?1:0);
+		int max = (boneConstruction?4:tier) * (2 + lvl) + augment.defenseFactor(lvl)+(boneConstruction?1:0)
+                + (wardensCoat ? Math.max(0, lvl-2) : 0);
 		if (lvl > max){
 			return ((lvl - max)+1)/2;
 		} else {

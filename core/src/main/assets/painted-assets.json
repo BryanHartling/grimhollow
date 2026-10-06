@@ -21,6 +21,8 @@
     "botany-skills/plants.png": "d008d13ffeeccc547bd4a6acd7b9f37e8903ffa0ff3666ccc24726b3430c69e3",
     "botany-skills/psychic.png": "294e1b922d553ed5b4ab3f0acf43a3bb5ba1dd3c4b1d02ed359096c23a6ddd93",
     "botany-skills/seedpod.png": "4e46c10f9c5e0742d7f480b48a36d925810549ff4356baebafcf42c1052b5b25",
+    "bounty/brand.png": "4d5e9adbccb4014c8ca5f96c37f3292216442c0d3cb3a871c99be9ec181ee32a",
+    "bounty/coat.png": "14e48d02cc4408db28a177f1a457c8d9f0dd1879a0821ded237d07b8564e7a9c",
     "caves-materials.png": "55e4629826ed07495ec5a2ad8b6577ab69f9fb85609161d6c8ca875bf68f75fa",
     "city-materials.png": "f3316e1efa15a6b91712798d1bc54397fdc2563b9f589cdb89d85c275869cafc",
     "details.png": "e00209673cb5d728a3fbc173f1ede610c474d37c8ab7f5f33eae0c56fda72631",
@@ -401,7 +403,7 @@
         1024,
         2240
       ],
-      "rgba_sha256": "3fbf472f062b5082d67c090765b5a67f0cdeab75f3eb4d6392704ee0cdea08c7"
+      "rgba_sha256": "2782f69f8a26cc1802002a321b7fd91fe80b79f97f81a67b5759bcdbe62e5c2d"
     },
     "sprites/item_icons.png": {
       "size": [
@@ -17331,6 +17333,20 @@
         256
       ],
       "rgba_sha256": "c6daa6c6e411525169a488b4b5a12be10a4484878759d7215cee7b18b724fa0a"
+    },
+    "artwork/item-550.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "204748b75160ae17c7877b43a0aefb6d4f9f3c50cae175500c806212c357eb6d"
+    },
+    "artwork/item-551.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "bf6777f5f05070b8fe25a4b594007de76daae94e4e2b639aa829f369c7a7f29b"
     }
   }
 }

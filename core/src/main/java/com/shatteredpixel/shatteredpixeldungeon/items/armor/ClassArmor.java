@@ -126,6 +126,7 @@ abstract public class ClassArmor extends Armor {
 		classArmor.level(armor.trueLevel());
 		classArmor.tier = armor.tier;
         classArmor.boneConstruction=armor.boneConstruction;
+        classArmor.wardensCoat=armor.wardensCoat;
 		classArmor.augment = armor.augment;
 		classArmor.inscribe(armor.glyph);
         classArmor.runeEtching=armor.runeEtching;

@@ -130,7 +130,7 @@ public class CrystalWisp extends Mob{
 		if (hit( this, enemy, true )) {
 
 			int dmg = Random.NormalIntRange( 5, 10 );
-			enemy.damage( dmg, new LightBeam() );
+			com.shatteredpixel.shatteredpixeldungeon.actors.DirectAttack.apply(enemy, dmg, new LightBeam(), this);
 
 			if (!enemy.isAlive() && enemy == Dungeon.hero) {
 				Badges.validateDeathFromEnemyMagic();

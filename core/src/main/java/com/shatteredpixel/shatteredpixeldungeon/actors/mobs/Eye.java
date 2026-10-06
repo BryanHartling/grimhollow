@@ -195,7 +195,7 @@ public class Eye extends Mob {
 
 				com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant variant=buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant.class);
                 if(variant!=null)variant.onHit(ch);
-                ch.damage( dmg, new DeathGaze() );
+                com.shatteredpixel.shatteredpixeldungeon.actors.DirectAttack.apply(ch, dmg, new DeathGaze(), this);
 
 				if (Dungeon.level.heroFOV[pos]) {
 					ch.sprite.flash();

@@ -1,3 +1,11 @@
+# Bounty Board component 3 - 2026-10-06
+
+- Passing checkpoint: Necromancer Runs=10 failures=0, desktop distribution, and full offline art validation (PAINTED assets=1285 failures=0; test 44 failures=0). The first art audit detected missing inventory packaging; the dedicated --bounty packer fixes it without regenerating other artwork.
+
+- Added painted Bloodmarked Brand and Warden's Coat sources, recorded prompts, offline inventory packaging and inspection previews. Brand tracks only its target, refreshes its timed mark, and applies hero weapon accuracy/rolled armor benefits. Legendary death drops its +2 coat once through ordinary recoverable loot handling.
+- Coat upgrades retain the agreed protection table and save first-hit use per enemy. Explicit immediate-spell attribution preserves resistance source classes; environmental and later damage remain excluded. Crown conversion retains coat growth, glyph and Etching behavior.
+- The existing smoke fixture verifies real deaths, upgrades, damage, direct spells, rounding, receipts, conversion, refresh and tracking without terrain revelation. Sandboxed compilation was denied local cache access; the documented escalation route succeeded. The Guard death fixture now supplies its otherwise absent scene emitter. These failed attempts are not passing results.
+
 # Bounty Board component 2 - 2026-10-06
 
 - Added fixed aliases, named floors, explicit acceptance, accepted-only wanted mobs with ordinary AI/vulnerabilities, saved encounter snapshots, elapsed-action urgency, protected receipt-preserving Warrants, and once-only return payments. Common/Rare completion unlocks the boss offer without Legendary.

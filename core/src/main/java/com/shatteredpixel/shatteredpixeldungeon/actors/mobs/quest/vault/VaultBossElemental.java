@@ -313,7 +313,7 @@ public class VaultBossElemental extends Mob {
 	public int defenseProc(Char enemy, int damage) {
 		if (form == ElementalForm.SHOCK && enemy == Dungeon.hero && !(Dungeon.hero.belongings.attackingWeapon() instanceof MissileWeapon)){
 			enemy.sprite.parent.addToFront( new Lightning( sprite.center(), enemy.sprite.center(), null ) );
-			enemy.damage( Random.IntRange(5, 10), new Shocking() );
+			com.shatteredpixel.shatteredpixeldungeon.actors.DirectAttack.apply(enemy, Random.IntRange(5, 10), new Shocking(), this);
 			Sample.INSTANCE.play(Assets.Sounds.LIGHTNING);
 			PixelScene.shake( 2, 0.3f );
 			enemy.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);

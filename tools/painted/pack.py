@@ -252,8 +252,12 @@ def main():
     parser.add_argument('--wayward',action='store_true',help='Package Chart items and memory visuals; full --check remains the CI gate')
     parser.add_argument('--mystery',action='store_true',help='Package exit, cushion and Rebuff; full --check remains the CI gate')
     parser.add_argument('--previews',action='store_true',help='Package inspection paintings only; full --check remains the CI gate')
+    parser.add_argument('--bounty',action='store_true',help='Package Bounty Board inventory; full --check remains the CI gate')
     args=parser.parse_args()
-    if args.previews:
+    if args.bounty:
+        from inventory import outputs as inventory
+        built=inventory()
+    elif args.previews:
         from artwork_previews import outputs as artwork_previews
         built=artwork_previews()
     elif args.mystery:
@@ -274,7 +278,7 @@ def main():
     failures=[]
     sources={p.relative_to(HERE/'sources').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'sources').rglob('*.png'))}
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
-    if args.hero or args.icons or args.wayward or args.mystery or args.previews:
+    if args.hero or args.icons or args.wayward or args.mystery or args.previews or args.bounty:
         manifest['assets']=json.loads(MANIFEST.read_text(encoding='utf-8'))['assets']
     from monsters import sizes as monster_sizes
     fixed_monster_sizes=monster_sizes()
@@ -330,7 +334,7 @@ def main():
         else:
             target.parent.mkdir(parents=True,exist_ok=True)
             im.save(target,optimize=False)
-    if args.previews or not (args.hero or args.icons or args.wayward or args.mystery):
+    if args.previews or not (args.hero or args.icons or args.wayward or args.mystery or args.bounty):
         from artwork_previews import index_bytes
         index_path=ASSETS/'artwork-previews.json'
         if args.check:

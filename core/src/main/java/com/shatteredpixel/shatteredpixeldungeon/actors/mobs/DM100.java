@@ -97,9 +97,9 @@ public class DM100 extends Mob {
 
 			Invisibility.dispel(this);
 			if (hit( this, enemy, true )) {
-				int dmg = Math.round(Random.NormalIntRange(3, 10) * wantedDamage);
+				int dmg = Random.NormalIntRange(3, 10);
 				dmg = Math.round(dmg * AscensionChallenge.statModifier(this));
-				enemy.damage( dmg, new LightningBolt() );
+				com.shatteredpixel.shatteredpixeldungeon.actors.DirectAttack.apply(enemy, dmg, new LightningBolt(), this);
 
 				if (enemy.sprite.visible) {
 					enemy.sprite.centerEmitter().burst(SparkParticle.FACTORY, 3);

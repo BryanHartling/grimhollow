@@ -1,0 +1,15 @@
+{
+  "provider": "imagegen",
+  "assets": [
+    {
+      "source": "sources/bounty/brand.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: Grimhollow dark fantasy inventory and large examination painting, one isolated item on genuinely transparent background. Subject: Bloodmarked Brand, a hefty barbed iron branding seal wound with crimson cord, its old circular seal face has restrained ember-red fissures, no letters. Hand-painted realistic gothic dungeon item, textured iron and frayed cord, muted rusty red and soot charcoal with bright readable edges, polished painted illustration rather than pixel art or cartoony render. Three-quarter view, the whole object centered, large silhouette fills 80 percent of a square canvas, small handle, no background, no ground shadow, no surrounding effects, no frame, no text, no logo. Match a worn, grounded medieval dungeon inventory. Distinct silhouette clearly readable at tiny scale; no religious or holy imagery."
+    },
+    {
+      "source": "sources/bounty/coat.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: Grimhollow dark fantasy armor inventory and large examination painting, one isolated armor item on genuinely transparent background. Subject: Warden's Coat: a battered dark leather long coat beneath overlapping aged bronze plates across shoulders and torso, bronze old warden's seal at collar, sleeves, narrow waist, strong silhouette. Empty wearable coat, no person, no head, no legs. Hand-painted realistic gothic dungeon armor, rich worn leather, scratched bronze, muted warm brown and bronze with readable rim highlights, polished painted illustration rather than pixel art or cartoony render. Front three-quarter view, entire coat centered filling 80 percent of square canvas; no background, no ground shadow, no frame, no text, no logo, no holy symbols. Keep coat shape easy to read in a 64 pixel inventory icon."
+    }
+  ]
+}

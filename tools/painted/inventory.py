@@ -120,6 +120,11 @@ def build(cell_size=64):
         index=545+offset
         semantics['items'][name]={'id':index,'artIndex':index,'cellSize':64}
         replacements[name]=art
+    from bounty import items as bounty_items
+    for offset,(name,art) in enumerate(bounty_items(cell_size).items()):
+        index=550+offset
+        semantics['items'][name]={'id':index,'artIndex':index,'cellSize':64}
+        replacements[name]=art
     written={}
     for name,image in replacements.items():
         if name not in semantics['items']:raise ValueError('Unknown inventory ID '+name)

@@ -13014,6 +13014,24 @@
         384,
         2240
       ]
+    },
+    {
+      "file": "artwork/item-550.png",
+      "rect": [
+        384,
+        2176,
+        448,
+        2240
+      ]
+    },
+    {
+      "file": "artwork/item-551.png",
+      "rect": [
+        448,
+        2176,
+        512,
+        2240
+      ]
     }
   ],
   "sprites/king.png": [

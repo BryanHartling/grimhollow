@@ -2745,6 +2745,18 @@
       "artIndex": 549,
       "cellSize": 64,
       "rgbaSha256": "ca32eac82c5851e3b14f7a15be84259faed3560608b2c45ec634c264fed61f65"
+    },
+    "BLOODMARKED_BRAND": {
+      "id": 550,
+      "artIndex": 550,
+      "cellSize": 64,
+      "rgbaSha256": "1443cc24470b50c8865446edf490224ee8e7c60cc7a4f572667688d9b121506f"
+    },
+    "WARDENS_COAT": {
+      "id": 551,
+      "artIndex": 551,
+      "cellSize": 64,
+      "rgbaSha256": "9a026391a2a953c87d05436178848fc377f523619bacb98e04134433e19ed2c3"
     }
   },
   "icons": {

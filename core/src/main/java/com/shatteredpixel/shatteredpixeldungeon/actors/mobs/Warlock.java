@@ -121,7 +121,7 @@ public class Warlock extends Mob {
 
 			com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant variant=buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.CursedVariant.class);
             if(variant!=null)variant.onHit(enemy);
-            enemy.damage( dmg, new DarkBolt() );
+            com.shatteredpixel.shatteredpixeldungeon.actors.DirectAttack.apply(enemy, dmg, new DarkBolt(), this);
 			
 			if (enemy == Dungeon.hero && !enemy.isAlive()) {
 				Badges.validateDeathFromEnemyMagic();

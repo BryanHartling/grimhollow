@@ -32,6 +32,7 @@ public class ItemSpriteSheet {
     public static final int BLANK_PARCHMENT=541;
     public static final int FICKLE_HEADS=542, FICKLE_TAILS=543, GOLDEN_COMPANION=544;
     public static final int WAYWARD_CHART=545, WAYWARD_FULL=546, WAYWARD_PARTIAL=547, WAYWARD_EMPTY=548, WAYWARD_MARKER=549;
+    public static final int BLOODMARKED_BRAND=550, WARDENS_COAT=551;
     public static final int BONE_ROD=512, PHYLACTERY=513, ARMOR_NECROMANCER=514, RUNED_BATON=515, SIGIL_BRUSH=516, ARMOR_ENCHANTER=517, FOCUS_RING=518, FOCUS_CRYSTAL=519, ARMOR_PSYCHIC=520, RUNE_ETCHING=521;
 
 	public static final int SIZE = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.TEX_ITEM;

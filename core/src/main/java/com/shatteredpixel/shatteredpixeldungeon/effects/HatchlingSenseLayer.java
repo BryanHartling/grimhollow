@@ -33,6 +33,9 @@ public class HatchlingSenseLayer extends Group {
             if(!heap.isEmpty() && treasure.senses(heap.pos) && !Dungeon.level.heroFOV[heap.pos] && !used.contains(heap.pos)){
                 mark(heap.pos,heapImage(heap),used);markers.get(heap.pos).alpha(.9f*treasure.alpha());
             }
+        for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) if (mob.isAlive()
+                && mob.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.class) != null
+                && !Dungeon.level.heroFOV[mob.pos]) mark(mob.pos, ItemSpriteSheet.BLOODMARKED_BRAND, used);
         for (Integer cell : new HashSet<>(markers.keySet())) if (!used.contains(cell)) {
             ItemSprite sprite=markers.remove(cell); remove(sprite); sprite.destroy(); images.remove(cell);
         }

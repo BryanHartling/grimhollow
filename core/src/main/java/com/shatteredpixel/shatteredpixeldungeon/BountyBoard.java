@@ -36,6 +36,7 @@ public final class BountyBoard {
         public float elapsed;
         public int deadline = 500, bonusPercent = 20;
         public Mob target;
+        public boolean coatIssued;
         public Contract() {}
         public String alias() { return Messages.get(Cole.class, "alias_" + (index == 2 ? "warden" : species)); }
         public String title() { return Messages.get(Cole.class, "title_" + (index == 2 ? "warden" : species)); }
@@ -59,6 +60,7 @@ public final class BountyBoard {
             b.put("elapsed", elapsed); b.put("bonus_earned", bonusEarned);
             b.put("deadline", deadline); b.put("bonus_percent", bonusPercent);
             b.put("target", target);
+            b.put("coat_issued", coatIssued);
         }
         @Override public void restoreFromBundle(Bundle b) {
             index = b.getInt("index"); species = b.getInt("species"); floor = b.getInt("floor");
@@ -69,6 +71,7 @@ public final class BountyBoard {
             deadline = b.contains("deadline") ? b.getInt("deadline") : 500;
             bonusPercent = b.contains("bonus_percent") ? b.getInt("bonus_percent") : 20;
             target = (Mob)b.get("target");
+            coatIssued = b.getBoolean("coat_issued");
         }
     }
 
@@ -165,6 +168,12 @@ public final class BountyBoard {
         if (c.target == null || c.target.id() != mob.id()) return;
         c.complete = true;
         c.target = null;
+        if (index == 2 && !c.coatIssued) {
+            c.coatIssued = true;
+            Item coat = new com.shatteredpixel.shatteredpixeldungeon.items.armor.WardensCoat().level(2);
+            int cell = Dungeon.level.insideMap(mob.pos) ? mob.pos : Dungeon.hero.pos;
+            Dungeon.level.drop(coat, cell);
+        }
         c.bonusEarned = !c.paid && index < 2 && c.clockStarted && c.elapsed <= c.deadline;
     }
     public static boolean returnClaim(int index) {

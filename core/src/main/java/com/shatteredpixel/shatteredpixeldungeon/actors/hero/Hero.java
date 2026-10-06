@@ -983,6 +983,7 @@ public class Hero extends Char {
 				com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.carried();
 		if (hatchling != null) hatchling.onHeroReady();
 		com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.onHeroReady();
+        com.shatteredpixel.shatteredpixeldungeon.BountyBoard.onHeroReady();
 
 		AttackIndicator.updateState();
 		

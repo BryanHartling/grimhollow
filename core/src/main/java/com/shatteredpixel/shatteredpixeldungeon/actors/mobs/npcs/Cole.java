@@ -21,10 +21,13 @@ public class Cole extends NPC {
     @Override public boolean interact(Char ch) {
         if (ch == Dungeon.hero) Game.runOnRenderThread(() -> {
             BountyBoard.planContracts();
+            java.util.ArrayList<String> options=new java.util.ArrayList<>();
+            for(int i=0;i<3;i++)options.add(BountyBoard.contracts[i].title());
+            if(BountyBoard.bossUnlocked()&&!BountyBoard.bossDefeated){BountyBoard.planBoss();options.add(BountyBoard.contracts[3].title());}
             GameScene.show(new WndOptions(sprite(), name(),
                     Messages.get(this, "greet_" + Dungeon.hero.heroClass.name())
                             + (BountyBoard.shopClosed ? "\n\n" + Messages.get(this, "closed") : ""),
-                    BountyBoard.contracts[0].title(), BountyBoard.contracts[1].title(), BountyBoard.contracts[2].title()) {
+                    options.toArray(new String[0])) {
                 @Override protected void onSelect(int index) { GameScene.show(new WndBountyContract(BountyBoard.contracts[index])); }
             });
         });

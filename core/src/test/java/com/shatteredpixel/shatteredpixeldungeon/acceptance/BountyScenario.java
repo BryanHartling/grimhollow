@@ -59,6 +59,7 @@ final class BountyScenario {
             }
             contracts();
             items();
+            boss();
             System.out.println("BOUNTY COMPONENTS 1-2 PASS: ten reachable offices, finite double-price stock, isolated closure, disk receipts; accepted-only saved targets, real deaths, timing, Warrants and once-only rewards");
         } catch (java.io.IOException error) { throw new AssertionError(error); }
         finally { BountyBoard.AVAILABLE = enabled; BountyBoard.reset(); }
@@ -172,5 +173,40 @@ final class BountyScenario {
         enemy.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.class).act();
         check(enemy.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.class)==null,"Brand expiration");
         System.out.println("BOUNTY COMPONENT 3 PASS: unique +2 coat, actual +10 upgrades, growth table, per-enemy receipts, direct spell attribution, environment exclusion, crown/save, Brand benefits/refresh/tracking");
+    }
+    private static void boss(){
+        for(int choice=0;choice<2;choice++){
+            Dungeon.init();Dungeon.depth=7;Dungeon.branch=0;Dungeon.switchLevel(Dungeon.newLevel(),-1);
+            BountyBoard.planContracts();BountyBoard.bossChoice=choice;
+            check(!BountyBoard.accept(3),"locked boss accepted");
+            BountyBoard.contracts[0].returned=BountyBoard.contracts[1].returned=true;
+            check(BountyBoard.accept(3)&&!BountyBoard.accept(3),"boss acceptance receipt");
+            Dungeon.depth=10;Dungeon.switchLevel(Dungeon.newLevel(),-1);
+            com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Tengu boss=
+                    ((com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel)Dungeon.level).bountyBoss();
+            check((boss instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Chainwarden)==(choice==1),"poster/generator boss mismatch");
+            check(BountyBoard.contracts[3].alias().equals(boss.name())&&BountyBoard.contracts[3].target==boss,"boss identity binding");
+            boss.HP=0;BountyBoard.targetDied(boss);
+            check(BountyBoard.contracts[3].complete&&!BountyBoard.contracts[3].paid,"death skips betrayal payment");
+            int gold=Dungeon.gold;check(BountyBoard.beginBetrayal(),"betrayal missing");
+            check(Dungeon.gold-gold==1500&&!com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.ownedContract(3),"boss cash / paper");
+            int snapshot=BountyBoard.heroBounty;
+            BountyBoard.beginBetrayal();check(Dungeon.gold-gold==1500,"boss duplicate payout");
+            check(!BountyBoard.accept(2),"post-betrayal new contract");
+            BountyBoard.arrive(Dungeon.level);
+            int count=0;for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)if(m instanceof Cole)count++;
+            check(count==1,"missing/duplicate departure actor");
+            BountyBoard.finishDeparture();
+            for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)check(!(m instanceof Cole),"Cole remains at exit");
+            Bundle saved=new Bundle();BountyBoard.store(saved);BountyBoard.restore(saved);BountyBoard.arrive(Dungeon.level);
+            check(BountyBoard.departed&&BountyBoard.betrayed&&BountyBoard.heroBounty==snapshot&&!BountyBoard.beginBetrayal(),"betrayal reload");
+            check(Dungeon.level.exit()>=0,"boss exit removed");
+        }
+        Dungeon.init();Dungeon.depth=10;Dungeon.branch=0;Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Tengu boss=((com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel)Dungeon.level).bountyBoss();
+        BountyBoard.targetDied(boss);check(!BountyBoard.beginBetrayal()&&!BountyBoard.accept(3),"retroactive boss arc");
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass hc:com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.values())
+            check(!com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(Cole.class,"betray_"+hc.name()).contains("!!!"),"missing class betrayal");
+        System.out.println("BOUNTY COMPONENT 4 PASS: both actual boss choices, explicit unlock/acceptance, once-only payment/snapshot, departure/reload, no retroactive arc and all nine dialogues");
     }
 }

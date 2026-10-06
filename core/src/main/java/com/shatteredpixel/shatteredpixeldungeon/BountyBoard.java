@@ -29,6 +29,9 @@ public final class BountyBoard {
     public static Item[] stock = new Item[5];
     public static int[] prices = new int[5];
     public static Contract[] contracts = new Contract[4];
+    public static int bossChoice = -1, heroBounty;
+    public static boolean bossDefeated, betrayed, departed;
+    private static boolean dialogueOpen;
 
     public static class Contract implements com.watabou.utils.Bundlable {
         public int index, species, floor, traits, payment;
@@ -38,8 +41,8 @@ public final class BountyBoard {
         public Mob target;
         public boolean coatIssued;
         public Contract() {}
-        public String alias() { return Messages.get(Cole.class, "alias_" + (index == 2 ? "warden" : species)); }
-        public String title() { return Messages.get(Cole.class, "title_" + (index == 2 ? "warden" : species)); }
+        public String alias() { return index == 3 ? preview().name() : Messages.get(Cole.class, "alias_" + (index == 2 ? "warden" : species)); }
+        public String title() { return index == 3 ? Messages.get(Cole.class,"boss_title",alias()) : Messages.get(Cole.class, "title_" + (index == 2 ? "warden" : species)); }
         public int amount() { return payment + (bonusEarned ? payment * bonusPercent / 100 : 0); }
         public Mob preview() {
             Mob mob;
@@ -48,6 +51,8 @@ public final class BountyBoard {
                 case 2: mob = new Guard(); break;
                 case 3: mob = new DM100(); break;
                 case 4: mob = new Necromancer(); break;
+                case 5: mob = new Tengu(); break;
+                case 6: mob = new Chainwarden(); break;
                 default: mob = new Skeleton();
             }
             return mob;
@@ -80,6 +85,7 @@ public final class BountyBoard {
         shopClosed = false; officeCell = -1;
         stock = new Item[5]; prices = new int[5];
         contracts = new Contract[4];
+        bossChoice=-1; heroBounty=0; bossDefeated=betrayed=departed=dialogueOpen=false;
     }
 
     public static void planContracts() {
@@ -96,8 +102,9 @@ public final class BountyBoard {
         } finally { Random.popGenerator(); }
     }
     public static boolean accept(int index) {
-        if (!present || index < 0 || index >= 3) return false;
+        if (!present || betrayed || index < 0 || index >= 4 || index==3 && (!bossUnlocked() || bossDefeated)) return false;
         planContracts(); Contract c = contracts[index];
+        if(index==3){ planBoss(); c=contracts[3]; }
         if (c.accepted) return false;
         c.accepted = true;
         if (!c.issued) { c.issued = true; give(new Warrant(index)); }
@@ -110,7 +117,9 @@ public final class BountyBoard {
     public static void arrive(Level level) {
         if (!present || Dungeon.branch != 0) return;
         planContracts();
-        for (Contract c : contracts) if (c != null && c.accepted && !c.complete) {
+        if(level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel && contracts[3]!=null && !contracts[3].complete)
+            contracts[3].target=((com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel)level).bountyBoss();
+        for (Contract c : contracts) if (c != null && c.index<3 && c.accepted && !c.complete) {
             if (Dungeon.depth == c.floor) {
                 c.clockStarted = true;
                 boolean exists = false;
@@ -134,6 +143,9 @@ public final class BountyBoard {
         }
         if (Dungeon.depth == OFFICE_DEPTH && shopClosed)
             for (Heap heap : level.heaps.valueList().toArray(new Heap[0])) if (owns(heap)) heap.destroy();
+        if(betrayed && Dungeon.depth==OFFICE_DEPTH) for(Mob mob:level.mobs.toArray(new Mob[0]))
+            if(mob instanceof Cole) removeCole((Cole)mob);
+        if(Dungeon.depth==10 && contracts[3]!=null && contracts[3].complete && !departed) ensureDeparture();
     }
     /** Exhaustive candidates prevent an unlucky placement roll from losing a contract. */
     public static int spawnCell(Level level, Mob mob) {
@@ -162,6 +174,14 @@ public final class BountyBoard {
     }
     public static void targetDied(Mob mob) {
         int index = mob.bountyContract;
+        if(present && index==3 && Dungeon.depth==10 && Dungeon.branch==0 && mob instanceof Tengu) {
+            bossDefeated=true; Contract c=contracts[3];
+            if(c!=null && c.accepted && !c.complete && c.target!=null && c.target.id()==mob.id()) {
+                c.complete=true; c.target=null;
+                Dungeon.hero.interrupt(); Dungeon.hero.lastAction=null;
+            }
+            return;
+        }
         if (!present || index < 0 || index >= 3 || Dungeon.branch != 0) return;
         Contract c = contracts[index];
         if (c == null || !c.accepted || !c.spawned || c.complete || c.floor != Dungeon.depth) return;
@@ -184,6 +204,63 @@ public final class BountyBoard {
         if (!c.paid) { c.paid = true; if (c.amount() > 0) new Gold(c.amount()).sale().award(Dungeon.hero); }
         Warrant.retireContract(index);
         return true;
+    }
+    /** One saved roll shared by the offer and the actual boss, with the original configured probability. */
+    public static void planBoss() {
+        if(bossChoice<0){
+            Random.pushGenerator(Dungeon.seed ^ 0x424F554E5459424FL);
+            try {bossChoice=BalanceTuning.roll(BalanceTuning.Key.CHAINWARDEN,10,3)?1:0;}
+            finally{Random.popGenerator();}
+        }
+        if(contracts[3]==null){Contract c=contracts[3]=new Contract();c.index=3;c.species=5+bossChoice;c.floor=10;c.payment=1500;}
+    }
+    public static Tengu createBoss() {
+        if(!present)return BalanceTuning.roll(BalanceTuning.Key.CHAINWARDEN,10,3)?new Chainwarden():new Tengu();
+        planBoss(); Tengu boss=bossChoice==1?new Chainwarden():new Tengu();
+        boss.bountyContract=3;contracts[3].target=boss;return boss;
+    }
+    private static Cole ensureDeparture() {
+        for(Mob m:Dungeon.level.mobs)if(m instanceof Cole)return (Cole)m;
+        int origin=Dungeon.level.exit(); int best=-1,distance=Integer.MAX_VALUE;
+        for(int cell=0;cell<Dungeon.level.length();cell++)if(Dungeon.level.passable[cell]&&!Dungeon.level.pit[cell]
+                &&Dungeon.level.findMob(cell)==null&&cell!=Dungeon.hero.pos&&cell!=origin&&cell!=Dungeon.level.entrance()
+                &&Dungeon.level.traps.get(cell)==null&&Dungeon.level.heaps.get(cell)==null){
+            int d=Dungeon.level.distance(cell,origin);if(d<distance){best=cell;distance=d;}
+        }
+        if(best<0)return null;
+        Cole cole=new Cole();cole.pos=best;Dungeon.level.mobs.add(cole);
+        if(com.watabou.noosa.Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene)
+            com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.add(cole);
+        return cole;
+    }
+    public static boolean beginBetrayal() {
+        Contract c=contracts[3];if(!present||c==null||!c.accepted||!c.complete||departed)return false;
+        if(!betrayed){
+            c.returned=true; if(!c.paid){c.paid=true;new Gold(c.payment).sale().award(Dungeon.hero);}
+            Warrant.retireContract(3);shopClosed=true;betrayed=true;
+            long value=Dungeon.gold;java.util.Set<Item> counted=java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
+            for(Item item:Dungeon.hero.belongings)if(counted.add(item))value+=Math.max(0,item.value());
+            heroBounty=(int)Math.min(Integer.MAX_VALUE,value);
+        }
+        return true;
+    }
+    public static void finishDeparture() {
+        departed=true;dialogueOpen=false;
+        for(Mob mob:Dungeon.level.mobs.toArray(new Mob[0]))if(mob instanceof Cole)removeCole((Cole)mob);
+    }
+    private static void removeCole(Cole cole) {
+        Dungeon.level.mobs.remove(cole); Actor.remove(cole);
+        if(cole.sprite!=null){cole.sprite.killAndErase();cole.sprite=null;}
+    }
+    public static void onHeroReady() {
+        if(!present||Dungeon.branch!=0||Dungeon.depth!=10||departed||dialogueOpen||contracts[3]==null||!contracts[3].complete)return;
+        if(!(com.watabou.noosa.Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene))return;
+        dialogueOpen=true;Dungeon.hero.interrupt();Dungeon.hero.lastAction=null;Dungeon.hero.resting=false;
+        com.watabou.noosa.Game.runOnRenderThread(()->{
+            Cole cole=ensureDeparture();if(cole==null){dialogueOpen=false;return;}
+            beginBetrayal();
+            com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal(cole));
+        });
     }
     public static boolean bossUnlocked() {
         int count = 0; for (int i = 0; i < 3; i++) if (contracts[i] != null && contracts[i].returned) count++;
@@ -231,6 +308,7 @@ public final class BountyBoard {
     public static void store(Bundle quests) {
         Bundle b = new Bundle();
         b.put("present", present); b.put("closed", shopClosed); b.put("office", officeCell);
+        b.put("boss_choice",bossChoice);b.put("boss_defeated",bossDefeated);b.put("betrayed",betrayed);b.put("departed",departed);b.put("hero_bounty",heroBounty);
         for (int i = 0; i < 4; i++) b.put("contract_" + i, contracts[i]);
         for (int i = 0; i < 5; i++) { b.put("stock_" + i, stock[i]); b.put("price_" + i, prices[i]); }
         quests.put("bounty_board", b);
@@ -240,6 +318,8 @@ public final class BountyBoard {
         if (!quests.contains("bounty_board")) return;
         Bundle b = quests.getBundle("bounty_board");
         present = b.getBoolean("present"); shopClosed = b.getBoolean("closed");
+        bossChoice=b.contains("boss_choice")?b.getInt("boss_choice"):-1;bossDefeated=b.getBoolean("boss_defeated");
+        betrayed=b.getBoolean("betrayed");departed=b.getBoolean("departed");heroBounty=b.getInt("hero_bounty");
         officeCell = b.contains("office") ? b.getInt("office") : -1;
         for (int i = 0; i < 4; i++) contracts[i] = (Contract)b.get("contract_" + i);
         for (int i = 0; i < 5; i++) { stock[i] = (Item)b.get("stock_" + i); prices[i] = b.getInt("price_" + i); }

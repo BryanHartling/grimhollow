@@ -1,3 +1,9 @@
+# Bounty Board component 4 - 2026-10-06
+
+- Added one saved configured boss choice shared by the actual floor-10 generator and contract. Any two returned Prison claims unlock explicit boss acceptance; an unaccepted death cannot start the arc. Both Tengu and Chainwarden retain their ordinary progression code.
+- Boss completion queues an interrupted departure dialogue, pays 1,500 gold once, snapshots owned wealth without duplicate items, closes new business, and removes Cole without a death event when the hero dismisses their poster. Accepted ordinary targets remain valid; all nine class lines use native localized windows.
+- Component gate passed: unit tests, Necromancer Runs=10 failures=0, both boss records/payment/reload/departure and desktop distribution. Native dialogue input is checked at integration.
+
 # Bounty Board component 3 - 2026-10-06
 
 - Passing checkpoint: Necromancer Runs=10 failures=0, desktop distribution, and full offline art validation (PAINTED assets=1285 failures=0; test 44 failures=0). The first art audit detected missing inventory packaging; the dedicated --bounty packer fixes it without regenerating other artwork.

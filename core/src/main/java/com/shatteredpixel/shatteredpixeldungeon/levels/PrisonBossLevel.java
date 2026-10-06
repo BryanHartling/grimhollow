@@ -598,8 +598,9 @@ public class PrisonBossLevel extends Level {
 	
 	@Override
 	protected void createMobs() {
-		tengu = BalanceTuning.roll(CHAINWARDEN,10,3)?new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Chainwarden():new Tengu(); //We want to keep track of tengu independently of other mobs, he's not always in the level.
+        tengu = com.shatteredpixel.shatteredpixeldungeon.BountyBoard.createBoss(); //One saved choice shared with Cole's contract.
 	}
+    public Tengu bountyBoss(){return tengu;}
 	
 	public Actor addRespawner() {
 		return null;

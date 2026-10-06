@@ -1,5 +1,8 @@
 # Known issues
 
+- v1.28.0: Cole's Bounty Board is complete for new runs; existing saves without quest data deliberately receive no retroactive office. Native portrait/touch checks and an Android build do not replace physical Samsung tablet review or a full player-driven bounty campaign. New dialogue uses English fallback where translations are unavailable; initial quest economy and combat budgets need campaign balance review.
+- v1.28.0 verification: native fixture window iteration and floor/scene lifecycle were corrected after failing attempts; settlement labels now use localized item titles rather than object identities. The compiled audit was rerun against a stable JAR after a concurrent rebuild replaced its input. These failed attempts are not counted as passing results.
+
 - v1.27.0: physical Samsung tablet review remains outstanding; native portrait mouse/touch fixtures are not a device test. Composite/retained small images without larger source detail use their exact shipped frame. Additional preview PNGs add about 73 MiB to the asset set and load only while open; new control text falls back to English in untranslated languages.
 - v1.27.0 verification: sandboxed Gradle could not access C:\.android; the existing authorized escalation route built successfully. Initial fixture compilation missed its local Crystal reference, then passed after correction. Creature artwork input priority is corrected. Full local interface attempts also encountered Windows clipboard contention in the existing issue-copy check, including a sequential retry; isolated artwork checks pass both orientations through the same fixture. Full CI retains every clipboard and interface assertion; no failed attempt is counted as passing.
 

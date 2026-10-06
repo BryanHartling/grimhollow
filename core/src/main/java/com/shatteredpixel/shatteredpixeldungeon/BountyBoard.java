@@ -21,8 +21,8 @@ import com.watabou.utils.Random;
 /** One authoritative quest record, independent of floor files and physical claims. */
 public final class BountyBoard {
     private BountyBoard() {}
-    // Components remain isolated from ordinary runs until the full quest is integrated.
-    public static boolean AVAILABLE = false;
+    // New runs receive the quest; absent records in older saves remain absent.
+    public static boolean AVAILABLE = true;
     public static boolean present, shopClosed;
     public static final int OFFICE_DEPTH = 7;
     public static int officeCell = -1;
@@ -467,9 +467,27 @@ public final class BountyBoard {
     }
     public static void showSettlement(int count){
         planSettlements();Item[] items=count>=3?settlementThree:settlementTwo;
-        String[] labels=new String[items.length];for(int i=0;i<items.length;i++)labels[i]=items[i].toString()+" - "+(count>=3?Messages.get(Cole.class,"free"):settlementPrices[i]+" "+Messages.get(Cole.class,"gold"));
+        String[] labels=new String[items.length];for(int i=0;i<items.length;i++)labels[i]=Messages.titleCase(items[i].title())+"\n"+(count>=3?Messages.get(Cole.class,"free"):settlementPrices[i]+" "+Messages.get(Cole.class,"gold"));
         com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions(
                 Messages.get(Cole.class,"settlement"),Messages.get(Cole.class,"choose_prize"),labels){
+            @Override protected void layoutBody(float pos,String message,String... options){
+                int width= com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.landscape()?180:160;
+                width=Math.min(width,(int)com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.uiCamera.width-32);
+                com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock body=com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.renderTextBlock(6);
+                body.text(message,width);body.setPos(0,pos);add(body);pos=body.bottom()+4;
+                for(int i=0;i<options.length;i++){
+                    final int index=i;
+                    com.shatteredpixel.shatteredpixeldungeon.ui.RedButton button=new com.shatteredpixel.shatteredpixeldungeon.ui.RedButton(options[i],6){
+                        @Override protected void onClick(){hide();onSelect(index);}
+                    };
+                    button.multiline=true;button.setRect(0,pos,width-24,28);button.enable(enabled(i));add(button);
+                    com.shatteredpixel.shatteredpixeldungeon.ui.IconButton info=new com.shatteredpixel.shatteredpixeldungeon.ui.IconButton(com.shatteredpixel.shatteredpixeldungeon.ui.Icons.get(com.shatteredpixel.shatteredpixeldungeon.ui.Icons.INFO)){
+                        @Override protected void onClick(){onInfo(index);}
+                    };
+                    info.setRect(width-24,pos,24,28);add(info);pos+=30;
+                }
+                resize(width,(int)pos-2);
+            }
             @Override protected boolean hasInfo(int i){return true;}
             @Override protected void onInfo(int i){com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(items[i]));}
             @Override protected boolean enabled(int i){return count>=3||Dungeon.gold>=settlementPrices[i];}

@@ -34,6 +34,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean interfaceReview=Boolean.getBoolean("grimhollow.interfaceReview");
     private final boolean expeditionReview=Boolean.getBoolean("grimhollow.expeditionReview");
     private final boolean horrorReview=Boolean.getBoolean("grimhollow.horrorReview");
+    private final boolean bountyReview=Boolean.getBoolean("grimhollow.bountyReview");
+    private int bountyStep;
+    private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole bountyCole;
     private int horrorFrames, horrorStep, horrorStart, horrorHealth;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror reviewHorror;
     private boolean[] horrorFov, horrorVisited, horrorMapped;
@@ -177,6 +180,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             else {
                 Dungeon.seed=Long.getLong("grimhollow.seed",417L);
                 Dungeon.init();
+                if(bountyReview)Dungeon.depth=7;
                 if(roomReview)prepareRooms(0);
                 else Dungeon.switchLevel(Dungeon.newLevel(),-1);
                 if(Boolean.getBoolean("grimhollow.renderPoc"))pocRoom();
@@ -224,6 +228,93 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             System.out.println("PASS: "+(vault?"Vault":"Sewer")+" scene renders with dynamic lighting on and off.");
             Gdx.app.exit();
         }
+    }
+
+    /** Quest coverage inside the existing native fixture, using real mouse/touch input. */
+    private void bountyTick(){
+        {
+            int step=bountyStep++;
+            if(step==0){
+                Playtest.enable();Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.gold=30000;
+                for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)if(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole)bountyCole=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole)m;
+                if(bountyCole==null)throw new AssertionError("Generated office has no Cole");
+                for(int n:com.watabou.utils.PathFinder.NEIGHBOURS8)if(Dungeon.level.passable[bountyCole.pos+n]&&Actor.findChar(bountyCole.pos+n)==null){Dungeon.hero.pos=bountyCole.pos+n;break;}
+                Dungeon.hero.sprite.place(Dungeon.hero.pos);Dungeon.observe();Camera.main.snapTo(Dungeon.hero.sprite.center());return;
+            }
+            if(step<=18){HeroClass hero=HeroClass.values()[(step-1)/2];
+                if(step%2==1){if(step==1)capture("bounty-office");closeReviewWindows();Dungeon.hero.heroClass=hero;bountyCole.interact(Dungeon.hero);}
+                else{interfaceBounds();checkReviewText(Game.scene());if(!allReviewText(Game.scene()).contains(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(bountyCole,"greet_"+hero.name())))throw new AssertionError("Missing greeting "+hero);capture("bounty-greet-"+hero.name().toLowerCase());}return;
+            }
+            if(step<=32){int species=(step-19)/2;
+                if(step%2==1){closeReviewWindows();BountyBoard.Contract c=new BountyBoard.Contract();c.index=species>=5?3:species==2?2:0;c.species=species;c.floor=species>=5?10:8;c.payment=c.index==2?0:600;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(c));}
+                else{interfaceBounds();checkReviewText(Game.scene());capture("bounty-poster-"+species);scrollReview(Game.scene());}return;
+            }
+            switch(step){
+                case 33:closeReviewWindows();BountyBoard.contracts[0].floor=7;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(BountyBoard.contracts[0]));break;
+                case 34:playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(bountyCole,"accept"));break;
+                case 35:
+                    if(!BountyBoard.contracts[0].accepted||!com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.ownedContract(0))throw new AssertionError("Native acceptance failed");
+                    bountySealCheck();
+                    GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.class)));break;
+                case 36:interfaceBounds();capture("bounty-warrant");closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoMob(bountyCole));break;
+                case 37:
+                    interfaceBounds();capture("bounty-cole-description");
+                    for(com.watabou.noosa.Gizmo child:new java.util.ArrayList<>(RecoveryChecks.members(Game.scene())))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoMob){Object title=RecoveryChecks.field(child,"titlebar");pointerGestureReview(RecoveryChecks.field(title,"artworkButton"),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);break;}break;
+                case 38:
+                    interfaceBounds();boolean enlarged=false;for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndArtwork)enlarged=true;
+                    if(!enlarged)throw new AssertionError("Cole image did not open artwork viewer");capture("bounty-cole-artwork");closeReviewWindows();
+                    for(com.shatteredpixel.shatteredpixeldungeon.items.Heap h:Dungeon.level.heaps.valueList())if(BountyBoard.owns(h)&&h.coleSlot==0){GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndTradeItem(h));break;}break;
+                case 39:interfaceBounds();capture("bounty-shop");playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.windows.WndTradeItem.class,"buy",200));break;
+                case 40:if(BountyBoard.stock[0]!=null)throw new AssertionError("Native purchase failed");closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal());break;
+                case 41:interfaceBounds();capture("bounty-journal");closeReviewWindows();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.quests();break;
+                case 42:menuEntry("Cole and Bounty Board");menuEntry("Bounty balance controls");menuEntry("Hunter crews and Cole combat");menuEntry("Cole Bolas ammunition: 2");break;
+                case 43:interfaceBounds();capture("bounty-tuning-input");playtestInput("3","Apply");break;
+                case 44:
+                    if(BalanceTuning.get(BalanceTuning.Key.COLE_BOLAS)!=3)throw new AssertionError("Native tuning failed");BalanceTuning.setShared(BalanceTuning.Key.COLE_BOLAS,2);closeReviewWindows();BountyBoard.betrayed=true;BountyBoard.arrive(Dungeon.level);
+                    for(int i=0;i<3;i++){BountyBoard.crews[i].complete=true;com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.hunter(i).collect(Dungeon.hero.belongings.backpack);}BountyBoard.showSettlement(3);break;
+                case 45:interfaceBounds();checkReviewText(Game.scene());for(com.shatteredpixel.shatteredpixeldungeon.items.Item item:BountyBoard.settlementThree)if(!allReviewText(Game.scene()).contains(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.titleCase(item.title())))throw new AssertionError("Missing professional item name");capture("bounty-professional-offers");closeReviewWindows();BountyBoard.showSettlement(2);break;
+                case 46:interfaceBounds();checkReviewText(Game.scene());for(com.shatteredpixel.shatteredpixeldungeon.items.Item item:BountyBoard.settlementTwo)if(!allReviewText(Game.scene()).contains(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.titleCase(item.title())))throw new AssertionError("Missing negotiated item name");capture("bounty-negotiated-offers");closeReviewWindows();break;
+                default:
+                    if(step>=47&&step<65){HeroClass hero=HeroClass.values()[(step-47)/2];
+                        if(step%2==1){closeReviewWindows();Dungeon.hero.heroClass=hero;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal(bountyCole));}
+                        else{interfaceBounds();checkReviewText(Game.scene());capture("bounty-betray-"+hero.name().toLowerCase());scrollReview(Game.scene());}
+                    }else if(step>=65&&step<71){
+                        int choice=(step-65)/3,phase=(step-65)%3;
+                        if(phase==0){
+                            closeReviewWindows();questField(GameScene.class,"scene",null);Dungeon.init();Playtest.enable();Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.depth=10;
+                            BountyBoard.planContracts();BountyBoard.contracts[0].returned=BountyBoard.contracts[1].returned=true;BountyBoard.bossChoice=choice;BountyBoard.planBoss();
+                            Dungeon.switchLevel(Dungeon.newLevel(),-1);if(!BountyBoard.accept(3))throw new AssertionError("Actual boss contract failed");InterlevelScene.mode=InterlevelScene.Mode.DESCEND;switchNoFade(GameScene.class);
+                        }else if(phase==1){
+                            com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel level=(com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel)Dungeon.level;
+                            level.progress();level.progress();level.progress();
+                        }else{
+                            com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel level=(com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel)Dungeon.level;
+                            level.bountyBoss().HP=0;level.progress();boolean mask=false;
+                            for(com.shatteredpixel.shatteredpixeldungeon.items.Heap heap:level.heaps.valueList())for(com.shatteredpixel.shatteredpixeldungeon.items.Item item:heap.items)if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.TengusMask)mask=true;
+                            if(!mask||!BountyBoard.contracts[3].complete||level.state()!=com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel.State.WON)throw new AssertionError("Actual boss reward/progression lost "+choice);
+                            capture("bounty-boss-"+choice);
+                        }
+                    }else if(step==71){closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(BountyBoard.contracts[3]));}
+                    else if(step==72){interfaceBounds();checkReviewText(Game.scene());capture("bounty-completed-poster");}
+                    else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, seven painted posters and completion stamp, mouse/touch acceptance and purchase, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements and both actual boss deaths/mask rewards; failures=0");Gdx.app.exit();}
+            }
+        }
+    }
+
+    private void bountySealCheck(){
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob=BountyBoard.contracts[0].target;
+        if(mob==null||mob.sprite==null)throw new AssertionError("Accepted target not placed");
+        boolean fov=Dungeon.level.heroFOV[mob.pos],shown=mob.sprite.visible;int hidden=mob.invisible,index=mob.bountyContract;
+        com.shatteredpixel.shatteredpixeldungeon.ui.CharHealthIndicator indicator=new com.shatteredpixel.shatteredpixeldungeon.ui.CharHealthIndicator(mob);
+        try{
+            mob.sprite.visible=true;mob.invisible=0;Dungeon.level.heroFOV[mob.pos]=false;indicator.update();
+            com.watabou.noosa.Image seal=(com.watabou.noosa.Image)RecoveryChecks.field(indicator,"wantedSeal");
+            if(seal.visible)throw new AssertionError("Wanted seal reveals an unseen target");
+            Dungeon.level.heroFOV[mob.pos]=true;
+            for(int rarity=0;rarity<3;rarity++){mob.bountyContract=rarity;indicator.update();if(!seal.visible)throw new AssertionError("Missing visible wanted seal "+rarity);}
+            mob.invisible=1;indicator.update();if(seal.visible)throw new AssertionError("Wanted seal reveals invisible target");
+            mob.invisible=0;mob.sprite.visible=false;indicator.update();if(seal.visible)throw new AssertionError("Wanted seal reveals hidden sprite");
+        }finally{Dungeon.level.heroFOV[mob.pos]=fov;mob.sprite.visible=shown;mob.invisible=hidden;mob.bountyContract=index;indicator.killAndErase();}
     }
 
     /** Exercise actual selection buttons and their read-only progression windows. */
@@ -467,6 +558,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
 
     /** Review actual inventory, scrolling descriptions and class controls in both orientations. */
     private void interfaceTick() {
+        if(bountyReview){if(Game.scene() instanceof GameScene&&frames>=220&&frames%20==0)bountyTick();return;}
         if(Boolean.getBoolean("grimhollow.artworkReview")){
             // Run the same artwork assertions independently of clipboard-heavy
             // Playtest coverage. Normal CI still executes the entire fixture.

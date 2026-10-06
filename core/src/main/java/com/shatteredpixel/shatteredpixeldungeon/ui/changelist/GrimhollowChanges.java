@@ -20,7 +20,12 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.27.0","See the dungeon's paintings up close.");
+        ChangeInfo r=release(list,"v1.28.0","A name on a poster. A hunter who keeps his promises.");
+        note(r,Icons.JOURNAL,"Cole's Bounty Board","Find Cole in his old Prison office. Read the posters and choose which contracts to sign; an unsigned contract never summons its quarry. His finite shop asks a steep price for good equipment. Some names on the board are best approached carefully.");
+        note(r,Icons.INFO,"Promises and Warrants","Named wanted creatures, painted posters, physical Warrants and journal notes follow your accepted jobs. A swift hand may earn a fuller purse. The boss poster matches the prison's actual jailer, and Cole has one last contract to discuss afterward.");
+        note(r,Icons.TALENT,"Hunter's equipment","Bloodmarked Brands and the Warden's Coat join the dungeon's equipment. Later hunters carry their own Warrants; what you bring back to Cole determines the terms he will offer. Each ending has a cosmetic badge.");
+        note(r,Icons.PREFS,"Quest testing","Quests > Cole and Bounty Board groups status, travel and tuning. Prices, contract terms, wanted creatures, hunter crews, Cole's finite supplies and the new equipment can be tuned without resetting progress or duplicating prizes. New games receive the complete quest; older saves retain their existing maps.");
+        r=release(list,"v1.27.0","See the dungeon's paintings up close.");
         note(r,Icons.MAGNIFY,"Artwork inspection","Tap an image or its small magnifying lens in an examination window to see a larger painting. Close it to return to the same description. Items, creatures, plants, traps, terrain, skills and journal notes support inspection, with sharper exports from the original paintings where available.");
         r=release(list,"v1.26.0","More mystery, clearer companions and organized testing tools.");
         note(r,Icons.INFO,"Rediscover the dungeon","Descriptions of Grimhollow's additions now favor atmosphere and useful hints over formulas and hidden reward tables. Actions and current conditions remain readable.");

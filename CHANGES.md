@@ -1,3 +1,13 @@
+# Bounty Board v1.28.0 / component 7 - 2026-10-06
+
+- Enabled the complete quest for new games, retaining an absent-quest default for older saves. Added the home-screen Update Log entry, packaged Windows launcher and Android APK, and native landscape/mouse and portrait/touch review captures under `verification/interface/{orientation}/bounty-*.png`.
+- Posters have painted rarity seals and a completion stamp. Settlement offers show localized item names, upgrades and fixed prices with inspection controls; object identity strings were corrected during visual review. Wanted seals are suppressed outside current sight and on invisible creatures.
+- `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon --console=plain` passed: unit tests, all six Bounty components and the combined `Runs=30 failures=0` gate. Separate Necromancer, Enchanter and Psychic gates each passed `Runs=10 failures=0` during integration.
+- The existing native fixture passed both orientations: all nine greetings/betrayals, all seven matching posters, mouse/touch acceptance and purchase, physical Warrant/journal/artwork, tuning, settlement offers and wanted-seal visibility. Real Tengu and Chainwarden arena deaths each completed the accepted boss contract and retained the mask reward and normal progression.
+- Offline art verification passed: `PAINTED assets=1299 source sheets=166 failures=0`; provenance test 44 had zero failures. Compiled-handler/network audit passed: `classes=3036 guarded browser sinks=1 HTTP/socket calls=0 failures=0`. The native Bounty fixture is included in the existing CI interface step; all previous checks remain. Exact-head CI status is reported at delivery.
+- Corrected test-fixture window mutation and stale scene references after failing attempts; the first office capture now waits for the relocated camera to render. The audit uses a stable copy of the JAR to avoid a build replacing its input. No failed attempt is represented as passing. No parallel verification harness was added and terrain contrast test 45 remains abandoned.
+- Physical Samsung tablet review and full campaign economy/combat balance remain human playtesting. The documented defaults are initial values, exposed in the persistent Playtest submenu without relaxing one-time claims, loot or badge rules.
+
 # Bounty Board component 6 - 2026-10-06
 
 - Added seeded two-Warrant discounted choices and three-Warrant superior free choices, quoted from the deepest main region when offered and paid once. Cole's real death releases only accepted unpaid cash, including unfinished base claims, alongside one seeded equipment prize and finite unused supplies.

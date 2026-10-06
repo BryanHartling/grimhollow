@@ -9,6 +9,15 @@ import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 public class WndBountyContract extends WndTitledMessage {
     public WndBountyContract(BountyBoard.Contract c) {
         super(poster(c), c.title(), text(c));
+        if(c.index<3){
+            com.watabou.noosa.Image seal=new com.watabou.noosa.Image("interfaces/bounty_seals.png");
+            seal.frame(new com.watabou.noosa.TextureFilm(seal.texture,64,64).get(c.index));
+            seal.logicalSize(9,9);seal.x=20;seal.y=18;titlebar.add(seal);
+        }
+        if(c.complete){
+            com.watabou.noosa.Image stamp=com.shatteredpixel.shatteredpixeldungeon.ui.Icons.get(com.shatteredpixel.shatteredpixeldungeon.ui.Icons.CHECKED);
+            stamp.logicalSize(10,10);stamp.x=19;stamp.y=18;stamp.angle=-12;titlebar.add(stamp);
+        }
         RedButton action = new RedButton(Messages.get(Cole.class, c.complete ? "return" : "accept")) {
             @Override protected void onClick() {
                 hide(); if (c.complete) BountyBoard.returnClaim(c.index); else BountyBoard.accept(c.index);

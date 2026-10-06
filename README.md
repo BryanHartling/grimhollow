@@ -1,3 +1,13 @@
+# Cole's Bounty Board - v1.28.0
+
+Cole opens his five-slot shop and Bounty Board on Prison floor 2 (global floor 7). Read a poster, then explicitly accept its contract to bring the wanted target into the dungeon. Warrants record his promises; the journal keeps the accepted jobs and later pursuit. The optional Legendary bounty carries the Warden's Coat, and Bloodmarked Brands join the equipment pool. The boss contract follows the actual Prison boss. The longer quest offers four mutually exclusive cosmetic outcomes.
+
+Start a new game for the complete quest. Older saves without its record keep their maps and do not acquire a retroactive office. Prices, ammunition, target identity, deadlines, payment receipts and settlement choices persist through revisits and reloads.
+
+**Playtest > Quests > Cole and Bounty Board** provides status, travel, the board and grouped balance controls. It retains submenu position and never resets reward receipts. Settings explain their defaults, ranges, and whether they affect future generation or current combat. Custom tuning and tools retain the existing ranking/badge exclusions.
+
+Windows: `desktop/build/windows/1.28.0/Grimhollow/Grimhollow.exe` (keep the whole folder). The existing desktop shortcut or `tools/play.bat` selects the latest packaged build. Android sideload: `android/build/outputs/apk/debug/android-debug.apk`. The quest design is in [BOUNTY_BOARD_SPEC.md](BOUNTY_BOARD_SPEC.md); painted sources and prompts are under `tools/painted/sources/bounty/` and [bounty-prompts.json](tools/painted/bounty-prompts.json). Native portrait and landscape review captures are under `verification/interface/` with the `bounty-` prefix. Physical Samsung tablet review and campaign balance remain with human playtesting.
+
 # Artwork inspection - v1.27.0
 
 Click or tap the picture (or its small magnifying lens) in an examination window to open a large framed preview. **Back to description**, Back/Escape or a tap outside returns to the same window. Items, creatures/NPCs, plants, traps, terrain, buffs, talents, abilities, journal notes and hero portraits support it. Looking at artwork spends no turns or charges and does not identify belongings.

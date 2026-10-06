@@ -81,6 +81,12 @@ public class Heap implements Bundlable {
 	public boolean hidden = false; //sets alpha to 15%
 	
 	public LinkedList<Item> items = new LinkedList<>();
+	public int coleSlot = -1;
+	public int salePrice() {
+		return com.shatteredpixel.shatteredpixeldungeon.BountyBoard.owns(this)
+				? com.shatteredpixel.shatteredpixeldungeon.BountyBoard.prices[coleSlot]
+				: Shopkeeper.sellPrice(peek());
+	}
 	
 	public void open( Hero hero ) {
 		switch (type) {
@@ -377,7 +383,7 @@ public class Heap implements Bundlable {
 			case FOR_SALE:
 				Item i = peek();
 				if (size() == 1) {
-					return Messages.get(this, "for_sale", Shopkeeper.sellPrice(i), i.title());
+					return Messages.get(this, "for_sale", salePrice(), i.title());
 				} else {
 					return i.title();
 				}
@@ -435,6 +441,7 @@ public class Heap implements Bundlable {
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
 		pos = bundle.getInt( POS );
+		coleSlot = bundle.contains("cole_slot") ? bundle.getInt("cole_slot") : -1;
         waywardCache=bundle.getInt("wayward_cache");
 		seen = bundle.getBoolean( SEEN );
 		type = Type.valueOf( bundle.getString( TYPE ) );
@@ -462,6 +469,7 @@ public class Heap implements Bundlable {
 	@Override
 	public void storeInBundle( Bundle bundle ) {
 		bundle.put( POS, pos );
+		bundle.put("cole_slot", coleSlot);
         bundle.put("wayward_cache",waywardCache);
 		bundle.put( SEEN, seen );
 		bundle.put( TYPE, type );

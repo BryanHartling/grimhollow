@@ -142,7 +142,7 @@ public class WndTradeItem extends WndInfoItem {
 
 		float pos = height;
 
-		final int price = Shopkeeper.sellPrice( item );
+		final int price = heap.salePrice();
 
 		RedButton btnBuy = new RedButton( Messages.get(this, "buy", price) ) {
 			@Override
@@ -166,7 +166,9 @@ public class WndTradeItem extends WndInfoItem {
 				@Override
 				protected void onClick() {
 					if (chance >= 1){
+						if (!com.shatteredpixel.shatteredpixeldungeon.BountyBoard.canTrade(heap)) return;
 						thievery.steal(item);
+						com.shatteredpixel.shatteredpixeldungeon.BountyBoard.takeStock(heap);
 						Hero hero = Dungeon.hero;
 						Item item = heap.pickUp();
 						hide();
@@ -177,14 +179,16 @@ public class WndTradeItem extends WndInfoItem {
 					} else {
 						GameScene.show(new WndOptions(new ItemSprite(ItemSpriteSheet.ARTIFACT_ARMBAND),
 								Messages.titleCase(Messages.get(MasterThievesArmband.class, "name")),
-								Messages.get(WndTradeItem.class, "steal_warn"),
+								Messages.get(WndTradeItem.class, com.shatteredpixel.shatteredpixeldungeon.BountyBoard.owns(heap) ? "cole_steal_warn" : "steal_warn"),
 								Messages.get(WndTradeItem.class, "steal_warn_yes"),
 								Messages.get(WndTradeItem.class, "steal_warn_no")){
 							@Override
 							protected void onSelect(int index) {
 								super.onSelect(index);
 								if (index == 0){
+									if (!com.shatteredpixel.shatteredpixeldungeon.BountyBoard.canTrade(heap)) return;
 									if (thievery.steal(item)) {
+										com.shatteredpixel.shatteredpixeldungeon.BountyBoard.takeStock(heap);
 										Hero hero = Dungeon.hero;
 										Item item = heap.pickUp();
 										WndTradeItem.this.hide();
@@ -193,6 +197,9 @@ public class WndTradeItem extends WndInfoItem {
 											Dungeon.level.drop(item, heap.pos).sprite.drop();
 										}
 									} else {
+										if (com.shatteredpixel.shatteredpixeldungeon.BountyBoard.owns(heap)) {
+											com.shatteredpixel.shatteredpixeldungeon.BountyBoard.failedTheft();
+										} else {
 										for (Mob mob : Dungeon.level.mobs) {
 											if (mob instanceof Shopkeeper) {
 												mob.yell(Messages.get(mob, "thief"));
@@ -201,6 +208,7 @@ public class WndTradeItem extends WndInfoItem {
 											}
 										}
 										WndTradeItem.this.hide();
+										}
 									}
 								}
 							}
@@ -290,11 +298,14 @@ public class WndTradeItem extends WndInfoItem {
 	}
 	
 	private void buy( Heap heap ) {
+		if (!com.shatteredpixel.shatteredpixeldungeon.BountyBoard.canTrade(heap)) return;
+		int price = heap.salePrice();
+		if (Dungeon.gold < price) return;
 		
 		Item item = heap.pickUp();
 		if (item == null) return;
 		
-		int price = Shopkeeper.sellPrice( item );
+		com.shatteredpixel.shatteredpixeldungeon.BountyBoard.takeStock(heap);
 		Dungeon.gold -= price;
 		Catalog.countUses(Gold.class, price);
 		

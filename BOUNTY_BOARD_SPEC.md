@@ -1,10 +1,10 @@
-# Grimhollow Bounty Board Quest Draft
+# Grimhollow Bounty Board Quest
 
-Version 0.3 | 6 October 2026 | Design for review
+Version 0.3 | 6 October 2026 | Implementation authorized
 
 Cole, a bounty hunter operating from an abandoned Prison office, offers three dangerous contracts and a small premium shop. Completing two contracts unlocks a bounty on the actual Prison boss. Cole pays that bounty, then sells out the hero. Hunter crews pursue the hero through the Caves, City, and Halls, until the hero negotiates a settlement, confronts Cole, or outlasts the contract.
 
-This draft records the agreed quest and item rules. Sections explicitly marked **Proposal** contain initial values or details still subject to review. Writing this specification does not authorize implementation. The earlier pasted Bounty Board proposal is superseded wherever it conflicts with this draft.
+This specification records the agreed quest and item rules. Implementation was authorized on 6 October 2026; sections marked **Proposal** supply the initial tuning defaults. The earlier pasted Bounty Board proposal is superseded wherever it conflicts with this specification.
 
 ## 1 Scope
 

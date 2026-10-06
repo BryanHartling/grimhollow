@@ -283,6 +283,7 @@ public class Dungeon {
 		Blacksmith.Quest.reset();
 		Imp.Quest.reset();
 		DragonExpedition.reset();
+		BountyBoard.reset();
 
 		hero = new Hero();
 		hero.live();
@@ -693,6 +694,7 @@ public class Dungeon {
 			Blacksmith	.Quest.storeInBundle( quests );
 			Imp			.Quest.storeInBundle( quests );
 			DragonExpedition.store(quests);
+			BountyBoard.store(quests);
 			bundle.put( QUESTS, quests );
 			
 			SpecialRoom.storeRoomsInBundle( bundle );
@@ -802,12 +804,14 @@ public class Dungeon {
 				Blacksmith.Quest.restoreFromBundle( quests );
 				Imp.Quest.restoreFromBundle( quests );
 				DragonExpedition.restore(quests);
+				BountyBoard.restore(quests);
 			} else {
 				Ghost.Quest.reset();
 				Wandmaker.Quest.reset();
 				Blacksmith.Quest.reset();
 				Imp.Quest.reset();
 		DragonExpedition.reset();
+		BountyBoard.restore(new Bundle());
 			}
 			
 			SpecialRoom.restoreRoomsFromBundle(bundle);

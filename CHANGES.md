@@ -1,3 +1,8 @@
+# Bounty Board component 1 - 2026-10-06
+
+- Authorized the reviewed specification with its proposed numbers as initial tuning defaults. Added safe absent defaults for older saves, a separately budgeted floor-7 office, five finite saved quotes at twice ordinary shop prices, and owner-specific theft closure without removing other vendors or contract access.
+- The quest remains disabled in ordinary runs until all components are integrated. Cole and Brand visual/combat placeholders are isolated to the development fixture; their final art and behavior follow in the specified components.
+- Component gate: `gradlew.bat core:test core:smokeRun desktop:dist -PsmokeClass=NECROMANCER -PdesktopOnly=true --no-daemon --console=plain` passed, `Runs=10 failures=0`, with ten generated offices, reachable exits, fixed prices, closure isolation and real disk receipts. Android/native quest interface coverage follows at integration.
 # Artwork inspection - v1.27.0
 
 - Add a shared read-only artwork modal and a painted magnifier with a minimum 24-unit touch target. Wire item/heap, creature/NPC, terrain, plant, trap, buff, talent, ability/subclass, journal and hero detail artwork. Preserve the originating window and its actions; journal dismissal and creature description controls do not swallow image taps.

@@ -82,7 +82,10 @@ public class PrisonLevel extends RegularLevel {
 
 	@Override
 	protected ArrayList<Room> initRooms() {
-		return Wandmaker.Quest.spawnRoom(super.initRooms());
+		ArrayList<Room> rooms = Wandmaker.Quest.spawnRoom(super.initRooms());
+		if (Dungeon.branch == 0 && Dungeon.depth == 7 && com.shatteredpixel.shatteredpixeldungeon.BountyBoard.present)
+			rooms.add(new com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.BountyOfficeRoom());
+		return rooms;
 	}
 
 	@Override

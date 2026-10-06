@@ -9,7 +9,7 @@ public class BloodmarkedBrand extends Item {
         if (target != null && target.alignment == com.shatteredpixel.shatteredpixeldungeon.actors.Char.Alignment.ENEMY)
             com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.prolong(target,
                     com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.class,
-                    com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Bloodmark.DURATION);
+                    com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.get(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.BRAND_TURNS));
     }
     @Override public boolean isUpgradable() { return false; }
     @Override public boolean isIdentified() { return true; }

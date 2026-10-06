@@ -222,7 +222,11 @@ public class Badges {
 		GAMES_PLAYED_5              ( 124, BadgeType.GLOBAL ),
 		HIGH_SCORE_5                ( 125 ),
 		CHAMPION_2                  ( 126 ),
-		CHAMPION_3                  ( 127 );
+        CHAMPION_3                  ( 127 ),
+        COLES_FOLLY                 ( 128 ),
+        BOUNTY_NEGOTIATED            ( 129 ),
+        BOUNTY_PROFESSIONAL          ( 130 ),
+        WANTED                      ( 131 );
 
 		public boolean meta;
 
@@ -1076,6 +1080,11 @@ public class Badges {
 		}
 	}
 
+    public static void validateBounty(int outcome){
+        if(Playtest.unranked()||outcome<1||outcome>4)return;
+        Badge badge=new Badge[]{Badge.COLES_FOLLY,Badge.BOUNTY_NEGOTIATED,Badge.BOUNTY_PROFESSIONAL,Badge.WANTED}[outcome-1];
+        local.add(badge);displayBadge(badge);
+    }
 	public static void validateTakingTheMick(Object cause){
 		if ((cause == Dungeon.hero || cause instanceof Explosive.ExplosiveCurseBomb)
 				&& Dungeon.hero.belongings.attackingWeapon() instanceof Pickaxe

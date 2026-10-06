@@ -44,7 +44,16 @@ public final class BalanceTuning {
         COMPANION_RECOVERY(11,100,25,400), COMPANION_COLLECT(11,5,0,8),
         CHART_CHANCE_0(12,10,0,100), CHART_CHANCE_1(12,15,0,100), CHART_CHANCE_2(12,20,0,100), CHART_CHANCE_3(12,25,0,100),
         CHART_GOLD(12,100,25,300), CHART_ITEMS_0(12,2,2,8), CHART_ITEMS_1(12,3,2,8), CHART_ITEMS_2(12,4,2,8), CHART_ITEMS_3(12,5,2,8),
-        CHART_QUALITY_ROLLS(12,2,1,4), CHART_MEMORY_CELLS(12,36,6,100);
+        CHART_QUALITY_ROLLS(12,2,1,4), CHART_MEMORY_CELLS(12,36,6,100),
+        COLE_PRICE(13,200,100,400), BOUNTY_COMMON_PAY(13,600,0,5000), BOUNTY_RARE_PAY(13,1200,0,10000),
+        BOUNTY_BOSS_PAY(13,1500,0,10000), BOUNTY_DEADLINE(13,500,100,1500), BOUNTY_BONUS(13,20,0,100),
+        WANTED_COMMON_HP(14,125,100,300), WANTED_RARE_HP(14,160,100,300), WANTED_LEGEND_HP(14,220,100,400),
+        WANTED_COMMON_DAMAGE(14,110,50,200), WANTED_RARE_DAMAGE(14,115,50,200), WANTED_LEGEND_DAMAGE(14,125,50,250),
+        WANTED_ARMOR(14,1,0,5), WANTED_MOVEMENT(14,110,100,150),
+        CREW_HEALTH(15,150,100,300), CREW_DAMAGE(15,120,50,250), COLE_HEALTH(15,300,100,500),
+        COLE_DAMAGE(15,120,50,250), COLE_EVASION(15,120,100,180), COLE_BOLAS(15,2,0,4),
+        BRAND_TURNS(16,8,3,15), BRAND_ACCURACY(16,125,100,175), BRAND_PENETRATION(16,50,0,100),
+        COAT_GROWTH(16,1,0,3), COAT_FIRST_HIT(16,10,0,20);
 
         public final int group, baseline, min, max;
         Key(int group) { this(group,100,0,1000); }
@@ -58,6 +67,8 @@ public final class BalanceTuning {
                     || group==10 && this!=COIN_ZERO_EXPIRY && this!=COIN_CHARGE_TURNS && this!=COIN_GOLD_CHARGE && this!=COIN_SHOP_ROLLS
                     || group==11 && (this==COMPANION_HEALTH || this==COMPANION_DAMAGE || this==COMPANION_STEAL || this==COMPANION_GOLD));
             percentage |= group==12 && (name().startsWith("CHART_CHANCE") || this==CHART_GOLD);
+            percentage |= group==14&&this!=WANTED_ARMOR || group==15&&this!=COLE_BOLAS
+                    || this==COLE_PRICE || this==BOUNTY_BONUS || this==BRAND_ACCURACY || this==BRAND_PENETRATION || this==COAT_FIRST_HIT;
             return value+(percentage?"%":""); }
     }
     private static final EnumMap<Key,Integer> values=new EnumMap<>(Key.class);

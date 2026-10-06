@@ -36,6 +36,9 @@ public final class BountyBoard {
     public static int hallsCell=-1, meetingDepth=-1;
     public static Cole encounter;
     public static boolean resolved, hallsIntroduced, combatRequested, responsePending;
+    public static int outcome, deepestMain=1;
+    public static Item[] settlementTwo=new Item[2], settlementThree=new Item[3];
+    public static int[] settlementPrices=new int[2];
     public static class Crew implements com.watabou.utils.Bundlable {
         public int index, floor;
         public boolean spawned, complete, issued;
@@ -109,6 +112,7 @@ public final class BountyBoard {
         bossChoice=-1; heroBounty=0; bossDefeated=betrayed=departed=dialogueOpen=false;
         crews=new Crew[3];hallsCell=meetingDepth=-1;encounter=null;
         resolved=hallsIntroduced=combatRequested=responsePending=false;
+        outcome=0;deepestMain=1;settlementTwo=new Item[2];settlementThree=new Item[3];settlementPrices=new int[2];
     }
 
     public static void planContracts() {
@@ -120,7 +124,8 @@ public final class BountyBoard {
                 c.floor = Random.IntRange(7, 9);
                 c.species = i == 0 ? Random.Int(2) : i == 1 ? Random.IntRange(2, 4) : 2;
                 c.traits = i == 0 ? 0 : i == 1 ? 1 << Random.Int(2) : 3;
-                c.payment = i == 0 ? 600 : i == 1 ? 1200 : 0;
+                c.payment = i == 0 ? BalanceTuning.get(BalanceTuning.Key.BOUNTY_COMMON_PAY) : i == 1 ? BalanceTuning.get(BalanceTuning.Key.BOUNTY_RARE_PAY) : 0;
+                c.deadline=BalanceTuning.get(BalanceTuning.Key.BOUNTY_DEADLINE);c.bonusPercent=BalanceTuning.get(BalanceTuning.Key.BOUNTY_BONUS);
             }
         } finally { Random.popGenerator(); }
     }
@@ -130,6 +135,7 @@ public final class BountyBoard {
         if(index==3){ planBoss(); c=contracts[3]; }
         if (c.accepted) return false;
         c.accepted = true;
+        com.shatteredpixel.shatteredpixeldungeon.journal.Notes.addBounty(index,OFFICE_DEPTH);
         if (!c.issued) { c.issued = true; give(new Warrant(index)); }
         arrive(Dungeon.level);
         return true;
@@ -139,6 +145,7 @@ public final class BountyBoard {
     }
     public static void arrive(Level level) {
         if (!present || Dungeon.branch != 0) return;
+        deepestMain=Math.max(deepestMain,Math.min(25,Dungeon.depth));
         planContracts();
         if(level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel && contracts[3]!=null && !contracts[3].complete)
             contracts[3].target=((com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel)level).bountyBoss();
@@ -152,10 +159,10 @@ public final class BountyBoard {
                     if (cell < 0) continue;
                     if (!c.spawned) {
                     mob.bountyContract = c.index;
-                    mob.wantedDamage = c.index == 0 ? 1.10f : c.index == 1 ? 1.15f : 1.25f;
-                    mob.wantedMovement = (c.traits & 2) != 0 ? 1.10f : 1f;
-                    mob.wantedArmor = (c.traits & 1) != 0 ? 1 : 0;
-                    mob.HT = mob.HP = Math.round(mob.HT * (c.index == 0 ? 1.25f : c.index == 1 ? 1.60f : 2.20f));
+                    mob.wantedDamage = BalanceTuning.multiplier(new BalanceTuning.Key[]{BalanceTuning.Key.WANTED_COMMON_DAMAGE,BalanceTuning.Key.WANTED_RARE_DAMAGE,BalanceTuning.Key.WANTED_LEGEND_DAMAGE}[c.index]);
+                    mob.wantedMovement = (c.traits & 2) != 0 ? BalanceTuning.multiplier(BalanceTuning.Key.WANTED_MOVEMENT) : 1f;
+                    mob.wantedArmor = (c.traits & 1) != 0 ? BalanceTuning.get(BalanceTuning.Key.WANTED_ARMOR) : 0;
+                    mob.HT = mob.HP = Math.round(mob.HT * BalanceTuning.multiplier(new BalanceTuning.Key[]{BalanceTuning.Key.WANTED_COMMON_HP,BalanceTuning.Key.WANTED_RARE_HP,BalanceTuning.Key.WANTED_LEGEND_HP}[c.index]));
                     }
                     mob.pos = cell; mob.timeToNow(); level.mobs.add(mob);
                     if (com.watabou.noosa.Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene)
@@ -167,7 +174,10 @@ public final class BountyBoard {
         if (Dungeon.depth == OFFICE_DEPTH && shopClosed)
             for (Heap heap : level.heaps.valueList().toArray(new Heap[0])) if (owns(heap)) heap.destroy();
         if(betrayed && (Dungeon.depth==OFFICE_DEPTH||Dungeon.depth==22)) for(Mob mob:level.mobs.toArray(new Mob[0]))
-            if(mob instanceof Cole && (resolved||Dungeon.depth!=meetingDepth||mob!=encounter)) removeCole((Cole)mob);
+            if(mob instanceof Cole){
+                if(!resolved&&Dungeon.depth==meetingDepth&&encounter!=null&&encounter.id()==mob.id())encounter=(Cole)mob;
+                else removeCole((Cole)mob);
+            }
         if(Dungeon.depth==10 && contracts[3]!=null && contracts[3].complete && !departed) ensureDeparture();
         if(betrayed){arriveCrews(level);arriveMeeting(level);}
     }
@@ -237,7 +247,7 @@ public final class BountyBoard {
             try {bossChoice=BalanceTuning.roll(BalanceTuning.Key.CHAINWARDEN,10,3)?1:0;}
             finally{Random.popGenerator();}
         }
-        if(contracts[3]==null){Contract c=contracts[3]=new Contract();c.index=3;c.species=5+bossChoice;c.floor=10;c.payment=1500;}
+        if(contracts[3]==null){Contract c=contracts[3]=new Contract();c.index=3;c.species=5+bossChoice;c.floor=10;c.payment=BalanceTuning.get(BalanceTuning.Key.BOUNTY_BOSS_PAY);}
     }
     public static Tengu createBoss() {
         if(!present)return BalanceTuning.roll(BalanceTuning.Key.CHAINWARDEN,10,3)?new Chainwarden():new Tengu();
@@ -266,6 +276,7 @@ public final class BountyBoard {
             long value=Dungeon.gold;java.util.Set<Item> counted=java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
             for(Item item:Dungeon.hero.belongings)if(counted.add(item))value+=Math.max(0,item.value());
             heroBounty=(int)Math.min(Integer.MAX_VALUE,value);
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.addBounty(4,10);
         }
         return true;
     }
@@ -371,7 +382,7 @@ public final class BountyBoard {
     private static void arriveMeeting(Level level){
         if(resolved)return;
         if(Dungeon.depth==22&&meetingDepth<0&&hallsCell>=0){meetingDepth=22;if(encounter==null)encounter=new Cole();}
-        if(Dungeon.depth==meetingDepth&&encounter!=null&&!level.mobs.contains(encounter))placeEncounter(level,meetingDepth==22?hallsCell:officeCell);
+        if(Dungeon.depth==meetingDepth&&encounter!=null&&!level.mobs.contains(encounter))placeEncounter(level,encounter.combatConfigured?encounter.pos:meetingDepth==22?hallsCell:officeCell);
     }
     private static void placeEncounter(Level level,int origin){
         if(origin<0||origin>=level.length())return;int best=-1,distance=Integer.MAX_VALUE;
@@ -383,23 +394,35 @@ public final class BountyBoard {
         if(com.watabou.noosa.Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene)
             com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.add(encounter);
     }
-    public static void requestCombat(){combatRequested=responsePending=true;Dungeon.hero.interrupt();Dungeon.hero.lastAction=null;}
+    public static void requestCombat(){combatRequested=responsePending=true;if(encounter!=null)encounter.startCombat();Dungeon.hero.interrupt();Dungeon.hero.lastAction=null;}
     public static void showMeeting(Cole cole,boolean halls){
         int paid=payEarned();int claims=hunterClaims();
+        if(claims>=2)planSettlements();
         String text=(paid>0?Messages.get(Cole.class,"debt_paid")+"\n\n":"")+Messages.get(Cole.class,halls&&claims==0?"hostile":"meeting");
+        java.util.ArrayList<String> choices=new java.util.ArrayList<>();
+        choices.add(Messages.get(Cole.class,claims==0&&halls?"continue":"confront"));
+        if(claims>=2)choices.add(Messages.get(Cole.class,"settlement"));
+        choices.add(Messages.get(Cole.class,"leave"));
         com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions(
-                cole.sprite(),cole.name(),text,Messages.get(Cole.class,claims==0&&halls?"continue":"confront"),Messages.get(Cole.class,"leave")){
-            @Override protected void onSelect(int index){if(index==0)requestCombat();}
+                cole.sprite(),cole.name(),text,choices.toArray(new String[0])){
+            @Override protected void onSelect(int index){if(index==0)requestCombat();else if(index==1&&claims>=2)showSettlement(claims);}
             @Override public void hide(){super.hide();if(halls&&claims==0)requestCombat();}
         });
     }
     public static void showBoard(){
         com.watabou.noosa.Game.runOnRenderThread(()->{
             if(!betrayed){for(Mob m:Dungeon.level.mobs)if(m instanceof Cole){((Cole)m).interact(Dungeon.hero);return;}}
+            planContracts();java.util.ArrayList<String> options=new java.util.ArrayList<>();
+            options.add(Messages.get(Cole.class,"arrange"));for(int i=0;i<3;i++)options.add(contracts[i].title());options.add(Messages.get(Cole.class,"wanted_title",Dungeon.hero.name()));
             com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions(
-                    Messages.get(Cole.class,"board"),Messages.get(Cole.class,"note"),Messages.get(Cole.class,"arrange"),Messages.get(Cole.class,"leave")){
-                @Override protected boolean enabled(int index){return index==1||!resolved&&(hunterClaims()>0||earnedDebt());}
-                @Override protected void onSelect(int index){if(index==0&&arrangeOffice())showMeeting(encounter,false);}
+                    Messages.get(Cole.class,"board"),Messages.get(Cole.class,"note"),options.toArray(new String[0])){
+                @Override protected boolean enabled(int index){return index>0||!resolved&&(hunterClaims()>0||earnedDebt());}
+                @Override protected void onSelect(int index){if(index==0&&arrangeOffice())showMeeting(encounter,false);
+                    else if(index>0&&index<4)com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(contracts[index-1]));
+                    else if(index==4)com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage(
+                        new com.shatteredpixel.shatteredpixeldungeon.ui.HeroPortrait(Dungeon.hero.heroClass,24),Messages.get(Cole.class,"wanted_title",Dungeon.hero.name()),
+                        Messages.get(Cole.class,"hero_poster",Dungeon.hero.name(),Dungeon.hero.heroClass.title(),heroBounty)));
+                }
             });
         });
     }
@@ -409,6 +432,62 @@ public final class BountyBoard {
             total+=c.amount();c.paid=c.returned=true;Warrant.retireContract(c.index);
         }
         return total;
+    }
+    private static Weapon weaponPrize(Generator.Category category,int level){
+        Weapon item=(Weapon)Generator.randomUsingDefaults(category);item.level(level);item.cursed=false;
+        item.enchant(Weapon.Enchantment.random());item.identify();return item;
+    }
+    public static Item qualityPrize(int tier,int level){
+        return weaponPrize(tier==5?Generator.Category.WEP_T5:Generator.Category.WEP_T4,level);
+    }
+    private static Item ringPrize(int level){
+        Item item=Generator.randomUsingDefaults(Generator.Category.RING);item.level(level);item.cursed=false;return item.identify();
+    }
+    public static void planSettlements(){
+        if(settlementTwo[0]!=null)return;
+        Random.pushGenerator(Dungeon.seed ^ 0x434F4C455052495AL);
+        try{
+            settlementTwo[0]=qualityPrize(4,2);settlementTwo[1]=ringPrize(2);
+            settlementThree[0]=qualityPrize(5,3);settlementThree[1]=ringPrize(3);
+            com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor armor=Random.Int(2)==0?
+                    new com.shatteredpixel.shatteredpixeldungeon.items.armor.ScaleArmor():new com.shatteredpixel.shatteredpixeldungeon.items.armor.PlateArmor();
+            armor.level(3);armor.cursed=false;armor.inscribe(com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor.Glyph.random());settlementThree[2]=armor.identify();
+            int quoteDepth=Math.min(21,(Math.max(1,deepestMain)-1)/5*5+1);
+            for(int i=0;i<2;i++)settlementPrices[i]=Math.round(standardPrice(settlementTwo[i],quoteDepth)*BalanceTuning.multiplier(BalanceTuning.Key.COLE_PRICE)/2f);
+        }finally{Random.popGenerator();}
+    }
+    public static boolean settle(int count,int choice){
+        if(!present||!betrayed||resolved||count<2||count>3||hunterClaims()<count)return false;
+        planSettlements();Item[] items=count==3?settlementThree:settlementTwo;
+        if(choice<0||choice>=items.length)return false;int price=count==3?0:settlementPrices[choice];
+        if(Dungeon.gold<price)return false;Dungeon.gold-=price;Item prize=items[choice];
+        finishOutcome(count==3?3:2);give(prize);
+        if(encounter!=null&&Dungeon.level.mobs.contains(encounter))removeCole(encounter);
+        return true;
+    }
+    public static void showSettlement(int count){
+        planSettlements();Item[] items=count>=3?settlementThree:settlementTwo;
+        String[] labels=new String[items.length];for(int i=0;i<items.length;i++)labels[i]=items[i].toString()+" - "+(count>=3?Messages.get(Cole.class,"free"):settlementPrices[i]+" "+Messages.get(Cole.class,"gold"));
+        com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions(
+                Messages.get(Cole.class,"settlement"),Messages.get(Cole.class,"choose_prize"),labels){
+            @Override protected boolean hasInfo(int i){return true;}
+            @Override protected void onInfo(int i){com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(items[i]));}
+            @Override protected boolean enabled(int i){return count>=3||Dungeon.gold>=settlementPrices[i];}
+            @Override protected void onSelect(int i){settle(Math.min(3,count),i);}
+        });
+    }
+    public static boolean finishOutcome(int result){
+        if(!present||!betrayed||outcome!=0||result<1||result>4)return false;outcome=result;resolved=true;
+        for(Crew c:crews)if(c!=null)for(BountyHunter m:c.members)if(m!=null)m.endPursuit();
+        if(Dungeon.level!=null)for(Mob m:Dungeon.level.mobs)if(m instanceof BountyHunter&&((BountyHunter)m).coleReinforcement)((BountyHunter)m).endPursuit();
+        Badges.validateBounty(result);return true;
+    }
+    public static int coleDefeated(Cole cole){
+        if(!betrayed||resolved||encounter==null||encounter.id()!=cole.id())return 0;
+        int claims=releaseCashOnDeath();finishOutcome(1);return claims;
+    }
+    public static void onEscape(){
+        if(present&&betrayed&&!resolved&&Statistics.amuletObtained)finishOutcome(4);
     }
     public static boolean bossUnlocked() {
         int count = 0; for (int i = 0; i < 3; i++) if (contracts[i] != null && contracts[i].returned) count++;
@@ -429,7 +508,7 @@ public final class BountyBoard {
             weapon.enchant(Weapon.Enchantment.random());
             stock[3] = weapon.identify();
             stock[4] = new BloodmarkedBrand().quantity(2);
-            for (int i = 0; i < 5; i++) prices[i] = standardPrice(stock[i], OFFICE_DEPTH) * 2;
+            for (int i = 0; i < 5; i++) prices[i] = Math.round(standardPrice(stock[i], OFFICE_DEPTH) * BalanceTuning.multiplier(BalanceTuning.Key.COLE_PRICE));
         } finally { Random.popGenerator(); }
     }
 
@@ -459,6 +538,9 @@ public final class BountyBoard {
         b.put("boss_choice",bossChoice);b.put("boss_defeated",bossDefeated);b.put("betrayed",betrayed);b.put("departed",departed);b.put("hero_bounty",heroBounty);
         b.put("halls",hallsCell);b.put("meeting_depth",meetingDepth);b.put("encounter",encounter);b.put("resolved",resolved);
         b.put("halls_introduced",hallsIntroduced);b.put("combat_requested",combatRequested);b.put("response_pending",responsePending);
+        b.put("outcome",outcome);b.put("deepest_main",deepestMain);
+        for(int i=0;i<3;i++)b.put("settlement_three_"+i,settlementThree[i]);
+        for(int i=0;i<2;i++){b.put("settlement_two_"+i,settlementTwo[i]);b.put("settlement_price_"+i,settlementPrices[i]);}
         for(int i=0;i<3;i++)b.put("crew_"+i,crews[i]);
         for (int i = 0; i < 4; i++) b.put("contract_" + i, contracts[i]);
         for (int i = 0; i < 5; i++) { b.put("stock_" + i, stock[i]); b.put("price_" + i, prices[i]); }
@@ -474,6 +556,9 @@ public final class BountyBoard {
         hallsCell=b.contains("halls")?b.getInt("halls"):-1;meetingDepth=b.contains("meeting_depth")?b.getInt("meeting_depth"):-1;
         encounter=(Cole)b.get("encounter");resolved=b.getBoolean("resolved");hallsIntroduced=b.getBoolean("halls_introduced");
         combatRequested=b.getBoolean("combat_requested");responsePending=b.getBoolean("response_pending");
+        outcome=b.getInt("outcome");deepestMain=b.contains("deepest_main")?b.getInt("deepest_main"):Math.max(1,Statistics.deepestFloor);
+        for(int i=0;i<3;i++)settlementThree[i]=(Item)b.get("settlement_three_"+i);
+        for(int i=0;i<2;i++){settlementTwo[i]=(Item)b.get("settlement_two_"+i);settlementPrices[i]=b.getInt("settlement_price_"+i);}
         for(int i=0;i<3;i++)crews[i]=(Crew)b.get("crew_"+i);
         officeCell = b.contains("office") ? b.getInt("office") : -1;
         for (int i = 0; i < 4; i++) contracts[i] = (Contract)b.get("contract_" + i);

@@ -235,6 +235,8 @@ def outputs():
     result.update(wayward())
     from mystery import outputs as mystery
     result.update(mystery())
+    from bounty import outputs as bounty
+    result.update(bounty())
     from artwork_previews import outputs as artwork_previews
     result.update(artwork_previews())
     return result
@@ -256,7 +258,9 @@ def main():
     args=parser.parse_args()
     if args.bounty:
         from inventory import outputs as inventory
-        built=inventory()
+        from bounty import outputs as bounty
+        from readability import outputs as readability
+        built={**inventory(),**bounty(),**readability()}
     elif args.previews:
         from artwork_previews import outputs as artwork_previews
         built=artwork_previews()
@@ -304,7 +308,10 @@ def main():
         if path=='interfaces/menu_pane.png':expected=(128,128)
         if path=='environment/custom_tiles/elemental_cache.png':expected=(256,128)
         if path=='interfaces/painted_skills.png':expected=(1024,512)
-        if path=='interfaces/painted_badges.png':expected=(1024,512)
+        if path=='interfaces/painted_badges.png':expected=(1024,576)
+        if path in ('sprites/bounty_cole.png','sprites/bounty_board.png'):expected=(256,256)
+        if path=='interfaces/bounty_posters.png':expected=(1024,512)
+        if path=='interfaces/bounty_seals.png':expected=(192,64)
         if path=='effects/painted_food.png':expected=(64,64)
         if path=='effects/painted_notifications.png':expected=(1008,320)
         if path=='effects/painted_spells.png':expected=(512,64)
@@ -323,10 +330,10 @@ def main():
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]
-        if path.startswith('sprites/expedition_') or path=='sprites/lurking_horror.png':
+        if path.startswith('sprites/expedition_') or path.startswith('sprites/bounty_') or path=='sprites/lurking_horror.png':
             manifest['assets'][path]['character']=True
             manifest['assets'][path]['logical_size']=[im.width//8,im.height//8]
-            frame=256 if 'hunter' in path or 'horror' in path else 512
+            frame=256 if 'hunter' in path or 'horror' in path or 'bounty_' in path else 512
             manifest['assets'][path]['painted_rects']=[[x,y,x+frame,y+frame] for y in range(0,im.height,frame) for x in range(0,im.width,frame)]
         target=ASSETS/path
         if args.check:

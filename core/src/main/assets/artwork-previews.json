@@ -1532,6 +1532,71 @@
       ]
     }
   ],
+  "interfaces/bounty_posters.png": [
+    {
+      "file": "artwork/bounty-poster-0.png",
+      "rect": [
+        0,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "file": "artwork/bounty-poster-1.png",
+      "rect": [
+        256,
+        0,
+        512,
+        256
+      ]
+    },
+    {
+      "file": "artwork/bounty-poster-2.png",
+      "rect": [
+        512,
+        0,
+        768,
+        256
+      ]
+    },
+    {
+      "file": "artwork/bounty-poster-3.png",
+      "rect": [
+        768,
+        0,
+        1024,
+        256
+      ]
+    },
+    {
+      "file": "artwork/bounty-poster-4.png",
+      "rect": [
+        0,
+        256,
+        256,
+        512
+      ]
+    },
+    {
+      "file": "artwork/bounty-poster-5.png",
+      "rect": [
+        256,
+        256,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "artwork/bounty-poster-6.png",
+      "rect": [
+        512,
+        256,
+        768,
+        512
+      ]
+    }
+  ],
   "interfaces/buffs.png": [
     {
       "file": "artwork/status-0.png",
@@ -4724,6 +4789,28 @@
         0,
         416,
         128
+      ]
+    }
+  ],
+  "sprites/bounty_board.png": [
+    {
+      "file": "artwork/bounty-board.png",
+      "rect": [
+        0,
+        0,
+        256,
+        256
+      ]
+    }
+  ],
+  "sprites/bounty_cole.png": [
+    {
+      "file": "artwork/bounty-cole.png",
+      "rect": [
+        0,
+        0,
+        256,
+        256
       ]
     }
   ],
@@ -13030,6 +13117,15 @@
         448,
         2176,
         512,
+        2240
+      ]
+    },
+    {
+      "file": "artwork/item-552.png",
+      "rect": [
+        512,
+        2176,
+        576,
         2240
       ]
     }

@@ -74,6 +74,23 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class Notes {
+    public static class BountyRecord extends Record {
+        public int contract;
+        public BountyRecord(){}
+        public BountyRecord(int index,int floor){contract=index;depth=floor;}
+        @Override public Image icon(){
+            if(contract==4)return new com.shatteredpixel.shatteredpixeldungeon.ui.HeroPortrait(Dungeon.hero.heroClass,24);
+            com.shatteredpixel.shatteredpixeldungeon.BountyBoard.Contract c=com.shatteredpixel.shatteredpixeldungeon.BountyBoard.contracts[contract];
+            return c==null?new ItemSprite(ItemSpriteSheet.WARRANT):com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract.poster(c);
+        }
+        @Override protected int order(){return 950+contract;}
+        @Override public String title(){return contract==4?Messages.get(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole.class,"wanted_title",Dungeon.hero.name()):com.shatteredpixel.shatteredpixeldungeon.BountyBoard.contracts[contract].title();}
+        @Override public String desc(){return contract==4?Messages.get(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole.class,"hero_poster",Dungeon.hero.name(),Dungeon.hero.heroClass.title(),com.shatteredpixel.shatteredpixeldungeon.BountyBoard.heroBounty):com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract.text(com.shatteredpixel.shatteredpixeldungeon.BountyBoard.contracts[contract]);}
+        @Override public boolean equals(Object obj){return obj instanceof BountyRecord&&((BountyRecord)obj).contract==contract;}
+        @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("contract",contract);}
+        @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);contract=b.getInt("contract");}
+    }
+    public static void addBounty(int index,int floor){BountyRecord record=new BountyRecord(index,floor);if(!records.contains(record)){records.add(record);Collections.sort(records,comparator);}}
     public static class ChartRecord extends Record {
         public int cacheID;
         public ChartRecord() {}
@@ -165,7 +182,8 @@ public class Notes {
 
 		FIRE_TREASURY,
 		WATER_TREASURY,
-		LIGHTNING_TREASURY;
+		LIGHTNING_TREASURY,
+		COLE;
 	}
 	
 	public static class LandmarkRecord extends Record {
@@ -202,6 +220,7 @@ public class Notes {
 				case SHOP:
 					if (depth == 20)    return characterIcon(new ImpSprite());
 					else                return characterIcon(new ShopkeeperSprite());
+				case COLE: return characterIcon(new com.shatteredpixel.shatteredpixeldungeon.sprites.BountyBoardSprite());
 				case ALCHEMY:
 					return Icons.get(Icons.ALCHEMY);
 				case GARDEN:
@@ -308,6 +327,7 @@ public class Notes {
 				case WANDMAKER:     return Messages.get(Wandmaker.class, "desc");
 				case TROLL:         return Messages.get(Blacksmith.class, "desc");
 				case IMP:           return Messages.get(Imp.class, "desc");
+				case COLE:          return Messages.get(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.BountyNotice.class,"desc");
 
 				case DEMON_SPAWNER: return Messages.get(DemonSpawner.class, "desc");
 				case FIRE_TREASURY:

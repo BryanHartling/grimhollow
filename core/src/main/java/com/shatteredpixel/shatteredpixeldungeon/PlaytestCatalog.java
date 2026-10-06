@@ -44,6 +44,8 @@ public final class PlaytestCatalog {
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.armor.LeatherArmor.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.armor.MageArmor.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.armor.MailArmor.class);
+        items.add(com.shatteredpixel.shatteredpixeldungeon.items.armor.WardensCoat.class);
+        items.add(com.shatteredpixel.shatteredpixeldungeon.items.quest.BloodmarkedBrand.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.armor.NecromancerArmor.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.armor.PlateArmor.class);
         items.add(com.shatteredpixel.shatteredpixeldungeon.items.armor.PsychicArmor.class);

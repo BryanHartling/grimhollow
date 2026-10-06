@@ -922,6 +922,7 @@ public class Dungeon {
 	}
 	
 	public static void win( Object cause ) {
+        BountyBoard.onEscape();
 
 		updateLevelExplored();
 		Statistics.gameWon = true;

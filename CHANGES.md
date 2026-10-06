@@ -1,3 +1,9 @@
+# Bounty Board component 6 - 2026-10-06
+
+- Added seeded two-Warrant discounted choices and three-Warrant superior free choices, quoted from the deepest main region when offered and paid once. Cole's real death releases only accepted unpaid cash, including unfinished base claims, alongside one seeded equipment prize and finite unused supplies.
+- Cole now fights as a regional mobile mini-boss with saved health, normal crossbow/Bolas accuracy and collision, two unupgraded Bolas, one healing potion, smoke and repositioning use, and one ordinary reinforcement. The hero gets the first response; spent supplies, attached debuffs and per-enemy coat protection survive reloads. Resolution stops crew and reinforcement pursuit.
+- Added mutually exclusive cosmetic outcomes, zero-crew Amulet escape eligibility, painted Cole/board/Warrant/posters/seals/badges with enlargement, dynamic journal records, and Quests > Cole and Bounty Board with persistent balance controls. Existing saved plans retain their prices and supplies; Brand/Coat combat controls state their immediate effect.
+- The end-of-component unit/Necromancer/desktop gate passed (Runs=10 failures=0). A mistaken tuning accessor and badge-method placement were corrected; the final gate also checks ordinary Bolas damage and saved debuffs. Native layouts, Android packaging and complete class gates follow in component 7. Normal quest generation remains disabled until that integration checkpoint.
 # Bounty Board component 5 - 2026-10-06
 
 - Added saved Caves/City/Halls crews with 2/3/3 regional hunters, ordinary navigation and vulnerabilities, finite healing/debuffs/ammunition, controlled-survivor accounting and one protected hunter Warrant per crew. Floor rebuilds retain member health and spent supplies rather than creating replacement rewards.

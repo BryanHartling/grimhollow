@@ -30,6 +30,7 @@ public class CharHealthIndicator extends HealthBar {
 	private static final int HEIGHT = 1;
 	
 	private Char target;
+	private com.watabou.noosa.Image wantedSeal;
 	
 	public CharHealthIndicator( Char c ){
 		target = c;
@@ -40,6 +41,7 @@ public class CharHealthIndicator extends HealthBar {
 	protected void createChildren() {
 		super.createChildren();
 		height = HEIGHT;
+		wantedSeal=new com.watabou.noosa.Image("interfaces/bounty_seals.png");wantedSeal.logicalSize(4,4);add(wantedSeal);wantedSeal.visible=false;
 	}
 	
 	@Override
@@ -54,8 +56,17 @@ public class CharHealthIndicator extends HealthBar {
 			y = body.top - 2;
 			level( target );
 			visible = target.HP < target.HT || target.shielding() > 0 || target.incomingDOT() > 0;
+			wantedSeal.visible=target instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob
+				&&((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob)target).bountyContract>=0
+				&&((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob)target).bountyContract<3
+				&&target.invisible==0&&com.shatteredpixel.shatteredpixeldungeon.Dungeon.level.heroFOV[target.pos];
+			if(wantedSeal.visible){
+				wantedSeal.frame(new com.watabou.noosa.TextureFilm(wantedSeal.texture,64,64).get(((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob)target).bountyContract));
+				wantedSeal.logicalSize(4,4);wantedSeal.x=x+width+1;wantedSeal.y=y-1.5f;visible=true;
+			}
 		} else {
 			visible = false;
+			wantedSeal.visible=false;
 		}
 	}
 	

@@ -39,12 +39,18 @@ def centered(canvas,part,size,center=(32,32)):
 
 def outputs():
     motifs=cutouts('badges.png',6,7);details=cutouts('details.png',4,2)
-    badges=Image.new('RGBA',(1024,512));fx=Image.new('RGBA',(512,64))
+    badges=Image.new('RGBA',(1024,576));fx=Image.new('RGBA',(512,64))
     java=(ROOT/'core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/Badges.java').read_text()
     entries=re.findall(r'^\s*(\w+)\s*\(\s*(\d+)\s*[,)]',java,re.M)
     hashes={}
     for name,index in entries:
         index=int(index)
+        if name in ('COLES_FOLLY','BOUNTY_NEGOTIATED','BOUNTY_PROFESSIONAL','WANTED'):
+            from bounty import source
+            tile=Image.new('RGBA',(64,64));centered(tile,details[3],(62,62))
+            art=source({'COLES_FOLLY':'cole','BOUNTY_NEGOTIATED':'brand','BOUNTY_PROFESSIONAL':'coat','WANTED':'warrant'}[name])
+            centered(tile,art,(35,40),(32,30));put(badges,index,tile)
+            hashes.setdefault(tile.tobytes(),[]).append(name);continue
         key=name if name in MOTIFS else re.sub(r'_\d+$','',name)
         assert key in MOTIFS,(name,'unmapped badge')
         tier=0 if index<32 else 1 if index<64 else 2 if index<96 else 3 if index<120 else 4
@@ -58,7 +64,7 @@ def outputs():
             for n in range(count):centered(tile,motifs[40],(5,5),(32+(n-(count-1)/2)*6,49))
         put(badges,index,tile)
         hashes.setdefault(tile.tobytes(),[]).append(name)
-    assert len(entries)==98
+    assert len(entries)==102
     assert len(hashes)==len(entries),[names for names in hashes.values() if len(names)>1]
     for i,part in enumerate(details):
         tile=Image.new('RGBA',(64,64));centered(tile,part,(60,60))

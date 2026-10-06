@@ -21,8 +21,11 @@
     "botany-skills/plants.png": "d008d13ffeeccc547bd4a6acd7b9f37e8903ffa0ff3666ccc24726b3430c69e3",
     "botany-skills/psychic.png": "294e1b922d553ed5b4ab3f0acf43a3bb5ba1dd3c4b1d02ed359096c23a6ddd93",
     "botany-skills/seedpod.png": "4e46c10f9c5e0742d7f480b48a36d925810549ff4356baebafcf42c1052b5b25",
+    "bounty/board.png": "74815a45809107fdb45548c3693ce5e5bab3990cdd81970826e5091d87bfe829",
     "bounty/brand.png": "4d5e9adbccb4014c8ca5f96c37f3292216442c0d3cb3a871c99be9ec181ee32a",
     "bounty/coat.png": "14e48d02cc4408db28a177f1a457c8d9f0dd1879a0821ded237d07b8564e7a9c",
+    "bounty/cole.png": "a08e199fab7617eceaae60b3ad7052a3d5cc4760847d898b89f9a969112e0756",
+    "bounty/warrant.png": "c50274e5c9832d8c27f53272618be9dfe863d93681eee3e882636cf7c0bfdaa9",
     "caves-materials.png": "55e4629826ed07495ec5a2ad8b6577ab69f9fb85609161d6c8ca875bf68f75fa",
     "city-materials.png": "f3316e1efa15a6b91712798d1bc54397fdc2563b9f589cdb89d85c275869cafc",
     "details.png": "e00209673cb5d728a3fbc173f1ede610c474d37c8ab7f5f33eae0c56fda72631",
@@ -403,7 +406,7 @@
         1024,
         2240
       ],
-      "rgba_sha256": "2782f69f8a26cc1802002a321b7fd91fe80b79f97f81a67b5759bcdbe62e5c2d"
+      "rgba_sha256": "00218e1c7595492b3f2e30fa08343167e8c5c6c0cda7c063cb70e151c6b9c1b7"
     },
     "sprites/item_icons.png": {
       "size": [
@@ -9104,9 +9107,9 @@
     "interfaces/painted_badges.png": {
       "size": [
         1024,
-        512
+        576
       ],
-      "rgba_sha256": "19d65a6bffed6269dc659fc99578281879a94591e3528d2a0016ce978263aaea"
+      "rgba_sha256": "4091e5761a419ff17ff7a002db35c9916b27f21cace41587ef4a7d0948f1ce1c"
     },
     "effects/readability.png": {
       "size": [
@@ -17347,6 +17350,130 @@
         256
       ],
       "rgba_sha256": "bf6777f5f05070b8fe25a4b594007de76daae94e4e2b639aa829f369c7a7f29b"
+    },
+    "sprites/bounty_cole.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4232c0409b0508f8ee2bb23b5dd3a9f97a5a97fca6a3f2abffc7dd167ba82b20",
+      "character": true,
+      "logical_size": [
+        32,
+        32
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          256,
+          256
+        ]
+      ]
+    },
+    "sprites/bounty_board.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "0d377f612462af27d8c5a30da331ae90058cd4eb0ffc6569affa4dd36660c50b",
+      "character": true,
+      "logical_size": [
+        32,
+        32
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          256,
+          256
+        ]
+      ]
+    },
+    "interfaces/bounty_posters.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "8d844d6952a7acee1dd8274182916c4126412a9aed5d3f09a9c2eb5b88b20779"
+    },
+    "interfaces/bounty_seals.png": {
+      "size": [
+        192,
+        64
+      ],
+      "rgba_sha256": "b575ae1735935d40d7db61a28e6be1593372491b240eac0002f51fd7b1cb649a"
+    },
+    "artwork/item-552.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "db3c232ef58e263020d3b72349fd771207ba81626e4c742cbb7f451f359d4469"
+    },
+    "artwork/bounty-cole.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4232c0409b0508f8ee2bb23b5dd3a9f97a5a97fca6a3f2abffc7dd167ba82b20"
+    },
+    "artwork/bounty-board.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "0d377f612462af27d8c5a30da331ae90058cd4eb0ffc6569affa4dd36660c50b"
+    },
+    "artwork/bounty-poster-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "bbcdcf89f00a00928a726ea3ad56911c8054e5c084dc04164a9e203db5597ad3"
+    },
+    "artwork/bounty-poster-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3c39bc95fc0e414278500ea999fb19fd9b2ca9c72c705093a98d8fcd873e419a"
+    },
+    "artwork/bounty-poster-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6012f731da351a3b411c245f358b549976f66cbe441ac3ced88e8dc1ba2093ce"
+    },
+    "artwork/bounty-poster-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e48d61cc6b313b250e3c7c78fc9474f38ba8049467e3d6df74afb2a159cf96a5"
+    },
+    "artwork/bounty-poster-4.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d35d76afdee5b69f4cda4f51656a61121c0a44fdfa18a04dbc9e241fddd4cee8"
+    },
+    "artwork/bounty-poster-5.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "eabbe93791259fde2b588fa47c73170b381ee26fa65feb008df5c04e944a2c85"
+    },
+    "artwork/bounty-poster-6.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "db1389cd03c8b0037bbdd256ad0b3631e5d0abbbcc042fd94b3e9e2d9d455253"
     }
   }
 }

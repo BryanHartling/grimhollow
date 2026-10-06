@@ -8,7 +8,7 @@ import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
 
 public class WndBountyContract extends WndTitledMessage {
     public WndBountyContract(BountyBoard.Contract c) {
-        super(c.preview().sprite(), c.title(), text(c));
+        super(poster(c), c.title(), text(c));
         RedButton action = new RedButton(Messages.get(Cole.class, c.complete ? "return" : "accept")) {
             @Override protected void onClick() {
                 hide(); if (c.complete) BountyBoard.returnClaim(c.index); else BountyBoard.accept(c.index);
@@ -18,6 +18,10 @@ public class WndBountyContract extends WndTitledMessage {
         action.setRect(0, height+2, width, 20); add(action); resize(width, height+22);
     }
     @Override protected float targetHeight() { return Math.min(super.targetHeight(), PixelScene.uiCamera.height-74); }
+    public static com.watabou.noosa.Image poster(BountyBoard.Contract c){
+        com.watabou.noosa.Image image=new com.watabou.noosa.Image("interfaces/bounty_posters.png");
+        image.frame(new com.watabou.noosa.TextureFilm(image.texture,256,256).get(c.species));image.logicalSize(28,28);return image;
+    }
     public static String text(BountyBoard.Contract c) {
         String text = Messages.get(Cole.class, "poster", c.alias(), Messages.get(Cole.class, c.index==3 ? "boss_flavor" : "flavor_"+(c.index == 2 ? "warden" : c.species)), c.floor-5,
                 c.index == 2 ? Messages.get(Cole.class, "coat_prize") : Messages.get(Cole.class, "gold_prize", c.payment));

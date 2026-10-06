@@ -135,6 +135,7 @@ public class WndPlaytest extends Window {
         rows.add(new Entry("Edit carried equipment / recharge",WndPlaytest::inventory));
         rows.add(new Entry("Hero, class and progression",WndPlaytest::hero));
         rows.add(new Entry("Travel to any floor / quest branch",WndPlaytest::floors));
+        rows.add(new Entry(Messages.get(WndPlaytest.class,"quests"),WndPlaytest::quests));
         rows.add(new Entry("Heal, feed and clear harmful effects",()->changed(Playtest::restoreHero,WndPlaytest::root)));
         rows.add(new Entry("Refill all item charges",()->changed(Playtest::recharge,WndPlaytest::root)));
         rows.add(new Entry("Gold and alchemy energy",WndPlaytest::resources));
@@ -204,6 +205,7 @@ public class WndPlaytest extends Window {
         }
         rows.add(new Entry("Dragon expedition",()->tuningFamily("Dragon expedition",new int[]{4,5,6,7})));
         rows.add(new Entry("Artifacts and trinkets",WndPlaytest::tuningItems));
+        rows.add(new Entry(Messages.get(WndPlaytest.class,"bounty"),WndPlaytest::bountyTuning));
         rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_reset"),()->changed(BalanceTuning::reset,WndPlaytest::tuning)));
         show(Messages.get(WndPlaytest.class,"tuning"),Messages.get(WndPlaytest.class,"tuning_intro",BalanceTuning.changedCount()),rows,WndPlaytest::root);
     }
@@ -211,6 +213,29 @@ public class WndPlaytest extends Window {
         List<Entry> rows=new ArrayList<>();
         for(int group:groups)rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_group_"+group),()->tuningGroup(group)));
         show(title,"Shared balance controls; existing encounters keep their saved state.",rows,WndPlaytest::tuning);
+    }
+    public static void quests(){
+        show(Messages.get(WndPlaytest.class,"quests"),Messages.get(WndPlaytest.class,"quests_hint"),Arrays.asList(
+            new Entry(Messages.get(WndPlaytest.class,"bounty"),WndPlaytest::bountyQuest),
+            new Entry("Dragon expedition",WndPlaytest::floors)),WndPlaytest::root);
+    }
+    public static void bountyQuest(){
+        List<Entry> rows=new ArrayList<>();
+        rows.add(new Entry(Messages.get(WndPlaytest.class,"bounty_controls"),WndPlaytest::bountyTuning));
+        if(BountyBoard.present){
+            rows.add(new Entry(Messages.get(WndPlaytest.class,"bounty_status"),()->{
+                StringBuilder status=new StringBuilder(Messages.get(WndPlaytest.class,"bounty_status_line",BountyBoard.betrayed,BountyBoard.resolved,BountyBoard.hunterClaims(),BountyBoard.outcome));
+                BountyBoard.planContracts();for(BountyBoard.Contract c:BountyBoard.contracts)if(c!=null)status.append("\n\n").append(c.title()).append("\n").append(WndBountyContract.text(c));
+                present(new WndTitledMessage(new com.shatteredpixel.shatteredpixeldungeon.sprites.BountyBoardSprite(),Messages.get(WndPlaytest.class,"bounty"),status.toString()));
+            }));
+            for(int floor:new int[]{7,13,18,22})rows.add(new Entry(Messages.get(WndPlaytest.class,"bounty_travel",floor),()->travel(floor,0)));
+            if(Dungeon.branch==0&&Dungeon.depth==7)rows.add(new Entry(Messages.get(WndPlaytest.class,"bounty_board"),BountyBoard::showBoard));
+        }
+        show(Messages.get(WndPlaytest.class,"bounty"),Messages.get(WndPlaytest.class,BountyBoard.present?"bounty_quest_hint":"bounty_absent"),rows,WndPlaytest::quests);
+    }
+    private static void bountyTuning(){
+        List<Entry> rows=new ArrayList<>();for(int group:new int[]{13,14,15,16})rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_group_"+group),()->tuningGroup(group)));
+        show(Messages.get(WndPlaytest.class,"bounty_controls"),Messages.get(WndPlaytest.class,"bounty_tuning_hint"),rows,atHome()?WndPlaytest::tuning:WndPlaytest::bountyQuest);
     }
     private static void tuningItems(){
         show("Artifacts and trinkets","Controls for Grimhollow's carried companions and curios.",Arrays.asList(
@@ -231,7 +256,7 @@ public class WndPlaytest extends Window {
                     BalanceTuning.configured(key),key.min,key.max,n->{if(atHome())BalanceTuning.setShared(key,n);else BalanceTuning.set(key,n);},()->tuningGroup(group))));
         }
         if(group==1)rows.add(new Entry("Lurking Horror",()->tuningGroup(8)));
-        Runnable back=group>=4 && group<=7?()->tuningFamily("Dragon expedition",new int[]{4,5,6,7}):group==8?()->tuningGroup(1):group==11?WndPlaytest::tuningHatchling:group==10||group==12?WndPlaytest::tuningItems:WndPlaytest::tuning;
+        Runnable back=group>=13?WndPlaytest::bountyTuning:group>=4 && group<=7?()->tuningFamily("Dragon expedition",new int[]{4,5,6,7}):group==8?()->tuningGroup(1):group==11?WndPlaytest::tuningHatchling:group==10||group==12?WndPlaytest::tuningItems:WndPlaytest::tuning;
         show(Messages.get(WndPlaytest.class,"tuning_group_"+group),Messages.get(WndPlaytest.class,"tuning_hint_"+group),rows,back);
     }
     private static void number(String title,String body,int value,int min,int max,IntConsumer action,Runnable back){

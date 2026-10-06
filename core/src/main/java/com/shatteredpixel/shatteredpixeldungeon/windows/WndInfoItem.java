@@ -99,6 +99,13 @@ public class WndInfoItem extends Window {
 		}
 
 		IconTitle titlebar = new IconTitle( item );
+		if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant){
+			com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant paper=(com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant)item;
+			if(!paper.hunter&&!paper.claims.isEmpty()){
+				com.shatteredpixel.shatteredpixeldungeon.BountyBoard.Contract c=com.shatteredpixel.shatteredpixeldungeon.BountyBoard.contracts[paper.claims.iterator().next()];
+				if(c!=null)titlebar=new IconTitle(WndBountyContract.poster(c),item.title());
+			}else if(paper.hunter)titlebar=new IconTitle(new com.shatteredpixel.shatteredpixeldungeon.ui.HeroPortrait(com.shatteredpixel.shatteredpixeldungeon.Dungeon.hero.heroClass,24),item.title());
+		}
 		titlebar.color( color );
 		
 		RenderedTextBlock txtInfo = PixelScene.renderTextBlock( item.info(), 6 );

@@ -10,6 +10,21 @@
       "source": "sources/bounty/coat.png",
       "transparent_background": true,
       "prompt": "Use case: stylized-concept. Asset type: Grimhollow dark fantasy armor inventory and large examination painting, one isolated armor item on genuinely transparent background. Subject: Warden's Coat: a battered dark leather long coat beneath overlapping aged bronze plates across shoulders and torso, bronze old warden's seal at collar, sleeves, narrow waist, strong silhouette. Empty wearable coat, no person, no head, no legs. Hand-painted realistic gothic dungeon armor, rich worn leather, scratched bronze, muted warm brown and bronze with readable rim highlights, polished painted illustration rather than pixel art or cartoony render. Front three-quarter view, entire coat centered filling 80 percent of square canvas; no background, no ground shadow, no frame, no text, no logo, no holy symbols. Keep coat shape easy to read in a 64 pixel inventory icon."
+    },
+    {
+      "source": "sources/bounty/cole.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. A single isolated full-body dark gothic fantasy bounty hunter NPC for Grimhollow, genuinely transparent background. Cole: lean older male with scarred weathered face, grey swept-back hair, dark leather long hunter coat, muted bronze clasps, a compact medieval crossbow held across his lower torso and a small sheathed blade at belt. Strong distinguishable narrow silhouette, grounded realistic proportions, sturdy boots, entire body including feet, three quarter view facing viewer's right, relaxed but vigilant stance. Hand-painted realistic dungeon character illustration with sharp clean silhouette, visible face and materials, warm leather and muted bronze against charcoal clothing. No backdrop, no floor, no shadow outside body, no aura, no other people, no text, no frame, no logos. Fill 88 percent of canvas height. Readable shape when reduced to a tiny game sprite, restrained details, no pixel art."
+    },
+    {
+      "source": "sources/bounty/warrant.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. A single isolated dark fantasy quest item for Grimhollow, genuine transparent background. A folded ivory parchment Warrant, weathered and foxed, half unrolled with a prominent deep crimson wax seal and dark binding thread. Subtle meaningless ink traces, no readable words, numerals, signatures, skulls or text. Warm old parchment, tactile red wax, painted realism, richly readable silhouette and strong light edge contrast. Three-quarter view, whole object centered filling 80 percent of square canvas. No background, ground, cast shadow, frame or logos. Designed for a small inventory icon and a large detailed examination painting. Gothic dungeon style, no pixel art."
+    },
+    {
+      "source": "sources/bounty/board.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. One isolated dark gothic dungeon bounty board for Grimhollow, genuinely transparent background. A rough square weathered dark timber noticeboard hung with three large blank ivory wanted parchments, iron nails and deep crimson wax seals. Empty parchment faces intended for overlaid game portraits and text, no ink words, no readable text, no skulls, no other subjects. Bronze corner straps and battered lower shelf. Straight-on front view with whole rectangular board visible, fills 90 percent of canvas, strong silhouette with warm pale paper against charcoal wood. Hand-painted realistic illustration, sharp materials and edges, grounded old Prison office object. No surrounding wall, no background, no floor or shadows outside board, no pixel art."
     }
   ]
 }

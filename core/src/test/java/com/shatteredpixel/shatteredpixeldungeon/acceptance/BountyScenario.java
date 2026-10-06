@@ -61,6 +61,7 @@ final class BountyScenario {
             items();
             boss();
             crews();
+            resolution();
             System.out.println("BOUNTY COMPONENTS 1-2 PASS: ten reachable offices, finite double-price stock, isolated closure, disk receipts; accepted-only saved targets, real deaths, timing, Warrants and once-only rewards");
         } catch (java.io.IOException error) { throw new AssertionError(error); }
         finally { BountyBoard.AVAILABLE = enabled; BountyBoard.reset(); }
@@ -261,5 +262,72 @@ final class BountyScenario {
         for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)
             check(!(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter),"resolved crew spawn");
         System.out.println("BOUNTY COMPONENT 5 PASS: accepted-only 2/3/3 crews, real controlled/hostile deaths, one saved Warrant, member resources and Cole identity, both meetings, response and earned/unfinished payment receipts");
+    }
+    private static void leverage(int count){
+        BountyBoard.betrayed=BountyBoard.departed=true;BountyBoard.arrive(Dungeon.level);
+        for(int i=0;i<count;i++){BountyBoard.crews[i].complete=true;com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.hunter(i).collect(Dungeon.hero.belongings.backpack);}
+    }
+    private static void resolution(){
+        Dungeon.init();Dungeon.depth=7;Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();leverage(2);
+        BountyBoard.deepestMain=18;BountyBoard.planSettlements();
+        Item first=BountyBoard.settlementTwo[0];int price=BountyBoard.settlementPrices[0];
+        check(first instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon&&first.level()==2&&!first.cursed&&first.isIdentified(),"two-claim quality");
+        check(price==BountyBoard.standardPrice(first,16),"deepest-region half-double quote");
+        Bundle save=new Bundle();BountyBoard.store(save);BountyBoard.restore(save);BountyBoard.deepestMain=25;BountyBoard.planSettlements();
+        check(price==BountyBoard.settlementPrices[0]&&first.getClass()==BountyBoard.settlementTwo[0].getClass(),"settlement reroll/reprice");
+        Dungeon.gold=price-1;check(!BountyBoard.settle(2,0)&&!BountyBoard.resolved,"unaffordable settlement");
+        Dungeon.gold=price+99;check(BountyBoard.settle(2,0)&&BountyBoard.outcome==2&&Dungeon.gold==99,"negotiation price/outcome");
+        check(!BountyBoard.settle(2,1)&&!BountyBoard.finishOutcome(1),"duplicate prize/second outcome");
+        for(BountyBoard.Crew crew:BountyBoard.crews)if(crew!=null)for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter m:crew.members)if(m!=null)check(m.alignment==com.shatteredpixel.shatteredpixeldungeon.actors.Char.Alignment.NEUTRAL,"active pursuit after settlement");
+        Dungeon.init();Dungeon.depth=7;Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();leverage(3);Dungeon.gold=0;
+        BountyBoard.planSettlements();check(BountyBoard.settlementThree[0].level()==3&&BountyBoard.settlementThree[2].level()==3,"professional quality");
+        check(BountyBoard.settle(3,2)&&BountyBoard.outcome==3&&Dungeon.gold==0,"professional free single reward");
+        BountyBoard.onEscape();check(BountyBoard.outcome==3,"settlement also Wanted");
+        Dungeon.init();Dungeon.depth=7;Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();
+        BountyBoard.betrayed=true;Statistics.amuletObtained=false;BountyBoard.onEscape();check(BountyBoard.outcome==0,"Wanted without Amulet");
+        Statistics.amuletObtained=true;check(BountyBoard.hunterClaims()==0,"zero-crew escape fixture");BountyBoard.onEscape();check(BountyBoard.outcome==4&&BountyBoard.resolved,"zero-crew Wanted escape");
+        check(!Badges.filterReplacedBadges(false).contains(Badges.Badge.WANTED),"Playtest cosmetic badge eligible");
+        combat();
+        for(BalanceTuning.Key key:BalanceTuning.Key.values())if(key.group>=13){
+            check(!com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(BalanceTuning.class,key.id()).equals(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.NO_TEXT_FOUND),"unlocalized tuning label");
+            check(key.baseline>=key.min&&key.baseline<=key.max,"invalid default/range");
+        }
+        BalanceTuning.setShared(BalanceTuning.Key.COLE_BOLAS,3);Cole tuned=new Cole();tuned.startCombat();check(tuned.bolas.quantity()==3&&Playtest.unranked(),"shared combat tuning");
+        BalanceTuning.setShared(BalanceTuning.Key.COLE_BOLAS,2);
+        System.out.println("BOUNTY COMPONENT 6 PASS: seeded/priced single settlements, finite Cole combat/normal Bolas controls, saved supplies and debuffs, once-only accepted cash and personal loot, mutually exclusive outcomes, zero-crew escape and unranked tuning");
+    }
+    private static void combat(){
+        try{
+            Dungeon.init();Dungeon.depth=22;Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();
+            Dungeon.hero.lvl=30;Dungeon.hero.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();Dungeon.hero.sprite.link(Dungeon.hero);
+            BountyBoard.betrayed=BountyBoard.departed=true;BountyBoard.deepestMain=22;BountyBoard.arrive(Dungeon.level);
+            Cole cole=BountyBoard.encounter;check(cole!=null,"combat encounter");BountyBoard.requestCombat();
+            check(cole.HP==240&&cole.bolas.quantity()==2&&cole.alignment==com.shatteredpixel.shatteredpixeldungeon.actors.Char.Alignment.ENEMY&&BountyBoard.responsePending,"combat budget/response");
+            java.lang.reflect.Method act=Cole.class.getDeclaredMethod("act");act.setAccessible(true);
+            check((Boolean)act.invoke(cole)&&cole.bolas.quantity()==2,"first response consumes ammo");BountyBoard.onHeroSpent(1);
+            com.shatteredpixel.shatteredpixeldungeon.actors.Char target=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Rat(){@Override public int defenseSkill(com.shatteredpixel.shatteredpixeldungeon.actors.Char c){return 0;}};
+            target.HT=target.HP=500;target.sprite=null;cole.sprite=null;
+            int from=-1,to=-1;
+            for(int cell=0;cell<Dungeon.level.length();cell++)if(Dungeon.level.insideMap(cell)&&Dungeon.level.passable[cell]&&cell%Dungeon.level.width()<Dungeon.level.width()-4){
+                int end=cell+3;if(Dungeon.level.passable[end]&&new com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica(cell,end,com.shatteredpixel.shatteredpixeldungeon.mechanics.Ballistica.PROJECTILE).collisionPos==end){from=cell;to=end;break;}
+            }
+            check(from>=0,"clear ranged fixture");cole.pos=from;target.pos=to;
+            java.lang.reflect.Method attack=Cole.class.getDeclaredMethod("doAttack",com.shatteredpixel.shatteredpixeldungeon.actors.Char.class);attack.setAccessible(true);
+            int health=target.HP;attack.invoke(cole,target);check(cole.bolas.quantity()==1&&target.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Cripple.class)!=null&&health-target.HP<=9,"ordinary Bolas hit/damage/Cripple");
+            target.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Cripple.class).detach();attack.invoke(cole,target);check(cole.bolas.quantity()==0,"finite ammunition");
+            cole.HP=83;cole.healed=cole.smoked=cole.repositioned=cole.reinforcementCalled=true;cole.bolts=4;
+            com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.prolong(cole,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Weakness.class,4);
+            Bundle saved=new Bundle();saved.put("cole",cole);Cole restored=(Cole)saved.get("cole");
+            restored.startCombat();check(restored.HP==83&&restored.bolts==4&&restored.bolas.quantity()==0&&restored.healed&&restored.smoked&&restored.repositioned&&restored.reinforcementCalled&&restored.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Weakness.class)!=null,"combat reload restores resources/status");
+            BountyBoard.encounter=restored;Dungeon.level.mobs.remove(cole);Dungeon.level.mobs.add(restored);
+            BountyBoard.Contract common=BountyBoard.contracts[0],rare=BountyBoard.contracts[1];common.accepted=common.complete=common.paid=true;rare.accepted=true;
+            restored.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.ColeSprite(){@Override public com.watabou.noosa.particles.Emitter emitter(){return new com.watabou.noosa.particles.Emitter();}};restored.sprite.link(restored);
+            Heap corpse=Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.food.Food(),restored.pos);corpse.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite(corpse);corpse.sprite.link(corpse);
+            restored.HP=0;restored.die(Dungeon.hero);int cash=0,prizes=0;
+            for(Item item:corpse.items){if(item instanceof Gold)cash+=item.quantity();if(item==restored.prize)prizes++;}
+            check(cash==1800&&prizes==1&&BountyBoard.outcome==1&&rare.paid&&!rare.complete,"Cole real death fixed loot/unfinished claim");
+            restored.rollToDropLoot();check(corpse.items.size()==3&&BountyBoard.releaseCashOnDeath()==0,"duplicate loot/claims");
+            BountyBoard.store(saved);BountyBoard.restore(saved);check(BountyBoard.outcome==1&&BountyBoard.encounter.lootDropped,"death receipt reload");
+        }catch(ReflectiveOperationException error){throw new AssertionError(error);}
     }
 }

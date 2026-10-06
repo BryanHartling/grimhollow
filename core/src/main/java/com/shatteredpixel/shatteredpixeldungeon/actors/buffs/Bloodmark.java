@@ -7,10 +7,12 @@ public class Bloodmark extends FlavourBuff {
     public static float accuracy(com.shatteredpixel.shatteredpixeldungeon.actors.Char user, com.shatteredpixel.shatteredpixeldungeon.actors.Char enemy) {
         return user == com.shatteredpixel.shatteredpixeldungeon.Dungeon.hero
                 && com.shatteredpixel.shatteredpixeldungeon.Dungeon.hero.belongings.attackingWeapon() != null
-                && enemy.buff(Bloodmark.class) != null ? 1.25f : 1f;
+                && enemy.buff(Bloodmark.class) != null ? com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.multiplier(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.BRAND_ACCURACY) : 1f;
     }
     public static int armor(com.shatteredpixel.shatteredpixeldungeon.actors.Char user, com.shatteredpixel.shatteredpixeldungeon.actors.Char enemy, int dr) {
-        return accuracy(user, enemy) > 1 ? dr-dr/2 : dr;
+        return user==com.shatteredpixel.shatteredpixeldungeon.Dungeon.hero
+                &&com.shatteredpixel.shatteredpixeldungeon.Dungeon.hero.belongings.attackingWeapon()!=null&&enemy.buff(Bloodmark.class)!=null
+                ?dr-(int)Math.floor(dr*com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.multiplier(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.BRAND_PENETRATION)):dr;
     }
     @Override public int icon() { return BuffIndicator.TARGETED; }
     @Override public void tintIcon(com.watabou.noosa.Image icon) { icon.hardlight(0xD47758); }

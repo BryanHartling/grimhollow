@@ -32,6 +32,12 @@ def build_previews():
         assert images[path].getbbox(),('empty named item',index)
         lookup.setdefault('sprites/items.png',[]).append({'rect':[x*64,y*64,(x+1)*64,(y+1)*64],'file':path})
     del atlas
+    from bounty import source,outputs as bounty_outputs
+    for name in ('cole','board'):
+        add(f'sprites/bounty_{name}.png',(0,0,256,256),source(name),'bounty-'+name)
+    for i in range(7):
+        x,y=i%4*256,i//4*256
+        add('interfaces/bounty_posters.png',(x,y,x+256,y+256),bounty_outputs()['interfaces/bounty_posters.png'].crop((x,y,x+256,y+256)),f'bounty-poster-{i}')
 
     from monsters import CONTRACT,parts,rectangle,blank_atlas,pose_choice,density
     for spec in CONTRACT['monsters']:

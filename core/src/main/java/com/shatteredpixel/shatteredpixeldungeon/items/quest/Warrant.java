@@ -17,7 +17,7 @@ public class Warrant extends Item {
     public int payment;
     public String targetName = "";
     public LinkedHashSet<Integer> claims = new LinkedHashSet<>();
-    public Warrant() { unique = true; stackable = true; image = ItemSpriteSheet.EXPEDITION_MAP; }
+    public Warrant() { unique = true; stackable = true; image = ItemSpriteSheet.WARRANT; }
     public Warrant(int contract) {
         this(); claims.add(contract); payment = BountyBoard.contracts[contract].payment;
         targetName = BountyBoard.contracts[contract].alias();

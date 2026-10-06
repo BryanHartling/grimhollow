@@ -133,7 +133,8 @@ public class Armor extends EquipableItem {
                 || enemy.alignment != com.shatteredpixel.shatteredpixeldungeon.actors.Char.Alignment.ENEMY
                 || trueLevel() <= 0) return damage;
         enemy.wardensGuardUsed = true;
-        return (int)Math.ceil(damage * (1d-Math.min(1d, Math.max(0, trueLevel())/10d)));
+        return (int)Math.ceil(damage * (1d-Math.min(1d, Math.max(0, trueLevel())*
+                com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.get(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.COAT_FIRST_HIT)/100d)));
     }
     private boolean leatherVariant;
     private void updateAppearance(){if(leatherVariant){if(getClass()==LeatherArmor.class)image=ItemSpriteSheet.ARMOR_LEATHER_OCHRE;else if(getClass()==MailArmor.class)image=ItemSpriteSheet.ARMOR_LEATHER_ASH;}}
@@ -411,7 +412,7 @@ public class Armor extends EquipableItem {
 		}
 
 		int max = (boneConstruction?4:tier) * (2 + lvl) + augment.defenseFactor(lvl)+(boneConstruction?1:0)
-                + (wardensCoat ? Math.max(0, lvl-2) : 0);
+                + (wardensCoat ? Math.max(0, lvl-2)*com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.get(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.COAT_GROWTH) : 0);
 		if (lvl > max){
 			return ((lvl - max)+1)/2;
 		} else {

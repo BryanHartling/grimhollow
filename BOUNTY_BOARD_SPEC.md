@@ -1,6 +1,6 @@
 # Grimhollow Bounty Board Quest Draft
 
-Version 0.2 | 6 October 2026 | Design for review
+Version 0.3 | 6 October 2026 | Design for review
 
 Cole, a bounty hunter operating from an abandoned Prison office, offers three dangerous contracts and a small premium shop. Completing two contracts unlocks a bounty on the actual Prison boss. Cole pays that bounty, then sells out the hero. Hunter crews pursue the hero through the Caves, City, and Halls, until the hero negotiates a settlement, confronts Cole, or outlasts the contract.
 
@@ -92,17 +92,17 @@ The former 300/650-gold Common/Rare proposals cover one and roughly two ordinary
 
 Known, beneficially enchanted tier-3 weapons at +1/+2 cost substantially more than basic consumables under ordinary valuation. The revised payments support a few purchases or supplement the hero's savings, without buying Cole's entire stock.
 
-### Proposal for failed theft
+### Failed theft
 
 The Thieves' Armband retains its normal success probability, charge use, and successful item transfer. A failed theft attempt at Cole's stock permanently closes **his retail shop for this run**, including all remaining sale slots. Cole stays in the office, keeps the board available, honors earned payments, and does not attack or disappear before the betrayal.
 
-Suggested response:
+Cole's response:
 
 > "Keep those hands where I can see them. The next poster could be yours. Shop's closed."
 
 This is a threat and narrative foreshadowing, not an early hunter-crew trigger. Ordinary contract acceptance and the boss-driven betrayal continue normally. The theft confirmation must describe Cole's actual consequence rather than promise that an ordinary shopkeeper will flee.
 
-Route a failed attempt to the vendor owning that stock. Do not make another shopkeeper on the floor flee, remove unrelated merchandise, confiscate belongings, or silently reroll Cole's stock. Successful theft does not close the shop. Save the closed-shop flag through reloads and revisits. This response is a recommendation for review.
+Route a failed attempt to the vendor owning that stock. Do not make another shopkeeper on the floor flee, remove unrelated merchandise, confiscate belongings, or silently reroll Cole's stock. Successful theft does not close the shop. Save the closed-shop flag through reloads and revisits.
 
 ## 4 The four contracts
 
@@ -141,11 +141,11 @@ Suggested traits are **Ironhide**, adding 1 to both ends of the ordinary physica
 
 Wanted mobs remain non-boss enemies. They do not acquire blanket immunity to charms, knockback, inscriptions, or other ordinary tools. Their explicit reward is finite; do not also grant the unrelated curse-bound bonus-loot roll.
 
-### Proposed target identity and flavor
+### Target identity and flavor
 
-Wanted creatures retain their existing species painting and silhouette. While normally visible, show a painted crimson wanted seal beside the health bar, with bronze, silver, or gold detail for Common, Rare, or Legendary. A restrained bronze edge accent is an additional visual proposal. The alias appears in targeting and examination, with the base species available in the description. These indicators confer no debuff and never reveal an unseen creature or room.
+Wanted creatures retain their existing species painting and silhouette. While normally visible, show a painted crimson wanted seal beside the health bar, with bronze, silver, or gold detail for Common, Rare, or Legendary, and a restrained bronze edge accent. The alias appears in targeting and examination, with the base species available in the description. These indicators confer no debuff and never reveal an unseen creature or room.
 
-Suggested title and alias pairs:
+Initial title and alias pairs:
 
 | Base creature | Contract title | Target alias | Poster flavor |
 |---|---|---|---|
@@ -156,17 +156,17 @@ Suggested title and alias pairs:
 | Necromancer | An Unclosed Ledger | The Bone Clerk | "The dead on his ledger keep coming back to work." |
 | Legendary Guard | The Last Warden | Warden Morcant | "Kept the keys. Kept the coat. Never opened the cells." |
 
-These names and lines are proposals. Fix the chosen pair with its contract seed, avoid duplicate aliases within the run, and never rename ordinary members of the base species. The actual Prison boss retains its own identity, with an appropriate unique contract title.
+These names and lines are agreed for the initial roster. Fix the chosen pair with its contract seed, avoid duplicate aliases within the run, and never rename ordinary members of the base species. The actual Prison boss retains its own identity, with an appropriate unique contract title. The separate target-pool and combat-strength proposals remain subject to review.
 
 ### Warrants and quest records
 
-Accepting a bounty grants the hero a **Warrant**, a protected physical quest item naming the actual target and recording Cole's promised payment or prize. It is an IOU eligible for payment only after that target dies. Completion remains tied to the accepted contract record, not to holding the paper at the moment of death. Returning the completed claim to Cole pays and consumes it once. The journal mirrors its poster, last-seen floor, urgency, and claim state.
+Accepting a bounty grants the hero a **Warrant**, a protected physical quest item naming the actual target and recording Cole's promised payment or prize. While Cole lives, it is an IOU eligible for payment only after that target dies. Completion remains tied to the accepted contract record, not to holding the paper at the moment of death. Returning the completed claim to Cole pays and consumes it once. Cole's death settles any outstanding accepted cash claims through the rule in section 10, including unfinished targets. The journal mirrors its poster, last-seen floor, urgency, and claim state.
 
 Legendary's Warrant records the carried coat prize and the target's death. Returning it proves completion for boss-contract eligibility; it cannot create a second coat or an extra cash reward. The boss Warrant is settled once during the betrayal exchange.
 
 Each defeated hunter crew drops **one Warrant naming the hero**, replacing poster fragments. Its face value is the hero bounty issued at betrayal. These captured Warrants prove how many separate crews were sent against the hero and provide leverage for settlement. The living hero cannot cash an IOU payable on their own death, and the printed bounty does not become a guaranteed gold drop from every crew.
 
-**Stacking implementation proposal:** merge Warrants only when issuer, named target, reward terms, and claim state match. Different accepted bounties remain separate stacks; the three hunter Warrants share the hero's fixed bounty terms and stack together. Preserve individual contract or crew IDs within merged stacks, so quantity never invents extra claims or loses their identity. Splitting and merging cannot duplicate a receipt or count one crew twice.
+**Stacking rules:** merge Warrants only when issuer, named target, reward terms, and claim state match. Different accepted bounties remain separate stacks; the three hunter Warrants share the hero's fixed bounty terms and stack together. Preserve individual contract or crew IDs within merged stacks, so quantity never invents extra claims or loses their identity. Splitting and merging cannot duplicate a receipt or count one crew twice.
 
 Warrants cannot be sold, fed to the Hatchling, recycled, stolen, or destroyed as ordinary paper. If a backpack is full, place an issued Warrant in a safe recoverable heap while preserving the accepted quest record. They have no ordinary sale value. Keep the authoritative quest state independent of its presentation, including after a paid claim is removed.
 
@@ -182,7 +182,7 @@ The clock starts once the contract is accepted and the hero first enters its nam
 
 Stop the clock when the actual target dies. Returning to Cole later cannot remove an earned bonus. Menus, examination, real-world time, saving, and time while the game is closed do not count. Persist elapsed time across floor transitions and reloads.
 
-The normal poster and Warrant carry an **URGENT BOUNTY** stamp and the proposed line **"A fuller purse for a swift hand."** This hints at the reward without disclosing the percentage or countdown. Do not display turns remaining or a numerical deadline in ordinary journal views. Internal state still distinguishes an unstarted clock, active eligibility, earned bonus, and expired bonus for saving and Playtest inspection. An expired bonus never produces a mission-failed warning; Cole may acknowledge prompt work when paying it.
+The normal poster and Warrant carry an **URGENT BOUNTY** stamp and the line **"A fuller purse for a swift hand."** This hints at the reward without disclosing the percentage or countdown. Do not display turns remaining or a numerical deadline in ordinary journal views. Internal state still distinguishes an unstarted clock, active eligibility, earned bonus, and expired bonus for saving and Playtest inspection. An expired bonus never produces a mission-failed warning; Cole may acknowledge prompt work when paying it.
 
 ## 6 The Prison boss and betrayal
 
@@ -304,9 +304,9 @@ The hero can arrange a later meeting in **Cole's old office** using the board, o
 
 Summoning Cole at the office is a discrete meeting interaction. He does not appear merely because the hero passes the room. The Halls encounter is also optional; it cannot block stairs or the route to the final boss.
 
-**Proposal for arriving in the Halls without hunter Warrants:** Cole has come to collect the hero's bounty personally. Zero Warrants provides no peaceful settlement option. After settling any earned outstanding Prison claims, he gives a clear hostile opening line and the encounter becomes combat. Closing the dialogue gives the hero control before Cole's first attack. The hero may retreat or avoid his room entirely; defeating crews is not mandatory for reaching the Amulet or escaping. This replaces treating a zero-Warrant visit as an empty friendly meeting.
+**Arriving in the Halls without hunter Warrants:** Cole has come to collect the hero's bounty personally. Zero Warrants provides no peaceful settlement option. After settling any earned outstanding Prison claims, he gives a clear hostile opening line and the encounter becomes combat. Closing the dialogue gives the hero control before Cole's first attack. The hero may retreat or avoid his room entirely; defeating crews is not mandatory for reaching the Amulet or escaping.
 
-Suggested line:
+Cole's line:
 
 > "Still breathing. Good. I prefer to collect my own work."
 
@@ -318,11 +318,19 @@ At either meeting, Cole first pays all **earned, unpaid** Common and Rare reward
 
 Keep an explicit payment record. Do not put the debt in a payment chest or escrow box, refund earlier purchases, or drop previously paid bounty money again when Cole dies. Accepting, killing, returning, claiming, and paying are separate states.
 
-**Review item for unfinished contracts if Cole is killed:** the Warrant is not payable until its named target dies, so Cole cannot prepay unfinished contracts through a death-loot reserve. The simplest proposed policy is that killing Cole forfeits unearned Common/Rare cash claims, while accepted targets remain completable and the Legendary's carried coat remains recoverable. Give the player a warning before deliberately starting combat if such claims exist: **"Finish your work before you finish me. Dead men don't settle accounts."** Already earned, unpaid rewards are paid before combat as agreed. This forfeiture policy requires review; it is not an agreed reward rule.
+### Cash claims on Cole's death
+
+When Cole dies, he drops **all outstanding cash owed for accepted contracts**, including the base payments of Common/Rare bounties whose targets have not yet died. Include an urgency bonus only if the target's death already earned it. Already paid claims contribute nothing. Unaccepted offers, the Legendary's coat prize, and hunter Warrants naming the hero contribute no cash to this settlement.
+
+This is an explicit exception to the usual target-death requirement for payment: Cole's death releases the remaining accepted cash claims. It does not kill their targets or mark unfinished contracts complete. The targets remain available to fight, and the Legendary's carried coat remains recoverable under its existing rule.
+
+Resolve each eligible claim once and place its gold in a safe recoverable heap with Cole's death loot. Record that claim's payment as settled through Cole's death, and retire its cash Warrant so it cannot be redeemed again. Preserve the underlying contract and target identity for any unfinished encounter. A later target death may complete that encounter but grants no second payment or new urgency bonus.
+
+This claim gold is separate from Cole's ordinary finite personal loot. Never calculate it by returning previously paid bounty money or prior shop purchases. Saving before or after the death, re-entering the room, and splitting/merging Warrants cannot create another payment. There is no forfeiture warning or posthumous payment NPC.
 
 ## 11 Resolution and rewards
 
-Presenting captured hunter Warrants starts a conversation, not an automatic attack at the office. The player deliberately chooses confrontation or an available peaceful settlement there; the zero-Warrant Halls encounter follows its hostile proposal above. Settling with two hunter Warrants ends the pursuit and prevents obtaining a third crew Warrant afterward.
+Presenting captured hunter Warrants starts a conversation, not an automatic attack at the office. The player deliberately chooses confrontation or an available peaceful settlement there; the zero-Warrant Halls encounter follows its hostile rule above. Settling with two hunter Warrants ends the pursuit and prevents obtaining a third crew Warrant afterward.
 
 | Outcome | Requirement | Current-run result | Cosmetic badge |
 |---|---|---|---|
@@ -339,7 +347,7 @@ Seed the choices once and save them. Show the specific item and price before con
 
 - **Two hunter Warrants:** choose one of two offers at half Cole's double-standard price: a tier-4 weapon at +2 with a beneficial enchantment, or a ring at +2.
 - **Three hunter Warrants:** choose one of three free offers: a tier-5 weapon at +3 with a beneficial enchantment, a ring at +3, or scale/plate armor at +3 with a beneficial glyph.
-- **Cole defeated:** one seeded quality equipment reward and his finite remaining personal gold and unused consumables. No full exclusive-item set, second Warden's Coat, or repayment of old rewards.
+- **Cole defeated:** one seeded quality equipment reward, his finite remaining personal gold and unused consumables, and the outstanding accepted cash claims defined in section 10. No full exclusive-item set, second Warden's Coat, or repayment of previously paid rewards.
 
 These are initial reward proposals. Respect existing eligibility, item generation, and identification conventions. Do not apply unrequested extra Ring of Wealth or Doubloon multipliers to guaranteed quest payments or prizes; ordinary hunter drops retain their normal interactions.
 
@@ -380,7 +388,7 @@ Keep prose thematic. Base payments and named floors provide information needed t
 
 ## 13 Persistence and compatibility
 
-Keep one authoritative quest record per save. Persist the office and shop plan, fixed prices, failed-theft closure, each contract's identity and state, title and alias, target identity and floor, chosen traits, spawn state, death completion, elapsed bonus time, Warrant issuance and per-claim or per-crew IDs in stacks, reward ownership, payment receipts, boss identity, betrayal and departure state, hunter crew members and captured Warrants, Cole's location and encounter state including ammunition, seeded settlement choices, and final outcome.
+Keep one authoritative quest record per save. Persist the office and shop plan, fixed prices, failed-theft closure, each contract's identity and state, title and alias, target identity and floor, chosen traits, spawn state, death completion, elapsed bonus time, Warrant issuance and per-claim or per-crew IDs in stacks, reward ownership, payment receipts including settlement through Cole's death, the created claim-gold heap, boss identity, betrayal and departure state, hunter crew members and captured Warrants, Cole's location and encounter state including ammunition, seeded settlement choices, and final outcome.
 
 Persist Bloodmarked Brand through the ordinary buff mechanism. Persist the coat's intrinsic property through upgrading and class-armor conversion, and preserve first-hit consumption for individual enemies across their floor saves.
 
@@ -402,7 +410,7 @@ Do not expose reward duplication, multiple Legendary contracts, or additional no
 
 ### Proposed build order after design review
 
-1. Quest state, safe save migration, office placement, and fixed five-slot shop with double-standard pricing and the reviewed failed-theft response.
+1. Quest state, safe save migration, office placement, and fixed five-slot shop with double-standard pricing and the agreed failed-theft response.
 2. Board, explicit acceptance, wanted variants, seeded named posters, physical Warrants and stacking, implicit urgency, timing bonuses, and reward receipts.
 3. Bloodmarked Brand and Warden's Coat, including class-armor conversion and painted item art.
 4. Actual-boss contract, boss-choice consistency, payment, betrayal, and Cole's departure.
@@ -418,7 +426,7 @@ Extend the relevant existing gameplay, save, and native-interface checks during 
 
 Required coverage:
 
-1. Every generated test run has a reachable floor-7 office and exactly five finite shop slots, each quoted at twice the standard price; existing Prison quests and exits remain usable. Verify the reviewed failed-theft response, successful theft, correct vendor isolation, closed-stock persistence, and continued board/payment access.
+1. Every generated test run has a reachable floor-7 office and exactly five finite shop slots, each quoted at twice the standard price; existing Prison quests and exits remain usable. Verify the failed-theft response, successful theft, correct vendor isolation, closed-stock persistence, and continued board/payment access.
 2. Examining or buying does not accept a contract. Unaccepted targets never spawn. Accepted targets appear only on their saved named floor, including an already generated floor.
 3. All three contracts can be accepted together and can share a floor. Target identity, traits, floor, contract title, alias, and poster stay stable through reloads. Compatible wanted modifiers apply once. Visible wanted seals distinguish targets without exposing them through fog.
 4. Actual target death completes one contract through hero, ally, and environmental paths. Ordinary same-species mobs and summoned servants cannot impersonate the target.
@@ -428,9 +436,9 @@ Required coverage:
 8. Bloodmarked Brand lasts eight turns, modifies hero melee/ranged accuracy and physical penetration correctly, works on bosses, refreshes without stacking, and reveals only its target. It cannot permit attacks through walls or amplify allied attacks.
 9. Warden's Coat matches every row of its progression table. Test an actual +10 upgrade, temporary-level boosts, misses, fully armor-blocked hits, multi-hit attacks, direct spells, attached debuffs, environmental damage, and rounding. The first qualifying hit at +10 is zero damage and consumes that enemy's protection.
 10. Coat consumption survives retreat, re-equipping, revisits, reloads, and class-armor conversion. Glyphs, inscriptions, Etching, upgrades, and normal armor restrictions remain functional. The Legendary prize stays recoverable after a fall and never duplicates.
-11. Exactly three crews appear after betrayal, with the configured 2/3/3 composition, one hunter Warrant per defeated crew, persistent members/consumables, and no branch-floor or duplicate spawns. Resolution ends pending and active pursuit. Acceptance issues one correct Warrant; target death makes it payable; payment consumes its claim once. Compatible stacks preserve IDs, incompatible claims remain separate, and split/merge cannot manufacture gold or crew progress. Captured hero Warrants are leverage, not a cash payout to the living target.
-12. Both Cole meeting routes pay earned outstanding debts before any fight or settlement, with no repeated payout or recovery of previously spent shop gold. Verify the reviewed policy for unfinished contracts if Cole dies.
-13. One hunter Warrant does not automatically attack at the office. Two- and three-Warrant settlements offer their saved choices and end the bounty. A zero-Warrant Halls encounter follows the reviewed hostile-opening behavior, with debt settlement and a player response before combat. Cole's damage, consumables, reinforcement, and finite Bolas persist across interruptions, with normal dodge/collision/Cripple behavior and one finite kill reward.
+11. Exactly three crews appear after betrayal, with the configured 2/3/3 composition, one hunter Warrant per defeated crew, persistent members/consumables, and no branch-floor or duplicate spawns. Resolution ends pending and active pursuit. Acceptance issues one correct Warrant; target death makes it payable while Cole lives; payment consumes its claim once. Compatible stacks preserve IDs, incompatible claims remain separate, and split/merge cannot manufacture gold or crew progress. Captured hero Warrants are leverage, not a cash payout to the living target.
+12. Both Cole meeting routes pay earned outstanding debts before any fight or settlement, with no repeated payout or recovery of previously spent shop gold. Cole's death drops all accepted unpaid cash claims, including unfinished targets' base payments and only earned urgency bonuses. Unaccepted offers and hunter Warrants add no cash. Claims settle once, unfinished targets remain incomplete and available, and a later target death or reload grants no additional money or bonus. The cash stays recoverable if inventory is full or the corpse cell is unsuitable.
+13. One hunter Warrant does not automatically attack at the office. Two- and three-Warrant settlements offer their saved choices and end the bounty. A zero-Warrant Halls encounter follows the agreed hostile-opening behavior, with debt settlement and a player response before combat. Cole's damage, consumables, reinforcement, and finite Bolas persist across interruptions, with normal dodge/collision/Cripple behavior and one finite kill reward.
 14. Each of the four outcomes awards at most one cosmetic badge, with no future-run combat or generation bonus and normal Playtest eligibility rules. Wanted succeeds on escaping with the Amulet and an unresolved bounty, including zero crews defeated and zero hunter Warrants; it does not trigger on pickup alone or after a settlement/Cole kill.
 15. Older saves lacking quest data load safely. Floor travel, dialogue re-entry, full inventories, and deliberate reloads cannot lose mandatory progress or recreate paid prizes.
 16. All nine greetings and betrayals display correctly. Posters, art enlargement, journal entries, long text, and shop/contract controls fit native tablet portrait and desktop landscape layouts.
@@ -438,6 +446,6 @@ Required coverage:
 
 ## 16 Remaining review items
 
-The agreed item names, coat progression, Brand effects, quest structure, explicit acceptance, optional Legendary fight, double-standard shop prices, implicit urgency, physical Warrants replacing fragments, Cole's departure, expanded Wanted eligibility, debt settlement, finite Bolas in Cole's loadout, and cosmetic-only permanent rewards are fixed by the discussion. Specific naming and presentation treatments remain draft wording.
+The agreed item names, coat progression, Brand effects, quest structure, explicit acceptance, optional Legendary fight, double-standard shop prices, failed-theft response, implicit urgency, target identities and wanted seals, physical Warrants and stacking, Cole's departure and zero-Warrant Halls response, expanded Wanted eligibility, debt settlement including unfinished cash claims on Cole's death, finite Bolas in Cole's loadout, and cosmetic-only permanent rewards are fixed by the discussion.
 
-Review the revised proposed payouts, intrinsic Brand value, stock quality, failed-theft response, 500-turn bonus values, exact wanted pools/traits/aliases, target seal presentation, Warrant stacking details, crew floors and combat budgets, zero-Warrant Halls response, Cole's Bolas quantity and other combat budget, settlement rewards, accessible office doorway, and unfinished-contract payment on Cole's death. These proposals make the draft concrete without treating untested numbers or newly resolved edge cases as approved decisions.
+Review the revised proposed payouts, intrinsic Brand value, stock quality, 500-turn bonus values, exact wanted pools and combat traits, crew floors and combat budgets, Cole's Bolas quantity and other combat budget, settlement rewards, and accessible office doorway. These proposals make the draft concrete without treating untested numbers as approved decisions. Greeting and betrayal wording remain draft dialogue; the approved urgency, theft, target-flavor, and Halls lines are established above.

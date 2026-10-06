@@ -1,3 +1,9 @@
+# Bounty Board component 5 - 2026-10-06
+
+- Added saved Caves/City/Halls crews with 2/3/3 regional hunters, ordinary navigation and vulnerabilities, finite healing/debuffs/ammunition, controlled-survivor accounting and one protected hunter Warrant per crew. Floor rebuilds retain member health and spent supplies rather than creating replacement rewards.
+- Added the persistent office board, optional one-door Halls meeting room, discrete office summons, hero response after the hostile Halls introduction, and a single saved Cole encounter. Earned Prison debts pay once before a meeting; death settlement separately releases accepted unfinished cash claims without completing their targets.
+- End-of-component gate passed: core tests, Necromancer Runs=10 failures=0, crew deaths/receipts/rebuilds, both meeting routes and desktop distribution. Corrected a missing import and the headless death fixture's absent loot/hero sprites. Settlement choices, hostile combat and final paintings remain component 6; ordinary generation stays disabled until integration.
+
 # Bounty Board component 4 - 2026-10-06
 
 - Added one saved configured boss choice shared by the actual floor-10 generator and contract. Any two returned Prison claims unlock explicit boss acceptance; an unaccepted death cannot start the arc. Both Tengu and Chainwarden retain their ordinary progression code.

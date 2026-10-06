@@ -60,6 +60,7 @@ final class BountyScenario {
             contracts();
             items();
             boss();
+            crews();
             System.out.println("BOUNTY COMPONENTS 1-2 PASS: ten reachable offices, finite double-price stock, isolated closure, disk receipts; accepted-only saved targets, real deaths, timing, Warrants and once-only rewards");
         } catch (java.io.IOException error) { throw new AssertionError(error); }
         finally { BountyBoard.AVAILABLE = enabled; BountyBoard.reset(); }
@@ -208,5 +209,57 @@ final class BountyScenario {
         for(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass hc:com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.values())
             check(!com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(Cole.class,"betray_"+hc.name()).contains("!!!"),"missing class betrayal");
         System.out.println("BOUNTY COMPONENT 4 PASS: both actual boss choices, explicit unlock/acceptance, once-only payment/snapshot, departure/reload, no retroactive arc and all nine dialogues");
+    }
+    private static void crews(){
+        Dungeon.init();Dungeon.branch=0;Dungeon.depth=13;Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        Dungeon.hero.lvl=30;Dungeon.hero.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();Dungeon.hero.sprite.link(Dungeon.hero);
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)
+            check(!(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter),"pre-betrayal crew");
+        BountyBoard.betrayed=BountyBoard.departed=true;BountyBoard.heroBounty=7000;BountyBoard.arrive(Dungeon.level);
+        for(int region=0;region<3;region++){
+            if(region>0){Dungeon.depth=new int[]{13,18,22}[region];Dungeon.switchLevel(Dungeon.newLevel(),-1);}
+            BountyBoard.Crew c=BountyBoard.crews[region];int count=0;
+            for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)
+                if(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter){count++;check(!Dungeon.level.heroFOV[m.pos],"crew in sight");}
+            check(count==(region==0?2:3)&&c.spawned&&!c.complete,"crew quota");
+            c.members[0].HP-=5;c.members[0].ammunition=2;c.members[0].healed=true;
+            Bundle save=new Bundle();BountyBoard.store(save);BountyBoard.restore(save);BountyBoard.arrive(Dungeon.level);
+            c=BountyBoard.crews[region];int hp=c.members[0].HP;
+            Dungeon.level.mobs.remove(c.members[0]);BountyBoard.arrive(Dungeon.level);
+            check(c.members[0].HP==hp&&c.members[0].ammunition==2&&c.members[0].healed,"crew rebuild replenishes");
+            c.members[c.members.length-1].alignment=com.shatteredpixel.shatteredpixeldungeon.actors.Char.Alignment.ALLY;
+            for(int i=0;i<c.members.length;i++){
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter hunter=c.members[i];
+                Heap loot=Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.food.Food(),hunter.pos);
+                loot.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite(loot);loot.sprite.link(loot);
+                hunter.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.GuardSprite(){
+                    @Override public com.watabou.noosa.particles.Emitter emitter(){return new com.watabou.noosa.particles.Emitter();}
+                };hunter.sprite.link(hunter);hunter.HP=0;hunter.die(Dungeon.hero);
+                check(c.complete==(i==c.members.length-1),"controlled living hunter completes crew");
+            }
+            int warrants=0;
+            for(Heap heap:Dungeon.level.heaps.valueList())for(Item item:new java.util.ArrayList<>(heap.items))
+                if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant){
+                    warrants++;item.collect(Dungeon.hero.belongings.backpack);heap.items.remove(item);
+                }
+            check(warrants==1&&c.issued&&BountyBoard.hunterClaims()==region+1,"one crew claim");
+            BountyBoard.arrive(Dungeon.level);
+            for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)
+                check(!(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter),"dead crew respawns");
+        }
+        check(BountyBoard.encounter!=null&&BountyBoard.meetingDepth==22&&BountyBoard.hallsCell>=0,"optional Halls meeting");
+        BountyBoard.encounter.HP=1;Bundle save=new Bundle();BountyBoard.store(save);BountyBoard.restore(save);BountyBoard.arrive(Dungeon.level);
+        check(BountyBoard.encounter.HP==1&&Dungeon.level.mobs.contains(BountyBoard.encounter),"Cole encounter reload identity");
+        BountyBoard.requestCombat();check(BountyBoard.responsePending,"no hero response");BountyBoard.onHeroSpent(1);check(!BountyBoard.responsePending,"hero response not accepted");
+        Dungeon.depth=7;Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        check(BountyBoard.arrangeOffice()&&BountyBoard.meetingDepth==7,"office route");
+        BountyBoard.planContracts();BountyBoard.Contract common=BountyBoard.contracts[0],rare=BountyBoard.contracts[1];
+        common.accepted=common.complete=common.bonusEarned=true;rare.accepted=true;
+        int gold=Dungeon.gold;check(BountyBoard.payEarned()==720&&Dungeon.gold-gold==720&&BountyBoard.payEarned()==0,"earned debt duplicate");
+        check(BountyBoard.releaseCashOnDeath()==1200&&rare.paid&&!rare.complete&&BountyBoard.releaseCashOnDeath()==0,"unfinished death settlement");
+        BountyBoard.resolved=true;Dungeon.depth=13;Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)
+            check(!(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter),"resolved crew spawn");
+        System.out.println("BOUNTY COMPONENT 5 PASS: accepted-only 2/3/3 crews, real controlled/hostile deaths, one saved Warrant, member resources and Cole identity, both meetings, response and earned/unfinished payment receipts");
     }
 }

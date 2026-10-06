@@ -22,6 +22,9 @@ public class Warrant extends Item {
         this(); claims.add(contract); payment = BountyBoard.contracts[contract].payment;
         targetName = BountyBoard.contracts[contract].alias();
     }
+    public static Warrant hunter(int crew){
+        Warrant w=new Warrant();w.hunter=true;w.claims.add(crew);w.targetName=Dungeon.hero.name();w.payment=BountyBoard.heroBounty;return w;
+    }
     @Override public boolean isUpgradable() { return false; }
     @Override public boolean isIdentified() { return true; }
     @Override public int value() { return 0; }

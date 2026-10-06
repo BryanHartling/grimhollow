@@ -89,6 +89,8 @@ public class HallsLevel extends RegularLevel {
 		ArrayList<Room> rooms = super.initRooms();
 
 		rooms.add(new DemonSpawnerRoom());
+        if(com.shatteredpixel.shatteredpixeldungeon.BountyBoard.present&&Dungeon.branch==0&&Dungeon.depth==22)
+            rooms.add(new com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.ColeMeetingRoom());
 
 		return rooms;
 	}

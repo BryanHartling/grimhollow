@@ -21,10 +21,12 @@ public class BountyOfficeRoom extends SpecialRoom {
         BountyBoard.planShop();
         Cole cole = new Cole(); cole.pos = BountyBoard.officeCell = level.pointToCell(center());
         level.mobs.add(cole);
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.BountyNotice board=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.BountyNotice();
+        board.pos=cole.pos+level.width();level.mobs.add(board);
         int index = 0;
         for (int y = top+1; y < bottom && index < 5; y++) for (int x = left+1; x < right && index < 5; x++) {
             int cell = x + y * level.width();
-            if (cell == cole.pos || Math.abs(cell % level.width() - entrance().x)
+            if (cell == cole.pos || cell==board.pos || Math.abs(cell % level.width() - entrance().x)
                     + Math.abs(cell / level.width() - entrance().y) <= 1) continue;
             if (!BountyBoard.shopClosed && BountyBoard.stock[index] != null) {
                 Heap heap = level.drop(BountyBoard.stock[index], cell);

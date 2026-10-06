@@ -32,6 +32,27 @@ public final class BountyBoard {
     public static int bossChoice = -1, heroBounty;
     public static boolean bossDefeated, betrayed, departed;
     private static boolean dialogueOpen;
+    public static Crew[] crews=new Crew[3];
+    public static int hallsCell=-1, meetingDepth=-1;
+    public static Cole encounter;
+    public static boolean resolved, hallsIntroduced, combatRequested, responsePending;
+    public static class Crew implements com.watabou.utils.Bundlable {
+        public int index, floor;
+        public boolean spawned, complete, issued;
+        public BountyHunter[] members;
+        public boolean[] dead;
+        public Crew(){}
+        @Override public void storeInBundle(Bundle b){
+            b.put("index",index);b.put("floor",floor);b.put("spawned",spawned);b.put("complete",complete);b.put("issued",issued);
+            b.put("dead",dead);b.put("count",members.length);for(int i=0;i<members.length;i++)b.put("member_"+i,members[i]);
+        }
+        @Override public void restoreFromBundle(Bundle b){
+            index=b.getInt("index");floor=b.getInt("floor");spawned=b.getBoolean("spawned");complete=b.getBoolean("complete");issued=b.getBoolean("issued");
+            members=new BountyHunter[b.getInt("count")];dead=b.getBooleanArray("dead");
+            if(dead.length!=members.length)dead=new boolean[members.length];
+            for(int i=0;i<members.length;i++)members[i]=(BountyHunter)b.get("member_"+i);
+        }
+    }
 
     public static class Contract implements com.watabou.utils.Bundlable {
         public int index, species, floor, traits, payment;
@@ -86,6 +107,8 @@ public final class BountyBoard {
         stock = new Item[5]; prices = new int[5];
         contracts = new Contract[4];
         bossChoice=-1; heroBounty=0; bossDefeated=betrayed=departed=dialogueOpen=false;
+        crews=new Crew[3];hallsCell=meetingDepth=-1;encounter=null;
+        resolved=hallsIntroduced=combatRequested=responsePending=false;
     }
 
     public static void planContracts() {
@@ -143,9 +166,10 @@ public final class BountyBoard {
         }
         if (Dungeon.depth == OFFICE_DEPTH && shopClosed)
             for (Heap heap : level.heaps.valueList().toArray(new Heap[0])) if (owns(heap)) heap.destroy();
-        if(betrayed && Dungeon.depth==OFFICE_DEPTH) for(Mob mob:level.mobs.toArray(new Mob[0]))
-            if(mob instanceof Cole) removeCole((Cole)mob);
+        if(betrayed && (Dungeon.depth==OFFICE_DEPTH||Dungeon.depth==22)) for(Mob mob:level.mobs.toArray(new Mob[0]))
+            if(mob instanceof Cole && (resolved||Dungeon.depth!=meetingDepth||mob!=encounter)) removeCole((Cole)mob);
         if(Dungeon.depth==10 && contracts[3]!=null && contracts[3].complete && !departed) ensureDeparture();
+        if(betrayed){arriveCrews(level);arriveMeeting(level);}
     }
     /** Exhaustive candidates prevent an unlucky placement roll from losing a contract. */
     public static int spawnCell(Level level, Mob mob) {
@@ -171,6 +195,7 @@ public final class BountyBoard {
             c.elapsed += turns;
         // Retry a pending placement when occupied cells become free.
         if (Dungeon.level != null) arrive(Dungeon.level);
+        if(turns>0&&responsePending)responsePending=false;
     }
     public static void targetDied(Mob mob) {
         int index = mob.bountyContract;
@@ -253,6 +278,12 @@ public final class BountyBoard {
         if(cole.sprite!=null){cole.sprite.killAndErase();cole.sprite=null;}
     }
     public static void onHeroReady() {
+        if(present&&betrayed&&!resolved&&Dungeon.branch==0&&Dungeon.depth==22&&encounter!=null
+                &&!hallsIntroduced&&Dungeon.level.mobs.contains(encounter)&&Dungeon.level.heroFOV[encounter.pos]
+                &&com.watabou.noosa.Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene){
+            hallsIntroduced=true;Dungeon.hero.interrupt();Dungeon.hero.lastAction=null;Dungeon.hero.resting=false;
+            com.watabou.noosa.Game.runOnRenderThread(()->showMeeting(encounter,true));
+        }
         if(!present||Dungeon.branch!=0||Dungeon.depth!=10||departed||dialogueOpen||contracts[3]==null||!contracts[3].complete)return;
         if(!(com.watabou.noosa.Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene))return;
         dialogueOpen=true;Dungeon.hero.interrupt();Dungeon.hero.lastAction=null;Dungeon.hero.resting=false;
@@ -261,6 +292,123 @@ public final class BountyBoard {
             beginBetrayal();
             com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal(cole));
         });
+    }
+    private static void planCrews(){
+        for(int i=0;i<3;i++)if(crews[i]==null){
+            Crew c=crews[i]=new Crew();c.index=i;c.floor=new int[]{13,18,22}[i];
+            c.members=new BountyHunter[i==0?2:3];c.dead=new boolean[c.members.length];
+        }
+    }
+    private static void arriveCrews(Level level){
+        planCrews();
+        for(Crew c:crews)if(Dungeon.depth==c.floor){
+            for(Mob mob:level.mobs.toArray(new Mob[0]))if(mob instanceof BountyHunter&&((BountyHunter)mob).crew==c.index){
+                int member=((BountyHunter)mob).member;
+                if(member<0||member>=c.members.length||c.dead[member]){level.mobs.remove(mob);Actor.remove(mob);if(mob.sprite!=null)mob.sprite.killAndErase();}
+                else c.members[member]=(BountyHunter)mob;
+            }
+            if(resolved){for(BountyHunter m:c.members)if(m!=null)m.endPursuit();continue;}
+            if(c.complete)continue;
+            java.util.ArrayList<Integer> cells=crewCells(level,c.members.length);
+            if(cells==null)continue;
+            for(int i=0;i<c.members.length;i++)if(!c.dead[i]){
+                BountyHunter mob=c.members[i];if(mob!=null&&level.mobs.contains(mob))continue;
+                if(mob==null){mob=new BountyHunter();mob.configure(c.floor,c.index==0&&i==1?2:i);mob.crew=c.index;mob.member=i;c.members[i]=mob;}
+                mob.pos=cells.remove(Random.Int(cells.size()));mob.timeToNow();level.mobs.add(mob);
+                if(com.watabou.noosa.Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene)
+                    com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.add(mob);
+            }
+            c.spawned=true;
+        }
+    }
+    private static java.util.ArrayList<Integer> crewCells(Level level,int count){
+        if(!(level instanceof RegularLevel))return null;
+        java.util.LinkedHashMap<StandardRoom,java.util.ArrayList<Integer>> rooms=new java.util.LinkedHashMap<>();
+        com.watabou.utils.PathFinder.buildDistanceMap(level.entrance(),level.passable);
+        for(int cell=0;cell<level.length();cell++)if(level.passable[cell]&&!level.pit[cell]&&level.findMob(cell)==null
+                &&cell!=Dungeon.hero.pos&&cell!=level.exit()&&cell!=level.entrance()&&!level.heroFOV[cell]
+                &&level.distance(cell,Dungeon.hero.pos)>5&&level.distance(cell,level.entrance())>5
+                &&level.traps.get(cell)==null&&level.heaps.get(cell)==null&&com.watabou.utils.PathFinder.distance[cell]!=Integer.MAX_VALUE
+                &&((RegularLevel)level).room(cell) instanceof StandardRoom)
+            rooms.computeIfAbsent((StandardRoom)((RegularLevel)level).room(cell),r->new java.util.ArrayList<>()).add(cell);
+        java.util.ArrayList<java.util.ArrayList<Integer>> choices=new java.util.ArrayList<>();
+        for(java.util.ArrayList<Integer> cells:rooms.values())if(cells.size()>=count)choices.add(cells);
+        return choices.isEmpty()?null:Random.element(choices);
+    }
+    public static void hunterDied(BountyHunter mob){
+        if(!present||!betrayed||resolved||mob.crew<0||mob.crew>=3||Dungeon.branch!=0)return;
+        Crew c=crews[mob.crew];int member=mob.member;
+        if(c==null||c.floor!=Dungeon.depth||member<0||member>=c.members.length||c.dead[member]
+                ||c.members[member]==null||c.members[member].id()!=mob.id())return;
+        c.dead[member]=true;c.members[member]=null;
+        for(boolean dead:c.dead)if(!dead)return;
+        c.complete=true;
+        if(!c.issued){c.issued=true;Dungeon.level.drop(Warrant.hunter(c.index),Dungeon.level.insideMap(mob.pos)?mob.pos:Dungeon.hero.pos);}
+    }
+    public static int hunterClaims(){
+        java.util.HashSet<Integer> ids=new java.util.HashSet<>();
+        for(Item item:Dungeon.hero.belongings)if(item instanceof Warrant&&((Warrant)item).hunter)
+            for(int id:((Warrant)item).claims)if(id>=0&&id<3&&crews[id]!=null&&crews[id].complete)ids.add(id);
+        return ids.size();
+    }
+    public static boolean earnedDebt(){
+        for(int i=0;i<2;i++)if(contracts[i]!=null&&contracts[i].accepted&&contracts[i].complete&&!contracts[i].paid)return true;
+        return false;
+    }
+    public static int payEarned(){
+        int total=0;for(int i=0;i<2;i++)if(contracts[i]!=null){Contract c=contracts[i];
+            if(c.accepted&&c.complete&&!c.paid){total+=c.amount();c.paid=c.returned=true;Warrant.retireContract(i);}
+        }
+        if(total>0)new Gold(total).sale().award(Dungeon.hero);return total;
+    }
+    public static boolean arrangeOffice(){
+        if(!present||!betrayed||resolved||Dungeon.branch!=0||Dungeon.depth!=OFFICE_DEPTH||officeCell<0
+                ||hunterClaims()<1&&!earnedDebt())return false;
+        if(encounter==null)encounter=new Cole();
+        if(Dungeon.level.mobs.contains(encounter))return true;
+        meetingDepth=OFFICE_DEPTH;placeEncounter(Dungeon.level,officeCell);return Dungeon.level.mobs.contains(encounter);
+    }
+    private static void arriveMeeting(Level level){
+        if(resolved)return;
+        if(Dungeon.depth==22&&meetingDepth<0&&hallsCell>=0){meetingDepth=22;if(encounter==null)encounter=new Cole();}
+        if(Dungeon.depth==meetingDepth&&encounter!=null&&!level.mobs.contains(encounter))placeEncounter(level,meetingDepth==22?hallsCell:officeCell);
+    }
+    private static void placeEncounter(Level level,int origin){
+        if(origin<0||origin>=level.length())return;int best=-1,distance=Integer.MAX_VALUE;
+        for(int cell=0;cell<level.length();cell++)if(level.passable[cell]&&!level.pit[cell]&&level.findMob(cell)==null
+                &&cell!=Dungeon.hero.pos&&cell!=level.entrance()&&cell!=level.exit()&&level.heaps.get(cell)==null&&level.traps.get(cell)==null){
+            int d=level.distance(cell,origin);if(d<distance){best=cell;distance=d;}
+        }
+        if(best<0)return;encounter.pos=best;encounter.timeToNow();level.mobs.add(encounter);
+        if(com.watabou.noosa.Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene)
+            com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.add(encounter);
+    }
+    public static void requestCombat(){combatRequested=responsePending=true;Dungeon.hero.interrupt();Dungeon.hero.lastAction=null;}
+    public static void showMeeting(Cole cole,boolean halls){
+        int paid=payEarned();int claims=hunterClaims();
+        String text=(paid>0?Messages.get(Cole.class,"debt_paid")+"\n\n":"")+Messages.get(Cole.class,halls&&claims==0?"hostile":"meeting");
+        com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions(
+                cole.sprite(),cole.name(),text,Messages.get(Cole.class,claims==0&&halls?"continue":"confront"),Messages.get(Cole.class,"leave")){
+            @Override protected void onSelect(int index){if(index==0)requestCombat();}
+            @Override public void hide(){super.hide();if(halls&&claims==0)requestCombat();}
+        });
+    }
+    public static void showBoard(){
+        com.watabou.noosa.Game.runOnRenderThread(()->{
+            if(!betrayed){for(Mob m:Dungeon.level.mobs)if(m instanceof Cole){((Cole)m).interact(Dungeon.hero);return;}}
+            com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions(
+                    Messages.get(Cole.class,"board"),Messages.get(Cole.class,"note"),Messages.get(Cole.class,"arrange"),Messages.get(Cole.class,"leave")){
+                @Override protected boolean enabled(int index){return index==1||!resolved&&(hunterClaims()>0||earnedDebt());}
+                @Override protected void onSelect(int index){if(index==0&&arrangeOffice())showMeeting(encounter,false);}
+            });
+        });
+    }
+    /** Death pays accepted unfinished cash claims without completing their targets. */
+    public static int releaseCashOnDeath(){
+        int total=0;for(Contract c:contracts)if(c!=null&&c.accepted&&!c.paid&&c.payment>0){
+            total+=c.amount();c.paid=c.returned=true;Warrant.retireContract(c.index);
+        }
+        return total;
     }
     public static boolean bossUnlocked() {
         int count = 0; for (int i = 0; i < 3; i++) if (contracts[i] != null && contracts[i].returned) count++;
@@ -309,6 +457,9 @@ public final class BountyBoard {
         Bundle b = new Bundle();
         b.put("present", present); b.put("closed", shopClosed); b.put("office", officeCell);
         b.put("boss_choice",bossChoice);b.put("boss_defeated",bossDefeated);b.put("betrayed",betrayed);b.put("departed",departed);b.put("hero_bounty",heroBounty);
+        b.put("halls",hallsCell);b.put("meeting_depth",meetingDepth);b.put("encounter",encounter);b.put("resolved",resolved);
+        b.put("halls_introduced",hallsIntroduced);b.put("combat_requested",combatRequested);b.put("response_pending",responsePending);
+        for(int i=0;i<3;i++)b.put("crew_"+i,crews[i]);
         for (int i = 0; i < 4; i++) b.put("contract_" + i, contracts[i]);
         for (int i = 0; i < 5; i++) { b.put("stock_" + i, stock[i]); b.put("price_" + i, prices[i]); }
         quests.put("bounty_board", b);
@@ -320,6 +471,10 @@ public final class BountyBoard {
         present = b.getBoolean("present"); shopClosed = b.getBoolean("closed");
         bossChoice=b.contains("boss_choice")?b.getInt("boss_choice"):-1;bossDefeated=b.getBoolean("boss_defeated");
         betrayed=b.getBoolean("betrayed");departed=b.getBoolean("departed");heroBounty=b.getInt("hero_bounty");
+        hallsCell=b.contains("halls")?b.getInt("halls"):-1;meetingDepth=b.contains("meeting_depth")?b.getInt("meeting_depth"):-1;
+        encounter=(Cole)b.get("encounter");resolved=b.getBoolean("resolved");hallsIntroduced=b.getBoolean("halls_introduced");
+        combatRequested=b.getBoolean("combat_requested");responsePending=b.getBoolean("response_pending");
+        for(int i=0;i<3;i++)crews[i]=(Crew)b.get("crew_"+i);
         officeCell = b.contains("office") ? b.getInt("office") : -1;
         for (int i = 0; i < 4; i++) contracts[i] = (Contract)b.get("contract_" + i);
         for (int i = 0; i < 5; i++) { stock[i] = (Item)b.get("stock_" + i); prices[i] = b.getInt("price_" + i); }

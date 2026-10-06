@@ -44,6 +44,7 @@ public class WndInfoBuff extends Window {
 
 		titlebar.icon( buffIcon );
 		titlebar.label( Messages.titleCase(buff.name()), Window.TITLE_COLOR );
+		titlebar.enableArtwork();
 		titlebar.setRect( 0, 0, WIDTH, 0 );
 		add( titlebar );
 

@@ -161,6 +161,7 @@ public class WndHero extends WndTabbed {
 			else
 				title.label((hero.name() + "\n" + Messages.get(this, "title", hero.lvl, hero.className())).toUpperCase(Locale.ENGLISH));
 			title.color(Window.TITLE_COLOR);
+			title.enableArtwork();
 			title.setRect( 0, 0, WIDTH-16, 0 );
 			add(title);
 

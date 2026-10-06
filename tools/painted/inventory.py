@@ -49,11 +49,11 @@ def panels(name):
             for y in range(4) for x in range(4)]
 
 
-def icon(image):
+def icon(image, cell_size=64):
     box=image.getchannel('A').point(lambda a:255 if a>=16 else 0).getbbox()
     if not box:raise ValueError('Empty named inventory source')
     image=image.crop(box)
-    scale=min(56/image.width,56/image.height)
+    scale=min(cell_size*56/64/image.width,cell_size*56/64/image.height)
     image=image.resize((max(1,round(image.width*scale)),max(1,round(image.height*scale))),Image.Resampling.LANCZOS)
     # Lanczos can leave detached, nearly transparent ringing pixels. They are
     # invisible after GPU minification but would enlarge the runtime occupancy
@@ -62,60 +62,61 @@ def icon(image):
     pixels=np.array(image)
     pixels[pixels[:,:,3]<8]=0
     image=Image.fromarray(pixels)
-    out=Image.new('RGBA',(64,64))
-    out.alpha_composite(image,((64-image.width)//2,(64-image.height)//2))
+    out=Image.new('RGBA',(cell_size,cell_size))
+    out.alpha_composite(image,((cell_size-image.width)//2,(cell_size-image.height)//2))
     return out
 
 
-def build():
+def build(cell_size=64):
     config=json.loads((HERE/'items.json').read_text(encoding='utf-8'))
     semantics=json.loads(base_file(SEMANTICS))
-    original=Image.open(BytesIO(base_file('core/src/main/assets/sprites/items.png'))).convert('RGBA').resize((1024,2176),Image.Resampling.NEAREST)
-    atlas=Image.new('RGBA',(1024,2240))
+    original=Image.open(BytesIO(base_file('core/src/main/assets/sprites/items.png'))).convert('RGBA').resize((cell_size*16,cell_size*34),Image.Resampling.NEAREST)
+    atlas=Image.new('RGBA',(cell_size*16,cell_size*35))
     atlas.alpha_composite(original)
     replacements={}
+    make_icon=lambda image:icon(image,cell_size)
     for sheet,names in config['sheets'].items():
         if len(names)!=16:raise ValueError(f'{sheet}: expected sixteen named cells')
         for cell,name in enumerate(names):
             if name in RETAINED:continue
             if name in replacements:raise ValueError('Duplicate named replacement '+name)
-            replacements[name]=icon(panels(sheet)[cell])
+            replacements[name]=make_icon(panels(sheet)[cell])
     gear=parts('armor',2)
     for i,name in enumerate(('CLOTH','LEATHER','MAIL','SCALE','PLATE')):
-        replacements['ARMOR_'+name]=icon(gear[i])
+        replacements['ARMOR_'+name]=make_icon(gear[i])
     for hero in HEROES:
-        replacements['ARMOR_'+hero.upper()]=icon(parts(hero)[1])
-    replacements['ARMOR_LEATHER_OCHRE']=icon(ImageEnhance.Color(gear[1]).enhance(1.3))
-    replacements['ARMOR_LEATHER_ASH']=icon(ImageEnhance.Color(gear[1]).enhance(.08))
+        replacements['ARMOR_'+hero.upper()]=make_icon(parts(hero)[1])
+    replacements['ARMOR_LEATHER_OCHRE']=make_icon(ImageEnhance.Color(gear[1]).enhance(1.3))
+    replacements['ARMOR_LEATHER_ASH']=make_icon(ImageEnhance.Color(gear[1]).enhance(.08))
     for name,source in {'ARTIFACT_TOOLKIT':'KIT','ARTIFACT_BEACON':'BEACON'}.items():
         replacements[name]=replacements[source]
     # A disguised mimic and its ordinary chest share the exact same authored
     # closed pose, avoiding a visual tell introduced by independent art passes.
     from monsters import parts as monster_parts
     for row,name in enumerate(('CHEST','LOCKED_CHEST','CRYSTAL_CHEST','EBONY_CHEST')):
-        replacements[name]=icon(monster_parts('mimics')[row*4])
+        replacements[name]=make_icon(monster_parts('mimics')[row*4])
     from inventory_families import extend
-    extend(replacements,semantics)
+    extend(replacements,semantics,cell_size)
     lantern=Image.open(HERE/'sources/items/ashlight-lantern.png').convert('RGBA')
     if lantern.getchannel('A').getextrema()[0]!=0:raise ValueError('Lantern source lacks alpha')
     for panel,name in enumerate(('ASHLIGHT_OPEN','ASHLIGHT_CLOSED')):
         index=537+panel
         semantics['items'][name]={'id':index,'artIndex':index,'cellSize':64}
-        replacements[name]=icon(lantern.crop((panel*lantern.width//2,0,(panel+1)*lantern.width//2,lantern.height)))
+        replacements[name]=make_icon(lantern.crop((panel*lantern.width//2,0,(panel+1)*lantern.width//2,lantern.height)))
     semantics['items']['HATCHLING_MIMIC']={'id':539,'artIndex':539,'cellSize':64}
-    replacements['HATCHLING_MIMIC']=icon(Image.open(HERE/'sources/items/hatchling.png').convert('RGBA'))
+    replacements['HATCHLING_MIMIC']=make_icon(Image.open(HERE/'sources/items/hatchling.png').convert('RGBA'))
     semantics['items']['EXPEDITION_MAP']={'id':540,'artIndex':540,'cellSize':64}
-    replacements['EXPEDITION_MAP']=icon(Image.open(HERE/'sources/expedition/map.png').convert('RGBA'))
+    replacements['EXPEDITION_MAP']=make_icon(Image.open(HERE/'sources/expedition/map.png').convert('RGBA'))
     semantics['items']['BLANK_PARCHMENT']={'id':541,'artIndex':541,'cellSize':64}
-    replacements['BLANK_PARCHMENT']=icon(Image.open(HERE/'sources/sprint/parchment.png').convert('RGBA'))
+    replacements['BLANK_PARCHMENT']=make_icon(Image.open(HERE/'sources/sprint/parchment.png').convert('RGBA'))
     coin=Image.open(HERE/'sources/items/doubloon.png').convert('RGBA')
     if coin.getchannel('A').getextrema()[0]!=0:raise ValueError('Doubloon source lacks genuine alpha')
     for panel,name in enumerate(('FICKLE_HEADS','FICKLE_TAILS','GOLDEN_COMPANION'),start=1):
         x,y=panel%2,panel//2
         semantics['items'][name]={'id':541+panel,'artIndex':541+panel,'cellSize':64}
-        replacements[name]=icon(coin.crop((x*coin.width//2,y*coin.height//2,(x+1)*coin.width//2,(y+1)*coin.height//2)))
+        replacements[name]=make_icon(coin.crop((x*coin.width//2,y*coin.height//2,(x+1)*coin.width//2,(y+1)*coin.height//2)))
     from wayward import items as wayward_items
-    for offset,(name,art) in enumerate(wayward_items().items()):
+    for offset,(name,art) in enumerate(wayward_items(cell_size).items()):
         index=545+offset
         semantics['items'][name]={'id':index,'artIndex':index,'cellSize':64}
         replacements[name]=art
@@ -125,7 +126,7 @@ def build():
         index=semantics['items'][name]['artIndex']
         digest=hashlib.sha256(image.tobytes()).hexdigest()
         if index in written and written[index]!=digest:raise ValueError('Conflicting art index '+str(index))
-        atlas.paste(image,(index%16*64,index//16*64));written[index]=digest
+        atlas.paste(image,(index%16*cell_size,index//16*cell_size));written[index]=digest
     # Aliases such as DARTS and DART keep the same ID and therefore pixels.
     for entry in semantics['items'].values():
         if entry['artIndex'] in written:

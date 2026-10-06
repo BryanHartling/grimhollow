@@ -32,6 +32,7 @@ public class WndTitledMessage extends Window {
 	protected static final int WIDTH_MIN    = 120;
 	protected static final int WIDTH_MAX    = 220;
 	protected static final int GAP	= 2;
+	protected final Component titlebar;
 	private com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane description;
 	private float descriptionTop,descriptionHeight;
 
@@ -44,6 +45,8 @@ public class WndTitledMessage extends Window {
 	public WndTitledMessage( Component titlebar, String message ) {
 
 		super();
+		this.titlebar = titlebar;
+		if (titlebar instanceof IconTitle) ((IconTitle)titlebar).enableArtwork();
 
 		int maxWidth = Math.max(80, Math.min(WIDTH_MAX, (int)PixelScene.uiCamera.width - 32));
 		int width = Math.min(WIDTH_MIN, maxWidth);

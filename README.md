@@ -1,3 +1,11 @@
+# Artwork inspection - v1.27.0
+
+Click or tap the picture (or its small magnifying lens) in an examination window to open a large framed preview. **Back to description**, Back/Escape or a tap outside returns to the same window. Items, creatures/NPCs, plants, traps, terrain, buffs, talents, abilities, journal notes and hero portraits support it. Looking at artwork spends no turns or charges and does not identify belongings.
+
+The offline packer exports 256px inspection images from existing source paintings for named items, creature poses, plants, traps, status symbols, new skills, journal pictures and matching terrain materials. Hero portraits open their existing full class paintings. Composite tiles and entries without a larger source preserve their exact shipped frame; enlargement cannot add detail absent from that source. Preview textures load on demand and are released on close, including Android context-reload support. Gameplay/world artwork is unchanged.
+
+Windows: `desktop/build/windows/1.27.0/Grimhollow/Grimhollow.exe`. Android: `android/build/outputs/apk/debug/android-debug.apk`. See [acceptance evidence](verification/ACCEPTANCE.md) and [known issues](KNOWN_ISSUES.md).
+
 # Mystery and Playtest usability - v1.26.0
 
 Grimhollow's new descriptions now use atmospheric hints instead of hidden formulas and reward tables. Action costs and current equipment/status information remain available where needed to choose an action. Psychic **Rebuff** replaces Wrench: successful Push casts grant a brief shield. Gold collection does not heal the Golden Mimic.

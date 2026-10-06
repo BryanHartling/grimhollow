@@ -36,6 +36,7 @@ public class WndInfoMob extends WndTitledMessage {
 	public WndInfoMob( Mob mob ) {
 
 		super( new MobTitle( mob ), mob.info() );
+		((MobTitle)titlebar).artworkButton.givePointerPriority();
 
 		if (mob.isDirectableAlly()) {
 			com.shatteredpixel.shatteredpixeldungeon.ui.RedButton direct = new com.shatteredpixel.shatteredpixeldungeon.ui.RedButton(Messages.get(this, "direct")) {
@@ -66,6 +67,7 @@ public class WndInfoMob extends WndTitledMessage {
 		private RenderedTextBlock name;
 		private HealthBar health;
 		private BuffIndicator buffs;
+		private com.shatteredpixel.shatteredpixeldungeon.ui.ArtworkButton artworkButton;
 		
 		public MobTitle( Mob mob ) {
 			
@@ -82,6 +84,8 @@ public class WndInfoMob extends WndTitledMessage {
 
 			buffs = new BuffIndicator( mob, false );
 			if (!Char.hasProp(mob, Char.Property.OBJECT)) add( buffs );
+			artworkButton = new com.shatteredpixel.shatteredpixeldungeon.ui.ArtworkButton(() -> image, () -> name.text());
+			add(artworkButton);
 		}
 		
 		@Override
@@ -90,12 +94,15 @@ public class WndInfoMob extends WndTitledMessage {
 			image.x = 0;
 			image.y = Math.max( 0, name.height() + health.height() - image.height() );
 
-			float w = width - image.width() - GAP;
+			float imageColumn = Math.max(24, image.width() + 8);
+			artworkButton.setRect(0, image.y, imageColumn, Math.max(24, image.height()));
+			float w = width - imageColumn - GAP;
 
-			name.setPos(x + image.width() + GAP,
+			name.maxWidth((int)w);
+			name.setPos(x + imageColumn + GAP,
 					image.height() > name.height() ? y +(image.height() - name.height()) / 2 : y);
 
-			health.setRect(image.width() + GAP, name.bottom() + GAP, w, health.height());
+			health.setRect(imageColumn + GAP, name.bottom() + GAP, w, health.height());
 
 			buffs.maxBuffs = 50; //infinite, effectively
 			buffs.setRect(name.right(), name.bottom() - BuffIndicator.SIZE_SMALL-2, w - name.width(), 8);
@@ -103,9 +110,9 @@ public class WndInfoMob extends WndTitledMessage {
 			//If buff bar doesn't have enough room, move it below
 			if (!buffs.allBuffsVisible()){
 				buffs.setRect(0, health.bottom(), width, 8);
-				height = Math.max(image.y + image.height(), buffs.bottom());
+				height = Math.max(artworkButton.bottom(), buffs.bottom());
 			} else {
-				height = Math.max(image.y + image.height(), health.bottom());
+				height = Math.max(artworkButton.bottom(), health.bottom());
 			}
 		}
 	}

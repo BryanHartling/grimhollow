@@ -1,3 +1,11 @@
+# Artwork inspection - v1.27.0
+
+`artwork_previews.py` deterministically exports 1,128 256px inspection images from the existing paintings; `pack.py --previews` writes only `artwork/`, its rectangle lookup and the manifest. Full `python tools/recovery_assets.py --check` reconstructs **1,283 assets from 161 source sheets**, plus 55 launcher resources, and checks the lookup bytes. No image generation or Blender is needed. Existing source licenses and project GPL-3.0-or-later apply.
+
+Inventory packing now takes an optional cell size, including the same family tint/coating rules and aliases. Its default 64px export is unchanged. Traps likewise support a larger export with the same shape/color contract. Creature previews select the same source pose as the displayed animation rectangle. Status tints remain runtime-controlled. Terrain upgrades require an exact match to a shipped material cell; custom composites retain their current texture/frame. The lookup contains no item-type discovery logic. Hero face crops lead to their existing 1600x900 class paintings.
+
+Runtime loads one picture only while its modal is open; it participates in Android texture reload and is removed/disposed on close. The original image scale, logical units, filtering and gameplay assets remain untouched. Original paintings bound the available detail: enlargement does not invent missing details in retained small assets. The additional PNGs add about 73 MiB uncompressed to the asset set.
+
 # Mystery presentation - v1.26.0
 
 `mystery.py` cuts one authored Sewers descent gateway into the existing three-by-five logical footprint, with a locked-state center composed from the previously approved padlock painting. `playtest_presentation.py` replaces only the royal cushion cell; `botany_skills.py` places the new Rebuff at the stable WRENCH icon index. Sources and exact built-in imagegen prompts are in `sources/mystery/`. `pack.py --mystery` exports this component; full `--check` verifies all 155 assets, 161 sources and launcher resources without generation. Artwork is released with the project under GPL-3.0-or-later.

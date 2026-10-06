@@ -1,5 +1,8 @@
 # Known issues
 
+- v1.27.0: physical Samsung tablet review remains outstanding; native portrait mouse/touch fixtures are not a device test. Composite/retained small images without larger source detail use their exact shipped frame. Additional preview PNGs add about 73 MiB to the asset set and load only while open; new control text falls back to English in untranslated languages.
+- v1.27.0 verification: sandboxed Gradle could not access C:\.android; the existing authorized escalation route built successfully. Initial fixture compilation missed its local Crystal reference, then passed after correction. Creature artwork input priority is corrected. Full local interface attempts also encountered Windows clipboard contention in the existing issue-copy check, including a sequential retry; isolated artwork checks pass both orientations through the same fixture. Full CI retains every clipboard and interface assertion; no failed attempt is counted as passing.
+
 - v1.26.0 tag run 37403674799 passed every check except unchanged effects timing test 31: mean 1.5280ms, p95 2.0028ms against the strict <2ms gate. The identical game commit 789f0cdd4 passed all seven branch jobs in run 37403674554. GitHub denied the failed-job retry with HTTP 403; both runs remain available and no check was weakened. Later report-only commits do not change the game or packaged builds.
 
 - Historical v1.26.0 branch run 37401404725 failed the live encounter fixture after its deliberate death at action 150; zero HP reached the render check before the actor's completion flag. The fixture now waits for that scheduled callback while retaining unexpected-death, encounter coverage, summon/pickup and 120-frame death assertions. The failed run remains available.

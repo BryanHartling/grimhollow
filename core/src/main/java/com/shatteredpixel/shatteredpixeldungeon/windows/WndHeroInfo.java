@@ -24,6 +24,8 @@ public class WndHeroInfo extends WndTabbed {
         resize(pageWidth,windowHeight);
         HeroPortrait portrait=new HeroPortrait(hero,34);
         portrait.x=2;portrait.y=2;add(portrait);
+		ArtworkButton art=new ArtworkButton(()->portrait,()->Messages.titleCase(hero.title()));
+		art.setRect(2,2,38,36);add(art);
         RenderedTextBlock title=PixelScene.renderTextBlock(Messages.titleCase(hero.title()),10);
         title.maxWidth(pageWidth-44);title.hardlight(TITLE_COLOR);title.setPos(42,4);add(title);
         RenderedTextBlock hint=PixelScene.renderTextBlock(Messages.get(this,"handbook"),6);

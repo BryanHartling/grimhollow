@@ -4,14 +4,15 @@ from PIL import Image, ImageDraw, ImageFilter
 from inventory import icon
 HERE=Path(__file__).resolve().parent
 
-def items():
+def items(cell_size=64):
+    make_icon=lambda image:icon(image,cell_size)
     chart=Image.open(HERE/'sources/wayward/chart.png').convert('RGBA')
     mound=Image.open(HERE/'sources/wayward/cache.png').convert('RGBA')
     for source in (chart,mound):
         if source.getchannel('A').getextrema()[0]!=0:raise ValueError('Wayward source lacks genuine transparency')
-    images={'WAYWARD_CHART':icon(chart)}
+    images={'WAYWARD_CHART':make_icon(chart)}
     for panel,name in enumerate(('WAYWARD_FULL','WAYWARD_PARTIAL','WAYWARD_EMPTY')):
-        images[name]=icon(mound.crop((round(panel*mound.width/3),0,round((panel+1)*mound.width/3),mound.height)))
+        images[name]=make_icon(mound.crop((round(panel*mound.width/3),0,round((panel+1)*mound.width/3),mound.height)))
     # A painted cross taken from the actual chart, isolated with its red pigment.
     cross=chart.crop((round(chart.width*.64),round(chart.height*.42),round(chart.width*.76),round(chart.height*.55)))
     pixels=cross.load();alpha=Image.new('L',cross.size);a=alpha.load()
@@ -37,7 +38,7 @@ def items():
             if (x,y) not in largest:a[x,y]=0
     cross.putalpha(alpha)
     from PIL import ImageEnhance
-    images['WAYWARD_MARKER']=icon(ImageEnhance.Brightness(cross).enhance(2))
+    images['WAYWARD_MARKER']=make_icon(ImageEnhance.Brightness(cross).enhance(2))
     return images
 
 def outputs():

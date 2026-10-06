@@ -235,6 +235,8 @@ def outputs():
     result.update(wayward())
     from mystery import outputs as mystery
     result.update(mystery())
+    from artwork_previews import outputs as artwork_previews
+    result.update(artwork_previews())
     return result
 
 
@@ -249,8 +251,12 @@ def main():
     parser.add_argument('--icons',action='store_true',help='Package identity/skill changes; full --check remains the CI gate')
     parser.add_argument('--wayward',action='store_true',help='Package Chart items and memory visuals; full --check remains the CI gate')
     parser.add_argument('--mystery',action='store_true',help='Package exit, cushion and Rebuff; full --check remains the CI gate')
+    parser.add_argument('--previews',action='store_true',help='Package inspection paintings only; full --check remains the CI gate')
     args=parser.parse_args()
-    if args.mystery:
+    if args.previews:
+        from artwork_previews import outputs as artwork_previews
+        built=artwork_previews()
+    elif args.mystery:
         from mystery import outputs as mystery
         from playtest_presentation import outputs as presentation
         from botany_skills import outputs as skills
@@ -268,7 +274,7 @@ def main():
     failures=[]
     sources={p.relative_to(HERE/'sources').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'sources').rglob('*.png'))}
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
-    if args.hero or args.icons or args.wayward or args.mystery:
+    if args.hero or args.icons or args.wayward or args.mystery or args.previews:
         manifest['assets']=json.loads(MANIFEST.read_text(encoding='utf-8'))['assets']
     from monsters import sizes as monster_sizes
     fixed_monster_sizes=monster_sizes()
@@ -276,6 +282,7 @@ def main():
     painted_rects=coverage()
     for path,im in built.items():
         expected=(1024,2240) if path=='sprites/items.png' else (2048,1024) if path.startswith('sprites/hero_') else (512,512) if '/water' in path else (256,512) if '/raised_terrain' in path else (1024,1024)
+        if path.startswith('artwork/'):expected=(256,256)
         expected={'interfaces/title_grimhollow.png':(1920,1080),'interfaces/title_wordmark.png':(1024,144),'interfaces/title_mist.png':(1024,342)}.get(path,expected)
         expected=fixed_monster_sizes.get(path,expected)
         expected={'interfaces/buffs.png':(448,224),'interfaces/large_buffs.png':(1024,512),'interfaces/chrome.png':(512,384),'interfaces/status_pane.png':(1024,512),'interfaces/painted_glyphs.png':(512,256)}.get(path,expected)
@@ -323,6 +330,12 @@ def main():
         else:
             target.parent.mkdir(parents=True,exist_ok=True)
             im.save(target,optimize=False)
+    if args.previews or not (args.hero or args.icons or args.wayward or args.mystery):
+        from artwork_previews import index_bytes
+        index_path=ASSETS/'artwork-previews.json'
+        if args.check:
+            if not index_path.exists() or index_path.read_bytes().replace(b'\r\n',b'\n')!=index_bytes():failures.append('artwork-previews.json')
+        else:index_path.write_bytes(index_bytes())
     if not args.hero:
         from presentation import pack_launchers
         pack_launchers(args.check,failures)

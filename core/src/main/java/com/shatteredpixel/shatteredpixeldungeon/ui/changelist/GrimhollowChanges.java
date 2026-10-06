@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.26.0","More mystery, clearer companions and organized testing tools.");
+        ChangeInfo r=release(list,"v1.27.0","See the dungeon's paintings up close.");
+        note(r,Icons.MAGNIFY,"Artwork inspection","Tap an image or its small magnifying lens in an examination window to see a larger painting. Close it to return to the same description. Items, creatures, plants, traps, terrain, skills and journal notes support inspection, with sharper exports from the original paintings where available.");
+        r=release(list,"v1.26.0","More mystery, clearer companions and organized testing tools.");
         note(r,Icons.INFO,"Rediscover the dungeon","Descriptions of Grimhollow's additions now favor atmosphere and useful hints over formulas and hidden reward tables. Actions and current conditions remain readable.");
         note(r,Icons.TALENT,"Rebuff","Psychics can learn a brief protective ward that answers a successful Push. Golden Mimic companions accept directions from their harness or inspection window.");
         note(r,Icons.PREFS,"Testing tools","Travel, expedition settings, class items and companion controls are grouped into submenus. Pages are remembered, with shortcuts to the main menu and the last submenu. Generation controls choose which types can appear in future random finds and roaming spawns.");

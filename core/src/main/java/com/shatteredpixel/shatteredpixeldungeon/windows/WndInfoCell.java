@@ -157,6 +157,7 @@ public class WndInfoCell extends Window {
 		IconTitle titlebar = new IconTitle();
 		titlebar.icon(cellImage(cell));
 		titlebar.label(cellName(cell));
+		titlebar.enableArtwork();
 
 		if (customTile != null){
 			String customDesc = customTile.desc(x, y);

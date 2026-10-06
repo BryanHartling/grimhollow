@@ -39,6 +39,8 @@ public class WndJournalItem extends WndTitledMessage {
 		};
 		blocker.camera = PixelScene.uiCamera;
 		add(blocker);
+		// The journal's tap-to-dismiss area must not swallow artwork taps.
+		if (titlebar instanceof IconTitle) ((IconTitle)titlebar).enableArtwork();
 
 	}
 

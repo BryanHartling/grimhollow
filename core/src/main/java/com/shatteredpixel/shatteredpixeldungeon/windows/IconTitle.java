@@ -41,6 +41,7 @@ public class IconTitle extends Component {
 	protected Image imIcon;
 	protected RenderedTextBlock tfLabel;
 	protected HealthBar health;
+	private com.shatteredpixel.shatteredpixeldungeon.ui.ArtworkButton artworkButton;
 
 	private float healthLvl = Float.NaN;
 
@@ -95,8 +96,9 @@ public class IconTitle extends Component {
 		imIcon.y = y + (Math.max(0, 8 - imIcon.height()/2));
 		PixelScene.align(imIcon);
 
-		int imWidth = (int)Math.max(imIcon.width(), 16);
-		int imHeight = (int)Math.max(imIcon.height(), 16);
+		int imWidth = (int)Math.max(imIcon.width() + (artworkButton == null ? 0 : 8), artworkButton == null ? 16 : 24);
+		int imHeight = (int)Math.max(imIcon.height(), artworkButton == null ? 16 : 24);
+		if (artworkButton != null) artworkButton.setRect(x, y, imWidth, imHeight);
 
 		tfLabel.maxWidth((int)(width - (imWidth + GAP)));
 		tfLabel.setPos(x + imWidth + GAP,
@@ -124,6 +126,15 @@ public class IconTitle extends Component {
 
 	public void label( String label ) {
 		tfLabel.text( label );
+	}
+
+	public void enableArtwork() {
+		if (artworkButton == null) {
+			artworkButton = new com.shatteredpixel.shatteredpixeldungeon.ui.ArtworkButton(() -> imIcon, () -> tfLabel.text());
+			add(artworkButton);
+		}
+		artworkButton.givePointerPriority();
+		layout();
 	}
 
 	public void label( String label, int color ) {

@@ -18,12 +18,13 @@ def bottle(image,color):
     # Repaint the purple glass and crystal, preserving the authored bronze fittings.
     return colorize(image,color,(b>g*1.15)&(b>r*.75))
 
-def extend(replacements,semantics):
+def extend(replacements,semantics,cell_size=64):
+    make_icon=lambda image:icon(image,cell_size)
     config=json.loads((HERE/'items-continuation.json').read_text())
     for sheet,names in config['sheets'].items():
         assert len(names)==16,sheet
         for i,name in enumerate(names):
-            if name is not None:replacements[name]=icon(panels(sheet)[i])
+            if name is not None:replacements[name]=make_icon(panels(sheet)[i])
     colors=[(180,45,58),(203,126,42),(225,195,61),(74,163,84),(58,178,176),(67,149,215),
             (100,85,188),(191,70,159),(134,95,57),(69,69,78),(185,204,216),(235,224,191)]
     color_names=['CRIMSON','AMBER','GOLDEN','JADE','TURQUOISE','AZURE','INDIGO','MAGENTA','BISTRE','CHARCOAL','SILVER','IVORY']
@@ -37,10 +38,10 @@ def extend(replacements,semantics):
     darts=['ROT','INCENDIARY','ADRENALINE','HEALING','CHILLING','SHOCKING','POISON','CLEANSING','PARALYTIC','HOLY','DISPLACING','BLINDING']
     coatings=[(169,45,59),(239,105,38),(192,148,81),(91,186,99),(124,211,237),(147,133,233),
               (91,144,47),(221,131,211),(213,166,56),(249,229,151),(81,184,184),(106,109,122)]
-    yy,xx=np.mgrid[:64,:64]
+    yy,xx=np.mgrid[:cell_size,:cell_size]
     for name,color in zip(darts,coatings):
         source=replacements['DART'];pixels=np.array(source)
-        mask=(xx<35)&(yy>31)&(pixels[:,:,3]>0)
+        mask=(xx<35*cell_size/64)&(yy>31*cell_size/64)&(pixels[:,:,3]>0)
         replacements[name+'_DART']=colorize(source,color,mask)
     for name,color in [('AQUA',(48,170,185)),('TOXIC',(110,177,45)),('ICY',(146,216,242))]:
         replacements['ELIXIR_'+name]=bottle(replacements['ELIXIR_ARCANE'],color)
@@ -56,7 +57,7 @@ def extend(replacements,semantics):
         gray=ImageOps.grayscale(image).convert('RGBA');gray.putalpha(image.getchannel('A'))
         replacements[name+'_HOLDER']=gray
     from status import symbols
-    replacements['SOMETHING']=icon(symbols()[87])
+    replacements['SOMETHING']=make_icon(symbols()[87])
     # Every public item ID is accounted for, including the DART/DARTS alias.
     by_index={semantics['items'][name]['artIndex']:art for name,art in replacements.items()}
     missing=[]

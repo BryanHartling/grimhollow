@@ -1,3 +1,10 @@
+# Artwork inspection - v1.27.0
+
+- Add a shared read-only artwork modal and a painted magnifier with a minimum 24-unit touch target. Wire item/heap, creature/NPC, terrain, plant, trap, buff, talent, ability/subclass, journal and hero detail artwork. Preserve the originating window and its actions; journal dismissal and creature description controls do not swallow image taps.
+- Package 1,128 inspection images through the existing offline pipeline, using the same committed paintings. Match displayed texture rectangles rather than item types so unknown appearances, variants and secret identities remain intact. Full class paintings are already shipped; composite/legacy art without a larger source uses its original frame. Default atlas pixels/indices and gameplay are unchanged.
+- Use independent image geometry and scale vectors; opening a preview cannot resize a source sprite. Load one preview texture on demand through the context-reload cache, then dispose its GPU texture and bitmap on close. Add localized English-fallback controls and a home-screen Update Log entry.
+- Extend the existing native interface fixture for 11 subjects, real mouse/touch input, window bounds, modal return, original scale/frame, charge/turn/inventory/identification invariants and texture disposal. No new verification harness or art generation is introduced; test 45 remains abandoned.
+
 # Mystery and Playtest usability - v1.26.0
 
 - Repair individual and bulk Waterskin refill, expose the Golden Mimic's normal ally directions from both examination and its harness, and present the Hatchling's imminent meal as a modal warning while clearing queued movement and rest.

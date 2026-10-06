@@ -175,5 +175,13 @@ public class TextureCache {
 	public synchronized static boolean contains( Object key ) {
 		return all.containsKey( key );
 	}
+
+	/** Look up an already loaded asset without loading unrelated textures. */
+	public synchronized static Object sourceOf(SmartTexture texture) {
+		for (java.util.Map.Entry<Object, SmartTexture> entry : all.entrySet()) {
+			if (entry.getValue() == texture) return entry.getKey();
+		}
+		return null;
+	}
 	
 }

@@ -467,6 +467,15 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
 
     /** Review actual inventory, scrolling descriptions and class controls in both orientations. */
     private void interfaceTick() {
+        if(Boolean.getBoolean("grimhollow.artworkReview")){
+            // Run the same artwork assertions independently of clipboard-heavy
+            // Playtest coverage. Normal CI still executes the entire fixture.
+            if(Game.scene() instanceof GameScene && frames>=230 && frames%20==0){
+                try{if(artworkReview())Gdx.app.exit();}
+                catch(ReflectiveOperationException error){throw new AssertionError(error);}
+            }
+            return;
+        }
         if(Boolean.getBoolean("grimhollow.polishReview")){polishTick();return;}
         if(frames>=1200){playtestTick();return;}
         if(!(Game.scene() instanceof GameScene))return;
@@ -1375,7 +1384,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 case 73:if(!playtestClickPage("Reset all balance tuning"))return;break;
                 case 74:
                     if(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.changedCount()!=0||!Playtest.enabled())throw new AssertionError("58: tuning reset/playtest isolation");
-                    if(!mysteryMenuChecks())return;
+                    if(mysteryMenuStep<6 && !mysteryMenuChecks())return;
+                    if(!artworkReview())return;
                     System.out.println("TEST 58 UI PASS: balance menu, paging, numeric input, saved changes and reset via native pointer input");
                     Gdx.app.exit();return;
             }
@@ -2081,6 +2091,94 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 System.out.println("PLAYTEST ORGANIZATION PASS: grouped item exclusions, native toggle input, class Crystal, persistent submenu page and main/resume navigation; failures=0");return true;
         }
         return false;
+    }
+    private int artworkStep;
+    private com.shatteredpixel.shatteredpixeldungeon.ui.Window artworkOrigin;
+    private Image artworkSource;
+    private float artworkScaleX,artworkScaleY,artworkTime;
+    private int artworkCharge,artworkBagSize;
+    private com.watabou.utils.RectF artworkFrame;
+    private boolean artworkPotionKnown;
+    private com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision artworkPotion;
+    private final com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal artworkCrystal=new com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal();
+    private static final String[] ART_SUBJECTS={"item","unknown-potion","creature","plant","trap","terrain","talent","buff","journal","class","composite-tile"};
+
+    /** Extend the existing native interface fixture with real mouse/touch artwork taps. */
+    private boolean artworkReview() throws ReflectiveOperationException {
+        com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal crystal=artworkCrystal;
+        int subject=artworkStep/4,phase=artworkStep++%4;
+        if(subject>=ART_SUBJECTS.length){
+            System.out.println("ARTWORK UI PASS: 11 subjects, source-resolution exports/fallback, native mouse/touch, modal return, independent scale, no turns/charges/identification changes; failures=0");
+            return true;
+        }
+        if(phase==0){
+            closeReviewWindows();
+            switch(subject){
+                case 0:artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,crystal);break;
+                case 1:
+                    artworkPotion=new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision();
+                    artworkPotionKnown=artworkPotion.isIdentified();
+                    artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(artworkPotion);break;
+                case 2:artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoMob(new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Skeleton());break;
+                case 3:
+                    com.shatteredpixel.shatteredpixeldungeon.plants.Plant plant=new com.shatteredpixel.shatteredpixeldungeon.plants.Sungrass();
+                    plant.pos=Dungeon.hero.pos;Dungeon.level.plants.put(plant.pos,plant);
+                    artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoPlant(plant);break;
+                case 4:
+                    com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.BurningTrap().set(Dungeon.hero.pos).reveal();
+                    Dungeon.level.traps.put(trap.pos,trap);
+                    artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoTrap(trap);break;
+                case 5:artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoCell(Dungeon.hero.pos);break;
+                case 6:artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoTalent(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.WRENCH,1,null);break;
+                case 7:artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoBuff(new com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Haste());break;
+                case 8:
+                    com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord note=new com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord(com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark.DISTANT_WELL,Dungeon.depth);
+                    artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndJournalItem(note.icon(),note.title(),note.desc());break;
+                case 9:artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroInfo(HeroClass.NECROMANCER);break;
+                default:
+                    Image composite=new Image("environment/custom_tiles/painted_sewer_exit.png",0,0,64,128);
+                    composite.logicalSize(16,32);
+                    artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage(composite,"Gateway","A composite tile keeps its original frame.");
+            }
+            GameScene.show(artworkOrigin);
+            artworkTime=Dungeon.hero.cooldown();artworkCharge=crystal.charges();artworkBagSize=Dungeon.hero.belongings.backpack.items.size();
+        }else if(phase==1){
+            interfaceBounds();
+            capture("artwork-"+ART_SUBJECTS[subject]+"-description");
+            Object button=findArtworkButton(artworkOrigin);
+            if(button==null)throw new AssertionError("Missing artwork tap: "+ART_SUBJECTS[subject]);
+            @SuppressWarnings("unchecked") java.util.function.Supplier<Image> supplier=(java.util.function.Supplier<Image>)RecoveryChecks.field(button,"artwork");
+            artworkSource=supplier.get();artworkScaleX=artworkSource.scale.x;artworkScaleY=artworkSource.scale.y;artworkFrame=artworkSource.frame();
+            if(artworkSource==null||artworkSource.texture==null)throw new AssertionError("Empty examination artwork");
+            pointerGestureReview(button,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
+        }else if(phase==2){
+            com.shatteredpixel.shatteredpixeldungeon.windows.WndArtwork viewer=null;
+            for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndArtwork)viewer=(com.shatteredpixel.shatteredpixeldungeon.windows.WndArtwork)child;
+            if(viewer==null||artworkOrigin.parent==null)throw new AssertionError("Artwork modal did not preserve its description: "+ART_SUBJECTS[subject]+" source="+artworkSource.width+"x"+artworkSource.height+" origin="+artworkOrigin.parent+" viewer="+viewer);
+            interfaceBounds();checkReviewText(viewer);
+            Image large=(Image)RecoveryChecks.field(viewer,"artwork");
+            if(large.scale==artworkSource.scale||large.width()<=artworkSource.width()*2||large.height()<=artworkSource.height()*2)throw new AssertionError("Artwork not independently enlarged");
+            if(large.width()>viewer.camera.width||large.height()>viewer.camera.height)throw new AssertionError("Artwork clipped");
+            if(subject!=5 && subject!=10 && (large.width<256||large.height<256))throw new AssertionError("Missing high-resolution source: "+ART_SUBJECTS[subject]);
+            capture("artwork-"+ART_SUBJECTS[subject]);
+            if(subject==10)viewer.onBackPressed();else playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(viewer,"close"));
+            if(RecoveryChecks.field(viewer,"ownedTexture")!=null)throw new AssertionError("Preview texture retained after closing");
+        }else{
+            com.watabou.utils.RectF frame=artworkSource.frame();
+            if(artworkOrigin.parent==null || artworkSource.scale.x!=artworkScaleX || artworkSource.scale.y!=artworkScaleY || frame.left!=artworkFrame.left || frame.top!=artworkFrame.top || frame.right!=artworkFrame.right || frame.bottom!=artworkFrame.bottom)throw new AssertionError("Preview changed source/description");
+            if(Dungeon.hero.cooldown()!=artworkTime || crystal.charges()!=artworkCharge || Dungeon.hero.belongings.backpack.items.size()!=artworkBagSize || (artworkPotion!=null && artworkPotion.isIdentified()!=artworkPotionKnown))throw new AssertionError("Preview consumed a turn/charge or identified an item");
+            closeReviewWindows();
+            if(subject==3)Dungeon.level.plants.remove(Dungeon.hero.pos);
+            if(subject==4)Dungeon.level.traps.remove(Dungeon.hero.pos);
+        }
+        return false;
+    }
+    private Object findArtworkButton(Group group){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(group)){
+            if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.ArtworkButton)return child;
+            if(child instanceof Group){Object found=findArtworkButton((Group)child);if(found!=null)return found;}
+        }
+        return null;
     }
     private com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton playtestButton(String label){
         for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.Window)

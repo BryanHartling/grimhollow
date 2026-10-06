@@ -40,7 +40,7 @@ def outputs():
     return result
 
 
-def traps(features):
+def traps(features,cell_size=64):
     sheet = source('traps')
     assert sheet.getchannel('A').getextrema()[0] == 0, 'Trap source needs real alpha'
     # Existing RED..BLACK colors. Tint only the authored cyan insets; retain
@@ -52,7 +52,7 @@ def traps(features):
         part=sheet.crop((round(col*sheet.width/4),round(row*sheet.height/2),
                          round((col+1)*sheet.width/4),round((row+1)*sheet.height/2)))
         box=part.getchannel('A').point(lambda a:255 if a>=16 else 0).getbbox()
-        part=ImageOps.contain(part.crop(box),(56,52),Image.Resampling.LANCZOS)
+        part=ImageOps.contain(part.crop(box),(round(56*cell_size/64),round(52*cell_size/64)),Image.Resampling.LANCZOS)
         base=np.asarray(part).copy()
         rgb=base[:,:,:3].astype(float)
         mask=np.clip((np.minimum(rgb[:,:,1],rgb[:,:,2])-rgb[:,:,0]-12)/65,0,1)[:,:,None]
@@ -62,9 +62,9 @@ def traps(features):
             painted=base.copy()
             painted[:,:,:3]=np.clip(rgb*(1-mask)+np.array(target)*light*mask,0,255).astype('uint8')
             painted[painted[:,:,3]<8]=0
-            tile=Image.new('RGBA',(64,64))
-            tile.alpha_composite(Image.fromarray(painted),((64-part.width)//2,(64-part.height)//2))
-            put(features,shape*16+color,tile)
+            tile=Image.new('RGBA',(cell_size,cell_size))
+            tile.alpha_composite(Image.fromarray(painted),((cell_size-part.width)//2,(cell_size-part.height)//2))
+            features.paste(tile,(color*cell_size,shape*cell_size))
 
 
 def launcher_files():

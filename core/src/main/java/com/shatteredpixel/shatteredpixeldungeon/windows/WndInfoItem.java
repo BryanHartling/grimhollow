@@ -107,6 +107,7 @@ public class WndInfoItem extends Window {
 	}
 
 	private void layoutFields(IconTitle title, RenderedTextBlock info){
+		title.enableArtwork();
 		int width = WIDTH_MIN;
 
 		info.maxWidth(width-12);

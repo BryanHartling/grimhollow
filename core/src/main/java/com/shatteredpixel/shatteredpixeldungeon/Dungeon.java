@@ -504,6 +504,7 @@ public class Dungeon {
 		}
 
 		DragonExpedition.arriveDragon(level);
+		BountyBoard.arrive(level);
 		Mob.restoreAllies( level, pos );
         com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion golden=com.shatteredpixel.shatteredpixeldungeon.items.trinkets.GoldenMimicCompanion.carried();if(golden!=null)golden.arrive();
         if (level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel)

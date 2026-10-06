@@ -139,7 +139,7 @@ public class EnchanterMagic extends Buff {
         }
         learn(item);
     }
-    public static int armorRoll(Char ch){if(ch.buff(FracturedArmor.class)!=null||ch.buff(Unmade.class)!=null)return 0;int dr=ch.drRoll();return ch.buff(DegradedGear.class)!=null?Math.round(dr*.7f):dr;}
+    public static int armorRoll(Char ch){if(ch.buff(FracturedArmor.class)!=null||ch.buff(Unmade.class)!=null)return 0;int dr=ch.drRoll();if(ch instanceof Mob)dr+=((Mob)ch).wantedArmor;return ch.buff(DegradedGear.class)!=null?Math.round(dr*.7f):dr;}
     public static void counterweight(){if(Dungeon.hero.subClass==HeroSubClass.SCRIVENER&&points(Talent.COUNTERWEIGHT)>0)Buff.affect(Dungeon.hero,Barkskin.class).setForDuration(Dungeon.hero.lvl/2,points(Talent.COUNTERWEIGHT));}
     public static float procChance(Char ch,float chance){
         chance=Math.min(Math.max(1f,chance),chance*procRate(ch));

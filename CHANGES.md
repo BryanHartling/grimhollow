@@ -1,3 +1,8 @@
+# Bounty Board component 2 - 2026-10-06
+
+- Added fixed aliases, named floors, explicit acceptance, accepted-only wanted mobs with ordinary AI/vulnerabilities, saved encounter snapshots, elapsed-action urgency, protected receipt-preserving Warrants, and once-only return payments. Common/Rare completion unlocks the boss offer without Legendary.
+- Guaranteed payment uses the fixed-gold path; it cannot acquire a Doubloon bonus. A rebuilt testing floor reuses its saved target rather than losing it or replenishing health. Normal message keys use the complete actors/items/windows namespace; failed checks exposed and corrected the initial key/import mistakes and the headless fixture's missing sprite linkage.
+- End-of-component gate passed: `core:test core:smokeRun desktop:dist -PsmokeClass=NECROMANCER -PdesktopOnly=true --no-daemon --console=plain`, `Runs=10 failures=0`, `BOUNTY COMPONENTS 1-2 PASS`. Ordinary runs remain isolated until quest integration.
 # Bounty Board component 1 - 2026-10-06
 
 - Authorized the reviewed specification with its proposed numbers as initial tuning defaults. Added safe absent defaults for older saves, a separately budgeted floor-7 office, five finite saved quotes at twice ordinary shop prices, and owner-specific theft closure without removing other vendors or contract access.

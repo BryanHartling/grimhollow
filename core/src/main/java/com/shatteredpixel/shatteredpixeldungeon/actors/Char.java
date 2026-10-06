@@ -24,6 +24,7 @@ package com.shatteredpixel.shatteredpixeldungeon.actors;
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Electricity;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.StormCloud;
 import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.ToxicGas;
@@ -434,6 +435,7 @@ public abstract class Char extends Actor {
 			}
 
 			dmg = dmg*dmgMulti;
+			if (this instanceof Mob) dmg *= ((Mob)this).wantedDamage;
 
 			//flat damage bonus is affected by multipliers
 			dmg += dmgBonus;

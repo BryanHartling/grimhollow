@@ -209,6 +209,7 @@ public class WndTradeItem extends WndInfoItem {
 										}
 										WndTradeItem.this.hide();
 										}
+										if (com.shatteredpixel.shatteredpixeldungeon.BountyBoard.owns(heap)) WndTradeItem.this.hide();
 									}
 								}
 							}

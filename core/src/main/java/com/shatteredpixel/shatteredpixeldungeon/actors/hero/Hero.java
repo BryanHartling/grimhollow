@@ -842,6 +842,7 @@ public class Hero extends Char {
         super.spendConstant(time);
         float paid=cooldown()-before;
         if(paid>0){
+            com.shatteredpixel.shatteredpixeldungeon.BountyBoard.onHeroSpent(paid);
             com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.onHeroSpent(paid);
             if(ashesDebt>0){ashesDebt=Math.max(0,ashesDebt-paid);ashesLastCost=0;}
             else ashesLastCost=paid;

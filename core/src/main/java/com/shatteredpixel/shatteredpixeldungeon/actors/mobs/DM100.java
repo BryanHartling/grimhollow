@@ -97,7 +97,7 @@ public class DM100 extends Mob {
 
 			Invisibility.dispel(this);
 			if (hit( this, enemy, true )) {
-				int dmg = Random.NormalIntRange(3, 10);
+				int dmg = Math.round(Random.NormalIntRange(3, 10) * wantedDamage);
 				dmg = Math.round(dmg * AscensionChallenge.statModifier(this));
 				enemy.damage( dmg, new LightningBolt() );
 

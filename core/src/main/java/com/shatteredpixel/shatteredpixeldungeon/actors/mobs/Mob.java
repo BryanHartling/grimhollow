@@ -134,6 +134,14 @@ public abstract class Mob extends Char {
 	
 	public int EXP = 1;
     public boolean goldPilfered,generatedRespawn;
+    public int bountyContract = -1, wantedArmor;
+    public float wantedDamage = 1f, wantedMovement = 1f;
+    @Override public String name() {
+        if (bountyContract >= 0 && bountyContract < 3
+                && com.shatteredpixel.shatteredpixeldungeon.BountyBoard.contracts[bountyContract] != null)
+            return com.shatteredpixel.shatteredpixeldungeon.BountyBoard.contracts[bountyContract].alias();
+        return super.name();
+    }
 	public int maxLvl = Hero.MAX_LEVEL-1;
     private boolean killedByHorror;
 	
@@ -172,6 +180,8 @@ public abstract class Mob extends Char {
 	
 	@Override
 	public void storeInBundle( Bundle bundle ) {
+        bundle.put("bounty_contract", bountyContract); bundle.put("wanted_armor", wantedArmor);
+        bundle.put("wanted_damage", wantedDamage); bundle.put("wanted_movement", wantedMovement);
         bundle.put("gold_pilfered",goldPilfered);bundle.put("generated_respawn",generatedRespawn);
 		
 		super.storeInBundle( bundle );
@@ -215,6 +225,10 @@ public abstract class Mob extends Char {
 	
 	@Override
 	public void restoreFromBundle( Bundle bundle ) {
+        bountyContract = bundle.contains("bounty_contract") ? bundle.getInt("bounty_contract") : -1;
+        wantedArmor = bundle.getInt("wanted_armor");
+        wantedDamage = bundle.contains("wanted_damage") ? bundle.getFloat("wanted_damage") : 1f;
+        wantedMovement = bundle.contains("wanted_movement") ? bundle.getFloat("wanted_movement") : 1f;
         goldPilfered=bundle.getBoolean("gold_pilfered");generatedRespawn=bundle.getBoolean("generated_respawn");
 		
 		super.restoreFromBundle( bundle );
@@ -893,7 +907,7 @@ public abstract class Mob extends Char {
 
 	@Override
 	public float speed() {
-		return super.speed() * AscensionChallenge.enemySpeedModifier(this);
+		return super.speed() * AscensionChallenge.enemySpeedModifier(this) * wantedMovement;
 	}
 
 	public final boolean surprisedBy( Char enemy ){
@@ -1148,6 +1162,7 @@ public abstract class Mob extends Char {
 	
 	@Override
 	public void die( Object cause ) {
+        com.shatteredpixel.shatteredpixeldungeon.BountyBoard.targetDied(this);
         killedByHorror=cause instanceof LurkingHorror && ((LurkingHorror)cause).predatoryStrike();
         if(killedByHorror) {
             Dungeon.level.freshRemains.put(pos,new com.shatteredpixel.shatteredpixeldungeon.levels.features.FreshRemains(this));

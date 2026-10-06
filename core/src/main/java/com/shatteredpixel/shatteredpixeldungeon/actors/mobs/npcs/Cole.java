@@ -8,7 +8,8 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ShopkeeperSprite;
-import com.shatteredpixel.shatteredpixeldungeon.windows.WndQuest;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract;
 import com.watabou.noosa.Game;
 
 public class Cole extends NPC {
@@ -18,8 +19,15 @@ public class Cole extends NPC {
     @Override public boolean add(Buff buff) { return false; }
     @Override public boolean reset() { return true; }
     @Override public boolean interact(Char ch) {
-        if (ch == Dungeon.hero) Game.runOnRenderThread(() -> GameScene.show(new WndQuest(this,
-                Messages.get(this, BountyBoard.shopClosed ? "closed" : "greet_" + Dungeon.hero.heroClass.name()))));
+        if (ch == Dungeon.hero) Game.runOnRenderThread(() -> {
+            BountyBoard.planContracts();
+            GameScene.show(new WndOptions(sprite(), name(),
+                    Messages.get(this, "greet_" + Dungeon.hero.heroClass.name())
+                            + (BountyBoard.shopClosed ? "\n\n" + Messages.get(this, "closed") : ""),
+                    BountyBoard.contracts[0].title(), BountyBoard.contracts[1].title(), BountyBoard.contracts[2].title()) {
+                @Override protected void onSelect(int index) { GameScene.show(new WndBountyContract(BountyBoard.contracts[index])); }
+            });
+        });
         return true;
     }
 }

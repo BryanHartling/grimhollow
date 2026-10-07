@@ -24,7 +24,7 @@ public class BlankParchment extends Item {
     { image=ItemSpriteSheet.BLANK_PARCHMENT; stackable=true; defaultAction=AC_SCRIBE; }
     @Override public boolean isIdentified(){return true;}
     @Override public boolean isUpgradable(){return false;}
-    @Override public int value(){return 0;}
+    @Override public int value(){return 5 * quantity();}
     @Override public ArrayList<String> actions(Hero hero){
         ArrayList<String> actions=super.actions(hero);
         if(hero.heroClass==HeroClass.ENCHANTER)actions.add(AC_SCRIBE);

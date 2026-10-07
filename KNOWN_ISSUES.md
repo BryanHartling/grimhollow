@@ -128,3 +128,7 @@ The dated entries below retain their original verification scope. Their test-45 
 - The stored Git credential helper returned no credential. The user-supplied token authenticated successfully; only a Windows DPAPI-encrypted copy is stored in ignored .local/github-token.dpapi, and Git/CI access uses process-local authorization headers. No token is committed.
 
 - Version 1.16.1 natural cavern layout, separated initial broodmother and equipment-heavy remains apply to new or Playtest-rebuilt caverns; saved floors keep their layout and existing loot, while their stair artwork is corrected on load. Physical-tablet performance and expedition campaign balance still require human playtesting.
+- v1.29.0: Existing offices filled with player-dropped loot may retain their previous sale positions when five spaced displays cannot fit; decoration still updates and no belongings or stock are destroyed.
+- v1.29.0: Physical Samsung tablet and end-to-end campaign playability are not verified by this visual pass; terrain contrast test 45 remains Abandoned: test failed, and is not rerun.
+- v1.29.0: Sandboxed Git metadata writes and Android SDK access failed; the documented authorized escalation route completed fetch/write-check and Gradle --no-daemon builds without a human approval pause.
+- v1.29.0 automatic approval review timed out on a combined elevated native-test command; workspace-sandbox native tests and Windows packaging succeeded, and the javap audit passed through a narrow read-only escalation.

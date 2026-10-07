@@ -1,4 +1,658 @@
 {
+  "effects/bloodmark.png": [
+    {
+      "file": "artwork/bloodmark.png",
+      "rect": [
+        0,
+        0,
+        64,
+        64
+      ]
+    }
+  ],
+  "environment/custom_tiles/halls_special.png": [
+    {
+      "file": "artwork/halls_special-0.png",
+      "rect": [
+        0,
+        0,
+        64,
+        64
+      ]
+    },
+    {
+      "file": "artwork/halls_special-1.png",
+      "rect": [
+        64,
+        0,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "artwork/halls_special-2.png",
+      "rect": [
+        128,
+        0,
+        192,
+        64
+      ]
+    },
+    {
+      "file": "artwork/halls_special-3.png",
+      "rect": [
+        192,
+        0,
+        256,
+        64
+      ]
+    },
+    {
+      "file": "artwork/halls_special-4.png",
+      "rect": [
+        256,
+        0,
+        320,
+        64
+      ]
+    },
+    {
+      "file": "artwork/halls_special-5.png",
+      "rect": [
+        320,
+        0,
+        384,
+        64
+      ]
+    },
+    {
+      "file": "artwork/halls_special-6.png",
+      "rect": [
+        384,
+        0,
+        448,
+        64
+      ]
+    },
+    {
+      "file": "artwork/halls_special-7.png",
+      "rect": [
+        448,
+        0,
+        512,
+        64
+      ]
+    },
+    {
+      "file": "artwork/halls_special-8.png",
+      "rect": [
+        0,
+        64,
+        64,
+        128
+      ]
+    },
+    {
+      "file": "artwork/halls_special-9.png",
+      "rect": [
+        64,
+        64,
+        128,
+        128
+      ]
+    },
+    {
+      "file": "artwork/halls_special-10.png",
+      "rect": [
+        128,
+        64,
+        192,
+        128
+      ]
+    },
+    {
+      "file": "artwork/halls_special-11.png",
+      "rect": [
+        192,
+        64,
+        256,
+        128
+      ]
+    },
+    {
+      "file": "artwork/halls_special-12.png",
+      "rect": [
+        256,
+        64,
+        320,
+        128
+      ]
+    },
+    {
+      "file": "artwork/halls_special-13.png",
+      "rect": [
+        320,
+        64,
+        384,
+        128
+      ]
+    },
+    {
+      "file": "artwork/halls_special-14.png",
+      "rect": [
+        384,
+        64,
+        448,
+        128
+      ]
+    },
+    {
+      "file": "artwork/halls_special-15.png",
+      "rect": [
+        448,
+        64,
+        512,
+        128
+      ]
+    },
+    {
+      "file": "artwork/halls_special-16.png",
+      "rect": [
+        0,
+        128,
+        64,
+        192
+      ]
+    },
+    {
+      "file": "artwork/halls_special-17.png",
+      "rect": [
+        64,
+        128,
+        128,
+        192
+      ]
+    },
+    {
+      "file": "artwork/halls_special-18.png",
+      "rect": [
+        128,
+        128,
+        192,
+        192
+      ]
+    },
+    {
+      "file": "artwork/halls_special-19.png",
+      "rect": [
+        192,
+        128,
+        256,
+        192
+      ]
+    },
+    {
+      "file": "artwork/halls_special-20.png",
+      "rect": [
+        256,
+        128,
+        320,
+        192
+      ]
+    },
+    {
+      "file": "artwork/halls_special-21.png",
+      "rect": [
+        320,
+        128,
+        384,
+        192
+      ]
+    },
+    {
+      "file": "artwork/halls_special-22.png",
+      "rect": [
+        384,
+        128,
+        448,
+        192
+      ]
+    },
+    {
+      "file": "artwork/halls_special-23.png",
+      "rect": [
+        448,
+        128,
+        512,
+        192
+      ]
+    },
+    {
+      "file": "artwork/halls_special-24.png",
+      "rect": [
+        0,
+        192,
+        64,
+        256
+      ]
+    },
+    {
+      "file": "artwork/halls_special-25.png",
+      "rect": [
+        64,
+        192,
+        128,
+        256
+      ]
+    },
+    {
+      "file": "artwork/halls_special-26.png",
+      "rect": [
+        128,
+        192,
+        192,
+        256
+      ]
+    },
+    {
+      "file": "artwork/halls_special-27.png",
+      "rect": [
+        192,
+        192,
+        256,
+        256
+      ]
+    },
+    {
+      "file": "artwork/halls_special-28.png",
+      "rect": [
+        256,
+        192,
+        320,
+        256
+      ]
+    },
+    {
+      "file": "artwork/halls_special-29.png",
+      "rect": [
+        320,
+        192,
+        384,
+        256
+      ]
+    },
+    {
+      "file": "artwork/halls_special-30.png",
+      "rect": [
+        384,
+        192,
+        448,
+        256
+      ]
+    },
+    {
+      "file": "artwork/halls_special-31.png",
+      "rect": [
+        448,
+        192,
+        512,
+        256
+      ]
+    },
+    {
+      "file": "artwork/halls_special-32.png",
+      "rect": [
+        0,
+        256,
+        64,
+        320
+      ]
+    },
+    {
+      "file": "artwork/halls_special-33.png",
+      "rect": [
+        64,
+        256,
+        128,
+        320
+      ]
+    },
+    {
+      "file": "artwork/halls_special-34.png",
+      "rect": [
+        128,
+        256,
+        192,
+        320
+      ]
+    },
+    {
+      "file": "artwork/halls_special-35.png",
+      "rect": [
+        192,
+        256,
+        256,
+        320
+      ]
+    },
+    {
+      "file": "artwork/halls_special-36.png",
+      "rect": [
+        256,
+        256,
+        320,
+        320
+      ]
+    },
+    {
+      "file": "artwork/halls_special-37.png",
+      "rect": [
+        320,
+        256,
+        384,
+        320
+      ]
+    },
+    {
+      "file": "artwork/halls_special-38.png",
+      "rect": [
+        384,
+        256,
+        448,
+        320
+      ]
+    },
+    {
+      "file": "artwork/halls_special-39.png",
+      "rect": [
+        448,
+        256,
+        512,
+        320
+      ]
+    },
+    {
+      "file": "artwork/halls_special-40.png",
+      "rect": [
+        0,
+        320,
+        64,
+        384
+      ]
+    },
+    {
+      "file": "artwork/halls_special-41.png",
+      "rect": [
+        64,
+        320,
+        128,
+        384
+      ]
+    },
+    {
+      "file": "artwork/halls_special-42.png",
+      "rect": [
+        128,
+        320,
+        192,
+        384
+      ]
+    },
+    {
+      "file": "artwork/halls_special-43.png",
+      "rect": [
+        192,
+        320,
+        256,
+        384
+      ]
+    },
+    {
+      "file": "artwork/halls_special-44.png",
+      "rect": [
+        256,
+        320,
+        320,
+        384
+      ]
+    },
+    {
+      "file": "artwork/halls_special-45.png",
+      "rect": [
+        320,
+        320,
+        384,
+        384
+      ]
+    },
+    {
+      "file": "artwork/halls_special-46.png",
+      "rect": [
+        384,
+        320,
+        448,
+        384
+      ]
+    },
+    {
+      "file": "artwork/halls_special-47.png",
+      "rect": [
+        448,
+        320,
+        512,
+        384
+      ]
+    },
+    {
+      "file": "artwork/halls_special-48.png",
+      "rect": [
+        0,
+        384,
+        64,
+        448
+      ]
+    },
+    {
+      "file": "artwork/halls_special-49.png",
+      "rect": [
+        64,
+        384,
+        128,
+        448
+      ]
+    },
+    {
+      "file": "artwork/halls_special-50.png",
+      "rect": [
+        128,
+        384,
+        192,
+        448
+      ]
+    },
+    {
+      "file": "artwork/halls_special-51.png",
+      "rect": [
+        192,
+        384,
+        256,
+        448
+      ]
+    },
+    {
+      "file": "artwork/halls_special-52.png",
+      "rect": [
+        256,
+        384,
+        320,
+        448
+      ]
+    },
+    {
+      "file": "artwork/halls_special-53.png",
+      "rect": [
+        320,
+        384,
+        384,
+        448
+      ]
+    },
+    {
+      "file": "artwork/halls_special-54.png",
+      "rect": [
+        384,
+        384,
+        448,
+        448
+      ]
+    },
+    {
+      "file": "artwork/halls_special-55.png",
+      "rect": [
+        448,
+        384,
+        512,
+        448
+      ]
+    }
+  ],
+  "environment/custom_tiles/wardens_office.png": [
+    {
+      "file": "artwork/wardens_office-0.png",
+      "rect": [
+        0,
+        0,
+        64,
+        64
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-1.png",
+      "rect": [
+        64,
+        0,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-2.png",
+      "rect": [
+        128,
+        0,
+        192,
+        64
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-3.png",
+      "rect": [
+        192,
+        0,
+        256,
+        64
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-4.png",
+      "rect": [
+        256,
+        0,
+        320,
+        64
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-5.png",
+      "rect": [
+        320,
+        0,
+        384,
+        64
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-6.png",
+      "rect": [
+        384,
+        0,
+        448,
+        64
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-7.png",
+      "rect": [
+        448,
+        0,
+        512,
+        64
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-8.png",
+      "rect": [
+        0,
+        64,
+        64,
+        128
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-16.png",
+      "rect": [
+        0,
+        128,
+        64,
+        192
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-17.png",
+      "rect": [
+        64,
+        128,
+        128,
+        192
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-18.png",
+      "rect": [
+        128,
+        128,
+        192,
+        192
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-19.png",
+      "rect": [
+        192,
+        128,
+        256,
+        192
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-20.png",
+      "rect": [
+        256,
+        128,
+        320,
+        192
+      ]
+    },
+    {
+      "file": "artwork/wardens_office-21.png",
+      "rect": [
+        320,
+        128,
+        384,
+        192
+      ]
+    }
+  ],
   "environment/terrain_features.png": [
     {
       "file": "artwork/plant-0.png",
@@ -2400,6 +3054,836 @@
       ]
     }
   ],
+  "interfaces/hero_icons.png": [
+    {
+      "file": "artwork/hero-symbol-0.png",
+      "rect": [
+        0,
+        0,
+        64,
+        64
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-1.png",
+      "rect": [
+        64,
+        0,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-2.png",
+      "rect": [
+        128,
+        0,
+        192,
+        64
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-3.png",
+      "rect": [
+        192,
+        0,
+        256,
+        64
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-4.png",
+      "rect": [
+        256,
+        0,
+        320,
+        64
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-5.png",
+      "rect": [
+        320,
+        0,
+        384,
+        64
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-6.png",
+      "rect": [
+        384,
+        0,
+        448,
+        64
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-7.png",
+      "rect": [
+        448,
+        0,
+        512,
+        64
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-8.png",
+      "rect": [
+        0,
+        64,
+        64,
+        128
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-9.png",
+      "rect": [
+        64,
+        64,
+        128,
+        128
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-10.png",
+      "rect": [
+        128,
+        64,
+        192,
+        128
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-11.png",
+      "rect": [
+        192,
+        64,
+        256,
+        128
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-16.png",
+      "rect": [
+        0,
+        128,
+        64,
+        192
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-17.png",
+      "rect": [
+        64,
+        128,
+        128,
+        192
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-18.png",
+      "rect": [
+        128,
+        128,
+        192,
+        192
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-19.png",
+      "rect": [
+        192,
+        128,
+        256,
+        192
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-20.png",
+      "rect": [
+        256,
+        128,
+        320,
+        192
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-21.png",
+      "rect": [
+        320,
+        128,
+        384,
+        192
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-22.png",
+      "rect": [
+        384,
+        128,
+        448,
+        192
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-23.png",
+      "rect": [
+        448,
+        128,
+        512,
+        192
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-24.png",
+      "rect": [
+        0,
+        192,
+        64,
+        256
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-25.png",
+      "rect": [
+        64,
+        192,
+        128,
+        256
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-26.png",
+      "rect": [
+        128,
+        192,
+        192,
+        256
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-27.png",
+      "rect": [
+        192,
+        192,
+        256,
+        256
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-28.png",
+      "rect": [
+        256,
+        192,
+        320,
+        256
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-29.png",
+      "rect": [
+        320,
+        192,
+        384,
+        256
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-30.png",
+      "rect": [
+        384,
+        192,
+        448,
+        256
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-31.png",
+      "rect": [
+        448,
+        192,
+        512,
+        256
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-32.png",
+      "rect": [
+        0,
+        256,
+        64,
+        320
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-33.png",
+      "rect": [
+        64,
+        256,
+        128,
+        320
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-34.png",
+      "rect": [
+        128,
+        256,
+        192,
+        320
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-40.png",
+      "rect": [
+        0,
+        320,
+        64,
+        384
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-41.png",
+      "rect": [
+        64,
+        320,
+        128,
+        384
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-42.png",
+      "rect": [
+        128,
+        320,
+        192,
+        384
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-43.png",
+      "rect": [
+        192,
+        320,
+        256,
+        384
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-44.png",
+      "rect": [
+        256,
+        320,
+        320,
+        384
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-45.png",
+      "rect": [
+        320,
+        320,
+        384,
+        384
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-46.png",
+      "rect": [
+        384,
+        320,
+        448,
+        384
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-47.png",
+      "rect": [
+        448,
+        320,
+        512,
+        384
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-48.png",
+      "rect": [
+        0,
+        384,
+        64,
+        448
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-49.png",
+      "rect": [
+        64,
+        384,
+        128,
+        448
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-50.png",
+      "rect": [
+        128,
+        384,
+        192,
+        448
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-51.png",
+      "rect": [
+        192,
+        384,
+        256,
+        448
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-52.png",
+      "rect": [
+        256,
+        384,
+        320,
+        448
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-53.png",
+      "rect": [
+        320,
+        384,
+        384,
+        448
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-54.png",
+      "rect": [
+        384,
+        384,
+        448,
+        448
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-55.png",
+      "rect": [
+        448,
+        384,
+        512,
+        448
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-56.png",
+      "rect": [
+        0,
+        448,
+        64,
+        512
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-57.png",
+      "rect": [
+        64,
+        448,
+        128,
+        512
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-58.png",
+      "rect": [
+        128,
+        448,
+        192,
+        512
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-59.png",
+      "rect": [
+        192,
+        448,
+        256,
+        512
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-60.png",
+      "rect": [
+        256,
+        448,
+        320,
+        512
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-61.png",
+      "rect": [
+        320,
+        448,
+        384,
+        512
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-62.png",
+      "rect": [
+        384,
+        448,
+        448,
+        512
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-63.png",
+      "rect": [
+        448,
+        448,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-64.png",
+      "rect": [
+        0,
+        512,
+        64,
+        576
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-65.png",
+      "rect": [
+        64,
+        512,
+        128,
+        576
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-66.png",
+      "rect": [
+        128,
+        512,
+        192,
+        576
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-104.png",
+      "rect": [
+        0,
+        832,
+        64,
+        896
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-105.png",
+      "rect": [
+        64,
+        832,
+        128,
+        896
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-106.png",
+      "rect": [
+        128,
+        832,
+        192,
+        896
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-107.png",
+      "rect": [
+        192,
+        832,
+        256,
+        896
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-108.png",
+      "rect": [
+        256,
+        832,
+        320,
+        896
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-109.png",
+      "rect": [
+        320,
+        832,
+        384,
+        896
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-110.png",
+      "rect": [
+        384,
+        832,
+        448,
+        896
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-72.png",
+      "rect": [
+        0,
+        576,
+        64,
+        640
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-73.png",
+      "rect": [
+        64,
+        576,
+        128,
+        640
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-74.png",
+      "rect": [
+        128,
+        576,
+        192,
+        640
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-75.png",
+      "rect": [
+        192,
+        576,
+        256,
+        640
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-76.png",
+      "rect": [
+        256,
+        576,
+        320,
+        640
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-77.png",
+      "rect": [
+        320,
+        576,
+        384,
+        640
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-78.png",
+      "rect": [
+        384,
+        576,
+        448,
+        640
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-79.png",
+      "rect": [
+        448,
+        576,
+        512,
+        640
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-80.png",
+      "rect": [
+        0,
+        640,
+        64,
+        704
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-81.png",
+      "rect": [
+        64,
+        640,
+        128,
+        704
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-82.png",
+      "rect": [
+        128,
+        640,
+        192,
+        704
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-83.png",
+      "rect": [
+        192,
+        640,
+        256,
+        704
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-84.png",
+      "rect": [
+        256,
+        640,
+        320,
+        704
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-85.png",
+      "rect": [
+        320,
+        640,
+        384,
+        704
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-86.png",
+      "rect": [
+        384,
+        640,
+        448,
+        704
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-87.png",
+      "rect": [
+        448,
+        640,
+        512,
+        704
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-88.png",
+      "rect": [
+        0,
+        704,
+        64,
+        768
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-89.png",
+      "rect": [
+        64,
+        704,
+        128,
+        768
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-90.png",
+      "rect": [
+        128,
+        704,
+        192,
+        768
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-91.png",
+      "rect": [
+        192,
+        704,
+        256,
+        768
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-92.png",
+      "rect": [
+        256,
+        704,
+        320,
+        768
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-93.png",
+      "rect": [
+        320,
+        704,
+        384,
+        768
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-94.png",
+      "rect": [
+        384,
+        704,
+        448,
+        768
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-95.png",
+      "rect": [
+        448,
+        704,
+        512,
+        768
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-96.png",
+      "rect": [
+        0,
+        768,
+        64,
+        832
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-97.png",
+      "rect": [
+        64,
+        768,
+        128,
+        832
+      ]
+    },
+    {
+      "file": "artwork/hero-symbol-98.png",
+      "rect": [
+        128,
+        768,
+        192,
+        832
+      ]
+    }
+  ],
   "interfaces/large_buffs.png": [
     {
       "file": "artwork/status-0.png",
@@ -4585,6 +6069,1502 @@
         448,
         512,
         512
+      ]
+    }
+  ],
+  "interfaces/talent_icons.png": [
+    {
+      "file": "artwork/talent-0.png",
+      "rect": [
+        0,
+        0,
+        64,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-1.png",
+      "rect": [
+        64,
+        0,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-2.png",
+      "rect": [
+        128,
+        0,
+        192,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-3.png",
+      "rect": [
+        192,
+        0,
+        256,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-4.png",
+      "rect": [
+        256,
+        0,
+        320,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-5.png",
+      "rect": [
+        320,
+        0,
+        384,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-6.png",
+      "rect": [
+        384,
+        0,
+        448,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-7.png",
+      "rect": [
+        448,
+        0,
+        512,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-8.png",
+      "rect": [
+        512,
+        0,
+        576,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-9.png",
+      "rect": [
+        576,
+        0,
+        640,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-10.png",
+      "rect": [
+        640,
+        0,
+        704,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-11.png",
+      "rect": [
+        704,
+        0,
+        768,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-12.png",
+      "rect": [
+        768,
+        0,
+        832,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-13.png",
+      "rect": [
+        832,
+        0,
+        896,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-14.png",
+      "rect": [
+        896,
+        0,
+        960,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-15.png",
+      "rect": [
+        960,
+        0,
+        1024,
+        64
+      ]
+    },
+    {
+      "file": "artwork/talent-16.png",
+      "rect": [
+        0,
+        64,
+        64,
+        128
+      ]
+    },
+    {
+      "file": "artwork/talent-17.png",
+      "rect": [
+        64,
+        64,
+        128,
+        128
+      ]
+    },
+    {
+      "file": "artwork/talent-18.png",
+      "rect": [
+        128,
+        64,
+        192,
+        128
+      ]
+    },
+    {
+      "file": "artwork/talent-19.png",
+      "rect": [
+        192,
+        64,
+        256,
+        128
+      ]
+    },
+    {
+      "file": "artwork/talent-20.png",
+      "rect": [
+        256,
+        64,
+        320,
+        128
+      ]
+    },
+    {
+      "file": "artwork/talent-21.png",
+      "rect": [
+        320,
+        64,
+        384,
+        128
+      ]
+    },
+    {
+      "file": "artwork/talent-22.png",
+      "rect": [
+        384,
+        64,
+        448,
+        128
+      ]
+    },
+    {
+      "file": "artwork/talent-23.png",
+      "rect": [
+        448,
+        64,
+        512,
+        128
+      ]
+    },
+    {
+      "file": "artwork/talent-24.png",
+      "rect": [
+        512,
+        64,
+        576,
+        128
+      ]
+    },
+    {
+      "file": "artwork/talent-25.png",
+      "rect": [
+        576,
+        64,
+        640,
+        128
+      ]
+    },
+    {
+      "file": "artwork/talent-32.png",
+      "rect": [
+        0,
+        128,
+        64,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-33.png",
+      "rect": [
+        64,
+        128,
+        128,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-34.png",
+      "rect": [
+        128,
+        128,
+        192,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-35.png",
+      "rect": [
+        192,
+        128,
+        256,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-36.png",
+      "rect": [
+        256,
+        128,
+        320,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-37.png",
+      "rect": [
+        320,
+        128,
+        384,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-38.png",
+      "rect": [
+        384,
+        128,
+        448,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-39.png",
+      "rect": [
+        448,
+        128,
+        512,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-40.png",
+      "rect": [
+        512,
+        128,
+        576,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-41.png",
+      "rect": [
+        576,
+        128,
+        640,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-42.png",
+      "rect": [
+        640,
+        128,
+        704,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-43.png",
+      "rect": [
+        704,
+        128,
+        768,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-44.png",
+      "rect": [
+        768,
+        128,
+        832,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-45.png",
+      "rect": [
+        832,
+        128,
+        896,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-46.png",
+      "rect": [
+        896,
+        128,
+        960,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-47.png",
+      "rect": [
+        960,
+        128,
+        1024,
+        192
+      ]
+    },
+    {
+      "file": "artwork/talent-48.png",
+      "rect": [
+        0,
+        192,
+        64,
+        256
+      ]
+    },
+    {
+      "file": "artwork/talent-49.png",
+      "rect": [
+        64,
+        192,
+        128,
+        256
+      ]
+    },
+    {
+      "file": "artwork/talent-50.png",
+      "rect": [
+        128,
+        192,
+        192,
+        256
+      ]
+    },
+    {
+      "file": "artwork/talent-51.png",
+      "rect": [
+        192,
+        192,
+        256,
+        256
+      ]
+    },
+    {
+      "file": "artwork/talent-52.png",
+      "rect": [
+        256,
+        192,
+        320,
+        256
+      ]
+    },
+    {
+      "file": "artwork/talent-53.png",
+      "rect": [
+        320,
+        192,
+        384,
+        256
+      ]
+    },
+    {
+      "file": "artwork/talent-54.png",
+      "rect": [
+        384,
+        192,
+        448,
+        256
+      ]
+    },
+    {
+      "file": "artwork/talent-55.png",
+      "rect": [
+        448,
+        192,
+        512,
+        256
+      ]
+    },
+    {
+      "file": "artwork/talent-56.png",
+      "rect": [
+        512,
+        192,
+        576,
+        256
+      ]
+    },
+    {
+      "file": "artwork/talent-57.png",
+      "rect": [
+        576,
+        192,
+        640,
+        256
+      ]
+    },
+    {
+      "file": "artwork/talent-64.png",
+      "rect": [
+        0,
+        256,
+        64,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-65.png",
+      "rect": [
+        64,
+        256,
+        128,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-66.png",
+      "rect": [
+        128,
+        256,
+        192,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-67.png",
+      "rect": [
+        192,
+        256,
+        256,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-68.png",
+      "rect": [
+        256,
+        256,
+        320,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-69.png",
+      "rect": [
+        320,
+        256,
+        384,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-70.png",
+      "rect": [
+        384,
+        256,
+        448,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-71.png",
+      "rect": [
+        448,
+        256,
+        512,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-72.png",
+      "rect": [
+        512,
+        256,
+        576,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-73.png",
+      "rect": [
+        576,
+        256,
+        640,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-74.png",
+      "rect": [
+        640,
+        256,
+        704,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-75.png",
+      "rect": [
+        704,
+        256,
+        768,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-76.png",
+      "rect": [
+        768,
+        256,
+        832,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-77.png",
+      "rect": [
+        832,
+        256,
+        896,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-78.png",
+      "rect": [
+        896,
+        256,
+        960,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-79.png",
+      "rect": [
+        960,
+        256,
+        1024,
+        320
+      ]
+    },
+    {
+      "file": "artwork/talent-80.png",
+      "rect": [
+        0,
+        320,
+        64,
+        384
+      ]
+    },
+    {
+      "file": "artwork/talent-81.png",
+      "rect": [
+        64,
+        320,
+        128,
+        384
+      ]
+    },
+    {
+      "file": "artwork/talent-82.png",
+      "rect": [
+        128,
+        320,
+        192,
+        384
+      ]
+    },
+    {
+      "file": "artwork/talent-83.png",
+      "rect": [
+        192,
+        320,
+        256,
+        384
+      ]
+    },
+    {
+      "file": "artwork/talent-84.png",
+      "rect": [
+        256,
+        320,
+        320,
+        384
+      ]
+    },
+    {
+      "file": "artwork/talent-85.png",
+      "rect": [
+        320,
+        320,
+        384,
+        384
+      ]
+    },
+    {
+      "file": "artwork/talent-86.png",
+      "rect": [
+        384,
+        320,
+        448,
+        384
+      ]
+    },
+    {
+      "file": "artwork/talent-87.png",
+      "rect": [
+        448,
+        320,
+        512,
+        384
+      ]
+    },
+    {
+      "file": "artwork/talent-88.png",
+      "rect": [
+        512,
+        320,
+        576,
+        384
+      ]
+    },
+    {
+      "file": "artwork/talent-89.png",
+      "rect": [
+        576,
+        320,
+        640,
+        384
+      ]
+    },
+    {
+      "file": "artwork/talent-96.png",
+      "rect": [
+        0,
+        384,
+        64,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-97.png",
+      "rect": [
+        64,
+        384,
+        128,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-98.png",
+      "rect": [
+        128,
+        384,
+        192,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-99.png",
+      "rect": [
+        192,
+        384,
+        256,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-100.png",
+      "rect": [
+        256,
+        384,
+        320,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-101.png",
+      "rect": [
+        320,
+        384,
+        384,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-102.png",
+      "rect": [
+        384,
+        384,
+        448,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-103.png",
+      "rect": [
+        448,
+        384,
+        512,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-104.png",
+      "rect": [
+        512,
+        384,
+        576,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-105.png",
+      "rect": [
+        576,
+        384,
+        640,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-106.png",
+      "rect": [
+        640,
+        384,
+        704,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-107.png",
+      "rect": [
+        704,
+        384,
+        768,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-108.png",
+      "rect": [
+        768,
+        384,
+        832,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-109.png",
+      "rect": [
+        832,
+        384,
+        896,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-110.png",
+      "rect": [
+        896,
+        384,
+        960,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-111.png",
+      "rect": [
+        960,
+        384,
+        1024,
+        448
+      ]
+    },
+    {
+      "file": "artwork/talent-112.png",
+      "rect": [
+        0,
+        448,
+        64,
+        512
+      ]
+    },
+    {
+      "file": "artwork/talent-113.png",
+      "rect": [
+        64,
+        448,
+        128,
+        512
+      ]
+    },
+    {
+      "file": "artwork/talent-114.png",
+      "rect": [
+        128,
+        448,
+        192,
+        512
+      ]
+    },
+    {
+      "file": "artwork/talent-115.png",
+      "rect": [
+        192,
+        448,
+        256,
+        512
+      ]
+    },
+    {
+      "file": "artwork/talent-116.png",
+      "rect": [
+        256,
+        448,
+        320,
+        512
+      ]
+    },
+    {
+      "file": "artwork/talent-117.png",
+      "rect": [
+        320,
+        448,
+        384,
+        512
+      ]
+    },
+    {
+      "file": "artwork/talent-118.png",
+      "rect": [
+        384,
+        448,
+        448,
+        512
+      ]
+    },
+    {
+      "file": "artwork/talent-119.png",
+      "rect": [
+        448,
+        448,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "artwork/talent-120.png",
+      "rect": [
+        512,
+        448,
+        576,
+        512
+      ]
+    },
+    {
+      "file": "artwork/talent-121.png",
+      "rect": [
+        576,
+        448,
+        640,
+        512
+      ]
+    },
+    {
+      "file": "artwork/talent-128.png",
+      "rect": [
+        0,
+        512,
+        64,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-129.png",
+      "rect": [
+        64,
+        512,
+        128,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-130.png",
+      "rect": [
+        128,
+        512,
+        192,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-131.png",
+      "rect": [
+        192,
+        512,
+        256,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-132.png",
+      "rect": [
+        256,
+        512,
+        320,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-133.png",
+      "rect": [
+        320,
+        512,
+        384,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-134.png",
+      "rect": [
+        384,
+        512,
+        448,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-135.png",
+      "rect": [
+        448,
+        512,
+        512,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-136.png",
+      "rect": [
+        512,
+        512,
+        576,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-137.png",
+      "rect": [
+        576,
+        512,
+        640,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-138.png",
+      "rect": [
+        640,
+        512,
+        704,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-139.png",
+      "rect": [
+        704,
+        512,
+        768,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-140.png",
+      "rect": [
+        768,
+        512,
+        832,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-141.png",
+      "rect": [
+        832,
+        512,
+        896,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-142.png",
+      "rect": [
+        896,
+        512,
+        960,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-143.png",
+      "rect": [
+        960,
+        512,
+        1024,
+        576
+      ]
+    },
+    {
+      "file": "artwork/talent-144.png",
+      "rect": [
+        0,
+        576,
+        64,
+        640
+      ]
+    },
+    {
+      "file": "artwork/talent-145.png",
+      "rect": [
+        64,
+        576,
+        128,
+        640
+      ]
+    },
+    {
+      "file": "artwork/talent-146.png",
+      "rect": [
+        128,
+        576,
+        192,
+        640
+      ]
+    },
+    {
+      "file": "artwork/talent-147.png",
+      "rect": [
+        192,
+        576,
+        256,
+        640
+      ]
+    },
+    {
+      "file": "artwork/talent-148.png",
+      "rect": [
+        256,
+        576,
+        320,
+        640
+      ]
+    },
+    {
+      "file": "artwork/talent-149.png",
+      "rect": [
+        320,
+        576,
+        384,
+        640
+      ]
+    },
+    {
+      "file": "artwork/talent-150.png",
+      "rect": [
+        384,
+        576,
+        448,
+        640
+      ]
+    },
+    {
+      "file": "artwork/talent-151.png",
+      "rect": [
+        448,
+        576,
+        512,
+        640
+      ]
+    },
+    {
+      "file": "artwork/talent-152.png",
+      "rect": [
+        512,
+        576,
+        576,
+        640
+      ]
+    },
+    {
+      "file": "artwork/talent-153.png",
+      "rect": [
+        576,
+        576,
+        640,
+        640
+      ]
+    },
+    {
+      "file": "artwork/talent-160.png",
+      "rect": [
+        0,
+        640,
+        64,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-161.png",
+      "rect": [
+        64,
+        640,
+        128,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-162.png",
+      "rect": [
+        128,
+        640,
+        192,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-163.png",
+      "rect": [
+        192,
+        640,
+        256,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-164.png",
+      "rect": [
+        256,
+        640,
+        320,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-165.png",
+      "rect": [
+        320,
+        640,
+        384,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-166.png",
+      "rect": [
+        384,
+        640,
+        448,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-167.png",
+      "rect": [
+        448,
+        640,
+        512,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-168.png",
+      "rect": [
+        512,
+        640,
+        576,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-169.png",
+      "rect": [
+        576,
+        640,
+        640,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-170.png",
+      "rect": [
+        640,
+        640,
+        704,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-171.png",
+      "rect": [
+        704,
+        640,
+        768,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-172.png",
+      "rect": [
+        768,
+        640,
+        832,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-173.png",
+      "rect": [
+        832,
+        640,
+        896,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-174.png",
+      "rect": [
+        896,
+        640,
+        960,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-175.png",
+      "rect": [
+        960,
+        640,
+        1024,
+        704
+      ]
+    },
+    {
+      "file": "artwork/talent-176.png",
+      "rect": [
+        0,
+        704,
+        64,
+        768
+      ]
+    },
+    {
+      "file": "artwork/talent-177.png",
+      "rect": [
+        64,
+        704,
+        128,
+        768
+      ]
+    },
+    {
+      "file": "artwork/talent-178.png",
+      "rect": [
+        128,
+        704,
+        192,
+        768
+      ]
+    },
+    {
+      "file": "artwork/talent-179.png",
+      "rect": [
+        192,
+        704,
+        256,
+        768
+      ]
+    },
+    {
+      "file": "artwork/talent-180.png",
+      "rect": [
+        256,
+        704,
+        320,
+        768
+      ]
+    },
+    {
+      "file": "artwork/talent-181.png",
+      "rect": [
+        320,
+        704,
+        384,
+        768
+      ]
+    },
+    {
+      "file": "artwork/talent-182.png",
+      "rect": [
+        384,
+        704,
+        448,
+        768
+      ]
+    },
+    {
+      "file": "artwork/talent-183.png",
+      "rect": [
+        448,
+        704,
+        512,
+        768
+      ]
+    },
+    {
+      "file": "artwork/talent-184.png",
+      "rect": [
+        512,
+        704,
+        576,
+        768
+      ]
+    },
+    {
+      "file": "artwork/talent-185.png",
+      "rect": [
+        576,
+        704,
+        640,
+        768
+      ]
+    },
+    {
+      "file": "artwork/talent-26.png",
+      "rect": [
+        640,
+        64,
+        704,
+        128
+      ]
+    },
+    {
+      "file": "artwork/talent-58.png",
+      "rect": [
+        640,
+        192,
+        704,
+        256
+      ]
+    },
+    {
+      "file": "artwork/talent-90.png",
+      "rect": [
+        640,
+        320,
+        704,
+        384
+      ]
+    },
+    {
+      "file": "artwork/talent-122.png",
+      "rect": [
+        640,
+        448,
+        704,
+        512
+      ]
+    },
+    {
+      "file": "artwork/talent-154.png",
+      "rect": [
+        640,
+        576,
+        704,
+        640
+      ]
+    },
+    {
+      "file": "artwork/talent-186.png",
+      "rect": [
+        640,
+        704,
+        704,
+        768
+      ]
+    },
+    {
+      "file": "artwork/talent-218.png",
+      "rect": [
+        640,
+        832,
+        704,
+        896
+      ]
+    },
+    {
+      "file": "artwork/talent-215.png",
+      "rect": [
+        448,
+        832,
+        512,
+        896
+      ]
+    },
+    {
+      "file": "artwork/talent-216.png",
+      "rect": [
+        512,
+        832,
+        576,
+        896
+      ]
+    },
+    {
+      "file": "artwork/talent-217.png",
+      "rect": [
+        576,
+        832,
+        640,
+        896
       ]
     }
   ],

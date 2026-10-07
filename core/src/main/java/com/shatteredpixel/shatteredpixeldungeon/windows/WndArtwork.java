@@ -56,6 +56,15 @@ public class WndArtwork extends Window {
         artwork.x = (w - artwork.width()) / 2;
         artwork.y = top + (space - artwork.height()) / 2;
         add(artwork);
+        if (source instanceof com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite) {
+            int identity = ((com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite)source).identityIcon;
+            if (identity >= 0) {
+                Image emblem = new com.shatteredpixel.shatteredpixeldungeon.ui.ItemIdentityIcon(identity, 28);
+                emblem.x = w-34;
+                emblem.y = top;
+                add(emblem);
+            }
+        }
 
         RedButton close = new RedButton(Messages.get(this, "close")) {
             @Override protected void onClick() { hide(); }

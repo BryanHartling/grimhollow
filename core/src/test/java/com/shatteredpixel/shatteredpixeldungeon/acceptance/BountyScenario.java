@@ -42,6 +42,23 @@ final class BountyScenario {
                     if (heap.coleSlot == 0) { check(heap.salePrice() == 200, "ration price"); bought = heap; }
                 }
                 check(slots == 5 && BountyBoard.prices[4] == 600, "fixed five slots and Brand bundle");
+                java.util.ArrayList<Heap> originalDisplays=new java.util.ArrayList<>();
+                for(Heap heap:level.heaps.valueList())if(BountyBoard.owns(heap))originalDisplays.add(heap);
+                level.customTiles.removeIf(t->t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles);
+                BountyBoard.arrive(level);BountyBoard.arrive(level);
+                for(Heap heap:originalDisplays)check(level.heaps.get(heap.pos)==heap,"presentation migration preserves actual stock");
+                check(level.customTiles.stream().filter(t->t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles).count()==1,"presentation migration is idempotent");
+                java.util.ArrayList<Heap> displays=new java.util.ArrayList<>();
+                for(Heap heap:level.heaps.valueList())if(BountyBoard.owns(heap))displays.add(heap);
+                for(Heap a:displays){
+                    check(reached[a.pos],"display reachable");
+                    for(Heap b:displays)if(a!=b)check(Math.abs(a.pos%level.width()-b.pos%level.width())
+                            +Math.abs(a.pos/level.width()-b.pos/level.width())>=2,"display spacing");
+                }
+                check(level.customTiles.stream().anyMatch(t->t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles),"painted office furniture");
+                com.watabou.utils.Bundle officeSave=new com.watabou.utils.Bundle();
+                officeSave.put("furniture",level.customTiles.stream().filter(t->t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles).findFirst().get());
+                check(officeSave.get("furniture") instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles,"office art serialization");
                 int[] quotes = BountyBoard.prices.clone();
                 BountyBoard.takeStock(bought); bought.pickUp();
                 Bundle saved = new Bundle(); BountyBoard.store(saved); BountyBoard.restore(saved);

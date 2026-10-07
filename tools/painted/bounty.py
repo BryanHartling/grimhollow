@@ -8,13 +8,14 @@ HERE = Path(__file__).resolve().parent
 def items(cell_size=64):
     result = {}
     for name, file in [('BLOODMARKED_BRAND', 'brand'), ('WARDENS_COAT', 'coat'), ('WARRANT', 'warrant')]:
-        art = Image.open(HERE / 'sources/bounty' / (file + '.png')).convert('RGBA')
+        art = source(file)
         assert art.getchannel('A').getextrema()[0] == 0, (name, 'genuine transparency required')
         result[name] = icon(art, cell_size)
     return result
 
 def source(name):
-    im=Image.open(HERE/'sources/bounty'/f'{name}.png').convert('RGBA')
+    folder='playtest-v129' if name=='brand' else 'bounty'
+    im=Image.open(HERE/'sources'/folder/f'{name}.png').convert('RGBA')
     assert im.getchannel('A').getextrema()[0]==0,name
     return im
 
@@ -28,8 +29,7 @@ def outputs():
     from monsters import CONTRACT,parts
     for i,name in enumerate(('skeleton','thief','guard','dm100','necromancer','tengu','chainwarden')):
         spec=next(s for s in CONTRACT['monsters'] if s['name']==name)
-        portrait=icon(parts(spec['sheet'])[spec['row']*4],174)
-        tile=Image.new('RGBA',(256,256));tile.alpha_composite(paper,(8,8));tile.alpha_composite(portrait,(41,26))
+        tile=icon(parts(spec['sheet'])[spec['row']*4],256)
         sheet.alpha_composite(tile,(i%4*256,i//4*256))
     result['interfaces/bounty_posters.png']=sheet
     seals=Image.new('RGBA',(192,64));frames=cutouts('details.png',4,2)

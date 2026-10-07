@@ -240,7 +240,7 @@ public class WndJournal extends WndTabbed {
 		
 		@Override
 		protected void createChildren() {
-			list = new ScrollingListPane();
+			list = new ScrollingListPane(28);
 			add( list );
 		}
 		
@@ -479,7 +479,7 @@ public class WndJournal extends WndTabbed {
 		
 		@Override
 		protected void createChildren() {
-			grid = new ScrollingGridPane();
+			grid = new ScrollingGridPane(28);
 			add(grid);
 		}
 		
@@ -601,7 +601,7 @@ public class WndJournal extends WndTabbed {
 			itemButtons[BESTIARY_IDX].icon(JournalIcons.get(5));
 			itemButtons[LORE_IDX].icon(JournalIcons.get(6));
 
-			grid = new ScrollingGridPane(){
+			grid = new ScrollingGridPane(28){
 				@Override
 				public synchronized void update() {
 					super.update();
@@ -768,6 +768,7 @@ public class WndJournal extends WndTabbed {
 				}
 
 				sprite = new ItemSprite(item.image, seen ? item.glowing() : null);
+                if(seen) sprite.identityIcon=item.icon;
 				if (!seen)  {
 					if (item instanceof ExoticPotion){
 						sprite.frame(ItemSpriteSheet.POTION_CRIMSON);
@@ -870,6 +871,7 @@ public class WndJournal extends WndTabbed {
 				gridItem.addSecondIcon(secondIcon);
 			}
 			if (!seen) {
+				gridItem.showUnknownBadge();
 				gridItem.hardLightBG(2f, 1f, 2f);
 			}
 			grid.addItem(gridItem);

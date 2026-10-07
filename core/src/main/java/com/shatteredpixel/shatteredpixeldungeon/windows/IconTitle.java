@@ -33,6 +33,8 @@ import com.watabou.noosa.Image;
 import com.watabou.noosa.ui.Component;
 
 public class IconTitle extends Component {
+    private Image identity;
+    private int displayedIdentity=-1;
 
 	private static final float FONT_SIZE = 9;
 
@@ -95,6 +97,21 @@ public class IconTitle extends Component {
 		imIcon.x = x + (Math.max(0, 8 - imIcon.width()/2));
 		imIcon.y = y + (Math.max(0, 8 - imIcon.height()/2));
 		PixelScene.align(imIcon);
+        int identityIndex = imIcon instanceof ItemSprite ? ((ItemSprite)imIcon).identityIcon : -1;
+        if(identityIndex!=displayedIdentity){
+            if(identity!=null){identity.killAndErase();identity=null;}
+            if(identityIndex>=0){
+                identity=new com.shatteredpixel.shatteredpixeldungeon.ui.ItemIdentityIcon(identityIndex,9);
+                add(identity);
+            }
+            displayedIdentity=identityIndex;
+        }
+        if (identity != null) {
+            identity.visible = identityIndex >= 0;
+            identity.x = imIcon.x+imIcon.width()-3;
+            identity.y = y;
+            PixelScene.align(identity);
+        }
 
 		int imWidth = (int)Math.max(imIcon.width() + (artworkButton == null ? 0 : 8), artworkButton == null ? 16 : 24);
 		int imHeight = (int)Math.max(imIcon.height(), artworkButton == null ? 16 : 24);
@@ -153,6 +170,7 @@ public class IconTitle extends Component {
 	public void alpha( float value ){
 		tfLabel.alpha(value);
 		imIcon.alpha(value);
+        if(identity!=null)identity.alpha(value);
 	}
 
 	public void health( float value ) {

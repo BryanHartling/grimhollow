@@ -296,7 +296,15 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                         }
                     }else if(step==71){closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(BountyBoard.contracts[3]));}
                     else if(step==72){interfaceBounds();checkReviewText(Game.scene());capture("bounty-completed-poster");}
-                    else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, seven painted posters and completion stamp, mouse/touch acceptance and purchase, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements and both actual boss deaths/mask rewards; failures=0");Gdx.app.exit();}
+                    else if(step==73||step==76){
+                        closeReviewWindows();questField(GameScene.class,"scene",null);Dungeon.init();Playtest.enable();
+                        Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.depth=step==73?25:26;
+                        Dungeon.switchLevel(Dungeon.newLevel(),-1);
+                        Dungeon.hero.pos=step==73?Dungeon.level.exit()+3*Dungeon.level.width()+2:com.shatteredpixel.shatteredpixeldungeon.levels.LastLevel.AMULET_POS+2;
+                        InterlevelScene.mode=InterlevelScene.Mode.DESCEND;switchNoFade(GameScene.class);
+                    }else if(step==74||step==77){Dungeon.observe();Camera.main.snapTo(Dungeon.hero.sprite.center());}
+                    else if(step==75||step==78){capture(step==75?"painted-yog-platform":"painted-amulet-sanctum");}
+                    else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, seven painted posters and completion stamp, mouse/touch acceptance and purchase, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements, both actual boss deaths/mask rewards and painted final sanctums; failures=0");Gdx.app.exit();}
             }
         }
     }
@@ -2191,25 +2199,29 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private int artworkCharge,artworkBagSize;
     private com.watabou.utils.RectF artworkFrame;
     private boolean artworkPotionKnown;
+    private boolean artworkPotionPreviouslyKnown;
     private com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision artworkPotion;
     private final com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal artworkCrystal=new com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal();
-    private static final String[] ART_SUBJECTS={"item","unknown-potion","creature","plant","trap","terrain","talent","buff","journal","class","composite-tile"};
+    private static final String[] ART_SUBJECTS={"item","unknown-potion","creature","plant","trap","terrain","talent","buff","journal","class","composite-tile","identified-potion","retained-talent"};
 
     /** Extend the existing native interface fixture with real mouse/touch artwork taps. */
     private boolean artworkReview() throws ReflectiveOperationException {
         com.shatteredpixel.shatteredpixeldungeon.items.FocusCrystal crystal=artworkCrystal;
         int subject=artworkStep/4,phase=artworkStep++%4;
         if(subject>=ART_SUBJECTS.length){
-            System.out.println("ARTWORK UI PASS: 11 subjects, source-resolution exports/fallback, native mouse/touch, modal return, independent scale, no turns/charges/identification changes; failures=0");
+            System.out.println("ARTWORK UI PASS: 13 subjects, source-resolution exports/fallback, known consumable emblems in inspection and artwork, hidden unknown identities, native mouse/touch, modal return, independent scale, no turns/charges/identification changes; failures=0");
             return true;
         }
         if(phase==0){
             closeReviewWindows();
+            artworkPotion=null;
             switch(subject){
                 case 0:artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,crystal);break;
                 case 1:
+                    artworkPotionPreviouslyKnown=com.shatteredpixel.shatteredpixeldungeon.items.potions.Potion.getKnown().remove(com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision.class);
                     artworkPotion=new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision();
                     artworkPotionKnown=artworkPotion.isIdentified();
+                    if(artworkPotionKnown)throw new AssertionError("Unknown-potion fixture starts identified");
                     artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(artworkPotion);break;
                 case 2:artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoMob(new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Skeleton());break;
                 case 3:
@@ -2227,6 +2239,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord note=new com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord(com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark.DISTANT_WELL,Dungeon.depth);
                     artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndJournalItem(note.icon(),note.title(),note.desc());break;
                 case 9:artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroInfo(HeroClass.NECROMANCER);break;
+                case 11:artworkPotion=new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfMindVision();artworkPotion.identify();artworkPotionKnown=artworkPotion.isIdentified();artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(artworkPotion);break;
+                case 12:artworkOrigin=new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoTalent(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.STRONGMAN,1,null);break;
                 default:
                     Image composite=new Image("environment/custom_tiles/painted_sewer_exit.png",0,0,64,128);
                     composite.logicalSize(16,32);
@@ -2241,6 +2255,12 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if(button==null)throw new AssertionError("Missing artwork tap: "+ART_SUBJECTS[subject]);
             @SuppressWarnings("unchecked") java.util.function.Supplier<Image> supplier=(java.util.function.Supplier<Image>)RecoveryChecks.field(button,"artwork");
             artworkSource=supplier.get();artworkScaleX=artworkSource.scale.x;artworkScaleY=artworkSource.scale.y;artworkFrame=artworkSource.frame();
+            if(subject==1||subject==11){
+                Object titlebar=((com.watabou.noosa.Gizmo)button).parent;
+                Image identity=(Image)RecoveryChecks.field(titlebar,"identity");
+                if((identity!=null&&identity.visible)!=(subject==11))throw new AssertionError("Inspection identity disclosure mismatch");
+                capture("inspection-"+ART_SUBJECTS[subject]);
+            }
             if(artworkSource==null||artworkSource.texture==null)throw new AssertionError("Empty examination artwork");
             pointerGestureReview(button,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
         }else if(phase==2){
@@ -2249,6 +2269,10 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if(viewer==null||artworkOrigin.parent==null)throw new AssertionError("Artwork modal did not preserve its description: "+ART_SUBJECTS[subject]+" source="+artworkSource.width+"x"+artworkSource.height+" origin="+artworkOrigin.parent+" viewer="+viewer);
             interfaceBounds();checkReviewText(viewer);
             Image large=(Image)RecoveryChecks.field(viewer,"artwork");
+            if(subject==1||subject==11){
+                int emblems=0;for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(viewer))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.ItemIdentityIcon)emblems++;
+                if(emblems!=(subject==11?1:0))throw new AssertionError("Artwork identity disclosure mismatch");
+            }
             if(large.scale==artworkSource.scale||large.width()<=artworkSource.width()*2||large.height()<=artworkSource.height()*2)throw new AssertionError("Artwork not independently enlarged");
             if(large.width()>viewer.camera.width||large.height()>viewer.camera.height)throw new AssertionError("Artwork clipped");
             if(subject!=5 && subject!=10 && (large.width<256||large.height<256))throw new AssertionError("Missing high-resolution source: "+ART_SUBJECTS[subject]);
@@ -2260,6 +2284,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             if(artworkOrigin.parent==null || artworkSource.scale.x!=artworkScaleX || artworkSource.scale.y!=artworkScaleY || frame.left!=artworkFrame.left || frame.top!=artworkFrame.top || frame.right!=artworkFrame.right || frame.bottom!=artworkFrame.bottom)throw new AssertionError("Preview changed source/description");
             if(Dungeon.hero.cooldown()!=artworkTime || crystal.charges()!=artworkCharge || Dungeon.hero.belongings.backpack.items.size()!=artworkBagSize || (artworkPotion!=null && artworkPotion.isIdentified()!=artworkPotionKnown))throw new AssertionError("Preview consumed a turn/charge or identified an item");
             closeReviewWindows();
+            if(subject==1 && artworkPotionPreviouslyKnown)artworkPotion.setKnown();
             if(subject==3)Dungeon.level.plants.remove(Dungeon.hero.pos);
             if(subject==4)Dungeon.level.traps.remove(Dungeon.hero.pos);
         }
@@ -2923,10 +2948,22 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             before=failures.size();
             for(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent talent:com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.values()){
                 com.shatteredpixel.shatteredpixeldungeon.ui.TalentIcon icon=new com.shatteredpixel.shatteredpixeldungeon.ui.TalentIcon(talent);
-                int expected=com.shatteredpixel.shatteredpixeldungeon.ui.SkillIcon.talentIndex(talent.icon())>=0?64:32;
+                int expected=64;
                 if(Math.round(icon.frame().width()*icon.texture.width)!=expected||icon.width()!=16||GameGeometry.opaqueHeight(icon.texture,icon.frame())==0)failures.add("36 empty or mis-scaled talent "+talent);
                 Pixmap drawn=renderSprite(icon,buffer,camera);drawn.dispose();icon.destroy();
             }
+            int selectors=0;
+            Class<?> selectorsType=com.shatteredpixel.shatteredpixeldungeon.ui.HeroIcon.class;
+            for(java.lang.reflect.Field field:selectorsType.getFields()){
+                if(field.getDeclaringClass()!=selectorsType||field.getType()!=int.class||field.getName().equals("NONE")||field.getName().equals("SPELL_ACTION_OFFSET"))continue;
+                int id=field.getInt(null);
+                for(int variant=0;variant<(id>=40&&id<=66?2:1);variant++){
+                    com.shatteredpixel.shatteredpixeldungeon.ui.HeroIcon icon=new com.shatteredpixel.shatteredpixeldungeon.ui.HeroIcon(id+variant*32);
+                    if(Math.round(icon.frame().width()*icon.texture.width)!=64||icon.width()!=16||icon.height()!=16||GameGeometry.opaqueHeight(icon.texture,icon.frame())==0)failures.add("36 empty/mis-scaled hero selector "+field.getName()+":"+variant);
+                    Pixmap drawn=renderSprite(icon,buffer,camera);drawn.dispose();icon.destroy();selectors++;
+                }
+            }
+            System.out.println("PAINTED HERO SELECTORS: subclass, armor, Cleric and action symbols="+selectors);
             paintedSkillsAndPlants(buffer,camera,failures);
             rankAndKeyChecks(buffer,camera,failures);
             System.out.println("TEST 36: nine splashes, descriptions, portraits, all talents and ItemSlots failures="+(failures.size()-before));

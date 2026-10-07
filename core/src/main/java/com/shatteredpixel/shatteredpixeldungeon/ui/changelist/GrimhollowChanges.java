@@ -20,7 +20,11 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.28.0","A name on a poster. A hunter who keeps his promises.");
+        ChangeInfo r=release(list,"v1.29.0","Painted sanctums, a stately office and clearer discoveries.");
+        note(r,Icons.JOURNAL,"The Warden's Office","Cole's office now has a broad carpet, a ledger desk, carved furniture and wall shackles. The board hangs by the wall and the five sale displays are spaced apart. Contracts read as parchment notices, with a large wanted portrait above their story and seal.");
+        note(r,Icons.TALENT,"Painted talents and discoveries","The retained heroes' talents now have painted, effect-specific emblems. Journal lists show larger pictures, and identified consumables retain their identity emblem in examination and enlarged artwork. Bloodmarked Brands bear the same mark shown on their victims.");
+        note(r,Icons.INFO,"The final sanctums","Yog's platform and the Amulet sanctum now use painted basalt, carved masonry, stained glass and candles. Blank Parchment can be sold or offered to a hungry Hatchling, one sheet at a time.");
+        r=release(list,"v1.28.0","A name on a poster. A hunter who keeps his promises.");
         note(r,Icons.JOURNAL,"Cole's Bounty Board","Find Cole in his old Prison office. Read the posters and choose which contracts to sign; an unsigned contract never summons its quarry. His finite shop asks a steep price for good equipment. Some names on the board are best approached carefully.");
         note(r,Icons.INFO,"Promises and Warrants","Named wanted creatures, painted posters, physical Warrants and journal notes follow your accepted jobs. A swift hand may earn a fuller purse. The boss poster matches the prison's actual jailer, and Cole has one last contract to discuss afterward.");
         note(r,Icons.TALENT,"Hunter's equipment","Bloodmarked Brands and the Warden's Coat join the dungeon's equipment. Later hunters carry their own Warrants; what you bring back to Cole determines the terms he will offer. Each ending has a cosmetic badge.");

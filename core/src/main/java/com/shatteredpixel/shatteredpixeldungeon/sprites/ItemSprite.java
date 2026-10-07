@@ -49,6 +49,7 @@ import com.watabou.utils.Random;
 import java.nio.Buffer;
 
 public class ItemSprite extends MovieClip {
+    public int identityIcon = -1;
     @Override public void frame(com.watabou.utils.RectF frame) {
         super.frame(frame);
         texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR, com.badlogic.gdx.graphics.GL20.GL_LINEAR);
@@ -135,6 +136,7 @@ public class ItemSprite extends MovieClip {
 	@Override
 	public void copy(Image other) {
 		super.copy(other);
+        identityIcon = other instanceof ItemSprite ? ((ItemSprite)other).identityIcon : -1;
 
 		if (other instanceof ItemSprite && ((ItemSprite) other).glowing != null){
 			glow(((ItemSprite) other).glowing);
@@ -206,6 +208,7 @@ public class ItemSprite extends MovieClip {
 
 	public ItemSprite view( Item item ){
 		view(item.image(), item.glowing());
+        identityIcon = com.shatteredpixel.shatteredpixeldungeon.ui.ItemIdentityIcon.index(item);
 		Emitter emitter = item.emitter();
 		if (emitter != null && parent != null) {
 			emitter.pos( this );
@@ -247,6 +250,7 @@ public class ItemSprite extends MovieClip {
 	}
 	
 	public ItemSprite view( int image, Glowing glowing ) {
+        identityIcon = -1;
 		if (this.emitter != null) this.emitter.killAndErase();
 		emitter = null;
 		frame( image );

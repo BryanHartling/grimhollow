@@ -133,9 +133,11 @@ public class HeroIcon extends Image {
 		super( Assets.Interfaces.HERO_ICONS );
 		if(icon>=1000){SkillIcon.apply(this,icon-1000);return;}
 		if (film == null){
-			film = new TextureFilm(texture, SIZE, SIZE);
+			film = new TextureFilm(texture, 64, 64);
 		}
 		frame(film.get(icon));
+        logicalSize(SIZE,SIZE);
+        texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR,com.badlogic.gdx.graphics.GL20.GL_LINEAR);
 	}
 
 }

@@ -14,6 +14,8 @@ def outputs(items):
     cells=[icon(sheet.crop((xs[x],ys[y],xs[x+1],ys[y+1]))) for y in range(4) for x in range(4)]
     atlas=Image.new('RGBA',(256,256))
     for i,cell in enumerate(cells):atlas.paste(cell,(i%4*64,i//4*64))
+    from playtest_polish import journal_consumables
+    atlas.paste(journal_consumables(items),(0,128))
     materials=panels()
     buttons=Image.new('RGBA',(256,64))
     buttons.paste(patch(materials[0],(52,44),(6,6,6,6)),(8,8))

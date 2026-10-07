@@ -1,3 +1,13 @@
+# Quest presentation - v1.29.0
+
+Yog's platform and the Amulet sanctum now use painted basalt, connected carved masonry, stained glass and candles. Cole's Warden's Office has a ledger desk, an oxblood carpet, carved furniture and shackles, with its board against the north wall and five separated sale displays. Contracts use a scrollable parchment layout with a large central target portrait, description, flavor text and rarity seal; the acceptance button stays accessible.
+
+All retained heroes' talent emblems are now painted, including their subclass/armor talents and the shared Heroic Energy variants. Their subclass and armor selectors, Cleric spells and action indicators use matching painted motifs. The existing painted talents for Necromancer, Enchanter and Psychic remain. Journal list/gallery pictures are larger; a potion-and-scroll category image and explicit unknown markers distinguish discoveries. Known consumable emblems carry into inspection and enlarged artwork. The Bloodmarked Brand's debuff image is cropped from the same engraving on its striking face.
+
+Blank Parchment can be sold and fed to the Hatchling as a minor meal, consuming one sheet per meal. Existing office maps receive decoration and repositioned unsold displays without rerolling stock or prices; player-dropped heaps are protected. Rooms filled with loot can retain their original display positions. Quest rewards, combat and difficulty are unchanged.
+
+Windows: `desktop/build/windows/1.29.0/Grimhollow/Grimhollow.exe` (keep its entire folder); the usual shortcut selects the newest packaged version. Android: `android/build/outputs/apk/debug/android-debug.apk`. New paintings, exact prompts and offline assembly are in `tools/painted/sources/playtest-v129/`, `tools/painted/playtest-v129-prompts.json` and `tools/painted/playtest_polish.py`. CI needs no image generator. Native captures are in `verification/interface/{landscape,portrait}/` with `bounty-`, `painted-` and `inspection-` prefixes. Physical tablet and campaign review remain human playtests.
+
 # Cole's Bounty Board - v1.28.0
 
 Cole opens his five-slot shop and Bounty Board on Prison floor 2 (global floor 7). Read a poster, then explicitly accept its contract to bring the wanted target into the dungeon. Warrants record his promises; the journal keeps the accepted jobs and later pursuit. The optional Legendary bounty carries the Warden's Coat, and Bloodmarked Brands join the equipment pool. The boss contract follows the actual Prison boss. The longer quest offers four mutually exclusive cosmetic outcomes.

@@ -149,7 +149,7 @@ public class HatchlingMimic extends Trinket {
         if (item instanceof Plant.Seed) return 2;
         if (item instanceof Runestone) return 3;
         if (item instanceof Potion) return 4;
-        if (item instanceof Scroll) return 5;
+        if (item instanceof Scroll || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.BlankParchment) return 5;
         if (item instanceof Wand) return 7;
         if (item instanceof Ring) return 8;
         if (item instanceof Armor) return 9;

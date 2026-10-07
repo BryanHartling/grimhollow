@@ -40,10 +40,11 @@ public class TalentIcon extends Image {
 		int painted=SkillIcon.talentIndex(icon);
 		if(painted>=0){SkillIcon.apply(this,painted);return;}
 
-		if (film == null) film = new TextureFilm(texture, SIZE*2, SIZE*2);
+		if (film == null) film = new TextureFilm(texture, 64, 64);
 
 		frame(film.get(icon));
         logicalSize(SIZE,SIZE);
+        texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR,com.badlogic.gdx.graphics.GL20.GL_LINEAR);
 	}
 
 }

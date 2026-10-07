@@ -38,6 +38,22 @@ def build_previews():
     for i in range(7):
         x,y=i%4*256,i//4*256
         add('interfaces/bounty_posters.png',(x,y,x+256,y+256),bounty_outputs()['interfaces/bounty_posters.png'].crop((x,y,x+256,y+256)),f'bounty-poster-{i}')
+    from playtest_polish import talents,hero_icons,bloodmark,outputs as polished
+    for i,art in talents(SIZE)[1].items():
+        x,y=i%16*64,i//16*64
+        add('interfaces/talent_icons.png',(x,y,x+64,y+64),art,f'talent-{i}')
+    hero_paint,hero_indices=hero_icons(SIZE)
+    for i in hero_indices:
+        x,y=i%8*64,i//8*64
+        art=hero_paint.crop((i%8*SIZE,i//8*SIZE,(i%8+1)*SIZE,(i//8+1)*SIZE))
+        add('interfaces/hero_icons.png',(x,y,x+64,y+64),art,f'hero-symbol-{i}')
+    add('effects/bloodmark.png',(0,0,64,64),bloodmark(),'bloodmark')
+    for texture,atlas in polished().items():
+        if not texture.startswith('environment/custom_tiles/'):continue
+        columns=atlas.width//64
+        for i in range(columns*(atlas.height//64)):
+            x,y=i%columns*64,i//columns*64;art=atlas.crop((x,y,x+64,y+64))
+            if art.getbbox():add(texture,(x,y,x+64,y+64),art,f'{texture.split("/")[-1][:-4]}-{i}')
 
     from monsters import CONTRACT,parts,rectangle,blank_atlas,pose_choice,density
     for spec in CONTRACT['monsters']:
@@ -75,6 +91,10 @@ def build_previews():
         for i in range(16):
             x,y=i%4,i//4
             art=sheet.crop((xs[x],ys[y],xs[x+1],ys[y+1]))
+            if texture.endswith('painted_journal.png') and i==8:
+                from playtest_polish import journal_consumables
+                from inventory import outputs as inventory_outputs
+                art=journal_consumables(inventory_outputs()['sprites/items.png'])
             if texture.endswith('landmarks.png') and i==9:art=Image.open(HERE/'sources/playtest-v123/well.png').convert('RGBA')
             add(texture,(x*64,y*64,(x+1)*64,(y+1)*64),art,f'{texture.split("/")[-1][:-4]}-{i}')
     from actors import HEROES

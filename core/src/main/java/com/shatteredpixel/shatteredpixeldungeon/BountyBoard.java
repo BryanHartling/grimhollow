@@ -145,6 +145,7 @@ public final class BountyBoard {
     }
     public static void arrive(Level level) {
         if (!present || Dungeon.branch != 0) return;
+        if(Dungeon.depth==OFFICE_DEPTH)com.shatteredpixel.shatteredpixeldungeon.levels.rooms.special.BountyOfficeRoom.refreshPresentation(level);
         deepestMain=Math.max(deepestMain,Math.min(25,Dungeon.depth));
         planContracts();
         if(level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel && contracts[3]!=null && !contracts[3].complete)

@@ -33,10 +33,14 @@ public class ScrollingListPane extends ScrollPane {
 
 	private ArrayList<Component> items = new ArrayList<>();
 
-	private static final int ITEM_HEIGHT	= 18;
+	private final int itemHeight;
 
 	public ScrollingListPane(){
-		super(new Component());
+		this(18);
+	}
+    public ScrollingListPane(int itemHeight){
+        super(new Component());
+        this.itemHeight = itemHeight;
 	}
 
 	@Override
@@ -77,7 +81,7 @@ public class ScrollingListPane extends ScrollPane {
 
 		float pos = 0;
 		for (Component item : items){
-			item.setRect(0, pos, width, ITEM_HEIGHT);
+			item.setRect(0, pos, width, itemHeight);
 			pos += item.height();
 		}
 
@@ -145,9 +149,10 @@ public class ScrollingListPane extends ScrollPane {
 
 		@Override
 		protected void layout() {
-
+            float iconSpace = height > 20 ? 26 : 16;
+            if (height > 20) com.shatteredpixel.shatteredpixeldungeon.GameGeometry.fitBox(icon, 22, 22);
 			icon.y = y + 1 + (height() - 1 - icon.height()) / 2f;
-			icon.x = x + (16 - icon.width())/2f;
+			icon.x = x + (iconSpace - icon.width())/2f;
 			PixelScene.align(icon);
 
 			iconLabel.x = icon.x + (icon.width - iconLabel.width()) / 2f;
@@ -158,8 +163,8 @@ public class ScrollingListPane extends ScrollPane {
 			line.x = x;
 			line.y = y;
 
-			label.maxWidth((int)(width - 16 - 1));
-			label.setPos(x + 17, y + (height() - label.height()) / 2f);
+			label.maxWidth((int)(width - iconSpace - 1));
+			label.setPos(x + iconSpace+1, y + (height() - label.height()) / 2f);
 			PixelScene.align(label);
 		}
 	}

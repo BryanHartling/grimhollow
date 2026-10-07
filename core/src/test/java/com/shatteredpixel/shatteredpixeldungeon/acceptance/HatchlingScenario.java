@@ -56,7 +56,7 @@ final class HatchlingScenario {
     static void run() throws Exception {
         HatchlingMimic hatchling=fresh();
         Item[] food={new ThrowingKnife().quantity(3),new Dagger(),new Firebloom.Seed(),new StoneOfIntuition(),
-                new PotionOfHealing(),new ScrollOfIdentify(),new Javelin(),new WandOfMagicMissile(),
+                new PotionOfHealing(),new BlankParchment(),new ScrollOfIdentify(),new Javelin(),new WandOfMagicMissile(),
                 new RingOfEvasion(),new LeatherArmor(),new Greatsword(),new AshlightLantern()};
         carry(food);
         for(Item expected:food){check(hatchling.nextFood(hero())==expected,"feed order "+expected.getClass());expected.detachAll(hero().belongings.backpack);}
@@ -68,6 +68,10 @@ final class HatchlingScenario {
         check(hatchling.nextFood(hero())==known,"identified first");
         check(HatchlingMimic.foodPriority(new Shuriken(),hero())==0,"tier-two thrown gap closed");
         check(!HatchlingMimic.canUpgrade(new AshlightLantern())&&!HatchlingMimic.canUpgrade(new FocusCrystal()),"artifact/focus upgrade restrictions");
+        check(new BlankParchment().quantity(3).value()==15 && HatchlingMimic.foodTier(new BlankParchment())==Tier.MINOR,"sellable parchment is a minor meal");
+        hatchling=fresh();Item paper=new BlankParchment().quantity(3);carry(paper);
+        due(hatchling);hatchling.tick(hero());
+        check(hero().belongings.contains(paper)&&paper.quantity()==2,"a parchment meal consumes one sheet");
 
         hatchling=fresh();Item knives=new ThrowingKnife().quantity(3);carry(knives);
         ArrayList<String> events=new ArrayList<>();Signal.Listener<String> listener=s->{events.add(s);return false;};GLog.update.add(listener);

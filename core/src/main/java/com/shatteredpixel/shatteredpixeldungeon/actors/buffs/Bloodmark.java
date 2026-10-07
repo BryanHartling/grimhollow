@@ -15,6 +15,10 @@ public class Bloodmark extends FlavourBuff {
                 ?dr-(int)Math.floor(dr*com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.multiplier(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.BRAND_PENETRATION)):dr;
     }
     @Override public int icon() { return BuffIndicator.TARGETED; }
-    @Override public void tintIcon(com.watabou.noosa.Image icon) { icon.hardlight(0xD47758); }
+    @Override public void tintIcon(com.watabou.noosa.Image icon) {
+        float w=icon.width(), h=icon.height();
+        icon.texture("effects/bloodmark.png"); icon.frame(0,0,64,64); icon.logicalSize(w,h);
+        icon.texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR,com.badlogic.gdx.graphics.GL20.GL_LINEAR);
+    }
     @Override public float iconFadePercent() { return Math.max(0, (DURATION-visualcooldown())/DURATION); }
 }

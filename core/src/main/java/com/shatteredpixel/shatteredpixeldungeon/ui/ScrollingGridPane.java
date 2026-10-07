@@ -35,11 +35,16 @@ public class ScrollingGridPane extends ScrollPane {
 	private ArrayList<Component> items = new ArrayList<>();
 	private ArrayList<ColorBlock> separators = new ArrayList<>();
 
-	private static final int ITEM_SIZE	= 17;
-	private static final int MIN_GROUP_SIZE = 3*(ITEM_SIZE+1);
+	private final int ITEM_SIZE;
+	private final int MIN_GROUP_SIZE;
 
 	public ScrollingGridPane(){
-		super(new Component());
+		this(17);
+	}
+    public ScrollingGridPane(int itemSize){
+        super(new Component());
+        ITEM_SIZE = itemSize;
+        MIN_GROUP_SIZE = 3*(itemSize+1);
 	}
 
 	@Override
@@ -170,6 +175,7 @@ public class ScrollingGridPane extends ScrollPane {
 		protected Image icon;
 
 		protected Visual secondIcon;
+        private RenderedTextBlock unknownBadge;
 
 		protected ColorBlock bg;
 
@@ -190,6 +196,10 @@ public class ScrollingGridPane extends ScrollPane {
 			add(secondIcon);
 			layout();
 		}
+        public void showUnknownBadge(){
+            unknownBadge=com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.renderTextBlock("?",10);
+            unknownBadge.hardlight(Window.TITLE_COLOR);add(unknownBadge);layout();
+        }
 
 		public void hardLightBG( float r, float g, float b ){
 			bg.hardlight(r, g, b);
@@ -212,6 +222,8 @@ public class ScrollingGridPane extends ScrollPane {
 			bg.y = y;
 			bg.size(width(), height());
 
+            if (width > 20) com.shatteredpixel.shatteredpixeldungeon.GameGeometry.fitBox(icon, width-4, height-4);
+
 			icon.y = y + (height() - icon.height()) / 2f;
 			icon.x = x + (width() - icon.width())/2f;
 			PixelScene.align(icon);
@@ -220,6 +232,7 @@ public class ScrollingGridPane extends ScrollPane {
 				secondIcon.x = x + width()-secondIcon.width();
 				secondIcon.y = y;
 			}
+            if(unknownBadge!=null)unknownBadge.setPos(x+width()-unknownBadge.width()-1,y+1);
 
 		}
 

@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.5","The deeds and debts of a run, remembered.");
+        ChangeInfo r=release(list,"v1.29.6","Cole waits at the Prison stairs.");
+        note(r,Icons.INFO,"Speak to Cole","After completing his Prison boss bounty, find Cole beside the stairs and speak to him to collect your payment and hear what comes next. His Wanted notice remains in your ranked run's Deeds.");
+        r=release(list,"v1.29.5","The deeds and debts of a run, remembered.");
         note(r,Icons.JOURNAL,"Run history","Each ranked character has a Deeds tab: quest deliveries, the troll commission, the Imp's contract, dragon expedition outcomes and Cole's fate. Old runs without a recorded history say so.");
         note(r,Icons.RANKINGS,"Archived Wanted posters","Review your Wanted notice from Cole's betrayal and the contracts you accepted. Completed notices retain their crimson stamp. The highest paid bounty records the actual gold collected; archived notices cannot accept contracts or claim rewards.");
         r=release(list,"v1.29.4","A name crossed off the board. A purse plainly paid.");

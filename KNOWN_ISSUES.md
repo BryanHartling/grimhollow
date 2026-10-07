@@ -140,3 +140,4 @@ The dated entries below retain their original verification scope. Their test-45 
 
 - v1.29.5: Older completed ranking records contain no quest state and cannot have their deeds reconstructed; the UI says not recorded. Ongoing older saves record only confirmed retained outcomes and mark their earlier history partial. Unranked Playtest games remain excluded from Rankings.
 - v1.29.5: Physical Samsung tablet and a full player-driven campaign remain NOT RUN; terrain contrast test 45 stays Abandoned: test failed and is not rerun. A native Deeds scroll-camera failure and optional-history read warnings were corrected before final verification; initial attempts are not counted as passing.
+- v1.29.6: Already-settled old boss bounties remain settled; the stairs interaction applies to completed, unpaid claims. Physical Samsung tablet and a full human campaign remain NOT RUN; terrain contrast test 45 stays abandoned and was not rerun.

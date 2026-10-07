@@ -1,3 +1,9 @@
+# Cole's Prison stairs meeting v1.29.6 - 2026-10-07
+
+- Completing an accepted Prison boss bounty places Cole beside the exit without opening his betrayal notice or paying the claim. Speak to him to receive the existing payment, Wanted notice and betrayal dialogue; closing the conversation removes him. Waiting, leaving or reloading keeps the claim unpaid until that conversation. His office/Halls settlement and combat rules are unchanged.
+- The interaction guards duplicate dialogue/payment, preserves the current stairs and requires an accepted boss contract. Rankings captures the Wanted notice when the conversation occurs. Existing headless and native Bounty scenarios cover the waiting/save-load state, both actual boss variants, conversation, payment once and departure.
+- Windows/Android build, eight unit tests, combined Runs=30 failures=0, native Bounty review in both orientations and compiled-handler audit pass. The packaged Windows JAR matches the tested distribution. Exact release CI is reported at delivery; physical tablet remains NOT RUN and terrain contrast test 45 stays abandoned.
+
 # Ranked deeds and archived Wanted posters v1.29.5 - 2026-10-07
 
 - Added a scrollable Deeds tab to every rankings detail window, including records whose saved hero is unavailable. The Wanted notice preserves the hero's class/name and bounty at betrayal. Accepted contracts preserve their quarry, story, quoted reward, completion stamp and actual cash collected; the highest paid bounty is highlighted. Reopening a notice has no claim/accept action and cannot affect a current quest.

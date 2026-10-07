@@ -203,7 +203,7 @@ public final class BountyBoard {
                 if(!resolved&&Dungeon.depth==meetingDepth&&encounter!=null&&encounter.id()==mob.id())encounter=(Cole)mob;
                 else removeCole((Cole)mob);
             }
-        if(Dungeon.depth==10 && contracts[3]!=null && contracts[3].complete && !departed) ensureDeparture();
+        if(departurePending()) ensureDeparture();
         if(betrayed){arriveCrews(level);arriveMeeting(level);}
     }
     /** Exhaustive candidates prevent an unlucky placement roll from losing a contract. */
@@ -330,8 +330,21 @@ public final class BountyBoard {
             com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.add(cole);
         return cole;
     }
+    private static boolean departurePending() {
+        Contract c=contracts[3];
+        return present&&Dungeon.branch==0&&Dungeon.depth==10&&!departed&&c!=null&&c.accepted&&c.complete;
+    }
+    /** The boss's death completes the claim; speaking to Cole settles it. */
+    public static boolean interactAtExit(Cole cole) {
+        if(!departurePending()||!Dungeon.level.mobs.contains(cole)||!(Game.scene() instanceof GameScene))return false;
+        if(dialogueOpen)return true;
+        if(!beginBetrayal())return false;
+        dialogueOpen=true;Dungeon.hero.interrupt();Dungeon.hero.lastAction=null;Dungeon.hero.resting=false;
+        GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal(cole));
+        return true;
+    }
     public static boolean beginBetrayal() {
-        Contract c=contracts[3];if(!present||c==null||!c.accepted||!c.complete||departed)return false;
+        Contract c=contracts[3];if(!departurePending())return false;
         if(!betrayed){
             c.returned=true; if(!c.paid){c.paid=true;pay(c.payment,c,false);}
             Warrant.retireContract(3);shopClosed=true;betrayed=true;
@@ -358,13 +371,11 @@ public final class BountyBoard {
             hallsIntroduced=true;Dungeon.hero.interrupt();Dungeon.hero.lastAction=null;Dungeon.hero.resting=false;
             com.watabou.noosa.Game.runOnRenderThread(()->showMeeting(encounter,true));
         }
-        if(!present||Dungeon.branch!=0||Dungeon.depth!=10||departed||dialogueOpen||contracts[3]==null||!contracts[3].complete)return;
+        if(!departurePending())return;
         if(!(com.watabou.noosa.Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene))return;
-        dialogueOpen=true;Dungeon.hero.interrupt();Dungeon.hero.lastAction=null;Dungeon.hero.resting=false;
+        for(Mob mob:Dungeon.level.mobs)if(mob instanceof Cole)return;
         com.watabou.noosa.Game.runOnRenderThread(()->{
-            Cole cole=ensureDeparture();if(cole==null){dialogueOpen=false;return;}
-            beginBetrayal();
-            com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal(cole));
+            if(departurePending())ensureDeparture();
         });
     }
     private static void planCrews(){

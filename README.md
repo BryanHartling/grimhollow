@@ -1,3 +1,9 @@
+# Cole's Prison stairs meeting - v1.29.6
+
+After completing an accepted Prison boss bounty, Cole waits beside the exit stairs. Speak to him to receive payment and the betrayal notice; killing the boss alone no longer opens a popup. He leaves when the conversation closes. Leaving or saving before speaking preserves the unpaid claim for your return, and the later office/Halls encounters retain their existing rules.
+
+Windows: `desktop/build/windows/1.29.6/Grimhollow/Grimhollow.exe` (keep its entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk`.
+
 # Ranked deeds and archived Wanted posters - v1.29.5
 
 Open a run in Rankings, then select its journal-icon **Deeds** tab. It keeps your Wanted notice from Cole's betrayal, your accepted contract posters (including the CLAIMED stamp), and the highest bounty actually collected. Archived posters are read-only. Payments recovered from Cole's gold pile are recorded when you pick it up, not when it drops.

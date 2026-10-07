@@ -266,6 +266,19 @@ final class BountyScenario {
             check(BountyBoard.contracts[3].alias().equals(boss.name())&&BountyBoard.contracts[3].target==boss,"boss identity binding");
             boss.HP=0;BountyBoard.targetDied(boss);
             check(BountyBoard.contracts[3].complete&&!BountyBoard.contracts[3].paid,"death skips betrayal payment");
+            int unpaidGold=Dungeon.gold;
+            BountyBoard.arrive(Dungeon.level);BountyBoard.onHeroReady();BountyBoard.onHeroReady();
+            check(!BountyBoard.betrayed&&!BountyBoard.departed&&Dungeon.gold==unpaidGold
+                    &&com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.ownedContract(3)
+                    &&!RunDeeds.capture().wanted,"boss death auto-settled the claim");
+            Bundle waiting=new Bundle();BountyBoard.store(waiting);BountyBoard.restore(waiting);BountyBoard.arrive(Dungeon.level);
+            check(BountyBoard.contracts[3].complete&&!BountyBoard.contracts[3].paid&&!BountyBoard.betrayed
+                    &&!BountyBoard.departed&&Dungeon.gold==unpaidGold,"waiting claim lost on reload");
+            int waitingCount=0;for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)if(m instanceof Cole){
+                waitingCount++;check(m.pos!=Dungeon.level.exit()&&m.pos!=Dungeon.level.entrance()
+                        &&m.pos!=Dungeon.hero.pos&&Dungeon.level.passable[m.pos],"waiting Cole blocks the stairs");
+            }
+            check(waitingCount==1,"waiting Cole missing or duplicated after reload");
             int gold=Dungeon.gold;check(BountyBoard.beginBetrayal(),"betrayal missing");
             check(Dungeon.gold-gold==1500&&!com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.ownedContract(3),"boss cash / paper");
             int snapshot=BountyBoard.heroBounty;
@@ -285,7 +298,7 @@ final class BountyScenario {
         BountyBoard.targetDied(boss);check(!BountyBoard.beginBetrayal()&&!BountyBoard.accept(3),"retroactive boss arc");
         for(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass hc:com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.values())
             check(!com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(Cole.class,"betray_"+hc.name()).contains("!!!"),"missing class betrayal");
-        System.out.println("BOUNTY COMPONENT 4 PASS: both actual boss choices, explicit unlock/acceptance, once-only payment/snapshot, departure/reload, no retroactive arc and all nine dialogues");
+        System.out.println("BOUNTY COMPONENT 4 PASS: both actual boss choices, explicit unlock/acceptance, unpaid stairs meeting/reload, once-only payment/snapshot, departure/reload, no retroactive arc and all nine dialogues");
     }
     private static void crews(){
         Dungeon.init();Dungeon.branch=0;Dungeon.depth=13;Dungeon.switchLevel(Dungeon.newLevel(),-1);

@@ -97,6 +97,7 @@ public class Cole extends NPC {
     @Override public boolean reset() { return true; }
     @Override public boolean interact(Char ch) {
         if (ch == Dungeon.hero) Game.runOnRenderThread(() -> {
+            if(BountyBoard.interactAtExit(Cole.this))return;
             if(BountyBoard.betrayed){BountyBoard.showMeeting(Cole.this,Dungeon.depth==22);return;}
             BountyBoard.planContracts();
             java.util.ArrayList<String> options=new java.util.ArrayList<>();

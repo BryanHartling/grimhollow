@@ -288,8 +288,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     if(step>=47&&step<65){HeroClass hero=HeroClass.values()[(step-47)/2];
                         if(step%2==1){closeReviewWindows();Dungeon.hero.heroClass=hero;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal(bountyCole));}
                         else{interfaceBounds();checkReviewText(Game.scene());capture("bounty-betray-"+hero.name().toLowerCase());scrollReview(Game.scene());}
-                    }else if(step>=65&&step<71){
-                        int choice=(step-65)/3,phase=(step-65)%3;
+                    }else if(step>=65&&step<77){
+                        int choice=(step-65)/6,phase=(step-65)%6;
                         if(phase==0){
                             closeReviewWindows();questField(GameScene.class,"scene",null);Dungeon.init();Playtest.enable();Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.depth=10;
                             BountyBoard.planContracts();BountyBoard.contracts[0].returned=BountyBoard.contracts[1].returned=true;BountyBoard.bossChoice=choice;BountyBoard.planBoss();
@@ -297,17 +297,38 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                         }else if(phase==1){
                             com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel level=(com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel)Dungeon.level;
                             level.progress();level.progress();level.progress();
-                        }else{
+                        }else if(phase==2){
                             com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel level=(com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel)Dungeon.level;
                             level.bountyBoss().HP=0;level.progress();boolean mask=false;
                             for(com.shatteredpixel.shatteredpixeldungeon.items.Heap heap:level.heaps.valueList())for(com.shatteredpixel.shatteredpixeldungeon.items.Item item:heap.items)if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.TengusMask)mask=true;
                             if(!mask||!BountyBoard.contracts[3].complete||level.state()!=com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel.State.WON)throw new AssertionError("Actual boss reward/progression lost "+choice);
+                            BountyBoard.onHeroReady();
                             capture("bounty-boss-"+choice);
+                        }else if(phase==3){
+                            BountyBoard.onHeroReady();
+                            if(BountyBoard.betrayed||BountyBoard.contracts[3].paid||RunDeeds.capture().wanted)throw new AssertionError("Boss death settled without speaking to Cole");
+                            for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal)throw new AssertionError("Automatic boss betrayal popup");
+                            bountyCole=null;int count=0;
+                            for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs)if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole){bountyCole=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole)mob;count++;}
+                            if(count!=1||Dungeon.level.distance(bountyCole.pos,Dungeon.level.exit())!=1||bountyCole.pos==Dungeon.level.exit())throw new AssertionError("Cole did not wait beside the available stairs");
+                            Dungeon.observe();Camera.main.snapTo(bountyCole.sprite.center());capture("bounty-cole-at-stairs-"+choice);
+                            bountyPaymentGold=Dungeon.gold;bountyCole.interact(Dungeon.hero);
+                        }else if(phase==4){
+                            int dialogs=0;for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal)dialogs++;
+                            if(dialogs!=1||!BountyBoard.betrayed||!BountyBoard.contracts[3].paid||!RunDeeds.capture().wanted
+                                    ||Dungeon.gold-bountyPaymentGold!=BountyBoard.contracts[3].payment)throw new AssertionError("Speaking to Cole did not settle the boss claim once");
+                            BountyBoard.onHeroReady();BountyBoard.interactAtExit(bountyCole);
+                            if(Dungeon.gold-bountyPaymentGold!=BountyBoard.contracts[3].payment)throw new AssertionError("Repeated Cole interaction paid twice");
+                            interfaceBounds();checkReviewText(Game.scene());capture("bounty-cole-stairs-dialogue-"+choice);
+                        }else{
+                            closeReviewWindows();BountyBoard.arrive(Dungeon.level);BountyBoard.onHeroReady();
+                            if(!BountyBoard.departed)throw new AssertionError("Cole did not depart after the conversation");
+                            for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs)if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole)throw new AssertionError("Cole returned after departing");
                         }
-                    }else if(step==71){closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(BountyBoard.contracts[3]));}
-                    else if(step==72){
+                    }else if(step==77){closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(BountyBoard.contracts[3]));}
+                    else if(step==78){
                         interfaceBounds();checkReviewText(Game.scene());bountyPosterLayoutCheck();capture("bounty-completed-poster");
-                        if(!BountyBoard.beginBetrayal())throw new AssertionError("Actual completed boss did not create Wanted notice");
+                        if(!BountyBoard.betrayed||!RunDeeds.capture().wanted)throw new AssertionError("Cole conversation did not preserve the Wanted notice");
                         // Quest mechanics are exercised headlessly; include their facts in this UI review.
                         RunDeeds.record(RunDeeds.Deed.DUST_RETURNED);RunDeeds.record(RunDeeds.Deed.TROLL_GOLD);
                         RunDeeds.record(RunDeeds.Deed.IMP_COMPLETED);RunDeeds.record(RunDeeds.Deed.DRAGON_SLAIN);
@@ -317,16 +338,16 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                         bountyRankedRecord.version=Game.version;bountyRankedRecord.customSeed="";
                         Rankings.INSTANCE.saveGameData(bountyRankedRecord);
                     }
-                    else if(step==73||step==76){
+                    else if(step==79||step==82){
                         closeReviewWindows();questField(GameScene.class,"scene",null);Dungeon.init();Playtest.enable();
-                        Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.depth=step==73?25:26;
+                        Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.depth=step==79?25:26;
                         Dungeon.switchLevel(Dungeon.newLevel(),-1);
-                        Dungeon.hero.pos=step==73?Dungeon.level.exit()+3*Dungeon.level.width()+2:com.shatteredpixel.shatteredpixeldungeon.levels.LastLevel.AMULET_POS+2;
+                        Dungeon.hero.pos=step==79?Dungeon.level.exit()+3*Dungeon.level.width()+2:com.shatteredpixel.shatteredpixeldungeon.levels.LastLevel.AMULET_POS+2;
                         InterlevelScene.mode=InterlevelScene.Mode.DESCEND;switchNoFade(GameScene.class);
-                    }else if(step==74||step==77){Dungeon.observe();Camera.main.snapTo(Dungeon.hero.sprite.center());}
-                    else if(step==75||step==78){capture(step==75?"painted-yog-platform":"painted-amulet-sanctum");}
-                    else if(step>=79&&step<=89){rankingDeedsReview(step-79);}
-                    else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, eight painted posters and completion stamp, six unique quarry skins/save-load/unchanged species animations, mouse/touch acceptance, purchase, urgency HUD/poster and paid receipt, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements, both actual boss deaths/mask rewards, painted final sanctums and ranked Deeds/Wanted/paid posters/old-record fallback; failures=0");Gdx.app.exit();}
+                    }else if(step==80||step==83){Dungeon.observe();Camera.main.snapTo(Dungeon.hero.sprite.center());}
+                    else if(step==81||step==84){capture(step==81?"painted-yog-platform":"painted-amulet-sanctum");}
+                    else if(step>=85&&step<=95){rankingDeedsReview(step-85);}
+                    else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, eight painted posters and completion stamp, six unique quarry skins/save-load/unchanged species animations, mouse/touch acceptance, purchase, urgency HUD/poster and paid receipt, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements, both actual boss deaths/mask rewards and player-initiated Cole stairs meetings/once-only payment/departure, painted final sanctums and ranked Deeds/Wanted/paid posters/old-record fallback; failures=0");Gdx.app.exit();}
             }
         }
     }

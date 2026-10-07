@@ -24,11 +24,14 @@ def source(name):
 def poster_assets():
     # Full-resolution poses, not the small game sprites or old 256px notices.
     from monsters import CONTRACT,parts
+    from wanted import WANTED,source_poses
     sheet=Image.new('RGBA',(2048,1024))
     for i,name in enumerate(('skeleton','thief','guard','dm100','necromancer','tengu','chainwarden')):
         spec=next(s for s in CONTRACT['monsters'] if s['name']==name)
-        tile=icon(parts(spec['sheet'])[spec['row']*4],512)
+        art=source_poses(WANTED[i][0])[0] if i<5 else parts(spec['sheet'])[spec['row']*4]
+        tile=icon(art,512)
         sheet.alpha_composite(tile,(i%4*512,i//4*512))
+    sheet.alpha_composite(icon(source_poses('morcant')[0],512),(1536,512))
     source_dir=HERE/'sources/bounty-poster'
     paper=Image.open(source_dir/'paper.png').convert('RGBA')
     raw_seals=Image.open(source_dir/'seals.png').convert('RGBA')
@@ -46,6 +49,8 @@ def poster_assets():
 def outputs():
     from readability import cutouts,centered
     result={}
+    from wanted import outputs as wanted_outputs
+    result.update(wanted_outputs())
     for name in ('cole','board'):
         result[f'sprites/bounty_{name}.png']=icon(source(name),256)
     result.update(poster_assets())

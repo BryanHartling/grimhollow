@@ -2278,6 +2278,15 @@
         1536,
         1024
       ]
+    },
+    {
+      "file": "artwork/bounty-poster-7.png",
+      "rect": [
+        1536,
+        512,
+        2048,
+        1024
+      ]
     }
   ],
   "interfaces/buffs.png": [
@@ -22455,6 +22464,819 @@
         288,
         0,
         384,
+        112
+      ]
+    }
+  ],
+  "sprites/wanted_bone_clerk.png": [
+    {
+      "file": "artwork/creature-wanted-bone_clerk-0.png",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-bone_clerk-0.png",
+      "rect": [
+        128,
+        0,
+        256,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-bone_clerk-0.png",
+      "rect": [
+        256,
+        0,
+        384,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-bone_clerk-1.png",
+      "rect": [
+        384,
+        0,
+        512,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-bone_clerk-0.png",
+      "rect": [
+        512,
+        0,
+        640,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-bone_clerk-2.png",
+      "rect": [
+        640,
+        0,
+        768,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-bone_clerk-2.png",
+      "rect": [
+        768,
+        0,
+        896,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-bone_clerk-2.png",
+      "rect": [
+        896,
+        0,
+        1024,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-bone_clerk-2.png",
+      "rect": [
+        1024,
+        0,
+        1152,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-bone_clerk-3.png",
+      "rect": [
+        1152,
+        0,
+        1280,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-bone_clerk-3.png",
+      "rect": [
+        1280,
+        0,
+        1408,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-bone_clerk-3.png",
+      "rect": [
+        1408,
+        0,
+        1536,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-bone_clerk-3.png",
+      "rect": [
+        1536,
+        0,
+        1664,
+        128
+      ]
+    }
+  ],
+  "sprites/wanted_jack.png": [
+    {
+      "file": "artwork/creature-wanted-jack-0.png",
+      "rect": [
+        0,
+        0,
+        96,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-0.png",
+      "rect": [
+        96,
+        0,
+        192,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-0.png",
+      "rect": [
+        192,
+        0,
+        288,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-0.png",
+      "rect": [
+        288,
+        0,
+        384,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-0.png",
+      "rect": [
+        384,
+        0,
+        480,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-1.png",
+      "rect": [
+        480,
+        0,
+        576,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-0.png",
+      "rect": [
+        576,
+        0,
+        672,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-1.png",
+      "rect": [
+        672,
+        0,
+        768,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-0.png",
+      "rect": [
+        768,
+        0,
+        864,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-1.png",
+      "rect": [
+        864,
+        0,
+        960,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-2.png",
+      "rect": [
+        1344,
+        0,
+        1440,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-2.png",
+      "rect": [
+        1440,
+        0,
+        1536,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-2.png",
+      "rect": [
+        1536,
+        0,
+        1632,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-3.png",
+      "rect": [
+        960,
+        0,
+        1056,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-3.png",
+      "rect": [
+        1056,
+        0,
+        1152,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-3.png",
+      "rect": [
+        1152,
+        0,
+        1248,
+        120
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-jack-3.png",
+      "rect": [
+        1248,
+        0,
+        1344,
+        120
+      ]
+    }
+  ],
+  "sprites/wanted_morcant.png": [
+    {
+      "file": "artwork/creature-wanted-morcant-0.png",
+      "rect": [
+        0,
+        0,
+        96,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-0.png",
+      "rect": [
+        96,
+        0,
+        192,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-0.png",
+      "rect": [
+        192,
+        0,
+        288,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-1.png",
+      "rect": [
+        288,
+        0,
+        384,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-0.png",
+      "rect": [
+        384,
+        0,
+        480,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-1.png",
+      "rect": [
+        480,
+        0,
+        576,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-0.png",
+      "rect": [
+        576,
+        0,
+        672,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-1.png",
+      "rect": [
+        672,
+        0,
+        768,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-2.png",
+      "rect": [
+        768,
+        0,
+        864,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-2.png",
+      "rect": [
+        864,
+        0,
+        960,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-2.png",
+      "rect": [
+        960,
+        0,
+        1056,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-3.png",
+      "rect": [
+        1056,
+        0,
+        1152,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-3.png",
+      "rect": [
+        1152,
+        0,
+        1248,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-3.png",
+      "rect": [
+        1248,
+        0,
+        1344,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-morcant-3.png",
+      "rect": [
+        1344,
+        0,
+        1440,
+        128
+      ]
+    }
+  ],
+  "sprites/wanted_nails.png": [
+    {
+      "file": "artwork/creature-wanted-nails-0.png",
+      "rect": [
+        0,
+        0,
+        96,
+        104
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-nails-0.png",
+      "rect": [
+        96,
+        0,
+        192,
+        104
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-nails-0.png",
+      "rect": [
+        192,
+        0,
+        288,
+        104
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-nails-1.png",
+      "rect": [
+        288,
+        0,
+        384,
+        104
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-nails-0.png",
+      "rect": [
+        384,
+        0,
+        480,
+        104
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-nails-2.png",
+      "rect": [
+        960,
+        0,
+        1056,
+        104
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-nails-2.png",
+      "rect": [
+        1056,
+        0,
+        1152,
+        104
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-nails-2.png",
+      "rect": [
+        1152,
+        0,
+        1248,
+        104
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-nails-3.png",
+      "rect": [
+        480,
+        0,
+        576,
+        104
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-nails-3.png",
+      "rect": [
+        576,
+        0,
+        672,
+        104
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-nails-3.png",
+      "rect": [
+        672,
+        0,
+        768,
+        104
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-nails-3.png",
+      "rect": [
+        768,
+        0,
+        864,
+        104
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-nails-3.png",
+      "rect": [
+        864,
+        0,
+        960,
+        104
+      ]
+    }
+  ],
+  "sprites/wanted_voss.png": [
+    {
+      "file": "artwork/creature-wanted-voss-0.png",
+      "rect": [
+        0,
+        0,
+        96,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-0.png",
+      "rect": [
+        96,
+        0,
+        192,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-0.png",
+      "rect": [
+        192,
+        0,
+        288,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-1.png",
+      "rect": [
+        288,
+        0,
+        384,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-0.png",
+      "rect": [
+        384,
+        0,
+        480,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-1.png",
+      "rect": [
+        480,
+        0,
+        576,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-0.png",
+      "rect": [
+        576,
+        0,
+        672,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-1.png",
+      "rect": [
+        672,
+        0,
+        768,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-2.png",
+      "rect": [
+        768,
+        0,
+        864,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-2.png",
+      "rect": [
+        864,
+        0,
+        960,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-2.png",
+      "rect": [
+        960,
+        0,
+        1056,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-3.png",
+      "rect": [
+        1056,
+        0,
+        1152,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-3.png",
+      "rect": [
+        1152,
+        0,
+        1248,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-3.png",
+      "rect": [
+        1248,
+        0,
+        1344,
+        128
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-voss-3.png",
+      "rect": [
+        1344,
+        0,
+        1440,
+        128
+      ]
+    }
+  ],
+  "sprites/wanted_widowmaker.png": [
+    {
+      "file": "artwork/creature-wanted-widowmaker-0.png",
+      "rect": [
+        0,
+        0,
+        128,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-0.png",
+      "rect": [
+        128,
+        0,
+        256,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-0.png",
+      "rect": [
+        768,
+        0,
+        896,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-1.png",
+      "rect": [
+        896,
+        0,
+        1024,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-0.png",
+      "rect": [
+        1024,
+        0,
+        1152,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-1.png",
+      "rect": [
+        1152,
+        0,
+        1280,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-2.png",
+      "rect": [
+        256,
+        0,
+        384,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-2.png",
+      "rect": [
+        384,
+        0,
+        512,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-2.png",
+      "rect": [
+        512,
+        0,
+        640,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-2.png",
+      "rect": [
+        640,
+        0,
+        768,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-3.png",
+      "rect": [
+        1280,
+        0,
+        1408,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-3.png",
+      "rect": [
+        1408,
+        0,
+        1536,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-3.png",
+      "rect": [
+        1536,
+        0,
+        1664,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-3.png",
+      "rect": [
+        1664,
+        0,
+        1792,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-3.png",
+      "rect": [
+        1792,
+        0,
+        1920,
+        112
+      ]
+    },
+    {
+      "file": "artwork/creature-wanted-widowmaker-3.png",
+      "rect": [
+        1920,
+        0,
+        2048,
         112
       ]
     }

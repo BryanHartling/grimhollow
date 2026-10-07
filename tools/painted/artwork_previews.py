@@ -35,7 +35,7 @@ def build_previews():
     from bounty import source,outputs as bounty_outputs
     for name in ('cole','board'):
         add(f'sprites/bounty_{name}.png',(0,0,256,256),source(name),'bounty-'+name)
-    for i in range(7):
+    for i in range(8):
         x,y=i%4*512,i//4*512
         add('interfaces/bounty_posters.png',(x,y,x+512,y+512),bounty_outputs()['interfaces/bounty_posters.png'].crop((x,y,x+512,y+512)),f'bounty-poster-{i}')
     for i in range(3):
@@ -59,6 +59,14 @@ def build_previews():
             if art.getbbox():add(texture,(x,y,x+64,y+64),art,f'{texture.split("/")[-1][:-4]}-{i}')
 
     from monsters import CONTRACT,parts,rectangle,blank_atlas,pose_choice,density
+    from wanted import WANTED,source_poses,spec as wanted_spec
+    for name,base in WANTED:
+        contract=wanted_spec(base);texture=f'sprites/wanted_{name}.png'
+        atlas=blank_atlas(contract.get('atlas',base));art=source_poses(name)
+        for mode in ('idle','move','attack','defeated'):
+            for step,index in enumerate(contract.get(mode,[])):
+                choice=pose_choice(mode,step,base)
+                add(texture,rectangle(atlas,contract['frame'],index,8),art[choice],f'creature-wanted-{name}-{choice}')
     for spec in CONTRACT['monsters']:
         name=spec['name'];texture=f"sprites/{spec.get('atlas',name)}.png"
         den=density(spec.get('atlas',name));atlas=blank_atlas(spec.get('atlas',name))

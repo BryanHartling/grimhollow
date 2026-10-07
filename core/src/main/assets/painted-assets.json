@@ -172,6 +172,12 @@
     "title-mist.png": "8686123f111541d132b3aec2f81194cb470545da3af65c9487b9252aea159cb0",
     "title-wordmark.png": "9eabb2f05d010aea0edf720a4897ebd7e33e3bcf8c1a4d01270d9ae4cda322a2",
     "vegetation-states.png": "845fd40c6899b40d19a52fc603342666c5345562fd489714c23ac3f614719e42",
+    "wanted/bone_clerk.png": "caf92e28dc09d6b73e832d7b7adbc7b76d18f8bc58e072446789b9d5655100fb",
+    "wanted/jack.png": "75cfe5d1cc972816db15b43df25741b6be02ddc35959e6979897add2697d6b0a",
+    "wanted/morcant.png": "3da5a6da357031a0608ab9fc27f9fed48db805c5d52a4e249c0ab4a9490ed3b5",
+    "wanted/nails.png": "6688244ffc344de604c7589304e098e1c8fbc89867db01378463c9fe15c06207",
+    "wanted/voss.png": "6eff7390dcffeb0321d3744a1179d8b52f116114a9cb0ecea13255284e44fc23",
+    "wanted/widowmaker.png": "f4def7691246cfb51633c069caf22f95c2e56fc70901f662213ba65828884c80",
     "wayward/cache.png": "fbcf81c4b7dc3046a1a15fe6537967d1347a9e823099c279489b7cac350ff098",
     "wayward/chart.png": "ff615e5e6cf4d314c520f11311b15e7558ac32d4924b0f239b2d1f38acd5ff2c"
   },
@@ -9492,7 +9498,7 @@
         2048,
         1024
       ],
-      "rgba_sha256": "6a642b984f157eb5e72ca5b8dafc9e0c039c416f37b2d467687fb47f2835304b"
+      "rgba_sha256": "6754d95ec289a8d1126516969b55a32e08d82900132fb3c8cc6eff390f3c9c97"
     },
     "interfaces/bounty_seals.png": {
       "size": [
@@ -12327,35 +12333,35 @@
         256,
         256
       ],
-      "rgba_sha256": "4eb8ad72aa1b28273e3a9148ec69ad479629be90f00b6e334e46eb9748d5464b"
+      "rgba_sha256": "e40f728bad0a7cde674caa6ce6a8bbb0accd1d90c79299baaf75023493762e40"
     },
     "artwork/bounty-poster-1.png": {
       "size": [
         256,
         256
       ],
-      "rgba_sha256": "6597573f57bc006b3c0e793e47287f1049e365ba9ef90bfb22bee3bc6b6f87b7"
+      "rgba_sha256": "33fff4b19292383f1091c232931d89bf356543bc73590e094bbbe12bcba28768"
     },
     "artwork/bounty-poster-2.png": {
       "size": [
         256,
         256
       ],
-      "rgba_sha256": "a2892ae9d9a52415cbee1ebd6208d8fc590d6a67193412968cd92f6060be98fe"
+      "rgba_sha256": "2a30b2824af32c3acf0765c828fd04ed08c67c4e39ca1fc4846e542d76bfdf20"
     },
     "artwork/bounty-poster-3.png": {
       "size": [
         256,
         256
       ],
-      "rgba_sha256": "31983fdb480c7d98b47f9fa82de105a2ecae181d646e1ca37a463ff271c03f58"
+      "rgba_sha256": "b8fdb01ab897f3a145c59c64e1b4453787b1cc9929fe0d3403ceea744830be89"
     },
     "artwork/bounty-poster-4.png": {
       "size": [
         256,
         256
       ],
-      "rgba_sha256": "bcbc2cd43f2d1dce35f0404a27505297fc9a4a339d9d5d4cb03f766373a1f711"
+      "rgba_sha256": "a052251f3e7a053d7864535793542c09da76135dd6a6eb051401908c72831855"
     },
     "artwork/bounty-poster-5.png": {
       "size": [
@@ -19860,6 +19866,799 @@
         256
       ],
       "rgba_sha256": "c3bbafcdfefceef8e2212903286498d1d0ba7f5914a94d9502e5b2cb62ec58c2"
+    },
+    "sprites/wanted_jack.png": {
+      "size": [
+        2048,
+        256
+      ],
+      "rgba_sha256": "f7f4e29e0bd3c161aad381904b39d9383935f59fe9db253d0f2519a6fb3a5f5c",
+      "logical_size": [
+        256,
+        32
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          96,
+          120
+        ],
+        [
+          96,
+          0,
+          192,
+          120
+        ],
+        [
+          192,
+          0,
+          288,
+          120
+        ],
+        [
+          288,
+          0,
+          384,
+          120
+        ],
+        [
+          384,
+          0,
+          480,
+          120
+        ],
+        [
+          480,
+          0,
+          576,
+          120
+        ],
+        [
+          576,
+          0,
+          672,
+          120
+        ],
+        [
+          672,
+          0,
+          768,
+          120
+        ],
+        [
+          768,
+          0,
+          864,
+          120
+        ],
+        [
+          864,
+          0,
+          960,
+          120
+        ],
+        [
+          960,
+          0,
+          1056,
+          120
+        ],
+        [
+          1056,
+          0,
+          1152,
+          120
+        ],
+        [
+          1152,
+          0,
+          1248,
+          120
+        ],
+        [
+          1248,
+          0,
+          1344,
+          120
+        ],
+        [
+          1344,
+          0,
+          1440,
+          120
+        ],
+        [
+          1440,
+          0,
+          1536,
+          120
+        ],
+        [
+          1536,
+          0,
+          1632,
+          120
+        ]
+      ],
+      "character": true
+    },
+    "sprites/wanted_nails.png": {
+      "size": [
+        2048,
+        256
+      ],
+      "rgba_sha256": "507ad4f9e055b8a10b25236e943158cdf1859fc99583733a767ef91a637e6009",
+      "logical_size": [
+        256,
+        32
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          96,
+          104
+        ],
+        [
+          96,
+          0,
+          192,
+          104
+        ],
+        [
+          192,
+          0,
+          288,
+          104
+        ],
+        [
+          288,
+          0,
+          384,
+          104
+        ],
+        [
+          384,
+          0,
+          480,
+          104
+        ],
+        [
+          480,
+          0,
+          576,
+          104
+        ],
+        [
+          576,
+          0,
+          672,
+          104
+        ],
+        [
+          672,
+          0,
+          768,
+          104
+        ],
+        [
+          768,
+          0,
+          864,
+          104
+        ],
+        [
+          864,
+          0,
+          960,
+          104
+        ],
+        [
+          960,
+          0,
+          1056,
+          104
+        ],
+        [
+          1056,
+          0,
+          1152,
+          104
+        ],
+        [
+          1152,
+          0,
+          1248,
+          104
+        ]
+      ],
+      "character": true
+    },
+    "sprites/wanted_voss.png": {
+      "size": [
+        2048,
+        128
+      ],
+      "rgba_sha256": "10b60df6ad4b3d60b0c8c1a2c1b93d5b2a8b4941711a9f5ced8edea6aa01ca07",
+      "logical_size": [
+        256,
+        16
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          96,
+          128
+        ],
+        [
+          96,
+          0,
+          192,
+          128
+        ],
+        [
+          192,
+          0,
+          288,
+          128
+        ],
+        [
+          288,
+          0,
+          384,
+          128
+        ],
+        [
+          384,
+          0,
+          480,
+          128
+        ],
+        [
+          480,
+          0,
+          576,
+          128
+        ],
+        [
+          576,
+          0,
+          672,
+          128
+        ],
+        [
+          672,
+          0,
+          768,
+          128
+        ],
+        [
+          768,
+          0,
+          864,
+          128
+        ],
+        [
+          864,
+          0,
+          960,
+          128
+        ],
+        [
+          960,
+          0,
+          1056,
+          128
+        ],
+        [
+          1056,
+          0,
+          1152,
+          128
+        ],
+        [
+          1152,
+          0,
+          1248,
+          128
+        ],
+        [
+          1248,
+          0,
+          1344,
+          128
+        ],
+        [
+          1344,
+          0,
+          1440,
+          128
+        ]
+      ],
+      "character": true
+    },
+    "sprites/wanted_widowmaker.png": {
+      "size": [
+        2048,
+        256
+      ],
+      "rgba_sha256": "3768ca04f77933479f5c25ea767ca66c08df3246447dc98118a553fec718c458",
+      "logical_size": [
+        256,
+        32
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          128,
+          112
+        ],
+        [
+          128,
+          0,
+          256,
+          112
+        ],
+        [
+          256,
+          0,
+          384,
+          112
+        ],
+        [
+          384,
+          0,
+          512,
+          112
+        ],
+        [
+          512,
+          0,
+          640,
+          112
+        ],
+        [
+          640,
+          0,
+          768,
+          112
+        ],
+        [
+          768,
+          0,
+          896,
+          112
+        ],
+        [
+          896,
+          0,
+          1024,
+          112
+        ],
+        [
+          1024,
+          0,
+          1152,
+          112
+        ],
+        [
+          1152,
+          0,
+          1280,
+          112
+        ],
+        [
+          1280,
+          0,
+          1408,
+          112
+        ],
+        [
+          1408,
+          0,
+          1536,
+          112
+        ],
+        [
+          1536,
+          0,
+          1664,
+          112
+        ],
+        [
+          1664,
+          0,
+          1792,
+          112
+        ],
+        [
+          1792,
+          0,
+          1920,
+          112
+        ],
+        [
+          1920,
+          0,
+          2048,
+          112
+        ]
+      ],
+      "character": true
+    },
+    "sprites/wanted_bone_clerk.png": {
+      "size": [
+        2048,
+        512
+      ],
+      "rgba_sha256": "1dd5fa04ef8a4f4bc31556953c326766c038d87116116a4be627add5c6962763",
+      "logical_size": [
+        256,
+        64
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          128,
+          128
+        ],
+        [
+          128,
+          0,
+          256,
+          128
+        ],
+        [
+          256,
+          0,
+          384,
+          128
+        ],
+        [
+          384,
+          0,
+          512,
+          128
+        ],
+        [
+          512,
+          0,
+          640,
+          128
+        ],
+        [
+          640,
+          0,
+          768,
+          128
+        ],
+        [
+          768,
+          0,
+          896,
+          128
+        ],
+        [
+          896,
+          0,
+          1024,
+          128
+        ],
+        [
+          1024,
+          0,
+          1152,
+          128
+        ],
+        [
+          1152,
+          0,
+          1280,
+          128
+        ],
+        [
+          1280,
+          0,
+          1408,
+          128
+        ],
+        [
+          1408,
+          0,
+          1536,
+          128
+        ],
+        [
+          1536,
+          0,
+          1664,
+          128
+        ]
+      ],
+      "character": true
+    },
+    "sprites/wanted_morcant.png": {
+      "size": [
+        2048,
+        128
+      ],
+      "rgba_sha256": "881d0b98e873db9dd39582223613530c4c8f193168590bbc3753a02aa697472a",
+      "logical_size": [
+        256,
+        16
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          96,
+          128
+        ],
+        [
+          96,
+          0,
+          192,
+          128
+        ],
+        [
+          192,
+          0,
+          288,
+          128
+        ],
+        [
+          288,
+          0,
+          384,
+          128
+        ],
+        [
+          384,
+          0,
+          480,
+          128
+        ],
+        [
+          480,
+          0,
+          576,
+          128
+        ],
+        [
+          576,
+          0,
+          672,
+          128
+        ],
+        [
+          672,
+          0,
+          768,
+          128
+        ],
+        [
+          768,
+          0,
+          864,
+          128
+        ],
+        [
+          864,
+          0,
+          960,
+          128
+        ],
+        [
+          960,
+          0,
+          1056,
+          128
+        ],
+        [
+          1056,
+          0,
+          1152,
+          128
+        ],
+        [
+          1152,
+          0,
+          1248,
+          128
+        ],
+        [
+          1248,
+          0,
+          1344,
+          128
+        ],
+        [
+          1344,
+          0,
+          1440,
+          128
+        ]
+      ],
+      "character": true
+    },
+    "artwork/bounty-poster-7.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3be07ba902188548bedc3ad048182388a884fdf0a4a40c4f3056467560ab72b3"
+    },
+    "artwork/creature-wanted-jack-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "353213c91238b9d33d5c3f4e2ed5d2e59a86c92d901a4d1e2f3e238250f10a24"
+    },
+    "artwork/creature-wanted-jack-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ff66c0f40795447285d662d2a5f6d5cea17f86f8de381b7deecffe314a81582b"
+    },
+    "artwork/creature-wanted-jack-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7f84e417ac81a3a712789c5e3740f262c9ab4dfd589f855eb90f77b85ec11307"
+    },
+    "artwork/creature-wanted-jack-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e68f0e7fe10037a75d15b4a855fd84fce9eb1d0987cca90347a5f3aad07c4d84"
+    },
+    "artwork/creature-wanted-nails-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6ec751505e8195a0ffb4e1f18fc0c0da3714a3223a00148d4ff3566dc04aef59"
+    },
+    "artwork/creature-wanted-nails-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5c9e5035db0135abea28e65f18b660aea2a3a6ff072c13d4043c13fe0a321862"
+    },
+    "artwork/creature-wanted-nails-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b715b0ef39b7ecee048e0a59b5c8758cf9fcc3dedbce158fca83cdaf8355b9a9"
+    },
+    "artwork/creature-wanted-nails-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6b5544f976e0ae96983b38480f81347516655d88aedd0700e0fc30f61d60bb7a"
+    },
+    "artwork/creature-wanted-voss-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "058400235ad04219520cf2139524f9fa5a2d3f77a67b0049416578a7897f6e0a"
+    },
+    "artwork/creature-wanted-voss-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "03ae14dd0b042811827110037e37e36e30f6a9688ccbaa6b31b65ed65b42b2b5"
+    },
+    "artwork/creature-wanted-voss-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "117a42565ac2dd94d87edf364fd51bb9c4e6fe3518ad20a48a6295dee1572484"
+    },
+    "artwork/creature-wanted-voss-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "538716480352c108d29ee15ba57ac13fce5728ca43e714a2191124adeaccb222"
+    },
+    "artwork/creature-wanted-widowmaker-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "fa51a9b7cafe21d181192523f0e58e9362c00572cf8ef170aa64b64365d4212c"
+    },
+    "artwork/creature-wanted-widowmaker-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4d01fff114d484e28b5be0bf27d94037a98260bca8d47779f21e7cfb256d13c6"
+    },
+    "artwork/creature-wanted-widowmaker-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d7e38d2ad2ba7307585785c70984e083e26cf7dda8a8c1cf50bd32fa078de405"
+    },
+    "artwork/creature-wanted-widowmaker-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "1c01638b7811e37fe9bfa39cc2fdcc2dca864a8de3b564e9c62440934a370859"
+    },
+    "artwork/creature-wanted-bone_clerk-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "9812436147da0ec7e01b23313d83c083b9e5a74f4cf17ed781f79a17fa66920a"
+    },
+    "artwork/creature-wanted-bone_clerk-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e24b71301a6c949bb3af82fcb766c9f70b71f899124f923b89abf6f45ac90e57"
+    },
+    "artwork/creature-wanted-bone_clerk-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7ced9a3c4edaa59f15ada57e0b5aa3c5f74510a352b4adf4cb4c2660e82be328"
+    },
+    "artwork/creature-wanted-bone_clerk-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e9aeeaac1c06f745c3424a8fd37be0d7751bc723d4978f0e13e17524a37a404c"
+    },
+    "artwork/creature-wanted-morcant-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "9aae155dae61accce14a2897bada9a67a6122b3aacd05eb751fb98c798be9dd1"
+    },
+    "artwork/creature-wanted-morcant-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "cdbe57958a9dcf8e42a3c2f299509d196d0d762d3344c5f21ca70bf9b3788e57"
+    },
+    "artwork/creature-wanted-morcant-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "83cab3a209125ee64e360d924968d1c24b2f85889755f8ec032ae625791a54b0"
+    },
+    "artwork/creature-wanted-morcant-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f5692ab317bb1baf588cbfb5d6f515c87015e55af9982ad12f2cf2decb37cb6"
     }
   }
 }

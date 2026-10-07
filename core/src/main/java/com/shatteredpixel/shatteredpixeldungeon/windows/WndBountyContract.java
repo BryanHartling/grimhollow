@@ -126,7 +126,7 @@ public class WndBountyContract extends Window {
 
     public static Image poster(BountyBoard.Contract c) {
         Image image = new Image("interfaces/bounty_posters.png");
-        image.frame(new TextureFilm(image.texture, 512, 512).get(c.species));
+        image.frame(new TextureFilm(image.texture, 512, 512).get(c.index == 2 ? 7 : c.species));
         image.texture.filter(GL20.GL_LINEAR, GL20.GL_LINEAR);
         image.logicalSize(28, 28);
         return image;

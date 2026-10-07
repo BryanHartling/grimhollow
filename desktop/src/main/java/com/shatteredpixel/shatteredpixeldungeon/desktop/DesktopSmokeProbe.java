@@ -37,6 +37,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean bountyReview=Boolean.getBoolean("grimhollow.bountyReview");
     private int bountyStep;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole bountyCole;
+    private final java.util.List<com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob> bountyQuarries=new java.util.ArrayList<>();
     private int horrorFrames, horrorStep, horrorStart, horrorHealth;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror reviewHorror;
     private boolean[] horrorFov, horrorVisited, horrorMapped;
@@ -246,9 +247,14 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 else{interfaceBounds();checkReviewText(Game.scene());if(!allReviewText(Game.scene()).contains(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(bountyCole,"greet_"+hero.name())))throw new AssertionError("Missing greeting "+hero);capture("bounty-greet-"+hero.name().toLowerCase());}return;
             }
             if(step<=32){int species=(step-19)/2;
-                if(step%2==1){closeReviewWindows();BountyBoard.Contract c=new BountyBoard.Contract();c.index=species>=5?3:species==2?2:species==1||species==3?1:0;c.species=species;c.floor=species>=5?10:8;c.payment=c.index==2?0:c.index==1?1200:600;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(c));}
+                if(step%2==1){closeReviewWindows();BountyBoard.Contract c=new BountyBoard.Contract();c.index=species>=5?3:species>=2?1:0;c.species=species;c.floor=species>=5?10:8;c.payment=c.index==1?1200:600;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(c));}
                 else{interfaceBounds();checkReviewText(Game.scene());bountyPosterLayoutCheck();capture("bounty-poster-"+species);scrollReview(Game.scene());}return;
             }
+            if(step==33){closeReviewWindows();BountyBoard.Contract c=new BountyBoard.Contract();c.index=2;c.species=2;c.floor=8;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(c));return;}
+            if(step==34){interfaceBounds();checkReviewText(Game.scene());bountyPosterLayoutCheck();capture("bounty-poster-7");return;}
+            if(step==35){closeReviewWindows();bountySkinCheck();placeBountyQuarries();return;}
+            if(step==36){capture("bounty-quarries");for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:bountyQuarries){m.destroy();m.sprite.killAndErase();}bountyQuarries.clear();return;}
+            step-=4;
             switch(step){
                 case 33:closeReviewWindows();BountyBoard.contracts[0].floor=7;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(BountyBoard.contracts[0]));break;
                 case 34:playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(bountyCole,"accept"));break;
@@ -304,9 +310,46 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                         InterlevelScene.mode=InterlevelScene.Mode.DESCEND;switchNoFade(GameScene.class);
                     }else if(step==74||step==77){Dungeon.observe();Camera.main.snapTo(Dungeon.hero.sprite.center());}
                     else if(step==75||step==78){capture(step==75?"painted-yog-platform":"painted-amulet-sanctum");}
-                    else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, seven painted posters and completion stamp, mouse/touch acceptance and purchase, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements, both actual boss deaths/mask rewards and painted final sanctums; failures=0");Gdx.app.exit();}
+                    else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, eight painted posters and completion stamp, six unique quarry skins/save-load/unchanged species animations, mouse/touch acceptance and purchase, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements, both actual boss deaths/mask rewards and painted final sanctums; failures=0");Gdx.app.exit();}
             }
         }
+    }
+
+    private BountyBoard.Contract quarryContract(int i){
+        BountyBoard.Contract c=new BountyBoard.Contract();c.index=i==5?2:i<2?0:1;c.species=new int[]{0,1,2,3,4,2}[i];return c;
+    }
+
+    private void bountySkinCheck(){
+        java.util.Set<Object> textures=new java.util.HashSet<>();
+        for(int i=0;i<6;i++){
+            com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob quarry=quarryContract(i).preview();
+            com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite painted=quarry.sprite();
+            if(painted.getClass()!=com.shatteredpixel.shatteredpixeldungeon.sprites.WantedSprites.typeFor(quarry)||painted.getClass()==quarry.spriteClass)throw new AssertionError("Missing named quarry skin "+i);
+            if(!textures.add(painted.texture))throw new AssertionError("Two quarry skins share a texture");
+            com.watabou.utils.Bundle saved=new com.watabou.utils.Bundle();quarry.storeInBundle(saved);
+            com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob restored=com.watabou.utils.Reflection.newInstance(quarry.getClass());restored.restoreFromBundle(saved);
+            if(restored.sprite().getClass()!=painted.getClass())throw new AssertionError("Quarry skin lost on reload "+i);
+            quarry.bountyContract=-1;
+            com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite ordinary=quarry.sprite();
+            if(ordinary.getClass()!=quarry.spriteClass||ordinary.texture==painted.texture)throw new AssertionError("Ordinary species artwork changed "+i);
+            for(String name:new String[]{"idle","run","attack","die","zap"}){
+                com.watabou.noosa.MovieClip.Animation a=(com.watabou.noosa.MovieClip.Animation)RecoveryChecks.field(painted,name),b=(com.watabou.noosa.MovieClip.Animation)RecoveryChecks.field(ordinary,name);
+                if(a==null||b==null){if(a!=b)throw new AssertionError("Quarry animation missing "+name);continue;}
+                if(a.delay!=b.delay||a.looped!=b.looped||a.frames.length!=b.frames.length)throw new AssertionError("Quarry animation timing changed "+i+" "+name);
+                for(int f=0;f<a.frames.length;f++)if(a.frames[f].left!=b.frames[f].left||a.frames[f].top!=b.frames[f].top||a.frames[f].right!=b.frames[f].right||a.frames[f].bottom!=b.frames[f].bottom)throw new AssertionError("Quarry animation layout changed "+i+" "+name);
+            }
+        }
+        System.out.println("WANTED SKINS: six distinct textures; ordinary species unchanged; save/load and animation timing/layout preserved; failures=0");
+    }
+
+    private void placeBountyQuarries(){
+        for(int i=0;i<6;i++){
+            com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob=quarryContract(i).preview();int cell=-1;
+            for(int distance=1;distance<=5&&cell<0;distance++)for(int p=0;p<Dungeon.level.length();p++)if(Dungeon.level.heroFOV[p]&&Dungeon.level.passable[p]&&Dungeon.level.distance(Dungeon.hero.pos,p)==distance&&Actor.findChar(p)==null){cell=p;break;}
+            if(cell<0)throw new AssertionError("No visible quarry review cell "+i);
+            mob.pos=cell;mob.state=mob.PASSIVE;GameScene.add(mob);bountyQuarries.add(mob);
+        }
+        Dungeon.observe();
     }
 
     private void bountyPosterLayoutCheck(){

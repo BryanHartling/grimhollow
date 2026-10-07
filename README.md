@@ -1,3 +1,9 @@
+# Named quarry paintings - v1.29.2
+
+All six non-boss wanted targets now have unique painted bodies and action poses: Jack Twice-Hanged, Nails the Cutpurse, Voss the Cellbreaker, the Widowmaker, the Bone Clerk and Warden Morcant. Their posters and enlarged inspection pictures come from the same original paintings. Ordinary enemies keep their current art; combat, rewards, animation timing and visibility rules are unchanged. Previously accepted targets receive their matching appearance when a saved floor loads.
+
+Windows: `desktop/build/windows/1.29.2/Grimhollow/Grimhollow.exe` (keep the entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk`. Original paintings and exact prompts are in `tools/painted/sources/wanted/` and `tools/painted/wanted-prompts.json`; `python tools/painted/pack.py --wanted` rebuilds their atlases, posters and inspection exports offline. Native review captures are `verification/interface/{landscape,portrait}/bounty-poster-*.png` and `bounty-quarries.png`. Physical tablet review remains human playtesting.
+
 # Wanted posters - v1.29.1
 
 Bounty posters now place large WANTED lettering and the quarry's name above a larger centered portrait. Centered ink follows with the contract title, story, last sighting, bounty, urgency, signature and an elaborate worn rarity seal. Cleaner outline-free ink, 512px portrait frames and new detailed parchment improve readability. The accept/claim button stays outside the scrolling page. Quest rules and rewards are unchanged.

@@ -259,8 +259,14 @@ def main():
     parser.add_argument('--bounty',action='store_true',help='Package Bounty Board inventory; full --check remains the CI gate')
     parser.add_argument('--polish',action='store_true',help='Package quest presentation and inspection exports; full --check remains the CI gate')
     parser.add_argument('--posters',action='store_true',help='Package wanted notices and inspection exports; full --check remains the CI gate')
+    parser.add_argument('--wanted',action='store_true',help='Package named quarry skins, notices and inspection exports')
     args=parser.parse_args()
-    if args.posters:
+    if args.wanted:
+        from wanted import outputs as wanted_outputs
+        from bounty import poster_assets
+        from artwork_previews import outputs as previews
+        built={**wanted_outputs(),**poster_assets(),**previews()}
+    elif args.posters:
         from bounty import poster_assets
         from artwork_previews import outputs as previews
         built={**poster_assets(),**previews()}
@@ -294,17 +300,20 @@ def main():
     failures=[]
     sources={p.relative_to(HERE/'sources').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'sources').rglob('*.png'))}
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
-    if args.hero or args.icons or args.wayward or args.mystery or args.previews or args.bounty or args.polish or args.posters:
+    if args.hero or args.icons or args.wayward or args.mystery or args.previews or args.bounty or args.polish or args.posters or args.wanted:
         manifest['assets']=json.loads(MANIFEST.read_text(encoding='utf-8'))['assets']
     from monsters import sizes as monster_sizes
     fixed_monster_sizes=monster_sizes()
     from monsters import coverage
     painted_rects=coverage()
+    from wanted import metadata as wanted_metadata
+    quarry_metadata=wanted_metadata()
     for path,im in built.items():
         expected=(1024,2240) if path=='sprites/items.png' else (2048,1024) if path.startswith('sprites/hero_') else (512,512) if '/water' in path else (256,512) if '/raised_terrain' in path else (1024,1024)
         if path.startswith('artwork/'):expected=(256,256)
         expected={'interfaces/title_grimhollow.png':(1920,1080),'interfaces/title_wordmark.png':(1024,144),'interfaces/title_mist.png':(1024,342)}.get(path,expected)
         expected=fixed_monster_sizes.get(path,expected)
+        if path in quarry_metadata:expected=quarry_metadata[path]['size']
         expected={'interfaces/buffs.png':(448,224),'interfaces/large_buffs.png':(1024,512),'interfaces/chrome.png':(512,384),'interfaces/status_pane.png':(1024,512),'interfaces/painted_glyphs.png':(512,256)}.get(path,expected)
         if path.startswith('splashes/painted_'):expected=(1600,900)
         if path=='interfaces/painted_portraits.png':expected=(384,384)
@@ -347,6 +356,9 @@ def main():
         assert im.size==expected,path
         manifest['assets'][path]={'size':list(im.size),'rgba_sha256':digest(im)}
         if path in painted_rects:manifest['assets'][path]['painted_rects']=painted_rects[path]
+        if path in quarry_metadata:
+            manifest['assets'][path].update({key:value for key,value in quarry_metadata[path].items() if key!='size'})
+            manifest['assets'][path]['character']=True
         if path.startswith('sprites/expedition_') or path.startswith('sprites/bounty_') or path=='sprites/lurking_horror.png':
             manifest['assets'][path]['character']=True
             manifest['assets'][path]['logical_size']=[im.width//8,im.height//8]
@@ -358,7 +370,7 @@ def main():
         else:
             target.parent.mkdir(parents=True,exist_ok=True)
             im.save(target,optimize=False)
-    if args.previews or args.polish or args.posters or not (args.hero or args.icons or args.wayward or args.mystery or args.bounty):
+    if args.previews or args.polish or args.posters or args.wanted or not (args.hero or args.icons or args.wayward or args.mystery or args.bounty):
         from artwork_previews import index_bytes
         index_path=ASSETS/'artwork-previews.json'
         if args.check:

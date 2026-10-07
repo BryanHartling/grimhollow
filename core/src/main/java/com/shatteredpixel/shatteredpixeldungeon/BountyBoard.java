@@ -79,6 +79,8 @@ public final class BountyBoard {
                 case 6: mob = new Chainwarden(); break;
                 default: mob = new Skeleton();
             }
+            // The notice preview and spawned quarry use the same appearance.
+            if (index < 3) mob.bountyContract = index;
             return mob;
         }
         @Override public void storeInBundle(Bundle b) {

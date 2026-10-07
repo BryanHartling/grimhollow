@@ -282,7 +282,7 @@ public abstract class Mob extends Char {
 	}
 	
 	public CharSprite sprite() {
-		return Reflection.newInstance(spriteClass);
+		return Reflection.newInstance(com.shatteredpixel.shatteredpixeldungeon.sprites.WantedSprites.typeFor(this));
 	}
 	
 	@Override

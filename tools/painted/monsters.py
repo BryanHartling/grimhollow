@@ -26,33 +26,38 @@ CONTRACT = json.loads((HERE/'monsters.json').read_text(encoding='utf-8'))
 @lru_cache(None)
 def parts(name):
     source = Image.open(HERE/'sources/monsters'/f'{name}.png').convert('RGBA')
+    return split_poses(source, name)
+
+
+def split_poses(source, name, columns=4, rows=4):
     assert source.getchannel('A').getextrema()[0] == 0, name
     # The reduced connectivity mask keeps this portable to Pillow/numpy-only CI.
     size = (source.width//2, source.height//2)
     alpha = np.asarray(source.getchannel('A').resize(size, Image.Resampling.BILINEAR))
     active = alpha >= 24
     labels = np.full(active.shape, -1, dtype=np.int16)
-    groups = [[] for _ in range(16)]
+    count = columns*rows
+    groups = [[] for _ in range(count)]
     for sy, sx in zip(*np.nonzero(active)):
         if labels[sy, sx] != -1:
             continue
-        queue = deque([(int(sy), int(sx))]); labels[sy, sx] = 16; points = []
+        queue = deque([(int(sy), int(sx))]); labels[sy, sx] = count; points = []
         while queue:
             y, x = queue.popleft(); points.append((y, x))
             for dy, dx in ((-1,0),(1,0),(0,-1),(0,1),(-1,-1),(-1,1),(1,-1),(1,1)):
                 yy, xx = y+dy, x+dx
                 if 0 <= yy < size[1] and 0 <= xx < size[0] and active[yy,xx] and labels[yy,xx] == -1:
-                    labels[yy,xx] = 16; queue.append((yy,xx))
+                    labels[yy,xx] = count; queue.append((yy,xx))
         if len(points) < 5:
             continue
         ys, xs = np.array(points).T
-        row = min(3, int(ys.mean()*4/size[1]))
-        col = min(3, int(xs.mean()*4/size[0]))
-        index = row*4+col
+        row = min(rows-1, int(ys.mean()*rows/size[1]))
+        col = min(columns-1, int(xs.mean()*columns/size[0]))
+        index = row*columns+col
         labels[ys, xs] = index
         groups[index].append((ys, xs))
     result = []
-    for index in range(16):
+    for index in range(count):
         # Stationary actors use only the declared source poses. Do not turn an
         # unused, connected magic trail into part of a different creature.
         largest = max((len(ys) for ys, _ in groups[index]), default=0)

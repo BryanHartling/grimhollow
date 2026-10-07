@@ -27,11 +27,12 @@ import com.watabou.noosa.MovieClip;
 import com.watabou.noosa.TextureFilm;
 
 public class GuardSprite extends MobSprite {
+	protected String textureFile(){ return Assets.Sprites.GUARD; }
 
 	public GuardSprite() {
 		super();
 
-		texture( Assets.Sprites.GUARD );
+		texture( textureFile() );
 
 		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 16 );
 

@@ -1,3 +1,10 @@
+# Named quarry paintings v1.29.2 - 2026-10-06
+
+- Added six original painted wanted skins with idle, movement, attack/casting and defeated poses. Jack has his noose and broken restraints; Nails a green hood and stolen payroll; Voss blue prison livery and heavy keys; the Widowmaker damaged copper machinery and a red eye; the Bone Clerk a grim ledger; Morcant enclosed armor and an oxblood officer's coat. Normal enemies and the actual Prison bosses retain their artwork.
+- Wanted targets select their skin from the existing saved bounty marker. Each skin inherits its species' animation layout, timing and callbacks; no new actor type, stat, AI, loot or save field is introduced. Previously accepted targets acquire the correct skin on reload. Posters and source-resolution artwork previews use the same paintings, with a separate poster slot for Morcant.
+- Committed source paintings, exact imagegen prompts and deterministic offline assembly. The existing native Bounty fixture checks all six unique textures, ordinary species artwork, save/load, unchanged animation timing/layout, eight posters, visibility suppression and existing quest interactions. The existing geometry fixture checks every new frame and steady idle.
+- Windows/Android builds, eight unit tests, combined Runs=30 failures=0, both native Bounty orientations, geometry and the compiled-handler audit pass. Asset provenance and exact release CI are reported in verification/ACCEPTANCE.md and at delivery. Physical tablet review remains NOT RUN; test 45 remains abandoned.
+
 # Wanted poster refinement v1.29.1 - 2026-10-06
 
 - Reordered every bounty poster: large WANTED, quarry alias, centered portrait, contract title, flavor, last seen, BOUNTY amount, urgency, signature state, rarity seal and fixed action button. Jack's contract is now titled Jack's Second Chance. All paragraph lines are centered and can scroll on smaller screens.

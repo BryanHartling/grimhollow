@@ -25,11 +25,12 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.watabou.noosa.TextureFilm;
 
 public class ThiefSprite extends MobSprite {
+	protected String textureFile(){ return Assets.Sprites.THIEF; }
 	
 	public ThiefSprite() {
 		super();
 		
-		texture( Assets.Sprites.THIEF );
+		texture( textureFile() );
 		TextureFilm film = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 12, 13 );
 		
 		idle = new Animation( 1, true );

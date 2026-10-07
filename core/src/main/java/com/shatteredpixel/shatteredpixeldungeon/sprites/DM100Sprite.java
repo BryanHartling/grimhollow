@@ -32,11 +32,12 @@ import com.watabou.utils.Callback;
 import com.watabou.utils.PointF;
 
 public class DM100Sprite extends MobSprite {
+	protected String textureFile(){ return Assets.Sprites.DM100; }
 
 	public DM100Sprite () {
 		super();
 		
-		texture( Assets.Sprites.DM100 );
+		texture( textureFile() );
 		
 		TextureFilm frames = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 16, 14 );
 

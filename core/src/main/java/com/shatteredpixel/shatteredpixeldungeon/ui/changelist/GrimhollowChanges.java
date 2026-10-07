@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.1","A proper wanted notice.");
+        ChangeInfo r=release(list,"v1.29.2","Six faces worth remembering.");
+        note(r,Icons.JOURNAL,"Named wanted creatures","Jack Twice-Hanged carries his noose and shackles; Nails guards a stolen payroll; Voss wears battered blue prison livery. The Widowmaker's broken machinery, the Bone Clerk's grim ledger and Morcant's red-and-gold armor each have their own paintings. Their posters and enlarged inspection images match the creatures you encounter.");
+        r=release(list,"v1.29.1","A proper wanted notice.");
         note(r,Icons.JOURNAL,"Wanted posters","Bold WANTED lettering and the quarry's name sit above a larger centered portrait. Centered ink lists the contract's story, last sighting, bounty and urgency before its signature line and ornate worn rarity seal. Contract buttons remain accessible while scrolling.");
         r=release(list,"v1.29.0","Painted sanctums, a stately office and clearer discoveries.");
         note(r,Icons.JOURNAL,"The Warden's Office","Cole's office now has a broad carpet, a ledger desk, carved furniture and wall shackles. The board hangs by the wall and the five sale displays are spaced apart. Contracts read as parchment notices, with a large wanted portrait above their story and seal.");

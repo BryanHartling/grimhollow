@@ -32,6 +32,7 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.particles.Emitter;
 
 public class NecromancerSprite extends MobSprite {
+	protected String textureFile(){ return Assets.Sprites.NECRO; }
 	
 	private Animation charging;
 	private Emitter summoningBones;
@@ -39,7 +40,7 @@ public class NecromancerSprite extends MobSprite {
 	public NecromancerSprite(){
 		super();
 		
-		texture( Assets.Sprites.NECRO );
+		texture( textureFile() );
 		TextureFilm film = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.characterFilm(texture, 16, 16 );
 		
 		idle = new Animation( 1, true );

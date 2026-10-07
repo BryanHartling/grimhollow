@@ -1,5 +1,7 @@
 # Known issues
 
+- v1.29.2: six named quarry skins pass native portrait/landscape, geometry, animation and reload checks; physical Samsung tablet visual review remains NOT RUN. Combat and quest tuning are unchanged. Test 45 remains Abandoned: test failed and is not rerun.
+
 - v1.28.0 branch CI 37504904710 failed only unchanged effects timing test 31: mean 1.4500 ms / p95 2.1384 ms against the strict <2 ms gate; fog test 47 and both native Bounty layouts passed. The identical release-tag commit's rendering stage passed. GitHub denied the failed-job retry with HTTP 403; the failed run remains available and no check or threshold was weakened. This documentation update does not change the game or packaged builds.
 
 - v1.28.0: Cole's Bounty Board is complete for new runs; existing saves without quest data deliberately receive no retroactive office. Native portrait/touch checks and an Android build do not replace physical Samsung tablet review or a full player-driven bounty campaign. New dialogue uses English fallback where translations are unavailable; initial quest economy and combat budgets need campaign balance review.

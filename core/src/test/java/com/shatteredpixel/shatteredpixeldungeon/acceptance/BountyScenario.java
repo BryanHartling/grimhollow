@@ -75,6 +75,7 @@ final class BountyScenario {
                 check(BountyBoard.shopClosed && BountyBoard.stock[0] == null, "disk-save receipts");
             }
             contracts();
+            legendaryCash();
             items();
             boss();
             crews();
@@ -96,7 +97,14 @@ final class BountyScenario {
         check(!BountyBoard.contracts[0].accepted && !BountyBoard.bossUnlocked(), "examination accepts / early boss");
         check(com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract.text(BountyBoard.contracts[0]).contains("URGENT BOUNTY")
                 && !com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract.text(BountyBoard.contracts[0]).contains("500"), "implicit urgency");
-        for (int i=0;i<3;i++) check(BountyBoard.accept(i) && !BountyBoard.accept(i), "acceptance duplication");
+        BountyBoard.contracts[0].floor=8;
+        check(BountyBoard.accept(0)&&!BountyBoard.contracts[0].clockStarted
+                && BountyBoard.urgency(BountyBoard.contracts[0]).contains("starts when"), "clock starts before arrival");
+        BountyBoard.onHeroSpent(3);
+        check(BountyBoard.contracts[0].elapsed==0,"waiting for target-floor arrival consumes bonus");
+        BountyBoard.contracts[0].floor=7;BountyBoard.arrive(Dungeon.level);
+        for (int i=1;i<3;i++) check(BountyBoard.accept(i) && !BountyBoard.accept(i), "acceptance duplication");
+        check(!BountyBoard.accept(0),"first acceptance duplicated");
         int targets=0;
         for (com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob : Dungeon.level.mobs) if(mob.bountyContract>=0) {
             targets++; check(!Dungeon.level.heroFOV[mob.pos], "target appears in immediate sight");
@@ -104,18 +112,31 @@ final class BountyScenario {
             mob.sprite=mob.sprite(); mob.sprite.link(mob);
         }
         check(targets==3 && com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.ownedContract(0), "accepted overlap / claim issuance");
-        BountyBoard.onHeroSpent(499.5f);
+        Dungeon.branch=1;BountyBoard.onHeroSpent(499.5f);Dungeon.branch=0;
         BountyBoard.Contract common=BountyBoard.contracts[0], rare=BountyBoard.contracts[1];
+        check(common.urgencyRunning() && common.turnsRemaining()==1 && !common.urgencyExpired(), "fractional countdown rounding");
+        check(new com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant(0).info().contains("1 turn remaining")
+                && new com.shatteredpixel.shatteredpixeldungeon.journal.Notes.BountyRecord(0,7).desc().contains("1 turn remaining"), "Warrant/journal countdown missing");
         common.target.HP=0; common.target.die(Dungeon.hero);
         check(common.complete && common.bonusEarned && common.amount()==720, "real hero kill/earned timer");
         BountyBoard.onHeroSpent(1f);
+        check(rare.turnsRemaining()==0 && rare.urgencyExpired()
+                && BountyBoard.urgency(rare).contains("base bounty is still payable"), "expiry hides base claim");
+        check(!common.urgencyRunning() && common.elapsed==499.5f
+                && BountyBoard.urgency(common).contains("secured"), "kill does not lock the urgency bonus");
         rare.target.HP=0; rare.target.die(com.shatteredpixel.shatteredpixeldungeon.levels.features.Chasm.class);
         check(rare.complete && !rare.bonusEarned && rare.amount()==1200, "environment kill/expired timer");
         Bundle saved=new Bundle(); BountyBoard.store(saved); BountyBoard.restore(saved);
         check(BountyBoard.contracts[0].title().equals(title)&&BountyBoard.contracts[0].alias().equals(alias),"seeded identity load");
         int gold=Dungeon.gold;
+        String paidMessage=com.shatteredpixel.shatteredpixeldungeon.utils.GLog.HIGHLIGHT
+                + com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(Cole.class,"payment",720);
+        long notices=com.shatteredpixel.shatteredpixeldungeon.utils.MessageHistory.snapshot().stream().filter(m->m.startsWith(paidMessage)).count();
         check(BountyBoard.returnClaim(0)&&!BountyBoard.returnClaim(0),"payment duplicate");
         check(Dungeon.gold-gold==720&&!com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.ownedContract(0),"payment receipt / consumed paper");
+        java.util.List<String> history=com.shatteredpixel.shatteredpixeldungeon.utils.MessageHistory.snapshot();
+        check(history.stream().filter(m->m.startsWith(paidMessage)).count()==notices+1
+                && history.stream().anyMatch(m->m.startsWith(paidMessage)&&m.contains(alias)&&m.contains("120 gold for swift completion")), "payment amount/bonus receipt missing or duplicated");
         check(BountyBoard.returnClaim(1)&&BountyBoard.bossUnlocked(), "two cash contracts unlock boss");
         BountyBoard.store(saved); BountyBoard.restore(saved);
         check(!BountyBoard.returnClaim(0), "reload repayment");
@@ -148,6 +169,43 @@ final class BountyScenario {
         int after=0; for(Heap heap:Dungeon.level.heaps.valueList()) for(Item item:heap.items)
             if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.armor.WardensCoat)after++;
         check(after==1,"duplicate corpse prize");
+        check(legendary.payment==BountyBoard.contracts[1].payment && !legendary.bonusEarned
+                && !com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract.text(legendary).contains("URGENT"), "Legendary cash must match Rare without urgency");
+        int legendaryGold=Dungeon.gold;
+        check(BountyBoard.returnClaim(2)&&!BountyBoard.returnClaim(2)&&Dungeon.gold-legendaryGold==1200, "Legendary coat/cash claim duplicated or missing");
+    }
+    private static void legendaryCash(){
+        int original=BalanceTuning.get(BalanceTuning.Key.BOUNTY_RARE_PAY);
+        try{
+            BalanceTuning.setShared(BalanceTuning.Key.BOUNTY_RARE_PAY,1800);
+            Dungeon.init();Dungeon.depth=7;Dungeon.branch=0;Dungeon.switchLevel(Dungeon.newLevel(),-1);
+            BountyBoard.Contract c=BountyBoard.contracts[2];
+            check(c.payment==1800&&c.payment==BountyBoard.contracts[1].payment,"Legendary/Rare tuning diverged");
+            BalanceTuning.setShared(BalanceTuning.Key.BOUNTY_RARE_PAY,900);BountyBoard.planContracts();
+            Bundle saved=new Bundle();BountyBoard.store(saved);BountyBoard.restore(saved);c=BountyBoard.contracts[2];
+            check(c.payment==1800,"saved Legendary quote was repriced");
+            // Reproduce the previous release's on-disk record, with no new cash marker.
+            Bundle legacyClaim=new Bundle();legacyClaim.put("__className",BountyBoard.Contract.class.getName());
+            legacyClaim.put("index",2);legacyClaim.put("species",c.species);legacyClaim.put("floor",c.floor);legacyClaim.put("payment",0);
+            Bundle legacyQuest=saved.getBundle("bounty_board");legacyQuest.put("contract_2",legacyClaim);saved.put("bounty_board",legacyQuest);
+            BountyBoard.restore(Bundle.read(new java.io.ByteArrayInputStream(saved.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8))));
+            c=BountyBoard.contracts[2];
+            check(c.payment==1800&&c.payment==BountyBoard.contracts[1].payment,"old Legendary must inherit its run's saved Rare quote");
+            c.accepted=c.complete=true;BountyBoard.give(new com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant(2));
+            int gold=Dungeon.gold;
+            check(BountyBoard.earnedDebt()&&BountyBoard.payEarned()==1800&&BountyBoard.payEarned()==0
+                    &&Dungeon.gold-gold==1800&&!com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.ownedContract(2),"deferred Legendary payment/receipt");
+            Bundle old=new Bundle();old.put("index",2);old.put("accepted",true);old.put("complete",true);old.put("payment",0);
+            BountyBoard.Contract migrated=new BountyBoard.Contract();migrated.restoreFromBundle(old);
+            check(migrated.payment==900&&!migrated.paid,"old unpaid Legendary missing new cash");
+            old.put("paid",true);migrated.restoreFromBundle(old);check(migrated.payment==0&&migrated.paid,"old settled Legendary was reopened");
+            BountyBoard.Contract zero=new BountyBoard.Contract();zero.index=2;zero.payment=0;zero.storeInBundle(saved);migrated.restoreFromBundle(saved);
+            check(migrated.payment==0,"deliberately zero-priced new Legendary was migrated");
+            BountyBoard.Contract clock=new BountyBoard.Contract();clock.elapsed=clock.deadline;
+            check(!clock.urgencyExpired()&&clock.turnsRemaining()==0,"exact deadline boundary changed");
+            System.out.println("BOUNTY RECEIPTS/CLOCK PASS: quoted cash and bonus once, fractional countdown/Warrant/journal, delayed start/continuous clock/kill lock; Legendary equals Rare, no urgency, deferred claim, tuning/save migration/settled exclusion");
+        }catch(java.io.IOException error){throw new AssertionError(error);}
+        finally{BalanceTuning.setShared(BalanceTuning.Key.BOUNTY_RARE_PAY,original);}
     }
     private static void items() {
         Dungeon.init(); Dungeon.depth=7; Dungeon.branch=0; Dungeon.switchLevel(Dungeon.newLevel(),-1);

@@ -36,6 +36,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean horrorReview=Boolean.getBoolean("grimhollow.horrorReview");
     private final boolean bountyReview=Boolean.getBoolean("grimhollow.bountyReview");
     private int bountyStep;
+    private int bountyPaymentGold;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole bountyCole;
     private final java.util.List<com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob> bountyQuarries=new java.util.ArrayList<>();
     private int horrorFrames, horrorStep, horrorStart, horrorHealth;
@@ -250,10 +251,12 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(step%2==1){closeReviewWindows();BountyBoard.Contract c=new BountyBoard.Contract();c.index=species>=5?3:species>=2?1:0;c.species=species;c.floor=species>=5?10:8;c.payment=c.index==1?1200:600;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(c));}
                 else{interfaceBounds();checkReviewText(Game.scene());bountyPosterLayoutCheck();capture("bounty-poster-"+species);scrollReview(Game.scene());}return;
             }
-            if(step==33){closeReviewWindows();BountyBoard.Contract c=new BountyBoard.Contract();c.index=2;c.species=2;c.floor=8;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(c));return;}
+            if(step==33){closeReviewWindows();BountyBoard.Contract c=new BountyBoard.Contract();c.index=2;c.species=2;c.floor=8;c.payment=1200;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(c));return;}
             if(step==34){interfaceBounds();checkReviewText(Game.scene());bountyPosterLayoutCheck();capture("bounty-poster-7");return;}
             if(step==35){closeReviewWindows();bountySkinCheck();placeBountyQuarries();return;}
             if(step==36){capture("bounty-quarries");for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:bountyQuarries){m.destroy();m.sprite.killAndErase();}bountyQuarries.clear();return;}
+            if(step>=41&&step<49){bountyPaymentReview(step-41);return;}
+            if(step>=49)step-=8;
             step-=4;
             switch(step){
                 case 33:closeReviewWindows();BountyBoard.contracts[0].floor=7;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(BountyBoard.contracts[0]));break;
@@ -310,9 +313,52 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                         InterlevelScene.mode=InterlevelScene.Mode.DESCEND;switchNoFade(GameScene.class);
                     }else if(step==74||step==77){Dungeon.observe();Camera.main.snapTo(Dungeon.hero.sprite.center());}
                     else if(step==75||step==78){capture(step==75?"painted-yog-platform":"painted-amulet-sanctum");}
-                    else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, eight painted posters and completion stamp, six unique quarry skins/save-load/unchanged species animations, mouse/touch acceptance and purchase, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements, both actual boss deaths/mask rewards and painted final sanctums; failures=0");Gdx.app.exit();}
+                    else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, eight painted posters and completion stamp, six unique quarry skins/save-load/unchanged species animations, mouse/touch acceptance, purchase, urgency HUD/poster and paid receipt, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements, both actual boss deaths/mask rewards and painted final sanctums; failures=0");Gdx.app.exit();}
             }
         }
+    }
+
+    private void bountyPaymentReview(int step){
+        BountyBoard.Contract common=BountyBoard.contracts[0], rare=BountyBoard.contracts[1];
+        Object menu=RecoveryChecks.field(Game.scene(),"menu");
+        com.shatteredpixel.shatteredpixeldungeon.ui.BountyClockIndicator clock=(com.shatteredpixel.shatteredpixeldungeon.ui.BountyClockIndicator)RecoveryChecks.field(menu,"bountyClock");
+        com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton[] rows=(com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton[])RecoveryChecks.field(clock,"rows");
+        switch(step){
+            case 0:
+                closeReviewWindows();rare.floor=7;if(!BountyBoard.accept(1))throw new AssertionError("Second urgency contract not accepted");
+                common.elapsed=321.5f;rare.elapsed=123;break;
+            case 1:
+                bountyClockBounds(clock);if(!clock.visible||!rows[0].visible||!rows[1].visible||!rows[0].text().contains("179 turns")||!rows[1].text().contains("377 turns"))throw new AssertionError("Two independent urgency clocks missing");
+                capture("bounty-urgency-hud");pointerGestureReview(rows[0],Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);break;
+            case 2:
+                interfaceBounds();bountyPosterLayoutCheck();if(!allReviewText(Game.scene()).contains("179 turns remaining"))throw new AssertionError("Urgency HUD did not open its contract");
+                capture("bounty-urgency-poster");closeReviewWindows();common.elapsed=499.5f;rare.elapsed=rare.deadline+1;break;
+            case 3:
+                bountyClockBounds(clock);if(!rows[0].text().contains("1 turn")||!rows[1].text().contains("expired"))throw new AssertionError("Fractional/expired urgency HUD incorrect");
+                capture("bounty-urgency-expired");common.target.HP=0;common.target.die(Dungeon.hero);break;
+            case 4:
+                if(!common.complete||!common.bonusEarned||rows[0].visible||!rows[1].visible)throw new AssertionError("Completed urgency still ticking");
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(common));break;
+            case 5:
+                interfaceBounds();bountyPosterLayoutCheck();capture("bounty-completed-common");bountyPaymentGold=Dungeon.gold;
+                playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(bountyCole,"return"));break;
+            case 6:
+                interfaceBounds();checkReviewText(Game.scene());String text=allReviewText(Game.scene());
+                if(Dungeon.gold-bountyPaymentGold!=720||!text.contains("720 gold received")||!text.contains(common.alias())||!text.contains("120 gold for swift completion"))throw new AssertionError("Native payment receipt missing amount/bonus/quarry");
+                capture("bounty-payment");closeReviewWindows();if(BountyBoard.returnClaim(0)||Dungeon.gold-bountyPaymentGold!=720)throw new AssertionError("Native receipt repaid the claim");
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(common));break;
+            case 7:
+                interfaceBounds();bountyPosterLayoutCheck();capture("bounty-returned-common");closeReviewWindows();
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoMob(bountyCole));break;
+        }
+    }
+
+    private void bountyClockBounds(com.shatteredpixel.shatteredpixeldungeon.ui.BountyClockIndicator clock){
+        if(clock.left()<0||clock.top()<0||clock.right()>clock.camera().width||clock.bottom()>clock.camera().height)throw new AssertionError("Urgency HUD outside viewport");
+        Object menu=RecoveryChecks.field(Game.scene(),"menu");
+        com.shatteredpixel.shatteredpixeldungeon.ui.KeyDisplay keys=(com.shatteredpixel.shatteredpixeldungeon.ui.KeyDisplay)RecoveryChecks.field(menu,"keys");
+        com.shatteredpixel.shatteredpixeldungeon.ui.DangerIndicator danger=(com.shatteredpixel.shatteredpixeldungeon.ui.DangerIndicator)RecoveryChecks.field(menu,"danger");
+        if(keys.visible&&clock.top()<keys.bottom()||danger.visible&&clock.top()<danger.bottom())throw new AssertionError("Urgency HUD overlaps keys/enemy indicator");
     }
 
     private BountyBoard.Contract quarryContract(int i){
@@ -356,8 +402,13 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene())){
             if(!(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract))continue;
             float center=((Number)RecoveryChecks.field(child,"paperWidth")).floatValue()/2;
+            com.watabou.noosa.Image claimed=(com.watabou.noosa.Image)RecoveryChecks.field(child,"claimedStamp");
+            String signatureText=((com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock)RecoveryChecks.field(child,"signature")).text();
+            boolean complete=signatureText.equals(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(bountyCole,"complete"))||signatureText.equals(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(bountyCole,"returned"));
+            if(complete!=(claimed!=null))throw new AssertionError("CLAIMED stamp does not match completed poster");
+            if(claimed!=null&&(claimed.angle!=-18||claimed.width()<center*1.5f||claimed.texture.width!=1024||claimed.texture.height!=384))throw new AssertionError("CLAIMED stamp is not a large diagonal painted mark");
             float previous=-1;
-            for(String name:new String[]{"heading","quarry","target","flavorTitle","flavor","location","reward","urgency","signature","seal"}){
+            for(String name:new String[]{"heading","quarry","target","flavorTitle","flavor","location","reward","prizeNote","urgency","deadlineNote","signature","seal"}){
                 Object part=RecoveryChecks.field(child,name);if(part==null)continue;
                 float x,y,width,height;
                 if(part instanceof com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock){

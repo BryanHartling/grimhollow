@@ -35,15 +35,21 @@ def poster_assets():
     source_dir=HERE/'sources/bounty-poster'
     paper=Image.open(source_dir/'paper.png').convert('RGBA')
     raw_seals=Image.open(source_dir/'seals.png').convert('RGBA')
-    for name,im in [('paper',paper),('seals',raw_seals)]:
+    raw_claimed=Image.open(source_dir/'claimed.png').convert('RGBA')
+    for name,im in [('paper',paper),('seals',raw_seals),('claimed',raw_claimed)]:
         assert im.getchannel('A').getextrema()[0]==0,(name,'genuine transparency required')
     seals=Image.new('RGBA',(768,256))
     for i in range(3):
         art=raw_seals.crop((round(i*raw_seals.width/3),0,round((i+1)*raw_seals.width/3),raw_seals.height))
         seals.alpha_composite(icon(art,256),(i*256,0))
     paper=paper.crop(paper.getchannel('A').point(lambda a:255 if a>=16 else 0).getbbox())
+    raw_claimed=raw_claimed.crop(raw_claimed.getchannel('A').point(lambda a:255 if a>=16 else 0).getbbox())
+    ink=ImageOps.contain(raw_claimed,(1000,360),Image.Resampling.LANCZOS)
+    claimed=Image.new('RGBA',(1024,384))
+    claimed.alpha_composite(ink,((claimed.width-ink.width)//2,(claimed.height-ink.height)//2))
     return {'interfaces/bounty_posters.png':sheet,
             'interfaces/bounty_poster_seals.png':seals,
+            'interfaces/bounty_claimed.png':claimed,
             'interfaces/bounty_parchment.png':paper.resize((512,768),Image.Resampling.LANCZOS)}
 
 def outputs():

@@ -19,8 +19,8 @@ public class WndBountyContract extends Window {
     private ScrollPane paper;
     private int paperWidth, paperHeight;
     private Component content;
-    private RenderedTextBlock heading, quarry, flavorTitle, flavor, location, reward, urgency, signature;
-    private Image target, seal;
+    private RenderedTextBlock heading, quarry, flavorTitle, flavor, location, reward, prizeNote, urgency, deadlineNote, signature;
+    private Image target, seal, claimedStamp;
 
     public WndBountyContract(BountyBoard.Contract c) {
         int w = Math.min(210, (int) PixelScene.uiCamera.width - 28);
@@ -44,13 +44,21 @@ public class WndBountyContract extends Window {
         flavorTitle = ink(c.title(), 10, w, target.y + target.height() + 4);
         flavor = ink(flavor(c), 8, w, flavorTitle.bottom() + 4);
         location = ink(location(c), 8, w, flavor.bottom() + 8);
-        reward = ink(c.index == 2 ? Messages.get(Cole.class, "coat_prize")
-                : Messages.get(Cole.class, "poster_bounty", c.payment), 11, w, location.bottom() + 8);
+        reward = ink(Messages.get(Cole.class, "poster_bounty", c.payment), 11, w, location.bottom() + 8);
         float bottom = reward.bottom();
+        if (c.index == 2) {
+            prizeNote = ink(Messages.get(Cole.class, "coat_prize"), 8, w, bottom + 3);
+            bottom = prizeNote.bottom();
+        }
         if (c.index < 2) {
             urgency = ink(Messages.get(Cole.class, "urgent"), 9, w, bottom + 8);
             RenderedTextBlock swift = ink(Messages.get(Cole.class, "swift"), 8, w, urgency.bottom() + 3);
             bottom = swift.bottom();
+            String clock = BountyBoard.urgency(c);
+            if (!clock.isEmpty()) {
+                deadlineNote = ink(clock, 8, w, bottom + 4);
+                bottom = deadlineNote.bottom();
+            }
         }
         signature = ink(Messages.get(Cole.class, c.returned ? "returned" : c.complete ? "complete"
                 : c.accepted ? "accepted" : "offered"), 8, w, bottom + 9);
@@ -70,12 +78,16 @@ public class WndBountyContract extends Window {
         int rarity = Math.min(2, c.index);
         ink(Messages.get(Cole.class, "poster_rarity_" + rarity), rarity == 2 ? 5 : 6, w, seal.y + 46.5f);
         if (c.complete) {
-            Image stamp = Icons.get(Icons.CHECKED);
-            stamp.logicalSize(15, 15);
-            stamp.x = seal.x + seal.width() + 2;
-            stamp.y = seal.y + 22;
-            stamp.angle = -12;
-            content.add(stamp);
+            claimedStamp = new Image("interfaces/bounty_claimed.png");
+            claimedStamp.texture.filter(GL20.GL_LINEAR, GL20.GL_LINEAR);
+            float stampWidth = w - 24;
+            claimedStamp.logicalSize(stampWidth, stampWidth * 384 / 1024);
+            claimedStamp.originToCenter();
+            claimedStamp.x = (w - stampWidth) / 2;
+            claimedStamp.y = target.y + (target.height() - claimedStamp.height()) / 2;
+            claimedStamp.angle = -18;
+            claimedStamp.alpha(.88f);
+            content.add(claimedStamp);
         }
         content.setSize(w, seal.y + seal.height() + 10);
         ArtworkButton enlarge = new ArtworkButton(() -> target, () -> c.alias());
@@ -143,8 +155,11 @@ public class WndBountyContract extends Window {
 
     public static String text(BountyBoard.Contract c) {
         String text = Messages.get(Cole.class, "poster", c.alias(), flavor(c), location(c),
-                c.index == 2 ? Messages.get(Cole.class, "coat_prize") : Messages.get(Cole.class, "gold_prize", c.payment));
+                Messages.get(Cole.class, "gold_prize", c.payment)
+                        + (c.index == 2 ? "\n" + Messages.get(Cole.class, "coat_prize") : ""));
         if (c.index < 2) text += "\n\n" + Messages.get(Cole.class, "urgent") + "\n" + Messages.get(Cole.class, "swift");
+        String clock = BountyBoard.urgency(c);
+        if (!clock.isEmpty()) text += "\n\n" + clock;
         text += "\n\n" + Messages.get(Cole.class, c.returned ? "returned" : c.complete ? "complete" : c.accepted ? "accepted" : "offered");
         return text;
     }

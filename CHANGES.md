@@ -1,3 +1,13 @@
+# Bounty receipts and urgency v1.29.4 - 2026-10-07
+
+- Returning a cash Warrant now shows the actual gold received and quarry name in a receipt, including the earned swift-completion bonus. A painted coin burst, floating gold and currency sound accompany the payment; log history retains the receipt. Boss and later debt-settlement dialogues also explicitly state their payouts. The existing quoted-payment path, Doubloon interactions and once-only claim flags remain unchanged.
+- Accepted common/rare contracts expose their existing saved clock in the Warrant, bounty journal description and two independent tappable HUD rows beneath the keys/enemy indicator. The clock starts on the first target-floor arrival and continues elsewhere; a kill locks the bonus. Expiry explicitly preserves the base bounty. No countdown is shown on unsigned notices, legendary or boss contracts. Text is rebuilt only when its displayed value changes.
+- The Legendary cash reward now equals the Rare quote (default 1,200 gold), alongside its dropped coat, with no urgency bonus. Both future quotes share the existing Rare / Legendary Playtest setting. Old unpaid coat-only claims migrate to that cash amount; settled claims and existing cash quotes are preserved. Later debt settlement also honors the Legendary claim once.
+
+- Replaced the small completion checkmark with an original worn crimson-to-dark-crimson CLAIMED ink stamp, placed diagonally across the portrait once a quarry dies. Accepted-but-unfinished notices remain unstamped. An uncollected reward is still payable; no completion, reward or quest mechanics changed. The absolute floor reference added in v1.29.3 remains.
+- Source painting and exact built-in imagegen prompt are committed; the existing offline poster packer assembles the transparent stamp. The existing native Bounty layout check verifies that only completed notices have the large diagonal high-resolution mark.
+- Final Windows/Android build, eight unit tests, combined Runs=30 failures=0, native Bounty review in both orientations, 1,671 asset provenance checks and the compiled-handler audit pass. Existing fixtures cover receipts, clocks, Legendary cash/tuning and old-save compatibility. Exact release CI is reported at delivery. Physical Samsung tablet review remains NOT RUN; test 45 stays abandoned.
+
 # Bounty floor references v1.29.3 - 2026-10-07
 
 - The shared Last seen line in Warrants, bounty posters and journal descriptions now includes the absolute dungeon floor: Last seen on Prison floor 3 (Dungeon floor 8). Existing numbering and quest destinations are unchanged; Prison floor 2 is Dungeon floor 7. Existing and new Warrants receive the clarification without a save migration.

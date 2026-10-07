@@ -1,0 +1,7 @@
+{
+  "provider": "imagegen",
+  "mode": "built-in",
+  "source": "sources/bounty-poster/claimed.png",
+  "transparent_background": true,
+  "prompt": "Use case: stylized-concept. Asset type: one ORIGINAL high-resolution medieval bounty-completion ink stamp for Grimhollow's painted parchment wanted posters. Text (verbatim): CLAIMED. Exactly this one word in very large, bold, condensed capital serif lettering, perfectly spelled, centered within a thin double rectangular ink border. One horizontal stamp, flat front view, NOT tilted; the game rotates it diagonally later. Wide aspect ratio about 3.5:1, isolated as genuinely transparent alpha ink with transparent counters and gaps, fully visible with modest transparent padding around all edges. The ink ranges from rich crimson at its top to deep dark-crimson at its bottom, restrained blood-red tones, clearly legible on light ivory parchment. Tactile imperfect stamped ink, lightly abraded and uneven worn edges, small weathered breaks in the border and a few tiny rubbed patches in the letters while every letter stays immediately readable. Dense flat coloured ink, no bevel, no shine, no shadow, no 3D depth. This should look like an old Prison official's forceful wooden ink-stamp impression, fitting an ornate gothic fantasy WANTED notice. No parchment, no paper backing, no solid rectangle filling behind the letters, no wax seal, no picture, no hand, no other words, no dates, no other symbols. Genuine transparency, not a checkerboard image."
+}

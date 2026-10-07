@@ -20,7 +20,11 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.3","A clearer trail through the Prison.");
+        ChangeInfo r=release(list,"v1.29.4","A name crossed off the board. A purse plainly paid.");
+        note(r,Icons.INFO,"Bounty receipts and urgency","Returning a paid Warrant shows a gold receipt, coin effect and sound. Warrants and journal entries show the urgent bonus clock; the small HUD clocks open their matching posters. An expired urgency bonus leaves the base bounty payable.");
+        note(r,Icons.JOURNAL,"The Legendary Warrant","The coat is still carried by its quarry. Bring the Legendary Warrant back to Cole for a cash payment equal to the Rare bounty, without an urgency bonus.");
+        note(r,Icons.JOURNAL,"Claimed bounties","Completed posters bear a large diagonal crimson CLAIMED stamp. The quarry's death marks the notice; uncollected payment remains due.");
+        r=release(list,"v1.29.3","A clearer trail through the Prison.");
         note(r,Icons.JOURNAL,"Bounty floor references","The Last seen line on Warrants, posters and bounty journal entries now includes the absolute dungeon floor beside the Prison floor number.");
         r=release(list,"v1.29.2","Six faces worth remembering.");
         note(r,Icons.JOURNAL,"Named wanted creatures","Jack Twice-Hanged carries his noose and shackles; Nails guards a stolen payroll; Voss wears battered blue prison livery. The Widowmaker's broken machinery, the Bone Clerk's grim ledger and Morcant's red-and-gold armor each have their own paintings. Their posters and enlarged inspection images match the creatures you encounter.");

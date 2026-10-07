@@ -1,5 +1,7 @@
 # Known issues
 
+- v1.29.4: physical Samsung tablet review remains NOT RUN. The first native Bounty attempt mistakenly required a modal while checking the HUD alone; HUD and popup bounds now have separate assertions. An old-save test initially referenced an unavailable JSON dependency and now uses the existing Bundle API. Failed attempts are not counted as passing. Test 45 remains Abandoned: test failed and is not rerun.
+
 - v1.29.2: six named quarry skins pass native portrait/landscape, geometry, animation and reload checks; physical Samsung tablet visual review remains NOT RUN. Combat and quest tuning are unchanged. Test 45 remains Abandoned: test failed and is not rerun.
 
 - v1.28.0 branch CI 37504904710 failed only unchanged effects timing test 31: mean 1.4500 ms / p95 2.1384 ms against the strict <2 ms gate; fog test 47 and both native Bounty layouts passed. The identical release-tag commit's rendering stage passed. GitHub denied the failed-job retry with HTTP 403; the failed run remains available and no check or threshold was weakened. This documentation update does not change the game or packaged builds.

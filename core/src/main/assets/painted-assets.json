@@ -26,6 +26,7 @@
     "bounty/coat.png": "14e48d02cc4408db28a177f1a457c8d9f0dd1879a0821ded237d07b8564e7a9c",
     "bounty/cole.png": "a08e199fab7617eceaae60b3ad7052a3d5cc4760847d898b89f9a969112e0756",
     "bounty/warrant.png": "c50274e5c9832d8c27f53272618be9dfe863d93681eee3e882636cf7c0bfdaa9",
+    "bounty-poster/claimed.png": "77e99ebdf772f06a4530a346c4a074a293085ca7822a3a0e6810acf91a4a4754",
     "bounty-poster/paper.png": "966df154160f538a311a7e1e4d614d4cf9c6fe42f4babcabe713b8efef850327",
     "bounty-poster/seals.png": "38cd746c2d89cbc5bc79e4b88837ebfffcbe6f6c11cce95fe93f567959020dab",
     "caves-materials.png": "55e4629826ed07495ec5a2ad8b6577ab69f9fb85609161d6c8ca875bf68f75fa",
@@ -20659,6 +20660,13 @@
         256
       ],
       "rgba_sha256": "4f5692ab317bb1baf588cbfb5d6f515c87015e55af9982ad12f2cf2decb37cb6"
+    },
+    "interfaces/bounty_claimed.png": {
+      "size": [
+        1024,
+        384
+      ],
+      "rgba_sha256": "c69e729e8d20c3a687efb23c6d8b4e17c92a7d0d06f539957daa4e798bce9525"
     }
   }
 }

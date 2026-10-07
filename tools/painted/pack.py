@@ -333,6 +333,7 @@ def main():
         if path in ('sprites/bounty_cole.png','sprites/bounty_board.png'):expected=(256,256)
         if path=='interfaces/bounty_posters.png':expected=(2048,1024)
         if path=='interfaces/bounty_poster_seals.png':expected=(768,256)
+        if path=='interfaces/bounty_claimed.png':expected=(1024,384)
         if path=='interfaces/bounty_seals.png':expected=(192,64)
         if path in ('environment/custom_tiles/halls_special.png','environment/custom_tiles/wardens_office.png'):expected=(512,512)
         if path=='interfaces/bounty_parchment.png':expected=(512,768)

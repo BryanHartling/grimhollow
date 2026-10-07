@@ -3,6 +3,7 @@ package com.shatteredpixel.shatteredpixeldungeon;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
+import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.*;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant;
 import com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel;
@@ -15,6 +16,15 @@ import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.levels.Level;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
+import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
+import com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene;
+import com.shatteredpixel.shatteredpixeldungeon.effects.FloatingText;
+import com.shatteredpixel.shatteredpixeldungeon.effects.Speck;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite;
+import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite;
+import com.shatteredpixel.shatteredpixeldungeon.windows.WndTitledMessage;
+import com.watabou.noosa.Game;
+import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -64,10 +74,14 @@ public final class BountyBoard {
         public int deadline = 500, bonusPercent = 20;
         public Mob target;
         public boolean coatIssued;
+        private boolean legacyLegendaryCash;
         public Contract() {}
         public String alias() { return index == 3 ? preview().name() : Messages.get(Cole.class, "alias_" + (index == 2 ? "warden" : species)); }
         public String title() { return index == 3 ? Messages.get(Cole.class,"boss_title",alias()) : Messages.get(Cole.class, "title_" + (index == 2 ? "warden" : species)); }
         public int amount() { return payment + (bonusEarned ? payment * bonusPercent / 100 : 0); }
+        public boolean urgencyRunning() { return index < 2 && accepted && clockStarted && !complete && !paid; }
+        public boolean urgencyExpired() { return elapsed > deadline; }
+        public int turnsRemaining() { return Math.max(0, (int)Math.ceil(deadline - elapsed)); }
         public Mob preview() {
             Mob mob;
             switch (species) {
@@ -90,6 +104,7 @@ public final class BountyBoard {
             b.put("paid", paid); b.put("issued", issued); b.put("clock_started", clockStarted);
             b.put("elapsed", elapsed); b.put("bonus_earned", bonusEarned);
             b.put("deadline", deadline); b.put("bonus_percent", bonusPercent);
+            b.put("legendary_cash", true);
             b.put("target", target);
             b.put("coat_issued", coatIssued);
         }
@@ -101,6 +116,11 @@ public final class BountyBoard {
             elapsed = b.getFloat("elapsed"); bonusEarned = b.getBoolean("bonus_earned");
             deadline = b.contains("deadline") ? b.getInt("deadline") : 500;
             bonusPercent = b.contains("bonus_percent") ? b.getInt("bonus_percent") : 20;
+            // Older unpaid Legendary Warrants had only the dropped coat as their reward.
+            // Preserve settled claims and deliberately zero-priced new plans.
+            legacyLegendaryCash = index == 2 && !paid && payment == 0 && !b.contains("legendary_cash");
+            if (legacyLegendaryCash)
+                payment = BalanceTuning.get(BalanceTuning.Key.BOUNTY_RARE_PAY);
             target = (Mob)b.get("target");
             coatIssued = b.getBoolean("coat_issued");
         }
@@ -126,7 +146,7 @@ public final class BountyBoard {
                 c.floor = Random.IntRange(7, 9);
                 c.species = i == 0 ? Random.Int(2) : i == 1 ? Random.IntRange(2, 4) : 2;
                 c.traits = i == 0 ? 0 : i == 1 ? 1 << Random.Int(2) : 3;
-                c.payment = i == 0 ? BalanceTuning.get(BalanceTuning.Key.BOUNTY_COMMON_PAY) : i == 1 ? BalanceTuning.get(BalanceTuning.Key.BOUNTY_RARE_PAY) : 0;
+                c.payment = BalanceTuning.get(i == 0 ? BalanceTuning.Key.BOUNTY_COMMON_PAY : BalanceTuning.Key.BOUNTY_RARE_PAY);
                 c.deadline=BalanceTuning.get(BalanceTuning.Key.BOUNTY_DEADLINE);c.bonusPercent=BalanceTuning.get(BalanceTuning.Key.BOUNTY_BONUS);
             }
         } finally { Random.popGenerator(); }
@@ -239,9 +259,45 @@ public final class BountyBoard {
         Contract c = contracts[index];
         if (!c.complete || c.returned || !Warrant.ownedContract(index)) return false;
         c.returned = true;
-        if (!c.paid) { c.paid = true; if (c.amount() > 0) new Gold(c.amount()).sale().award(Dungeon.hero); }
+        if (!c.paid) { c.paid = true; pay(c.amount(), c, true); }
         Warrant.retireContract(index);
         return true;
+    }
+    public static String urgency(Contract c) {
+        if (c.index >= 2 || !c.accepted) return "";
+        if (c.complete) return Messages.get(Cole.class, c.bonusEarned ? "clock_earned" : "clock_missed");
+        if (c.paid) return "";
+        if (!c.clockStarted) return Messages.get(Cole.class, "clock_pending");
+        return c.urgencyExpired() ? Messages.get(Cole.class, "clock_expired")
+                : Messages.get(Cole.class, c.turnsRemaining() == 1 ? "clock_remaining_one" : "clock_remaining", c.turnsRemaining());
+    }
+    /** Quest payments retain their quoted amount and announce the actual award once. */
+    private static void pay(int amount, Contract claim, boolean receipt) {
+        if (amount <= 0) return;
+        Hero hero = Dungeon.hero;
+        int awarded = new Gold(amount).sale().award(hero);
+        String message = Messages.get(Cole.class, "payment", awarded);
+        if (claim != null) {
+            message += "\n\n" + Messages.get(Cole.class, "payment_claim", claim.alias());
+            if (claim.bonusEarned)
+                message += "\n" + Messages.get(Cole.class, "payment_bonus", claim.amount() - claim.payment);
+        }
+        GLog.h(message.replace("\n\n", " ").replace("\n", " "));
+        // Text, particles and audio belong to the render thread, never the actor thread.
+        if (Game.scene() instanceof GameScene) {
+            GameScene scene = (GameScene) Game.scene();
+            String body = message;
+            Game.runOnRenderThread(() -> {
+                if (Game.scene() != scene || Dungeon.hero != hero) return;
+                if (hero.sprite != null) {
+                    hero.sprite.showStatusWithIcon(CharSprite.POSITIVE, "+" + awarded, FloatingText.GOLD);
+                    hero.sprite.emitter().burst(Speck.factory(Speck.COIN), 8);
+                }
+                Sample.INSTANCE.play(Assets.Sounds.GOLD);
+                if (receipt) GameScene.show(new WndTitledMessage(new ItemSprite(new Gold(awarded)),
+                        Messages.get(Cole.class, "payment_title", awarded), body));
+            });
+        }
     }
     /** One saved roll shared by the offer and the actual boss, with the original configured probability. */
     public static void planBoss() {
@@ -274,7 +330,7 @@ public final class BountyBoard {
     public static boolean beginBetrayal() {
         Contract c=contracts[3];if(!present||c==null||!c.accepted||!c.complete||departed)return false;
         if(!betrayed){
-            c.returned=true; if(!c.paid){c.paid=true;new Gold(c.payment).sale().award(Dungeon.hero);}
+            c.returned=true; if(!c.paid){c.paid=true;pay(c.payment,c,false);}
             Warrant.retireContract(3);shopClosed=true;betrayed=true;
             long value=Dungeon.gold;java.util.Set<Item> counted=java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
             for(Item item:Dungeon.hero.belongings)if(counted.add(item))value+=Math.max(0,item.value());
@@ -366,14 +422,14 @@ public final class BountyBoard {
         return ids.size();
     }
     public static boolean earnedDebt(){
-        for(int i=0;i<2;i++)if(contracts[i]!=null&&contracts[i].accepted&&contracts[i].complete&&!contracts[i].paid)return true;
+        for(int i=0;i<3;i++)if(contracts[i]!=null&&contracts[i].accepted&&contracts[i].complete&&!contracts[i].paid)return true;
         return false;
     }
     public static int payEarned(){
-        int total=0;for(int i=0;i<2;i++)if(contracts[i]!=null){Contract c=contracts[i];
+        int total=0;for(int i=0;i<3;i++)if(contracts[i]!=null){Contract c=contracts[i];
             if(c.accepted&&c.complete&&!c.paid){total+=c.amount();c.paid=c.returned=true;Warrant.retireContract(i);}
         }
-        if(total>0)new Gold(total).sale().award(Dungeon.hero);return total;
+        pay(total,null,false);return total;
     }
     public static boolean arrangeOffice(){
         if(!present||!betrayed||resolved||Dungeon.branch!=0||Dungeon.depth!=OFFICE_DEPTH||officeCell<0
@@ -401,7 +457,7 @@ public final class BountyBoard {
     public static void showMeeting(Cole cole,boolean halls){
         int paid=payEarned();int claims=hunterClaims();
         if(claims>=2)planSettlements();
-        String text=(paid>0?Messages.get(Cole.class,"debt_paid")+"\n\n":"")+Messages.get(Cole.class,halls&&claims==0?"hostile":"meeting");
+        String text=(paid>0?Messages.get(Cole.class,"debt_paid")+"\n"+Messages.get(Cole.class,"payment",paid)+"\n\n":"")+Messages.get(Cole.class,halls&&claims==0?"hostile":"meeting");
         java.util.ArrayList<String> choices=new java.util.ArrayList<>();
         choices.add(Messages.get(Cole.class,claims==0&&halls?"continue":"confront"));
         if(claims>=2)choices.add(Messages.get(Cole.class,"settlement"));
@@ -583,6 +639,8 @@ public final class BountyBoard {
         for(int i=0;i<3;i++)crews[i]=(Crew)b.get("crew_"+i);
         officeCell = b.contains("office") ? b.getInt("office") : -1;
         for (int i = 0; i < 4; i++) contracts[i] = (Contract)b.get("contract_" + i);
+        if (contracts[2] != null && contracts[2].legacyLegendaryCash && contracts[1] != null)
+            contracts[2].payment = contracts[1].payment;
         for (int i = 0; i < 5; i++) { stock[i] = (Item)b.get("stock_" + i); prices[i] = b.getInt("price_" + i); }
     }
 }

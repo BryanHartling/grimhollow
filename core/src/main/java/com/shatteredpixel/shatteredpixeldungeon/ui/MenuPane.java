@@ -69,6 +69,7 @@ public class MenuPane extends Component {
 
 	private DangerIndicator danger;
 	private KeyDisplay keys;
+	private BountyClockIndicator bountyClock;
 
 	public static final int WIDTH = 31;
 
@@ -152,6 +153,8 @@ public class MenuPane extends Component {
 
 		danger = new DangerIndicator();
 		add( danger );
+		bountyClock = new BountyClockIndicator();
+		add(bountyClock);
 
 		add( pickedUp = new Toolbar.PickedUpItem());
 	}
@@ -213,6 +216,18 @@ public class MenuPane extends Component {
 		keys.setPos(x+WIDTH-keys.width(),y+bg.height+1);
 		danger.setPos( x + WIDTH - danger.width(), keys.top() + (keys.visible?keys.height()+1:0) );
 		danger.setSize( camera.width - danger.width(), danger.height());
+		placeBountyClock();
+	}
+
+	private void placeBountyClock() {
+		float left = x + WIDTH - bountyClock.width();
+		float top = danger.top() + (danger.visible ? danger.height() + 2 : 2);
+		if (bountyClock.left() != left || bountyClock.top() != top) bountyClock.setPos(left, top);
+	}
+
+	@Override public void update() {
+		super.update();
+		placeBountyClock();
 	}
 
 	public void pickup(Item item, int cell) {

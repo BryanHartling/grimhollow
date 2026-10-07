@@ -1,3 +1,15 @@
+# Bounty receipts and urgency - v1.29.4
+
+Returning a cash Warrant shows a receipt with the actual gold received, the quarry's name and any earned urgency bonus, with a painted coin burst, floating gold and the gold pickup sound. Log history retains the payment. Cole's boss payment and later debt settlement explicitly state their amounts in the existing dialogues.
+
+Accepted urgent bounties show their remaining turns on the Warrant, journal description and a small HUD panel beneath the keys/enemy indicator. Tap a clock to open its poster. Each clock starts on the first arrival at its accepted quarry's floor and keeps running if you leave; the kill secures or misses the bonus. Expiry leaves the base bounty payable. Existing saved clocks resume unchanged. Unsigned notices retain their urgency hint without a running timer.
+
+The Legendary bounty now pays the same base cash as the Rare bounty (1,200 gold by default), in addition to the coat dropped by its quarry. Return the Warrant to claim the cash; there is no urgency bonus. The Rare / Legendary payment setting controls both future quotes. Old unpaid coat-only claims gain the cash reward; settled claims remain settled and existing quoted cash is preserved.
+
+Completed bounty posters carry a large worn crimson-to-dark-crimson CLAIMED stamp diagonally across their portrait. It replaces the small completion checkmark and appears once the quarry is dead, whether or not its reward has been collected. The absolute floor reference from v1.29.3 remains in Warrants, posters and journal entries. Existing common/rare/boss rewards and deadlines are unchanged.
+
+Windows: `desktop/build/windows/1.29.4/Grimhollow/Grimhollow.exe` (keep the entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk`. The original stamp painting and built-in imagegen prompt are `tools/painted/sources/bounty-poster/claimed.png` and `tools/painted/claimed-stamp-prompt.json`; `python tools/painted/pack.py --posters` reproduces the stamped ink asset offline.
+
 # Bounty floor references - v1.29.3
 
 Warrants, posters and bounty journal entries now include the absolute dungeon floor in the Last seen line, alongside the existing Prison floor number. For example: Last seen on Prison floor 3 (Dungeon floor 8). Quest destinations and save data are unchanged.

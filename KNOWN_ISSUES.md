@@ -137,3 +137,6 @@ The dated entries below retain their original verification scope. Their test-45 
 - v1.29.0: Sandboxed Git metadata writes and Android SDK access failed; the documented authorized escalation route completed fetch/write-check and Gradle --no-daemon builds without a human approval pause.
 - v1.29.0 automatic approval review timed out on a combined elevated native-test command; workspace-sandbox native tests and Windows packaging succeeded, and the javap audit passed through a narrow read-only escalation.
 - v1.29.1 the sandbox denied a cached Gradle dependency during the initial desktop compile; the established elevated build route passed. Physical tablet poster review remains NOT RUN.
+
+- v1.29.5: Older completed ranking records contain no quest state and cannot have their deeds reconstructed; the UI says not recorded. Ongoing older saves record only confirmed retained outcomes and mark their earlier history partial. Unranked Playtest games remain excluded from Rankings.
+- v1.29.5: Physical Samsung tablet and a full player-driven campaign remain NOT RUN; terrain contrast test 45 stays Abandoned: test failed and is not rerun. A native Deeds scroll-camera failure and optional-history read warnings were corrected before final verification; initial attempts are not counted as passing.

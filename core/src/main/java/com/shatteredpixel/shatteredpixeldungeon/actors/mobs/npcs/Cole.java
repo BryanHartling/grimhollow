@@ -76,7 +76,7 @@ public class Cole extends NPC {
     @Override public void rollToDropLoot(){
         if(!combatConfigured||lootDropped)return;lootDropped=true;
         int gold=BountyBoard.coleDefeated(this)+personalGold;
-        if(gold>0)Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.Gold(gold).sale(),pos);
+        if(gold>0)Dungeon.level.drop(BountyBoard.deathGold(gold),pos);
         if(prize!=null)Dungeon.level.drop(prize,pos);
         if(!healed)Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing(),pos);
         if(!smoked)Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.potions.exotic.PotionOfShroudingFog(),pos);

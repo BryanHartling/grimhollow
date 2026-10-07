@@ -38,6 +38,10 @@ import java.util.ArrayList;
 
 public class Gold extends Item {
     private boolean fortuneApplied;
+    private final ArrayList<com.shatteredpixel.shatteredpixeldungeon.RunDeeds.Notice> bountyReceipts = new ArrayList<>();
+    public Gold bountyReceipts(java.util.Collection<com.shatteredpixel.shatteredpixeldungeon.RunDeeds.Notice> receipts) {
+        bountyReceipts.addAll(receipts); return this;
+    }
     public Gold sale(){fortuneApplied=true;return this;}
     public int award(Hero hero){
         com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon coin=com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.active();
@@ -46,10 +50,28 @@ public class Gold extends Item {
         Dungeon.gold+=quantity;Statistics.goldCollected+=quantity;
         coin=com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.equipped();
         if(coin!=null)coin.earnedGold(quantity);
+        for (com.shatteredpixel.shatteredpixeldungeon.RunDeeds.Notice receipt : bountyReceipts)
+            com.shatteredpixel.shatteredpixeldungeon.RunDeeds.collected(receipt);
+        bountyReceipts.clear();
         Badges.validateGoldCollected();return quantity;
     }
-    @Override public void storeInBundle(com.watabou.utils.Bundle b){super.storeInBundle(b);b.put("fortune_applied",fortuneApplied);}
-    @Override public void restoreFromBundle(com.watabou.utils.Bundle b){super.restoreFromBundle(b);fortuneApplied=b.getBoolean("fortune_applied");}
+    @Override public Item merge(Item other) {
+        if (isSimilar(other) && other instanceof Gold) {
+            bountyReceipts.addAll(((Gold)other).bountyReceipts);
+            ((Gold)other).bountyReceipts.clear();
+        }
+        return super.merge(other);
+    }
+    @Override public void storeInBundle(com.watabou.utils.Bundle b) {
+        super.storeInBundle(b); b.put("fortune_applied",fortuneApplied);
+        if (!bountyReceipts.isEmpty()) b.put("bounty_receipts",bountyReceipts);
+    }
+    @Override public void restoreFromBundle(com.watabou.utils.Bundle b) {
+        super.restoreFromBundle(b); fortuneApplied=b.getBoolean("fortune_applied"); bountyReceipts.clear();
+        if (b.contains("bounty_receipts")) for (com.watabou.utils.Bundlable receipt : b.getCollection("bounty_receipts"))
+            if (receipt instanceof com.shatteredpixel.shatteredpixeldungeon.RunDeeds.Notice)
+                bountyReceipts.add((com.shatteredpixel.shatteredpixeldungeon.RunDeeds.Notice)receipt);
+    }
 
 	{
 		image = ItemSpriteSheet.GOLD;

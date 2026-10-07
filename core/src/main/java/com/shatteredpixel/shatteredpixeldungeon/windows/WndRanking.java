@@ -27,6 +27,8 @@ import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.QuickSlot;
 import com.shatteredpixel.shatteredpixeldungeon.Rankings;
+import com.shatteredpixel.shatteredpixeldungeon.RunDeeds;
+import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Statistics;
@@ -48,6 +50,8 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.Button;
 import com.shatteredpixel.shatteredpixeldungeon.ui.CheckBox;
 import com.shatteredpixel.shatteredpixeldungeon.ui.IconButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
+import com.shatteredpixel.shatteredpixeldungeon.ui.HeroPortrait;
+import com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane;
 import com.shatteredpixel.shatteredpixeldungeon.ui.ItemSlot;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RedButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock;
@@ -76,6 +80,7 @@ public class WndRanking extends WndTabbed {
 	
 	private String gameID;
 	private Rankings.Record record;
+	private int deedsIndex;
 	
 	public WndRanking( final Rankings.Record rec ) {
 		
@@ -113,11 +118,12 @@ public class WndRanking extends WndTabbed {
 
 		if (Dungeon.hero != null) {
 			Icons[] icons =
-					{Icons.RANKINGS, Icons.TALENT, Icons.BACKPACK_LRG, Icons.BADGES, Icons.CHALLENGE_COLOR};
+					{Icons.RANKINGS, Icons.TALENT, Icons.BACKPACK_LRG, Icons.BADGES, Icons.JOURNAL, Icons.CHALLENGE_COLOR};
 			Group[] pages =
-					{new StatsTab(), new TalentsTab(), new ItemsTab(), new BadgesTab(), null};
+					{new StatsTab(), new TalentsTab(), new ItemsTab(), new BadgesTab(), new DeedsTab(), null};
+			deedsIndex = 4;
 
-			if (Dungeon.challenges != 0) pages[4] = new ChallengesTab();
+			if (Dungeon.challenges != 0) pages[5] = new ChallengesTab();
 
 			for (int i = 0; i < pages.length; i++) {
 
@@ -135,9 +141,64 @@ public class WndRanking extends WndTabbed {
 
 			select(0);
 		} else {
-			StatsTab tab = new StatsTab();
-			add(tab);
+			Group stats = new StatsTab(), deeds = new DeedsTab();
+			add(stats); add(deeds);
+			add(new RankingTab(Icons.RANKINGS, stats));
+			add(new RankingTab(Icons.JOURNAL, deeds));
+			deedsIndex = 1;
+			layoutTabs(); select(0);
+		}
+	}
 
+	public void showDeeds() { select(deedsIndex); }
+
+	private class DeedsTab extends Component {
+		private final Component content = new Component();
+		private float bottom;
+		DeedsTab() {
+			camera = WndRanking.this.camera;
+			line(Messages.get(RunDeeds.class, "title"), Window.TITLE_COLOR, 9);
+			RunDeeds history = record.deeds;
+			if (history == null) {
+				line(Messages.get(RunDeeds.class, "not_recorded"), 0xBBBBB0, 8);
+			} else {
+				if (history.partial) line(Messages.get(RunDeeds.class, "partial"), 0xBBBBB0, 7);
+				if (history.wanted) action(Messages.get(RunDeeds.class, "wanted"), () ->
+					Game.scene().add(new WndTitledMessage(new HeroPortrait(history.wantedClass, 24),
+						Messages.get(Cole.class, "wanted_title", history.wantedName),
+						Messages.get(Cole.class, "betray_" + history.wantedClass.name()) + "\n\n" +
+						Messages.get(Cole.class, "hero_poster", history.wantedName, history.wantedClass.title(), history.wantedBounty))));
+				RunDeeds.Notice best = history.highestPaid();
+				if (best != null) {
+					line(Messages.get(RunDeeds.class, "highest", best.collected), Window.TITLE_COLOR, 8);
+					action(best.alias, () -> Game.scene().add(new WndBountyContract(best)));
+				}
+				for (RunDeeds.Deed deed : history.deeds) line(RunDeeds.text(deed), 0xDDD1BA, 8);
+				if (!history.notices.isEmpty()) {
+					line(Messages.get(RunDeeds.class, "posters"), Window.TITLE_COLOR, 9);
+					for (RunDeeds.Notice n : history.notices) action(n.alias + "\n" + Messages.get(RunDeeds.class,
+						n.complete ? "quarry_slain" : "unfinished"), () -> Game.scene().add(new WndBountyContract(n)));
+				}
+				if (!history.wanted && best == null && history.deeds.isEmpty() && history.notices.isEmpty())
+					line(Messages.get(RunDeeds.class, "none"), 0xBBBBB0, 8);
+			}
+			content.setSize(WIDTH, bottom + 5);
+			ScrollPane scroll = new ScrollPane(content);
+			add(scroll); scroll.setRect(0, 0, WIDTH, HEIGHT);
+			setSize(WIDTH, HEIGHT);
+		}
+		private void line(String value, int color, int size) {
+			RenderedTextBlock text = PixelScene.renderTextBlock(value, size);
+			text.maxWidth(WIDTH - 4); text.hardlight(color); text.setPos(2, bottom);
+			content.add(text); bottom = text.bottom() + 5;
+		}
+		private void action(String label, Runnable open) {
+			RedButton button = new RedButton(label, 8) {
+				@Override protected void onClick() { open.run(); }
+			};
+			button.multiline = true; button.setRect(1, bottom, WIDTH - 2, 22);
+			button.setSize(WIDTH - 2, Math.max(22, button.reqHeight() + 4));
+			content.add(button); bottom = button.bottom() + 4;
 		}
 	}
 

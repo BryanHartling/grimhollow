@@ -20,7 +20,10 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.4","A name crossed off the board. A purse plainly paid.");
+        ChangeInfo r=release(list,"v1.29.5","The deeds and debts of a run, remembered.");
+        note(r,Icons.JOURNAL,"Run history","Each ranked character has a Deeds tab: quest deliveries, the troll commission, the Imp's contract, dragon expedition outcomes and Cole's fate. Old runs without a recorded history say so.");
+        note(r,Icons.RANKINGS,"Archived Wanted posters","Review your Wanted notice from Cole's betrayal and the contracts you accepted. Completed notices retain their crimson stamp. The highest paid bounty records the actual gold collected; archived notices cannot accept contracts or claim rewards.");
+        r=release(list,"v1.29.4","A name crossed off the board. A purse plainly paid.");
         note(r,Icons.INFO,"Bounty receipts and urgency","Returning a paid Warrant shows a gold receipt, coin effect and sound. Warrants and journal entries show the urgent bonus clock; the small HUD clocks open their matching posters. An expired urgency bonus leaves the base bounty payable.");
         note(r,Icons.JOURNAL,"The Legendary Warrant","The coat is still carried by its quarry. Bring the Legendary Warrant back to Cole for a cash payment equal to the Rare bounty, without an urgency bonus.");
         note(r,Icons.JOURNAL,"Claimed bounties","Completed posters bear a large diagonal crimson CLAIMED stamp. The quarry's death marks the notice; uncollected payment remains due.");

@@ -1,3 +1,14 @@
+# Ranked deeds and archived Wanted posters v1.29.5 - 2026-10-07
+
+- Added a scrollable Deeds tab to every rankings detail window, including records whose saved hero is unavailable. The Wanted notice preserves the hero's class/name and bounty at betrayal. Accepted contracts preserve their quarry, story, quoted reward, completion stamp and actual cash collected; the highest paid bounty is highlighted. Reopening a notice has no claim/accept action and cannot affect a current quest.
+- Record ingredient recovery separately from Wandmaker delivery, ghost quarry/reward, dark gold returned/troll guardian/commission, Imp contract or unsuccessful Vault return, dragon entry/Broodmother/dragon death/escape alive, and Cole defeat/settlement/Amulet escape. Scores and gameplay are unchanged.
+- Save the historical facts with the run and copy them into each ranking before stripping its equipment/buffs. Poster snapshots contain values, not live enemies. Actual death-payout receipts travel with Cole's gold through merging and floor serialization and count only on collection. Later runs and current balance settings cannot rewrite past rewards.
+- Serialize the deed names with ordinary collection loops to avoid a new stream API dependency on the declared Android minimum.
+- Older rankings have no quest evidence and show 'not recorded'; old ongoing saves import only retained quest facts and label their prior history as partial. Added guarded optional fields so ordinary/older gold and runs without betrayal load quietly.
+- Extended the existing headless Bounty scenarios and native Bounty fixture for quest variants, saved/independent ranked histories, paid vs uncollected gold, poster actions, scrolling, both orientations and old-record fallback. The first native attempt found a detached scroll camera; the Deeds page now follows the existing ranking pages' camera convention. Initial optional metadata reads were guarded before final verification.
+
+- Validation: final Windows/Android build, eight unit tests, combined Runs=30 failures=0, mouse/touch native Bounty and rankings review in both orientations, and the compiled-handler audit pass. Windows packaging retains the final tested JAR. Physical tablet remains NOT RUN; test 45 stays abandoned. Exact release CI is reported at delivery.
+
 # Bounty receipts and urgency v1.29.4 - 2026-10-07
 
 - Returning a cash Warrant now shows the actual gold received and quarry name in a receipt, including the earned swift-completion bonus. A painted coin burst, floating gold and currency sound accompany the payment; log history retains the receipt. Boss and later debt-settlement dialogues also explicitly state their payouts. The existing quoted-payment path, Doubloon interactions and once-only claim flags remain unchanged.

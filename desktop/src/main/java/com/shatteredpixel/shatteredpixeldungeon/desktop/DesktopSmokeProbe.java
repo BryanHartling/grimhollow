@@ -37,6 +37,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean bountyReview=Boolean.getBoolean("grimhollow.bountyReview");
     private int bountyStep;
     private int bountyPaymentGold;
+    private Rankings.Record bountyRankedRecord;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole bountyCole;
     private final java.util.List<com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob> bountyQuarries=new java.util.ArrayList<>();
     private int horrorFrames, horrorStep, horrorStart, horrorHealth;
@@ -304,7 +305,18 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                             capture("bounty-boss-"+choice);
                         }
                     }else if(step==71){closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(BountyBoard.contracts[3]));}
-                    else if(step==72){interfaceBounds();checkReviewText(Game.scene());bountyPosterLayoutCheck();capture("bounty-completed-poster");}
+                    else if(step==72){
+                        interfaceBounds();checkReviewText(Game.scene());bountyPosterLayoutCheck();capture("bounty-completed-poster");
+                        if(!BountyBoard.beginBetrayal())throw new AssertionError("Actual completed boss did not create Wanted notice");
+                        // Quest mechanics are exercised headlessly; include their facts in this UI review.
+                        RunDeeds.record(RunDeeds.Deed.DUST_RETURNED);RunDeeds.record(RunDeeds.Deed.TROLL_GOLD);
+                        RunDeeds.record(RunDeeds.Deed.IMP_COMPLETED);RunDeeds.record(RunDeeds.Deed.DRAGON_SLAIN);
+                        bountyRankedRecord=new Rankings.Record();bountyRankedRecord.gameID="native-deeds-review";
+                        bountyRankedRecord.heroClass=Dungeon.hero.heroClass;bountyRankedRecord.herolevel=Dungeon.hero.lvl;
+                        bountyRankedRecord.armorTier=0;bountyRankedRecord.depth=10;bountyRankedRecord.date="2026-10-07";
+                        bountyRankedRecord.version=Game.version;bountyRankedRecord.customSeed="";
+                        Rankings.INSTANCE.saveGameData(bountyRankedRecord);
+                    }
                     else if(step==73||step==76){
                         closeReviewWindows();questField(GameScene.class,"scene",null);Dungeon.init();Playtest.enable();
                         Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.depth=step==73?25:26;
@@ -313,9 +325,77 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                         InterlevelScene.mode=InterlevelScene.Mode.DESCEND;switchNoFade(GameScene.class);
                     }else if(step==74||step==77){Dungeon.observe();Camera.main.snapTo(Dungeon.hero.sprite.center());}
                     else if(step==75||step==78){capture(step==75?"painted-yog-platform":"painted-amulet-sanctum");}
-                    else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, eight painted posters and completion stamp, six unique quarry skins/save-load/unchanged species animations, mouse/touch acceptance, purchase, urgency HUD/poster and paid receipt, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements, both actual boss deaths/mask rewards and painted final sanctums; failures=0");Gdx.app.exit();}
+                    else if(step>=79&&step<=89){rankingDeedsReview(step-79);}
+                    else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, eight painted posters and completion stamp, six unique quarry skins/save-load/unchanged species animations, mouse/touch acceptance, purchase, urgency HUD/poster and paid receipt, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements, both actual boss deaths/mask rewards, painted final sanctums and ranked Deeds/Wanted/paid posters/old-record fallback; failures=0");Gdx.app.exit();}
             }
         }
+    }
+
+    private void rankingDeedsReview(int step){
+        switch(step){
+            case 0:
+                closeReviewWindows();
+                if(!bountyRankedRecord.deeds.wanted||bountyRankedRecord.deeds.highestPaid()==null)throw new AssertionError("Missing boss/betrayal history");
+                Rankings.INSTANCE.records=new java.util.ArrayList<>();Rankings.INSTANCE.records.add(bountyRankedRecord);
+                Rankings.Record old=new Rankings.Record();old.heroClass=bountyRankedRecord.heroClass;old.herolevel=4;old.depth=3;
+                old.date="2026-09-07";old.version="1.24.0";old.customSeed="";old.gameID="native-old-record";
+                Rankings.INSTANCE.records.add(old);Rankings.INSTANCE.lastRecord=0;Rankings.INSTANCE.save();
+                Dungeon.daily=false;SPDSettings.victoryNagged(true);
+                switchNoFade(com.shatteredpixel.shatteredpixeldungeon.scenes.RankingsScene.class);break;
+            case 1:
+                capture("rankings-list");
+                for(com.watabou.noosa.Gizmo g:RecoveryChecks.members(Game.scene()))if(g instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.RankingsScene.Record){
+                    pointerGestureReview(g,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);break;
+                }break;
+            case 2:
+                interfaceBounds();
+                for(com.watabou.noosa.Gizmo g:RecoveryChecks.members(Game.scene()))if(g instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndRanking){
+                    java.util.List<?> tabs=(java.util.List<?>)RecoveryChecks.field(g,"tabs");
+                    if(tabs.size()!=5)throw new AssertionError("Missing Deeds ranking tab");
+                    pointerGestureReview(tabs.get(4),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);break;
+                }break;
+            case 3:
+                interfaceBounds();checkReviewText(Game.scene());
+                if(!allReviewText(Game.scene()).contains("Highest bounty collected"))throw new AssertionError("Missing paid bounty history");
+                capture("rankings-deeds");rankingClick(Game.scene(),com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(RunDeeds.class,"wanted"));break;
+            case 4:
+                interfaceBounds();checkReviewText(Game.scene());
+                if(!allReviewText(Game.scene()).contains(Integer.toString(bountyRankedRecord.deeds.wantedBounty)))throw new AssertionError("Wanted amount changed across runs");
+                capture("rankings-wanted");closeReviewWindows();
+                com.shatteredpixel.shatteredpixeldungeon.windows.WndRanking ranking=new com.shatteredpixel.shatteredpixeldungeon.windows.WndRanking(bountyRankedRecord);
+                Game.scene().add(ranking);ranking.showDeeds();break;
+            case 5:rankingClick(Game.scene(),bountyRankedRecord.deeds.highestPaid().alias);break;
+            case 6:
+                interfaceBounds();checkReviewText(Game.scene());bountyPosterLayoutCheck();capture("rankings-paid-poster");
+                playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(RunDeeds.class,"close"));break;
+            case 7:
+                interfaceBounds();checkReviewText(Game.scene());scrollReview(Game.scene());break;
+            case 8:
+                interfaceBounds();capture("rankings-deeds-scrolled");closeReviewWindows();
+                Game.scene().add(new com.shatteredpixel.shatteredpixeldungeon.windows.WndRanking(Rankings.INSTANCE.records.get(1)));break;
+            case 9:
+                for(com.watabou.noosa.Gizmo g:RecoveryChecks.members(Game.scene()))if(g instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndRanking){
+                    java.util.List<?> tabs=(java.util.List<?>)RecoveryChecks.field(g,"tabs");
+                    if(tabs.size()!=2)throw new AssertionError("No-hero legacy record cannot display Deeds");
+                    pointerGestureReview(tabs.get(1),Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);break;
+                }break;
+            case 10:
+                interfaceBounds();checkReviewText(Game.scene());
+                if(!allReviewText(Game.scene()).contains("Quest deeds were not recorded"))throw new AssertionError("Old record invents history");
+                capture("rankings-deeds-old-record");break;
+        }
+    }
+
+    private boolean rankingClick(Group group,String label){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(group))if(child.visible&&child.active){
+            if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton
+                    &&label.equals(((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)child).text())){
+                pointerGestureReview(child,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);return true;
+            }
+            if(child instanceof Group&&rankingClick((Group)child,label))return true;
+        }
+        if(group==Game.scene())throw new AssertionError("Missing ranked history button "+label);
+        return false;
     }
 
     private void bountyPaymentReview(int step){
@@ -695,7 +775,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
 
     /** Review actual inventory, scrolling descriptions and class controls in both orientations. */
     private void interfaceTick() {
-        if(bountyReview){if(Game.scene() instanceof GameScene&&frames>=220&&frames%20==0)bountyTick();return;}
+        if(bountyReview){if((Game.scene() instanceof GameScene || Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.RankingsScene)&&frames>=220&&frames%20==0)bountyTick();return;}
         if(Boolean.getBoolean("grimhollow.artworkReview")){
             // Run the same artwork assertions independently of clipboard-heavy
             // Playtest coverage. Normal CI still executes the entire fixture.

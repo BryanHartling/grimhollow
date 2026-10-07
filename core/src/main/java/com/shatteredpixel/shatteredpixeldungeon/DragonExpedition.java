@@ -153,6 +153,8 @@ public final class DragonExpedition {
     }
 
     public static void travel(int depth, int branch, int cell) {
+        if (Dungeon.branch == BRANCH && branch == 0 && entered && !dragonSlain && Dungeon.hero.isAlive())
+            RunDeeds.record(RunDeeds.Deed.DRAGON_ESCAPED);
         Level.beforeTransition();
         InterlevelScene.returnDepth = depth;
         InterlevelScene.returnBranch = branch;

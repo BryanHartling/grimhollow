@@ -284,6 +284,7 @@ public class Dungeon {
 		Imp.Quest.reset();
 		DragonExpedition.reset();
 		BountyBoard.reset();
+		RunDeeds.reset();
 
 		hero = new Hero();
 		hero.live();
@@ -696,6 +697,7 @@ public class Dungeon {
 			Imp			.Quest.storeInBundle( quests );
 			DragonExpedition.store(quests);
 			BountyBoard.store(quests);
+			RunDeeds.store(quests);
 			bundle.put( QUESTS, quests );
 			
 			SpecialRoom.storeRoomsInBundle( bundle );
@@ -806,6 +808,7 @@ public class Dungeon {
 				Imp.Quest.restoreFromBundle( quests );
 				DragonExpedition.restore(quests);
 				BountyBoard.restore(quests);
+				RunDeeds.restore(quests);
 			} else {
 				Ghost.Quest.reset();
 				Wandmaker.Quest.reset();
@@ -813,6 +816,7 @@ public class Dungeon {
 				Imp.Quest.reset();
 		DragonExpedition.reset();
 		BountyBoard.restore(new Bundle());
+		RunDeeds.restore(new Bundle());
 			}
 			
 			SpecialRoom.restoreRoomsFromBundle(bundle);

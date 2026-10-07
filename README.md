@@ -1,3 +1,13 @@
+# Ranked deeds and archived Wanted posters - v1.29.5
+
+Open a run in Rankings, then select its journal-icon **Deeds** tab. It keeps your Wanted notice from Cole's betrayal, your accepted contract posters (including the CLAIMED stamp), and the highest bounty actually collected. Archived posters are read-only. Payments recovered from Cole's gold pile are recorded when you pick it up, not when it drops.
+
+Deeds distinguish recovering Wandmaker ingredients from delivering them, and record the Sad Ghost's reward, returning dark gold and defeating the troll mine's guardian, the Imp's contract/Vault return, entering the dragon expedition, killing its Broodmother or dragon, escaping with the dragon alive, and Cole's eventual outcome. Each ranking stores its own snapshot; later runs do not rewrite it. No quest, reward or scoring rules change. Playtest runs retain their existing unranked behavior.
+
+Older rankings cannot reconstruct quest history and explicitly say it was not recorded. Ongoing old saves retain confirmed quest outcomes and label the earlier history as partial. New runs record their deeds through save/load.
+
+Windows: `desktop/build/windows/1.29.5/Grimhollow/Grimhollow.exe` (keep its entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk`.
+
 # Bounty receipts and urgency - v1.29.4
 
 Returning a cash Warrant shows a receipt with the actual gold received, the quarry's name and any earned urgency bonus, with a painted coin burst, floating gold and the gold pickup sound. Log history retains the payment. Cole's boss payment and later debt settlement explicitly state their amounts in the existing dialogues.

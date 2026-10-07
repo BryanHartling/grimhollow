@@ -269,6 +269,7 @@ public enum Rankings {
 	public static final String DAILY_REPLAY	= "daily_replay";
 
 	public void saveGameData(Record rec){
+		rec.deeds = RunDeeds.capture();
 		if (Dungeon.hero == null){
 			rec.gameData = null;
 			return;
@@ -504,6 +505,7 @@ public enum Rankings {
 		public boolean ascending;
 
 		public Bundle gameData;
+		public RunDeeds deeds;
 		public String gameID;
 
 		//Note this is for summary purposes, visible score should be re-calculated from game data
@@ -562,6 +564,7 @@ public enum Rankings {
 			}
 
 			if (bundle.contains(DATA))  gameData = bundle.getBundle(DATA);
+			deeds = bundle.contains("run_deeds") ? (RunDeeds)bundle.get("run_deeds") : null;
 			if (bundle.contains(ID))   gameID = bundle.getString(ID);
 			
 			if (gameID == null) gameID = UUID.randomUUID().toString();
@@ -588,6 +591,7 @@ public enum Rankings {
 			bundle.put( VERSION, version );
 
 			if (gameData != null) bundle.put( DATA, gameData );
+			if (deeds != null) bundle.put("run_deeds", deeds);
 			bundle.put( ID, gameID );
 		}
 	}

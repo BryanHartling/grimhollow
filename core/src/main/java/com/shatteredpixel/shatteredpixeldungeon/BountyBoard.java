@@ -47,6 +47,7 @@ public final class BountyBoard {
     public static Cole encounter;
     public static boolean resolved, hallsIntroduced, combatRequested, responsePending;
     public static int outcome, deepestMain=1;
+    private static final java.util.ArrayList<RunDeeds.Notice> deathReceipts = new java.util.ArrayList<>();
     public static Item[] settlementTwo=new Item[2], settlementThree=new Item[3];
     public static int[] settlementPrices=new int[2];
     public static class Crew implements com.watabou.utils.Bundlable {
@@ -127,6 +128,7 @@ public final class BountyBoard {
     }
 
     public static void reset() {
+        deathReceipts.clear();
         present = AVAILABLE;
         shopClosed = false; officeCell = -1;
         stock = new Item[5]; prices = new int[5];
@@ -276,6 +278,7 @@ public final class BountyBoard {
         if (amount <= 0) return;
         Hero hero = Dungeon.hero;
         int awarded = new Gold(amount).sale().award(hero);
+        RunDeeds.paid(claim, awarded);
         String message = Messages.get(Cole.class, "payment", awarded);
         if (claim != null) {
             message += "\n\n" + Messages.get(Cole.class, "payment_claim", claim.alias());
@@ -335,6 +338,7 @@ public final class BountyBoard {
             long value=Dungeon.gold;java.util.Set<Item> counted=java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
             for(Item item:Dungeon.hero.belongings)if(counted.add(item))value+=Math.max(0,item.value());
             heroBounty=(int)Math.min(Integer.MAX_VALUE,value);
+            RunDeeds.wantedPoster();
             com.shatteredpixel.shatteredpixeldungeon.journal.Notes.addBounty(4,10);
         }
         return true;
@@ -427,7 +431,7 @@ public final class BountyBoard {
     }
     public static int payEarned(){
         int total=0;for(int i=0;i<3;i++)if(contracts[i]!=null){Contract c=contracts[i];
-            if(c.accepted&&c.complete&&!c.paid){total+=c.amount();c.paid=c.returned=true;Warrant.retireContract(i);}
+            if(c.accepted&&c.complete&&!c.paid){total+=c.amount();c.paid=c.returned=true;RunDeeds.paid(c,c.amount());Warrant.retireContract(i);}
         }
         pay(total,null,false);return total;
     }
@@ -487,11 +491,14 @@ public final class BountyBoard {
     }
     /** Death pays accepted unfinished cash claims without completing their targets. */
     public static int releaseCashOnDeath(){
+        deathReceipts.clear();
         int total=0;for(Contract c:contracts)if(c!=null&&c.accepted&&!c.paid&&c.payment>0){
+            deathReceipts.add(RunDeeds.receipt(c,c.amount()));
             total+=c.amount();c.paid=c.returned=true;Warrant.retireContract(c.index);
         }
         return total;
     }
+    public static Gold deathGold(int amount) { return new Gold(amount).sale().bountyReceipts(deathReceipts); }
     private static Weapon weaponPrize(Generator.Category category,int level){
         Weapon item=(Weapon)Generator.randomUsingDefaults(category);item.level(level);item.cursed=false;
         item.enchant(Weapon.Enchantment.random());item.identify();return item;

@@ -124,6 +124,7 @@ public class Item implements Bundlable {
 
 	public boolean doPickUp(Hero hero, int pos) {
 		if (collect( hero.belongings.backpack )) {
+			com.shatteredpixel.shatteredpixeldungeon.RunDeeds.pickedUp(this);
 			
 			GameScene.pickUp( this, pos );
 			Sample.INSTANCE.play( Assets.Sounds.ITEM );

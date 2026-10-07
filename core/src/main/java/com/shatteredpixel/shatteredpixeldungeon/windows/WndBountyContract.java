@@ -3,6 +3,7 @@ package com.shatteredpixel.shatteredpixeldungeon.windows;
 
 import com.badlogic.gdx.graphics.GL20;
 import com.shatteredpixel.shatteredpixeldungeon.BountyBoard;
+import com.shatteredpixel.shatteredpixeldungeon.RunDeeds;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole;
 import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene;
@@ -23,6 +24,14 @@ public class WndBountyContract extends Window {
     private Image target, seal, claimedStamp;
 
     public WndBountyContract(BountyBoard.Contract c) {
+        this(c, false, 0);
+    }
+
+    public WndBountyContract(RunDeeds.Notice notice) {
+        this(notice.poster(), true, notice.collected);
+    }
+
+    private WndBountyContract(BountyBoard.Contract c, boolean archived, int collected) {
         int w = Math.min(210, (int) PixelScene.uiCamera.width - 28);
         int h = Math.min(405, (int) PixelScene.uiCamera.height - 36);
         Image background = new Image("interfaces/bounty_parchment.png");
@@ -50,11 +59,15 @@ public class WndBountyContract extends Window {
             prizeNote = ink(Messages.get(Cole.class, "coat_prize"), 8, w, bottom + 3);
             bottom = prizeNote.bottom();
         }
+        if (archived && collected > 0) {
+            prizeNote = ink(Messages.get(RunDeeds.class, "collected", collected), 8, w, bottom + 3);
+            bottom = prizeNote.bottom();
+        }
         if (c.index < 2) {
             urgency = ink(Messages.get(Cole.class, "urgent"), 9, w, bottom + 8);
             RenderedTextBlock swift = ink(Messages.get(Cole.class, "swift"), 8, w, urgency.bottom() + 3);
             bottom = swift.bottom();
-            String clock = BountyBoard.urgency(c);
+            String clock = archived ? (c.complete ? BountyBoard.urgency(c) : "") : BountyBoard.urgency(c);
             if (!clock.isEmpty()) {
                 deadlineNote = ink(clock, 8, w, bottom + 4);
                 bottom = deadlineNote.bottom();
@@ -98,14 +111,16 @@ public class WndBountyContract extends Window {
         paperHeight = h - 31;
         paper = new ScrollPane(content);
         add(paper);
-        RedButton action = new RedButton(Messages.get(Cole.class, c.complete ? "return" : "accept")) {
+        RedButton action = new RedButton(archived ? Messages.get(RunDeeds.class, "close")
+                : Messages.get(Cole.class, c.complete ? "return" : "accept")) {
             @Override protected void onClick() {
                 hide();
+                if (archived) return;
                 if (c.complete) BountyBoard.returnClaim(c.index);
                 else BountyBoard.accept(c.index);
             }
         };
-        action.enable(!BountyBoard.betrayed && !c.accepted || c.index < 3 && c.complete && !c.returned
+        action.enable(archived || !BountyBoard.betrayed && !c.accepted || c.index < 3 && c.complete && !c.returned
                 && com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.ownedContract(c.index));
         action.setRect(9, h - 27, w - 18, 21);
         add(action);

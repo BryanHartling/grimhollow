@@ -80,6 +80,7 @@ final class BountyScenario {
             boss();
             crews();
             resolution();
+            deeds();
             System.out.println("BOUNTY COMPONENTS 1-2 PASS: ten reachable offices, finite double-price stock, isolated closure, disk receipts; accepted-only saved targets, real deaths, timing, Warrants and once-only rewards");
         } catch (java.io.IOException error) { throw new AssertionError(error); }
         finally { BountyBoard.AVAILABLE = enabled; BountyBoard.reset(); }
@@ -341,6 +342,85 @@ final class BountyScenario {
     private static void leverage(int count){
         BountyBoard.betrayed=BountyBoard.departed=true;BountyBoard.arrive(Dungeon.level);
         for(int i=0;i<count;i++){BountyBoard.crews[i].complete=true;com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.hunter(i).collect(Dungeon.hero.belongings.backpack);}
+    }
+
+    private static void deeds() throws java.io.IOException {
+        Dungeon.init(); Dungeon.depth=7; Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        check(RunDeeds.capture().deeds.isEmpty() && RunDeeds.capture().highestPaid()==null, "fresh run inherits deeds");
+        for (int type=1; type<=3; type++) {
+            Bundle quests=new Bundle(), wandmaker=new Bundle();
+            wandmaker.put("spawned",true);wandmaker.put("given",true);wandmaker.put("type",type);
+            wandmaker.put("wand1",new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBlastWave());
+            wandmaker.put("wand2",new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfLivingEarth());
+            quests.put("wandmaker",wandmaker);Wandmaker.Quest.restoreFromBundle(quests);
+            RunDeeds.reset();
+            Item ingredient=type==1?new com.shatteredpixel.shatteredpixeldungeon.items.quest.CorpseDust()
+                    :type==2?new com.shatteredpixel.shatteredpixeldungeon.items.quest.Embers():new com.shatteredpixel.shatteredpixeldungeon.plants.Rotberry.Seed();
+            RunDeeds.Deed found=type==1?RunDeeds.Deed.DUST_FOUND:type==2?RunDeeds.Deed.EMBERS_FOUND:RunDeeds.Deed.ROTBERRY_FOUND;
+            RunDeeds.Deed returned=type==1?RunDeeds.Deed.DUST_RETURNED:type==2?RunDeeds.Deed.EMBERS_RETURNED:RunDeeds.Deed.ROTBERRY_RETURNED;
+            RunDeeds.pickedUp(ingredient);
+            check(RunDeeds.capture().deeds.contains(found)&&!RunDeeds.capture().deeds.contains(returned),"retrieval prematurely marks delivery");
+            Wandmaker.Quest.complete();
+            check(RunDeeds.capture().deeds.contains(returned),"Wandmaker variant completion absent "+type);
+        }
+        Dungeon.init();Dungeon.depth=7;Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        RunDeeds.pickedUp(new com.shatteredpixel.shatteredpixeldungeon.items.quest.CorpseDust());
+        Bundle completedQuests=new Bundle(), ghost=new Bundle(), troll=new Bundle(), imp=new Bundle();
+        ghost.put("spawned",true);ghost.put("given",true);ghost.put("processed",true);completedQuests.put("sadGhost",ghost);
+        Ghost.Quest.restoreFromBundle(completedQuests);
+        troll.put("spawned",true);troll.put("given",true);troll.put("boss_beaten",true);completedQuests.put("blacksmith",troll);
+        Blacksmith.Quest.restoreFromBundle(completedQuests);
+        new com.shatteredpixel.shatteredpixeldungeon.items.quest.Pickaxe().collect(Dungeon.hero.belongings.backpack);
+        new com.shatteredpixel.shatteredpixeldungeon.items.quest.DarkGold().quantity(20).collect(Dungeon.hero.belongings.backpack);
+        Blacksmith.Quest.complete();
+        imp.put("spawned",true);imp.put("old_quest",false);imp.put("given",true);completedQuests.put("demon",imp);
+        imp.put("reward_options",new java.util.ArrayList<Item>());
+        Imp.Quest.restoreFromBundle(completedQuests);Imp.Quest.complete(4000);
+        RunDeeds questHistory=RunDeeds.capture();
+        check(questHistory.deeds.containsAll(java.util.EnumSet.of(RunDeeds.Deed.GHOST_QUARRY,RunDeeds.Deed.GHOST_REWARD,
+                RunDeeds.Deed.TROLL_GOLD,RunDeeds.Deed.TROLL_BOSS,RunDeeds.Deed.TROLL_COMPLETED,RunDeeds.Deed.IMP_COMPLETED)),"ghost/troll/Imp quest history absent");
+        BountyBoard.Contract c=BountyBoard.contracts[0];c.accepted=c.complete=c.bonusEarned=true;
+        c.payment=600;c.bonusPercent=20;
+        com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant w=new com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant(0);
+        w.collect(Dungeon.hero.belongings.backpack);check(BountyBoard.returnClaim(0),"deeds actual payment fixture");
+        BountyBoard.heroBounty=4321;BountyBoard.betrayed=true;RunDeeds.wantedPoster();
+        DragonExpedition.entered=true;DragonExpedition.spiderSlain=true;
+        check(!RunDeeds.capture().deeds.contains(RunDeeds.Deed.DRAGON_ESCAPED),"entering is recorded as surviving");
+        RunDeeds.record(RunDeeds.Deed.DRAGON_ESCAPED);
+        RunDeeds before=RunDeeds.capture();
+        check(before.highestPaid().collected==720 && before.highestPaid().complete && before.wantedBounty==4321, "paid gold / poster snapshot");
+        Dungeon.saveAll();Dungeon.loadGame(GamesInProgress.curSlot);
+        check(RunDeeds.capture().highestPaid().collected==720 && RunDeeds.capture().deeds.contains(RunDeeds.Deed.DRAGON_ESCAPED),"deeds disk save/load");
+        Rankings.Record first=new Rankings.Record();first.heroClass=Dungeon.hero.heroClass;first.date="2026-10-07";first.version="test";first.customSeed="";
+        Rankings.INSTANCE.saveGameData(first);
+        Bundle records=new Bundle();records.put("first",first);
+        first=(Rankings.Record)records.get("first");
+        String alias=first.deeds.highestPaid().alias;
+        Dungeon.init();Dungeon.depth=7;Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        BountyBoard.contracts[0].payment=99999;DragonExpedition.dragonSlain=true;
+        RunDeeds.paid(BountyBoard.contracts[0],99999);
+        Rankings.Record second=new Rankings.Record();Rankings.INSTANCE.saveGameData(second);
+        check(first.deeds.highestPaid().collected==720 && first.deeds.highestPaid().alias.equals(alias)
+                && !first.deeds.deeds.contains(RunDeeds.Deed.DRAGON_SLAIN) && second.deeds.deeds.contains(RunDeeds.Deed.DRAGON_SLAIN),"later run changes old history");
+        BountyBoard.Contract readOnly=first.deeds.highestPaid().poster();
+        readOnly.payment=1;readOnly.complete=false;
+        check(first.deeds.highestPaid().payment==600 && first.deeds.highestPaid().complete,"poster mutates archived notice");
+        Bundle old=new Bundle();old.put("class",first.heroClass);old.put("gameData",first.gameData);
+        Rankings.Record legacy=new Rankings.Record();legacy.restoreFromBundle(old);
+        check(legacy.deeds==null,"old rankings fabricate deeds from current quest state");
+        RunDeeds.restore(new Bundle());check(RunDeeds.capture().partial,"legacy ongoing save loses history qualifier");
+        // A claimed gold pile from Cole's death has not yet been collected: it is not a receipt.
+        Dungeon.init();Dungeon.depth=7;Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        BountyBoard.contracts[0].accepted=BountyBoard.contracts[0].complete=true;
+        int released=BountyBoard.releaseCashOnDeath();
+        check(RunDeeds.capture().highestPaid()==null,"uncollected death loot recorded as cash collected");
+        Gold payout=BountyBoard.deathGold(released+100);
+        Gold merged=new Gold(10);merged.merge(payout);
+        Bundle dropped=new Bundle();dropped.put("gold",merged);
+        Gold loaded=(Gold)dropped.get("gold");loaded.award(Dungeon.hero);
+        check(RunDeeds.capture().highestPaid().collected==BountyBoard.contracts[0].amount(),"collected death claim loses its receipt when merged/saved");
+        for(RunDeeds.Deed deed:RunDeeds.Deed.values())check(!RunDeeds.text(deed).equals(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.NO_TEXT_FOUND),"unlocalized deed "+deed);
+        System.out.println("RANKED DEEDS PASS: all three Wandmaker variants, retrieval vs delivery, actual paid bounty, Wanted snapshot, dragon entry vs survival/kill, disk and rankings serialization, independent runs, read-only poster copies, honest old records and no uncollected gold claims");
     }
     private static void resolution(){
         Dungeon.init();Dungeon.depth=7;Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();leverage(2);

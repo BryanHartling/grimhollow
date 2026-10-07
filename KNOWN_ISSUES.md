@@ -132,3 +132,4 @@ The dated entries below retain their original verification scope. Their test-45 
 - v1.29.0: Physical Samsung tablet and end-to-end campaign playability are not verified by this visual pass; terrain contrast test 45 remains Abandoned: test failed, and is not rerun.
 - v1.29.0: Sandboxed Git metadata writes and Android SDK access failed; the documented authorized escalation route completed fetch/write-check and Gradle --no-daemon builds without a human approval pause.
 - v1.29.0 automatic approval review timed out on a combined elevated native-test command; workspace-sandbox native tests and Windows packaging succeeded, and the javap audit passed through a narrow read-only escalation.
+- v1.29.1 the sandbox denied a cached Gradle dependency during the initial desktop compile; the established elevated build route passed. Physical tablet poster review remains NOT RUN.

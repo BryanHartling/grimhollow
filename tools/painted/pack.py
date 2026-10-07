@@ -258,8 +258,13 @@ def main():
     parser.add_argument('--previews',action='store_true',help='Package inspection paintings only; full --check remains the CI gate')
     parser.add_argument('--bounty',action='store_true',help='Package Bounty Board inventory; full --check remains the CI gate')
     parser.add_argument('--polish',action='store_true',help='Package quest presentation and inspection exports; full --check remains the CI gate')
+    parser.add_argument('--posters',action='store_true',help='Package wanted notices and inspection exports; full --check remains the CI gate')
     args=parser.parse_args()
-    if args.polish:
+    if args.posters:
+        from bounty import poster_assets
+        from artwork_previews import outputs as previews
+        built={**poster_assets(),**previews()}
+    elif args.polish:
         from playtest_polish import outputs as polish
         from artwork_previews import outputs as previews
         built={**polish(),**previews()}
@@ -289,7 +294,7 @@ def main():
     failures=[]
     sources={p.relative_to(HERE/'sources').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'sources').rglob('*.png'))}
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
-    if args.hero or args.icons or args.wayward or args.mystery or args.previews or args.bounty or args.polish:
+    if args.hero or args.icons or args.wayward or args.mystery or args.previews or args.bounty or args.polish or args.posters:
         manifest['assets']=json.loads(MANIFEST.read_text(encoding='utf-8'))['assets']
     from monsters import sizes as monster_sizes
     fixed_monster_sizes=monster_sizes()
@@ -317,10 +322,11 @@ def main():
         if path=='interfaces/painted_skills.png':expected=(1024,512)
         if path=='interfaces/painted_badges.png':expected=(1024,576)
         if path in ('sprites/bounty_cole.png','sprites/bounty_board.png'):expected=(256,256)
-        if path=='interfaces/bounty_posters.png':expected=(1024,512)
+        if path=='interfaces/bounty_posters.png':expected=(2048,1024)
+        if path=='interfaces/bounty_poster_seals.png':expected=(768,256)
         if path=='interfaces/bounty_seals.png':expected=(192,64)
         if path in ('environment/custom_tiles/halls_special.png','environment/custom_tiles/wardens_office.png'):expected=(512,512)
-        if path=='interfaces/bounty_parchment.png':expected=(256,384)
+        if path=='interfaces/bounty_parchment.png':expected=(512,768)
         if path=='effects/bloodmark.png':expected=(64,64)
         if path=='interfaces/hero_icons.png':expected=(512,1024)
         if path=='effects/painted_food.png':expected=(64,64)
@@ -352,7 +358,7 @@ def main():
         else:
             target.parent.mkdir(parents=True,exist_ok=True)
             im.save(target,optimize=False)
-    if args.previews or args.polish or not (args.hero or args.icons or args.wayward or args.mystery or args.bounty):
+    if args.previews or args.polish or args.posters or not (args.hero or args.icons or args.wayward or args.mystery or args.bounty):
         from artwork_previews import index_bytes
         index_path=ASSETS/'artwork-previews.json'
         if args.check:

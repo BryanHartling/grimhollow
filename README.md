@@ -1,3 +1,9 @@
+# Wanted posters - v1.29.1
+
+Bounty posters now place large WANTED lettering and the quarry's name above a larger centered portrait. Centered ink follows with the contract title, story, last sighting, bounty, urgency, signature and an elaborate worn rarity seal. Cleaner outline-free ink, 512px portrait frames and new detailed parchment improve readability. The accept/claim button stays outside the scrolling page. Quest rules and rewards are unchanged.
+
+Windows: `desktop/build/windows/1.29.1/Grimhollow/Grimhollow.exe` (keep the whole folder). Android: `android/build/outputs/apk/debug/android-debug.apk`. Original paintings and prompts are in `tools/painted/sources/bounty-poster/` and `tools/painted/bounty-poster-prompts.json`; `python tools/painted/pack.py --posters` reproduces the poster assets and inspection lookup. Native captures remain `verification/interface/{landscape,portrait}/bounty-poster-*.png`.
+
 # Quest presentation - v1.29.0
 
 Yog's platform and the Amulet sanctum now use painted basalt, connected carved masonry, stained glass and candles. Cole's Warden's Office has a ledger desk, an oxblood carpet, carved furniture and shackles, with its board against the north wall and five separated sale displays. Contracts use a scrollable parchment layout with a large central target portrait, description, flavor text and rarity seal; the acceptance button stays accessible.

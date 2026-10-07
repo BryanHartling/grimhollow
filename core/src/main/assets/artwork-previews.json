@@ -2186,68 +2186,97 @@
       ]
     }
   ],
+  "interfaces/bounty_poster_seals.png": [
+    {
+      "file": "artwork/bounty-seal-0.png",
+      "rect": [
+        0,
+        0,
+        256,
+        256
+      ]
+    },
+    {
+      "file": "artwork/bounty-seal-1.png",
+      "rect": [
+        256,
+        0,
+        512,
+        256
+      ]
+    },
+    {
+      "file": "artwork/bounty-seal-2.png",
+      "rect": [
+        512,
+        0,
+        768,
+        256
+      ]
+    }
+  ],
   "interfaces/bounty_posters.png": [
     {
       "file": "artwork/bounty-poster-0.png",
       "rect": [
         0,
         0,
-        256,
-        256
+        512,
+        512
       ]
     },
     {
       "file": "artwork/bounty-poster-1.png",
       "rect": [
-        256,
-        0,
         512,
-        256
+        0,
+        1024,
+        512
       ]
     },
     {
       "file": "artwork/bounty-poster-2.png",
       "rect": [
-        512,
+        1024,
         0,
-        768,
-        256
+        1536,
+        512
       ]
     },
     {
       "file": "artwork/bounty-poster-3.png",
       "rect": [
-        768,
+        1536,
         0,
-        1024,
-        256
+        2048,
+        512
       ]
     },
     {
       "file": "artwork/bounty-poster-4.png",
       "rect": [
         0,
-        256,
-        256,
-        512
+        512,
+        512,
+        1024
       ]
     },
     {
       "file": "artwork/bounty-poster-5.png",
       "rect": [
-        256,
-        256,
         512,
-        512
+        512,
+        1024,
+        1024
       ]
     },
     {
       "file": "artwork/bounty-poster-6.png",
       "rect": [
+        1024,
         512,
-        256,
-        768,
-        512
+        1536,
+        1024
       ]
     }
   ],

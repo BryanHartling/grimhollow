@@ -166,8 +166,8 @@ def hero_icons(size=64):
     return out,indices
 
 def outputs():
-    paper=panels('office')[6]
-    paper=ImageOps.fit(paper,(256,384),Image.Resampling.LANCZOS)
+    from bounty import poster_assets
+    paper=poster_assets()['interfaces/bounty_parchment.png']
     return {'environment/custom_tiles/halls_special.png':halls(),
             'environment/custom_tiles/wardens_office.png':office(),
             'interfaces/bounty_parchment.png':paper,

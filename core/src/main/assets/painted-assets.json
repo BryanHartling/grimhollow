@@ -26,6 +26,8 @@
     "bounty/coat.png": "14e48d02cc4408db28a177f1a457c8d9f0dd1879a0821ded237d07b8564e7a9c",
     "bounty/cole.png": "a08e199fab7617eceaae60b3ad7052a3d5cc4760847d898b89f9a969112e0756",
     "bounty/warrant.png": "c50274e5c9832d8c27f53272618be9dfe863d93681eee3e882636cf7c0bfdaa9",
+    "bounty-poster/paper.png": "966df154160f538a311a7e1e4d614d4cf9c6fe42f4babcabe713b8efef850327",
+    "bounty-poster/seals.png": "38cd746c2d89cbc5bc79e4b88837ebfffcbe6f6c11cce95fe93f567959020dab",
     "caves-materials.png": "55e4629826ed07495ec5a2ad8b6577ab69f9fb85609161d6c8ca875bf68f75fa",
     "city-materials.png": "f3316e1efa15a6b91712798d1bc54397fdc2563b9f589cdb89d85c275869cafc",
     "details.png": "e00209673cb5d728a3fbc173f1ede610c474d37c8ab7f5f33eae0c56fda72631",
@@ -9487,10 +9489,10 @@
     },
     "interfaces/bounty_posters.png": {
       "size": [
-        1024,
-        512
+        2048,
+        1024
       ],
-      "rgba_sha256": "6313668e69f7be305d6f3a526ac246ff968836c34f327e41304f0a0c38e65cd4"
+      "rgba_sha256": "6a642b984f157eb5e72ca5b8dafc9e0c039c416f37b2d467687fb47f2835304b"
     },
     "interfaces/bounty_seals.png": {
       "size": [
@@ -9515,10 +9517,10 @@
     },
     "interfaces/bounty_parchment.png": {
       "size": [
-        256,
-        384
+        512,
+        768
       ],
-      "rgba_sha256": "e684e6ce29bd18de445fc66547baae02398d0dab5c062ff2c35ebf2e09efec61"
+      "rgba_sha256": "984c4b6fb51fa546ecf0fe9aefaac0623daa38eeb613bc2e8bb93f17ebdecd3f"
     },
     "effects/bloodmark.png": {
       "size": [
@@ -12325,49 +12327,49 @@
         256,
         256
       ],
-      "rgba_sha256": "17020fc2bcdba76321bef44d6dbd1d2fe5805afe6d618a152b3ec15f218d2866"
+      "rgba_sha256": "4eb8ad72aa1b28273e3a9148ec69ad479629be90f00b6e334e46eb9748d5464b"
     },
     "artwork/bounty-poster-1.png": {
       "size": [
         256,
         256
       ],
-      "rgba_sha256": "c9420fc26b454f7c30df5b9ba2f0687932955c2268c2ec0672e9e15f79ea04d8"
+      "rgba_sha256": "6597573f57bc006b3c0e793e47287f1049e365ba9ef90bfb22bee3bc6b6f87b7"
     },
     "artwork/bounty-poster-2.png": {
       "size": [
         256,
         256
       ],
-      "rgba_sha256": "3348eb1784a8f2a5c7f035bff9d446ea071fbf5d3c5fd2a8ede84e0d23646aa0"
+      "rgba_sha256": "a2892ae9d9a52415cbee1ebd6208d8fc590d6a67193412968cd92f6060be98fe"
     },
     "artwork/bounty-poster-3.png": {
       "size": [
         256,
         256
       ],
-      "rgba_sha256": "dbe07c2fac52310bf64cc88bae2d337428290080010d4d9155ee7e562cded4fe"
+      "rgba_sha256": "31983fdb480c7d98b47f9fa82de105a2ecae181d646e1ca37a463ff271c03f58"
     },
     "artwork/bounty-poster-4.png": {
       "size": [
         256,
         256
       ],
-      "rgba_sha256": "505dd3ff7ff3681f9bb0fd61afed130d577ae35c686685126f83784fa228c741"
+      "rgba_sha256": "bcbc2cd43f2d1dce35f0404a27505297fc9a4a339d9d5d4cb03f766373a1f711"
     },
     "artwork/bounty-poster-5.png": {
       "size": [
         256,
         256
       ],
-      "rgba_sha256": "36ac60cc499e9e62cfa432a3274db6d17c524408cce8a069457330ca171ce28d"
+      "rgba_sha256": "283d12758d2b92e9896c83e258dc4b9008f8137cba9113bfaaa87d171f64a89b"
     },
     "artwork/bounty-poster-6.png": {
       "size": [
         256,
         256
       ],
-      "rgba_sha256": "b9e5786ad97eb08ef9416cb9e4e15793b8fd91cca27cabaa4e0a1f28647358f1"
+      "rgba_sha256": "cde01d9a994dd665920178f656085030fa816c2007b6625814bbe4fa5841a924"
     },
     "artwork/talent-0.png": {
       "size": [
@@ -19830,6 +19832,34 @@
         256
       ],
       "rgba_sha256": "58f7c41cda84ad4d47b07addf4252b3b00532f43358ce15d8bbc5b794e2bf15d"
+    },
+    "interfaces/bounty_poster_seals.png": {
+      "size": [
+        768,
+        256
+      ],
+      "rgba_sha256": "781fcca4163ef3d2b307bd0bb43f3832e128554a146a448c03e149763c26afa6"
+    },
+    "artwork/bounty-seal-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b66778fe696d498e43dcc51608b16e6319aa5f3f11e227551e885276bb21e23c"
+    },
+    "artwork/bounty-seal-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "adc80abafc6f03c0ac739b7b6cea4bcba5e62484a860ff3069244be9dc7e6b7b"
+    },
+    "artwork/bounty-seal-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c3bbafcdfefceef8e2212903286498d1d0ba7f5914a94d9502e5b2cb62ec58c2"
     }
   }
 }

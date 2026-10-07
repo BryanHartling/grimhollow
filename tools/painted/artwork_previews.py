@@ -36,8 +36,11 @@ def build_previews():
     for name in ('cole','board'):
         add(f'sprites/bounty_{name}.png',(0,0,256,256),source(name),'bounty-'+name)
     for i in range(7):
-        x,y=i%4*256,i//4*256
-        add('interfaces/bounty_posters.png',(x,y,x+256,y+256),bounty_outputs()['interfaces/bounty_posters.png'].crop((x,y,x+256,y+256)),f'bounty-poster-{i}')
+        x,y=i%4*512,i//4*512
+        add('interfaces/bounty_posters.png',(x,y,x+512,y+512),bounty_outputs()['interfaces/bounty_posters.png'].crop((x,y,x+512,y+512)),f'bounty-poster-{i}')
+    for i in range(3):
+        x=i*256
+        add('interfaces/bounty_poster_seals.png',(x,0,x+256,256),bounty_outputs()['interfaces/bounty_poster_seals.png'].crop((x,0,x+256,256)),f'bounty-seal-{i}')
     from playtest_polish import talents,hero_icons,bloodmark,outputs as polished
     for i,art in talents(SIZE)[1].items():
         x,y=i%16*64,i//16*64

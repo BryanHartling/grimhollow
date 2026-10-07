@@ -1,3 +1,11 @@
+# Wanted poster refinement v1.29.1 - 2026-10-06
+
+- Reordered every bounty poster: large WANTED, quarry alias, centered portrait, contract title, flavor, last seen, BOUNTY amount, urgency, signature state, rarity seal and fixed action button. Jack's contract is now titled Jack's Second Chance. All paragraph lines are centered and can scroll on smaller screens.
+- Poster ink omits the heavy dark UI outline; the ordinary interface retains its existing font treatment. The portrait atlas now uses 512px frames extracted from original creature paintings. New high-resolution blank parchment and elaborate worn bronze/silver/gold seals have committed sources, exact prompts and offline packing. World wanted indicators retain their small existing seals.
+- Extended the existing native Bounty fixture to verify centered individual ink lines, the requested vertical hierarchy, portrait/seal source resolution and size, and borderless ink across all seven target posters and the completed contract. Contract acceptance, payment, timing, quest progression and enemies are unchanged. Named bounty creature reskins were discussed as a later art pass and are not part of this patch.
+- Visual review caught the old outline-compensating word spacing crowding the new plain ink; poster-only spacing now follows font size, with the ordinary UI's original metrics preserved. The native fixture also checks readable gaps between words.
+- Windows/Android builds, eight unit tests, combined Runs=30 failures=0, full offline art provenance, compiled-handler audit and final native portrait/landscape Bounty checks pass. The Windows launcher contains the final tested JAR. Physical tablet review remains NOT RUN; test 45 stays abandoned. Exact release CI status is reported with the tag.
+
 # Quest and interface presentation v1.29.0 - 2026-10-06
 
 - Replaced the retained Yog/Amulet custom tiles with painted basalt, connected shrine masonry, stained glass and live/spent candles. World geometry, boss gates, Amulet progression and visibility rules are unchanged.

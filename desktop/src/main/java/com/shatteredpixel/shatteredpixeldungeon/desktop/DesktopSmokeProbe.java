@@ -246,8 +246,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 else{interfaceBounds();checkReviewText(Game.scene());if(!allReviewText(Game.scene()).contains(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(bountyCole,"greet_"+hero.name())))throw new AssertionError("Missing greeting "+hero);capture("bounty-greet-"+hero.name().toLowerCase());}return;
             }
             if(step<=32){int species=(step-19)/2;
-                if(step%2==1){closeReviewWindows();BountyBoard.Contract c=new BountyBoard.Contract();c.index=species>=5?3:species==2?2:0;c.species=species;c.floor=species>=5?10:8;c.payment=c.index==2?0:600;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(c));}
-                else{interfaceBounds();checkReviewText(Game.scene());capture("bounty-poster-"+species);scrollReview(Game.scene());}return;
+                if(step%2==1){closeReviewWindows();BountyBoard.Contract c=new BountyBoard.Contract();c.index=species>=5?3:species==2?2:species==1||species==3?1:0;c.species=species;c.floor=species>=5?10:8;c.payment=c.index==2?0:c.index==1?1200:600;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(c));}
+                else{interfaceBounds();checkReviewText(Game.scene());bountyPosterLayoutCheck();capture("bounty-poster-"+species);scrollReview(Game.scene());}return;
             }
             switch(step){
                 case 33:closeReviewWindows();BountyBoard.contracts[0].floor=7;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(BountyBoard.contracts[0]));break;
@@ -295,7 +295,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                             capture("bounty-boss-"+choice);
                         }
                     }else if(step==71){closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(BountyBoard.contracts[3]));}
-                    else if(step==72){interfaceBounds();checkReviewText(Game.scene());capture("bounty-completed-poster");}
+                    else if(step==72){interfaceBounds();checkReviewText(Game.scene());bountyPosterLayoutCheck();capture("bounty-completed-poster");}
                     else if(step==73||step==76){
                         closeReviewWindows();questField(GameScene.class,"scene",null);Dungeon.init();Playtest.enable();
                         Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.depth=step==73?25:26;
@@ -305,6 +305,41 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     }else if(step==74||step==77){Dungeon.observe();Camera.main.snapTo(Dungeon.hero.sprite.center());}
                     else if(step==75||step==78){capture(step==75?"painted-yog-platform":"painted-amulet-sanctum");}
                     else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, seven painted posters and completion stamp, mouse/touch acceptance and purchase, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements, both actual boss deaths/mask rewards and painted final sanctums; failures=0");Gdx.app.exit();}
+            }
+        }
+    }
+
+    private void bountyPosterLayoutCheck(){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene())){
+            if(!(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract))continue;
+            float center=((Number)RecoveryChecks.field(child,"paperWidth")).floatValue()/2;
+            float previous=-1;
+            for(String name:new String[]{"heading","quarry","target","flavorTitle","flavor","location","reward","urgency","signature","seal"}){
+                Object part=RecoveryChecks.field(child,name);if(part==null)continue;
+                float x,y,width,height;
+                if(part instanceof com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock){
+                    com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock text=(com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock)part;
+                    x=text.left();y=text.top();width=text.width();height=text.height();
+                    if(name.equals("heading")&&!text.text().equals("WANTED"))throw new AssertionError("Poster announcement is not WANTED");
+                    java.util.Map<Integer,float[]> lines=new java.util.LinkedHashMap<>();
+                    for(com.watabou.noosa.Gizmo glyph:RecoveryChecks.members(text))if(glyph instanceof com.watabou.noosa.RenderedText){
+                        com.watabou.noosa.RenderedText word=(com.watabou.noosa.RenderedText)glyph;
+                        if((Boolean)RecoveryChecks.field(word,"border"))throw new AssertionError("Poster ink uses a heavy outline");
+                        float[] line=lines.computeIfAbsent(Math.round(word.y*256),key->new float[]{Float.POSITIVE_INFINITY,Float.NEGATIVE_INFINITY});
+                        if(line[1]!=Float.NEGATIVE_INFINITY&&word.x-line[1]<1.5f)throw new AssertionError("Cramped poster word spacing "+name);
+                        line[0]=Math.min(line[0],word.x);line[1]=Math.max(line[1],word.x+word.width());
+                    }
+                    for(float[] line:lines.values())if(Math.abs((line[0]+line[1])/2-center)>.75f)throw new AssertionError("Off-center ink line "+name);
+                }else{
+                    com.watabou.noosa.Image image=(com.watabou.noosa.Image)part;
+                    x=image.x;y=image.y;width=image.width();height=image.height();
+                    float pixels=image.frame().width()*image.texture.width;
+                    if(name.equals("target")&&(Math.abs(pixels-512)>.1f||height<96))throw new AssertionError("Low-resolution or small wanted portrait");
+                    if(name.equals("seal")&&(Math.abs(pixels-256)>.1f||height<60))throw new AssertionError("Low-resolution or small rarity seal");
+                }
+                if(Math.abs(x+width/2-center)>.75f)throw new AssertionError("Off-center poster part "+name);
+                if(y<previous)throw new AssertionError("Poster hierarchy overlaps at "+name);
+                previous=y+height;
             }
         }
     }

@@ -1,5 +1,6 @@
 """Pack committed bounty paintings; no generation service needed by CI."""
 from pathlib import Path
+from functools import lru_cache
 from PIL import Image, ImageOps
 from inventory import icon
 HERE = Path(__file__).resolve().parent
@@ -19,19 +20,35 @@ def source(name):
     assert im.getchannel('A').getextrema()[0]==0,name
     return im
 
+@lru_cache(None)
+def poster_assets():
+    # Full-resolution poses, not the small game sprites or old 256px notices.
+    from monsters import CONTRACT,parts
+    sheet=Image.new('RGBA',(2048,1024))
+    for i,name in enumerate(('skeleton','thief','guard','dm100','necromancer','tengu','chainwarden')):
+        spec=next(s for s in CONTRACT['monsters'] if s['name']==name)
+        tile=icon(parts(spec['sheet'])[spec['row']*4],512)
+        sheet.alpha_composite(tile,(i%4*512,i//4*512))
+    source_dir=HERE/'sources/bounty-poster'
+    paper=Image.open(source_dir/'paper.png').convert('RGBA')
+    raw_seals=Image.open(source_dir/'seals.png').convert('RGBA')
+    for name,im in [('paper',paper),('seals',raw_seals)]:
+        assert im.getchannel('A').getextrema()[0]==0,(name,'genuine transparency required')
+    seals=Image.new('RGBA',(768,256))
+    for i in range(3):
+        art=raw_seals.crop((round(i*raw_seals.width/3),0,round((i+1)*raw_seals.width/3),raw_seals.height))
+        seals.alpha_composite(icon(art,256),(i*256,0))
+    paper=paper.crop(paper.getchannel('A').point(lambda a:255 if a>=16 else 0).getbbox())
+    return {'interfaces/bounty_posters.png':sheet,
+            'interfaces/bounty_poster_seals.png':seals,
+            'interfaces/bounty_parchment.png':paper.resize((512,768),Image.Resampling.LANCZOS)}
+
 def outputs():
     from readability import cutouts,centered
     result={}
     for name in ('cole','board'):
         result[f'sprites/bounty_{name}.png']=icon(source(name),256)
-    sheet=Image.new('RGBA',(1024,512))
-    paper=source('board').crop((428,225,828,810)).resize((240,240),Image.Resampling.LANCZOS)
-    from monsters import CONTRACT,parts
-    for i,name in enumerate(('skeleton','thief','guard','dm100','necromancer','tengu','chainwarden')):
-        spec=next(s for s in CONTRACT['monsters'] if s['name']==name)
-        tile=icon(parts(spec['sheet'])[spec['row']*4],256)
-        sheet.alpha_composite(tile,(i%4*256,i//4*256))
-    result['interfaces/bounty_posters.png']=sheet
+    result.update(poster_assets())
     seals=Image.new('RGBA',(192,64));frames=cutouts('details.png',4,2)
     wax=source('board').crop((540,710,670,849))
     for i in range(3):

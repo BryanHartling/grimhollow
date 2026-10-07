@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.0","Painted sanctums, a stately office and clearer discoveries.");
+        ChangeInfo r=release(list,"v1.29.1","A proper wanted notice.");
+        note(r,Icons.JOURNAL,"Wanted posters","Bold WANTED lettering and the quarry's name sit above a larger centered portrait. Centered ink lists the contract's story, last sighting, bounty and urgency before its signature line and ornate worn rarity seal. Contract buttons remain accessible while scrolling.");
+        r=release(list,"v1.29.0","Painted sanctums, a stately office and clearer discoveries.");
         note(r,Icons.JOURNAL,"The Warden's Office","Cole's office now has a broad carpet, a ledger desk, carved furniture and wall shackles. The board hangs by the wall and the five sale displays are spaced apart. Contracts read as parchment notices, with a large wanted portrait above their story and seal.");
         note(r,Icons.TALENT,"Painted talents and discoveries","The retained heroes' talents now have painted, effect-specific emblems. Journal lists show larger pictures, and identified consumables retain their identity emblem in examination and enlarged artwork. Bloodmarked Brands bear the same mark shown on their victims.");
         note(r,Icons.INFO,"The final sanctums","Yog's platform and the Amulet sanctum now use painted basalt, carved masonry, stained glass and candles. Blank Parchment can be sold or offered to a hungry Hatchling, one sheet at a time.");

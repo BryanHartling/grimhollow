@@ -43,6 +43,7 @@ public class RenderedText extends Image {
 	private BitmapFont font = null;
 	private int size;
 	private String text;
+	private boolean border = true;
 	
 	public RenderedText( ) {
 		text = null;
@@ -57,6 +58,14 @@ public class RenderedText extends Image {
 		this.text = text;
 		this.size = size;
 		
+		measure();
+	}
+
+	/** Ink on light surfaces can omit the usual dark UI outline. */
+	public RenderedText(String text, int size, boolean border){
+		this.text = text;
+		this.size = size;
+		this.border = border;
 		measure();
 	}
 	
@@ -92,7 +101,7 @@ public class RenderedText extends Image {
 			visible = true;
 		}
 		
-		font = Game.platform.getFont(size, text, true, true);
+		font = Game.platform.getFont(size, text, true, border);
 		
 		if (font != null){
 			GlyphLayout glyphs = new GlyphLayout( font, text);

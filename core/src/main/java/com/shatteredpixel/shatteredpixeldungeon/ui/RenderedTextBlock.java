@@ -126,7 +126,7 @@ public class RenderedTextBlock extends Component {
 			} else if (str.equals(" ")){
 				words.add(SPACE);
 			} else {
-				RenderedText word = new RenderedText(str, size);
+				RenderedText word = createWord(str, size);
 				
 				if (highlighting) word.hardlight(hightlightColor);
 				else if (color != -1) word.hardlight(color);
@@ -148,6 +148,14 @@ public class RenderedTextBlock extends Component {
 		}
 		layout();
 	}
+
+	/** Override only for surfaces requiring a different font outline treatment. */
+	protected RenderedText createWord(String text, int size){
+		return new RenderedText(text, size);
+	}
+
+	protected float spaceWidth(){ return 1.667f; }
+	protected float wordOverlap(){ return 0.667f; }
 
 	public synchronized void hardlight(int color){
 		this.color = color;
@@ -217,7 +225,7 @@ public class RenderedTextBlock extends Component {
 		for (int i = 0; i < words.size(); i++){
 			RenderedText word = words.get(i);
 			if (word == SPACE){
-				x += 1.667f;
+				x += spaceWidth();
 			} else if (word == NEWLINE) {
 				//newline
 				y += height+2f;
@@ -236,7 +244,7 @@ public class RenderedTextBlock extends Component {
 				while (Messages.lang() != Languages.CHI_SMPL && Messages.lang() != Languages.CHI_TRAD
 						&& Messages.lang() != Languages.JAPANESE
 						&& j < words.size() && words.get(j) != SPACE && words.get(j) != NEWLINE){
-					fullWidth += words.get(j).width() - 0.667f;
+					fullWidth += words.get(j).width() - wordOverlap();
 					j++;
 				}
 
@@ -258,7 +266,7 @@ public class RenderedTextBlock extends Component {
 				
 				//Note that spacing currently doesn't factor in halfwidth and fullwidth characters
 				//(e.g. Ideographic full stop)
-				x -= 0.667f;
+				x -= wordOverlap();
 
 			}
 		}

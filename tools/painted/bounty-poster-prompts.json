@@ -1,0 +1,15 @@
+{
+  "provider": "imagegen",
+  "assets": [
+    {
+      "source": "sources/bounty-poster/paper.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: an ORIGINAL high-resolution blank medieval WANTED bounty poster parchment backing for the dark gothic fantasy game Grimhollow. One single upright rectangular sheet of aged ivory parchment, seen exactly straight-on, fully visible and centered with a small transparent margin. Aspect ratio 2:3, page fills 92 percent of canvas, subtle irregular torn/worn edges, slightly dark foxing and finger wear mostly around the edges. The broad entire central writing area is a LIGHT pale creamy ivory, clean and unobstructed, fine paper fibres but minimal texture contrast, intended for legible dark ink overlaid by game code. Hand-painted realistic tactile parchment, very sharp fine details, gentle warm uneven tone. No rolled corners blocking the page, no board, no frame, no wax seal, no pins, no portrait, no pictures, no writing, NO TEXT whatsoever, no logo, no cast ground shadow. Genuine transparent alpha outside the whole paper, not a checkerboard or white background. This is a reusable game UI page, no perspective or tilt."
+    },
+    {
+      "source": "sources/bounty-poster/seals.png",
+      "transparent_background": true,
+      "prompt": "Use case: stylized-concept. Asset type: ORIGINAL high-resolution ornamental rarity seals for gothic medieval Grimhollow WANTED bounty posters. Create ONE sprite source sheet with THREE entirely separate front-facing circular wax-and-metal seals across a SINGLE horizontal row, each occupying one equal third of the wide canvas and fully visible, transparent generous gutters, no overlap. Each seal is richly crafted and fancy but slightly timeworn, hand-painted realism with sharp engraved metal, worn wax edges and faded frayed hanging ribbons, medieval Prison warden theme. Left common seal: aged bronze wreath surrounding dark red wax stamped with a small skull, two short weathered tan ribbons. Middle rare seal: more elaborate tarnished silver laurel surrounding dark crimson wax with crossed keys engraving, two longer muted charcoal ribbons. Right legendary seal: grand ornate worn gold scrollwork surrounding black-red wax bearing a stylized fortress engraving, layered oxblood ribbons. The circular medallions have comparable overall sizes, increasingly elaborate decoration. Each has a SMALL BLANK pale ribbon/plaque at its lower edge for a rarity label added by game code. NO letters, NO words, NO readable text, no numbers. Genuine transparent alpha background, no parchment, no background, no frame around sheet, no ground or cast shadows, no other objects. All seals occupy 85 percent of their individual cell height, high detail, strongly readable silhouettes and metal highlights, restrained gothic colors."
+    }
+  ]
+}

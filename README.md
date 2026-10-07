@@ -1,3 +1,9 @@
+# Bounty floor references - v1.29.3
+
+Warrants, posters and bounty journal entries now include the absolute dungeon floor in the Last seen line, alongside the existing Prison floor number. For example: Last seen on Prison floor 3 (Dungeon floor 8). Quest destinations and save data are unchanged.
+
+Windows: `desktop/build/windows/1.29.3/Grimhollow/Grimhollow.exe` (keep the entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk`.
+
 # Named quarry paintings - v1.29.2
 
 All six non-boss wanted targets now have unique painted bodies and action poses: Jack Twice-Hanged, Nails the Cutpurse, Voss the Cellbreaker, the Widowmaker, the Bone Clerk and Warden Morcant. Their posters and enlarged inspection pictures come from the same original paintings. Ordinary enemies keep their current art; combat, rewards, animation timing and visibility rules are unchanged. Previously accepted targets receive their matching appearance when a saved floor loads.

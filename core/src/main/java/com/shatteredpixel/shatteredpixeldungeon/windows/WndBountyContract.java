@@ -43,7 +43,7 @@ public class WndBountyContract extends Window {
 
         flavorTitle = ink(c.title(), 10, w, target.y + target.height() + 4);
         flavor = ink(flavor(c), 8, w, flavorTitle.bottom() + 4);
-        location = ink(Messages.get(Cole.class, "poster_location", c.floor - 5), 8, w, flavor.bottom() + 8);
+        location = ink(location(c), 8, w, flavor.bottom() + 8);
         reward = ink(c.index == 2 ? Messages.get(Cole.class, "coat_prize")
                 : Messages.get(Cole.class, "poster_bounty", c.payment), 11, w, location.bottom() + 8);
         float bottom = reward.bottom();
@@ -137,8 +137,12 @@ public class WndBountyContract extends Window {
                 : "flavor_" + (c.index == 2 ? "warden" : c.species));
     }
 
+    private static String location(BountyBoard.Contract c) {
+        return Messages.get(Cole.class, "poster_location", c.floor - 5, c.floor);
+    }
+
     public static String text(BountyBoard.Contract c) {
-        String text = Messages.get(Cole.class, "poster", c.alias(), flavor(c), c.floor - 5,
+        String text = Messages.get(Cole.class, "poster", c.alias(), flavor(c), location(c),
                 c.index == 2 ? Messages.get(Cole.class, "coat_prize") : Messages.get(Cole.class, "gold_prize", c.payment));
         if (c.index < 2) text += "\n\n" + Messages.get(Cole.class, "urgent") + "\n" + Messages.get(Cole.class, "swift");
         text += "\n\n" + Messages.get(Cole.class, c.returned ? "returned" : c.complete ? "complete" : c.accepted ? "accepted" : "offered");

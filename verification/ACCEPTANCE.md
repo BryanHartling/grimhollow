@@ -1,3 +1,9 @@
+# Bounty floor references - v1.29.3
+
+- `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug -PsmokeClass=ENCHANTER --no-daemon --console=plain`: **BUILD SUCCESSFUL in 1m 25s; Runs=10 failures=0**. Eight JUnit tests have zero failures/errors. The existing smoke run includes all Bounty scenarios, including ten generated offices and Warrant acceptance, save/load and rewards. No new harness or gameplay rules.
+- Existing native portrait Bounty review: **BOUNTY UI PASS; failures=0**. All eight notices, text/layout, acceptance, Warrant, journal, artwork, visibility and boss rewards pass. The actual Warrant capture `verification/interface/portrait/bounty-warrant.png` is visually reviewed and reads **Last seen on Prison floor 2 (Dungeon floor 7).** The shared location formatter also supplies posters, bounty journal entries and Playtest status. Existing numbering is unchanged.
+- `tools/package-windows.ps1` produces `desktop/build/windows/1.29.3/Grimhollow/Grimhollow.exe`; Android debug APK builds. Physical tablet review is **NOT RUN**. Artwork is unchanged, and test 45 remains abandoned. Full CI remains enabled, with the exact release result reported at delivery; unchanged gates are not claimed as locally rerun.
+
 # Named quarry paintings - v1.29.2
 
 - `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 2m 20s; Runs=30 failures=0**. Eight JUnit tests report zero failures/errors. No combat, quest or animation timing changes.

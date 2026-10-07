@@ -1,3 +1,8 @@
+# Bounty floor references v1.29.3 - 2026-10-07
+
+- The shared Last seen line in Warrants, bounty posters and journal descriptions now includes the absolute dungeon floor: Last seen on Prison floor 3 (Dungeon floor 8). Existing numbering and quest destinations are unchanged; Prison floor 2 is Dungeon floor 7. Existing and new Warrants receive the clarification without a save migration.
+- Windows/Android builds, eight unit tests, the existing ten-seed Enchanter smoke run (including all Bounty scenarios) and native portrait Bounty UI checks pass. The actual Warrant is visually reviewed; physical tablet review remains NOT RUN. No art, balance, quest generation or rewards changed.
+
 # Named quarry paintings v1.29.2 - 2026-10-06
 
 - Added six original painted wanted skins with idle, movement, attack/casting and defeated poses. Jack has his noose and broken restraints; Nails a green hood and stolen payroll; Voss blue prison livery and heavy keys; the Widowmaker damaged copper machinery and a red eye; the Bone Clerk a grim ledger; Morcant enclosed armor and an oxblood officer's coat. Normal enemies and the actual Prison bosses retain their artwork.

@@ -68,8 +68,23 @@ def mining(base,features,crystal):
     ore=centered(forge()[2],(49,42))
     for index in [49,53]+list(range(84,88))+list(range(100,104)):
         face=cell(base,48);face.alpha_composite(ore,(0,4));put(atlas,index,face)
-    ore_cap=cell(base,48);ore_cap.alpha_composite(ore)
-    for index in list(range(160,176))+list(range(196,200)):
+    # Internal walls expose only a 20px strip on each open side. A centered
+    # deposit is almost entirely clipped by those strips, hiding mineable ore.
+    side_ore=fit(forge()[2],16,28)
+    for index in range(160,176):
+        ore_cap=cell(base,48)
+        ore_cap.alpha_composite(side_ore,(2,14))
+        ore_cap.alpha_composite(side_ore.transpose(Image.Transpose.FLIP_LEFT_RIGHT),(46,14))
+        tile=surface_mask(cell(old,index),ore_cap)
+        if index>160:
+            bare=surface_mask(cell(old,index),cell(base,48))
+            changed=np.any(np.array(tile)[:,:,:3]!=np.array(bare)[:,:,:3],axis=2)
+            assert np.count_nonzero(changed & (np.array(tile)[:,:,3]>0))>=160,('clipped ore',kind,index)
+        put(atlas,index,tile)
+    # Overhangs expose a horizontal band at y=32..47, not the tile center.
+    rim_ore=fit(forge()[2],36,14)
+    ore_cap=cell(base,48);ore_cap.alpha_composite(rim_ore,((64-rim_ore.width)//2,33))
+    for index in range(196,200):
         put(atlas,index,surface_mask(cell(old,index),ore_cap))
     floor=cell(base,0)
     rocks=panels('region-props.png')[6]

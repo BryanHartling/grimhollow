@@ -66,7 +66,7 @@ public class MineSecretRoom extends SecretRoom {
 			do {
 				cell = level.pointToCell(random(1));
 			} while (level.map[cell] == Terrain.WALL_DECO);
-			Painter.set(level, random(1), Terrain.WALL_DECO);
+			Painter.set(level, cell, Terrain.WALL_DECO);
 		}
 
 	}

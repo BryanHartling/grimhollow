@@ -1,3 +1,9 @@
+# Mine ore placement and visibility - v1.29.10
+
+Exposed ore on side-facing walls and wall rims now retains its painted mineral instead of clipping it away. Crystal treasure pockets place their ore on separate cells; the mine painter respects its existing 45-47-piece allowance. No mine is rerolled on loading, and collected ore is unchanged. The artwork fix applies to already-generated mines.
+
+Windows: `desktop/build/windows/1.29.10/Grimhollow/Grimhollow.exe` (keep the entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk` (`1.29.10-INDEV`, version code 1009).
+
 # Telekinesis, stealth and motion - v1.29.9
 
 High-level Hurl springs traps along the thrown creature's path as well as at its landing, retaining its existing impact damage and ledge rules. A lethal or relocating trap ends the throw safely. Chainwarden's pulls and targeted traps respect Cloak stealth, other invisibility and line of sight. Rogue's Foresight uses a distinct eye painting instead of Wide Search's magnifying glass.

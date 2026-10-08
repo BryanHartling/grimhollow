@@ -1,3 +1,22 @@
+# Mine ore - v1.29.10
+
+- Final `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 1m 28s; Runs=30 failures=0**. Eight JUnit tests have zero failures/errors. Each class checks 208 mining cases: 100 seeds for each implemented quest variant, plus seed 4507775544315 at depths 11-14 for both variants. All have 45-47 ore, two treasure pockets with 4-5 pieces each, diggable boundary positions and protected quest ore. The supplied seed's eight mine snapshots retain their terrain and loose ore across Bundle save/load.
+- Original-generation reproduction of the reported **crystal** seed, before the placement fix:
+
+| Blacksmith dungeon floor | Total ore | Completely buried ore | Ore in the two treasure pockets |
+|---|---|---|---|
+| 11 | 45 | 4 | 4 / 4 |
+| 12 | 46 | 4 | 4 / 5 |
+| 13 | 47 | 7 | 5 / 3 |
+| 14 | 45 | 2 | 4 / 4 |
+
+These are regenerated levels, not the tablet save. No total-ore shortage was reproduced. Magic Mapping skips completely buried rock; crystal treasure pockets contain veins rather than ore chests. Original room-placement checks fail on 57 pockets across the 208 cases because a second random coordinate overwrites deposits. The fixed code uses the validated cell. A later regression caught an optional extra deposit overshooting the total by one; its remaining-budget guard is corrected.
+
+- Existing native room review passes landscape and portrait: **MINE ORE NATIVE PASS** for gnoll and crystal, then **TEST 57 ROOMS PASS** and **REGIONAL SCENERY PASS; failures=0** in each. It invokes the real animated mining callback on side-facing ore, verifies one piece is collected or remains in a heap, and checks the mined terrain. Initial native attempts used a Playtest-only teleport in an ordinary fixture save; corrected fixture placement retains the production mining path. Only this desktop fixture repair required a subsequent `desktop:dist` build, successful in 27s.
+- Ore on side cutaways previously retained only 58-122 changed pixels, almost entirely clipping the centered mineral. The existing packer fits the same authored mineral to the exposed side/rim masks and asserts at least 160 visible changed pixels on each exposed internal variant. Fully buried interiors retain black masks. **PAINTED assets=1937 source sheets=182 launcher resources=55 failures=0; TEST 44 failures=0**. No new art was generated. Only the two mine atlas PNGs changed; their APK bytes and provenance manifest match the shipping assets.
+- Final compiled audit: **classes=3055 guarded browser sinks=1 HTTP/socket calls=0 failures=0**. Windows launcher: `desktop/build/windows/1.29.10/Grimhollow/Grimhollow.exe`; tested JAR SHA256 `0394F1C19D2DE8B9AD63B0C6C1B48F9EDA396C265AD973BC74504C7C798FC20C`. APK actual manifest **1.29.10-INDEV / versionCode 1009**, rebuilt **2026-10-08 17:23 EDT**, SHA256 `E8644D08F9DAD7A9D9048614E2AB67858AFDB0A7600D243B43A6757DFE8461A4`. Final mine captures in both orientations are visually reviewed.
+- The exact tablet save, collection history and physical tablet play are **NOT RUN**. Existing mine geometry and ore are not rerolled; the visual correction applies to old saves, while placement corrections apply to new mines. Test 45 remains **Abandoned: test failed**, not rerun; prior retired tests retain their status. Full CI remains enabled and its exact release result is reported at delivery.
+
 # Telekinesis, stealth and motion - v1.29.9
 
 - Final `gradlew.bat core:test core:smokeRun desktop:dist android:assembleDebug --no-daemon --console=plain`: **BUILD SUCCESSFUL in 1m 13s; Runs=30 failures=0**. Eight JUnit tests have zero failures/errors. Test 48 checks every Crystal level 0-10 for Push/Hurl distance, wall/creature impact damage and status, landing traps, Hurl's intermediate hidden/visible traps with correct victim occupancy, no duplicate landing activation, lethal/relocating interruption, first chasm edge and boss rules. Existing content checks exercise actual Cloak stealth, potion invisibility, absent line of sight and resumed Chainwarden pulls, plus rejection of targeted traps while cloaked.

@@ -270,7 +270,10 @@ def main():
         from artwork_previews import outputs as previews
         world={f'environment/tiles_{r}.png':Image.open(ASSETS/f'environment/tiles_{r}.png').convert('RGBA') for r in ['sewers','prison','caves','city','halls']}
         features=Image.open(ASSETS/'environment/terrain_features.png').convert('RGBA')
-        built={**regional_outputs(),'environment/custom_tiles/caves_quest.png':quest_outputs(world,features)['environment/custom_tiles/caves_quest.png'],**previews()}
+        quest=quest_outputs(world,features)
+        built={**regional_outputs(),**{path:quest[path] for path in (
+            'environment/custom_tiles/caves_quest.png','environment/tiles_caves_crystal.png',
+            'environment/tiles_caves_gnoll.png')},**previews()}
     elif args.wanted:
         from wanted import outputs as wanted_outputs
         from bounty import poster_assets

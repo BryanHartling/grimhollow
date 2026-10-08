@@ -9195,14 +9195,14 @@
         1024,
         1024
       ],
-      "rgba_sha256": "36fea6e4ca85cc50184e86bb361dab9c468cfa9315e0b526e1711ea5723dfc90"
+      "rgba_sha256": "a2d5316a2ee1429e489b440bfd6ccd884c7eaed68c2e4c5b45ebccb99fa0ba82"
     },
     "environment/tiles_caves_crystal.png": {
       "size": [
         1024,
         1024
       ],
-      "rgba_sha256": "102d15fca49f01c4f54a5ed633b0803eaa7504759b0d81afc7b48b13dfbe5328"
+      "rgba_sha256": "2631104ca705481f437b94d6455b28e3ba7164b8cce7a3869469831b3bf8c208"
     },
     "environment/custom_tiles/prison_quest.png": {
       "size": [

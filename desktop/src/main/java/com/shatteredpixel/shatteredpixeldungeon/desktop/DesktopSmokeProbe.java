@@ -49,6 +49,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.TreasureHunter expeditionHunter;
     private final boolean roomReview=Boolean.getBoolean("grimhollow.roomReview");
     private int roomStep, roomFrames, ritualTable, ritualCage, roomCenter;
+    private int minedOreCell, oreBeforeMining;
     private final boolean presentationReview=Boolean.getBoolean("grimhollow.presentationReview");
     private boolean presentationStarted;
     private final java.util.HashSet<Integer> loadingCaptures=new java.util.HashSet<>();
@@ -2217,15 +2218,17 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     int ore=roomCenter-Dungeon.level.width();Level.set(ore,Terrain.WALL_DECO);
                     EnhancedEffects.Torch flame=new EnhancedEffects.Torch(ore);Level.set(ore,Terrain.EMPTY);flame.update();
                     if(flame.alive)throw new AssertionError("Flame survived source mining");
-                    GameScene.updateMap();break;
+                    GameScene.updateMap();startNativeOreMining();break;
                 case 9:
-                    capture("gnoll-mine-after-mining");prepareRooms(3);switchNoFade(GameScene.class);break;
+                    assertNativeOreMined();capture("gnoll-mine-after-mining");prepareRooms(3);switchNoFade(GameScene.class);break;
                 case 10:
                     miningTorchChecks();capture("crystal-mine");
                     com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Chainwarden boss=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Chainwarden();
                     boss.pos=Dungeon.hero.pos+1;boss.HP=boss.HT/2;GameScene.add(boss);com.shatteredpixel.shatteredpixeldungeon.ui.BossHealthBar.assignBoss(boss);
+                    startNativeOreMining();
                     break;
                 case 11:
+                    assertNativeOreMined();
                     capture("painted-boss-bar");
                     for(Icons icon:new Icons[]{Icons.DEPTH,Icons.DEPTH_CHASM,Icons.DEPTH_WATER,Icons.DEPTH_GRASS,Icons.DEPTH_DARK,Icons.DEPTH_LARGE,Icons.DEPTH_TRAPS,Icons.DEPTH_SECRETS}){
                         Image visual=icon.get();if(visual.frame().width()*visual.texture.width<63)throw new AssertionError("Pixel depth icon: "+icon);visual.destroy();
@@ -2318,6 +2321,44 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         if(ore==0)throw new AssertionError("No ore in generated mine");
         for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))
             if(child instanceof EnhancedEffects.Torch)throw new AssertionError("Ore torch was instantiated");
+    }
+
+    private int collectedMineOre() {
+        int count=0;
+        for(com.shatteredpixel.shatteredpixeldungeon.items.Item item:Dungeon.hero.belongings)
+            if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.DarkGold)count+=item.quantity();
+        for(com.shatteredpixel.shatteredpixeldungeon.items.Heap heap:Dungeon.level.heaps.valueList())
+            for(com.shatteredpixel.shatteredpixeldungeon.items.Item item:heap.items)
+                if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.DarkGold)count+=item.quantity();
+        return count;
+    }
+    private void startNativeOreMining() throws ReflectiveOperationException {
+        int width=Dungeon.level.width(),stand=-1;
+        minedOreCell=-1;
+        for(int cell=width;cell<Dungeon.level.length()-width;cell++) {
+            if(Dungeon.level.map[cell]!=Terrain.WALL_DECO
+                    ||!com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet.wallStitcheable(Dungeon.level.map[cell+width]))continue;
+            for(int offset:new int[]{1,-1})if(Dungeon.level.passable[cell+offset]) {
+                minedOreCell=cell;stand=cell+offset;break;
+            }
+            if(stand>=0)break;
+        }
+        if(stand<0)throw new AssertionError("No side-facing ore in generated mine");
+        if(Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.quest.Pickaxe.class)==null)
+            Dungeon.hero.belongings.backpack.items.add(new com.shatteredpixel.shatteredpixeldungeon.items.quest.Pickaxe().identify());
+        Dungeon.hero.pos=stand;Dungeon.hero.sprite.place(stand);
+        Camera.main.snapTo(Dungeon.hero.sprite.center());Dungeon.observe();GameScene.updateMap();
+        oreBeforeMining=collectedMineOre();
+        java.lang.reflect.Method mine=com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero.class.getDeclaredMethod(
+                "actMine",com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroAction.Mine.class);
+        mine.setAccessible(true);
+        mine.invoke(Dungeon.hero,new com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroAction.Mine(minedOreCell));
+    }
+    private void assertNativeOreMined() {
+        if(Dungeon.level.map[minedOreCell]!=Terrain.EMPTY_DECO || collectedMineOre()!=oreBeforeMining+1)
+            throw new AssertionError("Animated mining lost side-facing ore");
+        System.out.println("MINE ORE NATIVE PASS: actual side-wall mining callback preserves one ore; variant="
+                +com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.Type());
     }
 
     private void reviewRegionTransition(int floor) throws java.io.IOException {

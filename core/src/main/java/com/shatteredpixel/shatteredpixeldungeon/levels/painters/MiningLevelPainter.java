@@ -101,7 +101,7 @@ public class MiningLevelPainter extends CavesPainter {
 							map[pos+i] = Terrain.WALL_DECO;
 							goldToAdd--;
 						}
-						if (Random.Int(2) == 0){
+						if (goldToAdd > 0 && Random.Int(2) == 0){
 							i = PathFinder.NEIGHBOURS4[Random.Int(4)];
 							if (level.insideMap(pos+i) && map[pos+i] == Terrain.WALL){
 								map[pos+i] = Terrain.WALL_DECO;

@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.9","Clearer motion and dependable telekinesis.");
+        ChangeInfo r=release(list,"v1.29.10","Dark veins in the rock.");
+        note(r,Icons.INFO,"Mine ore","Dark ore is visible on side-facing rock and wall rims, using the mine's existing painted mineral. Crystal treasure pockets place their deposits on separate cells. Existing mines keep their terrain and collected ore.");
+        r=release(list,"v1.29.9","Clearer motion and dependable telekinesis.");
         note(r,Icons.TALENT,"Hurl and stealth","A practiced Seer's Hurl springs traps along its path as well as on landing, while retaining its ledge and impact effects. Chainwarden cannot pull a hero concealed by the Cloak or another invisibility effect. Rogue's Foresight has its own eye motif.");
         note(r,Icons.PREFS,"Quiet speed","Drinking raises and tips the painted bottle. Haste leaves restrained blue-silver brush wisps at your boots while moving, for as long as its effect lasts. Ambush warnings have no directional marker, from either side; the popup follows your Playtest setting.");
         r=release(list,"v1.29.8","The Horror's warning stands on its own.");

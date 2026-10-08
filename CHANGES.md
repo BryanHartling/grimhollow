@@ -1,3 +1,9 @@
+# Mine ore v1.29.10 - 2026-10-08
+
+- The mine's side-wall cutaways expose narrow edge strips, while its upper rim exposes a horizontal band. The centered ore painting was mostly outside these masks. The existing offline packer places the same authored mineral inside those exposed strips; buried wall interiors remain black. Only the two mine atlases change.
+- Crystal treasure pockets now paint the empty cell they checked, rather than drawing another random cell and potentially overwriting a previous deposit. The main painter also stops its optional third deposit when the remaining budget reaches zero. The intended total remains 45-47; mining, quest rewards and collected ore are unchanged. Already-generated mines are preserved.
+- Investigated tablet seed 4507775544315 using the original generation code at all four possible blacksmith depths. Totals were 45/46/47/45, with 4/4/7/2 buried pieces; Magic Mapping excludes completely buried rock, and crystal pockets contain veins rather than ore chests. This reproduces the seed, not the player's exact tablet save or collected-item history.
+
 # Telekinesis, stealth and motion v1.29.9 - 2026-10-08
 
 - Crystal +6 and higher Hurl hard-presses intermediate traps with the victim occupying each cell, in path order; landing still triggers once. Death, teleportation or replacement ends the remaining throw. Push, ordinary Blast Wave and the existing collision/Paralysis, chasm and boss thresholds retain their behavior.

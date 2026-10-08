@@ -78,7 +78,7 @@ public class SmokeRun {
                             if(Dungeon.depth!=6) throw new AssertionError("Save/load depth mismatch");
                         }
                     }
-                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();psychicWeaponAndDetectionScenario();HatchlingScenario.run();keepsakeScenario();TuningScenario.run();ExpeditionScenario.run();HorrorScenario.run();PlaytestPolishScenario.run();ScribingRoomsScenario.spellguard();ScribingRoomsScenario.scribing();ScribingRoomsScenario.elementalRooms();DoubloonScenario.run();WaywardScenario.run();BountyScenario.run();}
+                    if(seed==0){v4Scenario();contentScenario();ashlightScenario();playtestScenario();tabletScenario();psychicWeaponAndDetectionScenario();HatchlingScenario.run();keepsakeScenario();TuningScenario.run();ExpeditionScenario.run();HorrorScenario.run();PlaytestPolishScenario.run();ScribingRoomsScenario.spellguard();ScribingRoomsScenario.scribing();ScribingRoomsScenario.elementalRooms();DoubloonScenario.run();WaywardScenario.run();BountyScenario.run();miningOreScenario();}
                     String line="PASS "+name+" seed="+seed+" floor=6 save/load=ok";
                     System.out.println(line); log.println(line);
                 } catch(Throwable error) {
@@ -653,6 +653,78 @@ public class SmokeRun {
         for(Class<?> kind:new Class<?>[]{com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfNecrosis.class,com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfGravity.class,com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBone.class}){int index=Arrays.asList(Generator.Category.WAND.classes).indexOf(kind);check(index>=0&&Generator.Category.WAND.defaultProbs[index]==3,"New wand generator weight");}
         check(Arrays.asList(Weapon.Enchantment.curses).contains(com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Echo.class)&&Arrays.asList(Armor.Glyph.curses).contains(com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering.class),"New curse pools");
         System.out.println("PASS CONTENT "+h.heroClass+": curses, healing, three scythes, armor/crown persistence, three wands, Soulfire recipe/immunity, Hourglass charge/upgrade/refund/save, cursed mob/drop, Hexcaster and Chainwarden");
+    }
+    private static void miningOreScenario() throws Exception {
+        com.watabou.utils.Bundle quest = new Bundle();
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.storeInBundle(quest);
+        long seed = Dungeon.seed;
+        int depth = Dungeon.depth, branch = Dungeon.branch;
+        Level original = Dungeon.level;
+        int minimum = Integer.MAX_VALUE, maximum = 0, buried = 0, invalidSecretRooms = 0;
+        try {
+            Dungeon.depth = 12; Dungeon.branch = 1;
+            for (int type = 1; type <= 2; type++) for (int sample = 0; sample < 104; sample++) {
+                Dungeon.seed = sample < 100 ? sample : 4507775544315L;
+                Dungeon.depth = sample < 100 ? 12 : sample - 89;
+                Bundle state = new Bundle(), node = new Bundle();
+                node.put("spawned", true); node.put("type", type); state.put("blacksmith", node);
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.restoreFromBundle(state);
+                Level mine = new com.shatteredpixel.shatteredpixeldungeon.levels.MiningLevel();
+                mine.create();
+                int ore = 0, levelBuried = 0, sideFacing = 0;
+                for (int cell = 0; cell < mine.length(); cell++) if (mine.map[cell] == Terrain.WALL_DECO) {
+                    check(mine.insideMap(cell), "Mine ore outside diggable boundary: " + sample + "/" + type);
+                    ore++;
+                    if (!mine.discoverable[cell]) { buried++; levelBuried++; }
+                    if (com.shatteredpixel.shatteredpixeldungeon.tiles.DungeonTileSheet.wallStitcheable(mine.map[cell+mine.width()])) sideFacing++;
+                }
+                for (Heap heap : mine.heaps.valueList()) for (Item item : heap.items)
+                    if (item instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.DarkGold) ore += item.quantity();
+                check(ore >= 45 && ore <= 47, "Mine ore budget: " + sample + "/" + type + " has " + ore);
+                java.util.ArrayList<Integer> secretTotals = new java.util.ArrayList<>();
+                for (com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room room
+                        : ((com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel)mine).rooms()) {
+                    if (!(room instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.MineSecretRoom)) continue;
+                    int secretOre = 0;
+                    for (com.watabou.utils.Point point : room.getPoints()) {
+                        if (!room.inside(point)) continue;
+                        int cell = mine.pointToCell(point);
+                        if (mine.map[cell] == Terrain.WALL_DECO) secretOre++;
+                        Heap heap = mine.heaps.get(cell);
+                        if (heap != null) for (Item item : heap.items)
+                            if (item instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.DarkGold) secretOre += item.quantity();
+                    }
+                    secretTotals.add(secretOre);
+                    if (secretOre < 4 || secretOre > 5) invalidSecretRooms++;
+                }
+                check(secretTotals.size() == 2, "Mine must retain two treasure rooms");
+                if (sample >= 100) System.out.println("MINE REPORTED SEED: " + Dungeon.seed + "; type=" + type
+                        + "; depth=" + Dungeon.depth + "; total=" + ore + "; buried=" + levelBuried
+                        + "; side-facing=" + sideFacing + "; secret rooms=" + secretTotals);
+                if (sample >= 100) {
+                    Bundle stored = new Bundle(); stored.put("mine", mine);
+                    Level restored = (Level)stored.get("mine");
+                    check(Arrays.equals(mine.map, restored.map), "Mine reload changes ore terrain");
+                    int restoredHeaps = 0, originalHeaps = 0;
+                    for (Heap heap : mine.heaps.valueList()) for (Item item : heap.items)
+                        if (item instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.DarkGold) originalHeaps += item.quantity();
+                    for (Heap heap : restored.heaps.valueList()) for (Item item : heap.items)
+                        if (item instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.DarkGold) restoredHeaps += item.quantity();
+                    check(originalHeaps == restoredHeaps, "Mine reload changes ore heaps");
+                }
+                minimum = Math.min(minimum, ore); maximum = Math.max(maximum, ore);
+            }
+            check(invalidSecretRooms == 0, "Mine secret-room deposits overwritten: " + invalidSecretRooms + " rooms");
+            check(com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.foodPriority(
+                    new com.shatteredpixel.shatteredpixeldungeon.items.quest.DarkGold(), Dungeon.hero) < 0,
+                    "Hatchling must never eat dark ore");
+            System.out.println("PASS MINE ORE: crystal/gnoll 100 seeds each plus reported seed on floors 11-14; total=" + minimum + "-" + maximum
+                    + "; buried veins=" + buried + "; quest ore protected");
+        } finally {
+            Dungeon.seed = seed; Dungeon.depth = depth; Dungeon.branch = branch; Dungeon.level = original;
+            com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.restoreFromBundle(quest);
+            com.watabou.utils.PathFinder.setMapSize(original.width(), original.height());
+        }
     }
     private static void v4Scenario() throws Exception {
         // Exercise the merge boundary: actual City/Vault generation, serialized quest and

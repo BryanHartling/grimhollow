@@ -251,6 +251,13 @@ public class WndPlaytest extends Window {
         List<Entry> rows=new ArrayList<>();
         for(BalanceTuning.Key key:BalanceTuning.Key.values())if(key.group==group){
             String title=Messages.get(BalanceTuning.class,key.id());
+            if(key==BalanceTuning.Key.HORROR_WARNING_POPUP){
+                rows.add(new Entry(title+": "+key.display(BalanceTuning.configured(key)),()->changed(()->{
+                    int value=1-BalanceTuning.configured(key);
+                    if(atHome())BalanceTuning.setShared(key,value);else BalanceTuning.set(key,value);
+                },()->tuningGroup(group))));
+                continue;
+            }
             rows.add(new Entry(title+": "+key.display(BalanceTuning.configured(key)),()->number(title,
                     Messages.get(BalanceTuning.class,key.id()+"_desc")+"\n\n"+Messages.get(WndPlaytest.class,"tuning_default",key.display(key.baseline)),
                     BalanceTuning.configured(key),key.min,key.max,n->{if(atHome())BalanceTuning.setShared(key,n);else BalanceTuning.set(key,n);},()->tuningGroup(group))));

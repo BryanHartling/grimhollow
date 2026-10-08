@@ -1,3 +1,8 @@
+# Horror warning v1.29.8 - 2026-10-08
+
+- Removed the bronze screen-edge directional ambush indicator and its position callback. The warning popup, sound/log cue, interrupted queued actions and fresh-action response opportunity remain intact. Detection silhouettes and Horror behavior are unchanged.
+- Playtest > Balance tuning > Grimhollow enemies > Lurking Horror adds Show ambush popup: ON/OFF, default ON. It uses the existing device-wide persisted tuning profile and applies immediately. Only the ambush popup is optional: log warnings, sound, travel interruption and the fresh-action response barrier always remain. The floor-entry omen is unaffected.
+
 # Regional scenery and bounty crews v1.29.7 - 2026-10-07
 
 - Replaced retained boss-room gate/trap, City stairs/statue, skull stack and merchant-dais art with paintings packed into the existing layouts. The forge quenching trough no longer uses a well image; its water flag and forge mechanics remain unchanged.

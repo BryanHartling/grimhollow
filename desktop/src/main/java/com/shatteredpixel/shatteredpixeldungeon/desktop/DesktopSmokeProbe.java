@@ -44,6 +44,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror reviewHorror;
     private boolean[] horrorFov, horrorVisited, horrorMapped;
     private boolean horrorWarningCaptured;
+    private boolean horrorPopupToggleTested;
     private int expeditionStep, expeditionFrames, expeditionTown, expeditionExitAttempts;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.TreasureHunter expeditionHunter;
     private final boolean roomReview=Boolean.getBoolean("grimhollow.roomReview");
@@ -1840,11 +1841,21 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 2:
                 if(hero.HP!=horrorHealth || reviewHorror.phase()!=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.Phase.WARNING)
                     throw new AssertionError("Warning attacked before a fresh player action");
-                if(!horrorNoticeVisible())throw new AssertionError("Ambush HUD warning faded before the player responded");
+                String warningText=com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror.class,"warning");
+                if(com.shatteredpixel.shatteredpixeldungeon.utils.MessageHistory.snapshot().stream().noneMatch(line->line.contains(warningText)))
+                    throw new AssertionError("Ambush warning missing from log history");
+                if(!horrorPopupToggleTested){
+                    if(!horrorNoticeVisible())throw new AssertionError("Ambush HUD warning faded before the player responded");
+                    BalanceTuning.setShared(BalanceTuning.Key.HORROR_WARNING_POPUP,0);
+                    horrorPopupToggleTested=true;horrorStep--;break;
+                }
+                if(horrorNoticeVisible())throw new AssertionError("Disabled ambush popup still visible");
+                capture("horror-warning-popup-off");
                 pointerCell(horrorStart+2);break;
             case 3:
                 if(hero.HP!=horrorHealth || hero.pos!=horrorStart+2 || reviewHorror.shadowmelded())
                     throw new AssertionError("Fresh movement did not evade ambush");
+                BalanceTuning.setShared(BalanceTuning.Key.HORROR_WARNING_POPUP,1);
                 capture("horror-exposed");
                 reviewHorror.pos=hero.pos-5;reviewHorror.sprite.place(reviewHorror.pos);reviewHorror.rooted=true;
                 hero.viewDistance=2;
@@ -1892,9 +1903,20 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 Playtest.enable();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();break;
             case 10:if(!playtestClickPage("Lurking Horror"))horrorStep--;break;
             case 11:
+                if(!playtestClickPage("Show ambush popup: ON")){horrorStep--;break;}
+                break;
+            case 12:
+                BalanceTuning.loadShared();
+                if(BalanceTuning.get(BalanceTuning.Key.HORROR_WARNING_POPUP)!=0)throw new AssertionError("Popup OFF menu setting did not persist");
+                interfaceBounds();capture("horror-balance-popup-off");
+                if(!playtestClickPage("Show ambush popup: OFF")){horrorStep--;break;}
+                break;
+            case 13:
+                BalanceTuning.loadShared();
+                if(BalanceTuning.get(BalanceTuning.Key.HORROR_WARNING_POPUP)!=1)throw new AssertionError("Popup ON menu setting did not persist");
                 interfaceBounds();capture("horror-balance-tuning");closeReviewWindows();
                 if(!horrorWarningCaptured)throw new AssertionError("Warning evidence not captured");
-                System.out.println("TEST 60 NATIVE PASS: persistent ambush HUD, real pointer auto-travel interruption, fresh-action evasion, painted exposed sprite, entity-only Mind Vision, unknown-cell inspection, remains/loot and painted bone-wall lifetime inspection, balance menu; failures=0");
+                System.out.println("TEST 60 NATIVE PASS: persistent ambush HUD, optional popup OFF with retained log and fresh-action evasion, real pointer auto-travel interruption, painted exposed sprite, entity-only Mind Vision, unknown-cell inspection, remains/loot and painted bone-wall lifetime inspection, persisted ON/OFF balance-menu clicks; failures=0");
                 Gdx.app.exit();break;
         }
     }

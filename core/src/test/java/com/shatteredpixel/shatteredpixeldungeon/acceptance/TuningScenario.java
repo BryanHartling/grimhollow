@@ -32,7 +32,9 @@ final class TuningScenario {
     }
     static void run() throws Exception {
         BalanceTuning.reset();Playtest.reset();Dungeon.hero=null;Dungeon.level=null;
-        BalanceTuning.setShared(DENSITY,125);BalanceTuning.loadShared();
+        check(BalanceTuning.get(HORROR_WARNING_POPUP)==1&&HORROR_WARNING_POPUP.display(0).equals("OFF")&&HORROR_WARNING_POPUP.display(1).equals("ON"),"ambush popup defaults/display");
+        BalanceTuning.setShared(DENSITY,125);BalanceTuning.setShared(HORROR_WARNING_POPUP,0);BalanceTuning.loadShared();
+        check(BalanceTuning.get(HORROR_WARNING_POPUP)==0,"ambush popup shared persistence");
         check(BalanceTuning.configured(DENSITY)==125&&!Playtest.enabled()&&BalanceTuning.get(DENSITY)==125,"home settings must remain separate from tool access");
         boolean homeRejected=false;
         try{BalanceTuning.setShared(DENSITY,201);}catch(IllegalArgumentException expected){homeRejected=true;}
@@ -41,7 +43,7 @@ final class TuningScenario {
         homeRejected=false;try{BalanceTuning.setShared(GOLD,0);}catch(IllegalArgumentException expected){homeRejected=true;}
         check(homeRejected&&BalanceTuning.configured(GOLD)==100,"home item weights accepted an empty loot pool");
         Playtest.reset();check(!Playtest.enabled()&&Playtest.unranked()&&BalanceTuning.get(DENSITY)==125&&!Playtest.god(),"new run adopts tuning without enabling tools or God mode");
-        BalanceTuning.reset();Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        BalanceTuning.reset();check(BalanceTuning.get(HORROR_WARNING_POPUP)==1,"ambush popup reset default");Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);
         boolean rejected=false;try{BalanceTuning.set(CURSEBOUND,0);}catch(IllegalStateException expected){rejected=true;}
         check(rejected,"ordinary save accepted mutation");
         String standard=sequence();Playtest.enable();check(standard.equals(sequence()),"default tuning changes seeded generator/RNG");

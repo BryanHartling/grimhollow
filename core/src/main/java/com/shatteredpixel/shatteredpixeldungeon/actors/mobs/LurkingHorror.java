@@ -124,7 +124,6 @@ public class LurkingHorror extends Mob {
         Dungeon.hero.interrupt(); Dungeon.hero.lastAction=null;
         GLog.w(Messages.get(this, secondStrike?"warning_again":"warning"));
         Sample.INSTANCE.play(Assets.Sounds.MISS, .55f, .65f);
-        com.shatteredpixel.shatteredpixeldungeon.effects.HorrorSenseLayer.warn(pos);
     }
     public void announceArrival() {
         if (!omen && isAlive() && alignment==Alignment.ENEMY) {

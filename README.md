@@ -1,3 +1,9 @@
+# Horror warning - v1.29.8
+
+The bronze directional marker at the screen edge has been removed. Playtest > Balance tuning > Grimhollow enemies > Lurking Horror offers Show ambush popup: ON/OFF (default ON). This applies immediately and persists across games on this device. The warning text remains in the log and travel stops for a fresh response even when the popup is off.
+
+Windows: `desktop/build/windows/1.29.8/Grimhollow/Grimhollow.exe` (keep the entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk`.
+
 # Regional scenery and bounty crews - v1.29.7
 
 The floor-15 gate and pressure plates, City stairway and statues, Imp shop skulls/dais, and forge quenching trough now use painted assets. The Vault's arrival stairwell has its own artwork and correct texture-to-world scale. The Amulet celebration uses the full inventory painting.

@@ -32,7 +32,7 @@ public final class BalanceTuning {
         CAVERN_GOLD_WEIGHT(7,10,0,100), CAVERN_CONSUMABLE_WEIGHT(7,5,0,100),
         CAVERN_MAX_TIER(7,3,1,5), CAVERN_UPGRADES(7,0,0,3),
         HORROR_CHANCE(8,50,0,100), HORROR_DAMAGE(8,100,0,200), HORROR_EVASION(8,100,25,200),
-        HORROR_FLIGHT(8,100,25,200), HORROR_HEALING(8,25,0,25),
+        HORROR_FLIGHT(8,100,25,200), HORROR_HEALING(8,25,0,25), HORROR_WARNING_POPUP(8,1,0,1),
         CACHE_CHANCE(9,100,0,300), CACHE_FIRE_CHANCE(9,6,0,100), CACHE_WATER_CHANCE(9,5,0,100), CACHE_LIGHTNING_CHANCE(9,4,0,100),
         CACHE_LOOT(9,100,0,300), CACHE_FIRE_KEY(9,4,1,8), CACHE_WATER_KEY(9,5,1,8), CACHE_LIGHTNING_KEY(9,6,1,8),
         COIN_HEADS(10,50,0,70), COIN_ZERO_EXPIRY(10,2,1,10), COIN_CHARGE_TURNS(10,40,10,200),
@@ -61,7 +61,9 @@ public final class BalanceTuning {
             this.group=group;this.baseline=baseline;this.min=min;this.max=max;
         }
         public String id() { return name().toLowerCase(Locale.ROOT); }
-        public String display(int value) { boolean percentage = this != TIER_SHIFT && (group < 4 || this == EXPEDITION_CHANCE
+        public String display(int value) {
+            if(this==HORROR_WARNING_POPUP)return value==0?"OFF":"ON";
+            boolean percentage = this != TIER_SHIFT && (group < 4 || this == EXPEDITION_CHANCE
                     || this == DRAGON_DAMAGE || this == BROOD_DAMAGE || this == EXPEDITION_FALL_DAMAGE
                     || group==9 && (this==CACHE_CHANCE || this==CACHE_LOOT || name().endsWith("_CHANCE")) || this == HOARD_ARTIFACT || this == HOARD_TRINKET || group==8
                     || group==10 && this!=COIN_ZERO_EXPIRY && this!=COIN_CHARGE_TURNS && this!=COIN_GOLD_CHARGE && this!=COIN_SHOP_ROLLS

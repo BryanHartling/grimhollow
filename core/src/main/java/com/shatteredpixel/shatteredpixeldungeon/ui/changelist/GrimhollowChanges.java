@@ -20,7 +20,11 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.6","Cole waits at the Prison stairs.");
+        ChangeInfo r=release(list,"v1.29.7","Painted boss-room landmarks and bounty crews.");
+        note(r,Icons.DEPTH,"Dungeon landmarks","The Caves gate and trap plates, City stairway and statues, Imp shop skulls and dais, and blacksmith's quenching trough have painted artwork. The Vault arrival stairwell no longer borrows fragments of the Imp's pit.");
+        note(r,Icons.WARNING,"Bounty crews","Hunters patrol together and rally their crew when they spot their quarry. Armored hunters, bandits, and spellcasters have distinct appearances.");
+        note(r,Icons.GOLD,"The Amulet","Claiming the Amulet presents its full painted artwork, with the familiar choice to leave or return.");
+        r=release(list,"v1.29.6","Cole waits at the Prison stairs.");
         note(r,Icons.INFO,"Speak to Cole","After completing his Prison boss bounty, find Cole beside the stairs and speak to him to collect your payment and hear what comes next. His Wanted notice remains in your ranked run's Deeds.");
         r=release(list,"v1.29.5","The deeds and debts of a run, remembered.");
         note(r,Icons.JOURNAL,"Run history","Each ranked character has a Deeds tab: quest deliveries, the troll commission, the Imp's contract, dragon expedition outcomes and Cole's fate. Old runs without a recorded history say so.");

@@ -140,6 +140,7 @@ def outputs(world,features):
         tile=floor.copy();tile.alpha_composite(work.crop(box));put(smithy,index,tile)
     # The lower-right cell is a separate water-filled quenching basin, not a
     # third fragment of the anvil. Its gameplay water flag remains unchanged.
-    put(smithy,18,centered(panels('details.png')[3],(60,54)))
+    from regional_scenery import props
+    put(smithy,18,centered(props()[0],(60,54)))
     output[path]=smithy
     return output

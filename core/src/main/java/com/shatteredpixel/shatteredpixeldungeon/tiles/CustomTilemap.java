@@ -93,6 +93,7 @@ public abstract class CustomTilemap implements Bundlable {
 
 	public Tilemap create(){
 		if (vis != null && vis.alive) vis.killAndErase();
+		prepareTexture();
 		int frame = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.tileFrame(String.valueOf(texture));
 		vis = new Tilemap(texture, new TextureFilm( texture, frame, frame )){
 			{ cellSize(SIZE, SIZE); }
@@ -106,6 +107,15 @@ public abstract class CustomTilemap implements Bundlable {
 		vis.x = tileX*SIZE;
 		vis.y = tileY*SIZE;
 		return vis;
+	}
+	protected void prepareTexture(){
+		if(com.shatteredpixel.shatteredpixeldungeon.Assets.Environment.CAVES_BOSS.equals(texture)
+				||com.shatteredpixel.shatteredpixeldungeon.Assets.Environment.CITY_BOSS.equals(texture)
+				||com.shatteredpixel.shatteredpixeldungeon.Assets.Environment.CITY_QUEST.equals(texture)
+				||com.shatteredpixel.shatteredpixeldungeon.Assets.Environment.CARPET.equals(texture)
+				||com.shatteredpixel.shatteredpixeldungeon.Assets.Environment.CAVES_QUEST.equals(texture))
+			com.watabou.gltextures.TextureCache.get(texture).filter(
+					com.badlogic.gdx.graphics.GL20.GL_LINEAR,com.badlogic.gdx.graphics.GL20.GL_LINEAR);
 	}
 
 	//TODO we need broader support for being able to alter terrain on custom tilemaps, this is a bit of a bandaid for DK fight changes atm.

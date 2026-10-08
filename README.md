@@ -1,3 +1,11 @@
+# Regional scenery and bounty crews - v1.29.7
+
+The floor-15 gate and pressure plates, City stairway and statues, Imp shop skulls/dais, and forge quenching trough now use painted assets. The Vault's arrival stairwell has its own artwork and correct texture-to-world scale. The Amulet celebration uses the full inventory painting.
+
+Bounty crews spawn in a tight group and share a patrol: the leader waits for stragglers and companions follow through ordinary pathfinding. Spotting or being attacked by their quarry alerts the crew. Armored hunters, bandits and spellcasters use distinct existing painted sprites, including after loading a save. Combat statistics and rewards are unchanged.
+
+Windows: `desktop/build/windows/1.29.7/Grimhollow/Grimhollow.exe` (keep the entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk`.
+
 # Cole's Prison stairs meeting - v1.29.6
 
 After completing an accepted Prison boss bounty, Cole waits beside the exit stairs. Speak to him to receive payment and the betrayal notice; killing the boss alone no longer opens a popup. He leaves when the conversation closes. Leaving or saving before speaking preserves the unpaid claim for your return, and the later office/Halls encounters retain their existing rules.

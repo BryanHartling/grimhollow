@@ -72,7 +72,10 @@ public class AmuletScene extends PixelScene {
 			text.maxWidth( PixelScene.landscape() ? 2*WIDTH-4 : WIDTH);
 		}
 		
-		amulet = new Image( Assets.Sprites.AMULET );
+		// Use the same full painting as the inventory's artwork viewer.
+		amulet = new Image( "artwork/item-" + ItemSpriteSheet.AMULET + ".png" );
+		amulet.texture.filter(com.badlogic.gdx.graphics.GL20.GL_LINEAR, com.badlogic.gdx.graphics.GL20.GL_LINEAR);
+		amulet.logicalSize(72, 72);
 		add( amulet );
 
 		btnExit = new StyledButton(Chrome.Type.GREY_BUTTON_TR, Messages.get(this, "exit") ) {
@@ -174,7 +177,7 @@ public class AmuletScene extends PixelScene {
 			timer = Random.Float( 0.5f, 5f );
 			
 			Speck star = (Speck)recycle( Speck.class );
-			star.reset( 0, amulet.x + 10.5f, amulet.y + 5.5f, Speck.DISCOVER );
+			star.reset( 0, amulet.x + amulet.width()*0.55f, amulet.y + amulet.height()*0.3f, Speck.DISCOVER );
 			add( star );
 		}
 	}

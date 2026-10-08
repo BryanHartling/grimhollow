@@ -418,7 +418,11 @@ public final class BountyBoard {
             rooms.computeIfAbsent((StandardRoom)((RegularLevel)level).room(cell),r->new java.util.ArrayList<>()).add(cell);
         java.util.ArrayList<java.util.ArrayList<Integer>> choices=new java.util.ArrayList<>();
         for(java.util.ArrayList<Integer> cells:rooms.values())if(cells.size()>=count)choices.add(cells);
-        return choices.isEmpty()?null:Random.element(choices);
+        if(choices.isEmpty())return null;
+        java.util.ArrayList<Integer> cells=Random.element(choices);
+        int anchor=Random.element(cells);
+        cells.sort(java.util.Comparator.comparingInt(cell->level.distance(anchor,cell)));
+        return new java.util.ArrayList<>(cells.subList(0,count));
     }
     public static void hunterDied(BountyHunter mob){
         if(!present||!betrayed||resolved||mob.crew<0||mob.crew>=3||Dungeon.branch!=0)return;

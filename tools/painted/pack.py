@@ -240,6 +240,8 @@ def outputs():
     from playtest_polish import outputs as playtest_polish
     result.update(playtest_polish())
     from artwork_previews import outputs as artwork_previews
+    from regional_scenery import outputs as regional_scenery
+    result.update(regional_scenery())
     result.update(artwork_previews())
     return result
 
@@ -260,8 +262,16 @@ def main():
     parser.add_argument('--polish',action='store_true',help='Package quest presentation and inspection exports; full --check remains the CI gate')
     parser.add_argument('--posters',action='store_true',help='Package wanted notices and inspection exports; full --check remains the CI gate')
     parser.add_argument('--wanted',action='store_true',help='Package named quarry skins, notices and inspection exports')
+    parser.add_argument('--regional',action='store_true',help='Package boss/quest scenery and inspection exports')
     args=parser.parse_args()
-    if args.wanted:
+    if args.regional:
+        from regional_scenery import outputs as regional_outputs
+        from quest_rooms import outputs as quest_outputs
+        from artwork_previews import outputs as previews
+        world={f'environment/tiles_{r}.png':Image.open(ASSETS/f'environment/tiles_{r}.png').convert('RGBA') for r in ['sewers','prison','caves','city','halls']}
+        features=Image.open(ASSETS/'environment/terrain_features.png').convert('RGBA')
+        built={**regional_outputs(),'environment/custom_tiles/caves_quest.png':quest_outputs(world,features)['environment/custom_tiles/caves_quest.png'],**previews()}
+    elif args.wanted:
         from wanted import outputs as wanted_outputs
         from bounty import poster_assets
         from artwork_previews import outputs as previews
@@ -300,7 +310,7 @@ def main():
     failures=[]
     sources={p.relative_to(HERE/'sources').as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((HERE/'sources').rglob('*.png'))}
     manifest={'base':BASE,'layout':LAYOUT,'source_sha256':sources,'assets':{}}
-    if args.hero or args.icons or args.wayward or args.mystery or args.previews or args.bounty or args.polish or args.posters or args.wanted:
+    if args.regional or args.hero or args.icons or args.wayward or args.mystery or args.previews or args.bounty or args.polish or args.posters or args.wanted:
         manifest['assets']=json.loads(MANIFEST.read_text(encoding='utf-8'))['assets']
     from monsters import sizes as monster_sizes
     fixed_monster_sizes=monster_sizes()
@@ -346,6 +356,10 @@ def main():
         if path in ('effects/painted_particles.png','effects/painted_specks.png','effects/painted_rays.png'):expected=(256,256)
         if path=='sprites/item_icons.png':expected=(512,256)
         if path=='environment/custom_tiles/caves_quest.png':expected=(256,512)
+        if path=='environment/custom_tiles/caves_boss.png':expected=(512,512)
+        if path=='environment/custom_tiles/city_boss.png':expected=(512,1024)
+        if path=='environment/custom_tiles/city_quest.png':expected=(1024,512)
+        if path=='environment/custom_tiles/carpet.png':expected=(1024,512)
         if path=='interfaces/boss_hp.png':expected=(512,256)
         if path=='interfaces/painted_depth.png':expected=(512,256)
         from expedition import SIZES
@@ -371,7 +385,7 @@ def main():
         else:
             target.parent.mkdir(parents=True,exist_ok=True)
             im.save(target,optimize=False)
-    if args.previews or args.polish or args.posters or args.wanted or not (args.hero or args.icons or args.wayward or args.mystery or args.bounty):
+    if args.regional or args.previews or args.polish or args.posters or args.wanted or not (args.hero or args.icons or args.wayward or args.mystery or args.bounty):
         from artwork_previews import index_bytes
         index_path=ASSETS/'artwork-previews.json'
         if args.check:

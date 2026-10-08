@@ -1,3 +1,7 @@
+# Regional scenery - v1.29.7
+
+`regional_scenery.py` packs the original built-in imagegen paintings in `sources/regional-v1297/` into the Caves/City boss and Imp quest atlas contracts. Exact prompts and GPL-3.0-or-later provenance are in `regional-v1297-prompts.json`. Gate and stairs are continuous paintings split across their existing footprints. Statue/prop cells carry genuine alpha, without inherited pixel backgrounds. `quest_rooms.py` uses the same authored rectangular quenching trough for the forge. `pack.py --regional` packages this component and inspection exports; the normal full offline provenance check remains required. CI requires neither generation nor Blender. Logical world cells remain sixteen units.
+
 # Artwork inspection - v1.27.0
 
 `artwork_previews.py` deterministically exports 1,128 256px inspection images from the existing paintings; `pack.py --previews` writes only `artwork/`, its rectangle lookup and the manifest. Full `python tools/recovery_assets.py --check` reconstructs **1,283 assets from 161 source sheets**, plus 55 launcher resources, and checks the lookup bytes. No image generation or Blender is needed. Existing source licenses and project GPL-3.0-or-later apply.

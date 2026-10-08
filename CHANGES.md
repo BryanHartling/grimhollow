@@ -1,3 +1,12 @@
+# Regional scenery and bounty crews v1.29.7 - 2026-10-07
+
+- Replaced retained boss-room gate/trap, City stairs/statue, skull stack and merchant-dais art with paintings packed into the existing layouts. The forge quenching trough no longer uses a well image; its water flag and forge mechanics remain unchanged.
+- Restored the Imp quest sheet's required sixteen-column contract: separate 5x5 entrance pit, 3x3 arrival stairs and barrier. Unused banner cells are transparent. The animated barrier now samples 64px frames in 16-unit world cells; painted quest/boss textures use linear filtering. No quest transitions change.
+- City carpets reuse the existing painted woven rug with connected borders. Their custom floor overrides no longer include duplicate legacy statue/step fragments; City pillars are assembled continuously across their original two-column footprint.
+- Bounty crew patrols follow a stable surviving leader and wait for stragglers. Members spawn together, share a detected quarry, retain ordinary movement/controls, and have armored, bandit and spellcaster skins by role. Existing stats, ammunition, healing, Warrants and rewards remain intact.
+- Amulet completion presents the same 256px painting used in artwork inspection at a readable 72-unit size, with painted sparkles. Leaving, continuing and rankings behavior is unchanged.
+- Original built-in imagegen sources/prompts and deterministic offline packing are retained under tools/painted; no generator or Blender is needed by CI. Physical tablet review remains NOT RUN; terrain contrast test 45 stays abandoned.
+
 # Cole's Prison stairs meeting v1.29.6 - 2026-10-07
 
 - Completing an accepted Prison boss bounty places Cole beside the exit without opening his betrayal notice or paying the claim. Speak to him to receive the existing payment, Wanted notice and betrayal dialogue; closing the conversation removes him. Waiting, leaving or reloading keeps the claim unpaid until that conversation. His office/Halls settlement and combat rules are unchanged.

@@ -1730,7 +1730,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         // Like InterlevelScene, generate with no live GameScene receiving map
         // callbacks for the outgoing floor; the next scene installs itself.
         questField(GameScene.class,"scene",null);
-        Dungeon.branch=kind==2||kind==3?1:0;Dungeon.depth=kind==0?8:kind==4?5:14;
+        Dungeon.branch=kind==2||kind==3||kind==7?1:0;
+        Dungeon.depth=kind==0?8:kind==4?5:kind==5?15:kind==6?20:kind==7?18:14;
         if(kind==0)questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Wandmaker.Quest.class,"type",2);
         if(kind==2||kind==3)questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.class,"type",kind==2?2:1);
         Level level=Dungeon.newLevel();
@@ -1748,6 +1749,12 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     center=map.tileX+map.tileW/2+(map.tileY+map.tileH/2)*level.width();
         } else if(kind==4){
             center=level.exit()+level.width();
+        } else if(kind==5){
+            center=14+15*level.width();
+        } else if(kind==6){
+            center=level.exit()+level.width();
+        } else if(kind==7){
+            center=level.entrance();
         } else {
             for(int cell=level.width();cell<level.length()-level.width();cell++)
                 if(level.map[cell]==Terrain.WALL_DECO && level.passable[cell+level.width()]){center=cell+level.width();break;}
@@ -2060,6 +2067,22 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }
     }
     private void roomTick(){
+        if(Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.AmuletScene&&roomStep==20){
+            if(++roomFrames%60!=0)return;
+            Image painting=(Image)RecoveryChecks.field(Game.scene(),"amulet");
+            if(painting.texture.width!=256||painting.width()!=72)throw new AssertionError("Legacy Amulet celebration");
+            if(painting.x<0||painting.y<0||painting.x+painting.width()>com.watabou.noosa.Camera.main.width
+                    ||painting.y+painting.height()>com.watabou.noosa.Camera.main.height)throw new AssertionError("Amulet painting outside viewport");
+            for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))
+                if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton){
+                    com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton button=(com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)child;
+                    if(button.left()<0||button.top()<0||button.right()>com.watabou.noosa.Camera.main.width||button.bottom()>com.watabou.noosa.Camera.main.height)
+                        throw new AssertionError("Amulet action outside viewport");
+                }
+            capture("painted-amulet-celebration");
+            System.out.println("REGIONAL SCENERY PASS: generated floor15 gate/traps and open refresh, floor20 stairs/skulls/dais, sixteen-column Vault arrival, 64-texture/16-world barrier, painted Amulet celebration; failures=0");
+            Gdx.app.exit();return;
+        }
         if(!(Game.scene() instanceof GameScene)||++roomFrames%60!=0)return;
         try {
             switch(roomStep++){
@@ -2162,9 +2185,59 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 case 14:
                     capture("rat-king-cushion");
                     System.out.println("PAINTED EXIT PASS: generated floor-five gateway, locked/open live cell refresh and Rat King cushion; failures=0");
-                    Gdx.app.exit();return;
+                    prepareRooms(5);switchNoFade(GameScene.class);break;
+                case 15:
+                    regionalAtlasCheck();capture("caves-boss-painted-gate-traps");
+                    // This presentation fixture skips the actual pylon fight.
+                    Blob.seed(Dungeon.hero.pos,1,com.shatteredpixel.shatteredpixeldungeon.levels.CavesBossLevel.PylonEnergy.class);
+                    ((com.shatteredpixel.shatteredpixeldungeon.levels.CavesBossLevel)Dungeon.level).unseal();
+                    GameScene.updateMap();break;
+                case 16:
+                    capture("caves-boss-painted-open-gate");prepareRooms(6);switchNoFade(GameScene.class);break;
+                case 17:
+                    regionalAtlasCheck();capture("city-boss-painted-stairs");
+                    questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.class,"completed",true);
+                    questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.class,"score",3000);
+                    ((com.shatteredpixel.shatteredpixeldungeon.levels.CityBossLevel)Dungeon.level).unseal();
+                    com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob shopkeeper=null;
+                    for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs)
+                        if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.ImpShopkeeper)shopkeeper=mob;
+                    if(shopkeeper==null)throw new AssertionError("Imp shop did not spawn after earned quest");
+                    Dungeon.hero.pos=shopkeeper.pos-Dungeon.level.width();Dungeon.hero.sprite.place(Dungeon.hero.pos);
+                    Dungeon.observe();
+                    com.watabou.noosa.Camera.main.snapTo(Dungeon.hero.sprite.center());break;
+                case 18:
+                    capture("imp-shop-painted-skulls-dais");prepareRooms(7);switchNoFade(GameScene.class);break;
+                case 19:
+                    regionalAtlasCheck();
+                    for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap tile:Dungeon.level.customTiles)
+                        if(tile instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultEntranceRoom.QuestEntranceInternal){
+                            com.watabou.noosa.Tilemap map=(com.watabou.noosa.Tilemap)RecoveryChecks.field(tile,"vis");
+                            Image middle=map.image(1,1);
+                            com.watabou.utils.RectF expected=new com.watabou.noosa.TextureFilm(Assets.Environment.CITY_QUEST,64,64).get(41);
+                            com.watabou.utils.RectF actual=middle.frame();
+                            if(actual.left!=expected.left||actual.top!=expected.top||actual.right!=expected.right||actual.bottom!=expected.bottom)
+                                throw new AssertionError("Vault arrival aliases Imp pit");middle.destroy();
+                        }
+                    capture("vault-painted-arrival");
+                    com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.AmbitiousImpRoom.EntranceBarrier barrier=new com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.AmbitiousImpRoom.EntranceBarrier();
+                    barrier.pos(Dungeon.hero.pos);com.watabou.noosa.Tilemap veil=barrier.create();
+                    Image part=veil.image(0,0);
+                    if(part.frame().width()*part.texture.width!=64 || ((Number)RecoveryChecks.field(veil,"cellW")).floatValue()!=16)throw new AssertionError("Imp barrier texture/world scale");
+                    part.destroy();veil.destroy();
+                    com.shatteredpixel.shatteredpixeldungeon.scenes.AmuletScene.noText=false;
+                    switchNoFade(com.shatteredpixel.shatteredpixeldungeon.scenes.AmuletScene.class);break;
             }
         } catch(ReflectiveOperationException error){throw new AssertionError(error);}
+    }
+    private void regionalAtlasCheck(){
+        for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap tile:Dungeon.level.customTiles){
+            Object path=RecoveryChecks.field(tile,"texture");
+            if(Assets.Environment.CAVES_BOSS.equals(path)||Assets.Environment.CITY_BOSS.equals(path)||Assets.Environment.CITY_QUEST.equals(path)){
+                com.watabou.noosa.Tilemap map=(com.watabou.noosa.Tilemap)RecoveryChecks.field(tile,"vis");
+                if(map==null||((Number)RecoveryChecks.field(map,"cellW")).floatValue()!=16)throw new AssertionError("Regional world scale");
+            }
+        }
     }
     private void sewerExitArtworkCheck(int index){
         boolean found=false;

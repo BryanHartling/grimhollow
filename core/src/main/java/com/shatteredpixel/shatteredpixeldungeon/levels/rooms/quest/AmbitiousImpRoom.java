@@ -203,6 +203,7 @@ public class AmbitiousImpRoom extends SpecialRoom {
 			Tilemap v = super.create();
 			int[] data = new int[tileW*tileH];
 			//up to five banners, which we place unless there's a door
+			java.util.Arrays.fill(data, -1);
 			int cell = tileX + Dungeon.level.width()*tileY;
 
 			if (!Dungeon.level.passable[cell+1]){
@@ -257,7 +258,10 @@ public class AmbitiousImpRoom extends SpecialRoom {
 		public Tilemap create() {
 			//largely a copy of super method, so that we can change alpha on update
 			if (vis != null && vis.alive) vis.killAndErase();
-			vis = new Tilemap(texture, new TextureFilm( texture, SIZE, SIZE )){
+			prepareTexture();
+			int frame = com.shatteredpixel.shatteredpixeldungeon.GameGeometry.tileFrame(String.valueOf(texture));
+			vis = new Tilemap(texture, new TextureFilm( texture, frame, frame )){
+				{ cellSize(SIZE, SIZE); }
 				@Override
 				protected NoosaScript script() {
 					//allow lighting for custom tilemaps

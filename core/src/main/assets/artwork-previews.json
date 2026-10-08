@@ -10,6 +10,2372 @@
       ]
     }
   ],
+  "environment/custom_tiles/carpet.png": [
+    {
+      "file": "artwork/carpet-0.png",
+      "rect": [
+        0,
+        0,
+        64,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-1.png",
+      "rect": [
+        64,
+        0,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-2.png",
+      "rect": [
+        128,
+        0,
+        192,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-3.png",
+      "rect": [
+        192,
+        0,
+        256,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-4.png",
+      "rect": [
+        256,
+        0,
+        320,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-5.png",
+      "rect": [
+        320,
+        0,
+        384,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-6.png",
+      "rect": [
+        384,
+        0,
+        448,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-7.png",
+      "rect": [
+        448,
+        0,
+        512,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-8.png",
+      "rect": [
+        512,
+        0,
+        576,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-9.png",
+      "rect": [
+        576,
+        0,
+        640,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-10.png",
+      "rect": [
+        640,
+        0,
+        704,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-11.png",
+      "rect": [
+        704,
+        0,
+        768,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-12.png",
+      "rect": [
+        768,
+        0,
+        832,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-13.png",
+      "rect": [
+        832,
+        0,
+        896,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-14.png",
+      "rect": [
+        896,
+        0,
+        960,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-15.png",
+      "rect": [
+        960,
+        0,
+        1024,
+        64
+      ]
+    },
+    {
+      "file": "artwork/carpet-16.png",
+      "rect": [
+        0,
+        64,
+        64,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-17.png",
+      "rect": [
+        64,
+        64,
+        128,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-18.png",
+      "rect": [
+        128,
+        64,
+        192,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-19.png",
+      "rect": [
+        192,
+        64,
+        256,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-20.png",
+      "rect": [
+        256,
+        64,
+        320,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-21.png",
+      "rect": [
+        320,
+        64,
+        384,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-22.png",
+      "rect": [
+        384,
+        64,
+        448,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-23.png",
+      "rect": [
+        448,
+        64,
+        512,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-24.png",
+      "rect": [
+        512,
+        64,
+        576,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-25.png",
+      "rect": [
+        576,
+        64,
+        640,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-26.png",
+      "rect": [
+        640,
+        64,
+        704,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-27.png",
+      "rect": [
+        704,
+        64,
+        768,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-28.png",
+      "rect": [
+        768,
+        64,
+        832,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-29.png",
+      "rect": [
+        832,
+        64,
+        896,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-30.png",
+      "rect": [
+        896,
+        64,
+        960,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-31.png",
+      "rect": [
+        960,
+        64,
+        1024,
+        128
+      ]
+    },
+    {
+      "file": "artwork/carpet-32.png",
+      "rect": [
+        0,
+        128,
+        64,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-33.png",
+      "rect": [
+        64,
+        128,
+        128,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-34.png",
+      "rect": [
+        128,
+        128,
+        192,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-35.png",
+      "rect": [
+        192,
+        128,
+        256,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-36.png",
+      "rect": [
+        256,
+        128,
+        320,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-37.png",
+      "rect": [
+        320,
+        128,
+        384,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-38.png",
+      "rect": [
+        384,
+        128,
+        448,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-39.png",
+      "rect": [
+        448,
+        128,
+        512,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-40.png",
+      "rect": [
+        512,
+        128,
+        576,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-41.png",
+      "rect": [
+        576,
+        128,
+        640,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-42.png",
+      "rect": [
+        640,
+        128,
+        704,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-43.png",
+      "rect": [
+        704,
+        128,
+        768,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-44.png",
+      "rect": [
+        768,
+        128,
+        832,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-45.png",
+      "rect": [
+        832,
+        128,
+        896,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-46.png",
+      "rect": [
+        896,
+        128,
+        960,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-47.png",
+      "rect": [
+        960,
+        128,
+        1024,
+        192
+      ]
+    },
+    {
+      "file": "artwork/carpet-48.png",
+      "rect": [
+        0,
+        192,
+        64,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-49.png",
+      "rect": [
+        64,
+        192,
+        128,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-50.png",
+      "rect": [
+        128,
+        192,
+        192,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-51.png",
+      "rect": [
+        192,
+        192,
+        256,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-52.png",
+      "rect": [
+        256,
+        192,
+        320,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-53.png",
+      "rect": [
+        320,
+        192,
+        384,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-54.png",
+      "rect": [
+        384,
+        192,
+        448,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-55.png",
+      "rect": [
+        448,
+        192,
+        512,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-56.png",
+      "rect": [
+        512,
+        192,
+        576,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-57.png",
+      "rect": [
+        576,
+        192,
+        640,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-58.png",
+      "rect": [
+        640,
+        192,
+        704,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-59.png",
+      "rect": [
+        704,
+        192,
+        768,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-60.png",
+      "rect": [
+        768,
+        192,
+        832,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-61.png",
+      "rect": [
+        832,
+        192,
+        896,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-62.png",
+      "rect": [
+        896,
+        192,
+        960,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-63.png",
+      "rect": [
+        960,
+        192,
+        1024,
+        256
+      ]
+    },
+    {
+      "file": "artwork/carpet-64.png",
+      "rect": [
+        0,
+        256,
+        64,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-65.png",
+      "rect": [
+        64,
+        256,
+        128,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-66.png",
+      "rect": [
+        128,
+        256,
+        192,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-67.png",
+      "rect": [
+        192,
+        256,
+        256,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-68.png",
+      "rect": [
+        256,
+        256,
+        320,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-69.png",
+      "rect": [
+        320,
+        256,
+        384,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-70.png",
+      "rect": [
+        384,
+        256,
+        448,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-71.png",
+      "rect": [
+        448,
+        256,
+        512,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-72.png",
+      "rect": [
+        512,
+        256,
+        576,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-73.png",
+      "rect": [
+        576,
+        256,
+        640,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-74.png",
+      "rect": [
+        640,
+        256,
+        704,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-75.png",
+      "rect": [
+        704,
+        256,
+        768,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-76.png",
+      "rect": [
+        768,
+        256,
+        832,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-77.png",
+      "rect": [
+        832,
+        256,
+        896,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-78.png",
+      "rect": [
+        896,
+        256,
+        960,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-79.png",
+      "rect": [
+        960,
+        256,
+        1024,
+        320
+      ]
+    },
+    {
+      "file": "artwork/carpet-80.png",
+      "rect": [
+        0,
+        320,
+        64,
+        384
+      ]
+    },
+    {
+      "file": "artwork/carpet-81.png",
+      "rect": [
+        64,
+        320,
+        128,
+        384
+      ]
+    },
+    {
+      "file": "artwork/carpet-82.png",
+      "rect": [
+        128,
+        320,
+        192,
+        384
+      ]
+    },
+    {
+      "file": "artwork/carpet-83.png",
+      "rect": [
+        192,
+        320,
+        256,
+        384
+      ]
+    },
+    {
+      "file": "artwork/carpet-84.png",
+      "rect": [
+        256,
+        320,
+        320,
+        384
+      ]
+    },
+    {
+      "file": "artwork/carpet-85.png",
+      "rect": [
+        320,
+        320,
+        384,
+        384
+      ]
+    },
+    {
+      "file": "artwork/carpet-86.png",
+      "rect": [
+        384,
+        320,
+        448,
+        384
+      ]
+    },
+    {
+      "file": "artwork/carpet-87.png",
+      "rect": [
+        448,
+        320,
+        512,
+        384
+      ]
+    },
+    {
+      "file": "artwork/carpet-88.png",
+      "rect": [
+        512,
+        320,
+        576,
+        384
+      ]
+    }
+  ],
+  "environment/custom_tiles/caves_boss.png": [
+    {
+      "file": "artwork/caves_boss-0.png",
+      "rect": [
+        0,
+        0,
+        64,
+        64
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-1.png",
+      "rect": [
+        64,
+        0,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-2.png",
+      "rect": [
+        128,
+        0,
+        192,
+        64
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-3.png",
+      "rect": [
+        192,
+        0,
+        256,
+        64
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-4.png",
+      "rect": [
+        256,
+        0,
+        320,
+        64
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-5.png",
+      "rect": [
+        320,
+        0,
+        384,
+        64
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-6.png",
+      "rect": [
+        384,
+        0,
+        448,
+        64
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-7.png",
+      "rect": [
+        448,
+        0,
+        512,
+        64
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-8.png",
+      "rect": [
+        0,
+        64,
+        64,
+        128
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-9.png",
+      "rect": [
+        64,
+        64,
+        128,
+        128
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-10.png",
+      "rect": [
+        128,
+        64,
+        192,
+        128
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-11.png",
+      "rect": [
+        192,
+        64,
+        256,
+        128
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-12.png",
+      "rect": [
+        256,
+        64,
+        320,
+        128
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-13.png",
+      "rect": [
+        320,
+        64,
+        384,
+        128
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-14.png",
+      "rect": [
+        384,
+        64,
+        448,
+        128
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-15.png",
+      "rect": [
+        448,
+        64,
+        512,
+        128
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-16.png",
+      "rect": [
+        0,
+        128,
+        64,
+        192
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-17.png",
+      "rect": [
+        64,
+        128,
+        128,
+        192
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-18.png",
+      "rect": [
+        128,
+        128,
+        192,
+        192
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-19.png",
+      "rect": [
+        192,
+        128,
+        256,
+        192
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-20.png",
+      "rect": [
+        256,
+        128,
+        320,
+        192
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-21.png",
+      "rect": [
+        320,
+        128,
+        384,
+        192
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-22.png",
+      "rect": [
+        384,
+        128,
+        448,
+        192
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-23.png",
+      "rect": [
+        448,
+        128,
+        512,
+        192
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-24.png",
+      "rect": [
+        0,
+        192,
+        64,
+        256
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-25.png",
+      "rect": [
+        64,
+        192,
+        128,
+        256
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-26.png",
+      "rect": [
+        128,
+        192,
+        192,
+        256
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-27.png",
+      "rect": [
+        192,
+        192,
+        256,
+        256
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-28.png",
+      "rect": [
+        256,
+        192,
+        320,
+        256
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-29.png",
+      "rect": [
+        320,
+        192,
+        384,
+        256
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-30.png",
+      "rect": [
+        384,
+        192,
+        448,
+        256
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-31.png",
+      "rect": [
+        448,
+        192,
+        512,
+        256
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-32.png",
+      "rect": [
+        0,
+        256,
+        64,
+        320
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-36.png",
+      "rect": [
+        256,
+        256,
+        320,
+        320
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-37.png",
+      "rect": [
+        320,
+        256,
+        384,
+        320
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-38.png",
+      "rect": [
+        384,
+        256,
+        448,
+        320
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-40.png",
+      "rect": [
+        0,
+        320,
+        64,
+        384
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-41.png",
+      "rect": [
+        64,
+        320,
+        128,
+        384
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-42.png",
+      "rect": [
+        128,
+        320,
+        192,
+        384
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-43.png",
+      "rect": [
+        192,
+        320,
+        256,
+        384
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-44.png",
+      "rect": [
+        256,
+        320,
+        320,
+        384
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-45.png",
+      "rect": [
+        320,
+        320,
+        384,
+        384
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-46.png",
+      "rect": [
+        384,
+        320,
+        448,
+        384
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-47.png",
+      "rect": [
+        448,
+        320,
+        512,
+        384
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-53.png",
+      "rect": [
+        320,
+        384,
+        384,
+        448
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-54.png",
+      "rect": [
+        384,
+        384,
+        448,
+        448
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-55.png",
+      "rect": [
+        448,
+        384,
+        512,
+        448
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-61.png",
+      "rect": [
+        320,
+        448,
+        384,
+        512
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-62.png",
+      "rect": [
+        384,
+        448,
+        448,
+        512
+      ]
+    },
+    {
+      "file": "artwork/caves_boss-63.png",
+      "rect": [
+        448,
+        448,
+        512,
+        512
+      ]
+    }
+  ],
+  "environment/custom_tiles/city_boss.png": [
+    {
+      "file": "artwork/city_boss-34.png",
+      "rect": [
+        128,
+        256,
+        192,
+        320
+      ]
+    },
+    {
+      "file": "artwork/city_boss-35.png",
+      "rect": [
+        192,
+        256,
+        256,
+        320
+      ]
+    },
+    {
+      "file": "artwork/city_boss-36.png",
+      "rect": [
+        256,
+        256,
+        320,
+        320
+      ]
+    },
+    {
+      "file": "artwork/city_boss-41.png",
+      "rect": [
+        64,
+        320,
+        128,
+        384
+      ]
+    },
+    {
+      "file": "artwork/city_boss-42.png",
+      "rect": [
+        128,
+        320,
+        192,
+        384
+      ]
+    },
+    {
+      "file": "artwork/city_boss-43.png",
+      "rect": [
+        192,
+        320,
+        256,
+        384
+      ]
+    },
+    {
+      "file": "artwork/city_boss-44.png",
+      "rect": [
+        256,
+        320,
+        320,
+        384
+      ]
+    },
+    {
+      "file": "artwork/city_boss-45.png",
+      "rect": [
+        320,
+        320,
+        384,
+        384
+      ]
+    },
+    {
+      "file": "artwork/city_boss-49.png",
+      "rect": [
+        64,
+        384,
+        128,
+        448
+      ]
+    },
+    {
+      "file": "artwork/city_boss-50.png",
+      "rect": [
+        128,
+        384,
+        192,
+        448
+      ]
+    },
+    {
+      "file": "artwork/city_boss-51.png",
+      "rect": [
+        192,
+        384,
+        256,
+        448
+      ]
+    },
+    {
+      "file": "artwork/city_boss-52.png",
+      "rect": [
+        256,
+        384,
+        320,
+        448
+      ]
+    },
+    {
+      "file": "artwork/city_boss-53.png",
+      "rect": [
+        320,
+        384,
+        384,
+        448
+      ]
+    },
+    {
+      "file": "artwork/city_boss-55.png",
+      "rect": [
+        448,
+        384,
+        512,
+        448
+      ]
+    },
+    {
+      "file": "artwork/city_boss-57.png",
+      "rect": [
+        64,
+        448,
+        128,
+        512
+      ]
+    },
+    {
+      "file": "artwork/city_boss-58.png",
+      "rect": [
+        128,
+        448,
+        192,
+        512
+      ]
+    },
+    {
+      "file": "artwork/city_boss-59.png",
+      "rect": [
+        192,
+        448,
+        256,
+        512
+      ]
+    },
+    {
+      "file": "artwork/city_boss-60.png",
+      "rect": [
+        256,
+        448,
+        320,
+        512
+      ]
+    },
+    {
+      "file": "artwork/city_boss-61.png",
+      "rect": [
+        320,
+        448,
+        384,
+        512
+      ]
+    },
+    {
+      "file": "artwork/city_boss-63.png",
+      "rect": [
+        448,
+        448,
+        512,
+        512
+      ]
+    },
+    {
+      "file": "artwork/city_boss-64.png",
+      "rect": [
+        0,
+        512,
+        64,
+        576
+      ]
+    },
+    {
+      "file": "artwork/city_boss-65.png",
+      "rect": [
+        64,
+        512,
+        128,
+        576
+      ]
+    },
+    {
+      "file": "artwork/city_boss-66.png",
+      "rect": [
+        128,
+        512,
+        192,
+        576
+      ]
+    },
+    {
+      "file": "artwork/city_boss-67.png",
+      "rect": [
+        192,
+        512,
+        256,
+        576
+      ]
+    },
+    {
+      "file": "artwork/city_boss-68.png",
+      "rect": [
+        256,
+        512,
+        320,
+        576
+      ]
+    },
+    {
+      "file": "artwork/city_boss-69.png",
+      "rect": [
+        320,
+        512,
+        384,
+        576
+      ]
+    },
+    {
+      "file": "artwork/city_boss-70.png",
+      "rect": [
+        384,
+        512,
+        448,
+        576
+      ]
+    },
+    {
+      "file": "artwork/city_boss-71.png",
+      "rect": [
+        448,
+        512,
+        512,
+        576
+      ]
+    },
+    {
+      "file": "artwork/city_boss-72.png",
+      "rect": [
+        0,
+        576,
+        64,
+        640
+      ]
+    },
+    {
+      "file": "artwork/city_boss-73.png",
+      "rect": [
+        64,
+        576,
+        128,
+        640
+      ]
+    },
+    {
+      "file": "artwork/city_boss-74.png",
+      "rect": [
+        128,
+        576,
+        192,
+        640
+      ]
+    },
+    {
+      "file": "artwork/city_boss-75.png",
+      "rect": [
+        192,
+        576,
+        256,
+        640
+      ]
+    },
+    {
+      "file": "artwork/city_boss-76.png",
+      "rect": [
+        256,
+        576,
+        320,
+        640
+      ]
+    },
+    {
+      "file": "artwork/city_boss-77.png",
+      "rect": [
+        320,
+        576,
+        384,
+        640
+      ]
+    },
+    {
+      "file": "artwork/city_boss-78.png",
+      "rect": [
+        384,
+        576,
+        448,
+        640
+      ]
+    },
+    {
+      "file": "artwork/city_boss-79.png",
+      "rect": [
+        448,
+        576,
+        512,
+        640
+      ]
+    },
+    {
+      "file": "artwork/city_boss-80.png",
+      "rect": [
+        0,
+        640,
+        64,
+        704
+      ]
+    },
+    {
+      "file": "artwork/city_boss-81.png",
+      "rect": [
+        64,
+        640,
+        128,
+        704
+      ]
+    },
+    {
+      "file": "artwork/city_boss-82.png",
+      "rect": [
+        128,
+        640,
+        192,
+        704
+      ]
+    },
+    {
+      "file": "artwork/city_boss-83.png",
+      "rect": [
+        192,
+        640,
+        256,
+        704
+      ]
+    },
+    {
+      "file": "artwork/city_boss-84.png",
+      "rect": [
+        256,
+        640,
+        320,
+        704
+      ]
+    },
+    {
+      "file": "artwork/city_boss-85.png",
+      "rect": [
+        320,
+        640,
+        384,
+        704
+      ]
+    },
+    {
+      "file": "artwork/city_boss-86.png",
+      "rect": [
+        384,
+        640,
+        448,
+        704
+      ]
+    },
+    {
+      "file": "artwork/city_boss-87.png",
+      "rect": [
+        448,
+        640,
+        512,
+        704
+      ]
+    },
+    {
+      "file": "artwork/city_boss-88.png",
+      "rect": [
+        0,
+        704,
+        64,
+        768
+      ]
+    },
+    {
+      "file": "artwork/city_boss-89.png",
+      "rect": [
+        64,
+        704,
+        128,
+        768
+      ]
+    },
+    {
+      "file": "artwork/city_boss-90.png",
+      "rect": [
+        128,
+        704,
+        192,
+        768
+      ]
+    },
+    {
+      "file": "artwork/city_boss-91.png",
+      "rect": [
+        192,
+        704,
+        256,
+        768
+      ]
+    },
+    {
+      "file": "artwork/city_boss-92.png",
+      "rect": [
+        256,
+        704,
+        320,
+        768
+      ]
+    },
+    {
+      "file": "artwork/city_boss-93.png",
+      "rect": [
+        320,
+        704,
+        384,
+        768
+      ]
+    },
+    {
+      "file": "artwork/city_boss-94.png",
+      "rect": [
+        384,
+        704,
+        448,
+        768
+      ]
+    },
+    {
+      "file": "artwork/city_boss-95.png",
+      "rect": [
+        448,
+        704,
+        512,
+        768
+      ]
+    },
+    {
+      "file": "artwork/city_boss-96.png",
+      "rect": [
+        0,
+        768,
+        64,
+        832
+      ]
+    },
+    {
+      "file": "artwork/city_boss-97.png",
+      "rect": [
+        64,
+        768,
+        128,
+        832
+      ]
+    },
+    {
+      "file": "artwork/city_boss-98.png",
+      "rect": [
+        128,
+        768,
+        192,
+        832
+      ]
+    },
+    {
+      "file": "artwork/city_boss-99.png",
+      "rect": [
+        192,
+        768,
+        256,
+        832
+      ]
+    },
+    {
+      "file": "artwork/city_boss-100.png",
+      "rect": [
+        256,
+        768,
+        320,
+        832
+      ]
+    },
+    {
+      "file": "artwork/city_boss-101.png",
+      "rect": [
+        320,
+        768,
+        384,
+        832
+      ]
+    },
+    {
+      "file": "artwork/city_boss-102.png",
+      "rect": [
+        384,
+        768,
+        448,
+        832
+      ]
+    },
+    {
+      "file": "artwork/city_boss-103.png",
+      "rect": [
+        448,
+        768,
+        512,
+        832
+      ]
+    },
+    {
+      "file": "artwork/city_boss-104.png",
+      "rect": [
+        0,
+        832,
+        64,
+        896
+      ]
+    },
+    {
+      "file": "artwork/city_boss-105.png",
+      "rect": [
+        64,
+        832,
+        128,
+        896
+      ]
+    },
+    {
+      "file": "artwork/city_boss-106.png",
+      "rect": [
+        128,
+        832,
+        192,
+        896
+      ]
+    },
+    {
+      "file": "artwork/city_boss-107.png",
+      "rect": [
+        192,
+        832,
+        256,
+        896
+      ]
+    },
+    {
+      "file": "artwork/city_boss-108.png",
+      "rect": [
+        256,
+        832,
+        320,
+        896
+      ]
+    },
+    {
+      "file": "artwork/city_boss-109.png",
+      "rect": [
+        320,
+        832,
+        384,
+        896
+      ]
+    },
+    {
+      "file": "artwork/city_boss-110.png",
+      "rect": [
+        384,
+        832,
+        448,
+        896
+      ]
+    },
+    {
+      "file": "artwork/city_boss-111.png",
+      "rect": [
+        448,
+        832,
+        512,
+        896
+      ]
+    },
+    {
+      "file": "artwork/city_boss-112.png",
+      "rect": [
+        0,
+        896,
+        64,
+        960
+      ]
+    },
+    {
+      "file": "artwork/city_boss-113.png",
+      "rect": [
+        64,
+        896,
+        128,
+        960
+      ]
+    },
+    {
+      "file": "artwork/city_boss-114.png",
+      "rect": [
+        128,
+        896,
+        192,
+        960
+      ]
+    },
+    {
+      "file": "artwork/city_boss-115.png",
+      "rect": [
+        192,
+        896,
+        256,
+        960
+      ]
+    },
+    {
+      "file": "artwork/city_boss-117.png",
+      "rect": [
+        320,
+        896,
+        384,
+        960
+      ]
+    },
+    {
+      "file": "artwork/city_boss-118.png",
+      "rect": [
+        384,
+        896,
+        448,
+        960
+      ]
+    },
+    {
+      "file": "artwork/city_boss-119.png",
+      "rect": [
+        448,
+        896,
+        512,
+        960
+      ]
+    },
+    {
+      "file": "artwork/city_boss-120.png",
+      "rect": [
+        0,
+        960,
+        64,
+        1024
+      ]
+    },
+    {
+      "file": "artwork/city_boss-121.png",
+      "rect": [
+        64,
+        960,
+        128,
+        1024
+      ]
+    },
+    {
+      "file": "artwork/city_boss-122.png",
+      "rect": [
+        128,
+        960,
+        192,
+        1024
+      ]
+    },
+    {
+      "file": "artwork/city_boss-123.png",
+      "rect": [
+        192,
+        960,
+        256,
+        1024
+      ]
+    },
+    {
+      "file": "artwork/city_boss-124.png",
+      "rect": [
+        256,
+        960,
+        320,
+        1024
+      ]
+    },
+    {
+      "file": "artwork/city_boss-125.png",
+      "rect": [
+        320,
+        960,
+        384,
+        1024
+      ]
+    },
+    {
+      "file": "artwork/city_boss-126.png",
+      "rect": [
+        384,
+        960,
+        448,
+        1024
+      ]
+    },
+    {
+      "file": "artwork/city_boss-127.png",
+      "rect": [
+        448,
+        960,
+        512,
+        1024
+      ]
+    }
+  ],
+  "environment/custom_tiles/city_quest.png": [
+    {
+      "file": "artwork/city_quest-0.png",
+      "rect": [
+        0,
+        0,
+        64,
+        64
+      ]
+    },
+    {
+      "file": "artwork/city_quest-1.png",
+      "rect": [
+        64,
+        0,
+        128,
+        64
+      ]
+    },
+    {
+      "file": "artwork/city_quest-2.png",
+      "rect": [
+        128,
+        0,
+        192,
+        64
+      ]
+    },
+    {
+      "file": "artwork/city_quest-3.png",
+      "rect": [
+        192,
+        0,
+        256,
+        64
+      ]
+    },
+    {
+      "file": "artwork/city_quest-4.png",
+      "rect": [
+        256,
+        0,
+        320,
+        64
+      ]
+    },
+    {
+      "file": "artwork/city_quest-16.png",
+      "rect": [
+        0,
+        64,
+        64,
+        128
+      ]
+    },
+    {
+      "file": "artwork/city_quest-17.png",
+      "rect": [
+        64,
+        64,
+        128,
+        128
+      ]
+    },
+    {
+      "file": "artwork/city_quest-18.png",
+      "rect": [
+        128,
+        64,
+        192,
+        128
+      ]
+    },
+    {
+      "file": "artwork/city_quest-19.png",
+      "rect": [
+        192,
+        64,
+        256,
+        128
+      ]
+    },
+    {
+      "file": "artwork/city_quest-20.png",
+      "rect": [
+        256,
+        64,
+        320,
+        128
+      ]
+    },
+    {
+      "file": "artwork/city_quest-24.png",
+      "rect": [
+        512,
+        64,
+        576,
+        128
+      ]
+    },
+    {
+      "file": "artwork/city_quest-25.png",
+      "rect": [
+        576,
+        64,
+        640,
+        128
+      ]
+    },
+    {
+      "file": "artwork/city_quest-26.png",
+      "rect": [
+        640,
+        64,
+        704,
+        128
+      ]
+    },
+    {
+      "file": "artwork/city_quest-32.png",
+      "rect": [
+        0,
+        128,
+        64,
+        192
+      ]
+    },
+    {
+      "file": "artwork/city_quest-33.png",
+      "rect": [
+        64,
+        128,
+        128,
+        192
+      ]
+    },
+    {
+      "file": "artwork/city_quest-34.png",
+      "rect": [
+        128,
+        128,
+        192,
+        192
+      ]
+    },
+    {
+      "file": "artwork/city_quest-35.png",
+      "rect": [
+        192,
+        128,
+        256,
+        192
+      ]
+    },
+    {
+      "file": "artwork/city_quest-36.png",
+      "rect": [
+        256,
+        128,
+        320,
+        192
+      ]
+    },
+    {
+      "file": "artwork/city_quest-37.png",
+      "rect": [
+        320,
+        128,
+        384,
+        192
+      ]
+    },
+    {
+      "file": "artwork/city_quest-38.png",
+      "rect": [
+        384,
+        128,
+        448,
+        192
+      ]
+    },
+    {
+      "file": "artwork/city_quest-39.png",
+      "rect": [
+        448,
+        128,
+        512,
+        192
+      ]
+    },
+    {
+      "file": "artwork/city_quest-40.png",
+      "rect": [
+        512,
+        128,
+        576,
+        192
+      ]
+    },
+    {
+      "file": "artwork/city_quest-41.png",
+      "rect": [
+        576,
+        128,
+        640,
+        192
+      ]
+    },
+    {
+      "file": "artwork/city_quest-42.png",
+      "rect": [
+        640,
+        128,
+        704,
+        192
+      ]
+    },
+    {
+      "file": "artwork/city_quest-48.png",
+      "rect": [
+        0,
+        192,
+        64,
+        256
+      ]
+    },
+    {
+      "file": "artwork/city_quest-49.png",
+      "rect": [
+        64,
+        192,
+        128,
+        256
+      ]
+    },
+    {
+      "file": "artwork/city_quest-50.png",
+      "rect": [
+        128,
+        192,
+        192,
+        256
+      ]
+    },
+    {
+      "file": "artwork/city_quest-51.png",
+      "rect": [
+        192,
+        192,
+        256,
+        256
+      ]
+    },
+    {
+      "file": "artwork/city_quest-52.png",
+      "rect": [
+        256,
+        192,
+        320,
+        256
+      ]
+    },
+    {
+      "file": "artwork/city_quest-56.png",
+      "rect": [
+        512,
+        192,
+        576,
+        256
+      ]
+    },
+    {
+      "file": "artwork/city_quest-57.png",
+      "rect": [
+        576,
+        192,
+        640,
+        256
+      ]
+    },
+    {
+      "file": "artwork/city_quest-58.png",
+      "rect": [
+        640,
+        192,
+        704,
+        256
+      ]
+    },
+    {
+      "file": "artwork/city_quest-64.png",
+      "rect": [
+        0,
+        256,
+        64,
+        320
+      ]
+    },
+    {
+      "file": "artwork/city_quest-65.png",
+      "rect": [
+        64,
+        256,
+        128,
+        320
+      ]
+    },
+    {
+      "file": "artwork/city_quest-66.png",
+      "rect": [
+        128,
+        256,
+        192,
+        320
+      ]
+    },
+    {
+      "file": "artwork/city_quest-67.png",
+      "rect": [
+        192,
+        256,
+        256,
+        320
+      ]
+    },
+    {
+      "file": "artwork/city_quest-68.png",
+      "rect": [
+        256,
+        256,
+        320,
+        320
+      ]
+    },
+    {
+      "file": "artwork/city_quest-80.png",
+      "rect": [
+        0,
+        320,
+        64,
+        384
+      ]
+    },
+    {
+      "file": "artwork/city_quest-81.png",
+      "rect": [
+        64,
+        320,
+        128,
+        384
+      ]
+    },
+    {
+      "file": "artwork/city_quest-82.png",
+      "rect": [
+        128,
+        320,
+        192,
+        384
+      ]
+    }
+  ],
   "environment/custom_tiles/halls_special.png": [
     {
       "file": "artwork/halls_special-0.png",

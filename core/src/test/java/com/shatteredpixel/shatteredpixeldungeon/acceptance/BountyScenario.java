@@ -312,6 +312,47 @@ final class BountyScenario {
             for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)
                 if(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter){count++;check(!Dungeon.level.heroFOV[m.pos],"crew in sight");}
             check(count==(region==0?2:3)&&c.spawned&&!c.complete,"crew quota");
+            java.util.HashSet<Class<?>> appearances=new java.util.HashSet<>();
+            for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter hunter:c.members){
+                appearances.add(hunter.spriteClass);
+                for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter other:c.members)
+                    check(Dungeon.level.distance(hunter.pos,other.pos)<=4,"crew spawned scattered");
+                Bundle appearanceSave=new Bundle();appearanceSave.put("hunter",hunter);
+                check(((com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter)appearanceSave.get("hunter")).spriteClass==hunter.spriteClass,"role skin lost on reload");
+            }
+            check(appearances.size()==c.members.length,"crew roles share a skin");
+            // Isolate navigation from loot-producing grass/trap callbacks, which
+            // require a live GameScene and are covered by the native room fixture.
+            for(int cell=0;cell<Dungeon.level.length();cell++){
+                if(Dungeon.level.traps.get(cell)!=null)Level.set(cell,com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.INACTIVE_TRAP);
+                if(Dungeon.level.map[cell]==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.HIGH_GRASS
+                        ||Dungeon.level.map[cell]==com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.FURROWED_GRASS)
+                    Level.set(cell,com.shatteredpixel.shatteredpixeldungeon.levels.Terrain.GRASS);
+            }
+            Dungeon.level.traps.clear();Dungeon.level.plants.clear();
+            for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter hunter:c.members){
+                hunter.sprite=hunter.sprite();hunter.sprite.link(hunter);
+                hunter.fieldOfView=new boolean[Dungeon.level.length()];
+            }
+            int moves=0;
+            for(int turn=0;turn<40;turn++){
+                for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter hunter:c.members){
+                    boolean waits=false;
+                    if(hunter==c.members[0])for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter other:c.members)
+                        if(other!=hunter&&Dungeon.level.distance(hunter.pos,other.pos)>3)waits=true;
+                    int before=hunter.pos;hunter.WANDERING.act(false,false);if(hunter.pos!=before)moves++;
+                    check(Dungeon.level.passable[hunter.pos],"patrol entered blocked terrain");
+                    if(waits)check(hunter.pos==before,"patrol leader abandoned a straggler");
+                    if(hunter!=c.members[0]){
+                        Bundle patrolSave=new Bundle();hunter.storeInBundle(patrolSave);
+                        check(patrolSave.getInt("target")==c.members[0].pos,"companion wandered independently");
+                    }
+                }
+            }
+            check(moves>0,"crew patrol never moved");
+            c.members[0].aggro(Dungeon.hero);
+            for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter hunter:c.members)
+                check(hunter.state==hunter.HUNTING&&hunter.isTargeting(Dungeon.hero),"crew did not share quarry");
             c.members[0].HP-=5;c.members[0].ammunition=2;c.members[0].healed=true;
             Bundle save=new Bundle();BountyBoard.store(save);BountyBoard.restore(save);BountyBoard.arrive(Dungeon.level);
             c=BountyBoard.crews[region];int hp=c.members[0].HP;
@@ -321,7 +362,9 @@ final class BountyScenario {
             for(int i=0;i<c.members.length;i++){
                 com.shatteredpixel.shatteredpixeldungeon.actors.mobs.BountyHunter hunter=c.members[i];
                 Heap loot=Dungeon.level.drop(new com.shatteredpixel.shatteredpixeldungeon.items.food.Food(),hunter.pos);
-                loot.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite(loot);loot.sprite.link(loot);
+                loot.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite(loot){
+                    @Override public void drop(){} // Real heap contents, no water-ripple renderer in headless mode.
+                };loot.sprite.link(loot);
                 hunter.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.GuardSprite(){
                     @Override public com.watabou.noosa.particles.Emitter emitter(){return new com.watabou.noosa.particles.Emitter();}
                 };hunter.sprite.link(hunter);hunter.HP=0;hunter.die(Dungeon.hero);

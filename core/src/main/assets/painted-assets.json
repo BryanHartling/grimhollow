@@ -144,6 +144,9 @@
     "readability/badges.png": "a18a5d4c9981333c6f3e52b047b7b71a3466166c88b02cb607aa5c55f817c43d",
     "readability/details.png": "e1952de42e0da3695139107c8e5797e986aacf4324d14d3cc98a57727debd852",
     "region-props.png": "fcdfa9075ad79fe4e4755a242bbbe4cb29cd579c9d66ab6a6dfd004e3defecde",
+    "regional-v1297/gate.png": "90ff2303f9704f8fbf054f7c7262f9d7901d528775a1cef096e74a2beb609bb8",
+    "regional-v1297/props.png": "b71f3156f800cc0d6a7989b1f08953b8ff2f36bfa4163741453cdca7448310b5",
+    "regional-v1297/stairs.png": "db3ca64bdb7530ad7e546769ed282e7995f63793cdfb49ff2a9e99e0af15b83a",
     "regions/caves.png": "1461a60e3db9dbecdacf1cddfcda04d621ad2204f30344ff2a9e6780c51f2975",
     "regions/city.png": "7efcc49144076b848fb53f10c559588380810f3a5473861828abe0a3683f4222",
     "regions/halls.png": "ebcba7baef3c9b2e73517d057b0e88eefe2fd2421dee679e65c95109941f9bce",
@@ -9213,7 +9216,7 @@
         256,
         512
       ],
-      "rgba_sha256": "6e04973a6165debb1315eb50a6007b365cec405a1e5281152b7750349aff29ce"
+      "rgba_sha256": "3ef00e762b262ae44f8011a436f092b708db9299e46b1bbb9c027d75f11b70bf"
     },
     "sprites/expedition_dragon.png": {
       "size": [
@@ -9454,6 +9457,624 @@
       ],
       "rgba_sha256": "d24ff83b9e8ac20c9d85cbad7728d1369b6dbe1d8a1709dca4d2e802a5d859ce"
     },
+    "sprites/wanted_jack.png": {
+      "size": [
+        2048,
+        256
+      ],
+      "rgba_sha256": "f7f4e29e0bd3c161aad381904b39d9383935f59fe9db253d0f2519a6fb3a5f5c",
+      "logical_size": [
+        256,
+        32
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          96,
+          120
+        ],
+        [
+          96,
+          0,
+          192,
+          120
+        ],
+        [
+          192,
+          0,
+          288,
+          120
+        ],
+        [
+          288,
+          0,
+          384,
+          120
+        ],
+        [
+          384,
+          0,
+          480,
+          120
+        ],
+        [
+          480,
+          0,
+          576,
+          120
+        ],
+        [
+          576,
+          0,
+          672,
+          120
+        ],
+        [
+          672,
+          0,
+          768,
+          120
+        ],
+        [
+          768,
+          0,
+          864,
+          120
+        ],
+        [
+          864,
+          0,
+          960,
+          120
+        ],
+        [
+          960,
+          0,
+          1056,
+          120
+        ],
+        [
+          1056,
+          0,
+          1152,
+          120
+        ],
+        [
+          1152,
+          0,
+          1248,
+          120
+        ],
+        [
+          1248,
+          0,
+          1344,
+          120
+        ],
+        [
+          1344,
+          0,
+          1440,
+          120
+        ],
+        [
+          1440,
+          0,
+          1536,
+          120
+        ],
+        [
+          1536,
+          0,
+          1632,
+          120
+        ]
+      ],
+      "character": true
+    },
+    "sprites/wanted_nails.png": {
+      "size": [
+        2048,
+        256
+      ],
+      "rgba_sha256": "507ad4f9e055b8a10b25236e943158cdf1859fc99583733a767ef91a637e6009",
+      "logical_size": [
+        256,
+        32
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          96,
+          104
+        ],
+        [
+          96,
+          0,
+          192,
+          104
+        ],
+        [
+          192,
+          0,
+          288,
+          104
+        ],
+        [
+          288,
+          0,
+          384,
+          104
+        ],
+        [
+          384,
+          0,
+          480,
+          104
+        ],
+        [
+          480,
+          0,
+          576,
+          104
+        ],
+        [
+          576,
+          0,
+          672,
+          104
+        ],
+        [
+          672,
+          0,
+          768,
+          104
+        ],
+        [
+          768,
+          0,
+          864,
+          104
+        ],
+        [
+          864,
+          0,
+          960,
+          104
+        ],
+        [
+          960,
+          0,
+          1056,
+          104
+        ],
+        [
+          1056,
+          0,
+          1152,
+          104
+        ],
+        [
+          1152,
+          0,
+          1248,
+          104
+        ]
+      ],
+      "character": true
+    },
+    "sprites/wanted_voss.png": {
+      "size": [
+        2048,
+        128
+      ],
+      "rgba_sha256": "10b60df6ad4b3d60b0c8c1a2c1b93d5b2a8b4941711a9f5ced8edea6aa01ca07",
+      "logical_size": [
+        256,
+        16
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          96,
+          128
+        ],
+        [
+          96,
+          0,
+          192,
+          128
+        ],
+        [
+          192,
+          0,
+          288,
+          128
+        ],
+        [
+          288,
+          0,
+          384,
+          128
+        ],
+        [
+          384,
+          0,
+          480,
+          128
+        ],
+        [
+          480,
+          0,
+          576,
+          128
+        ],
+        [
+          576,
+          0,
+          672,
+          128
+        ],
+        [
+          672,
+          0,
+          768,
+          128
+        ],
+        [
+          768,
+          0,
+          864,
+          128
+        ],
+        [
+          864,
+          0,
+          960,
+          128
+        ],
+        [
+          960,
+          0,
+          1056,
+          128
+        ],
+        [
+          1056,
+          0,
+          1152,
+          128
+        ],
+        [
+          1152,
+          0,
+          1248,
+          128
+        ],
+        [
+          1248,
+          0,
+          1344,
+          128
+        ],
+        [
+          1344,
+          0,
+          1440,
+          128
+        ]
+      ],
+      "character": true
+    },
+    "sprites/wanted_widowmaker.png": {
+      "size": [
+        2048,
+        256
+      ],
+      "rgba_sha256": "3768ca04f77933479f5c25ea767ca66c08df3246447dc98118a553fec718c458",
+      "logical_size": [
+        256,
+        32
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          128,
+          112
+        ],
+        [
+          128,
+          0,
+          256,
+          112
+        ],
+        [
+          256,
+          0,
+          384,
+          112
+        ],
+        [
+          384,
+          0,
+          512,
+          112
+        ],
+        [
+          512,
+          0,
+          640,
+          112
+        ],
+        [
+          640,
+          0,
+          768,
+          112
+        ],
+        [
+          768,
+          0,
+          896,
+          112
+        ],
+        [
+          896,
+          0,
+          1024,
+          112
+        ],
+        [
+          1024,
+          0,
+          1152,
+          112
+        ],
+        [
+          1152,
+          0,
+          1280,
+          112
+        ],
+        [
+          1280,
+          0,
+          1408,
+          112
+        ],
+        [
+          1408,
+          0,
+          1536,
+          112
+        ],
+        [
+          1536,
+          0,
+          1664,
+          112
+        ],
+        [
+          1664,
+          0,
+          1792,
+          112
+        ],
+        [
+          1792,
+          0,
+          1920,
+          112
+        ],
+        [
+          1920,
+          0,
+          2048,
+          112
+        ]
+      ],
+      "character": true
+    },
+    "sprites/wanted_bone_clerk.png": {
+      "size": [
+        2048,
+        512
+      ],
+      "rgba_sha256": "1dd5fa04ef8a4f4bc31556953c326766c038d87116116a4be627add5c6962763",
+      "logical_size": [
+        256,
+        64
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          128,
+          128
+        ],
+        [
+          128,
+          0,
+          256,
+          128
+        ],
+        [
+          256,
+          0,
+          384,
+          128
+        ],
+        [
+          384,
+          0,
+          512,
+          128
+        ],
+        [
+          512,
+          0,
+          640,
+          128
+        ],
+        [
+          640,
+          0,
+          768,
+          128
+        ],
+        [
+          768,
+          0,
+          896,
+          128
+        ],
+        [
+          896,
+          0,
+          1024,
+          128
+        ],
+        [
+          1024,
+          0,
+          1152,
+          128
+        ],
+        [
+          1152,
+          0,
+          1280,
+          128
+        ],
+        [
+          1280,
+          0,
+          1408,
+          128
+        ],
+        [
+          1408,
+          0,
+          1536,
+          128
+        ],
+        [
+          1536,
+          0,
+          1664,
+          128
+        ]
+      ],
+      "character": true
+    },
+    "sprites/wanted_morcant.png": {
+      "size": [
+        2048,
+        128
+      ],
+      "rgba_sha256": "881d0b98e873db9dd39582223613530c4c8f193168590bbc3753a02aa697472a",
+      "logical_size": [
+        256,
+        16
+      ],
+      "painted_rects": [
+        [
+          0,
+          0,
+          96,
+          128
+        ],
+        [
+          96,
+          0,
+          192,
+          128
+        ],
+        [
+          192,
+          0,
+          288,
+          128
+        ],
+        [
+          288,
+          0,
+          384,
+          128
+        ],
+        [
+          384,
+          0,
+          480,
+          128
+        ],
+        [
+          480,
+          0,
+          576,
+          128
+        ],
+        [
+          576,
+          0,
+          672,
+          128
+        ],
+        [
+          672,
+          0,
+          768,
+          128
+        ],
+        [
+          768,
+          0,
+          864,
+          128
+        ],
+        [
+          864,
+          0,
+          960,
+          128
+        ],
+        [
+          960,
+          0,
+          1056,
+          128
+        ],
+        [
+          1056,
+          0,
+          1152,
+          128
+        ],
+        [
+          1152,
+          0,
+          1248,
+          128
+        ],
+        [
+          1248,
+          0,
+          1344,
+          128
+        ],
+        [
+          1344,
+          0,
+          1440,
+          128
+        ]
+      ],
+      "character": true
+    },
     "sprites/bounty_cole.png": {
       "size": [
         256,
@@ -9501,6 +10122,27 @@
       ],
       "rgba_sha256": "6754d95ec289a8d1126516969b55a32e08d82900132fb3c8cc6eff390f3c9c97"
     },
+    "interfaces/bounty_poster_seals.png": {
+      "size": [
+        768,
+        256
+      ],
+      "rgba_sha256": "781fcca4163ef3d2b307bd0bb43f3832e128554a146a448c03e149763c26afa6"
+    },
+    "interfaces/bounty_claimed.png": {
+      "size": [
+        1024,
+        384
+      ],
+      "rgba_sha256": "c69e729e8d20c3a687efb23c6d8b4e17c92a7d0d06f539957daa4e798bce9525"
+    },
+    "interfaces/bounty_parchment.png": {
+      "size": [
+        512,
+        768
+      ],
+      "rgba_sha256": "984c4b6fb51fa546ecf0fe9aefaac0623daa38eeb613bc2e8bb93f17ebdecd3f"
+    },
     "interfaces/bounty_seals.png": {
       "size": [
         192,
@@ -9522,13 +10164,6 @@
       ],
       "rgba_sha256": "cafb2fb1421782dd42c909c6d7282b7179a0c9cc4228477b8d483fc717c1776e"
     },
-    "interfaces/bounty_parchment.png": {
-      "size": [
-        512,
-        768
-      ],
-      "rgba_sha256": "984c4b6fb51fa546ecf0fe9aefaac0623daa38eeb613bc2e8bb93f17ebdecd3f"
-    },
     "effects/bloodmark.png": {
       "size": [
         64,
@@ -9536,12 +10171,47 @@
       ],
       "rgba_sha256": "4c93b79f4e49d056ef4e8f1b387db1d13d3be8102b5c14a05a757995ce7740bd"
     },
+    "interfaces/hero_icons.png": {
+      "size": [
+        512,
+        1024
+      ],
+      "rgba_sha256": "5c752b2e80c8fc0d2708d776bf6793ae28453819c1ce4a9aeabc0f0fd0242f8d"
+    },
     "interfaces/talent_icons.png": {
       "size": [
         1024,
         1024
       ],
       "rgba_sha256": "1feec957fc8404be6a81532656930e97f6efd32632cb5add433a4596fb8ad6ff"
+    },
+    "environment/custom_tiles/caves_boss.png": {
+      "size": [
+        512,
+        512
+      ],
+      "rgba_sha256": "b934d70da0ba7f4d65b95d54e0d4990f1aea3a162fba832009ef47c1da96a15d"
+    },
+    "environment/custom_tiles/city_boss.png": {
+      "size": [
+        512,
+        1024
+      ],
+      "rgba_sha256": "8308c3228a89aa4216050da23276e49c7320339ce8cf4f1f5a932d5d51d40cb3"
+    },
+    "environment/custom_tiles/city_quest.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "d51a0465414e9328d78cd083eac512f694bca1a1a952875b298278514ef68592"
+    },
+    "environment/custom_tiles/carpet.png": {
+      "size": [
+        1024,
+        512
+      ],
+      "rgba_sha256": "26fb07133b66f33411df82187fd0ef6eb45355d117d04221a8627a87176d59d2"
     },
     "artwork/item-0.png": {
       "size": [
@@ -12378,6 +13048,34 @@
       ],
       "rgba_sha256": "cde01d9a994dd665920178f656085030fa816c2007b6625814bbe4fa5841a924"
     },
+    "artwork/bounty-poster-7.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3be07ba902188548bedc3ad048182388a884fdf0a4a40c4f3056467560ab72b3"
+    },
+    "artwork/bounty-seal-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b66778fe696d498e43dcc51608b16e6319aa5f3f11e227551e885276bb21e23c"
+    },
+    "artwork/bounty-seal-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "adc80abafc6f03c0ac739b7b6cea4bcba5e62484a860ff3069244be9dc7e6b7b"
+    },
+    "artwork/bounty-seal-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c3bbafcdfefceef8e2212903286498d1d0ba7f5914a94d9502e5b2cb62ec58c2"
+    },
     "artwork/talent-0.png": {
       "size": [
         256,
@@ -13540,6 +14238,650 @@
       ],
       "rgba_sha256": "54d98b7356d7ce08430b92e07b7087dd9df6ebfe9c05a475b41edfa6e3cb5b49"
     },
+    "artwork/hero-symbol-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "1cbc8aa8eda4f1bc955ec4ad918b09c8dcf2f829f8ea9bcae432006f2067e51a"
+    },
+    "artwork/hero-symbol-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "83a9e81a44c0d38bc86116c5d27ceb27d1691ba00ca7f63d6d719cd2d6125d8c"
+    },
+    "artwork/hero-symbol-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3d632ef9ae2031d455ba8df616671c4fdb38dbaac9a5cf6c200845500b67cf44"
+    },
+    "artwork/hero-symbol-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "151f556c6b3a7d4ce1cd9bbdae981b4bd8b7dc044727d1271c2864606d575bba"
+    },
+    "artwork/hero-symbol-4.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "62fc146fab627f5163a59ca051725377bcdcc507af7f0e2434a5ec13aea3002b"
+    },
+    "artwork/hero-symbol-5.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4b8a316f11b7b4bad30440bc829974eaa14e8ed5701e27fde107f2571cfa2f66"
+    },
+    "artwork/hero-symbol-6.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7fd4c9a83b15423c099034066da9a293ebc2aee83e68f6d9cb4f300090e0772c"
+    },
+    "artwork/hero-symbol-7.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "61955b996879db5c6ce6766d2a8f7fa32ef15a3ad03fddeb9a33eb1a1ac3cb24"
+    },
+    "artwork/hero-symbol-8.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "273831abe9eba4e19cc248998089fb90a0b68b4d8aa1d76c567d25ece7128c20"
+    },
+    "artwork/hero-symbol-9.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c1e7061d451494713c11c765db12b1f4ac67ee37ed1a45b31185f2d11cfb65aa"
+    },
+    "artwork/hero-symbol-10.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3bdf411789d0f6e4274d5953143107f03b1388bbdca12ba35fc1fb90becbf111"
+    },
+    "artwork/hero-symbol-11.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "23ba09262c6a213a854b1febb3946bcb5044503680be7fb77c2021f654b4f822"
+    },
+    "artwork/hero-symbol-16.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "adcf473fb8343f0b71c57a059d23f29a675dcce1dc9794776da8e0493c371f84"
+    },
+    "artwork/hero-symbol-17.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "bc35224693e7610f789a30dce3563efa79c0586cf87b4c130a3f8a634e799114"
+    },
+    "artwork/hero-symbol-18.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "135da9e67a4bfb22e025d57c06fae97b033639c824bc3fcc118550488f2ce36f"
+    },
+    "artwork/hero-symbol-19.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "9b8b6d7f88ceaba7c0b2076af91694dd394cf372f4ad72fc5705f80037971c53"
+    },
+    "artwork/hero-symbol-20.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "9345ecba740f9e087f405638505150af488f4c6d3a0ca9679e363816fdaf9b29"
+    },
+    "artwork/hero-symbol-21.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6e30cf101b024c02a8342d8f4466c15cae0649d92c2d94b7974cf3a3b583d6cf"
+    },
+    "artwork/hero-symbol-22.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b034549c7d4a590c7b4f2aa15272dd64d3e28dae326242309c9253553a277345"
+    },
+    "artwork/hero-symbol-23.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d80647dc60c38ac530ddac2311826b19035206f53b0f88273caa64bf80c33a68"
+    },
+    "artwork/hero-symbol-24.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "2038587017fda4db831cc0fd5057528a9a85bf78e0cbbb10b223a7e73a13559e"
+    },
+    "artwork/hero-symbol-25.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7eeddf48e00569fce7c4696f08cc77588624633908cf1062520937e8ce2449c2"
+    },
+    "artwork/hero-symbol-26.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "2aa8f27ec1f7c31fb134752c56fdd39617be65c2e2dabcca3ca5f3fd62895b3e"
+    },
+    "artwork/hero-symbol-27.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c4efa09992a84265cb955d4f29ec55ecf8520a4c083c5833141c84074762440c"
+    },
+    "artwork/hero-symbol-28.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "65d5b165cfbe98c3aadefb177a17583cec63fe6334efe4b4e2444e8cb6ad52eb"
+    },
+    "artwork/hero-symbol-29.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "84ab875a8fe43ecbe16f4634890a70004d4036059d24f6e91b150393abe9b075"
+    },
+    "artwork/hero-symbol-30.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4595f5bd01750f839355822614752223bab8113477706e8d60302cbba7bbbeb0"
+    },
+    "artwork/hero-symbol-31.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5c7fd8310163b982ab16bf94441266d112a9dcb0e75a2b4dc247c5ceae55761d"
+    },
+    "artwork/hero-symbol-32.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "35db5baf42c75d3264abd4fecc03504a6cb0055cca7629b0d657ff9b3454d41a"
+    },
+    "artwork/hero-symbol-33.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "682b8b3682f9df22154ea86d6f9b306c79650cc98441f8d0897f29baff51b58d"
+    },
+    "artwork/hero-symbol-34.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "a1049f73174690bacf86366656c3ff249b9dbcae73ad0a063bffbe16436b6085"
+    },
+    "artwork/hero-symbol-40.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "0a88f2238506b32bf74ffdde4b788a2790a49075f81201c4736019cec770d5fe"
+    },
+    "artwork/hero-symbol-41.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3bdf411789d0f6e4274d5953143107f03b1388bbdca12ba35fc1fb90becbf111"
+    },
+    "artwork/hero-symbol-42.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4bd2195b70810755192f5274c5ee4791bb691f9c42b501750b2eaf9f43ddbd7f"
+    },
+    "artwork/hero-symbol-43.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d0e1250698bf2c0d08b054d3d5b895370b19bbc1ba0849d025c33f4cd684d03e"
+    },
+    "artwork/hero-symbol-44.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4bd2195b70810755192f5274c5ee4791bb691f9c42b501750b2eaf9f43ddbd7f"
+    },
+    "artwork/hero-symbol-45.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d0be0fce8cfd91f06ecdc0666ad8c691e062a0b6bfa71b0a4378ded5771affcf"
+    },
+    "artwork/hero-symbol-46.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ede5d981d7f4a67571d4d32465bd059e0cc46829e2dd6bc979f1148dc1cc4f6d"
+    },
+    "artwork/hero-symbol-47.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "347d1ad72fdbde05beb429efd9f369200d4587420c4fd2c040a1f937c79cc7d5"
+    },
+    "artwork/hero-symbol-48.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6d410c15cdbd8453a178c0ae36501c69ddbccc035fba59b2f7152ded2a5b436e"
+    },
+    "artwork/hero-symbol-49.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3e0668daf457ec7a36a10b4c5f49a07fe727808774e14aeea9fd585e81220c94"
+    },
+    "artwork/hero-symbol-50.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "0a88f2238506b32bf74ffdde4b788a2790a49075f81201c4736019cec770d5fe"
+    },
+    "artwork/hero-symbol-51.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3bdf411789d0f6e4274d5953143107f03b1388bbdca12ba35fc1fb90becbf111"
+    },
+    "artwork/hero-symbol-52.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d2816bcb4f5e93aada402f2053ee3b96a5993e64d873e4dc93e08b718bdf0330"
+    },
+    "artwork/hero-symbol-53.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "8bd2b8b71100e7323c1e386708c303910737c1429efad56f1baf87162686a2c9"
+    },
+    "artwork/hero-symbol-54.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "10b7ea2fdbe18af827dc8aec38a56c5da7bd6802722ee8fad3f138092c5bc5e9"
+    },
+    "artwork/hero-symbol-55.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "2c29d3fa062b9293088fd9604965dcd4c1908a687ad3bb511fb81e131b4f5709"
+    },
+    "artwork/hero-symbol-56.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "23ba09262c6a213a854b1febb3946bcb5044503680be7fb77c2021f654b4f822"
+    },
+    "artwork/hero-symbol-57.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4a2889f765f5a33f34ebafb7c23d6b8daa816f8c52298fd06092342e1bf32fd1"
+    },
+    "artwork/hero-symbol-58.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5c7fd8310163b982ab16bf94441266d112a9dcb0e75a2b4dc247c5ceae55761d"
+    },
+    "artwork/hero-symbol-59.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "10b7ea2fdbe18af827dc8aec38a56c5da7bd6802722ee8fad3f138092c5bc5e9"
+    },
+    "artwork/hero-symbol-60.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "794aa50a1877068c12ebdf2d6aeca2c79b85e37dcb3dcdacf64bda11f9e2ffc5"
+    },
+    "artwork/hero-symbol-61.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "35db5baf42c75d3264abd4fecc03504a6cb0055cca7629b0d657ff9b3454d41a"
+    },
+    "artwork/hero-symbol-62.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "81811a6137ec08e41a1742d2f8bc558cc2d5eb5426b725124ba86efb7765b5b8"
+    },
+    "artwork/hero-symbol-63.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ed45e2e0ea8b35bdc4d6a23b2329c2aed23a1a6aa9fd2c998fa71ecaff84f7fd"
+    },
+    "artwork/hero-symbol-64.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "682b8b3682f9df22154ea86d6f9b306c79650cc98441f8d0897f29baff51b58d"
+    },
+    "artwork/hero-symbol-65.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "22c2409ec9c21599d137a980ce7e29375e2c24bf8b919160474d4dfaaa80f295"
+    },
+    "artwork/hero-symbol-66.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "58f7c41cda84ad4d47b07addf4252b3b00532f43358ce15d8bbc5b794e2bf15d"
+    },
+    "artwork/hero-symbol-104.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "1cbc8aa8eda4f1bc955ec4ad918b09c8dcf2f829f8ea9bcae432006f2067e51a"
+    },
+    "artwork/hero-symbol-105.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "83a9e81a44c0d38bc86116c5d27ceb27d1691ba00ca7f63d6d719cd2d6125d8c"
+    },
+    "artwork/hero-symbol-106.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "62fc146fab627f5163a59ca051725377bcdcc507af7f0e2434a5ec13aea3002b"
+    },
+    "artwork/hero-symbol-107.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4b8a316f11b7b4bad30440bc829974eaa14e8ed5701e27fde107f2571cfa2f66"
+    },
+    "artwork/hero-symbol-108.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7fd4c9a83b15423c099034066da9a293ebc2aee83e68f6d9cb4f300090e0772c"
+    },
+    "artwork/hero-symbol-109.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "273831abe9eba4e19cc248998089fb90a0b68b4d8aa1d76c567d25ece7128c20"
+    },
+    "artwork/hero-symbol-110.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c1e7061d451494713c11c765db12b1f4ac67ee37ed1a45b31185f2d11cfb65aa"
+    },
+    "artwork/hero-symbol-72.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "0a88f2238506b32bf74ffdde4b788a2790a49075f81201c4736019cec770d5fe"
+    },
+    "artwork/hero-symbol-73.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3bdf411789d0f6e4274d5953143107f03b1388bbdca12ba35fc1fb90becbf111"
+    },
+    "artwork/hero-symbol-74.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4bd2195b70810755192f5274c5ee4791bb691f9c42b501750b2eaf9f43ddbd7f"
+    },
+    "artwork/hero-symbol-75.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d0e1250698bf2c0d08b054d3d5b895370b19bbc1ba0849d025c33f4cd684d03e"
+    },
+    "artwork/hero-symbol-76.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4bd2195b70810755192f5274c5ee4791bb691f9c42b501750b2eaf9f43ddbd7f"
+    },
+    "artwork/hero-symbol-77.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d0be0fce8cfd91f06ecdc0666ad8c691e062a0b6bfa71b0a4378ded5771affcf"
+    },
+    "artwork/hero-symbol-78.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ede5d981d7f4a67571d4d32465bd059e0cc46829e2dd6bc979f1148dc1cc4f6d"
+    },
+    "artwork/hero-symbol-79.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "347d1ad72fdbde05beb429efd9f369200d4587420c4fd2c040a1f937c79cc7d5"
+    },
+    "artwork/hero-symbol-80.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6d410c15cdbd8453a178c0ae36501c69ddbccc035fba59b2f7152ded2a5b436e"
+    },
+    "artwork/hero-symbol-81.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3e0668daf457ec7a36a10b4c5f49a07fe727808774e14aeea9fd585e81220c94"
+    },
+    "artwork/hero-symbol-82.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "0a88f2238506b32bf74ffdde4b788a2790a49075f81201c4736019cec770d5fe"
+    },
+    "artwork/hero-symbol-83.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3bdf411789d0f6e4274d5953143107f03b1388bbdca12ba35fc1fb90becbf111"
+    },
+    "artwork/hero-symbol-84.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d2816bcb4f5e93aada402f2053ee3b96a5993e64d873e4dc93e08b718bdf0330"
+    },
+    "artwork/hero-symbol-85.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "8bd2b8b71100e7323c1e386708c303910737c1429efad56f1baf87162686a2c9"
+    },
+    "artwork/hero-symbol-86.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "10b7ea2fdbe18af827dc8aec38a56c5da7bd6802722ee8fad3f138092c5bc5e9"
+    },
+    "artwork/hero-symbol-87.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "2c29d3fa062b9293088fd9604965dcd4c1908a687ad3bb511fb81e131b4f5709"
+    },
+    "artwork/hero-symbol-88.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "23ba09262c6a213a854b1febb3946bcb5044503680be7fb77c2021f654b4f822"
+    },
+    "artwork/hero-symbol-89.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4a2889f765f5a33f34ebafb7c23d6b8daa816f8c52298fd06092342e1bf32fd1"
+    },
+    "artwork/hero-symbol-90.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5c7fd8310163b982ab16bf94441266d112a9dcb0e75a2b4dc247c5ceae55761d"
+    },
+    "artwork/hero-symbol-91.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "10b7ea2fdbe18af827dc8aec38a56c5da7bd6802722ee8fad3f138092c5bc5e9"
+    },
+    "artwork/hero-symbol-92.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "794aa50a1877068c12ebdf2d6aeca2c79b85e37dcb3dcdacf64bda11f9e2ffc5"
+    },
+    "artwork/hero-symbol-93.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "35db5baf42c75d3264abd4fecc03504a6cb0055cca7629b0d657ff9b3454d41a"
+    },
+    "artwork/hero-symbol-94.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "81811a6137ec08e41a1742d2f8bc558cc2d5eb5426b725124ba86efb7765b5b8"
+    },
+    "artwork/hero-symbol-95.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ed45e2e0ea8b35bdc4d6a23b2329c2aed23a1a6aa9fd2c998fa71ecaff84f7fd"
+    },
+    "artwork/hero-symbol-96.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "682b8b3682f9df22154ea86d6f9b306c79650cc98441f8d0897f29baff51b58d"
+    },
+    "artwork/hero-symbol-97.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "22c2409ec9c21599d137a980ce7e29375e2c24bf8b919160474d4dfaaa80f295"
+    },
+    "artwork/hero-symbol-98.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "58f7c41cda84ad4d47b07addf4252b3b00532f43358ce15d8bbc5b794e2bf15d"
+    },
     "artwork/bloodmark.png": {
       "size": [
         256,
@@ -14043,6 +15385,2008 @@
         256
       ],
       "rgba_sha256": "245762b602d556a4f48777aef00ab48c8a32a5f0531a08ad071958f5fc647f76"
+    },
+    "artwork/caves_boss-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d31eaf8a416750c1089a785356456ed21036abd4de6a1c45ae8fb1d3f9b05dcc"
+    },
+    "artwork/caves_boss-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "a5a0ad4c35af787de18ea95c40b5fbe18d082e3299a22b70ee7c4ce38cb66504"
+    },
+    "artwork/caves_boss-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e863219bdd5aa46230b745d623757d9e04c892b751a74a0d693da893d3718ecc"
+    },
+    "artwork/caves_boss-4.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-5.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-6.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b90c1f58477d4409b3e28f7a9ac3df1476170b21305496904a3a4c7110544a0f"
+    },
+    "artwork/caves_boss-7.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-8.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-9.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "1ced14c664e8131094a459d50533f5243e7ed248a5862dd37178ecf98df59175"
+    },
+    "artwork/caves_boss-10.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "646ffebf6a733e4bbeba85d70fe22fbf4367f2c926a8fba8242f871937686f07"
+    },
+    "artwork/caves_boss-11.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7dec2a5c230ef5cef75df980b3ec1e2771e08fb7eb140b23ab2ba7afa6e590d3"
+    },
+    "artwork/caves_boss-12.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-13.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-14.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b90c1f58477d4409b3e28f7a9ac3df1476170b21305496904a3a4c7110544a0f"
+    },
+    "artwork/caves_boss-15.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5531f565feac7c9cdfda8f9a5433ebac8ebb78322b43a0842533ffffcf59d198"
+    },
+    "artwork/caves_boss-16.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-17.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3a22b40a29d62856a750855b5c19f4c7807a0142514cba92897984cc5cd0371d"
+    },
+    "artwork/caves_boss-18.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-19.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3a22b40a29d62856a750855b5c19f4c7807a0142514cba92897984cc5cd0371d"
+    },
+    "artwork/caves_boss-20.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-21.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-22.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-23.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c2a6822e4402ed4704b39d6e590f5571c464519c9667ef5a63d77ef5cac6bb7c"
+    },
+    "artwork/caves_boss-24.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "f94271ebb2df76870208cdc003017ca74c96a7935b8838db72d350c886c2f1eb"
+    },
+    "artwork/caves_boss-25.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "28b544c6e84fe6172e53959c221c48481345e01633725aed1d42eace69444006"
+    },
+    "artwork/caves_boss-26.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-27.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4a4a0cc53a8af4b51309bec14298f862ef43981eea9536073c9934fdbf803115"
+    },
+    "artwork/caves_boss-28.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ca44140dccf3b3110121169b61a86bd89c167416ffa904cc9f6bbb961843471c"
+    },
+    "artwork/caves_boss-29.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-30.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3a22b40a29d62856a750855b5c19f4c7807a0142514cba92897984cc5cd0371d"
+    },
+    "artwork/caves_boss-31.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3a22b40a29d62856a750855b5c19f4c7807a0142514cba92897984cc5cd0371d"
+    },
+    "artwork/caves_boss-32.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e44eb8670e6c53781fee97b19cc2f0e4757d64930d599991014def5aa78e3ae4"
+    },
+    "artwork/caves_boss-36.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "f7f314da8581f7ae74e87398d447c8934508344841de81af9b62fcfe81aa96d5"
+    },
+    "artwork/caves_boss-37.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "168bac60aaa89dc6e4f949f1bc43c7d4a31af91b4c684e12389fe376dded4f20"
+    },
+    "artwork/caves_boss-38.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "bade71372ccd2c985fa1fe2102db502225544bf39ddcf54608587dfa43da84ca"
+    },
+    "artwork/caves_boss-40.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b3d6010d27a968a73497a2d7ad6650be331fd30eb8f68c4ca48ccce9da20225a"
+    },
+    "artwork/caves_boss-41.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5f30b75f202795d2728c4380edf344c7645c5552d0c7fe263eac1322aafacdbb"
+    },
+    "artwork/caves_boss-42.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "106ebe5362fac44c614473f12bf9485963a86d47c0c8ddd84a7ff8aa3ebfbcc3"
+    },
+    "artwork/caves_boss-43.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "bd391f93ad604a5e430ff2ed9b7c3d3b2311b87b4a79853548874e582c6a4eb6"
+    },
+    "artwork/caves_boss-44.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ff9b93dc2e9b40c9079c1179a990c2349f1135c7b2f5333bc7afbd9493d512cf"
+    },
+    "artwork/caves_boss-45.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-46.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-47.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-53.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-54.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-55.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-61.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-62.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/caves_boss-63.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "571e8e1bfd2d5cf3090f468031b023639540b76b7a7ed314c9f74723cec44bcc"
+    },
+    "artwork/city_boss-34.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "f7db409b4791b074aa94eec490e1c296992a08388c023b1ad7c0160fd389b379"
+    },
+    "artwork/city_boss-35.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3709896cdfd6c854082774f322b89d1e84f8f40f8cdd3d72ac75bce0d85baf82"
+    },
+    "artwork/city_boss-36.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "93d16bc19d20848914e5d16625510c836f2eccb93459f53f6c4c0448ed938579"
+    },
+    "artwork/city_boss-41.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "9c876d09e8ab2cff30c9c0eb6a0aa0d1cf964bc570537ce6cc37ba0b52f4c014"
+    },
+    "artwork/city_boss-42.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "14fca9baab6ec9853f74e52659056f7353531346dae6cef77e21c2db0bdead76"
+    },
+    "artwork/city_boss-43.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "074123c10d9c81bec384a2091144f9a4751257f7c3dce4c3308c12b2245c8fe0"
+    },
+    "artwork/city_boss-44.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b3fa284926e4565b736465bcf6095d572d6af393234f2c4410561562d69f5fc5"
+    },
+    "artwork/city_boss-45.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "436367ddecd7008053713be4642c218041e18d2adfaf9f3e288650f1b506ed66"
+    },
+    "artwork/city_boss-49.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6bd965c9f41305388116c5a86c2d636f9c9c8f24437af4f912d913062ff48bd2"
+    },
+    "artwork/city_boss-50.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b7cb46b329989caafbcb7fc04c973bf48767be61bf2c953e2f67d0b043db5dd3"
+    },
+    "artwork/city_boss-51.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "976df2b46bbbc7496549ab42260328a721b77d89b9ff288cd7ca564856fd306a"
+    },
+    "artwork/city_boss-52.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6d703afff9bd9e1c5f7a71a672a3275a4278d423f47ef5b83c4925fabda7f844"
+    },
+    "artwork/city_boss-53.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5e26f923dc95ba2a8bba33048eb633dfa90334c3c9557562a2e42baedb272be0"
+    },
+    "artwork/city_boss-55.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c64255428ac4e6c7907899bee165fc41ffd9af0b83341950325207d5f847931f"
+    },
+    "artwork/city_boss-57.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "83c0922de725c8412670cbfeee9ef69eb9dcc324d62b0e97e71a993a08444102"
+    },
+    "artwork/city_boss-58.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "bf4dc79d3c36aec37f3fae1898d98defe99fd2cb23bae540e7ad0d6adee38890"
+    },
+    "artwork/city_boss-59.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3bb014e45bd5af0c962407a9d2248b3ae9327136cc04626d18a30e94043f91b9"
+    },
+    "artwork/city_boss-60.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "72ff089981d11801b761a677aeb70dab61ec934cfd1a099b2bd9bde94f7cf2d3"
+    },
+    "artwork/city_boss-61.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "dbf16cab27244cf7d36b1b8591148063e5f053d6f49b01fe9233e7b6418ef1f0"
+    },
+    "artwork/city_boss-63.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5c59463c3888a7c5e0bb34893729a64437b615445408677ec9dafe7f64c3d1cd"
+    },
+    "artwork/city_boss-64.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "a9e1bf2dc927f5c2ed7f46e88da97963e16f8e5452b2ad47323df4a1207b670e"
+    },
+    "artwork/city_boss-65.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "f2c0657af5c6e729615836b703dbeab66eba23d2827bdd23e732f77c9329cd92"
+    },
+    "artwork/city_boss-66.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "65c28334c0b2ecb1fabe7a8a4e52a6919ce0d1059135af93ee9de249162e93a1"
+    },
+    "artwork/city_boss-67.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "8bfcf8892c0f32bffbb04745538a9cf031dd84932fcbb805fe02c7b47ad75526"
+    },
+    "artwork/city_boss-68.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e76950264de9a5e34b30e1b9187638919b141cf4097f12b17c34bde20362ad90"
+    },
+    "artwork/city_boss-69.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "623e0cf5d88514c39326c6a44781c92a495ae58882ff0e986ea4a783bf561de7"
+    },
+    "artwork/city_boss-70.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "1d4a4feceb08f7df9e8da765b631379b750728d75d20233e538fc82e779777f9"
+    },
+    "artwork/city_boss-71.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "9f1b31aa6c85b28958e75999b5d3c36585f95e018bab7947c0eb689625b07e1d"
+    },
+    "artwork/city_boss-72.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "33bb99aca7c713bab65ad452a0852841c590d90747eda94455dd1401672ed439"
+    },
+    "artwork/city_boss-73.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "2794e6e0a9b34722c27692f0eb951e87790382bd9a6f8dabb615ec9e262b126e"
+    },
+    "artwork/city_boss-74.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "2ae2b8d64331f53073dd51f9eb04d814bbd60f4360b9d644c3c5702130a77a55"
+    },
+    "artwork/city_boss-75.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "0e221d357879fc73985895c62f29bc17e58a2723794f14640eb9697c5feeca5d"
+    },
+    "artwork/city_boss-76.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "8a04b9b7fc685f877ed316d8a5ffd789a146980aa4f212cef5469803adeb2e35"
+    },
+    "artwork/city_boss-77.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "98d7ad2d0abe2e3c6e9462c9f94342004946dd222b22a77c800f4cf8d455d764"
+    },
+    "artwork/city_boss-78.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "49f6ca9255579a93c032e3c7496eaa794e1b8f7dc1236456c17ed035ab295ed8"
+    },
+    "artwork/city_boss-79.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "00c4e2bebde91e7018c02f29faa87e82567f38608e2ed1fc203b972ff66dc16b"
+    },
+    "artwork/city_boss-80.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "57afc89cbc66617d570a1096952118454b540fc584edd05b8ea5a90bf3a6c579"
+    },
+    "artwork/city_boss-81.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "aabb9a78c5afa56ea98b5124da076832304f39d85b7b02d4fe0beb304bdc10c6"
+    },
+    "artwork/city_boss-82.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "8144bf09753989288910dd3b2aeab859efc0773e8312dfc03a10cfec3f986441"
+    },
+    "artwork/city_boss-83.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "60f2e9cd88ea8be5716f87713f9a7a5aca37995c63e95aae9d53b803b7c941ab"
+    },
+    "artwork/city_boss-84.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c3c6403fb6c7bd645d8dda4fb58cce918c64d9cfad46481816da93ca8413c0a9"
+    },
+    "artwork/city_boss-85.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "cd043e7742f2a34770c9c521b2cbeb96e57713cc9bae68bff4f780b7d3dc6e06"
+    },
+    "artwork/city_boss-86.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "8c2539c0b9e9930c3c59e326a53fa69b07c12c3bef4994a0474e8c1644eb8577"
+    },
+    "artwork/city_boss-87.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3cf66db8aa9f6f30df21063bef39f8fa3eb53ca98c58f39671f77a82fac63f0e"
+    },
+    "artwork/city_boss-88.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-89.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-90.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-91.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-92.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-93.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-94.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-95.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "08cce01d6e73f8644bcc23e5b995950666e226c0bff7e77b4821b2e372210f55"
+    },
+    "artwork/city_boss-96.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-97.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-98.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-99.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-100.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-101.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "bade71372ccd2c985fa1fe2102db502225544bf39ddcf54608587dfa43da84ca"
+    },
+    "artwork/city_boss-102.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "56333a867f67f5005f96d647abe9b81612633d52f63c465cd44a91e59d89f3f0"
+    },
+    "artwork/city_boss-103.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5d7655584639a5dae2c29ebaf330d498e699e4650a61e26870562e8d3fbc8d76"
+    },
+    "artwork/city_boss-104.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-105.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-106.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-107.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-108.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "bade71372ccd2c985fa1fe2102db502225544bf39ddcf54608587dfa43da84ca"
+    },
+    "artwork/city_boss-109.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "27d2d3cde3f67de87b5c05bcdb6b1a51726632f4fbf94a27ebbdf9d6ccf091ee"
+    },
+    "artwork/city_boss-110.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "df8da6ce753a5f9a00d82362bcc2bbbdc5a23fbd8d17e90b3e7a611c857f78d9"
+    },
+    "artwork/city_boss-111.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "0d091804c5fe2841e8a935f0775db4439d92b36d029e8230fac4bce441185062"
+    },
+    "artwork/city_boss-112.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-113.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-114.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-115.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-117.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "1fe8b4590a72296a39744f054310bb2a4a53d068d94bfec0017b0494dff3320e"
+    },
+    "artwork/city_boss-118.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b9bae31fc4f9e516ab800f1e3cccbd989501ef632cff73e88f18c0d906ebfdaa"
+    },
+    "artwork/city_boss-119.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c5d16e727fda19842a81c37c0848183e4b02130f5365234cb7577cd4e1cd0649"
+    },
+    "artwork/city_boss-120.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-121.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-122.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-123.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f62478a9002b86ec507b03eeec9a0db8cf4be131c190afc4fa61a10a172ae8e"
+    },
+    "artwork/city_boss-124.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "bc849d08cd1396529dd7fea47e244a61ab74dbb57228020c1556a60ca1728c18"
+    },
+    "artwork/city_boss-125.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d9fbdfc6b8fdc2e8ecbfb2209af399fa2f7fc9d701ca6477db4316c3a9855535"
+    },
+    "artwork/city_boss-126.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "099cbed40312fe29090eed40ff61dc2edbe1d4614cddbcb3b4ad509f1349c4b7"
+    },
+    "artwork/city_boss-127.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5f73d8729916ac9f96f7e4fbf541bcf86d216b73106a3f3742c31b1a5479fa18"
+    },
+    "artwork/city_quest-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d5738329f96333a90b3e99082e9f9de19f11d24f8a0fd8607adc27a3af113cb3"
+    },
+    "artwork/city_quest-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "785b1e3e6f322f64bb249179f23de7448b40e862d65a3217b6a459876fe7e8be"
+    },
+    "artwork/city_quest-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e3717ac08d2d2a4b53726821aaf7919db79cf30bb47e91fb943014592da9c74a"
+    },
+    "artwork/city_quest-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "cc3de6cbaaea8b73b7d06136f010cbfd41d18d4214d23a59cdf13d528dfdb70d"
+    },
+    "artwork/city_quest-4.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "bcf19f6513d3b08701cbb7e9e245429ff88c58f49bd70318cde7229d181236e4"
+    },
+    "artwork/city_quest-16.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e8049b2f416f95dae414ba1ddec68ca0d376db487b3f43ebcc09920a2c38723b"
+    },
+    "artwork/city_quest-17.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "a546666e2e108de41cddf3a6e3731a4b6dbb2dd1aaa2f346af861cd96ace5569"
+    },
+    "artwork/city_quest-18.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "da2032438f7bce17a0984d96bfc958798c1cfe0d97520e0e60657ab7924a1bde"
+    },
+    "artwork/city_quest-19.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "90583893e1e90f47c7bb9b892d1886aa9a1118be1fda25bd591154f6af979686"
+    },
+    "artwork/city_quest-20.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ec35a354de9c3ad4e0fc410613fdafef8bf1e2d66d7368ea8d3b41cd28173b9f"
+    },
+    "artwork/city_quest-24.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "56db37e687bd125deecd7c2884ebf80c62ef6608d7305691ed307f624170c4d0"
+    },
+    "artwork/city_quest-25.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "cbc1a3a4f2df6de3c251f22937081f7ff94f669ec74aa387c1ffe91436cc77c5"
+    },
+    "artwork/city_quest-26.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "fb6915ffc30c97fae5c16dc005bef52c0ebc577cf8f407dbe0fe3253b3499a53"
+    },
+    "artwork/city_quest-32.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "75ae1a1ceac7d3ae4ad81b64cf677e34c8e84e77a2f0d1b1b379ca7715437d31"
+    },
+    "artwork/city_quest-33.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "72c19a5dbd1563545455b09a7f3762d843049ebbb568633b54f1ce85317afeba"
+    },
+    "artwork/city_quest-34.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b05095523a8eb5739be4ef4a0599ee9a1e52d87205c0ce200aa6113a74da40ba"
+    },
+    "artwork/city_quest-35.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "f8ff0555689db0e1b9e151bc1b44765c14c3558572b13655ec205c1b7de41929"
+    },
+    "artwork/city_quest-36.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "2d132c730e44ae81f02bd0e4c2731b61b48a04d5d749d787a0fcdf4685d0b737"
+    },
+    "artwork/city_quest-37.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d4c3a597c1477504b574977021b97e7850d126a13e7c7510c5de7dd99936773b"
+    },
+    "artwork/city_quest-38.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "04ee7e1b69c87a03f4b2fcbcfa8639503227f26d8cace125b63f33c6843b89ed"
+    },
+    "artwork/city_quest-39.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "72505b87c4f702dc4299521730fc1e95eff02f00959778e170ba5485ace4f4c8"
+    },
+    "artwork/city_quest-40.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "a64817d006e4b779681bb51ffc678bca1b704bfb7fd704054a1792c070665311"
+    },
+    "artwork/city_quest-41.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ddeb38e708fbd276e990c92c7f81f963596ad8ec689e4f44001df54351f5ccd5"
+    },
+    "artwork/city_quest-42.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5c99a74bad1f0c17b6d944cc38750f77a516b9b583caaff7a5d4c34383041554"
+    },
+    "artwork/city_quest-48.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ab7d651f989b6e2fe1dd5be6445c949c4047f6d98f1e1045bd398bcba37bd318"
+    },
+    "artwork/city_quest-49.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6be2ff3634ea888670813fb7c9e07584e1325c93a67f3749e0ddd723e8ff0885"
+    },
+    "artwork/city_quest-50.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "dd1b7da96bfee322fe9473928d5a4d0f4693d9e30e65c520e7f95257856830b8"
+    },
+    "artwork/city_quest-51.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b083c7b184a6342c527f5680f6b49bbd310da2bf9773d89df47d319c540b7ea0"
+    },
+    "artwork/city_quest-52.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "8376a8c96ee3cb2001c30f700a3075c1621eda110e22bd524564ca2d7d387ea5"
+    },
+    "artwork/city_quest-56.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "eef48639a5bba0c1d25c20365817f363651d948fbfb40fe789c059cfc58fef31"
+    },
+    "artwork/city_quest-57.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d95a0f0af8ffcb5d8a8f091349b350c202d21a56cef3685f4518c26232cd2b42"
+    },
+    "artwork/city_quest-58.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "9cbc327c8072481674f17de0403a4c9a54a46c0ea932acc65e2a17be42bc263a"
+    },
+    "artwork/city_quest-64.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "36d1fc2e0c368778efaf051670b88a0bf54fb2526efde6d60c41b885c26f8395"
+    },
+    "artwork/city_quest-65.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ccf482f24feff7ff27bbdc9d53e8a31645622377debd4977aa361ee5e128eb9a"
+    },
+    "artwork/city_quest-66.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "8f1d87ca60b9297f498afa101420ce2e88a72dd84e68f45c7d3daa4ba5914d87"
+    },
+    "artwork/city_quest-67.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "00b6b21a65bc79e3c31b3b26ebc3a66328f18734a2da29786bd4c231e7e12dcb"
+    },
+    "artwork/city_quest-68.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "63f03bc52007a1f8a324a1c22f99c8970f5ebb048d039c045a8111a95b6baff8"
+    },
+    "artwork/city_quest-80.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "939b3c6068e72a72678430b6b6d21d854033193d0e9e6705a023d1fdf134d4d4"
+    },
+    "artwork/city_quest-81.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e13a80cd0adc5902989ff9c81cab59e02b5fbb65be9a3d239346b71440eef3bb"
+    },
+    "artwork/city_quest-82.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "32f12bdf3f83a9e4c8e9d60b9762730f21c9523e50eccf0a4aa47a090ae9d334"
+    },
+    "artwork/carpet-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3ab0795ac5246361a0a3f125ebbb2f454548abddf08e134fb08119ea83d51498"
+    },
+    "artwork/carpet-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "019e48cd7ccd91b7ff23758e8f667c01f4f384f01925cac9c4ea74afeaebd611"
+    },
+    "artwork/carpet-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b4e98e8aa9019a2815c011fc5b292dd22c3d86dae34cabe0acd4d36028255e16"
+    },
+    "artwork/carpet-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "218c205ba8832a46f10d98b9e24ee9227644671bc386f82423418434a1d9cb6e"
+    },
+    "artwork/carpet-4.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "2ddd3d321ae657742ce8be8a304c26fb0ad4455be21a71fbb7185b4b29cbe481"
+    },
+    "artwork/carpet-5.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ef986d9ae7959e548d2ba379437b2f2251614f87d0457ee298b07b9be826d7fe"
+    },
+    "artwork/carpet-6.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "55ca7c703dcd08f5c393cb56741e5e2d91ce91c6a73450d3e226cca063ccf2c9"
+    },
+    "artwork/carpet-7.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "49a912d24c4d2184ff380c4c96f773fa9671c2b4c7f963f221689ca272a7283e"
+    },
+    "artwork/carpet-8.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ebad96d273c8f14b846894d195f8ea88725dd1d5197ba1462d7d381b6191c1ab"
+    },
+    "artwork/carpet-9.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5658ed0968fae50608b08b307f3456cab3539a72037009dada517b3cdef1c507"
+    },
+    "artwork/carpet-10.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b490a285770d33814418fa8f661320faa42c2d7717d6ea211161822ff3f74237"
+    },
+    "artwork/carpet-11.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e9be037a2a64b8f309d4cf6bf3f983472a671fa7a8716359c07259b41988e245"
+    },
+    "artwork/carpet-12.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "8e838d855eee9a00897dd82dceccf88e1329d52e45233e985f3b5b8b92a8604c"
+    },
+    "artwork/carpet-13.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "cdd7a85af9a7f4284dcaa9fd286b9a57e816b31363e5ffe5ebe6d3aa13b67058"
+    },
+    "artwork/carpet-14.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "f92783b36bd1e1d9d4c58be470cb5ab650c06bce2d593bcb8bf664a45eab0a81"
+    },
+    "artwork/carpet-15.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "8beac9dd0a53afa724b581b2bf1a725f98bd19c6ac9ffc987c118bf7f4910da4"
+    },
+    "artwork/carpet-16.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "42d958dee7ad34d78501581157608da375a8f69536feef6b6a26196c17eb8903"
+    },
+    "artwork/carpet-17.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3731dbb010d1c8d71c48dd06177aa655e7acea55279e48e4bf945bfd2779f4a2"
+    },
+    "artwork/carpet-18.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "cbfdaec92af3ac62a405e0364dbe5a17eb133b4e711ce82d3095993a43c700a7"
+    },
+    "artwork/carpet-19.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "93dfc7b8e85e4b4e2570d12e0c3232c1efdce305c436e45f415eb6e5993f1561"
+    },
+    "artwork/carpet-20.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "246d5527602a71c7fd0238f4624ce50a4bde1ff82a5111c75e941f69cbfc07d8"
+    },
+    "artwork/carpet-21.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "368f0d0f4590b954594acf66466a1d91f0acf49087b0071e080ea7e40ac8c93e"
+    },
+    "artwork/carpet-22.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7a3405683b05ffd5de4c9f86e310c9863dc775d718ecd0a00e63299b62f7d70e"
+    },
+    "artwork/carpet-23.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "9ac86c05fa2d6600f7e458957062204ccd2326607580bb941d3f3ec9bb1dd615"
+    },
+    "artwork/carpet-24.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4b126ddd5719985bc86ef078ca92ab8b49f9c6d26769344caee7549930bc6322"
+    },
+    "artwork/carpet-25.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "fecaab2eb9f6133d18f73e4807aca21b008c122e7b4957b3357b007f85527929"
+    },
+    "artwork/carpet-26.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "062904ccb975ffae60ddc5963479c3be91db15c55380a7efe9ba77867d17290e"
+    },
+    "artwork/carpet-27.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "89ef81d908ffe47fcba06ec0923f455b0183ec953774b55be587fe99c51532dd"
+    },
+    "artwork/carpet-28.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d9010187c7ca858c63802bf9a300587f1904cd7b3f6a80dbda49582fb1436ed3"
+    },
+    "artwork/carpet-29.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7e5a47025fd71f73e6e1ab47431b3057fa123c15d53a277544bbef33f632e0bf"
+    },
+    "artwork/carpet-30.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "43e137f30604ab9eb039b802a04c6d1b2b705b022d176efbd7e31b8d4c2af230"
+    },
+    "artwork/carpet-31.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c37475374bc6c0db286bedc0d00ce4c2f6202881d6aaff27f956613a4aa07a84"
+    },
+    "artwork/carpet-32.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "42d958dee7ad34d78501581157608da375a8f69536feef6b6a26196c17eb8903"
+    },
+    "artwork/carpet-33.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "3731dbb010d1c8d71c48dd06177aa655e7acea55279e48e4bf945bfd2779f4a2"
+    },
+    "artwork/carpet-34.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "cbfdaec92af3ac62a405e0364dbe5a17eb133b4e711ce82d3095993a43c700a7"
+    },
+    "artwork/carpet-35.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "93dfc7b8e85e4b4e2570d12e0c3232c1efdce305c436e45f415eb6e5993f1561"
+    },
+    "artwork/carpet-36.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "246d5527602a71c7fd0238f4624ce50a4bde1ff82a5111c75e941f69cbfc07d8"
+    },
+    "artwork/carpet-37.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "368f0d0f4590b954594acf66466a1d91f0acf49087b0071e080ea7e40ac8c93e"
+    },
+    "artwork/carpet-38.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7a3405683b05ffd5de4c9f86e310c9863dc775d718ecd0a00e63299b62f7d70e"
+    },
+    "artwork/carpet-39.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "9ac86c05fa2d6600f7e458957062204ccd2326607580bb941d3f3ec9bb1dd615"
+    },
+    "artwork/carpet-40.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4b126ddd5719985bc86ef078ca92ab8b49f9c6d26769344caee7549930bc6322"
+    },
+    "artwork/carpet-41.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "fecaab2eb9f6133d18f73e4807aca21b008c122e7b4957b3357b007f85527929"
+    },
+    "artwork/carpet-42.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "062904ccb975ffae60ddc5963479c3be91db15c55380a7efe9ba77867d17290e"
+    },
+    "artwork/carpet-43.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "89ef81d908ffe47fcba06ec0923f455b0183ec953774b55be587fe99c51532dd"
+    },
+    "artwork/carpet-44.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d9010187c7ca858c63802bf9a300587f1904cd7b3f6a80dbda49582fb1436ed3"
+    },
+    "artwork/carpet-45.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7e5a47025fd71f73e6e1ab47431b3057fa123c15d53a277544bbef33f632e0bf"
+    },
+    "artwork/carpet-46.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "43e137f30604ab9eb039b802a04c6d1b2b705b022d176efbd7e31b8d4c2af230"
+    },
+    "artwork/carpet-47.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c37475374bc6c0db286bedc0d00ce4c2f6202881d6aaff27f956613a4aa07a84"
+    },
+    "artwork/carpet-48.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "45c3e20a36245fc7dc333fe1e2eb3d2474ef313d04250b9d5561647044db4a1e"
+    },
+    "artwork/carpet-49.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "a3897fd3440edc2e3277355b18a7b21ecbab2f6dadcfa4429a669a42204b1e8a"
+    },
+    "artwork/carpet-50.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "db4cec2d3512fc8bc8b1d39cefad675df6df27c5e6157341751bcbdd47736cc9"
+    },
+    "artwork/carpet-51.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ba9336ccdfefbfc3a5eced94860e80bfaf09ed82879f94906ffaf8a829505b41"
+    },
+    "artwork/carpet-52.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6f44b03f8ca59be5180d8f979814ab4b20a75cdddbaf9d4b88b2ab6cdd69f0dc"
+    },
+    "artwork/carpet-53.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d54d289f1ccb5fe28a9ae5b34024e40f3db19e051e69c490d1662053de183479"
+    },
+    "artwork/carpet-54.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "1c29b5a8a8c9688a72034c8f4c903c96c8204dc3710a4dad273dc41b7686b467"
+    },
+    "artwork/carpet-55.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ad42eaa8f2561bba2f5172838f359bb16b2b7602f2dd3f05f7ccb43e25e43e80"
+    },
+    "artwork/carpet-56.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5ab0a54f2a18ee2f6c5a8ef8e878fb9fb5354679e0b1bd84199de5c7a334440e"
+    },
+    "artwork/carpet-57.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ff68394ed5fcd38659a088c0fcbf1bae07e208fb8eee53891ba0c27288eeeff7"
+    },
+    "artwork/carpet-58.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7daebdc906bfbe53b80a67e7a71fc89b6c37ad0422a7e44b241a2ac260ea9d14"
+    },
+    "artwork/carpet-59.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b7cf53ce7f4244e5f6bfc72093f35b8cd3d76f023f63fa35ae8738b48f813813"
+    },
+    "artwork/carpet-60.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "059f883d9addd109bc377318ae1b59c28347c33b51d1065177c343b81f17bd97"
+    },
+    "artwork/carpet-61.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "927f1f2e773239b9002fd8897cfaa62118aa4e1536619153e9fd0e0f96239b04"
+    },
+    "artwork/carpet-62.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4ad25db361b2c4c4fb969386adf75b76016f0496964ec70682f8e74c1f370263"
+    },
+    "artwork/carpet-63.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "f9fe0f3b8385f9038da96739c8c0fad019859c5d13d2c27c70eebaf922eb8742"
+    },
+    "artwork/carpet-64.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "594d1a79a20f2bf7de0fdec6d083af845cdce8da0a5d671fbc6ddd49f24005b6"
+    },
+    "artwork/carpet-65.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6121fbc5fa8e12980cf4f8576ff58a73d1f20d1cf24a61d1f37f9ae5cb9ceea6"
+    },
+    "artwork/carpet-66.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "cab72673076cc93f35e8be330d6d37c200da449dc9a53fb45d6afb82f02a2b1e"
+    },
+    "artwork/carpet-67.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "62da56a8e96fd65352dbba6e1772d39a3118de61303cbe8063543978aea0aa4e"
+    },
+    "artwork/carpet-68.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "75c039dc61a4a86eeb87074ac97e3fd61b9877e0e0533835294ec2129fead2b7"
+    },
+    "artwork/carpet-69.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "78c7c8044ceeafa472f8c29ea4274f43172d780fb76c1791cb24045424e3ea6f"
+    },
+    "artwork/carpet-70.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b94e1082b5867dcde5b86ad3dddf0aa210308024869960ea172aa8ffc41ceebd"
+    },
+    "artwork/carpet-71.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "95de4496d4a3fa651f7f55b7fe3d0a67a4dfc0bc50e1808284138944f31254de"
+    },
+    "artwork/carpet-72.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e2736d33209df0e307fb50331eabadf2888f78a08036f5c41ce11254c3efa74e"
+    },
+    "artwork/carpet-73.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d680f1bddd4a6ec0fb2e548610a70190c9c17276e364798489aa698d292b3382"
+    },
+    "artwork/carpet-74.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "1ace361b18d9f1c4f9d2ac322ce4462d4ea738092d0a777561265b397c985714"
+    },
+    "artwork/carpet-75.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "412aff485b2ea83252f3c4b9bb5c1ef18079d9fe364a919b838be4540899c214"
+    },
+    "artwork/carpet-76.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c46ae650101a0605d1e54e71344ec48c9b4138c42d02087c38304110921c55a8"
+    },
+    "artwork/carpet-77.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "bfe5cb761c518bcf5c0f18c8ed41f2adfa62eb6a01fa8d62fa95bd9ca35b3d6a"
+    },
+    "artwork/carpet-78.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "029c6178e902acb80e73c2f2de0051eacd99a399701c91632d5f07eaa8f91b90"
+    },
+    "artwork/carpet-79.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7352624725e30c117abee62b89433e105e6b92de4e05ec76ee1eeece6c9aa554"
+    },
+    "artwork/carpet-80.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "45c3e20a36245fc7dc333fe1e2eb3d2474ef313d04250b9d5561647044db4a1e"
+    },
+    "artwork/carpet-81.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "c27da0063f4cd2aad4f1ebf6298885af227f554cbb9284c5993f8a213a7d3de6"
+    },
+    "artwork/carpet-82.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "66b7eb32156033b1bfe0495155e7269accb38273720d4b342eb150db0023b524"
+    },
+    "artwork/carpet-83.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "45c3e20a36245fc7dc333fe1e2eb3d2474ef313d04250b9d5561647044db4a1e"
+    },
+    "artwork/carpet-84.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "45c3e20a36245fc7dc333fe1e2eb3d2474ef313d04250b9d5561647044db4a1e"
+    },
+    "artwork/carpet-85.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "45c3e20a36245fc7dc333fe1e2eb3d2474ef313d04250b9d5561647044db4a1e"
+    },
+    "artwork/carpet-86.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "45c3e20a36245fc7dc333fe1e2eb3d2474ef313d04250b9d5561647044db4a1e"
+    },
+    "artwork/carpet-87.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "45c3e20a36245fc7dc333fe1e2eb3d2474ef313d04250b9d5561647044db4a1e"
+    },
+    "artwork/carpet-88.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "45c3e20a36245fc7dc333fe1e2eb3d2474ef313d04250b9d5561647044db4a1e"
+    },
+    "artwork/creature-wanted-jack-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "353213c91238b9d33d5c3f4e2ed5d2e59a86c92d901a4d1e2f3e238250f10a24"
+    },
+    "artwork/creature-wanted-jack-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "ff66c0f40795447285d662d2a5f6d5cea17f86f8de381b7deecffe314a81582b"
+    },
+    "artwork/creature-wanted-jack-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7f84e417ac81a3a712789c5e3740f262c9ab4dfd589f855eb90f77b85ec11307"
+    },
+    "artwork/creature-wanted-jack-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e68f0e7fe10037a75d15b4a855fd84fce9eb1d0987cca90347a5f3aad07c4d84"
+    },
+    "artwork/creature-wanted-nails-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6ec751505e8195a0ffb4e1f18fc0c0da3714a3223a00148d4ff3566dc04aef59"
+    },
+    "artwork/creature-wanted-nails-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "5c9e5035db0135abea28e65f18b660aea2a3a6ff072c13d4043c13fe0a321862"
+    },
+    "artwork/creature-wanted-nails-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "b715b0ef39b7ecee048e0a59b5c8758cf9fcc3dedbce158fca83cdaf8355b9a9"
+    },
+    "artwork/creature-wanted-nails-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "6b5544f976e0ae96983b38480f81347516655d88aedd0700e0fc30f61d60bb7a"
+    },
+    "artwork/creature-wanted-voss-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "058400235ad04219520cf2139524f9fa5a2d3f77a67b0049416578a7897f6e0a"
+    },
+    "artwork/creature-wanted-voss-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "03ae14dd0b042811827110037e37e36e30f6a9688ccbaa6b31b65ed65b42b2b5"
+    },
+    "artwork/creature-wanted-voss-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "117a42565ac2dd94d87edf364fd51bb9c4e6fe3518ad20a48a6295dee1572484"
+    },
+    "artwork/creature-wanted-voss-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "538716480352c108d29ee15ba57ac13fce5728ca43e714a2191124adeaccb222"
+    },
+    "artwork/creature-wanted-widowmaker-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "fa51a9b7cafe21d181192523f0e58e9362c00572cf8ef170aa64b64365d4212c"
+    },
+    "artwork/creature-wanted-widowmaker-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4d01fff114d484e28b5be0bf27d94037a98260bca8d47779f21e7cfb256d13c6"
+    },
+    "artwork/creature-wanted-widowmaker-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "d7e38d2ad2ba7307585785c70984e083e26cf7dda8a8c1cf50bd32fa078de405"
+    },
+    "artwork/creature-wanted-widowmaker-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "1c01638b7811e37fe9bfa39cc2fdcc2dca864a8de3b564e9c62440934a370859"
+    },
+    "artwork/creature-wanted-bone_clerk-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "9812436147da0ec7e01b23313d83c083b9e5a74f4cf17ed781f79a17fa66920a"
+    },
+    "artwork/creature-wanted-bone_clerk-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e24b71301a6c949bb3af82fcb766c9f70b71f899124f923b89abf6f45ac90e57"
+    },
+    "artwork/creature-wanted-bone_clerk-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "7ced9a3c4edaa59f15ada57e0b5aa3c5f74510a352b4adf4cb4c2660e82be328"
+    },
+    "artwork/creature-wanted-bone_clerk-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "e9aeeaac1c06f745c3424a8fd37be0d7751bc723d4978f0e13e17524a37a404c"
+    },
+    "artwork/creature-wanted-morcant-0.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "9aae155dae61accce14a2897bada9a67a6122b3aacd05eb751fb98c798be9dd1"
+    },
+    "artwork/creature-wanted-morcant-1.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "cdbe57958a9dcf8e42a3c2f299509d196d0d762d3344c5f21ca70bf9b3788e57"
+    },
+    "artwork/creature-wanted-morcant-2.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "83cab3a209125ee64e360d924968d1c24b2f85889755f8ec032ae625791a54b0"
+    },
+    "artwork/creature-wanted-morcant-3.png": {
+      "size": [
+        256,
+        256
+      ],
+      "rgba_sha256": "4f5692ab317bb1baf588cbfb5d6f515c87015e55af9982ad12f2cf2decb37cb6"
     },
     "artwork/creature-rat-0.png": {
       "size": [
@@ -19188,1485 +22532,6 @@
         256
       ],
       "rgba_sha256": "ba3edf212eb9dea9c9c52a3eaf909d8cb0d76c8c8ebe89906d8960d76a30417d"
-    },
-    "interfaces/hero_icons.png": {
-      "size": [
-        512,
-        1024
-      ],
-      "rgba_sha256": "5c752b2e80c8fc0d2708d776bf6793ae28453819c1ce4a9aeabc0f0fd0242f8d"
-    },
-    "artwork/hero-symbol-0.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "1cbc8aa8eda4f1bc955ec4ad918b09c8dcf2f829f8ea9bcae432006f2067e51a"
-    },
-    "artwork/hero-symbol-1.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "83a9e81a44c0d38bc86116c5d27ceb27d1691ba00ca7f63d6d719cd2d6125d8c"
-    },
-    "artwork/hero-symbol-2.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "3d632ef9ae2031d455ba8df616671c4fdb38dbaac9a5cf6c200845500b67cf44"
-    },
-    "artwork/hero-symbol-3.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "151f556c6b3a7d4ce1cd9bbdae981b4bd8b7dc044727d1271c2864606d575bba"
-    },
-    "artwork/hero-symbol-4.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "62fc146fab627f5163a59ca051725377bcdcc507af7f0e2434a5ec13aea3002b"
-    },
-    "artwork/hero-symbol-5.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "4b8a316f11b7b4bad30440bc829974eaa14e8ed5701e27fde107f2571cfa2f66"
-    },
-    "artwork/hero-symbol-6.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "7fd4c9a83b15423c099034066da9a293ebc2aee83e68f6d9cb4f300090e0772c"
-    },
-    "artwork/hero-symbol-7.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "61955b996879db5c6ce6766d2a8f7fa32ef15a3ad03fddeb9a33eb1a1ac3cb24"
-    },
-    "artwork/hero-symbol-8.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "273831abe9eba4e19cc248998089fb90a0b68b4d8aa1d76c567d25ece7128c20"
-    },
-    "artwork/hero-symbol-9.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "c1e7061d451494713c11c765db12b1f4ac67ee37ed1a45b31185f2d11cfb65aa"
-    },
-    "artwork/hero-symbol-10.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "3bdf411789d0f6e4274d5953143107f03b1388bbdca12ba35fc1fb90becbf111"
-    },
-    "artwork/hero-symbol-11.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "23ba09262c6a213a854b1febb3946bcb5044503680be7fb77c2021f654b4f822"
-    },
-    "artwork/hero-symbol-16.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "adcf473fb8343f0b71c57a059d23f29a675dcce1dc9794776da8e0493c371f84"
-    },
-    "artwork/hero-symbol-17.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "bc35224693e7610f789a30dce3563efa79c0586cf87b4c130a3f8a634e799114"
-    },
-    "artwork/hero-symbol-18.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "135da9e67a4bfb22e025d57c06fae97b033639c824bc3fcc118550488f2ce36f"
-    },
-    "artwork/hero-symbol-19.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "9b8b6d7f88ceaba7c0b2076af91694dd394cf372f4ad72fc5705f80037971c53"
-    },
-    "artwork/hero-symbol-20.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "9345ecba740f9e087f405638505150af488f4c6d3a0ca9679e363816fdaf9b29"
-    },
-    "artwork/hero-symbol-21.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "6e30cf101b024c02a8342d8f4466c15cae0649d92c2d94b7974cf3a3b583d6cf"
-    },
-    "artwork/hero-symbol-22.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "b034549c7d4a590c7b4f2aa15272dd64d3e28dae326242309c9253553a277345"
-    },
-    "artwork/hero-symbol-23.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "d80647dc60c38ac530ddac2311826b19035206f53b0f88273caa64bf80c33a68"
-    },
-    "artwork/hero-symbol-24.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "2038587017fda4db831cc0fd5057528a9a85bf78e0cbbb10b223a7e73a13559e"
-    },
-    "artwork/hero-symbol-25.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "7eeddf48e00569fce7c4696f08cc77588624633908cf1062520937e8ce2449c2"
-    },
-    "artwork/hero-symbol-26.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "2aa8f27ec1f7c31fb134752c56fdd39617be65c2e2dabcca3ca5f3fd62895b3e"
-    },
-    "artwork/hero-symbol-27.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "c4efa09992a84265cb955d4f29ec55ecf8520a4c083c5833141c84074762440c"
-    },
-    "artwork/hero-symbol-28.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "65d5b165cfbe98c3aadefb177a17583cec63fe6334efe4b4e2444e8cb6ad52eb"
-    },
-    "artwork/hero-symbol-29.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "84ab875a8fe43ecbe16f4634890a70004d4036059d24f6e91b150393abe9b075"
-    },
-    "artwork/hero-symbol-30.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "4595f5bd01750f839355822614752223bab8113477706e8d60302cbba7bbbeb0"
-    },
-    "artwork/hero-symbol-31.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "5c7fd8310163b982ab16bf94441266d112a9dcb0e75a2b4dc247c5ceae55761d"
-    },
-    "artwork/hero-symbol-32.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "35db5baf42c75d3264abd4fecc03504a6cb0055cca7629b0d657ff9b3454d41a"
-    },
-    "artwork/hero-symbol-33.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "682b8b3682f9df22154ea86d6f9b306c79650cc98441f8d0897f29baff51b58d"
-    },
-    "artwork/hero-symbol-34.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "a1049f73174690bacf86366656c3ff249b9dbcae73ad0a063bffbe16436b6085"
-    },
-    "artwork/hero-symbol-40.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "0a88f2238506b32bf74ffdde4b788a2790a49075f81201c4736019cec770d5fe"
-    },
-    "artwork/hero-symbol-41.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "3bdf411789d0f6e4274d5953143107f03b1388bbdca12ba35fc1fb90becbf111"
-    },
-    "artwork/hero-symbol-42.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "4bd2195b70810755192f5274c5ee4791bb691f9c42b501750b2eaf9f43ddbd7f"
-    },
-    "artwork/hero-symbol-43.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "d0e1250698bf2c0d08b054d3d5b895370b19bbc1ba0849d025c33f4cd684d03e"
-    },
-    "artwork/hero-symbol-44.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "4bd2195b70810755192f5274c5ee4791bb691f9c42b501750b2eaf9f43ddbd7f"
-    },
-    "artwork/hero-symbol-45.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "d0be0fce8cfd91f06ecdc0666ad8c691e062a0b6bfa71b0a4378ded5771affcf"
-    },
-    "artwork/hero-symbol-46.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "ede5d981d7f4a67571d4d32465bd059e0cc46829e2dd6bc979f1148dc1cc4f6d"
-    },
-    "artwork/hero-symbol-47.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "347d1ad72fdbde05beb429efd9f369200d4587420c4fd2c040a1f937c79cc7d5"
-    },
-    "artwork/hero-symbol-48.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "6d410c15cdbd8453a178c0ae36501c69ddbccc035fba59b2f7152ded2a5b436e"
-    },
-    "artwork/hero-symbol-49.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "3e0668daf457ec7a36a10b4c5f49a07fe727808774e14aeea9fd585e81220c94"
-    },
-    "artwork/hero-symbol-50.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "0a88f2238506b32bf74ffdde4b788a2790a49075f81201c4736019cec770d5fe"
-    },
-    "artwork/hero-symbol-51.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "3bdf411789d0f6e4274d5953143107f03b1388bbdca12ba35fc1fb90becbf111"
-    },
-    "artwork/hero-symbol-52.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "d2816bcb4f5e93aada402f2053ee3b96a5993e64d873e4dc93e08b718bdf0330"
-    },
-    "artwork/hero-symbol-53.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "8bd2b8b71100e7323c1e386708c303910737c1429efad56f1baf87162686a2c9"
-    },
-    "artwork/hero-symbol-54.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "10b7ea2fdbe18af827dc8aec38a56c5da7bd6802722ee8fad3f138092c5bc5e9"
-    },
-    "artwork/hero-symbol-55.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "2c29d3fa062b9293088fd9604965dcd4c1908a687ad3bb511fb81e131b4f5709"
-    },
-    "artwork/hero-symbol-56.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "23ba09262c6a213a854b1febb3946bcb5044503680be7fb77c2021f654b4f822"
-    },
-    "artwork/hero-symbol-57.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "4a2889f765f5a33f34ebafb7c23d6b8daa816f8c52298fd06092342e1bf32fd1"
-    },
-    "artwork/hero-symbol-58.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "5c7fd8310163b982ab16bf94441266d112a9dcb0e75a2b4dc247c5ceae55761d"
-    },
-    "artwork/hero-symbol-59.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "10b7ea2fdbe18af827dc8aec38a56c5da7bd6802722ee8fad3f138092c5bc5e9"
-    },
-    "artwork/hero-symbol-60.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "794aa50a1877068c12ebdf2d6aeca2c79b85e37dcb3dcdacf64bda11f9e2ffc5"
-    },
-    "artwork/hero-symbol-61.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "35db5baf42c75d3264abd4fecc03504a6cb0055cca7629b0d657ff9b3454d41a"
-    },
-    "artwork/hero-symbol-62.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "81811a6137ec08e41a1742d2f8bc558cc2d5eb5426b725124ba86efb7765b5b8"
-    },
-    "artwork/hero-symbol-63.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "ed45e2e0ea8b35bdc4d6a23b2329c2aed23a1a6aa9fd2c998fa71ecaff84f7fd"
-    },
-    "artwork/hero-symbol-64.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "682b8b3682f9df22154ea86d6f9b306c79650cc98441f8d0897f29baff51b58d"
-    },
-    "artwork/hero-symbol-65.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "22c2409ec9c21599d137a980ce7e29375e2c24bf8b919160474d4dfaaa80f295"
-    },
-    "artwork/hero-symbol-66.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "58f7c41cda84ad4d47b07addf4252b3b00532f43358ce15d8bbc5b794e2bf15d"
-    },
-    "artwork/hero-symbol-104.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "1cbc8aa8eda4f1bc955ec4ad918b09c8dcf2f829f8ea9bcae432006f2067e51a"
-    },
-    "artwork/hero-symbol-105.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "83a9e81a44c0d38bc86116c5d27ceb27d1691ba00ca7f63d6d719cd2d6125d8c"
-    },
-    "artwork/hero-symbol-106.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "62fc146fab627f5163a59ca051725377bcdcc507af7f0e2434a5ec13aea3002b"
-    },
-    "artwork/hero-symbol-107.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "4b8a316f11b7b4bad30440bc829974eaa14e8ed5701e27fde107f2571cfa2f66"
-    },
-    "artwork/hero-symbol-108.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "7fd4c9a83b15423c099034066da9a293ebc2aee83e68f6d9cb4f300090e0772c"
-    },
-    "artwork/hero-symbol-109.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "273831abe9eba4e19cc248998089fb90a0b68b4d8aa1d76c567d25ece7128c20"
-    },
-    "artwork/hero-symbol-110.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "c1e7061d451494713c11c765db12b1f4ac67ee37ed1a45b31185f2d11cfb65aa"
-    },
-    "artwork/hero-symbol-72.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "0a88f2238506b32bf74ffdde4b788a2790a49075f81201c4736019cec770d5fe"
-    },
-    "artwork/hero-symbol-73.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "3bdf411789d0f6e4274d5953143107f03b1388bbdca12ba35fc1fb90becbf111"
-    },
-    "artwork/hero-symbol-74.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "4bd2195b70810755192f5274c5ee4791bb691f9c42b501750b2eaf9f43ddbd7f"
-    },
-    "artwork/hero-symbol-75.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "d0e1250698bf2c0d08b054d3d5b895370b19bbc1ba0849d025c33f4cd684d03e"
-    },
-    "artwork/hero-symbol-76.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "4bd2195b70810755192f5274c5ee4791bb691f9c42b501750b2eaf9f43ddbd7f"
-    },
-    "artwork/hero-symbol-77.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "d0be0fce8cfd91f06ecdc0666ad8c691e062a0b6bfa71b0a4378ded5771affcf"
-    },
-    "artwork/hero-symbol-78.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "ede5d981d7f4a67571d4d32465bd059e0cc46829e2dd6bc979f1148dc1cc4f6d"
-    },
-    "artwork/hero-symbol-79.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "347d1ad72fdbde05beb429efd9f369200d4587420c4fd2c040a1f937c79cc7d5"
-    },
-    "artwork/hero-symbol-80.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "6d410c15cdbd8453a178c0ae36501c69ddbccc035fba59b2f7152ded2a5b436e"
-    },
-    "artwork/hero-symbol-81.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "3e0668daf457ec7a36a10b4c5f49a07fe727808774e14aeea9fd585e81220c94"
-    },
-    "artwork/hero-symbol-82.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "0a88f2238506b32bf74ffdde4b788a2790a49075f81201c4736019cec770d5fe"
-    },
-    "artwork/hero-symbol-83.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "3bdf411789d0f6e4274d5953143107f03b1388bbdca12ba35fc1fb90becbf111"
-    },
-    "artwork/hero-symbol-84.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "d2816bcb4f5e93aada402f2053ee3b96a5993e64d873e4dc93e08b718bdf0330"
-    },
-    "artwork/hero-symbol-85.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "8bd2b8b71100e7323c1e386708c303910737c1429efad56f1baf87162686a2c9"
-    },
-    "artwork/hero-symbol-86.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "10b7ea2fdbe18af827dc8aec38a56c5da7bd6802722ee8fad3f138092c5bc5e9"
-    },
-    "artwork/hero-symbol-87.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "2c29d3fa062b9293088fd9604965dcd4c1908a687ad3bb511fb81e131b4f5709"
-    },
-    "artwork/hero-symbol-88.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "23ba09262c6a213a854b1febb3946bcb5044503680be7fb77c2021f654b4f822"
-    },
-    "artwork/hero-symbol-89.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "4a2889f765f5a33f34ebafb7c23d6b8daa816f8c52298fd06092342e1bf32fd1"
-    },
-    "artwork/hero-symbol-90.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "5c7fd8310163b982ab16bf94441266d112a9dcb0e75a2b4dc247c5ceae55761d"
-    },
-    "artwork/hero-symbol-91.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "10b7ea2fdbe18af827dc8aec38a56c5da7bd6802722ee8fad3f138092c5bc5e9"
-    },
-    "artwork/hero-symbol-92.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "794aa50a1877068c12ebdf2d6aeca2c79b85e37dcb3dcdacf64bda11f9e2ffc5"
-    },
-    "artwork/hero-symbol-93.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "35db5baf42c75d3264abd4fecc03504a6cb0055cca7629b0d657ff9b3454d41a"
-    },
-    "artwork/hero-symbol-94.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "81811a6137ec08e41a1742d2f8bc558cc2d5eb5426b725124ba86efb7765b5b8"
-    },
-    "artwork/hero-symbol-95.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "ed45e2e0ea8b35bdc4d6a23b2329c2aed23a1a6aa9fd2c998fa71ecaff84f7fd"
-    },
-    "artwork/hero-symbol-96.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "682b8b3682f9df22154ea86d6f9b306c79650cc98441f8d0897f29baff51b58d"
-    },
-    "artwork/hero-symbol-97.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "22c2409ec9c21599d137a980ce7e29375e2c24bf8b919160474d4dfaaa80f295"
-    },
-    "artwork/hero-symbol-98.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "58f7c41cda84ad4d47b07addf4252b3b00532f43358ce15d8bbc5b794e2bf15d"
-    },
-    "interfaces/bounty_poster_seals.png": {
-      "size": [
-        768,
-        256
-      ],
-      "rgba_sha256": "781fcca4163ef3d2b307bd0bb43f3832e128554a146a448c03e149763c26afa6"
-    },
-    "artwork/bounty-seal-0.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "b66778fe696d498e43dcc51608b16e6319aa5f3f11e227551e885276bb21e23c"
-    },
-    "artwork/bounty-seal-1.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "adc80abafc6f03c0ac739b7b6cea4bcba5e62484a860ff3069244be9dc7e6b7b"
-    },
-    "artwork/bounty-seal-2.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "c3bbafcdfefceef8e2212903286498d1d0ba7f5914a94d9502e5b2cb62ec58c2"
-    },
-    "sprites/wanted_jack.png": {
-      "size": [
-        2048,
-        256
-      ],
-      "rgba_sha256": "f7f4e29e0bd3c161aad381904b39d9383935f59fe9db253d0f2519a6fb3a5f5c",
-      "logical_size": [
-        256,
-        32
-      ],
-      "painted_rects": [
-        [
-          0,
-          0,
-          96,
-          120
-        ],
-        [
-          96,
-          0,
-          192,
-          120
-        ],
-        [
-          192,
-          0,
-          288,
-          120
-        ],
-        [
-          288,
-          0,
-          384,
-          120
-        ],
-        [
-          384,
-          0,
-          480,
-          120
-        ],
-        [
-          480,
-          0,
-          576,
-          120
-        ],
-        [
-          576,
-          0,
-          672,
-          120
-        ],
-        [
-          672,
-          0,
-          768,
-          120
-        ],
-        [
-          768,
-          0,
-          864,
-          120
-        ],
-        [
-          864,
-          0,
-          960,
-          120
-        ],
-        [
-          960,
-          0,
-          1056,
-          120
-        ],
-        [
-          1056,
-          0,
-          1152,
-          120
-        ],
-        [
-          1152,
-          0,
-          1248,
-          120
-        ],
-        [
-          1248,
-          0,
-          1344,
-          120
-        ],
-        [
-          1344,
-          0,
-          1440,
-          120
-        ],
-        [
-          1440,
-          0,
-          1536,
-          120
-        ],
-        [
-          1536,
-          0,
-          1632,
-          120
-        ]
-      ],
-      "character": true
-    },
-    "sprites/wanted_nails.png": {
-      "size": [
-        2048,
-        256
-      ],
-      "rgba_sha256": "507ad4f9e055b8a10b25236e943158cdf1859fc99583733a767ef91a637e6009",
-      "logical_size": [
-        256,
-        32
-      ],
-      "painted_rects": [
-        [
-          0,
-          0,
-          96,
-          104
-        ],
-        [
-          96,
-          0,
-          192,
-          104
-        ],
-        [
-          192,
-          0,
-          288,
-          104
-        ],
-        [
-          288,
-          0,
-          384,
-          104
-        ],
-        [
-          384,
-          0,
-          480,
-          104
-        ],
-        [
-          480,
-          0,
-          576,
-          104
-        ],
-        [
-          576,
-          0,
-          672,
-          104
-        ],
-        [
-          672,
-          0,
-          768,
-          104
-        ],
-        [
-          768,
-          0,
-          864,
-          104
-        ],
-        [
-          864,
-          0,
-          960,
-          104
-        ],
-        [
-          960,
-          0,
-          1056,
-          104
-        ],
-        [
-          1056,
-          0,
-          1152,
-          104
-        ],
-        [
-          1152,
-          0,
-          1248,
-          104
-        ]
-      ],
-      "character": true
-    },
-    "sprites/wanted_voss.png": {
-      "size": [
-        2048,
-        128
-      ],
-      "rgba_sha256": "10b60df6ad4b3d60b0c8c1a2c1b93d5b2a8b4941711a9f5ced8edea6aa01ca07",
-      "logical_size": [
-        256,
-        16
-      ],
-      "painted_rects": [
-        [
-          0,
-          0,
-          96,
-          128
-        ],
-        [
-          96,
-          0,
-          192,
-          128
-        ],
-        [
-          192,
-          0,
-          288,
-          128
-        ],
-        [
-          288,
-          0,
-          384,
-          128
-        ],
-        [
-          384,
-          0,
-          480,
-          128
-        ],
-        [
-          480,
-          0,
-          576,
-          128
-        ],
-        [
-          576,
-          0,
-          672,
-          128
-        ],
-        [
-          672,
-          0,
-          768,
-          128
-        ],
-        [
-          768,
-          0,
-          864,
-          128
-        ],
-        [
-          864,
-          0,
-          960,
-          128
-        ],
-        [
-          960,
-          0,
-          1056,
-          128
-        ],
-        [
-          1056,
-          0,
-          1152,
-          128
-        ],
-        [
-          1152,
-          0,
-          1248,
-          128
-        ],
-        [
-          1248,
-          0,
-          1344,
-          128
-        ],
-        [
-          1344,
-          0,
-          1440,
-          128
-        ]
-      ],
-      "character": true
-    },
-    "sprites/wanted_widowmaker.png": {
-      "size": [
-        2048,
-        256
-      ],
-      "rgba_sha256": "3768ca04f77933479f5c25ea767ca66c08df3246447dc98118a553fec718c458",
-      "logical_size": [
-        256,
-        32
-      ],
-      "painted_rects": [
-        [
-          0,
-          0,
-          128,
-          112
-        ],
-        [
-          128,
-          0,
-          256,
-          112
-        ],
-        [
-          256,
-          0,
-          384,
-          112
-        ],
-        [
-          384,
-          0,
-          512,
-          112
-        ],
-        [
-          512,
-          0,
-          640,
-          112
-        ],
-        [
-          640,
-          0,
-          768,
-          112
-        ],
-        [
-          768,
-          0,
-          896,
-          112
-        ],
-        [
-          896,
-          0,
-          1024,
-          112
-        ],
-        [
-          1024,
-          0,
-          1152,
-          112
-        ],
-        [
-          1152,
-          0,
-          1280,
-          112
-        ],
-        [
-          1280,
-          0,
-          1408,
-          112
-        ],
-        [
-          1408,
-          0,
-          1536,
-          112
-        ],
-        [
-          1536,
-          0,
-          1664,
-          112
-        ],
-        [
-          1664,
-          0,
-          1792,
-          112
-        ],
-        [
-          1792,
-          0,
-          1920,
-          112
-        ],
-        [
-          1920,
-          0,
-          2048,
-          112
-        ]
-      ],
-      "character": true
-    },
-    "sprites/wanted_bone_clerk.png": {
-      "size": [
-        2048,
-        512
-      ],
-      "rgba_sha256": "1dd5fa04ef8a4f4bc31556953c326766c038d87116116a4be627add5c6962763",
-      "logical_size": [
-        256,
-        64
-      ],
-      "painted_rects": [
-        [
-          0,
-          0,
-          128,
-          128
-        ],
-        [
-          128,
-          0,
-          256,
-          128
-        ],
-        [
-          256,
-          0,
-          384,
-          128
-        ],
-        [
-          384,
-          0,
-          512,
-          128
-        ],
-        [
-          512,
-          0,
-          640,
-          128
-        ],
-        [
-          640,
-          0,
-          768,
-          128
-        ],
-        [
-          768,
-          0,
-          896,
-          128
-        ],
-        [
-          896,
-          0,
-          1024,
-          128
-        ],
-        [
-          1024,
-          0,
-          1152,
-          128
-        ],
-        [
-          1152,
-          0,
-          1280,
-          128
-        ],
-        [
-          1280,
-          0,
-          1408,
-          128
-        ],
-        [
-          1408,
-          0,
-          1536,
-          128
-        ],
-        [
-          1536,
-          0,
-          1664,
-          128
-        ]
-      ],
-      "character": true
-    },
-    "sprites/wanted_morcant.png": {
-      "size": [
-        2048,
-        128
-      ],
-      "rgba_sha256": "881d0b98e873db9dd39582223613530c4c8f193168590bbc3753a02aa697472a",
-      "logical_size": [
-        256,
-        16
-      ],
-      "painted_rects": [
-        [
-          0,
-          0,
-          96,
-          128
-        ],
-        [
-          96,
-          0,
-          192,
-          128
-        ],
-        [
-          192,
-          0,
-          288,
-          128
-        ],
-        [
-          288,
-          0,
-          384,
-          128
-        ],
-        [
-          384,
-          0,
-          480,
-          128
-        ],
-        [
-          480,
-          0,
-          576,
-          128
-        ],
-        [
-          576,
-          0,
-          672,
-          128
-        ],
-        [
-          672,
-          0,
-          768,
-          128
-        ],
-        [
-          768,
-          0,
-          864,
-          128
-        ],
-        [
-          864,
-          0,
-          960,
-          128
-        ],
-        [
-          960,
-          0,
-          1056,
-          128
-        ],
-        [
-          1056,
-          0,
-          1152,
-          128
-        ],
-        [
-          1152,
-          0,
-          1248,
-          128
-        ],
-        [
-          1248,
-          0,
-          1344,
-          128
-        ],
-        [
-          1344,
-          0,
-          1440,
-          128
-        ]
-      ],
-      "character": true
-    },
-    "artwork/bounty-poster-7.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "3be07ba902188548bedc3ad048182388a884fdf0a4a40c4f3056467560ab72b3"
-    },
-    "artwork/creature-wanted-jack-0.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "353213c91238b9d33d5c3f4e2ed5d2e59a86c92d901a4d1e2f3e238250f10a24"
-    },
-    "artwork/creature-wanted-jack-1.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "ff66c0f40795447285d662d2a5f6d5cea17f86f8de381b7deecffe314a81582b"
-    },
-    "artwork/creature-wanted-jack-2.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "7f84e417ac81a3a712789c5e3740f262c9ab4dfd589f855eb90f77b85ec11307"
-    },
-    "artwork/creature-wanted-jack-3.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "e68f0e7fe10037a75d15b4a855fd84fce9eb1d0987cca90347a5f3aad07c4d84"
-    },
-    "artwork/creature-wanted-nails-0.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "6ec751505e8195a0ffb4e1f18fc0c0da3714a3223a00148d4ff3566dc04aef59"
-    },
-    "artwork/creature-wanted-nails-1.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "5c9e5035db0135abea28e65f18b660aea2a3a6ff072c13d4043c13fe0a321862"
-    },
-    "artwork/creature-wanted-nails-2.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "b715b0ef39b7ecee048e0a59b5c8758cf9fcc3dedbce158fca83cdaf8355b9a9"
-    },
-    "artwork/creature-wanted-nails-3.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "6b5544f976e0ae96983b38480f81347516655d88aedd0700e0fc30f61d60bb7a"
-    },
-    "artwork/creature-wanted-voss-0.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "058400235ad04219520cf2139524f9fa5a2d3f77a67b0049416578a7897f6e0a"
-    },
-    "artwork/creature-wanted-voss-1.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "03ae14dd0b042811827110037e37e36e30f6a9688ccbaa6b31b65ed65b42b2b5"
-    },
-    "artwork/creature-wanted-voss-2.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "117a42565ac2dd94d87edf364fd51bb9c4e6fe3518ad20a48a6295dee1572484"
-    },
-    "artwork/creature-wanted-voss-3.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "538716480352c108d29ee15ba57ac13fce5728ca43e714a2191124adeaccb222"
-    },
-    "artwork/creature-wanted-widowmaker-0.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "fa51a9b7cafe21d181192523f0e58e9362c00572cf8ef170aa64b64365d4212c"
-    },
-    "artwork/creature-wanted-widowmaker-1.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "4d01fff114d484e28b5be0bf27d94037a98260bca8d47779f21e7cfb256d13c6"
-    },
-    "artwork/creature-wanted-widowmaker-2.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "d7e38d2ad2ba7307585785c70984e083e26cf7dda8a8c1cf50bd32fa078de405"
-    },
-    "artwork/creature-wanted-widowmaker-3.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "1c01638b7811e37fe9bfa39cc2fdcc2dca864a8de3b564e9c62440934a370859"
-    },
-    "artwork/creature-wanted-bone_clerk-0.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "9812436147da0ec7e01b23313d83c083b9e5a74f4cf17ed781f79a17fa66920a"
-    },
-    "artwork/creature-wanted-bone_clerk-1.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "e24b71301a6c949bb3af82fcb766c9f70b71f899124f923b89abf6f45ac90e57"
-    },
-    "artwork/creature-wanted-bone_clerk-2.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "7ced9a3c4edaa59f15ada57e0b5aa3c5f74510a352b4adf4cb4c2660e82be328"
-    },
-    "artwork/creature-wanted-bone_clerk-3.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "e9aeeaac1c06f745c3424a8fd37be0d7751bc723d4978f0e13e17524a37a404c"
-    },
-    "artwork/creature-wanted-morcant-0.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "9aae155dae61accce14a2897bada9a67a6122b3aacd05eb751fb98c798be9dd1"
-    },
-    "artwork/creature-wanted-morcant-1.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "cdbe57958a9dcf8e42a3c2f299509d196d0d762d3344c5f21ca70bf9b3788e57"
-    },
-    "artwork/creature-wanted-morcant-2.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "83cab3a209125ee64e360d924968d1c24b2f85889755f8ec032ae625791a54b0"
-    },
-    "artwork/creature-wanted-morcant-3.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "4f5692ab317bb1baf588cbfb5d6f515c87015e55af9982ad12f2cf2decb37cb6"
-    },
-    "interfaces/bounty_claimed.png": {
-      "size": [
-        1024,
-        384
-      ],
-      "rgba_sha256": "c69e729e8d20c3a687efb23c6d8b4e17c92a7d0d06f539957daa4e798bce9525"
     }
   }
 }

@@ -51,7 +51,8 @@ def build_previews():
         art=hero_paint.crop((i%8*SIZE,i//8*SIZE,(i%8+1)*SIZE,(i//8+1)*SIZE))
         add('interfaces/hero_icons.png',(x,y,x+64,y+64),art,f'hero-symbol-{i}')
     add('effects/bloodmark.png',(0,0,64,64),bloodmark(),'bloodmark')
-    for texture,atlas in polished().items():
+    from regional_scenery import outputs as regional
+    for texture,atlas in {**polished(),**regional()}.items():
         if not texture.startswith('environment/custom_tiles/'):continue
         columns=atlas.width//64
         for i in range(columns*(atlas.height//64)):

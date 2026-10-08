@@ -148,7 +148,7 @@ public class FocusCrystal extends com.shatteredpixel.shatteredpixeldungeon.items
                 if(dx==0&&dy==0)return false;
                 Ballistica ray=new Ballistica(cell,cell+dx+dy*width,Ballistica.MAGIC_BOLT);
                 int distance=boss?1:pushDistance()+(hurl?2:0),crystalLevel=level();
-                WandOfBlastWave.throwChar(enemy,ray,distance,false,false,this,new WandOfBlastWave.LandingRules(crystalLevel>=6){
+                WandOfBlastWave.throwChar(enemy,ray,distance,false,false,this,new WandOfBlastWave.LandingRules(crystalLevel>=6,hurl&&crystalLevel>=6){
                     @Override public void collide(Char target,int moved){
                         if(crystalLevel<4)return;
                         int damage=Hero.heroDamageIntRange(2+h.lvl/2,4+h.lvl);

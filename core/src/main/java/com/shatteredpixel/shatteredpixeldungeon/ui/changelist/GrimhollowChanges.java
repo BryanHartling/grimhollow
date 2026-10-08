@@ -20,7 +20,10 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.8","The Horror's warning stands on its own.");
+        ChangeInfo r=release(list,"v1.29.9","Clearer motion and dependable telekinesis.");
+        note(r,Icons.TALENT,"Hurl and stealth","A practiced Seer's Hurl springs traps along its path as well as on landing, while retaining its ledge and impact effects. Chainwarden cannot pull a hero concealed by the Cloak or another invisibility effect. Rogue's Foresight has its own eye motif.");
+        note(r,Icons.PREFS,"Quiet speed","Drinking raises and tips the painted bottle. Haste leaves restrained blue-silver brush wisps at your boots while moving, for as long as its effect lasts. Ambush warnings have no directional marker, from either side; the popup follows your Playtest setting.");
+        r=release(list,"v1.29.8","The Horror's warning stands on its own.");
         note(r,Icons.WARNING,"Ambush warning","The bronze directional marker is gone. Playtest balance settings can turn the ambush popup on or off; the warning text remains in the log and you still have an opportunity to respond.");
         r=release(list,"v1.29.7","Painted boss-room landmarks and bounty crews.");
         note(r,Icons.DEPTH,"Dungeon landmarks","The Caves gate and trap plates, City stairway and statues, Imp shop skulls and dais, and blacksmith's quenching trough have painted artwork. The Vault arrival stairwell no longer borrows fragments of the Imp's pit.");

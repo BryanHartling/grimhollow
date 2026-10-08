@@ -636,7 +636,19 @@ public class SmokeRun {
         Dungeon.level.mobs.remove(hex);Actor.remove(hex);
         for(Buff b:h.buffs())if(b instanceof NecroCurse||b instanceof Slow||b instanceof Cripple)b.detach();
         Chainwarden boss=new Chainwarden();boss.pos=h.pos+4;boss.sprite=new ChainwardenSprite();boss.sprite.link(boss);Dungeon.level.mobs.add(boss);Actor.add(boss);
+        boss.fieldOfView=new boolean[Dungeon.level.length()];Dungeon.level.updateFieldOfView(boss,boss.fieldOfView);
         check(boss.HT==new Tengu().HT&&boss.attackSkill(h)==new Tengu().attackSkill(h),"Chainwarden retains Tengu stats");int initial=h.pos;boss.advanceChains(3);check(h.pos==initial,"Chainwarden waits four turns");boss.advanceChains(1);check(h.pos==initial+2,"Chainwarden pulls two cells at fourth turn");
+        h.pos=initial;
+        CloakOfShadows hiddenCloak=new CloakOfShadows();CloakOfShadows.cloakStealth stealth=hiddenCloak.new cloakStealth();
+        check(stealth.attachTo(h)&&h.invisible>0,"Cloak grants real stealth");
+        for(int tick=0;tick<12;tick++)boss.advanceChains(1);
+        boss.HP=boss.HT/2;
+        for(int tick=0;tick<5;tick++)check(!boss.canUseAbility(),"Chainwarden cannot aim traps at cloaked hero");
+        check(h.pos==initial,"Chainwarden cannot track/pull a cloaked hero");stealth.detach();
+        Buff.prolong(h,Invisibility.class,10);boss.advanceChains(4);
+        check(h.pos==initial,"Chainwarden cannot pull potion invisibility");Buff.detach(h,Invisibility.class);
+        boss.fieldOfView[h.pos]=false;boss.advanceChains(4);check(h.pos==initial,"Chainwarden cannot pull outside line of sight");
+        boss.fieldOfView[h.pos]=true;boss.advanceChains(4);check(h.pos==initial+2,"Chainwarden resumes pulling after detection returns");
         com.shatteredpixel.shatteredpixeldungeon.levels.traps.ChainTrap trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ChainTrap();trap.set(h.pos);trap.activate();check(h.buff(Roots.class)!=null&&h.buff(Roots.class).cooldown()==2,"Chain Trap roots two turns");
         for(Class<?> kind:new Class<?>[]{com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfNecrosis.class,com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfGravity.class,com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfBone.class}){int index=Arrays.asList(Generator.Category.WAND.classes).indexOf(kind);check(index>=0&&Generator.Category.WAND.defaultProbs[index]==3,"New wand generator weight");}
         check(Arrays.asList(Weapon.Enchantment.curses).contains(com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Echo.class)&&Arrays.asList(Armor.Glyph.curses).contains(com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Withering.class),"New curse pools");
@@ -1039,6 +1051,14 @@ public class SmokeRun {
         Dungeon.level.cleanWalls();
     }
     public static class PushBoss extends Rat {{properties.add(Property.BOSS);}}
+    public static class HurlPathTrap extends com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap {
+        int activations,occupant=-1,relocate=-1;boolean lethal;
+        @Override public String name(){return "test pressure trap";}
+        @Override public void activate(){
+            Char victim=Actor.findChar(pos);activations++;occupant=victim==null?-1:victim.id();
+            if(victim!=null){if(lethal)victim.damage(10000,this);else if(relocate>=0)victim.pos=relocate;}
+        }
+    }
     private static PushBoss pushBoss(int cell){
         PushBoss boss=new PushBoss();boss.pos=cell;boss.sprite=new RatSprite();boss.sprite.link(boss);
         Dungeon.level.mobs.add(boss);Actor.add(boss);return boss;
@@ -1076,6 +1096,16 @@ public class SmokeRun {
                 com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap trap=new com.shatteredpixel.shatteredpixeldungeon.levels.traps.ToxicTrap().hide();
                 Dungeon.level.setTrap(trap,c+1+distance);Level.set(trap.pos,Terrain.SECRET_TRAP);
                 check(crystal.cast(h,spell,enemy.pos,c+2)&&enemy.pos==trap.pos&&trap.active==(tier<6),"48: hidden landing trap threshold "+tier);
+                psychicArena();crystal.level(tier);crystal.gainCharge(100);enemy=target(c+1);
+                HurlPathTrap first=new HurlPathTrap(),second=new HurlPathTrap(),last=new HurlPathTrap();
+                Dungeon.level.setTrap(first,c+2);Level.set(first.pos,Terrain.SECRET_TRAP);
+                Dungeon.level.setTrap(second,c+3);Level.set(second.pos,Terrain.TRAP);
+                Dungeon.level.setTrap(last,c+1+distance);Level.set(last.pos,Terrain.SECRET_TRAP);
+                check(crystal.cast(h,spell,enemy.pos,c+2)&&enemy.pos==c+1+distance,"48: path traps preserve throw distance "+tier);
+                boolean sweep=spell.equals("hurl")&&tier>=6;
+                check(first.activations==(sweep?1:0)&&(!sweep||first.occupant==enemy.id()),"48: traversed hidden trap targets thrown creature "+spell+"/"+tier);
+                if(distance>2)check(second.activations==(sweep?1:0)&&(!sweep||second.occupant==enemy.id()),"48: consecutive path traps "+spell+"/"+tier);
+                check(last.activations==(tier>=6?1:0)&& (tier<6||last.occupant==enemy.id()),"48: final trap triggers exactly once "+spell+"/"+tier);
                 psychicArena();crystal.level(tier);crystal.gainCharge(100);enemy=target(c+1);Level.set(c+2,Terrain.CHASM);
                 check(crystal.cast(h,spell,enemy.pos,c+2)&&(tier<6?enemy.isAlive()&&enemy.pos==c+1:!enemy.isAlive()&&enemy.pos==c+2),"48: first chasm edge threshold "+tier);
             }
@@ -1083,7 +1113,15 @@ public class SmokeRun {
             check(!crystal.cast(h,"push",boss.pos,null)&&boss.pos==c+1&&crystal.charges()==charges,"48: Push rejects bosses at tier "+tier);
             check(crystal.cast(h,"hurl",boss.pos,c+2)&&boss.pos==c+2,"48: Hurl boss one cell at tier "+tier);
         }
-        System.out.println("TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision riders, traps, chasms and boss rules at every Crystal level 0-10");
+        for(boolean lethal:new boolean[]{false,true}){
+            psychicArena();int c=h.pos;crystal.level(10);crystal.gainCharge(100);Rat victim=target(c+1);
+            HurlPathTrap interruption=new HurlPathTrap();interruption.lethal=lethal;interruption.relocate=c+Dungeon.level.width();
+            Dungeon.level.setTrap(interruption,c+2);Level.set(interruption.pos,Terrain.TRAP);
+            HurlPathTrap later=new HurlPathTrap();Dungeon.level.setTrap(later,c+3);Level.set(later.pos,Terrain.TRAP);
+            check(crystal.cast(h,"hurl",victim.pos,c+2)&&interruption.activations==1&&later.activations==0,"48: interrupted path does not trigger later traps");
+            check(lethal?!victim.isAlive()&&victim.pos==c+2:victim.isAlive()&&victim.pos==interruption.relocate,"48: lethal/relocating trap retains its result");
+        }
+        System.out.println("TEST 48 PASS: Push/Hurl distance, walls, occupied cells, collision damage, landing/path traps, trap interruption, chasms and boss rules at every Crystal level 0-10");
         psychicArena();crystal.level(0);
         // Reset only the test item's saved XP, using its production bundle format.
         Bundle fresh=new Bundle();crystal.storeInBundle(fresh);fresh.put("spent_experience",0);crystal.restoreFromBundle(fresh);

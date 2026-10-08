@@ -1,3 +1,11 @@
+# Telekinesis, stealth and motion v1.29.9 - 2026-10-08
+
+- Crystal +6 and higher Hurl hard-presses intermediate traps with the victim occupying each cell, in path order; landing still triggers once. Death, teleportation or replacement ends the remaining throw. Push, ordinary Blast Wave and the existing collision/Paralysis, chasm and boss thresholds retain their behavior.
+- Chainwarden no longer bypasses invisibility or line of sight when pulling or aiming a chain-trap pattern. The normal four-turn cadence and combat statistics are unchanged. Existing content regressions exercise actual Cloak stealth, potion invisibility, occlusion and resumed detection.
+- Rogue's Foresight now has an eye as its primary painted motif; Wide Search retains the magnifying glass. The existing offline packer reproduces the updated atlas and large inspection painting from committed sources.
+- Drinking overlays the consumed potion's painted bottle during the normal operation animation, lifting and tipping it towards the mouth without changing its one-turn cost or callbacks. Resources are cached on the render thread. Haste uses two slightly clearer blue-silver brush wisps anchored to the actual boot silhouette, drawn above the body so they remain visible. They appear only during accelerated movement and cease when the buff ends.
+- The directional Horror ring was already absent in v1.29.8. Extended native checks cover all eight directions with popup ON/OFF, retained log text and the fresh response window; left/right captures show the actual cleared game view. Use the new packaged launcher/APK to replace earlier builds.
+
 # Horror warning v1.29.8 - 2026-10-08
 
 - Removed the bronze screen-edge directional ambush indicator and its position callback. The warning popup, sound/log cue, interrupted queued actions and fresh-action response opportunity remain intact. Detection silhouettes and Horror behavior are unchanged.

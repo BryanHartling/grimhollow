@@ -1916,7 +1916,36 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(BalanceTuning.get(BalanceTuning.Key.HORROR_WARNING_POPUP)!=1)throw new AssertionError("Popup ON menu setting did not persist");
                 interfaceBounds();capture("horror-balance-tuning");closeReviewWindows();
                 if(!horrorWarningCaptured)throw new AssertionError("Warning evidence not captured");
-                System.out.println("TEST 60 NATIVE PASS: persistent ambush HUD, optional popup OFF with retained log and fresh-action evasion, real pointer auto-travel interruption, painted exposed sprite, entity-only Mind Vision, unknown-cell inspection, remains/loot and painted bone-wall lifetime inspection, persisted ON/OFF balance-menu clicks; failures=0");
+                break;
+            case 14:
+                try {
+                java.lang.reflect.Method warn=reviewHorror.getClass().getDeclaredMethod("warn",boolean.class);warn.setAccessible(true);
+                for(int direction:com.watabou.utils.PathFinder.NEIGHBOURS8){
+                    reviewHorror.pos=hero.pos+direction;reviewHorror.sprite.place(reviewHorror.pos);warn.invoke(reviewHorror,false);Dungeon.observe();
+                    com.shatteredpixel.shatteredpixeldungeon.effects.HorrorSenseLayer layer=null;
+                    for(com.watabou.noosa.Gizmo member:RecoveryChecks.members(Game.scene()))if(member instanceof com.shatteredpixel.shatteredpixeldungeon.effects.HorrorSenseLayer)layer=(com.shatteredpixel.shatteredpixeldungeon.effects.HorrorSenseLayer)member;
+                    if(layer==null)throw new AssertionError("Missing Horror HUD layer");layer.update();
+                    if(!layer.ambushNoticeVisible())throw new AssertionError("Missing warning from direction "+direction);
+                    noHorrorDirectionMarker(layer);
+                    BalanceTuning.setShared(BalanceTuning.Key.HORROR_WARNING_POPUP,0);layer.update();
+                    if(layer.ambushNoticeVisible())throw new AssertionError("Popup OFF ignored from direction "+direction);
+                    noHorrorDirectionMarker(layer);BalanceTuning.setShared(BalanceTuning.Key.HORROR_WARNING_POPUP,1);
+                }
+                reviewHorror.pos=hero.pos+1;reviewHorror.sprite.place(reviewHorror.pos);warn.invoke(reviewHorror,false);Dungeon.observe();
+                }catch(ReflectiveOperationException error){throw new AssertionError("Could not position native ambush fixture",error);}
+                break;
+            case 15:
+                if(!horrorNoticeVisible())throw new AssertionError("Right-side warning missing from drawn frame");
+                capture("horror-warning-right");
+                try{
+                    java.lang.reflect.Method warn=reviewHorror.getClass().getDeclaredMethod("warn",boolean.class);warn.setAccessible(true);
+                    reviewHorror.pos=hero.pos-1;reviewHorror.sprite.place(reviewHorror.pos);warn.invoke(reviewHorror,false);Dungeon.observe();
+                }catch(ReflectiveOperationException error){throw new AssertionError(error);}
+                break;
+            case 16:
+                if(!horrorNoticeVisible())throw new AssertionError("Left-side warning missing from drawn frame");
+                capture("horror-warning-left");
+                System.out.println("TEST 60 NATIVE PASS: eight ambush directions with no bronze marker, persistent HUD, optional popup OFF with retained log and fresh-action evasion, pointer travel interruption, entity-only detection, remains/bone-wall inspection and persisted menu toggle; failures=0");
                 Gdx.app.exit();break;
         }
     }
@@ -1924,6 +1953,13 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         for(com.watabou.noosa.Gizmo member:RecoveryChecks.members(Game.scene()))if(member instanceof com.shatteredpixel.shatteredpixeldungeon.effects.HorrorSenseLayer)
             return ((com.shatteredpixel.shatteredpixeldungeon.effects.HorrorSenseLayer)member).ambushNoticeVisible();
         return false;
+    }
+    private void noHorrorDirectionMarker(Group group){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(group)){
+            if(child instanceof Image && child.isVisible() && ((Image)child).texture==com.watabou.gltextures.TextureCache.get("effects/readability.png"))
+                throw new AssertionError("Bronze directional marker still renders");
+            if(child instanceof Group)noHorrorDirectionMarker((Group)child);
+        }
     }
     private void expeditionFloor(int depth) {
         questField(GameScene.class,"scene",null);
@@ -3410,7 +3446,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Haste prior=hero.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Haste.class);
         boolean enhanced=SPDSettings.enhancedEffects();float elapsed=Game.elapsed;
         com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.HeroSprite();
-        Pixmap baseline=null,moving=null,stopped=null;
+        Pixmap baseline=null,moving=null,stopped=null,expired=null,drinking=null,withoutBottle=null;
         try{
             SPDSettings.enhancedEffects(true);
             baseline=renderSprite(sprite,buffer,camera);
@@ -3428,11 +3464,42 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             java.util.zip.CRC32 a=new java.util.zip.CRC32(),b=new java.util.zip.CRC32();a.update(baseline.getPixels().duplicate());b.update(stopped.getPixels().duplicate());
             if(a.getValue()!=b.getValue())failures.add("32 Haste still draws while standing");
             PixmapIO.writePNG(Gdx.files.absolute("verification/interface/haste-standing.png"),stopped,-1,true);
-            System.out.println("HASTE VISUAL: moving boot pixels="+changed+", upper-body pixels="+aboveBoots+", standing matches normal sprite; failures="+failures.size());
+            if(prior==null){
+                com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.detach(hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Haste.class);
+                sprite.isMoving=true;sprite.x+=.25f;trail.update();expired=renderSprite(sprite,buffer,camera);
+                java.util.zip.CRC32 c=new java.util.zip.CRC32();c.update(expired.getPixels().duplicate());
+                if(a.getValue()!=c.getValue())failures.add("32 Haste trail remains after buff expiry");
+            }
+            sprite.isMoving=false;sprite.idle();sprite.paused=false;
+            sprite.drink(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHaste());Game.elapsed=.15f;sprite.update();
+            com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite bottle=(com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSprite)RecoveryChecks.field(sprite,"drinkBottle");
+            com.watabou.utils.RectF bottleBody=GameGeometry.opaqueBounds(bottle.texture,bottle.frame());
+            float bottleWidth=bottleBody.width()*bottle.width()/(bottle.frame().width()*bottle.texture.width);
+            float bottleHeight=bottleBody.height()*bottle.height()/(bottle.frame().height()*bottle.texture.height);
+            if(RecoveryChecks.field(sprite,"renderedDrink")==null || bottleWidth>3.81f || bottleHeight>5.51f || bottleWidth<=0 || bottleHeight<=0)failures.add("32 drinking presentation not loaded/sized: "+bottleWidth+"x"+bottleHeight+" item="+RecoveryChecks.field(sprite,"renderedDrink"));
+            float drinkZoom=camera.zoom,xx=camera.matrix[0],yy=camera.matrix[5];camera.zoom=6;camera.matrix[0]=12f/256;camera.matrix[5]=-12f/256;
+            int bottlePixels=0;
+            try{
+                drinking=renderSprite(sprite,buffer,camera);PixmapIO.writePNG(Gdx.files.absolute("verification/interface/haste-drinking.png"),drinking,-1,true);
+                java.lang.reflect.Field held=sprite.getClass().getDeclaredField("drinkingItem");held.setAccessible(true);held.set(sprite,null);
+                withoutBottle=renderSprite(sprite,buffer,camera);
+                for(int y=0;y<256;y++)for(int x=0;x<256;x++)if(drinking.getPixel(x,y)!=withoutBottle.getPixel(x,y))bottlePixels++;
+                if(bottlePixels<20)failures.add("32 painted bottle contributes no visible drinking pixels: "+bottlePixels);
+            }finally{camera.zoom=drinkZoom;camera.matrix[0]=xx;camera.matrix[5]=yy;}
+            sprite.idle();if(RecoveryChecks.field(sprite,"drinkingItem")!=null)failures.add("32 drinking bottle remains after operation");
+            Image search=new com.shatteredpixel.shatteredpixeldungeon.ui.TalentIcon(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.WIDE_SEARCH);
+            Image foresight=new com.shatteredpixel.shatteredpixeldungeon.ui.TalentIcon(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.ROGUES_FORESIGHT);
+            Pixmap atlas=new Pixmap(Gdx.files.internal("interfaces/talent_icons.png"));
+            int similarity=0;for(int y=0;y<64;y++)for(int x=0;x<64;x++)if(atlas.getPixel(70%16*64+x,70/16*64+y)==atlas.getPixel(72%16*64+x,72/16*64+y))similarity++;
+            if(similarity>3500 || search.frame().equals(foresight.frame()))failures.add("32 Rogue icons lack distinct primary imagery");
+            atlas.dispose();search.destroy();foresight.destroy();
+            System.out.println("HASTE VISUAL: moving boot pixels="+changed+", upper-body pixels="+aboveBoots+", standing/expired match normal sprite, drinking bottle pixels="+bottlePixels+", distinct Rogue search/foresight; failures="+failures.size());
         }finally{
             if(prior==null)com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff.detach(hero,com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Haste.class);
             sprite.destroy();hero.sprite=original;Game.elapsed=elapsed;SPDSettings.enhancedEffects(enhanced);
             if(baseline!=null)baseline.dispose();if(moving!=null)moving.dispose();if(stopped!=null)stopped.dispose();
+            if(expired!=null)expired.dispose();if(drinking!=null)drinking.dispose();
+            if(withoutBottle!=null)withoutBottle.dispose();
         }
     }
 

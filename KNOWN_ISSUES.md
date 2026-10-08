@@ -1,5 +1,7 @@
 # Known issues
 
+- v1.29.9: Physical Samsung tablet and the user's exact Chainwarden/Horror saves are NOT RUN; native portrait/touch checks are not hardware testing. The first extended visual fixture needed checked-exception handling, an unpaused drinking sample, visible-paint sizing instead of atlas padding, and a frame after closing the menu. Failed attempts are not counted as passing. Terrain contrast test 45 remains Abandoned: test failed and is not rerun.
+
 - v1.29.4: physical Samsung tablet review remains NOT RUN. The first native Bounty attempt mistakenly required a modal while checking the HUD alone; HUD and popup bounds now have separate assertions. An old-save test initially referenced an unavailable JSON dependency and now uses the existing Bundle API. Failed attempts are not counted as passing. Test 45 remains Abandoned: test failed and is not rerun.
 
 - v1.29.2: six named quarry skins pass native portrait/landscape, geometry, animation and reload checks; physical Samsung tablet visual review remains NOT RUN. Combat and quest tuning are unchanged. Test 45 remains Abandoned: test failed and is not rerun.

@@ -125,7 +125,9 @@ public class WandOfBlastWave extends DamageWand {
 	/** Optional Psychic landing rules; ordinary blast-wave callers retain their original behavior. */
 	public static abstract class LandingRules {
 		public final boolean hazards;
-		public LandingRules(boolean hazards) { this.hazards = hazards; }
+		public final boolean pathTraps;
+		public LandingRules(boolean hazards) { this(hazards, false); }
+		public LandingRules(boolean hazards, boolean pathTraps) { this.hazards = hazards; this.pathTraps = pathTraps; }
 		public abstract void collide(Char target, int moved);
 	}
 
@@ -208,6 +210,25 @@ public class WandOfBlastWave extends DamageWand {
 					return;
 				}
 				int oldPos = ch.pos;
+				// Hurl presses traversed traps with the victim actually in that cell.
+				// A lethal or relocating trap ends the throw at its own result.
+				if (rules != null && rules.pathTraps) {
+					for (int i = 1; i < finalDist; i++) {
+						int cell = trajectory.path.get(i);
+						if (Actor.findChar(cell) != null || Dungeon.level.solid[cell]) {
+							if (ch.sprite != null) ch.sprite.place(ch.pos);
+							return;
+						}
+						ch.pos = cell;
+						com.shatteredpixel.shatteredpixeldungeon.levels.traps.Trap trap = Dungeon.level.traps.get(cell);
+						if (trap != null && trap.active) Dungeon.level.pressCell(cell);
+						if (!ch.isAlive() || ch.pos != cell || Actor.findChar(cell) != ch) {
+							if (ch.sprite != null) ch.sprite.place(ch.pos);
+							Dungeon.observe();
+							return;
+						}
+					}
+				}
 				ch.pos = newPos;
 				if (rules != null && ruleCollision && ch.isActive()) rules.collide(ch, finalDist);
 				if (finalCollided && ch.isActive()) {

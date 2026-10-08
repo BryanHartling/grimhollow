@@ -10183,7 +10183,7 @@
         1024,
         1024
       ],
-      "rgba_sha256": "1feec957fc8404be6a81532656930e97f6efd32632cb5add433a4596fb8ad6ff"
+      "rgba_sha256": "a7ca033186994c35b2c797f40a8483d83f9eafe67a96044f94a89033c27087e4"
     },
     "environment/custom_tiles/caves_boss.png": {
       "size": [
@@ -13501,7 +13501,7 @@
         256,
         256
       ],
-      "rgba_sha256": "dd6413b57f51a31660189fab84562d6e73127927319c887acab9f01109474b46"
+      "rgba_sha256": "d24157a3e949e24f6adfa24fb04b7fe0bb3ebd43143abdc63b80f76d753f186e"
     },
     "artwork/talent-73.png": {
       "size": [

@@ -51,6 +51,10 @@ public class HeroSprite extends CharSprite {
 	private Animation read;
     private volatile com.shatteredpixel.shatteredpixeldungeon.items.Item actionWeapon;
     private com.shatteredpixel.shatteredpixeldungeon.effects.HasteTrail hasteTrail;
+    private volatile com.shatteredpixel.shatteredpixeldungeon.items.Item drinkingItem;
+    private com.shatteredpixel.shatteredpixeldungeon.items.Item renderedDrink;
+    private ItemSprite drinkBottle;
+    private float drinkTime;
 
 	public HeroSprite() {
 		super();
@@ -67,6 +71,7 @@ public class HeroSprite extends CharSprite {
 			die();
         // Cache draw resources on the scene/render thread, never in actor callbacks.
         hasteTrail=new com.shatteredpixel.shatteredpixeldungeon.effects.HasteTrail(this);
+        drinkBottle=new ItemSprite();
 	}
 
 	public void disguise(HeroClass cls){
@@ -126,6 +131,7 @@ public class HeroSprite extends CharSprite {
 	@Override
 	public void idle() {
         actionWeapon=null;
+        drinkingItem=null;
 		super.idle();
 		if (ch != null && ch.flying) {
 			play( fly );
@@ -156,15 +162,32 @@ public class HeroSprite extends CharSprite {
     // Generic painted poses replace inventory icons used as anatomical overlays.
     public Image displayedEquipment(){return null;}
     public com.shatteredpixel.shatteredpixeldungeon.items.Item displayedWeapon(){return actionWeapon!=null?actionWeapon:((Hero)ch).belongings.weapon();}
+    /** Keep the normal operation callback and one-turn potion timing. */
+    public synchronized void drink(com.shatteredpixel.shatteredpixeldungeon.items.Item potion){
+        operate(ch.pos);
+        drinkingItem=potion;
+    }
     @Override public synchronized void attack(int cell,Callback callback){
         actionWeapon=((Hero)ch).belongings.attackingWeapon();
         super.attack(cell,callback);
     }
     @Override public void draw(){
-        if(hasteTrail!=null)hasteTrail.draw();
         super.draw();
+        if(hasteTrail!=null)hasteTrail.draw();
+        if(drinkingItem!=null && drinkingItem==renderedDrink && visible){
+            RectF body=visibleBounds();
+            float lift=Math.min(1,drinkTime/.18f);
+            if(drinkTime>.36f)lift=Math.max(0,(.5f-drinkTime)/.14f);
+            float side=flipHorizontal?1:-1;
+            drinkBottle.camera=camera();
+            drinkBottle.x=(body.left+body.right)/2+side*(1.2f+2*(1-lift))-drinkBottle.origin.x;
+            drinkBottle.y=body.top+body.height()*.13f+6*(1-lift)-drinkBottle.origin.y;
+            drinkBottle.angle=side*55*lift;
+            drinkBottle.alpha(am);
+            drinkBottle.draw();
+        }
     }
-    @Override public void destroy(){if(hasteTrail!=null)hasteTrail.destroy();super.destroy();}
+    @Override public void destroy(){if(hasteTrail!=null)hasteTrail.destroy();if(drinkBottle!=null)drinkBottle.destroy();super.destroy();}
 
 	@Override
 	public void bloodBurstA(PointF from, int damage) {
@@ -184,6 +207,16 @@ public class HeroSprite extends CharSprite {
 		
 		super.update();
         if(hasteTrail!=null)hasteTrail.update();
+        com.shatteredpixel.shatteredpixeldungeon.items.Item potion=drinkingItem;
+        if(potion!=renderedDrink){
+            renderedDrink=potion;drinkTime=0;
+            if(potion!=null){
+                drinkBottle.view(potion.image,null);
+                GameGeometry.fitBox(drinkBottle,3.8f,5.5f);
+                drinkBottle.origin.set(drinkBottle.width()/2,drinkBottle.height()*.2f);
+            }
+        }
+        if(potion!=null)drinkTime+=Game.elapsed;
 	}
 	
 	public void sprint( float speed ) {

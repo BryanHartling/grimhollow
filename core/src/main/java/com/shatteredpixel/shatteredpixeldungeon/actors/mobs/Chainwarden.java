@@ -17,18 +17,22 @@ public class Chainwarden extends Tengu {
     private float chainClock;
     private int trapClock;
     {spriteClass=ChainwardenSprite.class;}
+    private boolean canSeeHero(){
+        return Dungeon.hero.isAlive()&&Dungeon.hero.invisible<=0
+                && fieldOfView!=null && fieldOfView[Dungeon.hero.pos] && !isCharmedBy(Dungeon.hero);
+    }
     public void advanceChains(float turns){
         chainClock+=turns;
         if(chainClock>=4){
             chainClock%=4;
-            if(buff(Silenced.class)==null&&Dungeon.hero.isAlive()&&Dungeon.level.distance(pos,Dungeon.hero.pos)>1){
+            if(buff(Silenced.class)==null&&canSeeHero()&&Dungeon.level.distance(pos,Dungeon.hero.pos)>1){
                 if(sprite!=null&&sprite.parent!=null&&sprite.visible)sprite.parent.add(new Chains(pos,Dungeon.hero.pos,Effects.Type.CHAIN,null));
                 WandOfGravity.pull(Dungeon.hero,pos,2,this);
             }
         }
     }
     @Override protected void spendConstant(float time){super.spendConstant(time);if(time>0)advanceChains(time);}
-    @Override public boolean canUseAbility(){return HP<=HT/2&&++trapClock>=4;}
+    @Override public boolean canUseAbility(){return canSeeHero()&&HP<=HT/2&&++trapClock>=4;}
     @Override public boolean useAbility(){
         trapClock=0;
         for(int offset:PathFinder.NEIGHBOURS8){

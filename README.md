@@ -1,3 +1,11 @@
+# Telekinesis, stealth and motion - v1.29.9
+
+High-level Hurl springs traps along the thrown creature's path as well as at its landing, retaining its existing impact damage and ledge rules. A lethal or relocating trap ends the throw safely. Chainwarden's pulls and targeted traps respect Cloak stealth, other invisibility and line of sight. Rogue's Foresight uses a distinct eye painting instead of Wide Search's magnifying glass.
+
+Drinking raises and tips the actual painted bottle. Haste has restrained blue-silver boot wisps during movement while the speed buff lasts, with no idle effect. The Horror warning is checked from all eight directions: no bronze directional marker, and its popup obeys the existing Playtest ON/OFF setting while warning text always remains in the log.
+
+Windows: `desktop/build/windows/1.29.9/Grimhollow/Grimhollow.exe` (keep the entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk` (`1.29.9-INDEV`, version code 1008). Install this APK over the older tablet build; an already-running older executable is not changed by rebuilding. Physical Samsung tablet review remains with human playtesting.
+
 # Horror warning - v1.29.8
 
 The bronze directional marker at the screen edge has been removed. Playtest > Balance tuning > Grimhollow enemies > Lurking Horror offers Show ambush popup: ON/OFF (default ON). This applies immediately and persists across games on this device. The warning text remains in the log and travel stops for a fresh response even when the popup is off.

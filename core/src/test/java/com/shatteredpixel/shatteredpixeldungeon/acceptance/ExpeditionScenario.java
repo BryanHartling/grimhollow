@@ -73,7 +73,7 @@ final class ExpeditionScenario {
         int hp = Dungeon.hero.HP; ascend.invoke(new InterlevelScene());
         check(Dungeon.level instanceof DragonCavernLevel && Dungeon.hero.HP == hp && Dungeon.hero.buff(Cripple.class) == null, "voluntary descent harms hero");
         DragonCavernLevel level = (DragonCavernLevel) Dungeon.level;
-        check(level.viewDistance == 3 && level.addRespawner() == null && level.heaps.size == 48, "dark finite cavern");
+        check(level.viewDistance == 3 && level.addRespawner() instanceof DragonCavernLevel.CavernSpawner && level.heaps.size == 48, "dark cavern, dedicated timer and finite supplies");
         check(level.map[DragonCavernLevel.CENTER]==Terrain.ENTRANCE,"cavern climb must depict stairs up");
         int food = 0, torches = 0, gear=0, rings=0, bones=0, remains=0;
         for(Heap heap:level.heaps.valueList()){if(heap.type==Heap.Type.SKELETON)bones++;if(heap.type==Heap.Type.REMAINS)remains++;}
@@ -130,15 +130,71 @@ final class ExpeditionScenario {
         check(boss.hatched == 6 && !boss.canHatch(), "finite lifetime brood budget");
         Bundle b = new Bundle(); b.put("boss", boss); Broodmother copy = (Broodmother) b.get("boss");
         check(copy.hatched == 6 && !copy.canHatch(), "brood budget reset on load");
+        Actor timer = level.addRespawner(); float remaining = timer.cooldown();
+        check(remaining >= 60 && remaining <= 100 && timer == level.addRespawner()
+                && timer.cooldown() == remaining, "duplicate timer / visit resets replenishment delay");
+        int survivors = level.mobs.size() - 1;
         Dungeon.hero.lvl = 30; boss.HP = 0; boss.die(Dungeon.hero);
-        check(DragonExpedition.spiderSlain && level.mobs.isEmpty(), "cavern not safe after victory");
+        check(DragonExpedition.spiderSlain && level.mobs.size() == survivors, "broodmother death clears surviving spiders");
+        java.util.Arrays.fill(level.heroFOV, true);
+        cavernTick(timer);
+        check(level.mobs.size() == survivors && timer.cooldown() >= 60 && timer.cooldown() <= 100,
+                "spawn inside sight / blocked attempt retries every turn");
+        java.util.Arrays.fill(level.heroFOV, false);
+        cavernTick(timer);
+        Broodmother replacement = null;
+        for (Mob mob : level.mobs) if (mob instanceof Broodmother) replacement = (Broodmother) mob;
+        check(replacement != null && replacement.replenished && replacement.EXP == 0
+                && replacement.createLoot() == null && replacement.canHatch(), "replacement mother missing / reward farming / cannot hatch after first victory");
+        check(level.distance(replacement.pos, Dungeon.hero.pos) >= 8 && level.distance(replacement.pos, DragonCavernLevel.CENTER) >= 14
+                && level.openSpace[replacement.pos], "replacement spawns beside hero / unsafe landing / cramped large mob");
+        Bundle replacementBundle = new Bundle(); replacementBundle.put("mother", replacement);
+        Broodmother restoredMother = (Broodmother) replacementBundle.get("mother");
+        check(restoredMother.replenished && restoredMother.EXP == 0 && restoredMother.createLoot() == null, "replacement mother rewards return after load");
+        replacement.hatchCell = level.randomRespawnCell(null);
+        check(replacement.hatch(), "replacement cannot hatch after original victory");
+        cavernTick(timer);
+        CavernSpinner returning = null;
+        for (Mob mob : level.mobs) if (mob instanceof CavernSpinner && ((CavernSpinner) mob).replenished) returning = (CavernSpinner) mob;
+        check(returning != null && returning.EXP == 0 && !returning.hatchling && returning.createLoot() == null,
+                "timed scavenger missing / farms rewards / wrongly counts as summoned brood");
+        Bundle returningBundle = new Bundle(); returningBundle.put("spider", returning);
+        CavernSpinner restoredSpider = (CavernSpinner) returningBundle.get("spider");
+        check(restoredSpider.replenished && restoredSpider.EXP == 0 && restoredSpider.createLoot() == null, "returning spider rewards reset on load");
+        int capped = level.mobs.size();
+        java.util.Set<Float> delays = new java.util.HashSet<>();
+        for (int attempt = 0; attempt < 20; attempt++) {
+            cavernTick(timer); delays.add(timer.cooldown());
+            check(level.mobs.size() == capped && timer.cooldown() >= 60 && timer.cooldown() <= 100,
+                    "spider cap / duplicate mother / timer bounds");
+        }
+        check(delays.size() > 1, "replenishment timer is not randomized");
+        com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfWealth wealth = new com.shatteredpixel.shatteredpixeldungeon.items.rings.RingOfWealth();
+        wealth.level(10); Dungeon.hero.belongings.ring = wealth; wealth.activate(Dungeon.hero);
+        int heapCount = level.heaps.size, itemCount = 0;
+        for (Heap heap : level.heaps.valueList()) itemCount += heap.items.size();
+        for (int roll = 0; roll < 100; roll++) { replacement.rollToDropLoot(); returning.rollToDropLoot(); restoredSpider.rollToDropLoot(); }
+        int afterItems = 0; for (Heap heap : level.heaps.valueList()) afterItems += heap.items.size();
+        check(level.heaps.size == heapCount && afterItems == itemCount, "renewable ordinary / Wealth / Lucky loot farming");
+        int experience = Dungeon.hero.exp;
+        replacement.sprite = replacement.sprite(); replacement.HP = 0; replacement.die(Dungeon.hero);
+        check(Dungeon.hero.exp == experience && DragonExpedition.spiderSlain && level.mobs.size() == capped - 1,
+                "replacement boss grants XP / resets victory / clears spiders");
+        int retained = level.mobs.size(); float savedDelay = timer.cooldown();
         InterlevelScene.curTransition = level.getTransition(null);
         java.lang.reflect.Method descend = InterlevelScene.class.getDeclaredMethod("descend"); descend.setAccessible(true);
         descend.invoke(new InterlevelScene());
         check(Dungeon.level instanceof DragonChasmLevel && Dungeon.hero.pos == DragonChasmLevel.centerCell(), "return climb destination");
         InterlevelScene.curTransition = Dungeon.level.getTransition(LevelTransition.Type.REGULAR_ENTRANCE);
         ascend.invoke(new InterlevelScene());
-        check(Dungeon.level.mobs.isEmpty() && Dungeon.level.heaps.size == 48, "reentry regenerates enemies/supplies");
+        check(Dungeon.level.mobs.size() == retained && Dungeon.level.heaps.size == 48, "reentry clears surviving enemies / regenerates supplies");
+        level = (DragonCavernLevel) Dungeon.level;
+        timer = level.addRespawner();
+        check(timer.cooldown() == savedDelay && timer == level.addRespawner(), "saved timer resets across floor transitions");
+        Bundle legacy = new Bundle(); level.storeInBundle(legacy); legacy.remove("cavern_spawner");
+        DragonCavernLevel oldSave = new DragonCavernLevel(); oldSave.restoreFromBundle(legacy);
+        check(oldSave.addRespawner() != null && oldSave.mobs.size() == retained, "old cavern save loses mobs / fails timer migration");
+        Actor.remove(oldSave.addRespawner());
         check(Dungeon.level.map[DragonCavernLevel.CENTER]==Terrain.ENTRANCE,"loaded cavern stairs up");
         long originalSeed=Dungeon.seed;
         for(int seed=0;seed<32;seed++) {
@@ -165,7 +221,13 @@ final class ExpeditionScenario {
             Buff.detach(Dungeon.hero,Chasm.Falling.class);
         }
         Dungeon.seed=originalSeed;
-        System.out.println("TEST 59 cavern PASS: 32 connected natural outlines, 640 separated fall landings, outer broodmother/inner spiders, mixed 48 remains with 33 common gear/2 rings, finite supplies, up stairs, brood caps and persistence");
+        System.out.println("TEST 59 cavern PASS: natural outlines/falls, finite mixed supplies, surviving spiders, randomized 60-100-turn pressure, hidden arrivals, replacement brood, caps, zero renewable XP/loot with Wealth +10, open climb, saved timer and old-save migration");
+    }
+    private static void cavernTick(Actor timer) throws Exception {
+        java.lang.reflect.Method spend = Actor.class.getDeclaredMethod("spend", float.class); spend.setAccessible(true);
+        spend.invoke(timer, -timer.cooldown());
+        java.lang.reflect.Method act = DragonCavernLevel.CavernSpawner.class.getDeclaredMethod("act"); act.setAccessible(true);
+        check((Boolean) act.invoke(timer), "cavern timer stalls actor loop");
     }
     private static void dragon() throws Exception {
         Dungeon.init(); Dungeon.branch = DragonExpedition.BRANCH; Dungeon.depth = DragonExpedition.CHASM;
@@ -295,6 +357,10 @@ final class ExpeditionScenario {
         check(level.viewDistance==5 && level.mobs.size()==1,"configured cavern sight/population");
         Broodmother brood=(Broodmother)level.mobs.iterator().next();
         check(brood.HP==333 && brood.damageRoll()==0 && !brood.canHatch(),"configured brood stats/cap");
+        BalanceTuning.set(CAVERN_SPAWN_INTERVAL,0);
+        check(!level.replenishBrood() && level.mobs.size()==1,"disabled cavern replenishment spawns creatures");
+        BalanceTuning.set(CAVERN_SPAWN_INTERVAL,40);
+        for(int sample=0;sample<20;sample++)check(level.respawnCooldown()>=30 && level.respawnCooldown()<=50,"configured cavern timer bounds");
         int food=0,torches=0;
         for(Heap heap:level.heaps.valueList())for(Item item:heap.items){if(item instanceof Food)food++;if(item instanceof Torch)torches++;}
         check(food==1 && torches==2 && level.heaps.size==48,"configured guaranteed supplies");

@@ -9,7 +9,7 @@ import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
 import com.watabou.utils.Random;
 import java.util.ArrayList;
 
-/** Finite side-quest floors never use the main dungeon's respawn or supply schedules. */
+/** Side-quest floors never use the main dungeon's respawn or supply schedules. */
 public abstract class ExpeditionLevel extends Level {
     @Override public String tilesTex() { return Assets.Environment.TILES_CAVES; }
     @Override public String waterTex() { return Assets.Environment.WATER_CAVES; }

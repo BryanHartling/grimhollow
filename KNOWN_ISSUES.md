@@ -1,5 +1,7 @@
 # Known issues
 
+- v1.29.11: Physical tablet and full-campaign pressure balance remain NOT RUN. Earlier builds already removed spiders on Broodmother death; this patch does not recreate that lost population, but introduces its saved replenishment timer. The initial Android sandbox failure used the authorized route; pre-sprite patrol and protected-field failures were repaired and the final gates passed. Both native orientations emitted a non-fatal clipboard warning (exit 0). Terrain contrast test 45 remains Abandoned: test failed and is not rerun.
+
 - v1.29.10: No total-ore shortage reproduced in the original generation of reported tablet seed 4507775544315; the actual tablet save and its collection history were unavailable. The placement and clipping defects are fixed without rerolling existing mines. Physical tablet testing remains NOT RUN. Initial Git approval review hit the usage limit; the authorized retry succeeded after the user resumed work.
 
 - v1.29.9: Physical Samsung tablet and the user's exact Chainwarden/Horror saves are NOT RUN; native portrait/touch checks are not hardware testing. The first extended visual fixture needed checked-exception handling, an unpaused drinking sample, visible-paint sizing instead of atlas padding, and a frame after closing the menu. Failed attempts are not counted as passing. Terrain contrast test 45 remains Abandoned: test failed and is not rerun.

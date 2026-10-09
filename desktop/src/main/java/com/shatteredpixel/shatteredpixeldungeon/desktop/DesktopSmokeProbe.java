@@ -2104,7 +2104,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(Dungeon.level.activateTransition(Dungeon.hero,Dungeon.level.getTransition(null)))throw new AssertionError("Native living broodmother permits climb");
                 capture("expedition-fall-and-blocked-climb");break;
             case 28:
+                int cavernSurvivors=Dungeon.level.mobs.size()-1;
                 for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:new java.util.ArrayList<>(Dungeon.level.mobs))if(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Broodmother){m.HP=0;m.die(Dungeon.hero);}
+                if(Dungeon.level.mobs.size()!=cavernSurvivors)throw new AssertionError("Native broodmother death removed surviving spiders");
                 Dungeon.hero.pos=com.shatteredpixel.shatteredpixeldungeon.levels.DragonCavernLevel.CENTER;Dungeon.hero.sprite.place(Dungeon.hero.pos);
                 Dungeon.level.activateTransition(Dungeon.hero,Dungeon.level.getTransition(null));break;
             case 29:

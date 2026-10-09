@@ -1,3 +1,11 @@
+# Cavern pressure - v1.29.11
+
+Killing the Broodmother leaves the surviving cavern spiders and webs in place. A dedicated saved timer attempts one hidden replenishment every 60-100 turns at the default settings. A missing Broodmother is replaced before another scavenger is added; only one mother lives at a time, and the existing nine-spider cap still applies. The first victory permanently opens the climb. Initial enemies keep their rewards, while hatchlings and returning creatures grant no XP, ordinary loot or Wealth/Lucky bonus drops. Remains, rations and treasure are never replenished.
+
+Playtest > Balance tuning > Dragon expedition > Expedition cavern includes **Cavern replenishment interval** (default 80, randomized from 75% to 125%; zero disables it). The remaining time persists through saves and visits and pauses outside the cavern. Old saves acquire the timer without rebuilding their floor or restoring already-removed spiders.
+
+Windows: `desktop/build/windows/1.29.11/Grimhollow/Grimhollow.exe` (keep the entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk` (`1.29.11-INDEV`, version code 1010).
+
 # Mine ore placement and visibility - v1.29.10
 
 Exposed ore on side-facing walls and wall rims now retains its painted mineral instead of clipping it away. Crystal treasure pockets place their ore on separate cells; the mine painter respects its existing 45-47-piece allowance. No mine is rerolled on loading, and collected ore is unchanged. The artwork fix applies to already-generated mines.

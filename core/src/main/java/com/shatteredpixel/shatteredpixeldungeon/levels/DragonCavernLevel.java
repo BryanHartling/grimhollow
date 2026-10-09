@@ -8,10 +8,10 @@ import com.shatteredpixel.shatteredpixeldungeon.DragonExpedition;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Challenges;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
+import com.shatteredpixel.shatteredpixeldungeon.actors.Actor;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Broodmother;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.CavernSpinner;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob;
-import com.shatteredpixel.shatteredpixeldungeon.actors.blobs.Web;
 import com.shatteredpixel.shatteredpixeldungeon.items.*;
 import com.shatteredpixel.shatteredpixeldungeon.items.food.Food;
 import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
@@ -22,10 +22,13 @@ import com.shatteredpixel.shatteredpixeldungeon.utils.GLog;
 import com.watabou.utils.Random;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Reflection;
+import com.watabou.utils.PathFinder;
+import com.watabou.utils.BArray;
 import java.util.ArrayList;
 
 public class DragonCavernLevel extends ExpeditionLevel {
     public static final int SIZE = 43, CENTER = 21 * SIZE + 21;
+    private CavernSpawner cavernSpawner;
     { viewDistance = BalanceTuning.get(CAVERN_SIGHT); }
     @Override protected boolean build() {
         setSize(SIZE, SIZE);
@@ -136,20 +139,73 @@ public class DragonCavernLevel extends ExpeditionLevel {
         return best;
     }
     public void arrive() {
-        if (DragonExpedition.spiderSlain) { clearBrood(); return; }
         // Deliberately climbing down still alerts her. Falling does not bypass the outer spiders.
         if(Dungeon.hero.pos==CENTER&&Dungeon.hero.buff(Chasm.Falling.class)==null)
             for (Mob mob : mobs) if (mob instanceof Broodmother) ((Broodmother) mob).alertArrival();
     }
     @Override public void restoreFromBundle(Bundle bundle) {
         super.restoreFromBundle(bundle);map[CENTER]=Terrain.ENTRANCE;
+        cavernSpawner = (CavernSpawner) bundle.get("cavern_spawner");
     }
-    public void clearBrood() {
-        for (Mob mob : mobs.toArray(new Mob[0])) if (mob instanceof CavernSpinner) {
-            mob.alignment = com.shatteredpixel.shatteredpixeldungeon.actors.Char.Alignment.NEUTRAL;
-            mob.destroy(); if (mob.sprite != null) mob.sprite.die();
+    @Override public void storeInBundle(Bundle bundle) {
+        super.storeInBundle(bundle); bundle.put("cavern_spawner", cavernSpawner);
+    }
+    @Override public Actor addRespawner() {
+        if (cavernSpawner == null) {
+            cavernSpawner = new CavernSpawner();
+            Actor.addDelayed(cavernSpawner, respawnCooldown());
+        } else {
+            // Reuse the saved remaining time. Visits and loads do not reroll the delay.
+            Actor.add(cavernSpawner);
         }
-        Web web = (Web) blobs.get(Web.class);
-        if (web != null) web.fullyClear();
+        return cavernSpawner;
+    }
+    @Override public float respawnCooldown() {
+        int interval = BalanceTuning.get(CAVERN_SPAWN_INTERVAL);
+        return interval == 0 ? 80 : Random.IntRange(Math.max(1, interval * 3 / 4), Math.max(1, interval * 5 / 4));
+    }
+    public boolean replenishBrood() {
+        if (BalanceTuning.get(CAVERN_SPAWN_INTERVAL) == 0 || !Dungeon.hero.isAlive()) return false;
+        int spiders = 0;
+        boolean motherAlive = false;
+        for (Mob mob : mobs) if (mob.isAlive()) {
+            if (mob instanceof Broodmother) motherAlive = true;
+            if (mob instanceof CavernSpinner) spiders++;
+        }
+        Mob arrival;
+        if (!motherAlive) {
+            Broodmother mother = new Broodmother(); mother.setReplenished(); arrival = mother;
+        } else {
+            if (spiders >= BalanceTuning.get(SPIDERS_CAP)) return false;
+            CavernSpinner spider = new CavernSpinner(); spider.setReplenished(); arrival = spider;
+        }
+        PathFinder.buildDistanceMap(Dungeon.hero.pos, BArray.or(passable, avoid, null));
+        ArrayList<Integer> cells = new ArrayList<>();
+        for (int cell = 0; cell < length(); cell++) {
+            if (insideMap(cell) && passable[cell] && !pit[cell] && !heroFOV[cell]
+                    && distance(cell, Dungeon.hero.pos) >= 8 && findMob(cell) == null
+                    && Actor.findChar(cell) == null && cell != CENTER
+                    && PathFinder.distance[cell] != Integer.MAX_VALUE
+                    && (!(arrival instanceof Broodmother) || openSpace[cell] && distance(cell, CENTER) >= 14)) cells.add(cell);
+        }
+        if (cells.isEmpty()) return false;
+        arrival.pos = Random.element(cells);
+        // Set the patrol destination before GameScene creates the sprite. beckon()
+        // can call notice(), which requires a sprite that is not attached yet.
+        if (arrival instanceof Broodmother) ((Broodmother) arrival).patrolToward(Dungeon.hero.pos);
+        else ((CavernSpinner) arrival).patrolToward(Dungeon.hero.pos);
+        com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.add(arrival, 1f);
+        return true;
+    }
+    public static class CavernSpawner extends Actor {
+        { actPriority = BUFF_PRIO; }
+        @Override protected boolean act() {
+            if (!(Dungeon.level instanceof DragonCavernLevel)) { Actor.remove(this); return true; }
+            DragonCavernLevel cavern = (DragonCavernLevel) Dungeon.level;
+            cavern.replenishBrood();
+            // Even blocked/capped attempts wait for another full, randomized interval.
+            spend(cavern.respawnCooldown());
+            return true;
+        }
     }
 }

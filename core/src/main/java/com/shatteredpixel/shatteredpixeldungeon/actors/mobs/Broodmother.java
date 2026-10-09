@@ -22,6 +22,7 @@ import com.watabou.utils.Random;
 import java.util.ArrayList;
 
 public class Broodmother extends Mob {
+    public boolean replenished;
     public int hatched, hatchCooldown = BalanceTuning.get(BROOD_INTERVAL), hatchCell = -1;
     { spriteClass = com.shatteredpixel.shatteredpixeldungeon.sprites.BroodmotherSprite.class; HP = HT = BalanceTuning.get(BROOD_HEALTH); defenseSkill = 18; EXP = 25; maxLvl = 30;
         properties.add(Property.BOSS); properties.add(Property.LARGE);
@@ -53,7 +54,7 @@ public class Broodmother extends Mob {
         for (Mob mob : Dungeon.level.mobs) if (mob instanceof CavernSpinner && mob.isAlive()) {
             alive++; if (((CavernSpinner) mob).hatchling) brood++;
         }
-        return !DragonExpedition.spiderSlain && hatched < BalanceTuning.get(BROOD_TOTAL) && brood < BalanceTuning.get(BROOD_LIVE) && alive < BalanceTuning.get(SPIDERS_CAP);
+        return isAlive() && hatched < BalanceTuning.get(BROOD_TOTAL) && brood < BalanceTuning.get(BROOD_LIVE) && alive < BalanceTuning.get(SPIDERS_CAP);
     }
     private int chooseHatchCell() {
         ArrayList<Integer> cells = new ArrayList<>();
@@ -88,14 +89,20 @@ public class Broodmother extends Mob {
     }
     @Override public void die(Object cause) {
         DragonExpedition.spiderSlain = true;
-        if (Dungeon.level instanceof DragonCavernLevel) ((DragonCavernLevel) Dungeon.level).clearBrood();
         GLog.p(Messages.get(this, "defeated"));
         super.die(cause);
     }
+    public void setReplenished() { replenished = true; generatedRespawn = true; EXP = 0; lootChance = 0; }
+    public void patrolToward(int cell) { state = WANDERING; target = cell; }
+    @Override public com.shatteredpixel.shatteredpixeldungeon.items.Item createLoot() {
+        return replenished ? null : super.createLoot();
+    }
+    @Override public void rollToDropLoot() { if (!replenished) super.rollToDropLoot(); }
     @Override public void storeInBundle(Bundle b) {
-        super.storeInBundle(b); b.put("hatched", hatched); b.put("hatch_cooldown", hatchCooldown); b.put("hatch_cell", hatchCell);
+        super.storeInBundle(b); b.put("hatched", hatched); b.put("hatch_cooldown", hatchCooldown); b.put("hatch_cell", hatchCell); b.put("replenished", replenished);
     }
     @Override public void restoreFromBundle(Bundle b) {
         super.restoreFromBundle(b); hatched = b.getInt("hatched"); hatchCooldown = b.getInt("hatch_cooldown"); hatchCell = b.getInt("hatch_cell");
+        if (b.getBoolean("replenished")) setReplenished();
     }
 }

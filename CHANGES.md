@@ -1,3 +1,10 @@
+# Cavern pressure v1.29.11 - 2026-10-09
+
+- Surviving scavengers, hatchlings and webs remain after the Broodmother dies. The original kill still unlocks the climb permanently; this completed quest flag no longer prevents a living replacement mother from hatching.
+- The cavern alone gains a persisted actor timer. It attempts one spawn every 60-100 on-floor turns by default, replacing a missing mother before adding another spider. Candidates are reachable, unoccupied, outside current sight and at least eight cells from the hero; replacement mothers also keep the outer-lair/large-space rules. Blocked or capped attempts wait a full new interval. No off-floor catch-up waves, duplicate mothers or replenished supplies.
+- Newly replenished creatures grant no XP or loot, including Wealth/Lucky bonus rolls or stealable ordinary loot. Initial enemies retain their existing rewards. The original hatchlings' zero-loot promise now covers bonus-drop paths too. Playtest's new Cavern replenishment interval can tune the pressure or disable it; existing brood and population limits remain.
+- This replaces the earlier safe-cavern outcome at the user's request. Existing mines/expedition layouts and treasure are preserved; old cavern saves start a fresh timer without recreating enemies removed by an older build.
+
 # Mine ore v1.29.10 - 2026-10-08
 
 - The mine's side-wall cutaways expose narrow edge strips, while its upper rim exposes a horizontal band. The centered ore painting was mostly outside these masks. The existing offline packer places the same authored mineral inside those exposed strips; buried wall interiors remain black. Only the two mine atlases change.

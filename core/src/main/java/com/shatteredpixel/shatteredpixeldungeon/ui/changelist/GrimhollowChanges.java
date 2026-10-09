@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.10","Dark veins in the rock.");
+        ChangeInfo r=release(list,"v1.29.11","The cavern does not sleep.");
+        note(r,Icons.WARNING,"Cavern scavengers","Spiders survive the broodmother's death. More scavengers can arrive from the darkness, including a new broodmother when none remains. The first victory keeps the climb open; returning creatures carry no renewed rewards. Playtest balance settings include the cavern's replenishment interval.");
+        r=release(list,"v1.29.10","Dark veins in the rock.");
         note(r,Icons.INFO,"Mine ore","Dark ore is visible on side-facing rock and wall rims, using the mine's existing painted mineral. Crystal treasure pockets place their deposits on separate cells. Existing mines keep their terrain and collected ore.");
         r=release(list,"v1.29.9","Clearer motion and dependable telekinesis.");
         note(r,Icons.TALENT,"Hurl and stealth","A practiced Seer's Hurl springs traps along its path as well as on landing, while retaining its ledge and impact effects. Chainwarden cannot pull a hero concealed by the Cloak or another invisibility effect. Rogue's Foresight has its own eye motif.");

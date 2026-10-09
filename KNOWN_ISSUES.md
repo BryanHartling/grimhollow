@@ -1,5 +1,7 @@
 # Known issues
 
+- v1.29.13 CI: Release tag v1.29.13-quest-balance at b3a98cc99 passed all seven jobs in run 37973562389. The identical commit's branch run 37973562376 failed unchanged effects test 31 (mean 1.8352 ms, p95 2.4639 ms; both must be below 2 ms) and a concurrent room-rebuild race in the portrait screenshot fixture (Hero.act:874). All five-region fog assertions and both expedition layouts passed. GitHub denied the failed-job retry with HTTP 403; the failed run remains in place and no check or threshold was weakened. This follow-up changes documentation only, not the delivered game or packages.
+
 - v1.29.13: Physical Samsung tablet and full-campaign Dragon/Vault balance remain NOT RUN. Existing device balance overrides and generated cavern supplies are preserved; reset tuning for the new damage default and generate a new cavern to change its guaranteed rations. Vault partial guardian credit is corrected; the earlier v1.29.12 issue is superseded. The first combined gate needed the reused Psychic fixture's initial hunger actor restored; final gates pass. Test 45 remains Abandoned: test failed and is not rerun.
 
 - v1.29.12: Physical tablet and the user's exact Vault save remain NOT RUN. Vault partial boss score still uses remaining HP rather than damage dealt; scoring/supplies/difficulty are left for the requested balance discussion. Restricted Gradle/packer attempts required the authorized route, and the first compiled audit needed the documented JDK environment; final checks pass. Test 45 remains Abandoned: test failed and is not rerun.

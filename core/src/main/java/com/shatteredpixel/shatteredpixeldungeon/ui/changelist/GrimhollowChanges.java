@@ -20,7 +20,10 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.12","Vault travel and room furnishings.");
+        ChangeInfo r=release(list,"v1.29.13","Danger earns its treasure.");
+        note(r,Icons.WARNING,"Dragon expedition","The dragon's blows are heavier, and its wings threaten nearby prey more reliably. The warning remains your chance to move. Playtest's expedition supplies include clearly labeled guaranteed cavern rations; existing caverns keep their finite supplies.");
+        note(r,Icons.INFO,"The Imp's bargain","Entering and leaving the Vault no longer restores your health or fills your stomach. Damage inflicted on its guardian earns partial credit; merely awakening it does not.");
+        r=release(list,"v1.29.12","Vault travel and room furnishings.");
         note(r,Icons.INFO,"The Imp's Vault","Playtest now enters the single Vault attached to this run's Imp entrance. Revisiting a completed Vault no longer ejects you on your first step. The Escape Crystal returns to the correct entrance, including older saves.");
         note(r,Icons.JOURNAL,"Carpets and wall hangings","Cole's office rug remains whole beneath the furnishings. City and Vault wall hangings stay on plain wall faces and leave torches and floor paving clear.");
         r=release(list,"v1.29.11","The cavern does not sleep.");

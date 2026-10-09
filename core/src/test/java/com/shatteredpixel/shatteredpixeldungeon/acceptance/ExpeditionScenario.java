@@ -239,6 +239,19 @@ final class ExpeditionScenario {
         Dungeon.hero.pos = center + 5; Dungeon.hero.sprite = new HeroSprite(); Dungeon.hero.sprite.visible = false;
         Dungeon.hero.HP = Dungeon.hero.HT = 200; Dungeon.hero.lvl = 24;
         java.util.Arrays.fill(Dungeon.level.heroFOV, true); dragon.aggro(Dungeon.hero);
+        check(BalanceTuning.get(DRAGON_DAMAGE)==125,"dragon default damage increase");
+        for(int seed=0;seed<64;seed++) {
+            Random.pushGenerator(seed);int expected=Math.round(Random.NormalIntRange(22,32)*1.25f);Random.popGenerator();
+            Random.pushGenerator(seed);check(dragon.damageRoll()==expected,"dragon claw scaling");Random.popGenerator();
+            dragon.pending=ExpeditionDragon.Attack.NONE;dragon.wingDelay=dragon.breathDelay=0;
+            Dungeon.hero.pos=center+1+seed%2;int before= Dungeon.hero.HP;
+            Random.pushGenerator(seed);dragon.state.act(true,false);Random.popGenerator();
+            check(dragon.pending==ExpeditionDragon.Attack.WINGBEAT&&Dungeon.hero.HP==before,"ready nearby wingbeat must reliably warn, not immediately damage");
+        }
+        dragon.pending=ExpeditionDragon.Attack.NONE;dragon.wingDelay=5;dragon.breathDelay=0;Dungeon.hero.pos=center+2;
+        dragon.state.act(true,false);
+        check(dragon.pending==ExpeditionDragon.Attack.BREATH,"wingbeat cooldown must permit ready breath");
+        dragon.pending=ExpeditionDragon.Attack.NONE;dragon.wingDelay=dragon.breathDelay=0;Dungeon.hero.pos=center+5;
         int hp = Dungeon.hero.HP;
         check(dragon.prepare(ExpeditionDragon.Attack.BREATH, Dungeon.hero.pos), "breath preparation");
         check(Dungeon.hero.HP == hp, "windup deals damage");
@@ -253,11 +266,12 @@ final class ExpeditionScenario {
         java.lang.reflect.Method spend = ExpeditionDragon.class.getDeclaredMethod("spend", float.class); spend.setAccessible(true);
         spend.invoke(dragon, 2f); check(!dragon.prepare(ExpeditionDragon.Attack.BREATH, center+5), "breath before three turns");
         spend.invoke(dragon, 1f); check(dragon.prepare(ExpeditionDragon.Attack.BREATH, center+5), "breath after three turns");
-        Dungeon.hero.pos = center + 5; dragon.release(); check(Dungeon.hero.HP < hp, "breath misses target in warned cone");
+        Dungeon.hero.pos = center + 5; dragon.release(); check(hp-Dungeon.hero.HP>=18&&hp-Dungeon.hero.HP<=28, "125% breath impact damage");
         Buff.detach(Dungeon.hero, Burning.class); Dungeon.level.blobs.clear();
         Dungeon.hero.pos = center+1; hp = Dungeon.hero.HP;
         check(dragon.prepare(ExpeditionDragon.Attack.WINGBEAT, Dungeon.hero.pos), "wingbeat prep");
-        dragon.release(); check(Dungeon.hero.pos == center+3 && Dungeon.hero.HP < hp, "wingbeat damage and two-cell push");
+        dragon.release(); check(Dungeon.hero.pos == center+3 && hp-Dungeon.hero.HP>=10&&hp-Dungeon.hero.HP<=18, "125% wingbeat damage and two-cell push");
+        check(dragon.wingDelay==5&&!dragon.prepare(ExpeditionDragon.Attack.WINGBEAT,Dungeon.hero.pos),"wingbeat retains five-turn cooldown");
         int old = dragon.HP; dragon.damage(31, ExpeditionScenario.class); int wounded = dragon.HP;
         check(wounded < old && dragon.heal(999) == 0, "dragon healed");
         DragonExpedition.arriveDragon(Dungeon.level);
@@ -278,7 +292,7 @@ final class ExpeditionScenario {
         check(DragonExpedition.dragonSlain && DragonExpedition.victoryPending, "victory not recorded");
         DragonExpedition.arriveDragon(Dungeon.level);
         check(Dungeon.level.mobs.stream().noneMatch(m -> m instanceof ExpeditionDragon), "dead dragon respawns");
-        System.out.println("TEST 59 dragon PASS: warned fixed cone, range/occlusion, three-turn cooldown, wingbeat distance, no healing, single persistent boss, cavern round trip and death");
+        System.out.println("TEST 59 dragon PASS: 125% claw/breath/wing damage, 64 seeds of reliable nearby wingbeat priority, warned fixed cone, range/occlusion, three/five-turn cooldowns, two-cell push, no healing, persistent boss, cavern round trip and death");
     }
     private static void returnRoute() throws Exception {
         java.lang.reflect.Method route = InterlevelScene.class.getDeclaredMethod("returnTo");
@@ -364,6 +378,16 @@ final class ExpeditionScenario {
         int food=0,torches=0;
         for(Heap heap:level.heaps.valueList())for(Item item:heap.items){if(item instanceof Food)food++;if(item instanceof Torch)torches++;}
         check(food==1 && torches==2 && level.heaps.size==48,"configured guaranteed supplies");
+        for(int rationCount:new int[]{0,3,8}) {
+            BalanceTuning.set(CAVERN_RATIONS,rationCount);
+            DragonCavernLevel supplies=(DragonCavernLevel)Dungeon.newLevel();Dungeon.switchLevel(supplies,DragonCavernLevel.CENTER);
+            int count=0;for(Heap heap:supplies.heaps.valueList())for(Item item:heap.items)if(item instanceof Food)count+=item.quantity();
+            check(count==rationCount,"guaranteed cavern ration setting "+rationCount);
+            Dungeon.saveAll();Dungeon.loadGame(GamesInProgress.curSlot);Dungeon.switchLevel(Dungeon.loadLevel(GamesInProgress.curSlot),Dungeon.hero.pos);
+            int after=0;for(Heap heap:Dungeon.level.heaps.valueList())for(Item item:heap.items)if(item instanceof Food)after+=item.quantity();
+            check(after==rationCount&&BalanceTuning.get(CAVERN_RATIONS)==rationCount,"ration tuning/supplies changed after reload");
+        }
+        BalanceTuning.set(CAVERN_RATIONS,1);
         BalanceTuning.set(CAVERN_REMAINS,36);BalanceTuning.set(CAVERN_GEAR_WEIGHT,100);
         BalanceTuning.set(CAVERN_RING_WEIGHT,0);BalanceTuning.set(CAVERN_GOLD_WEIGHT,0);BalanceTuning.set(CAVERN_CONSUMABLE_WEIGHT,0);
         BalanceTuning.set(CAVERN_MAX_TIER,1);BalanceTuning.set(CAVERN_UPGRADES,2);
@@ -404,7 +428,7 @@ final class ExpeditionScenario {
         check(equipment==1 && trinkets==1,"configured reward count/trinket chance");
         Dungeon.saveAll();Dungeon.loadGame(GamesInProgress.curSlot);Dungeon.switchLevel(Dungeon.loadLevel(GamesInProgress.curSlot),Dungeon.hero.pos);
         check(BalanceTuning.get(DRAGON_HEALTH)==777 && BalanceTuning.get(HOARD_TRINKET)==100,"expedition tuning lost on disk");
-        BalanceTuning.reset();check(new ExpeditionDragon().HT==480 && BalanceTuning.get(CAVERN_RATIONS)==3,"expedition reset");
+        BalanceTuning.reset();check(new ExpeditionDragon().HT==480 && BalanceTuning.get(DRAGON_DAMAGE)==125 && BalanceTuning.get(CAVERN_RATIONS)==3,"expedition reset");
         Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);Playtest.enable();
         for(int depth:new int[]{DragonExpedition.CHASM,DragonExpedition.CAVERN,DragonExpedition.HOARD}){
             Playtest.travel(depth,DragonExpedition.BRANCH);

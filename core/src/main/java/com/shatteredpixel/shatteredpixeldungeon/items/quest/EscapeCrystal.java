@@ -24,6 +24,10 @@ package com.shatteredpixel.shatteredpixeldungeon.items.quest;
 import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.Char;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Buff;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Hunger;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.Regeneration;
+import com.shatteredpixel.shatteredpixeldungeon.actors.buffs.WellFed;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.Hero;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.VaultTokenDoor;
@@ -90,56 +94,7 @@ public class EscapeCrystal extends Item {
 					return;
 				}
 
-				int score = 0;
-
-				//firstly, score is always a full 4k if the hero had the statue
-				if (hero.belongings.getItem(ImpStatue.class) != null){
-					score = 4000;
-				} else {
-					//otherwise there is partial score, to a max of 3k:
-
-					//1,000 for exploring up to 80% of the level
-					score += (int) (1000 * Dungeon.level.levelExplorePercent(Dungeon.depth));
-
-					//1,000 for collecting tokens (100 each), plus a 250 bonus for opening the door
-					boolean doorOpened = true;
-					for (Char ch : Dungeon.level.mobs){
-						if (ch instanceof VaultTokenDoor){
-							doorOpened = false;
-							break;
-						}
-					}
-					if (doorOpened){
-						score += 1250; //1000 for tokens, 250 for door
-					} else {
-						Item tokens = hero.belongings.getItem(DwarfToken.class);
-						if (tokens != null){
-							score += Math.min(1000, 100*tokens.quantity());
-						}
-					}
-
-					//up to 750 for damaging/killing the boss elemental
-					VaultFinalRoom r = (VaultFinalRoom) ((VaultLevel) Dungeon.level).room(VaultFinalRoom.class);
-					if (r.elementalWasSummoned()){
-						boolean elementalFound = false;
-						for (Char ch : Dungeon.level.mobs){
-							if (ch instanceof VaultBossElemental){
-								elementalFound = true;
-								score += (int) (750 * (ch.HP/(float)ch.HT));
-								break;
-							}
-						}
-						if (!elementalFound){
-							//some poor sucker is absolutely going to kill the boss, not take the statue,
-							// and then be forced to leave by a golem or something
-							score += 750;
-						}
-					}
-
-					//finally, score is rounded down to the nearest 50 points
-					score = (score/50)*50;
-
-				}
+				int score = vaultScore(hero, (VaultLevel) Dungeon.level);
 
 				if (score < 50){
 					GameScene.show(new WndTitledMessage(new ImpSprite(),
@@ -255,11 +210,44 @@ public class EscapeCrystal extends Item {
 
 	}
 
+	/** Keep the live nutritional state and its timing across both equipment exchanges. */
+	public static void prepareTransition(Hero hero) {
+		for (Buff buff : hero.buffs()) {
+			if (!buff.revivePersists && !(buff instanceof Hunger)
+					&& !(buff instanceof WellFed) && !(buff instanceof Regeneration)) buff.detach();
+		}
+		Buff.affect(hero, Regeneration.class);
+		Buff.affect(hero, Hunger.class);
+	}
+
+	/** Same progress and reward thresholds as before, with credit for damage dealt. */
+	public static int vaultScore(Hero hero, VaultLevel vault) {
+		if (hero.belongings.getItem(ImpStatue.class) != null) return 4000;
+		int score = (int) (1000 * vault.levelExplorePercent(Dungeon.depth));
+		boolean doorOpened = true;
+		for (Char ch : vault.mobs) if (ch instanceof VaultTokenDoor) { doorOpened = false; break; }
+		if (doorOpened) score += 1250;
+		else {
+			Item tokens = hero.belongings.getItem(DwarfToken.class);
+			if (tokens != null) score += Math.min(1000, 100 * tokens.quantity());
+		}
+		VaultFinalRoom room = (VaultFinalRoom) vault.room(VaultFinalRoom.class);
+		if (room.elementalWasSummoned()) {
+			int bossCredit = 750; // Defeated, even if the statue was left behind.
+			for (Char ch : vault.mobs) if (ch instanceof VaultBossElemental) {
+				float damageFraction = Math.max(0, Math.min(1, 1 - ch.HP / (float) Math.max(1, ch.HT)));
+				bossCredit = (int) (750 * damageFraction);
+				break;
+			}
+			score += bossCredit;
+		}
+		return (score / 50) * 50;
+	}
+
 	private void leaveVault( Item preserve, int score ){
 		Sample.INSTANCE.play(Assets.Sounds.TELEPORT);
 
-		Dungeon.hero.live(); //clears all non-persist buffs, resets hunger/regen
-		Dungeon.hero.HP = Dungeon.hero.HT; //full heal
+		prepareTransition(Dungeon.hero);
 
 		//logic for removing Warrior's Seal or Mage's staff
 		if (preserve instanceof Armor && ((Armor) preserve).checkSeal() != null){

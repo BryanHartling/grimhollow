@@ -121,8 +121,8 @@ public class ExpeditionDragon extends Mob {
             if (pending != Attack.NONE) { release(); spend(TICK); return true; }
             if (enemyInFOV && !isCharmedBy(enemy)) {
                 int distance = Dungeon.level.distance(pos, enemy.pos);
-                if (distance <= 2 && wingDelay <= 0 && Random.Int(3) == 0 && prepare(Attack.WINGBEAT, enemy.pos)
-                        || distance > 1 && distance <= 6 && breathDelay <= 0 && prepare(Attack.BREATH, enemy.pos)) {
+                if ((distance <= 2 && wingDelay <= 0 && prepare(Attack.WINGBEAT, enemy.pos))
+                        || (distance > 1 && distance <= 6 && breathDelay <= 0 && prepare(Attack.BREATH, enemy.pos))) {
                     spend(TICK); return true;
                 }
             }

@@ -1,5 +1,7 @@
 # Known issues
 
+- v1.29.13: Physical Samsung tablet and full-campaign Dragon/Vault balance remain NOT RUN. Existing device balance overrides and generated cavern supplies are preserved; reset tuning for the new damage default and generate a new cavern to change its guaranteed rations. Vault partial guardian credit is corrected; the earlier v1.29.12 issue is superseded. The first combined gate needed the reused Psychic fixture's initial hunger actor restored; final gates pass. Test 45 remains Abandoned: test failed and is not rerun.
+
 - v1.29.12: Physical tablet and the user's exact Vault save remain NOT RUN. Vault partial boss score still uses remaining HP rather than damage dealt; scoring/supplies/difficulty are left for the requested balance discussion. Restricted Gradle/packer attempts required the authorized route, and the first compiled audit needed the documented JDK environment; final checks pass. Test 45 remains Abandoned: test failed and is not rerun.
 
 - v1.29.11: Physical tablet and full-campaign pressure balance remain NOT RUN. Earlier builds already removed spiders on Broodmother death; this patch does not recreate that lost population, but introduces its saved replenishment timer. The initial Android sandbox failure used the authorized route; pre-sprite patrol and protected-field failures were repaired and the final gates passed. Both native orientations emitted a non-fatal clipboard warning (exit 0). Terrain contrast test 45 remains Abandoned: test failed and is not rerun.

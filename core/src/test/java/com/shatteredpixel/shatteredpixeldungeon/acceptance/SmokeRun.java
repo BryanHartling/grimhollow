@@ -742,7 +742,19 @@ public class SmokeRun {
         int originalArtifactLevel=originalArtifact==null?-1:originalArtifact.level();
         int originalClassCharges=originalArtifact instanceof Phylactery?((Phylactery)originalArtifact).charges():originalArtifact instanceof ClassSpellItem?((ClassSpellItem)originalArtifact).charges():-1;
         int gold=Dungeon.gold,energy=Dungeon.energy;
-        Dungeon.hero.live();
+        Dungeon.hero.HP=7;
+        Hunger vaultHunger=Buff.affect(Dungeon.hero,Hunger.class);
+        Bundle nutrition=new Bundle();vaultHunger.storeInBundle(nutrition);
+        nutrition.put("level",350.25f);nutrition.put("partialDamage",0.75f);vaultHunger.restoreFromBundle(nutrition);
+        WellFed fed=Buff.affect(Dungeon.hero,WellFed.class);fed.extend(137);
+        Regeneration regen=Buff.affect(Dungeon.hero,Regeneration.class);
+        float hungerTime=vaultHunger.cooldown(),regenTime=regen.cooldown(),fedTime=fed.cooldown();
+        Buff.affect(Dungeon.hero,Paralysis.class,2);
+        com.shatteredpixel.shatteredpixeldungeon.items.quest.EscapeCrystal.prepareTransition(Dungeon.hero);
+        check(Dungeon.hero.HP==7&&Dungeon.hero.buff(Hunger.class)==vaultHunger&&vaultHunger.cooldown()==hungerTime
+                &&Dungeon.hero.buff(Regeneration.class)==regen&&regen.cooldown()==regenTime
+                &&Dungeon.hero.buff(WellFed.class)==fed&&fed.cooldown()==fedTime,"Vault entry reset health/nutrition/timers");
+        check(Dungeon.hero.buff(Paralysis.class)==null,"Vault retains transient-buff cleanup");
         switch(Dungeon.hero.heroClass){
             case NECROMANCER:check(Dungeon.hero.buff(Necromancy.class)!=null,"Vault cleared Necromancer state");break;
             case ENCHANTER:check(Dungeon.hero.buff(EnchanterMagic.class)!=null,"Vault cleared Enchanter state");break;
@@ -761,16 +773,45 @@ public class SmokeRun {
         check(vault.heaps.valueList().stream().anyMatch(h->h.items.stream().anyMatch(i->i instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.ImpStatue)),"v4 final reward missing");
         Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);
         check(Dungeon.branch==1&&Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel,"v4 Vault save/load failed");
+        Bundle savedNutrition=new Bundle();Dungeon.hero.buff(Hunger.class).storeInBundle(savedNutrition);
+        Bundle savedFed=new Bundle();Dungeon.hero.buff(WellFed.class).storeInBundle(savedFed);
+        check(Dungeon.hero.HP==7&&savedNutrition.getFloat("level")==350.25f&&savedNutrition.getFloat("partialDamage")==0.75f
+                &&savedFed.getInt("left")==137,"Vault save/load reset health, fractional hunger/debt or Well Fed duration");
         mirror=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.VaultMirror)Dungeon.level.mobs.stream().filter(m->m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.VaultMirror).findFirst().orElseThrow();
         check(mirror.reward!=null&&mirror.reward.getClass()==mirrorReward,"v4 mirror reward lost on reload");
         escape=Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.quest.EscapeCrystal.class);
         check(escape!=null&&escape.storedItems!=null,"v4 stored equipment lost");
-        Dungeon.hero.live();escape.restoreHeroBelongings(Dungeon.hero,null);
+        com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel scoringVault=(com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel)Dungeon.level;
+        com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultFinalRoom finalRoom=(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultFinalRoom)scoringVault.room(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultFinalRoom.class);
+        Bundle arenaState=new Bundle();finalRoom.storeInBundle(arenaState);
+        boolean[] remembered=scoringVault.visited.clone();Arrays.fill(scoringVault.visited,true);
+        Mob tokenDoor=scoringVault.mobs.stream().filter(m->m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.VaultTokenDoor).findFirst().orElseThrow();
+        scoringVault.mobs.remove(tokenDoor);
+        check(escape.vaultScore(Dungeon.hero,scoringVault)==2250,"Vault exploration/token score before boss");
+        Bundle summoned=new Bundle();finalRoom.storeInBundle(summoned);summoned.put("lock_triggered",true);finalRoom.restoreFromBundle(summoned);
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental elemental=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental();
+        elemental.HT=elemental.HP=200;scoringVault.mobs.add(elemental);
+        check(escape.vaultScore(Dungeon.hero,scoringVault)==2250,"Untouched Vault boss grants partial credit");
+        elemental.HP=100;check(escape.vaultScore(Dungeon.hero,scoringVault)==2600,"Half-damaged Vault boss credit/rounding");
+        elemental.HP=1;check(escape.vaultScore(Dungeon.hero,scoringVault)==2950,"Almost defeated Vault boss credit");
+        scoringVault.mobs.remove(elemental);check(escape.vaultScore(Dungeon.hero,scoringVault)==3000,"Dead Vault boss without statue grants full partial credit");
+        com.shatteredpixel.shatteredpixeldungeon.items.quest.ImpStatue statue=new com.shatteredpixel.shatteredpixeldungeon.items.quest.ImpStatue();statue.collect();
+        check(escape.vaultScore(Dungeon.hero,scoringVault)==4000,"Vault statue retains full victory score");statue.detachAll(Dungeon.hero.belongings.backpack);
+        scoringVault.mobs.add(tokenDoor);scoringVault.visited=remembered;finalRoom.restoreFromBundle(arenaState);
+        Dungeon.hero.HP=5;Buff.detach(Dungeon.hero,WellFed.class);
+        vaultHunger=Dungeon.hero.buff(Hunger.class);vaultHunger.storeInBundle(nutrition);
+        nutrition.put("level",Hunger.STARVING);nutrition.put("partialDamage",0.875f);vaultHunger.restoreFromBundle(nutrition);
+        hungerTime=vaultHunger.cooldown();regen=Dungeon.hero.buff(Regeneration.class);regenTime=regen.cooldown();
+        java.lang.reflect.Method leaveVault=escape.getClass().getDeclaredMethod("leaveVault",Item.class,int.class);leaveVault.setAccessible(true);leaveVault.invoke(escape,null,4000);
+        vaultHunger.storeInBundle(savedNutrition);
+        check(Dungeon.hero.HP==5&&Dungeon.hero.buff(Hunger.class)==vaultHunger&&vaultHunger.cooldown()==hungerTime
+                &&savedNutrition.getFloat("level")==Hunger.STARVING&&savedNutrition.getFloat("partialDamage")==0.875f
+                &&Dungeon.hero.buff(Regeneration.class)==regen&&regen.cooldown()==regenTime,"Actual Escape Crystal exit reset health/hunger/debt/timers");
         check(Dungeon.gold==gold&&Dungeon.energy==energy,"v4 currency restore failed");
         if(originalArtifact!=null)check(Dungeon.hero.belongings.artifact!=null&&Dungeon.hero.belongings.artifact.getClass()==originalArtifact.getClass()&&Dungeon.hero.belongings.artifact.level()==originalArtifactLevel,"v4 class item restore failed");
         Item restoredArtifact=Dungeon.hero.belongings.artifact;
         if(originalClassCharges>=0)check(originalClassCharges==(restoredArtifact instanceof Phylactery?((Phylactery)restoredArtifact).charges():((ClassSpellItem)restoredArtifact).charges()),"v4 class charges changed while stored");
-        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.complete(4000);
+        check(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.isCompleted(),"Actual Escape Crystal exit did not complete quest");
         Bundle quest=new Bundle();com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.storeInBundle(quest);
         com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.reset();
         com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.restoreFromBundle(quest);
@@ -813,7 +854,7 @@ public class SmokeRun {
                 check(EnchanterMagic.state().choices(false).contains(enchant.getClass()),"v4 enchantment cannot be learned for inscription");
             }
         }
-        System.out.println("PASS V4 "+Dungeon.hero.heroClass+" Vault generation/save/load, mirror="+mirrorReward.getSimpleName()+", equipment restore, quest completion/shop, four Playtest destinations normalized, legacy return metadata, walk off stairs and actual return; six enchantment/curses serialized");
+        System.out.println("PASS V4 "+Dungeon.hero.heroClass+" Vault health/hunger/Well Fed/timers and fractional debt carry over, disk persistence and actual Escape Crystal exit; boss scores untouched=2250 half=2600 near-death=2950 dead=3000 statue=4000; mirror="+mirrorReward.getSimpleName()+", equipment restore, quest completion/shop, Playtest/legacy return and six enchantment/curses serialized");
     }
     private static void contentMessages() throws Exception {
         String[][] items={

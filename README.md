@@ -1,3 +1,13 @@
+# Quest pressure - v1.29.13
+
+Dragon claw, direct breath and wingbeat impact damage default to 125% of the previous values. A ready wingbeat takes priority within two cells, retaining its warning and five-turn cooldown; breath retains its three-turn minimum. Existing device balance overrides remain authoritative.
+
+Playtest > Balance tuning > Dragon expedition > Expedition supplies and hoard > **Guaranteed cavern rations** sets 0-8 rations, default 3. This was already the cavern supply variable; its label is now explicit. It applies to newly generated caverns, never refilling an existing floor.
+
+Vault entry and departure preserve current health and nutritional state, including fractional starvation damage, Well Fed duration and regeneration timing. Equipment exchange still follows normal maximum-health clamping when gear changes. Partial guardian credit now increases with damage dealt rather than health remaining; rewards and completion thresholds are unchanged. Prison bosses are unchanged.
+
+Windows: `desktop/build/windows/1.29.13/Grimhollow/Grimhollow.exe` (keep the entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk` (`1.29.13-INDEV`, version code 1012).
+
 # Vault travel and carpets - v1.29.12
 
 Playtest offers one Imp Vault destination, attached to the Imp's actual entrance in this run. Completed Vaults remain explorable in Playtest; they have no descending stairs. The Escape Crystal returns to the actual Imp portal. Old quest saves recover that location from saved main-floor metadata. Existing layouts, inventory and quest rewards are preserved.

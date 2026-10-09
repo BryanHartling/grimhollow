@@ -2055,7 +2055,12 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 17:
                 if(!playtestClickPage("Expedition supplies and hoard"))expeditionStep--;break;
             case 18:
-                interfaceBounds();capture("expedition-tuning-hoard");closeReviewWindows();
+                interfaceBounds();capture("expedition-tuning-hoard");playtestClick("Guaranteed cavern rations: 3");expeditionStep=43;break;
+            case 43:
+                interfaceBounds();capture("expedition-tuning-rations");playtestInput("1","Apply");break;
+            case 44:
+                if(BalanceTuning.get(BalanceTuning.Key.CAVERN_RATIONS)!=1)throw new AssertionError("Guaranteed cavern rations numeric tuning input");
+                interfaceBounds();capture("expedition-tuning-rations-applied");closeReviewWindows();
                 com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();expeditionStep=40;break;
             case 40:
                 if(!playtestClickPage("Cavern remains loot"))expeditionStep--;break;

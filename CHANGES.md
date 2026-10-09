@@ -1,3 +1,11 @@
+# Quest pressure v1.29.13 - 2026-10-09
+
+- Dragon impact damage defaults to 125%, affecting claws, direct breath and wingbeats; existing tuning overrides are retained. Remove the one-in-three wingbeat selection roll so a ready close-range wingbeat takes priority. Keep the fixed-direction warning, five-turn wing cooldown, three-turn breath minimum, displacement and persistent boss health.
+- Relabel the existing 0-8 ration setting as Guaranteed cavern rations in expedition supplies. Keep its default of three, its device-wide persistence, finite generation and no-refill behavior. The existing native menu check now adjusts this exact control.
+- Vault entry and exit clear transient effects without replacing Hunger, Well Fed or Regeneration actors. Remove both full heals and preserve current hunger, fractional starvation debt and nutrition timing through inventory exchange and saved games. Normal equipment-based maximum-health clamping remains; no entrance snapshot erases damage or meals taken inside.
+- Correct partial elemental credit to 750 times damage fraction, rounded with the unchanged total-score rules. An untouched guardian gives zero boss credit; a defeated guardian gives 750 without the statue. The statue retains 4000 and partial progress caps at 3000. Reward pools, Vault supplies and Prison boss behavior are unchanged.
+- Extend existing V4 and expedition scenarios for actual Escape Crystal departure, live nutritional timers, persisted debt, untouched/half/dead guardian scores, 64 wingbeat-selection seeds, impact damage scaling and guaranteed ration counts 0/1/3/8. No new harness, art generation or acceptance document. Test 45 remains Abandoned: test failed and is not rerun.
+
 # Vault travel and room furnishings v1.29.12 - 2026-10-09
 
 - The Vault is a single quest floor. Playtest's four misleading City-depth entries now resolve to the actual Imp entrance for this run, and its menu offers one Vault destination. A completed Playtest Vault no longer automatically returns the hero on every step. Ordinary quest completion remains unchanged.

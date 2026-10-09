@@ -92,7 +92,13 @@ public class FocusCrystal extends com.shatteredpixel.shatteredpixeldungeon.items
     }
     public int glimpseDuration(){return level()>=10?9:level()>=5?7:5;}
     @Override public String desc(){
-        return super.desc();
+        String text=super.desc()+"\n\n"+Messages.get(this,"progress",charges(),cap(),level(),spentExperience(),10+5*level())
+                +"\n\n"+Messages.get(this,"grasp_stats",graspRange(Dungeon.hero))
+                +"\n\n"+Messages.get(this,"glimpse_stats",glimpseDuration())
+                +"\n\n"+Messages.get(this,"push_stats",pushDistance());
+        if(Dungeon.hero!=null&&Dungeon.hero.subClass==HeroSubClass.SEER)text+="\n\n"+Messages.get(this,"hurl_stats",pushDistance()+2);
+        if(Dungeon.hero!=null&&Dungeon.hero.subClass==HeroSubClass.PUPPETEER)text+="\n\n"+Messages.get(this,"dominate_stats");
+        return text;
     }
     @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("spent_experience",spentExperience);b.put("charge",charge);b.put("partialcharge",partialCharge);}
     @Override public void restoreFromBundle(Bundle b){super.restoreFromBundle(b);level(Math.max(0,Math.min(10,b.getInt("level"))));spentExperience=b.getInt("spent_experience");charge=Math.max(0,b.getInt("charge"));partialCharge=b.getFloat("partialcharge");}

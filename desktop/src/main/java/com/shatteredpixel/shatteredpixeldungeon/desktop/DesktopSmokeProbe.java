@@ -581,6 +581,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(frames>4000)throw new AssertionError("Duelist start stalled");
                 return;
             }
+            // Do not rebuild the review room while the first Hero.act is still scanning its mobs.
+            if(presentationGameFrames==0&&!Dungeon.hero.ready)return;
             if(presentationGameFrames++==0){
                 if(Dungeon.hero.heroClass!=HeroClass.DUELIST)throw new AssertionError("Duelist Start loaded the wrong hero");
                 pocRoom();
@@ -1519,7 +1521,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                         if(detail.length()<40||!firstRankText.contains(detail)||!firstRankText.contains("Rank "+rank))throw new AssertionError("Rank "+rank+" thematic progression missing from description");
                         if(rank>1&&detail.equals(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.actors.hero.Talent.class,"kinetic_surge.rank"+(rank-1))))throw new AssertionError("Indistinguishable rank descriptions");
                     }
-                    if(firstRankText.contains("12.5%")||firstRankText.contains("50%"))throw new AssertionError("Hidden formula still exposed in talent text");
+                    if(!firstRankText.contains("12.5%")||!firstRankText.contains("25%")||!firstRankText.contains("37.5%")||!firstRankText.contains("50%"))throw new AssertionError("Meaningful all-rank progression missing from talent text");
                     com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane progression=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(talentWindow(),"description");
                     pointerGestureReview(progression,com.watabou.input.PointerEvent.NONE,-25);
                     if(progression.content().height()>progression.height() && progression.content().camera.scroll.y<=0)throw new AssertionError("Overflowing progression does not scroll");
@@ -2850,7 +2852,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 }
                 if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AshlightLantern){
                     String text=item.info();
-                    if(!text.contains("Alchemy feeds the ember")||text.contains("Levels 1-6")||text.contains("\u00e2")||text.contains("%1$"))throw new AssertionError("Lantern mystery/encoding regression");
+                    if(!text.contains("1 charge and one turn")||!text.contains("Levels 1-6")||text.contains("\u00e2")||text.contains("%1$"))throw new AssertionError("Lantern mechanics/encoding regression");
                 }
                 wnd.hide();Dungeon.hero.belongings.backpack.items.remove(item);
             }

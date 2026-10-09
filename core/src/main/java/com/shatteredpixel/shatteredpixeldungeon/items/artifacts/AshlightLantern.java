@@ -183,7 +183,8 @@ public class AshlightLantern extends Artifact {
     }
     @Override public String desc(){
         return Messages.get(this,"desc")+"\n\n"+Messages.get(this,"lore")+"\n\n"
-                +Messages.get(this,"rules")
+                +Messages.get(this,"rules",lightBonus(),capacity(),Math.round(turnsPerCharge()))
+                +"\n\n"+Messages.get(this,"feeding")
                 +"\n\n"+Messages.get(this,"riders")+"\n\n"+Messages.get(this,shuttered ? "closed" : "open");
     }
     @Override protected ArtifactBuff passiveBuff(){return new EmberKeeper();}

@@ -1,8 +1,12 @@
-# Soul and descriptions sprint - 2026-10-09
+# Soul and descriptions v1.29.14 - 2026-10-09
 
 - Replace Necromancer's tier-two Soul Siphon with Soul Sustenance: eligible hero/raised-servant kills restore 10/20 hunger turns when the Phylactery was already full, capped at 60/120 per floor. Extra soul charges do not multiply the benefit. Summoned and rewardless replacement enemies are excluded; ordinary hunger restoration never heals, extends Well Fed or invokes food talents.
 - Retain the serialized NECROTIC_SIPHON identifier so invested points survive. Save floor allowances with the Necromancy buff, separating quest branches and preserving spending across revisits and rank upgrades. Old saves initialize the new allowance without altering ranks. Replace the obsolete curse-driven health drain.
 - Existing Necromancer headless gate: Runs=10 failures=0; eight unit tests pass. Scenarios cover both ranks/caps, pre-kill fullness, hero/minion attribution, bonus charges, summons/replacements, no healing, old saves, branches, revisits and serialization.
+- Replace the nearly-mechanics-free description policy with flavor plus primary effects, costs and meaningful progression. Restore the added classes' all-rank talent information, armor abilities, subclass differences, wand statistics and custom equipment/curses; clarify Rebuff's 4/7 shielding. Current Crystal descriptions resolve reach, duration and Push/Hurl riders. Added artifacts/trinkets describe their main actions and growth without exposing exceptional transformations, quest solutions or exact reward tables. Existing elemental-room clues, expedition dangers and bounty contract terms remain the appropriate level of disclosure.
+- Lantern and Chart descriptions format actual current light/charge values and the tuned cache chance. Keep standard unidentified-item information boundaries. Correct Hex Sigil's text to the implemented ten turns. No gameplay changes beyond Soul Sustenance, no art changes and no terrain contrast retest.
+- The existing native presentation fixture now waits for the initial hero action to finish before replacing its review room, correcting the previous startup mob-scan race without altering production behavior or assertions.
+- Combined headless Runs=30 failures=0, eight unit tests and Windows/Android builds pass. Native interface and presentation suites pass in both orientations, including real long-description scrolling, resolved Lantern feeding text and all talent ranks. The previous checks requiring erased percentages are replaced by assertions requiring the newly approved meaningful progression; formatting and scroll checks remain.
 
 # Quest pressure v1.29.13 - 2026-10-09
 

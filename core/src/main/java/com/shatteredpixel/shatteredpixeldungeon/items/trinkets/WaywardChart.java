@@ -8,6 +8,6 @@ import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 public class WaywardChart extends Trinket {
     { image = ItemSpriteSheet.WAYWARD_CHART; }
     @Override protected int upgradeEnergyCost() { return 10 + 5 * level(); }
-    @Override public String statsDesc() { return Messages.get(this, "stats_desc"); }
+    @Override public String statsDesc() { return Messages.get(this, "stats_desc",com.shatteredpixel.shatteredpixeldungeon.WaywardJourney.chance(level())); }
     public static int rank() { return trinketLevel(WaywardChart.class); }
 }

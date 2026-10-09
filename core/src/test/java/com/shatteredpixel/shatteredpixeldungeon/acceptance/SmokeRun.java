@@ -68,6 +68,7 @@ public class SmokeRun {
                         Level level=Dungeon.newLevel();
                         Dungeon.switchLevel(level,-1);
                         if(!Dungeon.level.insideMap(Dungeon.hero.pos)) throw new AssertionError("Invalid hero placement");
+                        if(depth==1)descriptionScenario();
                         if(depth==1 && Dungeon.hero.heroClass==HeroClass.NECROMANCER)necromancerScenario();
                         if(depth==1 && Dungeon.hero.heroClass==HeroClass.ENCHANTER)enchanterScenario();
                         if(depth==1 && Dungeon.hero.heroClass==HeroClass.PSYCHIC)psychicScenario();
@@ -108,8 +109,8 @@ public class SmokeRun {
                 String info=carrier.info();
                 check(info.contains("Rune Etching: "+name)
                         && info.contains("strength travels with the rune")
-                        && !info.contains("class bonus") && !info.contains("%1$s") && !info.contains("%2$d")
-                        && !info.contains("25%%"),"37: Rune Etching description resolves its live effect without formula spoilers");
+                        && info.contains("25% class bonus") && !info.contains("%1$s") && !info.contains("%2$d")
+                        && !info.contains("25%%"),"37: Rune Etching description resolves its live effect, upgrade and class bonus");
             }
         } finally {rune.floorEnchant=previous;rune.floorGlyph=previousGlyph;}
     }
@@ -1023,6 +1024,22 @@ public class SmokeRun {
         for(int cell:walls)check(Dungeon.level.map[cell]!=Terrain.BONE_WALL,"Bone Prison reverts on load");
         check(BoneWalls.prison(h.pos+3,10,1),"Exit prison");Level previous=Dungeon.level;Dungeon.newLevel();check(previous.boneOriginal.keyArray().length==0,"Bone Prison reverts on level exit");Dungeon.switchLevel(previous,h.pos);
         System.out.println("NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS");
+    }
+    private static void descriptionScenario() {
+        for(java.util.Map<Talent,Integer> tier:Dungeon.hero.talents)for(Talent talent:tier.keySet()){
+            String desc=talent.desc();
+            check(!desc.contains("NO TEXT")&&!desc.contains("\uFFFD")&&!desc.matches("(?s).*%[0-9]+\\$[dsf].*"),"Talent description resolves: "+talent);
+        }
+        check(Talent.NECROTIC_SIPHON.title().equals("Soul Sustenance")&&Talent.NECROTIC_SIPHON.desc().contains("120 per floor"),"Soul Sustenance title and rank differences are visible");
+        check(Talent.FIELD_REPAIR.desc().contains("6/10 turns")&&Talent.WRENCH.desc().contains("7 shielding"),"Defensive talents state distinct ranks and duration");
+        com.shatteredpixel.shatteredpixeldungeon.items.trinkets.WaywardChart chart=new com.shatteredpixel.shatteredpixeldungeon.items.trinkets.WaywardChart();
+        check(chart.statsDesc().contains("10% chance")&&!chart.statsDesc().contains("%1$"),"Chart displays actual tuned chance without a raw format token");
+        AshlightLantern lantern=new AshlightLantern();String light=lantern.desc();
+        check(light.contains("+2 vision")&&light.contains("3 charges")&&light.contains("40 turns")&&light.contains("Infernal Brew three"),"Lantern mechanics format current vision, capacity, charging and feeding");
+        String crystal=new FocusCrystal().desc();
+        check(crystal.contains("_Grasp:")&&crystal.contains("_Glimpse:")&&crystal.contains("_Push:")&&!crystal.contains("%1$"),"Crystal describes its current spell reach, duration and tier restrictions");
+        com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon coin=new com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon();
+        check(coin.desc().contains("1 charge and one turn")&&!coin.desc().contains("golden guardian")&&!light.contains("holy"),"Main costs visible, exceptional interactions and unrelated holy identity remain hidden");
     }
     private static void soulSustenanceScenario() throws Exception {
         Hero h=Dungeon.hero;Phylactery urn=h.belongings.getItem(Phylactery.class);

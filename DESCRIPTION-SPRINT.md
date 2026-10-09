@@ -7,3 +7,5 @@ Approved scope, 2026-10-09:
 3. Extend the existing class/content checks, verify long-description presentation, build Windows and Android, package, push and check the unchanged CI gates. No new art, unrelated balance changes or terrain contrast testing.
 
 Each implementation component will be committed separately. Check usage before beginning the description component; deliver the final build at a clean boundary.
+
+Completed locally: Soul Sustenance, balanced descriptions, combined headless Runs=30 failures=0, eight unit tests, Windows/Android builds, and interface/presentation checks in both orientations. The approved follow-up adds three-rank Bone Legion, Cole's staged payment/betrayal and personal poster, wanted-target/urgency repair for seed 3848062306978, and stronger Horror survival/combat. Package and CI delivery will cover both components together.

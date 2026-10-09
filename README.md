@@ -128,7 +128,9 @@ Windows: `desktop/build/windows/1.27.0/Grimhollow/Grimhollow.exe`. Android: `and
 
 # Mystery and Playtest usability - v1.26.0
 
-Grimhollow's new descriptions now use atmospheric hints instead of hidden formulas and reward tables. Action costs and current equipment/status information remain available where needed to choose an action. Psychic **Rebuff** replaces Wrench: successful Push casts grant a brief shield. Gold collection does not heal the Golden Mimic.
+Grimhollow's descriptions combine flavor with useful gameplay information. Items state their primary effect, meaningful chances, costs and growth; talents and spells explain rank differences, ranges, durations and significant restrictions. Rooms and quests offer clues, dangers and the immediate bargain without giving away solutions, twists or exact reward tables. Exceptional interactions remain discoveries, and unidentified belongings retain their usual information limits. This supersedes the earlier policy of removing nearly all mechanics. Psychic **Rebuff** grants 4/7 shielding for up to three turns after a successful Push. Gold collection does not heal the Golden Mimic.
+
+**Soul Sustenance v1.29.14:** Necromancer's tier-two Soul Siphon is replaced. A qualifying kill while the Phylactery was already full restores 10/20 normal hunger turns, limited to 60/120 per floor. Raised servants can earn this nourishment; summoned and rewardless enemies cannot. The benefit never heals or triggers food talents. Invested ranks survive, and saving, revisiting or changing floors cannot reset an allowance.
 
 Playtest groups expedition travel and tuning, Hatchling/companion settings, class items and custom enemies. Submenu pages persist on this device; within the same loaded run, **Resume last menu** returns to the last submenu. Every submenu also has **Main Playtest menu**. **Generation toggles** persist across games and filter future random pools without deleting belongings or replacing fixed quest essentials. They keep required pools nonempty and mark affected games as custom balance independently of save-local tools.
 

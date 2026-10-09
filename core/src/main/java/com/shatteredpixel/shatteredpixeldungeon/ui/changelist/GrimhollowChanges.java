@@ -20,7 +20,10 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.11","The cavern does not sleep.");
+        ChangeInfo r=release(list,"v1.29.12","Vault travel and room furnishings.");
+        note(r,Icons.INFO,"The Imp's Vault","Playtest now enters the single Vault attached to this run's Imp entrance. Revisiting a completed Vault no longer ejects you on your first step. The Escape Crystal returns to the correct entrance, including older saves.");
+        note(r,Icons.JOURNAL,"Carpets and wall hangings","Cole's office rug remains whole beneath the furnishings. City and Vault wall hangings stay on plain wall faces and leave torches and floor paving clear.");
+        r=release(list,"v1.29.11","The cavern does not sleep.");
         note(r,Icons.WARNING,"Cavern scavengers","Spiders survive the broodmother's death. More scavengers can arrive from the darkness, including a new broodmother when none remains. The first victory keeps the climb open; returning creatures carry no renewed rewards. Playtest balance settings include the cavern's replenishment interval.");
         r=release(list,"v1.29.10","Dark veins in the rock.");
         note(r,Icons.INFO,"Mine ore","Dark ore is visible on side-facing rock and wall rims, using the mine's existing painted mineral. Crystal treasure pockets place their deposits on separate cells. Existing mines keep their terrain and collected ore.");

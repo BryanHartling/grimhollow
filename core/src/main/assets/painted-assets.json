@@ -10204,7 +10204,7 @@
         1024,
         512
       ],
-      "rgba_sha256": "d51a0465414e9328d78cd083eac512f694bca1a1a952875b298278514ef68592"
+      "rgba_sha256": "9aebcb64dde6d673ca1dd061ae23f2d892cd7bad05a2e626ccadbc2e93268179"
     },
     "environment/custom_tiles/carpet.png": {
       "size": [
@@ -16581,21 +16581,14 @@
         256,
         256
       ],
-      "rgba_sha256": "939b3c6068e72a72678430b6b6d21d854033193d0e9e6705a023d1fdf134d4d4"
+      "rgba_sha256": "3ec069436b77bddffe25e0d5a6ca1b824723b7a3fea7cf838735caa329775382"
     },
     "artwork/city_quest-81.png": {
       "size": [
         256,
         256
       ],
-      "rgba_sha256": "e13a80cd0adc5902989ff9c81cab59e02b5fbb65be9a3d239346b71440eef3bb"
-    },
-    "artwork/city_quest-82.png": {
-      "size": [
-        256,
-        256
-      ],
-      "rgba_sha256": "32f12bdf3f83a9e4c8e9d60b9762730f21c9523e50eccf0a4aa47a090ae9d334"
+      "rgba_sha256": "5652383d6fda21572f2949379a4631899d6d2a5c82ccd6cd7f01f3b37dc6fe89"
     },
     "artwork/carpet-0.png": {
       "size": [

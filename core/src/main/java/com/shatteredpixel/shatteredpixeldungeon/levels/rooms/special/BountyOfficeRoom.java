@@ -27,10 +27,20 @@ public class BountyOfficeRoom extends SpecialRoom {
     }
     /** Upgrade an existing office's presentation without recreating stock or receipts. */
     public static void refreshPresentation(Level level){
-        if(!(level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel)
-                || level.customTiles.stream().anyMatch(t->t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles))return;
+        if(!(level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel))return;
         for(com.shatteredpixel.shatteredpixeldungeon.levels.rooms.Room room:((com.shatteredpixel.shatteredpixeldungeon.levels.RegularLevel)level).rooms()){
             if(!(room instanceof BountyOfficeRoom))continue;
+            // Repair the old mixed layer without moving stock, loot or actors.
+            for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap tile:level.customTiles){
+                if(tile instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles
+                        && !(tile instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles.Rug)){
+                    ((com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles)tile).removeCarpet();
+                    if(level.customTiles.stream().noneMatch(t->t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles.Rug))
+                        level.customTiles.add(0,new com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles.Rug(
+                                BountyBoard.officeCell%level.width(),BountyBoard.officeCell/level.width()));
+                    return;
+                }
+            }
             com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.BountyNotice board=null;
             for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:level.mobs)
                 if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.BountyNotice)board=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.BountyNotice)mob;
@@ -47,7 +57,7 @@ public class BountyOfficeRoom extends SpecialRoom {
         }
         com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles art=
                 new com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles(left,top,width(),height());
-        for(int dy=-1;dy<=1;dy++)for(int dx=-1;dx<=1;dx++)art.put(cx+dx,cy+dy,(dy+1)*3+dx+1);
+        level.customTiles.add(new com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles.Rug(cx,cy));
         art.put(cx-1,top+2,16);art.put(cx,top+2,17);
         art.put(left+1,top+1,20);art.put(right-1,top+1,19);art.put(right-2,top+1,18);
         java.util.ArrayList<Heap> oldDisplays=new java.util.ArrayList<>();

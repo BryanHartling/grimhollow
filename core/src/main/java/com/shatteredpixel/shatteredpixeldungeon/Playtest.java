@@ -249,6 +249,11 @@ public final class Playtest {
             Dungeon.depth=d;Dungeon.branch=0;Dungeon.level=Dungeon.newLevel();
             Dungeon.saveLevel(GamesInProgress.curSlot);
         }
+        if(branch==1 && depth>=16){
+            int entrance=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.vaultDepth();
+            if(entrance<16 || entrance>19)throw new IllegalStateException("This run has no Imp Vault entrance.");
+            depth=entrance;
+        }
         if (branch==DragonExpedition.BRANCH && DragonExpedition.returnCell<0) {
             Dungeon.depth=DragonExpedition.hunterDepth;Dungeon.branch=0;
             Level city=Dungeon.loadLevel(GamesInProgress.curSlot);

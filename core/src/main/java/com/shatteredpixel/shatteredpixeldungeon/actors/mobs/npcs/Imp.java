@@ -219,6 +219,34 @@ public class Imp extends NPC {
 		public static int hazardFreebies; //player gets two free hits from hazards before they start penalizing score
 		public static boolean mirrorUsed = false;
 		private static int score; //Not the score used in rankings! This score has no penalty applied
+		private static int vaultDepth;
+
+		/** One Vault belongs to the actual Imp entrance, not to each City depth. */
+		public static int vaultDepth() {
+			if (vaultDepth == 0 && spawned && !oldQuest) {
+				// Older saves did not record it. Read only transition metadata, without
+				// loading actors, rerolling rooms or changing the current floor.
+				for (int depth = 16; depth <= 19; depth++) {
+					if (!Dungeon.levelHasBeenGenerated(depth, 0)) continue;
+					try {
+						Bundle level = com.watabou.utils.FileUtils.bundleFromFile(
+								com.shatteredpixel.shatteredpixeldungeon.GamesInProgress.depthFile(
+										com.shatteredpixel.shatteredpixeldungeon.GamesInProgress.curSlot, depth, 0)).getBundle("level");
+						for (com.watabou.utils.Bundlable data : level.getCollection("transitions")) {
+							com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition transition =
+									(com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition) data;
+							if (transition.destBranch == 1 && transition.type ==
+									com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition.Type.BRANCH_EXIT) {
+								return vaultDepth = depth;
+							}
+						}
+					} catch (java.io.IOException error) {
+						com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon.reportException(error);
+					}
+				}
+			}
+			return vaultDepth;
+		}
 		
 		public static void reset() {
 			spawned = false;
@@ -229,6 +257,7 @@ public class Imp extends NPC {
 			hazardFreebies = 2;
 			mirrorUsed = false;
 			score = 0;
+			vaultDepth = 0;
 		}
 		
 		private static final String NODE        = "demon";
@@ -266,6 +295,7 @@ public class Imp extends NPC {
 				node.put( SCORE, score );
 				node.put( REWARD_OPTIONS, rewardOptions );
 				node.put( MIRROR_USED, mirrorUsed );
+				node.put( "vault_depth", vaultDepth );
 			}
 			
 			bundle.put( NODE, node );
@@ -274,6 +304,7 @@ public class Imp extends NPC {
 		public static void restoreFromBundle( Bundle bundle ) {
 
 			Bundle node = bundle.getBundle( NODE );
+			vaultDepth = 0;
 			
 			if (!node.isNull() && (spawned = node.getBoolean( SPAWNED ))) {
 
@@ -299,6 +330,7 @@ public class Imp extends NPC {
 				
 				given = node.getBoolean( GIVEN );
 				completed = node.getBoolean( COMPLETED );
+				vaultDepth = node.getInt("vault_depth");
 			}
 		}
 
@@ -307,6 +339,7 @@ public class Imp extends NPC {
 
 				rooms.add(new AmbitiousImpRoom());
 				spawned = true;
+				vaultDepth = Dungeon.depth;
 
 				oldQuest = false;
 				reward = null;

@@ -1,3 +1,11 @@
+# Vault travel and room furnishings v1.29.12 - 2026-10-09
+
+- The Vault is a single quest floor. Playtest's four misleading City-depth entries now resolve to the actual Imp entrance for this run, and its menu offers one Vault destination. A completed Playtest Vault no longer automatically returns the hero on every step. Ordinary quest completion remains unchanged.
+- The Imp quest saves its entrance depth. Old saves recover it from saved main-floor transition metadata without loading actors or rerolling floors. Both Escape Crystal and the normal completed-Vault return use this origin rather than the current branch depth; the Vault still has no descend-to-next-floor stairs.
+- Cole's rug has a separate complete floor layer beneath furniture and display stands. Existing offices split the old mixed layer on arrival, preserving all actors, stock and player heaps. Desk/display overlays no longer erase rug sections and leave stray side borders.
+- Existing painted textile is repacked as a one-cell wall hanging. Banners occupy only plain wall faces, skip torches/decorations and no longer extend onto floor cells. No new art is generated and other scenery remains unchanged.
+- Dragon/Vault difficulty and bounty-linked boss escalation are recommendations for discussion only; no supplies, combat statistics, scoring or rewards change in this patch. Test 45 remains Abandoned: test failed.
+
 # Cavern pressure v1.29.11 - 2026-10-09
 
 - Surviving scavengers, hatchlings and webs remain after the Broodmother dies. The original kill still unlocks the climb permanently; this completed quest flag no longer prevents a living replacement mother from hatching.

@@ -2365,15 +2365,6 @@
         128,
         384
       ]
-    },
-    {
-      "file": "artwork/city_quest-82.png",
-      "rect": [
-        128,
-        320,
-        192,
-        384
-      ]
     }
   ],
   "environment/custom_tiles/halls_special.png": [

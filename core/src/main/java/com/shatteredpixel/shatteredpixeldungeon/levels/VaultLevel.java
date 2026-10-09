@@ -208,6 +208,12 @@ public class VaultLevel extends CityLevel {
 		return false;
 	}
 
+	public LevelTransition returnTransition() {
+		int depth = Imp.Quest.vaultDepth();
+		return new LevelTransition(this, Dungeon.hero.pos, LevelTransition.Type.BRANCH_ENTRANCE,
+				depth == 0 ? Dungeon.depth : depth, 0, LevelTransition.Type.BRANCH_EXIT);
+	}
+
 	//only occurs in levelgen, no need to bundle these
 	// use arrays here as we want to be able to track and access indices
 	// this lets us garuntee an even distribution of loot
@@ -576,14 +582,10 @@ public class VaultLevel extends CityLevel {
 	public void occupyCell(Char ch) {
 		super.occupyCell(ch);
 		//extra check to ensure vault is left if quest is completed
-		if (ch == Dungeon.hero && (Imp.Quest.isCompleted() && !Imp.Quest.isOld())){
+		if (ch == Dungeon.hero && (Imp.Quest.isCompleted() && !Imp.Quest.isOld())
+				&& !com.shatteredpixel.shatteredpixeldungeon.Playtest.enabled()){
 			beforeTransition();
-			InterlevelScene.curTransition = new LevelTransition(Dungeon.level,
-					Dungeon.hero.pos,
-					LevelTransition.Type.BRANCH_ENTRANCE,
-					Dungeon.depth,
-					0,
-					LevelTransition.Type.BRANCH_EXIT);
+			InterlevelScene.curTransition = returnTransition();
 			InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
 			Game.switchScene( InterlevelScene.class );
 		} else if (ch == Dungeon.hero) {

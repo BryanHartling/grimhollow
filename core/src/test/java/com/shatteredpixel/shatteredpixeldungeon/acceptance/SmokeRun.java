@@ -736,6 +736,7 @@ public class SmokeRun {
         check(!com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.isOld(),"v4 generated old Imp quest");
         check(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.rewardOptions.size()==6,"v4 quest rewards missing");
         check(city.transitions.stream().anyMatch(t->t.destBranch==1),"v4 Vault entrance missing");
+        check(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.vaultDepth()==19,"v4 entrance depth recorded");
         Dungeon.saveAll();
         Item originalArtifact=Dungeon.hero.belongings.artifact;
         int originalArtifactLevel=originalArtifact==null?-1:originalArtifact.level();
@@ -774,6 +775,35 @@ public class SmokeRun {
         com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.reset();
         com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.restoreFromBundle(quest);
         check(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.isCompleted()&&com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.earnedShop(),"v4 completion/shop state lost");
+        // Old quest metadata has no entrance-depth field. Find the saved main
+        // floor's branch transition without replacing the live level/actors.
+        quest.getBundle("demon").put("vault_depth",0);
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.restoreFromBundle(quest);
+        Level current=Dungeon.level;int position=Dungeon.hero.pos,branch=Dungeon.branch,depth=Dungeon.depth;
+        check(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.vaultDepth()==19,"v4 legacy entrance recovered from saved City");
+        check(Dungeon.level==current&&Dungeon.hero.pos==position&&Dungeon.branch==branch&&Dungeon.depth==depth,"v4 metadata lookup mutated live floor");
+        Playtest.enable();
+        for(int requested:new int[]{16,17,18,19}){
+            Playtest.travel(requested,1);
+            check(Dungeon.branch==1&&Dungeon.depth==19&&Dungeon.level instanceof com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel,"v4 fake Vault floor normalized");
+            check(Dungeon.level.transitions.size()==1,"v4 single quest entrance, no invented stairs");
+            com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel actual=(com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel)Dungeon.level;
+            com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene.curTransition=null;
+            int next=-1;
+            for(int offset:com.watabou.utils.PathFinder.NEIGHBOURS8)if(actual.passable[Dungeon.hero.pos+offset]&&Actor.findChar(Dungeon.hero.pos+offset)==null){next=Dungeon.hero.pos+offset;break;}
+            check(next>=0,"v4 can leave arrival stairs");Dungeon.hero.move(next);
+            check(Dungeon.level==actual&&Dungeon.branch==1&&Dungeon.depth==19&&com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene.curTransition==null,"v4 moving in completed Playtest Vault must not auto-exit");
+            check(!actual.activateTransition(Dungeon.hero,actual.transitions.get(0)),"v4 Vault stairs cannot enter main floor below");
+            com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition exit=actual.returnTransition();
+            check(exit.destDepth==19&&exit.destBranch==0&&exit.destType==com.shatteredpixel.shatteredpixeldungeon.levels.features.LevelTransition.Type.BRANCH_EXIT,"v4 Escape Crystal returns to actual Imp entrance");
+            Dungeon.depth=requested;
+            check(actual.returnTransition().destDepth==19,"v4 old wrong-depth Vault returns to real portal");
+            Dungeon.depth=19;
+        }
+        com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene.curTransition=((com.shatteredpixel.shatteredpixeldungeon.levels.VaultLevel)Dungeon.level).returnTransition();
+        java.lang.reflect.Method ascend=com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene.class.getDeclaredMethod("ascend");ascend.setAccessible(true);
+        ascend.invoke(new com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene());
+        check(Dungeon.branch==0&&Dungeon.depth==19&&Dungeon.level.getTransition(Dungeon.hero.pos).destBranch==1,"v4 real return to saved Imp portal");
         for(Weapon.Enchantment enchant:new Weapon.Enchantment[]{new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Vorpal(),new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Venomous(),new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Crystal(),new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Eldritch(),new com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Pressurized(),new com.shatteredpixel.shatteredpixeldungeon.items.weapon.curses.Wondrous()}){
             Weapon weapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger();weapon.enchant(enchant);
             Bundle bundle=new Bundle();bundle.put("weapon",weapon);Weapon restored=(Weapon)bundle.get("weapon");
@@ -783,7 +813,7 @@ public class SmokeRun {
                 check(EnchanterMagic.state().choices(false).contains(enchant.getClass()),"v4 enchantment cannot be learned for inscription");
             }
         }
-        System.out.println("PASS V4 "+Dungeon.hero.heroClass+" Vault generation/save/load, mirror="+mirrorReward.getSimpleName()+", equipment restore, quest completion/shop and six enchantment/curses serialized");
+        System.out.println("PASS V4 "+Dungeon.hero.heroClass+" Vault generation/save/load, mirror="+mirrorReward.getSimpleName()+", equipment restore, quest completion/shop, four Playtest destinations normalized, legacy return metadata, walk off stairs and actual return; six enchantment/curses serialized");
     }
     private static void contentMessages() throws Exception {
         String[][] items={

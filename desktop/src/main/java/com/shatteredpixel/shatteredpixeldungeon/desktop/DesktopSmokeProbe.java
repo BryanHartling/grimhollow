@@ -243,6 +243,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 Playtest.enable();Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.gold=30000;
                 for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)if(m instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole)bountyCole=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole)m;
                 if(bountyCole==null)throw new AssertionError("Generated office has no Cole");
+                officeLayersCheck();
                 for(int n:com.watabou.utils.PathFinder.NEIGHBOURS8)if(Dungeon.level.passable[bountyCole.pos+n]&&Actor.findChar(bountyCole.pos+n)==null){Dungeon.hero.pos=bountyCole.pos+n;break;}
                 Dungeon.hero.sprite.place(Dungeon.hero.pos);Dungeon.observe();Camera.main.snapTo(Dungeon.hero.sprite.center());return;
             }
@@ -2273,6 +2274,22 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     capture("imp-shop-painted-skulls-dais");prepareRooms(7);switchNoFade(GameScene.class);break;
                 case 19:
                     regionalAtlasCheck();
+                    vaultHangingsCheck();
+                    // The prior room step deliberately completed the Imp quest.
+                    // A Playtest revisit must still let the player leave the stairs.
+                    Playtest.enable();
+                    questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.class,"spawned",true);
+                    questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.class,"oldQuest",false);
+                    questField(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Imp.Quest.class,"completed",true);
+                    com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene.curTransition=null;
+                    int arrival=Dungeon.hero.pos;
+                    for(int offset:com.watabou.utils.PathFinder.NEIGHBOURS8)
+                        if(Dungeon.level.passable[arrival+offset] && Actor.findChar(arrival+offset)==null){Dungeon.hero.move(arrival+offset);break;}
+                    if(Dungeon.hero.pos==arrival || Dungeon.branch!=1 || !(Game.scene() instanceof GameScene)
+                            || com.shatteredpixel.shatteredpixeldungeon.scenes.InterlevelScene.curTransition!=null)
+                        throw new AssertionError("Completed Playtest Vault ejected hero walking off stairs");
+                    Dungeon.hero.sprite.place(Dungeon.hero.pos);Dungeon.observe();
+                    System.out.println("VAULT WALK NATIVE PASS: completed Playtest Vault stays on branch while leaving stairs");
                     for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap tile:Dungeon.level.customTiles)
                         if(tile instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultEntranceRoom.QuestEntranceInternal){
                             com.watabou.noosa.Tilemap map=(com.watabou.noosa.Tilemap)RecoveryChecks.field(tile,"vis");
@@ -2292,6 +2309,36 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     switchNoFade(com.shatteredpixel.shatteredpixeldungeon.scenes.AmuletScene.class);break;
             }
         } catch(ReflectiveOperationException error){throw new AssertionError(error);}
+    }
+    private void officeLayersCheck() {
+        com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles.Rug rug=null;
+        com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles furniture=null;
+        for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap tile:Dungeon.level.customTiles){
+            if(tile instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles.Rug)
+                rug=(com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles.Rug)tile;
+            else if(tile instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles)
+                furniture=(com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles)tile;
+        }
+        if(rug==null || furniture==null || Dungeon.level.customTiles.indexOf(rug)>=Dungeon.level.customTiles.indexOf(furniture))
+            throw new AssertionError("Office rug must precede furnishings");
+        com.watabou.utils.Bundle bundle=new com.watabou.utils.Bundle();rug.storeInBundle(bundle);
+        if(!java.util.Arrays.equals(bundle.getIntArray("office_art"),new int[]{0,1,2,3,4,5,6,7,8}))
+            throw new AssertionError("Rug painting has missing or mismatched sections");
+        furniture.storeInBundle(bundle);
+        for(int frame:bundle.getIntArray("office_art"))if(frame>=0 && frame<9)throw new AssertionError("Rug still aliases furniture");
+    }
+    private void vaultHangingsCheck() throws ReflectiveOperationException {
+        for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap tile:Dungeon.level.customTerrain){
+            if(!(tile instanceof com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.AmbitiousImpRoom.WallBanners))continue;
+            com.watabou.noosa.Tilemap map=(com.watabou.noosa.Tilemap)RecoveryChecks.field(tile,"vis");
+            for(int y=0;y<tile.tileH;y++)for(int x=0;x<tile.tileW;x++){
+                Image image=map.image(x,y);if(image==null)continue;
+                int cell=tile.tileX+x+(tile.tileY+y)*Dungeon.level.width();
+                if(Dungeon.level.map[cell]!=Terrain.WALL)throw new AssertionError("Wall hanging covers floor or torch");
+                image.destroy();
+            }
+        }
+        System.out.println("VAULT FURNISHINGS NATIVE PASS: hangings confined to plain walls");
     }
     private void regionalAtlasCheck(){
         for(com.shatteredpixel.shatteredpixeldungeon.tiles.CustomTilemap tile:Dungeon.level.customTiles){

@@ -97,8 +97,12 @@ def outputs():
     split(quest,p[6],24,3,3)
     from playtest_polish import panels as polish_panels
     banner=polish_panels('office')[2]
-    lo,hi=prop(Image.new('RGBA',(64,64)),banner,46,100)
-    put(quest,80,hi);put(quest,81,hi.transpose(Image.Transpose.FLIP_LEFT_RIGHT));put(quest,82,lo)
+    # Wall hangings must fit within one wall face. The former two-cell rug
+    # continued down onto walkable paving and covered wall-torch flames.
+    hanging=Image.new('RGBA',(64,64));cloth_art=fit(banner,40,44)
+    hanging.alpha_composite(cloth_art,((64-cloth_art.width)//2,18))
+    put(quest,80,hanging);put(quest,81,hanging.transpose(Image.Transpose.FLIP_LEFT_RIGHT))
+    put(quest,82,Image.new('RGBA',(64,64)))
     # Barrier uses authored metalwork rather than the obsolete neon pixel checker.
     barrier=fit(source('gate'),192,192)
     whole=Image.new('RGBA',(192,192));whole.alpha_composite(barrier,(0,(192-barrier.height)//2))

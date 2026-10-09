@@ -47,7 +47,24 @@ final class BountyScenario {
                 level.customTiles.removeIf(t->t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles);
                 BountyBoard.arrive(level);BountyBoard.arrive(level);
                 for(Heap heap:originalDisplays)check(level.heaps.get(heap.pos)==heap,"presentation migration preserves actual stock");
-                check(level.customTiles.stream().filter(t->t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles).count()==1,"presentation migration is idempotent");
+                check(level.customTiles.stream().filter(t->t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles).count()==2,"two office layers; migration is idempotent");
+                com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles furniture=(com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles)
+                        level.customTiles.stream().filter(t->t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles
+                                && !(t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles.Rug)).findFirst().get();
+                // Simulate an old mixed layer with part of its carpet overwritten by a display.
+                level.customTiles.removeIf(t->t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles.Rug);
+                furniture.put(cole.pos%level.width()-1,cole.pos/level.width()-1,0);
+                BountyBoard.arrive(level);BountyBoard.arrive(level);
+                com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles.Rug rug=
+                        (com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles.Rug)level.customTiles.get(0);
+                Bundle rugSave=new Bundle();rug.storeInBundle(rugSave);
+                check(java.util.Arrays.equals(rugSave.getIntArray("office_art"),new int[]{0,1,2,3,4,5,6,7,8}),"complete rug beneath furniture");
+                Bundle furnitureSave=new Bundle();furniture.storeInBundle(furnitureSave);
+                for(int frame:furnitureSave.getIntArray("office_art"))check(frame<0 || frame>8,"mixed carpet removed without furnishing fragments");
+                for(Heap heap:originalDisplays)check(level.heaps.get(heap.pos)==heap,"rug repair preserves stock");
+                check(level.customTiles.stream().filter(t->t instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles).count()==2,"rug repair idempotent");
+                Bundle layers=new Bundle();layers.put("rug",rug);
+                check(layers.get("rug") instanceof com.shatteredpixel.shatteredpixeldungeon.tiles.BountyOfficeTiles.Rug,"rug save/load");
                 java.util.ArrayList<Heap> displays=new java.util.ArrayList<>();
                 for(Heap heap:level.heaps.valueList())if(BountyBoard.owns(heap))displays.add(heap);
                 for(Heap a:displays){

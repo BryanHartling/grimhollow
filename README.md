@@ -1,3 +1,11 @@
+# Vault travel and carpets - v1.29.12
+
+Playtest offers one Imp Vault destination, attached to the Imp's actual entrance in this run. Completed Vaults remain explorable in Playtest; they have no descending stairs. The Escape Crystal returns to the actual Imp portal. Old quest saves recover that location from saved main-floor metadata. Existing layouts, inventory and quest rewards are preserved.
+
+Cole's complete rug now sits beneath the office furnishings instead of sharing their tile layer. City/Vault wall hangings fit on plain wall faces and skip torches. These corrections use committed painted sources; no art generation or difficulty changes.
+
+Windows: `desktop/build/windows/1.29.12/Grimhollow/Grimhollow.exe` (keep the entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk` (`1.29.12-INDEV`, version code 1011).
+
 # Cavern pressure - v1.29.11
 
 Killing the Broodmother leaves the surviving cavern spiders and webs in place. A dedicated saved timer attempts one hidden replenishment every 60-100 turns at the default settings. A missing Broodmother is replaced before another scavenger is added; only one mother lives at a time, and the existing nine-spider cap still applies. The first victory permanently opens the climb. Initial enemies keep their rewards, while hatchlings and returning creatures grant no XP, ordinary loot or Wealth/Lucky bonus drops. Remains, rations and treasure are never replenished.

@@ -345,8 +345,8 @@ public class WndPlaytest extends Window {
     private static void branchTravel(){
         List<Entry> rows=new ArrayList<>();
         for(int d=11;d<=14;d++){final int depth=d;rows.add(new Entry("Mine branch at floor "+d,()->travel(depth,1)));}
-        for(int d=16;d<=19;d++){final int depth=d;rows.add(new Entry("Imp Vault at floor "+d,()->travel(depth,1)));}
-        show("Mine and Imp Vault","Quest branches use their authored entrances and encounters.",rows,WndPlaytest::floors);
+        rows.add(new Entry("Imp Vault - this run's quest entrance",()->travel(19,1)));
+        show("Mine and Imp Vault","The Imp Vault is one quest floor, linked to the Imp's entrance in this run. It has no stairs to other Vault floors; use the Escape Crystal or floor travel to leave.",rows,WndPlaytest::floors);
     }
     private static void travel(int depth,int branch){
         Playtest.require();

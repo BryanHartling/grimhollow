@@ -191,8 +191,6 @@ public class AmbitiousImpRoom extends SpecialRoom {
 
 		private final int BANNER_1 = 80;
 		private final int BANNER_2 = 81;
-		private final int BANNER__BOTTOM = 82;
-
 		@Override
 		public void pos(int pos) {
 			super.pos(pos);
@@ -206,33 +204,26 @@ public class AmbitiousImpRoom extends SpecialRoom {
 			java.util.Arrays.fill(data, -1);
 			int cell = tileX + Dungeon.level.width()*tileY;
 
-			if (!Dungeon.level.passable[cell+1]){
+			if (Dungeon.level.map[cell+1] == Terrain.WALL){
 				data[1] = BANNER_1 + Random.Int(2);
-				data[1+tileW] = BANNER__BOTTOM;
 			}
 
-			if (!Dungeon.level.passable[cell+3]) {
+			if (Dungeon.level.map[cell+3] == Terrain.WALL) {
 				data[3] = BANNER_1 + Random.Int(2);
-				if (Dungeon.level.map[cell+3+Dungeon.level.width()] != Terrain.PEDESTAL) {
-					data[3 + tileW] = BANNER__BOTTOM;
-				}
 			}
 
-			if (!Dungeon.level.passable[cell+5]) {
+			if (Dungeon.level.map[cell+5] == Terrain.WALL) {
 				data[5] = BANNER_1 + Random.Int(2);
-				data[5 + tileW] = BANNER__BOTTOM;
 			}
 
 			cell += Dungeon.level.width();
 
-			if (!Dungeon.level.passable[cell]) {
+			if (Dungeon.level.map[cell] == Terrain.WALL) {
 				data[7] = BANNER_1 + Random.Int(2);
-				data[7 + tileW] = BANNER__BOTTOM;
 			}
 
-			if (!Dungeon.level.passable[cell+6]) {
+			if (Dungeon.level.map[cell+6] == Terrain.WALL) {
 				data[13] = BANNER_1 + Random.Int(2);
-				data[13 + tileW] = BANNER__BOTTOM;
 			}
 
 			v.map( data, tileW );

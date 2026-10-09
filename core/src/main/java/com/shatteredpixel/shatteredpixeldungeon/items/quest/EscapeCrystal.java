@@ -283,12 +283,7 @@ public class EscapeCrystal extends Item {
 		if (!Imp.Quest.isOld()) Imp.Quest.complete(score);
 
 		Level.beforeTransition();
-		InterlevelScene.curTransition = new LevelTransition(Dungeon.level,
-				Dungeon.hero.pos,
-				LevelTransition.Type.BRANCH_ENTRANCE,
-				Dungeon.depth,
-				0,
-				LevelTransition.Type.BRANCH_EXIT);
+		InterlevelScene.curTransition = ((VaultLevel)Dungeon.level).returnTransition();
 		InterlevelScene.mode = InterlevelScene.Mode.ASCEND;
 		Game.switchScene(InterlevelScene.class);
 	}

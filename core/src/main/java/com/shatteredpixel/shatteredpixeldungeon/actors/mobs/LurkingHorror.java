@@ -33,7 +33,9 @@ public class LurkingHorror extends Mob {
     private boolean strikePending, strikeFollowUp;
     private int escapeGoal = -1;
     private boolean recoveryCue;
-    private static final int[] HEALTH = {12,18,28,40,55};
+    private int aggressorId=-1;
+    private static final int[] HEALTH = {24,50,120,150,180};
+    private static final int[] DAMAGE_LOW = {4,6,11,14,18}, DAMAGE_HIGH = {8,12,22,28,36};
     private static final int[] FLIGHT = {15,12,10,8,6};
 
     public LurkingHorror() {
@@ -44,7 +46,7 @@ public class LurkingHorror extends Mob {
     public void configure(int depth) {
         region = Math.max(0, Math.min(4, (depth-1)/5));
         HP = HT = HEALTH[region]; EXP = 3 + region*3; maxLvl = 6 + region*5;
-        defenseSkill = Math.round((8+2*region)*BalanceTuning.multiplier(HORROR_EVASION));
+        defenseSkill = Math.round((10+4*region)*BalanceTuning.multiplier(HORROR_EVASION));
     }
     public Phase phase() { return phase; }
     public int healedTotal() { return healed; }
@@ -58,13 +60,17 @@ public class LurkingHorror extends Mob {
     @Override public boolean canSurpriseAttack() { return false; } // Only the explicit warned strike gets the bonus.
     @Override public float spawningWeight() { return 0; } // Regional allocation only, never respawns.
     @Override public boolean reset() { return true; }
-    @Override public int attackSkill(Char target) { return ambushAttack ? INFINITE_ACCURACY : 10+region*5; }
+    @Override public int attackSkill(Char target) { return ambushAttack ? INFINITE_ACCURACY : 12+region*6; }
     @Override public int damageRoll() {
         // A sleeping-prey pounce is separate from the hero-facing combat range.
-        int low=predatoryStrike?9+4*region:3+region,high=predatoryStrike?13+6*region:6+2*region;
+        int low=predatoryStrike?9+4*region:DAMAGE_LOW[region],high=predatoryStrike?13+6*region:DAMAGE_HIGH[region];
         return Math.round(Random.NormalIntRange(low,high)*BalanceTuning.multiplier(HORROR_DAMAGE));
     }
     @Override public int drRoll() { return super.drRoll()+region; }
+    @Override public int defenseProc(Char attacker,int damage) {
+        if(attacker instanceof Mob && attacker!=this)aggressorId=attacker.id();
+        return super.defenseProc(attacker,damage);
+    }
     @Override public float speed() { return super.speed()*(phase==Phase.FLEEING ? 1.5f : phase==Phase.RECOVERING ? .5f : 1f); }
     public int flightTurns() { return Math.max(1, Math.round(FLIGHT[region]*BalanceTuning.multiplier(HORROR_FLIGHT))); }
     public int healingBudget() { return HT*BalanceTuning.get(HORROR_HEALING)/100; }
@@ -191,7 +197,9 @@ public class LurkingHorror extends Mob {
             int old=pos;
             if (retreat(false)) { spend(1/speed()); return moveSprite(old,pos); }
             // A cornered animal can fight, but only with ordinary damage and accuracy.
-            if (Dungeon.level.adjacent(pos,Dungeon.hero.pos) && Dungeon.hero.invisible<=0) attack(Dungeon.hero);
+            Char aggressor=Actor.findById(aggressorId) instanceof Char?(Char)Actor.findById(aggressorId):null;
+            if(aggressor!=null&&aggressor.isAlive()&&aggressor.invisible<=0&&Dungeon.level.adjacent(pos,aggressor.pos))attack(aggressor);
+            else if (Dungeon.level.adjacent(pos,Dungeon.hero.pos) && Dungeon.hero.invisible<=0) attack(Dungeon.hero);
         } else {
             int available=healingBudget()-healed;
             int due=Math.min(available, (int)(phaseAge*healingBudget()/50)-recoveryHealed);
@@ -309,7 +317,7 @@ public class LurkingHorror extends Mob {
     }
     public boolean predationUsed() { return predationUsed; }
     public static boolean ediblePrey(Mob prey) {
-        return prey.isAlive() && prey.alignment==Alignment.ENEMY && prey.state==prey.SLEEPING
+        return prey.isAlive() && prey.bountyContract<0 && prey.alignment==Alignment.ENEMY && prey.state==prey.SLEEPING
                 && Bestiary.REGIONAL.entities().contains(prey.getClass())
                 && !Char.hasProp(prey,Property.BOSS) && !Char.hasProp(prey,Property.MINIBOSS)
                 && !Char.hasProp(prey,Property.IMMOVABLE) && !Char.hasProp(prey,Property.INORGANIC)
@@ -346,6 +354,7 @@ public class LurkingHorror extends Mob {
         b.put("horror_controlled",controlled);
         b.put("horror_evasion",defenseSkill);
         b.put("horror_goal",escapeGoal); b.put("horror_cue",recoveryCue);
+        b.put("horror_aggressor",aggressorId);b.put("horror_stats_version",1);
     }
     @Override public void restoreFromBundle(Bundle b) {
         super.restoreFromBundle(b);
@@ -357,5 +366,14 @@ public class LurkingHorror extends Mob {
         EXP=3+region*3;
         escapeGoal=b.contains("horror_goal")?b.getInt("horror_goal"):-1;
         recoveryCue=b.getBoolean("horror_cue");
+        aggressorId=b.contains("horror_aggressor")?b.getInt("horror_aggressor"):-1;
+        if(!b.contains("horror_stats_version")||b.getInt("horror_stats_version")<1){
+            // Preserve injury and recovery-budget fractions, never resurrect a dead actor.
+            int oldHealth=Math.max(1,HT);HT=HEALTH[region];
+            HP=Math.min(HT,(int)Math.ceil(HP*(double)HT/oldHealth));
+            healed=(int)Math.ceil(healed*(double)HT/oldHealth);
+            recoveryHealed=(int)Math.ceil(recoveryHealed*(double)HT/oldHealth);
+            defenseSkill=Math.round((10+4*region)*BalanceTuning.multiplier(HORROR_EVASION));
+        }
     }
 }

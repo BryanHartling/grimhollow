@@ -1,6 +1,7 @@
 # Playtest follow-up v1.29.15 - 2026-10-09
 
 - Bone Legion has three ranks: newly raised servants gain 5/10/15 binding turns, with an additional summon slot only at rank three. Existing invested ranks remain invested; existing servants keep their remaining timers. All four servant types, cap thresholds, legacy rank-one saves and extended binding serialization pass in the existing Necromancer gate (Runs=10 failures=0); eight unit tests pass.
+- Strengthen Horror health to 24/50/120/150/180 by region and base damage to 4-8/6-12/11-22/14-28/18-36, with higher regional accuracy/evasion. Cornered Horrors retaliate against an adjacent denizen that attacked them, without gaining an ambush bonus. Saved living Horrors retain injury and spent recovery fractions; dead ones stay dead. Wanted quarries are excluded from offscreen predation. Existing scenario: 60/64 victories against cave spinners at default damage, including their poison; both 100% and 200% predation settings kill all 200 tested full-health floor-two rats. Warning/response, escape, stealth and lifetime healing structure are unchanged.
 
 # Soul and descriptions v1.29.14 - 2026-10-09
 

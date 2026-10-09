@@ -47,7 +47,7 @@ final class HorrorScenario {
         check(copy.phase()==h.phase() && copy.healedTotal()==h.healedTotal(),"phase save round trip");
         Dungeon.hero.spend(1); act(h);
         check(Dungeon.hero.HP<hp && h.phase()==LurkingHorror.Phase.FLEEING,"responded warning did not resolve");
-        check(hp-Dungeon.hero.HP<=9,"Sewers ambush exceeds the 3-6 base range times 1.5");
+        check(hp-Dungeon.hero.HP<=12,"Sewers ambush exceeds the 4-8 base range times 1.5");
 
         h=fresh(2); act(h); LurkingHorror.onHeroReady(); LurkingHorror.onHeroSpent(1);
         Dungeon.hero.pos+=Dungeon.level.width(); // Still adjacent: attack follows the hero, not a committed cell.
@@ -78,18 +78,18 @@ final class HorrorScenario {
         Arrays.fill(Dungeon.level.heroFOV,false);
         h.rooted=true; // A stationary isolated fixture makes elapsed recovery measurable.
         for(int i=0;i<67;i++)act(h);
-        check(h.healedTotal()==3 && h.HP==4,"lifetime recovery budget must be 25 percent");
+        check(h.healedTotal()==6 && h.HP==7,"lifetime recovery budget must be 25 percent");
         h.damage(1,HorrorScenario.class); for(int i=0;i<67;i++)act(h);
-        check(h.healedTotal()==3 && h.HP==3,"second recovery renewed lifetime healing budget");
+        check(h.healedTotal()==6 && h.HP==6,"second recovery renewed lifetime healing budget");
         saved=new Bundle(); saved.put("h",h); copy=(LurkingHorror)saved.get("h");
-        check(copy.healedTotal()==3,"save/load reset healing budget");
+        check(copy.healedTotal()==6,"save/load reset healing budget");
         for(int depth:new int[]{2,7,12,17,22}) {
             h=fresh(depth); int region=(depth-1)/5;
-            check(h.HT==new int[]{12,18,28,40,55}[region],"regional health");
-            for(int i=0;i<50;i++){int rolled=h.damageRoll();check(rolled>=3+region && rolled<=6+2*region,"regional base damage");}
+            check(h.HT==new int[]{24,50,120,150,180}[region],"regional health");
+            for(int i=0;i<50;i++){int rolled=h.damageRoll();check(rolled>=new int[]{4,6,11,14,18}[region] && rolled<=new int[]{8,12,22,28,36}[region],"regional base damage");}
             check(!Char.hasProp(h,Char.Property.UNDEAD) && !Char.hasProp(h,Char.Property.DEMONIC),"Horror classified as undead/demon");
         }
-        recoveryAndRouting(); counters(); predation(); generation();
+        recoveryAndRouting(); counters(); predation(); denizenDefense(); generation();
         System.out.println("TEST 60 Horror PASS: five-region stats, real warning/response, retargeting, invisibility, solitary hunt, entity-only Mind Vision/Scry, collision occupancy, finite healing, concealed mobile recovery, tool/collision reveals, routed escape, predation/remains, regional generation, bundle/disk persistence");
     }
     private static void field(LurkingHorror h,String name,Object value) throws Exception {
@@ -229,6 +229,47 @@ final class HorrorScenario {
             }
         }finally{BalanceTuning.setShared(BalanceTuning.Key.HORROR_DAMAGE,previousDamage);}
         System.out.println("HORROR PREDATION PASS: 200 full-health floor-two rats, damage settings 100/200 percent; no retaliation, no hero kill credit; strengthened player damage remains separately bounded");
+    }
+    private static void denizenDefense() throws Exception {
+        int wins=0;
+        for(int seed=0;seed<64;seed++){
+            LurkingHorror original=fresh(11);Dungeon.level.mobs.remove(original);Actor.remove(original);
+            LurkingHorror horror=new LurkingHorror(){@Override public void rollToDropLoot(){}};
+            horror.pos=original.pos;horror.sprite=horror.sprite();horror.sprite.link(horror);Dungeon.level.mobs.add(horror);Actor.add(horror);
+            Dungeon.hero.pos=horror.pos-8;horror.rooted=true;horror.expose();
+            Arrays.fill(Dungeon.level.heroFOV,false); // Offscreen denizen fight; no native particle scene in headless mode.
+            Random.pushGenerator(seed);
+            try {
+                Spinner spider=new Spinner(){
+                    @Override public void rollToDropLoot(){}
+                    @Override public int attackProc(Char enemy,int damage){
+                        com.shatteredpixel.shatteredpixeldungeon.sprites.CharSprite sprite=enemy.sprite;
+                        enemy.sprite=null; // Only suppress Poison's native splash, never death/combat rendering.
+                        try{return super.attackProc(enemy,damage);}finally{enemy.sprite=sprite;}
+                    }
+                };spider.pos=horror.pos+1;
+                spider.sprite=new com.shatteredpixel.shatteredpixeldungeon.sprites.SpinnerSprite(){
+                    @Override public com.watabou.noosa.particles.Emitter emitter(){return new com.watabou.noosa.particles.Emitter();}
+                };spider.sprite.link(spider);
+                Dungeon.level.mobs.add(spider);Actor.add(spider);
+                int heroHP=Dungeon.hero.HP;
+                for(int turn=0;turn<32&&horror.isAlive()&&spider.isAlive();turn++){
+                    spider.attack(horror);
+                    Poison poison=horror.buff(Poison.class);if(poison!=null&&horror.isAlive())poison.act();
+                    if(horror.isAlive())act(horror);
+                }
+                if(horror.isAlive()&&!spider.isAlive())wins++;
+                check(Dungeon.hero.HP==heroHP,"defensive denizen combat gained a hero ambush");
+            } finally {Random.popGenerator();}
+        }
+        check(wins>=48,"caves Horror still loses most cornered encounters to ordinary cave spinners: "+wins+"/64");
+        LurkingHorror horror=fresh(11);Bundle old=new Bundle();horror.storeInBundle(old);
+        old.put("horror_stats_version",0);old.put("HT",28);old.put("HP",14);old.put("horror_healed",7);old.put("horror_recovery_healed",7);
+        LurkingHorror restored=new LurkingHorror();restored.restoreFromBundle(old);
+        check(restored.HT==120&&restored.HP==60&&restored.healedTotal()==30,"old Horror saves lost injury or renewed spent recovery");
+        old.put("HP",0);restored.restoreFromBundle(old);check(!restored.isAlive(),"stat migration resurrected a killed Horror");
+        Guard quarry=new Guard();quarry.bountyContract=1;check(!LurkingHorror.ediblePrey(quarry),"Horror can hunt a wanted target offscreen");
+        System.out.println("HORROR DENIZEN DEFENSE PASS: floor-11 cave-spinner victories="+wins+"/64; five regional baselines, old-save injury/healing limits, no resurrection and wanted-target protection");
     }
     private static void generation() throws Exception {
         Dungeon.init(); int opportunities=0;

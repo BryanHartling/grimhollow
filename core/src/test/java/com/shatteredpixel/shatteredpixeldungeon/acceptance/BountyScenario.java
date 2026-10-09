@@ -92,6 +92,7 @@ final class BountyScenario {
                 check(BountyBoard.shopClosed && BountyBoard.stock[0] == null, "disk-save receipts");
             }
             contracts();
+            pendingTargets();
             legendaryCash();
             items();
             boss();
@@ -191,6 +192,41 @@ final class BountyScenario {
                 && !com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract.text(legendary).contains("URGENT"), "Legendary cash must match Rare without urgency");
         int legendaryGold=Dungeon.gold;
         check(BountyBoard.returnClaim(2)&&!BountyBoard.returnClaim(2)&&Dungeon.gold-legendaryGold==1200, "Legendary coat/cash claim duplicated or missing");
+    }
+    private static void pendingTargets() throws java.io.IOException {
+        Dungeon.init();Dungeon.seed=3848062306978L;Dungeon.depth=7;Dungeon.branch=0;
+        Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        String plan=BountyBoard.contracts[1].alias()+" floor="+BountyBoard.contracts[1].floor;
+        for(int i=0;i<3;i++)check(BountyBoard.accept(i),"reported-seed acceptance");
+        for(int depth=7;depth<=9;depth++){
+            if(depth>7){Dungeon.depth=depth;Dungeon.switchLevel(Dungeon.newLevel(),-1);}
+            BountyBoard.arrive(Dungeon.level);
+            for(BountyBoard.Contract c:BountyBoard.contracts)if(c!=null&&c.index<3&&c.floor==depth){
+                check(c.target!=null&&Dungeon.level.mobs.contains(c.target)&&c.clockStarted,"reported-seed promised quarry/clock missing");
+                check(com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract.text(c).contains("Dungeon floor "+depth),"poster promises different floor");
+            }
+            Dungeon.saveAll();Dungeon.loadGame(GamesInProgress.curSlot);
+            Dungeon.switchLevel(Dungeon.loadLevel(GamesInProgress.curSlot),Dungeon.hero.pos);
+            for(BountyBoard.Contract c:BountyBoard.contracts)if(c!=null&&c.index<3&&c.floor==depth)
+                check(c.target!=null&&Dungeon.level.mobs.contains(c.target)&&c.clockStarted,"reported-seed disk reload loses quarry/clock");
+        }
+        Dungeon.init();Dungeon.depth=7;Dungeon.branch=0;Dungeon.switchLevel(Dungeon.newLevel(),-1);
+        BountyBoard.Contract c=BountyBoard.contracts[1];c.floor=7;
+        java.util.Arrays.fill(Dungeon.level.heroFOV,true);
+        check(BountyBoard.accept(1)&&!c.spawned&&!c.clockStarted,"blocked placement started urgent countdown");
+        BountyBoard.onHeroSpent(20);check(c.elapsed==0&&!c.clockStarted,"pending spawn consumed bonus time");
+        // Reproduce an unfinished legacy record with a lost target reference.
+        c.spawned=true;Bundle saved=new Bundle();BountyBoard.store(saved);BountyBoard.restore(saved);c=BountyBoard.contracts[1];
+        java.util.Arrays.fill(Dungeon.level.heroFOV,false);BountyBoard.arrive(Dungeon.level);
+        check(c.target!=null&&c.target.isAlive()&&Dungeon.level.mobs.contains(c.target)&&c.clockStarted&&c.elapsed==0,"orphaned contract cannot recover");
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob quarry=c.target;
+        int ht=quarry.HT;quarry.HP--;BountyBoard.onHeroSpent(3);
+        BountyBoard.store(saved);BountyBoard.restore(saved);c=BountyBoard.contracts[1];BountyBoard.arrive(Dungeon.level);
+        check(c.target==quarry&&c.target.HT==ht&&c.target.HP==ht-1&&c.elapsed==3,"rebinding rerolled stats, restored health or reset timer");
+        check(Dungeon.level.mobs.stream().filter(m->m.bountyContract==1).count()==1,"repair duplicated quarry");
+        c.complete=true;c.target=null;Dungeon.level.mobs.remove(quarry);BountyBoard.arrive(Dungeon.level);
+        check(c.target==null&&Dungeon.level.mobs.stream().noneMatch(m->m.bountyContract==1),"completed quarry resurrected");
+        System.out.println("BOUNTY RECOVERY PASS: seed=3848062306978 "+plan+"; all three promised floors, disk reload, pending placement clock, missing reference repair, single wounded actor and completed-target protection");
     }
     private static void legendaryCash(){
         int original=BalanceTuning.get(BalanceTuning.Key.BOUNTY_RARE_PAY);
@@ -300,6 +336,22 @@ final class BountyScenario {
             check(Dungeon.gold-gold==1500&&!com.shatteredpixel.shatteredpixeldungeon.items.quest.Warrant.ownedContract(3),"boss cash / paper");
             int snapshot=BountyBoard.heroBounty;
             BountyBoard.beginBetrayal();check(Dungeon.gold-gold==1500,"boss duplicate payout");
+            check(Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster.class)==null,"poster delivered before handover");
+            if(choice==1)while(Dungeon.hero.belongings.backpack.items.size()<Dungeon.hero.belongings.backpack.capacity())
+                Dungeon.hero.belongings.backpack.items.add(new Item());
+            com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster poster=BountyBoard.issueWantedPoster();
+            check(poster!=null&&BountyBoard.issueWantedPoster()==null,"personal poster missing or duplicated");
+            if(choice==1)check(Dungeon.level.heaps.get(Dungeon.hero.pos)!=null
+                    &&Dungeon.level.heaps.get(Dungeon.hero.pos).items.contains(poster),"full pack loses personal poster");
+            else check(Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster.class)==poster,"poster not kept in inventory");
+            check(poster.bounty==snapshot&&poster.subject==Dungeon.hero.heroClass&&poster.subjectName.equals(Dungeon.hero.name())
+                    &&poster.isIdentified()&&!poster.isUpgradable()&&poster.value()==0
+                    &&com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.protectedItem(poster,Dungeon.hero),"poster snapshot/quest protection");
+            Bundle savedPoster=new Bundle();savedPoster.put("poster",poster);
+            com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster copy=(com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster)savedPoster.get("poster");
+            check(copy.subject==poster.subject&&copy.subjectName.equals(poster.subjectName)&&copy.bounty==snapshot,"poster reload changes identity");
+            Bundle handover=new Bundle();BountyBoard.store(handover);BountyBoard.restore(handover);
+            check(BountyBoard.issueWantedPoster()==null&&Dungeon.gold-gold==1500,"handover reload creates extra poster/payment");
             check(!BountyBoard.accept(2),"post-betrayal new contract");
             BountyBoard.arrive(Dungeon.level);
             int count=0;for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob m:Dungeon.level.mobs)if(m instanceof Cole)count++;

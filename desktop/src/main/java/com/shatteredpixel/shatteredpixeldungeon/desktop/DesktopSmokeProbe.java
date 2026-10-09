@@ -291,8 +291,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     if(step>=47&&step<65){HeroClass hero=HeroClass.values()[(step-47)/2];
                         if(step%2==1){closeReviewWindows();Dungeon.hero.heroClass=hero;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal(bountyCole));}
                         else{interfaceBounds();checkReviewText(Game.scene());capture("bounty-betray-"+hero.name().toLowerCase());scrollReview(Game.scene());}
-                    }else if(step>=65&&step<77){
-                        int choice=(step-65)/6,phase=(step-65)%6;
+                    }else if(step>=65&&step<81){
+                        int choice=(step-65)/8,phase=(step-65)%8;
                         if(phase==0){
                             closeReviewWindows();questField(GameScene.class,"scene",null);Dungeon.init();Playtest.enable();Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.depth=10;
                             BountyBoard.planContracts();BountyBoard.contracts[0].returned=BountyBoard.contracts[1].returned=true;BountyBoard.bossChoice=choice;BountyBoard.planBoss();
@@ -317,19 +317,32 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                             Dungeon.observe();Camera.main.snapTo(bountyCole.sprite.center());capture("bounty-cole-at-stairs-"+choice);
                             bountyPaymentGold=Dungeon.gold;bountyCole.interact(Dungeon.hero);
                         }else if(phase==4){
+                            int dialogs=0;for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyPayment)dialogs++;
+                            if(dialogs!=1||BountyBoard.betrayed||BountyBoard.contracts[3].paid||Dungeon.gold!=bountyPaymentGold)throw new AssertionError("Payment dialogue skipped acceptance");
+                            interfaceBounds();checkReviewText(Game.scene());capture("bounty-cole-payment-"+choice);
+                            playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole.class,"accept_bounty"));
+                        }else if(phase==5){
                             int dialogs=0;for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal)dialogs++;
                             if(dialogs!=1||!BountyBoard.betrayed||!BountyBoard.contracts[3].paid||!RunDeeds.capture().wanted
                                     ||Dungeon.gold-bountyPaymentGold!=BountyBoard.contracts[3].payment)throw new AssertionError("Speaking to Cole did not settle the boss claim once");
                             BountyBoard.onHeroReady();BountyBoard.interactAtExit(bountyCole);
                             if(Dungeon.gold-bountyPaymentGold!=BountyBoard.contracts[3].payment)throw new AssertionError("Repeated Cole interaction paid twice");
                             interfaceBounds();checkReviewText(Game.scene());capture("bounty-cole-stairs-dialogue-"+choice);
+                            if(!allReviewText(Game.scene()).contains("Cole hands you a new bounty."))throw new AssertionError("Missing separate poster handover");
+                            playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole.class,"view_bounty"));
+                        }else if(phase==6){
+                            if(BountyBoard.departed)throw new AssertionError("Cole left before showing the hero poster");
+                            int posters=0;for(com.shatteredpixel.shatteredpixeldungeon.items.Item item:Dungeon.hero.belongings)if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster)posters++;
+                            if(posters!=1)throw new AssertionError("Personal poster missing/duplicated or replaced with Warrant");
+                            interfaceBounds();checkReviewText(Game.scene());capture("bounty-hero-wanted-"+choice);
+                            playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(RunDeeds.class,"close"));
                         }else{
                             closeReviewWindows();BountyBoard.arrive(Dungeon.level);BountyBoard.onHeroReady();
                             if(!BountyBoard.departed)throw new AssertionError("Cole did not depart after the conversation");
                             for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs)if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole)throw new AssertionError("Cole returned after departing");
                         }
-                    }else if(step==77){closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(BountyBoard.contracts[3]));}
-                    else if(step==78){
+                    }else if(step==81){closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyContract(BountyBoard.contracts[3]));}
+                    else if(step==82){
                         interfaceBounds();checkReviewText(Game.scene());bountyPosterLayoutCheck();capture("bounty-completed-poster");
                         if(!BountyBoard.betrayed||!RunDeeds.capture().wanted)throw new AssertionError("Cole conversation did not preserve the Wanted notice");
                         // Quest mechanics are exercised headlessly; include their facts in this UI review.
@@ -341,15 +354,15 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                         bountyRankedRecord.version=Game.version;bountyRankedRecord.customSeed="";
                         Rankings.INSTANCE.saveGameData(bountyRankedRecord);
                     }
-                    else if(step==79||step==82){
+                    else if(step==83||step==86){
                         closeReviewWindows();questField(GameScene.class,"scene",null);Dungeon.init();Playtest.enable();
-                        Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.depth=step==79?25:26;
+                        Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.depth=step==83?25:26;
                         Dungeon.switchLevel(Dungeon.newLevel(),-1);
-                        Dungeon.hero.pos=step==79?Dungeon.level.exit()+3*Dungeon.level.width()+2:com.shatteredpixel.shatteredpixeldungeon.levels.LastLevel.AMULET_POS+2;
+                        Dungeon.hero.pos=step==83?Dungeon.level.exit()+3*Dungeon.level.width()+2:com.shatteredpixel.shatteredpixeldungeon.levels.LastLevel.AMULET_POS+2;
                         InterlevelScene.mode=InterlevelScene.Mode.DESCEND;switchNoFade(GameScene.class);
-                    }else if(step==80||step==83){Dungeon.observe();Camera.main.snapTo(Dungeon.hero.sprite.center());}
-                    else if(step==81||step==84){capture(step==81?"painted-yog-platform":"painted-amulet-sanctum");}
-                    else if(step>=85&&step<=95){rankingDeedsReview(step-85);}
+                    }else if(step==84||step==87){Dungeon.observe();Camera.main.snapTo(Dungeon.hero.sprite.center());}
+                    else if(step==85||step==88){capture(step==85?"painted-yog-platform":"painted-amulet-sanctum");}
+                    else if(step>=89&&step<=99){rankingDeedsReview(step-89);}
                     else{closeReviewWindows();System.out.println("BOUNTY UI PASS: all nine greetings/betrayals, eight painted posters and completion stamp, six unique quarry skins/save-load/unchanged species animations, mouse/touch acceptance, purchase, urgency HUD/poster and paid receipt, unseen/invisible wanted-seal suppression, Warrant/journal/artwork, tuning, settlements, both actual boss deaths/mask rewards and player-initiated Cole stairs meetings/once-only payment/departure, painted final sanctums and ranked Deeds/Wanted/paid posters/old-record fallback; failures=0");Gdx.app.exit();}
             }
         }

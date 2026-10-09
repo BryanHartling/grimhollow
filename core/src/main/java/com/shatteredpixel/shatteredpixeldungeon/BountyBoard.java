@@ -42,6 +42,7 @@ public final class BountyBoard {
     public static int bossChoice = -1, heroBounty;
     public static boolean bossDefeated, betrayed, departed;
     private static boolean dialogueOpen;
+    private static boolean wantedPosterIssued;
     public static Crew[] crews=new Crew[3];
     public static int hallsCell=-1, meetingDepth=-1;
     public static Cole encounter;
@@ -133,7 +134,7 @@ public final class BountyBoard {
         shopClosed = false; officeCell = -1;
         stock = new Item[5]; prices = new int[5];
         contracts = new Contract[4];
-        bossChoice=-1; heroBounty=0; bossDefeated=betrayed=departed=dialogueOpen=false;
+        bossChoice=-1; heroBounty=0; bossDefeated=betrayed=departed=dialogueOpen=wantedPosterIssued=false;
         crews=new Crew[3];hallsCell=meetingDepth=-1;encounter=null;
         resolved=hallsIntroduced=combatRequested=responsePending=false;
         outcome=0;deepestMain=1;settlementTwo=new Item[2];settlementThree=new Item[3];settlementPrices=new int[2];
@@ -176,13 +177,14 @@ public final class BountyBoard {
             contracts[3].target=((com.shatteredpixel.shatteredpixeldungeon.levels.PrisonBossLevel)level).bountyBoss();
         for (Contract c : contracts) if (c != null && c.index<3 && c.accepted && !c.complete) {
             if (Dungeon.depth == c.floor) {
-                c.clockStarted = true;
                 boolean exists = false;
-                for (Mob mob : level.mobs) if (mob.bountyContract == c.index) { c.target = mob; exists = true; break; }
-                if (!exists && (!c.spawned || c.target != null)) {
-                    Mob mob = c.spawned ? c.target : c.preview(); int cell = spawnCell(level, mob);
+                for (Mob mob : level.mobs) if (mob.bountyContract == c.index && mob.isAlive()) { c.target = mob; exists = true; break; }
+                if (!exists) {
+                    // An unfinished saved contract must never be stranded by a missing reference.
+                    boolean fresh = !c.spawned || c.target == null || !c.target.isAlive();
+                    Mob mob = fresh ? c.preview() : c.target; int cell = spawnCell(level, mob);
                     if (cell < 0) continue;
-                    if (!c.spawned) {
+                    if (fresh) {
                     mob.bountyContract = c.index;
                     mob.wantedDamage = BalanceTuning.multiplier(new BalanceTuning.Key[]{BalanceTuning.Key.WANTED_COMMON_DAMAGE,BalanceTuning.Key.WANTED_RARE_DAMAGE,BalanceTuning.Key.WANTED_LEGEND_DAMAGE}[c.index]);
                     mob.wantedMovement = (c.traits & 2) != 0 ? BalanceTuning.multiplier(BalanceTuning.Key.WANTED_MOVEMENT) : 1f;
@@ -194,6 +196,8 @@ public final class BountyBoard {
                         com.shatteredpixel.shatteredpixeldungeon.scenes.GameScene.add(mob);
                     c.spawned = true; c.target = mob;
                 }
+                c.spawned = true;
+                c.clockStarted = true; // Placement/rebinding succeeds before the bonus clock begins.
             }
         }
         if (Dungeon.depth == OFFICE_DEPTH && shopClosed)
@@ -338,11 +342,13 @@ public final class BountyBoard {
     public static boolean interactAtExit(Cole cole) {
         if(!departurePending()||!Dungeon.level.mobs.contains(cole)||!(Game.scene() instanceof GameScene))return false;
         if(dialogueOpen)return true;
-        if(!beginBetrayal())return false;
         dialogueOpen=true;Dungeon.hero.interrupt();Dungeon.hero.lastAction=null;Dungeon.hero.resting=false;
-        GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal(cole));
+        GameScene.show(betrayed?new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal(cole)
+                :new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyPayment(cole));
         return true;
     }
+    public static void closeExitConversation(){dialogueOpen=false;}
+    public static void holdExitConversation(){dialogueOpen=true;}
     public static boolean beginBetrayal() {
         Contract c=contracts[3];if(!departurePending())return false;
         if(!betrayed){
@@ -355,6 +361,14 @@ public final class BountyBoard {
             com.shatteredpixel.shatteredpixeldungeon.journal.Notes.addBounty(4,10);
         }
         return true;
+    }
+    /** The handover is separate from payment; the physical poster is never a cash claim. */
+    public static com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster issueWantedPoster(){
+        if(!betrayed||departed||wantedPosterIssued)return null;
+        RunDeeds record=RunDeeds.capture();
+        com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster poster=
+                new com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster(record.wantedClass,record.wantedName,record.wantedBounty);
+        wantedPosterIssued=true;give(poster);return poster;
     }
     public static void finishDeparture() {
         departed=true;dialogueOpen=false;
@@ -635,6 +649,7 @@ public final class BountyBoard {
         Bundle b = new Bundle();
         b.put("present", present); b.put("closed", shopClosed); b.put("office", officeCell);
         b.put("boss_choice",bossChoice);b.put("boss_defeated",bossDefeated);b.put("betrayed",betrayed);b.put("departed",departed);b.put("hero_bounty",heroBounty);
+        b.put("wanted_poster_issued",wantedPosterIssued);
         b.put("halls",hallsCell);b.put("meeting_depth",meetingDepth);b.put("encounter",encounter);b.put("resolved",resolved);
         b.put("halls_introduced",hallsIntroduced);b.put("combat_requested",combatRequested);b.put("response_pending",responsePending);
         b.put("outcome",outcome);b.put("deepest_main",deepestMain);
@@ -652,6 +667,7 @@ public final class BountyBoard {
         present = b.getBoolean("present"); shopClosed = b.getBoolean("closed");
         bossChoice=b.contains("boss_choice")?b.getInt("boss_choice"):-1;bossDefeated=b.getBoolean("boss_defeated");
         betrayed=b.getBoolean("betrayed");departed=b.getBoolean("departed");heroBounty=b.getInt("hero_bounty");
+        wantedPosterIssued=b.getBoolean("wanted_poster_issued");
         hallsCell=b.contains("halls")?b.getInt("halls"):-1;meetingDepth=b.contains("meeting_depth")?b.getInt("meeting_depth"):-1;
         encounter=(Cole)b.get("encounter");resolved=b.getBoolean("resolved");hallsIntroduced=b.getBoolean("halls_introduced");
         combatRequested=b.getBoolean("combat_requested");responsePending=b.getBoolean("response_pending");

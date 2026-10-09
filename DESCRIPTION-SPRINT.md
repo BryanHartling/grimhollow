@@ -9,3 +9,5 @@ Approved scope, 2026-10-09:
 Each implementation component will be committed separately. Check usage before beginning the description component; deliver the final build at a clean boundary.
 
 Completed locally: Soul Sustenance, balanced descriptions, combined headless Runs=30 failures=0, eight unit tests, Windows/Android builds, and interface/presentation checks in both orientations. The approved follow-up adds three-rank Bone Legion, Cole's staged payment/betrayal and personal poster, wanted-target/urgency repair for seed 3848062306978, and stronger Horror survival/combat. Package and CI delivery will cover both components together.
+
+Follow-up complete locally: all four servant types and legacy ranks, three-step Cole handover and physical poster (including full pack), reported-seed quarry/clock repair, stronger regional Horrors and saved-state migration. Final Bounty/Horror native suites pass both orientations. Version 1.29.15/code 1014 packages and compiled audit pass; release delivery includes all components.

@@ -8,11 +8,11 @@ import com.shatteredpixel.shatteredpixeldungeon.items.Phylactery;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand;
 import com.watabou.utils.*;
-/** Persistent once-per-floor and once-per-turn talent state. No regenerating resource. */
+/** Persistent per-floor talent state. No regenerating resource. */
 public class Necromancy extends Buff {
     { revivePersists = true; }
     private final java.util.HashSet<Integer> wardFloors=new java.util.HashSet<>();
-    private float siphonTurn=-100;
+    private final java.util.HashMap<Integer,Integer> nourishmentSpent=new java.util.HashMap<>();
     public static int points(Talent talent) { return Dungeon.hero == null ? 0 : Dungeon.hero.pointsInTalent(talent); }
     public static void heal(int amount) { if (Dungeon.hero != null && Dungeon.hero.isAlive()) Dungeon.hero.heal(Math.max(0,amount)); }
     public static void onFood() { for (NecroSkeleton m : NecroSkeleton.minions()) m.HP=Math.min(m.HT,m.HP+Math.round(m.HT*.25f*points(Talent.BONE_MEAL))); }
@@ -54,6 +54,10 @@ public class Necromancy extends Buff {
         NecroCurse curse=NecroCurse.find(target);
         if (cause==Dungeon.hero || cause instanceof NecroSkeleton || target.buff(HeroDamage.class)!=null || curse!=null) {
             Phylactery item=Dungeon.hero.belongings.getItem(Phylactery.class);
+            if (item!=null && item.charges()>=item.cap()) {
+                Necromancy passive=Dungeon.hero.buff(Necromancy.class);
+                if (passive!=null) passive.sustain(target);
+            }
             if (item!=null) item.gainCharge(1+(Random.Float()<.25f*points(Talent.GRAVE_HARVEST)?1:0));
             if (curse!=null) {
                 heal(Math.min(15,points(Talent.DARK_PACT)*curse.remaining));
@@ -64,11 +68,20 @@ public class Necromancy extends Buff {
             }
         }
     }
-    public void siphon(Char enemy) {
+    private void sustain(Mob enemy) {
+        // Keep NECROTIC_SIPHON as the serialized talent key so invested ranks survive.
         int p=points(Talent.NECROTIC_SIPHON);
-        if (p>0 && enemy.isAlive() && com.shatteredpixel.shatteredpixeldungeon.Statistics.duration+Actor.now()>=siphonTurn+1) {
-            siphonTurn=com.shatteredpixel.shatteredpixeldungeon.Statistics.duration+Actor.now(); int amount=Math.min(p,enemy.HP); heal(amount); enemy.damage(amount,this);
-        }
+        Hunger hunger=target.buff(Hunger.class);
+        if (p<=0 || enemy.EXP<=0 || enemy instanceof NecroSkeleton
+                || enemy instanceof Necromancer.NecroSkeleton || enemy.properties().contains(Char.Property.BOSS_MINION)
+                || hunger==null || hunger.hunger()==0) return;
+        int floor=Dungeon.depth+100*Dungeon.branch;
+        int spent=nourishmentSpent.containsKey(floor)?nourishmentSpent.get(floor):0;
+        int amount=Math.min(10*p,60*p-spent);
+        if (amount<=0) return;
+        // Plain hunger restoration: no HP healing, Well Fed extension or food hooks.
+        hunger.satisfy(amount);
+        nourishmentSpent.put(floor,spent+amount);
     }
     public void ward() {
         Hero h=(Hero)target;
@@ -78,6 +91,19 @@ public class Necromancy extends Buff {
         }
     }
     @Override public boolean act() { ward(); spend(TICK); return true; }
-    @Override public void storeInBundle(Bundle b) { super.storeInBundle(b);b.put("ward_floors",wardFloors.stream().mapToInt(Integer::intValue).toArray());b.put("siphon_turn",siphonTurn); }
-    @Override public void restoreFromBundle(Bundle b) { super.restoreFromBundle(b);wardFloors.clear();for(int floor:b.getIntArray("ward_floors"))wardFloors.add(floor);siphonTurn=b.getFloat("siphon_turn"); }
+    @Override public void storeInBundle(Bundle b) {
+        super.storeInBundle(b);
+        int[] wards=new int[wardFloors.size()];int n=0;for(int floor:wardFloors)wards[n++]=floor;b.put("ward_floors",wards);
+        int[] floors=new int[nourishmentSpent.size()],amounts=new int[floors.length];n=0;
+        for(java.util.Map.Entry<Integer,Integer> entry:nourishmentSpent.entrySet()){floors[n]=entry.getKey();amounts[n++]=entry.getValue();}
+        b.put("nourishment_floors",floors);b.put("nourishment_spent",amounts);
+    }
+    @Override public void restoreFromBundle(Bundle b) {
+        super.restoreFromBundle(b);wardFloors.clear();for(int floor:b.getIntArray("ward_floors"))wardFloors.add(floor);
+        nourishmentSpent.clear();
+        if(b.contains("nourishment_floors")&&b.contains("nourishment_spent")){
+            int[] floors=b.getIntArray("nourishment_floors"),amounts=b.getIntArray("nourishment_spent");
+            for(int n=0;n<Math.min(floors.length,amounts.length);n++)nourishmentSpent.put(floors[n],Math.max(0,amounts[n]));
+        }
+    }
 }

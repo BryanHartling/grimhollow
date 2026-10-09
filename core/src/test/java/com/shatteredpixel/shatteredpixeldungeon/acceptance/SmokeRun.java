@@ -1001,7 +1001,7 @@ public class SmokeRun {
         h.HP=10;h.buff(Necromancy.class).ward();check(h.buff(Barkskin.class)!=null,"Ward of Bone");
         Buff.detach(h,Barkskin.class);Dungeon.depth=2;h.buff(Necromancy.class).ward();Buff.detach(h,Barkskin.class);Dungeon.depth=1;h.buff(Necromancy.class).ward();
         check(h.buff(Barkskin.class)==null,"Ward of Bone cannot recharge by revisiting a floor");
-        h.buff(Necromancy.class).siphon(enemy);int hp=h.HP;h.buff(Necromancy.class).siphon(enemy);check(h.HP==hp,"One Soul Siphon target per turn");
+        soulSustenanceScenario();
         // All armor talent sets and concrete target scenarios.
         h.armorAbility=new CorpseExplosion();h.talents.get(3).clear();Talent.initArmorTalents(h);maxTalents();armor.charge=100;Dungeon.level.corpses.put(h.pos+1,100);
         int oldHP=enemy.HP;((CorpseExplosion)h.armorAbility).activate(armor,h,h.pos+1);check(enemy.HP<oldHP&&Dungeon.level.corpses.get(h.pos+1)==null,"Corpse Explosion damage and consumption");
@@ -1023,6 +1023,59 @@ public class SmokeRun {
         for(int cell:walls)check(Dungeon.level.map[cell]!=Terrain.BONE_WALL,"Bone Prison reverts on load");
         check(BoneWalls.prison(h.pos+3,10,1),"Exit prison");Level previous=Dungeon.level;Dungeon.newLevel();check(previous.boneOriginal.keyArray().length==0,"Bone Prison reverts on level exit");Dungeon.switchLevel(previous,h.pos);
         System.out.println("NECROMANCER kit, talents, subclasses, spells, armor, caps, and persistence: PASS");
+    }
+    private static void soulSustenanceScenario() throws Exception {
+        Hero h=Dungeon.hero;Phylactery urn=h.belongings.getItem(Phylactery.class);
+        Necromancy passive=h.buff(Necromancy.class);Hunger hunger=Buff.affect(h,Hunger.class);
+        Bundle before=new Bundle(),nutrition=new Bundle();passive.storeInBundle(before);hunger.storeInBundle(nutrition);
+        int depth=Dungeon.depth,branch=Dungeon.branch,hp=h.HP,rank=h.pointsInTalent(Talent.NECROTIC_SIPHON),harvest=h.pointsInTalent(Talent.GRAVE_HARVEST);
+        Rat victim=target(h.pos+3);victim.EXP=1;
+        try {
+            Dungeon.depth=91;Dungeon.branch=0;h.talents.get(1).put(Talent.NECROTIC_SIPHON,1);
+            Bundle start=new Bundle();hunger.storeInBundle(start);start.put("level",400f);hunger.restoreFromBundle(start);
+            urn.gainCharge(20);int initial=hunger.hunger();Necromancy.onDeath(victim,h);
+            check(hunger.hunger()==initial-10&&h.HP==hp,"Soul Sustenance rank one restores ten hunger turns without healing");
+            for(int i=0;i<9;i++)Necromancy.onDeath(victim,h);
+            check(hunger.hunger()==initial-60,"Soul Sustenance rank-one floor cap is sixty");
+            Dungeon.depth=92;urn.gainCharge(-1);h.talents.get(0).put(Talent.GRAVE_HARVEST,0);
+            initial=hunger.hunger();Necromancy.onDeath(victim,h);
+            check(urn.charges()==urn.cap()&&hunger.hunger()==initial,"A kill that fills the urn grants no nourishment");
+            h.talents.get(0).put(Talent.GRAVE_HARVEST,2);initial=hunger.hunger();Necromancy.onDeath(victim,new NecroSkeleton());
+            check(hunger.hunger()==initial-10,"Minion kills qualify once even with extra charge chance");
+            h.talents.get(1).put(Talent.NECROTIC_SIPHON,2);initial=hunger.hunger();Necromancy.onDeath(victim,h);
+            check(hunger.hunger()==initial-20,"Soul Sustenance rank two restores twenty hunger turns");
+            for(int i=0;i<9;i++)Necromancy.onDeath(victim,h);
+            check(hunger.hunger()==initial-110,"Rank upgrade keeps prior spending against the expanded 120-turn floor cap");
+            Bundle saved=new Bundle();saved.put("passive",passive);Necromancy loaded=(Necromancy)saved.get("passive");
+            Bundle restored=new Bundle();loaded.storeInBundle(restored);passive.restoreFromBundle(restored);
+            Dungeon.depth=91;initial=hunger.hunger();Necromancy.onDeath(victim,h);
+            check(hunger.hunger()==initial-20,"Save/load retains prior floor spending and upgraded allowance");
+            for(int i=0;i<9;i++)Necromancy.onDeath(victim,h);
+            check(hunger.hunger()==initial-60,"Revisiting does not reset Soul Sustenance");
+            Dungeon.branch=1;initial=hunger.hunger();Necromancy.onDeath(victim,h);
+            check(hunger.hunger()==initial-20,"Branch floors have independent allowances");
+            initial=hunger.hunger();victim.EXP=0;Necromancy.onDeath(victim,h);
+            Necromancy.onDeath(new Necromancer.NecroSkeleton(),h);Necromancy.onDeath(new Wraith(),h);
+            CavernSpinner replacement=new CavernSpinner();replacement.setReplenished();Necromancy.onDeath(replacement,h);
+            Broodmother mother=new Broodmother();mother.setReplenished();Necromancy.onDeath(mother,h);
+            check(hunger.hunger()==initial,"Summoned and rewardless creatures grant no nourishment");
+            victim.EXP=1;Necromancy.onDeath(victim,new Rat());
+            check(hunger.hunger()==initial,"Unattributed deaths do not nourish");
+            NecroCurse curse=NecroCurse.apply(victim,NecroCurse.Kind.WITHER,5);int enemyHP=victim.HP;curse.act();
+            check(victim.HP==enemyHP&&h.HP==hp,"Old Soul Siphon no longer drains cursed enemies");curse.detach();
+            WellFed fed=Buff.affect(h,WellFed.class);fed.extend(20);float expires=fed.cooldown();
+            Necromancy.onDeath(victim,h);
+            Bundle fedState=new Bundle();fed.storeInBundle(fedState);
+            check(h.HP==hp&&fedState.getInt("left")==20&&fed.cooldown()==expires,"Nourishment does not heal or extend Well Fed");Buff.detach(h,WellFed.class);
+            Bundle legacy=new Bundle();legacy.put("ward_floors",new int[]{1});legacy.put("siphon_turn",10f);passive.restoreFromBundle(legacy);
+            Dungeon.branch=0;Dungeon.depth=93;initial=hunger.hunger();Necromancy.onDeath(victim,h);
+            check(hunger.hunger()==initial-20&&h.pointsInTalent(Talent.NECROTIC_SIPHON)==2,"Old saves preserve invested ranks and start a new nourishment ledger");
+            System.out.println("SOUL SUSTENANCE PASS: ranks 10/20, caps 60/120, full-before-kill, hero/minion attribution, one benefit per kill, exclusions, no healing/food hooks, branches/revisits/save-load and old-save ranks");
+        } finally {
+            passive.restoreFromBundle(before);hunger.restoreFromBundle(nutrition);Dungeon.depth=depth;Dungeon.branch=branch;
+            h.talents.get(1).put(Talent.NECROTIC_SIPHON,rank);h.talents.get(0).put(Talent.GRAVE_HARVEST,harvest);
+            Actor.remove(victim);Dungeon.level.mobs.remove(victim);
+        }
     }
     private static void sentryHasteScenario() throws Exception {
         Hero h=Dungeon.hero;int original=h.pos;

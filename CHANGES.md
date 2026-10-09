@@ -1,3 +1,9 @@
+# Soul and descriptions sprint - 2026-10-09
+
+- Replace Necromancer's tier-two Soul Siphon with Soul Sustenance: eligible hero/raised-servant kills restore 10/20 hunger turns when the Phylactery was already full, capped at 60/120 per floor. Extra soul charges do not multiply the benefit. Summoned and rewardless replacement enemies are excluded; ordinary hunger restoration never heals, extends Well Fed or invokes food talents.
+- Retain the serialized NECROTIC_SIPHON identifier so invested points survive. Save floor allowances with the Necromancy buff, separating quest branches and preserving spending across revisits and rank upgrades. Old saves initialize the new allowance without altering ranks. Replace the obsolete curse-driven health drain.
+- Existing Necromancer headless gate: Runs=10 failures=0; eight unit tests pass. Scenarios cover both ranks/caps, pre-kill fullness, hero/minion attribution, bonus charges, summons/replacements, no healing, old saves, branches, revisits and serialization.
+
 # Quest pressure v1.29.13 - 2026-10-09
 
 - Dragon impact damage defaults to 125%, affecting claws, direct breath and wingbeats; existing tuning overrides are retained. Remove the one-in-three wingbeat selection roll so a ready close-range wingbeat takes priority. Keep the fixed-direction warning, five-turn wing cooldown, three-turn breath minimum, displacement and persistent boss health.

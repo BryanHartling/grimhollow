@@ -38,8 +38,6 @@ public class NecroCurse extends Buff {
     public void spark() { if(com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.enabled()){com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.burst(target.pos,com.shatteredpixel.shatteredpixeldungeon.effects.EnhancedEffects.Style.CURSE,16,.6f);return;} if(target.sprite!=null && target.sprite.parent!=null && target.sprite.visible) target.sprite.centerEmitter().burst(NecroticParticle.FACTORY,3); }
     @Override public boolean act() {
         if(remaining<=0 || !target.isAlive()) {detach();return true;}
-        Necromancy passive=Dungeon.hero.buff(Necromancy.class);
-        if(passive!=null && target.alignment==Char.Alignment.ENEMY)passive.siphon(target);
         spark();
         if(permanent){
             if(kind==Kind.WITHER||kind==Kind.DECREPIFY)Buff.prolong(target,Weakness.class,5);

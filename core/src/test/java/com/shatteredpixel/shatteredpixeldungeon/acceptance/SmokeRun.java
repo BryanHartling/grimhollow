@@ -985,11 +985,28 @@ public class SmokeRun {
         // Death Pact must suppress Second Grave while consuming minions.
         ClassArmor armor=ClassArmor.upgrade(h,new ClothArmor());h.armorAbility=new DeathPact();Talent.initArmorTalents(h);maxTalents();armor.charge=100;
         ((DeathPact)h.armorAbility).activate(armor,h,h.pos);check(NecroSkeleton.minions().isEmpty()&&h.buff(Adrenaline.class)!=null,"Death Pact sacrifice and buff");
-        clearArena();enemy=target(h.pos+2);
+        clearArena();
+        int legionRank=h.pointsInTalent(Talent.BONE_LEGION);
+        for(int rank=0;rank<=3;rank++){
+            h.talents.get(2).put(Talent.BONE_LEGION,rank);
+            check(NecroSkeleton.cap()==(rank<3?4:5),"Bone Legion adds a summon slot only at rank three");
+            Bundle ranks=new Bundle();Talent.storeTalentsInBundle(ranks,h);Hero restored=new Hero();restored.heroClass=h.heroClass;restored.subClass=h.subClass;
+            Talent.restoreTalentsFromBundle(ranks,restored);check(restored.pointsInTalent(Talent.BONE_LEGION)==rank,"Bone Legion preserves all ranks, including the old rank-one save");
+            for(int tier=0;tier<4;tier++){
+                NecroSkeleton servant=NecroSkeleton.raise(h.pos+1,tier,false);
+                check(servant!=null&&servant.remaining==new int[]{30,30,40,50}[tier]+5*rank,"Bone Legion binding progression for all servant types");
+                Bundle bound=new Bundle();bound.put("servant",servant);
+                check(((NecroSkeleton)bound.get("servant")).remaining==servant.remaining,"Extended binding serializes");
+                for(Buff b:servant.buffs())Actor.remove(b);Actor.remove(servant);Dungeon.level.mobs.remove(servant);
+            }
+        }
+        h.talents.get(2).put(Talent.BONE_LEGION,legionRank);
+        check(Talent.BONE_LEGION.maxPoints()==3,"Bone Legion exposes three ranks");
+        enemy=target(h.pos+2);
         while(item.level()<6){item.gainCharge(1);check(item.cast(h,Phylactery.Spell.WITHER,enemy.pos),"Growth to Revenant");}
         item.gainCharge(20);check(item.cast(h,Phylactery.Spell.RAISE_REVENANT,h.pos),"Deathspeaker Revenant unlock");
         NecroSkeleton revenant=NecroSkeleton.minions().get(0);
-        check(revenant.slots()==2&&revenant.remaining==50&&revenant.isImmune(Terror.class)&&revenant.isImmune(Amok.class),"Revenant slots lifetime immunities");
+        check(revenant.slots()==2&&revenant.remaining==65&&revenant.isImmune(Terror.class)&&revenant.isImmune(Amok.class),"Revenant slots, rank-three binding and immunities");
         item.gainCharge(20);check(!item.cast(h,Phylactery.Spell.RAISE_REVENANT,h.pos),"Only one Revenant");
         NecroGhoul rising=(NecroGhoul)NecroSkeleton.raise(h.pos-1,true,false);rising.HP=0;rising.die(h);check(rising.HP==rising.HT/2,"Ally-scoped Ghoul rises once");
         rising.sacrificed=true;rising.sprite=new GhoulSprite();rising.sprite.link(rising);rising.HP=0;rising.die(h);check(!NecroSkeleton.minions().contains(rising),"Sacrifice suppresses Ghoul rise");
@@ -1019,7 +1036,7 @@ public class SmokeRun {
         h=Dungeon.hero;h.sprite=new HeroSprite();item=h.belongings.getItem(Phylactery.class);
         check(item.charges()==charges&&NecroSkeleton.minions().size()==1,"Minion and Phylactery save/load");
         check(item.level()==artifactLevel,"Usage-grown artifact level survives save/load");
-        check(NecroSkeleton.minions().get(0).remaining==30&&NecroSkeleton.minions().get(0).description().contains("_30 more turns_"),"56: Minion lifetime and inspection save/load");
+        check(NecroSkeleton.minions().get(0).remaining==30&&NecroSkeleton.minions().get(0).description().contains("_30 more turns_"),"56: Hexweaver minion lifetime and inspection save/load without Bone Legion");
         check(Dungeon.level.mobs.stream().anyMatch(m->NecroCurse.find(m)!=null),"Curse save/load");
         for(int cell:walls)check(Dungeon.level.map[cell]!=Terrain.BONE_WALL,"Bone Prison reverts on load");
         check(BoneWalls.prison(h.pos+3,10,1),"Exit prison");Level previous=Dungeon.level;Dungeon.newLevel();check(previous.boneOriginal.keyArray().length==0,"Bone Prison reverts on level exit");Dungeon.switchLevel(previous,h.pos);

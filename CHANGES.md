@@ -1,3 +1,7 @@
+# Playtest follow-up v1.29.15 - 2026-10-09
+
+- Bone Legion has three ranks: newly raised servants gain 5/10/15 binding turns, with an additional summon slot only at rank three. Existing invested ranks remain invested; existing servants keep their remaining timers. All four servant types, cap thresholds, legacy rank-one saves and extended binding serialization pass in the existing Necromancer gate (Runs=10 failures=0); eight unit tests pass.
+
 # Soul and descriptions v1.29.14 - 2026-10-09
 
 - Replace Necromancer's tier-two Soul Siphon with Soul Sustenance: eligible hero/raised-servant kills restore 10/20 hunger turns when the Phylactery was already full, capped at 60/120 per floor. Extra soul charges do not multiply the benefit. Summoned and rewardless replacement enemies are excluded; ordinary hunger restoration never heals, extends Well Fed or invokes food talents.

@@ -19,7 +19,7 @@ public class NecroSkeleton extends DirectableAlly {
         if(Dungeon.level!=null)for(Mob m:Dungeon.level.mobs)if(m instanceof NecroSkeleton && m.isAlive())result.add((NecroSkeleton)m);
         return result;
     }
-    public static int cap() {return (Dungeon.hero.lvl<7?1:Dungeon.hero.lvl<21?2:3)+(Necromancy.points(Talent.BONE_LEGION)>0?1:0)+(Dungeon.hero.subClass==HeroSubClass.DEATHSPEAKER?1:0);}
+    public static int cap() {return (Dungeon.hero.lvl<7?1:Dungeon.hero.lvl<21?2:3)+(Necromancy.points(Talent.BONE_LEGION)>=3?1:0)+(Dungeon.hero.subClass==HeroSubClass.DEATHSPEAKER?1:0);}
     public static int counted() {int n=0;for(NecroSkeleton m:minions())if(m.grace<=0)n+=m.slots();return n;}
     public void configure(int level) {summonerLevel=level;HT=HP=Math.round(baseHealth()*growth()*(1+.1f*Necromancy.points(Talent.STURDY_BONES)));viewDistance=8+2*Necromancy.points(Talent.CORPSE_SENSE);}
     protected int baseHealth() {return 15+4*summonerLevel;}
@@ -32,6 +32,7 @@ public class NecroSkeleton extends DirectableAlly {
         if(second ? total>=cap()+1 : counted()+slots>cap() || total+slots>cap()+1) return null;
         if(tier==3&&minions().stream().anyMatch(m->m instanceof NecroRevenant))return null;
         NecroSkeleton m=tier==3?new NecroRevenant():tier==2?new NecroGhoul():tier==1?new NecroWraith():new NecroSkeleton();m.configure(Dungeon.hero.lvl);m.pos=pos;m.grace=second?5:0;
+        m.remaining+=5*Necromancy.points(Talent.BONE_LEGION);
         if(com.watabou.noosa.Game.scene() instanceof GameScene)GameScene.add(m);else{Dungeon.level.mobs.add(m);Actor.add(m);}
         Buff.affect(m,Lifetime.class);
         return m;

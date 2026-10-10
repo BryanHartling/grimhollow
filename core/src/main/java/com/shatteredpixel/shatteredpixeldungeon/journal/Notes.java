@@ -292,6 +292,7 @@ public class Notes {
 
 				case LOST_PACK:     return Messages.get(LostBackpack.class, "name");
 				case BEACON_LOCATION:return Messages.get(BeaconOfReturning.class, "name");
+				case COLE:          return Messages.get(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.BountyNotice.class, "name");
 			}
 		}
 

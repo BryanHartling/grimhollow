@@ -1,3 +1,9 @@
+# Journal title - v1.29.16
+
+The Bounty Board's Adventuring Notes entry now displays its proper name, including entries in existing saved games. Quest progress, gameplay and artwork are unchanged. The existing bounty scenarios check all 27 landmark titles/descriptions across serialization and open the board note through actual mouse/touch input.
+
+Windows: `desktop/build/windows/1.29.16/Grimhollow/Grimhollow.exe` (keep the entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk` (`1.29.16-INDEV`, version code 1015).
+
 # Quest pressure - v1.29.13
 
 Dragon claw, direct breath and wingbeat impact damage default to 125% of the previous values. A ready wingbeat takes priority within two cells, retaining its warning and five-turn cooldown; breath retains its three-turn minimum. Existing device balance overrides remain authoritative.

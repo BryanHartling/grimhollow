@@ -91,6 +91,7 @@ final class BountyScenario {
                 Dungeon.saveAll(); Dungeon.loadGame(GamesInProgress.curSlot);
                 check(BountyBoard.shopClosed && BountyBoard.stock[0] == null, "disk-save receipts");
             }
+            journal();
             contracts();
             pendingTargets();
             legendaryCash();
@@ -102,6 +103,23 @@ final class BountyScenario {
             System.out.println("BOUNTY COMPONENTS 1-2 PASS: ten reachable offices, finite double-price stock, isolated closure, disk receipts; accepted-only saved targets, real deaths, timing, Warrants and once-only rewards");
         } catch (java.io.IOException error) { throw new AssertionError(error); }
         finally { BountyBoard.AVAILABLE = enabled; BountyBoard.reset(); }
+    }
+    private static void journal() {
+        for (com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark landmark
+                : com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark.values()) {
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord record =
+                    new com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord(landmark, 7);
+            check(!record.title().isEmpty() && !record.title().contains("!!!"), "missing landmark title: " + landmark);
+            check(!record.desc().contains("!!!"), "missing landmark description: " + landmark);
+            Bundle saved = new Bundle(); saved.put("note", record);
+            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord restored =
+                    (com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord)saved.get("note");
+            check(restored.equals(record) && restored.title().equals(record.title())
+                    && restored.desc().equals(record.desc()), "saved journal entry: " + landmark);
+            if (landmark == com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark.COLE)
+                check(record.title().equals(new BountyNotice().name()), "board and journal names disagree");
+        }
+        System.out.println("BOUNTY JOURNAL PASS: all 27 landmark titles/descriptions resolve before and after save/load; Bounty Board name matches its actor");
     }
     private static void contracts() throws java.io.IOException {
         Dungeon.init(); Dungeon.depth=7; Dungeon.branch=0;

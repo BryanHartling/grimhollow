@@ -1,3 +1,9 @@
+# Journal title v1.29.16 - 2026-10-10
+
+- Resolve the Bounty Board landmark's title through the board's existing localized name, matching its description. Existing saved COLE notes keep their identity and now show Bounty Board instead of a missing-text placeholder. No quest, gameplay or artwork changes.
+- Extend the existing bounty checks to cover all 27 landmark titles/descriptions before and after serialization, and open the actual board journal icon with mouse/touch input in both orientations.
+- Combined class gate Runs=30 failures=0, eight unit tests, final native bounty suites in both layouts, compiled audit and fresh Windows/Android builds pass. Repair an initial fixture-only coordinate cast; its failed attempt is not counted as passing. Physical tablet is not tested; terrain contrast remains abandoned.
+
 # Playtest follow-up v1.29.15 - 2026-10-09
 
 - Bone Legion has three ranks: newly raised servants gain 5/10/15 binding turns, with an additional summon slot only at rank three. Existing invested ranks remain invested; existing servants keep their remaining timers. All four servant types, cap thresholds, legacy rank-one saves and extended binding serialization pass in the existing Necromancer gate (Runs=10 failures=0); eight unit tests pass.

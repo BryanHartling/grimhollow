@@ -36,6 +36,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean horrorReview=Boolean.getBoolean("grimhollow.horrorReview");
     private final boolean bountyReview=Boolean.getBoolean("grimhollow.bountyReview");
     private int bountyStep;
+    private boolean bountyJournalOpened;
     private int bountyPaymentGold;
     private Rankings.Record bountyRankedRecord;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole bountyCole;
@@ -278,8 +279,16 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     if(!enlarged)throw new AssertionError("Cole image did not open artwork viewer");capture("bounty-cole-artwork");closeReviewWindows();
                     for(com.shatteredpixel.shatteredpixeldungeon.items.Heap h:Dungeon.level.heaps.valueList())if(BountyBoard.owns(h)&&h.coleSlot==0){GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndTradeItem(h));break;}break;
                 case 39:interfaceBounds();capture("bounty-shop");playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.windows.WndTradeItem.class,"buy",200));break;
-                case 40:if(BountyBoard.stock[0]!=null)throw new AssertionError("Native purchase failed");closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal());break;
-                case 41:interfaceBounds();capture("bounty-journal");closeReviewWindows();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.quests();break;
+                case 40:if(BountyBoard.stock[0]!=null)throw new AssertionError("Native purchase failed");closeReviewWindows();com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal.last_index=0;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal());break;
+                case 41:
+                    interfaceBounds();checkReviewText(Game.scene());
+                    if(!bountyJournalOpened){
+                        capture("bounty-journal");bountyJournalClick();bountyJournalOpened=true;bountyStep--;break;
+                    }
+                    String boardName=com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.BountyNotice.class,"name");
+                    String boardDesc=com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.BountyNotice.class,"desc");
+                    if(!allReviewText(Game.scene()).contains(boardName)||!allReviewText(Game.scene()).contains(boardDesc))throw new AssertionError("Bounty journal click did not resolve board title/description");
+                    capture("bounty-board-journal-description");closeReviewWindows();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.quests();break;
                 case 42:menuEntry("Cole and Bounty Board");menuEntry("Bounty balance controls");menuEntry("Hunter crews and Cole combat");menuEntry("Cole Bolas ammunition: 2");break;
                 case 43:interfaceBounds();capture("bounty-tuning-input");playtestInput("3","Apply");break;
                 case 44:
@@ -864,6 +873,28 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     +Gdx.graphics.getWidth()+"x"+Gdx.graphics.getHeight()+"; failures=0");
         }
         if(frames>=700)readabilityReview();
+    }
+    private void bountyJournalClick(){
+        for(com.watabou.noosa.Gizmo window:RecoveryChecks.members(Game.scene())){
+            if(!(window instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndJournal))continue;
+            Object notes=RecoveryChecks.field(window,"notesTab");
+            com.shatteredpixel.shatteredpixeldungeon.ui.ScrollingGridPane grid=
+                    (com.shatteredpixel.shatteredpixeldungeon.ui.ScrollingGridPane)RecoveryChecks.field(notes,"grid");
+            for(com.watabou.noosa.Gizmo item:RecoveryChecks.members(grid.content())){
+                if(!(item instanceof com.shatteredpixel.shatteredpixeldungeon.ui.ScrollingGridPane.GridItem))continue;
+                // Read the actual note captured by the journal's click listener.
+                for(java.lang.reflect.Field field:item.getClass().getDeclaredFields()){
+                    if(!com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Record.class.isAssignableFrom(field.getType()))continue;
+                    Object record=RecoveryChecks.field(item,field.getName());
+                    if(!new com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord(
+                            com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark.COLE,7).equals(record))continue;
+                    grid.scrollTo(0,Math.max(0,((com.shatteredpixel.shatteredpixeldungeon.ui.ScrollingGridPane.GridItem)item).top()-grid.height()/2));
+                    pointerGestureReview(item,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
+                    return;
+                }
+            }
+        }
+        throw new AssertionError("Generated office missing its Bounty Board journal entry");
     }
     private void journalNoteReview(com.shatteredpixel.shatteredpixeldungeon.journal.Notes.Landmark landmark){
         com.shatteredpixel.shatteredpixeldungeon.journal.Notes.LandmarkRecord record=

@@ -1,5 +1,6 @@
 # Known issues
 
+- v1.29.16: The missing Bounty Board journal title is fixed for existing and new notes; all 27 landmark names/descriptions pass serialization and the actual mouse/touch popup passes both layouts. The first native attempt exposed an incorrect component cast in the fixture, corrected before the final passing suites. Physical Samsung tablet remains NOT RUN. No gameplay or artwork changes; test 45 remains Abandoned: test failed and is not rerun. CI checks are unchanged.
 - v1.29.15: Physical Samsung tablet and full-campaign balance remain NOT RUN. The reported bounty seed is verified, but the original tablet save was unavailable; no exact cause for its lost Voss is claimed. The patch repairs unfinished missing-reference records and protects wanted quarries from Horror predation. Existing dead Horrors are not resurrected. Test 45 remains Abandoned: test failed and is not rerun.
 - v1.29.15 verification: Initial description formatting and headless Horror fixture failures were corrected before final passing gates; native-only poison splash and loot callbacks are isolated in the existing combat fixture while actual attacks and poison still run. The authorized Git/build route is used; sandboxed CIM process inventory was unavailable, so work continued through existing build sessions. No checks or thresholds were weakened.
 

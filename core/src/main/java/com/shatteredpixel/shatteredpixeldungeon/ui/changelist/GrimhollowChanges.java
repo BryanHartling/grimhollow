@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.15","A stronger legion. A hunter's payment, then a new face on the board.");
+        ChangeInfo r=release(list,"v1.29.16","A name restored to the bounty board.");
+        note(r,Icons.JOURNAL,"Bounty Board notes","The Bounty Board's journal entry now displays its proper title, including notes in existing saved games.");
+        r=release(list,"v1.29.15","A stronger legion. A hunter's payment, then a new face on the board.");
         note(r,Icons.TALENT,"Bone Legion","Deathspeakers can invest three ranks. Newly raised servants remain bound for 5/10/15 additional turns; rank three also permits one more servant. Existing ranks and servants' remaining time are preserved.");
         note(r,Icons.JOURNAL,"Cole's handover","Speak to Cole at the Prison stairs and accept payment before his separate betrayal conversation. He hands over your own Wanted Poster, kept in inventory and in your run's Deeds. Rereading it cannot pay a bounty or alter the quest.");
         note(r,Icons.INFO,"Wanted quarries and the Horror","Unfinished bounties recover missing target references, preserving living quarries and starting urgency only after placement. Horrors have stronger regional combat baselines and can defend themselves against dungeon denizens when cornered. Their warning and escape rules remain.");

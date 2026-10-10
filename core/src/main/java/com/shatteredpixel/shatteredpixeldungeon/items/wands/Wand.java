@@ -387,6 +387,16 @@ public abstract class Wand extends Item {
 		return this;
 	}
 
+	/** The blacksmith improves the wand without replacing its existing resin. */
+	public Item upgradeAtForge() {
+		int resin = resinBonus;
+		upgrade();
+		resinBonus = resin;
+		updateLevel();
+		updateQuickslot();
+		return this;
+	}
+
 	@Override
 	public int buffedLvl() {
 		int lvl = super.buffedLvl();

@@ -153,9 +153,10 @@ def outputs(world,features):
     work=Image.new('RGBA',(128,64));art=sized(forge()[1],(122,58));work.alpha_composite(art,(3,3))
     for index,box in [(16,(0,0,64,64)),(17,(64,0,128,64))]:
         tile=floor.copy();tile.alpha_composite(work.crop(box));put(smithy,index,tile)
-    # The lower-right cell is a separate water-filled quenching basin, not a
-    # third fragment of the anvil. Its gameplay water flag remains unchanged.
+    # Keep the quenching water inside its basin; opaque smithy paving prevents
+    # the gameplay water backing from drawing a pool beneath the workshop.
     from regional_scenery import props
-    put(smithy,18,centered(props()[0],(60,54)))
+    basin=floor.copy();basin.alpha_composite(centered(props()[0],(60,54)))
+    put(smithy,18,basin)
     output[path]=smithy
     return output

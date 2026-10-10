@@ -420,19 +420,12 @@ public class WndBlacksmith extends Window {
 
 		@Override
 		public boolean itemSelectable(Item item) {
-			return item.isUpgradable()
-					&& item.isIdentified()
-					&& !item.cursed
-					&& item.level() < 2;
+			return Blacksmith.Quest.canUpgrade(item);
 		}
 
 		@Override
 		public void onSelect(Item item) {
-			if (item != null) {
-				item.upgrade();
-				int upgradeCost = 1000 + 1000*Blacksmith.Quest.upgrades;
-				Blacksmith.Quest.favor -= upgradeCost;
-				Blacksmith.Quest.upgrades++;
+			if (Blacksmith.Quest.upgradeItem(item)) {
 
 				WndBlacksmith.this.hide();
 

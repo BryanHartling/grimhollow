@@ -220,6 +220,22 @@ public class Blacksmith extends NPC {
 		public static int upgrades;
 		public static int smiths;
 
+		public static boolean canUpgrade(Item item) {
+			return item != null && item.isUpgradable() && item.isIdentified()
+					&& !item.cursed && item.level() < 2;
+		}
+
+		public static boolean upgradeItem(Item item) {
+			int cost = 1000 + 1000 * upgrades;
+			if (!canUpgrade(item) || favor < cost) return false;
+			if (item instanceof com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand)
+				((com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand)item).upgradeAtForge();
+			else item.upgrade();
+			favor -= cost;
+			upgrades++;
+			return true;
+		}
+
 		//pre-generate these so they are consistent between seeds
 		public static ArrayList<Item> smithRewards;
 		public static Weapon.Enchantment smithEnchant;

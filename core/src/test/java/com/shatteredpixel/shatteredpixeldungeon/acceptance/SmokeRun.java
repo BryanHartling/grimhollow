@@ -663,6 +663,36 @@ public class SmokeRun {
         Level original = Dungeon.level;
         int minimum = Integer.MAX_VALUE, maximum = 0, buried = 0, invalidSecretRooms = 0;
         try {
+            com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.favor=3000;
+            com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.upgrades=0;
+            com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfDisintegration wand=
+                    new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfDisintegration();
+            wand.identify();wand.resinBonus=1;wand.updateLevel();
+            check(wand.level()==1 && wand.trueLevel()==0,"resin wand initial levels");
+            check(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.upgradeItem(wand)
+                    && wand.level()==2 && wand.trueLevel()==1 && wand.resinBonus==1
+                    && com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.favor==2000,
+                    "paid wand upgrade consumed resin or favor without effective improvement");
+            check(!com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.upgradeItem(wand)
+                    && com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.favor==2000,
+                    "duplicate/capped upgrade charged favor");
+            Bundle wandSave=new Bundle();wandSave.put("wand",wand);
+            com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand restoredWand=
+                    (com.shatteredpixel.shatteredpixeldungeon.items.wands.Wand)wandSave.get("wand");
+            check(restoredWand.level()==2 && restoredWand.trueLevel()==1 && restoredWand.resinBonus==1,"forged resin wand save/load");
+            com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfDisintegration plain=
+                    new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfDisintegration();
+            plain.level(1);plain.identify();
+            check(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.upgradeItem(plain)
+                    && plain.level()==2 && com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.favor==0,
+                    "ordinary +1 wand upgrade or escalating cost");
+            com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfDisintegration scrollWand=
+                    new com.shatteredpixel.shatteredpixeldungeon.items.wands.WandOfDisintegration();
+            scrollWand.resinBonus=1;scrollWand.upgrade();
+            check(scrollWand.level()==1 && scrollWand.resinBonus==0,"scroll resin behavior changed");
+            check(!com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.upgradeItem(scrollWand)
+                    && com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Blacksmith.Quest.favor==0,"unaffordable upgrade charged favor");
+            System.out.println("BLACKSMITH PASS: +1 ordinary/resin wands become +2, resin retained, save/load, once-only favor costs and scroll behavior");
             Dungeon.depth = 12; Dungeon.branch = 1;
             for (int type = 1; type <= 2; type++) for (int sample = 0; sample < 104; sample++) {
                 Dungeon.seed = sample < 100 ? sample : 4507775544315L;

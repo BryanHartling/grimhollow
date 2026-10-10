@@ -9216,7 +9216,7 @@
         256,
         512
       ],
-      "rgba_sha256": "3ef00e762b262ae44f8011a436f092b708db9299e46b1bbb9c027d75f11b70bf"
+      "rgba_sha256": "e98b75bfd7a3f9e4fa5de551fc1889d8d286e2e3e417848b6fa58d966f814fdb"
     },
     "sprites/expedition_dragon.png": {
       "size": [
@@ -9427,7 +9427,7 @@
         512,
         64
       ],
-      "rgba_sha256": "3846d662588ec95dc7ee79a21a8b88aca1085b432a2e0e508d3f6fe0267b37d9"
+      "rgba_sha256": "a07d3971a200dee1276e4afa408e781891dc745288ce0892cd6022a71200ba32"
     },
     "environment/painted_bone_wall.png": {
       "size": [

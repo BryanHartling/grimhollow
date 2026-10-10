@@ -1,3 +1,10 @@
+# Workshop and targeting component - 2026-10-10
+
+- Cover the smithy's quenching-cell water backing with its existing opaque workshop paving; keep the actual basin's water interaction and all room terrain unchanged. Repack through the existing painted pipeline without generating art.
+- Share a smooth, original metal-ring targeting mark across quickslots, selected creatures and targeted cells, using the existing reproducible bronze-trim atlas.
+- The paid blacksmith upgrade preserves existing wand resin, so a resin-enhanced +1 wand actually becomes +2. Normal scroll upgrades retain upstream's resin conversion. Centralize eligibility/payment and recheck them before spending favor; capped, stale or unaffordable selections cannot charge. Original tablet save/resin history unavailable; the reproduced resin case and ordinary +1 Disintegration wand both pass.
+- Component gate: Windows/Android builds and eight unit tests pass; combined class Runs=30 failures=0, BUILD SUCCESSFUL in 3m 22s. Existing mine checks also cover resin persistence, once-only/escalating favor costs and unchanged scroll behavior. Art pack: 1936 assets, 182 source sheets, failures=0.
+
 # Journal title v1.29.16 - 2026-10-10
 
 - Resolve the Bounty Board landmark's title through the board's existing localized name, matching its description. Existing saved COLE notes keep their identity and now show Bounty Board instead of a missing-text placeholder. No quest, gameplay or artwork changes.

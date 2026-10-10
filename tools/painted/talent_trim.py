@@ -52,4 +52,14 @@ def outputs():
     d.polygon([(184,48),(212,72),(184,96)],fill=(239,206,149,255))
     atlas.paste(shuffle.resize((64,64),Image.Resampling.LANCZOS),(5*CELL,0))
     atlas.paste(patch(panels()[0],(64,64),(6,6,6,6)),(6*CELL,0))
+    # Shared aiming mark: smooth metal arcs, a dark edge and an open center.
+    target=Image.new('RGBA',(256,256));d=ImageDraw.Draw(target)
+    for start in (12,102,192,282):
+        d.arc((28,28,228,228),start,start+66,fill=(24,18,14,240),width=24)
+        d.arc((32,32,224,224),start,start+66,fill=(163,118,71,255),width=15)
+        d.arc((34,34,222,222),start+2,start+63,fill=(246,225,184,255),width=6)
+    for points in (((128,9),(128,58)),((128,198),(128,247)),((9,128),(58,128)),((198,128),(247,128))):
+        d.line(points,fill=(24,18,14,245),width=21)
+        d.line(points,fill=(232,202,151,255),width=11)
+    atlas.paste(target.resize((64,64),Image.Resampling.LANCZOS),(7*CELL,0))
     return {'interfaces/painted_talents.png':atlas}

@@ -144,6 +144,7 @@ public enum Icons {
 	
 	public static Image get( Icons type ) {
         if(type==SHUFFLE)return TalentMarkers.image(5,14);
+        if(type==TARGET)return TalentMarkers.image(7,16);
 		Image icon = new Image( Assets.Interfaces.ICONS );
 		switch (type) {
 

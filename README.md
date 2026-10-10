@@ -1,3 +1,11 @@
+# Cornered Horror and personal posters - v1.29.18
+
+Fleeing Horrors check real escape routes and defend themselves against adjacent pursuers when trapped, including raised servants. Opening the route lets them flee again. Their regional stats, ambush warning and recovery limits are unchanged.
+
+The hero's personal Wanted Poster follows the parchment design: WANTED, supplied name or initial class, a larger class painting, chosen subclass, distinct class flavor, bounty and Cole's signature/seal. Inventory and ranked-Deeds copies retain the same saved identity. Overflowing notices show a scroll hint; full notices remain readable without scrolling.
+
+Windows: `desktop/build/windows/1.29.18-final/Grimhollow/Grimhollow.exe` (keep the entire folder). The earlier `1.29.18` folder was in use during packaging; the final folder contains the latest build. Android: `android/build/outputs/apk/debug/android-debug.apk` (`1.29.18-INDEV`, version code 1017).
+
 # Hatchling and forge - v1.29.17
 
 Manual Hatchling feeding can select meals from every container and accepts valuable ordinary finds such as honey pots. Quest belongings, equipped gear, containers and class essentials stay protected; unattended grazing still uses loose inventory. A pet you set down waits, then heads for the stairs. Approach and pick it up before it disappears permanently. Its hunger and remembered gold survive recapture and saves.

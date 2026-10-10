@@ -39,6 +39,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private boolean bountyJournalOpened;
     private int bountyPaymentGold;
     private Rankings.Record bountyRankedRecord;
+    private boolean bountyWantedScrolled;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole bountyCole;
     private final java.util.List<com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob> bountyQuarries=new java.util.ArrayList<>();
     private int horrorFrames, horrorStep, horrorStart, horrorHealth;
@@ -420,7 +421,10 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 interfaceBounds();checkReviewText(Game.scene());
                 if(!allReviewText(Game.scene()).contains(Integer.toString(bountyRankedRecord.deeds.wantedBounty)))throw new AssertionError("Wanted amount changed across runs");
                 heroPosterLayoutCheck();
-                capture("rankings-wanted");closeReviewWindows();
+                if(!bountyWantedScrolled){
+                    capture("rankings-wanted");heroPosterScrollCheck();bountyWantedScrolled=true;bountyStep--;break;
+                }
+                capture("rankings-wanted-scrolled");closeReviewWindows();
                 com.shatteredpixel.shatteredpixeldungeon.windows.WndRanking ranking=new com.shatteredpixel.shatteredpixeldungeon.windows.WndRanking(bountyRankedRecord);
                 Game.scene().add(ranking);ranking.showDeeds();break;
             case 5:rankingClick(Game.scene(),bountyRankedRecord.deeds.highestPaid().alias);break;
@@ -599,6 +603,26 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             }
         }
         if(!found)throw new AssertionError("Personal poster not open for native review");
+    }
+    private void heroPosterScrollCheck(){
+        for(com.watabou.noosa.Gizmo window:RecoveryChecks.members(Game.scene()))if(window instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroWantedPoster){
+            com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(window,"paper");
+            Image seal=(Image)RecoveryChecks.field(window,"seal");
+            if(pane.content().height()<=pane.height()){
+                if(seal.y+seal.height()>pane.height())throw new AssertionError("Fitting personal poster clips its final seal");
+                System.out.println("PERSONAL POSTER FULL PAGE PASS: full notice/bounty/seal fits without scrolling; failures=0");
+                continue;
+            }
+            if(!allReviewText((Group)window).contains("Scroll to read the full notice"))throw new AssertionError("Personal poster lacks scroll hint");
+            pointerGestureReview(pane,com.watabou.input.PointerEvent.NONE,-60);
+            if(pane.content().camera.scroll.y<=0)throw new AssertionError("Personal poster touch scroll failed");
+            pane.scrollTo(0,0);
+            com.watabou.utils.Point at=pane.camera().cameraToScreen(pane.centerX(),pane.centerY());
+            com.watabou.input.ScrollEvent.addScrollEvent(new com.watabou.input.ScrollEvent(new com.watabou.utils.PointF(at.x,at.y),100));
+            com.watabou.input.ScrollEvent.processScrollEvents();
+            if(pane.content().camera.scroll.y<=0 || seal.y+seal.height()>pane.content().camera.scroll.y+pane.height())throw new AssertionError("Personal poster final seal is inaccessible");
+            System.out.println("PERSONAL POSTER SCROLL PASS: touch drag, mouse wheel, full notice/bounty/seal and fixed Close button; failures=0");
+        }
     }
     private void bountySealCheck(){
         com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob=BountyBoard.contracts[0].target;

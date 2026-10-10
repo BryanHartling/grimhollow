@@ -54,12 +54,19 @@ public class WndHeroWantedPoster extends Window {
         seal.texture.filter(GL20.GL_LINEAR,GL20.GL_LINEAR);seal.x=(w-80)/2;seal.y=signatureLine.y+5;content.add(seal);
         content.setSize(w,seal.y+seal.height()+10);
         ArtworkButton enlarge=new ArtworkButton(()->portrait,()->subjectName);enlarge.setRect(portrait.x,portrait.y,portrait.width(),portrait.height());content.add(enlarge);
-        paperWidth=w;paperHeight=h-31;paper=new ScrollPane(content);add(paper);
+        paperWidth=w;paperHeight=h-31;
+        if(content.height()>paperHeight){
+            paperHeight-=12;add(createInk(Messages.get(Cole.class,"hero_poster_scroll"),7,w,h-39));
+        }
+        paper=new ScrollPane(content);add(paper);
         RedButton close=new RedButton(Messages.get(com.shatteredpixel.shatteredpixeldungeon.RunDeeds.class,"close")){
             @Override protected void onClick(){hide();}
         };close.setRect(9,h-27,w-18,21);add(close);resize(w,h);
     }
     private RenderedTextBlock ink(String text,int size,int width,float y){
+        RenderedTextBlock block=createInk(text,size,width,y);content.add(block);return block;
+    }
+    private RenderedTextBlock createInk(String text,int size,int width,float y){
         int scale=Math.max(1,Math.round(PixelScene.defaultZoom*DeviceCompat.getRealPixelScaleX()));
         RenderedTextBlock block=new RenderedTextBlock(size*scale){
             @Override protected RenderedText createWord(String word,int pixels){return new RenderedText(word,pixels,false);}
@@ -68,7 +75,7 @@ public class WndHeroWantedPoster extends Window {
         };
         block.zoom(1f/scale);block.setHightlighting(false);block.hardlight(0x302218);
         block.text(text.replace("_",""),width-38);block.align(RenderedTextBlock.CENTER_ALIGN);
-        block.setPos((width-block.width())/2,y);PixelScene.align(block);content.add(block);return block;
+        block.setPos((width-block.width())/2,y);PixelScene.align(block);return block;
     }
     @Override public void resize(int w,int h){super.resize(w,h);alignPaper();}
     @Override public void offset(int x,int y){super.offset(x,y);alignPaper();}

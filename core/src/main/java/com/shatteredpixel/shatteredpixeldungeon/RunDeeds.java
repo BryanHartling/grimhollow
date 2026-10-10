@@ -2,6 +2,7 @@
 package com.shatteredpixel.shatteredpixeldungeon;
 
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass;
+import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass;
 import com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.*;
 import com.shatteredpixel.shatteredpixeldungeon.items.Item;
 import com.shatteredpixel.shatteredpixeldungeon.items.quest.*;
@@ -26,6 +27,7 @@ public class RunDeeds implements Bundlable {
     public final ArrayList<Notice> notices = new ArrayList<>();
     public boolean partial, wanted;
     public HeroClass wantedClass;
+    public HeroSubClass wantedSubclass=HeroSubClass.NONE;
     public String wantedName = "";
     public int wantedBounty;
 
@@ -39,7 +41,11 @@ public class RunDeeds implements Bundlable {
     public static void wantedPoster() {
         current.wanted = true;
         current.wantedClass = Dungeon.hero.heroClass;
-        current.wantedName = Dungeon.hero.name();
+        current.wantedSubclass = Dungeon.hero.subClass==null?HeroSubClass.NONE:Dungeon.hero.subClass;
+        String name=Dungeon.hero.name();
+        current.wantedName = name.equals(Dungeon.hero.className())
+                || Dungeon.hero.buff(com.shatteredpixel.shatteredpixeldungeon.actors.buffs.HeroDisguise.class)!=null
+                ? Dungeon.hero.heroClass.title() : name;
         current.wantedBounty = BountyBoard.heroBounty;
     }
     public static void paid(BountyBoard.Contract contract, int gold) {
@@ -107,6 +113,7 @@ public class RunDeeds implements Bundlable {
         b.put("deeds", names);
         b.put("notices", notices); b.put("partial", partial); b.put("wanted", wanted);
         if (wantedClass != null) b.put("wanted_class", wantedClass);
+        b.put("wanted_subclass",wantedSubclass);
         b.put("wanted_name", wantedName); b.put("wanted_bounty", wantedBounty);
     }
     @Override public void restoreFromBundle(Bundle b) {
@@ -119,6 +126,8 @@ public class RunDeeds implements Bundlable {
         wantedClass = b.contains("wanted_class") ? b.getEnum("wanted_class", HeroClass.class) : null;
         wanted &= wantedClass != null;
         wantedName = b.getString("wanted_name"); wantedBounty = b.getInt("wanted_bounty");
+        wantedSubclass=b.contains("wanted_subclass")?b.getEnum("wanted_subclass",HeroSubClass.class):WantedPoster.legacySubclass(wantedClass,wantedName);
+        if(!b.contains("wanted_subclass") && wantedSubclass!=HeroSubClass.NONE)wantedName=wantedClass.title();
     }
 
     /** A poster's value snapshot. No live mob, claim action or quest reference is retained. */

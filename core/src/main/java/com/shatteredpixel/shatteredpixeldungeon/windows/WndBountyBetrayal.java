@@ -17,7 +17,7 @@ public class WndBountyBetrayal extends WndTitledMessage {
         RedButton done=new RedButton(Messages.get(Cole.class,"view_bounty")){
             @Override protected void onClick(){
                 hide();BountyBoard.issueWantedPoster();RunDeeds record=RunDeeds.capture();
-                GameScene.show(new WndHeroWantedPoster(record.wantedClass,record.wantedName,record.wantedBounty){
+                GameScene.show(new WndHeroWantedPoster(record.wantedClass,record.wantedSubclass,record.wantedName,record.wantedBounty){
                     @Override public void hide(){super.hide();BountyBoard.finishDeparture();}
                 });
             }

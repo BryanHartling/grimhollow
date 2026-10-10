@@ -367,7 +367,7 @@ public final class BountyBoard {
         if(!betrayed||departed||wantedPosterIssued)return null;
         RunDeeds record=RunDeeds.capture();
         com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster poster=
-                new com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster(record.wantedClass,record.wantedName,record.wantedBounty);
+                new com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster(record.wantedClass,record.wantedSubclass,record.wantedName,record.wantedBounty);
         wantedPosterIssued=true;give(poster);return poster;
     }
     public static void finishDeparture() {

@@ -164,7 +164,7 @@ public class WndRanking extends WndTabbed {
 			} else {
 				if (history.partial) line(Messages.get(RunDeeds.class, "partial"), 0xBBBBB0, 7);
 				if (history.wanted) action(Messages.get(RunDeeds.class, "wanted"), () ->
-					Game.scene().add(new WndHeroWantedPoster(history.wantedClass,history.wantedName,history.wantedBounty)));
+					Game.scene().add(new WndHeroWantedPoster(history.wantedClass,history.wantedSubclass,history.wantedName,history.wantedBounty)));
 				RunDeeds.Notice best = history.highestPaid();
 				if (best != null) {
 					line(Messages.get(RunDeeds.class, "highest", best.collected), Window.TITLE_COLOR, 8);

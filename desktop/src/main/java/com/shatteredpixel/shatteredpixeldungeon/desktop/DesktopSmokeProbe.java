@@ -304,11 +304,17 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 case 46:interfaceBounds();checkReviewText(Game.scene());for(com.shatteredpixel.shatteredpixeldungeon.items.Item item:BountyBoard.settlementTwo)if(!allReviewText(Game.scene()).contains(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.titleCase(item.title())))throw new AssertionError("Missing negotiated item name");capture("bounty-negotiated-offers");closeReviewWindows();break;
                 default:
                     if(step>=47&&step<65){HeroClass hero=HeroClass.values()[(step-47)/2];
-                        if(step%2==1){closeReviewWindows();Dungeon.hero.heroClass=hero;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal(bountyCole));}
-                        else{interfaceBounds();checkReviewText(Game.scene());capture("bounty-betray-"+hero.name().toLowerCase());scrollReview(Game.scene());}
+                        if(step%2==1){
+                            if(step>47){heroPosterLayoutCheck();capture("bounty-personal-poster-"+HeroClass.values()[(step-49)/2].name().toLowerCase());}
+                            closeReviewWindows();Dungeon.hero.heroClass=hero;GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndBountyBetrayal(bountyCole));
+                        }else{
+                            interfaceBounds();checkReviewText(Game.scene());capture("bounty-betray-"+hero.name().toLowerCase());closeReviewWindows();
+                            GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroWantedPoster(hero,hero.subClasses()[0],hero==HeroClass.NECROMANCER?"Bryan":hero.title(),4321));
+                        }
                     }else if(step>=65&&step<81){
                         int choice=(step-65)/8,phase=(step-65)%8;
                         if(phase==0){
+                            if(step==65){heroPosterLayoutCheck();capture("bounty-personal-poster-psychic");}
                             closeReviewWindows();questField(GameScene.class,"scene",null);Dungeon.init();Playtest.enable();Dungeon.hero.HT=Dungeon.hero.HP=1000;Dungeon.hero.lvl=30;Dungeon.depth=10;
                             BountyBoard.planContracts();BountyBoard.contracts[0].returned=BountyBoard.contracts[1].returned=true;BountyBoard.bossChoice=choice;BountyBoard.planBoss();
                             Dungeon.switchLevel(Dungeon.newLevel(),-1);if(!BountyBoard.accept(3))throw new AssertionError("Actual boss contract failed");InterlevelScene.mode=InterlevelScene.Mode.DESCEND;switchNoFade(GameScene.class);
@@ -349,7 +355,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                             if(BountyBoard.departed)throw new AssertionError("Cole left before showing the hero poster");
                             int posters=0;for(com.shatteredpixel.shatteredpixeldungeon.items.Item item:Dungeon.hero.belongings)if(item instanceof com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster)posters++;
                             if(posters!=1)throw new AssertionError("Personal poster missing/duplicated or replaced with Warrant");
-                            interfaceBounds();checkReviewText(Game.scene());capture("bounty-hero-wanted-"+choice);
+                            interfaceBounds();checkReviewText(Game.scene());heroPosterLayoutCheck();capture("bounty-hero-wanted-"+choice);
                             playtestClick(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(RunDeeds.class,"close"));
                         }else{
                             closeReviewWindows();BountyBoard.arrive(Dungeon.level);BountyBoard.onHeroReady();
@@ -413,6 +419,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             case 4:
                 interfaceBounds();checkReviewText(Game.scene());
                 if(!allReviewText(Game.scene()).contains(Integer.toString(bountyRankedRecord.deeds.wantedBounty)))throw new AssertionError("Wanted amount changed across runs");
+                heroPosterLayoutCheck();
                 capture("rankings-wanted");closeReviewWindows();
                 com.shatteredpixel.shatteredpixeldungeon.windows.WndRanking ranking=new com.shatteredpixel.shatteredpixeldungeon.windows.WndRanking(bountyRankedRecord);
                 Game.scene().add(ranking);ranking.showDeeds();break;
@@ -570,6 +577,29 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }
     }
 
+    private void heroPosterLayoutCheck(){
+        boolean found=false;
+        for(com.watabou.noosa.Gizmo window:RecoveryChecks.members(Game.scene())){
+            if(!(window instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndHeroWantedPoster))continue;
+            found=true;float center=((Number)RecoveryChecks.field(window,"paperWidth")).floatValue()/2,previous=-1;
+            for(String name:new String[]{"heading","title","portrait","subclass","flavorTitle","flavor","reward","signatureLine","seal"}){
+                Object part=RecoveryChecks.field(window,name);if(part==null)continue;
+                float x,y,width,height;
+                if(part instanceof com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock){
+                    com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock text=(com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock)part;
+                    x=text.left();y=text.top();width=text.width();height=text.height();
+                    if(text.text().contains("!!!")||text.text().contains("%1$")||text.text().isEmpty())throw new AssertionError("Unresolved personal poster text "+name);
+                    if(name.equals("heading")&&!text.text().equals("WANTED"))throw new AssertionError("Missing personal WANTED announcement");
+                }else{
+                    Image image=(Image)part;x=image.x;y=image.y;width=image.width();height=image.height();
+                    if(name.equals("portrait")&&(image.texture.width<512||Math.abs(width-Math.min(144,center*2-48))>.1f))throw new AssertionError("Personal poster portrait lacks painted resolution/size");
+                }
+                if(Math.abs(x+width/2-center)>.75f||y<previous)throw new AssertionError("Personal poster misaligned/overlapping at "+name);
+                previous=y+height;
+            }
+        }
+        if(!found)throw new AssertionError("Personal poster not open for native review");
+    }
     private void bountySealCheck(){
         com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob=BountyBoard.contracts[0].target;
         if(mob==null||mob.sprite==null)throw new AssertionError("Accepted target not placed");

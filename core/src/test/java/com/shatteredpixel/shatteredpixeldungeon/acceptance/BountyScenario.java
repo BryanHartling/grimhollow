@@ -97,6 +97,7 @@ final class BountyScenario {
             legendaryCash();
             items();
             boss();
+            personalPosters();
             crews();
             resolution();
             deeds();
@@ -362,12 +363,13 @@ final class BountyScenario {
             if(choice==1)check(Dungeon.level.heaps.get(Dungeon.hero.pos)!=null
                     &&Dungeon.level.heaps.get(Dungeon.hero.pos).items.contains(poster),"full pack loses personal poster");
             else check(Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster.class)==poster,"poster not kept in inventory");
-            check(poster.bounty==snapshot&&poster.subject==Dungeon.hero.heroClass&&poster.subjectName.equals(Dungeon.hero.name())
+            check(poster.bounty==snapshot&&poster.subject==Dungeon.hero.heroClass&&poster.subjectName.equals(Dungeon.hero.heroClass.title())
+                    &&poster.subjectSubclass==Dungeon.hero.subClass
                     &&poster.isIdentified()&&!poster.isUpgradable()&&poster.value()==0
                     &&com.shatteredpixel.shatteredpixeldungeon.items.trinkets.HatchlingMimic.protectedItem(poster,Dungeon.hero),"poster snapshot/quest protection");
             Bundle savedPoster=new Bundle();savedPoster.put("poster",poster);
             com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster copy=(com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster)savedPoster.get("poster");
-            check(copy.subject==poster.subject&&copy.subjectName.equals(poster.subjectName)&&copy.bounty==snapshot,"poster reload changes identity");
+            check(copy.subject==poster.subject&&copy.subjectSubclass==poster.subjectSubclass&&copy.subjectName.equals(poster.subjectName)&&copy.bounty==snapshot,"poster reload changes identity");
             Bundle handover=new Bundle();BountyBoard.store(handover);BountyBoard.restore(handover);
             check(BountyBoard.issueWantedPoster()==null&&Dungeon.gold-gold==1500,"handover reload creates extra poster/payment");
             check(!BountyBoard.accept(2),"post-betrayal new contract");
@@ -386,6 +388,36 @@ final class BountyScenario {
         for(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass hc:com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.values())
             check(!com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(Cole.class,"betray_"+hc.name()).contains("!!!"),"missing class betrayal");
         System.out.println("BOUNTY COMPONENT 4 PASS: both actual boss choices, explicit unlock/acceptance, unpaid stairs meeting/reload, once-only payment/snapshot, departure/reload, no retroactive arc and all nine dialogues");
+    }
+    private static void personalPosters(){
+        Dungeon.init();java.util.Set<String> flavors=new java.util.HashSet<>();
+        for(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass hc:com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.values()){
+            String flavor=com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster.flavor(hc);
+            String title=com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster.headline(hc);
+            check(!flavor.contains("!!!")&&!title.contains("!!!")&&!flavor.isEmpty()&&!title.isEmpty()&&flavors.add(flavor),"missing or recycled class poster flavor");
+            for(com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass sc:new com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass[]{
+                    com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass.NONE,hc.subClasses()[0]}){
+                Dungeon.hero.heroClass=hc;Dungeon.hero.subClass=sc;BountyBoard.heroBounty=4321;RunDeeds.reset();RunDeeds.wantedPoster();
+                RunDeeds record=RunDeeds.capture();
+                check(record.wantedClass==hc&&record.wantedSubclass==sc&&record.wantedName.equals(hc.title()),"poster initial class/subclass snapshot");
+                com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster poster=new com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster(hc,sc,"Bryan",4321);
+                Bundle saved=new Bundle();saved.put("poster",poster);saved.put("record",record);
+                com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster copy=(com.shatteredpixel.shatteredpixeldungeon.items.quest.WantedPoster)saved.get("poster");
+                RunDeeds history=(RunDeeds)saved.get("record");
+                Dungeon.hero.heroClass=com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass.WARRIOR;
+                Dungeon.hero.subClass=com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass.NONE;
+                check(copy.subject==hc&&copy.subjectSubclass==sc&&copy.displayName().equals("Bryan")&&copy.bounty==4321
+                        &&copy.info().contains(flavor)&&copy.info().contains(title)&&copy.info().contains("4321")
+                        &&history.wantedClass==hc&&history.wantedSubclass==sc&&history.wantedName.equals(hc.title()),"saved poster/history changes with live hero");
+                poster.subjectName="";check(poster.displayName().equals(hc.title()),"blank name lacks initial-class fallback");
+                Bundle old=new Bundle();poster.storeInBundle(old);old.remove("subject_subclass");old.put("subject_name",sc==com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass.NONE?hc.title():sc.title());
+                copy.restoreFromBundle(old);
+                check(copy.subjectSubclass==sc&&copy.displayName().equals(hc.title()),"legacy subclass-name migration loses identity");
+                old=new Bundle();record.storeInBundle(old);old.remove("wanted_subclass");old.put("wanted_name",sc==com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroSubClass.NONE?hc.title():sc.title());
+                history.restoreFromBundle(old);check(history.wantedSubclass==sc&&history.wantedName.equals(hc.title()),"legacy ranked poster loses subclass");
+            }
+        }
+        System.out.println("PERSONAL WANTED POSTERS PASS: nine distinct class titles/flavors, initial class and separate subclass, custom-name/blank fallback, item/history serialization, legacy subclass migration and independence from later hero changes");
     }
     private static void crews(){
         Dungeon.init();Dungeon.branch=0;Dungeon.depth=13;Dungeon.switchLevel(Dungeon.newLevel(),-1);

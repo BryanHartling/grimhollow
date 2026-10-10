@@ -89,7 +89,7 @@ final class HorrorScenario {
             for(int i=0;i<50;i++){int rolled=h.damageRoll();check(rolled>=new int[]{4,6,11,14,18}[region] && rolled<=new int[]{8,12,22,28,36}[region],"regional base damage");}
             check(!Char.hasProp(h,Char.Property.UNDEAD) && !Char.hasProp(h,Char.Property.DEMONIC),"Horror classified as undead/demon");
         }
-        recoveryAndRouting(); counters(); predation(); denizenDefense(); generation();
+        recoveryAndRouting(); corneredShop(); counters(); predation(); denizenDefense(); generation();
         System.out.println("TEST 60 Horror PASS: five-region stats, real warning/response, retargeting, invisibility, solitary hunt, entity-only Mind Vision/Scry, collision occupancy, finite healing, concealed mobile recovery, tool/collision reveals, routed escape, predation/remains, regional generation, bundle/disk persistence");
     }
     private static void field(LurkingHorror h,String name,Object value) throws Exception {
@@ -144,6 +144,43 @@ final class HorrorScenario {
         Arrays.fill(Dungeon.level.heroFOV,false);field(h,"phaseAge",100f);act(h);
         for(int i=0;i<3;i++)act(h);
         check(h.phase()==LurkingHorror.Phase.RECOVERING && h.shadowmelded(),"route failed to reach concealed room recovery");
+    }
+    private static void corneredShop() throws Exception {
+        LurkingHorror h=fresh(7);int w=Dungeon.level.width();
+        for(int c=0;c<Dungeon.level.length();c++)if(Dungeon.level.insideMap(c))Level.set(c,Terrain.WALL);
+        for(int y=6;y<=10;y++)for(int x=7;x<=11;x++)Level.set(y*w+x,Terrain.EMPTY);
+        for(int y=11;y<=20;y++)Level.set(y*w+9,Terrain.EMPTY);
+        Level.set(11*w+9,Terrain.OPEN_DOOR);
+        h.pos=8*w+8;Dungeon.hero.pos=11*w+9;h.expose();
+        Arrays.fill(Dungeon.level.heroFOV,false);
+        for(int y=6;y<=11;y++)for(int x=7;x<=11;x++)Dungeon.level.heroFOV[y*w+x]=true;
+        NecroSkeleton skeleton=new NecroSkeleton();skeleton.configure(1);skeleton.pos=h.pos+1;
+        skeleton.HP=skeleton.HT=1000;skeleton.sprite=skeleton.sprite();skeleton.sprite.link(skeleton);
+        Dungeon.level.mobs.add(skeleton);Actor.add(skeleton);skeleton.targetChar(h);
+        // Keep real combat and real FOV; this headless fixture has no native particle scene.
+        h.sprite.visible=skeleton.sprite.visible=false;
+        int hp=skeleton.HP,heroHP=Dungeon.hero.HP,from=h.pos;
+        Random.pushGenerator(4417);
+        try {
+            for(int i=0;i<8;i++){act(h);check(h.pos==from,"blocked shop exit still produces a chase instead of retaliation");}
+        }finally{Random.popGenerator();}
+        check(skeleton.HP<hp && Dungeon.hero.HP==heroHP && h.attackSkill(skeleton)<Char.INFINITE_ACCURACY,
+                "cornered Horror ignores attacking summon or gains ambush accuracy");
+        h.defenseProc(skeleton,1);Bundle b=new Bundle();b.put("h",h);
+        LurkingHorror copy=(LurkingHorror)b.get("h");
+        java.lang.reflect.Field aggressor=LurkingHorror.class.getDeclaredField("aggressorId");aggressor.setAccessible(true);
+        check(aggressor.getInt(copy)==skeleton.id(),"saved retaliation loses aggressor");
+        Dungeon.hero.pos=6*w+7;hp=skeleton.HP;
+        java.util.Set<Integer> route=new java.util.HashSet<>();
+        for(int i=0;i<12 && h.pos/w<=11;i++){act(h);route.add(h.pos);}
+        check(h.pos/w>11 && route.size()>=4 && skeleton.HP==hp,"reopened shop exit fails to resume routed flight");
+
+        h=fresh(7);h.expose();h.rooted=true;Dungeon.hero.invisible=1;
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Shopkeeper shopkeeper=new com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Shopkeeper();
+        shopkeeper.pos=h.pos+1;Dungeon.level.mobs.add(shopkeeper);Actor.add(shopkeeper);
+        heroHP=Dungeon.hero.HP;hp=shopkeeper.HP;act(h);
+        check(Dungeon.hero.HP==heroHP && shopkeeper.HP==hp,"cornered Horror attacks invisible hero or uninvolved shopkeeper");
+        System.out.println("HORROR CORNERED SHOP PASS: blocked single exit, summon retaliation including missed-blow targeting, ordinary accuracy, saved aggressor, reopened escape, no invisible-hero or shopkeeper attacks");
     }
     private static void counters() throws Exception {
         LurkingHorror h=fresh(7); h.pos=Dungeon.hero.pos+4;

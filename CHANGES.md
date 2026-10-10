@@ -1,3 +1,8 @@
+# Cornered Horror and personal poster v1.29.18 - 2026-10-10
+
+- A fleeing Horror checks reachable escape destinations against both hero visibility/range and its pursuer. Blocking the only exit of a small visible shop makes it defend itself against adjacent attackers, including raised servants and attackers whose last blow missed. Reopening a real escape resumes its stable shortest route. Ordinary accuracy/damage, warning fairness, invisibility, controlled allies and recovery limits are unchanged; neutral shopkeepers are not retaliation targets. Visible defensive blows use the standard attack animation.
+- Component 1: existing cornered-shop, escape, five-region phasing and denizen scenarios pass; combined Runs=30 failures=0, eight unit tests, Windows/Android build successful in 1m 31s. The first attempt failed the unchanged Halls phasing check under extended visibility; the escape implementation was corrected and all gates passed without weakening that check.
+
 # Hatchling and forge v1.29.17 - 2026-10-10
 
 - Manual Feed browses every owned container and also accepts ordinary items worth at least 10 gold per unit, including honey pots. Existing eligible meal families retain their eligibility; throwing weapons remain whole-stack meals, others consume one unit. Equipped items, containers, keys, quest-package items and unique/class essentials are protected. Automatic grazing retains its existing loose-inventory hierarchy.

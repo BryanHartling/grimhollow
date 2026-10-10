@@ -194,12 +194,16 @@ public class LurkingHorror extends Mob {
                 if(sprite!=null) sprite.visible=visibleToHero();
                 spend(TICK); return true;
             }
+            Char opponent=corneredOpponent();
             int old=pos;
-            if (retreat(false)) { spend(1/speed()); return moveSprite(old,pos); }
-            // A cornered animal can fight, but only with ordinary damage and accuracy.
-            Char aggressor=Actor.findById(aggressorId) instanceof Char?(Char)Actor.findById(aggressorId):null;
-            if(aggressor!=null&&aggressor.isAlive()&&aggressor.invisible<=0&&Dungeon.level.adjacent(pos,aggressor.pos))attack(aggressor);
-            else if (Dungeon.level.adjacent(pos,Dungeon.hero.pos) && Dungeon.hero.invisible<=0) attack(Dungeon.hero);
+            if (retreat(false,opponent)) { spend(1/speed()); return moveSprite(old,pos); }
+            // A blocked exit must not turn a whole visible room into an endless chase.
+            // Retaliation has ordinary accuracy/damage, including the normal attack animation.
+            if(opponent!=null) {
+                enemy=opponent;
+                if(sprite!=null && sprite.parent!=null) return doAttack(opponent);
+                attack(opponent); spend(attackDelay()); return true;
+            }
         } else {
             int available=healingBudget()-healed;
             int due=Math.min(available, (int)(phaseAge*healingBudget()/50)-recoveryHealed);
@@ -212,7 +216,7 @@ public class LurkingHorror extends Mob {
                     recoveryCue=true; GLog.i(Messages.get(this,"shift"));
                 }
                 int old=pos;
-                if(retreat(true)) { spend(1/speed()); return moveSprite(old,pos); }
+                if(retreat(true,null)) { spend(1/speed()); return moveSprite(old,pos); }
                 // Rooted creatures can still heal. Otherwise an unsafe blocked hiding place
                 // resumes exposed flight instead of silently occupying a doorway.
                 if(!rooted && (!hidingCell(pos) || Dungeon.level.adjacent(pos,Dungeon.hero.pos))) expose();
@@ -221,7 +225,27 @@ public class LurkingHorror extends Mob {
         spend(TICK); return true;
     }
     private int recoveryHealed;
-    private boolean retreat(boolean recovering) {
+    private Char corneredOpponent() {
+        Actor actor=Actor.findById(aggressorId);
+        if(actor instanceof Char && defensiveTarget((Char)actor)) return (Char)actor;
+        // A missed blow does not call defenseProc, but its attacker still targets us.
+        for(Mob mob:Dungeon.level.mobs)
+            if(mob.isTargeting(this) && defensiveTarget(mob)) return mob;
+        return defensiveTarget(Dungeon.hero)?Dungeon.hero:null;
+    }
+    private boolean defensiveTarget(Char target) {
+        return target!=this && target.isAlive() && target.invisible<=0
+                && Dungeon.level.adjacent(pos,target.pos) && !isCharmedBy(target)
+                && !target.isInvulnerable(getClass());
+    }
+    private boolean escapeCell(int cell,Char opponent) {
+        int distance=Dungeon.level.distance(cell,Dungeon.hero.pos);
+        // Enough separation also counts as escape under extended terrain visibility.
+        // Mind Vision and very large rooms must not turn an open route into a corner.
+        return distance>=6 && (!Dungeon.level.heroFOV[cell] || distance>Dungeon.hero.viewDistance)
+                && (opponent==null || Dungeon.level.distance(cell,opponent.pos)>=6);
+    }
+    private boolean retreat(boolean recovering,Char opponent) {
         if (rooted) return false;
         Level level=Dungeon.level;
         boolean[] passable=level.passable.clone();
@@ -247,13 +271,19 @@ public class LurkingHorror extends Mob {
                 }
             }
         }
+        boolean escapeReachable=false;
+        for(int i=0;i<tail;i++) if(escapeCell(queue[i],opponent)) { escapeReachable=true; break; }
+        if(!recovering && !escapeReachable && opponent!=null) { escapeGoal=-1; return false; }
         if(escapeGoal<0 || distance[escapeGoal]<0 || pos==escapeGoal
-                || level.distance(escapeGoal,Dungeon.hero.pos)<3) {
+                || level.distance(escapeGoal,Dungeon.hero.pos)<3
+                || (!recovering && escapeReachable && !escapeCell(escapeGoal,opponent))) {
             escapeGoal=-1; float best=-Float.MAX_VALUE;
             for(int i=0;i<tail;i++) {
                 int c=queue[i], away=level.distance(c,Dungeon.hero.pos);
                 if(recovering && (away<3 || !hidingCell(c))) continue;
+                if(!recovering && escapeReachable && !escapeCell(c,opponent)) continue;
                 float score=10*Math.min(away,12)-distance[c]-(level.heroFOV[c]?35:0)-illumination(c)*4;
+                if(opponent!=null) score+=3*Math.min(level.distance(c,opponent.pos),8);
                 if(score>best) { best=score; escapeGoal=c; }
             }
         }

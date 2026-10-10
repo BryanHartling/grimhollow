@@ -67,9 +67,18 @@ public class HatchlingMimic extends Trinket {
     }
     public boolean canFeed(Hero hero,Item item){
         return hungry() && hero!=null && hero.isAlive() && hero.belongings.contains(this)
-                && (hero.belongings.backpack.items.contains(item) && foodPriority(item,hero)>=0
+                && (hero.belongings.contains(item) && !protectedItem(item,hero)
+                && (foodPriority(item,hero)>=0 || unitValue(item)>=10)
                 || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon && item.isEquipped(hero)
                 && !com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon.luckRunning(hero));
+    }
+    @Override public void doDrop(Hero hero){
+        if(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling.leave(this,hero.pos)!=null)
+            hero.spendAndNext(TIME_TO_DROP);
+    }
+    @Override protected void onThrow(int cell){
+        if(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling.leave(this,cell)==null)
+            super.onThrow(cell);
     }
     public boolean feedChosen(Hero hero,Item item){
         if(!canFeed(hero,item) || !consume(hero,item))return false;
@@ -107,7 +116,10 @@ public class HatchlingMimic extends Trinket {
     }
     @Override public boolean collect(Bag bag) {
         boolean result = super.collect(bag);
-        if (result && Dungeon.hero != null) Buff.affect(Dungeon.hero, Feeding.class);
+        if (result && Dungeon.hero != null) {
+            Buff.affect(Dungeon.hero, Feeding.class);
+            if(warned){awaitingChoice=true;warningShown=false;}
+        }
         return result;
     }
     @Override public String info() {
@@ -138,6 +150,8 @@ public class HatchlingMimic extends Trinket {
 
     public static boolean protectedItem(Item item, Hero hero) {
         return item == null || item.isEquipped(hero) || item instanceof Bag
+                || item instanceof com.shatteredpixel.shatteredpixeldungeon.items.keys.Key
+                || item.getClass().getPackage().getName().startsWith("com.shatteredpixel.shatteredpixeldungeon.items.quest")
                 || item instanceof Phylactery || item instanceof FocusCrystal || item instanceof SigilBrush
                 || item.unique && !(item instanceof Artifact) && !(item instanceof RunedBaton);
     }

@@ -1,3 +1,13 @@
+# Hatchling and forge - v1.29.17
+
+Manual Hatchling feeding can select meals from every container and accepts valuable ordinary finds such as honey pots. Quest belongings, equipped gear, containers and class essentials stay protected; unattended grazing still uses loose inventory. A pet you set down waits, then heads for the stairs. Approach and pick it up before it disappears permanently. Its hunger and remembered gold survive recapture and saves.
+
+The smithy has opaque workshop paving beneath its quenching basin. A paid blacksmith wand upgrade preserves resin so a displayed +1 becomes +2, with favor charged only on a valid successful selection. Ordinary scroll upgrades keep upstream's resin behavior. Targeting shares a smooth, reproducibly drawn metal-ring icon.
+
+Raised servants scale with hero experience level and Phylactery level, refreshing during play. Each Phylactery level adds 5% health/damage; talents and servant type further change their stats and utility. Dungeon depth is not a direct servant stat multiplier.
+
+Windows: `desktop/build/windows/1.29.17/Grimhollow/Grimhollow.exe` (keep the entire folder). Android: `android/build/outputs/apk/debug/android-debug.apk` (`1.29.17-INDEV`, version code 1016).
+
 # Journal title - v1.29.16
 
 The Bounty Board's Adventuring Notes entry now displays its proper name, including entries in existing saved games. Quest progress, gameplay and artwork are unchanged. The existing bounty scenarios check all 27 landmark titles/descriptions across serialization and open the board note through actual mouse/touch input.

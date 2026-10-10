@@ -67,6 +67,12 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental vaultBoss;
     private int frames;
     private int polishWaitFrames;
+    private int feedingReviewFrames;
+    private int feedingWaitFrames;
+    private HatchlingMimic feedingPet;
+    private com.shatteredpixel.shatteredpixeldungeon.items.bags.PotionBandolier feedingBag;
+    private com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing feedingMeal;
+    private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling feedingStray;
     private boolean originalLighting;
     private int originalZoom;
     private int[] reviewBounds;
@@ -926,18 +932,16 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }else if(frames==300){
             interfaceBounds();capture("polish-history-oldest");closeReviewWindows();
             HatchlingMimic pet=new HatchlingMimic();pet.collect();while(!pet.hungry())pet.tick(Dungeon.hero);
+            feedingPet=pet;
             String hunger=com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(HatchlingMimic.class,"hunger_hungry");
             if(!pet.info().contains(hunger)||pet.info().contains("75%")||pet.info().contains("%1$d")||pet.info().contains("%2$d"))throw new AssertionError("Hatchling hunger hint or description formatting");
-            Dungeon.hero.belongings.backpack.items.add(new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing());
+            feedingBag=new com.shatteredpixel.shatteredpixeldungeon.items.bags.PotionBandolier();feedingBag.collect();
+            feedingMeal=new com.shatteredpixel.shatteredpixeldungeon.items.potions.PotionOfHealing();feedingMeal.quantity(2);feedingBag.items.add(feedingMeal);
             GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndUseItem(null,pet));
         }else if(frames==330){interfaceBounds();capture("polish-hatchling-actions");playtestClick("FEED");}
         else if(frames==360){
-            if(Boolean.getBoolean("grimhollow.interfacePortrait"))interfaceBounds();
-            else {
-                com.shatteredpixel.shatteredpixeldungeon.ui.InventoryPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.InventoryPane)RecoveryChecks.field(Game.scene(),"inventory");
-                if(!pane.isSelecting()||!pane.getSelector().textPrompt().contains("Feed"))throw new AssertionError("61: Feed inventory selection missing");
-            }
-            capture("polish-feed-picker");closeReviewWindows();GameScene.cancel();
+            if(!feedingReviewTick()){frames--;return;}
+            closeReviewWindows();GameScene.cancel();
             int cell=Dungeon.hero.pos;
             com.shatteredpixel.shatteredpixeldungeon.levels.Level.set(cell-1,Terrain.ENTRANCE);
             com.shatteredpixel.shatteredpixeldungeon.levels.Level.set(cell+1,Terrain.EXIT);
@@ -1265,6 +1269,72 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             capture("wayward-restored-room");BalanceTuning.reset();
             System.out.println("WAYWARD UI PASS: painted Chart and mound states, no terrain-revealing marker, native mouse/touch claim, accumulated memory layer, mapping restore and tuning input; failures=0");Gdx.app.exit();
         }
+    }
+
+    /** Exercise the real bag tabs and item selector with mouse/touch, then recapture the dropped pet. */
+    private boolean feedingReviewTick(){
+        if(feedingReviewFrames>=30&&!Dungeon.hero.ready){
+            if(++feedingWaitFrames>1200)throw new AssertionError("Hatchling action did not finish");
+            return false;
+        }
+        feedingWaitFrames=0;
+        if(feedingReviewFrames++%15!=0)return false;
+        switch((feedingReviewFrames-1)/15){
+            case 0:
+                if(Boolean.getBoolean("grimhollow.interfacePortrait"))interfaceBounds();
+                else {
+                    com.shatteredpixel.shatteredpixeldungeon.ui.InventoryPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.InventoryPane)RecoveryChecks.field(Game.scene(),"inventory");
+                    if(!pane.isSelecting()||!pane.getSelector().textPrompt().contains("Feed"))throw new AssertionError("61: Feed inventory selection missing");
+                }
+                capture("polish-feed-picker");
+                if(!feedingBagClick(Game.scene()))throw new AssertionError("Feed bandolier tab missing");
+                break;
+            case 1:
+                if(!feedingPet.canFeed(Dungeon.hero,feedingMeal))throw new AssertionError("Nested feed target disabled");
+                capture("polish-feed-bandolier");
+                if(!feedingItemClick(Game.scene()))throw new AssertionError("Nested meal slot missing");
+                break;
+            case 2:
+                if(feedingMeal.quantity()!=1||!feedingBag.items.contains(feedingMeal)||feedingPet.hungry())throw new AssertionError("Bag meal not consumed one at a time");
+                closeReviewWindows();GameScene.cancel();feedingPet.doDrop(Dungeon.hero);break;
+            case 3:
+                for(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob mob:Dungeon.level.mobs)
+                    if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling)feedingStray=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling)mob;
+                if(feedingStray==null||feedingStray.pet()!=feedingPet||Dungeon.hero.belongings.contains(feedingPet))throw new AssertionError("Dropped pet actor missing");
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoMob(feedingStray));break;
+            case 4:
+                interfaceBounds();checkReviewText(Game.scene());capture("polish-dropped-hatchling");closeReviewWindows();pointerCell(feedingStray.pos);break;
+            case 5:
+                if(!Dungeon.hero.belongings.contains(feedingPet)||Dungeon.level.mobs.contains(feedingStray))throw new AssertionError("Native pet recapture failed");
+                com.shatteredpixel.shatteredpixeldungeon.effects.TargetedCell mark=GameScene.targetedCell(Dungeon.hero.pos+1,10);
+                Image icon=Icons.TARGET.get();
+                if(mark.texture!=icon.texture||mark.width()!=16||icon.width()!=16||icon.texture.width!=512)throw new AssertionError("Shared smooth reticle scale/source");
+                break;
+            default:
+                capture("polish-shared-targeting");
+                System.out.println("HATCHLING NATIVE PASS: real bag-tab and nested meal mouse/touch input, one-unit feed, dropped painted pet inspection and cell-click recapture, shared 64px/16-unit targeting; failures=0");
+                return true;
+        }
+        return false;
+    }
+    private boolean feedingBagClick(Group group){
+        for(com.watabou.noosa.Gizmo child:new java.util.ArrayList<>(RecoveryChecks.members(group))){
+            String name=child.getClass().getSimpleName();
+            if((name.equals("BagTab")||name.equals("BagButton"))&&RecoveryChecks.field(child,"bag")==feedingBag){
+                pointerGestureReview(child,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);return true;
+            }
+            if(child instanceof Group&&feedingBagClick((Group)child))return true;
+        }
+        return false;
+    }
+    private boolean feedingItemClick(Group group){
+        for(com.watabou.noosa.Gizmo child:new java.util.ArrayList<>(RecoveryChecks.members(group))){
+            if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.InventorySlot&&((com.shatteredpixel.shatteredpixeldungeon.ui.InventorySlot)child).item()==feedingMeal){
+                pointerGestureReview(child,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);return true;
+            }
+            if(child instanceof Group&&feedingItemClick((Group)child))return true;
+        }
+        return false;
     }
     private com.shatteredpixel.shatteredpixeldungeon.items.artifacts.FickleDoubloon reviewCoin;
     private com.shatteredpixel.shatteredpixeldungeon.items.trinkets.WaywardChart reviewChart;

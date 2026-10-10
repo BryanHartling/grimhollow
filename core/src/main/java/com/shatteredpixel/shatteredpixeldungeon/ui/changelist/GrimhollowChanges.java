@@ -20,7 +20,10 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.16","A name restored to the bounty board.");
+        ChangeInfo r=release(list,"v1.29.17","A better forge, a wandering appetite.");
+        note(r,Icons.INFO,"The workshop","Paid blacksmith wand upgrades preserve existing resin. The smithy's quenching basin now sits on workshop paving, and targeting uses a smooth metal-ring mark.");
+        note(r,Icons.JOURNAL,"Keep it fed, keep it close","Offer the Hatchling a meal from any of your bags, including ordinary valuable finds such as honey pots. Equipped gear, containers, quest belongings and class essentials remain protected. Unattended grazing still spares bag contents. Set it down and it will wait a while, then make for the stairs. Catch it before it slips away for good; recapture does not erase its appetite or remembered gold.");
+        r=release(list,"v1.29.16","A name restored to the bounty board.");
         note(r,Icons.JOURNAL,"Bounty Board notes","The Bounty Board's journal entry now displays its proper title, including notes in existing saved games.");
         r=release(list,"v1.29.15","A stronger legion. A hunter's payment, then a new face on the board.");
         note(r,Icons.TALENT,"Bone Legion","Deathspeakers can invest three ranks. Newly raised servants remain bound for 5/10/15 additional turns; rank three also permits one more servant. Existing ranks and servants' remaining time are preserved.");

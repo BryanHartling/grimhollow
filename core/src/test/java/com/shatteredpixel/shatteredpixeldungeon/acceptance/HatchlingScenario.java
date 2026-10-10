@@ -54,6 +54,8 @@ final class HatchlingScenario {
         heap.sprite.link(heap);Dungeon.level.heaps.put(cell,heap);
     }
     static void run() throws Exception {
+        manualContainers();
+        abandonment();
         HatchlingMimic hatchling=fresh();
         Item[] food={new ThrowingKnife().quantity(3),new Dagger(),new Firebloom.Seed(),new StoneOfIntuition(),
                 new PotionOfHealing(),new BlankParchment(),new ScrollOfIdentify(),new Javelin(),new WandOfMagicMissile(),
@@ -264,5 +266,87 @@ final class HatchlingScenario {
         Dungeon.LimitedDrops.TRINKET_CATA.drop();
         for(int depth=1;depth<=26;depth++){Dungeon.depth=depth;check(!Dungeon.trinketCataNeeded(),"no second natural catalyst at depth "+depth);}
         System.out.println("TEST 55 PASS: Hatchling hierarchy, hunger, gold, benefits, detection, transformation, Wealth rewards, kinship, theft and persistence; Grasp and journal PASS");
+    }
+    private static void manualContainers(){
+        HatchlingMimic hatchling=fresh();
+        PotionBandolier bandolier=new PotionBandolier();VelvetPouch pouch=new VelvetPouch();
+        MagicalHolster holster=new MagicalHolster();ScrollHolder scrolls=new ScrollHolder();
+        carry(bandolier,pouch,holster,scrolls);
+        Potion potion=new PotionOfHealing();potion.quantity(2);bandolier.items.add(potion);
+        Item seed=new Firebloom.Seed();pouch.items.add(seed);
+        Item wand=new WandOfMagicMissile();holster.items.add(wand);
+        Item scroll=new ScrollOfIdentify();scrolls.items.add(scroll);
+        Honeypot honey=new Honeypot();honey.quantity(2);carry(honey);
+        while(!hatchling.hungry())hatchling.tick(hero());
+        for(Item meal:new Item[]{potion,seed,wand,scroll,honey})check(hatchling.canFeed(hero(),meal),"manual container/value target "+meal.getClass());
+        check(hatchling.nextFood(hero())==null,"manual selection broadened passive grazing");
+        Item quest=new com.shatteredpixel.shatteredpixeldungeon.items.quest.Embers();bandolier.items.add(quest);
+        Item key=new com.shatteredpixel.shatteredpixeldungeon.items.keys.IronKey(1);carry(key);
+        check(!hatchling.canFeed(hero(),quest)&&!hatchling.canFeed(hero(),key)
+                && !hatchling.canFeed(hero(),hatchling)&&!hatchling.canFeed(hero(),bandolier)
+                && !hatchling.canFeed(hero(),hero().belongings.weapon()),"manual quest/key/container/equipped protections");
+        check(hatchling.feedChosen(hero(),potion)&&potion.quantity()==1&&bandolier.items.contains(potion),"one nested potion, container preserved");
+        while(!hatchling.hungry())hatchling.tick(hero());
+        check(hatchling.feedChosen(hero(),honey)&&honey.quantity()==1&&hero().belongings.contains(honey),"one valuable honey pot, not its stack");
+        while(!hatchling.hungry())hatchling.tick(hero());
+        check(hatchling.feedChosen(hero(),seed)&&!pouch.items.contains(seed)&&hero().belongings.contains(pouch),"nested seed detaches from correct container");
+        System.out.println("HATCHLING MANUAL PASS: all four specialized containers, valuable honey pots, one-unit meals, protected quest/key/gear/bags and unchanged loose-only grazing");
+    }
+    private static void abandonment() throws Exception {
+        for(int level=0;level<4;level++){
+            HatchlingMimic hatchling=fresh();hatchling.level(level);
+            for(int turn=0;turn<11;turn++)hatchling.tick(hero());
+            if(level==3)due(hatchling);
+            int hunger=hatchling.remaining();long gold=hatchling.goldDemand();
+            float now=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling.clock();
+            com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling stray=
+                    com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling.leave(hatchling,hero().pos);
+            check(stray!=null&&!hero().belongings.contains(hatchling)&&Dungeon.level.mobs.contains(stray),"dropped pet is one neutral floor actor");
+            Bundle b=new Bundle();b.put("stray",stray);Bundle fields=new Bundle();stray.storeInBundle(fields);
+            float leave=fields.getFloat("leave_at"),escape=fields.getFloat("escape_at");
+            check(leave-now>=120-20*level && leave-now<=180-30*level && escape==leave+20,"level-scaled saved grace and escape deadlines");
+            com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling restored=
+                    (com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling)b.get("stray");
+            check(restored.pet().remaining()==hunger&&restored.pet().goldDemand()==gold&&restored.pet().level()==level,"pet hunger/gold/level survive ground serialization");
+            Bundle after=new Bundle();restored.storeInBundle(after);
+            check(after.getFloat("leave_at")==leave&&after.getFloat("escape_at")==escape,"reload cannot reroll deadlines");
+            Actor.remove(stray);Dungeon.level.mobs.remove(stray);Dungeon.level.mobs.add(restored);Actor.add(restored);
+            Statistics.duration+=leave-com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling.clock();
+            int position=restored.pos;restored.act();
+            check(restored.pos==position&&restored.description().contains("stairs"),"warning grants a fresh action before flight");
+            if(!Dungeon.level.adjacent(hero().pos,restored.pos)){
+                for(int offset:PathFinder.NEIGHBOURS8){int cell=restored.pos+offset;if(Dungeon.level.insideMap(cell)&&Dungeon.level.passable[cell]&&Actor.findChar(cell)==null){hero().pos=cell;break;}}
+            }
+            HatchlingMimic recovered=restored.pet();
+            check(restored.interact(hero())&&hero().belongings.contains(recovered)&&!Dungeon.level.mobs.contains(restored),"recapture before permanent escape");
+            check(recovered.remaining()==hunger&&recovered.goldDemand()==gold,"recapture must not reset hunger or gold demand");
+            if(recovered.warned()){
+                recovered.tick(hero());
+                check(hero().belongings.contains(recovered)&&recovered.remaining()==1&&recovered.goldDemand()==gold,"pending hunger must wait for player control after recapture");
+            }
+        }
+        HatchlingMimic hatchling=fresh();
+        com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling stray=
+                com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling.leave(hatchling,hero().pos);
+        Bundle fields=new Bundle();stray.storeInBundle(fields);
+        Statistics.duration+=fields.getFloat("leave_at")-com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling.clock();
+        stray.sprite=stray.sprite();stray.sprite.link(stray);new com.watabou.noosa.Group().add(stray.sprite);
+        stray.act(); // Warning.
+        int old=stray.pos;stray.act();
+        check(stray.pos!=old || stray.pos==Dungeon.level.exit(),"scurrying pet must path toward stairs");
+        Statistics.duration+=25;stray.act();
+        check(!Dungeon.level.mobs.contains(stray)&&stray.pet()==null&&!hero().belongings.contains(hatchling)
+                &&hero().buff(Escape.class)==null,"abandonment removes pet permanently, without farming loot or a transformed mimic");
+        hatchling=fresh();stray=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling.leave(hatchling,hero().pos);
+        fields=new Bundle();stray.storeInBundle(fields);
+        float before=com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling.clock();
+        Actor.fixTime();check(Math.abs(before-com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling.clock())<.001f,"run-clock rebasing changed deadline");
+        Dungeon.saveAll();Dungeon.loadGame(99);Dungeon.switchLevel(Dungeon.loadLevel(99),Dungeon.hero.pos);
+        stray=null;for(Mob mob:Dungeon.level.mobs)if(mob instanceof com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling)stray=(com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling)mob;
+        check(stray!=null&&stray.pet()!=null,"dropped pet disk reload");
+        // Time spent away counts even when its floor's actor is not simulated.
+        Statistics.duration+=fields.getFloat("escape_at")-com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.AbandonedHatchling.clock()+1;
+        stray.act();check(!Dungeon.level.mobs.contains(stray),"time away allowed indefinite pet storage");
+        System.out.println("HATCHLING ABANDONMENT PASS: four grace ranges, warning/action, stair path, recapture, unchanged hunger/gold, fixed saved deadlines, disk reload, rebasing and elapsed-away expiry; no loot/XP transformation");
     }
 }

@@ -200,7 +200,7 @@ public class WndPlaytest extends Window {
     public static void tuning(){
         if(!atHome())Playtest.require();
         List<Entry> rows=new ArrayList<>();
-        for(int i:new int[]{0,1,2,3,9}){
+        for(int i:new int[]{0,1,2,3,9,17}){
             final int group=i;rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_group_"+i),()->tuningGroup(group)));
         }
         rows.add(new Entry("Dragon expedition",()->tuningFamily("Dragon expedition",new int[]{4,5,6,7})));
@@ -263,7 +263,7 @@ public class WndPlaytest extends Window {
                     BalanceTuning.configured(key),key.min,key.max,n->{if(atHome())BalanceTuning.setShared(key,n);else BalanceTuning.set(key,n);},()->tuningGroup(group))));
         }
         if(group==1)rows.add(new Entry("Lurking Horror",()->tuningGroup(8)));
-        Runnable back=group>=13?WndPlaytest::bountyTuning:group>=4 && group<=7?()->tuningFamily("Dragon expedition",new int[]{4,5,6,7}):group==8?()->tuningGroup(1):group==11?WndPlaytest::tuningHatchling:group==10||group==12?WndPlaytest::tuningItems:WndPlaytest::tuning;
+        Runnable back=group>=13 && group<=16?WndPlaytest::bountyTuning:group>=4 && group<=7?()->tuningFamily("Dragon expedition",new int[]{4,5,6,7}):group==8?()->tuningGroup(1):group==11?WndPlaytest::tuningHatchling:group==10||group==12?WndPlaytest::tuningItems:WndPlaytest::tuning;
         show(Messages.get(WndPlaytest.class,"tuning_group_"+group),Messages.get(WndPlaytest.class,"tuning_hint_"+group),rows,back);
     }
     private static void number(String title,String body,int value,int min,int max,IntConsumer action,Runnable back){

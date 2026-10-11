@@ -88,6 +88,9 @@ def build(cell_size=64):
         replacements['ARMOR_'+hero.upper()]=make_icon(parts(hero)[1])
     replacements['ARMOR_LEATHER_OCHRE']=make_icon(ImageEnhance.Color(gear[1]).enhance(1.3))
     replacements['ARMOR_LEATHER_ASH']=make_icon(ImageEnhance.Color(gear[1]).enhance(.08))
+    toolkit=Image.open(HERE/'sources/items/alchemists-toolkit.png').convert('RGBA')
+    if toolkit.getchannel('A').getextrema()[0]!=0:raise ValueError('Toolkit source lacks genuine alpha')
+    replacements['KIT']=make_icon(toolkit)
     for name,source in {'ARTIFACT_TOOLKIT':'KIT','ARTIFACT_BEACON':'BEACON'}.items():
         replacements[name]=replacements[source]
     # A disguised mimic and its ordinary chest share the exact same authored

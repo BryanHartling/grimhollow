@@ -32,6 +32,15 @@ final class TuningScenario {
     }
     static void run() throws Exception {
         BalanceTuning.reset();Playtest.reset();Dungeon.hero=null;Dungeon.level=null;
+        check(BalanceTuning.get(SCRIBE_UPGRADE_COST)==120&&SCRIBE_UPGRADE_COST.display(120).equals("120 energy"),"Upgrade Scribe default and units");
+        BalanceTuning.setShared(SCRIBE_UPGRADE_COST,168);BalanceTuning.loadShared();
+        Playtest.reset();
+        check(!Playtest.enabled()&&BalanceTuning.get(SCRIBE_UPGRADE_COST)==168,"Upgrade cost survives disk load and new-run reset without enabling tools");
+        for(int invalid:new int[]{11,601}){
+            boolean bad=false;try{BalanceTuning.setShared(SCRIBE_UPGRADE_COST,invalid);}catch(IllegalArgumentException expected){bad=true;}
+            check(bad&&BalanceTuning.get(SCRIBE_UPGRADE_COST)==168,"Upgrade crafting cost rejects out-of-range values atomically");
+        }
+        BalanceTuning.reset();check(BalanceTuning.get(SCRIBE_UPGRADE_COST)==120,"Upgrade cost reset");
         check(BalanceTuning.get(HORROR_WARNING_POPUP)==1&&HORROR_WARNING_POPUP.display(0).equals("OFF")&&HORROR_WARNING_POPUP.display(1).equals("ON"),"ambush popup defaults/display");
         BalanceTuning.setShared(DENSITY,125);BalanceTuning.setShared(HORROR_WARNING_POPUP,0);BalanceTuning.loadShared();
         check(BalanceTuning.get(HORROR_WARNING_POPUP)==0,"ambush popup shared persistence");

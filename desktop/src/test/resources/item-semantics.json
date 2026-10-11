@@ -355,7 +355,7 @@
       "id": 63,
       "artIndex": 63,
       "kind": "toolkit",
-      "rgbaSha256": "a9116bc8a60a1c74f1956aed789f9f2c697c39ad2303f0e85579b445fa889b50",
+      "rgbaSha256": "f0d58b98227924cf92c1c9fc3ca3bda24e5c9181f0eca5ea16f247fcaeefb034",
       "cellSize": 64
     },
     "SEAL_SHARD": {
@@ -1216,7 +1216,7 @@
       "id": 245,
       "artIndex": 245,
       "kind": "toolkit",
-      "rgbaSha256": "a9116bc8a60a1c74f1956aed789f9f2c697c39ad2303f0e85579b445fa889b50",
+      "rgbaSha256": "f0d58b98227924cf92c1c9fc3ca3bda24e5c9181f0eca5ea16f247fcaeefb034",
       "cellSize": 64
     },
     "ARTIFACT_SPELLBOOK": {

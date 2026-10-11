@@ -167,6 +167,7 @@ final class ScribingRoomsScenario {
     }
 
     static void scribing() {
+        BalanceTuning.reset();
         GamesInProgress.selectedClass=HeroClass.ENCHANTER;
         Dungeon.init();Dungeon.switchLevel(Dungeon.newLevel(),-1);SmokeRun.clearArena();
         Hero hero=Dungeon.hero;
@@ -177,10 +178,11 @@ final class ScribingRoomsScenario {
         check(BlankParchment.recipes().isEmpty(),"historical journal knowledge is not a recipe");
         Dungeon.energy=100;int charges=brush.charges();float time=hero.cooldown();
         check(!BlankParchment.scribe(hero,ScrollOfIdentify.class),"unknown recipe rejected");
+        check(!BlankParchment.scribe(hero,ScrollOfUpgrade.class),"unknown Upgrade recipe rejected");
         check(Dungeon.energy==100&&paper.quantity()==10&&brush.charges()==charges&&hero.cooldown()==time,"invalid selection spends nothing");
         new ScrollOfIdentify().identify();new ScrollOfTransmutation().identify();new ScrollOfUpgrade().identify();new ScrollOfEnchantment().identify();
         check(BlankParchment.recipes().contains(ScrollOfIdentify.class)&&BlankParchment.recipes().contains(ScrollOfTransmutation.class)
-                &&!BlankParchment.recipes().contains(ScrollOfUpgrade.class)&&!BlankParchment.recipes().contains(ScrollOfEnchantment.class),"regular pool and forbidden upgrade/exotic recipes");
+                &&BlankParchment.recipes().contains(ScrollOfUpgrade.class)&&!BlankParchment.recipes().contains(ScrollOfEnchantment.class),"regular and Upgrade recipes require knowledge; exotics remain excluded");
         check(BlankParchment.scribe(hero,ScrollOfIdentify.class),"known regular scroll written");
         check(Dungeon.energy==88&&paper.quantity()==9&&brush.charges()==charges-1&&hero.cooldown()==time+3,"one parchment, charge, 12 energy and exactly three turns");
         check(hero.belongings.getItem(ScrollOfIdentify.class).isIdentified(),"written output is known");
@@ -209,6 +211,21 @@ final class ScribingRoomsScenario {
         com.shatteredpixel.shatteredpixeldungeon.items.bags.ScrollHolder holder=new com.shatteredpixel.shatteredpixeldungeon.items.bags.ScrollHolder();
         check(holder.canHold(paper),"parchment fits scroll holder");
         check(((BlankParchment)paper.duplicate()).quantity()==paper.quantity(),"paper stack save/load");
+        check(BlankParchment.cost(ScrollOfUpgrade.class)==120,"default Upgrade energy cost");
+        Dungeon.energy=119;brush.gainCharge(100);charges=brush.charges();time=hero.cooldown();before=paper.quantity();
+        check(!BlankParchment.scribe(hero,ScrollOfUpgrade.class)&&Dungeon.energy==119&&brush.charges()==charges
+                &&paper.quantity()==before&&hero.cooldown()==time,"unaffordable Upgrade spends nothing");
+        Dungeon.energy=120;
+        check(BlankParchment.scribe(hero,ScrollOfUpgrade.class)&&Dungeon.energy==0&&brush.charges()==charges-1
+                &&paper.quantity()==before-1&&hero.cooldown()==time+3,"Upgrade costs exactly 120 energy, one charge, one sheet and three turns");
+        check(hero.belongings.getItem(ScrollOfUpgrade.class).isIdentified(),"crafted Upgrade is identified");
+        BalanceTuning.setShared(BalanceTuning.Key.SCRIBE_UPGRADE_COST,36);BalanceTuning.loadShared();
+        check(BlankParchment.cost(ScrollOfUpgrade.class)==36&&brush.desc().contains("_36 energy_"),"shared tuning drives crafting and current description");
+        Dungeon.energy=72;brush.gainCharge(100);
+        check(BlankParchment.scribe(hero,ScrollOfUpgrade.class)&&BlankParchment.scribe(hero,ScrollOfUpgrade.class)
+                &&Dungeon.energy==0&&hero.belongings.getItem(ScrollOfUpgrade.class).quantity()==3,"tuned cost permits repeated paid crafting without a cap");
+        BalanceTuning.reset();
+        keenStudy(hero,brush);
         int opportunities=0;
         for(int seed=0;seed<100;seed++){
             int count=0;
@@ -221,7 +238,71 @@ final class ScribingRoomsScenario {
             check(count>=1&&count<=5&&BlankParchment.spawnsOn(2,0,HeroClass.ENCHANTER,seed),"early sheet and regional bounds");opportunities+=count;
         }
         check(opportunities>=340&&opportunities<=450,"seeded parchment average remains modest");
-        System.out.println("TEST 63 PASS: Scribe knowledge, exclusions, atomic costs, three turns, carried Brush, recycling one/stack/exotic/stale, bag/save and seeded parchment opportunities="+opportunities+"/100 runs");
+        System.out.println("TEST 63 PASS: Scribe knowledge, Upgrade 120/tuned/shared cost/repeated casts, exotic exclusion, atomic costs, three turns, carried Brush, recycling, bag/save and seeded parchment opportunities="+opportunities+"/100 runs");
+    }
+
+    private static void keenStudy(Hero hero,SigilBrush brush){
+        Class<?> chosen=com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing.class;
+        long[] seeds=new long[3];java.util.Arrays.fill(seeds,-1);
+        for(long seed=0;java.util.Arrays.stream(seeds).anyMatch(s->s<0);seed++){
+            Random.pushGenerator(seed);float roll=Random.Float();Random.popGenerator();
+            int band=roll<.05f?0:roll<.1f?1:2;if(seeds[band]<0)seeds[band]=seed;
+        }
+        for(int rank=0;rank<=2;rank++)for(int band=0;band<3;band++)for(int kind=0;kind<3;kind++){
+            hero.talents.get(0).put(Talent.KEEN_STUDY,rank);
+            check(EnchanterMagic.permanenceChance(hero)==.05f*rank,"Keen Study rank "+rank+" probability");
+            Item item;
+            if(kind==1){
+                Armor armor=new ClothArmor();armor.inscribe(new Swiftness());hero.belongings.armor=armor;item=armor;
+            }else{
+                com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon weapon=kind==0?
+                        new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger():
+                        new com.shatteredpixel.shatteredpixeldungeon.items.weapon.missiles.ThrowingKnife();
+                weapon.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Chilling());item=weapon;
+                if(kind==0)hero.belongings.weapon=weapon;else hero.belongings.backpack.items.add(weapon);
+            }
+            item.level(2);item.identify();brush.gainCharge(100);int charges=brush.charges();float time=hero.cooldown();
+            Class<?> effect=kind==1?Obfuscation.class:chosen;
+            Random.pushGenerator(seeds[band]);
+            try{check(brush.cast(hero,"inscribe",hero.pos,item,effect),"paid Inscribe succeeds");}finally{Random.popGenerator();}
+            boolean permanent=rank>0&&(band==0||rank==2&&band==1);
+            check(brush.charges()==charges-1&&hero.cooldown()==time+1&&item.trueLevel()==2,"one charge/turn and unchanged upgrades");
+            check(item.inscriptionTurns==(permanent?0:30),"one rank-specific permanence outcome per cast");
+            if(item instanceof Armor){
+                Armor armor=(Armor)item;
+                check(armor.glyph.getClass()==(permanent?Obfuscation.class:Swiftness.class)
+                        &&(permanent?armor.inscribed==null:armor.inscribed instanceof Obfuscation),"armor replaces permanent only on successful roll");
+            }else{
+                com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon weapon=(com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)item;
+                check(weapon.enchantment.getClass()==(permanent?chosen:com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Chilling.class)
+                        &&(permanent?weapon.inscribed==null:weapon.inscribed.getClass()==chosen),"melee/ranged replaces permanent only on successful roll");
+            }
+            for(int turn=0;turn<31;turn++)EnchanterMagic.state().act();
+            check(item.inscriptionTurns==0,"temporary expiration or permanent survival");
+            Item saved=item.duplicate();
+            check(saved.trueLevel()==2&&(saved instanceof Armor?((Armor)saved).glyph.getClass():
+                    ((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)saved).enchantment.getClass())==
+                    (kind==1?(permanent?Obfuscation.class:Swiftness.class):(permanent?chosen:com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Chilling.class)),"permanence survives expiry and save/load");
+            if(kind==2)item.detachAll(hero.belongings.backpack);
+        }
+        hero.talents.get(0).put(Talent.KEEN_STUDY,2);brush.gainCharge(-100);
+        Random.pushGenerator(seeds[0]);float expected=Random.Float();Random.popGenerator();
+        Random.pushGenerator(seeds[0]);
+        try{
+            check(!brush.cast(hero,"inscribe",hero.pos,hero.belongings.weapon,chosen)&&Random.Float()==expected,"uncharged cast cannot roll permanence");
+        }finally{Random.popGenerator();}
+        brush.gainCharge(100);
+        Random.pushGenerator(seeds[0]);
+        try{
+            check(!brush.cast(hero,"inscribe",hero.pos,hero.belongings.weapon,Obfuscation.class)&&Random.Float()==expected,"invalid/cancelled choice cannot roll permanence");
+        }finally{Random.popGenerator();}
+        brush.gainCharge(-1);
+        Bundle beforeConsume=new Bundle();brush.storeInBundle(beforeConsume);
+        Talent.onPotionUsed(hero,hero.pos,1);Talent.onScrollUsed(hero,hero.pos,1,ScrollOfIdentify.class);
+        Bundle afterConsume=new Bundle();brush.storeInBundle(afterConsume);
+        check(afterConsume.getFloat("partialcharge")==beforeConsume.getFloat("partialcharge"),"old potion/scroll recharge removed");
+        hero.talents.get(0).put(Talent.KEEN_STUDY,0);
+        System.out.println("KEEN STUDY PASS: once per valid cast, exact 0/5/10% thresholds, melee/ranged/armor replacement, failed rolls preserve permanent, no free rejection rolls, unchanged upgrades, expiry/save and removed consume recharge");
     }
 
     static void spellguard() {

@@ -1,3 +1,12 @@
+# Enchanter lasting craft v1.30.2 - 2026-10-11
+
+- Scribe now includes an identified Scroll of Upgrade for 120 energy, one Blank Parchment, one usable Brush charge and three turns. Existing regular/Transmutation costs, knowledge requirements and exotic exclusion remain. No per-run crafting cap: the substantial energy investment is the intended tradeoff.
+- Playtest > Balance tuning > Enchanter crafting exposes Upgrade scroll energy cost (12-600, default 120). It uses the existing device-wide profile, applies immediately to future casts, survives saved/new games and resets with the other tuning values. Scribe's picker and Brush description show the current cost.
+- Keen Study now gives each successful Inscribe casting a 5%/10% chance to make its chosen weapon enchantment or armor glyph permanent, replacing the previous permanent effect. Failed rolls preserve that effect and apply the ordinary temporary layer. Upgrades and Rune Etchings are unchanged; invalid selections, cancelled pickers, combat procs and Etching do not roll. Efficient Sigils' existing charge-refund chance still applies independently. Repeated paid casting remains intentional. The old potion/scroll Brush-recharge hook is removed; saved Keen Study ranks retain their identity.
+- Replace the Alchemist's Toolkit tool-roll painting with an original worn wooden campaign chest, brass fittings, reagents and fold-out worktop. Inventory, alchemy UI and enlarged inspection use the same committed source; Toolkit mechanics are unchanged. Exact built-in imagegen prompt: tools/painted/alchemists-toolkit-prompt.json. The existing offline packer reproduces it without a generator or Blender.
+
+- Validation: 16 unit tests, combined Runs=30 failures=0, signed Android/desktop builds, 1,936 deterministic painted assets and compiled network audit pass. Packaged Toolkit bytes match their committed sources; only inventory indices 63 and 245 change. Native pointer coverage uses the existing fixture state machine so asynchronous scene loading cannot skip the new crafting checks.
+
 # Verified updates v1.30.1 - 2026-10-11
 
 - Add home-screen/manual update checks, optional six-hour automatic checks, stable/playtest filtering, scrollable release notes, progress, cancellation and one-day deferral. Only signed releases from this repository are trusted; exact bytes, version, package identity, sizes, hashes and HTTPS redirects are checked before installation. No game mechanics, artwork or save identities change.

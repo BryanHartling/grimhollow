@@ -53,7 +53,8 @@ public final class BalanceTuning {
         CREW_HEALTH(15,150,100,300), CREW_DAMAGE(15,120,50,250), COLE_HEALTH(15,300,100,500),
         COLE_DAMAGE(15,120,50,250), COLE_EVASION(15,120,100,180), COLE_BOLAS(15,2,0,4),
         BRAND_TURNS(16,8,3,15), BRAND_ACCURACY(16,125,100,175), BRAND_PENETRATION(16,50,0,100),
-        COAT_GROWTH(16,1,0,3), COAT_FIRST_HIT(16,10,0,20);
+        COAT_GROWTH(16,1,0,3), COAT_FIRST_HIT(16,10,0,20),
+        SCRIBE_UPGRADE_COST(17,120,12,600);
 
         public final int group, baseline, min, max;
         Key(int group) { this(group,100,0,1000); }
@@ -62,6 +63,7 @@ public final class BalanceTuning {
         }
         public String id() { return name().toLowerCase(Locale.ROOT); }
         public String display(int value) {
+            if(this==SCRIBE_UPGRADE_COST)return value+" energy";
             if(this==HORROR_WARNING_POPUP)return value==0?"OFF":"ON";
             boolean percentage = this != TIER_SHIFT && (group < 4 || this == EXPEDITION_CHANCE
                     || this == DRAGON_DAMAGE || this == BROOD_DAMAGE || this == EXPEDITION_FALL_DAMAGE

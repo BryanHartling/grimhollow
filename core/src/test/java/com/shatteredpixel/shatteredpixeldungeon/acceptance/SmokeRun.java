@@ -1690,6 +1690,8 @@ public class SmokeRun {
         check(brush.cast(h,"hex",enemy.pos,null,null)&&brush.charges()==2&&enemy.buff(DegradedGear.class)!=null&&enemy.buff(Hex.class)!=null,"Hex Sigil");
         for(int i=0;i<37;i++)h.buff(ClassSpellItem.Charger.class).act();check(brush.charges()==2,"No early Brush charge");h.buff(ClassSpellItem.Charger.class).act();check(brush.charges()==3,"Brush level-one cadence");
         h.lvl=21;h.HT=h.HP=120;h.subClass=HeroSubClass.ARTIFICER;Talent.initSubclassTalents(h);maxTalents();
+        // This fixture requires temporary layers; rank-specific permanence is covered by ScribingRoomsScenario.
+        h.talents.get(0).put(Talent.KEEN_STUDY,0);
         java.util.List<Class<?>> priorKnowledge=new java.util.ArrayList<>(EnchanterMagic.state().choices(false));
         java.util.List<Class<?>> priorGlyphs=new java.util.ArrayList<>(EnchanterMagic.state().choices(true));
         int knowledgeDepth=Dungeon.depth;

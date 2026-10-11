@@ -16,6 +16,7 @@ import java.util.*;
 import com.watabou.utils.Random;
 public class SigilBrush extends ClassSpellItem {
     {image=ItemSpriteSheet.SIGIL_BRUSH;}
+    @Override public String desc(){return Messages.get(this,"desc",BlankParchment.cost(com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade.class));}
     @Override protected boolean canCastFrom(Hero h){
         return isEquipped(h) || h.hasTalent(Talent.DUAL_INSCRIPTION) && h.belongings.contains(this);
     }
@@ -84,6 +85,7 @@ public class SigilBrush extends ClassSpellItem {
             case "inscribe":
                 if(!inscriptionTarget(h,item)||magic==null||!magic.choices(item).contains(choice))return false;
                 inscribe(item,choice,30+10*h.pointsInTalent(Talent.STEADY_HAND));
+                EnchanterMagic.crystallizeInscription(h,item);
                 if(Random.Float()<.1f*h.pointsInTalent(Talent.EFFICIENT_SIGILS))cost=0;
                 break;
             case "transmute":

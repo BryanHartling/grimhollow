@@ -37,11 +37,14 @@ public class BlankParchment extends Item {
     public static List<Class<? extends Scroll>> recipes(){
         List<Class<? extends Scroll>> result=new ArrayList<>();
         for(Class<?> type:Generator.Category.SCROLL.classes)
-            if(type!=ScrollOfUpgrade.class && Scroll.getKnown().contains(type))result.add(type.asSubclass(Scroll.class));
+            if(Scroll.getKnown().contains(type))result.add(type.asSubclass(Scroll.class));
         result.sort(Comparator.comparing(type->Reflection.newInstance(type).name()));
         return result;
     }
-    public static int cost(Class<? extends Scroll> type){return type==ScrollOfTransmutation.class?20:12;}
+    public static int cost(Class<? extends Scroll> type){
+        if(type==ScrollOfUpgrade.class)return com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.get(com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.SCRIBE_UPGRADE_COST);
+        return type==ScrollOfTransmutation.class?20:12;
+    }
     public static boolean canScribe(Hero hero,Class<? extends Scroll> type){
         SigilBrush brush=hero.belongings.getItem(SigilBrush.class);
         return hero==Dungeon.hero && hero.heroClass==HeroClass.ENCHANTER && hero.isAlive()

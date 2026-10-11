@@ -1167,6 +1167,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll.initLabels();
             new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify().identify();
             new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfTransmutation().identify();
+            new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade().identify();
             new com.shatteredpixel.shatteredpixeldungeon.items.BlankParchment().quantity(5).collect();
             Dungeon.energy=100;
             com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush brush=Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class);
@@ -1938,6 +1939,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                     if(mysteryMenuStep<6 && !mysteryMenuChecks())return;
                     if(!artworkReview())return;
                     System.out.println("TEST 58 UI PASS: balance menu, paging, numeric input, saved changes and reset via native pointer input");
+                    break;
+                case 75:
+                    if(!craftingMenuChecks())return;
                     Gdx.app.exit();return;
             }
             playtestStep++;
@@ -2964,6 +2968,56 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }
         return false;
     }
+    private int craftingMenuStep,craftingStartingCharges;
+    private boolean craftingMenuChecks() throws ReflectiveOperationException {
+        switch(craftingMenuStep){
+            case 0:
+                closeReviewWindows();BalanceTuning.reset();Playtest.heroClass(HeroClass.ENCHANTER);break;
+            case 1:
+                com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll.initLabels();
+                new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify().identify();
+                new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade().identify();
+                com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush brush=Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class);
+                Dungeon.hero.belongings.backpack.items.clear();Dungeon.hero.belongings.artifact=brush;
+                new com.shatteredpixel.shatteredpixeldungeon.items.BlankParchment().quantity(2).collect();
+                brush.gainCharge(100);craftingStartingCharges=brush.charges();Dungeon.energy=168;
+                com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();break;
+            case 2:if(!playtestClickPage("Enchanter crafting"))return false;break;
+            case 3:
+                interfaceBounds();capture("enchanter-crafting-balance");playtestClick("Upgrade scroll energy cost: 120 energy");break;
+            case 4:interfaceBounds();playtestInput("168","Apply");break;
+            case 5:
+                if(BalanceTuning.get(BalanceTuning.Key.SCRIBE_UPGRADE_COST)!=168)throw new AssertionError("Upgrade cost menu did not apply");
+                closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndScribe(Dungeon.hero));break;
+            case 6:
+                interfaceBounds();checkReviewText(Game.scene());capture("enchanter-scribe-upgrade");
+                clickReviewLabel(new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade().name()+" — 168");break;
+            case 7:
+                if(Dungeon.energy!=0||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.BlankParchment.class).quantity()!=1
+                        ||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).charges()!=craftingStartingCharges-1
+                        ||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade.class)==null)throw new AssertionError("Native Upgrade Scribe resources/output");
+                BalanceTuning.reset();closeReviewWindows();
+                GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(new com.shatteredpixel.shatteredpixeldungeon.items.artifacts.AlchemistsToolkit()));break;
+            case 8:
+                interfaceBounds();capture("alchemists-toolkit");
+                for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem){
+                    Object button=findArtworkButton((Group)child);
+                    if(button==null)throw new AssertionError("Toolkit enlargement control missing");
+                    pointerGestureReview(button,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);
+                }
+                break;
+            case 9:
+                com.shatteredpixel.shatteredpixeldungeon.windows.WndArtwork viewer=null;
+                for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndArtwork)viewer=(com.shatteredpixel.shatteredpixeldungeon.windows.WndArtwork)child;
+                if(viewer==null)throw new AssertionError("Toolkit enlargement did not open");
+                Image artwork=(Image)RecoveryChecks.field(viewer,"artwork");
+                if(artwork.width<256||artwork.height<256)throw new AssertionError("Toolkit lacks source-resolution inspection");
+                interfaceBounds();capture("alchemists-toolkit-artwork");closeReviewWindows();
+                System.out.println("UPGRADE SCRIBE UI PASS: shared balance submenu, numeric input, displayed tuned cost, actual mouse/touch crafting, exact resources and enlarged painted Toolkit; failures=0");return true;
+        }
+        craftingMenuStep++;return false;
+    }
+
     private Object findArtworkButton(Group group){
         for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(group)){
             if(child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.ArtworkButton)return child;

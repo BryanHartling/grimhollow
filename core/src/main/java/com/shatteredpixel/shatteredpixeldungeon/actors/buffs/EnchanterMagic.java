@@ -124,7 +124,25 @@ public class EnchanterMagic extends Buff {
                 || !com.shatteredpixel.shatteredpixeldungeon.items.armor.glyphs.AntiMagic.RESISTS.contains(source.getClass())) return 1f;
         return 1f - .1f * hero.pointsInTalent(Talent.SPELLGUARD);
     }
-    public static void consume(Hero h){SigilBrush brush=h.belongings.getItem(SigilBrush.class);if(brush!=null)brush.advance(5*h.pointsInTalent(Talent.KEEN_STUDY));}
+    public static float permanenceChance(Hero hero){
+        return hero.heroClass==HeroClass.ENCHANTER?.05f*hero.pointsInTalent(Talent.KEEN_STUDY):0;
+    }
+    /** Called once by a successful Inscribe cast, never by combat procs or Etching. */
+    public static void crystallizeInscription(Hero hero,Item item){
+        float chance=permanenceChance(hero);
+        if(chance<=0 || Random.Float()>=chance)return;
+        if(item instanceof Weapon){
+            Weapon weapon=(Weapon)item;
+            if(weapon.inscribed==null)return;
+            weapon.enchant(weapon.inscribed);weapon.inscribed=null;
+        }else if(item instanceof Armor){
+            Armor armor=(Armor)item;
+            if(armor.inscribed==null)return;
+            armor.inscribe(armor.inscribed);armor.inscribed=null;
+        }else return;
+        item.inscriptionTurns=0;learn(item);Item.updateQuickslot();
+        com.shatteredpixel.shatteredpixeldungeon.utils.GLog.p(com.shatteredpixel.shatteredpixeldungeon.messages.Messages.get(SigilBrush.class,"permanent",item.title()));
+    }
     public static void collect(Item item){
         if(state()==null)return;
         int rank=points(Talent.ATTUNEMENT);

@@ -6,6 +6,8 @@ Keen Study gives each successful Inscribe casting a **5%/10%** chance to make th
 
 Windows: `desktop/build/windows/1.30.2/Grimhollow/Grimhollow.exe` (keep the entire folder). Signed Android: `android/build/outputs/apk/update/android-update.apk` (`1.30.2`, version code 1020). Artwork source and exact prompt are in `tools/painted/sources/items/alchemists-toolkit.png` and `tools/painted/alchemists-toolkit-prompt.json`; the offline packer requires no generation service.
 
+Native crafting-menu and Toolkit review images are `verification/interface/{landscape,portrait}/{enchanter-crafting-balance,enchanter-scribe-upgrade,alchemists-toolkit,alchemists-toolkit-artwork}.png`. Mouse and touch checks pass both layouts; physical Samsung tablet review remains human playtesting.
+
 # Verified in-game updates - v1.30.1
 
 The home-screen update icon and Settings > Data > Check for updates open a native download dialog with scrolling release notes. Automatic checks run at most every six hours while at home; Later delays reminders for a day. Stable releases are the default, with optional playtest releases in Data settings. Downloads can be cancelled and never interrupt a run. Installation is available only from the home screen after normal saving.

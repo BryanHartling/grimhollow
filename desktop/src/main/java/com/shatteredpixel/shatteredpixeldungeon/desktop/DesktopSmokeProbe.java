@@ -932,6 +932,13 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     /** Review actual inventory, scrolling descriptions and class controls in both orientations. */
     private void interfaceTick() {
         if(bountyReview){if((Game.scene() instanceof GameScene || Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.RankingsScene)&&frames>=220&&frames%20==0)bountyTick();return;}
+        if(Boolean.getBoolean("grimhollow.craftingReview")){
+            if(Game.scene() instanceof GameScene && frames>=230 && frames%20==0){
+                try{if(craftingMenuChecks())Gdx.app.exit();}
+                catch(ReflectiveOperationException error){throw new AssertionError(error);}
+            }
+            return;
+        }
         if(Boolean.getBoolean("grimhollow.artworkReview")){
             // Run the same artwork assertions independently of clipboard-heavy
             // Playtest coverage. Normal CI still executes the entire fixture.
@@ -2972,7 +2979,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private boolean craftingMenuChecks() throws ReflectiveOperationException {
         switch(craftingMenuStep){
             case 0:
-                closeReviewWindows();BalanceTuning.reset();Playtest.heroClass(HeroClass.ENCHANTER);break;
+                closeReviewWindows();Playtest.enable();BalanceTuning.reset();Playtest.heroClass(HeroClass.ENCHANTER);break;
             case 1:
                 com.shatteredpixel.shatteredpixeldungeon.items.scrolls.Scroll.initLabels();
                 new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfIdentify().identify();
@@ -2991,7 +2998,16 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 closeReviewWindows();GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndScribe(Dungeon.hero));break;
             case 6:
                 interfaceBounds();checkReviewText(Game.scene());capture("enchanter-scribe-upgrade");
-                clickReviewLabel(new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade().name()+" — 168");break;
+                boolean clicked=false;
+                String label=new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.ScrollOfUpgrade().name()+" — 168";
+                for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndScribe){
+                    com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(child,"pane");
+                    for(com.watabou.noosa.Gizmo button:RecoveryChecks.members(pane.content()))if(button instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton
+                            &&label.equals(((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button).text())){
+                        pointerGestureReview(button,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);clicked=true;break;
+                    }
+                }
+                if(!clicked)throw new AssertionError("Native Upgrade recipe missing");break;
             case 7:
                 if(Dungeon.energy!=0||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.BlankParchment.class).quantity()!=1
                         ||Dungeon.hero.belongings.getItem(com.shatteredpixel.shatteredpixeldungeon.items.SigilBrush.class).charges()!=craftingStartingCharges-1

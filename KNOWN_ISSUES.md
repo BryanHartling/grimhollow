@@ -1,6 +1,6 @@
 # Known issues
 
-- v1.30.2: Physical Samsung tablet and full-campaign Enchanter economy remain human playtesting. Initial overlapping packing/building captured old enlarged Toolkit previews; final packages are rebuilt after packing and checked byte-for-byte. Native fixture method-call and reset-check ordering errors were corrected without weakening checks. Test 45 remains Abandoned: test failed and was not rerun.
+- v1.30.2: Physical Samsung tablet and full-campaign Enchanter economy remain human playtesting. Initial overlapping packing/building captured old enlarged Toolkit previews; final packages are rebuilt after packing and checked byte-for-byte. Native fixture method-call, nested-button and reset-check ordering errors were corrected without weakening checks. Test 45 remains Abandoned: test failed and was not rerun.
 
 - v1.30.1: Physical Samsung tablet installation and an actual user's application replacement remain NOT RUN; installation/rollback pass in isolated Windows fixtures. Delivery signing preserves this machine's APK identity, but older ephemeral CI debug APKs can have a different certificate; updates reject that mismatch without uninstalling or deleting saves. Install the first updater-enabled version manually, then use signed delivery builds. Linux/development JARs do not self-install. Test 45 remains Abandoned: test failed and was not rerun.
 

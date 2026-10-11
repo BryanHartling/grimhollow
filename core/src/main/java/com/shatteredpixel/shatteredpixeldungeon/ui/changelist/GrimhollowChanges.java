@@ -20,7 +20,7 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.30.0","Updates delivered to your doorstep.");
+        ChangeInfo r=release(list,"v1.30.1","Updates delivered to your doorstep.");
         note(r,Icons.CHANGES,"Grimhollow updates","Check published Grimhollow releases from the home screen or Settings. Read the changes, download in the game, and install when you are ready. Automatic checks and playtest releases can be toggled in Settings.");
         note(r,Icons.INFO,"Careful installation","Downloads must match a signed release manifest. Installation backs up saved data. Windows keeps the previous application for rollback; Android verifies that the update belongs to this installation before opening its system installer.");
         r=release(list,"v1.29.18","A cornered Horror fights back.");

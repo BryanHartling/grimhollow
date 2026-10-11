@@ -38,6 +38,7 @@ public final class GameUpdates {
 
     public static void initialize(Installer value) { installer = value; }
     public static boolean supported() { return installer != null; }
+    public static void startupHealthy() { if (supported()) installer.healthy(); }
     public static boolean working() { return busy(); }
     public static File directory() { return FileUtils.getFileHandle("updates").file(); }
     public static File packageFile() { return new File(directory(), "package-" + release.code + (installer.platform().equals("android") ? ".apk" : ".zip")); }
@@ -46,7 +47,7 @@ public final class GameUpdates {
 
     public static void home(boolean mayPrompt) {
         if (!supported()) return;
-        installer.healthy();
+        startupHealthy();
         if (!loaded) { loaded = true; lastCheck=SPDSettings.getLong("update_last_check",0); state = State.CHECKING; worker(() -> { loadCached(); if(state==State.CHECKING)state=State.IDLE; }); }
         if (SPDSettings.updates() && state != State.READY && !busy() && System.currentTimeMillis() - lastCheck > 6*60*60*1000L
                 && (!SPDSettings.WiFi() || Game.platform.connectedToUnmeteredNetwork())) check(false);

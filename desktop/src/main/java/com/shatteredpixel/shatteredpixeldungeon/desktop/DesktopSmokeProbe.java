@@ -30,6 +30,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
 final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean sewers;
     private final boolean updateReview=Boolean.getBoolean("grimhollow.updateReview");
+    private final boolean updateBootReview=Boolean.getBoolean("grimhollow.updateBootReview");
     private final boolean vault=Boolean.getBoolean("grimhollow.vault");
     private final boolean encounters=Boolean.getBoolean("grimhollow.encounterTests");
     private final boolean interfaceReview=Boolean.getBoolean("grimhollow.interfaceReview");
@@ -93,7 +94,8 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
             public String platform(){return "windows-x64";} public int androidApi(){return 0;}
             public String install(java.io.File file,com.shatteredpixel.shatteredpixeldungeon.services.updates.ReleaseInfo release){throw new IllegalStateException("UI review cannot install an update");}
         });
-        sceneClass=TitleScene.class;
+        if(updateBootReview)com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.initialize(new WindowsUpdateInstaller());
+        sceneClass=updateBootReview?com.shatteredpixel.shatteredpixeldungeon.scenes.WelcomeScene.class:TitleScene.class;
     }
     @Override public void create() {
         super.create();
@@ -114,6 +116,18 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     @Override public void render() {
         super.render();
         frames++;
+        if(updateBootReview) {
+            if(frames==300) {
+                if(!(Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.WelcomeScene))throw new AssertionError("Expected the untouched post-update welcome screen");
+                try {
+                    java.nio.file.Path marker=java.nio.file.Path.of(System.getenv("GRIMHOLLOW_UPDATE_HEALTH_FILE"));
+                    if(!java.nio.file.Files.readString(marker).equals(System.getenv("GRIMHOLLOW_UPDATE_HEALTH_TOKEN")))throw new AssertionError("Welcome screen failed startup readiness");
+                }catch(java.io.IOException e){throw new AssertionError(e);}
+                capture("update-startup");
+                System.out.println("UPDATE STARTUP: healthy welcome screen acknowledged without a click; failures=0");Gdx.app.exit();
+            }
+            return;
+        }
         if(updateReview) {
             if(frames==100) {
                 try {

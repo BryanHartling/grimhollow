@@ -68,6 +68,14 @@ jobs:
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         shell: bash
         run: xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-encounters" -Dgrimhollow.encounterTests=true -Dgrimhollow.encounterFixture=true -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
+      - name: Updated welcome screen acknowledges healthy startup without player input
+        if: ${{ !cancelled() && runner.os == 'Linux' }}
+        shell: bash
+        run: |
+          root="$RUNNER_TEMP/grimhollow-update-startup"
+          marker="$root/.local/share/.grimhollow/grimhollow/updates/launch-health.txt"
+          mkdir -p "$(dirname "$marker")"
+          xvfb-run -a env XDG_DATA_HOME="$root/.local/share" GRIMHOLLOW_UPDATE_HEALTH_FILE="$marker" GRIMHOLLOW_UPDATE_HEALTH_TOKEN=0123456789abcdef0123456789abcdef java -Duser.home="$root" -Dgrimhollow.updateBootReview=true -Dgrimhollow.smokeDir=verification/interface/landscape -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-title
       - name: Painted interface in landscape and portrait
         if: ${{ !cancelled() && runner.os == 'Linux' }}
         shell: bash

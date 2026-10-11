@@ -1,9 +1,10 @@
-# Verified updates v1.30.0 - 2026-10-11
+# Verified updates v1.30.1 - 2026-10-11
 
 - Add home-screen/manual update checks, optional six-hour automatic checks, stable/playtest filtering, scrollable release notes, progress, cancellation and one-day deferral. Only signed releases from this repository are trusted; exact bytes, version, package identity, sizes, hashes and HTTPS redirects are checked before installation. No game mechanics, artwork or save identities change.
 - Windows installation stages outside the running application, retains its predecessor, backs up saves/preferences, restarts and rolls back a failed startup. Android uses a restricted single-APK content provider and the system installer, preserving this machine's existing certificate and refusing mismatched identities. Heavy verification/copying runs off the render thread. Development JARs and read-only installations cannot self-replace.
 - Version-tag CI publication depends on both desktop platforms, Android and all four class gates. Packages are signed and uploaded to a draft before publication; existing releases are never replaced. Configure four encrypted Actions signing secrets; private keys remain ignored and locally access-restricted. Legacy upstream remote clients stay disabled; test 46 permits only the new guarded transport.
 - Validation: 16 unit tests (eight updater safety tests), combined Runs=30 failures=0, and Windows/Android builds pass. Seven isolated Windows helper tests cover validation, malicious archives, checksum/version rejection, successful startup and failed-startup rollback. Native update notes/progress are reviewed in both orientations; physical tablet installation remains NOT RUN. An initial fixture compile error, PowerShell argument quoting error and portrait settings omission were corrected before final checks.
+- Startup readiness also accepts the healthy post-update welcome screen without waiting for Continue. The preliminary v1.30.0 tag is held unpublished; delivery uses a new v1.30.1 tag rather than replacing signed release history. GitHub denied workflow cancellation (HTTP 403); a private draft prevents preliminary publication through the existing release-overwrite safeguard.
 - Engineering correction: validate jpackage's shipped `runtime/bin/server/jvm.dll`, since its application image deliberately omits the standalone `java.exe`; accept Windows PowerShell's UTF-8 BOM in package metadata.
 
 # Cornered Horror and personal poster v1.29.18 - 2026-10-10
@@ -712,6 +713,7 @@
 - All 98 visible awards use distinct painted 64px medals with bronze/silver/gold/platinum/diamond rims and tier gems, retaining their 16-unit UI layout and unlock requirements.
 - Press Examine twice to lock inspection across tiles, shop goods and inventory; press again or Escape/Back from the dungeon to leave. Holding Examine still searches and spends its normal turn. Inspection cannot buy, use or pick up items and does not expose hidden traps.
 - Focus Crystal level 3/7 adds one/two cells to Grasp's existing sight-based reach; level 5/10 extends Glimpse from five to seven/nine turns. Far Reach still adds its own bonus and targets must be visible. Costs, charge growth and combat riders are unchanged.
+- Startup readiness also accepts the healthy post-update welcome screen without waiting for Continue. The preliminary v1.30.0 tag is held unpublished; delivery uses a new v1.30.1 tag rather than replacing signed release history. GitHub denied workflow cancellation (HTTP 403); a private draft prevents preliminary publication through the existing release-overwrite safeguard.
 - Engineering correction: the initially suggested four-cell Grasp baseline would have reduced its existing reach, so the approved utility growth preserves the existing sight-based baseline instead.
 
 # Sprouted plants, skill icons and persistent inscriptions - v1.7.0

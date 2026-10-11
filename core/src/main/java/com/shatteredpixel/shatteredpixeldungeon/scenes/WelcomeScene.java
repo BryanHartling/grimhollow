@@ -223,6 +223,12 @@ public class WelcomeScene extends PixelScene {
 		}
 	}
 
+    @Override public void update() {
+        super.update();
+        // A healthy post-update welcome screen must not wait for player input
+        // before acknowledging the external installer's startup check.
+        com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.startupHealthy();
+    }
 	private void updateVersion(int previousVersion){
 
 		//update rankings, to update any data which may be outdated

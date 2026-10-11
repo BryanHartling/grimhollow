@@ -20,7 +20,13 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.29.17","A better forge, a wandering appetite.");
+        ChangeInfo r=release(list,"v1.30.0","Updates delivered to your doorstep.");
+        note(r,Icons.CHANGES,"Grimhollow updates","Check published Grimhollow releases from the home screen or Settings. Read the changes, download in the game, and install when you are ready. Automatic checks and playtest releases can be toggled in Settings.");
+        note(r,Icons.INFO,"Careful installation","Downloads must match a signed release manifest. Installation backs up saved data. Windows keeps the previous application for rollback; Android verifies that the update belongs to this installation before opening its system installer.");
+        r=release(list,"v1.29.18","A cornered Horror fights back.");
+        note(r,Icons.JOURNAL,"Wanted by class","Hero Wanted posters now carry class-specific accusations and a larger matching portrait. Their archived copies preserve the same notice.");
+        note(r,Icons.INFO,"No easy corner","A trapped Lurking Horror defends itself against adjacent enemies, including your minions, and resumes its escape when a route opens.");
+        r=release(list,"v1.29.17","A better forge, a wandering appetite.");
         note(r,Icons.INFO,"The workshop","Paid blacksmith wand upgrades preserve existing resin. The smithy's quenching basin now sits on workshop paving, and targeting uses a smooth metal-ring mark.");
         note(r,Icons.JOURNAL,"Keep it fed, keep it close","Offer the Hatchling a meal from any of your bags, including ordinary valuable finds such as honey pots. Equipped gear, containers, quest belongings and class essentials remain protected. Unattended grazing still spares bag contents. Set it down and it will wait a while, then make for the stairs. Catch it before it slips away for good; recapture does not erase its appetite or remembered gold.");
         r=release(list,"v1.29.16","A name restored to the bounty board.");

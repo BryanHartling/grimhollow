@@ -25,6 +25,9 @@ class WindowsInstallerTest(unittest.TestCase):
         cls.exe = cls.root / 'FakeGame.exe'
         compiler = Path(os.environ['SystemRoot']) / 'Microsoft.NET/Framework64/v4.0.30319/csc.exe'
         subprocess.run([str(compiler), '/nologo', '/target:winexe', '/out:' + str(cls.exe), str(source)], check=True, capture_output=True)
+        source.write_text('class Test { static int Main() { System.IO.File.WriteAllText(System.Environment.GetEnvironmentVariable("GRIMHOLLOW_UPDATE_HEALTH_FILE"), System.Environment.GetEnvironmentVariable("GRIMHOLLOW_UPDATE_HEALTH_TOKEN")); return 0; } }', encoding='utf-8')
+        cls.healthy_exe = cls.root / 'HealthyGame.exe'
+        subprocess.run([str(compiler), '/nologo', '/target:winexe', '/out:' + str(cls.healthy_exe), str(source)], check=True, capture_output=True)
 
     @classmethod
     def tearDownClass(cls):
@@ -40,11 +43,11 @@ class WindowsInstallerTest(unittest.TestCase):
         (self.target / 'original.txt').write_text('old game')
         self.archive = self.cache / 'package-1018.zip'
 
-    def package(self, extra=None, version=1018):
+    def package(self, extra=None, version=1018, healthy=False):
         with zipfile.ZipFile(self.archive, 'w') as archive:
             archive.writestr('Grimhollow/update-package.json', json.dumps(dict(schema=1,versionCode=version,versionName='1.30.0',platform='windows-x64')))
-            archive.writestr('Grimhollow/Grimhollow.exe', self.exe.read_bytes())
-            archive.writestr('Grimhollow/runtime/bin/java.exe', b'fake runtime')
+            archive.writestr('Grimhollow/Grimhollow.exe', (self.healthy_exe if healthy else self.exe).read_bytes())
+            archive.writestr('Grimhollow/runtime/bin/server/jvm.dll', b'fake runtime')
             archive.writestr('Grimhollow/new.txt', b'new game')
             if extra:
                 for name in extra: archive.writestr(name,b'unsafe')
@@ -54,7 +57,10 @@ class WindowsInstallerTest(unittest.TestCase):
                    '-Target',str(self.target),'-Archive',str(self.archive),'-ExpectedSHA256',checksum or hashlib.sha256(self.archive.read_bytes()).hexdigest(),
                    '-VersionCode',str(code),'-ParentPid','999999','-StatusDirectory',str(self.cache)]
         if validate: command.append('-ValidateOnly')
-        return subprocess.run(command,capture_output=True,text=True,timeout=90)
+        result = subprocess.run(command,capture_output=True,text=True,timeout=90)
+        status = self.cache / 'install-status.json'
+        if status.exists(): result.stdout += status.read_text(encoding='utf-8-sig')
+        return result
 
     def unchanged(self):
         self.assertEqual((self.target / 'original.txt').read_text(),'old game')
@@ -79,5 +85,17 @@ class WindowsInstallerTest(unittest.TestCase):
         self.package();result=self.run_helper(validate=False);self.assertNotEqual(result.returncode,0);self.unchanged()
         status=json.loads((self.cache/'install-status.json').read_text(encoding='utf-8-sig'))
         self.assertEqual(status['phase'],'rolled-back',result.stdout+result.stderr)
+
+    def test_healthy_launch_keeps_previous_application_and_saves(self):
+        saved = self.case / 'saved-game'; saved.write_bytes(b'unchanged saved data')
+        self.package(healthy=True);result=self.run_helper(validate=False)
+        self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+        self.assertEqual((self.target/'new.txt').read_text(),'new game')
+        previous=list(self.case.glob('Grimhollow.previous-*'))
+        self.assertEqual(len(previous),1)
+        self.assertEqual((previous[0]/'original.txt').read_text(),'old game')
+        self.assertEqual(saved.read_bytes(),b'unchanged saved data')
+        status=json.loads((self.cache/'install-status.json').read_text(encoding='utf-8-sig'))
+        self.assertEqual(status['phase'],'complete')
 
 if __name__ == '__main__': unittest.main(verbosity=2)

@@ -87,7 +87,12 @@ def handlers(jar):
                 fetches.append(current+' -> '+owner+'.'+name)
             if name=='"<init>"' and owner in ('java/net/Socket','java/net/DatagramSocket','java/net/ServerSocket'):
                 fetches.append(current+' -> '+owner+'.'+name)
-    failures.extend(fetches)
+    approved_transport='com.shatteredpixel.shatteredpixeldungeon.services.updates.UpdateTransport'
+    failures.extend(f for f in fetches if not f.startswith(approved_transport+' -> '))
+    # The opt-in release updater is the only network client. It checks every redirect,
+    # verifies signed manifests, and is disabled by native smoke/review launchers.
+    if fetches and not all(f.startswith(approved_transport+' -> ') for f in fetches):
+        failures.append('Network request outside the guarded release updater')
     if opens!=['com.watabou.utils.PlatformSupport']:failures.append('Unexpected browser sink inventory '+str(opens))
     # These modules contain old upstream feed clients; they must not be packaged.
     if any(c.endswith(('.GitHubUpdates','.ShatteredNews','.DebugUpdates','.DebugNews')) for c in classes):

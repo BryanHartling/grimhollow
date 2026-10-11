@@ -27,9 +27,9 @@ def digest(path):
 
 
 def validate_windows(directory, code, version):
-    if not (directory / 'Grimhollow.exe').is_file() or not (directory / 'runtime/bin/java.exe').is_file():
+    if not (directory / 'Grimhollow.exe').is_file() or not (directory / 'runtime/bin/server/jvm.dll').is_file():
         raise ValueError('Incomplete Windows package')
-    details = json.loads((directory / 'update-package.json').read_text(encoding='utf-8'))
+    details = json.loads((directory / 'update-package.json').read_text(encoding='utf-8-sig'))
     if details != dict(schema=1, versionCode=code, versionName=version, platform='windows-x64'):
         raise ValueError('Windows package metadata mismatch')
     jars = list((directory / 'app').glob('desktop-*.jar'))
@@ -43,6 +43,11 @@ def validate_windows(directory, code, version):
 
 def build(directory, windows, apk, tag, private_file=None):
     code, version = metadata()
+    if not (windows / 'Grimhollow.exe').is_file():
+        matches = list(windows.rglob('Grimhollow.exe'))
+        if len(matches) != 1:
+            raise ValueError('Downloaded artifact does not contain one Windows application')
+        windows = matches[0].parent
     if tag != f'v{version}-autoupdate' and tag != f'v{version}' and not re.fullmatch(r'v' + re.escape(version) + r'-[a-z0-9-]+', tag):
         raise ValueError('Release tag must match the built version')
     validate_windows(windows, code, version)
@@ -58,7 +63,7 @@ def build(directory, windows, apk, tag, private_file=None):
     import shutil
     shutil.copyfile(apk, android)
     # This metadata is generated only in a job dependent on every acceptance job.
-    channel = os.environ.get('GRIMHOLLOW_RELEASE_CHANNEL', 'stable')
+    channel = os.environ.get('GRIMHOLLOW_RELEASE_CHANNEL', 'playtest' if tag.endswith('-playtest') else 'stable')
     if channel not in ('stable', 'playtest'):
         raise ValueError('Invalid release channel')
     assets = {}

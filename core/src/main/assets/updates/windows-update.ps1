@@ -38,7 +38,11 @@ try {
     if (!(Test-Path -LiteralPath (Join-Path $targetPath 'Grimhollow.exe')) -or !(Test-Path -LiteralPath (Join-Path $targetPath 'update-package.json'))) { throw 'Incomplete current application' }
     if ($archivePath -ne (Join-Path $statusPath ('package-'+$VersionCode+'.zip'))) { throw 'Archive is outside the update cache' }
     if ([IO.File]::GetAttributes($targetPath) -band [IO.FileAttributes]::ReparsePoint) { throw 'Application junctions cannot be updated safely' }
-    if ((Get-FileHash -LiteralPath $archivePath -Algorithm SHA256).Hash.ToLowerInvariant() -ne $ExpectedSHA256) { throw 'Package checksum mismatch' }
+    $hashStream = [IO.File]::OpenRead($archivePath)
+    $hasher = [Security.Cryptography.SHA256]::Create()
+    try { $actualHash = [BitConverter]::ToString($hasher.ComputeHash($hashStream)).Replace('-','').ToLowerInvariant() }
+    finally { $hashStream.Dispose(); $hasher.Dispose() }
+    if ($actualHash -ne $ExpectedSHA256) { throw 'Package checksum mismatch' }
     $current = Get-Content -LiteralPath (Join-Path $targetPath 'update-package.json') -Raw | ConvertFrom-Json
     if ($current.versionCode -ge $VersionCode) { throw 'Refusing a downgrade or reinstall' }
     $checkedStage = Checked-Sibling $stagePath
@@ -53,6 +57,9 @@ try {
             $relative = $entry.FullName.Replace('/', '\')
             if (!$relative.StartsWith('Grimhollow\') -or $relative.Contains(':') -or $relative.Contains('..') -or
                 $relative.Contains([char]0) -or !$seen.Add($relative)) { throw 'Unsafe or duplicate ZIP entry' }
+            foreach ($part in $relative.Split('\')) {
+                if ($part -match '^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(\..*)?$' -or $part.EndsWith('.') -or $part.EndsWith(' ')) { throw 'Unsafe Windows filename' }
+            }
             $mode = ($entry.ExternalAttributes -shr 16) -band 0xF000
             if ($mode -eq 0xA000) { throw 'Archive symlinks are forbidden' }
             $expanded += $entry.Length
@@ -70,7 +77,7 @@ try {
     $newApp = Join-Path $checkedStage 'Grimhollow'
     $new = Get-Content -LiteralPath (Join-Path $newApp 'update-package.json') -Raw | ConvertFrom-Json
     if ($new.schema -ne 1 -or $new.platform -ne 'windows-x64' -or $new.versionCode -ne $VersionCode -or
-        !(Test-Path -LiteralPath (Join-Path $newApp 'Grimhollow.exe')) -or !(Test-Path -LiteralPath (Join-Path $newApp 'runtime/bin/java.exe'))) { throw 'Invalid extracted application' }
+        !(Test-Path -LiteralPath (Join-Path $newApp 'Grimhollow.exe')) -or !(Test-Path -LiteralPath (Join-Path $newApp 'runtime/bin/server/jvm.dll'))) { throw 'Invalid extracted application' }
     if ($ValidateOnly) { Status 'validated' 'Package validated without replacing or launching the application.'; exit 0 }
     $old = Get-Process -Id $ParentPid -ErrorAction SilentlyContinue
     if ($old -and !$old.WaitForExit(90000)) { throw 'The game did not exit; installation cancelled' }
@@ -111,6 +118,7 @@ try {
     } else { Status 'failed' ('Current application unchanged: '+$failure) }
     exit 1
 } finally {
+    Remove-Item Env:GRIMHOLLOW_UPDATE_HEALTH_FILE,Env:GRIMHOLLOW_UPDATE_HEALTH_TOKEN -ErrorAction SilentlyContinue
     $checkedStage = Checked-Sibling $stagePath
     if (Test-Path -LiteralPath $checkedStage) { Remove-Item -LiteralPath $checkedStage -Recurse -Force }
 }

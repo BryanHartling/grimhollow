@@ -8,6 +8,7 @@
 	<uses-permission android:name="android.permission.VIBRATE" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
 	<!-- Hilariously small screens still exist but are usually high enough DPI to work now -->
 	<supports-screens
@@ -26,6 +27,10 @@
 		android:allowBackup="true"
 		android:fullBackupOnly="true"
 		android:backupAgent=".AndroidBackupHandler">
+		<provider android:name=".UpdatePackageProvider" android:authorities="${applicationId}.updates"
+			android:exported="false" android:grantUriPermissions="true">
+			<grant-uri-permission android:path="/install.apk" />
+		</provider>
 		<activity
 			android:name=".AndroidLauncher"
 			android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"

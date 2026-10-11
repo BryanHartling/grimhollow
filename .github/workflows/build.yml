@@ -75,6 +75,7 @@ jobs:
           for orientation in landscape portrait; do
             portrait=false
             if [ "$orientation" = portrait ]; then portrait=true; fi
+            xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-updates-$orientation" -Dgrimhollow.updateReview=true -Dgrimhollow.interfacePortrait=$portrait -Dgrimhollow.smokeDir="verification/interface/$orientation" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-title
             xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-ui-$orientation" -Dgrimhollow.interfaceReview=true -Dgrimhollow.interfacePortrait=$portrait -Dgrimhollow.smokeDir="verification/interface/$orientation" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
             xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-rooms-$orientation" -Dgrimhollow.interfaceReview=true -Dgrimhollow.roomReview=true -Dgrimhollow.interfacePortrait=$portrait -Dgrimhollow.smokeDir="verification/interface/$orientation" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
             xvfb-run -a java -Duser.home="$RUNNER_TEMP/grimhollow-expedition-$orientation" -Dgrimhollow.interfaceReview=true -Dgrimhollow.expeditionReview=true -Dgrimhollow.interfacePortrait=$portrait -Dgrimhollow.smokeDir="verification/interface/$orientation" -jar "$(find desktop/build/libs -name 'desktop-*.jar' -print -quit)" --smoke-sewers
@@ -284,7 +285,6 @@ jobs:
       - name: Build and sign release manifest and packages
         env:
           GRIMHOLLOW_UPDATE_PRIVATE_KEY_B64: ${{ secrets.GRIMHOLLOW_UPDATE_PRIVATE_KEY_B64 }}
-          GRIMHOLLOW_RELEASE_CHANNEL: stable
           GRIMHOLLOW_RELEASE_NOTES: In-game updates, verified downloads, persistent Android signing, and guarded Windows installation with rollback.
         run: python tools/updates/release.py build --directory release-output --windows release-input/windows --apk release-input/android/android-update.apk --tag "$GITHUB_REF_NAME"
       - name: Publish all assets together from a draft
@@ -297,5 +297,8 @@ jobs:
             echo '::error::This release already exists. Use a new version instead of replacing signed assets.'
             exit 1
           fi
-          gh release create "$GITHUB_REF_NAME" release-output/* --draft --verify-tag --repo "$GITHUB_REPOSITORY" --title "Grimhollow ${GITHUB_REF_NAME}" --notes-file release-output/release-notes.md
-          gh release edit "$GITHUB_REF_NAME" --draft=false --latest --repo "$GITHUB_REPOSITORY"
+          flags=()
+          latest=true
+          if [[ "$GITHUB_REF_NAME" == *-playtest ]]; then flags=(--prerelease); latest=false; fi
+          gh release create "$GITHUB_REF_NAME" release-output/* --draft --verify-tag "${flags[@]}" --repo "$GITHUB_REPOSITORY" --title "Grimhollow ${GITHUB_REF_NAME}" --notes-file release-output/release-notes.md
+          gh release edit "$GITHUB_REF_NAME" --draft=false --latest="$latest" --repo "$GITHUB_REPOSITORY"

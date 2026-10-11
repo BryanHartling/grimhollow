@@ -10,4 +10,6 @@ To provision Actions secrets, use `provision.py` with PyNaCl available and `GRIM
 
 Windows installation is limited to a complete, writable packaged application, not development jars. An external helper validates the archive again, extracts within a checked sibling directory, waits for the old process to exit, keeps the previous application, and rolls back if the new launch never confirms a healthy home screen. Saves and preferences live separately and are backed up before installation; code rollback does not silently overwrite newer save data. Interrupted downloads never become installable. Network errors leave the current game usable.
 
+Install the first updater-enabled release manually. The default channel is stable; tags ending in `-playtest` publish prereleases that appear only when the Data settings allow them. Automatic checks run at home no more than once per six hours, respect the unmetered-network setting, and can be disabled. Later defers reminders for 24 hours. Manual checks and cached verified installations remain available. Linux builds retain their existing manual distribution.
+
 The historical network audit now permits only the guarded update transport; legacy SPD update/news clients stay disabled. Native smoke/review launchers disable all updater traffic. No art, gameplay, generation or balance changes belong to this component.

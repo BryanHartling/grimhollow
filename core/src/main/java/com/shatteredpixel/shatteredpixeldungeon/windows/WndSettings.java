@@ -799,6 +799,7 @@ public class WndSettings extends WndTabbed {
 		CheckBox chkUpdates;
 		CheckBox chkBetas;
 		CheckBox chkWifi;
+		RedButton btnUpdateCheck;
 
 		@Override
 		protected void createChildren() {
@@ -820,30 +821,35 @@ public class WndSettings extends WndTabbed {
 			chkNews.checked(SPDSettings.news());
 			add(chkNews);
 
-			if (Updates.supportsUpdates() && Updates.supportsUpdatePrompts()) {
+			if (com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.supported()) {
 				chkUpdates = new CheckBox(Messages.get(this, "updates")) {
 					@Override
 					protected void onClick() {
 						super.onClick();
 						SPDSettings.updates(checked());
-						Updates.clearUpdate();
+						com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.channelChanged();
 					}
 				};
 				chkUpdates.checked(SPDSettings.updates());
 				add(chkUpdates);
 
-				if (Updates.supportsBetaChannel()){
+				{
 					chkBetas = new CheckBox(Messages.get(this, "betas")) {
 						@Override
 						protected void onClick() {
+							if (com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.working()) return;
 							super.onClick();
 							SPDSettings.betas(checked());
-							Updates.clearUpdate();
+							com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.channelChanged();
 						}
 					};
 					chkBetas.checked(SPDSettings.betas());
 					add(chkBetas);
 				}
+				btnUpdateCheck = new RedButton("Check for updates") {
+					@Override protected void onClick() { com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.open(); }
+				};
+				add(btnUpdateCheck);
 			}
 
 			if (!DeviceCompat.isDesktop()){
@@ -887,6 +893,10 @@ public class WndSettings extends WndTabbed {
 			if (chkWifi != null){
 				chkWifi.setRect(0, pos + GAP, width, BTN_HEIGHT);
 				pos = chkWifi.bottom();
+			}
+			if (btnUpdateCheck != null) {
+				btnUpdateCheck.setRect(0, pos + GAP, width, BTN_HEIGHT);
+				pos = btnUpdateCheck.bottom();
 			}
 
 			height = pos;

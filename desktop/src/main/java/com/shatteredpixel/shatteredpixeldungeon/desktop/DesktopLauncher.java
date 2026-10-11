@@ -128,6 +128,8 @@ public class DesktopLauncher {
 		}
 
 		Updates.service = null;
+		if (!smoke && System.getProperty("os.name", "").startsWith("Windows"))
+			com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.initialize(new WindowsUpdateInstaller());
 		News.service = null;
 		
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
@@ -169,7 +171,7 @@ public class DesktopLauncher {
 		if (smoke) System.out.println("PREFERENCES_PATH=" + new Lwjgl3FileHandle(basePath, baseFileType).file().getAbsolutePath());
 		SPDSettings.set( new Lwjgl3Preferences( new Lwjgl3FileHandle(basePath + SPDSettings.DEFAULT_PREFS_FILE, baseFileType) ));
 		FileUtils.setDefaultFileProperties( baseFileType, basePath );
-		if(smoke && (Boolean.getBoolean("grimhollow.interfaceReview") || Boolean.getBoolean("grimhollow.presentationReview"))) {
+        if(smoke && (Boolean.getBoolean("grimhollow.interfaceReview") || Boolean.getBoolean("grimhollow.presentationReview") || Boolean.getBoolean("grimhollow.updateReview"))) {
 			SPDSettings.put(SPDSettings.KEY_FULLSCREEN,false);
 			SPDSettings.windowResolution(Boolean.getBoolean("grimhollow.interfacePortrait")?new Point(720,1080):new Point(1280,720));
 			SPDSettings.windowMaximized(false);

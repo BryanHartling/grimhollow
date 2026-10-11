@@ -29,6 +29,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
 /** Opt-in launch diagnostic: renders real OpenGL frames, writes evidence, exits. */
 final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private final boolean sewers;
+    private final boolean updateReview=Boolean.getBoolean("grimhollow.updateReview");
     private final boolean vault=Boolean.getBoolean("grimhollow.vault");
     private final boolean encounters=Boolean.getBoolean("grimhollow.encounterTests");
     private final boolean interfaceReview=Boolean.getBoolean("grimhollow.interfaceReview");
@@ -88,6 +89,10 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     DesktopSmokeProbe(boolean sewers) {
         super(new DesktopPlatformSupport());
         this.sewers=sewers;
+        if(updateReview)com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.initialize(new com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.Installer() {
+            public String platform(){return "windows-x64";} public int androidApi(){return 0;}
+            public String install(java.io.File file,com.shatteredpixel.shatteredpixeldungeon.services.updates.ReleaseInfo release){throw new IllegalStateException("UI review cannot install an update");}
+        });
         sceneClass=TitleScene.class;
     }
     @Override public void create() {
@@ -97,6 +102,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         // A fresh isolated settings directory defaults to the sealed tutorial room.
         // Encounter coverage requires an ordinary generated dungeon, like the saved run.
         if(encounters||interfaceReview||presentationReview)SPDSettings.intro(false);
+        if(updateReview)SPDSettings.updates(false);
     }
     private void capture(String name) {
         Pixmap screenshot=Pixmap.createFromFrameBuffer(0,0,Gdx.graphics.getBackBufferWidth(),Gdx.graphics.getBackBufferHeight());
@@ -108,6 +114,34 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     @Override public void render() {
         super.render();
         frames++;
+        if(updateReview) {
+            if(frames==100) {
+                try {
+                    java.security.KeyPairGenerator generator=java.security.KeyPairGenerator.getInstance("RSA");generator.initialize(2048);java.security.KeyPair pair=generator.generateKeyPair();
+                    String raw="{\"schema\":1,\"repository\":\"bryanhartling/grimhollow\",\"tag\":\"v1.30.1\",\"versionName\":\"1.30.1\",\"versionCode\":1019,\"channel\":\"stable\",\"minAndroid\":21,\"assets\":{\"windows-x64\":{\"name\":\"grimhollow-windows-x64.zip\",\"url\":\"https://github.com/bryanhartling/grimhollow/releases/download/v1.30.1/grimhollow-windows-x64.zip\",\"size\":3,\"sha256\":\"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\"}}}";
+                    byte[] bytes=raw.getBytes(java.nio.charset.StandardCharsets.UTF_8);java.security.Signature signature=java.security.Signature.getInstance("SHA256withRSA");signature.initSign(pair.getPrivate());signature.update(bytes);
+                    String notes="UI review fixture. Installation is disabled.\n\n"+"Release notes remain readable by scrolling while the download controls stay visible.\n\n".repeat(35);
+                    com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.release=com.shatteredpixel.shatteredpixeldungeon.services.updates.ReleaseInfo.verify(bytes,java.util.Base64.getEncoder().encode(signature.sign()),pair.getPublic().getEncoded(),"v1.30.1","windows-x64",notes);
+                    com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.state=com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.State.AVAILABLE;
+                    com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.open();
+                }catch(Exception e){throw new AssertionError(e);}
+            }
+            if(frames==115) {
+                com.shatteredpixel.shatteredpixeldungeon.windows.WndUpdater window=null;
+                for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndUpdater)window=(com.shatteredpixel.shatteredpixeldungeon.windows.WndUpdater)child;
+                if(window==null || window.camera.width>com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.uiCamera.width || window.camera.height>com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.uiCamera.height)throw new AssertionError("Update prompt leaves the screen");
+                com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.ScrollPane)RecoveryChecks.field(window,"scroll");
+                if(pane.content().height()<=pane.height())throw new AssertionError("Release notes are not scrollable");
+                capture("update-prompt");
+                com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.state=com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.State.DOWNLOADING;
+                com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.downloaded=2;
+            }
+            if(frames==125) {
+                capture("update-progress");
+                System.out.println("UPDATE UI: signed display fixture, scrollable notes, progress, offline review; failures=0");Gdx.app.exit();
+            }
+            return;
+        }
         if(interfaceReview && Game.scene() instanceof InterlevelScene && InterlevelScene.lastRegion>0
                 && !loadingCaptures.contains(InterlevelScene.lastRegion)){
             Image painting=(Image)RecoveryChecks.field(Game.scene(),"background");

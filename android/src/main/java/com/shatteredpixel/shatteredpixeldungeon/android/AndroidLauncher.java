@@ -90,6 +90,7 @@ public class AndroidLauncher extends AndroidApplication {
 
 			Gdx.app = this;
 			Updates.service = null;
+			com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.initialize(new AndroidUpdateInstaller());
 			News.service = null;
 
 			FileUtils.setDefaultFileProperties(Files.FileType.Local, "");

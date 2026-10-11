@@ -70,7 +70,8 @@ final class RecoveryChecks {
             journal.create();journal.destroy();
             if(opened.size()!=4)throw new AssertionError("Journal navigates externally");
             if(com.shatteredpixel.shatteredpixeldungeon.services.news.News.service!=null
-                    ||com.shatteredpixel.shatteredpixeldungeon.services.updates.Updates.service!=null)
+                    ||com.shatteredpixel.shatteredpixeldungeon.services.updates.Updates.service!=null
+                    ||com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.supported())
                 throw new AssertionError("A network feed service is active");
             System.out.println("TEST 46 runtime: title controls=6 credits handlers=4 repository URLs=4 external opens=0 scene fetches=0 failures=0");
         } catch(Exception e){throw new AssertionError(e);}

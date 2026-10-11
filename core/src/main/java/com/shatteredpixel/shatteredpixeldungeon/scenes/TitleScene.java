@@ -74,6 +74,7 @@ public class TitleScene extends PixelScene {
 	private BitmapText version;
 	private IconButton btnFade;
 	private ExitButton btnExit;
+	private IconButton btnUpdate;
 
 	@Override
 	public void create() {
@@ -215,6 +216,13 @@ public class TitleScene extends PixelScene {
 		version.x = insets.left + w - version.width() - (DeviceCompat.isDesktop() ? 4 : 8);
 		version.y = insets.top + h - version.height() - (DeviceCompat.isDesktop() ? 2 : 4);
 		add( version );
+		if (com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.supported()) {
+			btnUpdate = new IconButton(Icons.get(Icons.CHANGES)) {
+				@Override protected void onClick() { com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.open(); }
+			};
+			btnUpdate.setRect(insets.left + 3, version.y - 5, 20, 16);
+			add(btnUpdate);
+		}
 
 		btnFade = new IconButton(Icons.CHEVRON.get()){
 			@Override
@@ -269,6 +277,17 @@ public class TitleScene extends PixelScene {
 
 	private float uiAlpha;
 
+	@Override public void update() {
+		super.update();
+		boolean mayPrompt = uiAlpha > .9f;
+		for (com.watabou.noosa.Gizmo child : members) if (child instanceof com.shatteredpixel.shatteredpixeldungeon.ui.Window) mayPrompt = false;
+		com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.home(mayPrompt);
+		if (btnUpdate != null) {
+			boolean available = com.shatteredpixel.shatteredpixeldungeon.services.updates.GameUpdates.release != null;
+			if (available) btnUpdate.icon().hardlight(0xE6BD75); else btnUpdate.icon().resetColor();
+		}
+	}
+
 	public void updateFade() {
 		float alpha = GameMath.gate(0f, uiAlpha, 1f);
 
@@ -291,6 +310,7 @@ public class TitleScene extends PixelScene {
 		btnPlaytest.alpha(alpha);
 
 		version.alpha(alpha);
+		if (btnUpdate != null) { btnUpdate.enable(alpha != 0); btnUpdate.icon().alpha(alpha); }
 		btnFade.icon().alpha(alpha);
 		if (btnExit != null){
 			btnExit.enable(alpha != 0);

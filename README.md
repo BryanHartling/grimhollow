@@ -1,3 +1,11 @@
+# Verified in-game updates - v1.30.0
+
+The home-screen update icon and Settings > Data > Check for updates open a native download dialog with scrolling release notes. Automatic checks run at most every six hours while at home; Later delays reminders for a day. Stable releases are the default, with optional playtest releases in Data settings. Downloads can be cancelled and never interrupt a run. Installation is available only from the home screen after normal saving.
+
+Windows keeps the previous complete application, backs up saves/preferences, and rolls back if the new launcher fails its startup check. Android verifies the app identity, version and existing signing certificate before opening its system installer. Signed manifests and package hashes reject altered downloads, wrong repositories and downgrades. Version tags publish complete releases only after all existing CI gates pass; signing keys and credentials stay outside the repository.
+
+Install this version manually once to enable future in-game updates. Windows: `desktop/build/windows/1.30.0/Grimhollow/Grimhollow.exe` (keep the entire folder). Android delivery: `android/build/outputs/apk/update/android-update.apk` (`1.30.0`, version code 1018). Use delivery APKs for updates; ephemeral CI debug APKs may use a different certificate. An incompatible certificate is refused without deleting saved games. See `tools/updates/README.md` for release operations and safeties.
+
 # Cornered Horror and personal posters - v1.29.18
 
 Fleeing Horrors check real escape routes and defend themselves against adjacent pursuers when trapped, including raised servants. Opening the route lets them flee again. Their regional stats, ambush warning and recovery limits are unchanged.

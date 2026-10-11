@@ -32,6 +32,9 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: ./tools/package-windows.ps1
+      - name: Update helper validation and rollback safeguards
+        if: runner.os == 'Windows'
+        run: python tools/updates/test_windows.py
       # Recovery supersedes generated-art tests 3/4/17/18/28-30/35/39-42.
       # Their implementations and historical evidence remain in the repository.
       # Painted world sources are committed; CI verifies the offline packer too.
@@ -129,6 +132,40 @@ jobs:
       - name: Install compile SDK and build tools
         run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0'
       - run: ./gradlew android:assembleDebug --no-daemon --console=plain
+      - name: Prepare the persistent Android signing identity
+        env:
+          KEYSTORE_B64: ${{ secrets.GRIMHOLLOW_ANDROID_KEYSTORE_B64 }}
+          STORE_PASSWORD: ${{ secrets.GRIMHOLLOW_ANDROID_STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.GRIMHOLLOW_ANDROID_KEY_PASSWORD }}
+        shell: bash
+        run: |
+          if [ -z "$KEYSTORE_B64" ] || [ -z "$STORE_PASSWORD" ] || [ -z "$KEY_PASSWORD" ]; then
+            if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+              echo '::error::Update release signing secrets are missing; refusing to publish an incompatible APK.'
+              exit 1
+            fi
+            echo 'Signed update APK not built: signing secrets are not configured.'
+            exit 0
+          fi
+          python -c 'import base64,os,pathlib; pathlib.Path(os.environ["RUNNER_TEMP"],"grimhollow.p12").write_bytes(base64.b64decode(os.environ["KEYSTORE_B64"],validate=True))'
+          echo "GRIMHOLLOW_ANDROID_KEYSTORE=$RUNNER_TEMP/grimhollow.p12" >> "$GITHUB_ENV"
+      - name: Build and verify the update APK
+        if: env.GRIMHOLLOW_ANDROID_KEYSTORE != ''
+        env:
+          GRIMHOLLOW_ANDROID_STORE_PASSWORD: ${{ secrets.GRIMHOLLOW_ANDROID_STORE_PASSWORD }}
+          GRIMHOLLOW_ANDROID_KEY_PASSWORD: ${{ secrets.GRIMHOLLOW_ANDROID_KEY_PASSWORD }}
+        shell: bash
+        run: |
+          ./gradlew android:assembleUpdate --no-daemon --console=plain
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs android/build/outputs/apk/update/android-update.apk > "$RUNNER_TEMP/apk-cert.txt"
+          python -c 'import pathlib,re,os; expected=pathlib.Path("tools/updates/android-cert.sha256").read_text().strip(); actual=re.search(r"Signer #1 certificate SHA-256 digest: ([0-9a-f]+)",pathlib.Path(os.environ["RUNNER_TEMP"],"apk-cert.txt").read_text())[1]; assert actual==expected,"Android signing identity differs from installed local builds"'
+      - uses: actions/upload-artifact@v4
+        if: env.GRIMHOLLOW_ANDROID_KEYSTORE != ''
+        with:
+          name: grimhollow-android-update
+          path: android/build/outputs/apk/update/android-update.apk
+          if-no-files-found: error
+          retention-days: 14
       - uses: actions/upload-artifact@v4
         with:
           name: grimhollow-android-debug
@@ -218,3 +255,47 @@ jobs:
           name: grimhollow-psychic-logs
           path: core/build/reports/smoke/
           retention-days: 14
+
+  publish-update:
+    name: Publish verified update release
+    needs: [desktop, android, headless-smoke, necromancer-smoke, enchanter-smoke, psychic-smoke]
+    if: startsWith(github.ref, 'refs/tags/v') && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    concurrency:
+      group: publish-${{ github.ref }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install cryptography==50.0.2
+      - uses: actions/download-artifact@v4
+        with:
+          name: grimhollow-windows-app
+          path: release-input/windows
+      - uses: actions/download-artifact@v4
+        with:
+          name: grimhollow-android-update
+          path: release-input/android
+      - name: Build and sign release manifest and packages
+        env:
+          GRIMHOLLOW_UPDATE_PRIVATE_KEY_B64: ${{ secrets.GRIMHOLLOW_UPDATE_PRIVATE_KEY_B64 }}
+          GRIMHOLLOW_RELEASE_CHANNEL: stable
+          GRIMHOLLOW_RELEASE_NOTES: In-game updates, verified downloads, persistent Android signing, and guarded Windows installation with rollback.
+        run: python tools/updates/release.py build --directory release-output --windows release-input/windows --apk release-input/android/android-update.apk --tag "$GITHUB_REF_NAME"
+      - name: Publish all assets together from a draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          # Never replace an existing release or redirect latest to an incomplete draft.
+          if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo '::error::This release already exists. Use a new version instead of replacing signed assets.'
+            exit 1
+          fi
+          gh release create "$GITHUB_REF_NAME" release-output/* --draft --verify-tag --repo "$GITHUB_REPOSITORY" --title "Grimhollow ${GITHUB_REF_NAME}" --notes-file release-output/release-notes.md
+          gh release edit "$GITHUB_REF_NAME" --draft=false --latest --repo "$GITHUB_REPOSITORY"

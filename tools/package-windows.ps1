@@ -24,4 +24,8 @@ Copy-Item -LiteralPath $jar.FullName -Destination $inputDir
     --input $inputDir --main-jar $jar.Name --dest $destination --vendor Grimhollow `
     --icon (Join-Path $projectRoot 'desktop/src/main/assets/icons/windows.ico')
 if ($LASTEXITCODE -ne 0) { throw "jpackage failed: $LASTEXITCODE" }
+$buildSettings = Get-Content -LiteralPath (Join-Path $projectRoot 'build.gradle') -Raw
+$versionCode = [int]([regex]::Match($buildSettings, 'appVersionCode = (\d+)').Groups[1].Value)
+@{schema=1;versionCode=$versionCode;versionName=$version;platform='windows-x64'} | ConvertTo-Json -Compress |
+    Set-Content -LiteralPath (Join-Path $application 'update-package.json') -Encoding utf8
 Write-Output (Join-Path $application 'Grimhollow.exe')

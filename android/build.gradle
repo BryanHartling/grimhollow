@@ -23,11 +23,29 @@ android {
         targetSdkVersion appAndroidTargetSDK
     }
 
+    signingConfigs {
+        updateRelease {
+            if (System.getenv('GRIMHOLLOW_ANDROID_KEYSTORE')) {
+                storeFile file(System.getenv('GRIMHOLLOW_ANDROID_KEYSTORE'))
+                storePassword System.getenv('GRIMHOLLOW_ANDROID_STORE_PASSWORD')
+                keyAlias 'androiddebugkey'
+                keyPassword System.getenv('GRIMHOLLOW_ANDROID_KEY_PASSWORD')
+            }
+        }
+    }
+
     buildTypes {
         debug {
             versionNameSuffix '-INDEV'
         }
+        update {
+            initWith debug
+            debuggable false
+            versionNameSuffix ''
+            if (System.getenv('GRIMHOLLOW_ANDROID_KEYSTORE')) signingConfig signingConfigs.updateRelease
+        }
         release {
+            if (System.getenv('GRIMHOLLOW_ANDROID_KEYSTORE')) signingConfig signingConfigs.updateRelease
 
             //These lines enable R8, which is a code shrinker/optimizer/obfuscator.
             //This makes release APKs smaller and more efficient, but also makes debugging trickier

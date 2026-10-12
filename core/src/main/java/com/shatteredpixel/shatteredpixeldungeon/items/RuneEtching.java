@@ -7,11 +7,12 @@ import com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.MeleeWeapon;
 import com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.*;
+import com.shatteredpixel.shatteredpixeldungeon.messages.Messages;
 import com.shatteredpixel.shatteredpixeldungeon.sprites.ItemSpriteSheet;
 import com.watabou.utils.*;
 import java.util.ArrayList;
 
-/** Independent category-bound runes, each banking at most one paid carrier upgrade. */
+/** Independent category-bound runes, banking paid upgrades up to the hero's transfer capacity. */
 public class RuneEtching extends Item {
     public static boolean equipping;
     public static final Class<?>[] FLOOR_ENCHANTS={Blazing.class,Shocking.class,Chilling.class,Kinetic.class,Lucky.class,Blooming.class};
@@ -22,6 +23,18 @@ public class RuneEtching extends Item {
     public RuneEtching() {}
     public RuneEtching(boolean armor){armorMode=armor;}
     public boolean armorMode(){return armorMode;}
+    public static int upgradeCapacity(Hero hero){
+        if(hero==null || hero.lvl<5)return 0;
+        return hero.lvl<15?1:hero.lvl<25?2:3;
+    }
+    public void bankUpgrade(){
+        // Only a new paid upgrade can enter the rune; existing equipment levels are never absorbed.
+        if(level()<upgradeCapacity(Dungeon.hero))level(level()+1);
+    }
+    public String attachmentDescription(boolean armor){
+        return Messages.get(this,"attached",armor?floorGlyph.name():floorEnchant.name(),level())
+                +"\n"+Messages.get(this,"capacity",upgradeCapacity(Dungeon.hero));
+    }
     public void roll(){
         floorEnchant=(Weapon.Enchantment)Reflection.newInstance(Random.element(FLOOR_ENCHANTS));
         floorGlyph=Armor.Glyph.randomCommon();
@@ -63,8 +76,11 @@ public class RuneEtching extends Item {
         return item instanceof Weapon?((Weapon)item).runeEtching:item instanceof Armor?((Armor)item).runeEtching:null;
     }
     public static boolean canEtch(Hero hero,Item item){
-        return item!=null && (item instanceof MeleeWeapon || item instanceof Armor)
-                && item.isEquipped(hero) && attached(item)==null && find(hero,item instanceof Armor)!=null;
+        if(hero==null || item==null || !(item instanceof MeleeWeapon || item instanceof Armor)
+                || !item.isEquipped(hero) || attached(item)!=null)return false;
+        RuneEtching rune=find(hero,item instanceof Armor);
+        // Preserve already paid levels in old saves or after Playtest lowers the hero's level.
+        return rune!=null && rune.level()<=upgradeCapacity(hero);
     }
     public static boolean etch(Hero hero,Item next){
         if(!canEtch(hero,next))return false;
@@ -91,7 +107,7 @@ public class RuneEtching extends Item {
         // This mandatory attachment must survive a full pack when its carrier is lost.
         if(!rune.collect())Dungeon.hero.belongings.backpack.items.add(rune);
     }
-    @Override public String info(){return super.info()+"\n\n"+floorEnchant.name()+": "+floorEnchant.desc()+"\n\n"+floorGlyph.name()+": "+floorGlyph.desc();}
+    @Override public String info(){return super.info()+"\n\n"+Messages.get(this,"capacity",upgradeCapacity(Dungeon.hero))+"\n\n"+floorEnchant.name()+": "+floorEnchant.desc()+"\n\n"+floorGlyph.name()+": "+floorGlyph.desc();}
     @Override public void storeInBundle(Bundle b){super.storeInBundle(b);b.put("floor_enchant",floorEnchant);b.put("floor_glyph",floorGlyph);b.put("armor_mode",armorMode);}
     @Override public void restoreFromBundle(Bundle b){
         super.restoreFromBundle(b);

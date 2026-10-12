@@ -1111,7 +1111,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         }else if(frames==540){
             if(Dungeon.hero.belongings.armor.runeEtching==null || ((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)Dungeon.hero.belongings.weapon).runeEtching==null || Dungeon.hero.belongings.armor.runeEtching==((com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon)Dungeon.hero.belongings.weapon).runeEtching)throw new AssertionError("37: Etch picker did not attach armor rune");
             String text=Dungeon.hero.belongings.armor.info();
-            if(!text.contains("Rune Etching:")||!text.contains("travels with the rune")||text.contains("%1$s")||text.contains("%2$d"))throw new AssertionError("37: rendered armor description identity or placeholders");
+            if(!text.contains("Rune Etching:")||!text.contains("travels with the rune")
+                    ||!text.contains("Current upgrade-transfer capacity: _"+com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching.upgradeCapacity(Dungeon.hero)+"_")
+                    ||!text.contains("hero level 5, two at 15, and three at 25")||text.contains("%1$s")||text.contains("%2$d"))throw new AssertionError("37: rendered armor description identity, progression or placeholders");
             GameScene.show(new com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoItem(Dungeon.hero.belongings.armor));
         }else if(frames==570){
             interfaceBounds();capture("polish-armor-etch-description");

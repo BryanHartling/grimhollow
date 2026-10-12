@@ -419,7 +419,7 @@ abstract public class Weapon extends KindOfWeapon {
 		
 		cursed = false;
 
-		if(runeEtching!=null&&runeEtching.level()==0)runeEtching.level(1);
+		if(runeEtching!=null)runeEtching.bankUpgrade();
         return super.upgrade();
 	}
 	

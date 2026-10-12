@@ -109,10 +109,75 @@ public class SmokeRun {
                 String info=carrier.info();
                 check(info.contains("Rune Etching: "+name)
                         && info.contains("strength travels with the rune")
+                        && info.contains("Current upgrade-transfer capacity: _"+RuneEtching.upgradeCapacity(Dungeon.hero)+"_")
                         && info.contains("25% class bonus") && !info.contains("%1$s") && !info.contains("%2$d")
                         && !info.contains("25%%"),"37: Rune Etching description resolves its live effect, upgrade and class bonus");
             }
         } finally {rune.floorEnchant=previous;rune.floorGlyph=previousGlyph;}
+    }
+
+    private static void etchingProgressionScenario(){
+        Hero originalHero=Dungeon.hero;
+        try {
+            int[] levels={1,4,5,7,14,15,16,24,25,30},capacities={0,0,1,1,1,2,2,2,3,3};
+            check(RuneEtching.upgradeCapacity(null)==0,"37: no owner cannot bank upgrades");
+            for(boolean armor:new boolean[]{false,true})for(int i=0;i<levels.length;i++){
+                Hero hero=new Hero();hero.heroClass=HeroClass.ENCHANTER;hero.lvl=levels[i];Dungeon.hero=hero;
+                Talent.initClassTalents(hero);
+                Item source=armor?new ClothArmor():new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger();
+                Item next=armor?new ClothArmor():new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger();
+                source.level(2);next.level(3);source.identify();next.identify();
+                RuneEtching rune=new RuneEtching(armor);
+                if(armor){((Armor)source).runeEtching=rune;hero.belongings.armor=(Armor)source;}
+                else{((Weapon)source).runeEtching=rune;hero.belongings.weapon=(Weapon)source;}
+                check(rune.level()==0&&RuneEtching.upgradeCapacity(hero)==capacities[i],"37: exact level threshold "+levels[i]);
+                for(int paid=0;paid<4;paid++)source.upgrade();
+                int cap=capacities[i];
+                check(rune.level()==cap&&source.trueLevel()==6,"37: bank only new paid upgrades up to capacity "+levels[i]);
+                checkRuneDescription(source);
+                source.collect();next.collect();
+                for(int transfer=0;transfer<3;transfer++){
+                    if(armor)hero.belongings.armor=(Armor)next;else hero.belongings.weapon=(Weapon)next;
+                    check(RuneEtching.etch(hero,next)&&source.trueLevel()==6-cap&&next.trueLevel()==3+cap
+                            &&RuneEtching.attached(next)==rune&&RuneEtching.attached(source)==null,
+                            "37: exact transfer with excess and pre-existing upgrades retained "+levels[i]);
+                    if(armor)hero.belongings.armor=(Armor)source;else hero.belongings.weapon=(Weapon)source;
+                    check(RuneEtching.etch(hero,source)&&source.trueLevel()==6&&next.trueLevel()==3,
+                            "37: repeated transfers conserve every paid upgrade "+levels[i]);
+                }
+                Bundle saved=new Bundle();saved.put("carrier",source);
+                Item restored=(Item)saved.get("carrier");
+                check(restored.trueLevel()==6&&RuneEtching.attached(restored).level()==cap,
+                        "37: capacity and carrier upgrades survive save/load "+levels[i]);
+                if(cap>0){
+                    hero.lvl=cap==1?4:cap==2?14:24;
+                    if(armor)hero.belongings.armor=(Armor)next;else hero.belongings.weapon=(Weapon)next;
+                    check(!RuneEtching.canEtch(hero,next)&&!RuneEtching.etch(hero,next)
+                            &&RuneEtching.attached(source)==rune&&source.trueLevel()==6&&next.trueLevel()==3&&rune.level()==cap,
+                            "37: legacy/Playtest level reductions preserve paid upgrades without over-cap transfer");
+                    hero.lvl=levels[i];
+                    // Carrier loss, even with a full pack, must keep every banked level.
+                    while(hero.belongings.backpack.items.size()<hero.belongings.backpack.capacity())
+                        hero.belongings.backpack.items.add(new Food());
+                    RuneEtching.recover(source);
+                    check(source.trueLevel()==6-cap&&RuneEtching.attached(source)==null&&RuneEtching.find(hero,armor)==rune
+                            &&RuneEtching.etch(hero,next)&&next.trueLevel()==3+cap,
+                            "37: full-pack recovery preserves all banked upgrades "+levels[i]);
+                }
+            }
+            // Old saves may already have a paid level at hero level one. Keep it until transfer unlocks.
+            Hero legacyHero=new Hero();legacyHero.heroClass=HeroClass.ENCHANTER;legacyHero.lvl=1;Dungeon.hero=legacyHero;
+            Talent.initClassTalents(legacyHero);
+            Weapon old=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger();old.level(2);
+            old.runeEtching=new RuneEtching();old.runeEtching.level(1);old.collect();
+            Weapon next=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger();legacyHero.belongings.weapon=next;
+            Bundle oldSave=new Bundle();oldSave.put("carrier",old);
+            old=(Weapon)oldSave.get("carrier");legacyHero.belongings.backpack.items.clear();old.collect();
+            check(!RuneEtching.etch(legacyHero,next)&&old.trueLevel()==2&&old.runeEtching.level()==1,"37: old paid rune remains intact before new unlock");
+            legacyHero.lvl=5;
+            check(RuneEtching.etch(legacyHero,next)&&old.trueLevel()==1&&next.trueLevel()==1,"37: old paid rune transfers when its threshold is reached");
+        } finally {Dungeon.hero=originalHero;}
+        System.out.println("TEST 37 PROGRESSION PASS: weapon/armor capacities 0 before hero 5, 1 at 5, 2 at 15, 3 at 25; paid-upgrade conservation, descriptions, saves and legacy/full-pack recovery");
     }
 
     private static void armorEtchingScenario(Hero h,Weapon weapon){
@@ -1671,6 +1736,8 @@ public class SmokeRun {
         bow.detachAll(h.belongings.backpack);knives.detachAll(h.belongings.backpack);brush.gainCharge(3);
         System.out.println("TEST 33 RANGED PASS: bow, thrown stack split/recovery/expiry, tagged picker and cast exclusion, real arrow proc");
         RuneEtching rune=starter.runeEtching;
+        etchingProgressionScenario();
+        int originalEtchingLevel=h.lvl;h.lvl=5;
         checkRuneDescription(starter);starter.upgrade();checkRuneDescription(starter);
         check(starter.actions(h).contains(Item.AC_DROP)&&starter.value()>0,"37: ordinary sellable starter");
         com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword replacement=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.WornShortsword();
@@ -1684,6 +1751,7 @@ public class SmokeRun {
         starter.doEquip(h);check(RuneEtching.etch(h)&&starter.level()==1&&starter.runeEtching==rune,"37: reattach after carrier loss");
         check(!rune.actions(h).contains(Item.AC_DROP),"37: rune cannot be dropped");
         armorEtchingScenario(h,starter);
+        h.lvl=originalEtchingLevel;
         System.out.println("TEST 37 PASS: transfer, upgrade, replacement, carrier loss and reattachment");
         runecraftScenario(h,brush,starter);
         clearArena();Rat enemy=target(h.pos+1);enemy.sprite.visible=false;

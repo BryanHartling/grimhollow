@@ -1,3 +1,11 @@
+# Enchanter Etching progression v1.30.4 - 2026-10-12
+
+- Each weapon/armor Rune Etching banks one new paid upgrade at hero level 5, two at 15 and three at 25; no upgrade banking before level 5. Existing gear upgrades and excess new upgrades remain on the carrier. Rune enchantments/glyphs, one-turn transfers and zero charge cost are unchanged.
+- Engineering choice: preserve stored paid upgrades in older saves or after Playtest lowers hero level. A rune above the current capacity cannot transfer until the required level, rather than destroying or duplicating its upgrades. No save-format change. Category runes, crown conversion and full-pack recovery remain independent.
+- Show the progression and current capacity on attached gear and loose runes, and in the player update log. Extend existing test 37 with both categories at levels 1/4/5/7/14/15/16/24/25/30, repeated transfers, permanent gear levels, save/load, old level-one saves and full-pack loss recovery; retain earlier assertions at their new level-five unlock. Native description checks assert live capacity and resolved text.
+- Prior delivery complete: v1.30.3-enchanter-polish at 5f0f1957a5e9b4590f3075ef4f4476a3606cfc33 passed all tag jobs in CI 38188786362 and is published. Lasting Work and crafting/Toolkit changes remain included.
+- Local validation: combined Runs=30 failures=0, 16 unit tests, progression test 37, native mouse/touch Etch selection and fitted live descriptions in both orientations, compiled guarded-network audit and signed Android verification pass. Windows packaged launcher is built; physical tablet remains human playtesting.
+
 # Enchanter follow-up and release completion v1.30.3 - 2026-10-11
 
 - Tune Lasting Work to 15%/30%/45% at ranks 1/2/3, preserving one conversion attempt on first descent into a new floor. Keep weapon-before-armor priority, Reinforce conversion, saved floor receipts and failed-roll behavior. Update talent descriptions and rank text; seeded gameplay checks cover all four threshold bands, all working types, single conversion and revisit/save-load exclusion.

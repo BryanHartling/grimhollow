@@ -1,5 +1,9 @@
 # Known issues
 
+- v1.30.4: Physical Samsung tablet and full-campaign Enchanter balance remain human playtesting. A legacy rune above the hero's current transfer limit keeps its upgrades and waits for the corresponding level; none are deleted. Test 45 remains Abandoned: test failed and was not rerun.
+- v1.30.4 verification: isolated native reviews emitted nonfatal clipboard-access warnings but completed their mouse/touch and text assertions in both layouts. Initial sandboxed jpackage writes were denied; the documented authorized route produced the final Windows package. No game process or user save was interrupted.
+- v1.30.4 review cleanup: automatic approval rejected a broad screenshot restore. All 106 modified tracked images were then matched to this run's render output and copied with matching hashes to ignored .local/etching-review-image-backup before cleanup; the two Etching description proofs are retained in the commit.
+
 - v1.30.3: Physical Samsung tablet and full-campaign Enchanter balance remain human playtesting. Toolkit sources and existing art are unchanged. Test 45 remains Abandoned: test failed and was not rerun.
 
 - v1.30.2 delivery: tag v1.30.2-enchanter-craft at cdd7891f76bc16fa50b52c31d84a2b0923da6f3f remains immutable and unpublished. Its tag CI 38176646969 checked startup at 300 frames (about 2.5 seconds), before the unchanged three-second readiness delay, and failed on the absent marker. The identical commit and follow-up documentation branch runs passed every gate. v1.30.3 corrects that fixture timing with the same scene/token assertions and an elapsed-time deadline; no production safeguard is weakened.

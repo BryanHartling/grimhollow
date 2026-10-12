@@ -1,10 +1,10 @@
-# Enchanter follow-up and release completion - v1.30.3
+# Enchanter Etching progression - v1.30.4
 
 Lasting Work now has a **15% / 30% / 45%** chance to settle one active inscription or Reinforce permanently on the first descent into each new floor. Revisiting or reloading that floor grants no additional attempt. Keen Study remains 5%/10% per successful Inscribe cast, and Upgrade-scroll Scribe remains 120 energy by default with its existing Playtest balance control.
 
-Rune Etching can transfer one upgrade from the start of the run, without a talent requirement: upgrade its carrier while the rune is attached, then transfer it using the Brush's Etch action. Weapon and armor runes are independent; each carries at most one upgrade within its own category. Existing upgrades on gear before attachment are not absorbed.
+Rune Etching's upgrade-transfer capacity is **one at hero level 5, two at 15, and three at 25**. Weapon and armor runes are independent. New upgrades applied while attached fill that rune's capacity; upgrades applied earlier or beyond capacity stay with the gear. Its enchantment/glyph can move before level 5. Transfer costs one turn and no Brush charge. Old saves retain paid rune upgrades; if their amount exceeds the hero's new limit, transfer waits until the required level instead of losing upgrades.
 
-Windows: `desktop/build/windows/1.30.3/Grimhollow/Grimhollow.exe` (keep the entire folder). Signed Android: `android/build/outputs/apk/update/android-update.apk` (`1.30.3`, version code 1021). Toolkit artwork and the 1.30.2 crafting additions are included unchanged.
+Windows: `desktop/build/windows/1.30.4/Grimhollow/Grimhollow.exe` (keep the entire folder). Signed Android: `android/build/outputs/apk/update/android-update.apk` (`1.30.4`, version code 1022). Lasting Work, Toolkit artwork and the crafting additions are included unchanged. The prior v1.30.3-enchanter-polish release passed every tag CI job and is published.
 
 # Enchanter lasting craft - v1.30.2
 

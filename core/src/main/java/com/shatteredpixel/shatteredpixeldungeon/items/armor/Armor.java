@@ -522,8 +522,8 @@ public class Armor extends EquipableItem {
 
 		if (seal != null && seal.level() == 0)
 			seal.upgrade();
-		else if (runeEtching != null && runeEtching.level() == 0)
-			runeEtching.level(1);
+		else if (runeEtching != null)
+			runeEtching.bankUpgrade();
 
 		return super.upgrade();
 	}
@@ -672,7 +672,7 @@ public class Armor extends EquipableItem {
 			info += "\n\n" + Messages.get(Armor.class, "seal_attached", seal.maxShield(tier, level()));
 		}
 		
-		if(runeEtching!=null)info+="\n\n"+Messages.get(com.shatteredpixel.shatteredpixeldungeon.items.RuneEtching.class,"attached",runeEtching.floorGlyph.name(),runeEtching.level())+"\n"+runeEtching.floorGlyph.desc();
+		if(runeEtching!=null)info+="\n\n"+runeEtching.attachmentDescription(true)+"\n"+runeEtching.floorGlyph.desc();
 		return info+sigilInfo();
 	}
 

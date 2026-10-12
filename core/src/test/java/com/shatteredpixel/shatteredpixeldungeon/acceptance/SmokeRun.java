@@ -1531,6 +1531,51 @@ public class SmokeRun {
 
     private static void runecraftScenario(Hero h,SigilBrush brush,com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon w)throws Exception {
         clearArena();
+        Armor stylusArmor=h.belongings.armor;stylusArmor.identify();
+        Armor.Glyph oldGlyph=stylusArmor.glyph;
+        for(HeroSubClass subclass:new HeroSubClass[]{HeroSubClass.NONE,HeroSubClass.ARTIFICER,HeroSubClass.SCRIVENER}){
+            h.subClass=subclass;stylusArmor.inscribe(oldGlyph);
+            Stylus stylus=(Stylus)new Stylus().quantity(3);stylus.collect();
+            int uses=com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.useCount(Stylus.class);
+            Runecraft.Offer abandoned=stylus.runecraftOffer(h,stylusArmor);
+            int count=subclass==HeroSubClass.ARTIFICER?3:2;
+            check(abandoned!=null&&abandoned.options().size()==count&&stylus.quantity()==2
+                    &&com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.useCount(Stylus.class)==uses+1
+                    &&stylusArmor.glyph==oldGlyph,"33: stylus spent once before glyph choices, without changing armor");
+            java.util.Set<Class<?>> types=new java.util.HashSet<>();
+            for(Object glyph:abandoned.options()){
+                check(oldGlyph==null||glyph.getClass()!=oldGlyph.getClass(),"33: stylus excludes current glyph");types.add(glyph.getClass());
+            }
+            check(types.size()==count&&abandoned.cancel()&&!abandoned.cancel()&&!abandoned.apply(0)
+                    &&stylus.quantity()==2&&stylusArmor.glyph==oldGlyph,"33: abandonment cannot refund, reuse or double-consume the stylus");
+            Runecraft.Offer chosen=stylus.runecraftOffer(h,stylusArmor);
+            Class<?> glyph=chosen.options().get(0).getClass();
+            check(stylus.quantity()==1&&chosen.apply(0)&&stylusArmor.glyph.getClass()==glyph
+                    &&!chosen.apply(0)&&!chosen.cancel()&&stylus.quantity()==1
+                    &&com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.useCount(Stylus.class)==uses+2,
+                    "33: reapplying spends another stylus; acceptance applies exactly one chosen glyph");
+            Runecraft.Offer last=stylus.runecraftOffer(h,stylusArmor);
+            check(last!=null&&!h.belongings.contains(stylus)&&last.cancel()&&stylusArmor.glyph.getClass()==glyph,
+                    "33: final stylus is gone even when its glyphs are abandoned");
+            check(stylus.runecraftOffer(h,stylusArmor)==null
+                    &&com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.useCount(Stylus.class)==uses+3,
+                    "33: consumed stylus cannot create a free offer");
+        }
+        Stylus rejected=new Stylus();rejected.collect();
+        int uses=com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.useCount(Stylus.class);
+        java.util.List<Class<?>> knowledge=new java.util.ArrayList<>(EnchanterMagic.state().choices(true));
+        stylusArmor.cursedKnown=false;
+        check(rejected.runecraftOffer(h,stylusArmor)==null,"33: unidentified curse status rejected before spending");
+        stylusArmor.cursedKnown=true;stylusArmor.cursed=true;
+        check(rejected.runecraftOffer(h,stylusArmor)==null,"33: cursed armor rejected before spending");
+        stylusArmor.cursed=false;stylusArmor.glyph=new com.shatteredpixel.shatteredpixeldungeon.items.armor.curses.Stench();
+        check(rejected.runecraftOffer(h,stylusArmor)==null,"33: curse glyph rejected before spending");
+        stylusArmor.glyph=oldGlyph;
+        check(rejected.runecraftOffer(h,null)==null&&h.belongings.contains(rejected)
+                &&rejected.quantity()==1&&com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.useCount(Stylus.class)==uses
+                &&EnchanterMagic.state().choices(true).equals(knowledge),"33: invalid/cancelled targets cost nothing and teach no glyphs");
+        rejected.detachAll(h.belongings.backpack);
+        System.out.println("TEST 33 STYLUS PASS: 2/3 glyph choices; upfront one-unit consumption; abandonment/reapply/last-unit/stale offer guards; invalid armor rejected before spending; existing glyph preserved on cancel");
         for(HeroSubClass subclass:new HeroSubClass[]{HeroSubClass.NONE,HeroSubClass.ARTIFICER}){
             h.subClass=subclass;w.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Kinetic());
             com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment scroll=new com.shatteredpixel.shatteredpixeldungeon.items.scrolls.exotic.ScrollOfEnchantment();scroll.collect();

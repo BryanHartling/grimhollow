@@ -3039,9 +3039,119 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 Image artwork=(Image)RecoveryChecks.field(viewer,"artwork");
                 if(artwork.width<256||artwork.height<256)throw new AssertionError("Toolkit lacks source-resolution inspection");
                 interfaceBounds();capture("alchemists-toolkit-artwork");closeReviewWindows();
-                System.out.println("UPGRADE SCRIBE UI PASS: shared balance submenu, numeric input, displayed tuned cost, actual mouse/touch crafting, exact resources and enlarged painted Toolkit; failures=0");return true;
+                System.out.println("UPGRADE SCRIBE UI PASS: shared balance submenu, numeric input, displayed tuned cost, actual mouse/touch crafting, exact resources and enlarged painted Toolkit; failures=0");break;
+            default:return stylusMenuChecks();
         }
         craftingMenuStep++;return false;
+    }
+
+    private int stylusMenuStep,stylusUses;
+    private com.shatteredpixel.shatteredpixeldungeon.items.Stylus reviewStylus;
+    private com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor.Glyph stylusOldGlyph;
+    private String stylusChosenName;
+    private boolean stylusMenuChecks() throws ReflectiveOperationException {
+        com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor armor=Dungeon.hero.belongings.armor;
+        switch(stylusMenuStep){
+            case 0:
+                closeReviewWindows();Playtest.reset();
+                if(Playtest.unranked())throw new AssertionError("Stylus use-count fixture must use an ordinary isolated run");
+                armor.identify();armor.cursed=false;
+                reviewStylus=(com.shatteredpixel.shatteredpixeldungeon.items.Stylus)new com.shatteredpixel.shatteredpixeldungeon.items.Stylus().quantity(4);
+                reviewStylus.collect();stylusOldGlyph=armor.glyph;
+                stylusUses=com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.useCount(reviewStylus.getClass());
+                reviewStylus.execute(Dungeon.hero,"INSCRIBE");break;
+            case 1:
+                reviewEscape();
+                if(reviewStylus.quantity()!=4||armor.glyph!=stylusOldGlyph)throw new AssertionError("Stylus charged before armor selection");
+                reviewStylus.execute(Dungeon.hero,"INSCRIBE");break;
+            case 2:selectStylusArmor(armor);break;
+            case 3:
+                assertStylusState(armor,3,1,true);
+                java.util.List<String> before=new java.util.ArrayList<>();
+                for(com.watabou.noosa.Gizmo button:RecoveryChecks.members(stylusOptions()))if(button instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)
+                    before.add(((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button).text());
+                com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene scene=(com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene)Game.scene();
+                scene.saveWindows();closeReviewWindows();scene.restoreWindows();
+                java.util.List<String> restored=new java.util.ArrayList<>();
+                for(com.watabou.noosa.Gizmo button:RecoveryChecks.members(stylusOptions()))if(button instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)
+                    restored.add(((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button).text());
+                assertStylusState(armor,3,1,true);
+                if(!before.equals(restored))throw new AssertionError("Screen redraw rerolled or lost paid glyph choices");
+                interfaceBounds();checkReviewText(Game.scene());capture("stylus-committed-choices");
+                playtestClick("Abandon glyph");break;
+            case 4:
+                assertStylusState(armor,3,1,true);reviewStylus.execute(Dungeon.hero,"INSCRIBE");break;
+            case 5:selectStylusArmor(armor);break;
+            case 6:assertStylusState(armor,2,2,true);reviewEscape();break;
+            case 7:
+                assertStylusState(armor,2,2,true);reviewStylus.execute(Dungeon.hero,"INSCRIBE");break;
+            case 8:selectStylusArmor(armor);break;
+            case 9:
+                assertStylusState(armor,1,3,true);
+                com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions options=stylusOptions();
+                for(com.watabou.noosa.Gizmo button:RecoveryChecks.members(options))if(button instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton){
+                    stylusChosenName=((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button).text();
+                    pointerGestureReview(button,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);break;
+                }
+                break;
+            case 10:
+                assertStylusState(armor,1,3,false);
+                if(armor.glyph==null||!armor.glyph.name().equals(stylusChosenName))throw new AssertionError("Stylus did not apply chosen glyph");
+                stylusOldGlyph=armor.glyph;reviewStylus.execute(Dungeon.hero,"INSCRIBE");break;
+            case 11:selectStylusArmor(armor);break;
+            case 12:
+                if(Dungeon.hero.belongings.contains(reviewStylus))throw new AssertionError("Final stylus was not spent on opening choices");
+                com.watabou.utils.Point outside=com.shatteredpixel.shatteredpixeldungeon.scenes.PixelScene.uiCamera.cameraToScreen(2,2);
+                int type=Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT;
+                for(com.watabou.input.PointerEvent.Type action:new com.watabou.input.PointerEvent.Type[]{com.watabou.input.PointerEvent.Type.DOWN,com.watabou.input.PointerEvent.Type.UP}){
+                    com.watabou.input.PointerEvent.addPointerEvent(new com.watabou.input.PointerEvent(outside.x,outside.y,902,action,type));
+                    com.watabou.input.PointerEvent.processPointerEvents();
+                }
+                break;
+            case 13:
+                if(Dungeon.hero.belongings.contains(reviewStylus)||armor.glyph!=stylusOldGlyph
+                        ||com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.useCount(reviewStylus.getClass())!=stylusUses+4)
+                    throw new AssertionError("Outside dismissal refunded stylus, changed glyph or counted twice");
+                for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions)throw new AssertionError("Outside click did not abandon glyph picker");
+                Playtest.enable();
+                System.out.println("STYLUS UI PASS: real armor selection, free early cancellation, upfront one-unit cost, redraw retains choices, Abandon/Escape/outside dismissal, accepted glyph and no double charge; mouse/touch; failures=0");return true;
+        }
+        stylusMenuStep++;return false;
+    }
+    private void assertStylusState(com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor armor,int remaining,int uses,boolean unchanged){
+        if(reviewStylus.quantity()!=remaining||unchanged&&armor.glyph!=stylusOldGlyph
+                ||com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.useCount(reviewStylus.getClass())!=stylusUses+uses)
+            throw new AssertionError("Stylus state at step "+stylusMenuStep+": remaining="+reviewStylus.quantity()+" expected="+remaining
+                    +" uses="+com.shatteredpixel.shatteredpixeldungeon.journal.Catalog.useCount(reviewStylus.getClass())+" expected="+(stylusUses+uses)
+                    +" glyph unchanged="+(armor.glyph==stylusOldGlyph));
+    }
+    private void reviewEscape(){
+        for(boolean down:new boolean[]{true,false}){
+            com.watabou.input.KeyEvent.addKeyEvent(new com.watabou.input.KeyEvent(com.badlogic.gdx.Input.Keys.ESCAPE,down));
+            com.watabou.input.KeyEvent.processKeyEvents();
+        }
+    }
+    private void selectStylusArmor(com.shatteredpixel.shatteredpixeldungeon.items.armor.Armor armor) throws ReflectiveOperationException {
+        Group picker=null;
+        com.shatteredpixel.shatteredpixeldungeon.windows.WndBag.ItemSelector selector=null;
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndBag){
+            picker=(Group)child;selector=((com.shatteredpixel.shatteredpixeldungeon.windows.WndBag)child).getSelector();
+        }
+        if(selector==null){
+            com.shatteredpixel.shatteredpixeldungeon.ui.InventoryPane pane=(com.shatteredpixel.shatteredpixeldungeon.ui.InventoryPane)RecoveryChecks.field(Game.scene(),"inventory");
+            if(pane!=null&&pane.isSelecting()){picker=pane;selector=pane.getSelector();}
+        }
+        if(selector==null||!selector.itemSelectable(armor))throw new AssertionError("Stylus armor selector missing or ineligible");
+        for(com.watabou.noosa.Gizmo button:RecoveryChecks.members(picker))if(button instanceof com.shatteredpixel.shatteredpixeldungeon.ui.InventorySlot
+                    &&((com.shatteredpixel.shatteredpixeldungeon.ui.InventorySlot)button).item()==armor){
+                pointerGestureReview(button,Boolean.getBoolean("grimhollow.interfacePortrait")?com.watabou.input.PointerEvent.NONE:com.watabou.input.PointerEvent.LEFT,0);return;
+            }
+        throw new AssertionError("Stylus armor slot missing");
+    }
+    private com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions stylusOptions(){
+        for(com.watabou.noosa.Gizmo child:RecoveryChecks.members(Game.scene()))if(child instanceof com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions)
+            return (com.shatteredpixel.shatteredpixeldungeon.windows.WndOptions)child;
+        throw new AssertionError("Stylus glyph picker missing");
     }
 
     private Object findArtworkButton(Group group){

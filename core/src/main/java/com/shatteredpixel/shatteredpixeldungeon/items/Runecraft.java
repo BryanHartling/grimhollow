@@ -15,7 +15,7 @@ import com.watabou.utils.Random;
 import java.util.*;
 import java.util.function.BooleanSupplier;
 
-/** Shared, deferred-cost selection for deliberate enchantment sources. */
+/** Shared selection for deliberate enchantment sources, with explicit payment timing. */
 public final class Runecraft {
     private Runecraft(){}
     public static boolean enabled(Hero hero){return hero.heroClass==HeroClass.ENCHANTER;}
@@ -28,17 +28,23 @@ public final class Runecraft {
     }
     public static Offer offer(Hero hero,Item item,boolean sameRarity,BooleanSupplier payment){
         if(!enabled(hero)||!eligible(item))return null;
-        return new Offer(hero,item,sameRarity,payment);
+        return new Offer(hero,item,sameRarity,payment,false);
+    }
+    public static Offer committedOffer(Hero hero,Item item,boolean sameRarity,BooleanSupplier payment){
+        // Validate before consuming the source or revealing randomized choices.
+        if(!enabled(hero)||!eligible(item)||!payment.getAsBoolean())return null;
+        return new Offer(hero,item,sameRarity,()->true,true);
     }
     public static final class Offer {
         private final Item item;
         private final Object previous;
         private final BooleanSupplier payment;
+        private final boolean committed;
         private final ArrayList<Object> options=new ArrayList<>();
         private boolean open=true;
         @SuppressWarnings("unchecked")
-        private Offer(Hero hero,Item item,boolean sameRarity,BooleanSupplier payment){
-            this.item=item;previous=current(item);this.payment=payment;
+        private Offer(Hero hero,Item item,boolean sameRarity,BooleanSupplier payment,boolean committed){
+            this.item=item;previous=current(item);this.payment=payment;this.committed=committed;
             boolean armor=item instanceof Armor;
             ArrayList<Class<?>> excluded=new ArrayList<>();if(previous!=null)excluded.add(previous.getClass());
             ArrayList<Class<?>> pool=new ArrayList<>();
@@ -67,19 +73,53 @@ public final class Runecraft {
             else ((Armor)item).inscribe((Armor.Glyph)options.get(index));
             EnchanterMagic.learn(item);return true;
         }
-        public void cancel(){open=false;}
+        public boolean cancel(){if(!open)return false;open=false;return true;}
         public String name(int i){Object e=options.get(i);return e instanceof Weapon.Enchantment?((Weapon.Enchantment)e).name():((Armor.Glyph)e).name();}
         public String description(int i){Object e=options.get(i);return e instanceof Weapon.Enchantment?((Weapon.Enchantment)e).desc():((Armor.Glyph)e).desc();}
     }
     public static void show(Offer offer,Runnable after){
+        show(offer,after,()->{});
+    }
+    public static void show(Offer offer,Runnable after,Runnable abandoned){
         if(offer==null){com.shatteredpixel.shatteredpixeldungeon.utils.GLog.w(Messages.get(Runecraft.class,"cursed"));return;}
-        String[] labels=new String[offer.options.size()+1];for(int i=0;i<offer.options.size();i++)labels[i]=offer.name(i);
-        labels[labels.length-1]=Messages.get(Runecraft.class,"cancel");
-        GameScene.show(new WndOptions(new ItemSprite(offer.item),Messages.get(Runecraft.class,"name"),Messages.get(Runecraft.class,"choose"),labels){
-            @Override protected void onSelect(int index){if(index==offer.options.size())offer.cancel();else if(offer.apply(index))after.run();}
+        if(offer.committed){GameScene.show(new CommittedWindow(offer,after,abandoned));return;}
+        GameScene.show(new WndOptions(new ItemSprite(offer.item),Messages.get(Runecraft.class,"name"),Messages.get(Runecraft.class,"choose"),labels(offer)){
+            private void abandon(){if(offer.cancel())abandoned.run();}
+            @Override protected void onSelect(int index){if(index==offer.options.size())abandon();else if(offer.apply(index))after.run();else if(offer.committed)abandon();}
             @Override protected boolean hasInfo(int index){return index<offer.options.size();}
             @Override protected void onInfo(int index){GameScene.show(new WndTitledMessage(Icons.get(Icons.INFO),offer.name(index),offer.description(index)));}
-            @Override public void onBackPressed(){offer.cancel();super.onBackPressed();}
+            @Override public void onBackPressed(){abandon();super.onBackPressed();}
         });
+    }
+    private static String[] labels(Offer offer){
+        String[] labels=new String[offer.options.size()+1];for(int i=0;i<offer.options.size();i++)labels[i]=offer.name(i);
+        labels[labels.length-1]=Messages.get(Runecraft.class,offer.committed?"abandon":"cancel");return labels;
+    }
+    /** Public no-arg restoration preserves the paid offer when the tablet changes orientation. */
+    public static class CommittedWindow extends WndOptions {
+        private static CommittedWindow pending;
+        private final Offer offer;
+        private final Runnable after,abandoned;
+        public CommittedWindow(){this(restorePending());}
+        private CommittedWindow(CommittedWindow old){this(old.offer,old.after,old.abandoned);}
+        private CommittedWindow(Offer offer,Runnable after,Runnable abandoned){
+            super();
+            this.offer=offer;this.after=after;this.abandoned=abandoned;
+            initOptions(new ItemSprite(offer.item),Messages.get(Runecraft.class,"name"),Messages.get(Runecraft.class,"choose_committed"),labels(offer));
+            pending=this;
+        }
+        private static CommittedWindow restorePending(){
+            if(pending==null||!pending.offer.open)throw new IllegalStateException("No pending glyph choice");return pending;
+        }
+        private void clearPending(){if(pending==this)pending=null;}
+        private void abandon(){clearPending();if(offer.cancel())abandoned.run();}
+        @Override protected void onSelect(int index){
+            if(index==offer.options.size())abandon();
+            else if(offer.apply(index)){clearPending();after.run();}
+            else abandon();
+        }
+        @Override protected boolean hasInfo(int index){return index<offer.options.size();}
+        @Override protected void onInfo(int index){GameScene.show(new WndTitledMessage(Icons.get(Icons.INFO),offer.name(index),offer.description(index)));}
+        @Override public void onBackPressed(){abandon();super.onBackPressed();}
     }
 }

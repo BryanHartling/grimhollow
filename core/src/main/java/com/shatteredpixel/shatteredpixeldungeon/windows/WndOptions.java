@@ -37,8 +37,16 @@ public class WndOptions extends Window {
 	protected static final int MARGIN 		= 2;
 	protected static final int BUTTON_HEIGHT	= 18;
 
-	public WndOptions(Image icon, String title, String message, String... options) {
+	protected WndOptions() {
 		super();
+	}
+
+	public WndOptions(Image icon, String title, String message, String... options) {
+		this();
+		initOptions(icon, title, message, options);
+	}
+
+	protected final void initOptions(Image icon, String title, String message, String... options) {
 
 		int width = PixelScene.landscape() ? WIDTH_L : WIDTH_P;
 

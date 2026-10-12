@@ -1,3 +1,9 @@
+# Committed arcane stylus choices - v1.30.5
+
+An Enchanter now spends **one arcane stylus when its glyph choices appear**. Accept one glyph or choose **Abandon glyph**; Escape/Back and clicking outside also abandon the choices without refunding the stylus. Abandoning preserves the armor's previous glyph and spends the same two turns as inscription. Cancelling before selecting armor, or selecting invalid/cursed armor, costs nothing. The usual two choices (three for Artificer) and Scrivener preference remain.
+
+Windows: `desktop/build/windows/1.30.5/Grimhollow/Grimhollow.exe` (keep the entire folder). Signed Android: `android/build/outputs/apk/update/android-update.apk` (`1.30.5`, version code 1023). Previous Etching, Lasting Work and crafting changes are included.
+
 # Enchanter Etching progression - v1.30.4
 
 Lasting Work now has a **15% / 30% / 45%** chance to settle one active inscription or Reinforce permanently on the first descent into each new floor. Revisiting or reloading that floor grants no additional attempt. Keen Study remains 5%/10% per successful Inscribe cast, and Upgrade-scroll Scribe remains 120 energy by default with its existing Playtest balance control.

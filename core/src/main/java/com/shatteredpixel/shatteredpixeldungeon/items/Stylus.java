@@ -95,7 +95,8 @@ public class Stylus extends Item {
 		}
 		
         if(Runecraft.enabled(curUser)){
-            Runecraft.show(Runecraft.offer(curUser,armor,false,()->{if(!curUser.belongings.contains(this))return false;detach(curUser.belongings.backpack);Catalog.countUse(getClass());return true;}),()->{curUser.sprite.operate(curUser.pos);Enchanting.show(curUser,armor);Sample.INSTANCE.play(Assets.Sounds.BURNING);curUser.spend(TIME_TO_INSCRIBE);curUser.busy();});return;
+            final Hero hero=curUser;
+            Runecraft.show(runecraftOffer(hero,armor),()->{hero.sprite.operate(hero.pos);Enchanting.show(hero,armor);Sample.INSTANCE.play(Assets.Sounds.BURNING);hero.spend(TIME_TO_INSCRIBE);hero.busy();},()->{GLog.w(Messages.get(Stylus.class,"abandoned"));hero.spendAndNext(TIME_TO_INSCRIBE);});return;
         }
         detach(curUser.belongings.backpack);
 		Catalog.countUse(getClass());
@@ -112,6 +113,14 @@ public class Stylus extends Item {
 		curUser.spend(TIME_TO_INSCRIBE);
 		curUser.busy();
 	}
+
+    public Runecraft.Offer runecraftOffer(Hero hero,Armor armor){
+        if(armor==null||!armor.cursedKnown)return null;
+        return Runecraft.committedOffer(hero,armor,false,()->{
+            if(!hero.belongings.contains(this)||quantity()<=0)return false;
+            detach(hero.belongings.backpack);Catalog.countUse(getClass());return true;
+        });
+    }
 	
 	@Override
 	public int value() {

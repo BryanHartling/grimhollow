@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.30.4","Runes grow with their bearer.");
+        ChangeInfo r=release(list,"v1.30.5","The stylus spends its magic only once.");
+        note(r,Icons.INFO,"Committed glyph choices","An Enchanter spends one arcane stylus when its glyph choices appear. Choose a glyph or abandon the inscription; closing the picker cannot recover the stylus or reroll it for free. Cancelling before choosing armor spends nothing.");
+        r=release(list,"v1.30.4","Runes grow with their bearer.");
         note(r,Icons.INFO,"Rune Etching","Weapon and armor runes each carry one paid upgrade at hero level 5, two at 15, and three at 25. New upgrades applied while attached fill the rune's capacity; earlier upgrades stay on the gear. Their enchantments and glyphs can move from the start of the run. Existing stored upgrades are preserved.");
         r=release(list,"v1.30.3","Lasting work takes patient craft.");
         note(r,Icons.INFO,"Lasting Work","The Artificer has a 15%/30%/45% chance to settle one active working permanently when first descending into each new floor. Returning to the same floor grants no further check.");

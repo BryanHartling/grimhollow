@@ -1,5 +1,8 @@
 # Known issues
 
+- v1.30.5: Physical Samsung tablet and campaign playtesting remain with the user. Glyph cancellation changes apply to the arcane stylus; other Runecraft sources keep their existing payment rules. Test 45 remains Abandoned: test failed and is not rerun. The v1.30.4 branch-only fire-render discrepancy remains recorded below; this patch does not alter fire rendering or its checks.
+- v1.30.5 verification: initial native fixtures expected catalog counts in unranked Playtest mode; the final fixture uses an ordinary isolated save and retains its exact-count assertions. A helper-name compile conflict and a restorable-dialog initialization error were corrected before the final passing build and native suites. Nonfatal isolated clipboard-access warnings remain in ignored logs; no user save was changed.
+
 - v1.30.4 CI: v1.30.4-etching at bcb99c988b190c4e52e19c1ede590c298c0835e6 passed all eight tag jobs in run 38305589772 and is published with a verified signed manifest. The identical commit's branch run 38305589820 failed unchanged test 31: batched/individual fire maximum channel difference 41 (limit 2), mean 1.1093 ms and p95 1.3402 ms (both pass the 2 ms limit). Windows, Android and all four headless jobs passed in both runs. No fire code or checks changed; the differing comparison results remain an unresolved rendering verification issue. Evidence is retained in ignored .local/etching-branch-ci.log.
 
 - v1.30.4: Physical Samsung tablet and full-campaign Enchanter balance remain human playtesting. A legacy rune above the hero's current transfer limit keeps its upgrades and waits for the corresponding level; none are deleted. Test 45 remains Abandoned: test failed and was not rerun.

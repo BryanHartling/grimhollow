@@ -1,3 +1,11 @@
+# Committed arcane stylus choices v1.30.5 - 2026-10-12
+
+- An Enchanter spends one stylus before randomized glyph choices are revealed, counting its use once. Choose a glyph or abandon; cancellation, Escape/Back and outside dismissal cannot refund that stylus or yield a free reroll. Both successful inscription and abandonment retain the two-turn use cost; abandonment leaves the old glyph intact. Cancelling armor selection or targeting invalid, curse-unknown or cursed armor costs nothing.
+- Keep current option counts, current-glyph exclusions and Scrivener preference. Capture the initiating hero in callbacks, and close committed offers once so stale selections cannot apply a glyph or charge another item. Shared Runecraft has an explicit committed-source mode; existing scroll, stone and Brush payment/cancellation rules remain unchanged.
+- Engineering correction: give the committed picker the upstream public zero-argument restoration path. Screen redraw/orientation rebuilding retains the same paid choices and callbacks without another stylus or reroll; explicit dismissal still abandons. Native checks exercise the real save/restore window path and compare every choice before/after.
+- Extend existing test 33 for base/Artificer/Scrivener consumption, stacked and final styli, reapplication, closed offers, invalid armor and old-glyph preservation. Existing native crafting review now tests armor selection, early cancellation, glyph acceptance, Abandon, Escape and outside dismissal with mouse/touch in both orientations.
+- Local validation: 16 unit tests and combined Runs=30 failures=0 pass. Native mouse/touch, unchanged paid choices through the real window save/restore API, accepted glyphs and all abandonment paths pass in both orientations. Signed APK version 1.30.5/build 1023 preserves the existing certificate; Windows launcher is packaged in its own version folder. Compiled guarded-network audit passes.
+
 # Enchanter Etching progression v1.30.4 - 2026-10-12
 
 - Each weapon/armor Rune Etching banks one new paid upgrade at hero level 5, two at 15 and three at 25; no upgrade banking before level 5. Existing gear upgrades and excess new upgrades remain on the carrier. Rune enchantments/glyphs, one-turn transfers and zero charge cost are unchanged.

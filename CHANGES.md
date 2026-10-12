@@ -5,6 +5,7 @@
 - Show the progression and current capacity on attached gear and loose runes, and in the player update log. Extend existing test 37 with both categories at levels 1/4/5/7/14/15/16/24/25/30, repeated transfers, permanent gear levels, save/load, old level-one saves and full-pack loss recovery; retain earlier assertions at their new level-five unlock. Native description checks assert live capacity and resolved text.
 - Prior delivery complete: v1.30.3-enchanter-polish at 5f0f1957a5e9b4590f3075ef4f4476a3606cfc33 passed all tag jobs in CI 38188786362 and is published. Lasting Work and crafting/Toolkit changes remain included.
 - Local validation: combined Runs=30 failures=0, 16 unit tests, progression test 37, native mouse/touch Etch selection and fitted live descriptions in both orientations, compiled guarded-network audit and signed Android verification pass. Windows packaged launcher is built; physical tablet remains human playtesting.
+- Delivery: v1.30.4-etching at bcb99c988b190c4e52e19c1ede590c298c0835e6 passed all eight tag CI jobs in run 38305589772 and is publicly published. Exact-byte RSA manifest signature, stable channel, build 1022 and both asset records verify. The identical commit's branch run failed the existing fire-batch pixel comparison (41 versus limit 2); every headless job and both Windows/Android passed. Preserve this failure in KNOWN_ISSUES.md without changing fire code or acceptance thresholds.
 
 # Enchanter follow-up and release completion v1.30.3 - 2026-10-11
 

@@ -1,5 +1,7 @@
 # Known issues
 
+- v1.30.4 CI: v1.30.4-etching at bcb99c988b190c4e52e19c1ede590c298c0835e6 passed all eight tag jobs in run 38305589772 and is published with a verified signed manifest. The identical commit's branch run 38305589820 failed unchanged test 31: batched/individual fire maximum channel difference 41 (limit 2), mean 1.1093 ms and p95 1.3402 ms (both pass the 2 ms limit). Windows, Android and all four headless jobs passed in both runs. No fire code or checks changed; the differing comparison results remain an unresolved rendering verification issue. Evidence is retained in ignored .local/etching-branch-ci.log.
+
 - v1.30.4: Physical Samsung tablet and full-campaign Enchanter balance remain human playtesting. A legacy rune above the hero's current transfer limit keeps its upgrades and waits for the corresponding level; none are deleted. Test 45 remains Abandoned: test failed and was not rerun.
 - v1.30.4 verification: isolated native reviews emitted nonfatal clipboard-access warnings but completed their mouse/touch and text assertions in both layouts. Initial sandboxed jpackage writes were denied; the documented authorized route produced the final Windows package. No game process or user save was interrupted.
 - v1.30.4 review cleanup: automatic approval rejected a broad screenshot restore. All 106 modified tracked images were then matched to this run's render output and copied with matching hashes to ignored .local/etching-review-image-backup before cleanup; the two Etching description proofs are retained in the commit.

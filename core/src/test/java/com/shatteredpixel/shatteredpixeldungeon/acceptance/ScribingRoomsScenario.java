@@ -226,6 +226,7 @@ final class ScribingRoomsScenario {
                 &&Dungeon.energy==0&&hero.belongings.getItem(ScrollOfUpgrade.class).quantity()==3,"tuned cost permits repeated paid crafting without a cap");
         BalanceTuning.reset();
         keenStudy(hero,brush);
+        lastingWork(hero);
         int opportunities=0;
         for(int seed=0;seed<100;seed++){
             int count=0;
@@ -303,6 +304,51 @@ final class ScribingRoomsScenario {
         check(afterConsume.getFloat("partialcharge")==beforeConsume.getFloat("partialcharge"),"old potion/scroll recharge removed");
         hero.talents.get(0).put(Talent.KEEN_STUDY,0);
         System.out.println("KEEN STUDY PASS: once per valid cast, exact 0/5/10% thresholds, melee/ranged/armor replacement, failed rolls preserve permanent, no free rejection rolls, unchanged upgrades, expiry/save and removed consume recharge");
+    }
+
+    private static void lastingWork(Hero hero){
+        int depth=Dungeon.depth,branch=Dungeon.branch;
+        hero.subClass=HeroSubClass.ARTIFICER;Talent.initSubclassTalents(hero);
+        for(int rank=0;rank<=3;rank++)for(int band=0;band<4;band++)for(int kind=0;kind<3;kind++){
+            hero.talents.get(2).put(Talent.LASTING_WORK,rank);
+            check(Math.abs(EnchanterMagic.lastingWorkChance(hero)-new float[]{0,.15f,.30f,.45f}[rank])<.000001f,"Lasting Work rank probability");
+            com.shatteredpixel.shatteredpixeldungeon.items.weapon.Weapon weapon=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.melee.Dagger();
+            weapon.enchant(new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Chilling());weapon.level(2);weapon.identify();hero.belongings.weapon=weapon;
+            Armor armor=new ClothArmor();armor.inscribe(new Swiftness());armor.level(2);armor.identify();hero.belongings.armor=armor;
+            Buff.detach(hero,EnchanterMagic.class);EnchanterMagic magic=Buff.affect(hero,EnchanterMagic.class);
+            Dungeon.depth=1;Dungeon.branch=0;magic.arrive();
+            Item item=kind==1?armor:weapon;
+            if(kind==0){weapon.inscribed=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing();weapon.inscriptionTurns=30;armor.inscribed=new Obfuscation();armor.inscriptionTurns=30;}
+            else if(kind==1){armor.inscribed=new Obfuscation();armor.inscriptionTurns=30;}
+            else {weapon.reinforceTurns=50;weapon.reinforceFlat=1;}
+            long seed;
+            // Floor arrival rerolls both independent runes before its single permanence draw.
+            for(seed=0;seed<10000;seed++){
+                Random.pushGenerator(seed);RuneEtching.find(hero,false).roll();RuneEtching.find(hero,true).roll();float roll=Random.Float();Random.popGenerator();
+                if((roll<.15f?0:roll<.30f?1:roll<.45f?2:3)==band)break;
+            }
+            check(seed<10000,"Lasting Work threshold seed");Dungeon.depth=2;
+            Random.pushGenerator(seed);try{magic.arrive();}finally{Random.popGenerator();}
+            boolean permanent=rank>band;
+            if(kind==0){
+                check(weapon.enchantment instanceof com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Blazing==permanent
+                        &&(weapon.inscribed==null)==permanent&&armor.inscribed!=null,"weapon outcome and only one working per floor");
+            }else if(kind==1){
+                check(armor.glyph instanceof Obfuscation==permanent&&(armor.inscribed==null)==permanent,"armor outcome");
+            }else check(weapon.trueLevel()==(permanent?3:2)&&weapon.reinforceTurns==(permanent?0:50),"Reinforce outcome");
+            int level=item.trueLevel();Class<?> previous=kind==1?armor.glyph.getClass():weapon.enchantment.getClass();
+            if(kind==1){armor.inscribed=new Viscosity();armor.inscriptionTurns=30;}
+            else if(kind==0){weapon.inscribed=new com.shatteredpixel.shatteredpixeldungeon.items.weapon.enchantments.Shocking();weapon.inscriptionTurns=30;}
+            else weapon.reinforceTurns=40;
+            Dungeon.depth=1;magic.arrive();Dungeon.depth=2;magic.arrive();
+            Bundle saved=new Bundle();magic.storeInBundle(saved);magic.detach();EnchanterMagic restored=new EnchanterMagic();restored.restoreFromBundle(saved);restored.attachTo(hero);
+            Dungeon.depth=1;restored.arrive();Dungeon.depth=2;restored.arrive();
+            check(item.trueLevel()==level&&(kind==1?armor.glyph.getClass():weapon.enchantment.getClass())==previous
+                    &&(kind==2?weapon.reinforceTurns==40:item.inscriptionTurns==30),"Lasting Work cannot reroll through revisits or save/load");
+        }
+        hero.subClass=HeroSubClass.NONE;Dungeon.depth=depth;Dungeon.branch=branch;
+        check(EnchanterMagic.lastingWorkChance(hero)==0,"other subclasses cannot use Lasting Work");
+        System.out.println("LASTING WORK PASS: 0/15/30/45% thresholds, one weapon/armor/Reinforce outcome per new descended floor, no revisit/save-load rerolls");
     }
 
     static void spellguard() {

@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.30.2","The Enchanter studies lasting magic.");
+        ChangeInfo r=release(list,"v1.30.3","Lasting work takes patient craft.");
+        note(r,Icons.INFO,"Lasting Work","The Artificer has a 15%/30%/45% chance to settle one active working permanently when first descending into each new floor. Returning to the same floor grants no further check.");
+        r=release(list,"v1.30.2","The Enchanter studies lasting magic.");
         note(r,Icons.CHANGES,"Costly scrollcraft","The Brush can write a known Upgrade scroll for 120 alchemical energy, parchment, one charge and three turns. Playtest balance tuning includes the crafting cost.");
         note(r,Icons.INFO,"Keen Study","Each successful Inscribe cast has a 5%/10% chance to make its enchantment or glyph permanent, replacing the old permanent effect without changing upgrades.");
         note(r,Icons.INFO,"A field laboratory","The Alchemist\'s Toolkit opens as a worn wooden campaign chest, with matching painted inventory and enlarged inspection artwork.");

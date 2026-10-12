@@ -91,13 +91,16 @@ public class EnchanterMagic extends Buff {
                 Class<?> type=Random.element(unseen);unseen.remove(type);remember(type);
             }
         }
-        if(firstVisit&&descending&&h.subClass==HeroSubClass.ARTIFICER&&Random.Float()<.25f*points(Talent.LASTING_WORK)){
+        if(firstVisit&&descending&&h.subClass==HeroSubClass.ARTIFICER&&Random.Float()<lastingWorkChance(h)){
             for(Item item:new Item[]{h.belongings.weapon,h.belongings.armor})if(item!=null){
                 if(item instanceof Weapon&&((Weapon)item).inscribed!=null){((Weapon)item).enchant(((Weapon)item).inscribed);((Weapon)item).inscribed=null;item.inscriptionTurns=0;learn(item);break;}
                 if(item instanceof Armor&&((Armor)item).inscribed!=null){((Armor)item).inscribe(((Armor)item).inscribed);((Armor)item).inscribed=null;item.inscriptionTurns=0;learn(item);break;}
                 if(item.reinforceTurns>0){item.upgrade();item.reinforceTurns=0;item.reinforceFlat=0;break;}
             }
         }
+    }
+    public static float lastingWorkChance(Hero hero){
+        return hero.subClass==HeroSubClass.ARTIFICER?.15f*hero.pointsInTalent(Talent.LASTING_WORK):0;
     }
     @Override public boolean act(){
         Hero h=(Hero)target;

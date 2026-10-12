@@ -69,6 +69,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private com.shatteredpixel.shatteredpixeldungeon.levels.rooms.quest.vault.VaultFinalRoom vaultArena;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.quest.vault.VaultBossElemental vaultBoss;
     private int frames;
+    private final long startupReviewStarted=System.nanoTime();
     private int polishWaitFrames;
     private int feedingReviewFrames;
     private int feedingWaitFrames;
@@ -117,10 +118,17 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
         super.render();
         frames++;
         if(updateBootReview) {
-            if(frames==300) {
+            if(frames>=300) {
                 if(!(Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.WelcomeScene))throw new AssertionError("Expected the untouched post-update welcome screen");
                 try {
                     java.nio.file.Path marker=java.nio.file.Path.of(System.getenv("GRIMHOLLOW_UPDATE_HEALTH_FILE"));
+                    // A fast headless renderer can reach 300 frames before the installer's
+                    // three-second healthy-start delay. Keep an elapsed-time deadline,
+                    // well inside the external installer's rollback timeout.
+                    if(!java.nio.file.Files.exists(marker)){
+                        if(System.nanoTime()-startupReviewStarted<java.util.concurrent.TimeUnit.SECONDS.toNanos(15))return;
+                        throw new AssertionError("Welcome screen did not acknowledge startup within 15 seconds");
+                    }
                     if(!java.nio.file.Files.readString(marker).equals(System.getenv("GRIMHOLLOW_UPDATE_HEALTH_TOKEN")))throw new AssertionError("Welcome screen failed startup readiness");
                 }catch(java.io.IOException e){throw new AssertionError(e);}
                 capture("update-startup");

@@ -1,6 +1,8 @@
 # Known issues
 
-- v1.30.2 delivery: tag v1.30.2-enchanter-craft at cdd7891f76bc16fa50b52c31d84a2b0923da6f3f is pushed. Windows and signed Android CI pass. Tag CI 38176646969 failed the unchanged updater startup-readiness step; the identical branch run passed that step. Linux job logs are not downloadable until its remaining checks finish, so the exact cause is unconfirmed. Signed release publication remains gated; no check was weakened and no release was published manually. Local combined Runs=30 failures=0, 16 unit tests, reproducible art and mouse/touch crafting checks pass. Work stops before another repair component at 3% remaining allowance.
+- v1.30.3: Physical Samsung tablet and full-campaign Enchanter balance remain human playtesting. Toolkit sources and existing art are unchanged. Test 45 remains Abandoned: test failed and was not rerun.
+
+- v1.30.2 delivery: tag v1.30.2-enchanter-craft at cdd7891f76bc16fa50b52c31d84a2b0923da6f3f remains immutable and unpublished. Its tag CI 38176646969 checked startup at 300 frames (about 2.5 seconds), before the unchanged three-second readiness delay, and failed on the absent marker. The identical commit and follow-up documentation branch runs passed every gate. v1.30.3 corrects that fixture timing with the same scene/token assertions and an elapsed-time deadline; no production safeguard is weakened.
 
 - v1.30.2: Physical Samsung tablet and full-campaign Enchanter economy remain human playtesting. Initial overlapping packing/building captured old enlarged Toolkit previews; final packages are rebuilt after packing and checked byte-for-byte. Native fixture method-call, nested-button and reset-check ordering errors were corrected without weakening checks. Test 45 remains Abandoned: test failed and was not rerun.
 

@@ -1,3 +1,11 @@
+# Enchanter follow-up and release completion - v1.30.3
+
+Lasting Work now has a **15% / 30% / 45%** chance to settle one active inscription or Reinforce permanently on the first descent into each new floor. Revisiting or reloading that floor grants no additional attempt. Keen Study remains 5%/10% per successful Inscribe cast, and Upgrade-scroll Scribe remains 120 energy by default with its existing Playtest balance control.
+
+Rune Etching can transfer one upgrade from the start of the run, without a talent requirement: upgrade its carrier while the rune is attached, then transfer it using the Brush's Etch action. Weapon and armor runes are independent; each carries at most one upgrade within its own category. Existing upgrades on gear before attachment are not absorbed.
+
+Windows: `desktop/build/windows/1.30.3/Grimhollow/Grimhollow.exe` (keep the entire folder). Signed Android: `android/build/outputs/apk/update/android-update.apk` (`1.30.3`, version code 1021). Toolkit artwork and the 1.30.2 crafting additions are included unchanged.
+
 # Enchanter lasting craft - v1.30.2
 
 An Enchanter can Scribe a known Scroll of Upgrade for **120 energy**, one Blank Parchment, one Brush charge and three turns. Ordinary recipes still cost 12 energy and Transmutation costs 20; exotic scrolls remain unavailable. **Playtest > Balance tuning > Enchanter crafting > Upgrade scroll energy cost** changes the cost across games on this device (12-600; reset restores 120).

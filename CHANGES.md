@@ -1,3 +1,11 @@
+# Enchanter follow-up and release completion v1.30.3 - 2026-10-11
+
+- Tune Lasting Work to 15%/30%/45% at ranks 1/2/3, preserving one conversion attempt on first descent into a new floor. Keep weapon-before-armor priority, Reinforce conversion, saved floor receipts and failed-roll behavior. Update talent descriptions and rank text; seeded gameplay checks cover all four threshold bands, all working types, single conversion and revisit/save-load exclusion.
+- Engineering correction: the Linux startup fixture reached 300 frames in about 2.5 seconds, before the installer's unchanged three-second healthy-start delay. Wait for the exact readiness token with a 15-second elapsed-time deadline rather than treating frame count as elapsed time. Preserve untouched-WelcomeScene and exact-token assertions; production acknowledgement, 60-second rollback deadline and signing checks are unchanged.
+- Include the previously completed Upgrade-scroll Scribe, cost tuning, Keen Study and Toolkit artwork. Preserve the failed v1.30.2 tag and deliver a new v1.30.3 tag after verification.
+
+- Validation: combined Runs=30 failures=0, 16 unit tests, seeded Lasting Work threshold/revisit/save checks, untouched-welcome startup acknowledgement, mouse/touch crafting in both orientations, compiled handler/network audit and signed Android verification pass. Windows and Android packages contain the exact retained Toolkit art.
+
 # Enchanter lasting craft v1.30.2 - 2026-10-11
 
 - Scribe now includes an identified Scroll of Upgrade for 120 energy, one Blank Parchment, one usable Brush charge and three turns. Existing regular/Transmutation costs, knowledge requirements and exotic exclusion remain. No per-run crafting cap: the substantial energy investment is the intended tradeoff.

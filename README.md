@@ -1,8 +1,8 @@
-# Committed arcane stylus choices - v1.30.5
+# Committed arcane stylus choices - v1.30.6
 
 An Enchanter now spends **one arcane stylus when its glyph choices appear**. Accept one glyph or choose **Abandon glyph**; Escape/Back and clicking outside also abandon the choices without refunding the stylus. Abandoning preserves the armor's previous glyph and spends the same two turns as inscription. Cancelling before selecting armor, or selecting invalid/cursed armor, costs nothing. The usual two choices (three for Artificer) and Scrivener preference remain.
 
-Windows: `desktop/build/windows/1.30.5/Grimhollow/Grimhollow.exe` (keep the entire folder). Signed Android: `android/build/outputs/apk/update/android-update.apk` (`1.30.5`, version code 1023). Previous Etching, Lasting Work and crafting changes are included.
+Windows: `desktop/build/windows/1.30.6/Grimhollow/Grimhollow.exe` (keep the entire folder). Signed Android: `android/build/outputs/apk/update/android-update.apk` (`1.30.6`, version code 1024). Previous Etching, Lasting Work and crafting changes are included. The failed v1.30.5 tag is retained unpublished; this version corrects native fixture timing without changing the stylus mechanics or assertions.
 
 # Enchanter Etching progression - v1.30.4
 

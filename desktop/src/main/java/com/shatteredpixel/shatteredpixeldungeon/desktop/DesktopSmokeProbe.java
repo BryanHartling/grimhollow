@@ -941,7 +941,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private void interfaceTick() {
         if(bountyReview){if((Game.scene() instanceof GameScene || Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.RankingsScene)&&frames>=220&&frames%20==0)bountyTick();return;}
         if(Boolean.getBoolean("grimhollow.craftingReview")){
-            if(Game.scene() instanceof GameScene && frames>=230 && frames%20==0){
+            if(Game.scene() instanceof GameScene && frames>=230){
                 try{if(craftingMenuChecks())Gdx.app.exit();}
                 catch(ReflectiveOperationException error){throw new AssertionError(error);}
             }
@@ -2987,6 +2987,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     }
     private int craftingMenuStep,craftingStartingCharges;
     private boolean craftingMenuChecks() throws ReflectiveOperationException {
+        if(!Dungeon.hero.ready)return false;
         switch(craftingMenuStep){
             case 0:
                 closeReviewWindows();Playtest.enable();BalanceTuning.reset();Playtest.heroClass(HeroClass.ENCHANTER);break;

@@ -1,3 +1,9 @@
+# Stylus delivery fixture v1.30.6 - 2026-10-12
+
+- Preserve the v1.30.5-stylus tag unpublished after native CI attempted another armor selection while the successful inscription's animation still had the hero busy. Gate the existing crafting state machine on hero readiness; run its isolated mode at the same fast per-frame cadence as the full interface suite. Keep every quantity, catalog, glyph, abandonment and restoration assertion unchanged. No production stylus or animation change.
+- Deliver the completed stylus fix below as version 1.30.6/build 1024 using a new immutable tag.
+- Final local checks: combined Runs=30 failures=0, all 16 unit tests, and per-frame native mouse/touch tests pass in both layouts, including paid-choice restoration, acceptance, early cancellation and all abandonment paths. Signed Android, Windows packaging and the compiled audit pass.
+
 # Committed arcane stylus choices v1.30.5 - 2026-10-12
 
 - An Enchanter spends one stylus before randomized glyph choices are revealed, counting its use once. Choose a glyph or abandon; cancellation, Escape/Back and outside dismissal cannot refund that stylus or yield a free reroll. Both successful inscription and abandonment retain the two-turn use cost; abandonment leaves the old glyph intact. Cancelling armor selection or targeting invalid, curse-unknown or cursed armor costs nothing.

@@ -1,5 +1,7 @@
 # Known issues
 
+- v1.30.5 delivery: tag d88a041d2f5b4f2ef063ad343ff69aa391f738fd is retained unpublished. CI 38323129420 passed Windows, Android and earlier Linux rendering gates, but the full interface fixture attempted its final stylus selection while the preceding inscription animation still kept the hero busy. The isolated fixture had run at a slower cadence. v1.30.6 waits for hero readiness and verifies per-frame execution with the same assertions; no production check or mechanic is weakened. Logs: ignored .local/stylus-tag-ci.log.
+
 - v1.30.5: Physical Samsung tablet and campaign playtesting remain with the user. Glyph cancellation changes apply to the arcane stylus; other Runecraft sources keep their existing payment rules. Test 45 remains Abandoned: test failed and is not rerun. The v1.30.4 branch-only fire-render discrepancy remains recorded below; this patch does not alter fire rendering or its checks.
 - v1.30.5 verification: initial native fixtures expected catalog counts in unranked Playtest mode; the final fixture uses an ordinary isolated save and retains its exact-count assertions. A helper-name compile conflict and a restorable-dialog initialization error were corrected before the final passing build and native suites. Nonfatal isolated clipboard-access warnings remain in ignored logs; no user save was changed.
 

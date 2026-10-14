@@ -1,5 +1,6 @@
 # Known issues
 
+- v1.31.0-profiles is retained unpublished. CI 38567001252 passed the new native profile checks, Windows/Android and earlier Linux gates, but the legacy Horror warning fixture expected an in-run edit to overwrite device preferences. v1.31.1 checks the actual saved rules and unchanged future preferences, retaining every ON/OFF assertion. Evidence: ignored .local/profiles-tag-ci.log.
 - v1.31.0 profiles are device-local; synchronization/export is not part of this patch. Physical tablet and complete-run comparisons remain human playtesting. Old saves cannot recover generation exclusions that previous versions never stored; their existing customized/unranked status is preserved. Test 45 remains Abandoned: test failed and is not rerun.
 - v1.30.6 release CI passed all eight jobs, but the same-commit branch run 38493114093 exceeded unchanged test 31 timing: mean 1.7272 ms passed and p95 2.2221 ms exceeded the 2.0 ms limit; pixel comparison difference was zero. This existing runner-dependent verification discrepancy remains unresolved. Evidence: ignored .local/stylus6-branch-ci.log.
 

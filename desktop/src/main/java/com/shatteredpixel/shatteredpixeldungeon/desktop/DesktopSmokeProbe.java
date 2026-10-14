@@ -45,6 +45,7 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.npcs.Cole bountyCole;
     private final java.util.List<com.shatteredpixel.shatteredpixeldungeon.actors.mobs.Mob> bountyQuarries=new java.util.ArrayList<>();
     private int horrorFrames, horrorStep, horrorStart, horrorHealth;
+    private String horrorFutureTuning;
     private com.shatteredpixel.shatteredpixeldungeon.actors.mobs.LurkingHorror reviewHorror;
     private boolean[] horrorFov, horrorVisited, horrorMapped;
     private boolean horrorWarningCaptured;
@@ -2144,20 +2145,23 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 Image wall=com.shatteredpixel.shatteredpixeldungeon.windows.WndInfoCell.cellImage(hero.pos+3);
                 if(wall.texture!=com.watabou.gltextures.TextureCache.get(com.shatteredpixel.shatteredpixeldungeon.effects.BoneWallArt.TEXTURE))throw new AssertionError("Bone-wall inspection uses old barricade art");wall.destroy();
                 capture("bone-wall-inspection");closeReviewWindows();
+                horrorFutureTuning=SPDSettings.getString("balance_profile_v1","");
                 Playtest.enable();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.tuning();break;
             case 10:if(!playtestClickPage("Lurking Horror"))horrorStep--;break;
             case 11:
                 if(!playtestClickPage("Show ambush popup: ON")){horrorStep--;break;}
                 break;
             case 12:
-                BalanceTuning.loadShared();
+                restoreSavedReviewTuning();
                 if(BalanceTuning.get(BalanceTuning.Key.HORROR_WARNING_POPUP)!=0)throw new AssertionError("Popup OFF menu setting did not persist");
+                if(!horrorFutureTuning.equals(SPDSettings.getString("balance_profile_v1","")))throw new AssertionError("In-run OFF toggle changed future profile settings");
                 interfaceBounds();capture("horror-balance-popup-off");
                 if(!playtestClickPage("Show ambush popup: OFF")){horrorStep--;break;}
                 break;
             case 13:
-                BalanceTuning.loadShared();
+                restoreSavedReviewTuning();
                 if(BalanceTuning.get(BalanceTuning.Key.HORROR_WARNING_POPUP)!=1)throw new AssertionError("Popup ON menu setting did not persist");
+                if(!horrorFutureTuning.equals(SPDSettings.getString("balance_profile_v1","")))throw new AssertionError("In-run ON toggle changed future profile settings");
                 interfaceBounds();capture("horror-balance-tuning");closeReviewWindows();
                 if(!horrorWarningCaptured)throw new AssertionError("Warning evidence not captured");
                 break;
@@ -3171,6 +3175,10 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(button instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton && label.equals(((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button).text()))
                     return (com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button;
         return null;
+    }
+    private void restoreSavedReviewTuning(){
+        try{Playtest.restore(com.watabou.utils.FileUtils.bundleFromFile(GamesInProgress.gameFile(GamesInProgress.curSlot)));}
+        catch(java.io.IOException error){throw new AssertionError("Saved run balance could not be reloaded",error);}
     }
     private int profileStep;
     private void profilesTick(){

@@ -1,3 +1,8 @@
+# Profile delivery fixture v1.31.1 - 2026-10-14
+
+- Retain v1.31.0-profiles unpublished after its new profile menus passed Linux, but the older Horror warning fixture reloaded device preferences instead of the run's saved rules. Reload the actual save, retaining both ON/OFF persistence assertions and additionally checking that future-run preferences stay unchanged. No production behavior or threshold is changed.
+- Deliver the profile feature below using immutable tag v1.31.1-profiles, build 1026. Final local checks: Runs=30 failures=0, 16 unit tests, saved-run ON/OFF warning and profile menus pass in both native layouts; signed Android identity/version and packaged Windows launcher verified.
+
 # Named balance profiles v1.31.0 - 2026-10-14
 
 - Add named profile creation, selection, review, update/revision, rename and deletion under Playtest > Balance tuning. Protect Default and select it if the active preset is deleted. Save all numeric controls and generation exclusions; preserve the previous tuning as editable settings until explicitly saved/selected.

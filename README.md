@@ -1,10 +1,10 @@
-# Balance profiles - v1.31.0
+# Balance profiles - v1.31.1
 
 Open **Playtest > Balance tuning > Balance profiles**. Save the current numeric settings and generation exclusions as a named profile, select it as the standard for new games, review or rename it, update it from edited settings, or delete it. Default is protected. To make a variant: select a profile, edit the balance controls, then add a new profile or save a revision.
 
 Each run keeps its original rules. Profile selection, edits, renaming and deletion do not rewrite existing saves. Named-profile runs show their profile name and have separate local rankings per revision; their scores never enter Default rankings. Actual Playtest tools and mid-run rule edits still exclude scores. Shared badges, catalog-use credit and bones retain Default-only eligibility. Deleted profiles' completed rankings remain accessible. Legacy Custom Balance/Playtest saves keep those flags.
 
-Windows: `desktop/build/windows/1.31.0/Grimhollow/Grimhollow.exe` (keep the complete folder). Signed Android: `android/build/outputs/apk/update/android-update.apk` (`1.31.0`, build 1025). Profiles are stored on the device; no cross-device sync is added.
+Windows: `desktop/build/windows/1.31.1/Grimhollow/Grimhollow.exe` (keep the complete folder). Signed Android: `android/build/outputs/apk/update/android-update.apk` (`1.31.1`, build 1026). Profiles are stored on the device; no cross-device sync is added.
 
 # Committed arcane stylus choices - v1.30.6
 

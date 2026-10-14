@@ -25,6 +25,7 @@ import com.shatteredpixel.shatteredpixeldungeon.Assets;
 import com.shatteredpixel.shatteredpixeldungeon.Badges;
 import com.shatteredpixel.shatteredpixeldungeon.Dungeon;
 import com.shatteredpixel.shatteredpixeldungeon.Rankings;
+import com.shatteredpixel.shatteredpixeldungeon.ProfileRankings;
 import com.shatteredpixel.shatteredpixeldungeon.SPDSettings;
 import com.shatteredpixel.shatteredpixeldungeon.ShatteredPixelDungeon;
 import com.shatteredpixel.shatteredpixeldungeon.actors.hero.HeroClass;
@@ -37,6 +38,7 @@ import com.shatteredpixel.shatteredpixeldungeon.ui.ExitButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.IconButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Icons;
 import com.shatteredpixel.shatteredpixeldungeon.ui.RenderedTextBlock;
+import com.shatteredpixel.shatteredpixeldungeon.ui.RedButton;
 import com.shatteredpixel.shatteredpixeldungeon.ui.TitleBackground;
 import com.shatteredpixel.shatteredpixeldungeon.ui.Window;
 import com.shatteredpixel.shatteredpixeldungeon.windows.IconTitle;
@@ -50,6 +52,7 @@ import com.watabou.noosa.audio.Music;
 import com.watabou.utils.DeviceCompat;
 import com.watabou.utils.GameMath;
 import com.watabou.utils.RectF;
+import java.util.ArrayList;
 
 public class RankingsScene extends PixelScene {
 	
@@ -83,6 +86,11 @@ public class RankingsScene extends PixelScene {
 		h -= insets.top + insets.bottom;
 
 		Rankings.INSTANCE.load();
+		ProfileRankings.Board profile=ProfileRankings.viewKey.equals("default")?null:ProfileRankings.load(ProfileRankings.viewKey,ProfileRankings.viewName);
+		ArrayList<Rankings.Record> displayed=profile==null?Rankings.INSTANCE.records:profile.records;
+		int latest=profile==null?Rankings.INSTANCE.lastRecord:profile.lastRecord;
+		int total=profile==null?Rankings.INSTANCE.totalNumber:profile.totalNumber;
+		int won=profile==null?Rankings.INSTANCE.wonNumber:profile.wonNumber;
 
 		IconTitle title = new IconTitle( Icons.RANKINGS.get(), Messages.get(this, "title"));
 		title.setSize(200, 0);
@@ -92,19 +100,25 @@ public class RankingsScene extends PixelScene {
 		);
 		align(title);
 		add(title);
+		RedButton chooseProfile=new RedButton(ProfileRankings.viewName+"  >",7){
+			@Override protected void onClick(){
+                com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.rankingsProfiles();
+			}
+		};
+		chooseProfile.setRect(insets.left+(w-176)/2f,insets.top+24,176,18);add(chooseProfile);
 		
-		if (Rankings.INSTANCE.records.size() > 0) {
+		if (displayed.size() > 0) {
 
 			//attempts to give each record as much space as possible, ideally as much space as portrait mode
-			float rowHeight = GameMath.gate(ROW_HEIGHT_MIN, (h - 26)/Rankings.INSTANCE.records.size(), ROW_HEIGHT_MAX);
+			float rowHeight = GameMath.gate(10, (h - 66)/displayed.size(), ROW_HEIGHT_MAX);
 
 			float left = (w - Math.min( MAX_ROW_WIDTH, w )) / 2 + GAP;
-			float top = (h - rowHeight  * Rankings.INSTANCE.records.size()) / 2;
+			float top = 48+(h-66-rowHeight*displayed.size())/2;
 			
 			int pos = 0;
 			
-			for (Rankings.Record rec : Rankings.INSTANCE.records) {
-				Record row = new Record( pos, pos == Rankings.INSTANCE.lastRecord, rec );
+			for (Rankings.Record rec : displayed) {
+				Record row = new Record( pos, pos == latest, rec );
 				float offset = 0;
 				if (rowHeight <= 14){
 					offset = (pos % 2 == 1) ? 5 : -5;
@@ -115,12 +129,12 @@ public class RankingsScene extends PixelScene {
 				pos++;
 			}
 			
-			if (Rankings.INSTANCE.totalNumber >= Rankings.TABLE_SIZE) {
+			if (total >= Rankings.TABLE_SIZE) {
 				
 				RenderedTextBlock label = PixelScene.renderTextBlock( 8 );
 				label.hardlight( 0xCCCCCC );
 				label.setHightlighting(true, Window.SHPX_COLOR);
-				label.text( Messages.get(this, "total") + " _" + Rankings.INSTANCE.wonNumber + "_/" + Rankings.INSTANCE.totalNumber );
+				label.text( Messages.get(this, "total") + " _" + won + "_/" + total );
 				add( label );
 				
 				label.setPos(
@@ -150,7 +164,7 @@ public class RankingsScene extends PixelScene {
 
 		float left = insets.left + (PixelScene.landscape() && !DeviceCompat.isDesktop() ? 10 : 0);
 
-		if (Rankings.INSTANCE.latestDaily != null) {
+		if (profile==null && Rankings.INSTANCE.latestDaily != null) {
 			IconButton btnDailies = new IconButton(Icons.CALENDAR.get()) {
 				@Override
 				protected void onClick() {
@@ -168,7 +182,7 @@ public class RankingsScene extends PixelScene {
 			add(btnDailies);
 		}
 
-		if (Dungeon.daily){
+		if (profile==null && Dungeon.daily){
 			addToFront(new WndDailies());
 		} else if (Badges.isUnlocked(Badges.Badge.VICTORY) && !SPDSettings.victoryNagged()) {
 			SPDSettings.victoryNagged(true);

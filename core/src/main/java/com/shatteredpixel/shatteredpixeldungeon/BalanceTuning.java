@@ -85,10 +85,13 @@ public final class BalanceTuning {
     public static float multiplier(Key key) { return get(key)/100f; }
     public static void set(Key key,int value) {
         Playtest.require();
-        setShared(key,value);
+        setValue(key,value,false);
     }
     /** Edit the device profile without loading or modifying a saved hero. */
     public static void setShared(Key key,int value) {
+        setValue(key,value,true);
+    }
+    private static void setValue(Key key,int value,boolean shared) {
         if(value<key.min || value>key.max)throw new IllegalArgumentException("Value outside tuning range.");
         if(key.group==3 && value==0) {
             boolean any=false;
@@ -101,11 +104,32 @@ public final class BalanceTuning {
             if(!any)throw new IllegalArgumentException("Keep at least one cavern loot weight above zero.");
         }
         if(value==key.baseline)values.remove(key);else values.put(key,value);
-        persist();
+        if(shared)persist();
         if(Dungeon.hero!=null)Playtest.customBalance();
     }
     public static void reset() { Playtest.customBalance(); values.clear(); persist(); }
+    public static void resetRun() { Playtest.require();Playtest.customBalance();values.clear();Playtest.customBalance(); }
     public static int changedCount() { return values.size(); }
+    public static String snapshot() {
+        StringBuilder result=new StringBuilder();
+        for(Key key:Key.values())result.append(key.id()).append('=').append(configured(key)).append(';');
+        return result.toString();
+    }
+    public static java.util.Map<String,Integer> parseSnapshot(String text) {
+        java.util.Map<String,Integer> result=new LinkedHashMap<>();
+        for(String entry:text.split(";")) {
+            String[] pair=entry.split("=");if(pair.length!=2)continue;
+            try {Key key=Key.valueOf(pair[0].toUpperCase(Locale.ROOT));result.put(key.id(),Math.max(key.min,Math.min(key.max,Integer.parseInt(pair[1]))));}
+            catch(IllegalArgumentException ignored) { /* Removed or damaged keys. */ }
+        }
+        return result;
+    }
+    public static void applySnapshot(String text) {
+        values.clear();
+        java.util.Map<String,Integer> settings=parseSnapshot(text);
+        for(Key key:Key.values())if(settings.containsKey(key.id())&&settings.get(key.id())!=key.baseline)values.put(key,settings.get(key.id()));
+        sanitize();
+    }
     private static void persist() {
         StringBuilder profile=new StringBuilder();
         for(Key key:values.keySet())profile.append(key.id()).append('=').append(values.get(key)).append(';');
@@ -113,17 +137,7 @@ public final class BalanceTuning {
         SPDSettings.put(PROFILE,profile.toString());
     }
     public static void loadShared() {
-        values.clear();
-        for(String entry:SPDSettings.getString(PROFILE,"").split(";")) {
-            String[] pair=entry.split("=");
-            if(pair.length!=2)continue;
-            try {
-                Key key=Key.valueOf(pair[0].toUpperCase(Locale.ROOT));
-                int value=Math.max(key.min,Math.min(key.max,Integer.parseInt(pair[1])));
-                if(value!=key.baseline)values.put(key,value);
-            } catch(IllegalArgumentException ignored) { /* Ignore removed keys or damaged entries. */ }
-        }
-        sanitize();
+        applySnapshot(SPDSettings.getString(PROFILE,""));
     }
     public static void store(Bundle bundle) {
         Bundle tuning=new Bundle();
@@ -131,7 +145,6 @@ public final class BalanceTuning {
         bundle.put("balance_tuning",tuning);
     }
     public static void restore(Bundle bundle) {
-        if(SPDSettings.contains(PROFILE)) { loadShared(); return; }
         values.clear();
         if(!(Playtest.enabled() || bundle.getBoolean("custom_balance")) || !bundle.contains("balance_tuning"))return;
         Bundle tuning=bundle.getBundle("balance_tuning");
@@ -140,8 +153,7 @@ public final class BalanceTuning {
             if(value!=key.baseline)values.put(key,value);
         }
         sanitize();
-        // Adopt the first legacy customized save once, until the user edits or resets it.
-        if(!values.isEmpty())persist();
+        // Saved rules are independent of the profile selected for future games.
     }
     private static void sanitize() {
         boolean any=false;

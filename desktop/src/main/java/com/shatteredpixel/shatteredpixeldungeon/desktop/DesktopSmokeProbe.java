@@ -939,6 +939,9 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
 
     /** Review actual inventory, scrolling descriptions and class controls in both orientations. */
     private void interfaceTick() {
+        if(Boolean.getBoolean("grimhollow.profileReview")){
+            if(frames>=230&&frames%20==0)profilesTick();return;
+        }
         if(bountyReview){if((Game.scene() instanceof GameScene || Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.RankingsScene)&&frames>=220&&frames%20==0)bountyTick();return;}
         if(Boolean.getBoolean("grimhollow.craftingReview")){
             if(Game.scene() instanceof GameScene && frames>=230){
@@ -3168,6 +3171,53 @@ final class DesktopSmokeProbe extends ShatteredPixelDungeon {
                 if(button instanceof com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton && label.equals(((com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button).text()))
                     return (com.shatteredpixel.shatteredpixeldungeon.ui.StyledButton)button;
         return null;
+    }
+    private int profileStep;
+    private void profilesTick(){
+        switch(profileStep){
+            case 0:
+                if(!(Game.scene() instanceof GameScene)||!Dungeon.hero.ready)return;
+                closeReviewWindows();SPDSettings.put("balance_profiles_v1","{}");SPDSettings.put("balance_selected_v1","default");
+                BalanceTuning.reset();GenerationToggles.reset();BalanceTuning.setShared(BalanceTuning.Key.FLOOR_LOOT,200);
+                switchNoFade(TitleScene.class);break;
+            case 1:if(!(Game.scene() instanceof TitleScene))return;com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.openHome();break;
+            case 2:playtestClick("Balance tuning");break;
+            case 3:playtestClick("Balance profiles: Default");break;
+            case 4:interfaceBounds();capture("balance-profiles-list");playtestClick("Add profile from current settings");break;
+            case 5:playtestInput("High Loot","Save");break;
+            case 6:
+                if(!BalanceProfiles.selected().name.equals("High Loot")||BalanceProfiles.list().size()!=2)throw new AssertionError("Native profile creation/selection failed");
+                interfaceBounds();capture("balance-profile-standard");playtestClick("High Loot [STANDARD]");break;
+            case 7:if(!playtestClickPage("Review settings"))return;break;
+            case 8:interfaceBounds();capture("balance-profile-values");closeReviewWindows();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.profiles();break;
+            case 9:playtestClick("High Loot [STANDARD]");break;
+            case 10:if(!playtestClickPage("Rename profile"))return;break;
+            case 11:playtestInput("Treasure Rich","Save");break;
+            case 12:playtestClick("Treasure Rich [STANDARD]");break;
+            case 13:if(!playtestClickPage("Delete profile"))return;break;
+            case 14:playtestClick("Cancel");break;
+            case 15:if(BalanceProfiles.list().size()!=2)throw new AssertionError("Cancel deleted profile");if(!playtestClickPage("Delete profile"))return;break;
+            case 16:playtestClick("Delete");break;
+            case 17:
+                if(!BalanceProfiles.selected().isDefault()||BalanceTuning.get(BalanceTuning.Key.FLOOR_LOOT)!=100||BalanceProfiles.list().size()!=1)throw new AssertionError("Deletion failed to restore Default");
+                for(int i=1;i<=10;i++)BalanceProfiles.create("Preset "+i);
+                closeReviewWindows();com.shatteredpixel.shatteredpixeldungeon.windows.WndPlaytest.profiles();break;
+            case 18:if(!playtestClickPage("Preset 10"))return;break;
+            case 19:if(!playtestClickPage("View this profile's rankings"))return;break;
+            case 20:
+                if(!(Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.RankingsScene))return;
+                for(com.watabou.noosa.Gizmo g:RecoveryChecks.members(Game.scene()))if(g instanceof com.shatteredpixel.shatteredpixeldungeon.ui.RedButton){
+                    com.watabou.noosa.ui.Component b=(com.watabou.noosa.ui.Component)g;
+                    if(b.left()<0||b.top()<0||b.right()>Camera.main.width||b.bottom()>Camera.main.height)throw new AssertionError("Rankings selector clipped");
+                }
+                capture("balance-profile-rankings");rankingClick(Game.scene(),"Preset 10 (v1)  >");break;
+            case 21:interfaceBounds();capture("balance-rankings-picker");playtestClick("Default");break;
+            case 22:
+                if(!(Game.scene() instanceof com.shatteredpixel.shatteredpixeldungeon.scenes.RankingsScene)||!ProfileRankings.viewKey.equals("default"))return;
+                capture("balance-default-rankings");
+                System.out.println("BALANCE PROFILES UI PASS: mouse/touch creation, selection, review, rename, cancel/delete, protected Default, paged navigation and separate rankings selector; failures=0");Gdx.app.exit();return;
+        }
+        profileStep++;
     }
     private void playtestClick(String label){
         Object button=playtestButton(label);if(button==null)throw new AssertionError("Playtest missing button: "+label+" at step "+playtestStep);

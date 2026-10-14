@@ -253,6 +253,9 @@ public class WndRanking extends WndTabbed {
 			add(version);
 
 			pos = date.bottom()+5;
+			if(!record.profileKey.equals("default")){
+				RenderedTextBlock profile=PixelScene.renderTextBlock(record.profileName,6);profile.maxWidth(WIDTH);profile.hardlight(Window.TITLE_COLOR);profile.setPos(0,pos);add(profile);pos=profile.bottom()+3;
+			}
 
 			NumberFormat num = NumberFormat.getInstance(Messages.locale());
 

@@ -1,5 +1,8 @@
 # Known issues
 
+- v1.31.0 profiles are device-local; synchronization/export is not part of this patch. Physical tablet and complete-run comparisons remain human playtesting. Old saves cannot recover generation exclusions that previous versions never stored; their existing customized/unranked status is preserved. Test 45 remains Abandoned: test failed and is not rerun.
+- v1.30.6 release CI passed all eight jobs, but the same-commit branch run 38493114093 exceeded unchanged test 31 timing: mean 1.7272 ms passed and p95 2.2221 ms exceeded the 2.0 ms limit; pixel comparison difference was zero. This existing runner-dependent verification discrepancy remains unresolved. Evidence: ignored .local/stylus6-branch-ci.log.
+
 - v1.30.5 delivery: tag d88a041d2f5b4f2ef063ad343ff69aa391f738fd is retained unpublished. CI 38323129420 passed Windows, Android and earlier Linux rendering gates, but the full interface fixture attempted its final stylus selection while the preceding inscription animation still kept the hero busy. The isolated fixture had run at a slower cadence. v1.30.6 waits for hero readiness and verifies per-frame execution with the same assertions; no production check or mechanic is weakened. Logs: ignored .local/stylus-tag-ci.log.
 
 - v1.30.5: Physical Samsung tablet and campaign playtesting remain with the user. Glyph cancellation changes apply to the arcane stylus; other Runecraft sources keep their existing payment rules. Test 45 remains Abandoned: test failed and is not rerun. The v1.30.4 branch-only fire-render discrepancy remains recorded below; this patch does not alter fire rendering or its checks.

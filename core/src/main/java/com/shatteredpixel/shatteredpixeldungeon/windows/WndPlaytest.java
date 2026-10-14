@@ -46,10 +46,10 @@ public class WndPlaytest extends Window {
         Entry(String label,Runnable action,Item item){this.label=label;this.action=action;this.item=item;}
     }
     public WndPlaytest(){this("Playtest",atHome()
-            ?"Tune balance for every game on this device, or open a run for God mode, items and travel. Once Playtest is enabled for a save, reopen these tools from its in-game menu. Custom balance applies to every game; customized runs have no rankings or badges. Tools are enabled separately for each save."
+            ?"Choose a balance profile for future games, or open a run for God mode, items and travel. Existing saves keep their own rules. Named profiles have separate rankings; testing tools are enabled separately for each save."
             :Playtest.enabled()
             ?"Level "+Dungeon.hero.lvl+" | Floor "+Dungeon.depth+" | God mode "+(Playtest.god()?"ON":"OFF")
-            :"Enable testing for this save: no rankings, badges, catalog credit or bones. Balance settings apply to every game on this device; customized runs have no rankings or badges. God mode and direct actions affect this save only.",rootEntries(),-1,null);}
+            :"Enable testing for this save: no rankings, badges, catalog credit or bones. Its original balance profile stays saved. Profile selection changes future games; direct actions affect this save only.",rootEntries(),-1,null);}
 
     private WndPlaytest(String title,String body,List<Entry> entries,int page,Runnable back){
         int width=(int)Math.min(PixelScene.landscape()?220:170,PixelScene.uiCamera.width-24);
@@ -154,7 +154,7 @@ public class WndPlaytest extends Window {
             new Entry("Trinkets",()->generationTypes("Trinkets",Trinket.class)),
             new Entry("Items",WndPlaytest::generationItemGroups),
             new Entry("Enemies",WndPlaytest::generationEnemies),
-            new Entry("Enable all generation",()->{GenerationToggles.reset();root();})),WndPlaytest::root);
+            new Entry("Enable all generation",()->changed(()->{if(atHome())GenerationToggles.reset();else GenerationToggles.resetRun();},WndPlaytest::root))),WndPlaytest::root);
     }
     private static void generationItemGroups(){
         List<Entry> rows=new ArrayList<>();Set<String> groups=new TreeSet<>();
@@ -171,7 +171,7 @@ public class WndPlaytest extends Window {
             if(!family.isAssignableFrom(type) || family==Item.class && (Artifact.class.isAssignableFrom(type)||Trinket.class.isAssignableFrom(type)))continue;
             Item sample=Reflection.newInstance(type);
             if(family==Item.class && !group(sample).equals(title))continue;
-            rows.add(new Entry((GenerationToggles.allowed(type)?"ON: ":"OFF: ")+name(sample),()->{GenerationToggles.toggle(type);generationTypes(title,family);},sample));
+            rows.add(new Entry((GenerationToggles.allowed(type)?"ON: ":"OFF: ")+name(sample),()->changed(()->{if(atHome())GenerationToggles.toggle(type);else GenerationToggles.toggleRun(type);},()->generationTypes(title,family)),sample));
         }
         show("Generation: "+title,"Random pools only. At least one choice must remain in each required typed pool.",rows,family==Item.class?WndPlaytest::generationItemGroups:WndPlaytest::generation);
     }
@@ -179,7 +179,7 @@ public class WndPlaytest extends Window {
         List<Entry> rows=new ArrayList<>();
         for(Class<? extends Mob> type:GenerationToggles.enemyTypes()){
             Mob sample=Reflection.newInstance(type);
-            rows.add(new Entry((GenerationToggles.allowed(type)?"ON: ":"OFF: ")+Messages.titleCase(sample.name()),()->{GenerationToggles.toggle(type);generationEnemies();}));
+            rows.add(new Entry((GenerationToggles.allowed(type)?"ON: ":"OFF: ")+Messages.titleCase(sample.name()),()->changed(()->{if(atHome())GenerationToggles.toggle(type);else GenerationToggles.toggleRun(type);},WndPlaytest::generationEnemies)));
         }
         show("Generation: Enemies","Future roaming spawns only; bosses and fixed quest encounters stay. Keep at least one normal enemy in each regional roster.",rows,WndPlaytest::generation);
     }
@@ -200,19 +200,67 @@ public class WndPlaytest extends Window {
     public static void tuning(){
         if(!atHome())Playtest.require();
         List<Entry> rows=new ArrayList<>();
+        rows.add(new Entry("Balance profiles: "+BalanceProfiles.selected().name,WndPlaytest::profiles));
         for(int i:new int[]{0,1,2,3,9,17}){
             final int group=i;rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_group_"+i),()->tuningGroup(group)));
         }
         rows.add(new Entry("Dragon expedition",()->tuningFamily("Dragon expedition",new int[]{4,5,6,7})));
         rows.add(new Entry("Artifacts and trinkets",WndPlaytest::tuningItems));
         rows.add(new Entry(Messages.get(WndPlaytest.class,"bounty"),WndPlaytest::bountyTuning));
-        rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_reset"),()->changed(BalanceTuning::reset,WndPlaytest::tuning)));
-        show(Messages.get(WndPlaytest.class,"tuning"),Messages.get(WndPlaytest.class,"tuning_intro",BalanceTuning.changedCount()),rows,WndPlaytest::root);
+        rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_reset"),()->changed(()->{if(atHome())BalanceTuning.reset();else BalanceTuning.resetRun();},WndPlaytest::tuning)));
+        show(Messages.get(WndPlaytest.class,"tuning"),"Standard for new runs: "+BalanceProfiles.selected().name+". Save edited settings as a profile to give them their own rankings. Existing saves keep their rules.",rows,WndPlaytest::root);
+    }
+    private static void refreshProfileSettings(){if(atHome()){BalanceTuning.loadShared();GenerationToggles.load();}}
+    public static void profiles(){
+        List<Entry> rows=new ArrayList<>();
+        rows.add(new Entry("Add profile from current settings",()->profileName(null)));
+        String selected=BalanceProfiles.selected().id;
+        for(BalanceProfiles.Profile p:BalanceProfiles.list())rows.add(new Entry(p.name+(p.id.equals(selected)?" [STANDARD]":""),()->profile(p.id)));
+        show("Balance profiles","Select the standard for future runs. Each save keeps a copy of its original rules. Default is protected; deleting a profile keeps existing runs and scores.",rows,WndPlaytest::tuning);
+    }
+    private static void profileName(BalanceProfiles.Profile old){
+        present(new WndTextInput(old==null?"New balance profile":"Rename profile",old==null?"Save the current balance values and generation choices.":null,old==null?"":old.name,32,false,"Save","Cancel"){
+            @Override public void onSelect(boolean positive,String text){
+                if(!positive){profiles();return;}
+                run(()->{
+                    if(old==null){BalanceProfiles.Profile p=BalanceProfiles.create(text);BalanceProfiles.select(p.id);}
+                    else BalanceProfiles.rename(old.id,text);
+                    refreshProfileSettings();profiles();
+                });
+            }
+        });
+    }
+    private static void profile(String id){
+        BalanceProfiles.Profile p=BalanceProfiles.list().stream().filter(candidate->candidate.id.equals(id)).findFirst().orElseThrow(()->new IllegalArgumentException("Profile no longer exists."));
+        List<Entry> rows=new ArrayList<>();
+        rows.add(new Entry("Use as standard for new runs",()->{BalanceProfiles.select(id);refreshProfileSettings();profile(id);}));
+        rows.add(new Entry("Review settings",()->present(new WndTitledMessage(Icons.get(Icons.INFO),p.boardName(),BalanceProfiles.summary(p)))));
+        rows.add(new Entry("View this profile's rankings",()->{
+            save();
+            ProfileRankings.viewKey=p.boardKey();ProfileRankings.viewName=p.boardName();ShatteredPixelDungeon.switchNoFade(com.shatteredpixel.shatteredpixeldungeon.scenes.RankingsScene.class);
+        }));
+        if(!p.isDefault()){
+            rows.add(new Entry("Update from current settings",()->present(new WndOptions(Icons.get(Icons.INFO),"Update "+p.name,"Save these settings as a new revision. Existing saves and earlier rankings keep the old rules.","Save revision","Cancel"){
+                @Override protected void onSelect(int index){if(index==0){BalanceProfiles.update(id);BalanceProfiles.select(id);refreshProfileSettings();}profile(id);}
+            })));
+            rows.add(new Entry("Rename profile",()->profileName(p)));
+            rows.add(new Entry("Delete profile",()->present(new WndOptions(Icons.get(Icons.INFO),"Delete "+p.name,"Remove this preset? Existing saves and rankings remain. If this is the selected standard, future games return to Default.","Delete","Cancel"){
+                @Override protected void onSelect(int index){if(index==0){BalanceProfiles.delete(id);refreshProfileSettings();profiles();}else profile(id);}
+            })));
+        }
+        show(p.name,"Revision "+p.revision+(BalanceProfiles.selected().id.equals(id)?" | Standard for new runs":"")+"\n\n"+(atHome()?"Select it, edit balance controls, then save a revision or add a new profile.":"Your current run stays on "+(BalanceProfiles.runName().isEmpty()?"its saved custom rules":BalanceProfiles.runName())+". Profile selection affects future games."),rows,WndPlaytest::profiles);
+    }
+    public static void rankingsProfiles(){
+        List<Entry> rows=new ArrayList<>();
+        for(Map.Entry<String,String> board:ProfileRankings.boards().entrySet())rows.add(new Entry(board.getValue(),()->{
+            ProfileRankings.viewKey=board.getKey();ProfileRankings.viewName=board.getValue();ShatteredPixelDungeon.switchNoFade(com.shatteredpixel.shatteredpixeldungeon.scenes.RankingsScene.class);
+        }));
+        show("Rankings profile","Each profile revision has its own scores. Default includes your existing rankings. Archived tables remain available after deleting or updating presets.",rows,null);
     }
     private static void tuningFamily(String title,int[] groups){
         List<Entry> rows=new ArrayList<>();
         for(int group:groups)rows.add(new Entry(Messages.get(WndPlaytest.class,"tuning_group_"+group),()->tuningGroup(group)));
-        show(title,"Shared balance controls; existing encounters keep their saved state.",rows,WndPlaytest::tuning);
+        show(title,"Edit these settings, then save a named profile. Existing encounters keep their saved state.",rows,WndPlaytest::tuning);
     }
     public static void quests(){
         show(Messages.get(WndPlaytest.class,"quests"),Messages.get(WndPlaytest.class,"quests_hint"),Arrays.asList(

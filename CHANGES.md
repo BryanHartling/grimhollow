@@ -1,3 +1,13 @@
+# Named balance profiles v1.31.0 - 2026-10-14
+
+- Add named profile creation, selection, review, update/revision, rename and deletion under Playtest > Balance tuning. Protect Default and select it if the active preset is deleted. Save all numeric controls and generation exclusions; preserve the previous tuning as editable settings until explicitly saved/selected.
+- Keep each save's original rules and profile identity independently of device preferences. Persist effective rules and original profile together, so mid-run testing edits stay unranked and never silently alter a saved preset. Existing legacy flags are retained; old numeric settings are recovered from their saved bundle. Legacy saves did not record generation exclusions; their available legacy device exclusions are adopted once for customized saves, while ordinary legacy saves keep Default eligibility.
+- Give each named revision an independent local top-score table and retain historical tables after deleting presets. Preserve Default rankings, daily history, global badge rules, catalog-use credit and bones. New named-profile runs display their name rather than Custom Balance; enabling direct testing or editing rules during a run still excludes its ranking.
+- Retain seeded Default generation, required nonempty-pool validation, artifact uniqueness and all existing gameplay rules. Revisions separate changed rule sets; cosmetic renames retain the same table.
+- Extend existing headless and native interface gates only for profile persistence, save isolation, CRUD, paging and separate-ranking behavior. No art, terrain-contrast test or balance numbers change.
+
+- Local validation: combined Runs=30 failures=0; all 16 JUnit tests; mouse/touch profile menus in both layouts; compiled handlers classes=3093 failures=0; signed Android build 1025 with the established certificate; packaged Windows launcher. No physical tablet session was claimed.
+
 # Stylus delivery fixture v1.30.6 - 2026-10-12
 
 - Preserve the v1.30.5-stylus tag unpublished after native CI attempted another armor selection while the successful inscription's animation still had the hero busy. Gate the existing crafting state machine on hero readiness; run its isolated mode at the same fast per-frame cadence as the full interface suite. Keep every quantity, catalog, glyph, abandonment and restoration assertion unchanged. No production stylus or animation change.

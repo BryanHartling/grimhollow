@@ -20,7 +20,9 @@ public final class GrimhollowChanges {
         release.addButton(new ChangeButton(icon.get(),title,text));
     }
     public static void addAllChanges(ArrayList<ChangeInfo> list) {
-        ChangeInfo r=release(list,"v1.30.5","The stylus spends its magic only once.");
+        ChangeInfo r=release(list,"v1.31.0","Choose the dungeon you want to brave.");
+        note(r,Icons.RANKINGS,"Balance profiles","Save named balance profiles, select the standard for future games, and compare their separate rankings. Default remains available. Each run retains its original rules, even after a profile is edited or deleted.");
+        r=release(list,"v1.30.5","The stylus spends its magic only once.");
         note(r,Icons.INFO,"Committed glyph choices","An Enchanter spends one arcane stylus when its glyph choices appear. Choose a glyph or abandon the inscription; closing the picker cannot recover the stylus or reroll it for free. Cancelling before choosing armor spends nothing.");
         r=release(list,"v1.30.4","Runes grow with their bearer.");
         note(r,Icons.INFO,"Rune Etching","Weapon and armor runes each carry one paid upgrade at hero level 5, two at 15, and three at 25. New upgrades applied while attached fill the rune's capacity; earlier upgrades stay on the gear. Their enchantments and glyphs can move from the start of the run. Existing stored upgrades are preserved.");

@@ -22,7 +22,7 @@ import static com.shatteredpixel.shatteredpixeldungeon.BalanceTuning.Key.*;
 final class TuningScenario {
     private static void check(boolean ok,String text){if(!ok)throw new AssertionError("58: "+text);}
     private static Rat rat(){Rat rat=new Rat();rat.sprite=rat.sprite();return rat;}
-    private static String sequence(){
+    static String sequence(){
         Random.pushGenerator(58001);Generator.fullReset();StringBuilder out=new StringBuilder();
         for(int i=0;i<80;i++) {
             Item item=Generator.random();out.append(item.getClass().getName()).append(':').append(item.trueLevel()).append(':').append(item.cursed);
@@ -114,15 +114,15 @@ final class TuningScenario {
         Bundle saved=new Bundle();Playtest.store(saved);Playtest.reset();Playtest.restore(saved);check(BalanceTuning.get(DENSITY)==200,"bundle persistence");
         com.badlogic.gdx.Preferences reloaded=new com.badlogic.gdx.backends.headless.HeadlessPreferences(
                 com.badlogic.gdx.Gdx.files.absolute(System.getProperty("grimhollow.smokeOutput")+"/prefs/settings.xml"));
-        SPDSettings.set(reloaded);Playtest.reset();check(BalanceTuning.get(DENSITY)==200,"preference file reload");
+        SPDSettings.set(reloaded);Playtest.reset();check(BalanceTuning.get(DENSITY)==100,"in-run tuning must not replace future-run preferences on disk reload");
         Bundle corrupt=new Bundle(),tuning=new Bundle();corrupt.put("playtest",true);tuning.put("density",9999);
         for(BalanceTuning.Key key:BalanceTuning.Key.values())if(key.group==3)tuning.put(key.id(),0);
         corrupt.put("balance_tuning",tuning);Playtest.restore(corrupt);check(BalanceTuning.get(DENSITY)==200&&!BalanceTuning.customItemMix(),"corrupt save sanitization");
-        Playtest.restore(new Bundle());check(!Playtest.enabled()&&Playtest.unranked()&&BalanceTuning.get(DENSITY)==200&&!Playtest.god(),"ordinary save adopts shared tuning without enabling tools");
+        Playtest.restore(new Bundle());check(!Playtest.enabled()&&!Playtest.unranked()&&BalanceTuning.get(DENSITY)==100&&!Playtest.god(),"legacy ordinary save retains Default rules without enabling tools");
         BalanceTuning.setShared(CURSEBOUND,0);Dungeon.init();
         check(!Playtest.enabled()&&Playtest.unranked()&&!Playtest.god()&&BalanceTuning.get(CURSEBOUND)==0,"new game keeps shared balance and requires explicit tools");
         BalanceTuning.reset();Playtest.restore(saved);
-        check(Playtest.enabled()&&BalanceTuning.changedCount()==0&&BalanceTuning.get(DENSITY)==100,"old save resurrected reset settings");
+        check(Playtest.enabled()&&BalanceTuning.get(DENSITY)==200&&BalanceTuning.get(FLOOR_LOOT)==300,"existing save must retain its own rules after future-run settings reset");
         SPDSettings.put("balance_profile_v1","density=9999;removed_key=2;respawn=bad;weapon=0;armor=0;missile=0;wand=0;ring=0;artifact=0;potion=0;scroll=0;seed=0;stone=0;gold=0;");
         Playtest.reset();check(BalanceTuning.get(DENSITY)==200&&!BalanceTuning.customItemMix(),"damaged shared profile sanitization");
         BalanceTuning.reset();Dungeon.init();check(!Playtest.enabled()&&!Playtest.god(),"reset should permit ordinary future games");
@@ -131,7 +131,7 @@ final class TuningScenario {
         Bundle ordinaryTuned=new Bundle();Playtest.store(ordinaryTuned);
         check(!ordinaryTuned.getBoolean("playtest")&&ordinaryTuned.getBoolean("custom_balance"),"save separates custom balance and explicit tools");
         BalanceTuning.reset();Playtest.restore(ordinaryTuned);
-        check(!Playtest.enabled()&&!Playtest.god()&&Playtest.unranked(),"resetting balance must not rank an already customized run");
+        check(!Playtest.enabled()&&!Playtest.god()&&Playtest.unranked()&&BalanceTuning.get(DENSITY)==125,"resetting future balance must not alter or rank an already customized run");
         Dungeon.saveAll();
         Bundle oldGame=com.watabou.utils.FileUtils.bundleFromFile(GamesInProgress.gameFile(GamesInProgress.curSlot));
         oldGame.remove("elemental_coin_plans");

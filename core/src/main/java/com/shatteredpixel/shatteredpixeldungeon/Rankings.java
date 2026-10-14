@@ -81,7 +81,7 @@ public enum Rankings {
 	public LinkedHashMap<Long, Integer> dailyScoreHistory = new LinkedHashMap<>();
 
 	public void submit( boolean win, Object cause ) {
-		if (Playtest.unranked()) return;
+		if (!Playtest.rankingEligible()) return;
 
 		load();
 		
@@ -123,12 +123,21 @@ public enum Rankings {
 		rec.score       = calculateScore();
 		rec.customSeed  = Dungeon.customSeedText;
 		rec.daily       = Dungeon.daily;
+		rec.profileKey = BalanceProfiles.runBoardKey();
+		rec.profileName = BalanceProfiles.runBoardName();
 
-		Badges.validateHighScore( rec.score );
+		if (!BalanceProfiles.namedRun()) Badges.validateHighScore( rec.score );
 		
 		INSTANCE.saveGameData(rec);
 
 		rec.gameID = UUID.randomUUID().toString();
+
+		if (BalanceProfiles.namedRun()) {
+            if(!(rec.daily&&Dungeon.dailyReplay))ProfileRankings.submit(rec);
+			if(crystal!=null)tempStore.restoreHeroBelongings(Dungeon.hero,null);
+			return;
+		}
+		ProfileRankings.viewKey="default";ProfileRankings.viewName="Default";
 
 		if (rec.daily){
 			if (Dungeon.dailyReplay){
@@ -276,6 +285,7 @@ public enum Rankings {
 		}
 
 		rec.gameData = new Bundle();
+		Playtest.store(rec.gameData);
 
 		Belongings belongings = Dungeon.hero.belongings;
 
@@ -371,6 +381,7 @@ public enum Rankings {
 		Dungeon.challenges = data.getInt(CHALLENGES);
 
 		Dungeon.initialVersion = data.getInt(GAME_VERSION);
+		Playtest.restore(data);
 
 		if (Dungeon.initialVersion <= ShatteredPixelDungeon.v1_2_3){
 			Statistics.gameWon = rec.win;
@@ -516,6 +527,7 @@ public enum Rankings {
 
 		public String date;
 		public String version;
+		public String profileKey="default",profileName="Default";
 
 		public String desc(){
 			if (win){
@@ -548,6 +560,8 @@ public enum Rankings {
 			win		    = bundle.getBoolean( WIN );
 			score	    = bundle.getInt( SCORE );
 			customSeed  = bundle.getString( SEED );
+			profileKey=bundle.contains("balance_profile_key")?bundle.getString("balance_profile_key"):"default";
+			profileName=bundle.contains("balance_profile_name")?bundle.getString("balance_profile_name"):"Default";
 			daily       = bundle.getBoolean( DAILY );
 
 			heroClass	= bundle.getEnum( CLASS, HeroClass.class );
@@ -579,6 +593,7 @@ public enum Rankings {
 			bundle.put( WIN, win );
 			bundle.put( SCORE, score );
 			bundle.put( SEED, customSeed );
+			bundle.put("balance_profile_key",profileKey);bundle.put("balance_profile_name",profileName);
 			bundle.put( DAILY, daily );
 
 			bundle.put( CLASS, heroClass );

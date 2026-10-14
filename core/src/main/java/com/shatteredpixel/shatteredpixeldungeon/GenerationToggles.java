@@ -19,20 +19,28 @@ public final class GenerationToggles {
         return true;
     }
     public static int changedCount(){return excluded.size();}
+    public static String snapshot(){return String.join(";",new TreeSet<>(excluded));}
+    public static void applySnapshot(String profile){
+        excluded.clear();if(!profile.isEmpty())Collections.addAll(excluded,profile.split(";"));
+        try{validate();}catch(IllegalArgumentException invalid){excluded.clear();}
+    }
     public static void load(){
-        excluded.clear();
-        String profile=SPDSettings.getString(PROFILE,"");
-        if(!profile.isEmpty())Collections.addAll(excluded,profile.split(";"));
+        applySnapshot(SPDSettings.getString(PROFILE,""));
         // A damaged or obsolete profile must never leave a typed generation pool empty.
         try{validate();}catch(IllegalArgumentException invalid){excluded.clear();persist();}
     }
-    private static void persist(){SPDSettings.put(PROFILE,String.join(";",new TreeSet<>(excluded)));}
+    private static void persist(){SPDSettings.put(PROFILE,snapshot());}
     public static void reset(){Playtest.customBalance();excluded.clear();persist();}
+    public static void resetRun(){Playtest.customBalance();excluded.clear();Playtest.customBalance();}
     public static void toggle(Class<?> type){
+        toggle(type,true);
+    }
+    public static void toggleRun(Class<?> type){toggle(type,false);}
+    private static void toggle(Class<?> type,boolean shared){
         String name=type.getName();boolean disabled=excluded.remove(name);
         if(!disabled)excluded.add(name);
         try{validate();}catch(IllegalArgumentException invalid){if(disabled)excluded.add(name);else excluded.remove(name);throw invalid;}
-        persist();if(Dungeon.hero!=null)Playtest.customBalance();
+        if(shared)persist();if(Dungeon.hero!=null)Playtest.customBalance();
     }
     public static List<Class<? extends Item>> itemTypes(){
         Set<Class<? extends Item>> result=new LinkedHashSet<>();
